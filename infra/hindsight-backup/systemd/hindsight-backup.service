@@ -1,0 +1,5 @@
+[Unit]
+Description=PQBR backup diário do Hindsight (pg_dump só leitura, F3-03)
+[Service]
+Type=oneshot
+ExecStart=/bin/sh %h/Workspace/PQBR/infra/hindsight-backup/backup.sh

@@ -20,7 +20,7 @@
 | 0 | Revisão de SPEC/TESTES/RASTREABILIDADE | **G0** | reverter o commit |
 | 1 | Org PQBR no Paperclip, agentes pausados; perfil `pqbr`; fluxo de tickets | **G1** | arquivar a org (exclusão só pelo José); restaurar backup do perfil |
 | 3 | Contratos Pydantic v2, migração base, scanner de segredos | **G3** | migrações com `down` |
-| 4 | Migração do notebooklm-py | **G4** a cada passo | voltar ao pipx 0.8.2 e ao crontab salvo |
+| 4 | Migração do notebooklm-py (runbook F4-00..F4-09) | **G4** a cada passo; José em F4-02/04/05/06/08/09 | voltar ao pipx 0.8.2 e ao crontab salvo |
 | 5 | Grade, barreiras, `EpisodioWorkflow`, Schedules, fichas, render | **G5** (paralelo) e **G5b** (corte do fluxo antigo + pausa do `rede`) | pausar Schedules; fluxo antigo segue até G5b |
 | 6 | Resiliência | **G6** | pausar o guardião |
 | 7 | Contrato v2 e auditor | **G7** | v1 e auditor v3 como referência |

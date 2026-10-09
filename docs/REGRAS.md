@@ -95,7 +95,7 @@ _Origem do bloco: t184–t186._
 ## 10. Instalação exclusiva do notebooklm-py
 - Instalação **exclusiva da PQBR**, abortando a global: venv da PQBR com **0.8.4 fixada**, `NOTEBOOKLM_HOME` próprio, perfil `pqbr`, login novo, testes só em caderno clonado; **um serviço único dono da sessão** (refresh por timer, fila de uma tarefa, `usage --json` no banco). [t187–t188]
 - Antes do login novo, **deslogar a sessão antiga** do Porquê BR (cron de refresh e agente `rede`) para não haver mais de um dispositivo. Interromper a produção atual nesse momento está autorizado. Até lá, nada muda. [t191]
-- A migração é **tarefa de desenvolvimento** (não ticket), com autorização, critério de aceite e rollback por passo. Passos: ROADMAP F4-01..F4-05 (D1). [t187]
+- A migração é **tarefa de desenvolvimento** (não ticket), com autorização, critério de aceite e rollback por passo. Passos: ROADMAP F4-00..F4-09 (D1, runbook t351). [t187, t351]
 
 ## 11. Camofox e sessão do Studio
 _Origem do bloco: t194–t196, t272._

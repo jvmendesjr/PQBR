@@ -319,3 +319,7 @@ NÃO CABE:
 - (t349–t350) Hindsight fica no **armazenamento próprio**, separado do banco do app e do Postgres do Temporal; um único bank por organização (PQBR); backup e restauração independentes.
 - Verificação só leitura: Hindsight API em 127.0.0.1:8890, backend PostgreSQL 18.1 embutido (pg0) em `~/.pg0/instances/hindsight/data`; único bank hoje é o `core-engineering-bank`; não há backup.
 - Tarefas novas: F3-03 (backup do Hindsight alinhado às 03:30) e F3-04 (backup fora do servidor no Drive `PQBR/backups-db` via rclone, com login Google único do José), pendente José.
+
+## t351 — 09/10/2026
+- Seguir. F3-03 feito: backup diário do Hindsight via pg_dump só leitura, 03:45, 7 dumps em `~/Backups/hindsight`, restauração testada em container descartável.
+- Runbook D1 (notebooklm-py 0.8.4 isolado) preparado como ROADMAP F4-00..F4-09, **não executado**. Achados: o MP32 usa o binário global 0.8.2 (precisa da própria instalação antes de remover o pipx); o refresh do `~/.notebooklm` já falha (CSRF).
