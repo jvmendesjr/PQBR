@@ -246,3 +246,13 @@ NÃO CABE:
 - (t287) Arquivos de pré-construção (`docs/arquivo/`, `docs/pesquisas/`, este `DECISOES-LOG.md` e qualquer rascunho ou material legado) **nunca são consultados por agentes**; consultar exige aprovação explícita do José, porque podem ser mal interpretados e aplicados em produção.
 - (t287a) Aprovada e aplicada a proposta de sanitização (`PROPOSTA-sanitizacao-docs.md`): estrutura `REGRAS / ARQUITETURA / PLANO / CONTRATO-EDITORIAL / DECISOES-LOG / pesquisas / arquivo`; levantamento de vídeos fora do git (Drive `PQBR/_arquivo-docs-2026-10-09/`), mantida só a lista de temas publicados (`db/seeds/temas-publicados.csv`).
 - (t323) Dúvida ou conflito que não se resolve com certeza pelas decisões aprovadas **não é adivinhado**: fica marcado "EM CONSTRUÇÃO — aguardando José" e é listado para ele decidir.
+
+## 09/10/2026, ~14:47: pendências resolvidas (t324–t326)
+
+- Tickets de manutenção mantêm **duas aprovações do José**: na abertura (ele pode pedir correções no próprio ticket) e no merge.
+- Hindsight: **um único bank por organização** (inclui memórias de código).
+- **Dois bancos com papéis distintos:** Postgres próprio do Temporal = só estado de workflow (nunca consultado diretamente); Supabase = dados de negócio (temas/R10, vídeos/códigos, comentários, métricas, relatórios, base do painel e do analista). Supabase mantido (recomendação; confirmar no teste de 1 dia do Temporal). Supabase fora = retentativas duráveis do Temporal + outbox para o Supabase na volta; substitui a fila em arquivo da t242 (confirmar no teste).
+- Alimentação do painel Paperclip: continua EM CONSTRUÇÃO; será demonstrada no teste do Temporal.
+- **Padrão dos agentes pensantes** (director, analista, comunidade): rotina fixa executa tudo; os agentes observam e propõem mudanças só como saída estruturada validada por Pydantic v2; mudanças só se aplicam após aprovação do José.
+- **Janelas de publicação:** 11:40, 14:40, 18:35, 21:15 (4 janelas; teto de 4 por dia, sem mínimo).
+- **Ritmo da narração** para dimensionar o roteiro: 2,3 palavras/s (o modelo pode esticar ou acelerar).

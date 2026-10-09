@@ -257,7 +257,7 @@ Exigir no prompt a máxima fidelidade à bíblia, mas aceitar imperfeição leve
 
 ### O que os 4 roteiros confirmam (vira regra)
 
-1. **Partitura em 3 blocos (~50–52 s, ~110–120 palavras):** _(EM CONSTRUÇÃO — aguardando José: ~110–120 palavras em ~50 s dá ~2,3 palavras/s, contra ~3 palavras/s medidas nos testes de 08/10 (§12); qual vale para dimensionar o roteiro?)_ gancho 0–3 s, miolo com o porquê até ~45 s, fecho/CTA nos últimos ~5–8 s. O controle remoto ainda está num formato mais antigo (~60 s, blocos 10/15/20 s); os outros três já usam a partitura técnica. Padronizar a partitura.
+1. **Partitura em 3 blocos (~50–52 s, ~110–120 palavras):** _(RESOLVIDO [t324–t326]: dimensionar o roteiro a ~2,3 palavras/s; o modelo pode esticar ou acelerar. Os ~3 palavras/s da §12 ficam SUPERADOS.)_ gancho 0–3 s, miolo com o porquê até ~45 s, fecho/CTA nos últimos ~5–8 s. O controle remoto ainda está num formato mais antigo (~60 s, blocos 10/15/20 s); os outros três já usam a partitura técnica. Padronizar a partitura.
 2. **Gancho:** cena da mania já acontecendo + pergunta "por que…" sem resposta. Legenda curta e gritante (ACORDOU MOÍDO?, AMARELO = ACELERA?, TOMADA DERRETIDA!).
 3. **Um mecanismo real no miolo**, nomeado em linguagem de rua (luz azul / melatonina, "cálculo quântico" do motorista, óxido nas molas + tapa, Efeito Joule). Termo técnico só com imagem no mesmo segundo.
 4. **Personagem age:** dorme, acelera, tapa o controle, toma banho enquanto a tomada derrete. Não fica parado olhando.

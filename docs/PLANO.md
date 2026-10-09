@@ -28,24 +28,24 @@ Formato de cada fase: **Objetivo · Entregáveis · Aceite · Portão do José �
 
 ## Fase 0.5: spike de 1 dia do motor de orquestração (t283)
 - **Objetivo:** escolher o motor com dados do servidor real.
-- **Entregáveis:** `docs/sdd/adr-001-orquestrador.md` com a medição; compose isolado do Temporal só com Postgres local dedicado (sem Elasticsearch, separado do `mp32-postgres`); `EpisodioWorkflow` de brinquedo com timer, sinal de aprovação vindo do Telegram (Hermes `pqbr`) e uma Activity que falha.
+- **Entregáveis:** `docs/sdd/adr-001-orquestrador.md` com a medição; compose isolado do Temporal só com Postgres local dedicado (sem Elasticsearch, separado do `mp32-postgres`); `EpisodioWorkflow` de brinquedo com timer, sinal de aprovação vindo do Telegram (Hermes `pqbr`) e uma Activity que falha; simulação de Supabase fora com outbox; demonstração de como o painel Paperclip é alimentado.
 - **Aceite:** RAM total abaixo do limite combinado com o José; retomada após `kill -9` no worker e após reboot; aprovação por sinal funcionando.
 - **Se reprovar:** mesmo teste com o **DBOS** (plano B).
-- **Portão G0.5 (José):** escolhe o motor; autoriza ou não o uso do histórico do motor + outbox no lugar da fila local da t242 (EM CONSTRUÇÃO — aguardando José).
+- **Portão G0.5 (José):** escolhe o motor; confirma no teste: (a) os dois bancos (Postgres do Temporal só para estado; Supabase para dados de negócio); (b) retentativas duráveis + outbox no lugar da fila em arquivo da t242; (c) a forma de alimentar o painel Paperclip, demonstrada no teste [t324–t326].
 - **Rollback:** `docker compose down -v` do spike; nada de produção é tocado.
 - **Dependências:** G0. Hipóteses H-ORQ1, H-ORQ2.
 
 ## Fase 1: painel Paperclip (t282)
 - **Objetivo:** o José ver o estado da construção e, depois, da produção, desde o início, sem o Paperclip ser dono do fluxo.
 - **Entregáveis:** forma de alimentar o painel conforme a ADR-002; nenhum agente com efeito; heartbeats desligados.
-- **EM CONSTRUÇÃO — aguardando José:** pacote `company/` com agentes pausados ou só issues/projetos gravados por código; destino de `company/` e `tasks/`. Se houver pacote, seguir o formato agentcompanies/v1 (`COMPANY.md` com `schema`, `agents/<slug>/AGENTS.md` com as instruções no corpo, `.paperclip.yaml` com `schema: paperclip/v1`, segredos só como `inputs.env` `kind: secret`).
+- **EM CONSTRUÇÃO — aguardando José (a demonstrar no teste da Fase 0.5) [t324–t326]:** pacote `company/` com agentes pausados ou só issues/projetos gravados por código; destino de `company/` e `tasks/`. Se houver pacote, seguir o formato agentcompanies/v1 (`COMPANY.md` com `schema`, `agents/<slug>/AGENTS.md` com as instruções no corpo, `.paperclip.yaml` com `schema: paperclip/v1`, segredos só como `inputs.env` `kind: secret`).
 - **Aceite:** o painel mostra as tarefas D e os portões; nenhum heartbeat ligado.
 - **Portão G1 (José):** aprova a forma do painel.
 - **Rollback:** arquivar o projeto ou a org no Paperclip (exclusão só pelo José).
 - **Dependências:** G0. Riscos #6596 e `--yolo` (ADR-002).
 
 ## Fase 3: fundações (D3 + D14)
-- **D3, contratos Pydantic únicos** (`src/pqbr/schemas/`): `RoteiroShort` de 15 s a 3 min, alvo de ~50 s (t271), palavras proporcionais; estados aprovado → enviando → enviado(video_id) → agendado → publicado; comentário multirrótulo; saídas fechadas de `decide()`; auditoria com veredito/motivo/ID da cena. **`canal_id` em todo o schema** e `config/canais/pqbr.yaml` [PROPOSTA]. Migração `db/migrations/0001_base.sql`; carga de `db/seeds/temas-publicados.csv` na tabela de temas (R10).
+- **D3, contratos Pydantic únicos** (`src/pqbr/schemas/`): `RoteiroShort` de 15 s a 3 min, alvo de ~50 s (t271), palavras dimensionadas a ~2,3 palavras/s [t324–t326]; estados aprovado → enviando → enviado(video_id) → agendado → publicado; comentário multirrótulo; saídas fechadas de `decide()`; auditoria com veredito/motivo/ID da cena. **`canal_id` em todo o schema** e `config/canais/pqbr.yaml` [PROPOSTA]. Migração `db/migrations/0001_base.sql`; carga de `db/seeds/temas-publicados.csv` na tabela de temas (R10).
 - **D14, verificador de segredos/PII:** regex/scanner primeiro, Jev como segunda camada; hook antes de gravar no Hindsight (inclusive memórias de código), tickets, Supabase e logs; pre-commit no repo.
 - **Aceite:** testes de esquema passam; o scanner bloqueia o segredo de teste.
 - **Portão G3:** José aprova os esquemas.
@@ -67,7 +67,7 @@ Formato de cada fase: **Objetivo · Entregáveis · Aceite · Portão do José �
 - **Dependências:** D3, D1.
 
 ## Fase 6: D6, resiliência
-- **Entregáveis:** guardião de sessão como Schedule (~20 min com variação; checagem extra ~30 min antes de publicar; escada t272); teste de resposta; escada 30 s → 2 min → 8 min como `RetryPolicy` + lógica no workflow; `NETWORK_WAITING` sem gastar tentativa; buffer da t242 (conforme G0.5); fallback do Jev.
+- **Entregáveis:** guardião de sessão como Schedule (~20 min com variação; checagem extra ~30 min antes de publicar; escada t272); teste de resposta; escada 30 s → 2 min → 8 min como `RetryPolicy` + lógica no workflow; `NETWORK_WAITING` sem gastar tentativa; retentativas duráveis + outbox para o Supabase no lugar da fila em arquivo da t242 (conforme G0.5); fallback do Jev.
 - **Aceite:** simulação de cada degrau, de rede fora e de Supabase fora; nenhuma cópia de cookies sem OK.
 - **Portão G6:** José aprova o relatório de simulação.
 - **Rollback:** pausar o guardião.
@@ -142,12 +142,12 @@ Hipóteses H1–H16, H-ORQ1–3 e H-SDD1–3: ver `docs/ARQUITETURA.md` §7.
 ## Pendências que precisam do José (EM CONSTRUÇÃO — aguardando José)
 
 1. Teto de orçamento mensal (após os primeiros dias de testes; t268/decisão 10).
-2. Horários das janelas de publicação ("os mesmos horários de hoje", 07/10; documentos citam 11:40/14:40/18:35/21:00 e 11:40/18:35/21:15).
-3. @prod-director: LLM ou rotina determinística.
+2. ~~Horários das janelas~~ RESOLVIDO [t324–t326]: 11:40, 14:40, 18:35, 21:15.
+3. ~~@prod-director: LLM ou rotina~~ RESOLVIDO [t324–t326]: rotina fixa executa; agente propõe (Pydantic v2) e o José aprova.
 4. Persona do @prod-compliance e do @pqbr-assistente.
-5. Motor: Temporal × DBOS (G0.5); t242 via histórico do motor + outbox.
-6. Forma do painel Paperclip (pacote `company/` ou não).
-7. Tickets: 2 aprovações (abertura + merge) ou só o merge; bank Hindsight separado para código.
+5. Motor: Temporal × DBOS (G0.5). A substituição da fila t242 por retentativas + outbox e a manutenção do Supabase estão decididas [t324–t326], a confirmar no teste.
+6. Forma do painel Paperclip (pacote `company/` ou não): a demonstrar no teste da Fase 0.5.
+7. ~~Tickets e bank Hindsight~~ RESOLVIDO [t324–t326]: 2 aprovações (abertura com correções + merge); bank único por organização.
 8. Aprovação das 60 frases (D9) e do contrato v2 (D11).
 9. Configuração única do Studio (moderação, links, palavras bloqueadas): sem resposta registrada.
 10. Definição de sucesso do piloto (metas só depois da API; recalibrar em 2–4 semanas).
@@ -172,6 +172,6 @@ Hipóteses H1–H16, H-ORQ1–3 e H-SDD1–3: ver `docs/ARQUITETURA.md` §7.
 | Desmonetização por conteúdo inautêntico (pior ao escalar canais) | Saída do YPP | Compliance + HOLD + variedade; R10 |
 | Respostas parecendo robô | Dano ao canal | Banco aprovado, limites t274, sombra, kill switch |
 | Segredo vazado em ticket, memória de código ou repo | Credencial exposta | D14 primeiro; pre-commit |
-| Supabase fora | Estado perdido | t242; nada agendado/público sem estado gravado |
+| Supabase fora | Estado perdido | Retentativas duráveis do Temporal + outbox; nada agendado/público sem estado gravado |
 | Métricas divergentes (30 × 46 Shorts) | Metas erradas | Só pela Analytics API (H12) |
 | Disco do servidor | Falta de espaço | Ciclo t267/t268; `runtime/` limpo |

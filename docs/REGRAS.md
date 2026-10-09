@@ -17,7 +17,7 @@
 
 ## 2. Quem pode o quê e interação
 - **José** altera regras canônicas, aprova merges e é a autoridade final. [INTERAÇÃO; item 5]
-- **@prod-director** altera parâmetros operacionais. [INTERAÇÃO]
+- **@prod-director** altera parâmetros operacionais, sempre pelo padrão dos agentes pensantes (§3): propõe e o José aprova. [INTERAÇÃO; t324–t326]
 - **Agentes de desenvolvimento** (qualquer um) alteram código e infraestrutura **por ticket** na produção ou por tarefa de dev na construção. Substitui o roteamento para a core-eng. [t286; antes: INTERAÇÃO "core-eng"; 07/10 rodada 2]
 - Os demais agentes **só propõem**. [ENTREGA §1; item 5]
 - **@pqbr-assistente:** roda no **Hermes `pqbr` pelo Telegram** (t281). Só consulta, roteia e responde: perguntas, temas, propostas de regra ao @prod-director, tickets aos agentes de dev, verificação de fichas e pedidos de relatório ao @prod-analista. Responde sempre pelo banco. Não executa mudanças. [INTERAÇÃO; Relatórios de dados (t208); t281]
@@ -30,6 +30,7 @@
 - Agendamento com horários fixos + vigia de prazo; grade gerada **por código a partir da data** e gravada no banco; tema repetido barrado em **3 barreiras**; máquina de estados com checkpoint; o agente responde sempre pelo banco; relatório diário; o corte do fluxo antigo só acontece após vários dias sem falha. [ESTABILIDADE] _(Implementação do agendador: motor de workflow testado primeiro com Temporal, DBOS como plano B (t283); ver ARQUITETURA ADR-001. A regra não muda.)_
 - Origem: incidente de 08/10 (fluxo não iniciou; grade do dia 7 reaproveitada; 3 de 4 temas repetidos). [pauta 4]
 - Governança: máximo de determinismo; detectar problemas, registrar a ação humana e repetir automaticamente na próxima vez. [07/10 item 10]
+- **Padrão dos agentes pensantes** (@prod-director, @prod-analista, @prod-comunidade): uma **rotina fixa executa tudo**; os agentes só **observam e propõem mudanças**, como **saída estruturada validada por Pydantic v2**. Nenhuma mudança é aplicada sem a **aprovação do José**. [t324–t326]
 
 ## 4. Temas e grade
 - **R10:** um tema, um vídeo, inclusive variações próximas. Tema repetido é recusado mesmo que o José sugira; o sistema avisa ou abre ticket. [pauta 1; item 4] Lista dos temas já publicados: `db/seeds/temas-publicados.csv`.
@@ -48,7 +49,7 @@
 - **Nunca pedir comentário:** nem na narração, nem na descrição, nem no comentário fixado. [t263]
 - **Loop:** a última fala emenda na primeira cena; sem cauda, sem tela parada, sem fade. [t215]
 - **Encerramento visual:** logo com zoom suave curto sobre a última fala; corte do end card **só se detectado**. [t212–t217]
-- **Duração:** de **15 s a 3 min**, **alvo de ~50 s**; dimensionada pelo roteiro (~3 palavras/s). O contrato do roteiro e o auditor seguem essa faixa. Acima de 60 s, a checagem de direitos de áudio vira **bloqueante** (claim do Content ID bloqueia o Short). [t208; t271]
+- **Duração:** de **15 s a 3 min**, **alvo de ~50 s**; dimensionada pelo roteiro a **~2,3 palavras/s** (o modelo pode esticar ou acelerar a narração) [t324–t326]. O contrato do roteiro e o auditor seguem essa faixa. Acima de 60 s, a checagem de direitos de áudio vira **bloqueante** (claim do Content ID bloqueia o Short). [t208; t271]
 - **Dinamismo:** cada fala com imagem correspondente; personagem age em cena; troca de plano a cada ~3–5 s. [t217]
 - **Engajamento não é medida de segurança.** [itens de validação, item 1]
 - **Visual:** stickman 2D (07/10 item 7). **Nenhum critério visual de estilo reprova:** pele ou roupa colorida, troca ou variação de personagem, mais de 2 personagens, 3D ou realista (nunca pedidos, mas aceitos se vierem). A aderência ao elenco é **métrica**, não trava; a consistência continua buscada por prompts e referências. O que reprova é faltar a ironia e a sátira leve e cômica do cotidiano brasileiro, além das travas de texto, áudio e segurança. [t264; t265]
@@ -121,7 +122,7 @@ _Origem do bloco: item 4 (t233–t234), t273._
 - Fluxo da manhã: grade de madrugada; produção, pós e auditor de manhã, com pausas de ritmo humano e limites por modelo/ferramenta calculados para o dia; prazo de corte; aprovados ficam **agendados** nas janelas. Falhas: refazer ou trocar pela reserva durante a manhã; pendências vão ao José antes da primeira janela. [item 4]
 - **Reserva ≥ 2** vídeos aprovados; sem reserva, o horário é cancelado; **vídeo reprovado nunca é publicado**; atraso de até 1 h é só plano B. **Teto de 4 por dia, sem mínimo.** Qualidade acima da cota. [item 4]
 - O Jev decide refazer / trocar / chamar José e confere se título, descrição e código do agendado batem com o aprovado. [item 4]
-- Horários das janelas: **EM CONSTRUÇÃO — aguardando José** (07/10 item 6 diz "os mesmos horários de hoje"; os documentos citam 11:40/14:40/18:35/21:00 e 11:40/18:35/21:15).
+- **Janelas de publicação: 11:40, 14:40, 18:35 e 21:15** (horário de Fortaleza), 4 janelas; teto de 4 por dia, sem mínimo. [t324–t326]
 
 ## 16. Correção pós-publicação (item 5)
 _Origem do bloco: item 5 (t234–t235), t239, t245, t250._
@@ -146,7 +147,7 @@ _Origem do bloco: item 6 (t235–t236), t237, t286._
 _Origem do bloco: t240–t242._
 - **Teste de resposta** antes do lote da manhã e antes de cada ação crítica (agendar, tornar privado): chamada mínima a cada modelo e ferramenta (Jev, Gemini, NotebookLM, Supabase). Sem resposta no prazo ou com resposta inválida, entra a escada. [t241]
 - **Escada de falhas** (modelos, Supabase, 9router): backoff 30 s → 2 min → 8 min; rede fora = `NETWORK_WAITING` sem gastar tentativa; cada nova tentativa usa outra estratégia (outro provedor/combo); a mesma ação falhando 2× vai ao José; 5 chamadas idênticas = parada; idempotência antes de cada passo; varredura de recuperação no reboot. [t241]
-- **Supabase fora:** buffer local (fila em arquivo, gravação atômica); nada é agendado nem tornado público sem gravar o estado; sincroniza quando o Supabase volta. [t242] _(Usar o histórico do motor de workflow + outbox como implementação: EM CONSTRUÇÃO — aguardando José; ver ARQUITETURA.)_
+- **Supabase fora:** o estado do fluxo vive no motor de workflow, com **retentativas duráveis do Temporal**; o Supabase recebe as gravações por **outbox** quando volta. Isso **substitui a fila em arquivo** da t242 (a confirmar no teste de 1 dia do Temporal). Continua valendo: nada é agendado nem tornado público sem o estado gravado. [t242; t324–t326]
 
 ## 19. Comentários e comunidade (@prod-comunidade)
 - **Leitura** pela API de dados (OAuth do analista), sem Studio e **sem Camofox**: a cada 30 min nas primeiras 48 h, a cada 6 h até 7 dias, depois diária; ler também retidos e provável spam; cada comentário passa pelo classificador do Jev e é gravado com o código do vídeo. [t243]
@@ -158,12 +159,12 @@ _Origem do bloco: t240–t242._
 - Conferência em 60 min: se a resposta sumiu, para. Kill switch manual (`/pausar_respostas`, só do ID do José) e automático. [t245; t237]
 - **Corações** pelo Camofox, até **10 por dia**, só na sessão já aberta pelo guardião, abortando ao menor sinal de problema. Não existe na API. [t247]
 - **Sombra de 3 dias** (ou ~30 respostas simuladas aprovadas sem correção, o que vier primeiro) antes de ligar respostas e corações. **1 resposta real de teste** antes do automático (HIPÓTESE: `comments.insert` sem auditoria do app). [t247; t248]
-- O @prod-comunidade **só sinaliza**; quem torna privado é a regra do item 5. [t250]
+- O @prod-comunidade **só sinaliza**; quem torna privado é a regra do item 5. [t250] Mudanças que ele proponha seguem o padrão dos agentes pensantes (§3). [t324–t326]
 - As respostas nunca são automáticas sem regra aprovada pelo José; futuro: área de mensagens para pedir feedback. [t238]
 - Tom das frases, kill switch automático detalhado e escalonamento: EM CONSTRUÇÃO — aguardando José (vêm da pesquisa e da entrega, não de decisão explícita; confirmar na D9/D10).
 
 ## 20. Analista (@prod-analista) e relatórios
-- Coleta diária por código pela **YouTube Analytics API** (OAuth, só leitura; app do GCP publicado em produção para uso interno, para o token não expirar; Camofox no Studio como reserva). Análise semanal ou por anomalia; propõe ajustes ao @prod-director e salva aprendizados no Hindsight; **só observa até ~30 Shorts/90 dias**. [@prod-analista]
+- Coleta diária por código pela **YouTube Analytics API** (OAuth, só leitura; app do GCP publicado em produção para uso interno, para o token não expirar; Camofox no Studio como reserva). Análise semanal ou por anomalia; propõe ajustes ao @prod-director (saída estruturada Pydantic v2, aplicada só com aprovação do José, §3) e salva aprendizados no Hindsight; **só observa até ~30 Shorts/90 dias**. [@prod-analista; t324–t326]
 - Métricas oficiais só pela API; os relatórios de 08/10 divergem e são hipótese. [t208]
 - Relatórios de dados vêm pelo @pqbr-assistente no Telegram, que aciona o analista. [t208]
 
@@ -173,6 +174,7 @@ _Origem do bloco: t240–t242._
 - O servidor é temporário; prioridade é o disco livre. **Tudo sobe** (original do NotebookLM e editado); o arquivo local é apagado após confirmar tamanho/hash. O final fica no servidor até o upload ao YouTube ser confirmado (código no canal) e então é apagado. Intermediários limpos quando a cópia final estiver pronta. [t267; t268]
 - **Limpeza do Drive** por script determinístico na **rotina noturna do @prod-director**: duplicatas (hash/tamanho ou mesmo código) e órfãos vão para `99_Arquivo/_duplicados` e a lista vai ao José no relatório diário e no Telegram; **exclusão definitiva só pelo José**. [t269; t270]
 - Memória: **Hindsight local** com backup diário; OpenViking fora do build (importar só o aproveitável). [07/10 item 4; rodada 2]
+- Hindsight: **um único bank por organização** (inclui as memórias de código dos agentes de dev). [t324–t326]
 
 ## 22. Orçamento
 - O teto mensal é definido com os dados do monitor depois dos primeiros dias de testes. Valor: **EM CONSTRUÇÃO — aguardando José**. [decisão 10; t268]
@@ -188,8 +190,8 @@ _Origem do bloco: t240–t242._
 - Antes de dar um papel a um componente, conferir a ficha dele (ARQUITETURA). [t230]
 - Mudanças durante a construção voltam como **tarefas de desenvolvimento**; **tickets só na produção**. [t187; item 7]
 - **Tickets de manutenção agnósticos de agente:** qualquer agente de dev pega o ticket, acessa o código e corrige usando as memórias e o conhecimento do código no Hindsight. Os agentes especializados da PQBR **pré-estruturam cada ticket** com localização, falha observada e correções sugeridas. [t286]
-  - Número de aprovações do José por ticket (abertura + merge, como em 07/10 rodada 2): **EM CONSTRUÇÃO — aguardando José**. O merge pelo José é regra [INTERAÇÃO].
-  - Bank Hindsight separado para conhecimento de código: **EM CONSTRUÇÃO — aguardando José**.
+  - **Duas aprovações do José por ticket:** (1) na **abertura**, quando ele pode pedir correções no próprio ticket; (2) no **merge**. [t324–t326]
+  - Memórias de código ficam no **bank único da organização** (sem bank separado). [t324–t326]
 - Transição: o `rede` deixa de ter automação/cron e roda só sob demanda; a PQBR publica de forma autônoma, em observação. [07/10 rodada 2] _(Fluxo de ticket inter-org com a core-eng da mesma rodada: SUPERADO por t284/t286.)_
 - Dúvida não se adivinha: "EM CONSTRUÇÃO — aguardando José". [t323]
 - Arquivos de pré-construção não são consultados sem aprovação do José. [t287]

@@ -19,7 +19,10 @@
   - Activities sem LLM: NotebookLM CLI 0.8.4, FFmpeg, juiz Gemini, `decide()` (Jev via Pydantic), YouTube API, Drive, Supabase.
   - Multi-canal: `canal_id` em todo o schema, `config/canais/pqbr.yaml`, orçamento por canal.
   - R10 por canal: [PROPOSTA]; hoje a regra vale para o canal Porquê BR.
-- **Buffer local da t242:** a regra (REGRAS §18) não muda. Usar o histórico do motor + outbox para o Supabase como implementação: **EM CONSTRUÇÃO — aguardando José**. Até lá, vale a fila em arquivo com gravação atômica.
+- **Dois bancos com papéis distintos [t324–t326]:**
+  - **Postgres próprio do Temporal:** só estado dos workflows. **Nunca é consultado diretamente** por agentes, painel ou relatórios.
+  - **Supabase:** dados de negócio: temas/R10, vídeos e códigos PQBR-EP, comentários, métricas, relatórios, base do painel e do analista. Mantido [recomendação aprovada; confirmar no teste de 1 dia do Temporal].
+- **Supabase fora [t324–t326]:** retentativas duráveis do Temporal + **outbox** para o Supabase na volta. Substitui a fila em arquivo da t242 (confirmar no teste). A regra (REGRAS §18) não muda.
 - **Cautelas:** RAM e swap do `pc` (H-ORQ1); determinismo e versionamento dos workflows; `NUM_HISTORY_SHARDS` escolhido uma vez; backup diário do Postgres do motor (sem segredos); nenhum agente autônomo dentro de Activity com efeito colateral.
 
 ### ADR-002: Paperclip como painel desde o início
@@ -27,7 +30,7 @@
 - Abre só dentro da tailnet, por HTTPS; a porta 443 fica livre [VERIFICADO/APROVADO t280].
 - Verificação de fichas: status/issue no painel e botões no Telegram, sincronizados pela mesma tabela (REGRAS §6).
 - Riscos conhecidos: o adapter `hermes_local` força `--yolo` (PR #3850); recovery storm sem internet (issue #6596); injeção do AGENTS.md (issue #3833, corrigida pela PR #8543). Por isso: heartbeats desligados e nenhum agente com efeito.
-- **EM CONSTRUÇÃO — aguardando José:** como o painel é alimentado (pacote `company/` com agentes pausados vs. só issues/projetos gravados por código) e se a pasta `company/` continua. Até lá, `company/README.md` e `tasks/README.md` ficam como estão.
+- **EM CONSTRUÇÃO — aguardando José:** como o painel é alimentado (pacote `company/` com agentes pausados vs. só issues/projetos gravados por código) e se a pasta `company/` continua. **Será demonstrado no teste de 1 dia do Temporal** (Fase 0.5) [t324–t326]. Até lá, `company/README.md` e `tasks/README.md` ficam como estão.
 
 ### ADR-003: Telegram com o Hermes `pqbr`
 - **Decisão [APROVADO t281]:** o Telegram fica com o perfil Hermes `pqbr`; o @pqbr-assistente roda lá. Ele só consulta, roteia e responde, lendo o banco (REGRAS §2).
@@ -38,8 +41,8 @@
 ### ADR-004: tickets de manutenção agnósticos + memória de código no Hindsight
 - **Decisão [APROVADO t286]:** na produção, qualquer agente de desenvolvimento pode pegar um ticket de manutenção, acessar o código e corrigir. O conhecimento vem das **memórias de código no Hindsight**, sem segredos (REGRAS §17).
 - Os agentes especializados da PQBR (auditor, compliance, comunidade, guardião, analista) **pré-estruturam cada ticket**: localização (arquivo/módulo/workflow), falha observada (evidência, horário, ID do episódio) e correções sugeridas.
-- Fluxo [PROPOSTA]: o ticket é aberto pelo código ou pelo assistente → o José aprova (ver pendência) → um agente de dev trabalha em branch/worktree → testes → o **José aprova o merge** [APROVADO].
-- **EM CONSTRUÇÃO — aguardando José:** (a) 2 aprovações por ticket (abertura + merge) ou só o merge; (b) bank Hindsight separado para código vs. "bank único por organização" (07/10 item 4, marcado "confirmar").
+- Fluxo: o ticket é aberto pelo código ou pelo assistente, já pré-estruturado → **1ª aprovação do José na abertura** (ele pode pedir correções no próprio ticket) → um agente de dev trabalha em branch/worktree → testes → **2ª aprovação do José no merge** [t324–t326].
+- Memórias de código no **bank Hindsight único da organização** [t324–t326].
 - Durante a construção não há tickets: mudanças são tarefas de desenvolvimento do PLANO (REGRAS §24).
 
 ### ADR-005: org core-eng abortada
@@ -60,30 +63,32 @@
 | | Dicas do Studio [VERIFICADO no `rede`]: ir direto a `/videos/upload?d=ud`; `execCommand('insertText')`; COPPA "não é para crianças"; paginar 30 por vez; desafio de passkey → humano; upload só de `~/.camofox/uploads/`. | |
 | **YouTube Data API** | Grade, comentários (`commentThreads.list` = 1 unidade), respostas (`comments.insert` = 50), retenção (`setModerationStatus` = 50), `videos.update` = 50, upload (`videos.insert`). Cota 10.000/dia, reset à meia-noite do Pacífico (~04:00–05:00 em Fortaleza); `search.list` e `videos.insert` com balde próprio de 100/dia. Sem endpoint de coração. | [VERIFICADO na doc] |
 | **YouTube Analytics API** | Coleta diária do analista (OAuth só leitura; app do GCP em produção, uso interno). | [APROVADO] / números [HIPÓTESE] |
-| **Motor de workflow** (Temporal / DBOS) | Estado durável dos fluxos, Schedules, retentativas, sinais (ADR-001). | [APROVADO t283] / escolha no G0.5 |
-| **Supabase** | Dados de negócio: grade, temas (R10), episódios, `visual_assets`/`episode_assets`, comentários, ações (motivo/quem/quando), consumo, kill switch, relatórios. Plano Pro não confirmado (H13). | [APROVADO] |
+| **Motor de workflow** (Temporal / DBOS) | Estado durável dos fluxos, Schedules, retentativas, sinais (ADR-001). Postgres próprio, só estado de workflow, nunca consultado diretamente. | [APROVADO t283] / escolha no G0.5 |
+| **Supabase** | Dados de negócio (base do painel e do analista; recebe por outbox): grade, temas (R10), episódios, `visual_assets`/`episode_assets`, comentários, ações (motivo/quem/quando), consumo, kill switch, relatórios. Plano Pro não confirmado (H13). | [APROVADO] |
 | **Google Drive** | Armazenamento definitivo, estrutura t267 (REGRAS §21). | [APROVADO] |
 | **Hermes `pqbr`** | @pqbr-assistente no Telegram (ADR-003). | [APROVADO t281] |
 | **Paperclip** | Painel (ADR-002). | [APROVADO t282] |
-| **Hindsight** (local, backup diário) | Aprendizados (analista, lições do item 5) e memórias de código para os agentes de dev (ADR-004). Sem segredos nem PII. | [APROVADO] / bank de código EM CONSTRUÇÃO |
+| **Hindsight** (local, backup diário) | Aprendizados (analista, lições do item 5) e memórias de código para os agentes de dev (ADR-004), num **bank único por organização**. Sem segredos nem PII. | [APROVADO t324–t326] |
 | **Whisper / FFmpeg** | Transcrição com tempos (o Whisper ouve "Porquê BR" como "por KBR"; aceitar variantes). Pós: corte do end card só se detectado + logo com zoom suave curto. | [VERIFICADO] |
 
 ## 3. Papéis (ex-"agentes")
+
+**Padrão dos agentes pensantes [APROVADO t324–t326]:** uma rotina fixa executa tudo; @prod-director, @prod-analista e @prod-comunidade só observam e propõem mudanças como saída estruturada validada por Pydantic v2; nada se aplica sem a aprovação do José.
 
 Princípio [APROVADO t184]: ideação, roteiro, SEO e pesquisa ficam com o NotebookLM; os papéis orquestram, extraem por código, validam com Pydantic e conferem com o Jev. Com o motor de workflow, os papéis sem LLM viram **Activities/workflows** e só alguns continuam como agentes LLM [PROPOSTA, PESQ-orquestração §9].
 
 | Papel | Natureza [PROPOSTA salvo indicação] | Faz | Não faz |
 |---|---|---|---|
-| @prod-director | **EM CONSTRUÇÃO — aguardando José:** LLM ou rotina determinística | Cadência, rotinas, parâmetros operacionais; recebe propostas do analista e do assistente; limpeza noturna do Drive por script (t270) | Não altera regra canônica; não exclui |
+| @prod-director | Rotina fixa executa; agente observa e propõe (Pydantic v2), aplica só com aprovação do José [APROVADO t324–t326] | Cadência, rotinas, parâmetros operacionais; recebe propostas do analista e do assistente; limpeza noturna do Drive por script (t270) | Não altera regra canônica; não aplica mudança sem o José; não exclui |
 | @prod-ideador | Workflow que chama o NotebookLM | Entrega coleta e fontes ao caderno de tendências; recebe os temas filtrados | Não escolhe tema sem as 3 barreiras |
 | @prod-roteirista | Workflow que chama o NotebookLM | Roteiro no NotebookLM; lista as entidades da cena; valida `RoteiroShort` | Não redige fora do NotebookLM/Gemini; sem nomes |
 | @prod-render | Activity (sem LLM) | Geração no NotebookLM + pós FFmpeg | Não julga qualidade |
 | @prod-auditor | Código decide; Gemini sim/não; Jev nas checagens de texto | Auditoria pré-publicação + item de conformidade | LLM não dá gravidade nem escreve laudo |
 | @prod-seo | Workflow que chama o NotebookLM | Título, descrição, código PQBR-EPxxxx | Não pede comentário (t263) |
 | @prod-publisher | Activity (sem LLM) | `videos.insert` com agendamento; confere ID e código; executa o item 5 em código | Não decide sozinho; não reenvia sem consultar; não exclui; não volta vídeo a público |
-| @prod-analista [APROVADO] | Coleta por código + análise LLM | Analytics API; análise semanal ou por anomalia; propostas ao director; Hindsight | Não muda parâmetro sozinho |
+| @prod-analista [APROVADO] | Coleta por rotina fixa; agente analisa e propõe (Pydantic v2), aplica só com aprovação do José [t324–t326] | Analytics API; análise semanal ou por anomalia; propostas ao director; Hindsight | Não muda parâmetro sozinho |
 | @prod-compliance [APROVADO t198] | Coleta por código + Jev + análise | E-mail do canal, Studio só leitura, Data API; gravidade; HOLD; rascunho de recurso | Nunca recorre, apaga ou altera sem dupla confirmação |
-| @prod-comunidade [APROVADO t245] | Código + Jev; LLM só no resumo | Lê, classifica, retém, responde pelo banco, corações, agrupa temas | Não torna vídeo privado (t250); não escreve texto livre |
+| @prod-comunidade [APROVADO t245] | Rotina fixa + Jev executam; agente faz resumo e propõe (Pydantic v2), aplica só com aprovação do José [t324–t326] | Lê, classifica, retém, responde pelo banco, corações, agrupa temas | Não torna vídeo privado (t250); não escreve texto livre |
 | @pqbr-assistente [APROVADO] | LLM no Hermes `pqbr` (t281) | Consulta, roteia, responde pelo banco | Não executa mudanças |
 | Agentes de dev | LLM (qualquer um) | Tickets de manutenção na produção; tarefas D na construção (ADR-004) | Não faz merge (só o José) |
 
