@@ -323,3 +323,8 @@ NÃO CABE:
 ## t351 — 09/10/2026
 - Seguir. F3-03 feito: backup diário do Hindsight via pg_dump só leitura, 03:45, 7 dumps em `~/Backups/hindsight`, restauração testada em container descartável.
 - Runbook D1 (notebooklm-py 0.8.4 isolado) preparado como ROADMAP F4-00..F4-09, **não executado**. Achados: o MP32 usa o binário global 0.8.2 (precisa da própria instalação antes de remover o pipx); o refresh do `~/.notebooklm` já falha (CSRF).
+
+## t352–t354 — 09/10/2026
+- t352: o login do PQBR no NotebookLM (F4-05) usa a **conta de produção** (o e-mail não vai para o git).
+- t353: antes do logout (F4-04), verificar se ele derruba a sessão do perfil da conta de produção no MP32. Verificado: é uma cópia obsoleta, proibida no MP32. O risco foi registrado no F4-04.
+- t354: aprovados só F4-00, F4-01 e F4-03, que foram feitos. Login, logout, MP32, crontab, pipx global e `~/.notebooklm` ficaram intocados.
