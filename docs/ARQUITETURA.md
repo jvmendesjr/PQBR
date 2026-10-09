@@ -20,8 +20,8 @@
   - **Escopo [t327]:** só o canal Porquê BR. Multi-canal (`canal_id`, config e orçamento por canal, R10 por canal) fica **adiado** para depois dos aprendizados.
 - **Dois bancos com papéis distintos [t324–t326]:**
   - **Postgres próprio do Temporal:** só estado dos workflows. **Nunca é consultado diretamente** por agentes, painel ou relatórios.
-  - **banco do app:** dados de negócio: temas/R10, vídeos e códigos PQBR-EP, comentários, métricas, relatórios, base do painel e do analista. Mantido [recomendação aprovada; confirmar no teste de 1 dia do Temporal].
-- **banco do app fora [t324–t326]:** retentativas duráveis do Temporal + **outbox** para o banco do app na volta. Substitui a fila em arquivo da t242 (confirmar no teste). A regra (REGRAS §18) não muda.
+  - **Banco do app (Postgres local, t343):** dados de negócio: temas/R10, vídeos e códigos PQBR-EP, comentários, métricas, relatórios, base do painel e do analista. Mantido [recomendação aprovada; confirmar no teste de 1 dia do Temporal].
+- **Banco do app fora [t324–t326]:** retentativas duráveis do Temporal + **outbox** para o banco do app na volta. Substitui a fila em arquivo da t242 (confirmar no teste). A regra (REGRAS §18) não muda.
 - **Teto de RAM [APROVADO t329]:** Temporal + Postgres dedicado ≤ 1,5 GB no `pc`; acima disso no TZ-01, considerar o DBOS (plano B).
 - **Cautelas:** RAM e swap do `pc` (H-ORQ1); determinismo e versionamento dos workflows; `NUM_HISTORY_SHARDS` escolhido uma vez; backup diário do Postgres do motor (sem segredos); nenhum agente autônomo dentro de Activity com efeito colateral.
 
@@ -65,11 +65,11 @@
 | **YouTube Data API** | Grade, comentários (`commentThreads.list` = 1 unidade), respostas (`comments.insert` = 50), retenção (`setModerationStatus` = 50), `videos.update` = 50, upload (`videos.insert`). Cota 10.000/dia, reset à meia-noite do Pacífico (~04:00–05:00 em Fortaleza); `search.list` e `videos.insert` com balde próprio de 100/dia. Sem endpoint de coração. | [VERIFICADO na doc] |
 | **YouTube Analytics API** | Coleta diária do analista (OAuth só leitura; app do GCP em produção, uso interno). | [APROVADO] / números [HIPÓTESE] |
 | **Motor de workflow** (Temporal / DBOS) | Estado durável dos fluxos, Schedules, retentativas, sinais (ADR-001). Postgres próprio, só estado de workflow, nunca consultado diretamente. | [APROVADO t283] / escolha no G0.5 |
-| **banco do app** | Dados de negócio (base do painel e do analista; recebe por outbox): grade, temas (R10), episódios, `visual_assets`/`episode_assets`, comentários, ações (motivo/quem/quando), consumo, kill switch, relatórios. Plano Pro não confirmado (H13). | [APROVADO] |
+| **Banco do app** (Postgres 17 local, `infra/pqbr-db`) | Dados de negócio (base do painel e do analista; recebe por outbox): grade, temas (R10), episódios, `visual_assets`/`episode_assets`, comentários, ações (motivo/quem/quando), consumo, kill switch, relatórios. Plano Pro não confirmado (H13). | [APROVADO] |
 | **Google Drive** | Armazenamento definitivo, estrutura t267 (REGRAS §21). | [APROVADO] |
 | **Hermes `pqbr`** | @pqbr-assistente no Telegram (ADR-003). | [APROVADO t281] |
 | **Paperclip** | Camada de agentes + painel, ligado ao Temporal (ADR-002). | [APROVADO t282, t327] |
-| **Hindsight** (local, backup diário) | Aprendizados (analista, lições do item 5) e memórias de código para os agentes de dev (ADR-004), num **bank único por organização**. Sem segredos nem PII. | [APROVADO t324–t326] |
+| **Hindsight** (local, armazenamento próprio: Postgres embutido pg0; t349–t350) | Aprendizados (analista, lições do item 5) e memórias de código para os agentes de dev (ADR-004), num **bank único por organização**. Sem segredos nem PII. | [APROVADO t324–t326] |
 | **Whisper / FFmpeg** | Transcrição com tempos (o Whisper ouve "Porquê BR" como "por KBR"; aceitar variantes). Pós: corte do end card só se detectado + logo com zoom suave curto. | [VERIFICADO] |
 
 ## 3. Papéis (ex-"agentes")
@@ -136,7 +136,7 @@ Nada que depende de uma hipótese é construído antes de ela virar VERIFICADO (
 | H10 | ~~Juiz visual: Gemini web × Gemini API~~ RESOLVIDO (t327): Gemini web via Camofox. Resta verificar a automação estável em produção | dev | Auditor rodando via Camofox por N dias |
 | H11 | Termos de uso comercial do NotebookLM/Gemini; selo de IA desnecessário para stickman | dev (registro) + José | Leitura dos termos registrada; compliance acompanha |
 | H12 | Métricas do canal (30 vs. 46 Shorts; bases de retenção diferentes) | @prod-analista/dev | Números fixados pela Analytics API |
-| H13 | banco do app Pro ativo; local do schema Hindsight; `hermes_local` + Hindsight num heartbeat real | dev | Confirmação pelo MCP + 1 heartbeat real |
+| H13 | `hermes_local` + Hindsight num heartbeat real (armazenamento do Hindsight verificado em 09/10, §8; Supabase Pro superado por t343) | dev | Confirmação pelo MCP + 1 heartbeat real |
 | H14 | App do GCP em produção (uso interno) sem expiração do token | dev | Token válido além de 7 dias |
 | H15 | Limites do Pro do NotebookLM (5 h/semanal; 20 vídeos/dia) | dev | Monitor de consumo da 1ª semana |
 | H16 | Corações pelo Camofox (até 10/dia) sem desafio de login | dev | 3 dias de sombra sem incidente de sessão |
@@ -169,6 +169,19 @@ Nada que depende de uma hipótese é construído antes de ela virar VERIFICADO (
   - **Rede nova = linhas novas, não tabelas novas.** Não construir funcionalidade ainda indefinida; isso evita tabelas duplicadas e refatorações complexas.
   - Escopo atual: só YouTube no catálogo. **Outras redes (TikTok, Kwai, Instagram, Facebook) = sugestão futura, fora do escopo atual** (t343–t344).
   - Reaproveitamento de conteúdo entre plataformas: **EM CONSTRUÇÃO — aguardando José** (t345). Sem esquema além do vínculo `episodios → publicacoes`.
+- **Três armazenamentos separados [APROVADO t349–t350]:** cada um com backup e restauração independentes.
+  - Banco do app: `pqbr-db`.
+  - Postgres do Temporal: `pqbr-temporal`, só estado de workflow.
+  - **Hindsight:** armazenamento próprio. Um único bank por organização (PQBR).
+- **Hindsight [VERIFICADO 09/10, só leitura]:**
+  - Serviço de usuário `hindsight-api` (Restart=always), que roda a partir de `~/Workspace/core-engineering/memory`. API em `127.0.0.1:8890` (`/health` ok).
+  - Dashboard: serviço `hindsight-control-plane` na porta 9999 da tailnet.
+  - Backend: **PostgreSQL 18.1 embutido (pg0)**.
+    - Dados em `~/.pg0/instances/hindsight/data` (~68 MB), porta `127.0.0.1:5432`, banco e usuário `hindsight`.
+    - Credenciais no `instance.json` do pg0; não foram lidas.
+  - Modelos: LLM pelo 9router, embeddings `qwen3-embedding:0.6b` pelo Ollama local.
+  - Banks hoje: só o `core-engineering-bank` (46 fatos); **o bank do PQBR ainda não existe**.
+  - **Não há backup do Hindsight** (sem timer, cron nem arquivos de dump). Tarefas F3-03 e F3-04 no ROADMAP.
 - **Backup:** `infra/pqbr-db/backup.sh` (pg_dump `-Fc -Z9`), timer de usuário `pqbr-db-backup.timer` diário às 03:30 (Fortaleza).
   - Rotação de 7 em `~/Backups/pqbr-db` (700/600, fora do git).
   - Restauração testada com `testar_restauracao.sh`.
@@ -224,7 +237,7 @@ Escrita no banco do app sempre por Activity com **outbox** (idempotente por chav
 ## 10. Integração com o Paperclip [PROPOSTA; demonstrada em F05-04]
 
 - O Temporal publica eventos de negócio (via outbox) no banco do app e abre/atualiza **issues** no Paperclip (episódio, revisão, ticket, proposta).
-- Os agentes no Paperclip (director, analista, comunidade, compliance, assistente, dev) leem banco do app e issues e devolvem **`PropostaAgente`** validada; nunca executam efeito externo.
+- Os agentes no Paperclip (director, analista, comunidade, compliance, assistente, dev) leem o banco do app (só pelo contexto do fluxo ou `pqbr_leitura`) e issues e devolvem **`PropostaAgente`** validada; nunca executam efeito externo.
 - A aprovação do José (Telegram pelo Hermes `pqbr` ou painel) vira sinal `aprovacao_jose` no workflow; só então a rotina aplica.
 - Heartbeats desligados até a liberação; nenhum agente com `--yolo` (H-SDD1).
 

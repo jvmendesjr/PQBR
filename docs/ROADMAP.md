@@ -101,6 +101,14 @@
   - Req: RNF-03 · Testes: TS-SEC · Depende de: —
   - Aceite: bloqueia segredo de teste antes de Hindsight, tickets, banco do app, logs e commit.
   - Portão José: nenhum. Obs: 2026-10-09 (t336): `src/pqbr/seguranca/segredos.py` + `scripts/seguranca/verificar_segredos.py` + hook `.githooks/pre-commit` instalado (`core.hooksPath`); repositório inteiro limpo; commit com segredo falso bloqueado. Falta ligar Hindsight/tickets/banco do app/logs (quando existirem).
+- [ ] **F3-03** Backup do Hindsight (inexistente hoje), alinhado ao backup das 03:30
+  - Req: RNF-03 · Testes: TS-DB (restauração) · Depende de: —
+  - Aceite: `pg_dump -Fc` do banco `hindsight` do pg0 (sem parar nem reiniciar o Hindsight), timer de usuário às 03:30, rotação de 7 em `~/Backups/hindsight`, restauração testada em banco descartável, credencial lida só na hora do dump e nunca no git. Criar o bank único da organização PQBR quando a F1 pedir.
+  - Portão José: nenhum (só leitura do Hindsight). Obs: 2026-10-09: verificado que não há backup (t349–t350).
+- [ ] **F3-04** Backup fora do servidor no Drive via rclone no `pc`
+  - Req: RNF-03 · Testes: restauração a partir do Drive · Depende de: F3-03
+  - Aceite: rclone instalado em escopo de usuário; remote do Google Drive com escopo mínimo, autorizado uma vez pelo José; destino `PQBR/backups-db`; envio diário dos dumps do banco do app e do Hindsight depois das 03:30; retenção no Drive definida; nenhum token no git.
+  - Portão José: **login Google único** e escolha da retenção. Obs: PENDENTE José (t349–t350).
 
 ## Fase 4: migração do notebooklm-py (D1) — cada passo com portão G4
 

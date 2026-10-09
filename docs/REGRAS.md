@@ -182,6 +182,7 @@ _Origem do bloco: t240–t242._
 - **Limpeza do Drive** por script determinístico na **rotina noturna do @prod-director**: duplicatas (hash/tamanho ou mesmo código) e órfãos vão para `99_Arquivo/_duplicados` e a lista vai ao José no relatório diário e no Telegram; **exclusão definitiva só pelo José**. [t269; t270]
 - Memória: **Hindsight local** com backup diário; OpenViking fora do build (importar só o aproveitável). [07/10 item 4; rodada 2]
 - Hindsight: **um único bank por organização** (inclui as memórias de código dos agentes de dev). [t324–t326]
+- **Armazenamentos separados:** o Hindsight fica no **armazenamento próprio** (Postgres embutido pg0), separado do banco do app e do Postgres do Temporal; um bank único da organização PQBR; backup e restauração independentes, alinhados ao backup diário das 03:30; cópia fora do servidor (Drive `PQBR/backups-db`, via rclone) depende do login Google do José. [t349–t350]
 
 ## 22. Orçamento
 - **Sem teto mensal por enquanto:** só monitoramento e levantamento de custos (relatório diário com o consumo). [decisão 10; t268; t327]

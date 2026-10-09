@@ -313,3 +313,9 @@ NÃO CABE:
 - (t343–t344) Outras redes (TikTok, Kwai, Instagram, Facebook) eram só sugestão: **outras redes = sugestão futura, fora do escopo atual**. Modelo de plataforma genérico; no catálogo, só o YouTube.
 - (t345) Reaproveitamento de conteúdo entre plataformas: **EM CONSTRUÇÃO — aguardando José**. Sem esquema além do vínculo genérico `episodios → publicacoes`.
 - (t346) Diretriz de arquitetura: os projetos futuros são citados agora para desenhar bem a estrutura e evitar tabelas duplicadas ou refatorações complexas. Modelo genérico canal/plataforma/publicações + campo jsonb de extensão; **rede nova = linhas novas, não tabelas novas**; não construir funcionalidades indefinidas.
+
+## 09/10/2026, ~17:58: t349–t350
+
+- (t349–t350) Hindsight fica no **armazenamento próprio**, separado do banco do app e do Postgres do Temporal; um único bank por organização (PQBR); backup e restauração independentes.
+- Verificação só leitura: Hindsight API em 127.0.0.1:8890, backend PostgreSQL 18.1 embutido (pg0) em `~/.pg0/instances/hindsight/data`; único bank hoje é o `core-engineering-bank`; não há backup.
+- Tarefas novas: F3-03 (backup do Hindsight alinhado às 03:30) e F3-04 (backup fora do servidor no Drive `PQBR/backups-db` via rclone, com login Google único do José), pendente José.
