@@ -9,7 +9,7 @@ create table pqbr.temas (
   origem           text not null check (origem in ('em_alta', 'perene', 'jose', 'legado')),
   status           text not null default 'proposto'
                    check (status in ('proposto', 'aprovado', 'em_producao', 'publicado', 'recusado_r10', 'descartado')),
-  video_id         text unique check (video_id ~ '^[A-Za-z0-9_-]{11}$'),
+  video_id         text unique check (video_id ~ '^[A-Za-z0-9_-]{11}$'),  -- legado: vídeo do YouTube do CSV; publicações novas ficam em pqbr.publicacoes
   publicado_em     date,
   repete_n         smallint check (repete_n >= 0),       -- legado do CSV
   motivo_recusa    text,

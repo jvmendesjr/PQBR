@@ -300,3 +300,9 @@ NÃO CABE:
 
 - (t337–t338) José escolheu um **projeto Supabase novo e dedicado** ao PQBR (não o `paperclip`), na org dele (plano Pro por um ano); pode migrar para local depois, decidindo por projeto. Esquema `pqbr` fora da Data API; acesso só pelo `service_role`. As 2 repetições históricas da R10 foram aceitas como exceção.
 - Condição: criar só se o custo fosse US$ 0. O `get_cost` da org informou **US$ 10, recorrência mensal**. **Projeto não criado**; aguarda decisão do José.
+
+## 09/10/2026, ~17:44: t339–t342
+
+- (t339–t340) O PQBR vai se ramificar para outras redes (TikTok, Kwai, Instagram, talvez Facebook) no **mesmo projeto/banco**. Desenho agnóstico de plataforma: catálogo de plataformas e referência à plataforma em canais, publicações (uma por plataforma por episódio), comentários e métricas, sem construir demais. Esquema detalhado por rede: EM CONSTRUÇÃO.
+- (t341–t342) Separação confirmada: o Paperclip mantém o banco próprio. Agentes do Paperclip nunca escrevem no banco do app: propõem, e o Temporal valida e aplica após a aprovação. Leitura só pelo contexto do fluxo ou por chave só-leitura limitada.
+- Custo do projeto novo rechecado: US$ 10/mês. Projeto não criado; aguarda o José.

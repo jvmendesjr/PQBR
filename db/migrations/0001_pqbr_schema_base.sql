@@ -31,6 +31,28 @@ create table pqbr.canais (
 );
 insert into pqbr.canais (id, nome) values ('pqbr', 'Porquê BR');
 
+-- Plataformas (t339–t340): mesmo projeto/banco para outras redes. Esquema detalhado por rede: EM CONSTRUÇÃO.
+create table pqbr.plataformas (
+  id          text primary key check (id ~ '^[a-z0-9_]{2,32}$'),
+  nome        text not null,
+  ativa       boolean not null default false
+);
+insert into pqbr.plataformas (id, nome, ativa) values
+  ('youtube', 'YouTube Shorts', true), ('tiktok', 'TikTok', false), ('kwai', 'Kwai', false),
+  ('instagram', 'Instagram', false), ('facebook', 'Facebook', false);
+
+-- Contas do canal em cada plataforma (rótulo, nunca e-mail ou login)
+create table pqbr.canal_plataformas (
+  canal_id      text not null references pqbr.canais (id),
+  plataforma_id text not null references pqbr.plataformas (id),
+  conta_rotulo  text not null,
+  conta_externa_id text,                 -- ID público do canal/perfil na plataforma
+  ativo         boolean not null default false,
+  primary key (canal_id, plataforma_id)
+);
+create index canal_plataformas_plataforma on pqbr.canal_plataformas (plataforma_id);
+insert into pqbr.canal_plataformas (canal_id, plataforma_id, conta_rotulo, ativo) values ('pqbr', 'youtube', 'Porquê BR (YouTube)', true);
+
 -- Flags operacionais: kill switch das respostas, HOLD da fila (RF-26, RF-28)
 create table pqbr.config_flags (
   canal_id    text not null default 'pqbr' references pqbr.canais (id),
@@ -48,6 +70,10 @@ insert into pqbr.config_flags (chave, valor, definido_por) values
 
 alter table pqbr.canais enable row level security;
 alter table pqbr.canais force row level security;
+alter table pqbr.plataformas enable row level security;
+alter table pqbr.plataformas force row level security;
+alter table pqbr.canal_plataformas enable row level security;
+alter table pqbr.canal_plataformas force row level security;
 alter table pqbr.config_flags enable row level security;
 alter table pqbr.config_flags force row level security;
 

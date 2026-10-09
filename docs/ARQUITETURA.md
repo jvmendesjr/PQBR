@@ -150,6 +150,17 @@ Nada que depende de uma hipótese é construído antes de ela virar VERIFICADO (
 ## 8. Modelo de dados (Supabase) [PROPOSTA; fixado em F3-01]
 
 - **Projeto [APROVADO t337–t338]:** um projeto Supabase **novo e dedicado**, `pqbr`, na org Pro do José (região sa-east-1), com a opção de migrar para local depois. **Ainda não criado:** o `get_cost` informou **US$ 10/mês**, e a ordem era criar só se o custo fosse zero; aguarda o OK do José para esse valor. O projeto `paperclip` não é usado nem tocado.
+- **Multiplataforma [APROVADO t339–t340]:** o mesmo projeto e o mesmo banco servem a outras redes (TikTok, Kwai, Instagram e talvez Facebook).
+  - Catálogo `pqbr.plataformas` (só o YouTube ativo).
+  - `pqbr.canal_plataformas`: conta do canal em cada rede.
+  - `pqbr.publicacoes`: uma por episódio por plataforma, com os estados da REGRAS §15 e `external_id`.
+  - `plataforma_id` em comentários, respostas, métricas, ações, relatórios e compliance.
+  - O episódio guarda só o estado de produção.
+  - **Esquema detalhado por rede: EM CONSTRUÇÃO — aguardando José** (campos `detalhes`/`extra` em jsonb até lá).
+- **Separação [APROVADO t341–t342]:**
+  - O Paperclip mantém o banco próprio.
+  - Agentes do Paperclip **nunca** escrevem no banco do app: propõem, e o Temporal valida e aplica após a aprovação, com o `service_role` só no servidor.
+  - Leitura de agente só pelo contexto do fluxo ou pelo papel só-leitura `pqbr_leitura`. Ele lê tudo, menos o texto bruto de comentário; o login fica a criar, com senha só no `.env` do servidor.
 - **Histórico (09/10, só leitura):** o Supabase `paperclip` foi considerado (decisão 3), mas foi superado por t337–t338.
   - O `public` dele é o banco do próprio Paperclip: 214 tabelas, todas com RLS desligado. Esse alerta crítico do Supabase foi levado ao José; não mexi em nada.
   - Hoje não há tabela do PQBR, nem esquema `pqbr`, nem migrações registradas. Os nomes do PQBR não colidem com o `public`.

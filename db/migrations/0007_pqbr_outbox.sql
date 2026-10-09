@@ -29,6 +29,26 @@ do $$ begin
 end $$;
 revoke execute on all functions in schema pqbr from public;
 
+-- Separação (t341–t342): agentes do Paperclip NUNCA escrevem no banco do app; propõem, e o Temporal valida e aplica
+-- após aprovação (service_role, só no servidor). Leitura de agente: pelo contexto do fluxo ou por este papel
+-- só-leitura (login próprio a criar no painel com senha só no .env do servidor; sem texto bruto de comentário).
+do $$ begin
+  if not exists (select 1 from pg_roles where rolname = 'pqbr_leitura') then
+    create role pqbr_leitura nologin;
+  end if;
+end $$;
+grant usage on schema pqbr to pqbr_leitura;
+grant select on all tables in schema pqbr to pqbr_leitura;
+revoke select on pqbr.comentarios from pqbr_leitura;
+grant select (id, canal_id, plataforma_id, external_id, post_external_id, publicacao_id, rotulos, gravidade, acao,
+              publicado_em, lido_em) on pqbr.comentarios to pqbr_leitura;
+-- RLS forçado: o papel só-leitura precisa de política de SELECT explícita
+do $$ declare t text; begin
+  for t in select tablename from pg_tables where schemaname = 'pqbr' loop
+    execute format('create policy %I on pqbr.%I for select to pqbr_leitura using (true)', t || '_leitura', t);
+  end loop;
+end $$;
+
 alter table pqbr.outbox_aplicados enable row level security;
 alter table pqbr.outbox_aplicados force row level security;
 
