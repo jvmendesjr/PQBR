@@ -78,8 +78,9 @@
 
 ### Correção autônoma mediada pelo Temporal [t355; PROPOSTA]
 - Quando um passo de script falha com erro corrigível (`SiteMudou`, `SaidaForaDoEsquema`, transitório após a escada), o workflow chama o filho `CorrecaoAutonomaWorkflow(ferramenta, sessao, passo, contexto)` na fila da ferramenta (`camofox-pqbr`, `notebooklm`, …), com concorrência 1 por sessão.
+- **Etapas [t356]:** (1) **triagem pelo Jev** (`TriagemCorrecao`: corrigível / sensível / fora de escopo; ação sensível encerra como `Sensivel` sem chamar o agente); (2) **intervenção pelo agente com LLM** (Activity na fila da sessão, tentativas e tempo limitados); (3) **verificação pelo Jev** quando couber (o passo voltou a funcionar? a saída bate com o esquema? nada fora da allowlist foi feito?); (4) **log + aprendizado**: cada ação no banco do app pelo Temporal (outbox) e o aprendizado no bank Hindsight da PQBR, sanitizado; (5) **proposta de ajuste do script** (tarefa ou ticket) quando corrigiu.
 - A Activity do agente recebe só as ferramentas daquela fila (o Camofox restrito à instância `pqbr-camofox` e a uma allowlist de ações: navegar, ler, clicar, digitar, colar, upload; sem login, cookies ou exclusão). O Jev entra nas decisões estruturadas. Cada ação vai para o registro (`pqbr.acoes`, `jsonb`; tabela própria só se faltar campo, EM CONSTRUÇÃO).
-- Resultado: `Corrigido(passos, proposta_script)`, `Esgotado(tentativas)` ou `Sensivel(motivo)`. Corrigido retoma o workflow e abre a proposta de ajuste (tarefa ou ticket); os outros dois avisam o José. O runtime do agente (Hermes `pqbr` ou dev do Paperclip) e os limites estão EM CONSTRUÇÃO (REGRAS §3.1).
+- Resultado: `Corrigido(passos, proposta_script)`, `Esgotado(tentativas)` ou `Sensivel(motivo)`. Corrigido retoma o workflow e abre a proposta de ajuste (tarefa ou ticket); os outros dois avisam o José. Quem executa é um agente com LLM (t356); o runtime (Hermes `pqbr` ou dev do Paperclip), o modelo e os limites estão EM CONSTRUÇÃO (REGRAS §3.1).
 
 ## 3. Papéis (ex-"agentes")
 

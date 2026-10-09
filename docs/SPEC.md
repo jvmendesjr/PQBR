@@ -149,6 +149,7 @@
 | RF-35 | Tickets de manutenção agnósticos, pré-estruturados (localização, falha, correções sugeridas), com 2 aprovações do José (abertura com correções + merge); memórias de código no bank Hindsight único. | §24 |
 | RF-44 | Correção autônoma antes de chamar o José: script primeiro; falha corrigível → agente via Activity do Temporal (concorrência 1 por sessão), tentativas e tempo limitados, cada ação registrada; sucesso vira proposta de ajuste do script com as 2 aprovações; travas duras preservadas. | §3.1 |
 | RF-45 | Agentes usam o Camofox só pela Activity do Temporal, na instância da PQBR, com allowlist de ações; login, 2FA, cookies, exclusão e publicação fora das regras ficam com o José. | §11 |
+| RF-46 | Divisão de papéis na correção autônoma: o Jev faz só triagem, classificação, decisão estruturada e verificação do resultado; um agente com modelo LLM executa a intervenção, registra aprendizados no bank Hindsight único da PQBR e loga tudo no banco do app via Temporal. Runtime e modelo do agente: EM CONSTRUÇÃO. | §3.1, §7 |
 | RF-36 | Revisão humana como último recurso: local dedicado, aviso ao José e registro da determinação (excluir, corrigir, reaproveitar, arquivar). | §5 |
 
 ### F10. Sessão e resiliência
@@ -220,7 +221,7 @@
 
 ## 3. Lacunas (não inventar; levar ao José)
 
-- **EM CONSTRUÇÃO — aguardando José (t355):** limites da correção autônoma, desempate do auditor, corações, diálogos de sessão no Camofox, busca do código no Studio, runtime do agente, escada do §18 e teto de tokens (REGRAS §3.1 a–h). Afetam RF-44 e RF-45.
+- **EM CONSTRUÇÃO — aguardando José (t355):** limites da correção autônoma, desempate do auditor, corações, diálogos de sessão no Camofox, busca do código no Studio, runtime do agente, escada do §18 e teto de tokens (REGRAS §3.1 a–h). Afetam RF-44, RF-45 e RF-46 (t356 resolveu "quem executa": agente com LLM; runtime e modelo continuam abertos).
 
 - **EM CONSTRUÇÃO — aguardando José:** regras de roteiro R1–R6, R8 e R9 (contrato v2, F7-01). Afetam RF-07.
 - **EM CONSTRUÇÃO — aguardando José:** metas do piloto (definidas depois, t327). Afetam V1–V7 e F12-01.

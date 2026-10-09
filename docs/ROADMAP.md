@@ -110,7 +110,7 @@
   - Aceite: rclone instalado em escopo de usuário; remote do Google Drive com escopo mínimo, autorizado uma vez pelo José; destino `PQBR/backups-db`; envio diário dos dumps do banco do app e do Hindsight depois das 03:30; retenção no Drive definida; nenhum token no git.
   - Portão José: **login Google único** e escolha da retenção. Obs: PENDENTE José (t349–t350).
 
-- [ ] **F3-05** `CorrecaoAutonomaWorkflow` (t355) — filho chamado na falha corrigível, por fila de ferramenta e concorrência 1 por sessão; limites (PROPOSTA 3 tentativas, 20 min); resultados `Corrigido`/`Esgotado`/`Sensivel`; travas duras em código (lista do REGRAS §3.1); registro em `pqbr.acoes`; proposta de ajuste do script como tarefa ou ticket · Req: RF-44 · Testes: TS-11 · Depende de: F3-01 · Aceite: TS-11 verde · Portão: G4 + José nos casos EM CONSTRUÇÃO do §3.1 · Obs:
+- [ ] **F3-05** `CorrecaoAutonomaWorkflow` (t355) — filho chamado na falha corrigível, por fila de ferramenta e concorrência 1 por sessão; limites (PROPOSTA 3 tentativas, 20 min); resultados `Corrigido`/`Esgotado`/`Sensivel`; travas duras em código (lista do REGRAS §3.1); triagem e verificação pelo Jev, intervenção por agente com LLM, aprendizado no Hindsight da PQBR (t356); registro em `pqbr.acoes`; proposta de ajuste do script como tarefa ou ticket · Req: RF-44, RF-46 · Testes: TS-11 · Depende de: F3-01 · Aceite: TS-11 verde · Portão: G4 + José nos casos EM CONSTRUÇÃO do §3.1 · Obs:
 
 ## Fase 4: migração do notebooklm-py (D1) — runbook, cada passo com portão G4
 
