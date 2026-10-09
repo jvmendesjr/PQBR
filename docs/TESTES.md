@@ -71,5 +71,6 @@ Prioridade: V1, V2 e V3. Metas do piloto: EM CONSTRUÇÃO — aguardando José (
 | TS-11 | Armazenamento (RF-40, RF-41) | Apaga local só após hash; duplicata movida; nada excluído |
 | TS-12 | Monitores (RF-42, RNF-07) | Atualização relevante pede autorização; nada atualiza sozinho |
 | TS-13 | Painel (RF-43) | Estado exibido vem do Supabase/issues |
-| TS-SEC | Segredos/PII (RNF-03, RNF-08) | Segredo e PII de teste bloqueados em Hindsight, tickets, Supabase, logs e pre-commit |
+| TS-DB | Migrações (RF-02, RNF-02, RNF-03) | `sh db/test_migrations.sh`: sobe/desce 2 vezes; R10, código PQBR-EP, `video_id` obrigatório, janelas, 1 resposta por pessoa por vídeo, outbox idempotente, revisão coerente; anon/authenticated sem acesso; FKs indexadas. ✅ 09/10 |
+| TS-SEC | Segredos/PII (RNF-03, RNF-08) | Segredo e PII de teste bloqueados em Hindsight, tickets, Supabase, logs e pre-commit | ✅ 09/10 no pre-commit e na biblioteca (`tests/seguranca/test_segredos.py`; commit com token e e-mail falsos foi bloqueado). Falta ligar a biblioteca em Hindsight, tickets, Supabase e logs quando esses gravadores existirem.
 | TS-REPLAY | Determinismo (RNF-01, RNF-05) | Replay de históricos gravados passa após cada mudança de workflow |

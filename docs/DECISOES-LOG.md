@@ -290,3 +290,8 @@ NÃO CABE:
 ## 09/10/2026, ~15:47: autorização t334
 
 - (t334) José autorizou um projeto de teste reversível no Paperclip para TZ-04/TZ-05, separado da core-eng. Agente de teste fica pausado salvo quando estritamente necessário. Se o agente de teste exigir `hermes_local` com `--yolo`, não executar e documentar o bloqueio. Sem restarts de serviços, sem mudanças de exposição. Reboot do servidor dispensado: o restart do motor cobre o TZ-02. Resultado e limpeza em `docs/sdd/adr-001-orquestrador.md`.
+
+## 09/10/2026, ~17:05: t334 (complemento), t335, t336
+
+- (t334/t335) José: **não mexer no código do Paperclip**; o adaptador `hermes_local` fica como está; F05-05 continua pendente.
+- (t336) José aprovou seguir para a próxima fase do roadmap enquanto o soak de 24 h roda: base de dados e barreira de segredos (D3, D14). Escopo agora = **preparar**, sem gravar no Supabase e sem perturbar soak, Temporal, Paperclip ou outros serviços.

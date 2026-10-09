@@ -55,7 +55,7 @@
 - [ ] **F05-05** Agente Hermes no Paperclip sem `--yolo`; versão do Paperclip
   - Req: RNF-13 · Testes: TZ-05 · Depende de: F05-04
   - Aceite: H-SDD1 resolvida (ou alternativa documentada que respeite o perfil `pqbr`); H-ORQ3 conferida.
-  - Portão José: decidir a alternativa se não houver caminho sem `--yolo`. Obs: 2026-10-09: BLOQUEADO. `hermes_local` 2026.1001.0 força `--yolo` sem opção; nenhum agente Hermes criado nem executado. Decisão do José: patch upstream, adaptador `process` chamando o Hermes `pqbr`, ou outro adaptador.
+  - Portão José: decidir a alternativa se não houver caminho sem `--yolo`. Obs: 2026-10-09: BLOQUEADO e pendente. `hermes_local` 2026.1001.0 força `--yolo` sem opção; nenhum agente Hermes criado nem executado. José (t334): não mexer no código do Paperclip; o adaptador fica como está.
 - [ ] **F05-06** Aprovação pelo Telegram (Hermes `pqbr`) como sinal
   - Req: RF-34 · Testes: TZ-06 · Depende de: F05-04
   - Aceite: aprovar/negar funciona; outro ID é ignorado.
@@ -96,11 +96,11 @@
 - [ ] **F3-01** (D3) Contratos Pydantic v2 e migração base
   - Req: RF-02, RF-07, RNF-02 · Testes: TS-01, TS-02 · Depende de: F05-07
   - Aceite: modelos da ARQUITETURA §11; `db/migrations/0001_base.sql` (ARQUITETURA §8); carga de `temas-publicados.csv`; testes de contrato passam.
-  - Portão José: **G3**. Obs:
+  - Portão José: **G3**. Obs: 2026-10-09 (t336, preparo, nada aplicado): migrações `db/migrations/0001..0008` + rollback no esquema `pqbr` do Supabase `paperclip`; TS-DB ok em Postgres 17 descartável. Faltam os contratos Pydantic da §11 em `src/pqbr/schemas` e o portão **G3** para aplicar.
 - [ ] **F3-02** (D14) Verificador de segredos/PII
   - Req: RNF-03 · Testes: TS-SEC · Depende de: —
   - Aceite: bloqueia segredo de teste antes de Hindsight, tickets, Supabase, logs e commit.
-  - Portão José: nenhum. Obs:
+  - Portão José: nenhum. Obs: 2026-10-09 (t336): `src/pqbr/seguranca/segredos.py` + `scripts/seguranca/verificar_segredos.py` + hook `.githooks/pre-commit` instalado (`core.hooksPath`); repositório inteiro limpo; commit com segredo falso bloqueado. Falta ligar Hindsight/tickets/Supabase/logs (quando existirem).
 
 ## Fase 4: migração do notebooklm-py (D1) — cada passo com portão G4
 

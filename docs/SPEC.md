@@ -220,6 +220,7 @@
 
 - **EM CONSTRUÇÃO — aguardando José:** regras de roteiro R1–R6, R8 e R9 (contrato v2, F7-01). Afetam RF-07.
 - **EM CONSTRUÇÃO — aguardando José:** metas do piloto (definidas depois, t327). Afetam V1–V7 e F12-01.
+- [PROPOSTA, aguarda G3] esquema `pqbr` no Supabase `paperclip` (ARQUITETURA §8; `db/migrations/`).
 - [PROPOSTA] local dedicado da revisão humana (RF-36): registro no Supabase + `04_Privados_Revisao` no Drive.
 - [PROPOSTA, validar na Fase 0.5] ponte Temporal ↔ Paperclip (RF-33, RF-43).
 - [HIPÓTESE] H1–H16, H-ORQ1–3, H-SDD1–3 (ARQUITETURA §7) condicionam RF-10, RF-15, RF-22, RF-24, RF-25, RF-34, RF-43.

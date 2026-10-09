@@ -149,6 +149,17 @@ Nada que depende de uma hipótese é construído antes de ela virar VERIFICADO (
 
 ## 8. Modelo de dados (Supabase) [PROPOSTA; fixado em F3-01]
 
+- **Projeto:** o Supabase `paperclip` (decisão 3; conferido só em leitura em 09/10).
+  - O `public` dele é o banco do próprio Paperclip: 214 tabelas, todas com RLS desligado. Esse alerta crítico do Supabase foi levado ao José; não mexi em nada.
+  - Hoje não há tabela do PQBR, nem esquema `pqbr`, nem migrações registradas. Os nomes do PQBR não colidem com o `public`.
+- **Desenho [PROPOSTA, t336]:**
+  - Tudo no esquema dedicado **`pqbr`**, fora da Data API.
+  - RLS ligado e forçado, sem políticas: anon e authenticated sem acesso; o servidor usa o `service_role`.
+  - `canal_id` em todas as tabelas de negócio.
+  - Migrações em `db/migrations/0001..0008` com rollback em `db/migrations/rollback/`, testadas em Postgres 17 descartável (`db/test_migrations.sh`).
+  - **Aplicar exige o portão G3 do José.**
+- **Achado:** o CSV de temas tem 2 repetições históricas (`repete_n`), anteriores à R10. Elas ficam registradas, mas fora do índice único da R10.
+
 Só dados de negócio. O Postgres do Temporal guarda só estado de workflow e **nunca** é consultado diretamente (t324–t326). Sem segredos nem PII em nenhuma tabela (autores de comentário só como hash).
 
 | Tabela | Conteúdo principal | Req |

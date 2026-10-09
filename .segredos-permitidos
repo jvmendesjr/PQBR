@@ -1,0 +1,3 @@
+# Exceções da barreira de segredos (caminho_glob:regra). Toda nova linha precisa do OK do José.
+# O próprio detector contém padrões de exemplo nos testes:
+tests/seguranca/*:*
