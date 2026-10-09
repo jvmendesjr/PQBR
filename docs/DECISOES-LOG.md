@@ -328,3 +328,7 @@ NÃO CABE:
 - t352: o login do PQBR no NotebookLM (F4-05) usa a **conta de produção** (o e-mail não vai para o git).
 - t353: antes do logout (F4-04), verificar se ele derruba a sessão do perfil da conta de produção no MP32. Verificado: é uma cópia obsoleta, proibida no MP32. O risco foi registrado no F4-04.
 - t354: aprovados só F4-00, F4-01 e F4-03, que foram feitos. Login, logout, MP32, crontab, pipx global e `~/.notebooklm` ficaram intocados.
+
+## t354 (Camofox) — 09/10/2026
+- José perguntou se o Camofox será isolado. Verificado só leitura: um servidor compartilhado em `*:9377` sem chave, com 14 perfis de vários projetos no mesmo processo. Decidido o plano de isolamento: instância própria da PQBR em 127.0.0.1:9387 com chave, pasta e perfil próprios, fila com concorrência 1 (REGRAS §11, ROADMAP F4C). Login novo, troca do `rede`, logout do perfil antigo e o fechamento do 9377 compartilhado dependem do José.
+- Achado: a doc do MP32 diz que `~/.notebooklm` é a conta pessoal do José, o que contradiz o runbook F4. Marcado EM CONSTRUÇÃO no F4.

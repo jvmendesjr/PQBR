@@ -104,6 +104,8 @@ _Origem do bloco: t194–t196, t272._
 - **Guardião determinístico da sessão:** timer ~20 min com variação; testa Studio, Gemini Web e NotebookLM; checagem extra ~30 min antes de cada publicação. [t195]
 - **Escada de recuperação:** (1) o Camofox renova; (2) login manual pelo noVNC com aviso no Telegram; cópia de cookies do Chrome **só como último recurso e com OK do José**. A publicação fica em espera e retoma sozinha; renovação que falha gera Telegram + ticket automático; o agente só observa e só age com roteiro pronto quando a escada esgota. [t195; t272]
 
+- **Isolamento [t354]:** a PQBR tem um Camofox **só dela**: checkout fixado, serviço `pqbr-camofox` em `127.0.0.1:9387` com chave de API, pasta `/home/pc/.pqbr/camofox`, perfil `pqbr` na conta de produção, fila do Temporal com concorrência 1 por sessão. Não compartilha servidor, perfil nem porta com `rede`, MP32 ou outros projetos, e nenhum outro projeto usa o perfil da PQBR. Passos: ROADMAP F4C. Até lá, o perfil `porquebr` no 9377 compartilhado segue como está.
+
 ## 12. Monitor de atualizações
 - Semanal, cobre notebooklm-py, Camofox/camofox-browser, Camoufox, Paperclip, Hermes, FFmpeg, Whisper, Pydantic, PostgreSQL, Jev SDK e demais dependências. O Jev julga relevância e urgência; se afetar, **o José autoriza no Telegram**; com autorização, abre ticket para **qualquer agente de dev** (t286): worktree, smoke test isolado, versão fixada, rollback. **Nunca atualiza sozinho.** [t186; t196; t286]
 

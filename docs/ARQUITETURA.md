@@ -72,6 +72,10 @@
 | **Hindsight** (local, armazenamento próprio: Postgres embutido pg0; t349–t350) | Aprendizados (analista, lições do item 5) e memórias de código para os agentes de dev (ADR-004), num **bank único por organização**. Sem segredos nem PII. | [APROVADO t324–t326] |
 | **Whisper / FFmpeg** | Transcrição com tempos (o Whisper ouve "Porquê BR" como "por KBR"; aceitar variantes). Pós: corte do end card só se detectado + logo com zoom suave curto. | [VERIFICADO] |
 
+### Camofox: estado e isolamento [VERIFICADO 09/10, t354]
+- Hoje: um servidor compartilhado (`camofox-browser`, `*:9377`, **todas as interfaces, sem chave**), um processo para 14 perfis em `~/.camofox/profiles` (pastas pelo hash sha256 do `userId`). Usado por `rede` (`porquebr`), MP32 (`tutibom10`), Hermes `mp3`/`pet`/`gpu` e o keepalive do runway (conta pessoal). Sem trava entre projetos.
+- Alvo: instância da PQBR (`pqbr-camofox`, `127.0.0.1:9387`, chave, `/home/pc/.pqbr/camofox`, `MAX_SESSIONS=1`, `MemoryMax=900M`), acessada só pelas Activities da fila `camofox-pqbr` (concorrência 1). A fila `camofox` do §2 passa a ser essa. Passos no ROADMAP F4C; regra no REGRAS §11.
+
 ## 3. Papéis (ex-"agentes")
 
 **Padrão dos agentes pensantes [APROVADO t324–t326]:** uma rotina fixa executa tudo; @prod-director, @prod-analista e @prod-comunidade só observam e propõem mudanças como saída estruturada validada por Pydantic v2; nada se aplica sem a aprovação do José.
