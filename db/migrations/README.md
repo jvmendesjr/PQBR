@@ -1,17 +1,15 @@
 # db/migrations
 
-Esquema do Supabase do PQBR (ARQUITETURA §8; F3-01/D3). **Nada aplicado ainda: aplicar exige o OK do José (G3).**
+Esquema `pqbr` do banco do app (ARQUITETURA §8; F3-01/D3). Banco: **Postgres 17 local** no `pc` (`infra/pqbr-db`, t343). O Supabase fica como opção futura: as migrações rodam nele sem mudança, porque os blocos do `service_role`, `anon` e `authenticated` só agem se esses papéis existirem.
 
-- Projeto: o mesmo Supabase do Paperclip (decisão 3 do DECISOES-LOG). Tudo fica no esquema dedicado **`pqbr`**; nada em `public`, que é do Paperclip.
-- Ordem: `0001` … `0008`. Rollback: `rollback/000N_down.sql` em ordem inversa (`0001_down` remove o esquema inteiro).
-- Segurança:
-  - RLS ligado e forçado em todas as tabelas, sem políticas: anon e authenticated não leem nada.
-  - Acesso só pelo servidor (`service_role`).
-  - O esquema `pqbr` **não** deve ser adicionado aos "Exposed schemas" da Data API.
-- Sem segredos nem PII: autor de comentário só como HMAC; texto bruto expira em 30 dias (`pqbr.expirar_textos_comentarios()`).
-- `canal_id` em todas as tabelas de negócio (padrão `pqbr`) para o multi-canal futuro.
-- Testar localmente (Postgres 17 descartável, sem rede):
-
-  ```
-  sh db/test_migrations.sh
-  ```
+- **Ordem:** `0001` … `0009`. Aplicar com `sh infra/pqbr-db/aplicar.sh`, que é idempotente e registra cada arquivo em `public.pqbr_migracoes`.
+- **Rollback:** `rollback/000N_down.sql`, em ordem inversa. O `0001_down` remove o esquema e os papéis.
+- **Segurança:**
+  - RLS ligado e forçado em todas as tabelas.
+  - Políticas só para `pqbr_app` (escritor do Temporal) e `pqbr_leitura` (só-leitura, sem texto bruto de comentário).
+  - Agentes do Paperclip nunca escrevem aqui.
+- **Sem segredos nem PII:** autor de comentário só como HMAC; o texto bruto expira em 30 dias (`pqbr.expirar_textos_comentarios()`).
+- **Diretriz (t346):** canal / plataforma / publicações genéricos, com jsonb de extensão. Rede nova = linhas novas, não tabelas novas. No catálogo, só o YouTube.
+- **Testes:**
+  - Postgres 17 descartável, sem rede: `sh db/test_migrations.sh`.
+  - Banco real, sem alterar nada: `sh infra/pqbr-db/verificar.sh`.

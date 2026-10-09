@@ -16,12 +16,12 @@
   - `EpisodioWorkflow(ep)`: pauta → NotebookLM → FFmpeg → auditor → upload privado → agendar → confirmar.
   - `Item5Workflow`: qualquer problema → privado na hora + Telegram (REGRAS §16).
   - Workers Python (`src/pqbr`) com filas por recurso: `notebooklm` (concorrência 1), `camofox` (concorrência 1), `render`, `default`.
-  - Activities sem LLM: NotebookLM CLI 0.8.4, FFmpeg, juiz Gemini, `decide()` (Jev via Pydantic), YouTube API, Drive, Supabase.
+  - Activities sem LLM: NotebookLM CLI 0.8.4, FFmpeg, juiz Gemini, `decide()` (Jev via Pydantic), YouTube API, Drive, banco do app.
   - **Escopo [t327]:** só o canal Porquê BR. Multi-canal (`canal_id`, config e orçamento por canal, R10 por canal) fica **adiado** para depois dos aprendizados.
 - **Dois bancos com papéis distintos [t324–t326]:**
   - **Postgres próprio do Temporal:** só estado dos workflows. **Nunca é consultado diretamente** por agentes, painel ou relatórios.
-  - **Supabase:** dados de negócio: temas/R10, vídeos e códigos PQBR-EP, comentários, métricas, relatórios, base do painel e do analista. Mantido [recomendação aprovada; confirmar no teste de 1 dia do Temporal].
-- **Supabase fora [t324–t326]:** retentativas duráveis do Temporal + **outbox** para o Supabase na volta. Substitui a fila em arquivo da t242 (confirmar no teste). A regra (REGRAS §18) não muda.
+  - **banco do app:** dados de negócio: temas/R10, vídeos e códigos PQBR-EP, comentários, métricas, relatórios, base do painel e do analista. Mantido [recomendação aprovada; confirmar no teste de 1 dia do Temporal].
+- **banco do app fora [t324–t326]:** retentativas duráveis do Temporal + **outbox** para o banco do app na volta. Substitui a fila em arquivo da t242 (confirmar no teste). A regra (REGRAS §18) não muda.
 - **Teto de RAM [APROVADO t329]:** Temporal + Postgres dedicado ≤ 1,5 GB no `pc`; acima disso no TZ-01, considerar o DBOS (plano B).
 - **Cautelas:** RAM e swap do `pc` (H-ORQ1); determinismo e versionamento dos workflows; `NUM_HISTORY_SHARDS` escolhido uma vez; backup diário do Postgres do motor (sem segredos); nenhum agente autônomo dentro de Activity com efeito colateral.
 
@@ -29,7 +29,7 @@
 - **Decisão [APROVADO t282, t327]:** o **Temporal** executa o fluxo determinístico; o **Paperclip** é a **camada de agentes e o painel**. **Os agentes vivem no Paperclip** (org PQBR, pacote `company/` no formato agentcompanies/v1). Pelo padrão dos agentes pensantes (t324–t326), eles observam e propõem (saída Pydantic v2), e nada se aplica sem o José; o Paperclip **não é dono do fluxo**.
 - Abre só dentro da tailnet, por HTTPS; a porta 443 fica livre [VERIFICADO/APROVADO t280].
 - Verificação de fichas: status/issue no painel e botões no Telegram, sincronizados pela mesma tabela (REGRAS §6).
-- **Ligação Temporal ↔ Paperclip [PROPOSTA, a validar na Fase 0.5]:** o Temporal grava eventos e estado de negócio no Supabase (outbox) e abre/atualiza issues no Paperclip; os agentes leem Supabase/issues e devolvem propostas estruturadas; a aprovação do José vira **sinal** para o Temporal. Nunca leem o Postgres do Temporal.
+- **Ligação Temporal ↔ Paperclip [PROPOSTA, a validar na Fase 0.5]:** o Temporal grava eventos e estado de negócio no banco do app (outbox) e abre/atualiza issues no Paperclip; os agentes leem banco do app/issues e devolvem propostas estruturadas; a aprovação do José vira **sinal** para o Temporal. Nunca leem o Postgres do Temporal.
 - Riscos conhecidos: o adapter `hermes_local` força `--yolo` (PR #3850), mas o perfil `pqbr` não pode herdar `--yolo` (REGRAS §23): resolver H-SDD1 antes de ligar qualquer agente Hermes; recovery storm sem internet (issue #6596); injeção do AGENTS.md (issue #3833, corrigida pela PR #8543). Heartbeats desligados até a Fase 0.5 provar a ligação.
 - `company/` continua (pacote dos agentes). `tasks/`: as rotinas viram Schedules do Temporal, então `tasks/` é candidato a exclusão depois da Fase 0.5 [PROPOSTA].
 
@@ -65,7 +65,7 @@
 | **YouTube Data API** | Grade, comentários (`commentThreads.list` = 1 unidade), respostas (`comments.insert` = 50), retenção (`setModerationStatus` = 50), `videos.update` = 50, upload (`videos.insert`). Cota 10.000/dia, reset à meia-noite do Pacífico (~04:00–05:00 em Fortaleza); `search.list` e `videos.insert` com balde próprio de 100/dia. Sem endpoint de coração. | [VERIFICADO na doc] |
 | **YouTube Analytics API** | Coleta diária do analista (OAuth só leitura; app do GCP em produção, uso interno). | [APROVADO] / números [HIPÓTESE] |
 | **Motor de workflow** (Temporal / DBOS) | Estado durável dos fluxos, Schedules, retentativas, sinais (ADR-001). Postgres próprio, só estado de workflow, nunca consultado diretamente. | [APROVADO t283] / escolha no G0.5 |
-| **Supabase** | Dados de negócio (base do painel e do analista; recebe por outbox): grade, temas (R10), episódios, `visual_assets`/`episode_assets`, comentários, ações (motivo/quem/quando), consumo, kill switch, relatórios. Plano Pro não confirmado (H13). | [APROVADO] |
+| **banco do app** | Dados de negócio (base do painel e do analista; recebe por outbox): grade, temas (R10), episódios, `visual_assets`/`episode_assets`, comentários, ações (motivo/quem/quando), consumo, kill switch, relatórios. Plano Pro não confirmado (H13). | [APROVADO] |
 | **Google Drive** | Armazenamento definitivo, estrutura t267 (REGRAS §21). | [APROVADO] |
 | **Hermes `pqbr`** | @pqbr-assistente no Telegram (ADR-003). | [APROVADO t281] |
 | **Paperclip** | Camada de agentes + painel, ligado ao Temporal (ADR-002). | [APROVADO t282, t327] |
@@ -113,7 +113,7 @@ Personas [APROVADO como fonte]: pt-BR, parafraseadas da Agency Agents (MIT). Com
 
 - `docs/`: REGRAS, SPEC, ARQUITETURA, TESTES, ROADMAP, PLANO, RASTREABILIDADE; CONTRATO-EDITORIAL (rascunho), DECISOES-LOG, `pesquisas/`, `arquivo/` (estes quatro sob a t287); `docs/sdd/` para relatórios de fase (ex.: ADR-001 do teste).
 - `src/pqbr/{schemas,pipeline,integrations,community,guardian,storage}`: código. [PROPOSTA] `src/pqbr/workflows/` depois da ADR-001.
-- `db/migrations/` (schema do Supabase), `db/seeds/` (`temas-publicados.csv`: lista de temas já publicados, base da R10).
+- `db/migrations/` (schema do banco do app), `db/seeds/` (`temas-publicados.csv`: lista de temas já publicados, base da R10).
 - `templates/` (relatórios, mensagens fixas, banco de frases), `config/` (só exemplos sem segredo), `tests/`, `scripts/`, `skills/`.
 - `company/`, `tasks/`: pendentes da ADR-002.
 - `runtime/`: temporário, fora do git.
@@ -136,7 +136,7 @@ Nada que depende de uma hipótese é construído antes de ela virar VERIFICADO (
 | H10 | ~~Juiz visual: Gemini web × Gemini API~~ RESOLVIDO (t327): Gemini web via Camofox. Resta verificar a automação estável em produção | dev | Auditor rodando via Camofox por N dias |
 | H11 | Termos de uso comercial do NotebookLM/Gemini; selo de IA desnecessário para stickman | dev (registro) + José | Leitura dos termos registrada; compliance acompanha |
 | H12 | Métricas do canal (30 vs. 46 Shorts; bases de retenção diferentes) | @prod-analista/dev | Números fixados pela Analytics API |
-| H13 | Supabase Pro ativo; local do schema Hindsight; `hermes_local` + Hindsight num heartbeat real | dev | Confirmação pelo MCP + 1 heartbeat real |
+| H13 | banco do app Pro ativo; local do schema Hindsight; `hermes_local` + Hindsight num heartbeat real | dev | Confirmação pelo MCP + 1 heartbeat real |
 | H14 | App do GCP em produção (uso interno) sem expiração do token | dev | Token válido além de 7 dias |
 | H15 | Limites do Pro do NotebookLM (5 h/semanal; 20 vídeos/dia) | dev | Monitor de consumo da 1ª semana |
 | H16 | Corações pelo Camofox (até 10/dia) sem desafio de login | dev | 3 dias de sombra sem incidente de sessão |
@@ -147,30 +147,34 @@ Nada que depende de uma hipótese é construído antes de ela virar VERIFICADO (
 | H-SDD2 | Sintaxe do `paperclipai company import … --dry-run` e criação de agentes pausados | dev | Dry-run limpo |
 | H-SDD3 | Ponte Temporal ↔ Paperclip (issues/eventos; adapter `process` se útil) | dev | Demonstrada na Fase 0.5 |
 
-## 8. Modelo de dados (Supabase) [PROPOSTA; fixado em F3-01]
+## 8. Modelo de dados (banco do app) [APROVADO t343; aplicado 09/10]
 
-- **Projeto [APROVADO t337–t338]:** um projeto Supabase **novo e dedicado**, `pqbr`, na org Pro do José (região sa-east-1), com a opção de migrar para local depois. **Ainda não criado:** o `get_cost` informou **US$ 10/mês**, e a ordem era criar só se o custo fosse zero; aguarda o OK do José para esse valor. O projeto `paperclip` não é usado nem tocado.
-- **Multiplataforma [APROVADO t339–t340]:** o mesmo projeto e o mesmo banco servem a outras redes (TikTok, Kwai, Instagram e talvez Facebook).
-  - Catálogo `pqbr.plataformas` (só o YouTube ativo).
-  - `pqbr.canal_plataformas`: conta do canal em cada rede.
-  - `pqbr.publicacoes`: uma por episódio por plataforma, com os estados da REGRAS §15 e `external_id`.
-  - `plataforma_id` em comentários, respostas, métricas, ações, relatórios e compliance.
-  - O episódio guarda só o estado de produção.
-  - **Esquema detalhado por rede: EM CONSTRUÇÃO — aguardando José** (campos `detalhes`/`extra` em jsonb até lá).
-- **Separação [APROVADO t341–t342]:**
-  - O Paperclip mantém o banco próprio.
-  - Agentes do Paperclip **nunca** escrevem no banco do app: propõem, e o Temporal valida e aplica após a aprovação, com o `service_role` só no servidor.
-  - Leitura de agente só pelo contexto do fluxo ou pelo papel só-leitura `pqbr_leitura`. Ele lê tudo, menos o texto bruto de comentário; o login fica a criar, com senha só no `.env` do servidor.
-- **Histórico (09/10, só leitura):** o Supabase `paperclip` foi considerado (decisão 3), mas foi superado por t337–t338.
-  - O `public` dele é o banco do próprio Paperclip: 214 tabelas, todas com RLS desligado. Esse alerta crítico do Supabase foi levado ao José; não mexi em nada.
-  - Hoje não há tabela do PQBR, nem esquema `pqbr`, nem migrações registradas. Os nomes do PQBR não colidem com o `public`.
-- **Desenho [PROPOSTA, t336]:**
-  - Tudo no esquema dedicado **`pqbr`**, fora da Data API.
-  - RLS ligado e forçado, sem políticas: anon e authenticated sem acesso; o servidor usa o `service_role`.
+- **Banco [APROVADO t343]:** **Postgres 17 local** no `pc`, em `infra/pqbr-db/docker-compose.yml` (projeto `pqbr-db`).
+  - Separado do Postgres do Temporal.
+  - Porta só em `127.0.0.1:55433`; `pg_hba` sem `trust` no localhost.
+  - Limite de 320 MB (sem swap).
+  - Senhas geradas no servidor em `infra/pqbr-db/.env` (600, fora do git).
+  - **Supabase fica como opção futura** (o projeto Supabase dedicado custaria US$ 10/mês, t337–t338). O projeto Supabase `paperclip` não é usado nem tocado.
+- **Esquema `pqbr`:** migrações `db/migrations/0001..0009` (aplicadas por `infra/pqbr-db/aplicar.sh`, registro em `public.pqbr_migracoes`), com rollback em `db/migrations/rollback/`.
+  - Testes descartáveis: `db/test_migrations.sh`. Verificação do banco real: `infra/pqbr-db/verificar.sh`.
+  - RLS ligado e forçado em todas as tabelas, com políticas só para os papéis abaixo.
   - `canal_id` em todas as tabelas de negócio.
-  - Migrações em `db/migrations/0001..0008` com rollback em `db/migrations/rollback/`, testadas em Postgres 17 descartável (`db/test_migrations.sh`).
-  - As 2 exceções históricas da R10 foram aceitas pelo José (t337–t338). Aplicar depende de criar o projeto (custo acima).
-- **Achado:** o CSV de temas tem 2 repetições históricas (`repete_n`), anteriores à R10. Elas ficam registradas, mas fora do índice único da R10.
+- **Papéis (t341–t343):**
+  - `pqbr_app`: escritor, usado só pelo worker do Temporal. Sem DELETE em ações, histórico de estados, auditorias e outbox.
+  - `pqbr_leitura`: só-leitura, sem o texto bruto de comentário.
+  - Nenhum dos dois é superusuário nem tem BYPASSRLS; sem CREATE em `public`.
+  - **Agentes do Paperclip nunca escrevem no banco do app.** Eles propõem; o Temporal valida e aplica após a aprovação. Leitura de agente só pelo contexto do fluxo ou pelo `pqbr_leitura`. O Paperclip mantém o banco próprio.
+- **Diretriz de arquitetura [APROVADO t346]:**
+  - Modelo genérico **canal / plataforma / publicações**: `pqbr.plataformas`, `pqbr.canal_plataformas`, `pqbr.publicacoes` (uma por episódio por plataforma) e `plataforma_id` em comentários, respostas, métricas, ações, relatórios e compliance. Campos específicos de cada rede vão em jsonb (`detalhes`/`extra`).
+  - **Rede nova = linhas novas, não tabelas novas.** Não construir funcionalidade ainda indefinida; isso evita tabelas duplicadas e refatorações complexas.
+  - Escopo atual: só YouTube no catálogo. **Outras redes (TikTok, Kwai, Instagram, Facebook) = sugestão futura, fora do escopo atual** (t343–t344).
+  - Reaproveitamento de conteúdo entre plataformas: **EM CONSTRUÇÃO — aguardando José** (t345). Sem esquema além do vínculo `episodios → publicacoes`.
+- **Backup:** `infra/pqbr-db/backup.sh` (pg_dump `-Fc -Z9`), timer de usuário `pqbr-db-backup.timer` diário às 03:30 (Fortaleza).
+  - Rotação de 7 em `~/Backups/pqbr-db` (700/600, fora do git).
+  - Restauração testada com `testar_restauracao.sh`.
+  - Envio ao Drive **pendente**: o servidor não tem credencial do Drive (sem rclone). A pasta `PQBR` do Drive existe, mas não há subpasta de backups.
+- **Achado:** o CSV de temas tem 2 repetições históricas (`repete_n`), anteriores à R10, aceitas pelo José (t337–t338). Elas ficam registradas, mas fora do índice único da R10.
+- **Histórico:** o Supabase `paperclip` foi só lido em 09/10. O `public` dele (banco do Paperclip, 214 tabelas) está com RLS desligado; o alerta foi levado ao José, sem nenhuma alteração.
 
 Só dados de negócio. O Postgres do Temporal guarda só estado de workflow e **nunca** é consultado diretamente (t324–t326). Sem segredos nem PII em nenhuma tabela (autores de comentário só como hash).
 
@@ -193,7 +197,7 @@ Só dados de negócio. O Postgres do Temporal guarda só estado de workflow e **
 | `metricas` | Analytics API por vídeo e dia | RF-30 |
 | `config_flags` | kill switch das respostas, HOLD da fila | RF-26, RF-28 |
 
-Escrita no Supabase sempre por Activity com **outbox** (idempotente por chave).
+Escrita no banco do app sempre por Activity com **outbox** (idempotente por chave).
 
 ## 9. Workflows do Temporal [PROPOSTA; validados a partir da Fase 0.5]
 
@@ -219,8 +223,8 @@ Escrita no Supabase sempre por Activity com **outbox** (idempotente por chave).
 
 ## 10. Integração com o Paperclip [PROPOSTA; demonstrada em F05-04]
 
-- O Temporal publica eventos de negócio (via outbox) no Supabase e abre/atualiza **issues** no Paperclip (episódio, revisão, ticket, proposta).
-- Os agentes no Paperclip (director, analista, comunidade, compliance, assistente, dev) leem Supabase e issues e devolvem **`PropostaAgente`** validada; nunca executam efeito externo.
+- O Temporal publica eventos de negócio (via outbox) no banco do app e abre/atualiza **issues** no Paperclip (episódio, revisão, ticket, proposta).
+- Os agentes no Paperclip (director, analista, comunidade, compliance, assistente, dev) leem banco do app e issues e devolvem **`PropostaAgente`** validada; nunca executam efeito externo.
 - A aprovação do José (Telegram pelo Hermes `pqbr` ou painel) vira sinal `aprovacao_jose` no workflow; só então a rotina aplica.
 - Heartbeats desligados até a liberação; nenhum agente com `--yolo` (H-SDD1).
 

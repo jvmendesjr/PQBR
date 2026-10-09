@@ -306,3 +306,10 @@ NÃO CABE:
 - (t339–t340) O PQBR vai se ramificar para outras redes (TikTok, Kwai, Instagram, talvez Facebook) no **mesmo projeto/banco**. Desenho agnóstico de plataforma: catálogo de plataformas e referência à plataforma em canais, publicações (uma por plataforma por episódio), comentários e métricas, sem construir demais. Esquema detalhado por rede: EM CONSTRUÇÃO.
 - (t341–t342) Separação confirmada: o Paperclip mantém o banco próprio. Agentes do Paperclip nunca escrevem no banco do app: propõem, e o Temporal valida e aplica após a aprovação. Leitura só pelo contexto do fluxo ou por chave só-leitura limitada.
 - Custo do projeto novo rechecado: US$ 10/mês. Projeto não criado; aguarda o José.
+
+## 09/10/2026, ~17:50: t343–t346
+
+- (t343) José escolheu **banco local** no `pc` para os dados do app: Postgres 17 dedicado (`infra/pqbr-db`), separado do Postgres do Temporal, só em 127.0.0.1, memória modesta, senha no `.env` do servidor (600). Sem projeto Supabase e sem US$ 10/mês; o Supabase fica como opção futura. Papéis Postgres: `pqbr_app` (escritor do Temporal) e `pqbr_leitura` (só-leitura). Backup diário com rotação local e envio ao Drive.
+- (t343–t344) Outras redes (TikTok, Kwai, Instagram, Facebook) eram só sugestão: **outras redes = sugestão futura, fora do escopo atual**. Modelo de plataforma genérico; no catálogo, só o YouTube.
+- (t345) Reaproveitamento de conteúdo entre plataformas: **EM CONSTRUÇÃO — aguardando José**. Sem esquema além do vínculo genérico `episodios → publicacoes`.
+- (t346) Diretriz de arquitetura: os projetos futuros são citados agora para desenhar bem a estrutura e evitar tabelas duplicadas ou refatorações complexas. Modelo genérico canal/plataforma/publicações + campo jsonb de extensão; **rede nova = linhas novas, não tabelas novas**; não construir funcionalidades indefinidas.

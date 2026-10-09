@@ -31,15 +31,14 @@ create table pqbr.canais (
 );
 insert into pqbr.canais (id, nome) values ('pqbr', 'Porquê BR');
 
--- Plataformas (t339–t340): mesmo projeto/banco para outras redes. Esquema detalhado por rede: EM CONSTRUÇÃO.
+-- Plataformas (t339–t344): modelo genérico; hoje só YouTube. Esquema detalhado por rede: EM CONSTRUÇÃO.
 create table pqbr.plataformas (
   id          text primary key check (id ~ '^[a-z0-9_]{2,32}$'),
   nome        text not null,
   ativa       boolean not null default false
 );
-insert into pqbr.plataformas (id, nome, ativa) values
-  ('youtube', 'YouTube Shorts', true), ('tiktok', 'TikTok', false), ('kwai', 'Kwai', false),
-  ('instagram', 'Instagram', false), ('facebook', 'Facebook', false);
+-- Só o YouTube no escopo atual. Outras redes = sugestão futura, fora do escopo atual (t343–t344).
+insert into pqbr.plataformas (id, nome, ativa) values ('youtube', 'YouTube Shorts', true);
 
 -- Contas do canal em cada plataforma (rótulo, nunca e-mail ou login)
 create table pqbr.canal_plataformas (

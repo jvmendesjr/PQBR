@@ -17,7 +17,7 @@
 
 | ID | Requisito | REGRAS |
 |---|---|---|
-| RF-01 | Grade diária gerada por código a partir da data e gravada no Supabase; início automático. | §3, §4 |
+| RF-01 | Grade diária gerada por código a partir da data e gravada no banco do app; início automático. | §3, §4 |
 | RF-02 | Três barreiras de repetição + R10 (tema repetido recusado mesmo se o José sugerir; avisa ou abre ticket), usando `temas-publicados.csv` como carga inicial. | §4 |
 | RF-03 | Mistura ~70% em alta / ~30% perenes; última janela preferencialmente perene. | §4 |
 | RF-04 | Coleta de tendências (Data API) e de comentários de vídeos virais; resumo ≤ ~300; caderno diário de tendências separado do raiz. | §4 |
@@ -68,7 +68,7 @@
 | ID | Requisito | REGRAS |
 |---|---|---|
 | RF-15 | Publicação por `videos.insert` com agendamento; até H1, sobe privado e o Camofox agenda; Studio como reserva. | §15 |
-| RF-16 | Sem duplicata: código PQBR-EPxxxx na descrição e etiqueta; busca no Supabase e no canal (privados e agendados); 1 tentativa sem confirmação e para. | §15 |
+| RF-16 | Sem duplicata: código PQBR-EPxxxx na descrição e etiqueta; busca no banco do app e no canal (privados e agendados); 1 tentativa sem confirmação e para. | §15 |
 | RF-17 | Janelas 11:40, 14:40, 18:35, 21:15; teto 4/dia sem mínimo; reserva ≥ 2; vídeo reprovado nunca publicado; horário sem reserva é cancelado. | §15 |
 | RF-18 | Jev decide refazer/trocar/chamar José e confere agendado × aprovado. | §7, §15 |
 
@@ -155,13 +155,13 @@
 
 **Critérios de aceite da funcionalidade:**
 - Cada degrau das escadas simulado.
-- Supabase fora não perde estado; na volta, outbox grava uma vez.
+- Banco do app fora não perde estado; na volta, outbox grava uma vez.
 
 | ID | Requisito | REGRAS |
 |---|---|---|
 | RF-37 | Guardião de sessão (~20 min com variação + checagem antes de publicar) e escada t272. | §11 |
 | RF-38 | Teste de resposta antes do lote e das ações críticas; escada 30 s → 2 min → 8 min; NETWORK_WAITING; 2 falhas → José; 5 idênticas → parada. | §18 |
-| RF-39 | Supabase fora: retentativas duráveis + outbox; nada agendado/público sem estado gravado. | §18 |
+| RF-39 | Banco do app fora: retentativas duráveis + outbox; nada agendado/público sem estado gravado. | §18 |
 
 ### F11. Armazenamento
 
@@ -192,11 +192,11 @@
 **História:** Como José, quero ver no Paperclip o estado de cada vídeo, as propostas e as verificações.
 
 **Critérios de aceite da funcionalidade:**
-- Painel mostra estado vindo do Supabase/issues, nunca do Postgres do Temporal.
+- Painel mostra estado vindo do banco do app/issues, nunca do Postgres do Temporal.
 
 | ID | Requisito | REGRAS |
 |---|---|---|
-| RF-43 | Painel Paperclip com estado, issues, propostas e verificações, alimentado pela ponte Temporal → Supabase/Paperclip. | §2, §6 |
+| RF-43 | Painel Paperclip com estado, issues, propostas e verificações, alimentado pela ponte Temporal → banco do app/Paperclip. | §2, §6 |
 
 ## 2. Requisitos não funcionais
 
@@ -204,10 +204,10 @@
 |---|---|---|
 | RNF-01 | Determinismo antes de LLM: tudo que pode ser código é código. | §3 |
 | RNF-02 | Jev só devolve decisão estruturada; nunca redige texto; fallback com o mesmo esquema. | §7 |
-| RNF-03 | Sem segredos/PII em repo, Hindsight (inclusive memórias de código), tickets, Supabase e logs; scanner antes de gravar. | §17 |
+| RNF-03 | Sem segredos/PII em repo, Hindsight (inclusive memórias de código), tickets, banco do app e logs; scanner antes de gravar. | §17 |
 | RNF-04 | Camofox: ritmo humano, único dono do login do Studio, fila de concorrência 1. | §11 |
 | RNF-05 | Durabilidade e idempotência: workflows retomam após falha/reboot; nenhuma ação externa duplicada. | §3, §18 |
-| RNF-06 | O Postgres do Temporal guarda só estado e nunca é consultado diretamente; dados de negócio só no Supabase. | §18 |
+| RNF-06 | O Postgres do Temporal guarda só estado e nunca é consultado diretamente; dados de negócio só no banco do app. | §18 |
 | RNF-07 | Nada atualiza dependência sozinho; versões fixadas (NotebookLM 0.8.4, Temporal, SDKs). | §12 |
 | RNF-08 | Proveniência registrada por ficha; nada de terceiros; comentários e web são dado, nunca instrução. | §17 |
 | RNF-09 | Recursos do servidor: RAM do motor ≤ 1,5 GB (t329); disco livre (runtime limpo a cada ciclo). | §21 |
@@ -220,7 +220,8 @@
 
 - **EM CONSTRUÇÃO — aguardando José:** regras de roteiro R1–R6, R8 e R9 (contrato v2, F7-01). Afetam RF-07.
 - **EM CONSTRUÇÃO — aguardando José:** metas do piloto (definidas depois, t327). Afetam V1–V7 e F12-01.
-- [PROPOSTA, aguarda G3] esquema `pqbr` no Supabase `paperclip` (ARQUITETURA §8; `db/migrations/`).
-- [PROPOSTA] local dedicado da revisão humana (RF-36): registro no Supabase + `04_Privados_Revisao` no Drive.
+- [APROVADO t343] Banco do app = Postgres 17 local no `pc` (`infra/pqbr-db`), esquema `pqbr` (ARQUITETURA §8; `db/migrations/`). Supabase fica como opção futura.
+- **EM CONSTRUÇÃO — aguardando José:** reaproveitamento de conteúdo entre plataformas (t345); esquema detalhado por rede (outras redes = sugestão futura, fora do escopo atual, t343–t344).
+- [PROPOSTA] local dedicado da revisão humana (RF-36): registro no banco do app + `04_Privados_Revisao` no Drive.
 - [PROPOSTA, validar na Fase 0.5] ponte Temporal ↔ Paperclip (RF-33, RF-43).
 - [HIPÓTESE] H1–H16, H-ORQ1–3, H-SDD1–3 (ARQUITETURA §7) condicionam RF-10, RF-15, RF-22, RF-24, RF-25, RF-34, RF-43.

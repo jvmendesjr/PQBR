@@ -43,10 +43,10 @@
   - Aceite: timer + Activity que falha e retenta; retoma após `kill -9` no worker e após reboot.
   - Portão José: autorizar o reboot, se for o do servidor.
   - Obs: 2026-10-09: retries, timer, sinal, `kill -9` no worker e restart do motor ok; 0 duplicados. Reboot do servidor dispensado pelo José (t334); o restart do motor cobre o caso.
-- [x] **F05-03** Outbox para o Supabase e simulação de Supabase fora
+- [x] **F05-03** Outbox para o banco do app e simulação de banco do app fora
   - Req: RF-39, RNF-06 · Testes: TZ-03 · Depende de: F05-02
-  - Aceite: com o Supabase de desenvolvimento fora, nada se perde e nada fica "agendado/público" sem estado; na volta, grava uma vez só.
-  - Portão José: nenhum. Obs: 2026-10-09 (stub em arquivo, sem Supabase real): estado `aguardando_outbox` durante a queda e com `kill -9`; gravou 1 vez na volta. Teste contra o Supabase dev real fica para a F3.
+  - Aceite: com o banco do app de teste fora, nada se perde e nada fica "agendado/público" sem estado; na volta, grava uma vez só.
+  - Portão José: nenhum. Obs: 2026-10-09 (stub em arquivo, sem banco do app real): estado `aguardando_outbox` durante a queda e com `kill -9`; gravou 1 vez na volta. Teste contra o banco do app de teste fica para a F3.
 - [x] **F05-04** Ponte Temporal ↔ Paperclip
   - Req: RF-33, RF-43, RNF-06 · Testes: TZ-04 · Depende de: F05-02
   - Aceite: o Temporal abre/atualiza issue; agente de teste devolve proposta Pydantic v2 válida; aprovação vira sinal; o agente nunca lê o Postgres do Temporal; heartbeats desligados.
@@ -96,17 +96,17 @@
 - [ ] **F3-01** (D3) Contratos Pydantic v2 e migração base
   - Req: RF-02, RF-07, RNF-02 · Testes: TS-01, TS-02 · Depende de: F05-07
   - Aceite: modelos da ARQUITETURA §11; `db/migrations/0001_base.sql` (ARQUITETURA §8); carga de `temas-publicados.csv`; testes de contrato passam.
-  - Portão José: **G3**. Obs: 2026-10-09 (t336–t342): migrações `db/migrations/0001..0008` + rollback no esquema `pqbr`, já multiplataforma (plataformas, canal_plataformas, publicacoes, `plataforma_id`) e com papel só-leitura `pqbr_leitura`; TS-DB ok em Postgres 17 descartável (24 tabelas). Projeto Supabase dedicado `pqbr` **não criado**: o `get_cost` deu US$ 10/mês (rechecado 17:44); aguarda o OK do José ao custo. Esquema por rede EM CONSTRUÇÃO. Faltam os contratos Pydantic da §11.
+  - Portão José: **G3**. Obs: 2026-10-09 (t336–t346): Banco do app = **Postgres 17 local** (`infra/pqbr-db`, 127.0.0.1:55433, 320 MB), esquema `pqbr` com migrações 0001–0009 **aplicadas** (24 tabelas, 60 temas; só YouTube no catálogo). RLS ligado e forçado; papéis `pqbr_app` (escritor do Temporal) e `pqbr_leitura`; verificação pelo host ok. Backup diário 03:30 com rotação 7 (`~/Backups/pqbr-db`), restauração testada. Upload ao Drive pendente (sem credencial no servidor). Faltam os contratos Pydantic da §11 e ligar o worker ao banco.
 - [ ] **F3-02** (D14) Verificador de segredos/PII
   - Req: RNF-03 · Testes: TS-SEC · Depende de: —
-  - Aceite: bloqueia segredo de teste antes de Hindsight, tickets, Supabase, logs e commit.
-  - Portão José: nenhum. Obs: 2026-10-09 (t336): `src/pqbr/seguranca/segredos.py` + `scripts/seguranca/verificar_segredos.py` + hook `.githooks/pre-commit` instalado (`core.hooksPath`); repositório inteiro limpo; commit com segredo falso bloqueado. Falta ligar Hindsight/tickets/Supabase/logs (quando existirem).
+  - Aceite: bloqueia segredo de teste antes de Hindsight, tickets, banco do app, logs e commit.
+  - Portão José: nenhum. Obs: 2026-10-09 (t336): `src/pqbr/seguranca/segredos.py` + `scripts/seguranca/verificar_segredos.py` + hook `.githooks/pre-commit` instalado (`core.hooksPath`); repositório inteiro limpo; commit com segredo falso bloqueado. Falta ligar Hindsight/tickets/banco do app/logs (quando existirem).
 
 ## Fase 4: migração do notebooklm-py (D1) — cada passo com portão G4
 
 - [ ] **F4-01** venv PQBR 0.8.4, `NOTEBOOKLM_HOME` próprio, perfil `pqbr` — Req: RF-10 · Testes: TS-02 · Depende de: F3-01 · Aceite: smoke test em caderno clonado · Portão: G4 · Obs:
 - [ ] **F4-02** Deslogar a sessão antiga e login novo (t191) — Req: RF-10 · Depende de: F4-01 · Aceite: um só dispositivo · Portão: G4 + autorizar interrupção da produção atual · Obs:
-- [ ] **F4-03** Serviço único dono da sessão (Activity, fila `notebooklm`, concorrência 1; consumo no Supabase) — Req: RF-10, RF-32 · Testes: TS-02, V7 · Depende de: F4-02 · Aceite: consumo gravado (H6) · Portão: G4 · Obs:
+- [ ] **F4-03** Serviço único dono da sessão (Activity, fila `notebooklm`, concorrência 1; consumo no banco do app) — Req: RF-10, RF-32 · Testes: TS-02, V7 · Depende de: F4-02 · Aceite: consumo gravado (H6) · Portão: G4 · Obs:
 - [ ] **F4-04** MP32 com instalação própria 0.8.2; skills do `rede` sem cópia de cookies — Req: RF-10 · Depende de: F4-03 · Aceite: MP32 funcionando · Portão: G4 · Obs:
 - [ ] **F4-05** Remover o pipx global (manter `~/.notebooklm` 7 dias; backup do crontab) — Req: RF-10 · Depende de: F4-04 · Aceite: rollback ensaiado · Portão: G4 · Obs:
 
@@ -131,7 +131,7 @@
 
 - [ ] **F8-01** (D7) `PublicacaoWorkflow` + `Item5Workflow` — Req: RF-15..RF-21 · Testes: TS-04, TS-05, V4, V5 · Depende de: F6-01, F7-02 · Aceite: sem duplicata; 1 agendamento por via; item 5 em vídeo privado · Portão: **G8** · Obs:
 - [ ] **F8-02** (D13) Drive t267, upload com hash, limpeza noturna — Req: RF-40, RF-41 · Testes: TS-11, V6 · Depende de: F5-02 · Aceite: duplicata movida, nada excluído · Portão: G8 · Obs:
-- [ ] **F8-03** Revisão humana como último recurso — Req: RF-36 · Testes: TS-09 · Depende de: F8-01 · Aceite: item vai ao local de revisão, José avisado, determinação registrada · Portão: aprovar o local · Obs: [PROPOSTA] Supabase + `04_Privados_Revisao`.
+- [ ] **F8-03** Revisão humana como último recurso — Req: RF-36 · Testes: TS-09 · Depende de: F8-01 · Aceite: item vai ao local de revisão, José avisado, determinação registrada · Portão: aprovar o local · Obs: [PROPOSTA] Banco do app + `04_Privados_Revisao`.
 
 ## Fase 9: monitores, compliance e analista
 

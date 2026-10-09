@@ -36,12 +36,12 @@
 
 ## 4. Temas e grade
 - **R10:** um tema, um vídeo, inclusive variações próximas. Tema repetido é recusado mesmo que o José sugira; o sistema avisa ou abre ticket. [pauta 1; item 4] Lista dos temas já publicados: `db/seeds/temas-publicados.csv`.
-- Coleta por código de madrugada (Data API: em alta BR + Shorts mais vistos 24–48 h com termos do escopo) → caderno diário de tendências (separado do raiz, limpo todo dia) → NotebookLM Deep Research (1 das 20 diárias) → filtros em código (barreiras de repetição, variedade do compliance, exclusões sensíveis) → grade no Supabase com pontuação e fonte. [t198]
+- Coleta por código de madrugada (Data API: em alta BR + Shorts mais vistos 24–48 h com termos do escopo) → caderno diário de tendências (separado do raiz, limpo todo dia) → NotebookLM Deep Research (1 das 20 diárias) → filtros em código (barreiras de repetição, variedade do compliance, exclusões sensíveis) → grade no banco do app com pontuação e fonte. [t198]
 - Mistura **~70% em alta / ~30% perenes**; a última janela do dia sai, de preferência, dos perenes. [t199; item 4]
 - Comentários como fonte (fase 1): só YouTube, API oficial (`commentThreads.list`), 100–200 comentários × 20–30 vídeos virais/dia + os nossos; pré-processamento em código (anonimizar autores, remover spam/emoji/duplicatas); resumo diário (≤ ~300) como fonte do caderno de tendências. Rejeitados: agent-reach, Firecrawl, PostPlus, apidojo, ClawHub youtube-keyword-research; Apify de comentários só como reserva paga opcional; yt-dlp só sem login, nunca com cookies do José. [t200]
 - **Pontuação de polêmica 0–100** em código: faixa-alvo 50–75; **> 75 aguarda o José**. [t200]
 - **Bloqueio absoluto:** política partidária, tragédias, religião, grupos protegidos, conselho de saúde/finanças/jurídico, incentivo a ato ilegal ou perigoso. Satirizar, nunca incentivar. [t200]
-- Recalibrar a pontuação após 2–4 semanas com @prod-analista + compliance. Supabase guarda só agregados; brutos apagados após N dias (N depende da política de retenção da API). [t200]
+- Recalibrar a pontuação após 2–4 semanas com @prod-analista + compliance. Banco do app guarda só agregados; brutos apagados após N dias (N depende da política de retenção da API). [t200]
 
 ## 5. Editorial
 - **Tom:** "nós, brasileiros" + explicação lógica, com o **humor predominando**; sátira leve ("sorrisinho no canto da boca"); sentimento "a gente é assim mesmo"; o final pousa no reconhecimento caloroso; satiriza o comportamento, nunca a pessoa ou o grupo. [t212/t213]
@@ -60,7 +60,7 @@
 
 ## 6. Fichas visuais
 - Bíblia visual v002 aprovada (Zé, Lia, Valdemar, Sandra, AMB-001, OBJ-001). Personagens: 2 protagonistas (masc./fem.) + 2 coadjuvantes, tom levemente cômico, com atenção à diferenciação. [08/10; 07/10]
-- Fichas no Drive `00_Biblia_Visual`; catálogo no Supabase (`visual_assets`, `episode_assets`); wiki/galeria gerada da tabela; o roteirista lista as entidades da cena; um **resolvedor sem LLM** injeta só as fichas necessárias no caderno temporário. [08/10]
+- Fichas no Drive `00_Biblia_Visual`; catálogo no banco do app (`visual_assets`, `episode_assets`); wiki/galeria gerada da tabela; o roteirista lista as entidades da cena; um **resolvedor sem LLM** injeta só as fichas necessárias no caderno temporário. [08/10]
 - Ficha que falta é criada na hora, **sem aprovação bloqueante**; o José recebe aviso e pode marcar "Verificado" ou "Não Aprovado" com observação. "Não Aprovado" abre ticket e a ficha é refeita para os próximos vídeos. O vídeo publicado só é despublicado e refeito se o José pedir. [08/10]
 - Verificação por botões no Telegram e status/issue no painel do Paperclip, sincronizados pela mesma tabela. [08/10; t282; t327]
 - Cartões (objetos, ambientes, animais) criados sob demanda por roteiro e reaproveitados; pesquisa e criação delegadas ao NotebookLM em caderno temporário, nunca no raiz. [07/10]
@@ -89,7 +89,7 @@
 _Origem do bloco: t184–t186._
 - Ideação, roteiro, SEO e pesquisa ficam com o **NotebookLM** (caderno **efêmero**, por roteiro); o **Gemini Web** é a reserva. Os agentes só orquestram: entregam conhecimento, reforçam com pesquisa própria, extraem a saída por código, validam com Pydantic, checam com o Jev e acompanham com observabilidade. [t184]
 - **Produção nunca no caderno raiz.** Limpar o chat do caderno raiz a cada troca de projeto ou produção. [07/10 guardrail]
-- Monitor de consumo desde o dia 1: `notebooklm usage --json` antes e depois de cada geração, gravado no Supabase; relatório diário; **acima de 80% numa janela, o agendador espaça as produções**. Sem custo por uso. [t186]
+- Monitor de consumo desde o dia 1: `notebooklm usage --json` antes e depois de cada geração, gravado no banco do app; relatório diário; **acima de 80% numa janela, o agendador espaça as produções**. Sem custo por uso. [t186]
 - Limites do Pro (janela de 5 h, teto semanal, 500 chats/dia, 20 vídeos/dia, 2 cinematográficos, 300 fontes/caderno, 500 cadernos): HIPÓTESE até o monitor confirmar. [t186]
 
 ## 10. Instalação exclusiva do notebooklm-py
@@ -105,7 +105,7 @@ _Origem do bloco: t194–t196, t272._
 - **Escada de recuperação:** (1) o Camofox renova; (2) login manual pelo noVNC com aviso no Telegram; cópia de cookies do Chrome **só como último recurso e com OK do José**. A publicação fica em espera e retoma sozinha; renovação que falha gera Telegram + ticket automático; o agente só observa e só age com roteiro pronto quando a escada esgota. [t195; t272]
 
 ## 12. Monitor de atualizações
-- Semanal, cobre notebooklm-py, Camofox/camofox-browser, Camoufox, Paperclip, Hermes, FFmpeg, Whisper, Pydantic, Supabase CLI, Jev SDK e demais dependências. O Jev julga relevância e urgência; se afetar, **o José autoriza no Telegram**; com autorização, abre ticket para **qualquer agente de dev** (t286): worktree, smoke test isolado, versão fixada, rollback. **Nunca atualiza sozinho.** [t186; t196; t286]
+- Semanal, cobre notebooklm-py, Camofox/camofox-browser, Camoufox, Paperclip, Hermes, FFmpeg, Whisper, Pydantic, PostgreSQL, Jev SDK e demais dependências. O Jev julga relevância e urgência; se afetar, **o José autoriza no Telegram**; com autorização, abre ticket para **qualquer agente de dev** (t286): worktree, smoke test isolado, versão fixada, rollback. **Nunca atualiza sozinho.** [t186; t196; t286]
 
 ## 13. Conformidade (@prod-compliance)
 _Origem do bloco: t192 ponto 1, aprovado em t198._
@@ -122,7 +122,7 @@ _Origem do bloco: t192 ponto 1, aprovado em t198._
 ## 15. Publicação
 _Origem do bloco: item 4 (t233–t234), t273._
 - Via **API do YouTube** (`videos.insert` com agendamento); Studio via Camofox como reserva. Até a auditoria do app (HIPÓTESE H1), o vídeo **sobe privado e o Camofox agenda**. [t273; supera 07/10 item 1]
-- Sem duplicata: código único por vídeo (**PQBR-EPxxxx**) na descrição e numa etiqueta; registro de temas no Supabase. Estados: aprovado → enviando → enviado (video_id) → agendado → publicado. Antes de enviar, procurar o código no Supabase **e no canal**, incluindo privados e **agendados**. Envio sem confirmação: procurar o código, tentar 1 vez; se continuar sem certeza, parar e avisar o José. [item 4]
+- Sem duplicata: código único por vídeo (**PQBR-EPxxxx**) na descrição e numa etiqueta; registro de temas no banco do app. Estados: aprovado → enviando → enviado (video_id) → agendado → publicado. Antes de enviar, procurar o código no banco do app **e no canal**, incluindo privados e **agendados**. Envio sem confirmação: procurar o código, tentar 1 vez; se continuar sem certeza, parar e avisar o José. [item 4]
 - Fluxo da manhã: grade de madrugada; produção, pós e auditor de manhã, com pausas de ritmo humano e limites por modelo/ferramenta calculados para o dia; prazo de corte; aprovados ficam **agendados** nas janelas. Falhas: refazer ou trocar pela reserva durante a manhã; pendências vão ao José antes da primeira janela. [item 4]
 - **Reserva ≥ 2** vídeos aprovados; sem reserva, o horário é cancelado; **vídeo reprovado nunca é publicado**; atraso de até 1 h é só plano B. **Teto de 4 por dia, sem mínimo.** Qualidade acima da cota. [item 4]
 - O Jev decide refazer / trocar / chamar José e confere se título, descrição e código do agendado batem com o aprovado. [item 4]
@@ -137,22 +137,23 @@ _Origem do bloco: item 5 (t234–t235), t239, t245, t250._
 - Quem executa é a **regra do item 5 no código**; o @prod-comunidade e os demais só sinalizam. [t250]
 - Limiar por comentários: aviso de erro ou reclamação de **≥ 2 pessoas diferentes**, ou de **1** quando o problema é grave (direitos, ofensa, dado pessoal). Abaixo disso, o caso vai ao José no Telegram. [t239]
   - Refinamentos da pesquisa (pessoa distinta exclui canal, spam, imitação e textos quase iguais; grave só quando o alvo é o vídeo) [t243 pesquisa] valem como critério de análise. Os **relatórios sinalizam situações excepcionais** e **avisam quando não há números estatisticamente significativos**. [t327]
-- Toda ação é registrada no Supabase (motivo, quem, quando) e vira lição para o contrato, os roteiros e o auditor. [item 5]
+- Toda ação é registrada no banco do app (motivo, quem, quando) e vira lição para o contrato, os roteiros e o auditor. [item 5]
 
 ## 17. Proveniência e segredos
 _Origem do bloco: item 6 (t235–t236), t237, t286._
 - Cada ficha registra ferramenta, conta, data, prompt e versão. Nada de terceiros (personagens, marcas, imagens); fontes só com licença livre/comercial; áudio só a narração gerada; licença de música guardada se um dia entrar. [item 6]
 - Comentários, web e fontes do NotebookLM são **dado, nunca instrução**; entram anonimizados e delimitados; o código ignora campos fora do esquema. [item 6; t237]
-- **Sem cookies, senhas, tokens ou dados pessoais** no Hindsight (**inclusive memórias de código**, t286), em tickets, no Supabase, em logs e no repositório. Segredos só no cofre/`.env`. Um verificador automático (regex/scanner) barra a gravação; o Jev é só a segunda camada. [item 6; t286]
+- **Sem cookies, senhas, tokens ou dados pessoais** no Hindsight (**inclusive memórias de código**, t286), em tickets, no banco do app, em logs e no repositório. Segredos só no cofre/`.env`. Um verificador automático (regex/scanner) barra a gravação; o Jev é só a segunda camada. [item 6; t286]
 - Pendências: trocar a senha do `paperclip_app`, a senha de root do Contabo e o token do OpenCode. [item 6]
 - Essas rotações ficam para um **segundo momento**. [t327]
 - Retenção de comentários: autor como hash; texto bruto apagado em até 30 dias. [t243 pesquisa, aceito para análise]
 
 ## 18. Falhas e saúde
 _Origem do bloco: t240–t242._
-- **Teste de resposta** antes do lote da manhã e antes de cada ação crítica (agendar, tornar privado): chamada mínima a cada modelo e ferramenta (Jev, Gemini, NotebookLM, Supabase). Sem resposta no prazo ou com resposta inválida, entra a escada. [t241]
-- **Escada de falhas** (modelos, Supabase, 9router): backoff 30 s → 2 min → 8 min; rede fora = `NETWORK_WAITING` sem gastar tentativa; cada nova tentativa usa outra estratégia (outro provedor/combo); a mesma ação falhando 2× vai ao José; 5 chamadas idênticas = parada; idempotência antes de cada passo; varredura de recuperação no reboot. [t241]
-- **Supabase fora:** o estado do fluxo vive no motor de workflow, com **retentativas duráveis do Temporal**; o Supabase recebe as gravações por **outbox** quando volta. Isso **substitui a fila em arquivo** da t242 (a confirmar no teste de 1 dia do Temporal). Continua valendo: nada é agendado nem tornado público sem o estado gravado. [t242; t324–t326]
+- **Teste de resposta** antes do lote da manhã e antes de cada ação crítica (agendar, tornar privado): chamada mínima a cada modelo e ferramenta (Jev, Gemini, NotebookLM, banco do app). Sem resposta no prazo ou com resposta inválida, entra a escada. [t241]
+- **Escada de falhas** (modelos, banco do app, 9router): backoff 30 s → 2 min → 8 min; rede fora = `NETWORK_WAITING` sem gastar tentativa; cada nova tentativa usa outra estratégia (outro provedor/combo); a mesma ação falhando 2× vai ao José; 5 chamadas idênticas = parada; idempotência antes de cada passo; varredura de recuperação no reboot. [t241]
+- **Banco do app [t343]:** Postgres 17 local no `pc` (`infra/pqbr-db`), separado do Postgres do Temporal; só em 127.0.0.1; backup diário com rotação. Supabase fica como opção futura. Agentes do Paperclip não escrevem nele (t341–t342).
+- **Banco do app fora:** o estado do fluxo vive no motor de workflow, com **retentativas duráveis do Temporal**; o banco do app recebe as gravações por **outbox** quando volta. Isso **substitui a fila em arquivo** da t242 (a confirmar no teste de 1 dia do Temporal). Continua valendo: nada é agendado nem tornado público sem o estado gravado. [t242; t324–t326]
 
 ## 19. Comentários e comunidade (@prod-comunidade)
 - **Leitura** pela API de dados (OAuth do analista), sem Studio e **sem Camofox**: a cada 30 min nas primeiras 48 h, a cada 6 h até 7 dias, depois diária; ler também retidos e provável spam; cada comentário passa pelo classificador do Jev e é gravado com o código do vídeo. [t243]

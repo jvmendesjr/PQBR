@@ -55,6 +55,6 @@ Ordem: 0.5 ∥ 0 → 1 → 3 ∥ 4 → 5 → 6 → 7 → 8 → 9 → 10 → 11 �
 | Desmonetização por conteúdo inautêntico | compliance + HOLD + variedade; R10 |
 | Respostas parecendo robô | banco aprovado, limites, sombra, desligamento em casos graves |
 | Segredo vazado | scanner (F3-02) primeiro; pre-commit |
-| Supabase fora | retentativas + outbox (TZ-03) |
+| Banco do app fora | retentativas + outbox (TZ-03) |
 | Métricas divergentes | só pela Analytics API (H12); relatórios avisam falta de significância |
 | Disco do servidor | ciclo t267/t268; `runtime/` limpo |

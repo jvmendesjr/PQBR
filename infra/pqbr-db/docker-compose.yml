@@ -1,0 +1,20 @@
+# PQBR — Postgres 17 local dos dados do app (t343). Separado do Postgres do Temporal.
+# Porta só em 127.0.0.1:55433. Limite de RAM 320M (o servidor já usa swap; Temporal tem teto de 1350M).
+services:
+  pqbr-db:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: pqbr
+    command: ["postgres","-c","shared_buffers=48MB","-c","max_connections=30","-c","work_mem=4MB",
+              "-c","maintenance_work_mem=32MB","-c","effective_cache_size=192MB","-c","password_encryption=scram-sha-256"]
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ../..:/repo:ro
+    ports: ["127.0.0.1:55433:5432"]
+    mem_limit: 320m
+    memswap_limit: 320m
+    healthcheck: {test: ["CMD-SHELL","pg_isready -U postgres -d pqbr"], interval: 5s, timeout: 5s, retries: 30, start_period: 10s}
+volumes: {pgdata: {}}

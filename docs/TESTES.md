@@ -10,8 +10,8 @@
 | Unitário | Funções puras (grade, barreiras, pontuação, limites de resposta, templates) | `tests/unit/` | todo commit |
 | Contrato | Modelos Pydantic v2 (ARQUITETURA §11): válidos, inválidos, fallback do Jev com o mesmo esquema | `tests/contratos/` | todo commit |
 | Replay | Histórico do motor reproduzido contra o código novo (determinismo) | `tests/replay/` | todo commit que muda workflow |
-| Integração | Activities contra serviços de **desenvolvimento** (Supabase dev, caderno clonado, canal em privado) | `tests/integracao/` | por tarefa, com autorização |
-| Simulação de falha | Rede fora, Supabase fora, `kill -9`, reboot, sessão caída | `tests/falhas/` | Fases 0.5 e 6 |
+| Integração | Activities contra serviços de **desenvolvimento** (banco do app de teste, caderno clonado, canal em privado) | `tests/integracao/` | por tarefa, com autorização |
+| Simulação de falha | Rede fora, banco do app fora, `kill -9`, reboot, sessão caída | `tests/falhas/` | Fases 0.5 e 6 |
 | Sombra | Fluxo completo sem efeito externo (respostas e corações simulados) | — | Fases 5 e 10 |
 
 Regras: nenhum teste usa dados pessoais reais nem segredos (RNF-03); nenhum teste publica vídeo público sem portão do José; testes de canal usam vídeo privado.
@@ -22,7 +22,7 @@ Regras: nenhum teste usa dados pessoais reais nem segredos (RNF-03); nenhum test
 |---|---|---|---|
 | TZ-01 | Subir Temporal + Postgres dedicado; medir RAM/CPU em repouso e com carga | Temporal + Postgres dedicado ≤ 1,5 GB de RAM em repouso e com carga (t329); dump/restauração ok | RNF-09 |
 | TZ-02 | `EpisodioWorkflow` de brinquedo com timer e Activity que falha; `kill -9` no worker; reboot | Retoma do ponto certo; nenhuma Activity com efeito roda duas vezes | RNF-05 |
-| TZ-03 | Supabase dev inacessível durante o workflow | Nada perdido; outbox grava uma vez na volta; nada "agendado/público" sem estado | RF-39, RNF-06 |
+| TZ-03 | Banco do app de teste inacessível durante o workflow | Nada perdido; outbox grava uma vez na volta; nada "agendado/público" sem estado | RF-39, RNF-06 |
 | TZ-04 | Temporal abre issue no Paperclip; agente de teste devolve proposta; aprovação vira sinal | Proposta valida em Pydantic v2; proposta inválida é rejeitada; nada aplicado sem aprovação; agente não acessa o Postgres do Temporal | RF-33, RF-43 |
 | TZ-05 | Agente Hermes no Paperclip | Roda sem `--yolo`; heartbeats desligados; versão com a correção da #3833 | RNF-13 |
 | TZ-06 | Aprovação pelo Telegram (Hermes `pqbr`) | Aprovar/negar chega como sinal; mensagem de outro ID ignorada | RF-34 |
@@ -34,7 +34,7 @@ Regras: nenhum teste usa dados pessoais reais nem segredos (RNF-03); nenhum test
 |---|---|
 | TZ-01 | ✅ Aprovado. Pico de 307 MiB, abaixo do teto de 1,5 GB. Dump e restauração ok. Soak de 24 h até 10/10 ~15:40. |
 | TZ-02 | ✅ Aprovado, com `kill -9` no worker e restart do motor. Reboot do servidor dispensado (t334). |
-| TZ-03 | ✅ Aprovado, com stub; o Supabase dev real fica para a F3. |
+| TZ-03 | ✅ Aprovado, com stub; o banco do app de teste fica para a F3. |
 | TZ-04 | ✅ Aprovado no Paperclip de teste `PQBR-TESTE`. |
 | TZ-05 | ⛔ Bloqueado: `--yolo` incondicional no `hermes_local` (H-SDD1); nenhum agente Hermes executado. |
 | TZ-06 | ⏸ Pendente: falta o Telegram; o filtro de remetente do motor está ok. |
@@ -67,10 +67,10 @@ Prioridade: V1, V2 e V3. Metas do piloto: EM CONSTRUÇÃO — aguardando José (
 | TS-07 | Conformidade (RF-28, RF-29) | E-mail crítico simulado → HOLD + privados os agendados + Telegram + ticket; recurso não é enviado pelo agente |
 | TS-08 | Analista e relatórios (RF-30..RF-32) | Relatório por template; exceções sinalizadas; aviso quando a amostra não é estatisticamente significativa; custos somados |
 | TS-09 | Agentes e manutenção (RF-33..RF-36, RNF-12) | Proposta inválida rejeitada; nada aplicado sem aprovação; ordem de outro ID ignorada; ticket com 2 aprovações; revisão humana com as 4 determinações |
-| TS-10 | Resiliência (RF-37..RF-39) | Cada degrau das escadas; NETWORK_WAITING não gasta tentativa; 2 falhas → José; 5 idênticas → parada; Supabase fora |
+| TS-10 | Resiliência (RF-37..RF-39) | Cada degrau das escadas; NETWORK_WAITING não gasta tentativa; 2 falhas → José; 5 idênticas → parada; banco do app fora |
 | TS-11 | Armazenamento (RF-40, RF-41) | Apaga local só após hash; duplicata movida; nada excluído |
 | TS-12 | Monitores (RF-42, RNF-07) | Atualização relevante pede autorização; nada atualiza sozinho |
-| TS-13 | Painel (RF-43) | Estado exibido vem do Supabase/issues |
-| TS-DB | Migrações (RF-02, RNF-02, RNF-03) | `sh db/test_migrations.sh`: sobe/desce 2 vezes; R10, código PQBR-EP, `video_id` obrigatório, janelas, 1 resposta por pessoa por vídeo, outbox idempotente, revisão coerente; anon/authenticated sem acesso; FKs indexadas. ✅ 09/10 |
-| TS-SEC | Segredos/PII (RNF-03, RNF-08) | Segredo e PII de teste bloqueados em Hindsight, tickets, Supabase, logs e pre-commit | ✅ 09/10 no pre-commit e na biblioteca (`tests/seguranca/test_segredos.py`; commit com token e e-mail falsos foi bloqueado). Falta ligar a biblioteca em Hindsight, tickets, Supabase e logs quando esses gravadores existirem.
+| TS-13 | Painel (RF-43) | Estado exibido vem do banco do app/issues |
+| TS-DB | Migrações (RF-02, RNF-02, RNF-03) | `sh db/test_migrations.sh`: sobe/desce 2 vezes; R10, código PQBR-EP, `video_id` obrigatório, janelas, 1 resposta por pessoa por vídeo, outbox idempotente, revisão coerente; anon/authenticated sem acesso; FKs indexadas. ✅ 09/10 | Banco local (t343): `infra/pqbr-db/verificar.sh` ok (RLS, papéis, senha errada recusada, leitura sem texto bruto, sem escrita em `public`); `testar_restauracao.sh` ok (24/60/1 iguais).
+| TS-SEC | Segredos/PII (RNF-03, RNF-08) | Segredo e PII de teste bloqueados em Hindsight, tickets, banco do app, logs e pre-commit | ✅ 09/10 no pre-commit e na biblioteca (`tests/seguranca/test_segredos.py`; commit com token e e-mail falsos foi bloqueado). Falta ligar a biblioteca em Hindsight, tickets, banco do app e logs quando esses gravadores existirem.
 | TS-REPLAY | Determinismo (RNF-01, RNF-05) | Replay de históricos gravados passa após cada mudança de workflow |
