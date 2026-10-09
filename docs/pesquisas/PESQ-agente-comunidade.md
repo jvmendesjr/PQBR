@@ -1,3 +1,7 @@
+> ⛔ **PESQUISA / REFERÊNCIA DE PRÉ-CONSTRUÇÃO: AGENTES NÃO CONSULTAM SEM APROVAÇÃO EXPLÍCITA DO JOSÉ (t287).** Pode conter premissas superadas que, mal interpretadas, iriam parar em produção. As regras válidas estão em `docs/REGRAS.md`.
+
+> Nota: a parte sobre templates do Paperclip perde peso com a t282 (Paperclip só como painel).
+
 # Pesquisa: agente de comunidade (@prod-comunidade) — templates Paperclip, skills e boas práticas
 
 > Data: 08/10/2026, ~23:10 PT (Fortaleza). Pesquisa somente leitura (GitHub API/raw, API de busca do skills.sh). Nenhum host remoto tocado, nenhum segredo lido.

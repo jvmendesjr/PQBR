@@ -1,4 +1,46 @@
-# Decisões 08/10/2026
+# Registro de decisões do José (DECISOES-LOG)
+
+> ⛔ **ARQUIVO DE PRÉ-CONSTRUÇÃO: AGENTES NÃO CONSULTAM (t287).** Este registro é a prova histórica das decisões. Ler este arquivo exige **aprovação explícita do José**, porque entradas antigas ou superadas podem ser mal interpretadas e aplicadas em produção. As regras válidas estão em `docs/REGRAS.md`.
+
+> Registro cronológico, só acrescenta. Em divergência com `REGRAS.md`, vale a entrada mais nova deste log e o REGRAS.md é corrigido no mesmo commit. Toda decisão nova entra aqui **e** no REGRAS.md.
+> Unificação de 09/10: junta o registro de 07/10 (só existia no box), o de 08/10 do servidor e a entrada t280 (só existia no box). Host da tailnet substituído por nome lógico.
+
+---
+
+## 07/10/2026: decisões e ressalvas antes do blueprint (cópia que existia só no box; unificada em 09/10)
+
+- Nome da skill: recriar como `rotina-producao-porque-br` (corrigir o "e" que falta em `porqu-br`). Ressalva no blueprint.
+- OpenViking FORA do build. Memória migra para o Hindsight; importar do OpenViking só o que for aproveitável (o blueprint deve dizer como).
+- Guardrail: produção NUNCA no caderno raiz do NotebookLM; sempre caderno efêmero por roteiro. Limpar o chat do caderno raiz a cada troca de projeto ou de produção.
+- 1 Publicação: Camofox no Studio (como hoje); a API fica para depois.
+- 2 Template: pacote próprio `pqbr-company` (recomendado).
+- 3 `yt_production` vai para o Supabase do projeto Paperclip; o Hindsight também vai para o Supabase.
+- 4 Memória: um bank único por organização, no mesmo projeto Supabase do Paperclip (confirmar).
+- 5 Criar o perfil Hermes `pqbr`; pausar o `rede` durante a validação da transição.
+- 6 4 Shorts/dia, nos mesmos horários de hoje.
+- 7 Stickman 2D puro + bíblia/model sheet do personagem; antes, pesquisar quais estilos de personagem performam melhor.
+- 8 Auditor via Gemini Web/Camofox, mas precisa ficar mais eficiente: checar CTA, finalização correta e corte; guardrails determinísticos.
+- 9 @prod-analista: provável sim; José precisa de mais subsídios.
+- 10 Governança: máximo de determinismo; detectar problemas, registrar a ação humana e repetir automaticamente na próxima vez. Orçamento: em aberto.
+
+### Rodada 2 (07/10, ~21h)
+- Não existe agente de dev na PQBR. Manutenção (inclusive do caderno raiz) só via ticket para a core-eng; a permissão temporária vem com o ticket aprovado.
+- Hindsight fica LOCAL (com backup diário). A migração para o Supabase é uma fase futura opcional.
+- Roadmap dentro do blueprint (documento único). Quem escreve a documentação é o core-eng.
+- Fase 1: a core-eng faz a primeira documentação; o CTO recebe e distribui para os agentes.
+- Fase 4: o `rede` perde a automação/cron e passa a rodar só sob demanda (o José pede cada etapa); a PQBR publica os 4 Shorts de forma autônoma, em observação.
+- Fluxo de ticket: canal automatizado via issue inter-org no Paperclip, com 2 aprovações do José (abertura do ticket e merge). Detalhes na conversa.
+- Rodada 3: José aprovou o fluxo de ticket, as boas práticas e as fases. A ativação da core-eng (acionamento automático do CTO, orçamento, toolsets) vai para uma conversa separada. Próximo tema aqui: o auditor.
+- Rodada 4 (auditor FECHADO): CTA conferido nos últimos 8 s; rubrica inclui "capa legível e coerente com o título" (imagem própria se o canal for parceiro, senão o melhor frame, definido via Camofox); avisos por um perfil Hermes `pqbr` no Telegram (allowlist, botões, dupla confirmação para merge e permissão, sem comandos livres). Discord fica como opção futura.
+- Rodada 5 (07/10 23h): o Drive já está previsto (drive_client.py, disco local só como cache). Propor 8 pastas mais 00_Biblia_Visual e confirmar a cota da conta juniormoedavirtual. Hoje o áudio vem embutido no vídeo do NotebookLM; áudio separado fica só como expansão futura.
+- Personagens: 2 protagonistas (masculino e feminino) e 2 coadjuvantes, num tom levemente cômico; atenção à diferenciação, já que stickmen são muito parecidos.
+- A biblioteca de cartões (objetos, ambientes, animais) é criada sob demanda, por roteiro, e reaproveitada.
+- A pesquisa e a criação dos cartões são delegadas ao NotebookLM para economizar tokens, sempre em caderno temporário, nunca no raiz.
+- Rodada 6: José aprovou a reestruturação do Drive (8 pastas + 00_Biblia_Visual). Pediu os cartões iniciais de teste já nesta conversa: o que for aprovado será reaproveitado. Liberou o uso da conta jv e a clonagem do caderno raiz para testes (o raiz em si fica intocado).
+
+---
+
+## 08/10/2026 e 09/10/2026 (registro original do servidor)
 - Bíblia visual v002 aprovada (Zé, Lia, Valdemar, Sandra, AMB-001, OBJ-001).
 - Estratégia: fichas no Drive em 00_Biblia_Visual; catálogo no Supabase (tabelas visual_assets e episode_assets); wiki/galeria gerada automaticamente a partir da tabela; o roteirista lista as entidades da cena; um resolvedor sem LLM injeta só as fichas necessárias no caderno temporário; ficha que falta é criada na hora.
 - SEM aprovação bloqueante: a ficha nova entra em uso imediatamente e José recebe só um aviso. Ele pode verificar quando quiser: "Verificado", ou "Não Aprovado" com observação. "Não Aprovado" abre ticket e a ficha é refeita (vale para os próximos vídeos). O vídeo publicado só é despublicado e refeito se José pedir; correção leve vale só para os próximos.
@@ -189,3 +231,18 @@ NÃO CABE:
 - (t272) APROVADO: escada de sessão = Camofox renova → login manual pelo noVNC (Telegram); cópia de cookies do Chrome só como último recurso e com OK do José.
 - (t273) APROVADO: publicação pela API do YouTube (videos.insert com agendamento); Studio via Camofox de reserva. HIPÓTESE H1: auditoria do app para upload público; até lá, sobe privado e o Camofox agenda.
 - (t274) APROVADO com ajuste: limite é 1 resposta por pessoa POR VÍDEO (pode responder a mesma pessoa em vários vídeos); ressalvas: frase diferente para a mesma pessoa (não repetir as últimas usadas com ela) e intervalo mínimo de ~24 h entre respostas à mesma pessoa; demais limites mantidos. Correção do §7 da entrega.
+- (t280) Repositório criado por José: https://github.com/jvmendesjr/PQBR (privado, vazio). GitHub conectado na core-eng pelo conector do Paperclip em 09/10 11:19. Tailscale Serve: Paperclip em https://<host-tailnet>:3100 (só tailnet); 443 livre por decisão do José. Core-eng NÃO usa perfis Hermes; José interage pelo chat do Paperclip. _(entrada que existia só na cópia do box; unificada em 09/10)_
+
+---
+
+## 09/10/2026, tarde: novos rumos (t281–t287 e t323)
+
+- (t281) O Telegram fica com o perfil Hermes `pqbr`; o @pqbr-assistente roda lá.
+- (t282) O Paperclip é **painel desde o início**: mostra o estado, não é o dono do fluxo.
+- (t283) O Temporal é testado primeiro (arquitetura híbrida, pensada para vários canais); o DBOS é o plano B.
+- (t284) A org core-eng fica **abortada por enquanto**; a saída do CTO (COR-1) **não é usada**. Arquivada fora do git no Drive (`PQBR/_arquivo-docs-2026-10-09/cor1-cto-2026-10-09.tar.gz`).
+- (t285) As **regras aprovadas são o núcleo e não podem se perder**; a arquitetura se adapta a elas.
+- (t286) **Tickets de manutenção agnósticos de agente:** qualquer agente de desenvolvimento pode pegar um ticket, acessar o código e corrigir, usando as memórias e o conhecimento do código guardados no Hindsight. Substitui o roteamento para a core-eng. Os agentes especializados da própria PQBR **pré-estruturam cada ticket** com a localização, a falha observada e as correções sugeridas. EM CONSTRUÇÃO — aguardando José: (a) se continuam as 2 aprovações do José por ticket (abertura e merge; o merge pelo José já é regra); (b) bank Hindsight separado para conhecimento de código.
+- (t287) Arquivos de pré-construção (`docs/arquivo/`, `docs/pesquisas/`, este `DECISOES-LOG.md` e qualquer rascunho ou material legado) **nunca são consultados por agentes**; consultar exige aprovação explícita do José, porque podem ser mal interpretados e aplicados em produção.
+- (t287a) Aprovada e aplicada a proposta de sanitização (`PROPOSTA-sanitizacao-docs.md`): estrutura `REGRAS / ARQUITETURA / PLANO / CONTRATO-EDITORIAL / DECISOES-LOG / pesquisas / arquivo`; levantamento de vídeos fora do git (Drive `PQBR/_arquivo-docs-2026-10-09/`), mantida só a lista de temas publicados (`db/seeds/temas-publicados.csv`).
+- (t323) Dúvida ou conflito que não se resolve com certeza pelas decisões aprovadas **não é adivinhado**: fica marcado "EM CONSTRUÇÃO — aguardando José" e é listado para ele decidir.

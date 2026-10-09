@@ -8,3 +8,11 @@ __pycache__/
 *.mp4
 *.mp3
 *.wav
+*.webm
+*.mov
+*.zip
+*.tar.gz
+docs/arquivo/brutos/
+# Levantamento de vídeos publicados: fora do git (contém dado pessoal; arquivado no Drive)
+docs/04-canal/levantamento-videos-publicados-rede.md
+levantamento-videos-publicados-rede*.md

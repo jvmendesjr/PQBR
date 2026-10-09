@@ -1,3 +1,6 @@
+> ⛔ **SUPERADO — ARQUIVO DE PRÉ-CONSTRUÇÃO. NÃO USAR PARA DECIDIR. AGENTES NÃO CONSULTAM SEM APROVAÇÃO EXPLÍCITA DO JOSÉ (t287).**
+> Original: `docs/99-historico/RESULTADO-gemini.md`. Motivo: rodadas do auditor superadas por t232 e t264/t265. As regras válidas estão em `docs/REGRAS.md`.
+
 # Rubrica real no Gemini (08/10/2026, 20:36 PT) — modelo "3.8 Flash" (sem toggle de pensamento visível), conta jvmendesjr, 1 chat por vídeo
 | Vídeo | Real | Esperado | Gemini | Acerto |
 |---|---|---|---|---|

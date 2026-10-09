@@ -1,4 +1,7 @@
-  ⟳ compacting context…
+> ⛔ **PESQUISA / REFERÊNCIA DE PRÉ-CONSTRUÇÃO: AGENTES NÃO CONSULTAM SEM APROVAÇÃO EXPLÍCITA DO JOSÉ (t287).** Pode conter premissas superadas que, mal interpretadas, iriam parar em produção. As regras válidas estão em `docs/REGRAS.md`.
+
+> Nota: gabarito dos 4 vídeos (TV, sinal amarelo, controle remoto, tomada do chuveiro). O CTA gravado nestes roteiros é o antigo; o válido é só "Segue o Porquê BR" (t262/t263).
+
 Relatório com o material real extraído dos 4 episódios em `/workspace/yt-llm-bot/episodios`.
 
 ---

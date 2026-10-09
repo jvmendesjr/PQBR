@@ -1,8 +1,11 @@
+> ⛔ **SUPERADO — ARQUIVO DE PRÉ-CONSTRUÇÃO. NÃO USAR PARA DECIDIR. AGENTES NÃO CONSULTAM SEM APROVAÇÃO EXPLÍCITA DO JOSÉ (t287).**
+> Original: `docs/99-historico/dossie-preparacao-pqbr.md`. Motivo: dossiê de preparação para a core-eng (abortada, t284). E-mail pessoal e IP da tailnet removidos em 09/10. As regras válidas estão em `docs/REGRAS.md`.
+
 # Dossiê de preparação: PorqueBR Production (pqbr)
 
 > **Este documento não é o blueprint.** Ele reúne a pesquisa feita antes de desenhar a organização `porquebr-production` no Paperclip, que depois será delegada à org `core-engineering` (agente `core-engenheiro` / @eng-cto).
 > Data: 07/10/2026 (horário de Fortaleza). Métricas de popularidade coletadas nesse dia pela API do GitHub e de skills.sh. Os textos de terceiros estão resumidos aqui, nunca copiados.
-> Convenção: **[NB: título]** indica a fonte do caderno NotebookLM `f3b90c97…` ("Arquitetura de Confiabilidade, Automação e Dev com PaperClip…"). **[HERMES-rede]** indica leitura somente-leitura de `~/.hermes/profiles/rede/skills` no host `pc` (100.73.22.64). **⚠ confirmar com Hermes atual** indica algo possivelmente desatualizado ou contraditório.
+> Convenção: **[NB: título]** indica a fonte do caderno NotebookLM `f3b90c97…` ("Arquitetura de Confiabilidade, Automação e Dev com PaperClip…"). **[HERMES-rede]** indica leitura somente-leitura de `~/.hermes/profiles/rede/skills` no host `pc` (<IP da tailnet removido>). **⚠ confirmar com Hermes atual** indica algo possivelmente desatualizado ou contraditório.
 
 ---
 
@@ -152,12 +155,12 @@
 
 ### e.1 Como o acesso foi feito
 - **Caderno NotebookLM** (perfil `jv`, somente leitura): listei as 78 fontes, li o texto integral de cerca de 30 fontes-chave e fiz **uma** pergunta focada no chat do caderno. Nada foi criado, apagado ou renomeado. A pergunta e a resposta ficaram no histórico de chat do caderno.
-- **Host `pc`** (Tailscale 100.73.22.64, onde o Hermes roda): acesso SSH somente leitura a partir do notebook do José (BOOK-9H2JJD2OTF). Perfis existentes: `core, gpu, mp3, pet, rede`. **Não li** `.env`, `auth.json`, tokens nem o `config.yaml` completo.
+- **Host `pc`** (Tailscale <IP da tailnet removido>, onde o Hermes roda): acesso SSH somente leitura a partir do notebook do José (BOOK-9H2JJD2OTF). Perfis existentes: `core, gpu, mp3, pet, rede`. **Não li** `.env`, `auth.json`, tokens nem o `config.yaml` completo.
 - **VPS `vmi3460009`:** o SSH como root foi recusado (publickey). Para inventariar a VPS seria preciso uma chave ou usuário autorizado, ou que o José rode `ls ~/.hermes/profiles` lá. Como o host `pc` respondeu, isso não foi necessário.
 
 ### e.2 Persona e ambiente do `rede`
 O SOUL.md define o perfil como gestor operacional do canal Porquê BR / Tutibom Story:
-- Esteira canônica em `/workspace/yt-llm-bot`, conta operacional `juniormoedavirtual@gmail.com`, Camofox :9377 com perfil `porquebr`.
+- Esteira canônica em `/workspace/yt-llm-bot`, conta operacional `<conta operacional do canal (e-mail removido)>`, Camofox :9377 com perfil `porquebr`.
 - A memória é o **OpenViking** (`memory.provider: openviking`).
 - Plugins: `hermes-handoff` e `hermes-jev`.
 - **⚠ confirmar com Hermes atual:** o blueprint diz que o Hindsight substituiu o OpenViking, mas isso valeu só para a core-eng.

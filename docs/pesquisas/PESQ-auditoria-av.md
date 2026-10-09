@@ -1,3 +1,7 @@
+> ⛔ **PESQUISA / REFERÊNCIA DE PRÉ-CONSTRUÇÃO: AGENTES NÃO CONSULTAM SEM APROVAÇÃO EXPLÍCITA DO JOSÉ (t287).** Pode conter premissas superadas que, mal interpretadas, iriam parar em produção. As regras válidas estão em `docs/REGRAS.md`.
+
+> Nota: cita a premissa antiga de 60–80 s, SUPERADA por t271 (15 s a 3 min, alvo ~50 s).
+
 # Pesquisa: como a comunidade e a indústria auditam vídeo gerado por IA antes de publicar
 
 Data: 08/10/2026. Pesquisa feita só na web, sem compras, cadastros ou postagens.

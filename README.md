@@ -1,13 +1,25 @@
-# PQBR — documentação
+# PQBR (Porquê BR)
 
-Mapa dos documentos e ordem de autoridade. Em caso de conflito, vale o primeiro da lista.
+Aplicação de produção do canal Porquê BR: Shorts de sátira leve, em stickman, sobre manias e rotinas dos brasileiros.
 
-1. `docs/00-entrega/decisoes-jose-2026-10-08.md`: registro de decisões do José (as entradas mais novas valem sobre as antigas).
-2. `docs/00-entrega/ENTREGA-core-eng-PQBR.md`: documento de entrega para a core-eng (agentes, fluxo, regras, tarefas e hipóteses).
-3. `docs/01-editorial/`: contrato editorial (DESATUALIZADO na chamada final e na identidade visual; ver decisões t262–t265) e aditivo dos 4 roteiros.
-4. `docs/02-pesquisas/`: pesquisas de comentários, agente de comunidade e auditoria audiovisual.
-5. `docs/03-auditor/`: resumo do auditor v3.
-6. `docs/04-canal/`: relatórios e levantamentos do canal. São só REFERÊNCIA, não fonte da verdade: os relatórios de 90 dias divergem (30 x 46 Shorts) e o levantamento diz 60 vídeos no cabeçalho e 58 na auditoria, com muitos "não encontrado". Métricas oficiais virão da API do YouTube Analytics.
-7. `docs/99-historico/`: material substituído (dossiê de preparação, rodada anterior do Gemini). Não usar para decidir.
+## Ordem de autoridade (em conflito, vale o primeiro)
 
-Regras: nada de senhas, tokens ou dados pessoais neste repositório.
+1. `docs/REGRAS.md`: **todas as regras aprovadas pelo José**. Agentes leem este primeiro.
+2. `docs/ARQUITETURA.md`: como as regras são executadas (ADRs, componentes, papéis, hipóteses).
+3. `docs/PLANO.md`: fases, tarefas D1–D15, portões do José, pendências e riscos.
+
+## ⛔ Proibido consultar sem aprovação explícita do José (t287)
+
+Arquivos de pré-construção **nunca** são consultados por agentes. Ler qualquer um deles exige aprovação explícita do José, porque podem ser mal interpretados e aplicados em produção:
+
+- `docs/CONTRATO-EDITORIAL.md` (rascunho; o que vale está no REGRAS §5)
+- `docs/DECISOES-LOG.md` (registro histórico de decisões)
+- `docs/pesquisas/` (pesquisas e referências)
+- `docs/arquivo/` (material superado e legado)
+- qualquer rascunho ou material legado, dentro ou fora do repositório
+
+## Regras do repositório
+
+- Dúvida ou conflito sem certeza: não adivinhar; marcar "EM CONSTRUÇÃO — aguardando José" (t323).
+- Decisão nova entra no `DECISOES-LOG.md` e no `REGRAS.md` no mesmo commit.
+- Nada de senhas, tokens, cookies, dados pessoais, IPs ou IDs internos neste repositório. Segredos só no `.env`/cofre do servidor.

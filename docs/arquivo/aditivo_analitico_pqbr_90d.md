@@ -1,3 +1,6 @@
+> ⛔ **SUPERADO — ARQUIVO DE PRÉ-CONSTRUÇÃO. NÃO USAR PARA DECIDIR. AGENTES NÃO CONSULTAM SEM APROVAÇÃO EXPLÍCITA DO JOSÉ (t287).**
+> Original: `docs/04-canal/aditivo_analitico_pqbr_90d.md`. Motivo: fundido em docs/pesquisas/REF-canal-analytics-90d.md (parte B). As regras válidas estão em `docs/REGRAS.md`.
+
 # Aditivo Analítico e Retificação de Dados — Porquê BR (`@porquebr-t4c`)
 
 **Data:** 08 de outubro de 2026  

@@ -1,3 +1,6 @@
+> ⛔ **SUPERADO — ARQUIVO DE PRÉ-CONSTRUÇÃO. NÃO USAR PARA DECIDIR. AGENTES NÃO CONSULTAM SEM APROVAÇÃO EXPLÍCITA DO JOSÉ (t287).**
+> Original: `docs/00-entrega/ENTREGA-core-eng-PQBR.md (inclui a seção "Atualização do ambiente (09/10/2026)" que não estava commitada)`. Motivo: pacote de entrega para a org core-eng, abortada pela t284. Regras → REGRAS.md; componentes, papéis, skills, ambiente e perfil `pqbr` → ARQUITETURA.md; D/H e pendências → PLANO.md. Host da tailnet e id do chat do Telegram substituídos por nomes lógicos. As regras válidas estão em `docs/REGRAS.md`.
+
 # Entrega à core-eng: blueprint da org PQBR (Porquê BR)
 
 > **Para:** @eng-cto (org core-eng, Paperclip) · **Dono:** José Vieira · **Data:** 09/10/2026 (horário de Fortaleza)
@@ -376,7 +379,7 @@ Princípio [APROVADO, t184]: **ideação, roteiro, SEO e pesquisa ficam com o No
 ## Ambiente (atualizado em 09/10/2026)
 - **APROVADO/VERIFICADO:** a pasta `/home/pc/Workspace/PQBR` no servidor `pc` é o repositório oficial da aplicação, ligada ao GitHub `jvmendesjr/PQBR` (privado, branch `main`). A documentação está em `docs/`, e o `README.md` define a ordem de autoridade.
 - **VERIFICADO:** o GitHub está conectado à core-eng pelo conector do Paperclip.
-- **VERIFICADO:** o Paperclip abre só dentro da tailnet, em `https://pc.taildfb7d7.ts.net:3100`. A porta 443 fica livre por decisão do José.
+- **VERIFICADO:** o Paperclip abre só dentro da tailnet, em `https://<host-tailnet>:3100`. A porta 443 fica livre por decisão do José.
 - **APROVADO:** a core-eng não usa perfis do Hermes. O José interage pelo chat do próprio Paperclip quando for preciso.
 - **VERIFICADO:** dependências globais no servidor: Camofox (REST 9377, saudável), Node, Python/uv, FFmpeg, Docker, gh, NotebookLM CLI 0.8.2 e Hindsight. As dependências locais da PQBR são tarefas do roteiro.
 
@@ -394,3 +397,13 @@ Os diretórios abaixo já existem no repositório `jvmendesjr/PQBR`, vazios ou s
 - `runtime/`: temporário, fora do git, limpo a cada ciclo (regra de disco livre).
 - `docs/`: documentação.
 Segredos ficam no cofre do servidor, nunca no repositório.
+
+## Atualização do ambiente (09/10/2026): perfil Hermes `pqbr` JÁ CRIADO
+
+- O perfil existe em `/home/pc/.hermes/profiles/pqbr/` (SOUL.md, `config.yaml`, `.env`). Não é preciso criá-lo; o item D2 passa a ser só **ajustar** env mínimo, toolsets e budgets.
+- Acesso no servidor `pc`, pelo terminal do usuário `pc`:
+  - conversa interativa: `hermes -p pqbr chat`
+  - consulta sem interação: `echo "pedido" | hermes -p pqbr chat --query-file - --oneshot -Q`
+  - configuração: editar `~/.hermes/profiles/pqbr/config.yaml` e `~/.hermes/profiles/pqbr/.env` (segredos ficam só no `.env`/cofre, nunca no git).
+- Telegram: tópico 5756 do grupo PC (chat `<chat-id do grupo (no .env/config local)>`), rota `pqbr-topic` em `~/.hermes/config.yaml`, pelo roteador de bot único (o perfil não tem token próprio). O funcionamento da rota é tratado pelo José; não é bloqueio para a core-eng.
+- Continua valendo: o perfil não herda `--yolo` nem sudo sem senha do `rede`.

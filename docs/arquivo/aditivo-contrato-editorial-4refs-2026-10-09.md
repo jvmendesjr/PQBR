@@ -1,3 +1,6 @@
+> ⛔ **SUPERADO — ARQUIVO DE PRÉ-CONSTRUÇÃO. NÃO USAR PARA DECIDIR. AGENTES NÃO CONSULTAM SEM APROVAÇÃO EXPLÍCITA DO JOSÉ (t287).**
+> Original: `docs/01-editorial/aditivo-contrato-editorial-4refs-2026-10-09.md`. Motivo: fundido em docs/CONTRATO-EDITORIAL.md §15; a divergência de CTA foi resolvida por t262/t263; os caminhos citados estavam errados. As regras válidas estão em `docs/REGRAS.md`.
+
 # Aditivo ao contrato editorial (09/10/2026)
 
 > Completa a seção 12 do rascunho v1. Os roteiros dos 4 vídeos de referência chegaram do rede em `docs/referencias-4-videos-rede.md`. O levantamento amplo está em `docs/levantamento-videos-publicados-rede.md` (60 vídeos mapeados). Métricas por vídeo continuam hipótese até a YouTube Analytics API.

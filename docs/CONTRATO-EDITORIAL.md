@@ -1,10 +1,14 @@
-# Contrato editorial da PQBR (rascunho v1, 08/10/2026)
+# Contrato editorial da PQBR (rascunho v1 + aditivo de 09/10)
+
+> ⛔ **RASCUNHO: AGENTES NÃO CONSULTAM SEM APROVAÇÃO DO JOSÉ (t287).** Este é material de pré-construção: tem trechos superados e números que ainda são hipótese. As regras editoriais válidas estão em `docs/REGRAS.md` §5 (e §4, §8). Em conflito, vale o REGRAS.md.
+>
+> Status: rascunho v1 (08/10) com o aditivo dos 4 roteiros (09/10) incorporado como §15. Trechos superados estão marcados **SUPERADO** com a decisão que os substitui. A versão v2 (sem os superados) é a tarefa D11 do `docs/PLANO.md` e depende de aprovação do José. Originais em `docs/arquivo/`.
 
 > Item 1 da fase de validação. É um rascunho para o José corrigir.
 >
 > **Fontes (agente rede, YouTube Studio, 08/10/2026):**
-> - o relatório principal (`relatorio-rede/relatorio_analytics_youtube_studio_90d.md`);
-> - o **aditivo** (`relatorio-rede/aditivo_analitico_pqbr_90d.md`), que traz a tabela completa de 46 Shorts e as retificações.
+> - o relatório principal (hoje em `docs/pesquisas/REF-canal-analytics-90d.md`, parte A);
+> - o **aditivo** (hoje em `docs/pesquisas/REF-canal-analytics-90d.md`, parte B), que traz a tabela completa de 46 Shorts e as retificações.
 >
 > O canal `@porquebr-t4c` existe desde 16/09/2026.
 >
@@ -73,12 +77,14 @@
 | "Lata": queda em 0:18, no termo "tixotrópico" sem apoio visual. | **R4. Termo técnico só entra com imagem ou piada no mesmo segundo.** |
 | "Picolé": queda entre 0:20 e 0:24, na "aflição da madeira". | **R5. Evitar sensação física incômoda no miolo.** Hipótese, com um caso só. |
 | "Sinal amarelo" (~29 s por visualização), "TV" (~27 s) e "tomada do chuveiro" seguram pela curiosidade sobre a causa real. | **R6. Explicar o porquê de verdade, como recompensa da piada.** |
-| "Sinal amarelo": queda leve em 0:48, só na transição para o CTA. | **R7. O CTA é uma pergunta curta, integrada à história, nos últimos 8 s (regra do auditor mantida), sem quebra de ritmo.** |
+| "Sinal amarelo": queda leve em 0:48, só na transição para o CTA. | **R7. O CTA é uma pergunta curta, integrada à história, nos últimos 8 s (regra do auditor mantida), sem quebra de ritmo.** ⚠️ SUPERADO por t262/t263: CTA = só "Segue o Porquê BR", sem pergunta. |
 | Temas de curiosidade enciclopédica tiveram baixo alcance: copo americano (206), horário de Brasília (85, apesar de 1.219 impressões), 127 V/220 V (56), "PIX de graça" (43), filtro de barro (34). A exceção é "terremoto", com 135 visualizações e +3 inscritos. | **R8. Priorizar comportamento que o espectador reconhece em si. Curiosidade "de almanaque" só quando houver uma mania por trás.** |
 | Os dois maiores geradores de inscritos ("TV", +14) e os seguintes ("sabonete" e "tomada do chuveiro", +4 cada) são situações de casa e de família. | **R9. Priorizar situações vividas em casa e em família.** |
 | O feijão no pote de sorvete foi publicado **duas vezes** (76 e 387 visualizações). Há temas vizinhos repetidos: chuveiro elétrico x tomada do chuveiro; sacola de sacolas x sacola bonita. | **R10. Um tema, um vídeo.** A barreira contra repetição vale também para variações próximas (ver o observador de conformidade, item de variedade). |
 
 ## 6. Duração (decisão do José, t208)
+
+> ⚠️ **SUPERADO** em parte por t271: duração de 15 s a 3 min, **alvo de ~50 s** (REGRAS §5).
 
 - **A duração é definida pela qualidade. Não há teto editorial.** Um bom trabalho não é cortado para caber num limite, e passar de 60 s é aceito inclusive como norma.
 - **O teto técnico é o limite do Shorts: 3 minutos (180 s), em formato vertical ou quadrado.** Fonte: Central de Ajuda do YouTube, "Understand three-minute YouTube Shorts" (support.google.com/youtube/answer/15424877).
@@ -185,7 +191,7 @@ Recalibrar todas as faixas depois de 2 a 4 semanas com o `@prod-analista`.
 - A retenção de 79,8% do sinal amarelo vem do gráfico do Studio (base diferente de tempo de exibição ÷ visualizações); a core-eng fixa as definições pela API.
 
 ## 11. Diretrizes de roteiro (t212 e t213, José, 08/10/2026), regras
-1. **Elenco enxuto:** um personagem por padrão; nunca mais de dois por vídeo. O plano final também respeita esse limite (nada de "foto de grupo" com mais personagens do que o vídeo usa).
+1. **Elenco enxuto:** um personagem por padrão; nunca mais de dois por vídeo. ⚠️ SUPERADO por t264: até 2 é o desejado; mais que isso **não reprova**. O plano final também respeita esse limite (nada de "foto de grupo" com mais personagens do que o vídeo usa).
 2. **Sem nomes:** nenhum nome de personagem falado ou escrito na legenda ou na tela. O personagem sem nome é "qualquer brasileiro". Os nomes e IDs das fichas (Zé, Lia, Seu Valdemar) existem só para a produção, nunca no vídeo.
 3. **Enquadramento brasileiro:** o texto trata a mania como coisa nossa ("nós, brasileiros, temos essa mania…", "todo brasileiro já…"), mesmo que aconteça em outros lugares. Busca uma explicação lógica, mas o **humor predomina** sobre a aula.
 4. **Sátira leve:** "aquele sorrisinho no canto da boca". Nunca ridiculariza o brasileiro; o brasileiro é brincalhão, esperto, criativo.
@@ -207,10 +213,12 @@ Recalibrar todas as faixas depois de 2 a 4 semanas com o `@prod-analista`.
 - **Voz do narrador:** "a gente" / "todo brasileiro", cúmplice, com o sorrisinho no canto da boca; frases curtas; nada de professor.
 - **Ritmo da piada:** uma imagem engraçada ou exagero a cada 5–8 s nos primeiros 25 s (onde a curva se decide); depois a piada continua dentro da explicação.
 - **O porquê:** UM mecanismo real, em palavras do dia a dia, com imagem no mesmo segundo (sem termo técnico solto). Entra depois de ~40% do vídeo.
-- **Fecho e CTA:** logo depois do payoff, sem "ponte" longa (a queda do sinal amarelo foi na transição). O fecho é o reconhecimento caloroso ("a gente é assim mesmo") e a pergunta curta para os comentários sai do próprio fecho ("e aí na sua casa, quem faz isso?"). Nos últimos 8 s.
-- **Duração:** dimensionar pelo texto. Na rodada final de 08/10 a voz leu ~3,0 palavras/s: 178 palavras deram 59,3 s e 190 deram 63,9–67 s. Para 60–80 s, use **185–235 palavras**.
+- ⚠️ SUPERADO por t262/t263 (CTA = só "Segue o Porquê BR"; nunca pedir comentário). Texto antigo: **Fecho e CTA:** logo depois do payoff, sem "ponte" longa (a queda do sinal amarelo foi na transição). O fecho é o reconhecimento caloroso ("a gente é assim mesmo") e a pergunta curta para os comentários sai do próprio fecho ("e aí na sua casa, quem faz isso?"). Nos últimos 8 s.
+- ⚠️ SUPERADO em parte por t271 (alvo ~50 s; "60–80 s, 185–235 palavras" não vale mais). Texto antigo: **Duração:** dimensionar pelo texto. Na rodada final de 08/10 a voz leu ~3,0 palavras/s: 178 palavras deram 59,3 s e 190 deram 63,9–67 s. Para 60–80 s, use **185–235 palavras**.
 
 ### 11.1 CTA e encerramento (t214, José, 08/10/2026), regra
+> ⚠️ **SUPERADO** por t262/t263: a última fala é apenas "Segue o Porquê BR", curta e colada ao gancho; nunca pedir comentário (nem narração, nem descrição, nem fixado). O encerramento visual (logo com zoom) continua valendo.
+
 - **CTA explícito e falado nos últimos ~8 s**, como última fala: convida a comentar **e** a seguir/inscrever-se no canal, no tom "a gente é assim mesmo" (ex.: "E aí na sua casa, quem faz isso? Conta aqui nos comentários e segue o Porquê BR, porque a gente é assim mesmo."). Substitui a restrição anterior de "sem inscreva-se" (R7 e briefing).
 - **Encerramento visual:** o logo do Porquê BR entra no fim com zoom-in suave (~1,5–2 s), feito na pós-produção com FFmpeg.
 - O CTA não pode ser coberto por selo ou logo enquanto é falado.
@@ -223,12 +231,59 @@ Recalibrar todas as faixas depois de 2 a 4 semanas com o `@prod-analista`.
 
 ## 13. Dinamismo e relação texto-imagem (t217)
 - Tom/redação da rodada final (toalha molhada) aprovado por José como referência.
-- Cada fala tem imagem correspondente ao que está sendo dito (relação texto-imagem verificável pelo auditor: transcrição × frames).
+- Cada fala tem imagem correspondente ao que está sendo dito (relação texto-imagem verificável pelo auditor: transcrição × frames). **EM CONSTRUÇÃO — aguardando José:** trava ou métrica? (t217 x t265, ver REGRAS §8.)
 - O personagem age em cena (faz o hábito), não só observa; roteiros descrevem ações visíveis.
 - Ritmo de vídeo, não de slide: troca de plano/ação a cada ~3–5 s; reprovar sequências estáticas ou só infográfico.
-- Consistência do personagem segue como meta com tolerância: desvios leves aceitos se o dinamismo e a relação texto-imagem estiverem bons; reavaliar conforme evolução do modelo/plataforma.
+- Consistência do personagem segue como meta com tolerância (reforçado por t264: métrica, não trava): desvios leves aceitos se o dinamismo e a relação texto-imagem estiverem bons; reavaliar conforme evolução do modelo/plataforma.
 
 ## 14. Tolerância de identidade do personagem (t222)
+> ⚠️ **SUPERADO** por t264/t265: nenhum critério visual de estilo reprova (cor, roupa, troca, mais de 2, 3D ou realista); aderência ao elenco é métrica. Texto antigo mantido só como histórico.
+
 Exigir no prompt a máxima fidelidade à bíblia, mas aceitar imperfeição leve. LEVE (ressalva): corpo contornado/volume, contorno duplo, variação de traço. GRAVE (reprova): pele colorida, roupa real, 3D, realista, genérico, personagem trocado, > 2 personagens. Cena sem personagem é válida se a imagem acompanha o texto. Gabarito: toalha molhada v1 (aprovada).
 
 - (t232) Roupa insinuada só por contorno, toda branca e sem cor (linha no peito, golinha), sem botão visível nem estampa, é desvio LEVE.
+
+
+---
+
+## 15. Aditivo: 4 roteiros de referência (09/10/2026, incorporado)
+
+> Completa a seção 12 do rascunho v1. Os roteiros dos 4 vídeos de referência chegaram do rede em `docs/pesquisas/REF-roteiros-4-videos.md`. O levantamento amplo está no levantamento de vídeos publicados (60 vídeos; fora do git, arquivado no Drive `PQBR/_arquivo-docs-2026-10-09/`; a lista de temas está em `db/seeds/temas-publicados.csv`). Métricas por vídeo continuam hipótese até a YouTube Analytics API.
+
+### Fonte
+
+- `docs/pesquisas/REF-roteiros-4-videos.md` (TV, sinal amarelo, controle remoto, tomada do chuveiro)
+- levantamento de vídeos publicados, fora do git (60 publicados no canal; nenhuma transcrição Whisper dedicada; narração só nas marcações do roteiro)
+
+### O que os 4 roteiros confirmam (vira regra)
+
+1. **Partitura em 3 blocos (~50–52 s, ~110–120 palavras):** _(EM CONSTRUÇÃO — aguardando José: ~110–120 palavras em ~50 s dá ~2,3 palavras/s, contra ~3 palavras/s medidas nos testes de 08/10 (§12); qual vale para dimensionar o roteiro?)_ gancho 0–3 s, miolo com o porquê até ~45 s, fecho/CTA nos últimos ~5–8 s. O controle remoto ainda está num formato mais antigo (~60 s, blocos 10/15/20 s); os outros três já usam a partitura técnica. Padronizar a partitura.
+2. **Gancho:** cena da mania já acontecendo + pergunta "por que…" sem resposta. Legenda curta e gritante (ACORDOU MOÍDO?, AMARELO = ACELERA?, TOMADA DERRETIDA!).
+3. **Um mecanismo real no miolo**, nomeado em linguagem de rua (luz azul / melatonina, "cálculo quântico" do motorista, óxido nas molas + tapa, Efeito Joule). Termo técnico só com imagem no mesmo segundo.
+4. **Personagem age:** dorme, acelera, tapa o controle, toma banho enquanto a tomada derrete. Não fica parado olhando.
+5. **Steering visual canônico (3 dos 4):** stickman 2D limpo, fundo cream `#FDFBF7`, traço preto, sem papercut, sem die-cut, sem drop shadow. (O controle remoto ainda pede fundo branco; alinhar ao cream.)
+6. **Risco doméstico / trânsito (tomada e sinal amarelo):** satiriza a conta mental ou o hábito, e o fecho aponta a regra certa (conector cerâmico / não passar no amarelo), sem ensinar o atalho. Confirma a categoria 4.3 do contrato.
+7. **Orgulho da gambiarra (controle):** o stickman ergue o controle com fita como troféu. Casa com "a gente é assim mesmo".
+
+### Divergência a decidir (CTA)
+
+> ⚠️ **SUPERADO**: **resolvida por t262/t263**. CTA = só "Segue o Porquê BR"; nunca pedir comentário. O texto abaixo fica só como histórico.
+
+- **Aprovado por você (t214):** CTA nos últimos ~8 s convida a comentar e a seguir, no tom "a gente é assim mesmo" (ex.: "E aí na sua casa, quem faz isso? Conta nos comentários e segue o Porquê BR, porque a gente é assim mesmo.").
+- **O que a produção ainda grava no steering dos 4 refs:** frase fixa de loop "Segue o Porquê BR pra não perder nenhuma novidade e curiosidade todo dia!", sem pergunta de comentário e sem o pouso de reconhecimento.
+
+Até você escolher, o contrato fica com t214. O SOP/steering do NotebookLM precisa ser atualizado para bater com isso (e o auditor deve checar a frase do CTA, não a antiga).
+
+### Inventário (para o blueprint, não para o tom)
+
+- Levantamento: 60 vídeos únicos no canal.
+- Nenhuma transcrição Whisper salva; o auditor deve usar a narração do roteiro (ou gerar Whisper na esteira).
+- Há títulos duplicados / republicações no histórico (ex.: feijão no pote) - reforça a barreira anti-repetição já no contrato.
+- Métricas finas (% assistiu vs deslizou) vieram "não encontrado" em vários itens do levantamento; não usar como meta até a API.
+
+### Próximo passo sugerido
+
+> ⚠️ **SUPERADO**: o item 1 foi decidido (t262/t263). O item 2 segue como tarefa D11 do PLANO.
+
+1. Você confirma o CTA (t214 vs frase de loop atual).
+2. Jr incorpora este aditivo na seção 12 do rascunho e atualiza o texto do steering/SOP.

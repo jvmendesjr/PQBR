@@ -1,3 +1,7 @@
+> ⛔ **PESQUISA / REFERÊNCIA DE PRÉ-CONSTRUÇÃO: AGENTES NÃO CONSULTAM SEM APROVAÇÃO EXPLÍCITA DO JOSÉ (t287).** Pode conter premissas superadas que, mal interpretadas, iriam parar em produção. As regras válidas estão em `docs/REGRAS.md`.
+
+> Nota: o que foi aprovado daqui está em REGRAS §19 (t243–t250, t274).
+
 # Pesquisa: boas práticas para ler, classificar e agir sobre comentários (PQBR)
 
 Data: 08/10/2026 (~23:00 PT). Pesquisa feita só na web (docs oficiais, papers, Reddit/HN via resultados de busca, GitHub). Nada foi alterado em host remoto, nenhum segredo foi lido e o YouTube Studio não foi acessado.

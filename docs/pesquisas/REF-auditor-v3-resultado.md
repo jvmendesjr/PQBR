@@ -1,3 +1,7 @@
+> ⛔ **PESQUISA / REFERÊNCIA DE PRÉ-CONSTRUÇÃO: AGENTES NÃO CONSULTAM SEM APROVAÇÃO EXPLÍCITA DO JOSÉ (t287).** Pode conter premissas superadas que, mal interpretadas, iriam parar em produção. As regras válidas estão em `docs/REGRAS.md`.
+
+> Nota: evidência do "verificado em 4 vídeos" (t232). A tabela LEVE/GRAVE de identidade usada aqui foi SUPERADA por t264/t265.
+
 # Auditor v3: resumo gerado por código
 Acertos de veredito: 4/4.
 
