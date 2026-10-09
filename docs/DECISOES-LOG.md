@@ -256,3 +256,22 @@ NÃO CABE:
 - **Padrão dos agentes pensantes** (director, analista, comunidade): rotina fixa executa tudo; os agentes observam e propõem mudanças só como saída estruturada validada por Pydantic v2; mudanças só se aplicam após aprovação do José.
 - **Janelas de publicação:** 11:40, 14:40, 18:35, 21:15 (4 janelas; teto de 4 por dia, sem mínimo).
 - **Ritmo da narração** para dimensionar o roteiro: 2,3 palavras/s (o modelo pode esticar ou acelerar).
+
+## 09/10/2026, ~14:57: decisões t327 e t328
+
+- (t327) Arquitetura: ligar o **Temporal** (fluxo determinístico) ao **Paperclip** (camada de agentes e painel). Os agentes vivem no Paperclip.
+- (t327) Sem teto mensal de orçamento por enquanto: só monitoramento e levantamento de custos.
+- (t327) Imagem que não corresponde à narração **não reprova** o vídeo (pode ser transição breve); não é critério estrito.
+- (t327) Refinamentos da pesquisa de comentários (t243): os relatórios devem sinalizar situações excepcionais e avisar quando não houver números estatisticamente significativos.
+- (t327) Desligamento automático das respostas só em reclamação muito grave, direitos autorais ou situação visivelmente grave; só esses casos escalam ao José. Tom nessas situações: sempre profissional, direto e formal; não absorve o espírito editorial (sem piada, ironia ou sarcasmo).
+- (t327) Revisão humana só quando um item falha em todos os caminhos já previstos: fica num local dedicado do repositório para revisão, o José é avisado e o agente coleta a determinação dele: excluir, corrigir, reaproveitar ou arquivar. Resolve a "revisão humana antes da grade".
+- (t327) Personas do compliance e do assistente: sérias, diretas, sem rodeios.
+- (t327) Configuração do Studio: já definida. Visualização: já definida.
+- (t327) Escopo: só o canal PQBR por enquanto; outros canais estudados depois, com os aprendizados; cota da API para vários canais adiada.
+- (t327) Metas do piloto: definidas depois.
+- (t327) Perfil Hermes `rede`: pausado quando a PQBR estiver definida; usar o novo perfil `pqbr`.
+- (t327) Juiz de imagem: Gemini web continua; sem Gemini API.
+- (t327) Rotação de senhas/tokens: adiada para um segundo momento.
+- (t327) R1–R9 continuam dependendo do contrato v2, salvo o que já estiver coberto.
+- (t327) Criar `docs/ROADMAP.md` agnóstico de agente, com checkboxes, para qualquer agente retomar de onde o último parou.
+- (t328) Seguir o conjunto completo de SDD: constituição (REGRAS §0–§3), `SPEC.md`, `ARQUITETURA.md`, tarefas no `ROADMAP.md`, `TESTES.md` e matriz de rastreabilidade (`RASTREABILIDADE.md`), sem duplicar conteúdo; desconhecidos marcados EM CONSTRUÇÃO.

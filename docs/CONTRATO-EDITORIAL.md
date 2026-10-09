@@ -60,6 +60,8 @@
 5. Tema que só existe para gerar briga nos comentários, sem uma mania reconhecível por trás.
 
 ### 4.3 Exige revisão humana do José antes de entrar na grade
+> ⚠️ **SUPERADO** por t327: não há revisão humana prévia da grade. A revisão humana só acontece quando um item falha em todos os caminhos previstos (REGRAS §5). Os temas abaixo continuam como referência de risco; a regra de polêmica > 75 (t200) segue no REGRAS §4.
+
 1. **Referência: o sinal amarelo** ("acelera que dá tempo"). O tema é trânsito, com risco real, e os comentários viraram debate de regra. Mesmo assim, é o vídeo de maior tempo de exibição do canal (10,6 h). Funcionou **porque** satiriza a conta mental do motorista sem ensinar a avançar.
    - **O que serve de régua:** o hábito com risco aparece como absurdo, e o fecho deixa a regra correta clara.
 2. **Eletricidade, fogo e risco doméstico:** a tomada do chuveiro que derrete, o "rabo quente" para ferver água, o chuveiro elétrico que "não eletrocuta", 127 V e 220 V. O roteiro precisa remeter a um profissional e não pode sugerir conserto ou uso caseiro arriscado.
@@ -231,7 +233,7 @@ Recalibrar todas as faixas depois de 2 a 4 semanas com o `@prod-analista`.
 
 ## 13. Dinamismo e relação texto-imagem (t217)
 - Tom/redação da rodada final (toalha molhada) aprovado por José como referência.
-- Cada fala tem imagem correspondente ao que está sendo dito (relação texto-imagem verificável pelo auditor: transcrição × frames). **EM CONSTRUÇÃO — aguardando José:** trava ou métrica? (t217 x t265, ver REGRAS §8.)
+- Cada fala tem imagem correspondente ao que está sendo dito (relação texto-imagem verificável pelo auditor: transcrição × frames). ⚠️ RESOLVIDO por t327: imagem que não corresponde à fala **não reprova** (pode ser transição breve); não é critério estrito.
 - O personagem age em cena (faz o hábito), não só observa; roteiros descrevem ações visíveis.
 - Ritmo de vídeo, não de slide: troca de plano/ação a cada ~3–5 s; reprovar sequências estáticas ou só infográfico.
 - Consistência do personagem segue como meta com tolerância (reforçado por t264: métrica, não trava): desvios leves aceitos se o dinamismo e a relação texto-imagem estiverem bons; reavaliar conforme evolução do modelo/plataforma.

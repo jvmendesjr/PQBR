@@ -1,6 +1,6 @@
 # ARQUITETURA da PQBR
 
-> Autoridade: abaixo de `docs/REGRAS.md` e acima de `docs/PLANO.md`. Este arquivo diz **como** as regras são executadas hoje; ele se adapta às regras, nunca o contrário (t285). Em conflito, vale o REGRAS.md.
+> Autoridade: abaixo de `docs/REGRAS.md` e `docs/SPEC.md`; acima de `docs/TESTES.md`, `docs/ROADMAP.md` e `docs/PLANO.md`. Requisitos citados como RF/RNF (SPEC). Este arquivo diz **como** as regras são executadas hoje; ele se adapta às regras, nunca o contrário (t285). Em conflito, vale o REGRAS.md.
 > Não consultar `docs/arquivo/`, `docs/pesquisas/` nem `docs/DECISOES-LOG.md` sem aprovação explícita do José (t287).
 > Legenda: [APROVADO] · [VERIFICADO] · [HIPÓTESE] · [PROPOSTA] (sugestão ainda sem aprovação) · EM CONSTRUÇÃO — aguardando José.
 
@@ -10,27 +10,27 @@
 
 ### ADR-001: motor de orquestração (Temporal primeiro, DBOS como plano B)
 - **Decisão [APROVADO t283]:** a espinha do fluxo é **código + motor de workflow durável**, numa arquitetura híbrida pensada para vários canais. O **Temporal** é testado primeiro; o **DBOS** é o plano B.
-- **Como decidir [PROPOSTA, PLANO Fase 0.5]:** spike de 1 dia. Temporal self-hosted só com Postgres local e dedicado no `pc` (sem Elasticsearch; separado do `mp32-postgres`; ~0,9 GiB estimado) e um `EpisodioWorkflow` de brinquedo com timer, sinal de aprovação e uma Activity que falha. Aceite: RAM dentro do limite combinado; retomada após `kill -9` no worker e após reboot; aprovação por sinal. Se reprovar, repetir o teste com o DBOS. O José escolhe no portão G0.5.
+- **Como decidir [PROPOSTA, ROADMAP F05-01..F05-07; TESTES TZ-01..TZ-07]:** spike de 1 dia. Temporal self-hosted só com Postgres local e dedicado no `pc` (sem Elasticsearch; separado do `mp32-postgres`; ~0,9 GiB estimado) e um `EpisodioWorkflow` de brinquedo com timer, sinal de aprovação e uma Activity que falha. Aceite: RAM dentro do limite combinado; retomada após `kill -9` no worker e após reboot; aprovação por sinal. Se reprovar, repetir o teste com o DBOS. O José escolhe no portão G0.5.
 - **Forma-alvo [PROPOSTA]:**
-  - Schedules por canal: grade da madrugada, lote da manhã, guardião de sessão, leitura de comentários, limpeza do Drive, relatório diário, monitores. Eles substituem os timers do SO; a **regra** de horários fixos + vigia de prazo (REGRAS §3) não muda.
-  - `EpisodioWorkflow(canal, ep)`: pauta → NotebookLM → FFmpeg → auditor → upload privado → agendar → confirmar.
+  - Schedules: grade da madrugada, lote da manhã, guardião de sessão, leitura de comentários, limpeza do Drive, relatório diário, monitores. Eles substituem os timers do SO; a **regra** de horários fixos + vigia de prazo (REGRAS §3) não muda.
+  - `EpisodioWorkflow(ep)`: pauta → NotebookLM → FFmpeg → auditor → upload privado → agendar → confirmar.
   - `Item5Workflow`: qualquer problema → privado na hora + Telegram (REGRAS §16).
   - Workers Python (`src/pqbr`) com filas por recurso: `notebooklm` (concorrência 1), `camofox` (concorrência 1), `render`, `default`.
   - Activities sem LLM: NotebookLM CLI 0.8.4, FFmpeg, juiz Gemini, `decide()` (Jev via Pydantic), YouTube API, Drive, Supabase.
-  - Multi-canal: `canal_id` em todo o schema, `config/canais/pqbr.yaml`, orçamento por canal.
-  - R10 por canal: [PROPOSTA]; hoje a regra vale para o canal Porquê BR.
+  - **Escopo [t327]:** só o canal Porquê BR. Multi-canal (`canal_id`, config e orçamento por canal, R10 por canal) fica **adiado** para depois dos aprendizados.
 - **Dois bancos com papéis distintos [t324–t326]:**
   - **Postgres próprio do Temporal:** só estado dos workflows. **Nunca é consultado diretamente** por agentes, painel ou relatórios.
   - **Supabase:** dados de negócio: temas/R10, vídeos e códigos PQBR-EP, comentários, métricas, relatórios, base do painel e do analista. Mantido [recomendação aprovada; confirmar no teste de 1 dia do Temporal].
 - **Supabase fora [t324–t326]:** retentativas duráveis do Temporal + **outbox** para o Supabase na volta. Substitui a fila em arquivo da t242 (confirmar no teste). A regra (REGRAS §18) não muda.
 - **Cautelas:** RAM e swap do `pc` (H-ORQ1); determinismo e versionamento dos workflows; `NUM_HISTORY_SHARDS` escolhido uma vez; backup diário do Postgres do motor (sem segredos); nenhum agente autônomo dentro de Activity com efeito colateral.
 
-### ADR-002: Paperclip como painel desde o início
-- **Decisão [APROVADO t282]:** o Paperclip é **painel** desde o começo. Mostra estado, issues e verificações; **não é dono do fluxo** e nenhum agente dele executa efeito.
+### ADR-002: Paperclip = camada de agentes + painel, ligado ao Temporal
+- **Decisão [APROVADO t282, t327]:** o **Temporal** executa o fluxo determinístico; o **Paperclip** é a **camada de agentes e o painel**. **Os agentes vivem no Paperclip** (org PQBR, pacote `company/` no formato agentcompanies/v1). Pelo padrão dos agentes pensantes (t324–t326), eles observam e propõem (saída Pydantic v2), e nada se aplica sem o José; o Paperclip **não é dono do fluxo**.
 - Abre só dentro da tailnet, por HTTPS; a porta 443 fica livre [VERIFICADO/APROVADO t280].
 - Verificação de fichas: status/issue no painel e botões no Telegram, sincronizados pela mesma tabela (REGRAS §6).
-- Riscos conhecidos: o adapter `hermes_local` força `--yolo` (PR #3850); recovery storm sem internet (issue #6596); injeção do AGENTS.md (issue #3833, corrigida pela PR #8543). Por isso: heartbeats desligados e nenhum agente com efeito.
-- **EM CONSTRUÇÃO — aguardando José:** como o painel é alimentado (pacote `company/` com agentes pausados vs. só issues/projetos gravados por código) e se a pasta `company/` continua. **Será demonstrado no teste de 1 dia do Temporal** (Fase 0.5) [t324–t326]. Até lá, `company/README.md` e `tasks/README.md` ficam como estão.
+- **Ligação Temporal ↔ Paperclip [PROPOSTA, a validar na Fase 0.5]:** o Temporal grava eventos e estado de negócio no Supabase (outbox) e abre/atualiza issues no Paperclip; os agentes leem Supabase/issues e devolvem propostas estruturadas; a aprovação do José vira **sinal** para o Temporal. Nunca leem o Postgres do Temporal.
+- Riscos conhecidos: o adapter `hermes_local` força `--yolo` (PR #3850), mas o perfil `pqbr` não pode herdar `--yolo` (REGRAS §23): resolver H-SDD1 antes de ligar qualquer agente Hermes; recovery storm sem internet (issue #6596); injeção do AGENTS.md (issue #3833, corrigida pela PR #8543). Heartbeats desligados até a Fase 0.5 provar a ligação.
+- `company/` continua (pacote dos agentes). `tasks/`: as rotinas viram Schedules do Temporal, então `tasks/` é candidato a exclusão depois da Fase 0.5 [PROPOSTA].
 
 ### ADR-003: Telegram com o Hermes `pqbr`
 - **Decisão [APROVADO t281]:** o Telegram fica com o perfil Hermes `pqbr`; o @pqbr-assistente roda lá. Ele só consulta, roteia e responde, lendo o banco (REGRAS §2).
@@ -43,7 +43,7 @@
 - Os agentes especializados da PQBR (auditor, compliance, comunidade, guardião, analista) **pré-estruturam cada ticket**: localização (arquivo/módulo/workflow), falha observada (evidência, horário, ID do episódio) e correções sugeridas.
 - Fluxo: o ticket é aberto pelo código ou pelo assistente, já pré-estruturado → **1ª aprovação do José na abertura** (ele pode pedir correções no próprio ticket) → um agente de dev trabalha em branch/worktree → testes → **2ª aprovação do José no merge** [t324–t326].
 - Memórias de código no **bank Hindsight único da organização** [t324–t326].
-- Durante a construção não há tickets: mudanças são tarefas de desenvolvimento do PLANO (REGRAS §24).
+- Durante a construção não há tickets: mudanças são tarefas do ROADMAP (REGRAS §24).
 
 ### ADR-005: org core-eng abortada
 - **Decisão [APROVADO t284]:** a core-eng está abortada por enquanto e a saída do CTO (COR-1) não é usada. Ela foi arquivada fora do git (Drive `PQBR/_arquivo-docs-2026-10-09/cor1-cto-2026-10-09.tar.gz`). Onde os documentos antigos dizem "core-eng", leia "agente de desenvolvimento".
@@ -57,7 +57,7 @@
 | **NotebookLM** (notebooklm-py) | Primário para ideação, roteiro, SEO, pesquisa e vídeo. Caderno **efêmero por episódio**; nunca o raiz. Adicionar o roteiro como fonte antes de gerar; em timeout, listar artefatos e não regerar; nunca `ask --new`. | [APROVADO] / hábitos [VERIFICADO no `rede`] |
 | | Instalação exclusiva da PQBR (D1): venv com 0.8.4 fixada, `NOTEBOOKLM_HOME` próprio, perfil `pqbr`, serviço único dono da sessão. Hoje há uma instalação global 0.8.2 compartilhada com o MP32. | [APROVADO em princípio] / estado atual [VERIFICADO] |
 | | Duração de 15 s a 3 min com alvo de ~50 s. Verticais até ~67 s já saíram bem; até 180 s ainda não testado (H5). Com 2 personagens, o Short ignorou as imagens de elenco (5 de 5); com 1 funcionou. | [VERIFICADO até ~67 s] |
-| **Gemini web** | Reserva do NotebookLM e juiz visual do auditor (3.8 Flash, modo normal; o "Flash Estendido" recusa as pranchas). Produção via Camofox vs. Gemini API: H10. | [APROVADO] / [HIPÓTESE] |
+| **Gemini web** | Reserva do NotebookLM e **juiz visual** do auditor (3.8 Flash, modo normal; o "Flash Estendido" recusa as pranchas), via Camofox. **Sem Gemini API** [t327]. | [APROVADO] |
 | **Jev** (TypeSafe) | `decide()` com provedor trocável; só decisão estruturada (REGRAS §7). Fallback: Jev via OpenRouter → modelo OpenAI (H7). | [APROVADO] |
 | **Camofox** (camofox-browser sobre Camoufox, perfil `porquebr`) | Toda automação de navegador; único dono do login do Studio; reserva da publicação e agendamento enquanto H1 não fecha; corações. Telemetria de crash vem ligada: verificar e desligar (H9). | [APROVADO] |
 | | Dicas do Studio [VERIFICADO no `rede`]: ir direto a `/videos/upload?d=ud`; `execCommand('insertText')`; COPPA "não é para crianças"; paginar 30 por vez; desafio de passkey → humano; upload só de `~/.camofox/uploads/`. | |
@@ -67,7 +67,7 @@
 | **Supabase** | Dados de negócio (base do painel e do analista; recebe por outbox): grade, temas (R10), episódios, `visual_assets`/`episode_assets`, comentários, ações (motivo/quem/quando), consumo, kill switch, relatórios. Plano Pro não confirmado (H13). | [APROVADO] |
 | **Google Drive** | Armazenamento definitivo, estrutura t267 (REGRAS §21). | [APROVADO] |
 | **Hermes `pqbr`** | @pqbr-assistente no Telegram (ADR-003). | [APROVADO t281] |
-| **Paperclip** | Painel (ADR-002). | [APROVADO t282] |
+| **Paperclip** | Camada de agentes + painel, ligado ao Temporal (ADR-002). | [APROVADO t282, t327] |
 | **Hindsight** (local, backup diário) | Aprendizados (analista, lições do item 5) e memórias de código para os agentes de dev (ADR-004), num **bank único por organização**. Sem segredos nem PII. | [APROVADO t324–t326] |
 | **Whisper / FFmpeg** | Transcrição com tempos (o Whisper ouve "Porquê BR" como "por KBR"; aceitar variantes). Pós: corte do end card só se detectado + logo com zoom suave curto. | [VERIFICADO] |
 
@@ -92,7 +92,7 @@ Princípio [APROVADO t184]: ideação, roteiro, SEO e pesquisa ficam com o Noteb
 | @pqbr-assistente [APROVADO] | LLM no Hermes `pqbr` (t281) | Consulta, roteia, responde pelo banco | Não executa mudanças |
 | Agentes de dev | LLM (qualquer um) | Tickets de manutenção na produção; tarefas D na construção (ADR-004) | Não faz merge (só o José) |
 
-Personas [APROVADO como fonte]: pt-BR, parafraseadas da Agency Agents (MIT). Comunidade: donchitos `community-manager`, `customer-service.md`, `developer-community-builder`, `feedback-synthesizer`. Compliance e assistente: **a definir**.
+Personas [APROVADO como fonte]: pt-BR, parafraseadas da Agency Agents (MIT). Comunidade: donchitos `community-manager`, `customer-service.md`, `developer-community-builder`, `feedback-synthesizer`. **Compliance e assistente: sérios e diretos, sem rodeios [t327].** Todos os agentes vivem no Paperclip (ADR-002); o assistente roda pelo Hermes `pqbr`.
 
 ## 4. Skills
 
@@ -110,7 +110,7 @@ Personas [APROVADO como fonte]: pt-BR, parafraseadas da Agency Agents (MIT). Com
 
 ## 6. Estrutura do repositório
 
-- `docs/`: REGRAS, ARQUITETURA, PLANO, CONTRATO-EDITORIAL (rascunho), DECISOES-LOG, `pesquisas/`, `arquivo/` (os quatro últimos sob a t287).
+- `docs/`: REGRAS, SPEC, ARQUITETURA, TESTES, ROADMAP, PLANO, RASTREABILIDADE; CONTRATO-EDITORIAL (rascunho), DECISOES-LOG, `pesquisas/`, `arquivo/` (estes quatro sob a t287); `docs/sdd/` para relatórios de fase (ex.: ADR-001 do teste).
 - `src/pqbr/{schemas,pipeline,integrations,community,guardian,storage}`: código. [PROPOSTA] `src/pqbr/workflows/` depois da ADR-001.
 - `db/migrations/` (schema do Supabase), `db/seeds/` (`temas-publicados.csv`: lista de temas já publicados, base da R10).
 - `templates/` (relatórios, mensagens fixas, banco de frases), `config/` (só exemplos sem segredo), `tests/`, `scripts/`, `skills/`.
@@ -132,7 +132,7 @@ Nada que depende de uma hipótese é construído antes de ela virar VERIFICADO (
 | H7 | Nome do modelo OpenAI do fallback e paridade com o esquema do Jev | dev | Conjunto de avaliação roda com o mesmo formato |
 | H8 | Preço e saldo do Jev; média de gasto | dev | Média dos primeiros dias no relatório |
 | H9 | Causa das quedas do Studio (cookies do Chrome vs. identidade do aparelho do Camofox); telemetria do camofox-browser desligada | dev | Sessão estável por N dias com a escada t272, sem cópia de cookies |
-| H10 | Juiz visual em produção: Gemini web automatizado via Camofox vs. Gemini API (a chave é decisão do José) | dev + José | Teste comparativo (RUNBOOK) + decisão |
+| H10 | ~~Juiz visual: Gemini web × Gemini API~~ RESOLVIDO (t327): Gemini web via Camofox. Resta verificar a automação estável em produção | dev | Auditor rodando via Camofox por N dias |
 | H11 | Termos de uso comercial do NotebookLM/Gemini; selo de IA desnecessário para stickman | dev (registro) + José | Leitura dos termos registrada; compliance acompanha |
 | H12 | Métricas do canal (30 vs. 46 Shorts; bases de retenção diferentes) | @prod-analista/dev | Números fixados pela Analytics API |
 | H13 | Supabase Pro ativo; local do schema Hindsight; `hermes_local` + Hindsight num heartbeat real | dev | Confirmação pelo MCP + 1 heartbeat real |
@@ -142,6 +142,76 @@ Nada que depende de uma hipótese é construído antes de ela virar VERIFICADO (
 | H-ORQ1 | A RAM do `pc` comporta o motor escolhido (o `pc` já usa swap) | dev | Medição no spike da Fase 0.5 |
 | H-ORQ2 | Postgres local dedicado ao motor + backup diário | dev | Restauração testada |
 | H-ORQ3 | A versão do Paperclip/adapter Hermes inclui a correção da #3833 | dev | Versão conferida |
-| H-SDD1 | O `hermes_local` roda sem `--yolo` (ou há adapter alternativo) | dev | Teste; perde urgência se nenhum agente do painel executar efeito |
-| H-SDD2 | Sintaxe do `paperclipai company import … --dry-run` e criação de agentes pausados | dev | Só se a ADR-002 usar pacote |
-| H-SDD3 | O adapter `process` serve como ponte opcional painel → motor | dev | Só se a ADR-002 usar pacote |
+| H-SDD1 | O `hermes_local` roda sem `--yolo` (ou há adapter alternativo que respeite o perfil `pqbr`) | dev | Teste na Fase 0.5; **bloqueia ligar agentes Hermes no Paperclip** |
+| H-SDD2 | Sintaxe do `paperclipai company import … --dry-run` e criação de agentes pausados | dev | Dry-run limpo |
+| H-SDD3 | Ponte Temporal ↔ Paperclip (issues/eventos; adapter `process` se útil) | dev | Demonstrada na Fase 0.5 |
+
+## 8. Modelo de dados (Supabase) [PROPOSTA; fixado em F3-01]
+
+Só dados de negócio. O Postgres do Temporal guarda só estado de workflow e **nunca** é consultado diretamente (t324–t326). Sem segredos nem PII em nenhuma tabela (autores de comentário só como hash).
+
+| Tabela | Conteúdo principal | Req |
+|---|---|---|
+| `temas` | tema normalizado, origem (perene/em alta), status, `video_id`, data; carga inicial de `db/seeds/temas-publicados.csv` | RF-02 |
+| `grade` | data, janela, tema, pontuação, fonte, status | RF-01, RF-03, RF-05 |
+| `episodios` | código `PQBR-EPxxxx`, tema, estado (aprovado → enviando → enviado → agendado → publicado/privado), `video_id`, janela, hashes dos arquivos | RF-15, RF-16 |
+| `visual_assets`, `episode_assets` | fichas (origem: ferramenta, conta, data, prompt, versão; status de verificação) e uso por episódio | RF-08, RNF-08 |
+| `auditorias` | veredito, motivo, ID da cena, respostas sim/não por rodada | RF-11..RF-14 |
+| `comentarios` | id, vídeo, autor (hash), rótulos, ação; texto bruto apagado em até 30 dias | RF-22, RF-23 |
+| `respostas` | frase usada, comentário, horário, conferência de 60 min | RF-24 |
+| `frases` | banco de 60 frases aprovado | RF-24 |
+| `acoes` | motivo, quem, quando (item 5, retenções, compliance) | RF-20 |
+| `propostas` | propostas dos agentes (JSON Pydantic v2), status de aprovação | RF-33 |
+| `tickets` | ticket de manutenção pré-estruturado, aprovações 1 e 2 | RF-35 |
+| `revisao_humana` | item, caminhos já tentados, determinação do José | RF-36 |
+| `consumo` | uso do NotebookLM, tokens do Jev, cota das APIs, custo estimado | RF-10, RF-32 |
+| `compliance_eventos` | origem, gravidade, prazo de recurso | RF-28 |
+| `metricas` | Analytics API por vídeo e dia | RF-30 |
+| `config_flags` | kill switch das respostas, HOLD da fila | RF-26, RF-28 |
+
+Escrita no Supabase sempre por Activity com **outbox** (idempotente por chave).
+
+## 9. Workflows do Temporal [PROPOSTA; validados a partir da Fase 0.5]
+
+| Workflow | Disparo | Passos | Req |
+|---|---|---|---|
+| `GradeDiariaWorkflow` | Schedule de madrugada | coleta → caderno diário → Deep Research → filtros/barreiras/polêmica → grava grade | RF-01..RF-05 |
+| `EpisodioWorkflow(ep)` | grade do dia | roteiro (NotebookLM) → fichas → render → pós FFmpeg → auditor → Drive → aprovado | RF-06..RF-14, RF-40 |
+| `PublicacaoWorkflow(ep)` | episódio aprovado | busca do código → `videos.insert` privado → agendar (API ou Camofox) → conferir | RF-15..RF-18 |
+| `Item5Workflow(video)` | sinal de problema | privado na hora → Telegram → aguarda sinal do José | RF-19..RF-21 |
+| `ComentariosWorkflow` | Schedules 30 min / 6 h / diário | ler → pré-filtro → Jev → reter/responder/sinalizar | RF-22..RF-27 |
+| `ComplianceWorkflow` | Schedule + antes de cada janela | coleta → gravidade → HOLD se crítico | RF-28, RF-29 |
+| `GuardiaoSessaoWorkflow` | Schedule ~20 min com variação | testa Studio, Gemini, NotebookLM → escada t272 | RF-37 |
+| `AnalistaWorkflow` | Schedule diário/semanal | coleta → agente analisa → `PropostaAgente` | RF-30, RF-33 |
+| `RelatorioDiarioWorkflow` | Schedule noturno | junta dados → template → Telegram | RF-31, RF-32 |
+| `LimpezaDriveWorkflow` | rotina noturna do @prod-director | duplicatas/órfãos → `_duplicados` → lista ao José | RF-41 |
+| `MonitorAtualizacoesWorkflow` | Schedule semanal | lê releases → Jev → pede autorização | RF-42 |
+| `RevisaoHumanaWorkflow(item)` | item que falhou em todos os caminhos | guarda → avisa → aguarda determinação | RF-36 |
+
+- **Filas:** `notebooklm` (concorrência 1), `camofox` (concorrência 1), `render`, `default`.
+- **Sinais:** `aprovacao_jose` (proposta, ticket, volta a público), `pausar_respostas` / `retomar_respostas`, `determinacao_revisao` (excluir/corrigir/reaproveitar/arquivar), `hold_fila`.
+- **Retentativas:** `RetryPolicy` 30 s → 2 min → 8 min; espera de rede sem gastar tentativa; 2 falhas da mesma ação → José; 5 idênticas → parada (REGRAS §18).
+- **Janelas:** 11:40, 14:40, 18:35, 21:15 (America/Fortaleza).
+
+## 10. Integração com o Paperclip [PROPOSTA; demonstrada em F05-04]
+
+- O Temporal publica eventos de negócio (via outbox) no Supabase e abre/atualiza **issues** no Paperclip (episódio, revisão, ticket, proposta).
+- Os agentes no Paperclip (director, analista, comunidade, compliance, assistente, dev) leem Supabase e issues e devolvem **`PropostaAgente`** validada; nunca executam efeito externo.
+- A aprovação do José (Telegram pelo Hermes `pqbr` ou painel) vira sinal `aprovacao_jose` no workflow; só então a rotina aplica.
+- Heartbeats desligados até a liberação; nenhum agente com `--yolo` (H-SDD1).
+
+## 11. Interfaces: contratos Pydantic v2 [PROPOSTA; fixados em F3-01]
+
+| Modelo | Campos principais | Usado em |
+|---|---|---|
+| `RoteiroShort` | falas, duração estimada (15–180 s, alvo ~50 s, ~2,3 palavras/s), CTA = "Segue o Porquê BR", entidades da cena, sem nomes | RF-07 |
+| `DecisaoRepeticao` | repetido: bool, tema_parecido, confiança | RF-02 |
+| `PontuacaoPolemica` | valor 0–100, componentes, bloqueio_absoluto: bool | RF-05 |
+| `VereditoAuditor` | veredito (aprova/ressalva/revisão/reprova), motivos[], id_cena, rodadas | RF-12..RF-14 |
+| `DecisaoPublicacao` | ação (refazer/trocar/chamar_jose), confere_agendado: bool | RF-18 |
+| `ClassificacaoComentario` | rótulos[], alvo, ironia_possivel, grave: bool, pede_acao: bool | RF-23 |
+| `SinalItem5` | origem, motivo, gravidade, video_id | RF-19, RF-21 |
+| `PropostaAgente` | agente, tipo, alvo (parâmetro/regra/tema), valor_atual, valor_proposto, justificativa curta, evidências | RF-33 |
+| `TicketManutencao` | localização (arquivo/módulo/workflow), falha observada (evidência, horário, episódio), correções sugeridas, aprovações 1 e 2 | RF-35 |
+| `DeterminacaoRevisao` | item, decisão (excluir/corrigir/reaproveitar/arquivar), observação | RF-36 |
+| `decide()` | interface única do Jev: entrada tipada, saída de um dos modelos acima; fallback devolve o mesmo modelo | RNF-02 |
