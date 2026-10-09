@@ -8,7 +8,7 @@ trap 'docker rm -f $N >/dev/null 2>&1' EXIT
 for i in $(seq 1 30); do docker exec $N pg_isready -U postgres -q && break; sleep 1; done; sleep 2
 Q() { docker exec -i $N psql -U postgres -v ON_ERROR_STOP=1 -qAt "$@"; }
 Q -c "create role anon nologin; create role authenticated nologin; create role service_role nologin bypassrls;"
-up() { for f in "$R"/db/migrations/000[1-9]_*.sql; do Q -f "/repo/${f#$R/}" >/dev/null; done; }
+up() { for f in "$R"/db/migrations/[0-9][0-9][0-9][0-9]_*.sql; do Q -f "/repo/${f#$R/}" >/dev/null; done; }
 down() { for f in $(ls "$R"/db/migrations/rollback/*_down.sql | sort -r); do Q -f "/repo/${f#$R/}" >/dev/null; done; }
 up; Q -c "insert into pqbr.plataformas (id, nome) values ('outra', 'Plataforma de teste')"
 echo "plataformas no seed: $(Q -c "select string_agg(id, ',') from pqbr.plataformas where id <> 'outra'")"
@@ -31,6 +31,9 @@ F "autor sem hash" "insert into pqbr.comentarios (external_id, post_external_id,
 F "anon lê temas" "set role anon; select * from pqbr.temas"
 F "authenticated lê temas" "set role authenticated; select * from pqbr.temas"
 echo "pqbr_app escreve: $(Q -c "begin; set local role pqbr_app; insert into pqbr.acoes (tipo, alvo, motivo, ator) values ('teste','x','teste','temporal'); rollback; select 'sim'" | tail -1)"
+echo "consumo por modelo grava e agrega: $(Q -c "begin; set local role pqbr_app; insert into pqbr.consumo_modelos (provedor, modelo, tipo_acao, tokens_entrada, tokens_saida, sucesso) values ('openrouter','m','jev_triagem',10,2,true),('openrouter','m','jev_triagem',5,1,false); select chamadas||'/'||falhas||'/'||tokens_entrada from pqbr.consumo_diario; rollback" | tail -1)"
+F "tipo de ação inválido no consumo" "insert into pqbr.consumo_modelos (provedor, modelo, tipo_acao, sucesso) values ('x','m','qualquer',true)"
+F "pqbr_app apaga consumo" "set role pqbr_app; delete from pqbr.consumo_modelos"
 F "pqbr_app apaga histórico de ações" "set role pqbr_app; delete from pqbr.acoes"
 echo "service_role lê temas: $(Q -c "set role service_role; select count(*) from pqbr.temas")"
 H=$(printf '%064d' 0)

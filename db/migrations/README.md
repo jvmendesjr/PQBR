@@ -13,3 +13,5 @@ Esquema `pqbr` do banco do app (ARQUITETURA §8; F3-01/D3). Banco: **Postgres 17
 - **Testes:**
   - Postgres 17 descartável, sem rede: `sh db/test_migrations.sh`.
   - Banco real, sem alterar nada: `sh infra/pqbr-db/verificar.sh`.
+
+- `0010_pqbr_consumo_modelos.sql` (t357 h): consumo por modelo e por tipo de ação (tokens, chamadas, tempo, sucesso, custo estimado), view `consumo_diario` para o relatório; sem teto, só monitoramento; sem prompt nem resposta gravados.

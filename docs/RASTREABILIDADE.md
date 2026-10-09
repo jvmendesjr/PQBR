@@ -40,6 +40,8 @@
 | RF-44 | §3.1 | §2 Correção autônoma | F3-05 | TS-11 |
 | RF-45 | §11 | §2 Camofox; Correção autônoma | F4C-08 | TS-11 |
 | RF-46 | §3.1, §7 | §2 Correção autônoma (etapas) | F3-05 | TS-11 |
+| RF-47 | §22, §3.1 | §2 Consumo por modelo; migração 0010 | F3-06 | TS-08, TS-DB |
+| RF-48 | §2 | §3 @pqbr-assistente | F1-03 | TS-09 |
 | RF-34 | §2 | ADR-003; §10 | F05-06, F1-03 | TS-09, TZ-06 |
 | RF-35 | §24 | ADR-004; §11 TicketManutencao | F1-04 | TS-09 |
 | RF-36 | §5 | §8 revisao_humana; §9 sinal determinacao_revisao | F8-03 | TS-09 |

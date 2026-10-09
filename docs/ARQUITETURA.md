@@ -80,9 +80,19 @@
 - Quando um passo de script falha com erro corrigível (`SiteMudou`, `SaidaForaDoEsquema`, transitório após a escada), o workflow chama o filho `CorrecaoAutonomaWorkflow(ferramenta, sessao, passo, contexto)` na fila da ferramenta (`camofox-pqbr`, `notebooklm`, …), com concorrência 1 por sessão.
 - **Etapas [t356]:** (1) **triagem pelo Jev** (`TriagemCorrecao`: corrigível / sensível / fora de escopo; ação sensível encerra como `Sensivel` sem chamar o agente); (2) **intervenção pelo agente com LLM** (Activity na fila da sessão, tentativas e tempo limitados); (3) **verificação pelo Jev** quando couber (o passo voltou a funcionar? a saída bate com o esquema? nada fora da allowlist foi feito?); (4) **log + aprendizado**: cada ação no banco do app pelo Temporal (outbox) e o aprendizado no bank Hindsight da PQBR, sanitizado; (5) **proposta de ajuste do script** (tarefa ou ticket) quando corrigiu.
 - A Activity do agente recebe só as ferramentas daquela fila (o Camofox restrito à instância `pqbr-camofox` e a uma allowlist de ações: navegar, ler, clicar, digitar, colar, upload; sem login, cookies ou exclusão). O Jev entra nas decisões estruturadas. Cada ação vai para o registro (`pqbr.acoes`, `jsonb`; tabela própria só se faltar campo, EM CONSTRUÇÃO).
-- Resultado: `Corrigido(passos, proposta_script)`, `Esgotado(tentativas)` ou `Sensivel(motivo)`. Corrigido retoma o workflow e abre a proposta de ajuste (tarefa ou ticket); os outros dois avisam o José. Quem executa é um agente com LLM (t356); o runtime (Hermes `pqbr` ou dev do Paperclip), o modelo e os limites estão EM CONSTRUÇÃO (REGRAS §3.1).
+- Resultado: `Corrigido(passos, proposta_script)`, `Esgotado(tentativas)` ou `Sensivel(motivo)`. Corrigido retoma o workflow e abre a proposta de ajuste (tarefa ou ticket); os outros dois avisam o José. Quem executa é um agente com LLM (t356) **rodando no Paperclip** (t357); limites: 3 tentativas, 5–15 min sorteados no Camofox; na sessão do Camofox, antes de agir, confere conta e sessão (divergência = `Sensivel`). Consumo de cada chamada vai para `pqbr.consumo_modelos`. Modelo de cada agente: definido na F1 (REGRAS §3.1).
 
-## 3. Papéis (ex-"agentes")
+### Consumo por modelo [t357 h]
+- Tabela `pqbr.consumo_modelos` (migração 0010): uma linha por chamada ou lote, com provedor, modelo, `tipo_acao` (ideação, roteiro, auditor visual/texto/desempate, triagem/classificação/decisão/verificação do Jev, correção autônoma, comunidade, compliance, analista, assistente, publicação, teste de resposta…), ferramenta, episódio, workflow/run/activity do Temporal, tentativa, chamadas, tokens (entrada, saída, cache, raciocínio), unidades não-token, duração, sucesso, classe do erro e custo estimado (micro-USD). Sem prompt, resposta ou dado pessoal. View `consumo_diario` (fuso de Fortaleza) alimenta o relatório diário. Sem teto: só monitoramento.
+
+## 3. Papéis
+
+### @pqbr-assistente (Hermes `pqbr`) — especificação [t357]
+- **Papel:** assistente do José; entende a alma do negócio (CONTRATO-EDITORIAL, REGRAS). **Não executa:** sabe pedir. Os agentes rodam no **Paperclip**, que é o sistema principal de jobs.
+- **Capacidades:** (1) avisos pelo Telegram (allowlist, botões); (2) acionar agentes do Paperclip (abrir issue, comentar, acordar o responsável) e abrir tickets pré-estruturados; (3) orientar o José: qual agente, comando e caminho certos; (4) buscar arquivos, resultados e estados (banco do app com `pqbr_leitura`, relatórios, Drive só leitura); (5) pedir detalhes aos agentes especialistas; (6) consultar o Jev para esclarecer ou classificar.
+- **Acesso restrito:** só esses toolsets; sem shell livre, sem escrita no banco, no Drive, no Studio, no repositório nem nas configurações do Paperclip; sem `--yolo` e sem sudo (§5, REGRAS §23). Ordem só do ID do José.
+- **Persona:** séria e direta (t327). Rascunho do SOUL: `docs/hermes-pqbr/SOUL-rascunho.md` (instalar no perfil só com OK do José; `~/.hermes/profiles/pqbr` não foi alterado).
+ (ex-"agentes")
 
 **Padrão dos agentes pensantes [APROVADO t324–t326]:** uma rotina fixa executa tudo; @prod-director, @prod-analista e @prod-comunidade só observam e propõem mudanças como saída estruturada validada por Pydantic v2; nada se aplica sem a aprovação do José.
 

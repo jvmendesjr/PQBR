@@ -340,3 +340,13 @@ NÃO CABE:
 
 ## t356 — 09/10/2026
 - Divisão de papéis na correção autônoma: o **Jev** faz só as funções dele (decisão estruturada, classificação, se cabe intervenção, triagem) e pode sempre ser usado nelas; um **agente com LLM** faz a intervenção, resolve, aprende (bank Hindsight único da PQBR) e loga tudo (banco do app via Temporal). Fluxo: triagem Jev → intervenção do agente → verificação Jev → log e aprendizado → proposta de ajuste do script. Resolve em parte a dúvida (f): runtime e modelo continuam EM CONSTRUÇÃO.
+
+## t357 — 09/10/2026 (respostas às dúvidas a–h do §3.1)
+- (a) 3 tentativas por intervenção; duração de 5 a 15 min, sorteada (não fixa) no Camofox.
+- (b) Auditor: quando as 2 rodadas divergem, uma 3ª rodada desempata.
+- (c) Corações: o agente pode corrigir antes de abortar; janelas flutuantes, avisos e anúncios novos são capturados e classificados pelo Jev por importância.
+- (d) Diálogos de sessão no Camofox: o agente confere antes se está na sessão e na conta Google certas, autenticado; divergência = para e chama o José. Login e 2FA continuam com o José.
+- (e) Envio sem confirmação: o agente pode procurar o código no Studio via Camofox antes de parar.
+- (f) O Paperclip é o sistema principal de jobs (os agentes rodam lá). O Hermes `pqbr` é o assistente do José: avisa, aciona agentes do Paperclip, abre tickets, entende a alma do negócio, orienta como pedir (comandos e caminhos), busca arquivos e resultados, pede detalhes aos especialistas, consulta o Jev; não executa; acesso restrito. Especificação na ARQUITETURA §3; rascunho do SOUL em `docs/hermes-pqbr/SOUL-rascunho.md` (perfil no servidor não alterado).
+- (g) Escada de falhas: o agente faz até 3 tentativas com verificação do auditor; só depois da 3ª falha chama o José.
+- (h) Sem teto de tokens; só monitoramento: tabela `pqbr.consumo_modelos` (migração 0010) e seção de consumo no relatório diário.

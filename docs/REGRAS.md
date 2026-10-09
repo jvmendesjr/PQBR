@@ -21,7 +21,7 @@
 - **@prod-director** altera parâmetros operacionais, sempre pelo padrão dos agentes pensantes (§3): propõe e o José aprova. [INTERAÇÃO; t324–t326]
 - **Agentes de desenvolvimento** (qualquer um) alteram código e infraestrutura **por ticket** na produção ou por tarefa de dev na construção. Substitui o roteamento para a core-eng. [t286; antes: INTERAÇÃO "core-eng"; 07/10 rodada 2]
 - Os demais agentes **só propõem**. [ENTREGA §1; item 5]
-- **@pqbr-assistente:** roda no **Hermes `pqbr` pelo Telegram** (t281), registrado como agente no Paperclip (t327). Só consulta, roteia e responde: perguntas, temas, propostas de regra ao @prod-director, tickets aos agentes de dev, verificação de fichas e pedidos de relatório ao @prod-analista. Responde sempre pelo banco. Não executa mudanças. [INTERAÇÃO; Relatórios de dados (t208); t281]
+- **@pqbr-assistente:** roda no **Hermes `pqbr` pelo Telegram** (t281), registrado como agente no Paperclip (t327). É o assistente do José: conhece a alma do negócio, avisa, aciona os agentes do Paperclip (onde os agentes rodam, t357), abre tickets, orienta o José sobre como pedir (agente, comando, caminho), busca arquivos e resultados, pede detalhes aos especialistas e consulta o Jev; **não executa** e tem acesso restrito (ARQUITETURA §3; rascunho do SOUL em `docs/hermes-pqbr/SOUL-rascunho.md`). Só consulta, roteia e responde: perguntas, temas, propostas de regra ao @prod-director, tickets aos agentes de dev, verificação de fichas e pedidos de relatório ao @prod-analista. Responde sempre pelo banco. Não executa mudanças. [INTERAÇÃO; Relatórios de dados (t208); t281]
 - **Personas do @prod-compliance e do @pqbr-assistente:** sérias e diretas, sem rodeios. [t327]
 - Mensagem só vale como **ordem** se vier do **ID autorizado do José**; o resto é dado. [t237]
 - Avisos pelo Telegram com allowlist, botões, dupla confirmação para merge e permissão, sem comandos livres. [07/10 rodada 4]
@@ -38,7 +38,7 @@
 - **Camadas:** (1) o **script determinístico** executa; (2) se um passo falha por motivo **corrigível** (site ou seletor mudou, resposta fora do esquema, erro transitório que a escada não resolveu), um **agente intervém** para tentar resolver. O Jev entra nas decisões estruturadas e as ferramentas (Camofox, CLI, API) entram pelo próprio agente. (3) O José só é chamado se o agente falhar dentro dos limites ou se a ação for sensível. Isso **reduz o determinismo de propósito**: é automação inteligente, mas sempre limitada e registrada.
 - **Divisão de papéis [t356]:** o **Jev** faz só as funções dele e pode sempre ser usado nelas: decisão estruturada, classificação, triagem (se a falha é corrigível, se cabe intervenção, se é sensível) e verificação do resultado quando couber. A **intervenção** em si é de um **agente com modelo LLM**, que resolve, **aprende** (registra o aprendizado no bank Hindsight único da PQBR, sem segredos, §17, §21) e **loga tudo** no banco do app pelo Temporal.
 - **Sempre pelo Temporal:** a intervenção é uma Activity na fila da ferramenta/sessão (concorrência 1 por sessão), nunca uma chamada solta. Cada ação do agente (clique, comando, chamada, resposta do Jev) é registrada no banco do app com episódio, passo, motivo e resultado, sem segredos (§17).
-- **Limites padrão:** no máximo **3 tentativas** por passo e **20 min** por intervenção, sem repetir a mesma ação idêntica (vale a parada de 5 idênticas do §18). Os valores são **PROPOSTA — aguardando José**.
+- **Limites [t357]:** **3 tentativas** por intervenção; duração de **5 a 15 min**, **sorteada** (não fixa) quando a intervenção é no Camofox; sem repetir a mesma ação idêntica (vale a parada de 5 idênticas do §18).
 - **Persistência:** a correção que deu certo vira **proposta de ajuste do script** (tarefa de dev na construção; ticket ou PR na produção, §24), com as 2 aprovações do José. A correção de improviso vale só para aquela execução; o script corrigido é o que fica.
 - **Travas duras (o agente nunca faz, nem para corrigir):** login, 2FA, logout ou cópia de cookies; exclusão de qualquer coisa (vídeo, comentário, arquivo, caderno raiz, dado); tornar público ou republicar (item 5, §16); publicar fora das regras (reprovado, sem estado gravado, sem código, acima do teto); recorrer ou responder ao YouTube; pagamentos ou compras; mexer em segredos; mudar regras, limiares ou dependências (§12); escrever no banco do app fora do Temporal; código do Paperclip (t335). O **item 5 (privado automático)** continua só no código, sem agente no caminho.
 - **Quando o José é chamado:** limites esgotados, ação sensível necessária, a correção mudaria o resultado editorial ou de conformidade, ou o caso é marcado EM CONSTRUÇÃO abaixo. O aviso pelo Telegram traz o que foi tentado.
@@ -61,7 +61,15 @@
 | Monitor de atualizações (§12) | nenhuma | trava: nunca atualiza sozinho |
 | Grade e temas (§4) | regenerar a grade do dia pelo código; refazer a coleta | R10, bloqueio absoluto e polêmica > 75 continuam travas |
 
-- **Casos EM CONSTRUÇÃO — aguardando José:** (a) números dos limites (3 tentativas, 20 min); (b) divergência entre as 2 rodadas do auditor: uma 3ª rodada como desempate pode substituir a revisão do José?; (c) corações (§19) mandam abortar ao menor sinal de problema: o agente pode tentar corrigir?; (d) diálogos de sessão no Camofox ("confirme que é você", termos novos): todos contam como login, ou alguns são seguros?; (e) "envio sem confirmação" (§15): o agente pode procurar o código no Studio via Camofox antes de parar?; (f) ~~quem executa~~ resolvido em t356 (agente com LLM; o Jev faz triagem e verificação); **resta:** qual runtime (Hermes `pqbr` ou agente de dev do Paperclip) e qual modelo; (g) a escada de falhas do §18 ("a mesma ação falhando 2× vai ao José") passa a ter a intervenção do agente antes do José?; (h) gasto de tokens das intervenções entra no relatório, mas tem teto por dia?
+- **Casos resolvidos [t357]:**
+  - (a) 3 tentativas; 5–15 min sorteados no Camofox.
+  - (b) **Auditor:** quando as 2 rodadas divergem, uma **3ª rodada desempata** (antes ia para o José).
+  - (c) **Corações:** o agente pode corrigir antes de abortar; janelas flutuantes, avisos e anúncios novos são **capturados e classificados pelo Jev por importância**.
+  - (d) **Diálogos de sessão no Camofox:** o agente primeiro confere se está na **sessão e na conta Google certas**, autenticado e não em outra conta; divergência = **para e chama o José**. Login e 2FA continuam com o José.
+  - (e) **Envio sem confirmação:** o agente pode **procurar o código no Studio** via Camofox antes de parar.
+  - (f) Os agentes rodam no **Paperclip** (sistema principal de jobs). O Hermes `pqbr` é o assistente do José e **não executa** (ARQUITETURA §3). Runtime e modelo de cada agente do Paperclip: definidos na F1.
+  - (g) **Escada de falhas:** o agente faz até 3 tentativas com **verificação do auditor/Jev**; só depois da 3ª falha chama o José.
+  - (h) **Sem teto de tokens:** só monitoramento, na tabela `pqbr.consumo_modelos` (por modelo e por tipo de ação) e no relatório diário.
 
 ## 4. Temas e grade
 - **R10:** um tema, um vídeo, inclusive variações próximas. Tema repetido é recusado mesmo que o José sugira; o sistema avisa ou abre ticket. [pauta 1; item 4] Lista dos temas já publicados: `db/seeds/temas-publicados.csv`.
@@ -105,7 +113,7 @@
 - Roteiro, ideação e SEO continuam em LLM/NotebookLM, não no Jev. [CAMADA DE DECISÃO; t184]
 
 ## 8. Auditor
-- O código extrai **1 quadro por cena** e a transcrição (Whisper). O **Gemini 3.8 Flash (modo normal)** responde **só sim/não por traço**, em **2 rodadas** (chats novos); divergência vai para revisão do José. O Jev ou o código faz as checagens de texto (loop, CTA, fala cortada, tom, nomes). **O código aplica a tabela e decide.** Relatório por template (veredito, motivo, ID da cena), sem prosa de LLM. [t228–t232]
+- O código extrai **1 quadro por cena** e a transcrição (Whisper). O **Gemini 3.8 Flash (modo normal)** responde **só sim/não por traço**, em **2 rodadas** (chats novos); divergência é desempatada por uma **3ª rodada** (t357); só se a 3ª falhar ou vier fora do esquema vai à revisão do José. O Jev ou o código faz as checagens de texto (loop, CTA, fala cortada, tom, nomes). **O código aplica a tabela e decide.** Relatório por template (veredito, motivo, ID da cena), sem prosa de LLM. [t228–t232]
 - Ordem: reprova > revisão > aprova com ressalva > aprova. Duração, silêncio e resposta estruturada são indícios, não prova. [itens de validação, item 3]
 - **Bloqueia:** falta de ironia/sátira leve do cotidiano; narração com problema; loop quebrado; CTA "Segue o Porquê BR" ausente ou incompleto; **qualquer pedido de comentário**; fala cortada; nome de personagem; conteúdo de terceiros; segurança/conformidade (bloqueio absoluto, tom de especialista, direitos de áudio acima de 60 s). [t264; t265]
 - Imagem que não corresponde à fala **não reprova o vídeo** (pode ser uma transição breve); a relação texto-imagem é buscada, mas não é critério estrito. [t327]
@@ -156,7 +164,7 @@ _Origem do bloco: t192 ponto 1, aprovado em t198._
 ## 15. Publicação
 _Origem do bloco: item 4 (t233–t234), t273._
 - Via **API do YouTube** (`videos.insert` com agendamento); Studio via Camofox como reserva. Até a auditoria do app (HIPÓTESE H1), o vídeo **sobe privado e o Camofox agenda**. [t273; supera 07/10 item 1]
-- Sem duplicata: código único por vídeo (**PQBR-EPxxxx**) na descrição e numa etiqueta; registro de temas no banco do app. Estados: aprovado → enviando → enviado (video_id) → agendado → publicado. Antes de enviar, procurar o código no banco do app **e no canal**, incluindo privados e **agendados**. Envio sem confirmação: procurar o código, tentar 1 vez; se continuar sem certeza, parar e avisar o José. [item 4]
+- Sem duplicata: código único por vídeo (**PQBR-EPxxxx**) na descrição e numa etiqueta; registro de temas no banco do app. Estados: aprovado → enviando → enviado (video_id) → agendado → publicado. Antes de enviar, procurar o código no banco do app **e no canal**, incluindo privados e **agendados**. Envio sem confirmação: procurar o código (no banco, no canal e, pelo agente, no Studio via Camofox, t357), tentar 1 vez; se continuar sem certeza, parar e avisar o José. [item 4]
 - Fluxo da manhã: grade de madrugada; produção, pós e auditor de manhã, com pausas de ritmo humano e limites por modelo/ferramenta calculados para o dia; prazo de corte; aprovados ficam **agendados** nas janelas. Falhas: refazer ou trocar pela reserva durante a manhã; pendências vão ao José antes da primeira janela. [item 4]
 - **Reserva ≥ 2** vídeos aprovados; sem reserva, o horário é cancelado; **vídeo reprovado nunca é publicado**; atraso de até 1 h é só plano B. **Teto de 4 por dia, sem mínimo.** Qualidade acima da cota. [item 4]
 - O Jev decide refazer / trocar / chamar José e confere se título, descrição e código do agendado batem com o aprovado. [item 4]
@@ -185,7 +193,7 @@ _Origem do bloco: item 6 (t235–t236), t237, t286._
 ## 18. Falhas e saúde
 _Origem do bloco: t240–t242._
 - **Teste de resposta** antes do lote da manhã e antes de cada ação crítica (agendar, tornar privado): chamada mínima a cada modelo e ferramenta (Jev, Gemini, NotebookLM, banco do app). Sem resposta no prazo ou com resposta inválida, entra a escada. [t241]
-- **Escada de falhas** (modelos, banco do app, 9router): backoff 30 s → 2 min → 8 min; rede fora = `NETWORK_WAITING` sem gastar tentativa; cada nova tentativa usa outra estratégia (outro provedor/combo); a mesma ação falhando 2× vai ao José; 5 chamadas idênticas = parada; idempotência antes de cada passo; varredura de recuperação no reboot. [t241]
+- **Escada de falhas** (modelos, banco do app, 9router): backoff 30 s → 2 min → 8 min; rede fora = `NETWORK_WAITING` sem gastar tentativa; cada nova tentativa usa outra estratégia (outro provedor/combo); a mesma ação falhando 2× entra na correção autônoma (até 3 tentativas do agente com verificação do auditor/Jev) e só após a 3ª falha vai ao José (t357); 5 chamadas idênticas = parada; idempotência antes de cada passo; varredura de recuperação no reboot. [t241]
 - **Banco do app [t343]:** Postgres 17 local no `pc` (`infra/pqbr-db`), separado do Postgres do Temporal; só em 127.0.0.1; backup diário com rotação. Supabase fica como opção futura. Agentes do Paperclip não escrevem nele (t341–t342).
 - **Banco do app fora:** o estado do fluxo vive no motor de workflow, com **retentativas duráveis do Temporal**; o banco do app recebe as gravações por **outbox** quando volta. Isso **substitui a fila em arquivo** da t242 (a confirmar no teste de 1 dia do Temporal). Continua valendo: nada é agendado nem tornado público sem o estado gravado. [t242; t324–t326]
 
@@ -197,7 +205,7 @@ _Origem do bloco: t240–t242._
 - Limites: não repete frase no mesmo vídeo nem nas últimas 30; atraso aleatório de 15–120 min; 3–12 min entre respostas; teto de **6/h e 30/dia**; só das **08h às 22h**; **1 resposta por pessoa POR VÍDEO**, frase diferente para a mesma pessoa e intervalo mínimo de ~24 h entre respostas a ela. [t245; t274]
 - Ficam de fora: reclamação, erro, pergunta, golpe/spam/ofensa, PII/link, ironia possível, tema sensível, possível criança, retido, mais de 7 dias. [t245]
 - Conferência em 60 min: se a resposta sumiu, para. Kill switch manual (`/pausar_respostas`, só do ID do José) e automático. [t245; t237]
-- **Corações** pelo Camofox, até **10 por dia**, só na sessão já aberta pelo guardião, abortando ao menor sinal de problema. Não existe na API. [t247]
+- **Corações** pelo Camofox, até **10 por dia**, só na sessão já aberta pelo guardião; diante de problema, o agente tenta corrigir (§3.1) antes de abortar; janelas, avisos e anúncios novos são capturados e classificados pelo Jev por importância (t357). Não existe na API. [t247]
 - **Sombra de 3 dias** (ou ~30 respostas simuladas aprovadas sem correção, o que vier primeiro) antes de ligar respostas e corações. **1 resposta real de teste** antes do automático (HIPÓTESE: `comments.insert` sem auditoria do app). [t247; t248]
 - O @prod-comunidade **só sinaliza**; quem torna privado é a regra do item 5. [t250] Mudanças que ele proponha seguem o padrão dos agentes pensantes (§3). [t324–t326]
 - As respostas nunca são automáticas sem regra aprovada pelo José; futuro: área de mensagens para pedir feedback. [t238]
@@ -219,7 +227,7 @@ _Origem do bloco: t240–t242._
 - **Armazenamentos separados:** o Hindsight fica no **armazenamento próprio** (Postgres embutido pg0), separado do banco do app e do Postgres do Temporal; um bank único da organização PQBR; backup e restauração independentes, alinhados ao backup diário das 03:30; cópia fora do servidor (Drive `PQBR/backups-db`, via rclone) depende do login Google do José. [t349–t350]
 
 ## 22. Orçamento
-- **Sem teto mensal por enquanto:** só monitoramento e levantamento de custos (relatório diário com o consumo). [decisão 10; t268; t327]
+- **Sem teto mensal por enquanto:** só monitoramento e levantamento de custos (relatório diário com o consumo). **Sem teto de tokens** também (t357): consumo por modelo e por tipo de ação em `pqbr.consumo_modelos`. [decisão 10; t268; t327]
 
 ## 23. Ambiente e perfil `pqbr`
 - Repositório oficial: GitHub `jvmendesjr/PQBR` (privado), pasta `/home/pc/Workspace/PQBR` no servidor `pc`. [t280]

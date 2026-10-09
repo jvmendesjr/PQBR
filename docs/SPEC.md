@@ -150,6 +150,8 @@
 | RF-44 | Correção autônoma antes de chamar o José: script primeiro; falha corrigível → agente via Activity do Temporal (concorrência 1 por sessão), tentativas e tempo limitados, cada ação registrada; sucesso vira proposta de ajuste do script com as 2 aprovações; travas duras preservadas. | §3.1 |
 | RF-45 | Agentes usam o Camofox só pela Activity do Temporal, na instância da PQBR, com allowlist de ações; login, 2FA, cookies, exclusão e publicação fora das regras ficam com o José. | §11 |
 | RF-46 | Divisão de papéis na correção autônoma: o Jev faz só triagem, classificação, decisão estruturada e verificação do resultado; um agente com modelo LLM executa a intervenção, registra aprendizados no bank Hindsight único da PQBR e loga tudo no banco do app via Temporal. Runtime e modelo do agente: EM CONSTRUÇÃO. | §3.1, §7 |
+| RF-47 | Consumo por modelo e por tipo de ação (tokens, chamadas, tempo, sucesso, custo estimado) em `pqbr.consumo_modelos`, agregado por dia no relatório diário (por modelo, por tipo de ação, falhas, custo estimado, variação vs. 7 dias); sem teto de tokens. | §22, §3.1 |
+| RF-48 | @pqbr-assistente (Hermes `pqbr`): assistente do José que avisa, aciona agentes do Paperclip, abre tickets, orienta comandos e caminhos, busca arquivos e resultados, consulta especialistas e o Jev; não executa; acesso restrito. | §2 |
 | RF-36 | Revisão humana como último recurso: local dedicado, aviso ao José e registro da determinação (excluir, corrigir, reaproveitar, arquivar). | §5 |
 
 ### F10. Sessão e resiliência
@@ -221,7 +223,7 @@
 
 ## 3. Lacunas (não inventar; levar ao José)
 
-- **EM CONSTRUÇÃO — aguardando José (t355):** limites da correção autônoma, desempate do auditor, corações, diálogos de sessão no Camofox, busca do código no Studio, runtime do agente, escada do §18 e teto de tokens (REGRAS §3.1 a–h). Afetam RF-44, RF-45 e RF-46 (t356 resolveu "quem executa": agente com LLM; runtime e modelo continuam abertos).
+- [RESOLVIDO t357] limites (3 tentativas; 5–15 min sorteados no Camofox), desempate do auditor (3ª rodada), corações, diálogos de sessão (conferir conta; divergência = José), busca do código no Studio, agentes no Paperclip, escada (3 tentativas antes do José), sem teto de tokens (RF-47). Afetam RF-44..RF-48.
 
 - **EM CONSTRUÇÃO — aguardando José:** regras de roteiro R1–R6, R8 e R9 (contrato v2, F7-01). Afetam RF-07.
 - **EM CONSTRUÇÃO — aguardando José:** metas do piloto (definidas depois, t327). Afetam V1–V7 e F12-01.

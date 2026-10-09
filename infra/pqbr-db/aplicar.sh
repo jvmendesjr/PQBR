@@ -1,10 +1,10 @@
 #!/bin/sh
-# Aplica as migrações 0001..0009 no banco local e define login/senha dos papéis (senhas lidas do .env, sem eco).
+# Aplica as migrações 0001..0010 (todas em ordem) no banco local e define login/senha dos papéis (senhas lidas do .env, sem eco).
 set -eu; cd "$(dirname "$0")"; . ./.env
 C="$(docker compose ps -q pqbr-db)"
 P() { docker exec -i -w /repo "$C" psql -U postgres -d pqbr -v ON_ERROR_STOP=1 -qAt "$@"; }
 P -c "create table if not exists public.pqbr_migracoes (arquivo text primary key, aplicado_em timestamptz not null default now())"
-for f in ../../db/migrations/000[1-9]_*.sql; do
+for f in ../../db/migrations/[0-9][0-9][0-9][0-9]_*.sql; do
   b=$(basename "$f")
   if [ "$(P -c "select count(*) from public.pqbr_migracoes where arquivo='$b'")" = 1 ]; then echo "já aplicada: $b"; continue; fi
   P -f "/repo/db/migrations/$b" >/dev/null && P -c "insert into public.pqbr_migracoes (arquivo) values ('$b')" && echo "aplicada: $b"
