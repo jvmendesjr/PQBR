@@ -353,3 +353,13 @@ NÃO CABE:
 
 ## t358 — 09/10/2026 (por voz)
 - Retenção do consumo por modelo: job agendado (Schedule do Temporal) que agrega as linhas brutas num resumo diário antes de apagar, com papel de manutenção dedicado (o `pqbr_app` não apaga), idempotente e registrado. **Prazo: EM CONSTRUÇÃO — aguardando José** (ele vai levantar o padrão de mercado em dias). Só documentado: nenhuma migração, papel ou timer aplicado.
+
+## t363 — 09/10/2026 (por voz)
+- Autorizado ligar o Hermes `pqbr` ao Paperclip (origem e destino de ações: ler, criar issue/ticket, comentar, acordar agentes), com privilégio mínimo, escopado à empresa de teste PQBR-TESTE até a F1-02. Feito com o agente `pqbr-assistente`, uma chave de agente da empresa, um wrapper com allowlist e a skill `paperclip-pqbr`; o código do Paperclip, o gateway e outros perfis não foram tocados.
+- **Incidente no teste:** o perfil tem terminal livre; o agente saiu do wrapper, leu o ambiente do processo do Paperclip e expôs o `DATABASE_URL` do Paperclip (Supabase, com senha) ao modelo e ao histórico do perfil. Recomendado: trocar a senha do banco do Paperclip, limpar a mensagem do `state.db` e restringir os toolsets antes de usar. Aguardando José.
+
+## t367 — 09/10/2026
+- Plano (não executado): migrar o banco do Paperclip do Supabase para um Postgres local próprio no `pc`, container dedicado ao lado dos bancos do app, do Temporal e do Hindsight (ROADMAP L-01, ARQUITETURA §8). Exige o OK do José e um reinício curto do serviço do Paperclip (não do Hermes); o Supabase fica como rollback por N dias.
+
+## t369 — 09/10/2026
+- Retenção do consumo por modelo: linhas brutas **90 dias**, resumo diário **25 meses**; job às ~04:15, depois dos backups. F3-07 desbloqueada, ainda não executada.

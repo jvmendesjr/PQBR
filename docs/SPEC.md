@@ -152,7 +152,7 @@
 | RF-46 | Divisão de papéis na correção autônoma: o Jev faz só triagem, classificação, decisão estruturada e verificação do resultado; um agente com modelo LLM executa a intervenção, registra aprendizados no bank Hindsight único da PQBR e loga tudo no banco do app via Temporal. Runtime e modelo do agente: EM CONSTRUÇÃO. | §3.1, §7 |
 | RF-47 | Consumo por modelo e por tipo de ação (tokens, chamadas, tempo, sucesso, custo estimado) em `pqbr.consumo_modelos`, agregado por dia no relatório diário (por modelo, por tipo de ação, falhas, custo estimado, variação vs. 7 dias); sem teto de tokens. | §22, §3.1 |
 | RF-48 | @pqbr-assistente (Hermes `pqbr`): assistente do José que avisa, aciona agentes do Paperclip, abre tickets, orienta comandos e caminhos, busca arquivos e resultados, consulta especialistas e o Jev; não executa; acesso restrito. | §2 |
-| RF-49 | Retenção do consumo por modelo: Schedule do Temporal agrega as linhas brutas de `pqbr.consumo_modelos` num resumo diário antes de apagar as mais antigas que o prazo; papel de manutenção dedicado (o `pqbr_app` não apaga); idempotente; cada execução registrada. Prazo: EM CONSTRUÇÃO — aguardando José. | §22 |
+| RF-49 | Retenção do consumo por modelo: Schedule do Temporal agrega as linhas brutas de `pqbr.consumo_modelos` num resumo diário antes de apagar as mais antigas que o prazo; papel de manutenção dedicado (o `pqbr_app` não apaga); idempotente; cada execução registrada. Prazos (t369): brutos 90 dias, resumo diário 25 meses; job ~04:15. | §22 |
 | RF-36 | Revisão humana como último recurso: local dedicado, aviso ao José e registro da determinação (excluir, corrigir, reaproveitar, arquivar). | §5 |
 
 ### F10. Sessão e resiliência
@@ -224,7 +224,7 @@
 
 ## 3. Lacunas (não inventar; levar ao José)
 
-- **EM CONSTRUÇÃO — aguardando José (prazo):** prazo de retenção das linhas brutas de `pqbr.consumo_modelos` (t358). Afeta RF-49.
+- [RESOLVIDO t369] retenção do consumo: brutos 90 dias, resumo diário 25 meses (RF-49).
 
 - [RESOLVIDO t357] limites (3 tentativas; 5–15 min sorteados no Camofox), desempate do auditor (3ª rodada), corações, diálogos de sessão (conferir conta; divergência = José), busca do código no Studio, agentes no Paperclip, escada (3 tentativas antes do José), sem teto de tokens (RF-47). Afetam RF-44..RF-48.
 

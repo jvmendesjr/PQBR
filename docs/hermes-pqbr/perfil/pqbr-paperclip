@@ -1,0 +1,19 @@
+#!/bin/sh
+# Ponte do Hermes `pqbr` com o Paperclip (t363). Identidade: agente `pqbr-assistente`, chave de agente
+# escopada à empresa de teste PQBR-TESTE (será reapontada para a org PQBR real na F1-02).
+# Só subcomandos da lista abaixo; a chave é lida do .env do perfil e nunca impressa.
+set -eu
+PERFIL="${HERMES_PQBR_HOME:-/home/pc/.hermes/profiles/pqbr}"
+CTX="$PERFIL/paperclip/context.json"
+NODE=/home/pc/.hermes/node/bin/node
+CLI=/home/pc/.paperclip/cli/current/node_modules/paperclipai/dist/index.js
+PAPERCLIP_PQBR_API_KEY=$(sed -n 's/^PAPERCLIP_PQBR_API_KEY=//p' "$PERFIL/.env" | tail -1); export PAPERCLIP_PQBR_API_KEY
+[ -n "$PAPERCLIP_PQBR_API_KEY" ] || { echo "sem credencial do Paperclip no perfil pqbr" >&2; exit 2; }
+case "${1:-} ${2:-}" in
+  "issue list"|"issue get"|"issue comments"|"issue comment:get"|"issue create"|"issue comment"|"issue update"|\
+  "agent list"|"agent get"|"agent me"|"agent heartbeat:invoke"|"project list"|"activity list"|"dashboard get") ;;
+  *) echo "subcomando não permitido para o pqbr: ${1:-} ${2:-}" >&2
+     echo "permitidos: issue list|get|comments|comment:get|create|comment|update; agent list|get|me|heartbeat:invoke; project list; activity list; dashboard get" >&2; exit 3 ;;
+esac
+for a in "$@"; do case "$a" in --api-key*|--context*|--profile*|--api-base*|-C|--company-id*) echo "opção não permitida: $a (escopo fixo)" >&2; exit 3;; esac; done
+exec "$NODE" "$CLI" "$@" --context "$CTX"

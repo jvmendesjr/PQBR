@@ -87,6 +87,8 @@
 
 ## 3. Papéis
 
+> t363: o `pqbr` já fala com o Paperclip (empresa de teste) por chave de agente escopada; ver §10. A restrição de acesso ainda **não** está na configuração do perfil (incidente do teste, §10).
+
 ### @pqbr-assistente (Hermes `pqbr`) — especificação [t357]
 - **Papel:** assistente do José; entende a alma do negócio (CONTRATO-EDITORIAL, REGRAS). **Não executa:** sabe pedir. Os agentes rodam no **Paperclip**, que é o sistema principal de jobs.
 - **Capacidades:** (1) avisos pelo Telegram (allowlist, botões); (2) acionar agentes do Paperclip (abrir issue, comentar, acordar o responsável) e abrir tickets pré-estruturados; (3) orientar o José: qual agente, comando e caminho certos; (4) buscar arquivos, resultados e estados (banco do app com `pqbr_leitura`, relatórios, Drive só leitura); (5) pedir detalhes aos agentes especialistas; (6) consultar o Jev para esclarecer ou classificar.
@@ -232,14 +234,17 @@ Só dados de negócio. O Postgres do Temporal guarda só estado de workflow e **
 
 Escrita no banco do app sempre por Activity com **outbox** (idempotente por chave).
 
-### Retenção do consumo por modelo [t358; PROPOSTA, não aplicada]
-- **Prazo das linhas brutas:** **EM CONSTRUÇÃO — aguardando José (prazo)** (ele vai levantar o padrão de mercado em dias).
-- **Job:** `RetencaoConsumoWorkflow`, disparado por um **Schedule do Temporal** diário (fora das janelas de publicação e dos backups das 03:30/03:45; horário a definir junto com o prazo).
+### Retenção do consumo por modelo [t358, t369; APROVADO, não aplicado]
+- **Prazos [t369]:** linhas brutas **90 dias**; resumo diário **25 meses** (depois disso o resumo também é apagado pelo mesmo job).
+- **Job:** `RetencaoConsumoWorkflow`, disparado por um **Schedule do Temporal** diário às **~04:15** (Fortaleza), depois dos backups das 03:30/03:45 e fora das janelas de publicação.
 - **Ordem:** (1) agrega os dias que vão sair num **resumo diário** permanente (`pqbr.consumo_resumo_diario`, mesmas colunas de `consumo_diario`: dia, provedor, modelo, tipo de ação, somas), com upsert por chave natural; (2) confere se as somas do resumo batem com as linhas brutas daqueles dias; (3) só então apaga as linhas brutas mais antigas que o prazo, em lotes.
 - **Papel dedicado:** `pqbr_manutencao` (nologin até ser usado; senha só no `.env`), com `SELECT` e `DELETE` só em `consumo_modelos` e `INSERT`/`UPDATE` só no resumo. O `pqbr_app` continua sem `DELETE`.
 - **Idempotente:** rodar duas vezes no mesmo dia não duplica o resumo nem apaga nada além do prazo; se a conferência falhar, não apaga e avisa.
 - **Registro:** cada execução vai para `pqbr.acoes` (`tipo='retencao_consumo'`: dias agregados, linhas apagadas, resultado). O backup diário do banco roda antes, então o bruto apagado ainda fica nos 7 dumps.
 - **A fazer (migração futura, ainda não escrita nem aplicada):** tabela do resumo e papel `pqbr_manutencao`, com rollback.
+
+### Banco do Paperclip [t367; PLANO, não executado]
+- Hoje o Paperclip usa o próprio banco no **Supabase** (projeto `paperclip`). Plano: migrar para um **Postgres local próprio no `pc`**, num container dedicado ao lado dos bancos do app, do Temporal e do Hindsight (cada um separado), em 127.0.0.1 com limite de memória, backup diário e Supabase mantido como rollback por N dias. Com o banco local, a pendência de RLS do Supabase deixa de valer (a confirmar ao fim). Passos e portão: ROADMAP L-01. Exige reiniciar o **serviço do Paperclip** (não o Hermes) numa janela curta.
 
 ## 9. Workflows do Temporal [PROPOSTA; validados a partir da Fase 0.5]
 
@@ -264,6 +269,14 @@ Escrita no banco do app sempre por Activity com **outbox** (idempotente por chav
 - **Janelas:** 11:40, 14:40, 18:35, 21:15 (America/Fortaleza).
 
 ## 10. Integração com o Paperclip [PROPOSTA; demonstrada em F05-04]
+
+### Hermes `pqbr` ↔ Paperclip [t363; conectado na empresa de teste]
+- **Identidade:** agente `pqbr-assistente` (`7d18350e…`) na empresa **PQBR-TESTE** (`d9fa962a…`), adaptador `process` com `/bin/true`, heartbeat desligado, orçamento 0, permissões `canAssignTasks` sim, `canCreateAgents`/`canCreateSkills` não. **Chave de agente** `hermes-pqbr` (id `58b8794a…`), escopada à empresa (outra empresa → 403), guardada só em `~/.hermes/profiles/pqbr/.env` (`PAPERCLIP_PQBR_API_KEY`, 600).
+- **Acesso:** contexto CLI próprio `~/.hermes/profiles/pqbr/paperclip/context.json` (600, persona agent, a URL da tailnet na porta 3100 (`<ip-tailnet>:3100`), porque o Paperclip só escuta na tailnet, não em 127.0.0.1) + wrapper `paperclip/pqbr-paperclip` com allowlist (issue list/get/comments/create/comment/update; agent list/get/me/heartbeat:invoke; project, activity, dashboard) e escopo fixo + skill `skills/productivity/paperclip-pqbr`. Cópias no repo: `docs/hermes-pqbr/perfil/`.
+- **Escrita:** comentar ou atualizar issue com chave de agente exige o contexto de um heartbeat (`Cross-issue writes need a run`); a leitura funciona direto. O comentário de teste na PQB-4 só saiu com o `--run-id` de um heartbeat do próprio `pqbr-assistente`. Fazer isso no wrapper (invocar o heartbeat e passar o run) é pendência da F1-03.
+- **Reapontar na F1-02:** criar o mesmo agente na org PQBR real, nova chave, trocar `companyId`/`agentId` no contexto e revogar a chave de teste.
+- **Incidente no teste (09/10 ~19:20):** o Hermes `pqbr` tem terminal e arquivos sem restrição. No teste, além do wrapper, ele leu `/proc/<pid>/environ` do processo do Paperclip e **expôs o `DATABASE_URL` do Paperclip (Supabase, com senha)** ao modelo (`core-baixo` pelo 9router) e ao histórico `state.db` do perfil; também escreveu `cache/scratch/invoke_run.js`, que lê a chave do `.env` e chama a API direto. **O "acesso restrito" do SOUL não está garantido pela configuração.** Antes de ligar o `pqbr` no Telegram: restringir os toolsets do perfil (sem terminal livre; só o wrapper e as skills) e rodar de novo o teste ponta a ponta.
+
 
 - O Temporal publica eventos de negócio (via outbox) no banco do app e abre/atualiza **issues** no Paperclip (episódio, revisão, ticket, proposta).
 - Os agentes no Paperclip (director, analista, comunidade, compliance, assistente, dev) leem o banco do app (só pelo contexto do fluxo ou `pqbr_leitura`) e issues e devolvem **`PropostaAgente`** validada; nunca executam efeito externo.
