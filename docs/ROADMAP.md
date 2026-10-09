@@ -96,7 +96,7 @@
 - [ ] **F3-01** (D3) Contratos Pydantic v2 e migração base
   - Req: RF-02, RF-07, RNF-02 · Testes: TS-01, TS-02 · Depende de: F05-07
   - Aceite: modelos da ARQUITETURA §11; `db/migrations/0001_base.sql` (ARQUITETURA §8); carga de `temas-publicados.csv`; testes de contrato passam.
-  - Portão José: **G3**. Obs: 2026-10-09 (t336, preparo, nada aplicado): migrações `db/migrations/0001..0008` + rollback no esquema `pqbr` do Supabase `paperclip`; TS-DB ok em Postgres 17 descartável. Faltam os contratos Pydantic da §11 em `src/pqbr/schemas` e o portão **G3** para aplicar.
+  - Portão José: **G3**. Obs: 2026-10-09 (t336): migrações `db/migrations/0001..0008` + rollback no esquema `pqbr`; TS-DB ok em Postgres 17 descartável. (t337–t338): projeto Supabase novo e dedicado `pqbr`, com as 2 exceções R10 aceitas; **não criado**, porque o `get_cost` deu US$ 10/mês (a ordem era só se fosse US$ 0). Aguarda o OK do José ao custo. Faltam os contratos Pydantic da §11.
 - [ ] **F3-02** (D14) Verificador de segredos/PII
   - Req: RNF-03 · Testes: TS-SEC · Depende de: —
   - Aceite: bloqueia segredo de teste antes de Hindsight, tickets, Supabase, logs e commit.

@@ -149,7 +149,8 @@ Nada que depende de uma hipótese é construído antes de ela virar VERIFICADO (
 
 ## 8. Modelo de dados (Supabase) [PROPOSTA; fixado em F3-01]
 
-- **Projeto:** o Supabase `paperclip` (decisão 3; conferido só em leitura em 09/10).
+- **Projeto [APROVADO t337–t338]:** um projeto Supabase **novo e dedicado**, `pqbr`, na org Pro do José (região sa-east-1), com a opção de migrar para local depois. **Ainda não criado:** o `get_cost` informou **US$ 10/mês**, e a ordem era criar só se o custo fosse zero; aguarda o OK do José para esse valor. O projeto `paperclip` não é usado nem tocado.
+- **Histórico (09/10, só leitura):** o Supabase `paperclip` foi considerado (decisão 3), mas foi superado por t337–t338.
   - O `public` dele é o banco do próprio Paperclip: 214 tabelas, todas com RLS desligado. Esse alerta crítico do Supabase foi levado ao José; não mexi em nada.
   - Hoje não há tabela do PQBR, nem esquema `pqbr`, nem migrações registradas. Os nomes do PQBR não colidem com o `public`.
 - **Desenho [PROPOSTA, t336]:**
@@ -157,7 +158,7 @@ Nada que depende de uma hipótese é construído antes de ela virar VERIFICADO (
   - RLS ligado e forçado, sem políticas: anon e authenticated sem acesso; o servidor usa o `service_role`.
   - `canal_id` em todas as tabelas de negócio.
   - Migrações em `db/migrations/0001..0008` com rollback em `db/migrations/rollback/`, testadas em Postgres 17 descartável (`db/test_migrations.sh`).
-  - **Aplicar exige o portão G3 do José.**
+  - As 2 exceções históricas da R10 foram aceitas pelo José (t337–t338). Aplicar depende de criar o projeto (custo acima).
 - **Achado:** o CSV de temas tem 2 repetições históricas (`repete_n`), anteriores à R10. Elas ficam registradas, mas fora do índice único da R10.
 
 Só dados de negócio. O Postgres do Temporal guarda só estado de workflow e **nunca** é consultado diretamente (t324–t326). Sem segredos nem PII em nenhuma tabela (autores de comentário só como hash).

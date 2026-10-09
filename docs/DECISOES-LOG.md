@@ -295,3 +295,8 @@ NÃO CABE:
 
 - (t334/t335) José: **não mexer no código do Paperclip**; o adaptador `hermes_local` fica como está; F05-05 continua pendente.
 - (t336) José aprovou seguir para a próxima fase do roadmap enquanto o soak de 24 h roda: base de dados e barreira de segredos (D3, D14). Escopo agora = **preparar**, sem gravar no Supabase e sem perturbar soak, Temporal, Paperclip ou outros serviços.
+
+## 09/10/2026, ~17:21: t337–t338
+
+- (t337–t338) José escolheu um **projeto Supabase novo e dedicado** ao PQBR (não o `paperclip`), na org dele (plano Pro por um ano); pode migrar para local depois, decidindo por projeto. Esquema `pqbr` fora da Data API; acesso só pelo `service_role`. As 2 repetições históricas da R10 foram aceitas como exceção.
+- Condição: criar só se o custo fosse US$ 0. O `get_cost` da org informou **US$ 10, recorrência mensal**. **Projeto não criado**; aguarda decisão do José.
