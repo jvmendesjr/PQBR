@@ -24,7 +24,7 @@
 - [x] **R-003** Sanitização dos documentos — 2026-10-09 — commit 66aacb2
   - Obs: REGRAS/ARQUITETURA/PLANO/CONTRATO/DECISOES-LOG, `pesquisas/`, `arquivo/`, `db/seeds/temas-publicados.csv`; t287.
 - [x] **R-004** Decisões t324–t326 registradas — 2026-10-09 — commit 1598d8e
-- [x] **R-005** Decisões t327–t328 registradas; conjunto SDD criado (SPEC, TESTES, RASTREABILIDADE, ROADMAP) — 2026-10-09 — commit: ver `git log -- docs/ROADMAP.md`
+- [x] **R-005** Decisões t327–t328 registradas; conjunto SDD criado (SPEC, TESTES, RASTREABILIDADE, ROADMAP) — 2026-10-09 — commit 7ef5f39
   - Obs: Temporal + Paperclip (agentes no Paperclip); sem teto de orçamento; imagem×fala não reprova; revisão humana como último recurso; escopo só PQBR.
 
 ---
