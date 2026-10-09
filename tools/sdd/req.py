@@ -49,6 +49,7 @@ R=[
 ('RF-46','F09','Divisão de papéis na correção autônoma: o Jev faz só triagem, classificação, decisão estruturada e verificação do resultado; um agente com modelo LLM executa a intervenção, registra aprendizados no bank Hindsight único da PQBR e loga tudo no banco do app via Temporal. Runtime e modelo do agente: EM CONSTRUÇÃO.','§3.1, §7','§2 Correção autônoma (etapas)','F3-05','TS-11'),
 ('RF-47','F08','Consumo por modelo e por tipo de ação (tokens, chamadas, tempo, sucesso, custo estimado) em `pqbr.consumo_modelos`, agregado por dia no relatório diário (por modelo, por tipo de ação, falhas, custo estimado, variação vs. 7 dias); sem teto de tokens.','§22, §3.1','§2 Consumo por modelo; migração 0010','F3-06','TS-08, TS-DB'),
 ('RF-48','F09','@pqbr-assistente (Hermes `pqbr`): assistente do José que avisa, aciona agentes do Paperclip, abre tickets, orienta comandos e caminhos, busca arquivos e resultados, consulta especialistas e o Jev; não executa; acesso restrito.','§2','§3 @pqbr-assistente','F1-03','TS-09'),
+('RF-49','F08','Retenção do consumo por modelo: Schedule do Temporal agrega as linhas brutas de `pqbr.consumo_modelos` num resumo diário antes de apagar as mais antigas que o prazo; papel de manutenção dedicado (o `pqbr_app` não apaga); idempotente; cada execução registrada. Prazo: EM CONSTRUÇÃO — aguardando José.','§22','§8 Retenção do consumo','F3-07','TS-12, TS-DB'),
 ]
 N=[
 ('RNF-01','Determinismo antes de LLM: tudo que pode ser código é código.','§3','ADR-001','F00-01','TS-REPLAY'),

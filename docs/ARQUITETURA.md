@@ -232,6 +232,15 @@ Só dados de negócio. O Postgres do Temporal guarda só estado de workflow e **
 
 Escrita no banco do app sempre por Activity com **outbox** (idempotente por chave).
 
+### Retenção do consumo por modelo [t358; PROPOSTA, não aplicada]
+- **Prazo das linhas brutas:** **EM CONSTRUÇÃO — aguardando José (prazo)** (ele vai levantar o padrão de mercado em dias).
+- **Job:** `RetencaoConsumoWorkflow`, disparado por um **Schedule do Temporal** diário (fora das janelas de publicação e dos backups das 03:30/03:45; horário a definir junto com o prazo).
+- **Ordem:** (1) agrega os dias que vão sair num **resumo diário** permanente (`pqbr.consumo_resumo_diario`, mesmas colunas de `consumo_diario`: dia, provedor, modelo, tipo de ação, somas), com upsert por chave natural; (2) confere se as somas do resumo batem com as linhas brutas daqueles dias; (3) só então apaga as linhas brutas mais antigas que o prazo, em lotes.
+- **Papel dedicado:** `pqbr_manutencao` (nologin até ser usado; senha só no `.env`), com `SELECT` e `DELETE` só em `consumo_modelos` e `INSERT`/`UPDATE` só no resumo. O `pqbr_app` continua sem `DELETE`.
+- **Idempotente:** rodar duas vezes no mesmo dia não duplica o resumo nem apaga nada além do prazo; se a conferência falhar, não apaga e avisa.
+- **Registro:** cada execução vai para `pqbr.acoes` (`tipo='retencao_consumo'`: dias agregados, linhas apagadas, resultado). O backup diário do banco roda antes, então o bruto apagado ainda fica nos 7 dumps.
+- **A fazer (migração futura, ainda não escrita nem aplicada):** tabela do resumo e papel `pqbr_manutencao`, com rollback.
+
 ## 9. Workflows do Temporal [PROPOSTA; validados a partir da Fase 0.5]
 
 | Workflow | Disparo | Passos | Req |

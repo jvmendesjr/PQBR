@@ -350,3 +350,6 @@ NÃO CABE:
 - (f) O Paperclip é o sistema principal de jobs (os agentes rodam lá). O Hermes `pqbr` é o assistente do José: avisa, aciona agentes do Paperclip, abre tickets, entende a alma do negócio, orienta como pedir (comandos e caminhos), busca arquivos e resultados, pede detalhes aos especialistas, consulta o Jev; não executa; acesso restrito. Especificação na ARQUITETURA §3; rascunho do SOUL em `docs/hermes-pqbr/SOUL-rascunho.md` (perfil no servidor não alterado).
 - (g) Escada de falhas: o agente faz até 3 tentativas com verificação do auditor; só depois da 3ª falha chama o José.
 - (h) Sem teto de tokens; só monitoramento: tabela `pqbr.consumo_modelos` (migração 0010) e seção de consumo no relatório diário.
+
+## t358 — 09/10/2026 (por voz)
+- Retenção do consumo por modelo: job agendado (Schedule do Temporal) que agrega as linhas brutas num resumo diário antes de apagar, com papel de manutenção dedicado (o `pqbr_app` não apaga), idempotente e registrado. **Prazo: EM CONSTRUÇÃO — aguardando José** (ele vai levantar o padrão de mercado em dias). Só documentado: nenhuma migração, papel ou timer aplicado.
