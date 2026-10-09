@@ -1,0 +1,13 @@
+[Unit]
+Description=PQBR Temporal worker (teste F05, t333)
+[Service]
+WorkingDirectory=%h/Workspace/PQBR
+Environment=PYTHONPATH=%h/Workspace/PQBR/src
+Environment=PYTHONUNBUFFERED=1
+ExecStart=%h/Workspace/PQBR/.venv/bin/python -m pqbr.workflows.worker
+Restart=always
+RestartSec=3
+MemoryMax=256M
+MemorySwapMax=0
+[Install]
+WantedBy=default.target

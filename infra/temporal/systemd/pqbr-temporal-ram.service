@@ -1,0 +1,5 @@
+[Unit]
+Description=PQBR amostra de RAM do Temporal (soak)
+[Service]
+Type=oneshot
+ExecStart=/bin/sh %h/Workspace/PQBR/scripts/tz/ram_sample.sh

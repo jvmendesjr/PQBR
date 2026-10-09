@@ -1,0 +1,68 @@
+# PQBR — Temporal self-hosted (F05-01, t333). Só Postgres, sem Elasticsearch.
+# Portas só em 127.0.0.1. Teto de RAM (t329): postgres 400M + temporal 750M + ui 200M = 1350M (< 1,5 GB).
+x-db-env: &dbenv
+  DB: postgres12
+  DB_PORT: "5432"
+  POSTGRES_USER: ${POSTGRES_USER}
+  POSTGRES_PWD: ${POSTGRES_PASSWORD}
+  SQL_PASSWORD: ${POSTGRES_PASSWORD}
+  POSTGRES_SEEDS: postgresql
+services:
+  postgresql:
+    image: postgres:${POSTGRES_VERSION}
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    command: ["postgres","-c","shared_buffers=96MB","-c","max_connections=60","-c","work_mem=4MB","-c","maintenance_work_mem=32MB"]
+    volumes: [pgdata:/var/lib/postgresql/data]
+    mem_limit: 400m
+    memswap_limit: 400m
+    networks: [tnet]
+    healthcheck: {test: ["CMD-SHELL","pg_isready -U ${POSTGRES_USER}"], interval: 5s, timeout: 5s, retries: 60, start_period: 20s}
+  temporal-admin-tools:
+    image: temporalio/admin-tools:${TEMPORAL_ADMINTOOLS_VERSION}
+    restart: "no"
+    depends_on: {postgresql: {condition: service_healthy}}
+    environment: *dbenv
+    volumes: [./scripts:/scripts:ro]
+    entrypoint: ["/bin/sh"]
+    command: /scripts/setup-postgres.sh
+    mem_limit: 256m
+    networks: [tnet]
+  temporal:
+    image: temporalio/server:${TEMPORAL_VERSION}
+    restart: unless-stopped
+    depends_on: {temporal-admin-tools: {condition: service_completed_successfully}}
+    environment:
+      <<: *dbenv
+      BIND_ON_IP: 0.0.0.0
+      NUM_HISTORY_SHARDS: "4"
+      DYNAMIC_CONFIG_FILE_PATH: config/dynamicconfig/development-sql.yaml
+    volumes: [./dynamicconfig:/etc/temporal/config/dynamicconfig:ro]
+    ports: ["127.0.0.1:7233:7233"]
+    mem_limit: 750m
+    memswap_limit: 750m
+    networks: [tnet]
+    healthcheck: {test: ["CMD","nc","-z","localhost","7233"], interval: 5s, timeout: 3s, start_period: 30s, retries: 60}
+  temporal-create-namespace:
+    image: temporalio/admin-tools:${TEMPORAL_ADMINTOOLS_VERSION}
+    restart: "no"
+    depends_on: {temporal: {condition: service_healthy}}
+    environment: {TEMPORAL_ADDRESS: "temporal:7233", DEFAULT_NAMESPACE: pqbr}
+    volumes: [./scripts:/scripts:ro]
+    entrypoint: ["/bin/sh"]
+    command: /scripts/create-namespace.sh
+    mem_limit: 256m
+    networks: [tnet]
+  temporal-ui:
+    image: temporalio/ui:${TEMPORAL_UI_VERSION}
+    restart: unless-stopped
+    depends_on: {temporal: {condition: service_healthy}}
+    environment: {TEMPORAL_ADDRESS: "temporal:7233", TEMPORAL_DEFAULT_NAMESPACE: pqbr}
+    ports: ["127.0.0.1:8233:8080"]
+    mem_limit: 200m
+    memswap_limit: 200m
+    networks: [tnet]
+volumes: {pgdata: {}}
+networks: {tnet: {name: pqbr-temporal}}

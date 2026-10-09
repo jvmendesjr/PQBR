@@ -282,3 +282,7 @@ NÃO CABE:
 - (t330) Confirmado: "só casos graves escalam ao José" vale apenas para respostas automáticas e interação com usuários nos comentários. Item 5 inalterado; polêmica > 75 continua aguardando o José.
 - (t331) "Visualização" não era um item separado; não há pendência.
 - (t332) Configuração do Studio: deve cumprir todas as REGRAS aprovadas; não há pendência separada.
+
+## 09/10/2026, ~15:25: autorização t333
+
+- (t333) José autorizou instalar e testar o Temporal no `pc` (F05-01, TZ-01..TZ-07): teto de 1,5 GB com limites de memória; só Postgres; portas só em localhost/tailnet; sem mexer em Tailscale Serve/Funnel nem em serviços existentes; escrita no Paperclip só com nova autorização. Resultado em `docs/sdd/adr-001-orquestrador.md`.

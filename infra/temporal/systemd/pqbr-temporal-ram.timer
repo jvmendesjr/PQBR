@@ -1,0 +1,7 @@
+[Unit]
+Description=PQBR amostra de RAM a cada 5 min (soak 24 h)
+[Timer]
+OnBootSec=2min
+OnUnitActiveSec=5min
+[Install]
+WantedBy=timers.target
