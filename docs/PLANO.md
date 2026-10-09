@@ -36,7 +36,6 @@ Ordem: 0.5 ∥ 0 → 1 → 3 ∥ 4 → 5 → 6 → 7 → 8 → 9 → 10 → 11 �
 
 - **EM CONSTRUÇÃO — aguardando José:** regras de roteiro R1–R6, R8, R9 (contrato v2).
 - **EM CONSTRUÇÃO — aguardando José:** metas do piloto (definidas depois, t327).
-- **EM CONSTRUÇÃO — aguardando José:** limite de RAM aceitável para o motor (antes de F05-01).
 - Aprovar: banco de 60 frases (F10-01); local da revisão humana (F8-03); texto dos AGENTS.md (G1).
 - Segundo momento (t327): rotações de senhas/tokens; outros canais e cota multi-canal.
 

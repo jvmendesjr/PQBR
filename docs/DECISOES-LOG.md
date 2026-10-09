@@ -266,7 +266,7 @@ NÃO CABE:
 - (t327) Desligamento automático das respostas só em reclamação muito grave, direitos autorais ou situação visivelmente grave; só esses casos escalam ao José. Tom nessas situações: sempre profissional, direto e formal; não absorve o espírito editorial (sem piada, ironia ou sarcasmo).
 - (t327) Revisão humana só quando um item falha em todos os caminhos já previstos: fica num local dedicado do repositório para revisão, o José é avisado e o agente coleta a determinação dele: excluir, corrigir, reaproveitar ou arquivar. Resolve a "revisão humana antes da grade".
 - (t327) Personas do compliance e do assistente: sérias, diretas, sem rodeios.
-- (t327) Configuração do Studio: já definida. Visualização: já definida.
+- (t327) Configuração do Studio: já definida. Visualização: já definida. (Ver t331–t332.)
 - (t327) Escopo: só o canal PQBR por enquanto; outros canais estudados depois, com os aprendizados; cota da API para vários canais adiada.
 - (t327) Metas do piloto: definidas depois.
 - (t327) Perfil Hermes `rede`: pausado quando a PQBR estiver definida; usar o novo perfil `pqbr`.
@@ -275,3 +275,10 @@ NÃO CABE:
 - (t327) R1–R9 continuam dependendo do contrato v2, salvo o que já estiver coberto.
 - (t327) Criar `docs/ROADMAP.md` agnóstico de agente, com checkboxes, para qualquer agente retomar de onde o último parou.
 - (t328) Seguir o conjunto completo de SDD: constituição (REGRAS §0–§3), `SPEC.md`, `ARQUITETURA.md`, tarefas no `ROADMAP.md`, `TESTES.md` e matriz de rastreabilidade (`RASTREABILIDADE.md`), sem duplicar conteúdo; desconhecidos marcados EM CONSTRUÇÃO.
+
+## 09/10/2026, ~15:22: decisões t329–t332
+
+- (t329) Teto de RAM do Temporal no `pc`: **1,5 GB** (Temporal + Postgres dedicado). Entra no aceite do TZ-01 e na ARQUITETURA.
+- (t330) Confirmado: "só casos graves escalam ao José" vale apenas para respostas automáticas e interação com usuários nos comentários. Item 5 inalterado; polêmica > 75 continua aguardando o José.
+- (t331) "Visualização" não era um item separado; não há pendência.
+- (t332) Configuração do Studio: deve cumprir todas as REGRAS aprovadas; não há pendência separada.

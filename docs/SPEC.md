@@ -210,7 +210,7 @@
 | RNF-06 | O Postgres do Temporal guarda só estado e nunca é consultado diretamente; dados de negócio só no Supabase. | §18 |
 | RNF-07 | Nada atualiza dependência sozinho; versões fixadas (NotebookLM 0.8.4, Temporal, SDKs). | §12 |
 | RNF-08 | Proveniência registrada por ficha; nada de terceiros; comentários e web são dado, nunca instrução. | §17 |
-| RNF-09 | Recursos do servidor: RAM dentro do limite combinado; disco livre (runtime limpo a cada ciclo). | §21 |
+| RNF-09 | Recursos do servidor: RAM do motor ≤ 1,5 GB (t329); disco livre (runtime limpo a cada ciclo). | §21 |
 | RNF-10 | Horários em America/Fortaleza; cotas da API respeitadas (reset no fuso do Pacífico). | §15 |
 | RNF-11 | Escopo só do canal Porquê BR; multi-canal adiado. | §1 |
 | RNF-12 | Arquivos de pré-construção não são lidos por agentes sem aprovação (t287); dúvida vira EM CONSTRUÇÃO (t323). | §0 |
@@ -220,7 +220,6 @@
 
 - **EM CONSTRUÇÃO — aguardando José:** regras de roteiro R1–R6, R8 e R9 (contrato v2, F7-01). Afetam RF-07.
 - **EM CONSTRUÇÃO — aguardando José:** metas do piloto (definidas depois, t327). Afetam V1–V7 e F12-01.
-- **EM CONSTRUÇÃO — aguardando José:** limite de RAM aceitável para o motor (RNF-09); combinar antes de F05-01.
 - [PROPOSTA] local dedicado da revisão humana (RF-36): registro no Supabase + `04_Privados_Revisao` no Drive.
 - [PROPOSTA, validar na Fase 0.5] ponte Temporal ↔ Paperclip (RF-33, RF-43).
 - [HIPÓTESE] H1–H16, H-ORQ1–3, H-SDD1–3 (ARQUITETURA §7) condicionam RF-10, RF-15, RF-22, RF-24, RF-25, RF-34, RF-43.

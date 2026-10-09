@@ -26,6 +26,8 @@
 - [x] **R-004** Decisões t324–t326 registradas — 2026-10-09 — commit 1598d8e
 - [x] **R-005** Decisões t327–t328 registradas; conjunto SDD criado (SPEC, TESTES, RASTREABILIDADE, ROADMAP) — 2026-10-09 — commit 7ef5f39
   - Obs: Temporal + Paperclip (agentes no Paperclip); sem teto de orçamento; imagem×fala não reprova; revisão humana como último recurso; escopo só PQBR.
+- [x] **R-006** Decisões t329–t332: teto de RAM 1,5 GB; escopo do escalonamento; Studio/Visualização sem pendência — 2026-10-09 — commit: ver `git log -1 -- docs/ROADMAP.md`
+  - Obs: —
 
 ---
 
@@ -33,8 +35,8 @@
 
 - [ ] **F05-01** Subir o Temporal com Postgres próprio e medir recursos
   - Req: RNF-09 · Testes: TZ-01 · Depende de: R-005
-  - Aceite: Temporal em compose isolado, Postgres dedicado (sem Elasticsearch, separado do `mp32-postgres`); RAM/CPU dentro do limite (H-ORQ1); dump e restauração testados (H-ORQ2).
-  - Portão José: autorizar a instalação e combinar o limite de RAM (EM CONSTRUÇÃO — aguardando José).
+  - Aceite: Temporal em compose isolado, Postgres dedicado (sem Elasticsearch, separado do `mp32-postgres`); RAM ≤ 1,5 GB para Temporal + Postgres dedicado (t329; H-ORQ1); dump e restauração testados (H-ORQ2).
+  - Portão José: autorizar a instalação.
   - Obs:
 - [ ] **F05-02** `EpisodioWorkflow` de brinquedo
   - Req: RNF-05 · Testes: TZ-02 · Depende de: F05-01

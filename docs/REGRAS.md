@@ -166,7 +166,7 @@ _Origem do bloco: t240–t242._
 - **Sombra de 3 dias** (ou ~30 respostas simuladas aprovadas sem correção, o que vier primeiro) antes de ligar respostas e corações. **1 resposta real de teste** antes do automático (HIPÓTESE: `comments.insert` sem auditoria do app). [t247; t248]
 - O @prod-comunidade **só sinaliza**; quem torna privado é a regra do item 5. [t250] Mudanças que ele proponha seguem o padrão dos agentes pensantes (§3). [t324–t326]
 - As respostas nunca são automáticas sem regra aprovada pelo José; futuro: área de mensagens para pedir feedback. [t238]
-- **Desligamento automático das respostas** e **escalonamento ao José** só em: reclamação muito grave, direitos autorais ou situação visivelmente grave. O resto segue as regras automáticas. [t327]
+- **Desligamento automático das respostas** e **escalonamento ao José** só em: reclamação muito grave, direitos autorais ou situação visivelmente grave. O resto segue as regras automáticas. Vale só para respostas automáticas e interação com usuários nos comentários; não altera o item 5 (§13) nem a regra de polêmica > 75 (§4). [t327, t330]
 - **Tom nessas situações:** sempre profissional, direto e formal; **não** absorve o espírito editorial (sem piada, ironia ou sarcasmo). [t327]
 
 ## 20. Analista (@prod-analista) e relatórios

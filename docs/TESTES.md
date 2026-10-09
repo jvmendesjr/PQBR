@@ -20,7 +20,7 @@ Regras: nenhum teste usa dados pessoais reais nem segredos (RNF-03); nenhum test
 
 | ID | Teste | Critério de aprovação | Req |
 |---|---|---|---|
-| TZ-01 | Subir Temporal + Postgres dedicado; medir RAM/CPU em repouso e com carga | Dentro do limite combinado (EM CONSTRUÇÃO — aguardando José o valor); dump/restauração ok | RNF-09 |
+| TZ-01 | Subir Temporal + Postgres dedicado; medir RAM/CPU em repouso e com carga | Temporal + Postgres dedicado ≤ 1,5 GB de RAM em repouso e com carga (t329); dump/restauração ok | RNF-09 |
 | TZ-02 | `EpisodioWorkflow` de brinquedo com timer e Activity que falha; `kill -9` no worker; reboot | Retoma do ponto certo; nenhuma Activity com efeito roda duas vezes | RNF-05 |
 | TZ-03 | Supabase dev inacessível durante o workflow | Nada perdido; outbox grava uma vez na volta; nada "agendado/público" sem estado | RF-39, RNF-06 |
 | TZ-04 | Temporal abre issue no Paperclip; agente de teste devolve proposta; aprovação vira sinal | Proposta valida em Pydantic v2; proposta inválida é rejeitada; nada aplicado sem aprovação; agente não acessa o Postgres do Temporal | RF-33, RF-43 |

@@ -22,6 +22,7 @@
   - **Postgres próprio do Temporal:** só estado dos workflows. **Nunca é consultado diretamente** por agentes, painel ou relatórios.
   - **Supabase:** dados de negócio: temas/R10, vídeos e códigos PQBR-EP, comentários, métricas, relatórios, base do painel e do analista. Mantido [recomendação aprovada; confirmar no teste de 1 dia do Temporal].
 - **Supabase fora [t324–t326]:** retentativas duráveis do Temporal + **outbox** para o Supabase na volta. Substitui a fila em arquivo da t242 (confirmar no teste). A regra (REGRAS §18) não muda.
+- **Teto de RAM [APROVADO t329]:** Temporal + Postgres dedicado ≤ 1,5 GB no `pc`; acima disso no TZ-01, considerar o DBOS (plano B).
 - **Cautelas:** RAM e swap do `pc` (H-ORQ1); determinismo e versionamento dos workflows; `NUM_HISTORY_SHARDS` escolhido uma vez; backup diário do Postgres do motor (sem segredos); nenhum agente autônomo dentro de Activity com efeito colateral.
 
 ### ADR-002: Paperclip = camada de agentes + painel, ligado ao Temporal
@@ -139,7 +140,7 @@ Nada que depende de uma hipótese é construído antes de ela virar VERIFICADO (
 | H14 | App do GCP em produção (uso interno) sem expiração do token | dev | Token válido além de 7 dias |
 | H15 | Limites do Pro do NotebookLM (5 h/semanal; 20 vídeos/dia) | dev | Monitor de consumo da 1ª semana |
 | H16 | Corações pelo Camofox (até 10/dia) sem desafio de login | dev | 3 dias de sombra sem incidente de sessão |
-| H-ORQ1 | A RAM do `pc` comporta o motor escolhido (o `pc` já usa swap) | dev | Medição no spike da Fase 0.5 |
+| H-ORQ1 | A RAM do `pc` comporta o motor escolhido dentro do teto de 1,5 GB (t329; o `pc` já usa swap) | dev | Medição no spike da Fase 0.5 |
 | H-ORQ2 | Postgres local dedicado ao motor + backup diário | dev | Restauração testada |
 | H-ORQ3 | A versão do Paperclip/adapter Hermes inclui a correção da #3833 | dev | Versão conferida |
 | H-SDD1 | O `hermes_local` roda sem `--yolo` (ou há adapter alternativo que respeite o perfil `pqbr`) | dev | Teste na Fase 0.5; **bloqueia ligar agentes Hermes no Paperclip** |
