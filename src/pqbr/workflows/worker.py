@@ -4,8 +4,10 @@ import asyncio, os
 from temporalio.client import Client
 from temporalio.contrib.pydantic import pydantic_data_converter
 from temporalio.worker import Worker
-from .workflows import EpisodioWorkflow
-from .activities import gerar_roteiro, gravar_outbox
+from .workflows import EpisodioWorkflow, PonteTemporalPaperclipWorkflow
+from .activities import gerar_roteiro, gravar_outbox, aplicar_proposta_stub
+from .paperclip import (abrir_issue_paperclip, comentar_paperclip, ler_propostas_paperclip,
+                        concluir_issue_paperclip)
 
 ADDR = os.environ.get("TEMPORAL_ADDRESS", "127.0.0.1:7233")
 NS = os.environ.get("TEMPORAL_NAMESPACE", "pqbr")
@@ -18,7 +20,9 @@ async def client() -> Client:
 
 async def main() -> None:
     c = await client()
-    w = Worker(c, task_queue=FILA, workflows=[EpisodioWorkflow], activities=[gerar_roteiro, gravar_outbox])
+    w = Worker(c, task_queue=FILA, workflows=[EpisodioWorkflow, PonteTemporalPaperclipWorkflow],
+               activities=[gerar_roteiro, gravar_outbox, aplicar_proposta_stub, abrir_issue_paperclip,
+                           comentar_paperclip, ler_propostas_paperclip, concluir_issue_paperclip])
     print(f"worker em {ADDR} ns={NS} fila={FILA}", flush=True)
     await w.run()
 

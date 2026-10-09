@@ -28,6 +28,18 @@ Regras: nenhum teste usa dados pessoais reais nem segredos (RNF-03); nenhum test
 | TZ-06 | Aprovação pelo Telegram (Hermes `pqbr`) | Aprovar/negar chega como sinal; mensagem de outro ID ignorada | RF-34 |
 | TZ-07 | Consolidação | Relatório `docs/sdd/adr-001-orquestrador.md`; se o Temporal reprovar algum TZ, repetir TZ-01..TZ-04 com o DBOS | RNF-01 |
 
+**Resultados (09/10/2026; detalhes em `docs/sdd/adr-001-orquestrador.md`):**
+
+| ID | Resultado |
+|---|---|
+| TZ-01 | ✅ Aprovado. Pico de 307 MiB, abaixo do teto de 1,5 GB. Dump e restauração ok. Soak de 24 h até 10/10 ~15:40. |
+| TZ-02 | ✅ Aprovado, com `kill -9` no worker e restart do motor. Reboot do servidor dispensado (t334). |
+| TZ-03 | ✅ Aprovado, com stub; o Supabase dev real fica para a F3. |
+| TZ-04 | ✅ Aprovado no Paperclip de teste `PQBR-TESTE`. |
+| TZ-05 | ⛔ Bloqueado: `--yolo` incondicional no `hermes_local` (H-SDD1); nenhum agente Hermes executado. |
+| TZ-06 | ⏸ Pendente: falta o Telegram; o filtro de remetente do motor está ok. |
+| TZ-07 | Parcial. |
+
 ## 3. Os 7 itens da validação (REGRAS §14)
 
 | ID | Item | Critério de aceite | Evidência |

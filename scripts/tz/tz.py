@@ -5,8 +5,8 @@ from datetime import timedelta
 from temporalio.client import (Schedule, ScheduleActionStartWorkflow, ScheduleSpec, ScheduleIntervalSpec,
                                SchedulePolicy, ScheduleOverlapPolicy)
 from pqbr.workflows.worker import client, FILA
-from pqbr.workflows.workflows import EpisodioWorkflow
-from pqbr.workflows.contracts import EpisodioInput, AprovacaoJose
+from pqbr.workflows.workflows import EpisodioWorkflow, PonteTemporalPaperclipWorkflow
+from pqbr.workflows.contracts import EpisodioInput, AprovacaoJose, PonteInput
 
 
 async def main(cmd: str, *a: str) -> None:
@@ -42,6 +42,19 @@ async def main(cmd: str, *a: str) -> None:
             spec=ScheduleSpec(intervals=[ScheduleIntervalSpec(every=timedelta(minutes=10))]),
             policy=SchedulePolicy(overlap=ScheduleOverlapPolicy.SKIP)))
         print("schedule criado")
+    elif cmd == "ponte":  # ponte <wf_id> <company> <project> <agente>
+        h = await c.start_workflow(PonteTemporalPaperclipWorkflow.run, PonteInput(company_id=a[1], project_id=a[2],
+                                   agente_id=a[3]), id=a[0], task_queue=FILA)
+        print("iniciado", h.id)
+    elif cmd == "ponte-query":
+        print(await c.get_workflow_handle(a[0]).query(PonteTemporalPaperclipWorkflow.estado))
+    elif cmd == "ponte-aprovar":  # ponte-aprovar <wf_id> <remetente> [negar]
+        await c.get_workflow_handle(a[0]).signal(PonteTemporalPaperclipWorkflow.aprovacao_jose,
+            AprovacaoJose(remetente_id=a[1], decisao=a[2] if len(a) > 2 else "aprovar"))
+        print("sinal enviado")
+    elif cmd == "ponte-result":
+        r = await asyncio.wait_for(c.get_workflow_handle_for(PonteTemporalPaperclipWorkflow.run, a[0]).result(), 120)
+        print(r.model_dump_json())
     else:
         sys.exit(f"comando desconhecido: {cmd}")
 

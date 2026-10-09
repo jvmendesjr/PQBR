@@ -42,3 +42,15 @@ async def gravar_outbox(ev: OutboxEvento) -> bool:
     _append(OUTBOX, ev.model_dump(mode="json"))
     _append(EFEITOS, {"chave": ev.chave_idempotencia, "tentativa": activity.info().attempt})
     return True
+
+
+from .contracts import PropostaAgente  # noqa: E402
+
+APLICADAS = RUNTIME / "propostas_aplicadas.jsonl"
+
+
+@activity.defn
+async def aplicar_proposta_stub(p: PropostaAgente) -> bool:
+    """Stub: registra a aplicação em arquivo local; nenhuma mudança real."""
+    _append(APLICADAS, {"workflow": activity.info().workflow_id, **p.model_dump()})
+    return True

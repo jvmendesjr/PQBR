@@ -286,3 +286,7 @@ NÃO CABE:
 ## 09/10/2026, ~15:25: autorização t333
 
 - (t333) José autorizou instalar e testar o Temporal no `pc` (F05-01, TZ-01..TZ-07): teto de 1,5 GB com limites de memória; só Postgres; portas só em localhost/tailnet; sem mexer em Tailscale Serve/Funnel nem em serviços existentes; escrita no Paperclip só com nova autorização. Resultado em `docs/sdd/adr-001-orquestrador.md`.
+
+## 09/10/2026, ~15:47: autorização t334
+
+- (t334) José autorizou um projeto de teste reversível no Paperclip para TZ-04/TZ-05, separado da core-eng. Agente de teste fica pausado salvo quando estritamente necessário. Se o agente de teste exigir `hermes_local` com `--yolo`, não executar e documentar o bloqueio. Sem restarts de serviços, sem mudanças de exposição. Reboot do servidor dispensado: o restart do motor cobre o TZ-02. Resultado e limpeza em `docs/sdd/adr-001-orquestrador.md`.

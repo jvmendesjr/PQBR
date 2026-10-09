@@ -38,24 +38,24 @@
   - Aceite: Temporal em compose isolado, Postgres dedicado (sem Elasticsearch, separado do `mp32-postgres`); RAM ≤ 1,5 GB para Temporal + Postgres dedicado (t329; H-ORQ1); dump e restauração testados (H-ORQ2).
   - Portão José: autorizar a instalação.
   - Obs: 2026-10-09, commit: ver `git log -1 -- docs/sdd/adr-001-orquestrador.md`. Temporal 1.32.1 + Postgres 16 em `infra/temporal` (só 127.0.0.1; limites 400M/750M/200M). Repouso ≈ 220–285 MiB; pico com 100 workflows 307 MiB; dump e restauração ok. Soak de 24 h até 10/10 ~15:40 (`sh scripts/tz/soak_check.sh`). Ver `docs/sdd/adr-001-orquestrador.md`.
-- [ ] **F05-02** `EpisodioWorkflow` de brinquedo
+- [x] **F05-02** `EpisodioWorkflow` de brinquedo
   - Req: RNF-05 · Testes: TZ-02 · Depende de: F05-01
   - Aceite: timer + Activity que falha e retenta; retoma após `kill -9` no worker e após reboot.
   - Portão José: autorizar o reboot, se for o do servidor.
-  - Obs: 2026-10-09: retries, timer, sinal, `kill -9` no worker e restart do container do Temporal ok; 0 efeitos duplicados. Falta o reboot do servidor (precisa de autorização do José).
+  - Obs: 2026-10-09: retries, timer, sinal, `kill -9` no worker e restart do motor ok; 0 duplicados. Reboot do servidor dispensado pelo José (t334); o restart do motor cobre o caso.
 - [x] **F05-03** Outbox para o Supabase e simulação de Supabase fora
   - Req: RF-39, RNF-06 · Testes: TZ-03 · Depende de: F05-02
   - Aceite: com o Supabase de desenvolvimento fora, nada se perde e nada fica "agendado/público" sem estado; na volta, grava uma vez só.
   - Portão José: nenhum. Obs: 2026-10-09 (stub em arquivo, sem Supabase real): estado `aguardando_outbox` durante a queda e com `kill -9`; gravou 1 vez na volta. Teste contra o Supabase dev real fica para a F3.
-- [ ] **F05-04** Ponte Temporal ↔ Paperclip
+- [x] **F05-04** Ponte Temporal ↔ Paperclip
   - Req: RF-33, RF-43, RNF-06 · Testes: TZ-04 · Depende de: F05-02
   - Aceite: o Temporal abre/atualiza issue; agente de teste devolve proposta Pydantic v2 válida; aprovação vira sinal; o agente nunca lê o Postgres do Temporal; heartbeats desligados.
   - Portão José: autorizar projeto/org de teste no Paperclip.
-  - Obs: Lado do motor ok (proposta válida aceita, inválida rejeitada, nada aplicado sem aprovação). Paperclip só lido (`/api/health` ok, commit 8f8a0ab). Aguarda a autorização do José para projeto/issue de teste.
+  - Obs: 2026-10-09 (t334): ponte verificada no Paperclip de teste `PQBR-TESTE` (PQB-4, workflow `tz04-ponte-04`). Inválida rejeitada, válida aplicada (stub) só depois do sinal do José. IDs e limpeza em `docs/sdd/adr-001-orquestrador.md`.
 - [ ] **F05-05** Agente Hermes no Paperclip sem `--yolo`; versão do Paperclip
   - Req: RNF-13 · Testes: TZ-05 · Depende de: F05-04
   - Aceite: H-SDD1 resolvida (ou alternativa documentada que respeite o perfil `pqbr`); H-ORQ3 conferida.
-  - Portão José: decidir a alternativa se não houver caminho sem `--yolo`. Obs:
+  - Portão José: decidir a alternativa se não houver caminho sem `--yolo`. Obs: 2026-10-09: BLOQUEADO. `hermes_local` 2026.1001.0 força `--yolo` sem opção; nenhum agente Hermes criado nem executado. Decisão do José: patch upstream, adaptador `process` chamando o Hermes `pqbr`, ou outro adaptador.
 - [ ] **F05-06** Aprovação pelo Telegram (Hermes `pqbr`) como sinal
   - Req: RF-34 · Testes: TZ-06 · Depende de: F05-04
   - Aceite: aprovar/negar funciona; outro ID é ignorado.

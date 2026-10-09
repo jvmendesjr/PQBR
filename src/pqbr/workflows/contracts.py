@@ -55,3 +55,20 @@ class EstadoEpisodio(_Base):
     propostas_rejeitadas: int = 0
     sinais_ignorados: int = 0
     outbox_gravado: bool = False
+
+
+class PonteInput(_Base):
+    """Entrada do teste da ponte Temporal ↔ Paperclip (TZ-04)."""
+    company_id: str
+    project_id: str
+    agente_id: str
+    espera_proposta_segundos: int = Field(ge=10, le=86_400, default=900)
+    espera_aprovacao_segundos: int = Field(ge=10, le=86_400, default=900)
+    intervalo_leitura_segundos: int = Field(ge=2, le=600, default=10)
+
+
+class ResultadoPonte(_Base):
+    issue_id: str
+    etapa: str
+    propostas_rejeitadas: int
+    proposta_aplicada: PropostaAgente | None = None
