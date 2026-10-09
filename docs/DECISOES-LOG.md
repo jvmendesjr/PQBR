@@ -332,3 +332,8 @@ NÃO CABE:
 ## t354 (Camofox) — 09/10/2026
 - José perguntou se o Camofox será isolado. Verificado só leitura: um servidor compartilhado em `*:9377` sem chave, com 14 perfis de vários projetos no mesmo processo. Decidido o plano de isolamento: instância própria da PQBR em 127.0.0.1:9387 com chave, pasta e perfil próprios, fila com concorrência 1 (REGRAS §11, ROADMAP F4C). Login novo, troca do `rede`, logout do perfil antigo e o fechamento do 9377 compartilhado dependem do José.
 - Achado: a doc do MP32 diz que `~/.notebooklm` é a conta pessoal do José, o que contradiz o runbook F4. Marcado EM CONSTRUÇÃO no F4.
+
+## t355 — 09/10/2026
+- `~/.notebooklm` é a **sessão pessoal** do José (coleta inicial): fica intacta e fora da migração. O F4-04 não toca nela nem na linha 1 do crontab, e o F4-09 foi cancelado. O F4-08 (remover o pipx) ficou EM CONSTRUÇÃO porque o refresh pessoal usa o binário global.
+- **Agentes usam o Camofox.** Camadas: script determinístico primeiro; na falha por mudança do site, um agente (o Jev nas decisões estruturadas) intervém pelo Camofox, sempre pelo Temporal (concorrência 1 por sessão), com tentativas limitadas e cada ação registrada. A correção que deu certo vira proposta de ajuste do script (tarefa, ticket ou PR com as aprovações do José). O José só entra se o agente falhar dentro dos limites ou se a ação for sensível (login/2FA, exclusão, publicar fora das regras, pagamentos). Reduz o determinismo de propósito: automação inteligente.
+- Revisão de todas as regras e ferramentas: passo de correção autônoma com limites (REGRAS §3.1), travas duras mantidas (item 5, sem exclusão, segredos, ações sensíveis). Casos duvidosos a–h ficaram EM CONSTRUÇÃO — aguardando José.

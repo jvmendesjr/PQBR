@@ -76,6 +76,11 @@
 - Hoje: um servidor compartilhado (`camofox-browser`, `*:9377`, **todas as interfaces, sem chave**), um processo para 14 perfis em `~/.camofox/profiles` (pastas pelo hash sha256 do `userId`). Usado por `rede` (`porquebr`), MP32 (`tutibom10`), Hermes `mp3`/`pet`/`gpu` e o keepalive do runway (conta pessoal). Sem trava entre projetos.
 - Alvo: instância da PQBR (`pqbr-camofox`, `127.0.0.1:9387`, chave, `/home/pc/.pqbr/camofox`, `MAX_SESSIONS=1`, `MemoryMax=900M`), acessada só pelas Activities da fila `camofox-pqbr` (concorrência 1). A fila `camofox` do §2 passa a ser essa. Passos no ROADMAP F4C; regra no REGRAS §11.
 
+### Correção autônoma mediada pelo Temporal [t355; PROPOSTA]
+- Quando um passo de script falha com erro corrigível (`SiteMudou`, `SaidaForaDoEsquema`, transitório após a escada), o workflow chama o filho `CorrecaoAutonomaWorkflow(ferramenta, sessao, passo, contexto)` na fila da ferramenta (`camofox-pqbr`, `notebooklm`, …), com concorrência 1 por sessão.
+- A Activity do agente recebe só as ferramentas daquela fila (o Camofox restrito à instância `pqbr-camofox` e a uma allowlist de ações: navegar, ler, clicar, digitar, colar, upload; sem login, cookies ou exclusão). O Jev entra nas decisões estruturadas. Cada ação vai para o registro (`pqbr.acoes`, `jsonb`; tabela própria só se faltar campo, EM CONSTRUÇÃO).
+- Resultado: `Corrigido(passos, proposta_script)`, `Esgotado(tentativas)` ou `Sensivel(motivo)`. Corrigido retoma o workflow e abre a proposta de ajuste (tarefa ou ticket); os outros dois avisam o José. O runtime do agente (Hermes `pqbr` ou dev do Paperclip) e os limites estão EM CONSTRUÇÃO (REGRAS §3.1).
+
 ## 3. Papéis (ex-"agentes")
 
 **Padrão dos agentes pensantes [APROVADO t324–t326]:** uma rotina fixa executa tudo; @prod-director, @prod-analista e @prod-comunidade só observam e propõem mudanças como saída estruturada validada por Pydantic v2; nada se aplica sem a aprovação do José.

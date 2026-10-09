@@ -37,6 +37,8 @@
 | RF-31 | §19, §20, §22 | §9 RelatorioDiarioWorkflow | F9-01 | TS-08 |
 | RF-32 | §22 | §8 consumo | F9-01 | TS-08 |
 | RF-33 | §3 | §10; §11 PropostaAgente | F05-04, F1-01 | TS-09, TZ-04 |
+| RF-44 | §3.1 | §2 Correção autônoma | F3-05 | TS-11 |
+| RF-45 | §11 | §2 Camofox; Correção autônoma | F4C-08 | TS-11 |
 | RF-34 | §2 | ADR-003; §10 | F05-06, F1-03 | TS-09, TZ-06 |
 | RF-35 | §24 | ADR-004; §11 TicketManutencao | F1-04 | TS-09 |
 | RF-36 | §5 | §8 revisao_humana; §9 sinal determinacao_revisao | F8-03 | TS-09 |

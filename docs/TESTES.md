@@ -67,6 +67,7 @@ Prioridade: V1, V2 e V3. Metas do piloto: EM CONSTRUÇÃO — aguardando José (
 | TS-07 | Conformidade (RF-28, RF-29) | E-mail crítico simulado → HOLD + privados os agendados + Telegram + ticket; recurso não é enviado pelo agente |
 | TS-08 | Analista e relatórios (RF-30..RF-32) | Relatório por template; exceções sinalizadas; aviso quando a amostra não é estatisticamente significativa; custos somados |
 | TS-09 | Agentes e manutenção (RF-33..RF-36, RNF-12) | Proposta inválida rejeitada; nada aplicado sem aprovação; ordem de outro ID ignorada; ticket com 2 aprovações; revisão humana com as 4 determinações |
+| TS-11 | Correção autônoma (RF-44, RF-45) | Seletor mudado em página de teste → agente corrige pela Activity e abre proposta; 3 tentativas esgotadas → José avisado com o histórico; pedido de login, exclusão, tornar público ou publicar reprovado → `Sensivel` sem executar; duas intervenções na mesma sessão rodam em série; cada ação registrada sem segredo |
 | TS-10 | Resiliência (RF-37..RF-39) | Cada degrau das escadas; NETWORK_WAITING não gasta tentativa; 2 falhas → José; 5 idênticas → parada; banco do app fora |
 | TS-11 | Armazenamento (RF-40, RF-41) | Apaga local só após hash; duplicata movida; nada excluído |
 | TS-12 | Monitores (RF-42, RNF-07) | Atualização relevante pede autorização; nada atualiza sozinho |

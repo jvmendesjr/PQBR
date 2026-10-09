@@ -28,11 +28,39 @@
 - Fora de escopo para agentes: comentar em outros canais; excluir vídeos ou comentários, rejeitar comentários, banir autores (só José); republicar vídeo corrigido; atualizar dependências sem autorização; publicar vídeo reprovado para bater meta. [item 4; item 5; t243; t186]
 
 ## 3. Determinismo, estabilidade e governança
-- Determinismo antes de LLM: início automático, grade correta do dia, nenhum tema repetido, "publicado" só com ID confirmado. [ESTABILIDADE; pauta 4]
+- Determinismo antes de LLM (com a correção autônoma limitada do §3.1 quando o script falha, t355): início automático, grade correta do dia, nenhum tema repetido, "publicado" só com ID confirmado. [ESTABILIDADE; pauta 4]
 - Agendamento com horários fixos + vigia de prazo; grade gerada **por código a partir da data** e gravada no banco; tema repetido barrado em **3 barreiras**; máquina de estados com checkpoint; o agente responde sempre pelo banco; relatório diário; o corte do fluxo antigo só acontece após vários dias sem falha. [ESTABILIDADE] _(Implementação do agendador: motor de workflow testado primeiro com Temporal, DBOS como plano B (t283); ver ARQUITETURA ADR-001. A regra não muda.)_
 - Origem: incidente de 08/10 (fluxo não iniciou; grade do dia 7 reaproveitada; 3 de 4 temas repetidos). [pauta 4]
 - Governança: máximo de determinismo; detectar problemas, registrar a ação humana e repetir automaticamente na próxima vez. [07/10 item 10]
 - **Padrão dos agentes pensantes** (@prod-director, @prod-analista, @prod-comunidade): uma **rotina fixa executa tudo**; os agentes só **observam e propõem mudanças**, como **saída estruturada validada por Pydantic v2**. Nenhuma mudança é aplicada sem a **aprovação do José**. [t324–t326]
+
+### 3.1 Correção autônoma antes de chamar o José [t355]
+- **Camadas:** (1) o **script determinístico** executa; (2) se um passo falha por motivo **corrigível** (site ou seletor mudou, resposta fora do esquema, erro transitório que a escada não resolveu), um **agente intervém** para tentar resolver. O Jev entra nas decisões estruturadas e as ferramentas (Camofox, CLI, API) entram pelo próprio agente. (3) O José só é chamado se o agente falhar dentro dos limites ou se a ação for sensível. Isso **reduz o determinismo de propósito**: é automação inteligente, mas sempre limitada e registrada.
+- **Sempre pelo Temporal:** a intervenção é uma Activity na fila da ferramenta/sessão (concorrência 1 por sessão), nunca uma chamada solta. Cada ação do agente (clique, comando, chamada, resposta do Jev) é registrada no banco do app com episódio, passo, motivo e resultado, sem segredos (§17).
+- **Limites padrão:** no máximo **3 tentativas** por passo e **20 min** por intervenção, sem repetir a mesma ação idêntica (vale a parada de 5 idênticas do §18). Os valores são **PROPOSTA — aguardando José**.
+- **Persistência:** a correção que deu certo vira **proposta de ajuste do script** (tarefa de dev na construção; ticket ou PR na produção, §24), com as 2 aprovações do José. A correção de improviso vale só para aquela execução; o script corrigido é o que fica.
+- **Travas duras (o agente nunca faz, nem para corrigir):** login, 2FA, logout ou cópia de cookies; exclusão de qualquer coisa (vídeo, comentário, arquivo, caderno raiz, dado); tornar público ou republicar (item 5, §16); publicar fora das regras (reprovado, sem estado gravado, sem código, acima do teto); recorrer ou responder ao YouTube; pagamentos ou compras; mexer em segredos; mudar regras, limiares ou dependências (§12); escrever no banco do app fora do Temporal; código do Paperclip (t335). O **item 5 (privado automático)** continua só no código, sem agente no caminho.
+- **Quando o José é chamado:** limites esgotados, ação sensível necessária, a correção mudaria o resultado editorial ou de conformidade, ou o caso é marcado EM CONSTRUÇÃO abaixo. O aviso pelo Telegram traz o que foi tentado.
+- **Aplicação por ferramenta e regra** (os detalhes ficam em cada seção):
+
+| Ferramenta/regra | Correção autônoma permitida | Limites e travas |
+|---|---|---|
+| NotebookLM (§9–§10) | reexecutar a geração no caderno efêmero; reextrair a saída; ajustar o prompt dentro do contrato; trocar para o Gemini Web (reserva) | 3 tentativas; nunca no caderno raiz; respeita os 80% de consumo; login ou relogin = José |
+| Camofox (§11) | agente pela Activity: novo seletor, outro caminho na página, fechar diálogo informativo, repetir com ritmo humano | concorrência 1 por sessão; só a instância `pqbr-camofox`; sem login, 2FA ou cookies; sem tornar público ou excluir |
+| API do YouTube (§15, §19, §20) | repetir com backoff; renovar o token pelo fluxo OAuth já autorizado; conferir o estado pelo `list` antes de repetir | idempotência pelo código PQBR-EPxxxx; reautorização do OAuth = José |
+| Drive (§21) | repetir o upload; conferir tamanho e hash; recriar a pasta de destino que falta | nunca apaga; a limpeza só move para `99_Arquivo` |
+| Banco do app (§18) | repetir pelo outbox; conferir a idempotência | correção de esquema só por migração em tarefa ou ticket; agente não escreve direto |
+| Temporal (§3, §18) | repetir a Activity; reiniciar o workflow a partir do checkpoint | sem mudar código em execução; o reinício de serviço segue as regras de manutenção |
+| Paperclip (§2) | reenviar o comentário ou a issue; acordar o responsável (`--resume`) | sem tocar no código nem no adaptador (t335) |
+| Auditor (§8) | repetir a rodada do Gemini que voltou fora do esquema; reextrair quadro ou transcrição | não muda o veredito; divergência entre rodadas: ver casos EM CONSTRUÇÃO |
+| Conformidade (§13) | repetir a coleta (e-mail, Studio só leitura, Data API) | HOLD e privados são automáticos e sem agente; recurso só o José envia |
+| Publicação (§15) | refazer, trocar pela reserva, corrigir o agendamento no Studio que não bateu com o aprovado | sem duplicata (busca do código antes); vídeo reprovado nunca; "envio sem confirmação" continua com 1 tentativa e parada |
+| Comentários (§19) | repetir o `comments.insert` que falhou; reclassificar com o Jev uma resposta fora do esquema | limites de 6/h e 30/dia valem para as tentativas; retenção só nos casos aprovados; rejeitar, banir ou excluir = José |
+| Fichas visuais (§6) | refazer a ficha que falhou | já não bloqueia; "Não Aprovado" segue com o José |
+| Monitor de atualizações (§12) | nenhuma | trava: nunca atualiza sozinho |
+| Grade e temas (§4) | regenerar a grade do dia pelo código; refazer a coleta | R10, bloqueio absoluto e polêmica > 75 continuam travas |
+
+- **Casos EM CONSTRUÇÃO — aguardando José:** (a) números dos limites (3 tentativas, 20 min); (b) divergência entre as 2 rodadas do auditor: uma 3ª rodada como desempate pode substituir a revisão do José?; (c) corações (§19) mandam abortar ao menor sinal de problema: o agente pode tentar corrigir?; (d) diálogos de sessão no Camofox ("confirme que é você", termos novos): todos contam como login, ou alguns são seguros?; (e) "envio sem confirmação" (§15): o agente pode procurar o código no Studio via Camofox antes de parar?; (f) qual runtime executa a intervenção (Hermes `pqbr` ou agente de dev do Paperclip) e com qual modelo; (g) a escada de falhas do §18 ("a mesma ação falhando 2× vai ao José") passa a ter a intervenção do agente antes do José?; (h) gasto de tokens das intervenções entra no relatório, mas tem teto por dia?
 
 ## 4. Temas e grade
 - **R10:** um tema, um vídeo, inclusive variações próximas. Tema repetido é recusado mesmo que o José sugira; o sistema avisa ou abre ticket. [pauta 1; item 4] Lista dos temas já publicados: `db/seeds/temas-publicados.csv`.
@@ -94,15 +122,17 @@ _Origem do bloco: t184–t186._
 
 ## 10. Instalação exclusiva do notebooklm-py
 - Instalação **exclusiva da PQBR**, abortando a global: venv da PQBR com **0.8.4 fixada**, `NOTEBOOKLM_HOME` próprio, perfil `pqbr`, login novo, testes só em caderno clonado; **um serviço único dono da sessão** (refresh por timer, fila de uma tarefa, `usage --json` no banco). [t187–t188]
-- Antes do login novo, **deslogar a sessão antiga** do Porquê BR (cron de refresh e agente `rede`) para não haver mais de um dispositivo. Interromper a produção atual nesse momento está autorizado. Até lá, nada muda. [t191]
+- Antes do login novo, **deslogar a sessão antiga** do Porquê BR (a usada pelo agente `rede`) para não haver mais de um dispositivo. Interromper a produção atual nesse momento está autorizado. Até lá, nada muda. [t191]
 - A migração é **tarefa de desenvolvimento** (não ticket), com autorização, critério de aceite e rollback por passo. Passos: ROADMAP F4-00..F4-09 (D1, runbook t351). [t187, t351]
+- **`~/.notebooklm` é a sessão pessoal do José** (usada na coleta inicial): fica intacta e **fora da migração**, inclusive a linha de refresh no crontab. [t355]
 
 ## 11. Camofox e sessão do Studio
 _Origem do bloco: t194–t196, t272._
+- **Agentes usam o Camofox [t355]:** ele foi feito para agentes, inclusive com o Jev. O script determinístico vem primeiro; quando um passo falha porque o site mudou, um agente intervém pelo Camofox, **sempre por uma Activity do Temporal** na fila da sessão (concorrência 1), com tentativas limitadas e cada ação registrada; a correção que deu certo vira proposta de ajuste do script (§3.1). Login, 2FA, cookies, exclusão e publicação fora das regras ficam com o José.
 - **Camofox é inegociável:** mouse humano, colar texto longo, digitar texto curto com cadência humana. O ritmo é da camada do Camofox; o Jev entra só para perguntas pontuais sobre o texto/DOM. [t186]
 - Camofox é o **único dono do login do Studio** no perfil `porquebr`. Login manual inicial pelo noVNC do próprio Camofox (preso a localhost/tailnet, com senha, desligado fora da hora do login). Sem Camoufox separado. [t195]
 - **Guardião determinístico da sessão:** timer ~20 min com variação; testa Studio, Gemini Web e NotebookLM; checagem extra ~30 min antes de cada publicação. [t195]
-- **Escada de recuperação:** (1) o Camofox renova; (2) login manual pelo noVNC com aviso no Telegram; cópia de cookies do Chrome **só como último recurso e com OK do José**. A publicação fica em espera e retoma sozinha; renovação que falha gera Telegram + ticket automático; o agente só observa e só age com roteiro pronto quando a escada esgota. [t195; t272]
+- **Escada de recuperação:** (1) o Camofox renova; (2) login manual pelo noVNC com aviso no Telegram; cópia de cookies do Chrome **só como último recurso e com OK do José**. A publicação fica em espera e retoma sozinha; renovação que falha gera Telegram + ticket automático; o agente só observa e só age com roteiro pronto quando a escada esgota. [t195; t272] _Revisto em t355: fora da sessão (login), o agente pode intervir pelo §3.1; a sessão em si continua só com o José._
 
 - **Isolamento [t354]:** a PQBR tem um Camofox **só dela**: checkout fixado, serviço `pqbr-camofox` em `127.0.0.1:9387` com chave de API, pasta `/home/pc/.pqbr/camofox`, perfil `pqbr` na conta de produção, fila do Temporal com concorrência 1 por sessão. Não compartilha servidor, perfil nem porta com `rede`, MP32 ou outros projetos, e nenhum outro projeto usa o perfil da PQBR. Passos: ROADMAP F4C. Até lá, o perfil `porquebr` no 9377 compartilhado segue como está.
 
