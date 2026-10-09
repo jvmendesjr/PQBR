@@ -1,0 +1,10 @@
+runtime/*
+!runtime/.gitkeep
+.env
+*.env
+__pycache__/
+*.pyc
+.venv/
+*.mp4
+*.mp3
+*.wav

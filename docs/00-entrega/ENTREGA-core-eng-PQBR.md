@@ -379,3 +379,18 @@ Princípio [APROVADO, t184]: **ideação, roteiro, SEO e pesquisa ficam com o No
 - **VERIFICADO:** o Paperclip abre só dentro da tailnet, em `https://pc.taildfb7d7.ts.net:3100`. A porta 443 fica livre por decisão do José.
 - **APROVADO:** a core-eng não usa perfis do Hermes. O José interage pelo chat do próprio Paperclip quando for preciso.
 - **VERIFICADO:** dependências globais no servidor: Camofox (REST 9377, saudável), Node, Python/uv, FFmpeg, Docker, gh, NotebookLM CLI 0.8.2 e Hindsight. As dependências locais da PQBR são tarefas do roteiro.
+
+## Estrutura do repositório (criada em 09/10/2026, VERIFICADO)
+Os diretórios abaixo já existem no repositório `jvmendesjr/PQBR`, vazios ou só com `README.md`. Os agentes devem preencher esta estrutura e não criar outra paralela:
+- `company/`: pacote Paperclip (COMPANY.md, teams/, agents/<slug>/AGENTS.md, .paperclip.yaml).
+- `skills/`: skills internas.
+- `tasks/`: rotinas.
+- `src/pqbr/{schemas,pipeline,integrations,community,guardian,storage}`: código da aplicação.
+- `templates/`: relatórios, mensagens fixas e banco de frases.
+- `config/`: só exemplos sem segredo (`.env.example`).
+- `db/migrations/`: esquema do Supabase.
+- `tests/`: testes e conjuntos rotulados (auditor e comentários em pt-BR).
+- `scripts/`: utilitários.
+- `runtime/`: temporário, fora do git, limpo a cada ciclo (regra de disco livre).
+- `docs/`: documentação.
+Segredos ficam no cofre do servidor, nunca no repositório.
