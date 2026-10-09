@@ -363,3 +363,10 @@ NÃO CABE:
 
 ## t369 — 09/10/2026
 - Retenção do consumo por modelo: linhas brutas **90 dias**, resumo diário **25 meses**; job às ~04:15, depois dos backups. F3-07 desbloqueada, ainda não executada.
+
+## t372 — 09/10/2026
+- Autorizado limpar o perfil `pqbr` e restringir as ferramentas dele. Feito: backup do `state.db` (600) e remoção da única mensagem com o `DATABASE_URL` do Paperclip, com o banco compactado; `invoke_run.js` removido. **A senha não estava no texto:** o Hermes mascarou como `***`; ficaram expostos só o usuário e o host. Nada foi achado no Hindsight, nos backups dele, no 9router, no journal nem no repositório. O host do Supabase também aparece no `state.db` do perfil `core`, que é uso próprio daquele perfil e não foi mexido.
+- Ferramentas do `pqbr`: sem terminal, arquivos, código, web, navegador, delegação nem cron (em `cli` e `telegram`). O Paperclip fica acessível só pelo MCP `paperclip-pqbr` com heartbeat embutido. Teste: listar e comentar ok; pedido de shell/ambiente recusado.
+
+## t373 — 09/10/2026
+- A troca da senha do banco do Paperclip no Supabase, a atualização do `DATABASE_URL` e o reinício só do Paperclip ficam como **AÇÃO MANUAL PENDENTE — José** (ROADMAP, ao lado da F1-03). Não executado.
