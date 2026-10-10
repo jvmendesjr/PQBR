@@ -19,6 +19,10 @@ async def client() -> Client:
 
 
 async def main() -> None:
+    import logging
+    from ..seguranca.barreira import instalar_no_logging
+    logging.basicConfig(level=logging.INFO)
+    instalar_no_logging()
     c = await client()
     w = Worker(c, task_queue=FILA, workflows=[EpisodioWorkflow, PonteTemporalPaperclipWorkflow],
                activities=[gerar_roteiro, gravar_outbox, aplicar_proposta_stub, abrir_issue_paperclip,

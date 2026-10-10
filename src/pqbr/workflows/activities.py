@@ -32,6 +32,12 @@ async def gerar_roteiro(inp: EpisodioInput) -> RoteiroShort:
 @activity.defn
 async def gravar_outbox(ev: OutboxEvento) -> bool:
     """Grava no 'Supabase' com chave de idempotência; repetir não duplica."""
+    from ..seguranca.barreira import exigir_limpo
+    from ..seguranca.segredos import SegredoDetectado
+    try:
+        exigir_limpo(ev, "banco")
+    except SegredoDetectado as e:
+        raise ApplicationError(str(e), type="SegredoDetectado", non_retryable=True) from None
     if SUPABASE_FORA.exists():
         raise ApplicationError("supabase indisponível (simulado)")
     ja = set()

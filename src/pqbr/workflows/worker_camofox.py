@@ -7,6 +7,10 @@ from .camofox import FILA_CAMOFOX, CamofoxSaudeWorkflow, camofox_saude, camofox_
 
 
 async def main() -> None:
+    import logging
+    from ..seguranca.barreira import instalar_no_logging
+    logging.basicConfig(level=logging.INFO)
+    instalar_no_logging()
     c = await client()
     w = Worker(c, task_queue=FILA_CAMOFOX, workflows=[CamofoxSaudeWorkflow],
                activities=[camofox_saude, camofox_acao_stub], max_concurrent_activities=1)

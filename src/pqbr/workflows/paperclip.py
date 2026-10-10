@@ -6,6 +6,8 @@ import asyncio, json, os, re
 from temporalio import activity
 from temporalio.exceptions import ApplicationError
 from pydantic import BaseModel, ConfigDict
+from ..seguranca.barreira import exigir_limpo
+from ..seguranca.segredos import SegredoDetectado
 
 NODE = os.environ.get("PAPERCLIP_NODE", os.path.expanduser("~/.hermes/node/bin/node"))
 CLI = os.environ.get("PAPERCLIP_CLI", os.path.expanduser("~/.paperclip/cli/current/node_modules/paperclipai/dist/index.js"))
@@ -61,8 +63,16 @@ def _lista(d) -> list:
     return []
 
 
+def _barreira(obj) -> None:
+    try:
+        exigir_limpo(obj, "ticket")
+    except SegredoDetectado as e:
+        raise ApplicationError(str(e), type="SegredoDetectado", non_retryable=True) from None
+
+
 @activity.defn
 async def abrir_issue_paperclip(p: PedidoIssue) -> str:
+    _barreira(p)
     for it in _lista(await _cli("issue", "list", "-C", p.company_id)):
         if p.marcador in (it.get("title") or ""):
             return it["id"]  # já existe: idempotente
@@ -75,6 +85,7 @@ async def abrir_issue_paperclip(p: PedidoIssue) -> str:
 
 @activity.defn
 async def comentar_paperclip(c: Comentario) -> str:
+    _barreira(c)
     args = ["issue", "comment", c.issue_id, "--body", c.corpo] + (["--resume"] if c.acordar_responsavel else [])
     return (await _cli(*args)).get("id", "")
 
