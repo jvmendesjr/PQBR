@@ -52,6 +52,20 @@ echo "outbox repetido gravou: $(Q -c "select count(*) from pqbr.outbox_aplicados
 Q -c "update pqbr.comentarios set texto_bruto='oi', texto_expira_em=now()-interval '1 day' where external_id='c1'"
 echo "expirar textos: $(Q -c "select pqbr.expirar_textos_comentarios()") (esperado 1)"
 echo "FKs sem índice: $(Q -c "select count(*) from pg_constraint c join pg_namespace n on n.oid=c.connamespace where n.nspname='pqbr' and c.contype='f' and not exists (select 1 from pg_index i where i.indrelid=c.conrelid and i.indkey[0]=c.conkey[1])")"
+# 0011 retenção (t358/t369): 3 linhas velhas (100 dias) e 1 nova; resumo antigo de 26 meses
+Q -c "insert into pqbr.consumo_modelos (em, provedor, modelo, tipo_acao, tokens_entrada, chamadas, sucesso) values
+      (now()-interval '100 days','g','m','roteiro',10,1,true),(now()-interval '100 days','g','m','roteiro',5,2,false),
+      (now()-interval '100 days','g','m','seo',1,1,true),(now()-interval '1 day','g','m','roteiro',7,1,true);
+      insert into pqbr.consumo_resumo_diario (dia, provedor, modelo, tipo_acao, linhas, chamadas, falhas) values (current_date - interval '26 months','g','m','seo',1,1,0)"
+F "pqbr_app executa a retenção" "set role pqbr_app; select pqbr.reter_consumo(current_date)"
+F "pqbr_manutencao apaga ações" "set role pqbr_manutencao; delete from pqbr.acoes"
+echo "retenção 1ª: $(Q -c "set role pqbr_manutencao; select pqbr.reter_consumo(current_date)::text" | tail -1)"
+echo "resumo roteiro (linhas/chamadas/falhas/tokens): $(Q -c "select linhas||'/'||chamadas||'/'||falhas||'/'||tokens_entrada from pqbr.consumo_resumo_diario where tipo_acao='roteiro'") (esperado 2/3/1/15)"
+echo "bruto restante: $(Q -c "select count(*) from pqbr.consumo_modelos") (esperado 1)"
+echo "retenção 2ª (idempotente): $(Q -c "set role pqbr_manutencao; select pqbr.reter_consumo(current_date)::text" | tail -1)"
+echo "resumo após 2ª: $(Q -c "select count(*)||' grupos, roteiro '||(select chamadas from pqbr.consumo_resumo_diario where tipo_acao='roteiro') from pqbr.consumo_resumo_diario") (esperado 2 grupos, roteiro 3)"
+echo "registro em acoes: $(Q -c "select count(*) from pqbr.acoes where tipo='retencao_consumo'") (esperado 2)"
+Q -c "truncate pqbr.consumo_modelos, pqbr.consumo_resumo_diario, pqbr.acoes restart identity"
 Q -c "truncate pqbr.respostas, pqbr.comentarios, pqbr.publicacoes, pqbr.episodio_estados, pqbr.episodios, pqbr.frases, pqbr.outbox_aplicados restart identity cascade"  # limpa dados de teste
 down; echo "DOWN ok: esquema pqbr existe? $(Q -c "select count(*) from pg_namespace where nspname='pqbr'")"
 up; down; echo "ciclo UP/DOWN repetido ok"

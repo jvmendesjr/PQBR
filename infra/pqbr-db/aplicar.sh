@@ -1,5 +1,5 @@
 #!/bin/sh
-# Aplica as migrações 0001..0010 (todas em ordem) no banco local e define login/senha dos papéis (senhas lidas do .env, sem eco).
+# Aplica as migrações 0001..0011 (todas em ordem) no banco local e define login/senha dos papéis (senhas lidas do .env, sem eco).
 set -eu; cd "$(dirname "$0")"; . ./.env
 C="$(docker compose ps -q pqbr-db)"
 P() { docker exec -i -w /repo "$C" psql -U postgres -d pqbr -v ON_ERROR_STOP=1 -qAt "$@"; }
@@ -11,11 +11,16 @@ for f in ../../db/migrations/[0-9][0-9][0-9][0-9]_*.sql; do
 done
 # login + senha (via variáveis psql, não aparecem em ps nem em log)
 docker exec -i "$C" psql -U postgres -d pqbr -v ON_ERROR_STOP=1 -q \
-  -v app="$PQBR_APP_PASSWORD" -v leit="$PQBR_LEITURA_PASSWORD" <<'SQL'
+  -v app="$PQBR_APP_PASSWORD" -v leit="$PQBR_LEITURA_PASSWORD" -v manut="${PQBR_MANUT_PASSWORD:-}" <<'SQL'
 alter role pqbr_app login password :'app' connection limit 10;
 alter role pqbr_leitura login password :'leit' connection limit 5;
 revoke all on database pqbr from public;
 grant connect on database pqbr to pqbr_app, pqbr_leitura;
+select :'manut' <> '' as tem_manut \gset
+\if :tem_manut
+alter role pqbr_manutencao login password :'manut' connection limit 2;
+grant connect on database pqbr to pqbr_manutencao;
+\endif
 revoke create on schema public from public;
 SQL
 # Sem "trust" no localhost do container: só o socket local (docker exec) fica sem senha.

@@ -376,3 +376,10 @@ NÃO CABE:
 
 ## t375 — 10/10/2026
 - Link da tailnet do box reautorizado. Autorizados e feitos os passos seguros do isolamento do Camofox: F4C-01 (checkout fixado e Camoufox próprio), F4C-02 (`pqbr-camofox` em 127.0.0.1:9387 com chave, 900 MB, VNC desligado) e F4C-03 (fila `camofox-pqbr` com concorrência 1, Activity de saúde e stub). Não foram tocados o 9377 compartilhado, os perfis dele, o `rede` e o MP32; nenhum login foi feito.
+
+## t376 — 10/10/2026
+- O José não pode intervir agora: seguir só fases sem ele. Feito: F1-01 (pacote `company/`, adaptador `process` stub, tudo pausado; aguarda G1), F1-02 só dry-run (limpo, nenhuma org criada), F3-01 (contratos §11), F3-02 (barreira ligada em tickets, banco, Hindsight e logs), F3-05 (código; backends EM CONSTRUÇÃO), F3-06, F3-07 (migração 0011 aplicada, Schedule 04:15 ativo), F5-01 (grade/barreiras/R10/polêmica) e F5-02 (código e testes; Schedules pausados). Nada publicado, nenhum login, nenhum serviço fora da PQBR reiniciado.
+
+## t378 — 10/10/2026
+- **EM CONSTRUÇÃO — discutir com José** (próxima fase de conteúdo; regras atuais não mudam): reformular o escopo editorial para ≥ 80% de curiosidades inúteis que prendem a atenção (ex.: origem de expressões antigas ainda em uso, como "podre de rico", que foi bem); reduzir a pesquisa de assuntos em alta; tendências só para contextualizar datas sazonais (Natal, Carnaval, festas brasileiras). ROADMAP F7-00; afeta F5-01 (mistura configurável já no código) e F7-01.
+
