@@ -1,0 +1,113 @@
+schema: "paperclip/v1"
+agents:
+  prod-director:
+    role: "general"
+    adapter:
+      type: "process"
+      config:
+        command: "/home/pc/Workspace/PQBR/scripts/paperclip/agente_pausado.sh"
+        cwd: "/home/pc/Workspace/PQBR"
+        timeoutSec: 30
+    runtime:
+      heartbeat:
+        enabled: false
+        maxConcurrentRuns: 1
+    budgetMonthlyCents: 0
+    permissions:
+      canCreateAgents: false
+      canCreateSkills: false
+      canAssignTasks: true
+  prod-analista:
+    role: "researcher"
+    adapter:
+      type: "process"
+      config:
+        command: "/home/pc/Workspace/PQBR/scripts/paperclip/agente_pausado.sh"
+        cwd: "/home/pc/Workspace/PQBR"
+        timeoutSec: 30
+    runtime:
+      heartbeat:
+        enabled: false
+        maxConcurrentRuns: 1
+    budgetMonthlyCents: 0
+    permissions:
+      canCreateAgents: false
+      canCreateSkills: false
+      canAssignTasks: false
+  prod-comunidade:
+    role: "general"
+    adapter:
+      type: "process"
+      config:
+        command: "/home/pc/Workspace/PQBR/scripts/paperclip/agente_pausado.sh"
+        cwd: "/home/pc/Workspace/PQBR"
+        timeoutSec: 30
+    runtime:
+      heartbeat:
+        enabled: false
+        maxConcurrentRuns: 1
+    budgetMonthlyCents: 0
+    permissions:
+      canCreateAgents: false
+      canCreateSkills: false
+      canAssignTasks: false
+  prod-compliance:
+    role: "general"
+    adapter:
+      type: "process"
+      config:
+        command: "/home/pc/Workspace/PQBR/scripts/paperclip/agente_pausado.sh"
+        cwd: "/home/pc/Workspace/PQBR"
+        timeoutSec: 30
+    runtime:
+      heartbeat:
+        enabled: false
+        maxConcurrentRuns: 1
+    budgetMonthlyCents: 0
+    permissions:
+      canCreateAgents: false
+      canCreateSkills: false
+      canAssignTasks: false
+  pqbr-assistente:
+    role: "general"
+    adapter:
+      type: "process"
+      config:
+        command: "/home/pc/Workspace/PQBR/scripts/paperclip/agente_pausado.sh"
+        cwd: "/home/pc/Workspace/PQBR"
+        timeoutSec: 30
+    runtime:
+      heartbeat:
+        enabled: false
+        maxConcurrentRuns: 1
+    budgetMonthlyCents: 0
+    permissions:
+      canCreateAgents: false
+      canCreateSkills: false
+      canAssignTasks: true
+  dev-manutencao:
+    role: "engineer"
+    adapter:
+      type: "process"
+      config:
+        command: "/home/pc/Workspace/PQBR/scripts/paperclip/agente_pausado.sh"
+        cwd: "/home/pc/Workspace/PQBR"
+        timeoutSec: 30
+    runtime:
+      heartbeat:
+        enabled: false
+        maxConcurrentRuns: 1
+    budgetMonthlyCents: 0
+    permissions:
+      canCreateAgents: false
+      canCreateSkills: false
+      canAssignTasks: false
+schemaVersion: 7
+sidebar:
+  agents:
+    - "prod-director"
+    - "prod-analista"
+    - "prod-comunidade"
+    - "prod-compliance"
+    - "pqbr-assistente"
+    - "dev-manutencao"
