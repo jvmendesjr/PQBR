@@ -1,0 +1,13 @@
+[Unit]
+Description=PQBR worker Temporal da fila camofox-pqbr (concorrência 1, F4C-03)
+After=pqbr-camofox.service
+[Service]
+WorkingDirectory=/home/pc/Workspace/PQBR
+Environment=PYTHONPATH=/home/pc/Workspace/PQBR/src
+Environment=PYTHONUNBUFFERED=1
+ExecStart=/home/pc/Workspace/PQBR/.venv/bin/python -m pqbr.workflows.worker_camofox
+Restart=on-failure
+RestartSec=10
+MemoryMax=150M
+[Install]
+WantedBy=default.target

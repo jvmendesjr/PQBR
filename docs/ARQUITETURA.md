@@ -9,6 +9,7 @@
 ## 1. Decisões de arquitetura (ADRs)
 
 ### ADR-001: motor de orquestração (Temporal primeiro, DBOS como plano B)
+- **Resultado [APROVADO t374, 10/10]:** o **Temporal** foi aprovado no teste (TZ-01..TZ-04 e TZ-07; soak de 122 execuções em ~20 h, sem falha, perda ou duplicata, pico de 340 MiB). **Motor = Temporal; DBOS dispensado.**
 - **Decisão [APROVADO t283]:** a espinha do fluxo é **código + motor de workflow durável**, numa arquitetura híbrida pensada para vários canais. O **Temporal** é testado primeiro; o **DBOS** é o plano B.
 - **Como decidir [PROPOSTA, ROADMAP F05-01..F05-07; TESTES TZ-01..TZ-07]:** spike de 1 dia. Temporal self-hosted só com Postgres local e dedicado no `pc` (sem Elasticsearch; separado do `mp32-postgres`; ~0,9 GiB estimado) e um `EpisodioWorkflow` de brinquedo com timer, sinal de aprovação e uma Activity que falha. Aceite: RAM dentro do limite combinado; retomada após `kill -9` no worker e após reboot; aprovação por sinal. Se reprovar, repetir o teste com o DBOS. O José escolhe no portão G0.5.
 - **Forma-alvo [PROPOSTA]:**
@@ -74,6 +75,7 @@
 
 ### Camofox: estado e isolamento [VERIFICADO 09/10, t354]
 - Hoje: um servidor compartilhado (`camofox-browser`, `*:9377`, **todas as interfaces, sem chave**), um processo para 14 perfis em `~/.camofox/profiles` (pastas pelo hash sha256 do `userId`). Usado por `rede` (`porquebr`), MP32 (`tutibom10`), Hermes `mp3`/`pet`/`gpu` e o keepalive do runway (conta pessoal). Sem trava entre projetos.
+- **Feito em 10/10 (t375):** F4C-01..03 no ar: `pqbr-camofox` em 127.0.0.1:9387 com chave, Camoufox e pastas próprios, e worker da fila `camofox-pqbr` (concorrência 1). Ainda sem perfil logado: o login é a F4C-04, com o José.
 - Alvo: instância da PQBR (`pqbr-camofox`, `127.0.0.1:9387`, chave, `/home/pc/.pqbr/camofox`, `MAX_SESSIONS=1`, `MemoryMax=900M`), acessada só pelas Activities da fila `camofox-pqbr` (concorrência 1). A fila `camofox` do §2 passa a ser essa. Passos no ROADMAP F4C; regra no REGRAS §11.
 
 ### Correção autônoma mediada pelo Temporal [t355; PROPOSTA]

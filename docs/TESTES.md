@@ -32,13 +32,13 @@ Regras: nenhum teste usa dados pessoais reais nem segredos (RNF-03); nenhum test
 
 | ID | Resultado |
 |---|---|
-| TZ-01 | ✅ Aprovado. Pico de 307 MiB, abaixo do teto de 1,5 GB. Dump e restauração ok. Soak de 24 h até 10/10 ~15:40. |
+| TZ-01 | ✅ Aprovado. Pico de 307 MiB, abaixo do teto de 1,5 GB. Dump e restauração ok. Soak encerrado em 10/10 11:57 (t374, sem esperar as 24 h): **122 execuções em ~20 h** (a cada 10 min), 0 falhas ou expiradas, 0 perdidas (`MissedCatchupWindow` 0), 0 duplicatas no outbox; pico do compose 340 MiB, worker 53 MiB, nenhuma amostra acima de 1536 MiB. |
 | TZ-02 | ✅ Aprovado, com `kill -9` no worker e restart do motor. Reboot do servidor dispensado (t334). |
 | TZ-03 | ✅ Aprovado, com stub; o banco do app de teste fica para a F3. |
 | TZ-04 | ✅ Aprovado no Paperclip de teste `PQBR-TESTE`. |
 | TZ-05 | ⛔ Bloqueado: `--yolo` incondicional no `hermes_local` (H-SDD1); nenhum agente Hermes executado. |
 | TZ-06 | ⏸ Pendente: falta o Telegram; o filtro de remetente do motor está ok. |
-| TZ-07 | Parcial. |
+| TZ-07 | ✅ Fechado (t374): RAM e estabilidade medidas no soak; motor escolhido = **Temporal**. |
 
 ## 3. Os 7 itens da validação (REGRAS §14)
 

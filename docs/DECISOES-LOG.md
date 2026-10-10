@@ -370,3 +370,9 @@ NÃO CABE:
 
 ## t373 — 09/10/2026
 - A troca da senha do banco do Paperclip no Supabase, a atualização do `DATABASE_URL` e o reinício só do Paperclip ficam como **AÇÃO MANUAL PENDENTE — José** (ROADMAP, ao lado da F1-03). Não executado.
+
+## t374 — 10/10/2026
+- O José decidiu não esperar as 24 h do soak. Resultado às 11:57: 122 execuções em ~20 h, 0 falhas, 0 perdidas, 0 duplicatas no outbox, pico de 340 MiB (worker 53 MiB). **Motor = Temporal; DBOS dispensado** (ADR-001, F05-07). Soak pausado e amostragem de RAM desligada, com os logs mantidos; o Temporal segue no ar.
+
+## t375 — 10/10/2026
+- Link da tailnet do box reautorizado. Autorizados e feitos os passos seguros do isolamento do Camofox: F4C-01 (checkout fixado e Camoufox próprio), F4C-02 (`pqbr-camofox` em 127.0.0.1:9387 com chave, 900 MB, VNC desligado) e F4C-03 (fila `camofox-pqbr` com concorrência 1, Activity de saúde e stub). Não foram tocados o 9377 compartilhado, os perfis dele, o `rede` e o MP32; nenhum login foi feito.

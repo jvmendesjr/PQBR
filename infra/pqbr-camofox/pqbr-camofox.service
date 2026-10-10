@@ -1,0 +1,13 @@
+[Unit]
+Description=PQBR Camofox isolado (127.0.0.1:9387, F4C-02, t375)
+After=network.target
+[Service]
+WorkingDirectory=/home/pc/.pqbr/camofox/app
+EnvironmentFile=/home/pc/.pqbr/camofox/.env
+ExecStart=/home/pc/.local/bin/node server.js
+Restart=on-failure
+RestartSec=10
+MemoryMax=900M
+MemorySwapMax=200M
+[Install]
+WantedBy=default.target

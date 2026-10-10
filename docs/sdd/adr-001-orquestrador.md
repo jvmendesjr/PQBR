@@ -103,3 +103,7 @@ Também `rm runtime/tz/propostas_aplicadas.jsonl`. Os workflows `tz04-ponte-*` s
   rm -rf ../../.venv ../../runtime/tz
   ```
   Remove containers, volume e rede. Não afeta outros serviços.
+
+## Resultado (t374, 10/10/2026)
+- Soak encerrado às 11:57: 122 execuções em ~20 h, 0 falhas/expiradas, 0 perdidas, 0 duplicatas no outbox; pico do compose 340 MiB, worker 53 MiB, nenhuma amostra acima de 1536 MiB.
+- **Decisão: motor = Temporal. DBOS dispensado.**
