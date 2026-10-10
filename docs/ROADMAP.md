@@ -77,11 +77,11 @@
 - [ ] **F1-01** Pacote `company/` (agentcompanies/v1)
   - Req: RF-33, RNF-12 · Testes: TS-09 · Depende de: F05-07, F00-01
   - Aceite: `COMPANY.md`, `agents/<slug>/AGENTS.md` (director, analista, comunidade, compliance, assistente, dev), `.paperclip.yaml` sem segredos; validador e scanner passam; personas de compliance e assistente sérias e diretas.
-  - Portão José: **G1**. Obs:
+  - Portão José: **G1**. Obs: 2026-10-10 (t376): pacote pronto em `company/` (COMPANY.md, 6 AGENTS.md, `.paperclip.yaml` com adaptador `process` stub, heartbeat desligado, orçamento 0); scanner limpo; dry-run sem avisos nem erros. **Aguarda o G1 do José** (revisar o pacote).
 - [ ] **F1-02** Import dry-run e criação da org pausada
   - Req: RF-43, RNF-13 · Testes: TS-13 · Depende de: F1-01
   - Aceite: dry-run limpo (H-SDD2); agentes pausados, heartbeats desligados.
-  - Portão José: autorizar o import; liberar agente é decisão separada. Obs:
+  - Portão José: autorizar o import; liberar agente é decisão separada. Obs: 2026-10-10 (t376): **só o dry-run**, limpo (`docs/sdd/f1-02-dryrun.md`); nenhuma org criada. O pacote não carrega `paused`: pausar todos logo após o import. Criação real aguarda o José.
 - [ ] **F1-03** (D2) Ajuste do perfil Hermes `pqbr`
   - Req: RF-34, RNF-13 · Testes: TZ-06 · Depende de: F05-05
   - Aceite: env mínimo, toolsets restritos, budgets; segredos só no `.env`.
