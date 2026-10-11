@@ -1,3 +1,5 @@
+> ⛔ **ARQUIVO — não consultar sem aprovação do José.** Superado pelos docs canônicos (README).
+
 # PLANO da PQBR (fases, portões e rollback)
 
 > Autoridade: o último da ordem (REGRAS > SPEC > ARQUITETURA > TESTES > ROADMAP > PLANO). **As tarefas, o estado e o próximo passo ficam só em `docs/ROADMAP.md`**; este arquivo resume as fases, os portões do José, o rollback, as pendências e os riscos, sem repetir tarefas.

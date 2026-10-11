@@ -2,12 +2,26 @@
 
 ## 0. Autoridade e uso deste arquivo
 
-- **Este é o arquivo de autoridade.** As §0–§3 são a **constituição** do projeto (t328). Ordem: `docs/REGRAS.md` > `docs/SPEC.md` (requisitos) > `docs/ARQUITETURA.md` (desenho) > `docs/TESTES.md` (testes e validação) > `docs/ROADMAP.md` (tarefas e estado) > `docs/PLANO.md` (fases e portões). `docs/RASTREABILIDADE.md` liga requisito → desenho → tarefa → teste. Agentes leem nessa ordem. As regras são o núcleo e não podem se perder; a arquitetura se adapta a elas (t285).
-- ⛔ **Proibido consultar sem aprovação explícita do José (t287):** `docs/arquivo/`, `docs/pesquisas/`, `docs/DECISOES-LOG.md`, `docs/CONTRATO-EDITORIAL.md` (rascunho) e qualquer rascunho ou material legado. Eles podem ser mal interpretados e aplicados em produção. Tudo o que vale deles já está aqui.
+- **Este é o arquivo de autoridade.** As §0–§3 são a **constituição** do projeto (t328). Ordem: `docs/REGRAS.md` > `docs/SPEC.md` (requisitos) > `docs/ARQUITETURA.md` (desenho) > `docs/TESTES.md` (testes e validação) > `docs/ROADMAP.md` (tarefas, estado, fases e portões; o PLANO foi incorporado). `docs/AGENTES.md` detalha a equipe do Paperclip (abaixo da ARQUITETURA). `docs/CONTRATO-EDITORIAL.md` é canônico para tom, categorias e gabarito (t394). `docs/RASTREABILIDADE.md` liga requisito → desenho → tarefa → teste. Agentes leem nessa ordem. As regras são o núcleo e não podem se perder; a arquitetura se adapta a elas (t285).
+- ⛔ **Proibido consultar sem aprovação explícita do José (t287):** `docs/arquivo/`, `docs/pesquisas/`, `docs/DECISOES-LOG.md` (só para registrar decisão nova) e qualquer rascunho ou material legado. Eles podem ser mal interpretados e aplicados em produção. Tudo o que vale deles já está aqui.
 - **Dúvida ou conflito sem certeza** nas decisões aprovadas: não adivinhar. Marcar "EM CONSTRUÇÃO — aguardando José" e levar a ele (t323).
 - **Decisão nova:** entra no `DECISOES-LOG.md` (tNNN) **e** aqui, no mesmo commit. Se este arquivo divergir do log, vale a entrada mais nova do log e este arquivo é corrigido.
 - **Legenda:** [APROVADO] decisão do José · [VERIFICADO] testado/visto na fonte · [HIPÓTESE] a confirmar antes de construir o que depende dela · EM CONSTRUÇÃO — aguardando José.
 - Origem: os códigos (tNNN, "item N", nomes de bloco) remetem ao `DECISOES-LOG.md`; "07/10" = registro de 07/10/2026.
+
+- **Atualização 11/10 (t384–t394), prevalece sobre qualquer trecho abaixo que diga o contrário:**
+  1. **Estratégia:** a entrega à core-eng foi abolida; o jr constrói a PQBR **no Paperclip** (t394). A ENTREGA está em `arquivo/`. A equipe vigente e o mapa @prod-* → agentes estão em `AGENTES.md` (§3 e §11).
+  2. **Autonomia/proatividade (t384, t390):** a empresa opera semanas ou meses sem o José. Agentes aplicam sozinhos dentro de faixas e playbooks; o José só vê no relatório. Ainda exigem o José: excluir/rejeitar/banir; voltar a público vídeo do item 5 ou recorrer ao YouTube; gastar dinheiro; login manual pelo noVNC ou 2FA (só depois de esgotada a reautenticação autônoma, item 11); mudar regra canônica; segredos e infraestrutura.
+  3. **Equipe:** 14 agentes já contratados (AGENTES.md §2), incluindo Observador, Guardião de Segurança e Dev Revisor (t390, t392).
+  4. **Contratação (t392):** sem teto de agentes; só com sugestão do Diretor, do dono da trilha ou do José; o Diretor executa, sem aprovação do board.
+  5. **Runtime (t392):** os agentes usam modelos do **9router** pelos adapters `process` (texto) e `opencode_local` (ferramenta). Nenhum perfil Hermes além do `pqbr`, que é só o canal do José para o Diretor. Ferramentas = kit PQBR (Temporal, Camofox, NotebookLM py, Pydantic v2) + API Paperclip.
+  6. **Rotinas** do Paperclip podem acordar agentes, inclusive para produção (t392). Efeito externo continua só pelo Temporal.
+  7. **Orçamento:** warn-only, sem pausa por custo; limite de segurança revisto após os primeiros relatórios (t392).
+  8. **Falhas:** na 2ª falha da mesma ação entra o playbook (até 3 tentativas). No Camofox, 5–15 min entre tentativas (t357). Só depois Diretor → Telegram.
+  9. **Tickets:** abertura automática; merge automático com CI e testes verdes + aprovação do Dev Revisor, se a mudança não tocar regra canônica, segredos nem infra (t390).
+  10. **Fonte de verdade:** Postgres local (t343). O Supabase não é usado.
+
+  11. **Camofox PQBR 24/7 (t395):** a instância `pqbr-camofox` fica sempre ligada, com a sessão permanente aberta na mesma tela. Só reinicia se cair (watchdog/`Restart=always`). Se a sessão cair, a reautenticação é **autônoma e por qualquer meio**: renovar no Camofox, depois **sincronizar cookies do Chrome**, depois outro caminho previsto. Cada passo vai para o log + aviso no Telegram. O José só é chamado depois disso (noVNC/2FA). Isso supera a §3.1 (trava "cópia de cookies") e a §11 ("só com OK do José").
 
 ---
 
@@ -18,7 +32,7 @@
 
 ## 2. Quem pode o quê e interação
 - **José** altera regras canônicas, aprova merges e é a autoridade final. [INTERAÇÃO; item 5]
-- **@prod-director** altera parâmetros operacionais, sempre pelo padrão dos agentes pensantes (§3): propõe e o José aprova. [INTERAÇÃO; t324–t326]
+- **@prod-director** altera parâmetros operacionais, sempre pelo padrão dos agentes pensantes (§3): propõe e o José aprova. [INTERAÇÃO; t324–t326] **[SUPERADO t390–t395: ver §0, atualização 11/10]**
 - **Agentes de desenvolvimento** (qualquer um) alteram código e infraestrutura **por ticket** na produção ou por tarefa de dev na construção. Substitui o roteamento para a core-eng. [t286; antes: INTERAÇÃO "core-eng"; 07/10 rodada 2]
 - Os demais agentes **só propõem**. [ENTREGA §1; item 5]
 - **@pqbr-assistente:** roda no **Hermes `pqbr` pelo Telegram** (t281), registrado como agente no Paperclip (t327). É o assistente do José: conhece a alma do negócio, avisa, aciona os agentes do Paperclip (onde os agentes rodam, t357), abre tickets, orienta o José sobre como pedir (agente, comando, caminho), busca arquivos e resultados, pede detalhes aos especialistas e consulta o Jev; **não executa** e tem acesso restrito (ARQUITETURA §3; rascunho do SOUL em `docs/hermes-pqbr/SOUL-rascunho.md`). Só consulta, roteia e responde: perguntas, temas, propostas de regra ao @prod-director, tickets aos agentes de dev, verificação de fichas e pedidos de relatório ao @prod-analista. Responde sempre pelo banco. Não executa mudanças. [INTERAÇÃO; Relatórios de dados (t208); t281]
@@ -32,22 +46,22 @@
 - Agendamento com horários fixos + vigia de prazo; grade gerada **por código a partir da data** e gravada no banco; tema repetido barrado em **3 barreiras**; máquina de estados com checkpoint; o agente responde sempre pelo banco; relatório diário; o corte do fluxo antigo só acontece após vários dias sem falha. [ESTABILIDADE] _(Implementação do agendador: motor de workflow testado primeiro com Temporal, DBOS como plano B (t283); ver ARQUITETURA ADR-001. A regra não muda.)_
 - Origem: incidente de 08/10 (fluxo não iniciou; grade do dia 7 reaproveitada; 3 de 4 temas repetidos). [pauta 4]
 - Governança: máximo de determinismo; detectar problemas, registrar a ação humana e repetir automaticamente na próxima vez. [07/10 item 10]
-- **Padrão dos agentes pensantes** (@prod-director, @prod-analista, @prod-comunidade): uma **rotina fixa executa tudo**; os agentes só **observam e propõem mudanças**, como **saída estruturada validada por Pydantic v2**. Nenhuma mudança é aplicada sem a **aprovação do José**. [t324–t326]
+- **Padrão dos agentes pensantes** (@prod-director, @prod-analista, @prod-comunidade): uma **rotina fixa executa tudo**; os agentes só **observam e propõem mudanças**, como **saída estruturada validada por Pydantic v2**. Nenhuma mudança é aplicada sem a **aprovação do José**. [t324–t326] **[SUPERADO t390–t395: ver §0, atualização 11/10]**
 
 ### 3.1 Correção autônoma antes de chamar o José [t355]
 - **Camadas:** (1) o **script determinístico** executa; (2) se um passo falha por motivo **corrigível** (site ou seletor mudou, resposta fora do esquema, erro transitório que a escada não resolveu), um **agente intervém** para tentar resolver. O Jev entra nas decisões estruturadas e as ferramentas (Camofox, CLI, API) entram pelo próprio agente. (3) O José só é chamado se o agente falhar dentro dos limites ou se a ação for sensível. Isso **reduz o determinismo de propósito**: é automação inteligente, mas sempre limitada e registrada.
 - **Divisão de papéis [t356]:** o **Jev** faz só as funções dele e pode sempre ser usado nelas: decisão estruturada, classificação, triagem (se a falha é corrigível, se cabe intervenção, se é sensível) e verificação do resultado quando couber. A **intervenção** em si é de um **agente com modelo LLM**, que resolve, **aprende** (registra o aprendizado no bank Hindsight único da PQBR, sem segredos, §17, §21) e **loga tudo** no banco do app pelo Temporal.
 - **Sempre pelo Temporal:** a intervenção é uma Activity na fila da ferramenta/sessão (concorrência 1 por sessão), nunca uma chamada solta. Cada ação do agente (clique, comando, chamada, resposta do Jev) é registrada no banco do app com episódio, passo, motivo e resultado, sem segredos (§17).
 - **Limites [t357]:** **3 tentativas** por intervenção; duração de **5 a 15 min**, **sorteada** (não fixa) quando a intervenção é no Camofox; sem repetir a mesma ação idêntica (vale a parada de 5 idênticas do §18).
-- **Persistência:** a correção que deu certo vira **proposta de ajuste do script** (tarefa de dev na construção; ticket ou PR na produção, §24), com as 2 aprovações do José. A correção de improviso vale só para aquela execução; o script corrigido é o que fica.
-- **Travas duras (o agente nunca faz, nem para corrigir):** login, 2FA, logout ou cópia de cookies; exclusão de qualquer coisa (vídeo, comentário, arquivo, caderno raiz, dado); tornar público ou republicar (item 5, §16); publicar fora das regras (reprovado, sem estado gravado, sem código, acima do teto); recorrer ou responder ao YouTube; pagamentos ou compras; mexer em segredos; mudar regras, limiares ou dependências (§12); escrever no banco do app fora do Temporal; código do Paperclip (t335). O **item 5 (privado automático)** continua só no código, sem agente no caminho.
+- **Persistência:** a correção que deu certo vira **proposta de ajuste do script** (tarefa de dev na construção; ticket ou PR na produção, §24), com as 2 aprovações do José. **[SUPERADO t390–t395: ver §0, atualização 11/10]** A correção de improviso vale só para aquela execução; o script corrigido é o que fica.
+- **Travas duras (o agente nunca faz, nem para corrigir):** login manual, 2FA ou logout (a cópia de cookies saiu da trava em t395, §0 item 11); exclusão de qualquer coisa (vídeo, comentário, arquivo, caderno raiz, dado); tornar público ou republicar (item 5, §16); publicar fora das regras (reprovado, sem estado gravado, sem código, acima do teto); recorrer ou responder ao YouTube; pagamentos ou compras; mexer em segredos; mudar regras, limiares ou dependências (§12); escrever no banco do app fora do Temporal; código do Paperclip (t335). O **item 5 (privado automático)** continua só no código, sem agente no caminho.
 - **Quando o José é chamado:** limites esgotados, ação sensível necessária, a correção mudaria o resultado editorial ou de conformidade, ou o caso é marcado EM CONSTRUÇÃO abaixo. O aviso pelo Telegram traz o que foi tentado.
 - **Aplicação por ferramenta e regra** (os detalhes ficam em cada seção):
 
 | Ferramenta/regra | Correção autônoma permitida | Limites e travas |
 |---|---|---|
 | NotebookLM (§9–§10) | reexecutar a geração no caderno efêmero; reextrair a saída; ajustar o prompt dentro do contrato; trocar para o Gemini Web (reserva) | 3 tentativas; nunca no caderno raiz; respeita os 80% de consumo; login ou relogin = José |
-| Camofox (§11) | agente pela Activity: novo seletor, outro caminho na página, fechar diálogo informativo, repetir com ritmo humano | concorrência 1 por sessão; só a instância `pqbr-camofox`; sem login, 2FA ou cookies; sem tornar público ou excluir |
+| Camofox (§11) | agente pela Activity: novo seletor, outro caminho na página, fechar diálogo informativo, repetir com ritmo humano | concorrência 1 por sessão; só a instância `pqbr-camofox`; sem login manual ou 2FA (reautenticação e cookies: §0 item 11, t395); sem tornar público ou excluir |
 | API do YouTube (§15, §19, §20) | repetir com backoff; renovar o token pelo fluxo OAuth já autorizado; conferir o estado pelo `list` antes de repetir | idempotência pelo código PQBR-EPxxxx; reautorização do OAuth = José |
 | Drive (§21) | repetir o upload; conferir tamanho e hash; recriar a pasta de destino que falta | nunca apaga; a limpeza só move para `99_Arquivo` |
 | Banco do app (§18) | repetir pelo outbox; conferir a idempotência | correção de esquema só por migração em tarefa ou ticket; agente não escreve direto |
@@ -138,11 +152,11 @@ _Origem do bloco: t184–t186._
 
 ## 11. Camofox e sessão do Studio
 _Origem do bloco: t194–t196, t272._
-- **Agentes usam o Camofox [t355]:** ele foi feito para agentes, inclusive com o Jev. O script determinístico vem primeiro; quando um passo falha porque o site mudou, um agente intervém pelo Camofox, **sempre por uma Activity do Temporal** na fila da sessão (concorrência 1), com tentativas limitadas e cada ação registrada; a correção que deu certo vira proposta de ajuste do script (§3.1). Login, 2FA, cookies, exclusão e publicação fora das regras ficam com o José. Quem opera o Camofox na intervenção é o agente com LLM; o Jev só faz a triagem e confere o resultado (t356).
+- **Agentes usam o Camofox [t355]:** ele foi feito para agentes, inclusive com o Jev. O script determinístico vem primeiro; quando um passo falha porque o site mudou, um agente intervém pelo Camofox, **sempre por uma Activity do Temporal** na fila da sessão (concorrência 1), com tentativas limitadas e cada ação registrada; a correção que deu certo vira proposta de ajuste do script (§3.1). Login manual, 2FA, exclusão e publicação fora das regras ficam com o José (cookies: §0 item 11, t395). Quem opera o Camofox na intervenção é o agente com LLM; o Jev só faz a triagem e confere o resultado (t356).
 - **Camofox é inegociável:** mouse humano, colar texto longo, digitar texto curto com cadência humana. O ritmo é da camada do Camofox; o Jev entra só para perguntas pontuais sobre o texto/DOM. [t186]
 - Camofox é o **único dono do login do Studio** no perfil `porquebr`. Login manual inicial pelo noVNC do próprio Camofox (preso a localhost/tailnet, com senha, desligado fora da hora do login). Sem Camoufox separado. [t195]
 - **Guardião determinístico da sessão:** timer ~20 min com variação; testa Studio, Gemini Web e NotebookLM; checagem extra ~30 min antes de cada publicação. [t195]
-- **Escada de recuperação:** (1) o Camofox renova; (2) login manual pelo noVNC com aviso no Telegram; cópia de cookies do Chrome **só como último recurso e com OK do José**. A publicação fica em espera e retoma sozinha; renovação que falha gera Telegram + ticket automático; o agente só observa e só age com roteiro pronto quando a escada esgota. [t195; t272] _Revisto em t355: fora da sessão (login), o agente pode intervir pelo §3.1; a sessão em si continua só com o José._
+- **Escada de recuperação:** (1) o Camofox renova; (2) login manual pelo noVNC com aviso no Telegram; cópia de cookies do Chrome **só como último recurso e com OK do José**. **[SUPERADO t390–t395: ver §0, atualização 11/10]** A publicação fica em espera e retoma sozinha; renovação que falha gera Telegram + ticket automático; o agente só observa e só age com roteiro pronto quando a escada esgota. [t195; t272] _Revisto em t355: fora da sessão (login), o agente pode intervir pelo §3.1; a sessão em si continua só com o José._
 
 - **Isolamento [t354]:** a PQBR tem um Camofox **só dela**: checkout fixado, serviço `pqbr-camofox` em `127.0.0.1:9387` com chave de API, pasta `/home/pc/.pqbr/camofox`, perfil `pqbr` na conta de produção, fila do Temporal com concorrência 1 por sessão. Não compartilha servidor, perfil nem porta com `rede`, MP32 ou outros projetos, e nenhum outro projeto usa o perfil da PQBR. Passos: ROADMAP F4C. Até lá, o perfil `porquebr` no 9377 compartilhado segue como está.
 
@@ -193,7 +207,7 @@ _Origem do bloco: item 6 (t235–t236), t237, t286._
 ## 18. Falhas e saúde
 _Origem do bloco: t240–t242._
 - **Teste de resposta** antes do lote da manhã e antes de cada ação crítica (agendar, tornar privado): chamada mínima a cada modelo e ferramenta (Jev, Gemini, NotebookLM, banco do app). Sem resposta no prazo ou com resposta inválida, entra a escada. [t241]
-- **Escada de falhas** (modelos, banco do app, 9router): backoff 30 s → 2 min → 8 min; rede fora = `NETWORK_WAITING` sem gastar tentativa; cada nova tentativa usa outra estratégia (outro provedor/combo); a mesma ação falhando 2× entra na correção autônoma (até 3 tentativas do agente com verificação do auditor/Jev) e só após a 3ª falha vai ao José (t357); 5 chamadas idênticas = parada; idempotência antes de cada passo; varredura de recuperação no reboot. [t241]
+- **Escada de falhas** (modelos, banco do app, 9router): backoff 30 s → 2 min → 8 min; rede fora = `NETWORK_WAITING` sem gastar tentativa; cada nova tentativa usa outra estratégia (outro provedor/combo); a mesma ação falhando 2× entra na correção autônoma (até 3 tentativas do agente com verificação do auditor/Jev) e só após a 3ª falha vai ao José (t357); 5 chamadas idênticas = parada; idempotência antes de cada passo; varredura de recuperação no reboot. [t241] **[2ª falha → playbook antes do José: ver §0 item 8, t390]**
 - **Banco do app [t343]:** Postgres 17 local no `pc` (`infra/pqbr-db`), separado do Postgres do Temporal; só em 127.0.0.1; backup diário com rotação. Supabase fica como opção futura. Agentes do Paperclip não escrevem nele (t341–t342).
 - **Banco do app fora:** o estado do fluxo vive no motor de workflow, com **retentativas duráveis do Temporal**; o banco do app recebe as gravações por **outbox** quando volta. Isso **substitui a fila em arquivo** da t242 (a confirmar no teste de 1 dia do Temporal). Continua valendo: nada é agendado nem tornado público sem o estado gravado. [t242; t324–t326]
 
@@ -213,7 +227,7 @@ _Origem do bloco: t240–t242._
 - **Tom nessas situações:** sempre profissional, direto e formal; **não** absorve o espírito editorial (sem piada, ironia ou sarcasmo). [t327]
 
 ## 20. Analista (@prod-analista) e relatórios
-- Coleta diária por código pela **YouTube Analytics API** (OAuth, só leitura; app do GCP publicado em produção para uso interno, para o token não expirar; Camofox no Studio como reserva). Análise semanal ou por anomalia; propõe ajustes ao @prod-director (saída estruturada Pydantic v2, aplicada só com aprovação do José, §3) e salva aprendizados no Hindsight; **só observa até ~30 Shorts/90 dias**. [@prod-analista; t324–t326]
+- Coleta diária por código pela **YouTube Analytics API** (OAuth, só leitura; app do GCP publicado em produção para uso interno, para o token não expirar; Camofox no Studio como reserva). Análise semanal ou por anomalia; propõe ajustes ao @prod-director (saída estruturada Pydantic v2, aplicada só com aprovação do José, §3) **[SUPERADO t390–t395: ver §0, atualização 11/10]** e salva aprendizados no Hindsight; **só observa até ~30 Shorts/90 dias**. [@prod-analista; t324–t326]
 - Métricas oficiais só pela API; os relatórios de 08/10 divergem e são hipótese. [t208]
 - Relatórios de dados vêm pelo @pqbr-assistente no Telegram, que aciona o analista. [t208]
 
@@ -240,7 +254,7 @@ _Origem do bloco: t240–t242._
 - Antes de dar um papel a um componente, conferir a ficha dele (ARQUITETURA). [t230]
 - Mudanças durante a construção voltam como **tarefas de desenvolvimento**; **tickets só na produção**. [t187; item 7]
 - **Tickets de manutenção agnósticos de agente:** qualquer agente de dev pega o ticket, acessa o código e corrige usando as memórias e o conhecimento do código no Hindsight. Os agentes especializados da PQBR **pré-estruturam cada ticket** com localização, falha observada e correções sugeridas. [t286]
-  - **Duas aprovações do José por ticket:** (1) na **abertura**, quando ele pode pedir correções no próprio ticket; (2) no **merge**. [t324–t326]
+  - **Duas aprovações do José por ticket:** (1) na **abertura**, quando ele pode pedir correções no próprio ticket; (2) no **merge**. [t324–t326] **[SUPERADO t390–t395: ver §0, atualização 11/10]**
   - Memórias de código ficam no **bank único da organização** (sem bank separado). [t324–t326]
 - Transição: o perfil Hermes `rede` é **pausado quando a PQBR estiver definida**; daí em diante usa-se o perfil `pqbr`. Até lá, o `rede` deixa de ter automação/cron e roda só sob demanda. [07/10 rodada 2; t327] _(Fluxo de ticket inter-org com a core-eng: SUPERADO por t284/t286.)_
 - Dúvida não se adivinha: "EM CONSTRUÇÃO — aguardando José". [t323]

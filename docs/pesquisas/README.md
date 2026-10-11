@@ -1,3 +1,5 @@
+> ⛔ Pesquisas: material de apoio. Não consultar sem aprovação do José.
+
 # docs/pesquisas/
 
 > ⛔ **PASTA DE PRÉ-CONSTRUÇÃO: AGENTES NÃO CONSULTAM (t287).** Nenhum arquivo desta pasta pode ser lido por agente sem **aprovação explícita do José**. Pesquisas e referências podem trazer premissas superadas que, mal interpretadas, iriam parar em produção. O que foi aprovado a partir delas já está em `docs/REGRAS.md`.

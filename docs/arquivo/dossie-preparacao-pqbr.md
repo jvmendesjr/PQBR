@@ -1,3 +1,5 @@
+> ⛔ **ARQUIVO — não consultar sem aprovação do José.** Superado pelos docs canônicos (README).
+
 > ⛔ **SUPERADO — ARQUIVO DE PRÉ-CONSTRUÇÃO. NÃO USAR PARA DECIDIR. AGENTES NÃO CONSULTAM SEM APROVAÇÃO EXPLÍCITA DO JOSÉ (t287).**
 > Original: `docs/99-historico/dossie-preparacao-pqbr.md`. Motivo: dossiê de preparação para a core-eng (abortada, t284). E-mail pessoal e IP da tailnet removidos em 09/10. As regras válidas estão em `docs/REGRAS.md`.
 

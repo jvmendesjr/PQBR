@@ -1,3 +1,5 @@
+> ⛔ **ARQUIVO — não consultar sem aprovação do José.** Superado pelos docs canônicos (README).
+
 > ⛔ **SUPERADO — ARQUIVO DE PRÉ-CONSTRUÇÃO. NÃO USAR PARA DECIDIR. AGENTES NÃO CONSULTAM SEM APROVAÇÃO EXPLÍCITA DO JOSÉ (t287).**
 > Original: `box: testes/2026-10-08/final-round/v2-r3/RELATORIO-v2-r3.md`. Motivo: avaliação anterior às regras t264/t265 (a3 foi reavaliada como aprovada pelo critério novo). As regras válidas estão em `docs/REGRAS.md`.
 

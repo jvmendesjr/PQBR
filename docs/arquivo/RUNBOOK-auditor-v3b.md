@@ -1,3 +1,5 @@
+> ⛔ **ARQUIVO — não consultar sem aprovação do José.** Superado pelos docs canônicos (README).
+
 > ⛔ **SUPERADO — ARQUIVO DE PRÉ-CONSTRUÇÃO. NÃO USAR PARA DECIDIR. AGENTES NÃO CONSULTAM SEM APROVAÇÃO EXPLÍCITA DO JOSÉ (t287).**
 > Original: `box: testes/2026-10-08/auditor/v3/RUNBOOK.md`. Motivo: usa a tabela LEVE/GRAVE de identidade, superada por t264/t265. O gabarito (labels.json, decide.py) entra em tests/ na D4. As regras válidas estão em `docs/REGRAS.md`.
 

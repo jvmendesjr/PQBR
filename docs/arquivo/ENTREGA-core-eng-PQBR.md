@@ -1,3 +1,5 @@
+> ⛔ **ARQUIVO — não consultar sem aprovação do José.** Superado pelos docs canônicos (README).
+
 > ⛔ **SUPERADO — ARQUIVO DE PRÉ-CONSTRUÇÃO. NÃO USAR PARA DECIDIR. AGENTES NÃO CONSULTAM SEM APROVAÇÃO EXPLÍCITA DO JOSÉ (t287).**
 > Original: `docs/00-entrega/ENTREGA-core-eng-PQBR.md (inclui a seção "Atualização do ambiente (09/10/2026)" que não estava commitada)`. Motivo: pacote de entrega para a org core-eng, abortada pela t284. Regras → REGRAS.md; componentes, papéis, skills, ambiente e perfil `pqbr` → ARQUITETURA.md; D/H e pendências → PLANO.md. Host da tailnet e id do chat do Telegram substituídos por nomes lógicos. As regras válidas estão em `docs/REGRAS.md`.
 

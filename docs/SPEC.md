@@ -133,6 +133,7 @@
 | RF-32 | Levantamento de custos (tokens, uso do NotebookLM, APIs) sem teto mensal. | §22 |
 
 ### F09. Agentes, interação e manutenção
+> Atualizado t384–t395: autonomia, contratação, runtime 9router, Guardião e Camofox 24/7 em REGRAS §0 (atualização 11/10) e AGENTES.md; prevalecem sobre os itens abaixo.
 
 **História:** Como José, quero que os agentes só proponham e que eu aprove, pelo Telegram, tudo o que muda.
 
@@ -148,7 +149,7 @@
 | RF-34 | @pqbr-assistente no Hermes `pqbr` pelo Telegram: só consulta, roteia e responde pelo banco; ordem só do ID autorizado do José. | §2 |
 | RF-35 | Tickets de manutenção agnósticos, pré-estruturados (localização, falha, correções sugeridas), com 2 aprovações do José (abertura com correções + merge); memórias de código no bank Hindsight único. | §24 |
 | RF-44 | Correção autônoma antes de chamar o José: script primeiro; falha corrigível → agente via Activity do Temporal (concorrência 1 por sessão), tentativas e tempo limitados, cada ação registrada; sucesso vira proposta de ajuste do script com as 2 aprovações; travas duras preservadas. | §3.1 |
-| RF-45 | Agentes usam o Camofox só pela Activity do Temporal, na instância da PQBR, com allowlist de ações; login, 2FA, cookies, exclusão e publicação fora das regras ficam com o José. | §11 |
+| RF-45 | Agentes usam o Camofox só pela Activity do Temporal, na instância da PQBR, com allowlist de ações; login manual, 2FA, exclusão (cookies: REGRAS §0 item 11, t395) e publicação fora das regras ficam com o José. | §11 |
 | RF-46 | Divisão de papéis na correção autônoma: o Jev faz só triagem, classificação, decisão estruturada e verificação do resultado; um agente com modelo LLM executa a intervenção, registra aprendizados no bank Hindsight único da PQBR e loga tudo no banco do app via Temporal. Runtime e modelo do agente: EM CONSTRUÇÃO. | §3.1, §7 |
 | RF-47 | Consumo por modelo e por tipo de ação (tokens, chamadas, tempo, sucesso, custo estimado) em `pqbr.consumo_modelos`, agregado por dia no relatório diário (por modelo, por tipo de ação, falhas, custo estimado, variação vs. 7 dias); sem teto de tokens. | §22, §3.1 |
 | RF-48 | @pqbr-assistente (Hermes `pqbr`): assistente do José que avisa, aciona agentes do Paperclip, abre tickets, orienta comandos e caminhos, busca arquivos e resultados, consulta especialistas e o Jev; não executa; acesso restrito. | §2 |

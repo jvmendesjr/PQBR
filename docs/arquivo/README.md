@@ -1,3 +1,5 @@
+> ⛔ **ARQUIVO — não consultar sem aprovação do José.** Superado pelos docs canônicos (README).
+
 # docs/arquivo/
 
 > ⛔ **SUPERADO — NÃO USAR PARA DECIDIR. AGENTES NÃO CONSULTAM (t287).** Esta é a única pasta de material superado e legado. Ler qualquer arquivo daqui exige **aprovação explícita do José**: o conteúdo foi substituído por decisões mais novas e pode ser mal interpretado e aplicado em produção. As regras válidas estão em `docs/REGRAS.md`.

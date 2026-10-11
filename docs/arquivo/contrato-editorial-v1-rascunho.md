@@ -1,3 +1,5 @@
+> ⛔ **ARQUIVO — não consultar sem aprovação do José.** Superado pelos docs canônicos (README).
+
 > ⛔ **SUPERADO — ARQUIVO DE PRÉ-CONSTRUÇÃO. NÃO USAR PARA DECIDIR. AGENTES NÃO CONSULTAM SEM APROVAÇÃO EXPLÍCITA DO JOSÉ (t287).**
 > Original: `docs/01-editorial/contrato-editorial-pqbr-rascunho.md`. Motivo: fundido em docs/CONTRATO-EDITORIAL.md, com os trechos superados (t262–t265, t271) marcados. As regras válidas estão em `docs/REGRAS.md`.
 

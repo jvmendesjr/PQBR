@@ -52,6 +52,17 @@
 
 ---
 
+### ADR-006: construção no Paperclip pelo jr; agentes via 9router [APROVADO t390–t394]
+- Sem entrega à core-eng; o jr monta a empresa PQBR no Paperclip (t394). 14 agentes; desenho em `AGENTES.md`.
+- Adapters: `process` (script do kit → 9router → Pydantic) e `opencode_local` (9router como provider OpenAI-compatível; ferramentas nativas negadas, salvo os Devs em container). Plano B: `http`. `hermes_local` não é usado. O único perfil Hermes é o `pqbr` (ADR-003).
+- Dev Revisor usa outro modelo do 9router, de família diferente do Corretor.
+
+### ADR-007: exceção controlada do `--yolo` / auto-aprovação de ferramentas [APROVADO t390, renumerada t395]
+- `--yolo` (ou o equivalente do OpenCode, auto-aprovar permissões) só quando necessário. Perfis mínimos sem terminal, arquivos ou sudo; exceção só para o Dev Corretor e o Dev Revisor, em container isolado (worktree, sem rede de produção nem segredos; o Revisor não escreve no repo principal). O `pqbr` nunca usa `--yolo`. Com a ADR-006, o H-SDD1 deixa de bloquear.
+
+### ADR-008: Camofox PQBR 24/7 com reautenticação autônoma [APROVADO t395]
+- `pqbr-camofox` sempre ligado, com a sessão permanente na mesma tela; reinicia só se cair (`Restart=always` + guardião). A sessão caiu: renovar → sincronizar cookies do Chrome → outro caminho; log + Telegram em cada passo; o José só no fim (noVNC/2FA).
+
 ## 2. Componentes
 
 | Componente | Papel | Status |
@@ -88,6 +99,8 @@
 - Tabela `pqbr.consumo_modelos` (migração 0010): uma linha por chamada ou lote, com provedor, modelo, `tipo_acao` (ideação, roteiro, auditor visual/texto/desempate, triagem/classificação/decisão/verificação do Jev, correção autônoma, comunidade, compliance, analista, assistente, publicação, teste de resposta…), ferramenta, episódio, workflow/run/activity do Temporal, tentativa, chamadas, tokens (entrada, saída, cache, raciocínio), unidades não-token, duração, sucesso, classe do erro e custo estimado (micro-USD). Sem prompt, resposta ou dado pessoal. View `consumo_diario` (fuso de Fortaleza) alimenta o relatório diário. Sem teto: só monitoramento.
 
 ## 3. Papéis
+
+> **SUPERADO em parte (t384–t395):** a equipe vigente e o mapa @prod-* → 14 agentes estão em `AGENTES.md` §11. O "só propõe, José aprova" foi relaxado (REGRAS §0).
 
 > t363: o `pqbr` já fala com o Paperclip (empresa de teste) por chave de agente escopada; ver §10. A restrição de acesso ainda **não** está na configuração do perfil (incidente do teste, §10).
 
@@ -135,7 +148,7 @@ Personas [APROVADO como fonte]: pt-BR, parafraseadas da Agency Agents (MIT). Com
 
 ## 6. Estrutura do repositório
 
-- `docs/`: REGRAS, SPEC, ARQUITETURA, TESTES, ROADMAP, PLANO, RASTREABILIDADE; CONTRATO-EDITORIAL (rascunho), DECISOES-LOG, `pesquisas/`, `arquivo/` (estes quatro sob a t287); `docs/sdd/` para relatórios de fase (ex.: ADR-001 do teste).
+- `docs/`: README, REGRAS, CONTRATO-EDITORIAL, SPEC, ARQUITETURA, AGENTES, TESTES, ROADMAP (com o PLANO), RASTREABILIDADE, DECISOES-LOG; `hermes-pqbr/` (config viva do perfil `pqbr`); `pesquisas/`, `arquivo/` (estes quatro sob a t287); `docs/sdd/` para relatórios de fase (ex.: ADR-001 do teste).
 - `src/pqbr/{schemas,pipeline,integrations,community,guardian,storage}`: código. [PROPOSTA] `src/pqbr/workflows/` depois da ADR-001.
 - `db/migrations/` (schema do banco do app), `db/seeds/` (`temas-publicados.csv`: lista de temas já publicados, base da R10).
 - `templates/` (relatórios, mensagens fixas, banco de frases), `config/` (só exemplos sem segredo), `tests/`, `scripts/`, `skills/`.

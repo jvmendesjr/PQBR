@@ -1,3 +1,5 @@
+> ⛔ **ARQUIVO — não consultar sem aprovação do José.** Superado pelos docs canônicos (README).
+
 > ⛔ **SUPERADO — ARQUIVO DE PRÉ-CONSTRUÇÃO. NÃO USAR PARA DECIDIR. AGENTES NÃO CONSULTAM SEM APROVAÇÃO EXPLÍCITA DO JOSÉ (t287).**
 > Original: `docs/01-editorial/aditivo-contrato-editorial-4refs-2026-10-09.md`. Motivo: fundido em docs/CONTRATO-EDITORIAL.md §15; a divergência de CTA foi resolvida por t262/t263; os caminhos citados estavam errados. As regras válidas estão em `docs/REGRAS.md`.
 

@@ -383,3 +383,10 @@ NÃO CABE:
 ## t378 — 10/10/2026
 - **EM CONSTRUÇÃO — discutir com José** (próxima fase de conteúdo; regras atuais não mudam): reformular o escopo editorial para ≥ 80% de curiosidades inúteis que prendem a atenção (ex.: origem de expressões antigas ainda em uso, como "podre de rico", que foi bem); reduzir a pesquisa de assuntos em alta; tendências só para contextualizar datas sazonais (Natal, Carnaval, festas brasileiras). ROADMAP F7-00; afeta F5-01 (mistura configurável já no código) e F7-01.
 
+
+## t384–t395 — 11/10/2026 (resumo)
+- t384/t390: proatividade e autonomia; equipe pré-contratada; aprovações relaxadas; Dev Revisor; `--yolo` com regras (ADR-007).
+- t392: sem perfis Hermes nos agentes (só `pqbr`); modelos via 9router (`process`/`opencode_local`, ADR-006); sem teto de agentes; rotinas podem acordar a produção; orçamento warn-only; Guardião de Segurança.
+- t393: o observador de risco da conta (t198) fica com o Líder Compliance; a sessão fica com o Observador e o comprometimento com o Guardião (AGENTES §2.2).
+- t394: a core-eng foi abolida; o jr constrói no Paperclip; docs consolidados (README, AGENTES; PLANO → ROADMAP; ENTREGA e superados em `arquivo/`).
+- t395: Camofox PQBR 24/7 com sessão permanente; reinício só se cair; reautenticação autônoma por qualquer meio, inclusive cookies do Chrome, com log + Telegram; o José só no fim (ADR-008; REGRAS §0 item 11).
