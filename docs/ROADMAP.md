@@ -172,10 +172,11 @@ Precisam do José: F4C-04, F4C-05, F4C-06, F4C-07. F4C-01..03 só pedem o portã
 
 ## Fase 7: editorial e auditor
 
-- [ ] **F7-00** (t378) Reformular o escopo editorial — **EM CONSTRUÇÃO — discutir com José** na próxima fase de conteúdo; regras atuais **não** mudam ainda. Proposta: ≥ 80% de "curiosidades inúteis que prendem a atenção" (ex.: origem de expressões antigas do dia a dia ainda em uso; "por que dizemos podre de rico" foi bem); menos pesquisa de assuntos em alta; tendências só para contextualizar datas sazonais (Natal, Carnaval, festas brasileiras). Afeta F5-01 (mistura e barreiras; o código já aceita a fração configurável) e F7-01 · Portão: José.
+- [x] **F7-00** (t378 → decidido t399/t400) Escopo editorial ≥ 80% origem de expressões/curiosidades, sazonal só na janela; visual 2D genérico; fichas pausadas. Regra em CONTRATO §16. Afeta F5-01 (fração configurável: 0,8) e F7-01.
 
+- [ ] **F7-03** (t400) Modelo de roteiro com bloco visual (`[ESTILO]/[PERSONAGEM]/[AMBIENTE]/[CENAS]`, CONTRATO §16.4) no `RoteiroShort` (Pydantic) + limite diário de uso do NotebookLM por contagem própria · Depende de: F3-01 · Aceite: roteiro inválido sem o bloco; contador bloqueia acima do limite · Portão: G7
 - [ ] **F7-01** (D11) Contrato v2 sem superados; decidir R1–R6, R8, R9; RUNBOOK; SOP — Req: RF-07 · Testes: V1 · Depende de: R-005 · Aceite: aprovado pelo José · Portão: **G7** · Obs: R1–R9 EM CONSTRUÇÃO — aguardando José.
-- [ ] **F7-02** (D4) Auditor (Gemini web via Camofox, Jev no texto, código decide; imagem×fala não reprova) — Req: RF-11..RF-14 · Testes: TS-03, V3 · Depende de: F3-01, F7-01 · Aceite: falso aprovado/reprovado medidos · Portão: G7 · Obs:
+- [ ] **F7-02** (D4) Auditor (Gemini web via Camofox em 2 rodadas, RUNBOOK-auditor-v3b; checagens sem fichas CONTRATO §16.6 + A9; Jev no texto, código decide; imagem×fala não reprova) — Req: RF-11..RF-14 · Testes: TS-03, V3 · Depende de: F3-01, F7-01 · Aceite: falso aprovado/reprovado medidos · Portão: G7 · Obs:
 
 ## Fase 8: publicação, armazenamento e revisão humana
 

@@ -22,7 +22,7 @@ Fontes revisadas (servidor `pc` fora da tailnet; usadas cópias locais): espelho
 José (board, ausente por padrão)
 └─ Diretor (CEO)
    ├─ Líder Editorial ── Pesquisador de Origem · Roteirista · Caçador Sazonal
-   ├─ Diretor de Arte 2D
+   ├─ Diretor de Arte 2D (PAUSADO, t400)
    ├─ Especialista SEO
    ├─ Auditor
    ├─ Líder Compliance
@@ -39,11 +39,11 @@ José (board, ausente por padrão)
 | Diretor (CEO) | prioriza, desbloqueia, contrata/pausa, resumo semanal; parâmetros operacionais e limpeza noturna do Drive por script (t270) | escalonamento + semanal | Programador de Publicação (propõe janelas; Temporal executa) |
 | Líder Editorial | grade 80/20, anti-repetição R10 | grade 1:00 | — |
 | Pesquisador de Origem | origem das expressões com ≥2 fontes | tema aprovado | Checador de Fatos (fonte) |
-| Roteirista | orquestra roteiro no NotebookLM (t184), 15 s–3 min, alvo ~50 s (t271) | pesquisa pronta | — |
+| Roteirista | orquestra no NotebookLM (caderno **efêmero por episódio**, nunca o mestre; roteiro como fonte antes de gerar; nunca `ask --new`) pesquisa, plano, roteiro e Short com os comandos/prompts canônicos; escreve o **bloco visual** (estilo 2D + personagem + ambiente + cenas, CONTRATO §16); respeita **limite diário** de uso (contagem própria; Pro: 500 chats/dia, 20 vídeos/dia) para poupar tokens; 15 s–3 min, alvo ~50 s (t271) | pesquisa pronta | descrição de estilo/personagem do Diretor de Arte 2D (t400) |
 | Caçador Sazonal | tendências sazonais (≤20% da grade) | rotina Paperclip (cron) 30 dias antes de Carnaval, Junina, Natal etc. + issue do Líder Editorial | — |
-| Diretor de Arte 2D | fichas e prompts por cena; capa | roteiro aprovado | Capista (execução) |
+| Diretor de Arte 2D | **PAUSADO (t400)** junto com as fichas; reativar só em arquitetura não-NotebookLM | — | — |
 | Especialista SEO | título, descrição, tags, código PQBR-EP; nunca pede comentário (t263) | roteiro aprovado | — |
-| Auditor | auditoria pré-publicação (código + Gemini juiz + Jev); 3ª rodada em divergência | pré-publicação | QA de Narração (checagens de áudio/transcrição) |
+| Auditor | auditoria pré-publicação: código extrai quadros/transcrição; **juiz visual = Gemini web via Camofox, 2 rodadas** (3.8 Flash modo normal, chat novo por rodada; falha só se as duas concordam; divergência → 3ª rodada do agente) (RUNBOOK-auditor-v3b; ENTREGA §2); Jev no texto; código decide; checagens visuais sem fichas (CONTRATO §16.6) e gate A9 (capa/frame) | pré-publicação | QA de Narração; auditoria de imagem/vídeo e capa do Diretor de Arte 2D (t400) |
 | Líder Compliance | políticas YT, item 5, direitos autorais | pré-publicação + diário | Direitos Autorais |
 | Comunidade | resumo e saúde dos comentários; triagem e respostas são código + Jev + banco de 60 frases (t245) | ciclo 30 min / 6 h / diário | Triagem + Redator (o "redator" é código; separação mantida porque o agente não escreve texto livre) |
 | **Observador** (novo) | loop constante: conexões, auth/reauth, saldos, limites, consumo de tokens por agente/modelo/ação, tentativas e quais falham mais; reprovações do Auditor; reações/resultados dos vídeos (Analytics) para enriquecer relatórios | Temporal faz os pings a cada ~20 min (código) e abre issue no Paperclip em anomalia; agente acorda por essa issue + rotina diária e semanal | Vigia de Custo, Guardião de Sessão (observação), Checador de Reprovações, Capista-monitor, **@prod-analista** |
@@ -179,7 +179,7 @@ t392: rotinas acordam produção **sim**; orçamento warn-only **sim**; sem teto
 | @prod-render | — | Activity do Temporal (sem LLM) |
 | @prod-auditor | **Auditor** | código decide; agente `process` desempata (3ª rodada) |
 | @prod-seo | **Especialista SEO** | agente `process` |
-| (arte/fichas) | **Diretor de Arte 2D** | agente `opencode_local` |
+| (arte/fichas) | **Diretor de Arte 2D — PAUSADO (t400)**; descrição visual → Roteirista; auditoria e capa → Auditor | agente `opencode_local` pausado |
 | @prod-publisher | — | Activity do Temporal (único executor de efeito externo) |
 | @prod-analista | **Observador** (resultados/Analytics) | agente; coleta por código |
 | @prod-compliance | **Líder Compliance** (inclui o observador de risco da conta, §2.2) | agente `process`; coleta por código |

@@ -27,7 +27,7 @@
 
 ## 1. Nome e identidade
 - A organização se chama **PQBR**; os documentos explicam a sigla (Porquê BR); o canal usa o "porquê" por extenso. [08/10 NOME]
-- O canal faz sátira leve de stickman sobre manias e rotinas dos brasileiros. [t212/t213, t265]
+- O canal faz sátira leve, em **desenho 2D genérico** (stickman exclusivo superado, t399/t400), sobre manias, rotinas e a origem das expressões dos brasileiros (≥ 80%). [t212/t213, t265, t399; CONTRATO §16]
 - **Escopo:** por enquanto, **só o canal Porquê BR**. Outros canais serão estudados depois, com os aprendizados; cota da API para vários canais fica adiada. [t327]
 
 ## 2. Quem pode o quê e interação
@@ -105,11 +105,12 @@
 - **Duração:** de **15 s a 3 min**, **alvo de ~50 s**; dimensionada pelo roteiro a **~2,3 palavras/s** (o modelo pode esticar ou acelerar a narração) [t324–t326]. O contrato do roteiro e o auditor seguem essa faixa. Acima de 60 s, a checagem de direitos de áudio vira **bloqueante** (claim do Content ID bloqueia o Short). [t208; t271]
 - **Dinamismo:** cada fala com imagem correspondente (buscado; não reprova, ver §8); personagem age em cena; troca de plano a cada ~3–5 s. [t217; t327]
 - **Engajamento não é medida de segurança.** [itens de validação, item 1]
-- **Visual:** stickman 2D (07/10 item 7). **Nenhum critério visual de estilo reprova:** pele ou roupa colorida, troca ou variação de personagem, mais de 2 personagens, 3D ou realista (nunca pedidos, mas aceitos se vierem). A aderência ao elenco é **métrica**, não trava; a consistência continua buscada por prompts e referências. O que reprova é faltar a ironia e a sátira leve e cômica do cotidiano brasileiro, além das travas de texto, áudio e segurança. [t264; t265]
+- **Visual:** **2D genérico**, o roteiro dá o norte (CONTRATO §16; t400; stickman superado). **Nenhum critério visual de estilo reprova:** pele ou roupa colorida, troca ou variação de personagem, mais de 2 personagens, 3D ou realista (nunca pedidos, mas aceitos se vierem). A aderência ao estilo é **métrica**, não trava; a consistência é buscada só pelo bloco visual do roteiro (fichas pausadas). O que reprova é faltar a ironia e a sátira leve e cômica do cotidiano brasileiro, além das travas de texto, áudio e segurança. [t264; t265] **Reprova (segurança):** semelhança com pessoa real, marca real, estereótipo ofensivo. [t400]
 - **Revisão humana só como último recurso:** quando um item falha em **todos os caminhos já previstos**, ele é guardado num **local dedicado de revisão**, o José é avisado e o agente coleta a determinação dele: **excluir, corrigir, reaproveitar ou arquivar**. Substitui a "revisão humana antes da grade" do contrato rascunho (§4.3). [t327]
 - Regras de roteiro R1–R6, R8 e R9 do contrato rascunho (R7 superada por t262/t263; R10 está no §4): **EM CONSTRUÇÃO — aguardando José** (dependem do contrato v2, tarefa D11).
 
-## 6. Fichas visuais
+## 6. Fichas visuais — **PAUSADAS (t400)**
+> Tudo abaixo fica guardado e desligado; reservado a uma futura arquitetura não-NotebookLM. Nenhuma ficha é criada nem injetada na PQBR atual. [t399/t400]
 - Bíblia visual v002 aprovada (Zé, Lia, Valdemar, Sandra, AMB-001, OBJ-001). Personagens: 2 protagonistas (masc./fem.) + 2 coadjuvantes, tom levemente cômico, com atenção à diferenciação. [08/10; 07/10]
 - Fichas no Drive `00_Biblia_Visual`; catálogo no banco do app (`visual_assets`, `episode_assets`); wiki/galeria gerada da tabela; o roteirista lista as entidades da cena; um **resolvedor sem LLM** injeta só as fichas necessárias no caderno temporário. [08/10]
 - Ficha que falta é criada na hora, **sem aprovação bloqueante**; o José recebe aviso e pode marcar "Verificado" ou "Não Aprovado" com observação. "Não Aprovado" abre ticket e a ficha é refeita para os próximos vídeos. O vídeo publicado só é despublicado e refeito se o José pedir. [08/10]

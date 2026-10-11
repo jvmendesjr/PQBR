@@ -390,3 +390,8 @@ NÃO CABE:
 - t393: o observador de risco da conta (t198) fica com o Líder Compliance; a sessão fica com o Observador e o comprometimento com o Guardião (AGENTES §2.2).
 - t394: a core-eng foi abolida; o jr constrói no Paperclip; docs consolidados (README, AGENTES; PLANO → ROADMAP; ENTREGA e superados em `arquivo/`).
 - t395: Camofox PQBR 24/7 com sessão permanente; reinício só se cair; reautenticação autônoma por qualquer meio, inclusive cookies do Chrome, com log + Telegram; o José só no fim (ADR-008; REGRAS §0 item 11).
+
+## t399–t402 — 11/10/2026
+- t399: fim do stickman exclusivo → **2D genérico**; o modelo escolhe personagens/objetos/ambientes; fichas pausadas (guardadas para arquitetura não-NotebookLM); roteiro ganha descrição detalhada de personagem e ambiente; editorial ≥ 80% origem de expressões/curiosidades, tendências só sazonais (fecha F7-00).
+- t400: (1) estilo padrão 2D, o roteiro dá o norte; (2) **Diretor de Arte 2D pausado** com as fichas: auditoria de imagem/vídeo → **Auditor** (2 rodadas no Gemini web via Camofox, como nos docs canônicos antigos); descrição de estilo/personagem → **Roteirista** (NotebookLM, cadernos efêmeros, limite diário de uso); (3) NotebookLM Short continua o formato único; comandos/prompts canônicos inalterados; teste Brief/Explainer descartado.
+- t402: fonte das funções = `arquivo/ENTREGA-core-eng-PQBR.md` §2/§4 e `arquivo/RUNBOOK-auditor-v3b.md` (consulta autorizada pelo José para isso). Aplicado em CONTRATO §16, REGRAS §1/§5/§6, AGENTES §2/§11, ROADMAP F7-00/F7-03 e instruções `company/agents/{auditor,roteirista,diretor-arte-2d}`.

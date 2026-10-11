@@ -194,7 +194,7 @@ Recalibrar todas as faixas depois de 2 a 4 semanas com o `@prod-analista`.
 
 ## 11. Diretrizes de roteiro (t212 e t213, José, 08/10/2026), regras
 1. **Elenco enxuto:** um personagem por padrão; nunca mais de dois por vídeo. ⚠️ SUPERADO por t264: até 2 é o desejado; mais que isso **não reprova**. O plano final também respeita esse limite (nada de "foto de grupo" com mais personagens do que o vídeo usa).
-2. **Sem nomes:** nenhum nome de personagem falado ou escrito na legenda ou na tela. O personagem sem nome é "qualquer brasileiro". Os nomes e IDs das fichas (Zé, Lia, Seu Valdemar) existem só para a produção, nunca no vídeo.
+2. **Sem nomes:** nenhum nome de personagem falado ou escrito na legenda ou na tela. O personagem sem nome é "qualquer brasileiro". (Fichas Zé/Lia/Valdemar **pausadas**, t400; §16.)
 3. **Enquadramento brasileiro:** o texto trata a mania como coisa nossa ("nós, brasileiros, temos essa mania…", "todo brasileiro já…"), mesmo que aconteça em outros lugares. Busca uma explicação lógica, mas o **humor predomina** sobre a aula.
 4. **Sátira leve:** "aquele sorrisinho no canto da boca". Nunca ridiculariza o brasileiro; o brasileiro é brincalhão, esperto, criativo.
 5. **Sentimento "a gente é assim mesmo" (t213):** engraçado, mas verdadeiro. Orgulho carinhoso de ser brasileiro; o espectador reconhece a própria identidade, sem vergonha. **O final pousa no reconhecimento caloroso** ("é, a gente é assim mesmo… e tudo bem"), nunca na zombaria nem no sermão. A explicação lógica não "corrige" o espectador: ela dá um motivo para a mania e a devolve com carinho.
@@ -238,7 +238,7 @@ Recalibrar todas as faixas depois de 2 a 4 semanas com o `@prod-analista`.
 - Ritmo de vídeo, não de slide: troca de plano/ação a cada ~3–5 s; reprovar sequências estáticas ou só infográfico.
 - Consistência do personagem segue como meta com tolerância (reforçado por t264: métrica, não trava): desvios leves aceitos se o dinamismo e a relação texto-imagem estiverem bons; reavaliar conforme evolução do modelo/plataforma.
 
-## 14. Tolerância de identidade do personagem (t222)
+## 14. Tolerância de identidade do personagem (t222) — **SUPERADO pela §16 (t399/t400)**; a regra de que estilo não reprova (REGRAS §5, t264/t265) continua
 > ⚠️ **SUPERADO** por t264/t265: nenhum critério visual de estilo reprova (cor, roupa, troca, mais de 2, 3D ou realista); aderência ao elenco é métrica. Texto antigo mantido só como histórico.
 
 Exigir no prompt a máxima fidelidade à bíblia, mas aceitar imperfeição leve. LEVE (ressalva): corpo contornado/volume, contorno duplo, variação de traço. GRAVE (reprova): pele colorida, roupa real, 3D, realista, genérico, personagem trocado, > 2 personagens. Cena sem personagem é válida se a imagem acompanha o texto. Gabarito: toalha molhada v1 (aprovada).
@@ -263,7 +263,7 @@ Exigir no prompt a máxima fidelidade à bíblia, mas aceitar imperfeição leve
 2. **Gancho:** cena da mania já acontecendo + pergunta "por que…" sem resposta. Legenda curta e gritante (ACORDOU MOÍDO?, AMARELO = ACELERA?, TOMADA DERRETIDA!).
 3. **Um mecanismo real no miolo**, nomeado em linguagem de rua (luz azul / melatonina, "cálculo quântico" do motorista, óxido nas molas + tapa, Efeito Joule). Termo técnico só com imagem no mesmo segundo.
 4. **Personagem age:** dorme, acelera, tapa o controle, toma banho enquanto a tomada derrete. Não fica parado olhando.
-5. **Steering visual canônico (3 dos 4):** stickman 2D limpo, fundo cream `#FDFBF7`, traço preto, sem papercut, sem die-cut, sem drop shadow. (O controle remoto ainda pede fundo branco; alinhar ao cream.)
+5. ~~**Steering visual canônico (3 dos 4):** stickman 2D limpo, fundo cream...~~ **SUPERADO (t399/t400):** ver §16.
 6. **Risco doméstico / trânsito (tomada e sinal amarelo):** satiriza a conta mental ou o hábito, e o fecho aponta a regra certa (conector cerâmico / não passar no amarelo), sem ensinar o atalho. Confirma a categoria 4.3 do contrato.
 7. **Orgulho da gambiarra (controle):** o stickman ergue o controle com fita como troféu. Casa com "a gente é assim mesmo".
 
@@ -289,3 +289,16 @@ Até você escolher, o contrato fica com t214. O SOP/steering do NotebookLM prec
 
 1. Você confirma o CTA (t214 vs frase de loop atual).
 2. Jr incorpora este aditivo na seção 12 do rascunho e atualiza o texto do steering/SOP.
+
+## 16. Visual 2D genérico e linha editorial 80/20 (t399–t402, 11/10/2026), regra
+**Fontes:** decisões t399/t400/t402; ENTREGA-core-eng §2 (@prod-roteirista, @prod-auditor) e §4 (NotebookLM: "estilo próprio não é aceito no formato Short", 1 personagem funciona, 2 falham); RUNBOOK-auditor-v3b (2 rodadas no Gemini web); Ajuda NotebookLM answer/16454555 (seletor de estilo exclui Short); YouTube answer/1311392 (inauthentic content). Proposta: `prep/PROPOSTA-visual-editorial-2D.md` (box).
+1. **Estilo padrão: 2D** (desenho genérico). Fim do stickman exclusivo. 3D/convencional só se o roteiro pedir. O modelo do NotebookLM escolhe livremente personagens, objetos e ambientes; o roteiro dá o norte.
+2. **Fichas pausadas** (bíblia v002, resolvedor, `00_Biblia_Visual`): ficam guardadas e **desligadas**, reservadas a uma futura arquitetura não-NotebookLM. Nenhuma ficha é injetada no caderno.
+3. **O Short do NotebookLM continua o formato único:** o NotebookLM pesquisa, planeja, roteiriza, propõe temas e gera o vídeo; nós só orquestramos com os comandos/prompts canônicos (inalterados). Teste Brief/Explainer **descartado** (t400). Como o Short não aceita estilo próprio, o estilo vai **escrito no roteiro** (fonte do caderno).
+4. **Bloco visual obrigatório no roteiro** (adicionado como fonte antes de gerar):
+   - `[ESTILO]` 2D + frase meio/tom/paleta/referência. Padrão: "ilustração 2D plana de cartum, traço preto grosso, cores chapadas quentes, humor carinhoso, cenário brasileiro do dia a dia; sem fotorrealismo, sem rosto de pessoa real, sem texto nas imagens".
+   - `[PERSONAGEM]` 1 por padrão (máx. 2, §11.1): idade aprox., tipo físico, cabelo, roupa (cor + peça), 1 traço marcante, expressão-base; repetido **palavra por palavra** em cada cena; sem nome.
+   - `[AMBIENTE]` por cena: lugar, época, 3–5 objetos-âncora brasileiros, luz/horário.
+   - `[CENAS]` troca a cada ~3–5 s: fala → ação visível → enquadramento. Cena 1 = imagem literal da expressão (gancho); última cena retoma a 1ª (loop, §11.2).
+5. **Linha editorial 80/20:** ≥ 80% origem de expressões brasileiras e curiosidades "inúteis" do cotidiano (ex.: "podre de rico", "o cão chupando manga"); ≤ 20% sazonal, só na janela do Caçador Sazonal (30 dias antes). Fora da janela, sem tendência. Etimologia disputada: "a versão mais aceita é… mas tem quem diga…"; ≥ 2 fontes. Gancho: a expressão em cena literal absurda + "Por que a gente fala isso?" até 3 s.
+6. **Auditoria visual sem fichas** (Auditor, §AGENTES): estilo, coerência do personagem dentro do vídeo, legibilidade mobile e adequação cultural são **métrica** (não reprovam, REGRAS §5). **Reprovam** (segurança): semelhança com pessoa real/celebridade, marca/logo real, estereótipo ofensivo, texto na tela com erro que mude o sentido.
