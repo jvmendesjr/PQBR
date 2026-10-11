@@ -1,69 +1,386 @@
 schema: "paperclip/v1"
 agents:
-  prod-director:
+  diretor:
+    role: "ceo"
+    adapter:
+      type: "opencode_local"
+      config:
+        command: "/home/pc/.opencode/bin/opencode"
+        cwd: "/home/pc/Workspace/PQBR"
+        model: "9router/core-alto"
+        dangerouslySkipPermissions: false
+        timeoutSec: 900
+        graceSec: 15
+        env:
+          XDG_CONFIG_HOME: "/home/pc/Workspace/PQBR/company/opencode-config"
+          OPENCODE_ALLOW_ALL_MODELS: "true"
+    inputs:
+      env:
+        NINEROUTER_API_KEY:
+          kind: secret
+          requirement: optional
+          default: ""
+    runtime:
+      heartbeat:
+        enabled: false
+        maxConcurrentRuns: 1
+    budgetMonthlyCents: 2000
+    permissions:
+      canCreateAgents: true
+      canCreateSkills: false
+      canAssignTasks: true
+  lider-editorial:
+    role: "pm"
+    adapter:
+      type: "process"
+      config:
+        command: "/home/pc/Workspace/PQBR/scripts/paperclip/agente_pausado.sh"
+        cwd: "/home/pc/Workspace/PQBR"
+        timeoutSec: 120
+        env:
+          PQBR_MODELO_9ROUTER: "core-medio"
+          PQBR_9ROUTER_URL: "http://127.0.0.1:20130/v1"
+    inputs:
+      env:
+        NINEROUTER_API_KEY:
+          kind: secret
+          requirement: optional
+          default: ""
+    runtime:
+      heartbeat:
+        enabled: false
+        maxConcurrentRuns: 1
+    budgetMonthlyCents: 2000
+    permissions:
+      canCreateAgents: false
+      canCreateSkills: false
+      canAssignTasks: true
+  pesquisador-origem:
+    role: "researcher"
+    adapter:
+      type: "opencode_local"
+      config:
+        command: "/home/pc/.opencode/bin/opencode"
+        cwd: "/home/pc/Workspace/PQBR"
+        model: "9router/core-medio"
+        dangerouslySkipPermissions: false
+        timeoutSec: 900
+        graceSec: 15
+        env:
+          XDG_CONFIG_HOME: "/home/pc/Workspace/PQBR/company/opencode-config"
+          OPENCODE_ALLOW_ALL_MODELS: "true"
+    inputs:
+      env:
+        NINEROUTER_API_KEY:
+          kind: secret
+          requirement: optional
+          default: ""
+    runtime:
+      heartbeat:
+        enabled: false
+        maxConcurrentRuns: 1
+    budgetMonthlyCents: 2000
+    permissions:
+      canCreateAgents: false
+      canCreateSkills: false
+      canAssignTasks: false
+  roteirista:
     role: "general"
     adapter:
       type: "process"
       config:
         command: "/home/pc/Workspace/PQBR/scripts/paperclip/agente_pausado.sh"
         cwd: "/home/pc/Workspace/PQBR"
-        timeoutSec: 30
+        timeoutSec: 120
+        env:
+          PQBR_MODELO_9ROUTER: "core-alto"
+          PQBR_9ROUTER_URL: "http://127.0.0.1:20130/v1"
+    inputs:
+      env:
+        NINEROUTER_API_KEY:
+          kind: secret
+          requirement: optional
+          default: ""
     runtime:
       heartbeat:
         enabled: false
         maxConcurrentRuns: 1
-    budgetMonthlyCents: 0
+    budgetMonthlyCents: 2000
     permissions:
       canCreateAgents: false
       canCreateSkills: false
-      canAssignTasks: true
-  prod-analista:
+      canAssignTasks: false
+  cacador-sazonal:
     role: "researcher"
     adapter:
       type: "process"
       config:
         command: "/home/pc/Workspace/PQBR/scripts/paperclip/agente_pausado.sh"
         cwd: "/home/pc/Workspace/PQBR"
-        timeoutSec: 30
+        timeoutSec: 120
+        env:
+          PQBR_MODELO_9ROUTER: "core-baixo"
+          PQBR_9ROUTER_URL: "http://127.0.0.1:20130/v1"
+    inputs:
+      env:
+        NINEROUTER_API_KEY:
+          kind: secret
+          requirement: optional
+          default: ""
     runtime:
       heartbeat:
         enabled: false
         maxConcurrentRuns: 1
-    budgetMonthlyCents: 0
+    budgetMonthlyCents: 2000
     permissions:
       canCreateAgents: false
       canCreateSkills: false
       canAssignTasks: false
-  prod-comunidade:
+  diretor-arte-2d:
+    role: "designer"
+    adapter:
+      type: "opencode_local"
+      config:
+        command: "/home/pc/.opencode/bin/opencode"
+        cwd: "/home/pc/Workspace/PQBR"
+        model: "9router/core-medio"
+        dangerouslySkipPermissions: false
+        timeoutSec: 900
+        graceSec: 15
+        env:
+          XDG_CONFIG_HOME: "/home/pc/Workspace/PQBR/company/opencode-config"
+          OPENCODE_ALLOW_ALL_MODELS: "true"
+    inputs:
+      env:
+        NINEROUTER_API_KEY:
+          kind: secret
+          requirement: optional
+          default: ""
+    runtime:
+      heartbeat:
+        enabled: false
+        maxConcurrentRuns: 1
+    budgetMonthlyCents: 2000
+    permissions:
+      canCreateAgents: false
+      canCreateSkills: false
+      canAssignTasks: false
+  especialista-seo:
+    role: "cmo"
+    adapter:
+      type: "process"
+      config:
+        command: "/home/pc/Workspace/PQBR/scripts/paperclip/agente_pausado.sh"
+        cwd: "/home/pc/Workspace/PQBR"
+        timeoutSec: 120
+        env:
+          PQBR_MODELO_9ROUTER: "core-baixo"
+          PQBR_9ROUTER_URL: "http://127.0.0.1:20130/v1"
+    inputs:
+      env:
+        NINEROUTER_API_KEY:
+          kind: secret
+          requirement: optional
+          default: ""
+    runtime:
+      heartbeat:
+        enabled: false
+        maxConcurrentRuns: 1
+    budgetMonthlyCents: 2000
+    permissions:
+      canCreateAgents: false
+      canCreateSkills: false
+      canAssignTasks: false
+  auditor:
+    role: "qa"
+    adapter:
+      type: "process"
+      config:
+        command: "/home/pc/Workspace/PQBR/scripts/paperclip/agente_pausado.sh"
+        cwd: "/home/pc/Workspace/PQBR"
+        timeoutSec: 120
+        env:
+          PQBR_MODELO_9ROUTER: "core-alto"
+          PQBR_9ROUTER_URL: "http://127.0.0.1:20130/v1"
+    inputs:
+      env:
+        NINEROUTER_API_KEY:
+          kind: secret
+          requirement: optional
+          default: ""
+    runtime:
+      heartbeat:
+        enabled: false
+        maxConcurrentRuns: 1
+    budgetMonthlyCents: 2000
+    permissions:
+      canCreateAgents: false
+      canCreateSkills: false
+      canAssignTasks: false
+  lider-compliance:
     role: "general"
     adapter:
       type: "process"
       config:
         command: "/home/pc/Workspace/PQBR/scripts/paperclip/agente_pausado.sh"
         cwd: "/home/pc/Workspace/PQBR"
-        timeoutSec: 30
+        timeoutSec: 120
+        env:
+          PQBR_MODELO_9ROUTER: "core-medio"
+          PQBR_9ROUTER_URL: "http://127.0.0.1:20130/v1"
+    inputs:
+      env:
+        NINEROUTER_API_KEY:
+          kind: secret
+          requirement: optional
+          default: ""
     runtime:
       heartbeat:
         enabled: false
         maxConcurrentRuns: 1
-    budgetMonthlyCents: 0
+    budgetMonthlyCents: 2000
     permissions:
       canCreateAgents: false
       canCreateSkills: false
       canAssignTasks: false
-  prod-compliance:
+  comunidade:
     role: "general"
     adapter:
       type: "process"
       config:
         command: "/home/pc/Workspace/PQBR/scripts/paperclip/agente_pausado.sh"
         cwd: "/home/pc/Workspace/PQBR"
-        timeoutSec: 30
+        timeoutSec: 120
+        env:
+          PQBR_MODELO_9ROUTER: "core-baixo"
+          PQBR_9ROUTER_URL: "http://127.0.0.1:20130/v1"
+    inputs:
+      env:
+        NINEROUTER_API_KEY:
+          kind: secret
+          requirement: optional
+          default: ""
     runtime:
       heartbeat:
         enabled: false
         maxConcurrentRuns: 1
-    budgetMonthlyCents: 0
+    budgetMonthlyCents: 2000
+    permissions:
+      canCreateAgents: false
+      canCreateSkills: false
+      canAssignTasks: false
+  observador:
+    role: "general"
+    adapter:
+      type: "opencode_local"
+      config:
+        command: "/home/pc/.opencode/bin/opencode"
+        cwd: "/home/pc/Workspace/PQBR"
+        model: "9router/core-baixo"
+        dangerouslySkipPermissions: false
+        timeoutSec: 900
+        graceSec: 15
+        env:
+          XDG_CONFIG_HOME: "/home/pc/Workspace/PQBR/company/opencode-config"
+          OPENCODE_ALLOW_ALL_MODELS: "true"
+    inputs:
+      env:
+        NINEROUTER_API_KEY:
+          kind: secret
+          requirement: optional
+          default: ""
+    runtime:
+      heartbeat:
+        enabled: false
+        maxConcurrentRuns: 1
+    budgetMonthlyCents: 2000
+    permissions:
+      canCreateAgents: false
+      canCreateSkills: false
+      canAssignTasks: false
+  guardiao-seguranca:
+    role: "general"
+    adapter:
+      type: "opencode_local"
+      config:
+        command: "/home/pc/.opencode/bin/opencode"
+        cwd: "/home/pc/Workspace/PQBR"
+        model: "9router/ds/deepseek-v4-pro-max"
+        dangerouslySkipPermissions: false
+        timeoutSec: 900
+        graceSec: 15
+        env:
+          XDG_CONFIG_HOME: "/home/pc/Workspace/PQBR/company/opencode-config"
+          OPENCODE_ALLOW_ALL_MODELS: "true"
+    inputs:
+      env:
+        NINEROUTER_API_KEY:
+          kind: secret
+          requirement: optional
+          default: ""
+    runtime:
+      heartbeat:
+        enabled: false
+        maxConcurrentRuns: 1
+    budgetMonthlyCents: 2000
+    permissions:
+      canCreateAgents: false
+      canCreateSkills: false
+      canAssignTasks: false
+  dev-corretor:
+    role: "engineer"
+    adapter:
+      type: "opencode_local"
+      config:
+        command: "/home/pc/.opencode/bin/opencode"
+        cwd: "/home/pc/Workspace/PQBR"
+        model: "9router/cu/gpt-5.6-sol-low"
+        dangerouslySkipPermissions: false
+        timeoutSec: 900
+        graceSec: 15
+        env:
+          XDG_CONFIG_HOME: "/home/pc/Workspace/PQBR/company/opencode-config"
+          OPENCODE_ALLOW_ALL_MODELS: "true"
+    inputs:
+      env:
+        NINEROUTER_API_KEY:
+          kind: secret
+          requirement: optional
+          default: ""
+    runtime:
+      heartbeat:
+        enabled: false
+        maxConcurrentRuns: 1
+    budgetMonthlyCents: 2000
+    permissions:
+      canCreateAgents: false
+      canCreateSkills: false
+      canAssignTasks: false
+  dev-revisor:
+    role: "engineer"
+    adapter:
+      type: "opencode_local"
+      config:
+        command: "/home/pc/.opencode/bin/opencode"
+        cwd: "/home/pc/Workspace/PQBR"
+        model: "9router/cu/claude-sonnet-5-5-medium"
+        dangerouslySkipPermissions: false
+        timeoutSec: 900
+        graceSec: 15
+        env:
+          XDG_CONFIG_HOME: "/home/pc/Workspace/PQBR/company/opencode-config"
+          OPENCODE_ALLOW_ALL_MODELS: "true"
+    inputs:
+      env:
+        NINEROUTER_API_KEY:
+          kind: secret
+          requirement: optional
+          default: ""
+    runtime:
+      heartbeat:
+        enabled: false
+        maxConcurrentRuns: 1
+    budgetMonthlyCents: 2000
     permissions:
       canCreateAgents: false
       canCreateSkills: false
@@ -75,39 +392,54 @@ agents:
       config:
         command: "/home/pc/Workspace/PQBR/scripts/paperclip/agente_pausado.sh"
         cwd: "/home/pc/Workspace/PQBR"
-        timeoutSec: 30
+        timeoutSec: 120
     runtime:
       heartbeat:
         enabled: false
         maxConcurrentRuns: 1
-    budgetMonthlyCents: 0
+    budgetMonthlyCents: 2000
     permissions:
       canCreateAgents: false
       canCreateSkills: false
       canAssignTasks: true
-  dev-manutencao:
-    role: "engineer"
-    adapter:
-      type: "process"
-      config:
-        command: "/home/pc/Workspace/PQBR/scripts/paperclip/agente_pausado.sh"
-        cwd: "/home/pc/Workspace/PQBR"
-        timeoutSec: 30
-    runtime:
-      heartbeat:
-        enabled: false
-        maxConcurrentRuns: 1
-    budgetMonthlyCents: 0
-    permissions:
-      canCreateAgents: false
-      canCreateSkills: false
-      canAssignTasks: false
-schemaVersion: 7
-sidebar:
-  agents:
-    - "prod-director"
-    - "prod-analista"
-    - "prod-comunidade"
-    - "prod-compliance"
-    - "pqbr-assistente"
-    - "dev-manutencao"
+routines:
+  cacador-janela-30-dias:
+    triggers:
+      - kind: schedule
+        cronExpression: "0 9 * * 1"
+        timezone: America/Fortaleza
+  observador-relatorio-diario:
+    triggers:
+      - kind: schedule
+        cronExpression: "0 7 * * *"
+        timezone: America/Fortaleza
+  observador-relatorio-semanal:
+    triggers:
+      - kind: schedule
+        cronExpression: "0 8 * * 1"
+        timezone: America/Fortaleza
+  diretor-resumo-semanal:
+    triggers:
+      - kind: schedule
+        cronExpression: "0 9 * * 1"
+        timezone: America/Fortaleza
+  guardiao-varredura-diaria:
+    triggers:
+      - kind: schedule
+        cronExpression: "0 3 * * *"
+        timezone: America/Fortaleza
+  compliance-diario:
+    triggers:
+      - kind: schedule
+        cronExpression: "30 6 * * *"
+        timezone: America/Fortaleza
+  comunidade-resumo-diario:
+    triggers:
+      - kind: schedule
+        cronExpression: "0 21 * * *"
+        timezone: America/Fortaleza
+  editorial-grade:
+    triggers:
+      - kind: schedule
+        cronExpression: "0 1 * * *"
+        timezone: America/Fortaleza

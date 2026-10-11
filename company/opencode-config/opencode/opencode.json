@@ -1,0 +1,31 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "provider": {
+    "9router": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "9router (PQBR)",
+      "options": {
+        "baseURL": "http://127.0.0.1:20130/v1",
+        "apiKey": "{env:NINEROUTER_API_KEY}"
+      },
+      "models": {
+        "core-alto": {},
+        "core-baixo": {},
+        "core-medio": {},
+        "cu/claude-sonnet-5-5-medium": {},
+        "cu/gpt-5.6-sol-low": {},
+        "ds/deepseek-v4-pro-max": {}
+      }
+    }
+  },
+  "small_model": "9router/core-baixo",
+  "permission": {
+    "bash": "deny",
+    "edit": "deny",
+    "webfetch": "deny",
+    "external_directory": "deny",
+    "*": "ask"
+  },
+  "share": "disabled",
+  "autoupdate": false
+}

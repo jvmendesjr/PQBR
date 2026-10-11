@@ -1,14 +1,10 @@
-# company — pacote Paperclip da PQBR (agentcompanies/v1, F1-01)
+# company — pacote Paperclip da PQBR (agentcompanies/v1, v4.3 / t396)
 
-- `COMPANY.md`: empresa PQBR (schema `agentcompanies/v1`).
-- `agents/<slug>/AGENTS.md`: prod-director, prod-analista, prod-comunidade, prod-compliance, pqbr-assistente, dev-manutencao.
-- `.paperclip.yaml`: adaptador `process` (stub `scripts/paperclip/agente_pausado.sh`, sem `hermes_local`/`--yolo`), heartbeat desligado, orçamento 0, sem segredos.
-
-Dry-run (não cria nada):
-
-    paperclipai company import ./company --target new --new-company-name PQBR --include company,agents --dry-run --json
-
-Criação (portão do José, F1-02) — depois de aplicar, **pausar** cada agente, porque o pacote não carrega status:
-
-    paperclipai company import ./company --target new --new-company-name PQBR --include company,agents --yes
-    for a in $(paperclipai agent list -C <novo-id> --json | jq -r '.[].id'); do paperclipai agent pause "$a"; done
+15 agentes: os 14 de `docs/AGENTES.md` + `pqbr-assistente` (identidade do canal Hermes `pqbr`).
+- `agents/<slug>/AGENTS.md`: instruções (versionadas no git; o bundle do Paperclip não tem histórico).
+- `skills/`: `pqbr-contrato` (comum) + skills das trilhas.
+- `projects/`: trilhas (labels `lane:<slug>`). `tasks/`: rotinas (`recurring`), com cron em `.paperclip.yaml` (America/Fortaleza).
+- `.paperclip.yaml`: adapters `process` (texto; stub até o script do kit) e `opencode_local` (`/home/pc/.opencode/bin/opencode`, modelo `9router/...`, `dangerouslySkipPermissions: false`).
+- `opencode-config/`: XDG_CONFIG_HOME só da PQBR (provider 9router, permissões negadas). A chave vem por `NINEROUTER_API_KEY` (secret_ref, criado pelo José). Não toca no config do José.
+- Orçamento: 2000 c/mês por agente, **warn-only** (`hardStopEnabled: false`, 80%).
+- Todos nascem pausados até o MCP `pqbr-kit` e os scripts do kit existirem.
