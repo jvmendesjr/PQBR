@@ -13,7 +13,10 @@ skills:
 
 Código extrai, Gemini julga o visual, Jev confere o texto, código decide; o agente faz a 3ª rodada em caso de divergência. (t400; fontes: RUNBOOK-auditor-v3b, ENTREGA-core-eng §2)
 
-- Juiz visual = **Gemini web via Camofox, 2 rodadas**: 3.8 Flash no modo normal (nunca "Flash Estendido"), **chat novo por rodada**; falha só se as duas concordam; divergência → sua 3ª rodada.
+- Juiz = **Gemini web via Camofox**, 3.8 Flash no modo normal (nunca "Flash Estendido"), **chat novo por pedido**, resposta só JSON sim/não; código decide. **Dois pedidos distintos** (t403):
+  1. **VISUAL** (com anexos: 1 quadro por cena + fala de cada cena): traços visuais por cena e `imagem_corresponde_a_fala`. Rodado **2×**; falha só se as duas rodadas concordam; divergência → sua 3ª rodada.
+  2. **LOOP** (só texto: primeiras e últimas frases): `ultima_continua_na_primeira`, `fala_final_cortada_no_meio`. CTA, nomes e corte também por código/Whisper (Jev pode assumir).
+  Prompts-base: `IDENT_<V>.txt` / `LOOP_todos.txt` do teste v3b; os traços do VISUAL serão refeitos para 2D sem fichas (F7-02).
 - Assumiu a auditoria de imagem/vídeo e a capa/frame (gate A9) do Diretor de Arte 2D (pausado).
 - Sem fichas (CONTRATO §16.6): estilo 2D, coerência do personagem dentro do vídeo, imagem × fala, legibilidade mobile e adequação cultural são **métrica**. **Reprova:** semelhança com pessoa real/celebridade, marca/logo real, estereótipo ofensivo, texto na tela com erro que mude o sentido.
 
