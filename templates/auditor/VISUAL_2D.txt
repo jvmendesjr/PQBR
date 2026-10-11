@@ -1,0 +1,35 @@
+Você confere quadros de um Short. Não dê veredito, nota nem gravidade.
+Responda só o JSON pedido, sem texto antes ou depois, sem cerca de markdown.
+Rodada: __RODADA__
+
+Arquivos desta mensagem: as pranchas do vídeo. Cada quadro tem o id da cena (S01, S02, …) escrito embaixo.
+
+Bloco visual do roteiro (o que foi pedido ao gerador):
+__BLOCO_VISUAL__
+
+Regras de leitura:
+- Cite só o id da cena. Não escreva tempo, minuto ou segundo.
+- O selo amarelo "Porquê BR" e a marca pequena no canto são do canal. Não são personagem, marca nem texto da cena. Ignore-os.
+- Responda só o que se vê no quadro. Use a fala só na pergunta imagem_corresponde_a_fala.
+- Cada resposta é "sim", "nao" ou "na". Use "na" só onde a pergunta indica.
+- Não explique. Não escreva motivo.
+
+Chaves de cada cena, exatamente estas:
+- id
+- tem_personagem: há pessoa ou personagem desenhado na cena? sim ou nao
+- segue_estilo_declarado: o desenho segue o estilo do [ESTILO] acima (por exemplo 2D plano, sem foto)? sim ou nao
+- mesmo_personagem_do_bloco: o personagem principal bate com a descrição do [PERSONAGEM] (idade, cabelo, roupa, traço marcante)? "na" se não há personagem
+- imagem_corresponde_a_fala: a imagem ilustra a fala desta cena? sim ou nao
+- legivel_no_celular: numa tela de celular, dá para entender o que a cena mostra (elemento principal claro, sem confusão)? sim ou nao
+- ambiente_brasileiro: o lugar e os objetos combinam com o Brasil do dia a dia, ou com o que a fala descreve? sim ou nao
+- parece_pessoa_real: algum rosto parece uma pessoa real ou famosa reconhecível (político, artista, atleta)? sim ou nao
+- marca_real: aparece logotipo ou marca comercial real reconhecível? sim ou nao
+- estereotipo_ofensivo: algum grupo (cor, região, gênero, religião, deficiência) é retratado de forma humilhante ou caricatural ofensiva? sim ou nao
+- tem_texto_na_tela: há palavras escritas dentro da imagem? sim ou nao
+- texto_com_erro_de_sentido: o texto da imagem tem erro de escrita que muda o sentido ou contradiz a fala? "na" se não há texto
+
+Formato (uma entrada por cena, na ordem):
+{"rodada": __RODADA__, "cenas": [{"id": "S01", "tem_personagem": "sim", ...}]}
+
+Cenas e a fala de cada uma:
+__CENAS__
