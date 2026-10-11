@@ -8,3 +8,9 @@
 - `opencode-config/`: XDG_CONFIG_HOME só da PQBR (provider 9router, permissões negadas). A chave vem por `NINEROUTER_API_KEY` (secret_ref, criado pelo José). Não toca no config do José.
 - Orçamento: 2000 c/mês por agente, **warn-only** (`hardStopEnabled: false`, 80%).
 - Todos nascem pausados até o MCP `pqbr-kit` e os scripts do kit existirem.
+
+## Estado (t396, 11/10)
+- Segredo `NINEROUTER_API_KEY` na empresa (secret_ref em todos os agentes); nunca no git.
+- Kit: `scripts/paperclip/agente_texto.sh` → `pqbr.kit.agente_texto` (checkout → 9router → `PropostaAgente` → comentário/status); MCP `pqbr-kit` (`pqbr.kit.mcp_kit`, lista fechada por `PQBR_KIT_PAPEL`). Playbooks em `playbooks/`.
+- Smoke ok e **ativos:** Especialista SEO (PQBA-5) e Observador (PQBA-2). Demais pausados; rotinas pausadas.
+- Atenção: o import troca `process` por `claude_local`; depois de importar, reaplicar o adapter `process`.

@@ -23,9 +23,25 @@
     "bash": "deny",
     "edit": "deny",
     "webfetch": "deny",
-    "external_directory": "deny",
-    "*": "ask"
+    "external_directory": "deny"
   },
   "share": "disabled",
-  "autoupdate": false
+  "autoupdate": false,
+  "mcp": {
+    "pqbr-kit": {
+      "type": "local",
+      "command": [
+        "/home/pc/Workspace/PQBR/.venv/bin/python",
+        "-m",
+        "pqbr.kit.mcp_kit"
+      ],
+      "environment": {
+        "PYTHONPATH": "/home/pc/Workspace/PQBR/src",
+        "PQBR_KIT_PAPEL": "{env:PQBR_KIT_PAPEL}",
+        "PAPERCLIP_API_KEY": "{env:PAPERCLIP_API_KEY}",
+        "PAPERCLIP_RUN_ID": "{env:PAPERCLIP_RUN_ID}"
+      },
+      "enabled": true
+    }
+  }
 }

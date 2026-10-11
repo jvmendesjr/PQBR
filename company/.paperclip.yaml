@@ -14,6 +14,7 @@ agents:
         env:
           XDG_CONFIG_HOME: "/home/pc/Workspace/PQBR/company/opencode-config"
           OPENCODE_ALLOW_ALL_MODELS: "true"
+          PQBR_KIT_PAPEL: "diretor"
     inputs:
       env:
         NINEROUTER_API_KEY:
@@ -69,6 +70,7 @@ agents:
         env:
           XDG_CONFIG_HOME: "/home/pc/Workspace/PQBR/company/opencode-config"
           OPENCODE_ALLOW_ALL_MODELS: "true"
+          PQBR_KIT_PAPEL: "pesquisador-origem"
     inputs:
       env:
         NINEROUTER_API_KEY:
@@ -150,6 +152,7 @@ agents:
         env:
           XDG_CONFIG_HOME: "/home/pc/Workspace/PQBR/company/opencode-config"
           OPENCODE_ALLOW_ALL_MODELS: "true"
+          PQBR_KIT_PAPEL: "diretor-arte-2d"
     inputs:
       env:
         NINEROUTER_API_KEY:
@@ -170,7 +173,7 @@ agents:
     adapter:
       type: "process"
       config:
-        command: "/home/pc/Workspace/PQBR/scripts/paperclip/agente_pausado.sh"
+        command: "/home/pc/Workspace/PQBR/scripts/paperclip/agente_texto.sh"
         cwd: "/home/pc/Workspace/PQBR"
         timeoutSec: 120
         env:
@@ -283,6 +286,7 @@ agents:
         env:
           XDG_CONFIG_HOME: "/home/pc/Workspace/PQBR/company/opencode-config"
           OPENCODE_ALLOW_ALL_MODELS: "true"
+          PQBR_KIT_PAPEL: "observador"
     inputs:
       env:
         NINEROUTER_API_KEY:
@@ -312,6 +316,7 @@ agents:
         env:
           XDG_CONFIG_HOME: "/home/pc/Workspace/PQBR/company/opencode-config"
           OPENCODE_ALLOW_ALL_MODELS: "true"
+          PQBR_KIT_PAPEL: "guardiao-seguranca"
     inputs:
       env:
         NINEROUTER_API_KEY:
@@ -341,6 +346,7 @@ agents:
         env:
           XDG_CONFIG_HOME: "/home/pc/Workspace/PQBR/company/opencode-config"
           OPENCODE_ALLOW_ALL_MODELS: "true"
+          PQBR_KIT_PAPEL: "dev-corretor"
     inputs:
       env:
         NINEROUTER_API_KEY:
@@ -370,6 +376,7 @@ agents:
         env:
           XDG_CONFIG_HOME: "/home/pc/Workspace/PQBR/company/opencode-config"
           OPENCODE_ALLOW_ALL_MODELS: "true"
+          PQBR_KIT_PAPEL: "dev-revisor"
     inputs:
       env:
         NINEROUTER_API_KEY:
