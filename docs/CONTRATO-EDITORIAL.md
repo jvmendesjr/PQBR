@@ -302,3 +302,23 @@ Até você escolher, o contrato fica com t214. O SOP/steering do NotebookLM prec
    - `[CENAS]` troca a cada ~3–5 s: fala → ação visível → enquadramento. Cena 1 = imagem literal da expressão (gancho); última cena retoma a 1ª (loop, §11.2).
 5. **Linha editorial 80/20:** ≥ 80% origem de expressões brasileiras e curiosidades "inúteis" do cotidiano (ex.: "podre de rico", "o cão chupando manga"); ≤ 20% sazonal, só na janela do Caçador Sazonal (30 dias antes). Fora da janela, sem tendência. Etimologia disputada: "a versão mais aceita é… mas tem quem diga…"; ≥ 2 fontes. Gancho: a expressão em cena literal absurda + "Por que a gente fala isso?" até 3 s.
 6. **Auditoria visual sem fichas** (Auditor, §AGENTES): estilo, coerência do personagem dentro do vídeo, legibilidade mobile e adequação cultural são **métrica** (não reprovam, REGRAS §5). **Reprovam** (segurança): semelhança com pessoa real/celebridade, marca/logo real, estereótipo ofensivo, texto na tela com erro que mude o sentido.
+
+### 16.7 Bloco visual padrão (t429) — **proposta para aprovação do José**
+**Fontes:** §16.4; Ajuda NotebookLM answer/16454555 (Short não tem seletor de estilo → estilo vai no texto da fonte); "Keeping One Character Consistent…" (dev.to, 2026: ficha literal e contável, repetida palavra por palavra; negativos repetidos; personagem grande e agindo); JDKola "Directing the Frame" (paleta, traço, luz e referência explícitos > adjetivos vagos); ENTREGA §4 (1 personagem funciona, 2 falham). Validação: `BlocoVisual` (Pydantic, `src/pqbr/contratos`) exige "2D" no estilo e barra fotorrealismo/3D sem pedido.
+
+Texto canônico (o Roteirista preenche só o que está entre `< >`; o resto é fixo):
+
+```
+[ESTILO] Ilustração 2D plana de cartum, como animação de TV brasileira: traço preto grosso e uniforme, cores chapadas quentes (amarelo-mostarda, verde-bandeira, azul-céu, terracota), sem degradê nem sombra realista, fundo simples com no máximo 5 objetos, humor carinhoso. Personagem sempre grande no quadro (ocupa ≥ 1/3 da altura), centralizado, agindo. Proibido: fotorrealismo, 3D, rosto de pessoa real ou celebridade, marca ou logo real, texto escrito nas imagens. Formato vertical 9:16, deixar livres a faixa de cima e a de baixo da tela.
+
+[PERSONAGEM] Um só: <idade aprox.> anos, <tipo físico>, cabelo <cor + corte>, <peça de roupa + cor>, <peça 2 + cor>, <1 traço marcante contável, ex.: "bigode grosso", "óculos redondos vermelhos">, expressão-base <curiosa/espantada/marota>. Sem nome. Esta frase se repete idêntica em todas as cenas.
+
+[AMBIENTE] Cena <n>: <lugar>, <época: hoje / anos 80 / Brasil colonial>, objetos-âncora: <3 a 5 objetos brasileiros concretos, ex.: filtro de barro, TV de tubo, ventilador de pé>, luz <manhã/tarde/noite + fonte>.
+
+[CENAS] (troca a cada 3–5 s)
+1. Fala: "<frase>" → Ação: o personagem vive a expressão ao pé da letra, de forma absurda → Plano: <aberto/médio/close>.
+…
+N. Fala: "<frase final / CTA>" → Ação: retoma a imagem da cena 1 (loop) → Plano: o mesmo da cena 1.
+```
+
+Regras de preenchimento: 1 personagem (2 só se o roteiro exigir, §11.1, e então 2 frases-ficha distintas); contar traços ("dois", "um") em vez de adjetivos; uma ação visível por cena; época histórica só no trecho de etimologia; sem crianças em situação de risco nem estereótipo regional (§16.6). Em vigor só depois da aprovação; até lá vale a frase padrão do item 4.

@@ -1,5 +1,5 @@
 #!/bin/sh
-# Aplica as migrações 0001..0011 (todas em ordem) no banco local e define login/senha dos papéis (senhas lidas do .env, sem eco).
+# Aplica as migrações 0001..0012 (todas em ordem) no banco local e define login/senha dos papéis (senhas lidas do .env, sem eco).
 set -eu; cd "$(dirname "$0")"; . ./.env
 C="$(docker compose ps -q pqbr-db)"
 P() { docker exec -i -w /repo "$C" psql -U postgres -d pqbr -v ON_ERROR_STOP=1 -qAt "$@"; }

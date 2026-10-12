@@ -21,12 +21,34 @@ class Contrato(BaseModel):
     model_config = ConfigDict(extra="forbid", frozen=True, str_strip_whitespace=True)
 
 
+# CONTRATO §16.4 (t427) -------------------------------------------------------------------------
+class CenaVisual(Contrato):
+    fala: str = Field(min_length=1, max_length=400)
+    acao: str = Field(min_length=3, max_length=400)          # ação visível
+    enquadramento: str = Field(min_length=3, max_length=120)
+    ambiente: str = Field(min_length=3, max_length=400)       # lugar, época, 3–5 objetos-âncora, luz/horário
+
+
+class BlocoVisual(Contrato):
+    estilo: str = Field(min_length=20, max_length=600)        # [ESTILO] 2D + meio/tom/paleta/referência
+    personagem: str = Field(min_length=20, max_length=600)    # [PERSONAGEM] repetido palavra por palavra; sem nome
+    personagem_2: str | None = Field(default=None, max_length=600)   # máx. 2 (§11.1)
+    cenas: list[CenaVisual] = Field(min_length=2, max_length=60)     # [CENAS] ~3–5 s; cena 1 literal; última retoma a 1ª
+
+    @model_validator(mode="after")
+    def _regras(self):
+        if "2d" not in self.estilo.lower() and "3d" not in self.estilo.lower():
+            raise ValueError("[ESTILO] deve declarar 2D (ou 3D só se o roteiro pedir)")
+        return self
+
+
 # RF-07 ---------------------------------------------------------------------------------------
 class RoteiroShort(Contrato):
     episodio_id: str = Field(pattern=r"^[a-z0-9-]{3,64}$")
     titulo: str = Field(min_length=5, max_length=100)
     falas: list[str] = Field(min_length=2, max_length=60)
     entidades_cena: list[str] = Field(min_length=1, max_length=40)
+    bloco_visual: BlocoVisual                                  # obrigatório (CONTRATO §16.4, t427)
 
     @property
     def palavras(self) -> int:

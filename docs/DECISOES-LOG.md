@@ -409,3 +409,12 @@ NÃO CABE:
 - **Rotação:** o Corretor não tem chave persistente (`token agent list` = 0); a única credencial dele é o token por run que o Paperclip injeta e expira no fim do run. Nada a revogar; cada run já recebe token novo, agora entregue pelo arquivo do relay (abaixo), nunca pelo env do container.
 - **Prevenção:** (1) o container dos Devs não recebe segredo algum: o wrapper grava as chaves do run em `~/.pqbr/dev-secrets/<papel>.env` (700/600, fora dos mounts) e apaga no fim; o container usa `Bearer via-relay:<papel>` e o relay `pqbr-dev-egress` injeta a credencial real por requisição (9router e Paperclip); (2) config OpenCode dos Devs nega `env`, `printenv`, `set/export/declare`, `/proc/*/environ`, qualquer caminho com `.paperclip`, `dev-secrets` ou `context.json`, `find /`, `sudo`, `curl`, `wget`; teto de 25 passos; (3) instruções dos Devs: kit primeiro, shell só no worktree e só para a tarefa, ~15 chamadas, parar em bloqueio; (4) Guardião ganhou `seguranca_varrer_logs` (run-logs das últimas 24 h, só contagens) na varredura diária.
 - Achados atuais da varredura de logs: só PII leve (IP da tailnet em 2 logs, e-mail em 1), nenhuma chave. Regra Revisor ≠ Corretor de família segue **suspensa** (decisão do José).
+
+## t427–t429 (12/10/2026) — peças pré-teste E2E
+- Hindsight banco `pqbr` criado e indexado (107 itens: DECISOES-LOG, commits desde 01/10, playbooks); timer diário `pqbr-hindsight-indexar`; ferramentas `memoria_buscar`/`memoria_registrar` no pqbr-kit (Devs via relay 8890).
+- Migração 0012: `temas_pendentes`/`temas_publicados` (+ catálogo, anti-repetição exata e por similaridade, `fila_folga`, RLS).
+- `RoteiroShort.bloco_visual` (BlocoVisual) obrigatório; coluna `bloco_visual` nos temas.
+- Roteirista e Especialista SEO passam a `opencode_local` (mesmos combos t414) com `notebooklm_enfileirar`; persona canônica aplicada em todo caderno antes de qualquer atividade.
+- `post-short.sh` + logos portados; EpisodioWorkflow/PublicacaoWorkflow (dry-run, privado, sem upload) + worker `episodio-pqbr`; Gate A9 proposto (`docs/sdd/gate-a9.md`).
+- Drive: token OAuth do yt-llm-bot como segredo Paperclip `GOOGLE_DRIVE_TOKEN_JSON` + arquivo 600 em ~/.pqbr/secrets; pasta PQBR ainda não encontrada no Drive dessa conta (não criada).
+- §16.7 bloco visual padrão: proposta para aprovação do José.

@@ -62,7 +62,8 @@
         "PAPERCLIP_API_KEY": "{env:PAPERCLIP_API_KEY}",
         "PAPERCLIP_RUN_ID": "{env:PAPERCLIP_RUN_ID}",
         "PQBR_PAPERCLIP_API": "http://172.31.250.1:3100",
-        "TEMPORAL_ADDRESS": "172.31.250.1:7233"
+        "TEMPORAL_ADDRESS": "172.31.250.1:7233",
+        "HINDSIGHT_URL": "http://172.31.250.1:8890"
       },
       "enabled": true,
       "timeout": 900000

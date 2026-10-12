@@ -12,13 +12,15 @@ UNIDADES = ["pqbr-camofox", "pqbr-camofox-worker", "pqbr-notebooklm-worker", "pq
 # Lista fechada por papel (AGENTES §2, §6). Leitura de docs e API do Paperclip para todos os papéis com ferramenta.
 COMUM = ["docs_ler", "paperclip_comentar", "paperclip_status", "paperclip_criar_issue"]
 PAPEIS = {
-    "diretor": COMUM + ["temporal_listar", "saude_servicos", "segunda_opiniao"],
+    "diretor": COMUM + ["temporal_listar", "saude_servicos", "segunda_opiniao", "memoria_buscar"],
     "pesquisador-origem": COMUM + ["notebooklm_enfileirar"],
+    "roteirista": COMUM + ["notebooklm_enfileirar"],
+    "especialista-seo": COMUM + ["notebooklm_enfileirar"],
     "diretor-arte-2d": COMUM + ["notebooklm_enfileirar"],
-    "observador": COMUM + ["temporal_listar", "saude_servicos", "camofox_saude"],
+    "observador": COMUM + ["temporal_listar", "saude_servicos", "camofox_saude", "memoria_buscar", "memoria_registrar"],
     "guardiao-seguranca": COMUM + ["temporal_listar", "saude_servicos", "seguranca_varrer", "seguranca_varrer_logs", "segunda_opiniao"],
-    "dev-corretor": COMUM + ["temporal_listar"],
-    "dev-revisor": COMUM + ["temporal_listar"],
+    "dev-corretor": COMUM + ["temporal_listar", "memoria_buscar", "memoria_registrar"],
+    "dev-revisor": COMUM + ["temporal_listar", "memoria_buscar"],
 }
 
 FERR = {
@@ -33,6 +35,8 @@ FERR = {
                               "contador diário). tipo=pesquisa (espera e devolve a resposta; use pergunta) ou short (devolve o id do "
                               "workflow; vídeo vertical --format short). fonte = roteiro/briefing (vira a fonte do caderno).",
                               {"tipo": "string", "slug": "string", "fonte": "string", "pergunta": "string"}),
+    "memoria_buscar": ("Busca na memória da PQBR (Hindsight, bank pqbr): decisões, incidentes, commits, lições. Use ANTES de corrigir/decidir.", {"consulta": "string"}),
+    "memoria_registrar": ("Registra uma lição no Hindsight (passa pela barreira de segredos/PII). Formato: falha → causa → correção → como evitar.", {"licao": "string"}),
     "segunda_opiniao": ("Segunda opinião independente no combo core-revisao (t421). OBRIGATÓRIA antes de pausar agente/bloquear publicação (Guardião) e antes de aplicar correção de playbook (Diretor). Devolve CONCORDO/DISCORDO + motivo.", {"contexto": "string", "decisao": "string"}),
     "seguranca_varrer_logs": ("Varre os run-logs da PQBR das últimas N horas (padrão 24) com o detector de segredos; devolve só contagens por arquivo, nunca o valor.", {"horas": "number"}),
     "seguranca_varrer": ("Roda a barreira de segredos/PII sobre um texto.", {"texto": "string"}),
@@ -142,6 +146,17 @@ def chamar(nome: str, a: dict) -> str:
     if nome == "camofox_saude": return _camofox_saude()
     if nome == "notebooklm_enfileirar": return _notebooklm(a)
     if nome == "seguranca_varrer": return _varrer(a["texto"])
+    if nome == "memoria_buscar":
+        import urllib.request
+        u = os.environ.get("HINDSIGHT_URL", "http://127.0.0.1:8890")
+        r = urllib.request.Request(f"{u}/v1/default/banks/pqbr/memories/recall", method="POST", headers={"Content-Type": "application/json"},
+                                   data=json.dumps({"query": a["consulta"][:500], "max_tokens": 1500}).encode())
+        with urllib.request.urlopen(r, timeout=60) as resp:
+            res = json.load(resp).get("results", [])
+        return "\n".join(f"- {x.get('text', '')[:400]}" for x in res[:8]) or "nada na memória"
+    if nome == "memoria_registrar":
+        from pqbr.storage.hindsight import reter
+        reter(a["licao"][:3000], f"PQBR lição registrada por {os.environ.get('PQBR_KIT_PAPEL', '?')}"); return "registrado"
     if nome == "segunda_opiniao":
         from pqbr.kit.agente_texto import segunda_leitura
         from pqbr.seguranca.barreira import exigir_limpo

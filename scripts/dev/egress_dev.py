@@ -72,21 +72,24 @@ async def _pipe(r, w):
         w.close()
 
 
-async def _tcp(cr, cw):
+def _tcp_para(porta):
+  async def _tcp(cr, cw):
     try:
-        ur, uw = await asyncio.open_connection("127.0.0.1", 7233)
+        ur, uw = await asyncio.open_connection("127.0.0.1", porta)
     except Exception:
         cw.close(); return
     await asyncio.gather(_pipe(cr, uw), _pipe(ur, cw))
+  return _tcp
 
 
 def main():
     for porta, dest, var in [(20130, ("127.0.0.1", 20130), "NINEROUTER_API_KEY"), (3100, _paperclip(), "PAPERCLIP_API_KEY")]:
         s = ThreadingHTTPServer((GW, porta), _handler(dest, var)); s.daemon_threads = True
         threading.Thread(target=s.serve_forever, daemon=True).start()
-    print("egress-dev: 20130/3100 (HTTP, injeta credencial) + 7233 (TCP)", flush=True)
+    print("egress-dev: 20130/3100 (HTTP, injeta credencial) + 7233/8890 (TCP)", flush=True)
     async def tcp():
-        srv = await asyncio.start_server(_tcp, GW, 7233); await srv.serve_forever()
+        srvs = [await asyncio.start_server(_tcp_para(p), GW, p) for p in (7233, 8890)]  # Temporal + Hindsight (memória)
+        await asyncio.gather(*(x.serve_forever() for x in srvs))
     asyncio.run(tcp())
 
 main()

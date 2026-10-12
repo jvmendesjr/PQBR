@@ -15,6 +15,7 @@ FILA_NOTEBOOKLM = "notebooklm-pqbr"
 HOME = Path(os.environ.get("PQBR_NOTEBOOKLM_HOME", "/home/pc/.pqbr/notebooklm"))
 CLI = str(HOME / "venv/bin/notebooklm")
 PERFIL = "pqbr"
+PERSONA = Path(os.environ.get("PQBR_NLM_PERSONA", "/home/pc/Workspace/PQBR/templates/notebooklm/persona-pqbr.txt"))
 LIMITES = {"chat": int(os.environ.get("PQBR_NLM_CHATS_DIA", "500")), "video": int(os.environ.get("PQBR_NLM_VIDEOS_DIA", "20"))}
 TETO_JANELA = 80.0
 MESTRES_PROIBIDOS = {"88246689", "c35d7b24-5d4f-4eee-afc4-7a0eadc860bf"}
@@ -22,7 +23,7 @@ SLUG = re.compile(r"^[a-z0-9][a-z0-9-]{1,60}$")
 
 
 class PedidoNotebookLM(BaseModel):
-    tipo: Literal["pesquisa", "short"]
+    tipo: Literal["pesquisa", "roteiro", "seo", "contexto", "short"]
     slug: str = Field(pattern=SLUG.pattern)
     fonte: str = Field(min_length=20, max_length=200_000)   # roteiro/briefing; vira a fonte do caderno
     pergunta: str | None = Field(default=None, max_length=4000)  # pesquisa
@@ -105,6 +106,24 @@ async def nlm_caderno(slug: str) -> str:
 
 
 @activity.defn
+async def nlm_persona(caderno: str) -> str:
+    """Regra canônica (t427): todo caderno recebe o preset de persona ANTES de qualquer atividade."""
+    if caderno in MESTRES_PROIBIDOS: raise RuntimeError("caderno mestre proibido")
+    texto = PERSONA.read_text(encoding="utf-8").strip()[:10000]
+    await asyncio.to_thread(_cli, "configure", "-n", caderno, "--persona", texto, timeout=120)
+    return "persona ok"
+
+
+@activity.defn
+async def nlm_baixar_video(caderno: str, artefato: str, destino: str) -> dict:
+    Path(destino).parent.mkdir(parents=True, exist_ok=True)
+    await asyncio.to_thread(_cli, "download", "video", destino, "-n", caderno, "-a", artefato, timeout=900)
+    f = Path(destino)
+    if not f.is_file() or f.stat().st_size < 10_000: raise RuntimeError("download vazio")
+    return {"arquivo": str(f), "bytes": f.stat().st_size}
+
+
+@activity.defn
 async def nlm_fonte(caderno: str, slug: str, texto: str) -> str:
     if caderno in MESTRES_PROIBIDOS: raise RuntimeError("caderno mestre proibido")
     tmp = HOME / "tmp"; tmp.mkdir(exist_ok=True)
@@ -151,14 +170,15 @@ class NotebookLMWorkflow:
     async def run(self, p: PedidoNotebookLM) -> ResultadoNotebookLM:
         curto = dict(start_to_close_timeout=timedelta(minutes=12),
                      retry_policy=RetryPolicy(maximum_attempts=3, non_retryable_error_types=["SemSaldo"]))
-        tipo = "chat" if p.tipo == "pesquisa" else "video"
+        tipo = "video" if p.tipo == "short" else "chat"
         try:
             uso = await workflow.execute_activity(nlm_checar_saldo, tipo, **curto)
         except Exception as e:
             return ResultadoNotebookLM(ok=False, tipo=p.tipo, motivo=f"sem saldo: {e}")
         nb = await workflow.execute_activity(nlm_caderno, p.slug, **curto)
+        await workflow.execute_activity(nlm_persona, nb, **curto)   # persona antes de tudo (t427)
         await workflow.execute_activity(nlm_fonte, args=[nb, p.slug, p.fonte], **curto)
-        if p.tipo == "pesquisa":
+        if p.tipo != "short":
             r = await workflow.execute_activity(nlm_perguntar, args=[nb, p.pergunta or "Resuma a origem e o significado."],
                                                 start_to_close_timeout=timedelta(minutes=12),
                                                 retry_policy=RetryPolicy(maximum_attempts=1))
@@ -176,4 +196,4 @@ class NotebookLMWorkflow:
                                    estado_artefato=estado, uso_dia=uso)
 
 
-ATIVIDADES = [nlm_checar_saldo, nlm_caderno, nlm_fonte, nlm_perguntar, nlm_artefatos_video, nlm_gerar_short]
+ATIVIDADES = [nlm_checar_saldo, nlm_caderno, nlm_persona, nlm_baixar_video, nlm_fonte, nlm_perguntar, nlm_artefatos_video, nlm_gerar_short]

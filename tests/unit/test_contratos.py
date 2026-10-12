@@ -5,12 +5,16 @@ from pydantic import ValidationError
 from pqbr.contratos import (RoteiroShort, DecisaoRepeticao, PontuacaoPolemica, VereditoAuditor,
     PropostaAgente, TicketManutencao, Falha, GradeDiaria, ItemGrade, RegistroConsumo, CTA)
 
+BLOCO = dict(estilo="ilustração 2D plana de cartum, traço preto grosso, cores chapadas quentes",
+             personagem="homem de ~40 anos, magro, cabelo grisalho curto, camiseta verde, bigode, expressão curiosa",
+             cenas=[dict(fala="Por que a gente fala isso?", acao="ele olha a TV desligada", enquadramento="plano médio", ambiente="sala brasileira, sofá, TV de tubo, noite"),
+                    dict(fala="Comenta aí", acao="ele volta ao sofá", enquadramento="plano aberto", ambiente="mesma sala, noite")])
 FALAS = ["Por que a gente desliga a TV e acorda na hora?"] + ["O corpo sabe que o barulho sumiu e estranha o silêncio da sala."] * 8 + [CTA]
 
 
 class Contratos(unittest.TestCase):
     def roteiro(self, **kw):
-        base = dict(episodio_id="ep-0001", titulo="Por que acordamos sem a TV?", falas=FALAS, entidades_cena=["sofá", "TV"])
+        base = dict(episodio_id="ep-0001", titulo="Por que acordamos sem a TV?", falas=FALAS, entidades_cena=["sofá", "TV"], bloco_visual=BLOCO)
         base.update(kw); return RoteiroShort(**base)
 
     def test_roteiro_valido(self):
@@ -69,3 +73,10 @@ class Contratos(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class BlocoVisualT(unittest.TestCase):
+    def test_bloco_sem_2d_falha(self):
+        from pqbr.contratos import BlocoVisual
+        with self.assertRaises(Exception):
+            BlocoVisual(**{**BLOCO, "estilo": "fotografia realista de um homem na sala"})

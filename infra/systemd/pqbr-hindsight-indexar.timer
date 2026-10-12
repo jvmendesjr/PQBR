@@ -1,0 +1,8 @@
+[Unit]
+Description=PQBR indexação Hindsight a cada hora
+[Timer]
+OnCalendar=hourly
+RandomizedDelaySec=300
+Persistent=true
+[Install]
+WantedBy=timers.target

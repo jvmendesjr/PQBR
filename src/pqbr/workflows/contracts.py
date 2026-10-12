@@ -24,6 +24,7 @@ class RoteiroShort(_Base):
     falas: list[str] = Field(min_length=1, max_length=40)
     palavras: int = Field(ge=1)
     tentativa: int = Field(ge=1)
+    bloco_visual: dict | None = None   # CONTRATO §16.4 (t427); validado por pqbr.contratos.BlocoVisual
 
 
 class AprovacaoJose(_Base):
