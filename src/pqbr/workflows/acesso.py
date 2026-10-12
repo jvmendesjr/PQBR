@@ -57,10 +57,11 @@ async def acesso_google_camofox() -> EstadoAcesso:
 
 @activity.defn
 async def acesso_notebooklm() -> EstadoAcesso:
-    from .notebooklm import CLI, HOME, PERFIL
-    env = {**os.environ, "NOTEBOOKLM_HOME": str(HOME), "NOTEBOOKLM_DISABLE_KEEPALIVE_POKE": "1"}
-    r = await asyncio.to_thread(subprocess.run, [CLI, "-p", PERFIL, "--quiet", "list", "--json"], capture_output=True, text=True, timeout=120, env=env)
-    return EstadoAcesso(servico="notebooklm", ok=r.returncode == 0, motivo="ok" if r.returncode == 0 else (r.stderr or r.stdout)[-200:])
+    from .notebooklm import _cli   # mesmo caminho do worker: erro de auth → nlm-sync.sh (com guarda) → tenta de novo
+    try:
+        await asyncio.to_thread(_cli, "list", "--json", timeout=120); return EstadoAcesso(servico="notebooklm", ok=True, motivo="ok")
+    except Exception as e:  # noqa: BLE001
+        return EstadoAcesso(servico="notebooklm", ok=False, motivo=str(e)[-200:])
 
 
 @activity.defn
@@ -87,8 +88,12 @@ async def restaurar_sessao_camofox() -> EstadoAcesso:
     if not (perfil / "storage-state.json").is_file(): return EstadoAcesso(servico="google_camofox", ok=False, motivo="perfil fixo ausente")
     sid = lambda f: next((hashlib.sha256(c["value"].encode()).hexdigest() for c in json.loads(f.read_text())["cookies"]
                           if c["name"] == "SID" and c["domain"] == ".google.com"), None)
-    if not sid(nlm) or sid(nlm) != sid(perfil / "storage-state.json"):
-        return EstadoAcesso(servico="google_camofox", ok=False, motivo="SID diferente entre Camofox e notebooklm-py: não é a mesma sessão")
+    ts = lambda f: next((hashlib.sha256(c["value"].encode()).hexdigest() for c in json.loads(f.read_text())["cookies"]
+                         if c["name"] == "__Secure-1PSIDTS" and c["domain"] == ".google.com"), None)
+    mesmo = bool(sid(nlm)) and sid(nlm) == sid(perfil / "storage-state.json")
+    causa = causa_provavel(ts(perfil / "storage-state.json"), ts(nlm), mesmo)
+    if not mesmo:
+        return EstadoAcesso(servico="google_camofox", ok=False, motivo=causa + " — restauração recusada")
     if not (await acesso_notebooklm_local()).ok: return EstadoAcesso(servico="google_camofox", ok=False, motivo="notebooklm-py também sem sessão")
     bk = home / f"Backups/pqbr-camofox/perfil-{datetime.now():%Y%m%d-%H%M%S}"; shutil.copytree(perfil, bk); bk.chmod(0o700)
     ok = lambda d: any(d.lstrip(".") == g or d.endswith("." + g) for g in ("google.com", "google.com.br"))
@@ -100,11 +105,53 @@ async def restaurar_sessao_camofox() -> EstadoAcesso:
         try: time.sleep(8); return _snap(t)
         finally: _api("DELETE", f"/tabs/{t}?userId=pqbr")
     snap = await asyncio.to_thread(run)
-    return EstadoAcesso(servico="google_camofox", ok=not deslogado(snap), motivo="restaurada do notebooklm-py" if not deslogado(snap) else "Google recusou a restauração")
+    return EstadoAcesso(servico="google_camofox", ok=not deslogado(snap), motivo=(f"{causa} — restaurada do notebooklm-py (mesma sessão)" if not deslogado(snap) else f"{causa} — Google recusou a restauração"))
 
 
 async def acesso_notebooklm_local() -> EstadoAcesso:
     return await acesso_notebooklm.__wrapped__() if hasattr(acesso_notebooklm, "__wrapped__") else await acesso_notebooklm()
+
+
+class EventoAcesso(BaseModel):
+    model_config = ConfigDict(extra="forbid", frozen=True)
+    servico: Servico
+    tipo: Literal["queda", "restauro_ok", "restauro_falhou", "normalizado"]
+    causa: str
+    resultado: str | None = None
+
+
+@activity.defn
+async def registrar_evento(e: EventoAcesso) -> int:
+    """José 18:06: toda queda/restauração vai para pqbr.eventos_acesso + changelog da REFERENCIA-sessao-google."""
+    from datetime import datetime
+    from pathlib import Path
+    from .pacote import _banco, RAIZ
+    with _banco() as c:
+        i = c.execute("insert into pqbr.eventos_acesso (servico, tipo, causa, resultado) values (%s, %s, %s, %s) returning id",
+                      (e.servico, e.tipo, e.causa[:500], (e.resultado or "")[:500] or None)).fetchone()[0]; c.commit()
+    ref = Path(RAIZ) / "docs/REFERENCIA-sessao-google.md"
+    if ref.is_file():
+        with ref.open("a", encoding="utf-8") as f:
+            f.write(f"- {datetime.now():%d/%m %H:%M} PT (auto, evento #{i}): {e.servico} {e.tipo}: {e.causa[:200]}" + (f" → {e.resultado[:200]}" if e.resultado else "") + "\n")
+    return i
+
+
+@activity.defn
+async def avisar_jose(servico: str, texto: str) -> int:
+    """Aviso informativo (não pede ação): linha 'aviso:' em revisao_humana, já executada; o cron Telegram envia uma vez."""
+    from .pacote import _banco
+    with _banco() as c:
+        i = c.execute("insert into pqbr.revisao_humana (canal_id, item_tipo, item_ref, caminhos_tentados, status, determinacao, decidido_em, observacao_jose)"
+                      " values ('pqbr', 'outro', %s, '{}'::jsonb, 'executado', 'corrigir', now(), %s) returning id",
+                      (f"aviso:{servico}", texto[:900])).fetchone()[0]; c.commit(); return i
+
+
+def causa_provavel(psidts_camofox: str | None, psidts_nlm: str | None, mesmo_sid: bool) -> str:
+    """Puro; testado. Diagnóstico da queda do navegador a partir de hashes (nunca valores)."""
+    if not mesmo_sid: return "sessão diferente (SID não confere): logout/revogação ou login novo"
+    if psidts_camofox and psidts_nlm and psidts_camofox != psidts_nlm:
+        return "__Secure-1PSIDTS divergente: outro cliente rotacionou a sessão (mesmo SID)"
+    return "mesmo SID e mesmo PSIDTS: causa não identificada (ver logs do Camofox)"
 
 
 @activity.defn
@@ -139,12 +186,23 @@ class AcessosWorkflow:
         estados = [await workflow.execute_activity(acesso_google_camofox, task_queue=FILA_CAMOFOX, **r),
                    await workflow.execute_activity(acesso_notebooklm, task_queue=FILA_NLM, **r),
                    await workflow.execute_activity(acesso_paperclip, task_queue=FILA_REG, **r)]
-        if not estados[0].ok and estados[1].ok:   # sequência José 17:26: passo 2 antes de pedir login
-            estados[0] = await workflow.execute_activity(restaurar_sessao_camofox, task_queue=FILA_CAMOFOX, **r)
+        if not estados[0].ok:   # José 17:26/18:06: registrar → restaurar automático → registrar → avisar
+            await workflow.execute_activity(registrar_evento, EventoAcesso(servico="google_camofox", tipo="queda", causa=estados[0].motivo), task_queue=FILA_REG, **r)
+            if estados[1].ok:
+                rest = await workflow.execute_activity(restaurar_sessao_camofox, task_queue=FILA_CAMOFOX, **r)
+                await workflow.execute_activity(registrar_evento, EventoAcesso(servico="google_camofox", tipo="restauro_ok" if rest.ok else "restauro_falhou",
+                                                causa=estados[0].motivo, resultado=rest.motivo), task_queue=FILA_REG, **r)
+                if rest.ok:
+                    await workflow.execute_activity(avisar_jose, args=["google_camofox", f"Sessão Google do Camofox caiu e foi restaurada sozinha. Causa: {rest.motivo}"],
+                                                    task_queue=FILA_REG, **r)
+                estados[0] = rest
         for e in estados:
             if e.ok:
-                await workflow.execute_activity(acesso_resolvido, e.servico, task_queue=FILA_REG, **r)
+                n = await workflow.execute_activity(acesso_resolvido, e.servico, task_queue=FILA_REG, **r)
+                if n: await workflow.execute_activity(registrar_evento, EventoAcesso(servico=e.servico, tipo="normalizado", causa="pedido pendente resolvido", resultado=e.motivo), task_queue=FILA_REG, **r)
             else:
+                if e.servico != "google_camofox":
+                    await workflow.execute_activity(registrar_evento, EventoAcesso(servico=e.servico, tipo="queda", causa=e.motivo), task_queue=FILA_REG, **r)
                 await workflow.execute_activity(pedir_jose, PedidoJose(servico=e.servico, motivo=e.motivo, acao_jose=ACAO_JOSE[e.servico],
-                                                caminhos_tentados=["conferência automática"]), task_queue=FILA_REG, **r)
+                                                caminhos_tentados=["conferência automática"] + (["restauração do notebooklm-py"] if e.servico == "google_camofox" else [])), task_queue=FILA_REG, **r)
         return [e.model_dump() for e in estados]

@@ -181,10 +181,21 @@ async def registro_autorizar_apagar(caderno: str, codigo: str) -> str:
 
 
 @activity.defn
+async def registro_autorizar_apagar_teste(caderno: str) -> str:
+    """Caderno de TESTE (classe pesquisa, nunca publicado): exige arquivado E verificado; sem espera de D+2 (José 18:06)."""
+    with _banco() as c:
+        r = c.execute("select titulo, arquivado_em, verificado_em from pqbr.cadernos_episodio where caderno_id = %s and classe = 'pesquisa'"
+                      " and publicado_em is null and apagado_em is null", (caderno,)).fetchone()
+    if not r: raise RuntimeError("caderno de teste fora da allowlist")
+    if r[1] is None or r[2] is None: raise RuntimeError("caderno não arquivado/verificado: arquivar e verificar antes de apagar")
+    return r[0]
+
+
+@activity.defn
 async def registro_apagado(caderno: str, codigo: str) -> None:
     with _banco() as c:
-        c.execute("update pqbr.cadernos_episodio set apagado_em = now() where caderno_id = %s and episodio_codigo = %s",
-                  (caderno, codigo)); c.commit()
+        c.execute("update pqbr.cadernos_episodio set apagado_em = now() where caderno_id = %s and (episodio_codigo = %s or (%s = '' and classe = 'pesquisa'))",
+                  (caderno, codigo, codigo)); c.commit()
 
 
 @activity.defn
@@ -252,11 +263,11 @@ async def nlm_exportar_caderno(caderno: str, codigo: str) -> list[str]:
 
 
 @activity.defn
-async def nlm_apagar_caderno(caderno: str, codigo: str, titulo_registrado: str) -> dict:
+async def nlm_apagar_caderno(caderno: str, codigo: str, titulo_registrado: str, teste: bool = False) -> dict:
     """Apaga UM caderno pelo id completo (a CLI aceita id parcial → exigimos UUID inteiro). Nunca por título."""
     if not UUID.match(caderno): raise RuntimeError("id incompleto/ inválido: recusado")
     if caderno in MESTRES_PROIBIDOS or caderno[:8] in MESTRES_PROIBIDOS: raise RuntimeError("caderno mestre proibido")
-    if not CODIGO.match(codigo) or not titulo_registrado.startswith(f"Short - {codigo} - "):
+    if not teste and (not CODIGO.match(codigo) or not titulo_registrado.startswith(f"Short - {codigo} - ")):
         raise RuntimeError("fora da allowlist de título")
     alvo = next((n for n in _ids(_json(await asyncio.to_thread(_cli, "list", "--json", timeout=120))) if n["id"] == caderno), None)
     if alvo is None: return {"apagado": False, "motivo": "já não existe"}
@@ -270,8 +281,14 @@ async def nlm_apagar_caderno(caderno: str, codigo: str, titulo_registrado: str) 
 class ApagarCadernoWorkflow:
     """Inicia na publicação real; dorme até D+2 (+ jitter); confere allowlist no banco; apaga pelo id; registra."""
     @workflow.run
-    async def run(self, caderno: str, codigo: str, publicado_iso: str) -> dict:
+    async def run(self, caderno: str, codigo: str, publicado_iso: str, teste: bool = False) -> dict:
         r = dict(start_to_close_timeout=timedelta(minutes=5), retry_policy=RetryPolicy(maximum_attempts=3))
+        if teste:   # José 18:06: caderno de teste já arquivado+verificado pelo DescartarCadernoTesteWorkflow; sem D+2
+            titulo = await workflow.execute_activity(registro_autorizar_apagar_teste, caderno, task_queue=FILA_EPISODIO, **r)
+            res = await workflow.execute_activity(nlm_apagar_caderno, args=[caderno, "", titulo, True], task_queue=FILA_NOTEBOOKLM,
+                                                  start_to_close_timeout=timedelta(minutes=5), retry_policy=RetryPolicy(maximum_attempts=2))
+            await workflow.execute_activity(registro_apagado, args=[caderno, ""], task_queue=FILA_EPISODIO, **r)
+            return res
         apos = await workflow.execute_activity(registro_publicado, args=[caderno, codigo, publicado_iso], task_queue=FILA_EPISODIO, **r)
         espera = datetime.fromisoformat(apos) - workflow.now() + timedelta(minutes=workflow.random().randint(5, 90))
         if espera.total_seconds() > 0: await workflow.sleep(espera)
@@ -284,5 +301,5 @@ class ApagarCadernoWorkflow:
 
 
 ATIVIDADES_REGISTRO = [registro_fonte, registro_fontes_listar, pacote_garantir, registro_buscar_caderno, registro_caderno, arquivar_caderno, registro_publicado,
-                       verificar_arquivo, registro_autorizar_apagar, registro_apagado]
+                       verificar_arquivo, registro_autorizar_apagar, registro_autorizar_apagar_teste, registro_apagado]
 ATIVIDADES_NLM_CICLO = [nlm_conferir_fontes, nlm_injetar_pacote, nlm_exportar_caderno, nlm_apagar_caderno]

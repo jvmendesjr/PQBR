@@ -61,3 +61,45 @@ Toda automação de navegador simula humano: Camoufox com `humanize: true` (curs
 - 12/10 16:17 PT: sessão do Camofox caiu. Causa: a CLI notebooklm-py rotacionou o `__Secure-1PSIDTS` (scripts manuais sem DISABLE_KEEPALIVE_POKE). Mesmo SID, mesmo perfil; não foi logout global nem revogação.
 - 12/10 17:25 PT: restaurada sem login pelo passo 2 (import dos cookies do notebooklm-py, 43 cookies Google); Gemini e NotebookLM logados. Pedido #1 fechado pelo `AcessosWorkflow`.
 - 12/10 17:26: sequência canônica 1–4 (ver playbook `camofox-sessao`) + regra "nenhum script fora do repo/contratos em produção".
+- 12/10 18:09 PT (auto, evento #1): notebooklm queda: error": true,
+  "code": "UNEXPECTED_ERROR",
+  "message": "Unexpected error: CSRF token not found in HTML. Final URL: https://notebook.google.com/\nThis may indicate the page structure has changed."
+}
+
+- 12/10 18:09 PT (auto, evento #2): paperclip_cli queda: paperclip cli falhou (company list): API error 400: Request failed with status 400
+
+- 12/10 18:10 PT (auto, evento #3): notebooklm queda: error": true,
+  "code": "UNEXPECTED_ERROR",
+  "message": "Unexpected error: CSRF token not found in HTML. Final URL: https://notebook.google.com/\nThis may indicate the page structure has changed."
+}
+
+- 12/10 18:10 PT (auto, evento #4): paperclip_cli queda: paperclip cli falhou (company list): API error 400: Request failed with status 400
+
+- 12/10 18:12 PT (auto, evento #5): notebooklm queda: error": true,
+  "code": "UNEXPECTED_ERROR",
+  "message": "Unexpected error: CSRF token not found in HTML. Final URL: https://notebook.google.com/\nThis may indicate the page structure has changed."
+}
+
+- 12/10 18:12 PT (auto, evento #6): paperclip_cli queda: paperclip cli falhou (company list): API error 400: Request failed with status 400
+
+- 12/10 18:13 PT (auto, evento #7): notebooklm queda: error": true,
+  "code": "UNEXPECTED_ERROR",
+  "message": "Unexpected error: CSRF token not found in HTML. Final URL: https://notebook.google.com/\nThis may indicate the page structure has changed."
+}
+
+- 12/10 18:13 PT (auto, evento #8): paperclip_cli queda: paperclip cli falhou (company list): API error 400: Request failed with status 400
+
+- 12/10 18:13 PT (auto, evento #9): notebooklm queda: error": true,
+  "code": "UNEXPECTED_ERROR",
+  "message": "Unexpected error: CSRF token not found in HTML. Final URL: https://notebook.google.com/\nThis may indicate the page structure has changed."
+}
+
+- 12/10 18:13 PT (auto, evento #10): paperclip_cli queda: paperclip cli falhou (company list): API error 400: Request failed with status 400
+
+- 12/10 18:13 PT (auto, evento #11): notebooklm queda: error": true,
+  "code": "UNEXPECTED_ERROR",
+  "message": "Unexpected error: CSRF token not found in HTML. Final URL: https://notebook.google.com/\nThis may indicate the page structure has changed."
+}
+
+- 12/10 18:13 PT (auto, evento #12): paperclip_cli queda: paperclip cli falhou (company list): API error 400: Request failed with status 400
+

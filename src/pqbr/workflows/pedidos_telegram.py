@@ -6,7 +6,7 @@ import json
 
 def formatar(linhas: list[tuple]) -> str:
     if not linhas: return ""
-    out = ["PQBR precisa de você:"]
+    out = ["PQBR — acessos:"]
     for i, ref, acao, cam in linhas:
         motivo = (cam or {}).get("motivo", "") if isinstance(cam, dict) else ""
         out.append(f"#{i} {ref.replace('acesso:', 'acesso ')}: {acao}" + (f" (motivo: {motivo[:120]})" if motivo else ""))
@@ -18,8 +18,8 @@ def main() -> None:
     from .pacote import _banco
     from ..seguranca.barreira import exigir_limpo
     with _banco() as c:
-        rows = c.execute("select id, item_ref, observacao_jose, caminhos_tentados from pqbr.revisao_humana where status = 'pendente'"
-                         " and (avisado_em is null or avisado_em < now() - interval '6 hours') order by id").fetchall()
+        rows = c.execute("select id, item_ref, observacao_jose, caminhos_tentados from pqbr.revisao_humana where (status = 'pendente' and (avisado_em is null or avisado_em < now() - interval '6 hours'))"
+                         " or (item_ref like 'aviso:%%' and avisado_em is null) order by id").fetchall()
         txt = formatar(rows)
         if txt:
             exigir_limpo(txt, "telegram")
