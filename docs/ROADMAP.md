@@ -204,6 +204,18 @@ Precisam do José: F4C-04, F4C-05, F4C-06, F4C-07. F4C-01..03 só pedem o portã
 
 - [ ] **F12-01** Evidência V1–V7; metas do piloto; ativar Schedules um a um — Req: todos · Testes: V1–V7 · Depende de: todas · Portão: **G12** · Obs: metas do piloto EM CONSTRUÇÃO — aguardando José (t327).
 
+## Semana de 19/10/2026: migração Drive rede → PQBR (DRV-MIG-01)
+
+- [ ] Concluir a migração dos materiais da pasta antiga  () para a , conforme : 53 masters stickman (~246 MB) + 28 AUDIT.md → .
+- [ ] Depois de conferir as cópias (md5), limpar a pasta antiga para evitar conflito, duplicação e gasto de espaço. **Excluir exige OK explícito do José.**
+- [ ] Atualizar o perfil  para não gravar mais na pasta antiga.
+
+## Semana de 19/10/2026: migração Drive rede → PQBR (DRV-MIG-01)
+
+- [ ] Concluir a migração dos materiais da pasta antiga `Porquê BR` (`1Qt79b1VoiH9nLY23X-bhcqCUfy7QEMSM`) para a `PQBR`, conforme `docs/pesquisas/mapa-drive-rede.md`: 53 masters stickman (~246 MB) + 28 AUDIT.md → `99_Arquivo/rede-stickman/`.
+- [ ] Depois de conferir as cópias (md5), limpar a pasta antiga para evitar conflito, duplicação e gasto de espaço. **Excluir exige OK explícito do José.**
+- [ ] Atualizar o perfil `rede` para gravar só na `PQBR`.
+
 ## Segundo momento (fora do caminho crítico)
 
 - [x] **L-01 — PRIORIDADE (t412)** Migrar o banco do Paperclip do Supabase para Postgres local próprio no `pc` (container dedicado, ao lado de app/Temporal/Hindsight) (t367) — Passos: (1) inventariar só leitura onde o `DATABASE_URL` do Paperclip é usado (serviço, `.env`, CLI, backups); (2) `pg_dump` do Supabase (versão do cliente ≥ servidor); (3) container `paperclip-db` em 127.0.0.1 com `mem_limit`, senha só no `.env` 600; (4) restaurar e conferir contagens por tabela contra a origem; (5) trocar o `DATABASE_URL` do Paperclip numa janela curta de manutenção (**reinício do serviço do Paperclip**, não do Hermes) e conferir painel, issues e heartbeats; (6) timer de backup diário com rotação; (7) manter o Supabase como rollback por N dias (N a definir); (8) depois, decidir que a pendência de RLS do Supabase deixou de valer · Aceite: contagens iguais, painel e TZ-04 ok no banco novo, backup e restauração testados · Portão: **José (OK antes de executar; janela de reinício do Paperclip)** · Rollback: voltar o `DATABASE_URL` para o Supabase e reiniciar o serviço do Paperclip · Obs: não executado. · Obs t412: prioridade; é a última dependência real do Supabase (o Paperclip ainda usa o DATABASE_URL do projeto `paperclip`). Não migrar sem a janela combinada. · 2026-10-11 21:45 (t412): FEITO. Dump public+drizzle do Supabase (600, `~/.paperclip-migration/`), Postgres 17 local dedicado (`infra/paperclip-db`, 127.0.0.1:55434, role/banco `paperclip`), restaurado, `DATABASE_URL` trocado por drop-in (Paperclip parado ~1 min). Verificado: 5 empresas e contagens iguais ao Supabase (26 agentes, 29 issues, 8 rotinas, 4 segredos, 5 chaves), 15 agentes PQBR ativos+pausados, UI/API 200 no 3100, MCP do `pqbr` lê agentes/issues, chave de agente autentica, heartbeat do Observador `succeeded`. Backup diário 04:00 (`paperclip-db-backup.timer`). Supabase intocado como rollback até 18/10 (`infra/paperclip-db/README.md`); depois o José desliga/exclui o projeto.
