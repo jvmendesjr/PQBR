@@ -1,7 +1,7 @@
 """E2E dry-run nº1 (t463), parte 1: tema → roteiro → compliance/guardião → SEO → inicia EpisodioWorkflow (dry_run)."""
 import json, re, sys, time, asyncio
 from datetime import date
-from pqbr.kit.router9 import chat
+from pqbr.kit.router9 import chat, combo
 from pqbr.pipeline.grade import checar_repeticao, bloqueio_absoluto, normalizar
 from pqbr.contratos import RoteiroShort, PacoteSEO, TemaPendente, ESTILO_PADRAO_2D, CTA
 from pqbr.seguranca.barreira import exigir_limpo
@@ -21,7 +21,7 @@ def gerar(modelo, sis, usr, valida, tent=3, mt=3500):
 t0 = time.time()
 with _banco() as c:
     usados = [r[0] for r in c.execute("select tema from pqbr.temas union all select tema from pqbr.temas_pendentes").fetchall()]
-cands, _ = gerar("core-medio", "Você é o Pesquisador de Origem do canal Porquê BR (Shorts de curiosidades). Responda só JSON.",
+cands, _ = gerar(combo("pesquisador-origem"), "Você é o Pesquisador de Origem do canal Porquê BR (Shorts de curiosidades). Responda só JSON.",
     "Proponha 8 temas de curiosidade/cultura popular brasileira (≥80% origem de expressões populares ou curiosidades inúteis que prendem a atenção), "
     "no formato pergunta 'Por que ...?' curta. Evite política, religião, tragédia, marcas e pessoas reais. "
     'JSON: {"temas":[{"tema":"...","categoria":"expressao|habito_mania|curiosidade_cultura_pop"}]}', lambda d: d["temas"])
@@ -45,7 +45,7 @@ def val_rot(d):
     if len(d.get("fontes", [])) < 2: raise ValueError("≥ 2 fontes (URLs) obrigatórias")
     if not 35 <= r.duracao_estimada_s <= 70: raise ValueError(f"duração {r.duracao_estimada_s}s; alvo ~50 s")
     return r, d["fontes"]
-(rot, fontes), tent = gerar("core-alto", ag + "\n\nResponda só JSON.",
+(rot, fontes), tent = gerar(combo("roteirista"), ag + "\n\nResponda só JSON.",
     f"Tema: {escolhido['tema']}\nepisodio_id: {slug}\n\nRegras do contrato (§16):\n{sec16}\n\n"
     f"Escreva o RoteiroShort: narrador único, gancho até 3 s com a imagem literal, versão mais aceita + 'mas tem quem diga', "
     f"~50 s (115 palavras), última fala exatamente \"{CTA}\". bloco_visual: personagem (frase-ficha detalhada, sem nome, 1 personagem), "
@@ -57,7 +57,7 @@ marca("roteirista", t0, tentativas=tent, falas=len(rot.falas), duracao_s=rot.dur
 t0 = time.time()
 comp = json.loads(open("company/agents/lider-compliance/AGENTS.md").read()[:0] or "{}")
 txt = json.dumps(rot.model_dump(), ensure_ascii=False)
-ver, _ = gerar("core-revisao", "Você é o Líder de Compliance do Porquê BR. Confira o roteiro contra o contrato editorial (segurança: pessoa real, marca real, "
+ver, _ = gerar(combo("lider-compliance"), "Você é o Líder de Compliance do Porquê BR. Confira o roteiro contra o contrato editorial (segurança: pessoa real, marca real, "
     "estereótipo ofensivo, política/religião/tragédia, afirmação falsa sem 'mas tem quem diga', pedido de comentário). Responda só JSON.",
     f"Contrato §16:\n{sec16[:5000]}\n\nRoteiro:\n{txt}\nFontes: {fontes}\n" + 'JSON: {"aprovado":true|false,"motivos":[...],"ressalvas":[...]}',
     lambda d: d if isinstance(d.get("aprovado"), bool) else (_ for _ in ()).throw(ValueError("aprovado")))
@@ -66,7 +66,7 @@ marca("compliance_guardiao", t0, aprovado=ver["aprovado"], motivos=ver.get("moti
 if not ver["aprovado"]: sys.exit("compliance reprovou")
 # 4 SEO
 t0 = time.time()
-seo, _ = gerar("core-medio", "Você é o Especialista de SEO do Porquê BR (YouTube Shorts, pt-BR). Responda só JSON.",
+seo, _ = gerar(combo("especialista-seo"), "Você é o Especialista de SEO do Porquê BR (YouTube Shorts, pt-BR). Responda só JSON.",
     f"Roteiro: {txt}\nGere titulo (≤ 70 car., pergunta curiosa), descricao (2–3 frases + fontes {fontes} + hashtags), tags (≤ 12), hashtags (3–5, incluir #shorts). "
     'JSON: {"titulo","descricao","tags":[...],"hashtags":[...]}', lambda d: PacoteSEO.model_validate(d))
 marca("seo", t0, titulo=seo.titulo, categoria=seo.categoria_id, sintetica=seo.contem_midia_sintetica)

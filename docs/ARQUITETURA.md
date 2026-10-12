@@ -324,3 +324,6 @@ Escrita no banco do app sempre por Activity com **outbox** (idempotente por chav
 
 ## Revisão por modelo distinto (t419)
 Combo do 9router `core-revisao` (família distinta dos combos de produção) para correções/revisões de saídas dos outros combos core: aplicados (t419/t421): Dev Revisor, desempate da 3ª rodada do Auditor, 2ª tentativa após saída inválida, dupla checagem do Guardião antes de bloquear/pausar (`segunda_opiniao` no `pqbr-kit`), revisão do Diretor sobre correções de playbook e segunda leitura do Compliance em roteiro sensível. Falha do combo (2×) → regra conservadora. Detalhe em `docs/AGENTES.md` §7.
+
+## Modelos 9router por papel (José 12/10 14:02)
+Toda chamada ao 9router de worker ou script usa `pqbr.kit.router9.combo(papel)` / `chat_papel`, lendo **`config/modelos_9router.json`** (fonte única, mesmo mapeamento dos agentes Paperclip): core-alto = Diretor, Roteirista, Auditor, Devs; core-medio = Pesquisador de Origem, Líder Editorial, Compliance, Guardião; core-baixo = Observador, SEO, Caçador Sazonal, Comunidade, Diretor de Arte, pqbr; core-revisao = revisões e segundas opiniões. Proibido nome de combo fixo no código.

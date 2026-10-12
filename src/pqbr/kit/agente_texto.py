@@ -70,7 +70,7 @@ def processar(i: dict, me: dict, modelo: str) -> str:
         i = {**i, **(pc.issue(i["id"]) or {})}
     slug = _slug(me["name"])
     pedido = f"Tarefa {i.get('identifier')}: {i.get('title')}\n\n{(i.get('description') or '')[:4000]}"
-    revisao = os.environ.get("PQBR_MODELO_REVISAO", "core-revisao")
+    revisao = os.environ.get("PQBR_MODELO_REVISAO") or router9.combo("revisao")
     if revisao and re.search(r"terceira[_ ]rodada|desempate", pedido, re.I):
         modelo = revisao   # t419: desempate do Auditor vai ao combo de revisão (família distinta)
     print(f"pqbr-kit: modelo={modelo} descricao={len(i.get('description') or '')}", flush=True)
@@ -100,7 +100,7 @@ def processar(i: dict, me: dict, modelo: str) -> str:
 
 
 def main() -> int:
-    modelo = os.environ.get("PQBR_MODELO_9ROUTER", "core-baixo")
+    modelo = os.environ.get("PQBR_MODELO_9ROUTER") or router9.combo("pqbr-assistente")
     me = pc.eu()
     alvo = os.environ.get("PAPERCLIP_TASK_ID") or os.environ.get("PAPERCLIP_ISSUE_ID")
     itens = [pc.issue(alvo)] if alvo else [x for x in pc.inbox() if x.get("status") in ("todo", "in_progress")]

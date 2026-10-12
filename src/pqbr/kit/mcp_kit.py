@@ -158,9 +158,9 @@ def chamar(nome: str, a: dict) -> str:
         from pqbr.storage.hindsight import reter
         reter(a["licao"][:3000], f"PQBR lição registrada por {os.environ.get('PQBR_KIT_PAPEL', '?')}"); return "registrado"
     if nome == "segunda_opiniao":
-        from pqbr.kit.agente_texto import segunda_leitura
+        from pqbr.kit.agente_texto import segunda_leitura; from pqbr.kit import router9
         from pqbr.seguranca.barreira import exigir_limpo
-        r = segunda_leitura(os.environ.get("PQBR_MODELO_REVISAO", "core-revisao"), a["contexto"], a["decisao"])
+        r = segunda_leitura(os.environ.get("PQBR_MODELO_REVISAO") or router9.combo("revisao"), a["contexto"], a["decisao"])
         exigir_limpo(r, "log"); return r
     if nome == "seguranca_varrer_logs": return _varrer_logs(a.get("horas", 24) or 24)
     raise KeyError(nome)

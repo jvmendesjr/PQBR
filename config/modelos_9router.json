@@ -1,0 +1,19 @@
+{
+ "_doc": "Papel → combo core do 9router (José 12/10 14:02). Fonte única para workers/scripts; espelha os agentes Paperclip (t414).",
+ "diretor": "core-alto",
+ "roteirista": "core-alto",
+ "auditor": "core-alto",
+ "dev-corretor": "core-alto",
+ "dev-revisor": "core-alto",
+ "pesquisador-origem": "core-medio",
+ "lider-editorial": "core-medio",
+ "lider-compliance": "core-medio",
+ "guardiao-seguranca": "core-medio",
+ "observador": "core-baixo",
+ "especialista-seo": "core-baixo",
+ "cacador-sazonal": "core-baixo",
+ "comunidade": "core-baixo",
+ "diretor-arte-2d": "core-baixo",
+ "pqbr-assistente": "core-baixo",
+ "revisao": "core-revisao"
+}

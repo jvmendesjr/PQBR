@@ -13,3 +13,21 @@ def chat(modelo: str, sistema: str, usuario: str, max_tokens: int = 800) -> str:
                                         "Content-Type": "application/json"})
     with urllib.request.urlopen(r, timeout=180) as resp:
         return json.load(resp)["choices"][0]["message"]["content"]
+
+
+_COMBOS = None
+
+
+def combo(papel: str) -> str:
+    """Combo core do 9router por papel (config/modelos_9router.json; José 12/10). Sem hardcode de modelo nos chamadores."""
+    global _COMBOS
+    if _COMBOS is None:
+        from pathlib import Path
+        _COMBOS = json.loads((Path(__file__).resolve().parents[3] / "config" / "modelos_9router.json").read_text())
+    if papel not in _COMBOS or papel.startswith("_"):
+        raise KeyError(f"papel sem combo em config/modelos_9router.json: {papel}")
+    return _COMBOS[papel]
+
+
+def chat_papel(papel: str, sistema: str, usuario: str, max_tokens: int = 800) -> str:
+    return chat(combo(papel), sistema, usuario, max_tokens)
