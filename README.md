@@ -28,3 +28,5 @@ Arquivos de pré-construção **nunca** são consultados por agentes; ler qualqu
 - Dúvida ou conflito sem certeza: não adivinhar; marcar "EM CONSTRUÇÃO — aguardando José" (t323).
 - Decisão nova entra no `DECISOES-LOG.md` e no `REGRAS.md` no mesmo commit; requisitos, desenho, testes e tarefas afetados são atualizados junto.
 - Nada de senhas, tokens, cookies, dados pessoais, IPs ou IDs internos neste repositório.
+
+- **Sessão Google (referência viva):** [`docs/REFERENCIA-sessao-google.md`](docs/REFERENCIA-sessao-google.md) — Camofox única fonte/renovador; NotebookLM só lê.

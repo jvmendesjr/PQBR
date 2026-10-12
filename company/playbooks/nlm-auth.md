@@ -24,3 +24,5 @@ oficial do notebooklm-py e evita duas ferramentas rotacionando a **mesma** sess�
 **Contorno do login (12/10, notebooklm-py 0.8.4, última versão no PyPI):** deslogado, `notebook.google.com` (e o legado `notebooklm.google.com`) cai em `notebook.google.com/trynow`, mesmo host → o `login` acusa "Already logged in" e salva só NID/__Host-GAPS. `NOTEBOOKLM_BASE_URL` não resolve. Usar `scripts/notebooklm/login_jose.sh`: abre o Chromium do perfil persistente do notebooklm-py na página de login do Google (DISPLAY=:1, visível no VNC), espera SID + `__Secure-1PSIDTS`, fecha e roda `notebooklm -p pqbr login` (sem `--fresh`) + `auth check --test`. Log em `~/.pqbr/notebooklm/logs-login.txt`.
 
 **Atualização 12/10 (José):** supera L1–L3 nativos. NotebookLM só LÊ a sessão do Camofox via `NOTEBOOKLM_REFRESH_CMD=~/.pqbr/camofox/nlm-sync.sh` (`DISABLE_KEEPALIVE_POKE=1`, `HEADLESS_REAUTH=0`, sem perfil Chromium, sem `auth refresh`). Falha de auth → rodar `nlm-sync.sh`; se a sessão do Camofox caiu → playbook camofox-sessao (login no Camofox pelo VNC, com ritmo humano).
+
+Referência viva: [`docs/REFERENCIA-sessao-google.md`](../../docs/REFERENCIA-sessao-google.md).

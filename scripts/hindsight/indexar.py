@@ -8,6 +8,8 @@ from pathlib import Path
 RAIZ = Path("/home/pc/Workspace/PQBR"); sys.path.insert(0, str(RAIZ / "src"))
 from pqbr.storage.hindsight import reter  # noqa: E402
 
+DOCS = ["docs/REFERENCIA-sessao-google.md", "docs/CONTRATO-EDITORIAL.md", "docs/ARQUITETURA.md", "docs/ROADMAP.md", "docs/SPEC.md",
+        "docs/AGENTES.md", "docs/pesquisas/mapa-drive-rede.md", "docs/pesquisas/estilo-2d-referencias.md", "docs/sdd/gate-a9.md"]
 ESTADO = Path.home() / ".pqbr/hindsight/indexados.json"
 
 
@@ -25,6 +27,20 @@ def itens():
         yield f"commit:{h}", f"Commit {h} em {d}: {s}", "PQBR evolução — commit do repositório"
     for f in sorted((RAIZ / "company/playbooks").glob("*.md")):
         yield f"playbook:{f.name}", f.read_text(encoding="utf-8")[:3500], f"PQBR playbook/lição — {f.stem}"
+
+    for rel in DOCS:
+        f = RAIZ / rel
+        if not f.exists(): continue
+        txt = f.read_text(encoding="utf-8")
+        for sec in re.split(r"\n(?=##+ )", txt):
+            if len(sec.strip()) < 80: continue
+            tit = sec.strip().splitlines()[0].lstrip("# ").strip()[:80]
+            for i in range(0, len(sec), 3500):
+                yield f"doc:{rel}:{tit}:{i}", sec[i:i + 3500], f"PQBR doc canônico — {rel}: {tit}"
+    mem = RAIZ / "scripts/hindsight/memorias.json"
+    if mem.exists():
+        for chave, texto in json.loads(mem.read_text(encoding="utf-8")):
+            yield chave, texto, "PQBR decisão-chave (memória)"
 
 
 def main() -> int:

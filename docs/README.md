@@ -16,3 +16,5 @@ Ordem de autoridade (ler nesta ordem):
 ⛔ `arquivo/` (ENTREGA, propostas antigas, decisoes-jose, PLANO, rascunhos) e `pesquisas/`: **não consultar sem aprovação do José.**
 
 Consolidado no servidor em 11/10 (t394–t395).
+
+- `REFERENCIA-sessao-google.md`: referência viva da sessão Google persistente (Camofox/Camoufox + notebooklm-py), com changelog.

@@ -14,3 +14,5 @@ Fila `camofox-pqbr`, concorrência 1; cada passo → log (`pqbr.acoes`) + aviso 
 - **Fonte de cookies do Chrome não existe mais:** o José saiu da conta no Chrome do servidor (12/10). O degrau "sincronizar cookies do Chrome" (`sync_cookies_chrome.py`) está sem fonte; a escada vai direto de "renovar no Camofox" para login manual pelo VNC.
 
 **Ritmo humano (obrigatório, REGRAS §157):** clicar/digitar só por `pqbr.workflows.camofox_humano` (mouse humanize do Camoufox, digitação com cadência, texto longo colado, pausas sorteadas). Sessão Google: Camofox é a única fonte/renovador (keepalive 15 min); cópia do Chrome aposentada.
+
+Referência viva: [`docs/REFERENCIA-sessao-google.md`](../../docs/REFERENCIA-sessao-google.md).
