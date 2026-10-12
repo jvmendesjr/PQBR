@@ -3,7 +3,9 @@
 O Gemini web responde só sim/nao/na por cena (templates/auditor/VISUAL_2D.txt).
 O código decide. Regras: CONTRATO §16.6, REGRAS §5.
 - SEGURANCA (reprova): parece_pessoa_real, marca_real, estereotipo_ofensivo,
-  texto_com_erro_de_sentido = "sim".
+  texto_com_erro_de_sentido = "sim" (texto na imagem OU na legenda que muda o sentido).
+- ACEITAVEIS (t435, nunca reprovam): legenda_com_erro (a legenda é do NotebookLM, obrigatória,
+  sem queima extra no pós). Vão para pqbr.erros_aceitaveis junto com as ressalvas de métrica.
 - METRICAS (nunca reprovam; "nao" vira ressalva): segue_estilo_declarado,
   mesmo_personagem_do_bloco, imagem_corresponde_a_fala, legivel_no_celular,
   ambiente_brasileiro.
@@ -20,8 +22,17 @@ TEMPLATE = Path(__file__).resolve().parents[3] / "templates" / "auditor" / "VISU
 SEGURANCA = ("parece_pessoa_real", "marca_real", "estereotipo_ofensivo", "texto_com_erro_de_sentido")
 METRICAS = ("segue_estilo_declarado", "mesmo_personagem_do_bloco", "imagem_corresponde_a_fala",
             "legivel_no_celular", "ambiente_brasileiro")
-CHAVES = ("tem_personagem", "tem_texto_na_tela") + METRICAS + SEGURANCA
-PODE_NA = {"mesmo_personagem_do_bloco", "texto_com_erro_de_sentido"}
+ACEITAVEIS = ("legenda_com_erro",)
+CHAVES = ("tem_personagem", "tem_texto_na_tela") + METRICAS + ACEITAVEIS + SEGURANCA
+PODE_NA = {"mesmo_personagem_do_bloco", "texto_com_erro_de_sentido", "legenda_com_erro"}
+CATEGORIA = {"legenda_com_erro": "legenda", "legivel_no_celular": "visual", "segue_estilo_declarado": "visual",
+             "mesmo_personagem_do_bloco": "visual", "imagem_corresponde_a_fala": "visual",
+             "ambiente_brasileiro": "visual", "tem_texto_na_tela": "texto"}
+DESCRICAO = {"legenda_com_erro": "legenda do NotebookLM com palavra errada/cortada/fora de sincronia, sem mudar o sentido",
+             "tem_texto_na_tela": "texto escrito dentro da imagem (estilo pede sem texto), sem erro de sentido",
+             "legivel_no_celular": "cena pouco legível no celular", "segue_estilo_declarado": "fora do estilo declarado",
+             "mesmo_personagem_do_bloco": "personagem diferente do bloco visual",
+             "imagem_corresponde_a_fala": "imagem não ilustra a fala", "ambiente_brasileiro": "ambiente pouco brasileiro"}
 ORDEM = ("reprova", "terceira_rodada", "aprova_com_ressalva", "aprova")
 
 
@@ -70,7 +81,7 @@ def decidir(respostas: list[str], ids: list[str]) -> dict:
         c, p = ler_resposta(txt, ids)
         rodadas.append(c)
         problemas += [f"r{n}:{x}" for x in p]
-    falhas, divergencias, ressalvas = [], [], []
+    falhas, divergencias, ressalvas, aceitos = [], [], [], []
     metricas = {m: [0, 0] for m in METRICAS}  # [sim, total]
     for i in ids:
         for k in SEGURANCA:
@@ -86,6 +97,13 @@ def decidir(respostas: list[str], ids: list[str]) -> dict:
             metricas[k][1] += len(votos)
             if votos and votos.count("nao") == len(votos):
                 ressalvas.append((i, k))
+                aceitos.append((i, k))
+        for k in ACEITAVEIS + ("tem_texto_na_tela",):
+            votos = [r[i][k] for r in rodadas if i in r and k in r[i] and r[i][k] != "na"]
+            if votos and votos.count("sim") == len(votos) and (i, "texto_com_erro_de_sentido") not in falhas:
+                if k != "tem_texto_na_tela":
+                    ressalvas.append((i, k))
+                aceitos.append((i, k))
     if falhas:
         v = "reprova"
     elif divergencias or problemas:
@@ -102,4 +120,22 @@ def decidir(respostas: list[str], ids: list[str]) -> dict:
         "ressalvas": ressalvas,
         "metricas": {k: (s / t if t else None) for k, (s, t) in metricas.items()},
         "rodada_unica": len(rodadas) == 1,
+        "erros_aceitaveis": [] if v == "reprova" else aceitos,
     }
+
+
+SQL_ERROS = ("insert into pqbr.erros_aceitaveis (episodio_codigo, tema_slug, cena, categoria, chave, descricao,"
+             " gravidade, veredito_auditor, rodadas, evidencia) values"
+             " (%(episodio_codigo)s, %(tema_slug)s, %(cena)s, %(categoria)s, %(chave)s, %(descricao)s,"
+             " %(gravidade)s, %(veredito_auditor)s, %(rodadas)s, %(evidencia)s)")
+
+
+def linhas_erros_aceitaveis(resultado: dict, episodio_codigo: str | None = None, tema_slug: str | None = None) -> list[dict]:
+    """Linhas para pqbr.erros_aceitaveis (SQL_ERROS). Reprova não grava: vira falha, não erro aceito."""
+    if not (episodio_codigo or tema_slug):
+        raise ValueError("episodio_codigo ou tema_slug obrigatório")
+    rod = 1 if resultado.get("rodada_unica") else 2
+    return [{"episodio_codigo": episodio_codigo, "tema_slug": tema_slug, "cena": c, "categoria": CATEGORIA[k],
+             "chave": k, "descricao": DESCRICAO[k], "gravidade": "leve", "veredito_auditor": resultado["veredito"],
+             "rodadas": rod, "evidencia": json.dumps({"metricas": resultado.get("metricas", {})})}
+            for c, k in resultado.get("erros_aceitaveis", [])]

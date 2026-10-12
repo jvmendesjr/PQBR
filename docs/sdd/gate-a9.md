@@ -13,7 +13,7 @@
 5. Um foco só (personagem ou objeto-gancho) no centro, dentro da zona segura: fora dos ~15% de cima, ~20–25% de baixo e ~15% da borda direita.
 6. Legível no teste de ~120–200 px de largura (miniatura da prateleira).
 7. Promete o mesmo que o título (sem isca falsa).
-8. Texto na imagem: preferível nenhum (estilo §16.4 pede "sem texto nas imagens"); se houver, ≤ 3 palavras e sem erro.
-9. **Segurança (reprova o vídeo, §16.6):** semelhança com pessoa real, marca/logo real, estereótipo ofensivo.
+8. Texto na imagem: preferível nenhum **dentro do desenho** (§16.4); a **legenda do NotebookLM** (obrigatória, faixa de baixo) é esperada e não conta, mas prefira quadro em que ela não cubra o foco. Texto/legenda com erro sem mudar o sentido → `pqbr.erros_aceitaveis` (não reprova); erro que muda o sentido → item 9 (t435).
+9. **Segurança (reprova o vídeo, §16.6):** semelhança com pessoa real, marca/logo real, estereótipo ofensivo, texto/legenda com erro que muda o sentido.
 
 **Resultado:** 1–4 e 5–8 são **métrica** (escolhem outro quadro; se nenhum passar, segue com ressalva no relatório); só 9 reprova.

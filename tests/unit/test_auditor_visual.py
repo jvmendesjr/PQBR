@@ -9,6 +9,7 @@ def cena(i, **kw):
     base = {"id": i, "tem_personagem": "sim", "tem_texto_na_tela": "nao",
             **{m: "sim" for m in av.METRICAS}, **{s: "nao" for s in av.SEGURANCA}}
     base["texto_com_erro_de_sentido"] = "na"
+    base["legenda_com_erro"] = "nao"
     base.update(kw)
     return base
 
@@ -77,3 +78,24 @@ class AuditorVisual(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+    def test_legenda_com_erro_aceita_e_registra(self):
+        x = resp(cena("S01", legenda_com_erro="sim"), cena("S02"))
+        r = av.decidir([x, x], IDS)
+        assert r["veredito"] == "aprova_com_ressalva"
+        assert r["erros_aceitaveis"] == [("S01", "legenda_com_erro")]
+        ls = av.linhas_erros_aceitaveis(r, episodio_codigo="PQBR-EP0001")
+        assert ls[0]["categoria"] == "legenda" and ls[0]["veredito_auditor"] == "aprova_com_ressalva"
+
+
+    def test_legenda_que_muda_sentido_reprova(self):
+        x = resp(cena("S01", legenda_com_erro="sim", texto_com_erro_de_sentido="sim"), cena("S02"))
+        r = av.decidir([x, x], IDS)
+        assert r["veredito"] == "reprova" and r["erros_aceitaveis"] == []
+
+
+    def test_texto_na_imagem_sem_erro_registra_sem_ressalva(self):
+        x = resp(cena("S01", tem_texto_na_tela="sim", texto_com_erro_de_sentido="nao"), cena("S02"))
+        r = av.decidir([x, x], IDS)
+        assert r["veredito"] == "aprova" and r["erros_aceitaveis"] == [("S01", "tem_texto_na_tela")]

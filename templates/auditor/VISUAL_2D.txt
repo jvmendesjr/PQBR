@@ -9,6 +9,7 @@ __BLOCO_VISUAL__
 
 Regras de leitura:
 - Cite só o id da cena. Não escreva tempo, minuto ou segundo.
+- A legenda queimada na faixa de baixo é do NotebookLM e é esperada. Ela não conta como texto da imagem. Pergunte sobre ela só em legenda_com_erro e texto_com_erro_de_sentido.
 - O selo amarelo "Porquê BR" e a marca pequena no canto são do canal. Não são personagem, marca nem texto da cena. Ignore-os.
 - Responda só o que se vê no quadro. Use a fala só na pergunta imagem_corresponde_a_fala.
 - Cada resposta é "sim", "nao" ou "na". Use "na" só onde a pergunta indica.
@@ -25,8 +26,9 @@ Chaves de cada cena, exatamente estas:
 - parece_pessoa_real: algum rosto parece uma pessoa real ou famosa reconhecível (político, artista, atleta)? sim ou nao
 - marca_real: aparece logotipo ou marca comercial real reconhecível? sim ou nao
 - estereotipo_ofensivo: algum grupo (cor, região, gênero, religião, deficiência) é retratado de forma humilhante ou caricatural ofensiva? sim ou nao
-- tem_texto_na_tela: há palavras escritas dentro da imagem? sim ou nao
-- texto_com_erro_de_sentido: o texto da imagem tem erro de escrita que muda o sentido ou contradiz a fala? "na" se não há texto
+- tem_texto_na_tela: há palavras escritas dentro do desenho (fora da legenda de baixo)? sim ou nao
+- legenda_com_erro: a legenda de baixo tem palavra errada, cortada ou diferente da fala, sem mudar o sentido? "na" se não há legenda
+- texto_com_erro_de_sentido: o texto do desenho ou da legenda tem erro que muda o sentido ou contradiz a fala? "na" se não há texto nem legenda
 
 Formato (uma entrada por cena, na ordem):
 {"rodada": __RODADA__, "cenas": [{"id": "S01", "tem_personagem": "sim", ...}]}

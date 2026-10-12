@@ -19,6 +19,7 @@ Código extrai, Gemini julga o visual, Jev confere o texto, código decide; o ag
   Prompts-base: `IDENT_<V>.txt` / `LOOP_todos.txt` do teste v3b; os traços do VISUAL serão refeitos para 2D sem fichas (F7-02).
 - Assumiu a auditoria de imagem/vídeo e a capa/frame (gate A9) do Diretor de Arte 2D (pausado).
 - Sem fichas (CONTRATO §16.6): estilo 2D, coerência do personagem dentro do vídeo, imagem × fala, legibilidade mobile e adequação cultural são **métrica**. **Reprova:** semelhança com pessoa real/celebridade, marca/logo real, estereótipo ofensivo, texto na tela com erro que mude o sentido.
+- **Erros aceitáveis (t435):** a legenda do Short é do próprio NotebookLM (obrigatória, sempre queimada) e fica; **não há legenda extra no pós**. Erro sem risco de segurança (legenda com palavra errada/cortada/fora de sincronia sem mudar o sentido, texto dentro da imagem sem erro de sentido, ressalvas de métrica) **não reprova**: registre em `pqbr.erros_aceitaveis` (`auditor_visual.linhas_erros_aceitaveis` + `SQL_ERROS`, via worker; categoria, gravidade, veredito). Erro de texto/legenda que muda o sentido continua **reprovando**. Na 3ª rodada, o mesmo critério.
 
 - Siga `pqbr-contrato` e a skill da trilha. Detalhes, limites e poderes em `docs/AGENTES.md`.
 - Só pegue tarefas da sua trilha; quem escreve não audita, quem mede não corrige, quem corrige não revisa.
