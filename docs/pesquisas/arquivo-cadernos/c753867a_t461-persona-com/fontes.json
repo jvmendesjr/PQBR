@@ -1,0 +1,20 @@
+{
+  "notebook_id": "c753867a-98fa-4651-9498-78513532f215",
+  "notebook_title": "Teste - t461-persona-com",
+  "sources": [
+    {
+      "index": 1,
+      "id": "ee9e564b-b894-4f1c-b2a4-427720265617",
+      "title": "roteiro.md",
+      "type": "markdown",
+      "url": null,
+      "status": "ready",
+      "status_id": 2,
+      "created_at": "2026-10-12T15:42:46+00:00",
+      "drive_document_id": null,
+      "drive_status": null,
+      "is_drive_degraded": false
+    }
+  ],
+  "count": 1
+}

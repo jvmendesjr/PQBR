@@ -1,0 +1,20 @@
+{
+  "notebook_id": "bff9409b-ee47-4280-96b5-4c94ce1c2a63",
+  "notebook_title": "Teste - t460-capa",
+  "sources": [
+    {
+      "index": 1,
+      "id": "cfd7e2f8-161b-43ce-933f-6b097de42e2b",
+      "title": "roteiro.md",
+      "type": "markdown",
+      "url": null,
+      "status": "ready",
+      "status_id": 2,
+      "created_at": "2026-10-12T15:33:50+00:00",
+      "drive_document_id": null,
+      "drive_status": null,
+      "is_drive_degraded": false
+    }
+  ],
+  "count": 1
+}

@@ -1,0 +1,20 @@
+{
+  "notebook_id": "ce30c1e2-d589-4e0c-8eac-4eef988d1539",
+  "notebook_title": "Teste - t461-persona-sem",
+  "sources": [
+    {
+      "index": 1,
+      "id": "e9c9fd9c-b04c-47da-928b-05137664c7a3",
+      "title": "roteiro.md",
+      "type": "markdown",
+      "url": null,
+      "status": "ready",
+      "status_id": 2,
+      "created_at": "2026-10-12T15:43:26+00:00",
+      "drive_document_id": null,
+      "drive_status": null,
+      "is_drive_degraded": false
+    }
+  ],
+  "count": 1
+}
