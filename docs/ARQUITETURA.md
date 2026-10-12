@@ -191,7 +191,7 @@ Nada que depende de uma hipótese é construído antes de ela virar VERIFICADO (
   - Porta só em `127.0.0.1:55433`; `pg_hba` sem `trust` no localhost.
   - Limite de 320 MB (sem swap).
   - Senhas geradas no servidor em `infra/pqbr-db/.env` (600, fora do git).
-  - **Supabase fica como opção futura** (o projeto Supabase dedicado custaria US$ 10/mês, t337–t338). O projeto Supabase `paperclip` não é usado nem tocado.
+  - **[t412] Supabase não é usado.** Texto histórico: Supabase ficava como opção futura (o projeto Supabase dedicado custaria US$ 10/mês, t337–t338). O projeto Supabase `paperclip` não é usado nem tocado.
 - **Esquema `pqbr`:** migrações `db/migrations/0001..0009` (aplicadas por `infra/pqbr-db/aplicar.sh`, registro em `public.pqbr_migracoes`), com rollback em `db/migrations/rollback/`.
   - Testes descartáveis: `db/test_migrations.sh`. Verificação do banco real: `infra/pqbr-db/verificar.sh`.
   - RLS ligado e forçado em todas as tabelas, com políticas só para os papéis abaixo.
@@ -259,7 +259,7 @@ Escrita no banco do app sempre por Activity com **outbox** (idempotente por chav
 - **A fazer (migração futura, ainda não escrita nem aplicada):** tabela do resumo e papel `pqbr_manutencao`, com rollback.
 
 ### Banco do Paperclip [t367; PLANO, não executado]
-- Hoje o Paperclip usa o próprio banco no **Supabase** (projeto `paperclip`). Plano: migrar para um **Postgres local próprio no `pc`**, num container dedicado ao lado dos bancos do app, do Temporal e do Hindsight (cada um separado), em 127.0.0.1 com limite de memória, backup diário e Supabase mantido como rollback por N dias. Com o banco local, a pendência de RLS do Supabase deixa de valer (a confirmar ao fim). Passos e portão: ROADMAP L-01. Exige reiniciar o **serviço do Paperclip** (não o Hermes) numa janela curta.
+- **[FEITO t412, 11/10]** O Paperclip usa Postgres 17 local dedicado (`infra/paperclip-db`, 127.0.0.1:55434, banco/role `paperclip`, backup 04:00; rollback no README até 18/10). Antes usava o **Supabase** (projeto `paperclip`). Plano: migrar para um **Postgres local próprio no `pc`**, num container dedicado ao lado dos bancos do app, do Temporal e do Hindsight (cada um separado), em 127.0.0.1 com limite de memória, backup diário e Supabase mantido como rollback por N dias. Com o banco local, a pendência de RLS do Supabase deixa de valer (a confirmar ao fim). Passos e portão: ROADMAP L-01. Exige reiniciar o **serviço do Paperclip** (não o Hermes) numa janela curta.
 
 ## 9. Workflows do Temporal [PROPOSTA; validados a partir da Fase 0.5]
 

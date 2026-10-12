@@ -1,0 +1,8 @@
+[Unit]
+Description=PQBR backup diário do Postgres do Paperclip, 04:00 (Fortaleza; depois do Hindsight)
+[Timer]
+OnCalendar=*-*-* 04:00:00
+RandomizedDelaySec=5min
+Persistent=true
+[Install]
+WantedBy=timers.target

@@ -1,0 +1,15 @@
+# Paperclip — Postgres 17 local dedicado (L-01, t412). Separado do banco do app PQBR e do Temporal.
+# Porta só em 127.0.0.1:55434. Segredos em ~/.config/paperclip-db/db.env (600, fora do git).
+services:
+  paperclip-db:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    env_file: ["${HOME}/.config/paperclip-db/db.env"]
+    command: ["postgres","-c","shared_buffers=64MB","-c","max_connections=60","-c","work_mem=4MB",
+              "-c","maintenance_work_mem=32MB","-c","effective_cache_size=256MB","-c","password_encryption=scram-sha-256"]
+    volumes: ["pgdata:/var/lib/postgresql/data"]
+    ports: ["127.0.0.1:55434:5432"]
+    mem_limit: 512m
+    memswap_limit: 512m
+    healthcheck: {test: ["CMD-SHELL","pg_isready -U postgres -d paperclip"], interval: 5s, timeout: 5s, retries: 30, start_period: 10s}
+volumes: {pgdata: {}}
