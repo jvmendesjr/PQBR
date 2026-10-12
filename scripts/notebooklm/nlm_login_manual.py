@@ -11,7 +11,7 @@ with sync_playwright() as p:
     ctx = p.chromium.launch_persistent_context(str(PERFIL), headless=False, viewport={"width": 1200, "height": 680})
     pg = ctx.pages[0] if ctx.pages else ctx.new_page()
     pg.goto(URL)
-    fim = time.time() + 3600
+    fim = time.time() + 10800
     while time.time() < fim:
         nomes = {c["name"] for c in ctx.cookies("https://notebook.google.com")}
         if {"SID", "__Secure-1PSIDTS"} <= nomes and "notebook.google.com" in pg.url and "trynow" not in pg.url:
