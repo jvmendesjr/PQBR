@@ -56,14 +56,16 @@ class SemSaldo(Exception):
     pass
 
 
-SYNC_SESSAO = os.environ.get("PQBR_NLM_SYNC_CMD", "/home/pc/.pqbr/camofox/nlm-sync.sh")
 _AUTH_ERR = ("authentication expired", "re-authenticate", "notebooklm login")
 
 
 def _sincronizar_sessao() -> bool:
-    """Copia a sessão viva do Camofox (único rotacionador) para o perfil pqbr. Playbook nlm-auth."""
+    """Reautenticação nativa do notebooklm-py (playbook nlm-auth): `auth refresh` percorre L1/L2/L3
+    (token, RotateCookies, re-login headless pelo perfil de navegador próprio). Sessão separada do Camofox."""
     try:
-        return subprocess.run([SYNC_SESSAO], capture_output=True, timeout=60).returncode == 0
+        env = {**os.environ, "NOTEBOOKLM_HOME": str(HOME), "NOTEBOOKLM_HEADLESS_REAUTH": "1"}
+        return subprocess.run([CLI, "-p", PERFIL, "--quiet", "auth", "refresh"], capture_output=True,
+                              timeout=180, env=env).returncode == 0
     except Exception:  # noqa: BLE001
         return False
 

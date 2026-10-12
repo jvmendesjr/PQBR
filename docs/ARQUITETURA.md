@@ -61,6 +61,8 @@
 - `--yolo` (ou o equivalente do OpenCode, auto-aprovar permissões) só quando necessário. Perfis mínimos sem terminal, arquivos ou sudo; exceção só para o Dev Corretor e o Dev Revisor, em container isolado (worktree, sem rede de produção nem segredos; o Revisor não escreve no repo principal). O `pqbr` nunca usa `--yolo`. Com a ADR-006, o H-SDD1 deixa de bloquear.
 
 ### ADR-008: Camofox PQBR 24/7 com reautenticação autônoma [APROVADO t395]
+- **Instância e perfil únicos (José, 12/10):** a conta Google de produção vive em **um** processo `pqbr-camofox` (127.0.0.1:9387) e **um** perfil persistente: `userId=pqbr` → `~/.pqbr/camofox/profiles/66e057673effe4afdd963a2bd6a45a2a/` (SHA-256 do userId, plugin de persistência). Regras: todo cliente usa `userId=pqbr` (o `sessionKey` é só o grupo de abas, no mesmo contexto); `MAX_SESSIONS=1`; nada de userId novo, perfil efêmero, `--fresh` ou segundo processo; reinícios restauram o mesmo `storage-state.json`. Auditado em 12/10: keepalive, `camofox.py` (fila camofox-pqbr), `sync_cookies_chrome.py`, `mcp_kit` e playbooks usam só `pqbr`; o auditor Gemini ainda não tem código e deve seguir a mesma regra. Outro processo `node server.js` no `pc` (PID do 9377) é de outro projeto, não da PQBR.
+- **NotebookLM com sessão própria (t-nlm2):** reauth nativa do notebooklm-py (L1–L3, `NOTEBOOKLM_HEADLESS_REAUTH=1`), perfil próprio; sem cópia de cookies Camofox → NotebookLM.
 - `pqbr-camofox` sempre ligado, com a sessão permanente na mesma tela; reinicia só se cair (`Restart=always` + guardião). A sessão caiu: renovar → sincronizar cookies do Chrome → outro caminho; log + Telegram em cada passo; o José só no fim (noVNC/2FA).
 
 ## 2. Componentes
