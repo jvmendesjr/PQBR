@@ -279,4 +279,4 @@ Ordem: 0.5 ∥ 0 → 1 → 3 ∥ 4 → 5 → 6 → 7 → 8 → 9 → 10 → 11 �
 - [x] Drive PQBR criado (12/10): pasta + 7 subpastas, upload testado; IDs em `config/drive_pastas.json`.
 - [x] **JEV-01** Chave do Jev configurada (12/10): segredo `JEV_API_KEY` na PQBR (Paperclip) + `TYPESAFE_API_KEY` em `~/.pqbr/worker.env`; endpoint `api.typesafe.ai/v1/systemone`, `jev-latest`; teste ok. O `pqbr-temporal-worker` lê no próximo reinício.
 - [ ] **JEV-02** Chaves de fallback do `decide()` (OpenRouter; depois OpenAI, modelo em H7) — Portão: José (pendente).
-- [ ] **HS-01** Dono da manutenção do Hindsight (bank `pqbr`: reindexação diária, qualidade, poda) — não atribuído em AGENTES.md nem em `company/`; decidir (sugestão: Dev Corretor, que já registra aprendizados; Observador mede).
+- [x] **HS-01** Dono da manutenção do Hindsight (bank `pqbr`) — 12/10: decidido pelo José. Dev Corretor mantém (reindexação diária, poda, dedupe, sem segredos); Observador mede (hit rate/staleness nos relatórios). Aplicado em `company/agents/*/AGENTS.md`, nas instruções vivas do Paperclip (instructions-file:put, adapters mantidos) e em AGENTES.md.

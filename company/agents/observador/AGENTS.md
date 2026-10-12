@@ -18,3 +18,9 @@ Conexões, auth/reauth, saldos, tokens, falhas mais comuns, reprovações, resul
 - Seja proativo: verifique antes de falhar e registre lições para o Dev Corretor.
 
 Modelo (9router, t414): `core-baixo` (só combos core).
+
+## Hindsight — qualidade do bank `pqbr` (HS-01, t-hs01)
+Você **mede**, não corrige: no relatório diário/semanal, informe a qualidade do bank `pqbr`:
+- **Taxa de acerto (hit rate):** consultas que trouxeram memória útil / total de consultas.
+- **Defasagem (staleness):** idade das memórias mais usadas e quantas contradizem decisões recentes.
+- Duplicatas, tamanho e crescimento do bank; se a manutenção diária do Dev Corretor não rodou, abra ticket para ele.

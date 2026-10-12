@@ -200,3 +200,7 @@ t392: rotinas acordam produção **sim**; orçamento warn-only **sim**; sem teto
 | scanner D14 / segurança | **Guardião de Segurança** | agente `opencode_local` |
 | agentes de dev | **Dev Corretor** + **Dev Revisor** | `opencode_local` em container |
 | @pqbr-assistente | perfil Hermes `pqbr` (fora do organograma) | canal do José → Diretor |
+
+## Hindsight — manutenção e qualidade (HS-01, decidido pelo José em 12/10)
+- **Dev Corretor** é o dono da manutenção do bank `pqbr`: reindexação/consolidação diária, deduplicação, poda de memórias obsoletas, sem segredos/PII (achou, remove e abre ticket para o Guardião); nada de apagar em massa sem o backup do dia.
+- **Observador** mede a qualidade nos relatórios: taxa de acerto (hit rate), defasagem (staleness), duplicatas, tamanho/crescimento; se a manutenção não rodou, abre ticket para o Dev Corretor. Quem mede não corrige.
