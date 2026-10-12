@@ -222,7 +222,7 @@ Nada que depende de uma hipótese é construído antes de ela virar VERIFICADO (
 - **Backup:** `infra/pqbr-db/backup.sh` (pg_dump `-Fc -Z9`), timer de usuário `pqbr-db-backup.timer` diário às 03:30 (Fortaleza).
   - Rotação de 7 em `~/Backups/pqbr-db` (700/600, fora do git).
   - Restauração testada com `testar_restauracao.sh`.
-  - Envio ao Drive **pendente**: o servidor não tem credencial do Drive (sem rclone). A pasta `PQBR` do Drive existe, mas não há subpasta de backups.
+  - Drive ativo (12/10): pasta `PQBR` id `1RKEE2kn2WDrH6SK__1SA5QkFkxwpqzya` + 7 subpastas (REGRAS §21); IDs em `config/drive_pastas.json` e `PQBR_DRIVE_PASTA_ID` no worker.env; privada (só dono).
 - **Achado:** o CSV de temas tem 2 repetições históricas (`repete_n`), anteriores à R10, aceitas pelo José (t337–t338). Elas ficam registradas, mas fora do índice único da R10.
 - **Histórico:** o Supabase `paperclip` foi só lido em 09/10. O `public` dele (banco do Paperclip, 214 tabelas) está com RLS desligado; o alerta foi levado ao José, sem nenhuma alteração.
 

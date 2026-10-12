@@ -418,3 +418,4 @@ NÃO CABE:
 - `post-short.sh` + logos portados; EpisodioWorkflow/PublicacaoWorkflow (dry-run, privado, sem upload) + worker `episodio-pqbr`; Gate A9 proposto (`docs/sdd/gate-a9.md`).
 - Drive: token OAuth do yt-llm-bot como segredo Paperclip `GOOGLE_DRIVE_TOKEN_JSON` + arquivo 600 em ~/.pqbr/secrets; pasta PQBR ainda não encontrada no Drive dessa conta (não criada).
 - §16.7 bloco visual padrão: proposta para aprovação do José.
+- (12/10, t431) Drive: criada a pasta `PQBR` (id `1RKEE2kn2WDrH6SK__1SA5QkFkxwpqzya`, privada) com 00_Biblia_Visual, 01_Contrato_e_SOP, 02_Episodios, 03_Reservas, 04_Privados_Revisao, 05_Relatorios, 99_Arquivo. IDs em `config/drive_pastas.json`; `PQBR_DRIVE_PASTA_ID` no worker.env. Teste: upload com md5 conferido e exclusão do arquivo de teste (aprovado por José).

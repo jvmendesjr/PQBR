@@ -275,3 +275,5 @@ Ordem: 0.5 ∥ 0 → 1 → 3 ∥ 4 → 5 → 6 → 7 → 8 → 9 → 10 → 11 �
 | Banco do app fora | retentativas + outbox (TZ-03) |
 | Métricas divergentes | só pela Analytics API (H12); relatórios avisam falta de significância |
 | Disco do servidor | ciclo t267/t268; `runtime/` limpo |
+
+- [x] Drive PQBR criado (12/10): pasta + 7 subpastas, upload testado; IDs em `config/drive_pastas.json`.
