@@ -339,7 +339,7 @@ agents:
       config:
         command: "/home/pc/.opencode/bin/opencode"
         cwd: "/home/pc/Workspace/PQBR"
-        model: "9router/ag/gpt-oss-120b-medium"
+        model: "9router/ag/gemini-3.8-flash-medium"
         dangerouslySkipPermissions: false
         timeoutSec: 900
         graceSec: 15

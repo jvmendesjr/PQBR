@@ -39,7 +39,8 @@
         "PYTHONPATH": "/home/pc/Workspace/PQBR/src",
         "PQBR_KIT_PAPEL": "{env:PQBR_KIT_PAPEL}",
         "PAPERCLIP_API_KEY": "{env:PAPERCLIP_API_KEY}",
-        "PAPERCLIP_RUN_ID": "{env:PAPERCLIP_RUN_ID}"
+        "PAPERCLIP_RUN_ID": "{env:PAPERCLIP_RUN_ID}",
+        "PQBR_PAPERCLIP_API": "{env:PQBR_PAPERCLIP_API}"
       },
       "enabled": true
     }
