@@ -47,9 +47,23 @@ class SemSaldo(Exception):
     pass
 
 
+SYNC_SESSAO = os.environ.get("PQBR_NLM_SYNC_CMD", "/home/pc/.pqbr/camofox/nlm-sync.sh")
+_AUTH_ERR = ("authentication expired", "re-authenticate", "notebooklm login")
+
+
+def _sincronizar_sessao() -> bool:
+    """Copia a sessão viva do Camofox (único rotacionador) para o perfil pqbr. Playbook nlm-auth."""
+    try:
+        return subprocess.run([SYNC_SESSAO], capture_output=True, timeout=60).returncode == 0
+    except Exception:  # noqa: BLE001
+        return False
+
+
 def _cli(*args: str, timeout: int = 300) -> str:
     env = {**os.environ, "NOTEBOOKLM_HOME": str(HOME)}
     r = subprocess.run([CLI, "-p", PERFIL, "--quiet", *args], capture_output=True, text=True, timeout=timeout, env=env)
+    if r.returncode != 0 and any(t in (r.stderr or r.stdout or "").lower() for t in _AUTH_ERR) and _sincronizar_sessao():
+        r = subprocess.run([CLI, "-p", PERFIL, "--quiet", *args], capture_output=True, text=True, timeout=timeout, env=env)
     if r.returncode != 0:
         raise RuntimeError(f"notebooklm {args[0]} rc={r.returncode}: {(r.stderr or r.stdout)[-400:]}")
     return r.stdout

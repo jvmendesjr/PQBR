@@ -11,7 +11,10 @@ SISTEMA = """Você é {nome}, agente da PQBR (Porquê BR). Siga o contrato: cont
 nada de segredos ou dados pessoais; efeito externo só pelo Temporal. Responda APENAS um objeto JSON válido do
 contrato PropostaAgente: {{"agente":"{slug}","tipo":"correcao|melhoria|manutencao|parametro",
 "alvo":"parametro|regra|tema|script","chave":"...","valor_atual":null,"valor_proposto":"...",
-"justificativa":"...","evidencias":[],"risco":"baixo|medio|alto"}}"""
+"justificativa":"...","evidencias":[],"risco":"baixo|medio|alto"}}
+Limites (Pydantic; acima disso a saída é rejeitada): `valor_proposto` e `justificativa` até 500 caracteres cada; `evidencias` até 10 itens. Para listas longas
+(ex.: grade do dia), escreva em `valor_proposto` uma forma compacta (itens separados por ";", sem prosa) e ponha
+detalhes curtos em `evidencias` (lista de strings)."""
 
 
 def _json(texto: str) -> dict:
@@ -19,6 +22,24 @@ def _json(texto: str) -> dict:
     if not m:
         raise ValueError("sem JSON na resposta")
     return json.loads(m.group(0))
+
+
+def _compactar(d: dict) -> dict:
+    """Saída longa (ex.: grade do dia) não deve derrubar o agente: o excedente de valor_proposto/justificativa
+    vai para `evidencias` (até 10 itens), sem perder conteúdo além do limite do contrato."""
+    if not isinstance(d, dict):
+        return d
+    ev = [str(x) for x in (d.get("evidencias") or [])]
+    for campo in ("valor_proposto", "justificativa"):
+        v = d.get(campo)
+        if isinstance(v, str) and len(v) > 500:
+            corte = v.rfind(";", 0, 480)
+            corte = corte if corte > 200 else 480
+            d[campo] = v[:corte].rstrip() + " […]"
+            resto = v[corte:].lstrip("; ")
+            ev = [f"{campo} (continuação): {resto[i:i + 1900]}" for i in range(0, len(resto), 1900)] + ev
+    d["evidencias"] = ev[:10]
+    return d
 
 
 def _slug(nome: str) -> str:
@@ -57,9 +78,10 @@ def processar(i: dict, me: dict, modelo: str) -> str:
     for tentativa in (1, 2):
         m_t = modelo if tentativa == 1 else revisao   # t421: 2ª tentativa após saída inválida vai ao core-revisao
         texto = router9.chat(m_t, SISTEMA.format(nome=me["name"], slug=slug),
-                             pedido + (f"\n\nA resposta anterior foi inválida: {erro}. Corrija." if erro else ""))
+                             pedido + (f"\n\nA resposta anterior foi inválida: {erro}. Corrija respeitando os limites "
+                                      "(valor_proposto <= 500 caracteres; detalhes em evidencias)." if erro else ""))
         try:
-            p = PropostaAgente.model_validate(_json(texto))
+            p = PropostaAgente.model_validate(_compactar(_json(texto)))
             corpo = "Proposta (PropostaAgente válida):\n```json\n" + p.model_dump_json(indent=1) + "\n```"
             gat = os.environ.get("PQBR_SEGUNDA_LEITURA")
             if gat and re.search(gat, pedido, re.I):   # t421: Compliance relê roteiro sensível em core-revisao
