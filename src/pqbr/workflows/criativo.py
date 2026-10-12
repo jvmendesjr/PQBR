@@ -8,11 +8,19 @@ from temporalio import activity
 from temporalio.exceptions import ApplicationError
 from ..contratos import RoteiroShort, PacoteSEO, ESTILO_PADRAO_2D, CTA, MARCA_LINK_QUEBRADO
 
+TOM_EDITORIAL = (   # José 12/10 17:13/17:17; contrato §17
+    "Tom (contrato §17): a essência é a cultura brasileira (ditados, expressões, atitudes, gestos, comportamentos). "
+    "Reforce que o brasileiro usa essa expressão HOJE, mesmo que ela tenha nascido fora do Brasil; a origem é a fofoca que explica a piada. "
+    "Comédia inteligente e leve, palavras fáceis para todos os públicos, ironia e sátira brasileiras carinhosas da situação de hoje "
+    "que a expressão descreve. NÃO pode soar como aula nem instrução: nada de 'vamos aprender', 'você sabia', 'saiba que', "
+    "'o correto é', 'dica' ou tom de professor. Narrador único, frases curtas, cada fala puxa a próxima. "
+    "Satiriza o comportamento, nunca a pessoa ou o grupo. ")
 PROMPT_ROTEIRO = (
     "Escreva o roteiro do Short sobre \"{tema}\" seguindo o contrato editorial e o bloco visual §16.7 do pacote PQBR: "
     "gancho até 3 s com a imagem literal da expressão, versão mais aceita + 'mas tem quem diga', ≥ 2 fontes deste caderno, "
     "loop na última cena. Narrador único, sem nomes, ~50 s (cerca de 115 palavras), última fala exatamente \"" + CTA + "\". "
     "Um personagem 2D sem nome descrito numa frase-ficha detalhada (idade, cabelo, roupa, traço marcante), repetida igual. "
+    + TOM_EDITORIAL +
     "Uma cena por fala. Responda SÓ um JSON, sem texto fora dele, neste formato: "
     '{{"episodio_id":"{slug}","titulo":"...","falas":["..."],"entidades_cena":["..."],'
     '"bloco_visual":{{"personagem":"...","cenas":[{{"fala":"...","acao":"...","enquadramento":"...","ambiente":"..."}}]}},'

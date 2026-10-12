@@ -2,6 +2,7 @@
 from __future__ import annotations
 import asyncio
 from temporalio.worker import Worker
+from .acesso import acesso_notebooklm
 from .worker import client, ADDR, NS
 from .notebooklm import FILA_NOTEBOOKLM, NotebookLMWorkflow, ATIVIDADES
 from .pacote import ATIVIDADES_NLM_CICLO
@@ -13,7 +14,7 @@ async def main() -> None:
     logging.basicConfig(level=logging.INFO)
     instalar_no_logging()
     c = await client()
-    w = Worker(c, task_queue=FILA_NOTEBOOKLM, workflows=[NotebookLMWorkflow], activities=[*ATIVIDADES, *ATIVIDADES_NLM_CICLO],
+    w = Worker(c, task_queue=FILA_NOTEBOOKLM, workflows=[NotebookLMWorkflow], activities=[*ATIVIDADES, *ATIVIDADES_NLM_CICLO, acesso_notebooklm],
                max_concurrent_activities=1, max_concurrent_workflow_tasks=1)
     print(f"worker notebooklm em {ADDR} ns={NS} fila={FILA_NOTEBOOKLM} (concorrência 1)", flush=True)
     await w.run()

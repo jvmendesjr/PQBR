@@ -11,6 +11,7 @@ FUSO = "America/Fortaleza"
 AGENDA = [  # id, workflow, hora, minuto, pausado, nota
     ("pqbr-retencao-consumo", "RetencaoConsumoWorkflow", 4, 15, False, "F3-07 t369: bruto 90 d, resumo 25 meses"),
     ("pqbr-reposicao-temas", "ReposicaoTemasWorkflow", 0, 30, False, "t465 José 14:00: 7 dias de temas abertos (Líder Editorial)"),
+    ("pqbr-acessos", "AcessosWorkflow", None, 10, False, "José 17:18: confere Google/NotebookLM/Paperclip de hora em hora e pede login pelo Telegram/painel"),
     ("pqbr-grade-diaria", "GradeDiariaWorkflow", 1, 0, True, "F5-02 PAUSADO: coleta real EM CONSTRUÇÃO; liberar = G5"),
     ("pqbr-lote-producao", "EpisodioProducaoWorkflow", 5, 0, True, "F5-02 PAUSADO: sem NotebookLM/publicação reais; liberar = G5"),
 ]
@@ -24,10 +25,10 @@ async def main() -> None:
             print(f"já existe: {sid}"); continue
         await c.create_schedule(sid, Schedule(
             action=ScheduleActionStartWorkflow(wf, id=f"{sid}-wf", task_queue=FILA),
-            spec=ScheduleSpec(calendars=[ScheduleCalendarSpec(hour=[ScheduleRange(h)], minute=[ScheduleRange(m)])], time_zone_name=FUSO),
+            spec=ScheduleSpec(calendars=[ScheduleCalendarSpec(hour=[ScheduleRange(0, 23) if h is None else ScheduleRange(h)], minute=[ScheduleRange(m)])], time_zone_name=FUSO),
             policy=SchedulePolicy(overlap=ScheduleOverlapPolicy.SKIP),
             state=ScheduleState(paused=pausado, note=nota)))
-        print(f"criado: {sid} {h:02d}:{m:02d} {'PAUSADO' if pausado else 'ativo'}")
+        print(f"criado: {sid} {'hh' if h is None else f'{h:02d}'}:{m:02d} {'PAUSADO' if pausado else 'ativo'}")
     if "--listar" in sys.argv or True:
         async for s in await c.list_schedules():
             if s.id.startswith("pqbr-"):

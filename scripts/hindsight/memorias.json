@@ -86,5 +86,21 @@
  [
   "memoria:e2e-dryrun-1",
   "E2E dry-run nº1 OK em 12/10 15:20 (e2e-PQBR-EP1002, sem upload): NotebookLM-first fez roteiro, SEO (cat. 27) e capa; Short em ~5 min; Drive 1H2J4OAplcI0Dmz_760X5EfGHYAZsarzW. Bugs corrigidos: id de artefato vs tarefa no generate, drive.TOKEN, destino da barreira. Pendentes: [suspicious link removed] no SEO, capa em painéis, Gemini Web, login board do CLI na 3101."
+ ],
+ [
+  "memoria:queda-sessao-psidts",
+  "Queda da sessão Google do Camofox PQBR (12/10 ~16:15): o PSIDTS foi rotacionado pela CLI notebooklm-py sem DISABLE_KEEPALIVE_POKE, como segundo cliente. Não foi logout global, revogação nem perfil novo. Guarda: .pth no venv força poke=0."
+ ],
+ [
+  "memoria:regra-sem-manual",
+  "Regra José 17:17: nenhuma etapa de fluxo à mão; fluxo inativo = parar, registrar, consertar o fluxo. José só usa Telegram PQBR e painel Paperclip."
+ ],
+ [
+  "memoria:tom-editorial-17",
+  "Tom editorial §17: cultura brasileira, o brasileiro usa a expressão hoje (mesmo nascida fora), comédia leve com palavras fáceis, ironia e sátira brasileiras, nunca aula."
+ ],
+ [
+  "memoria:acessos-workflow",
+  "AcessosWorkflow/pqbr-acessos (de hora em hora): confere Google/Camofox, NotebookLM e Paperclip; pede ao José via revisao_humana (Telegram/painel); nunca faz login."
  ]
 ]

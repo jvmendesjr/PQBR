@@ -322,3 +322,14 @@ N. Fala: "<frase final / CTA>" → Ação: retoma a imagem da cena 1 (loop) → 
 ```
 
 Regras de preenchimento: 1 personagem (2 só se o roteiro exigir, §11.1, e então 2 frases-ficha distintas); contar traços ("dois", "um") em vez de adjetivos; uma ação visível por cena; época histórica só no trecho de etimologia; sem crianças em situação de risco nem estereótipo regional (§16.6). **Revisão t430 (pesquisa NotebookLM, `docs/pesquisas/estilo-2d-referencias.md`):** mantido o cartum 2D plano com 1 personagem (fica entre flat vector e cutout, os estilos com mais tração em curiosidade curta). Mudou: contraste personagem quente × fundo frio/limpo; fundo minimalista (3–5 objetos); expressões exageradas; ritmo 2–4 s (era 3–5 s); gancho visual no 1º segundo (OpusClip: 50–60% da evasão nos 3 s iniciais). Texto: as fontes dão +15–25% de retenção com legenda embutida; o Short do NotebookLM **já queima legenda obrigatória** (sem opção de desligar no app nem no `notebooklm generate video`; confirmado nos masters antigos), então **não há legenda extra no pós** (t435, José). A imagem continua **sem texto escrito dentro do desenho**; erros de legenda sem mudança de sentido vão para `pqbr.erros_aceitaveis` (§16.4 item 6; Gate A9 item 8). **Aprovado (12/10/2026):** este é o bloco padrão do `RoteiroShort` (`ESTILO_PADRAO_2D` em `src/pqbr/contratos`). O bloco divergente gerado por rotina periódica no caderno "PQBR - pesquisa bloco visual 2D" (fundo creme, cortes 3–5 s) **não** foi adotado.
+
+
+## 17. Tom editorial: cultura brasileira, ironia leve, nunca aula (José, 12/10/2026 17:13 e 17:17), regra
+- **A essência é a cultura brasileira:** ditados, expressões, atitudes, gestos e comportamentos do brasileiro.
+- **Sempre reforçar que o brasileiro usa a expressão hoje**, mesmo quando ela nasceu fora do Brasil: a origem estrangeira é curiosidade; o centro é como a gente fala e vive isso agora.
+- **Comédia inteligente e leve, com palavras fáceis para todos os públicos.**
+- **Ironia e sátira brasileiras, leves e brincalhonas**, da situação atual que a expressão descreve (o boleto, o mercado, a fila, o grupo da família), com exagero carinhoso. A origem histórica entra como a "fofoca" que explica a piada.
+- **Nunca soar como aula nem instrução:** proibido "vamos aprender", "você sabia que", "saiba que", "o correto é", "dica:", imperativo didático, tom de professor ou de manual.
+- **Ritmo de referência:** o teste de estilos B (12/10): narrador único, frases curtas, cada fala puxa a curiosidade da próxima.
+- Continua valendo a §3: satiriza o comportamento e a situação, nunca a pessoa ou o grupo; satiriza, nunca incentiva.
+- Aplicação: este tom vai no pacote canônico (este contrato), no prompt do roteiro (`criativo.TOM_EDITORIAL`) e no steering do vídeo (`notebooklm.TOM_NARRACAO`). O Auditor reprova roteiro com cara de aula.

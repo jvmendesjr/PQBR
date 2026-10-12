@@ -227,10 +227,25 @@ REFORCO_SHORT = (   # José 16:08: mais movimento; personagem consistente QUANDO
     "roupa e cores. Sem nenhum texto escrito dentro da imagem (sem letreiros, placas, rótulos ou balões).")
 
 
+TOM_NARRACAO = (   # José 12/10 17:17; contrato §17
+    "Narração: comédia leve e inteligente, palavras fáceis, ironia brasileira carinhosa sobre como o brasileiro usa essa expressão hoje; "
+    "nunca tom de aula ou de instrução. ")
+
+
+def estilo_ativo() -> str:
+    """config/estilo_visual.json → texto do estilo ativo (vazio se não houver). Puro."""
+    try:
+        d = json.loads((Path(__file__).resolve().parents[3] / "config/estilo_visual.json").read_text())
+        return d["estilos"][d["ativo"]] + " "
+    except Exception:
+        return ""
+
+
 def steering_short(bloco: str = "") -> str:
     """t462 (José 13:30): steering do Short = bloco visual 2D do roteiro + reforços fixos (sem texto na imagem; mesmo personagem)."""
     b = " ".join((bloco or "").split())[:3000]
-    return (b + " " if b else "Cartum 2D plano, cores chapadas, 1 personagem, fundo minimalista. ") + REFORCO_SHORT
+    e = estilo_ativo()   # estilo em teste tem prioridade sobre o [ESTILO] do bloco (o bloco segue para personagem/cenas)
+    return e + (b + " " if b else ("" if e else "Cartum 2D plano, cores chapadas, 1 personagem, fundo minimalista. ")) + TOM_NARRACAO + REFORCO_SHORT
 
 
 @activity.defn

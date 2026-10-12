@@ -4,7 +4,7 @@ from pathlib import Path
 HOME = Path.home() / ".pqbr/notebooklm"; CLI = str(HOME / "venv/bin/notebooklm")
 OUT = Path.home() / ".pqbr/estilos-teste"; OUT.mkdir(parents=True, exist_ok=True)
 def cli(*a, t=600):
-    env = {"NOTEBOOKLM_HOME": str(HOME), "PATH": "/usr/bin:/bin"}
+    env = {"NOTEBOOKLM_HOME": str(HOME), "PATH": "/usr/bin:/bin", "NOTEBOOKLM_DISABLE_KEEPALIVE_POKE": "1"}  # Camofox é o ÚNICO renovador (rotação aqui derrubou a sessão em 12/10)
     for _ in range(2):
         r = subprocess.run([CLI, "-p", "pqbr", "--quiet", *a], capture_output=True, text=True, timeout=t, env=env)
         if r.returncode == 0: return r.stdout

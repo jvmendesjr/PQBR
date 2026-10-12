@@ -17,3 +17,9 @@ Antes do 1º E2E, conferir **nesta ordem**. Cada item saiu de uma falha real do 
 10. **Dry-run real.** Só então rodar o E2E em dry-run (sem upload), com tempos e artefatos por etapa.
 
 Ver também: DECISOES-LOG (12/10), ROADMAP (t462–t465), `company/playbooks/nlm-cadernos.md`.
+
+## Lições de 12/10 (tarde)
+11. **Nunca rodar etapa de fluxo à mão** (José 17:17). Se o fluxo não está ativo: parar, registrar, consertar o fluxo e rodar por ele (Paperclip + Temporal).
+12. **Uma só ferramenta rotaciona a sessão Google: o Camofox.** Qualquer CLI notebooklm-py com poke ligado derruba o navegador (queda de 12/10 ~16:15). O guarda está no venv (`.pth`) e não depende do script.
+13. Antes do E2E: `pqbr-acessos` verde (Google, NotebookLM, Paperclip) e nenhum pedido pendente em `revisao_humana`.
+14. O roteiro segue o contrato §17 (ironia brasileira, nunca aula). O Auditor reprova roteiro com cara de aula.
