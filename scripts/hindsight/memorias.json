@@ -38,5 +38,33 @@
  [
   "memoria:cadernos-efemeros",
   "Sem caderno mestre no NotebookLM (José 12/10, ADR-003): pacote canônico (persona, comandos/prompts, contrato, bloco §16.7) versionado por sha256 em pqbr.pacote_canonico (Postgres, fonte de verdade) + espelho Drive 00_Biblia_Visual/pacote-<hash12>; caderno por episódio casado pelo id em pqbr.cadernos_episodio; arquiva fontes/respostas/vídeo (Drive + pqbr.arquivo_caderno); ApagarCadernoWorkflow apaga pelo UUID completo em D+2 após publicação, com allowlist e MESTRES_PROIBIDOS; nunca por título. Cadernos antigos só com aprovação do José."
+ ],
+ [
+  "memoria:apagar-48h",
+  "Caderno do episódio é apagado 48 h após a publicação (ApagarCadernoWorkflow), pelo UUID completo registrado; nunca por título; dry-run nunca apaga (José 12/10)."
+ ],
+ [
+  "memoria:arquivar-verificar",
+  "Regra permanente (José 12/10): arquivar (fontes com URL+texto, relatórios, respostas, notas, metadados + resumo) em Drive + repo + pqbr.arquivo_caderno e VERIFICAR as 3 cópias (verificar_arquivo, verificado_em) antes de apagar qualquer caderno. Export falhou = não apaga."
+ ],
+ [
+  "memoria:sem-contaminacao",
+  "Sem contaminação cruzada entre cadernos (José 12/10): produção usa só o id registrado; só pacote + fontes do episódio, registradas em pqbr.fontes_caderno; nlm_conferir_fontes bloqueia (ContaminacaoCaderno) fonte estranha antes de gerar."
+ ],
+ [
+  "memoria:limpeza-cadernos",
+  "Limpeza total aprovada (José 12/10 12:20): todos os cadernos do inventário 20261012 apagados exceto mestre c35d7b24 e reserva 23f71f2f; pesquisas arquivadas antes em Drive 00_Biblia_Visual/pesquisas, repo docs/pesquisas/arquivo-cadernos e Postgres."
+ ],
+ [
+  "memoria:capa",
+  "Capa do Short (José 12/10): caderno do episódio gera (generate infographic portrait, 1536x2752, sem marca visível, C2PA Google), Gemini Web audita, script determinístico insere como 1º quadro e carimba, Diretor de Arte escreve o pedido, Auditor audita."
+ ],
+ [
+  "memoria:templates-9router",
+  "Sem caderno mestre (José 12/10 12:41): personas, steering, comandos e pedidos ao Gemini Web vêm de templates via 9router (core-medio gera, core-revisao revisa), contrato Pydantic, cache por tema+versão do pacote, registro no Postgres; persona é texto fixo no pacote."
+ ],
+ [
+  "memoria:gemini-notebook",
+  "12/10: Google rebatizou NotebookLM como Gemini Notebook (notebooklm.google.com → notebook.google.com). Erro 'CSRF token not found' = cópia de sessão velha; nlm-sync.sh resolve; _cli trata."
  ]
 ]

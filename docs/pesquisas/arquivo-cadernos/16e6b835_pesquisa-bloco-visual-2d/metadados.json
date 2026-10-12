@@ -1,0 +1,61 @@
+{
+  "id": "16e6b835-a33a-4460-ba48-035d7a58d566",
+  "title": "PQBR - pesquisa bloco visual 2D",
+  "created_at": "2026-10-12T11:03:59+00:00",
+  "last_viewed_at": "2026-10-12T15:23:35+00:00",
+  "modified_at": "2026-10-12T15:23:35+00:00",
+  "is_owner": true,
+  "role": "owner",
+  "sources": [
+    {
+      "type": "web_page",
+      "title": "10 Most Popular Animation Channels on YouTube in 2026 - AIR Media-Tech",
+      "url": "https://air.io/en/trending/10-most-popular-animation-channels-on-youtube-in-2026"
+    },
+    {
+      "type": "web_page",
+      "title": "100 Animation YouTubers You Must Follow in 2026",
+      "url": "https://videos.feedspot.com/animation_youtube_channels/"
+    },
+    {
+      "type": "web_page",
+      "title": "24 Best Animation YouTube Channels to Follow - Animaker",
+      "url": "https://www.animaker.com/hub/animation-youtube-channels/"
+    },
+    {
+      "type": "web_page",
+      "title": "80+ Must-Watch Animated YouTube Channels - Breadnbeyond",
+      "url": "https://breadnbeyond.com/youtube-marketing/animation-channels/"
+    },
+    {
+      "type": "web_page",
+      "title": "Animators on YouTube that you would recommend? - Reddit",
+      "url": "https://www.reddit.com/r/animation/comments/1isrqsg/animators_on_youtube_that_you_would_recommend/"
+    },
+    {
+      "type": "markdown",
+      "title": "Arquitetura de Prompts e Linguagem Visual 2D para Animação Generativa e Conteúdo de Alto Desempenho em Redes Sociais",
+      "url": null
+    },
+    {
+      "type": "web_page",
+      "title": "Most Subscribed Animations Channels of ALL TIME (2005-2025) - YouTube",
+      "url": "https://www.youtube.com/watch?v=b6KTQ206u-Q"
+    },
+    {
+      "type": "web_page",
+      "title": "The 60+ Best Animation YouTube Channels in Every Category | Hive Life",
+      "url": "https://hivelife.com/best-animated-youtube-channels/"
+    },
+    {
+      "type": "web_page",
+      "title": "Top 12 YouTube Animator Channels You Should Follow | CraveFX",
+      "url": "https://cravefx.com/blog/top-12-youtube-animator-channels-you-should-follow/"
+    },
+    {
+      "type": "web_page",
+      "title": "Top 40 Animation Channels On Youtube - Cartoon Brew",
+      "url": "https://www.cartoonbrew.com/top-40-animation-channels-on-youtube"
+    }
+  ]
+}

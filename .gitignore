@@ -16,3 +16,6 @@ docs/arquivo/brutos/
 # Levantamento de vídeos publicados: fora do git (contém dado pessoal; arquivado no Drive)
 docs/04-canal/levantamento-videos-publicados-rede.md
 levantamento-videos-publicados-rede*.md
+
+# t459b: texto integral das fontes (páginas web com e-mails públicos) fica só no disco + Drive + Postgres; o scanner bloqueia no git
+docs/pesquisas/arquivo-cadernos/*/fontes/
