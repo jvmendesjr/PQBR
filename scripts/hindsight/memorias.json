@@ -69,6 +69,6 @@
  ],
  [
   "memoria:logout-global",
-  "12/10 13:27 (José): conta juniormoedavirtual só na PQBR (Camofox 9387 userId pqbr + notebooklm-py PQBR). Desligados: crons keepalive-session-guardian.py e notebooklm auth refresh (comentados), storage do userId porquebr no Camofox global 9377, ~/.notebooklm default, MP32 juniormoedavirtual, Chrome perfil PorqueBR, tudo em ~/Backups (600). Skills do rede com porquebr/9377 sem sessão; usar fila camofox-pqbr. Reativar exige OK do José."
+  "12/10 13:27 (José): conta juniormoedavirtual só na PQBR (Camofox 9387 userId pqbr + notebooklm-py PQBR). Desligados: crons keepalive-session-guardian.py e notebooklm auth refresh (comentados), storage do userId porquebr no Camofox global 9377, ~/.notebooklm default, MP32 juniormoedavirtual, Chrome perfil PorqueBR, tudo em ~/Backups (600). Skills do rede com porquebr/9377 sem sessão; proibido ligar rede à PQBR (sem fila, sem 9387, sem adaptador), José 13:29. Reativar exige OK do José."
  ]
 ]
