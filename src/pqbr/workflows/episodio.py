@@ -13,6 +13,10 @@ from temporalio.common import RetryPolicy
 
 with workflow.unsafe.imports_passed_through():
     from .notebooklm import NotebookLMWorkflow, PedidoNotebookLM, FILA_NOTEBOOKLM, nlm_baixar_video
+    from .pacote import (ApagarCadernoWorkflow, ATIVIDADES_REGISTRO, pacote_garantir, registro_buscar_caderno,
+                         arquivar_caderno, nlm_exportar_caderno)
+    from ..contratos import CATEGORIA_YOUTUBE
+    from temporalio.workflow import ParentClosePolicy
 
 FILA_EPISODIO = "episodio-pqbr"
 RAIZ = Path("/home/pc/Workspace/PQBR")
@@ -102,7 +106,7 @@ async def publicacao_dryrun(p: dict) -> dict:
         dup = None
     if dup: raise RuntimeError(f"código {p['codigo']} já publicado (sem duplicata)")
     corpo = {"snippet": {"title": p["titulo"], "description": p["descricao"], "tags": p.get("tags", []) + [p["codigo"]],
-                         "categoryId": "24", "defaultLanguage": "pt-BR"},
+                         "categoryId": CATEGORIA_YOUTUBE, "defaultLanguage": "pt-BR"},
              "status": {"privacyStatus": "private", "selfDeclaredMadeForKids": False, "containsSyntheticMedia": False},
              "_arquivo": p["video"], "_capa": p.get("capa"), "_dry_run": True}
     DRYRUN.mkdir(parents=True, exist_ok=True)
@@ -135,8 +139,12 @@ class EpisodioWorkflow:
     async def run(self, p: PedidoEpisodioE2E) -> ResultadoEpisodioE2E:
         curto = dict(start_to_close_timeout=timedelta(minutes=20), retry_policy=RetryPolicy(maximum_attempts=2))
         base = str(TRAB / p.slug)
+        pac = await workflow.execute_activity(pacote_garantir, **curto)               # t459: versão do pacote (hash)
+        reg = await workflow.execute_activity(registro_buscar_caderno, p.codigo, **curto)
         nlm = await workflow.execute_child_workflow(
-            NotebookLMWorkflow.run, PedidoNotebookLM(tipo="short", slug=p.slug, fonte=p.roteiro_texto, solicitante="episodio"),
+            NotebookLMWorkflow.run, PedidoNotebookLM(tipo="short", slug=p.slug, fonte=p.roteiro_texto, solicitante="episodio",
+                                                     episodio=p.codigo, caderno_registrado=reg,
+                                                     pacote_fonte=pac["fonte"], pacote_hash=pac["hash"]),
             id=f"nlm-short-{p.slug}-{workflow.info().workflow_id[-6:]}", task_queue=FILA_NOTEBOOKLM)
         if not nlm.ok or not nlm.artefato:
             return ResultadoEpisodioE2E(etapa="geracao", ok=False, detalhes=nlm.model_dump())
@@ -151,13 +159,18 @@ class EpisodioWorkflow:
             return ResultadoEpisodioE2E(etapa="auditor", ok=False, detalhes={"motivo": "sem veredito no prazo", "pranchas": quadros, "capa": capa})
         if self._veredito.veredito == "reprova":
             return ResultadoEpisodioE2E(etapa="auditor", ok=False, detalhes=self._veredito.model_dump())
+        exp = await workflow.execute_activity(nlm_exportar_caderno, args=[nlm.caderno, p.codigo], task_queue=FILA_NOTEBOOKLM, **curto)
+        arq = await workflow.execute_activity(arquivar_caderno, args=[nlm.caderno, p.codigo, p.slug, exp, raw["arquivo"]], **curto)
         drv = await workflow.execute_activity(drive_enviar, args=[p.codigo, p.slug, [raw["arquivo"], f"{base}/final.mp4"]], **curto)
         pub = await workflow.execute_child_workflow(PublicacaoWorkflow.run, {
             "codigo": p.codigo, "titulo": p.titulo, "descricao": p.descricao, "tags": p.tags, "dry_run": p.dry_run,
             "video": f"{base}/final.mp4", "capa": capa.get("escolhido")}, id=f"pub-{p.codigo}-{workflow.info().workflow_id[-6:]}")
+        if not p.dry_run and pub.get("enviado"):   # t459: só publicação real agenda o apagamento D+2
+            await workflow.start_child_workflow(ApagarCadernoWorkflow.run, args=[nlm.caderno, p.codigo, workflow.now().isoformat()],
+                                                id=f"apagar-caderno-{p.codigo}", parent_close_policy=ParentClosePolicy.ABANDON)
         return ResultadoEpisodioE2E(etapa="publicacao_dryrun", ok=True,
-                                    detalhes={"pos": pos, "capa": capa.get("escolhido"), "drive": drv, "publicacao": pub,
+                                    detalhes={"arquivo_caderno": arq, "pos": pos, "capa": capa.get("escolhido"), "drive": drv, "publicacao": pub,
                                               "auditor": self._veredito.model_dump()})
 
 
-ATIVIDADES_EPISODIO = [pos_produzir, extrair_quadros, capa_a9, drive_enviar, publicacao_dryrun]
+ATIVIDADES_EPISODIO = [pos_produzir, extrair_quadros, capa_a9, drive_enviar, publicacao_dryrun, *ATIVIDADES_REGISTRO]

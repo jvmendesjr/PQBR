@@ -16,3 +16,4 @@ Esquema `pqbr` do banco do app (ARQUITETURA §8; F3-01/D3). Banco: **Postgres 17
 
 - `0010_pqbr_consumo_modelos.sql` (t357 h): consumo por modelo e por tipo de ação (tokens, chamadas, tempo, sucesso, custo estimado), view `consumo_diario` para o relatório; sem teto, só monitoramento; sem prompt nem resposta gravados.
 - `0013_pqbr_erros_aceitaveis.sql` (t435): erros sem risco de segurança aceitos pelo Auditor (legenda, texto, visual…), com decisão posterior (`pendente/aceito/corrigir_prompt/virar_seguranca`); view `erros_aceitaveis_resumo`.
+- `0014_pqbr_cadernos_efemeros.sql` (t459): pacote canônico do NotebookLM versionado por hash (`pacote_canonico`), registro dos cadernos por episódio (`cadernos_episodio`, apagar D+2) e arquivamento (`arquivo_caderno`).

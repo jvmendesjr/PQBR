@@ -287,3 +287,8 @@ Ordem: 0.5 ∥ 0 → 1 → 3 ∥ 4 → 5 → 6 → 7 → 8 → 9 → 10 → 11 �
 - [x] **JEV-01** Chave do Jev configurada (12/10): segredo `JEV_API_KEY` na PQBR (Paperclip) + `TYPESAFE_API_KEY` em `~/.pqbr/worker.env`; endpoint `api.typesafe.ai/v1/systemone`, `jev-latest`; teste ok. O `pqbr-temporal-worker` lê no próximo reinício.
 - [ ] **JEV-02** Chaves de fallback do `decide()` (OpenRouter; depois OpenAI, modelo em H7) — Portão: José (pendente).
 - [x] **HS-01** Dono da manutenção do Hindsight (bank `pqbr`) — 12/10: decidido pelo José. Dev Corretor mantém (reindexação diária, poda, dedupe, sem segredos); Observador mede (hit rate/staleness nos relatórios). Aplicado em `company/agents/*/AGENTS.md`, nas instruções vivas do Paperclip (instructions-file:put, adapters mantidos) e em AGENTES.md.
+- [x] **CAT-01** Categoria YouTube = 27 Educação (12/10, José): `CATEGORIA_YOUTUBE` em `contratos`, usado no dry-run; SPEC RF-06 corrigida (`containsSyntheticMedia`=false).
+- [x] **NLM-EF-01** Cadernos efêmeros + pacote canônico (12/10, José; ADR-003): migração 0014, `workflows/pacote.py`, `nlm_caderno` por id do episódio, arquivamento e `ApagarCadernoWorkflow` D+2; playbook `nlm-cadernos`.
+- [ ] **NLM-EF-02** Limpeza dos 55 cadernos antigos — lista classificada entregue; apagar só após aprovação do José, por id.
+- [ ] **NLM-EF-03** Validar o ciclo completo no E2E nº 1 (dry-run: cria, injeta, arquiva; não apaga).
+

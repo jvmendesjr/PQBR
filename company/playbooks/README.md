@@ -8,3 +8,4 @@ Cada falha conhecida tem passos ordenados. O agente escolhe entre eles, faz no m
 | `camofox-watchdog.md` | código (systemd) / Observador | serviço `pqbr-camofox` caiu |
 | `saida-invalida.md` | dono da tarefa | saída fora do contrato Pydantic |
 | `lock-preso.md` | Diretor | 409 persistente no checkout |
+| `nlm-cadernos.md` | código (Temporal) / Dev Corretor | caderno efêmero sumiu, pacote, arquivamento ou apagamento recusado (t459) |

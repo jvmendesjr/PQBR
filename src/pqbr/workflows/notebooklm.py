@@ -20,6 +20,15 @@ LIMITES = {"chat": int(os.environ.get("PQBR_NLM_CHATS_DIA", "500")), "video": in
 TETO_JANELA = 80.0
 MESTRES_PROIBIDOS = {"88246689", "c35d7b24-5d4f-4eee-afc4-7a0eadc860bf"}
 SLUG = re.compile(r"^[a-z0-9][a-z0-9-]{1,60}$")
+UUID = re.compile(r"^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
+CODIGO = re.compile(r"^PQBR-EP[0-9]{4,}$")
+FILA_REGISTRO = "episodio-pqbr"   # atividades de banco/Drive do ciclo do caderno (workflows/pacote.py)
+
+
+def titulo_caderno(codigo: str, slug: str) -> str:
+    """Rótulo do caderno do episódio. A identidade é o id registrado em pqbr.cadernos_episodio (t459)."""
+    if not CODIGO.match(codigo): raise ValueError("código de episódio inválido")
+    return f"Short - {codigo} - {slug}"
 
 
 class UsoDia(BaseModel):
@@ -38,6 +47,10 @@ class PedidoNotebookLM(BaseModel):
     perguntas: list[str] | None = Field(default=None, max_length=3)   # t430: até 3 chats no mesmo caderno
     pesquisa_web: list[str] | None = Field(default=None, max_length=3)  # t430: add-research --mode fast antes dos chats
     solicitante: str = "kit"
+    episodio: str | None = Field(default=None, pattern=CODIGO.pattern)   # t459: caderno casado pelo código do episódio
+    caderno_registrado: str | None = Field(default=None, pattern=UUID.pattern)
+    pacote_fonte: str | None = None                                      # arquivo do pacote canônico (workflows/pacote.py)
+    pacote_hash: str | None = Field(default=None, pattern=r"^[0-9a-f]{64}$")
 
 
 class ResultadoNotebookLM(BaseModel):
@@ -123,14 +136,25 @@ async def nlm_checar_saldo(tipo: str) -> dict:
 
 
 @activity.defn
-async def nlm_caderno(slug: str) -> str:
-    titulo = f"Short - {slug}"
-    lst = _json(await asyncio.to_thread(_cli, "list", "--json", timeout=120))
-    for n in _ids(lst):
-        if n.get("title") == titulo and n["id"] not in MESTRES_PROIBIDOS:
-            return n["id"]
-    novo = _json(await asyncio.to_thread(_cli, "create", titulo, "--json", timeout=120))
-    return next(_ids(novo))["id"]
+async def nlm_caderno(slug: str, codigo: str | None = None, existente: str | None = None) -> str:
+    """Episódio (t459): casa pelo id registrado para o código (pqbr.cadernos_episodio); se não houver, cria
+    "Short - <código> - <slug>" (o workflow registra o id). Nunca casa episódio por título.
+    Sem código (pesquisa/kit): caderno efêmero "Short - <slug>" como antes."""
+    lst = list(_ids(_json(await asyncio.to_thread(_cli, "list", "--json", timeout=120))))
+    if codigo:
+        if existente:
+            if not UUID.match(existente) or existente in MESTRES_PROIBIDOS: raise RuntimeError("caderno registrado inválido")
+            if any(n["id"] == existente for n in lst): return existente
+            raise RuntimeError(f"caderno registrado {existente} sumiu do NotebookLM (revisar antes de recriar)")
+        titulo = titulo_caderno(codigo, slug)
+    else:
+        titulo = f"Short - {slug}"
+        for n in lst:
+            if n.get("title") == titulo and n["id"] not in MESTRES_PROIBIDOS:
+                return n["id"]
+    novo = next(_ids(_json(await asyncio.to_thread(_cli, "create", titulo, "--json", timeout=120))))["id"]
+    if novo in MESTRES_PROIBIDOS: raise RuntimeError("caderno mestre proibido")
+    return novo
 
 
 @activity.defn
@@ -211,8 +235,13 @@ class NotebookLMWorkflow:
             uso = await workflow.execute_activity(nlm_checar_saldo, tipo, **curto)
         except Exception as e:
             return ResultadoNotebookLM(ok=False, tipo=p.tipo, motivo=f"sem saldo: {e}")
-        nb = await workflow.execute_activity(nlm_caderno, p.slug, **curto)
+        nb = await workflow.execute_activity(nlm_caderno, args=[p.slug, p.episodio, p.caderno_registrado], **curto)
+        if p.episodio and not p.caderno_registrado:   # t459: registra o id do caderno para o código do episódio
+            await workflow.execute_activity("registro_caderno", args=[nb, p.episodio, p.slug, p.pacote_hash],
+                                            task_queue=FILA_REGISTRO, **curto)
         await workflow.execute_activity(nlm_persona, nb, **curto)   # persona antes de tudo (t427)
+        if p.pacote_fonte and p.pacote_hash:   # t459: pacote canônico injetado (sem caderno mestre)
+            await workflow.execute_activity("nlm_injetar_pacote", args=[nb, p.pacote_fonte, p.pacote_hash], **curto)
         await workflow.execute_activity(nlm_fonte, args=[nb, p.slug, p.fonte], **curto)
         if p.tipo != "short" and (p.pesquisa_web or p.perguntas):
             for q in (p.pesquisa_web or []):

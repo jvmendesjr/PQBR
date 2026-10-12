@@ -4,13 +4,14 @@ import asyncio
 from temporalio.worker import Worker
 from .worker import client, ADDR, NS
 from .episodio import FILA_EPISODIO, EpisodioWorkflow, PublicacaoWorkflow, ATIVIDADES_EPISODIO
+from .pacote import ApagarCadernoWorkflow
 
 
 async def main() -> None:
     import logging
     from ..seguranca.barreira import instalar_no_logging
     logging.basicConfig(level=logging.INFO); instalar_no_logging()
-    w = Worker(await client(), task_queue=FILA_EPISODIO, workflows=[EpisodioWorkflow, PublicacaoWorkflow],
+    w = Worker(await client(), task_queue=FILA_EPISODIO, workflows=[EpisodioWorkflow, PublicacaoWorkflow, ApagarCadernoWorkflow],
                activities=ATIVIDADES_EPISODIO, max_concurrent_activities=1)
     print(f"worker episodio em {ADDR} ns={NS} fila={FILA_EPISODIO} (concorrência 1)", flush=True)
     await w.run()

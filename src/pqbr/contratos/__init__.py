@@ -383,6 +383,7 @@ class ClassificacaoPopupCamofox(Contrato):
 
 
 # SEO (RF-06; YouTube Data API snippet/status; t437) --------------------------------------------
+CATEGORIA_YOUTUBE = "27"   # Educação — única categoria do canal (José 12/10/2026; antes havia "24" no dry-run)
 _HASHTAG = re.compile(r"^#[0-9A-Za-zÀ-ÿ_]{2,50}$")
 
 
@@ -391,9 +392,9 @@ class PacoteSEO(Contrato):
     descricao: str = Field(min_length=10, max_length=5000)
     tags: list[str] = Field(default_factory=list, max_length=30)
     hashtags: list[str] = Field(min_length=3, max_length=15)
-    categoria_id: str = Field(default="27", pattern=r"^[0-9]{1,3}$")   # 27 = Educação (PROPOSTA)
+    categoria_id: str = Field(default=CATEGORIA_YOUTUBE, pattern=r"^[0-9]{1,3}$")   # 27 = Educação (aprovado José 12/10)
     idioma: Literal["pt-BR"] = "pt-BR"
-    contem_midia_sintetica: bool = False    # status.containsSyntheticMedia; 2D não realista não exige o rótulo (decisão anterior)
+    contem_midia_sintetica: bool = False    # status.containsSyntheticMedia; cartum 2D não realista não exige o rótulo (José 12/10)
 
     @field_validator("hashtags")
     @classmethod

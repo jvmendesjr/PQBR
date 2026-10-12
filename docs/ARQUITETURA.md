@@ -61,6 +61,7 @@
 - `--yolo` (ou o equivalente do OpenCode, auto-aprovar permissões) só quando necessário. Perfis mínimos sem terminal, arquivos ou sudo; exceção só para o Dev Corretor e o Dev Revisor, em container isolado (worktree, sem rede de produção nem segredos; o Revisor não escreve no repo principal). O `pqbr` nunca usa `--yolo`. Com a ADR-006, o H-SDD1 deixa de bloquear.
 
 ### ADR-008: Camofox PQBR 24/7 com reautenticação autônoma [APROVADO t395]
+> Categoria YouTube: **27 Educação** (José 12/10); `containsSyntheticMedia=false` (cartum 2D não realista).
 > Referência viva da sessão Google: [`REFERENCIA-sessao-google.md`](REFERENCIA-sessao-google.md) (Camofox única fonte e único renovador; NotebookLM só lê; 12/10).
 - **Instância e perfil únicos (José, 12/10):** a conta Google de produção vive em **um** processo `pqbr-camofox` (127.0.0.1:9387) e **um** perfil persistente: `userId=pqbr` → `~/.pqbr/camofox/profiles/66e057673effe4afdd963a2bd6a45a2a/` (SHA-256 do userId, plugin de persistência). Regras: todo cliente usa `userId=pqbr` (o `sessionKey` é só o grupo de abas, no mesmo contexto); `MAX_SESSIONS=1`; nada de userId novo, perfil efêmero, `--fresh` ou segundo processo; reinícios restauram o mesmo `storage-state.json`. Auditado em 12/10: keepalive, `camofox.py` (fila camofox-pqbr), `sync_cookies_chrome.py`, `mcp_kit` e playbooks usam só `pqbr`; o auditor Gemini ainda não tem código e deve seguir a mesma regra. Outro processo `node server.js` no `pc` (PID do 9377) é de outro projeto, não da PQBR.
 - **NotebookLM com sessão própria (t-nlm2):** reauth nativa do notebooklm-py (L1–L3, `NOTEBOOKLM_HEADLESS_REAUTH=1`), perfil próprio; sem cópia de cookies Camofox → NotebookLM.
@@ -72,7 +73,7 @@
 
 | Componente | Papel | Status |
 |---|---|---|
-| **NotebookLM** (notebooklm-py) | Primário para ideação, roteiro, SEO, pesquisa e vídeo. Caderno **efêmero por episódio**; nunca o raiz. Adicionar o roteiro como fonte antes de gerar; em timeout, listar artefatos e não regerar; nunca `ask --new`. | [APROVADO] / hábitos [VERIFICADO no `rede`] |
+| **NotebookLM** (notebooklm-py) | Primário para ideação, roteiro, SEO, pesquisa e vídeo. Caderno **efêmero por episódio**; nunca o raiz. **Sem caderno mestre (t459, ADR-003):** pacote canônico (persona, comandos/prompts, contrato, bloco §16.7) versionado por hash em `pqbr.pacote_canonico` (Postgres, fonte de verdade) e espelhado no Drive `00_Biblia_Visual`; injetado em cada caderno do episódio (casado pelo id registrado em `pqbr.cadernos_episodio`); fontes/respostas/vídeo arquivados em Drive + `pqbr.arquivo_caderno`; caderno apagado pelo id em D+2 após a publicação (allowlist, nunca mestre, nunca por título). Adicionar o roteiro como fonte antes de gerar; em timeout, listar artefatos e não regerar; nunca `ask --new`. | [APROVADO] / hábitos [VERIFICADO no `rede`] |
 | | Instalação exclusiva da PQBR (D1): venv com 0.8.4 fixada, `NOTEBOOKLM_HOME` próprio, perfil `pqbr`, serviço único dono da sessão. Hoje há uma instalação global 0.8.2 compartilhada com o MP32. | [APROVADO em princípio] / estado atual [VERIFICADO] |
 | | Duração de 15 s a 3 min com alvo de ~50 s. Verticais até ~67 s já saíram bem; até 180 s ainda não testado (H5). Com 2 personagens, o Short ignorou as imagens de elenco (5 de 5); com 1 funcionou. | [VERIFICADO até ~67 s] |
 | **Gemini web** | Reserva do NotebookLM e **juiz visual** do auditor (3.8 Flash, modo normal; o "Flash Estendido" recusa as pranchas), via Camofox. **Sem Gemini API** [t327]. | [APROVADO] |
@@ -271,7 +272,7 @@ Escrita no banco do app sempre por Activity com **outbox** (idempotente por chav
 | Workflow | Disparo | Passos | Req |
 |---|---|---|---|
 | `GradeDiariaWorkflow` | Schedule de madrugada | coleta → caderno diário → Deep Research → filtros/barreiras/polêmica → grava grade | RF-01..RF-05 |
-| `EpisodioWorkflow(ep)` | grade do dia | roteiro (NotebookLM) → fichas → render → pós FFmpeg → auditor → Drive → aprovado | RF-06..RF-14, RF-40 |
+| `EpisodioWorkflow(ep)` | grade do dia | pacote canônico → caderno do episódio (id) → roteiro (NotebookLM) → fichas → render → pós FFmpeg → auditor → arquivar caderno → Drive → aprovado → `ApagarCadernoWorkflow` D+2 | RF-06..RF-14, RF-40 |
 | `PublicacaoWorkflow(ep)` | episódio aprovado | busca do código → `videos.insert` privado → agendar (API ou Camofox) → conferir | RF-15..RF-18 |
 | `Item5Workflow(video)` | sinal de problema | privado na hora → Telegram → aguarda sinal do José | RF-19..RF-21 |
 | `ComentariosWorkflow` | Schedules 30 min / 6 h / diário | ler → pré-filtro → Jev → reter/responder/sinalizar | RF-22..RF-27 |
