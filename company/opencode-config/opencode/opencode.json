@@ -43,7 +43,8 @@
         "PQBR_KIT_PAPEL": "{env:PQBR_KIT_PAPEL}",
         "PAPERCLIP_API_KEY": "{env:PAPERCLIP_API_KEY}",
         "PAPERCLIP_RUN_ID": "{env:PAPERCLIP_RUN_ID}",
-        "PQBR_PAPERCLIP_API": "{env:PQBR_PAPERCLIP_API}"
+        "PQBR_PAPERCLIP_API": "{env:PQBR_PAPERCLIP_API}",
+        "NINEROUTER_API_KEY": "{env:NINEROUTER_API_KEY}"
       },
       "enabled": true,
       "timeout": 900000

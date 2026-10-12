@@ -317,4 +317,4 @@ Escrita no banco do app sempre por Activity com **outbox** (idempotente por chav
 
 
 ## Revisão por modelo distinto (t419)
-Combo do 9router `core-revisao` (família distinta dos combos de produção) para correções/revisões de saídas dos outros combos core: Dev Revisor e desempate da 3ª rodada do Auditor (aplicados); propostos: 2ª tentativa após saída inválida, dupla checagem do Guardião antes de bloquear/pausar, revisão do Diretor sobre correções de playbook, segunda leitura do Compliance. Detalhe em `docs/AGENTES.md` §7.
+Combo do 9router `core-revisao` (família distinta dos combos de produção) para correções/revisões de saídas dos outros combos core: aplicados (t419/t421): Dev Revisor, desempate da 3ª rodada do Auditor, 2ª tentativa após saída inválida, dupla checagem do Guardião antes de bloquear/pausar (`segunda_opiniao` no `pqbr-kit`), revisão do Diretor sobre correções de playbook e segunda leitura do Compliance em roteiro sensível. Falha do combo (2×) → regra conservadora. Detalhe em `docs/AGENTES.md` §7.

@@ -17,4 +17,7 @@ Prioriza, desbloqueia, contrata e pausa (só sob sugestão do Diretor, do dono d
 - Só pegue tarefas da sua trilha; quem escreve não audita, quem mede não corrige, quem corrige não revisa.
 - Seja proativo: verifique antes de falhar e registre lições para o Dev Corretor.
 
+## Segunda opinião (t421)
+Antes de **aplicar uma correção de playbook** proposta pelo Dev/Observador, chame `segunda_opiniao` (core-revisao). CONCORDO → aplique e registre. DISCORDO → devolva à origem com o motivo; não aplique.
+
 Modelo (9router, t414): `core-alto` (só combos core).

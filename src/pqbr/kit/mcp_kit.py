@@ -12,11 +12,11 @@ UNIDADES = ["pqbr-camofox", "pqbr-camofox-worker", "pqbr-notebooklm-worker", "pq
 # Lista fechada por papel (AGENTES §2, §6). Leitura de docs e API do Paperclip para todos os papéis com ferramenta.
 COMUM = ["docs_ler", "paperclip_comentar", "paperclip_status", "paperclip_criar_issue"]
 PAPEIS = {
-    "diretor": COMUM + ["temporal_listar", "saude_servicos"],
+    "diretor": COMUM + ["temporal_listar", "saude_servicos", "segunda_opiniao"],
     "pesquisador-origem": COMUM + ["notebooklm_enfileirar"],
     "diretor-arte-2d": COMUM + ["notebooklm_enfileirar"],
     "observador": COMUM + ["temporal_listar", "saude_servicos", "camofox_saude"],
-    "guardiao-seguranca": COMUM + ["temporal_listar", "saude_servicos", "seguranca_varrer", "seguranca_varrer_logs"],
+    "guardiao-seguranca": COMUM + ["temporal_listar", "saude_servicos", "seguranca_varrer", "seguranca_varrer_logs", "segunda_opiniao"],
     "dev-corretor": COMUM + ["temporal_listar"],
     "dev-revisor": COMUM + ["temporal_listar"],
 }
@@ -33,6 +33,7 @@ FERR = {
                               "contador diário). tipo=pesquisa (espera e devolve a resposta; use pergunta) ou short (devolve o id do "
                               "workflow; vídeo vertical --format short). fonte = roteiro/briefing (vira a fonte do caderno).",
                               {"tipo": "string", "slug": "string", "fonte": "string", "pergunta": "string"}),
+    "segunda_opiniao": ("Segunda opinião independente no combo core-revisao (t421). OBRIGATÓRIA antes de pausar agente/bloquear publicação (Guardião) e antes de aplicar correção de playbook (Diretor). Devolve CONCORDO/DISCORDO + motivo.", {"contexto": "string", "decisao": "string"}),
     "seguranca_varrer_logs": ("Varre os run-logs da PQBR das últimas N horas (padrão 24) com o detector de segredos; devolve só contagens por arquivo, nunca o valor.", {"horas": "number"}),
     "seguranca_varrer": ("Roda a barreira de segredos/PII sobre um texto.", {"texto": "string"}),
 }
@@ -141,6 +142,11 @@ def chamar(nome: str, a: dict) -> str:
     if nome == "camofox_saude": return _camofox_saude()
     if nome == "notebooklm_enfileirar": return _notebooklm(a)
     if nome == "seguranca_varrer": return _varrer(a["texto"])
+    if nome == "segunda_opiniao":
+        from pqbr.kit.agente_texto import segunda_leitura
+        from pqbr.seguranca.barreira import exigir_limpo
+        r = segunda_leitura(os.environ.get("PQBR_MODELO_REVISAO", "core-revisao"), a["contexto"], a["decisao"])
+        exigir_limpo(r, "log"); return r
     if nome == "seguranca_varrer_logs": return _varrer_logs(a.get("horas", 24) or 24)
     raise KeyError(nome)
 

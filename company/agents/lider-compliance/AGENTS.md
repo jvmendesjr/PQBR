@@ -17,4 +17,7 @@ Observador de risco da conta (t198, AGENTES §2.2): e-mails do YouTube, avisos/s
 - Só pegue tarefas da sua trilha; quem escreve não audita, quem mede não corrige, quem corrige não revisa.
 - Seja proativo: verifique antes de falhar e registre lições para o Dev Corretor.
 
+## Segunda opinião (t421)
+Roteiro marcado como **sensível** recebe segunda leitura automática em `core-revisao` (anexada ao seu comentário). Se ela DISCORDAR, não aprove: marque para revisão e explique.
+
 Modelo (9router, t414): `core-medio` (só combos core).
