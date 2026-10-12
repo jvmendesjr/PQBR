@@ -20,3 +20,5 @@ mais a sessão do Camofox para o NotebookLM (o keepalive só faz checkpoint e `c
 
 Risco anotado: duas sessões da mesma conta (Camofox + NotebookLM) = dois dispositivos na conta; é o desenho
 oficial do notebooklm-py e evita duas ferramentas rotacionando a **mesma** sessão (causa provável da queda de 12/10).
+
+**Contorno do login (12/10, notebooklm-py 0.8.4, última versão no PyPI):** deslogado, `notebook.google.com` (e o legado `notebooklm.google.com`) cai em `notebook.google.com/trynow`, mesmo host → o `login` acusa "Already logged in" e salva só NID/__Host-GAPS. `NOTEBOOKLM_BASE_URL` não resolve. Usar `scripts/notebooklm/login_jose.sh`: abre o Chromium do perfil persistente do notebooklm-py na página de login do Google (DISPLAY=:1, visível no VNC), espera SID + `__Secure-1PSIDTS`, fecha e roda `notebooklm -p pqbr login` (sem `--fresh`) + `auth check --test`. Log em `~/.pqbr/notebooklm/logs-login.txt`.
