@@ -103,3 +103,9 @@ Toda automação de navegador simula humano: Camoufox com `humanize: true` (curs
 
 - 12/10 18:13 PT (auto, evento #12): paperclip_cli queda: paperclip cli falhou (company list): API error 400: Request failed with status 400
 
+- 12/10 18:46 PT (auto, evento #13): notebooklm normalizado: pedido pendente resolvido → ok
+- 12/10 18:46 PT (auto, evento #14): paperclip_cli queda: paperclip cli falhou (company list): API error 400: Request failed with status 400
+
+- 12/10 19:10 PT (auto, evento #15): paperclip_cli queda: paperclip cli falhou (company list): API error 400: Request failed with status 400
+
+- 12/10 19:59 PT: rede ? serve 3100 ? Paperclip 3101 corrigido (n?o afeta a sess?o Google). 19:35 crash do pc; Camofox/keepalive voltaram com o boot (conferir pqbr-acessos).
