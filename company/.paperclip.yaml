@@ -35,7 +35,7 @@ agents:
     adapter:
       type: "process"
       config:
-        command: "/home/pc/Workspace/PQBR/scripts/paperclip/agente_pausado.sh"
+        command: "/home/pc/Workspace/PQBR/scripts/paperclip/agente_texto.sh"
         cwd: "/home/pc/Workspace/PQBR"
         timeoutSec: 120
         env:
@@ -91,7 +91,7 @@ agents:
     adapter:
       type: "process"
       config:
-        command: "/home/pc/Workspace/PQBR/scripts/paperclip/agente_pausado.sh"
+        command: "/home/pc/Workspace/PQBR/scripts/paperclip/agente_texto.sh"
         cwd: "/home/pc/Workspace/PQBR"
         timeoutSec: 120
         env:
@@ -117,7 +117,7 @@ agents:
     adapter:
       type: "process"
       config:
-        command: "/home/pc/Workspace/PQBR/scripts/paperclip/agente_pausado.sh"
+        command: "/home/pc/Workspace/PQBR/scripts/paperclip/agente_texto.sh"
         cwd: "/home/pc/Workspace/PQBR"
         timeoutSec: 120
         env:
@@ -199,7 +199,7 @@ agents:
     adapter:
       type: "process"
       config:
-        command: "/home/pc/Workspace/PQBR/scripts/paperclip/agente_pausado.sh"
+        command: "/home/pc/Workspace/PQBR/scripts/paperclip/agente_texto.sh"
         cwd: "/home/pc/Workspace/PQBR"
         timeoutSec: 120
         env:
@@ -225,7 +225,7 @@ agents:
     adapter:
       type: "process"
       config:
-        command: "/home/pc/Workspace/PQBR/scripts/paperclip/agente_pausado.sh"
+        command: "/home/pc/Workspace/PQBR/scripts/paperclip/agente_texto.sh"
         cwd: "/home/pc/Workspace/PQBR"
         timeoutSec: 120
         env:
@@ -251,7 +251,7 @@ agents:
     adapter:
       type: "process"
       config:
-        command: "/home/pc/Workspace/PQBR/scripts/paperclip/agente_pausado.sh"
+        command: "/home/pc/Workspace/PQBR/scripts/paperclip/agente_texto.sh"
         cwd: "/home/pc/Workspace/PQBR"
         timeoutSec: 120
         env:
@@ -309,7 +309,7 @@ agents:
       config:
         command: "/home/pc/.opencode/bin/opencode"
         cwd: "/home/pc/Workspace/PQBR"
-        model: "9router/ds/deepseek-v4-pro-max"
+        model: "9router/ag/gemini-3.8-flash-medium"
         dangerouslySkipPermissions: false
         timeoutSec: 900
         graceSec: 15
@@ -339,7 +339,7 @@ agents:
       config:
         command: "/home/pc/.opencode/bin/opencode"
         cwd: "/home/pc/Workspace/PQBR"
-        model: "9router/cu/gpt-5.6-sol-low"
+        model: "9router/ag/gpt-oss-120b-medium"
         dangerouslySkipPermissions: false
         timeoutSec: 900
         graceSec: 15
@@ -369,7 +369,7 @@ agents:
       config:
         command: "/home/pc/.opencode/bin/opencode"
         cwd: "/home/pc/Workspace/PQBR"
-        model: "9router/cu/claude-sonnet-5-5-medium"
+        model: "9router/ag/claude-sonnet-4-6"
         dangerouslySkipPermissions: false
         timeoutSec: 900
         graceSec: 15

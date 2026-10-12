@@ -10,11 +10,11 @@
       },
       "models": {
         "core-alto": {},
-        "core-baixo": {},
         "core-medio": {},
-        "cu/claude-sonnet-5-5-medium": {},
-        "cu/gpt-5.6-sol-low": {},
-        "ds/deepseek-v4-pro-max": {}
+        "core-baixo": {},
+        "ag/gemini-3.8-flash-medium": {},
+        "ag/gpt-oss-120b-medium": {},
+        "ag/claude-sonnet-4-6": {}
       }
     }
   },

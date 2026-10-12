@@ -14,3 +14,9 @@
 - Kit: `scripts/paperclip/agente_texto.sh` → `pqbr.kit.agente_texto` (checkout → 9router → `PropostaAgente` → comentário/status); MCP `pqbr-kit` (`pqbr.kit.mcp_kit`, lista fechada por `PQBR_KIT_PAPEL`). Playbooks em `playbooks/`.
 - Smoke ok e **ativos:** Especialista SEO (PQBA-5) e Observador (PQBA-2). Demais pausados; rotinas pausadas.
 - Atenção: o import troca `process` por `claude_local`; depois de importar, reaplicar o adapter `process`.
+
+## Estado (t397, 11/10)
+- Canal José: agente `Canal José (pqbr)` (fora das trilhas, reporta ao Diretor); a chave do perfil `pqbr` foi trocada e a da PQBR-TESTE revogada.
+- Ativos após smoke: Diretor, Observador, Especialista SEO, Líder Editorial, Roteirista, Caçador Sazonal, Auditor, Líder Compliance, Comunidade. Rotinas ativas só para esses.
+- Modelos `cu/*` (Cursor) do 9router quebram no OpenCode ("unsupported IDE tool"): usar `core-*`/`ag/*`. Guardião → `ag/gemini-3.8-flash-medium` (smoke pendente); Devs → `ag/gpt-oss-120b-medium` / `ag/claude-sonnet-4-6`.
+- Reautenticação: `scripts/camofox/sync_cookies_chrome.py` (só o perfil Chrome `PorqueBR`; dry-run ok, 86 cookies).

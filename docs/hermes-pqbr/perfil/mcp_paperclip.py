@@ -72,7 +72,7 @@ TOOLS = {
                                    *(["--assignee-agent-id", a["agente_responsavel_id"]] if a.get("agente_responsavel_id") else []))),
     "listar_agentes": ({"type": "object", "properties": {}},
                        lambda a: json.dumps([{k: x.get(k) for k in ("id", "name", "title", "status")}
-                                             for x in json.loads(_cli("agent", "list"))], ensure_ascii=False)),
+                                             for x in json.loads(_cli("agent", "list", "-C", _ctx()["companyId"]))], ensure_ascii=False)),
     "acordar_agente": ({"type": "object", "properties": {"agente_id": S}, "required": ["agente_id"]},
                        lambda a: _cli("agent", "heartbeat:invoke", a["agente_id"])),
 }
