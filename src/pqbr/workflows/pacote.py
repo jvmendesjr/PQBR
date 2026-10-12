@@ -3,7 +3,7 @@ Pacote canônico = persona + comandos/prompts + contrato editorial + bloco visua
 Postgres local (`pqbr.pacote_canonico`, fonte de verdade) e espelhado no Drive `00_Biblia_Visual/pacote-<hash12>/`.
 Ciclo do caderno do episódio: criar ("Short - <código> - <slug>", registrado em `pqbr.cadernos_episodio`) → persona →
 injetar pacote → fonte/roteiro → gerar → arquivar (fontes, respostas, vídeo → Drive + `pqbr.arquivo_caderno`) →
-publicação → **D+2** → apagar **pelo id registrado para o código do episódio** (nunca por título), com allowlist
+publicação → **D+2** → **verificar as cópias (regra permanente)** → apagar **pelo id registrado para o código do episódio** (nunca por título), com allowlist
 (título `Short - <código> - …`, dono, UUID completo, registro arquivado) e `MESTRES_PROIBIDOS`.
 Atividades de banco/Drive rodam na fila `episodio-pqbr`; as da CLI do NotebookLM na `notebooklm-pqbr`."""
 from __future__ import annotations
@@ -147,13 +147,35 @@ async def registro_publicado(caderno: str, codigo: str, quando_iso: str) -> str:
 
 
 @activity.defn
-async def registro_autorizar_apagar(caderno: str, codigo: str) -> str:
-    """Allowlist do banco: o id tem de ser O caderno registrado para o código, arquivado, publicado há ≥ 48 h."""
+async def verificar_arquivo(caderno: str, esperados: dict) -> dict:
+    """REGRA PERMANENTE (José 12/10): arquivar e VERIFICAR vêm antes de apagar. Confere as 3 cópias:
+    Postgres (linhas de arquivo_caderno com sha256/bytes), Drive (todo item com drive_id, md5/tamanho conferidos no upload)
+    e repo/disco local (`esperados["repo"]`: caminho → bytes). `esperados["n"]` = nº mínimo de itens. Marca verificado_em."""
+    from pathlib import Path as _P
     with _banco() as c:
-        r = c.execute("select titulo, arquivado_em, apagar_apos from pqbr.cadernos_episodio"
+        rows = c.execute("select nome, bytes, drive_id from pqbr.arquivo_caderno where caderno_id = %s", (caderno,)).fetchall()
+        faltas = []
+        if len(rows) < int(esperados.get("n", 1)): faltas.append(f"postgres {len(rows)} < {esperados.get('n')}")
+        if any(r[2] is None for r in rows): faltas.append("item sem cópia no Drive")
+        for cam, b in (esperados.get("repo") or {}).items():
+            f = _P(cam)
+            if not f.is_file() or f.stat().st_size != int(b): faltas.append(f"repo: {cam}")
+        if faltas: raise RuntimeError("arquivo NÃO verificado — não apagar: " + "; ".join(faltas[:5]))
+        copias = {"postgres": len(rows), "drive": sum(r[2] is not None for r in rows), "repo": len(esperados.get("repo") or {}),
+                  "bytes": sum(int(r[1]) for r in rows)}
+        c.execute("update pqbr.cadernos_episodio set verificado_em = now(), copias = %s where caderno_id = %s",
+                  (json.dumps(copias), caderno)); c.commit()
+    return copias
+
+
+@activity.defn
+async def registro_autorizar_apagar(caderno: str, codigo: str) -> str:
+    """Allowlist do banco: o id tem de ser O caderno registrado para o código, arquivado E verificado, publicado há ≥ 48 h."""
+    with _banco() as c:
+        r = c.execute("select titulo, arquivado_em, apagar_apos, verificado_em from pqbr.cadernos_episodio"
                       " where caderno_id = %s and episodio_codigo = %s and apagado_em is null", (caderno, codigo)).fetchone()
     if not r: raise RuntimeError("caderno fora da allowlist (não registrado para o episódio)")
-    if r[1] is None: raise RuntimeError("caderno ainda não arquivado")
+    if r[1] is None or r[3] is None: raise RuntimeError("caderno não arquivado/verificado: arquivar e verificar antes de apagar")
     if r[2] is None or r[2] > datetime.now(timezone.utc): raise RuntimeError("antes de D+2 da publicação")
     return r[0]
 
@@ -165,7 +187,41 @@ async def registro_apagado(caderno: str, codigo: str) -> None:
                   (caderno, codigo)); c.commit()
 
 
+@activity.defn
+async def registro_fonte(caderno: str, fonte_id: str, tipo: str, titulo: str | None = None) -> None:
+    """Isolamento (t459c): toda fonte injetada no caderno do episódio é registrada por id."""
+    with _banco() as c:
+        c.execute("insert into pqbr.fontes_caderno (caderno_id, fonte_id, tipo, titulo) values (%s, %s, %s, %s)"
+                  " on conflict (caderno_id, fonte_id) do nothing", (caderno, fonte_id, tipo, titulo)); c.commit()
+
+
+@activity.defn
+async def registro_fontes_listar(caderno: str) -> list[str]:
+    with _banco() as c:
+        return [r[0] for r in c.execute("select fonte_id from pqbr.fontes_caderno where caderno_id = %s", (caderno,)).fetchall()]
+
+
+class ContaminacaoCaderno(Exception):
+    pass
+
+
+def fontes_estranhas(lista: dict | list, permitidas: list[str]) -> list[dict]:
+    """Fontes do caderno que NÃO estão registradas para o episódio (puro; testado)."""
+    ok = set(permitidas)
+    return [{"id": f["id"], "title": f.get("title")} for f in _ids(lista) if f["id"] not in ok]
+
+
 # ---------------- fila notebooklm-pqbr: CLI ----------------
+@activity.defn
+async def nlm_conferir_fontes(caderno: str, permitidas: list[str]) -> int:
+    """Antes de gerar: bloqueia se o caderno tiver fonte não registrada para o episódio (contaminação cruzada)."""
+    if caderno in MESTRES_PROIBIDOS: raise RuntimeError("caderno mestre proibido")
+    lst = _json(await asyncio.to_thread(_cli, "source", "list", "-n", caderno, "--json", timeout=120))
+    if isinstance(lst, dict): lst = lst.get("sources", [])
+    estranhas = fontes_estranhas(lst, permitidas)
+    if estranhas: raise ContaminacaoCaderno(f"caderno {caderno} tem {len(estranhas)} fonte(s) fora do registro: {estranhas[:5]}")
+    if not lst: raise ContaminacaoCaderno("caderno sem fontes")
+    return len(lst)
 @activity.defn
 async def nlm_injetar_pacote(caderno: str, fonte_pacote: str, pacote_hash: str) -> str:
     """Adiciona o pacote canônico como fonte (idempotente pelo título com o hash)."""
@@ -219,6 +275,7 @@ class ApagarCadernoWorkflow:
         apos = await workflow.execute_activity(registro_publicado, args=[caderno, codigo, publicado_iso], task_queue=FILA_EPISODIO, **r)
         espera = datetime.fromisoformat(apos) - workflow.now() + timedelta(minutes=workflow.random().randint(5, 90))
         if espera.total_seconds() > 0: await workflow.sleep(espera)
+        await workflow.execute_activity(verificar_arquivo, args=[caderno, {"n": 2}], task_queue=FILA_EPISODIO, **r)
         titulo = await workflow.execute_activity(registro_autorizar_apagar, args=[caderno, codigo], task_queue=FILA_EPISODIO, **r)
         res = await workflow.execute_activity(nlm_apagar_caderno, args=[caderno, codigo, titulo], task_queue=FILA_NOTEBOOKLM,
                                               start_to_close_timeout=timedelta(minutes=5), retry_policy=RetryPolicy(maximum_attempts=2))
@@ -226,6 +283,6 @@ class ApagarCadernoWorkflow:
         return res
 
 
-ATIVIDADES_REGISTRO = [pacote_garantir, registro_buscar_caderno, registro_caderno, arquivar_caderno, registro_publicado,
-                       registro_autorizar_apagar, registro_apagado]
-ATIVIDADES_NLM_CICLO = [nlm_injetar_pacote, nlm_exportar_caderno, nlm_apagar_caderno]
+ATIVIDADES_REGISTRO = [registro_fonte, registro_fontes_listar, pacote_garantir, registro_buscar_caderno, registro_caderno, arquivar_caderno, registro_publicado,
+                       verificar_arquivo, registro_autorizar_apagar, registro_apagado]
+ATIVIDADES_NLM_CICLO = [nlm_conferir_fontes, nlm_injetar_pacote, nlm_exportar_caderno, nlm_apagar_caderno]

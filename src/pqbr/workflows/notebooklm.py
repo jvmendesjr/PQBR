@@ -69,7 +69,8 @@ class SemSaldo(Exception):
     pass
 
 
-_AUTH_ERR = ("authentication expired", "re-authenticate", "notebooklm login")
+_AUTH_ERR = ("authentication expired", "re-authenticate", "notebooklm login",
+             "csrf token not found")   # 12/10: rebrand Gemini Notebook (notebook.google.com) → sessão velha cai aqui; sync do Camofox resolve
 
 
 SYNC_SESSAO = os.environ.get("NOTEBOOKLM_REFRESH_CMD", "/home/pc/.pqbr/camofox/nlm-sync.sh")
@@ -241,8 +242,13 @@ class NotebookLMWorkflow:
                                             task_queue=FILA_REGISTRO, **curto)
         await workflow.execute_activity(nlm_persona, nb, **curto)   # persona antes de tudo (t427)
         if p.pacote_fonte and p.pacote_hash:   # t459: pacote canônico injetado (sem caderno mestre)
-            await workflow.execute_activity("nlm_injetar_pacote", args=[nb, p.pacote_fonte, p.pacote_hash], **curto)
-        await workflow.execute_activity(nlm_fonte, args=[nb, p.slug, p.fonte], **curto)
+            pid = await workflow.execute_activity("nlm_injetar_pacote", args=[nb, p.pacote_fonte, p.pacote_hash], **curto)
+            if p.episodio:
+                await workflow.execute_activity("registro_fonte", args=[nb, pid, "pacote", f"PQBR pacote {p.pacote_hash[:12]}"],
+                                                task_queue=FILA_REGISTRO, **curto)
+        fid = await workflow.execute_activity(nlm_fonte, args=[nb, p.slug, p.fonte], **curto)
+        if p.episodio:   # t459c: toda fonte do episódio registrada por id
+            await workflow.execute_activity("registro_fonte", args=[nb, fid, "roteiro", f"{p.slug}.md"], task_queue=FILA_REGISTRO, **curto)
         if p.tipo != "short" and (p.pesquisa_web or p.perguntas):
             for q in (p.pesquisa_web or []):
                 await workflow.execute_activity(nlm_pesquisa_web, args=[nb, q], start_to_close_timeout=timedelta(minutes=25),
@@ -257,6 +263,13 @@ class NotebookLMWorkflow:
                                                 start_to_close_timeout=timedelta(minutes=12),
                                                 retry_policy=RetryPolicy(maximum_attempts=1))
             return ResultadoNotebookLM(ok=True, tipo=p.tipo, caderno=nb, resposta=r, uso_dia=uso)
+        if p.episodio:   # t459c: sem contaminação cruzada — só pacote + fontes registradas do próprio episódio
+            ok_ids = await workflow.execute_activity("registro_fontes_listar", nb, task_queue=FILA_REGISTRO, **curto)
+            try:
+                await workflow.execute_activity("nlm_conferir_fontes", args=[nb, ok_ids], start_to_close_timeout=timedelta(minutes=5),
+                                                retry_policy=RetryPolicy(maximum_attempts=2, non_retryable_error_types=["ContaminacaoCaderno"]))
+            except Exception as e:
+                return ResultadoNotebookLM(ok=False, tipo=p.tipo, caderno=nb, motivo=f"bloqueado: {e}")
         vids = await workflow.execute_activity(nlm_artefatos_video, nb, **curto)
         art = vids[0]["id"] if vids else await workflow.execute_activity(
             nlm_gerar_short, nb, start_to_close_timeout=timedelta(minutes=6), retry_policy=RetryPolicy(maximum_attempts=1))

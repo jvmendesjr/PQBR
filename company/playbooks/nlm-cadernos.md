@@ -1,5 +1,7 @@
 # Playbook `nlm-cadernos` — ciclo do caderno efêmero (t459, ADR-003)
 
+**REGRA PERMANENTE (José 12/10): arquivar e verificar SEMPRE antes de apagar.** Todo caderno (episódio ou pesquisa) só é apagado depois de exportar tudo (fontes com URL e texto integral, relatórios, respostas do chat, notas, metadados + resumo de achados) para Drive `00_Biblia_Visual/pesquisas` (ou pasta do episódio), repo e `pqbr.arquivo_caderno`, e de conferir as 3 cópias (contagem e bytes; `verificar_arquivo` grava `verificado_em`). Falhou um export → **não apaga** aquele caderno. Indexar no Hindsight.
+
 Regra: sem caderno mestre; um caderno por episódio, casado pelo **id** registrado em `pqbr.cadernos_episodio`.
 
 1. **Caderno registrado sumiu do NotebookLM** (`nlm_caderno` falha "sumiu"): não recriar às cegas. Conferir
@@ -12,3 +14,10 @@ Regra: sem caderno mestre; um caderno por episódio, casado pelo **id** registra
    não apagar por título, não usar id parcial. Mestres (`MESTRES_PROIBIDOS`) nunca.
 5. **Cadernos órfãos/antigos:** gerar a lista classificada (id/título/data) e pedir aprovação ao José. Nada de apagar
    em massa por código.
+6. **`CSRF token not found` / final URL notebook.google.com** (rebrand Gemini Notebook, 12/10): não é página mudada;
+   a cópia da sessão ficou velha. Rodar `~/.pqbr/camofox/nlm-sync.sh` (o `_cli` já faz isso sozinho) e repetir.
+7. **Isolamento entre cadernos de episódio (t459c):** toda atividade de produção usa o **id registrado** do caderno do
+   episódio (nunca título nem "mais recente"); o caderno recebe só o pacote canônico + as fontes do próprio episódio,
+   cada uma registrada por id em `pqbr.fontes_caderno`. Antes de gerar, `nlm_conferir_fontes` compara a lista do
+   NotebookLM com o registro: fonte estranha → **bloqueia** (`ContaminacaoCaderno`, sem retentativa), resultado
+   `bloqueado` e ticket. Não remover a fonte às cegas: investigar a origem (outro episódio? pesquisa?) e registrar.

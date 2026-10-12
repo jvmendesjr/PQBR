@@ -41,3 +41,18 @@ def test_apagar_confere_titulo_no_notebooklm(monkeypatch):
     monkeypatch.setattr(pacote, "_cli", cli)
     with pytest.raises(RuntimeError): asyncio.run(pacote.nlm_apagar_caderno(cad, "PQBR-EP0001", "Short - PQBR-EP0001 - x"))
     assert "delete" not in chamadas
+
+
+def test_fontes_estranhas_detecta_contaminacao():
+    lst = {"sources": [{"id": "a" * 8 + "-0000-0000-0000-" + "0" * 12, "title": "PQBR pacote x"},
+                       {"id": "b" * 8 + "-0000-0000-0000-" + "0" * 12, "title": "outro-episodio.md"}]}
+    est = pacote.fontes_estranhas(lst, ["a" * 8 + "-0000-0000-0000-" + "0" * 12])
+    assert [e["title"] for e in est] == ["outro-episodio.md"]
+    assert pacote.fontes_estranhas(lst, [x["id"] for x in lst["sources"]]) == []
+
+
+def test_conferir_fontes_bloqueia(monkeypatch):
+    out = '{"sources": [{"id": "cccccccc-0000-0000-0000-000000000000", "title": "intrusa.md"}]}'
+    monkeypatch.setattr(pacote, "_cli", lambda *a, **k: out)
+    with pytest.raises(pacote.ContaminacaoCaderno): asyncio.run(pacote.nlm_conferir_fontes("11111111-2222-3333-4444-555555555555", []))
+    assert asyncio.run(pacote.nlm_conferir_fontes("11111111-2222-3333-4444-555555555555", ["cccccccc-0000-0000-0000-000000000000"])) == 1
