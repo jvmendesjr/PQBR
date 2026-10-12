@@ -42,7 +42,8 @@
         "PAPERCLIP_RUN_ID": "{env:PAPERCLIP_RUN_ID}",
         "PQBR_PAPERCLIP_API": "{env:PQBR_PAPERCLIP_API}"
       },
-      "enabled": true
+      "enabled": true,
+      "timeout": 900000
     }
   }
 }

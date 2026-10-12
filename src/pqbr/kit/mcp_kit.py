@@ -7,7 +7,7 @@ from pathlib import Path
 RAIZ = Path("/home/pc/Workspace/PQBR")
 DOCS = RAIZ / "docs"
 PROIBIDO = ("arquivo", "pesquisas")
-UNIDADES = ["pqbr-camofox", "pqbr-camofox-worker", "pqbr-temporal-worker", "paperclipai", "9router"]
+UNIDADES = ["pqbr-camofox", "pqbr-camofox-worker", "pqbr-notebooklm-worker", "pqbr-temporal-worker", "paperclipai", "9router"]
 
 # Lista fechada por papel (AGENTES §2, §6). Leitura de docs e API do Paperclip para todos os papéis com ferramenta.
 COMUM = ["docs_ler", "paperclip_comentar", "paperclip_status", "paperclip_criar_issue"]
@@ -29,7 +29,10 @@ FERR = {
     "temporal_listar": ("Lista execuções recentes de workflows da PQBR (só leitura).", {"consulta": "string"}),
     "saude_servicos": ("Estado dos serviços da PQBR (systemd, só leitura).", {}),
     "camofox_saude": ("Enfileira CamofoxSaudeWorkflow na fila camofox-pqbr e devolve o resultado.", {}),
-    "notebooklm_enfileirar": ("Pede uma geração ao NotebookLM pela fila do Temporal (EM CONSTRUÇÃO: só registra).", {"pedido": "string"}),
+    "notebooklm_enfileirar": ("Pedido ao NotebookLM pela fila notebooklm-pqbr (um por vez, caderno efêmero 'Short - <slug>', "
+                              "contador diário). tipo=pesquisa (espera e devolve a resposta; use pergunta) ou short (devolve o id do "
+                              "workflow; vídeo vertical --format short). fonte = roteiro/briefing (vira a fonte do caderno).",
+                              {"tipo": "string", "slug": "string", "fonte": "string", "pergunta": "string"}),
     "seguranca_varrer": ("Roda a barreira de segredos/PII sobre um texto.", {"texto": "string"}),
 }
 
@@ -68,6 +71,22 @@ def _camofox_saude() -> str:
     return _temporal(f)
 
 
+def _notebooklm(a: dict) -> str:
+    sys.path.insert(0, str(RAIZ / "src"))
+    from pqbr.workflows.notebooklm import NotebookLMWorkflow, PedidoNotebookLM, FILA_NOTEBOOKLM
+    import uuid
+    p = PedidoNotebookLM(tipo=a.get("tipo", "pesquisa"), slug=a["slug"], fonte=a["fonte"], pergunta=a.get("pergunta") or None,
+                         solicitante=os.environ.get("PQBR_KIT_PAPEL", "kit"))
+    wid = f"nlm-{p.tipo}-{p.slug}-{uuid.uuid4().hex[:6]}"
+    async def f(c):
+        if p.tipo == "short":
+            await c.start_workflow(NotebookLMWorkflow.run, p, id=wid, task_queue=FILA_NOTEBOOKLM)
+            return f"enfileirado: {wid} (acompanhe com temporal_listar)"
+        r = await c.execute_workflow(NotebookLMWorkflow.run, p, id=wid, task_queue=FILA_NOTEBOOKLM)
+        return r.model_dump_json()
+    return _temporal(f)
+
+
 def _saude() -> str:
     linhas = []
     for u in UNIDADES:
@@ -97,7 +116,7 @@ def chamar(nome: str, a: dict) -> str:
     if nome == "temporal_listar": return _temporal_listar(a.get("consulta", ""))
     if nome == "saude_servicos": return _saude()
     if nome == "camofox_saude": return _camofox_saude()
-    if nome == "notebooklm_enfileirar": return "EM CONSTRUÇÃO: fila NotebookLM ainda sem workflow de pedido; registrado no comentário."
+    if nome == "notebooklm_enfileirar": return _notebooklm(a)
     if nome == "seguranca_varrer": return _varrer(a["texto"])
     raise KeyError(nome)
 

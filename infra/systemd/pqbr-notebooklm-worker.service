@@ -1,0 +1,15 @@
+[Unit]
+Description=PQBR worker Temporal da fila notebooklm-pqbr (concorrência 1, um pedido por vez)
+After=network-online.target
+StartLimitIntervalSec=0
+[Service]
+WorkingDirectory=/home/pc/Workspace/PQBR
+Environment=PYTHONPATH=/home/pc/Workspace/PQBR/src
+Environment=PYTHONUNBUFFERED=1
+Environment=PQBR_NOTEBOOKLM_HOME=/home/pc/.pqbr/notebooklm
+ExecStart=/home/pc/Workspace/PQBR/.venv/bin/python -m pqbr.workflows.worker_notebooklm
+Restart=always
+RestartSec=10
+MemoryMax=300M
+[Install]
+WantedBy=default.target
