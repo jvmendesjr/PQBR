@@ -1,28 +1,26 @@
 #!/bin/sh
-# PQBR 24/7 keepalive (t395/F4C-04, F4-05). Credentials come from the unit EnvironmentFile.
-# Keeps one Studio tab open, touches tabs every 60s, checkpoints storage every 5 min,
-# (empty cookie import = persistence-plugin checkpoint; the storage_state export route only exists with VNC on),
-# NotebookLM tem sessão própria (reauth nativa do notebooklm-py, t-nlm2): NÃO copiar para o perfil dele.
+# PQBR 24/7 keepalive (t395/F4C-04; José 12/10: Camofox é a única fonte e o ÚNICO renovador da sessão Google).
+# Mantém a aba do Studio, toca as abas a cada 60s, checkpoint a cada 5 min; a cada 15 min abre uma página
+# Google (NotebookLM) para o Google rotacionar os cookies, salva (checkpoint) e fecha a aba.
+# O NotebookLM só lê via NOTEBOOKLM_REFRESH_CMD (nlm-sync.sh). Nunca imprime valores.
 B=http://127.0.0.1:9387
 SRC_DIR="$HOME/.pqbr/camofox/profiles"
-DST="$HOME/.pqbr/notebooklm/profiles/pqbr/storage_state.json"
+LOG="$HOME/.pqbr/logs/camofox-keepalive.log"
+mkdir -p "$(dirname "$LOG")"
 umask 077
-api() { curl -s -H "Authorization: Bearer ${CAMOFOX_API_KEY}" "$@"; }
-sync_state() {
-  for f in "$SRC_DIR"/*/storage-state.json; do
-    [ -s "$f" ] || continue
-    chmod 600 "$f"
-    python3 -c "import json,sys;json.load(open(sys.argv[1]))" "$f" || continue
-    mkdir -p "$(dirname "$DST")"
-    cp "$f" "$DST.tmp" && chmod 600 "$DST.tmp" && mv -f "$DST.tmp" "$DST"
-  done
-}
+api() { curl -s -m 30 -H "Authorization: Bearer ${CAMOFOX_API_KEY}" "$@"; }
+checkpoint() { api -o /dev/null -X POST -H "Content-Type: application/json" -d '{"cookies":[]}' "$B/sessions/pqbr/cookies" && sleep 2 && for f in "$SRC_DIR"/*/storage-state.json; do [ -s "$f" ] && chmod 600 "$f"; done; }
 n=0
 while true; do
   T=$(api "$B/tabs?userId=pqbr" | python3 -c "import sys,json;[print(x.get(\"tabId\")) for x in json.load(sys.stdin).get(\"tabs\",[])]" 2>/dev/null)
-  [ -z "$T" ] && api -o /dev/null -X POST -H "Content-Type: application/json" -d "{\"userId\":\"pqbr\",\"sessionKey\":\"sessao\",\"url\":\"https://studio.youtube.com/\"}" "$B/tabs"
+  [ -z "$T" ] && api -o /dev/null -X POST -H "Content-Type: application/json" -d '{"userId":"pqbr","sessionKey":"sessao","url":"https://studio.youtube.com/"}' "$B/tabs"
   for t in $T; do api -o /dev/null "$B/tabs/$t/stats?userId=pqbr"; done
   n=$((n+1))
-  if [ $((n%5)) -eq 0 ]; then api -o /dev/null -X POST -H "Content-Type: application/json" -d "{\"cookies\":[]}" "$B/sessions/pqbr/cookies" && sleep 2 && for f in "$SRC_DIR"/*/storage-state.json; do [ -s "$f" ] && chmod 600 "$f"; done; fi
+  if [ $((n%15)) -eq 0 ]; then
+    K=$(api -X POST -H "Content-Type: application/json" -d '{"userId":"pqbr","sessionKey":"keepalive","url":"https://notebooklm.google.com/"}' "$B/tabs" | python3 -c "import sys,json;print(json.load(sys.stdin).get(\"tabId\",\"\"))" 2>/dev/null)
+    sleep 20; checkpoint
+    [ -n "$K" ] && api -o /dev/null -X DELETE "$B/tabs/$K?userId=pqbr"
+    echo "$(date -Is) renovação Google + checkpoint (aba ${K:-falhou})" >> "$LOG"
+  elif [ $((n%5)) -eq 0 ]; then checkpoint; fi
   sleep 60
 done
