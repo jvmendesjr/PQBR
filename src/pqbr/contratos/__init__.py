@@ -389,7 +389,7 @@ class PacoteSEO(Contrato):
     hashtags: list[str] = Field(min_length=3, max_length=15)
     categoria_id: str = Field(default="27", pattern=r"^[0-9]{1,3}$")   # 27 = Educação (PROPOSTA)
     idioma: Literal["pt-BR"] = "pt-BR"
-    contem_midia_sintetica: bool = True     # status.containsSyntheticMedia; vídeo do NotebookLM = IA
+    contem_midia_sintetica: bool = False    # status.containsSyntheticMedia; 2D não realista não exige o rótulo (decisão anterior)
 
     @field_validator("hashtags")
     @classmethod

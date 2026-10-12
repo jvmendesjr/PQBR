@@ -153,7 +153,7 @@ class ContratosT437(unittest.TestCase):
         from pqbr.contratos import PacoteSEO
         p = PacoteSEO(titulo="Por que a gente fala podre de rico?", descricao="A origem da expressão. #curiosidades",
                       tags=["expressões brasileiras", "curiosidades"], hashtags=["#shorts", "#curiosidades", "#brasil"])
-        assert p.snippet_status()["status"]["containsSyntheticMedia"] is True and p.idioma == "pt-BR"
+        assert p.snippet_status()["status"]["containsSyntheticMedia"] is False and p.idioma == "pt-BR"
         with self.assertRaises(ValidationError):
             PacoteSEO(titulo="Título ok aqui", descricao="descrição ok", hashtags=["shorts", "#a1", "#b2"])
         with self.assertRaises(ValidationError):
