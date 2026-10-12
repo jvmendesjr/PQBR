@@ -7,6 +7,11 @@
 |---|---|---|
 | 12/10/2026 | Criação. Camofox = única fonte e único renovador; notebooklm-py só lê via `NOTEBOOKLM_REFRESH_CMD`; Chromium e cópia do Chrome aposentados. | `0206a36` |
 | 12/10/2026 | Regra de comportamento humano (helpers `camofox_humano`, keepalive com jitter). | `c8a3335` |
+| 12/10/2026 | Rebrand Gemini Notebook (`notebook.google.com`): `CSRF token not found` = cópia velha da sessão → `nlm-sync.sh` resolve (o `_cli` faz sozinho). | `d88de95` |
+| 12/10/2026 13:27 | **Logout da sessão global (aprovado pelo José):** crons `keepalive-session-guardian.py` (yt-llm-bot; importava cookies no userId `porquebr` do Camofox global :9377 a cada 15 min) e `notebooklm auth refresh` (~/.notebooklm) **comentados** (backup `~/Backups/crontab-20261012-1327.bak`). Movidos para `~/Backups` (600/700): storage do `porquebr` da 9377, `~/.notebooklm/profiles/default/storage_state.json`, `~/.mp32/notebooklm/profiles/juniormoedavirtual/storage_state.json` e perfil Chrome `PorqueBR`. Nenhum logout no Google; PQBR (9387) intacta. | (este commit) |
+
+## 0. Consumidores proibidos (12/10)
+A conta juniormoedavirtual só existe na PQBR (Camofox 9387 `userId=pqbr` + notebooklm-py PQBR). Desligados/arquivados: Camofox global :9377 `porquebr`, `~/.notebooklm` global, MP32 `juniormoedavirtual`, Chrome do servidor perfil `PorqueBR`, cron `keepalive-session-guardian.py`. Reativar exige OK do José. Skills do `rede` que usavam `porquebr` na 9377 ficam sem sessão; caminho = fila `camofox-pqbr`.
 
 ## 1. Problema
 - Conta Google de produção (`juniormoedavirtual`) usada por **YouTube Studio, NotebookLM e Gemini Web**.
