@@ -279,3 +279,7 @@ Quer que eu aplique essa estrutura atualizada na criação de um roteiro de test
 - https://core.ac.uk/download/588677290.pdf | https://core.ac.uk/download/588677290.pdf
 - https://m.youtube.com/@ilustradamente.oficial/videos?view=0&sort=dd&shelf_id=4 | https://m.youtube.com/@ilustradamente.oficial/videos?view=0&sort=dd&shelf_id=4
 - https://www.proceedings.blucher.com.br/download-pdf/animao-2d-como-recurso-de-apoio-didtico-para-o-ensino-de-desenho-tcnico-38058 | https://www.proceedings.blucher.com.br/download-pdf/animao-2d-como-recurso-de-apoio-didtico-para-o-ensino-de-desenho-tcnico-38058
+
+
+## Superado (12/10/2026)
+Uma rotina periódica gerou no caderno "PQBR - pesquisa bloco visual 2D" um bloco divergente (fundo creme, cortes de 3–5 s). **Superado, não adotar:** vale o §16.7 aprovado pelo José (personagem quente sobre fundo limpo frio/neutro, 3–5 objetos, cortes de 2–4 s, imagem absurda no 1º segundo).

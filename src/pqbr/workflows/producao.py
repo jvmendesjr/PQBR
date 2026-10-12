@@ -76,7 +76,7 @@ async def gravar_grade(g: GradeDiaria) -> int:
 async def gerar_roteiro_nb(p: PedidoEpisodio) -> RoteiroShort:
     _sim(p.simulacao, "NotebookLM (conta de produção)")
     falas = [f"{p.item.tema}"] + ["E a explicação é mais lógica do que parece, e a gente nem percebe no dia a dia."] * 6 + [CTA]
-    bloco = BlocoVisual(estilo="Ilustração 2D plana de cartum, traço preto, cores chapadas (simulado)",
+    bloco = BlocoVisual(estilo=ESTILO_PADRAO_2D,
                         personagem="adulto de uns 35 anos, camiseta verde, bigode (simulado)",
                         cenas=[CenaVisual(fala=f, acao="personagem reage", enquadramento="plano médio",
                                           ambiente="cozinha brasileira") for f in falas[:2]])

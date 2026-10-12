@@ -29,8 +29,12 @@ class CenaVisual(Contrato):
     ambiente: str = Field(min_length=3, max_length=400)       # lugar, época, 3–5 objetos-âncora, luz/horário
 
 
+# CONTRATO-EDITORIAL §16.7 [ESTILO], aprovado pelo José em 12/10/2026 (padrão de todo RoteiroShort)
+ESTILO_PADRAO_2D = 'Ilustração 2D plana de cartum, como animação de TV brasileira: traço preto nítido e uniforme, personagem em cores chapadas quentes (amarelo-mostarda, verde-bandeira, terracota) com alto contraste sobre fundo limpo em tom frio ou neutro (azul-céu, bege claro), sem degradê nem sombra realista, fundo minimalista com no máximo 3–5 objetos, humor carinhoso. Personagem sempre grande no quadro (ocupa ≥ 1/3 da altura), centralizado, agindo, com expressões faciais e corporais exageradas. Proibido: fotorrealismo, 3D, rosto de pessoa real ou celebridade, marca ou logo real, texto escrito dentro das imagens (a legenda do NotebookLM não conta). Formato vertical 9:16, deixar livres a faixa de cima e a de baixo da tela.'
+
+
 class BlocoVisual(Contrato):
-    estilo: str = Field(min_length=20, max_length=600)        # [ESTILO] 2D + meio/tom/paleta/referência
+    estilo: str = Field(default=ESTILO_PADRAO_2D, min_length=20, max_length=900)        # [ESTILO] 2D + meio/tom/paleta/referência
     personagem: str = Field(min_length=20, max_length=600)    # [PERSONAGEM] repetido palavra por palavra; sem nome
     personagem_2: str | None = Field(default=None, max_length=600)   # máx. 2 (§11.1)
     cenas: list[CenaVisual] = Field(min_length=2, max_length=60)     # [CENAS] ~2–4 s; cena 1 literal; última retoma a 1ª

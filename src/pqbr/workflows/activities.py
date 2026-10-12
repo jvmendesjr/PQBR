@@ -28,7 +28,7 @@ async def gerar_roteiro(inp: EpisodioInput) -> RoteiroShort:
     falas = [f"Por que {inp.tema}?",
              "A explicação é mais lógica do que parece, e a gente repete isso todo santo dia sem perceber.",
              "No fim, é só mais uma mania nossa que tem história, e a história é boa demais.", CTA]
-    bloco = BlocoVisual(estilo="Ilustração 2D plana de cartum, traço preto, cores chapadas (demonstração)",
+    bloco = BlocoVisual(estilo=ESTILO_PADRAO_2D,
                         personagem="adulto de uns 35 anos, camiseta verde, bigode (demonstração)",
                         cenas=[CenaVisual(fala=f, acao="personagem reage", enquadramento="plano médio",
                                           ambiente="sala brasileira") for f in falas[:2]])
