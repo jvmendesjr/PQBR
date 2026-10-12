@@ -24,7 +24,7 @@ async def gerar_roteiro(inp: EpisodioInput) -> RoteiroShort:
     tentativa = activity.info().attempt
     if tentativa <= inp.falhas_simuladas:
         raise ApplicationError(f"falha simulada (tentativa {tentativa})")
-    from ..contratos import CTA, BlocoVisual, CenaVisual
+    from ..contratos import CTA, BlocoVisual, CenaVisual, ESTILO_PADRAO_2D
     falas = [f"Por que {inp.tema}?",
              "A explicação é mais lógica do que parece, e a gente repete isso todo santo dia sem perceber.",
              "No fim, é só mais uma mania nossa que tem história, e a história é boa demais.", CTA]

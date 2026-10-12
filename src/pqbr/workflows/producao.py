@@ -13,7 +13,7 @@ from temporalio.common import RetryPolicy
 from temporalio.exceptions import ApplicationError
 
 with workflow.unsafe.imports_passed_through():
-    from ..contratos import GradeDiaria, ItemGrade, VereditoAuditor, RoteiroShort, CTA, BlocoVisual, CenaVisual, PUBLICAVEL, VereditoTipo
+    from ..contratos import GradeDiaria, ItemGrade, VereditoAuditor, RoteiroShort, CTA, BlocoVisual, CenaVisual, ESTILO_PADRAO_2D, PUBLICAVEL, VereditoTipo
     from ..pipeline.grade import Candidato, montar_grade
 
 FUSO = timezone(timedelta(hours=-3))
