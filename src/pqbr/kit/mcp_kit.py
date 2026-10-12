@@ -16,7 +16,7 @@ PAPEIS = {
     "pesquisador-origem": COMUM + ["notebooklm_enfileirar"],
     "diretor-arte-2d": COMUM + ["notebooklm_enfileirar"],
     "observador": COMUM + ["temporal_listar", "saude_servicos", "camofox_saude"],
-    "guardiao-seguranca": COMUM + ["temporal_listar", "saude_servicos", "seguranca_varrer"],
+    "guardiao-seguranca": COMUM + ["temporal_listar", "saude_servicos", "seguranca_varrer", "seguranca_varrer_logs"],
     "dev-corretor": COMUM + ["temporal_listar"],
     "dev-revisor": COMUM + ["temporal_listar"],
 }
@@ -33,6 +33,7 @@ FERR = {
                               "contador diário). tipo=pesquisa (espera e devolve a resposta; use pergunta) ou short (devolve o id do "
                               "workflow; vídeo vertical --format short). fonte = roteiro/briefing (vira a fonte do caderno).",
                               {"tipo": "string", "slug": "string", "fonte": "string", "pergunta": "string"}),
+    "seguranca_varrer_logs": ("Varre os run-logs da PQBR das últimas N horas (padrão 24) com o detector de segredos; devolve só contagens por arquivo, nunca o valor.", {"horas": "number"}),
     "seguranca_varrer": ("Roda a barreira de segredos/PII sobre um texto.", {"texto": "string"}),
 }
 
@@ -95,6 +96,28 @@ def _saude() -> str:
     return "\n".join(linhas)
 
 
+def _varrer_logs(horas: float = 24) -> str:
+    import time, re
+    sys.path.insert(0, str(RAIZ / "src"))
+    from pqbr.seguranca import segredos
+    co = os.environ.get("PQBR_COMPANY_ID", "be3980d6-51ae-4cee-b85f-923b4568188c")
+    base = Path.home() / ".paperclip/instances/default/data/run-logs" / co
+    if not base.is_dir():
+        base = Path("/home/pc/.paperclip/instances/default/data/run-logs") / co
+    lim = time.time() - float(horas) * 3600
+    achados, n = [], 0
+    extra = [("paperclip_key_env", re.compile("PAPERCLIP_API_" + "KEY" + r"=(?!\*\*\*REDACTED)(?!via-relay)[^\s\\\"]{12,}")),
+             ("ninerouter_key_env", re.compile("NINEROUTER_API_" + "KEY" + r"=(?!\*\*\*REDACTED)(?!via-relay)[^\s\\\"]{12,}")),
+             ("jwt", re.compile(r"eyJ[A-Za-z0-9_-]{10,}\.[A-Za-z0-9_-]{10,}\.[A-Za-z0-9_-]{10,}"))]
+    for f in base.glob("*/*.ndjson"):
+        if f.stat().st_mtime < lim: continue
+        n += 1; t = f.read_text(errors="ignore")
+        c = {nome: len(rx.findall(t)) for nome, rx in list(segredos.REGRAS) + extra if rx.findall(t)} if hasattr(segredos, "REGRAS") else \
+            {nome: len(rx.findall(t)) for nome, rx in extra if rx.findall(t)}
+        if c: achados.append(f"{f.parent.name}/{f.name}: {c}")
+    return f"{n} logs varridos ({horas} h); " + ("ACHADOS:\n" + "\n".join(achados) if achados else "nada encontrado")
+
+
 def _varrer(texto: str) -> str:
     sys.path.insert(0, str(RAIZ / "src"))
     from pqbr.seguranca.barreira import exigir_limpo
@@ -118,6 +141,7 @@ def chamar(nome: str, a: dict) -> str:
     if nome == "camofox_saude": return _camofox_saude()
     if nome == "notebooklm_enfileirar": return _notebooklm(a)
     if nome == "seguranca_varrer": return _varrer(a["texto"])
+    if nome == "seguranca_varrer_logs": return _varrer_logs(a.get("horas", 24) or 24)
     raise KeyError(nome)
 
 

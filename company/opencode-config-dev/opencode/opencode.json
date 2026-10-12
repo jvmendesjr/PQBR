@@ -20,11 +20,28 @@
   },
   "small_model": "9router/core-baixo",
   "permission": {
-    "bash": "allow",
     "edit": "allow",
+    "read": "allow",
     "webfetch": "deny",
     "external_directory": "deny",
-    "read": "allow"
+    "bash": {
+      "*": "allow",
+      "env": "deny",
+      "env *": "deny",
+      "printenv*": "deny",
+      "set": "deny",
+      "export": "deny",
+      "declare*": "deny",
+      "cat /proc/*": "deny",
+      "*/proc/*/environ*": "deny",
+      "*.paperclip*": "deny",
+      "*dev-secrets*": "deny",
+      "*context.json*": "deny",
+      "find /*": "deny",
+      "sudo *": "deny",
+      "curl *": "deny",
+      "wget *": "deny"
+    }
   },
   "share": "disabled",
   "autoupdate": false,
@@ -46,6 +63,11 @@
       },
       "enabled": true,
       "timeout": 900000
+    }
+  },
+  "agent": {
+    "build": {
+      "steps": 25
     }
   }
 }
