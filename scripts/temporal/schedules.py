@@ -10,6 +10,7 @@ from pqbr.workflows.worker import client, FILA
 FUSO = "America/Fortaleza"
 AGENDA = [  # id, workflow, hora, minuto, pausado, nota
     ("pqbr-retencao-consumo", "RetencaoConsumoWorkflow", 4, 15, False, "F3-07 t369: bruto 90 d, resumo 25 meses"),
+    ("pqbr-reposicao-temas", "ReposicaoTemasWorkflow", 0, 30, False, "t465 José 14:00: 7 dias de temas abertos (Líder Editorial)"),
     ("pqbr-grade-diaria", "GradeDiariaWorkflow", 1, 0, True, "F5-02 PAUSADO: coleta real EM CONSTRUÇÃO; liberar = G5"),
     ("pqbr-lote-producao", "EpisodioProducaoWorkflow", 5, 0, True, "F5-02 PAUSADO: sem NotebookLM/publicação reais; liberar = G5"),
 ]

@@ -31,8 +31,11 @@ class PedidoEpisodioE2E(BaseModel):
     codigo: str = Field(pattern=CODIGO.pattern)
     roteiro_texto: str = Field(min_length=50)          # roteiro completo com o bloco visual (vira a fonte do caderno)
     n_cenas: int = Field(ge=2, le=60)
-    titulo: str = Field(min_length=5, max_length=100)
-    descricao: str = Field(min_length=10, max_length=5000)
+    titulo: str | None = Field(default=None, min_length=5, max_length=100)        # t464: None → SEO do NotebookLM
+    descricao: str | None = Field(default=None, min_length=10, max_length=5000)
+    roteirizar: bool = False          # t464: roteiro_texto = briefing do tema; NotebookLM escreve roteiro/SEO/capa
+    tema: str | None = Field(default=None, max_length=300)
+    tema_id: int | None = None        # pqbr.temas_pendentes.id (vira temas_publicados na publicação; reposição automática)
     tags: list[str] = Field(default_factory=list, max_length=15)
     dry_run: bool = True                               # t426: teste nº 1 para antes do upload
     steering: str | None = Field(default=None, max_length=4000)   # t462: bloco visual 2D do roteiro (reforços entram no nlm)
@@ -126,11 +129,16 @@ class PublicacaoWorkflow:
 @workflow.defn
 class EpisodioWorkflow:
     def __init__(self) -> None:
+        self._criativo: dict = {}
         self._veredito: VereditoAuditor | None = None
 
     @workflow.signal
     def veredito_auditor(self, v: VereditoAuditor) -> None:
         self._veredito = v
+
+    @workflow.query
+    def criativo(self) -> dict:
+        return {k: v for k, v in self._criativo.items() if k != "markdown"}
 
     @workflow.query
     def estado(self) -> str:
@@ -145,7 +153,8 @@ class EpisodioWorkflow:
         nlm = await workflow.execute_child_workflow(
             NotebookLMWorkflow.run, PedidoNotebookLM(tipo="short", slug=p.slug, fonte=p.roteiro_texto, solicitante="episodio",
                                                      episodio=p.codigo, caderno_registrado=reg,
-                                                     pacote_fonte=pac["fonte"], pacote_hash=pac["hash"], steering=p.steering),
+                                                     pacote_fonte=pac["fonte"], pacote_hash=pac["hash"], steering=p.steering,
+                                                     roteirizar=p.roteirizar, tema=p.tema),
             id=f"nlm-short-{p.slug}-{workflow.info().workflow_id[-6:]}", task_queue=FILA_NOTEBOOKLM)
         if not nlm.ok or not nlm.artefato:
             return ResultadoEpisodioE2E(etapa="geracao", ok=False, detalhes=nlm.model_dump())
@@ -154,6 +163,10 @@ class EpisodioWorkflow:
         pos = await workflow.execute_activity(pos_produzir, args=[raw["arquivo"], f"{base}/final.mp4"], **curto)
         quadros = await workflow.execute_activity(extrair_quadros, args=[f"{base}/final.mp4", p.n_cenas, f"{base}/pranchas"], **curto)
         capa = await workflow.execute_activity(capa_a9, quadros, **curto)
+        capa_nlm = (nlm.criativo.get("capa") or {}).get("arquivo")
+        if capa_nlm:   # t464: capa = infográfico retrato do NotebookLM; A9 fica como reserva
+            capa = {**capa, "escolhido": capa_nlm, "origem": "notebooklm-infografico", "a9": capa.get("escolhido")}
+        self._criativo = nlm.criativo
         try:
             await workflow.wait_condition(lambda: self._veredito is not None, timeout=timedelta(hours=p.espera_veredito_h))
         except asyncio.TimeoutError:
@@ -162,16 +175,24 @@ class EpisodioWorkflow:
             return ResultadoEpisodioE2E(etapa="auditor", ok=False, detalhes=self._veredito.model_dump())
         exp = await workflow.execute_activity(nlm_exportar_caderno, args=[nlm.caderno, p.codigo], task_queue=FILA_NOTEBOOKLM, **curto)
         arq = await workflow.execute_activity(arquivar_caderno, args=[nlm.caderno, p.codigo, p.slug, exp, raw["arquivo"]], **curto)
+        seo = nlm.criativo.get("seo") or {}
         drv = await workflow.execute_activity(drive_enviar, args=[p.codigo, p.slug, [raw["arquivo"], f"{base}/final.mp4"]], **curto)
         pub = await workflow.execute_child_workflow(PublicacaoWorkflow.run, {
-            "codigo": p.codigo, "titulo": p.titulo, "descricao": p.descricao, "tags": p.tags, "dry_run": p.dry_run,
+            "codigo": p.codigo, "titulo": seo.get("titulo") or p.titulo, "descricao": seo.get("descricao") or p.descricao,
+            "tags": (seo.get("tags") or p.tags)[:15], "dry_run": p.dry_run,
             "video": f"{base}/final.mp4", "capa": capa.get("escolhido")}, id=f"pub-{p.codigo}-{workflow.info().workflow_id[-6:]}")
+        if not p.dry_run and pub.get("enviado") and p.tema_id:   # t465: tema usado → temas_publicados + reposição automática
+            await workflow.execute_activity("tema_publicado", args=[p.tema_id, p.codigo, pub.get("video_id"), "private"],
+                                            task_queue="pqbr-episodio", **curto)
+            await workflow.start_child_workflow("ReposicaoTemasWorkflow", 6, id=f"repor-temas-{p.codigo}", task_queue="pqbr-episodio",
+                                                parent_close_policy=ParentClosePolicy.ABANDON)
         if not p.dry_run and pub.get("enviado"):   # t459: só publicação real agenda o apagamento D+2
             await workflow.start_child_workflow(ApagarCadernoWorkflow.run, args=[nlm.caderno, p.codigo, workflow.now().isoformat()],
                                                 id=f"apagar-caderno-{p.codigo}", parent_close_policy=ParentClosePolicy.ABANDON)
         return ResultadoEpisodioE2E(etapa="publicacao_dryrun", ok=True,
-                                    detalhes={"arquivo_caderno": arq, "pos": pos, "capa": capa.get("escolhido"), "drive": drv, "publicacao": pub,
+                                    detalhes={"criativo": {k: v for k, v in nlm.criativo.items() if k != "markdown"}, "arquivo_caderno": arq, "pos": pos, "capa": capa.get("escolhido"), "drive": drv, "publicacao": pub,
                                               "auditor": self._veredito.model_dump()})
 
 
-ATIVIDADES_EPISODIO = [pos_produzir, extrair_quadros, capa_a9, drive_enviar, publicacao_dryrun, *ATIVIDADES_REGISTRO]
+from .criativo import validar_roteiro, validar_seo, seo_9router, compliance_roteiro
+ATIVIDADES_EPISODIO = [validar_roteiro, validar_seo, seo_9router, compliance_roteiro, pos_produzir, extrair_quadros, capa_a9, drive_enviar, publicacao_dryrun, *ATIVIDADES_REGISTRO]

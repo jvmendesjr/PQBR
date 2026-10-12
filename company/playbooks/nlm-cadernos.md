@@ -21,3 +21,7 @@ Regra: sem caderno mestre; um caderno por episódio, casado pelo **id** registra
    cada uma registrada por id em `pqbr.fontes_caderno`. Antes de gerar, `nlm_conferir_fontes` compara a lista do
    NotebookLM com o registro: fonte estranha → **bloqueia** (`ContaminacaoCaderno`, sem retentativa), resultado
    `bloqueado` e ticket. Não remover a fonte às cegas: investigar a origem (outro episódio? pesquisa?) e registrar.
+
+## NotebookLM-first (t464, José 14:00)
+No caderno do episódio: persona → pacote → briefing do tema → `add-research` fast (fontes importadas registradas como `pesquisa`) → `ask` do roteiro (JSON validado em `RoteiroShort`, 2 tentativas) → Compliance/Guardião (9router, combo do papel) → roteiro como fonte registrada → checagem anti-contaminação → Short com steering do bloco 2D → `ask` SEO (`PacoteSEO`; reserva 9router `especialista-seo`) → capa `generate infographic --orientation portrait` (reserva: A9 num quadro).
+

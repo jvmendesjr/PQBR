@@ -13,6 +13,8 @@ from temporalio.common import RetryPolicy
 
 FILA_NOTEBOOKLM = "notebooklm-pqbr"
 HOME = Path(os.environ.get("PQBR_NOTEBOOKLM_HOME", "/home/pc/.pqbr/notebooklm"))
+TRAB_NLM = os.environ.get("PQBR_TRABALHO", "/home/pc/.pqbr/episodios")   # t464: capa do NotebookLM no mesmo diretório do episódio
+from .criativo import PROMPT_ROTEIRO, PROMPT_SEO, PROMPT_CAPA
 CLI = str(HOME / "venv/bin/notebooklm")
 PERFIL = "pqbr"
 PERSONA = Path(os.environ.get("PQBR_NLM_PERSONA", "/home/pc/Workspace/PQBR/templates/notebooklm/persona-pqbr.txt"))
@@ -52,6 +54,8 @@ class PedidoNotebookLM(BaseModel):
     pacote_fonte: str | None = None                                      # arquivo do pacote canônico (workflows/pacote.py)
     pacote_hash: str | None = Field(default=None, pattern=r"^[0-9a-f]{64}$")
     steering: str | None = Field(default=None, max_length=4000)          # t462: direcionamento do Short (bloco 2D + reforços)
+    roteirizar: bool = False          # t464: o NotebookLM escreve roteiro/SEO/capa no caderno; `fonte` = briefing do tema
+    tema: str | None = Field(default=None, max_length=300)
 
 
 class ResultadoNotebookLM(BaseModel):
@@ -64,6 +68,7 @@ class ResultadoNotebookLM(BaseModel):
     estado_artefato: str | None = None
     motivo: str | None = None
     uso_dia: UsoDia = Field(default_factory=UsoDia)
+    criativo: dict = Field(default_factory=dict)   # t464: roteiro, compliance, seo, capa (com a origem de cada um)
 
 
 class SemSaldo(Exception):
@@ -275,6 +280,11 @@ class NotebookLMWorkflow:
                                                 start_to_close_timeout=timedelta(minutes=12),
                                                 retry_policy=RetryPolicy(maximum_attempts=1))
             return ResultadoNotebookLM(ok=True, tipo=p.tipo, caderno=nb, resposta=r, uso_dia=uso)
+        cri: dict = {}
+        if p.roteirizar:   # t464: NotebookLM escreve o roteiro no caderno; modelos só validam
+            r = await self._roteirizar(p, nb, curto)
+            if isinstance(r, ResultadoNotebookLM): return r
+            cri = r
         if p.episodio:   # t459c: sem contaminação cruzada — só pacote + fontes registradas do próprio episódio
             ok_ids = await workflow.execute_activity("registro_fontes_listar", nb, task_queue=FILA_REGISTRO, **curto)
             try:
@@ -284,15 +294,85 @@ class NotebookLMWorkflow:
                 return ResultadoNotebookLM(ok=False, tipo=p.tipo, caderno=nb, motivo=f"bloqueado: {e}")
         vids = await workflow.execute_activity(nlm_artefatos_video, nb, **curto)
         art = vids[0]["id"] if vids else await workflow.execute_activity(
-            nlm_gerar_short, args=[nb, p.steering or ""], start_to_close_timeout=timedelta(minutes=6), retry_policy=RetryPolicy(maximum_attempts=1))
+            nlm_gerar_short, args=[nb, cri.get("steering") or p.steering or ""], start_to_close_timeout=timedelta(minutes=6), retry_policy=RetryPolicy(maximum_attempts=1))
         estado = ""
         for _ in range(60):   # até ~60 min
             vids = await workflow.execute_activity(nlm_artefatos_video, nb, **curto)
             estado = next((v["status"] for v in vids if v["id"] == art), estado)
             if re.search(r"complet|fail|error", estado, re.I): break
             await workflow.sleep(60)
-        return ResultadoNotebookLM(ok=bool(re.search("complet", estado, re.I)), tipo=p.tipo, caderno=nb, artefato=art,
-                                   estado_artefato=estado, uso_dia=uso)
+        ok = bool(re.search("complet", estado, re.I))
+        if ok and p.roteirizar:
+            cri["seo"] = await self._seo(nb, cri, curto)
+            try:
+                cri["capa"] = await workflow.execute_activity(nlm_gerar_capa, args=[nb, f"{TRAB_NLM}/{p.slug}/capa_nlm.png", PROMPT_CAPA],
+                                                              start_to_close_timeout=timedelta(minutes=20), retry_policy=RetryPolicy(maximum_attempts=1))
+            except Exception as e:  # noqa: BLE001
+                cri["capa"] = {"falhou": str(e)[:300]}
+        return ResultadoNotebookLM(ok=ok, tipo=p.tipo, caderno=nb, artefato=art, estado_artefato=estado, uso_dia=uso, criativo=cri)
+
+    async def _registrar_novas(self, nb: str, tipo: str, curto: dict) -> None:
+        ja = set(await workflow.execute_activity("registro_fontes_listar", nb, task_queue=FILA_REGISTRO, **curto))
+        for fid in await workflow.execute_activity(nlm_fontes_ids, nb, **curto):
+            if fid not in ja:
+                await workflow.execute_activity("registro_fonte", args=[nb, fid, tipo, None], task_queue=FILA_REGISTRO, **curto)
+
+    async def _roteirizar(self, p: "PedidoNotebookLM", nb: str, curto: dict):
+        uma = dict(start_to_close_timeout=timedelta(minutes=25), retry_policy=RetryPolicy(maximum_attempts=1))
+        try:   # pesquisa web do tema dentro do caderno; as fontes importadas viram fontes registradas do episódio
+            await workflow.execute_activity(nlm_pesquisa_web, args=[nb, f"origem e explicação: {p.tema}"], **uma)
+            if p.episodio: await self._registrar_novas(nb, "pesquisa", curto)
+        except Exception as e:  # noqa: BLE001
+            workflow.logger.warning(f"pesquisa web falhou: {e}")
+        erro, val = "", None
+        for _ in range(2):
+            txt = await workflow.execute_activity(nlm_perguntar, args=[nb, PROMPT_ROTEIRO.format(tema=p.tema, slug=p.slug) +
+                                                  (f" A resposta anterior foi inválida: {erro}. Corrija." if erro else "")], **uma)
+            try:
+                val = await workflow.execute_activity("validar_roteiro", args=[txt, p.slug], task_queue=FILA_REGISTRO, **uma); break
+            except Exception as e:  # noqa: BLE001
+                erro = str(getattr(e, "cause", e))[:300]
+        if not val:
+            return ResultadoNotebookLM(ok=False, tipo=p.tipo, caderno=nb, motivo=f"roteiro do NotebookLM inválido: {erro}")
+        comp = await workflow.execute_activity("compliance_roteiro", val["markdown"], task_queue=FILA_REGISTRO, **curto)
+        if comp.get("aprovado") is not True:
+            return ResultadoNotebookLM(ok=False, tipo=p.tipo, caderno=nb, motivo="compliance não aprovou",
+                                       criativo={"roteiro": val, "compliance": comp})
+        fid = await workflow.execute_activity(nlm_fonte, args=[nb, f"{p.slug}-roteiro", val["markdown"]], **curto)
+        if p.episodio:
+            await workflow.execute_activity("registro_fonte", args=[nb, fid, "roteiro", f"{p.slug}-roteiro.md"], task_queue=FILA_REGISTRO, **curto)
+        return {"roteiro": val["roteiro"], "fontes": val["fontes"], "markdown": val["markdown"], "steering": val["steering"],
+                "compliance": comp, "origem_roteiro": "notebooklm"}
+
+    async def _seo(self, nb: str, cri: dict, curto: dict) -> dict:
+        uma = dict(start_to_close_timeout=timedelta(minutes=12), retry_policy=RetryPolicy(maximum_attempts=1))
+        erro = ""
+        for _ in range(2):
+            try:
+                txt = await workflow.execute_activity(nlm_perguntar, args=[nb, PROMPT_SEO + (f" Corrija: {erro}" if erro else "")], **uma)
+                return (await workflow.execute_activity("validar_seo", txt, task_queue=FILA_REGISTRO, **uma)) | {"_origem": "notebooklm"}
+            except Exception as e:  # noqa: BLE001
+                erro = str(getattr(e, "cause", e))[:300]
+        return await workflow.execute_activity("seo_9router", cri["markdown"], task_queue=FILA_REGISTRO, **uma)
 
 
-ATIVIDADES = [nlm_checar_saldo, nlm_pesquisa_web, nlm_caderno, nlm_persona, nlm_baixar_video, nlm_fonte, nlm_perguntar, nlm_artefatos_video, nlm_gerar_short]
+@activity.defn
+async def nlm_fontes_ids(caderno: str) -> list[str]:
+    lst = _json(await asyncio.to_thread(_cli, "source", "list", "-n", caderno, "--json", timeout=120))
+    return [f["id"] for f in _ids(lst.get("sources", lst) if isinstance(lst, dict) else lst)]
+
+
+@activity.defn
+async def nlm_gerar_capa(caderno: str, destino: str, prompt: str) -> dict:
+    """t464: capa = infográfico retrato do próprio caderno (teste t460); falha → o episódio usa A9 num quadro."""
+    if caderno in MESTRES_PROIBIDOS: raise RuntimeError("caderno mestre proibido")
+    Path(destino).parent.mkdir(parents=True, exist_ok=True)
+    await asyncio.to_thread(_cli, "generate", "infographic", "-n", caderno, "--orientation", "portrait", "--detail", "concise",
+                            "--language", "pt_BR", "--wait", "--timeout", "900", "--json", prompt, timeout=960)
+    await asyncio.to_thread(_cli, "download", "infographic", "-n", caderno, destino, "--force", "--json", timeout=300)
+    f = Path(destino)
+    if not f.is_file() or f.stat().st_size < 10_000: raise RuntimeError("capa vazia")
+    return {"arquivo": str(f), "bytes": f.stat().st_size}
+
+
+ATIVIDADES = [nlm_fontes_ids, nlm_gerar_capa, nlm_checar_saldo, nlm_pesquisa_web, nlm_caderno, nlm_persona, nlm_baixar_video, nlm_fonte, nlm_perguntar, nlm_artefatos_video, nlm_gerar_short]

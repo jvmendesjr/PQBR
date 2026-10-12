@@ -292,3 +292,4 @@ Ordem: 0.5 ∥ 0 → 1 → 3 ∥ 4 → 5 → 6 → 7 → 8 → 9 → 10 → 11 �
 - [ ] **NLM-EF-02** Limpeza dos 55 cadernos antigos — lista classificada entregue; apagar só após aprovação do José, por id.
 - [ ] **NLM-EF-03** Validar o ciclo completo no E2E nº 1 (dry-run: cria, injeta, arquiva; não apaga).
 
+- [ ] **t462–t465 (12/10):** steering do Short; combos 9router por papel; NotebookLM-first (roteiro/SEO/capa no caderno); reposição automática de temas (7 dias, Líder Editorial). Pré-requisitos do E2E: [LICOES-pre-E2E](LICOES-pre-E2E.md). Pendentes: chave 9router no worker.env (formulário seguro do José), ponte CLI Paperclip na porta 3101 (re-login board), auditoria Gemini Web no fluxo.

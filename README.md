@@ -30,3 +30,5 @@ Arquivos de pré-construção **nunca** são consultados por agentes; ler qualqu
 - Nada de senhas, tokens, cookies, dados pessoais, IPs ou IDs internos neste repositório.
 
 - **Sessão Google (referência viva):** [`docs/REFERENCIA-sessao-google.md`](docs/REFERENCIA-sessao-google.md) — Camofox única fonte/renovador; NotebookLM só lê.
+
+- **Antes de qualquer E2E:** [docs/LICOES-pre-E2E.md](docs/LICOES-pre-E2E.md) (checklist em ordem).

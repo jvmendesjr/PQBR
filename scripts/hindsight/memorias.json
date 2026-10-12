@@ -70,5 +70,17 @@
  [
   "memoria:logout-global",
   "12/10 13:27 (José): conta juniormoedavirtual só na PQBR (Camofox 9387 userId pqbr + notebooklm-py PQBR). Desligados: crons keepalive-session-guardian.py e notebooklm auth refresh (comentados), storage do userId porquebr no Camofox global 9377, ~/.notebooklm default, MP32 juniormoedavirtual, Chrome perfil PorqueBR, tudo em ~/Backups (600). Skills do rede com porquebr/9377 sem sessão; proibido ligar rede à PQBR (sem fila, sem 9387, sem adaptador), José 13:29. Reativar exige OK do José."
+ ],
+ [
+  "memoria:licoes-pre-e2e",
+  "Checklist pré-E2E (docs/LICOES-pre-E2E.md), em ordem: 1 identidade única por conta; 2 pausar rotinas legadas; 3 segredos disponíveis para quem executa; 4 pontes e portas vivas; 5 mapa papel→modelo; 6 dados de entrada com reposição; 7 quem faz o criativo (NotebookLM-first); 8 etapas aprovadas existem no código; 9 isolamento e arquivamento; 10 dry-run real."
+ ],
+ [
+  "memoria:notebooklm-first",
+  "José 12/10 14:00: o NotebookLM faz roteiro, SEO e capa no caderno efêmero do episódio; modelos só orquestram e validam (Pydantic); reserva 9router. Temas: Líder Editorial mantém 7 dias abertos em temas_pendentes, reposição automática ao publicar."
+ ],
+ [
+  "memoria:combos-9router",
+  "Combos 9router por papel em config/modelos_9router.json (router9.combo): core-alto Diretor/Roteirista/Auditor/Devs; core-medio Pesquisador/Líder Editorial/Compliance/Guardião; core-baixo Observador/SEO/Caçador/Comunidade/Diretor de Arte/pqbr; core-revisao revisões."
  ]
 ]
