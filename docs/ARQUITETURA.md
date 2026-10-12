@@ -314,3 +314,7 @@ Escrita no banco do app sempre por Activity com **outbox** (idempotente por chav
 | `TicketManutencao` | localização (arquivo/módulo/workflow), falha observada (evidência, horário, episódio), correções sugeridas, aprovações 1 e 2 | RF-35 |
 | `DeterminacaoRevisao` | item, decisão (excluir/corrigir/reaproveitar/arquivar), observação | RF-36 |
 | `decide()` | interface única do Jev: entrada tipada, saída de um dos modelos acima; fallback devolve o mesmo modelo | RNF-02 |
+
+
+## Revisão por modelo distinto (t419)
+Combo do 9router `core-revisao` (família distinta dos combos de produção) para correções/revisões de saídas dos outros combos core: Dev Revisor e desempate da 3ª rodada do Auditor (aplicados); propostos: 2ª tentativa após saída inválida, dupla checagem do Guardião antes de bloquear/pausar, revisão do Diretor sobre correções de playbook, segunda leitura do Compliance. Detalhe em `docs/AGENTES.md` §7.

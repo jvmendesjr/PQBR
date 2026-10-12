@@ -29,8 +29,14 @@ def _slug(nome: str) -> str:
 
 def processar(i: dict, me: dict, modelo: str) -> str:
     pc.checkout(i["id"], me["id"])
+    if not i.get("description"):   # inbox traz item compacto; busca a issue completa (t419)
+        i = {**i, **(pc.issue(i["id"]) or {})}
     slug = _slug(me["name"])
     pedido = f"Tarefa {i.get('identifier')}: {i.get('title')}\n\n{(i.get('description') or '')[:4000]}"
+    revisao = os.environ.get("PQBR_MODELO_REVISAO")
+    if revisao and re.search(r"terceira[_ ]rodada|desempate", pedido, re.I):
+        modelo = revisao   # t419: desempate do Auditor vai ao combo de revisão (família distinta)
+    print(f"pqbr-kit: modelo={modelo} descricao={len(i.get('description') or '')}", flush=True)
     erro = None
     for tentativa in (1, 2):
         texto = router9.chat(modelo, SISTEMA.format(nome=me["name"], slug=slug),

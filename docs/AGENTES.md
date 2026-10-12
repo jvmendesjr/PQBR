@@ -128,15 +128,18 @@ Princípio: agente = instruções (`instructionsBundle`) + modelo do 9router + k
 3. Alternativa avaliada: **`http`** (serviço próprio do kit que fala com o 9router) — mais controle, mas mais código; fica como plano B se o `opencode_local` não respeitar as permissões. Hermes como runtime de agente: descartado.
 4. **Ponte Hermes:** só para modelos que o 9router não alcança; o 9router aponta para o Hermes como upstream (agentes não sabem disso). Não há perfis por agente.
 5. **Dev Revisor ≠ Dev Corretor:** basta `model` diferente no 9router (famílias diferentes, ex.: um OpenAI, outro Anthropic/Google); não precisa de perfil.
+7. **Pontos de revisão / segunda opinião → `core-revisao` (t419).** Aplicados: Dev Revisor (todo PR do Corretor); desempate da 3ª rodada do Auditor (`agente_texto` troca para `PQBR_MODELO_REVISAO` quando a issue cita `terceira_rodada`/`desempate`). Propostos (não aplicados): (a) 2ª tentativa após saída inválida (Pydantic) no `agente_texto` — usar `core-revisao` em vez de repetir o mesmo combo; (b) Guardião: dupla checagem antes de pausar agente/bloquear publicação (segunda opinião em `core-revisao`); (c) Diretor: revisão de correção de playbook proposta pelo Dev/Observador; (d) Compliance: segunda leitura de roteiro sinalizado como sensível; (e) SEO/Comunidade: não precisam (baixo risco, `core-baixo`).
+
 6. **Modelos (t414): só combos core do 9router.** Nenhum id direto (`ag/*`, `cu/*`) em agente.
 
 | Combo | Agentes |
 |---|---|
-| `core-alto` | Diretor, Roteirista, Auditor, Dev Corretor, Dev Revisor |
+| `core-alto` | Diretor, Roteirista, Auditor, Dev Corretor |
+| `core-revisao` | Dev Revisor; desempate da 3ª rodada do Auditor (t419) |
 | `core-medio` | Pesquisador de Origem, Líder Editorial, Líder Compliance, Guardião de Segurança |
 | `core-baixo` | Observador, Especialista SEO, Caçador Sazonal, Comunidade, Diretor de Arte 2D (pausado), Canal José (pqbr) |
 
-Composição no 9router (11/10): `core-alto` = gemini-3.8-flash-high → claude-opus-4-6-thinking; `core-medio` = gemini-3.8-flash-medium → claude-sonnet-4-6 (round-robin); `core-baixo` = gemini-3-flash. Nenhum combo core passa por `cu/*`. **Pendência:** Corretor e Revisor caem no mesmo combo; o 9router não deixa fixar família por agente dentro do combo sem criar combo/modelo não-core, então a regra "Revisor de família diferente" (item 5) fica **suspensa** até o José decidir.
+Composição no 9router (11/10): `core-alto` = gemini-3.8-flash-high → claude-opus-4-6-thinking; `core-medio` = gemini-3.8-flash-medium → claude-sonnet-4-6 (round-robin); `core-baixo` = gemini-3-flash. Nenhum combo core passa por `cu/*`. `core-revisao` (t416/t419) = claude-sonnet-4-6 → cu/claude-sonnet-5-5-medium (round-robin). **Regra Revisor ≠ Corretor reativada (t419):** Corretor em `core-alto` (Gemini primário), Revisor em `core-revisao` (Claude). Ressalvas: `core-alto` tem Opus como fallback (mesma família Claude em ~metade das chamadas por round-robin) e `core-revisao` inclui `cu/*`, que quebra o `opencode_local`; nos smokes t419 o Revisor passou 2/2, mas a falha de `cu/*` pode aparecer quando o round-robin cair nele (ver §7.1).
 6. **`--yolo` reavaliado:** o problema era do `hermes_local` (força `--yolo`). Sem Hermes nos agentes, **H-SDD1 deixa de bloquear**. O equivalente no OpenCode é a política de permissões, que fica **explícita e restritiva**; liberação ampla (auto-aprovar ferramentas) só nos Devs, em container isolado (worktree, sem rede de produção nem segredos; Revisor sem escrita no repo principal). ADR-007 (t390) passa a valer para essa política. O `pqbr` continua sem `--yolo`.
 
 ## 8. Decisões anteriores incorporadas

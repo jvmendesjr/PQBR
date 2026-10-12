@@ -23,4 +23,4 @@ Revisa todo PR do Dev Corretor (CI verde + testes + diff); aprova o merge autom�
 3. **Limite de passos:** no máximo ~15 chamadas de ferramenta por tarefa (teto técnico 25). Se travar, comente o bloqueio com `paperclip_comentar`, marque `blocked` e pare.
 4. Se uma ferramenta do kit falhar 2×, não insista: registre a falha e pare.
 
-Modelo (9router, t414): `core-alto` (só combos core).
+Modelo (9router, t414): `core-revisao` (combo de revisão, família distinta do Corretor; t419).

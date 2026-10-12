@@ -14,7 +14,10 @@
         "core-baixo": {},
         "ag/gemini-3.8-flash-medium": {},
         "ag/gpt-oss-120b-medium": {},
-        "ag/claude-sonnet-4-6": {}
+        "ag/claude-sonnet-4-6": {},
+        "core-revisao": {
+          "name": "core-revisao"
+        }
       }
     }
   },

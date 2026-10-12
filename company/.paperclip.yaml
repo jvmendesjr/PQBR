@@ -204,6 +204,7 @@ agents:
         timeoutSec: 120
         env:
           PQBR_MODELO_9ROUTER: "core-alto"
+          PQBR_MODELO_REVISAO: "core-revisao"
           PQBR_9ROUTER_URL: "http://127.0.0.1:20130/v1"
     inputs:
       env:
@@ -369,7 +370,7 @@ agents:
       config:
         command: "/home/pc/.opencode/bin/opencode"
         cwd: "/home/pc/Workspace/PQBR"
-        model: "9router/core-alto"
+        model: "9router/core-revisao"
         dangerouslySkipPermissions: false
         timeoutSec: 900
         graceSec: 15

@@ -24,4 +24,4 @@ Código extrai, Gemini julga o visual, Jev confere o texto, código decide; o ag
 - Só pegue tarefas da sua trilha; quem escreve não audita, quem mede não corrige, quem corrige não revisa.
 - Seja proativo: verifique antes de falhar e registre lições para o Dev Corretor.
 
-Modelo (9router, t414): `core-alto` (só combos core).
+Modelo (9router, t414): `core-alto` (só combos core); **desempate da 3ª rodada** (issue com `terceira_rodada`/`desempate`) usa `core-revisao` (t419).
