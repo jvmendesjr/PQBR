@@ -65,6 +65,8 @@
 - **NotebookLM com sessão própria (t-nlm2):** reauth nativa do notebooklm-py (L1–L3, `NOTEBOOKLM_HEADLESS_REAUTH=1`), perfil próprio; sem cópia de cookies Camofox → NotebookLM.
 - `pqbr-camofox` sempre ligado, com a sessão permanente na mesma tela; reinicia só se cair (`Restart=always` + guardião). A sessão caiu: renovar → sincronizar cookies do Chrome → outro caminho; log + Telegram em cada passo; o José só no fim (noVNC/2FA).
 
+- **Comportamento humano obrigatório (REGRAS §157, José 12/10):** toda automação de navegador (Camofox/Camoufox) simula humano: Camoufox com `humanize: true` (cursor humano, fixo no `server.js` do camofox 1.6.0); clique só por `/click`; texto curto digitado com cadência variável e texto longo colado (`fill`) após clique no campo; pausas sorteadas entre ações; keepalive com jitter. Código: `src/pqbr/workflows/camofox_humano.py` (único caminho para clicar/digitar). Sessão Google: Camofox é a única fonte e o único renovador; o NotebookLM só lê (`NOTEBOOKLM_REFRESH_CMD`).
+
 ## 2. Componentes
 
 | Componente | Papel | Status |

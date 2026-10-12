@@ -12,3 +12,5 @@ Fila `camofox-pqbr`, concorrência 1; cada passo → log (`pqbr.acoes`) + aviso 
 - **Timeouts do cliente HTTP:** toda chamada ao Camofox com timeout explícito (curl `-m`, urllib `timeout=`): 20–40 s para abrir aba/navegar, 10–20 s para evaluate/stats; nunca chamada sem prazo.
 - **Re-sincronizar depois de reiniciar:** após reiniciar o `pqbr-camofox`, conferir no log `restoring persisted storage state`, abrir Studio e NotebookLM e verificar a conta; se cair, restaurar o último backup de `~/Backups/pqbr-camofox/` no `storage-state.json` (600) e reiniciar uma vez.
 - **Fonte de cookies do Chrome não existe mais:** o José saiu da conta no Chrome do servidor (12/10). O degrau "sincronizar cookies do Chrome" (`sync_cookies_chrome.py`) está sem fonte; a escada vai direto de "renovar no Camofox" para login manual pelo VNC.
+
+**Ritmo humano (obrigatório, REGRAS §157):** clicar/digitar só por `pqbr.workflows.camofox_humano` (mouse humanize do Camoufox, digitação com cadência, texto longo colado, pausas sorteadas). Sessão Google: Camofox é a única fonte/renovador (keepalive 15 min); cópia do Chrome aposentada.
