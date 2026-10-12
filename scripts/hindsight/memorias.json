@@ -102,5 +102,9 @@
  [
   "memoria:acessos-workflow",
   "AcessosWorkflow/pqbr-acessos (de hora em hora): confere Google/Camofox, NotebookLM e Paperclip; pede ao José via revisao_humana (Telegram/painel); nunca faz login."
+ ],
+ [
+  "memoria:sequencia-sessao-google",
+  "Sequência canônica da sessão Google (José 12/10 17:26): 1) confirmar perfil fixo 66e05767/userId pqbr; 2) restaurar a MESMA sessão do notebooklm-py para o Camofox (mesmo SID; AcessosWorkflow.restaurar_sessao_camofox); 3) se falhar, VNC (vnc-mostrar.sh) + pedido de login ao José; 4) aviso Telegram (cron Hermes pqbr-pedidos-jose) e painel. Regra: nenhum script fora do repo/contratos em produção."
  ]
 ]
