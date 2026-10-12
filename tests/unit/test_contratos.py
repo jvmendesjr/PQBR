@@ -80,3 +80,31 @@ class BlocoVisualT(unittest.TestCase):
         from pqbr.contratos import BlocoVisual
         with self.assertRaises(Exception):
             BlocoVisual(**{**BLOCO, "estilo": "fotografia realista de um homem na sala"})
+
+
+class ContratosT436(unittest.TestCase):
+    def test_veredito_vocabulario_do_auditor(self):
+        from pqbr.contratos import VEREDITOS
+        from pqbr.pipeline.auditor_visual import ORDEM
+        assert set(VEREDITOS) == set(ORDEM)
+        VereditoAuditor(veredito="aprova_com_ressalva", motivos=["legenda"], rodadas=2)
+        with self.assertRaises(ValidationError):
+            VereditoAuditor(veredito="ressalva", motivos=["x"], rodadas=2)
+
+    def test_tema_pendente(self):
+        from pqbr.contratos import TemaPendente
+        TemaPendente(slug="podre-de-rico", tema="Podre de rico", tema_normalizado="podre de rico", categoria="expressao")
+        with self.assertRaises(ValidationError):
+            TemaPendente(slug="natal", tema="Natal", tema_normalizado="natal", categoria="sazonal")
+        with self.assertRaises(ValidationError):
+            TemaPendente(slug="x-y", tema="xyz", tema_normalizado="xyz", categoria="expressao", status="aprovado", fontes=["a"])
+
+    def test_erro_aceitavel_bate_com_auditor(self):
+        import json as _j
+        from pqbr.contratos import ErroAceitavel
+        from pqbr.pipeline import auditor_visual as av
+        r = {"veredito": "aprova_com_ressalva", "erros_aceitaveis": [("S01", "legenda_com_erro")], "metricas": {}, "rodada_unica": False}
+        for l in av.linhas_erros_aceitaveis(r, episodio_codigo="PQBR-EP0001"):
+            ErroAceitavel(**{**l, "evidencia": _j.loads(l["evidencia"])})
+        with self.assertRaises(ValidationError):
+            ErroAceitavel(categoria="legenda", chave="x1", descricao="abc", veredito_auditor="reprova", tema_slug="ab")

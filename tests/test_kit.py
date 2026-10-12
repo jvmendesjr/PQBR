@@ -10,9 +10,11 @@ def test_docs_bloqueia_arquivo():
 
 
 def test_papel_sem_lista_nao_tem_ferramentas():
+    # t428: o Roteirista ganhou NotebookLM; papel desconhecido continua sem ferramentas.
     p = subprocess.run([sys.executable, "-m", "pqbr.kit.mcp_kit"], input='{"jsonrpc":"2.0","id":1,"method":"tools/list"}\n',
-                       capture_output=True, text=True, env={**os.environ, "PQBR_KIT_PAPEL": "roteirista"})
+                       capture_output=True, text=True, env={**os.environ, "PQBR_KIT_PAPEL": "papel-inexistente"})
     assert json.loads(p.stdout)["result"]["tools"] == []
+    assert "notebooklm_enfileirar" in PAPEIS["roteirista"]
 
 
 def test_observador_tem_camofox_saude_e_nao_seguranca():

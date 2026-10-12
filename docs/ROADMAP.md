@@ -209,7 +209,7 @@ Precisam do José: F4C-04, F4C-05, F4C-06, F4C-07. F4C-01..03 só pedem o portã
 - [ ] Concluir a migração dos materiais da pasta antiga `Porquê BR` (`1Qt79b1VoiH9nLY23X-bhcqCUfy7QEMSM`) para a `PQBR`, conforme `docs/pesquisas/mapa-drive-rede.md`: 53 masters stickman (~246 MB) + 28 AUDIT.md → `99_Arquivo/rede-stickman/`.
 - [ ] Depois de conferir as cópias (md5), limpar a pasta antiga para evitar conflito, duplicação e gasto de espaço. **Excluir exige OK explícito do José.**
 - [ ] Atualizar o perfil `rede` para gravar só na `PQBR`.
-- [ ] **ERR-01** Revisar `pqbr.erros_aceitaveis` (view `erros_aceitaveis_resumo`) depois dos primeiros dias de produção: decidir por linha `aceito` / `corrigir_prompt` / `virar_seguranca`; erro recorrente vira ajuste de prompt ou regra (t435). Quem: José + Observador.
+- [ ] **ERR-01** Revisar `pqbr.erros_aceitaveis` (view `erros_aceitaveis_resumo`) depois dos primeiros dias de produção: decidir por linha `aceito` / `corrigir_prompt` / `virar_seguranca`; erro recorrente vira ajuste de prompt ou regra (t435). Por ora a legenda PT-BR do NotebookLM é considerada **boa**; se aparecerem muitos erros de legenda, avaliar uma solução de **legenda por overlay** no pós conforme os resultados (t436). Quem: José + Observador.
 
 ## Segundo momento (fora do caminho crítico)
 

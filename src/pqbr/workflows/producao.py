@@ -13,7 +13,7 @@ from temporalio.common import RetryPolicy
 from temporalio.exceptions import ApplicationError
 
 with workflow.unsafe.imports_passed_through():
-    from ..contratos import GradeDiaria, ItemGrade, VereditoAuditor, RoteiroShort, CTA
+    from ..contratos import GradeDiaria, ItemGrade, VereditoAuditor, RoteiroShort, CTA, BlocoVisual, CenaVisual, PUBLICAVEL, VereditoTipo
     from ..pipeline.grade import Candidato, montar_grade
 
 FUSO = timezone(timedelta(hours=-3))
@@ -25,7 +25,7 @@ class SimProducao(BaseModel):
     model_config = ConfigDict(extra="forbid", frozen=True)
     candidatos: list[tuple[str, Literal["em_alta", "perene"]]] = Field(default_factory=list)
     publicados: list[str] = Field(default_factory=list)
-    veredito: Literal["aprova", "ressalva", "revisao", "reprova"] = "aprova"
+    veredito: VereditoTipo = "aprova"
     atraso_producao_s: int = 0
     tem_reserva: bool = True
 
@@ -76,7 +76,12 @@ async def gravar_grade(g: GradeDiaria) -> int:
 async def gerar_roteiro_nb(p: PedidoEpisodio) -> RoteiroShort:
     _sim(p.simulacao, "NotebookLM (conta de produção)")
     falas = [f"{p.item.tema}"] + ["E a explicação é mais lógica do que parece, e a gente nem percebe no dia a dia."] * 6 + [CTA]
-    return RoteiroShort(episodio_id=p.codigo.lower(), titulo=p.item.tema[:100], falas=falas, entidades_cena=["cena"])
+    bloco = BlocoVisual(estilo="Ilustração 2D plana de cartum, traço preto, cores chapadas (simulado)",
+                        personagem="adulto de uns 35 anos, camiseta verde, bigode (simulado)",
+                        cenas=[CenaVisual(fala=f, acao="personagem reage", enquadramento="plano médio",
+                                          ambiente="cozinha brasileira") for f in falas[:2]])
+    return RoteiroShort(episodio_id=p.codigo.lower(), titulo=p.item.tema[:100], falas=falas, entidades_cena=["cena"],
+                        bloco_visual=bloco)
 
 
 @activity.defn
@@ -130,7 +135,7 @@ class EpisodioProducaoWorkflow:
             await workflow.sleep(p.simulacao.atraso_producao_s)
         await workflow.execute_activity(gerar_roteiro_nb, p, start_to_close_timeout=timedelta(minutes=20), retry_policy=_RT)
         v = await workflow.execute_activity(auditar, p, start_to_close_timeout=timedelta(minutes=20), retry_policy=_RT)
-        if v.veredito != "aprova":
+        if v.veredito not in PUBLICAVEL:
             return ResultadoEpisodio(codigo=p.codigo, estado="reprovado", motivo=v.veredito)
         await workflow.execute_activity(agendar_publicacao, p, start_to_close_timeout=timedelta(minutes=20),
                                         retry_policy=RetryPolicy(maximum_attempts=1))  # não reenvia sem consultar

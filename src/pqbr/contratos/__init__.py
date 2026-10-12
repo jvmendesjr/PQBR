@@ -103,8 +103,13 @@ class PontuacaoPolemica(Contrato):
 
 
 # RF-12..RF-14 --------------------------------------------------------------------------------
+VEREDITOS = ("aprova", "aprova_com_ressalva", "terceira_rodada", "reprova")  # = auditor_visual.ORDEM (t403)
+VereditoTipo = Literal["aprova", "aprova_com_ressalva", "terceira_rodada", "reprova"]
+PUBLICAVEL = ("aprova", "aprova_com_ressalva")   # métrica nunca reprova (REGRAS §5); só segurança reprova (t435)
+
+
 class VereditoAuditor(Contrato):
-    veredito: Literal["aprova", "ressalva", "revisao", "reprova"]
+    veredito: VereditoTipo
     motivos: list[str] = Field(default_factory=list, max_length=20)
     id_cena: str | None = None
     rodadas: int = Field(ge=1, le=3)  # 3ª rodada só desempata (t357 b)
@@ -253,4 +258,74 @@ class GradeDiaria(Contrato):
             raise ValueError("item de outra data na grade (incidente de 08/10)")
         if len({i.janela for i in self.itens}) != len(self.itens):
             raise ValueError("janela repetida")
+        return self
+
+
+# CONTRATO §16.5 / migração 0012 (t427) ------------------------------------------------------------
+_SLUG = r"^[a-z0-9][a-z0-9-]{1,60}$"
+_CODIGO = r"^PQBR-EP[0-9]{4,}$"
+CategoriaTema = Literal["expressao", "habito_mania", "curiosidade_cultura_pop", "sazonal"]
+
+
+class TemaPendente(Contrato):
+    slug: str = Field(pattern=_SLUG)
+    tema: str = Field(min_length=3, max_length=300)
+    tema_normalizado: str = Field(min_length=3, max_length=300)
+    categoria: CategoriaTema
+    janela_sazonal: tuple[date, date] | None = None
+    data_prevista: date | None = None
+    status: Literal["proposto", "aprovado", "em_producao", "auditado", "pronto_publicar", "falhou"] = "proposto"
+    fontes: list[str] = Field(default_factory=list, max_length=20)   # ≥ 2 antes de aprovar (§16.5)
+    bloco_visual: BlocoVisual | None = None
+    metadados: dict = Field(default_factory=dict)
+    caminhos: dict = Field(default_factory=dict)
+    criado_por: str = "codigo"
+
+    @model_validator(mode="after")
+    def _regras(self):
+        if self.categoria == "sazonal" and self.janela_sazonal is None:
+            raise ValueError("tema sazonal exige janela_sazonal (Caçador, 30 dias antes)")
+        if self.status != "proposto" and len(self.fontes) < 2:
+            raise ValueError("tema fora de 'proposto' exige ≥ 2 fontes (§16.5)")
+        return self
+
+
+class TemaPublicado(Contrato):
+    id: int = Field(ge=1)
+    slug: str = Field(pattern=_SLUG)
+    tema: str = Field(min_length=3, max_length=300)
+    tema_normalizado: str = Field(min_length=3, max_length=300)
+    categoria: CategoriaTema
+    codigo: str = Field(pattern=_CODIGO)
+    video_id: str | None = Field(default=None, pattern=r"^[A-Za-z0-9_-]{11}$")
+    publicado_em: datetime
+    privacidade: Literal["private", "public", "scheduled"] = "private"
+    fontes: list[str] = Field(default_factory=list)
+    bloco_visual: BlocoVisual | None = None
+    metadados: dict = Field(default_factory=dict)
+    caminhos: dict = Field(default_factory=dict)
+
+
+# Migração 0013 (t435) ------------------------------------------------------------------------------
+class ErroAceitavel(Contrato):
+    episodio_codigo: str | None = Field(default=None, pattern=_CODIGO)
+    tema_slug: str | None = Field(default=None, pattern=_SLUG)
+    cena: str | None = Field(default=None, pattern=r"^S[0-9]{2,}$")
+    categoria: Literal["legenda", "texto", "visual", "audio", "loop", "outro"]
+    chave: str = Field(min_length=2, max_length=80)
+    descricao: str = Field(min_length=3, max_length=500)
+    gravidade: Literal["leve", "media"] = "leve"
+    veredito_auditor: Literal["aprova", "aprova_com_ressalva", "terceira_rodada"]
+    rodadas: int = Field(default=2, ge=1, le=3)
+    evidencia: dict = Field(default_factory=dict)
+    decisao: Literal["pendente", "aceito", "corrigir_prompt", "virar_seguranca"] = "pendente"
+    revisado_por: str | None = None
+    revisado_em: datetime | None = None
+
+    @model_validator(mode="after")
+    def _regras(self):
+        if not (self.episodio_codigo or self.tema_slug):
+            raise ValueError("episodio_codigo ou tema_slug obrigatório")
+        if self.decisao != "pendente" and not (self.revisado_por and self.revisado_em):
+            raise ValueError("decisão exige revisado_por e revisado_em")
         return self

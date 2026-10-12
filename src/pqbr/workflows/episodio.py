@@ -7,7 +7,7 @@ import asyncio, json, os, re, subprocess
 from datetime import timedelta, datetime
 from pathlib import Path
 from typing import Literal
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, ConfigDict, Field
 from temporalio import activity, workflow
 from temporalio.common import RetryPolicy
 
@@ -22,6 +22,7 @@ CODIGO = re.compile(r"^PQBR-EP[0-9]{4,}$")
 
 
 class PedidoEpisodioE2E(BaseModel):
+    model_config = ConfigDict(extra="forbid", frozen=True)
     slug: str = Field(pattern=r"^[a-z0-9][a-z0-9-]{1,60}$")
     codigo: str = Field(pattern=CODIGO.pattern)
     roteiro_texto: str = Field(min_length=50)          # roteiro completo com o bloco visual (vira a fonte do caderno)
@@ -34,6 +35,8 @@ class PedidoEpisodioE2E(BaseModel):
 
 
 class VereditoAuditor(BaseModel):
+    """Sinal final do Auditor (sem terceira_rodada: o agente desempata antes de sinalizar)."""
+    model_config = ConfigDict(extra="forbid", frozen=True)
     veredito: Literal["aprova", "aprova_com_ressalva", "reprova"]
     motivo: str = ""
 
