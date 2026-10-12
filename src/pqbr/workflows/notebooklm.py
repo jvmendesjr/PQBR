@@ -51,6 +51,7 @@ class PedidoNotebookLM(BaseModel):
     caderno_registrado: str | None = Field(default=None, pattern=UUID.pattern)
     pacote_fonte: str | None = None                                      # arquivo do pacote canônico (workflows/pacote.py)
     pacote_hash: str | None = Field(default=None, pattern=r"^[0-9a-f]{64}$")
+    steering: str | None = Field(default=None, max_length=4000)          # t462: direcionamento do Short (bloco 2D + reforços)
 
 
 class ResultadoNotebookLM(BaseModel):
@@ -214,11 +215,22 @@ async def nlm_artefatos_video(caderno: str) -> list[dict]:
     return [{"id": a["id"], "status": str(a.get("status", ""))} for a in _ids(j)]
 
 
+REFORCO_SHORT = ("Sem nenhum texto escrito dentro da imagem (sem letreiros, placas, rótulos ou balões). "
+                 "O mesmo personagem em todas as cenas: mesmo rosto, cabelo, roupa e cores, do início ao fim.")
+
+
+def steering_short(bloco: str = "") -> str:
+    """t462 (José 13:30): steering do Short = bloco visual 2D do roteiro + reforços fixos (sem texto na imagem; mesmo personagem)."""
+    b = " ".join((bloco or "").split())[:3000]
+    return (b + " " if b else "Cartum 2D plano, cores chapadas, 1 personagem, fundo minimalista. ") + REFORCO_SHORT
+
+
 @activity.defn
-async def nlm_gerar_short(caderno: str) -> str:
+async def nlm_gerar_short(caderno: str, steering: str = "") -> str:
     _contador("video")
+    extra = [steering_short(steering)]
     out = await asyncio.to_thread(_cli, "generate", "video", "-n", caderno, "--format", "short", "--language", "pt_BR",
-                                  "--no-wait", "--json", timeout=300)
+                                  "--no-wait", "--json", *extra, timeout=300)
     a = next(_ids(_json(out)), None)
     return a["id"] if a else ""
 
@@ -272,7 +284,7 @@ class NotebookLMWorkflow:
                 return ResultadoNotebookLM(ok=False, tipo=p.tipo, caderno=nb, motivo=f"bloqueado: {e}")
         vids = await workflow.execute_activity(nlm_artefatos_video, nb, **curto)
         art = vids[0]["id"] if vids else await workflow.execute_activity(
-            nlm_gerar_short, nb, start_to_close_timeout=timedelta(minutes=6), retry_policy=RetryPolicy(maximum_attempts=1))
+            nlm_gerar_short, args=[nb, p.steering or ""], start_to_close_timeout=timedelta(minutes=6), retry_policy=RetryPolicy(maximum_attempts=1))
         estado = ""
         for _ in range(60):   # até ~60 min
             vids = await workflow.execute_activity(nlm_artefatos_video, nb, **curto)

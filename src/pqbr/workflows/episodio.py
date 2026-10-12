@@ -35,6 +35,7 @@ class PedidoEpisodioE2E(BaseModel):
     descricao: str = Field(min_length=10, max_length=5000)
     tags: list[str] = Field(default_factory=list, max_length=15)
     dry_run: bool = True                               # t426: teste nº 1 para antes do upload
+    steering: str | None = Field(default=None, max_length=4000)   # t462: bloco visual 2D do roteiro (reforços entram no nlm)
     espera_veredito_h: float = Field(default=24, ge=0.01, le=72)
 
 
@@ -144,7 +145,7 @@ class EpisodioWorkflow:
         nlm = await workflow.execute_child_workflow(
             NotebookLMWorkflow.run, PedidoNotebookLM(tipo="short", slug=p.slug, fonte=p.roteiro_texto, solicitante="episodio",
                                                      episodio=p.codigo, caderno_registrado=reg,
-                                                     pacote_fonte=pac["fonte"], pacote_hash=pac["hash"]),
+                                                     pacote_fonte=pac["fonte"], pacote_hash=pac["hash"], steering=p.steering),
             id=f"nlm-short-{p.slug}-{workflow.info().workflow_id[-6:]}", task_queue=FILA_NOTEBOOKLM)
         if not nlm.ok or not nlm.artefato:
             return ResultadoEpisodioE2E(etapa="geracao", ok=False, detalhes=nlm.model_dump())
