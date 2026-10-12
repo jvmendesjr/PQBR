@@ -92,7 +92,7 @@ async def compliance_roteiro(roteiro_md: str) -> dict:
     """Líder de Compliance + Guardião (combos do papel). Reprova só por segurança (CONTRATO §16.6)."""
     from ..kit.router9 import chat_papel
     from ..seguranca.barreira import exigir_limpo
-    exigir_limpo(roteiro_md, "roteiro")   # Guardião: sem segredo/injeção no que vai ao NotebookLM
+    exigir_limpo(roteiro_md, "notebooklm")   # Guardião: sem segredo/injeção no que vai ao NotebookLM
     pedido = ("Confira o roteiro contra o contrato editorial do Porquê BR. Reprove só por: pessoa real/celebridade, marca real, "
               "estereótipo ofensivo, política/religião/tragédia, afirmação falsa apresentada como certa, pedido de comentário, "
               "conselho especializado. Responda só JSON: {\"aprovado\":true|false,\"motivos\":[...],\"ressalvas\":[...]}\n\n" + roteiro_md[:8000])

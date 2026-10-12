@@ -9,7 +9,7 @@ import logging
 from typing import Any, Iterator
 from .segredos import SegredoDetectado, encontrar, REGRAS
 
-DESTINOS = {"hindsight", "ticket", "banco", "log", "commit"}
+DESTINOS = {"hindsight", "ticket", "banco", "log", "commit", "notebooklm"}
 
 
 def _textos(obj: Any, prefixo: str = "") -> Iterator[tuple[str, str]]:

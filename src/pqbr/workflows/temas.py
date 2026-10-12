@@ -105,7 +105,7 @@ async def paperclip_ids(papel: str) -> dict:
 
 
 DESCRICAO = (
-    "Reposição da grade (t465): faltam {faltam} temas para manter 7 dias abertos (alvo {alvo}). Proponha até 6 temas NOVOS de "
+    "Reposição da grade (t465): faltam {faltam} temas para manter 7 dias abertos (alvo {alvo}). Proponha até 5 temas NOVOS e curtos (valor_proposto com no máximo 480 caracteres no total) de "
     "curiosidade/cultura popular brasileira (≥ 80%: origem de expressões, hábitos e manias, curiosidades inúteis que prendem a atenção), "
     "sem política, religião, tragédia, marca ou pessoa real, sem repetir os já usados abaixo. "
     "Responda com UMA PropostaAgente: tipo=parametro, alvo=tema, chave=grade.reposicao, "

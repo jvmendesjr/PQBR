@@ -298,6 +298,8 @@ class NotebookLMWorkflow:
         estado = ""
         for _ in range(60):   # até ~60 min
             vids = await workflow.execute_activity(nlm_artefatos_video, nb, **curto)
+            if all(v["id"] != art for v in vids) and len(vids) == 1:
+                art = vids[0]["id"]   # E2E 12/10: `generate --json` devolve o id da tarefa, não o do artefato
             estado = next((v["status"] for v in vids if v["id"] == art), estado)
             if re.search(r"complet|fail|error", estado, re.I): break
             await workflow.sleep(60)
@@ -321,9 +323,9 @@ class NotebookLMWorkflow:
         uma = dict(start_to_close_timeout=timedelta(minutes=25), retry_policy=RetryPolicy(maximum_attempts=1))
         try:   # pesquisa web do tema dentro do caderno; as fontes importadas viram fontes registradas do episódio
             await workflow.execute_activity(nlm_pesquisa_web, args=[nb, f"origem e explicação: {p.tema}"], **uma)
-            if p.episodio: await self._registrar_novas(nb, "pesquisa", curto)
-        except Exception as e:  # noqa: BLE001
+        except Exception as e:  # noqa: BLE001  (E2E 12/10: add-research pode falhar "outcome unknown" e ainda importar)
             workflow.logger.warning(f"pesquisa web falhou: {e}")
+        if p.episodio: await self._registrar_novas(nb, "pesquisa", curto)   # importadas pela pesquisa do próprio episódio
         erro, val = "", None
         for _ in range(2):
             txt = await workflow.execute_activity(nlm_perguntar, args=[nb, PROMPT_ROTEIRO.format(tema=p.tema, slug=p.slug) +

@@ -90,7 +90,9 @@ async def capa_a9(quadros: list[str]) -> dict:
 @activity.defn
 async def drive_enviar(codigo: str, slug: str, arquivos: list[str]) -> dict:
     from ..integrations import drive
-    if not drive.TOKEN.is_file(): return {"pulado": "sem credencial do Drive"}
+    if not drive.ARQ_CRED.is_file(): return {"pulado": "sem credencial do Drive"}   # E2E 12/10: era drive.TOKEN (inexistente)
+    capa = Path(arquivos[-1]).parent / "capa_nlm.png"
+    if capa.is_file() and str(capa) not in arquivos: arquivos = [*arquivos, str(capa)]   # t464: capa do NotebookLM junto
     pasta = drive.garantir_pasta(f"PQBR/02_Episodios/{datetime.now():%Y-%m}/{codigo}_{slug}")
     return {"pasta": pasta, "arquivos": {Path(a).name: drive.enviar(a, pasta) for a in arquivos}}
 

@@ -82,5 +82,9 @@
  [
   "memoria:combos-9router",
   "Combos 9router por papel em config/modelos_9router.json (router9.combo): core-alto Diretor/Roteirista/Auditor/Devs; core-medio Pesquisador/Líder Editorial/Compliance/Guardião; core-baixo Observador/SEO/Caçador/Comunidade/Diretor de Arte/pqbr; core-revisao revisões."
+ ],
+ [
+  "memoria:e2e-dryrun-1",
+  "E2E dry-run nº1 OK em 12/10 15:20 (e2e-PQBR-EP1002, sem upload): NotebookLM-first fez roteiro, SEO (cat. 27) e capa; Short em ~5 min; Drive 1H2J4OAplcI0Dmz_760X5EfGHYAZsarzW. Bugs corrigidos: id de artefato vs tarefa no generate, drive.TOKEN, destino da barreira. Pendentes: [suspicious link removed] no SEO, capa em painéis, Gemini Web, login board do CLI na 3101."
  ]
 ]
