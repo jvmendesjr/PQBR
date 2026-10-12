@@ -9,7 +9,8 @@ RAIZ = Path("/home/pc/Workspace/PQBR"); sys.path.insert(0, str(RAIZ / "src"))
 from pqbr.storage.hindsight import reter  # noqa: E402
 
 DOCS = ["docs/REFERENCIA-sessao-google.md", "docs/CONTRATO-EDITORIAL.md", "docs/ARQUITETURA.md", "docs/ROADMAP.md", "docs/SPEC.md",
-        "docs/AGENTES.md", "docs/pesquisas/mapa-drive-rede.md", "docs/pesquisas/estilo-2d-referencias.md", "docs/sdd/gate-a9.md"]
+        "docs/AGENTES.md", "docs/pesquisas/mapa-drive-rede.md", "docs/pesquisas/estilo-2d-referencias.md", "docs/sdd/gate-a9.md",
+        "docs/sdd/adr-003-cadernos-efemeros.md", "docs/pesquisas/estilo-2d-deep-research-relatorio.md", "docs/pesquisas/cadernos-inventario-20261012.md"]
 ESTADO = Path.home() / ".pqbr/hindsight/indexados.json"
 
 
