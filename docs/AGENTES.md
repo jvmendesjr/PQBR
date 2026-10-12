@@ -128,6 +128,15 @@ Princípio: agente = instruções (`instructionsBundle`) + modelo do 9router + k
 3. Alternativa avaliada: **`http`** (serviço próprio do kit que fala com o 9router) — mais controle, mas mais código; fica como plano B se o `opencode_local` não respeitar as permissões. Hermes como runtime de agente: descartado.
 4. **Ponte Hermes:** só para modelos que o 9router não alcança; o 9router aponta para o Hermes como upstream (agentes não sabem disso). Não há perfis por agente.
 5. **Dev Revisor ≠ Dev Corretor:** basta `model` diferente no 9router (famílias diferentes, ex.: um OpenAI, outro Anthropic/Google); não precisa de perfil.
+6. **Modelos (t414): só combos core do 9router.** Nenhum id direto (`ag/*`, `cu/*`) em agente.
+
+| Combo | Agentes |
+|---|---|
+| `core-alto` | Diretor, Roteirista, Auditor, Dev Corretor, Dev Revisor |
+| `core-medio` | Pesquisador de Origem, Líder Editorial, Líder Compliance, Guardião de Segurança |
+| `core-baixo` | Observador, Especialista SEO, Caçador Sazonal, Comunidade, Diretor de Arte 2D (pausado), Canal José (pqbr) |
+
+Composição no 9router (11/10): `core-alto` = gemini-3.8-flash-high → claude-opus-4-6-thinking; `core-medio` = gemini-3.8-flash-medium → claude-sonnet-4-6 (round-robin); `core-baixo` = gemini-3-flash. Nenhum combo core passa por `cu/*`. **Pendência:** Corretor e Revisor caem no mesmo combo; o 9router não deixa fixar família por agente dentro do combo sem criar combo/modelo não-core, então a regra "Revisor de família diferente" (item 5) fica **suspensa** até o José decidir.
 6. **`--yolo` reavaliado:** o problema era do `hermes_local` (força `--yolo`). Sem Hermes nos agentes, **H-SDD1 deixa de bloquear**. O equivalente no OpenCode é a política de permissões, que fica **explícita e restritiva**; liberação ampla (auto-aprovar ferramentas) só nos Devs, em container isolado (worktree, sem rede de produção nem segredos; Revisor sem escrita no repo principal). ADR-007 (t390) passa a valer para essa política. O `pqbr` continua sem `--yolo`.
 
 ## 8. Decisões anteriores incorporadas

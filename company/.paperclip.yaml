@@ -145,7 +145,7 @@ agents:
       config:
         command: "/home/pc/.opencode/bin/opencode"
         cwd: "/home/pc/Workspace/PQBR"
-        model: "9router/core-medio"
+        model: "9router/core-baixo"
         dangerouslySkipPermissions: false
         timeoutSec: 900
         graceSec: 15
@@ -309,7 +309,7 @@ agents:
       config:
         command: "/home/pc/.opencode/bin/opencode"
         cwd: "/home/pc/Workspace/PQBR"
-        model: "9router/ag/gemini-3.8-flash-medium"
+        model: "9router/core-medio"
         dangerouslySkipPermissions: false
         timeoutSec: 900
         graceSec: 15
@@ -339,7 +339,7 @@ agents:
       config:
         command: "/home/pc/.opencode/bin/opencode"
         cwd: "/home/pc/Workspace/PQBR"
-        model: "9router/ag/gemini-3.8-flash-medium"
+        model: "9router/core-alto"
         dangerouslySkipPermissions: false
         timeoutSec: 900
         graceSec: 15
@@ -369,7 +369,7 @@ agents:
       config:
         command: "/home/pc/.opencode/bin/opencode"
         cwd: "/home/pc/Workspace/PQBR"
-        model: "9router/ag/claude-sonnet-4-6"
+        model: "9router/core-alto"
         dangerouslySkipPermissions: false
         timeoutSec: 900
         graceSec: 15
