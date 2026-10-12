@@ -27,14 +27,23 @@ def clicar(tab: str, *, ref: str | None = None, selector: str | None = None, use
 
 
 def escrever(tab: str, texto: str, *, ref: str | None = None, selector: str | None = None, user: str = "pqbr") -> dict:
-    """Clica no campo (mouse humano) e digita (curto) ou cola (longo)."""
+    """Clica no campo (mouse humano) e digita (curto, 70–190 ms por tecla sorteado a cada 1–3 teclas) ou cola (longo)."""
     clicar(tab, ref=ref, selector=selector, user=user)
     pausa_humana(0.4, 1.2)
     if len(texto) >= LIMITE_COLAR:
         return _post(f"/tabs/{tab}/type", {"userId": user, "ref": ref, "selector": selector, "text": texto, "mode": "fill"})
-    r = {}
-    for pedaco in texto.split(" "):   # rajadas por palavra, delay por tecla variável
-        r = _post(f"/tabs/{tab}/type", {"userId": user, "text": pedaco + " ", "mode": "keyboard",
-                                        "delay": random.randint(70, 190)})
-        pausa_humana(0.05, 0.45)
+    r, i = {}, 0
+    while i < len(texto):
+        n = random.randint(1, 3); pedaco = texto[i:i + n]; i += n
+        r = _post(f"/tabs/{tab}/type", {"userId": user, "text": pedaco, "mode": "keyboard", "delay": random.randint(70, 190)})
+        if pedaco.endswith(" ") or random.random() < 0.15: pausa_humana(0.1, 0.6)
     return r
+
+
+def rolar(tab: str, total: int = 900, direcao: str = "down", user: str = "pqbr") -> None:
+    """Rolagem pela roda do mouse em passos irregulares (80–260 px) com pausas de leitura."""
+    feito = 0
+    while feito < total:
+        passo = min(random.randint(80, 260), total - feito); feito += passo
+        _post(f"/tabs/{tab}/scroll", {"userId": user, "direction": direcao, "amount": passo})
+        pausa_humana(0.15, 0.9)
