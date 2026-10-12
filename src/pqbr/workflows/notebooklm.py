@@ -27,6 +27,8 @@ class PedidoNotebookLM(BaseModel):
     slug: str = Field(pattern=SLUG.pattern)
     fonte: str = Field(min_length=20, max_length=200_000)   # roteiro/briefing; vira a fonte do caderno
     pergunta: str | None = Field(default=None, max_length=4000)  # pesquisa
+    perguntas: list[str] | None = Field(default=None, max_length=3)   # t430: até 3 chats no mesmo caderno
+    pesquisa_web: list[str] | None = Field(default=None, max_length=3)  # t430: add-research --mode fast antes dos chats
     solicitante: str = "kit"
 
 
@@ -138,6 +140,14 @@ async def nlm_fonte(caderno: str, slug: str, texto: str) -> str:
 
 
 @activity.defn
+async def nlm_pesquisa_web(caderno: str, consulta: str) -> str:
+    if caderno in MESTRES_PROIBIDOS: raise RuntimeError("caderno mestre proibido")
+    out = await asyncio.to_thread(_cli, "source", "add-research", "-n", caderno, "--mode", "fast", "--import-all",
+                                  "--timeout", "600", consulta[:1500], timeout=1300)
+    return out[-500:]
+
+
+@activity.defn
 async def nlm_perguntar(caderno: str, pergunta: str) -> str:
     _contador("chat")   # conta antes: chamada iniciada consome
     out = await asyncio.to_thread(_cli, "ask", "-n", caderno, pergunta, "--json", timeout=600)  # nunca --new
@@ -178,6 +188,15 @@ class NotebookLMWorkflow:
         nb = await workflow.execute_activity(nlm_caderno, p.slug, **curto)
         await workflow.execute_activity(nlm_persona, nb, **curto)   # persona antes de tudo (t427)
         await workflow.execute_activity(nlm_fonte, args=[nb, p.slug, p.fonte], **curto)
+        if p.tipo != "short" and (p.pesquisa_web or p.perguntas):
+            for q in (p.pesquisa_web or []):
+                await workflow.execute_activity(nlm_pesquisa_web, args=[nb, q], start_to_close_timeout=timedelta(minutes=25),
+                                                retry_policy=RetryPolicy(maximum_attempts=1))
+            rs = []
+            for q in (p.perguntas or [p.pergunta or "Resuma."])[:3]:
+                rs.append(await workflow.execute_activity(nlm_perguntar, args=[nb, q], start_to_close_timeout=timedelta(minutes=12),
+                                                          retry_policy=RetryPolicy(maximum_attempts=1)))
+            return ResultadoNotebookLM(ok=True, tipo=p.tipo, caderno=nb, resposta="\n\n=====\n\n".join(rs), uso_dia=uso)
         if p.tipo != "short":
             r = await workflow.execute_activity(nlm_perguntar, args=[nb, p.pergunta or "Resuma a origem e o significado."],
                                                 start_to_close_timeout=timedelta(minutes=12),
@@ -196,4 +215,4 @@ class NotebookLMWorkflow:
                                    estado_artefato=estado, uso_dia=uso)
 
 
-ATIVIDADES = [nlm_checar_saldo, nlm_caderno, nlm_persona, nlm_baixar_video, nlm_fonte, nlm_perguntar, nlm_artefatos_video, nlm_gerar_short]
+ATIVIDADES = [nlm_checar_saldo, nlm_pesquisa_web, nlm_caderno, nlm_persona, nlm_baixar_video, nlm_fonte, nlm_perguntar, nlm_artefatos_video, nlm_gerar_short]

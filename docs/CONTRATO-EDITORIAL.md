@@ -309,16 +309,16 @@ Até você escolher, o contrato fica com t214. O SOP/steering do NotebookLM prec
 Texto canônico (o Roteirista preenche só o que está entre `< >`; o resto é fixo):
 
 ```
-[ESTILO] Ilustração 2D plana de cartum, como animação de TV brasileira: traço preto grosso e uniforme, cores chapadas quentes (amarelo-mostarda, verde-bandeira, azul-céu, terracota), sem degradê nem sombra realista, fundo simples com no máximo 5 objetos, humor carinhoso. Personagem sempre grande no quadro (ocupa ≥ 1/3 da altura), centralizado, agindo. Proibido: fotorrealismo, 3D, rosto de pessoa real ou celebridade, marca ou logo real, texto escrito nas imagens. Formato vertical 9:16, deixar livres a faixa de cima e a de baixo da tela.
+[ESTILO] Ilustração 2D plana de cartum, como animação de TV brasileira: traço preto nítido e uniforme, personagem em cores chapadas quentes (amarelo-mostarda, verde-bandeira, terracota) com alto contraste sobre fundo limpo em tom frio ou neutro (azul-céu, bege claro), sem degradê nem sombra realista, fundo minimalista com no máximo 3–5 objetos, humor carinhoso. Personagem sempre grande no quadro (ocupa ≥ 1/3 da altura), centralizado, agindo, com expressões faciais e corporais exageradas. Proibido: fotorrealismo, 3D, rosto de pessoa real ou celebridade, marca ou logo real, texto escrito nas imagens. Formato vertical 9:16, deixar livres a faixa de cima e a de baixo da tela.
 
-[PERSONAGEM] Um só: <idade aprox.> anos, <tipo físico>, cabelo <cor + corte>, <peça de roupa + cor>, <peça 2 + cor>, <1 traço marcante contável, ex.: "bigode grosso", "óculos redondos vermelhos">, expressão-base <curiosa/espantada/marota>. Sem nome. Esta frase se repete idêntica em todas as cenas.
+[PERSONAGEM] Um só: <idade aprox.> anos, <tipo físico>, cabelo <cor + corte>, <peça de roupa + cor>, <peça 2 + cor>, <1 traço marcante contável, ex.: "bigode grosso", "óculos redondos vermelhos">, expressão-base exagerada <curiosa/espantada/marota>. Sem nome. Esta frase se repete idêntica em todas as cenas.
 
 [AMBIENTE] Cena <n>: <lugar>, <época: hoje / anos 80 / Brasil colonial>, objetos-âncora: <3 a 5 objetos brasileiros concretos, ex.: filtro de barro, TV de tubo, ventilador de pé>, luz <manhã/tarde/noite + fonte>.
 
-[CENAS] (troca a cada 3–5 s)
+[CENAS] (troca de cena ou de enquadramento a cada 2–4 s; a imagem absurda da cena 1 aparece já no 1º segundo)
 1. Fala: "<frase>" → Ação: o personagem vive a expressão ao pé da letra, de forma absurda → Plano: <aberto/médio/close>.
 …
 N. Fala: "<frase final / CTA>" → Ação: retoma a imagem da cena 1 (loop) → Plano: o mesmo da cena 1.
 ```
 
-Regras de preenchimento: 1 personagem (2 só se o roteiro exigir, §11.1, e então 2 frases-ficha distintas); contar traços ("dois", "um") em vez de adjetivos; uma ação visível por cena; época histórica só no trecho de etimologia; sem crianças em situação de risco nem estereótipo regional (§16.6). Em vigor só depois da aprovação; até lá vale a frase padrão do item 4.
+Regras de preenchimento: 1 personagem (2 só se o roteiro exigir, §11.1, e então 2 frases-ficha distintas); contar traços ("dois", "um") em vez de adjetivos; uma ação visível por cena; época histórica só no trecho de etimologia; sem crianças em situação de risco nem estereótipo regional (§16.6). **Revisão t430 (pesquisa NotebookLM, `docs/pesquisas/estilo-2d-referencias.md`):** mantido o cartum 2D plano com 1 personagem (fica entre flat vector e cutout, os estilos com mais tração em curiosidade curta). Mudou: contraste personagem quente × fundo frio/limpo; fundo minimalista (3–5 objetos); expressões exageradas; ritmo 2–4 s (era 3–5 s); gancho visual no 1º segundo (OpusClip: 50–60% da evasão nos 3 s iniciais). Texto: as fontes dão +15–25% de retenção com legenda embutida, mas o NotebookLM erra texto em imagem → a imagem continua **sem texto** e a legenda é **queimada no pós** (`post-short.sh`, a implementar se aprovado; muda §16.4 e Gate A9 item 8). Em vigor só depois da aprovação; até lá vale a frase padrão do item 4.
