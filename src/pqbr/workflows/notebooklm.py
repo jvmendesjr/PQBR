@@ -220,8 +220,11 @@ async def nlm_artefatos_video(caderno: str) -> list[dict]:
     return [{"id": a["id"], "status": str(a.get("status", ""))} for a in _ids(j)]
 
 
-REFORCO_SHORT = ("Sem nenhum texto escrito dentro da imagem (sem letreiros, placas, rótulos ou balões). "
-                 "O mesmo personagem em todas as cenas: mesmo rosto, cabelo, roupa e cores, do início ao fim.")
+REFORCO_SHORT = (   # José 16:08: mais movimento; personagem consistente QUANDO aparece (não precisa estar em todas)
+    "Movimento cinematográfico do início ao fim: câmera sempre em movimento (zoom in e zoom out lentos, pan lateral, travelling), "
+    "cortes dinâmicos a cada 2 a 3 segundos e variação de planos (close, plano médio, plano geral). "
+    "O personagem principal não precisa aparecer em todas as cenas; sempre que aparecer, mantenha-o consistente: mesmo rosto, cabelo, "
+    "roupa e cores. Sem nenhum texto escrito dentro da imagem (sem letreiros, placas, rótulos ou balões).")
 
 
 def steering_short(bloco: str = "") -> str:
@@ -349,19 +352,31 @@ class NotebookLMWorkflow:
     async def _seo(self, nb: str, cri: dict, curto: dict) -> dict:
         uma = dict(start_to_close_timeout=timedelta(minutes=12), retry_policy=RetryPolicy(maximum_attempts=1))
         erro = ""
+        reg = await workflow.execute_activity("registro_fontes_listar", nb, task_queue=FILA_REGISTRO, **curto)
+        fontes = await workflow.execute_activity(nlm_fontes_urls, args=[nb, reg], **curto)
+        fontes = await workflow.execute_activity("ordenar_fontes", args=[cri.get("fontes") or [], fontes], task_queue=FILA_REGISTRO, **curto)
         for _ in range(2):
             try:
                 txt = await workflow.execute_activity(nlm_perguntar, args=[nb, PROMPT_SEO + (f" Corrija: {erro}" if erro else "")], **uma)
-                return (await workflow.execute_activity("validar_seo", txt, task_queue=FILA_REGISTRO, **uma)) | {"_origem": "notebooklm"}
+                return (await workflow.execute_activity("validar_seo", args=[txt, fontes], task_queue=FILA_REGISTRO, **uma)) | {"_origem": "notebooklm"}
             except Exception as e:  # noqa: BLE001
                 erro = str(getattr(e, "cause", e))[:300]
-        return await workflow.execute_activity("seo_9router", cri["markdown"], task_queue=FILA_REGISTRO, **uma)
+        return await workflow.execute_activity("seo_9router", args=[cri["markdown"], fontes], task_queue=FILA_REGISTRO, **uma)
 
 
 @activity.defn
 async def nlm_fontes_ids(caderno: str) -> list[str]:
     lst = _json(await asyncio.to_thread(_cli, "source", "list", "-n", caderno, "--json", timeout=120))
     return [f["id"] for f in _ids(lst.get("sources", lst) if isinstance(lst, dict) else lst)]
+
+
+@activity.defn
+async def nlm_fontes_urls(caderno: str, registradas: list[str]) -> list[dict]:
+    """t466: título + URL real das fontes REGISTRADAS do episódio (web/pdf); base da lista de fontes da descrição."""
+    lst = _json(await asyncio.to_thread(_cli, "source", "list", "-n", caderno, "--json", timeout=120))
+    ok = set(registradas)
+    return [{"id": f["id"], "titulo": f.get("title") or "", "url": f["url"]} for f in _ids(lst.get("sources", lst) if isinstance(lst, dict) else lst)
+            if f["id"] in ok and str(f.get("url") or "").startswith("http")]
 
 
 @activity.defn
@@ -377,4 +392,4 @@ async def nlm_gerar_capa(caderno: str, destino: str, prompt: str) -> dict:
     return {"arquivo": str(f), "bytes": f.stat().st_size}
 
 
-ATIVIDADES = [nlm_fontes_ids, nlm_gerar_capa, nlm_checar_saldo, nlm_pesquisa_web, nlm_caderno, nlm_persona, nlm_baixar_video, nlm_fonte, nlm_perguntar, nlm_artefatos_video, nlm_gerar_short]
+ATIVIDADES = [nlm_fontes_urls, nlm_fontes_ids, nlm_gerar_capa, nlm_checar_saldo, nlm_pesquisa_web, nlm_caderno, nlm_persona, nlm_baixar_video, nlm_fonte, nlm_perguntar, nlm_artefatos_video, nlm_gerar_short]

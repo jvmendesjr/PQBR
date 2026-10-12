@@ -166,8 +166,10 @@ class EpisodioWorkflow:
         quadros = await workflow.execute_activity(extrair_quadros, args=[f"{base}/final.mp4", p.n_cenas, f"{base}/pranchas"], **curto)
         capa = await workflow.execute_activity(capa_a9, quadros, **curto)
         capa_nlm = (nlm.criativo.get("capa") or {}).get("arquivo")
-        if capa_nlm:   # t464: capa = infográfico retrato do NotebookLM; A9 fica como reserva
-            capa = {**capa, "escolhido": capa_nlm, "origem": "notebooklm-infografico", "a9": capa.get("escolhido")}
+        if capa_nlm:   # t464/t466: infográfico retrato do NotebookLM só se for cena única; senão A9
+            chk = await workflow.execute_activity("capa_conferir", capa_nlm, **curto)
+            capa = ({**capa, "escolhido": capa_nlm, "origem": "notebooklm-infografico", "a9": capa.get("escolhido"), "checagem": chk}
+                    if chk["unico"] else {**capa, "origem": "a9 (infográfico reprovado: " + chk["motivo"] + ")", "checagem": chk})
         self._criativo = nlm.criativo
         try:
             await workflow.wait_condition(lambda: self._veredito is not None, timeout=timedelta(hours=p.espera_veredito_h))
@@ -196,5 +198,5 @@ class EpisodioWorkflow:
                                               "auditor": self._veredito.model_dump()})
 
 
-from .criativo import validar_roteiro, validar_seo, seo_9router, compliance_roteiro
-ATIVIDADES_EPISODIO = [validar_roteiro, validar_seo, seo_9router, compliance_roteiro, pos_produzir, extrair_quadros, capa_a9, drive_enviar, publicacao_dryrun, *ATIVIDADES_REGISTRO]
+from .criativo import validar_roteiro, validar_seo, seo_9router, compliance_roteiro, ordenar_fontes, capa_conferir
+ATIVIDADES_EPISODIO = [capa_conferir, validar_roteiro, validar_seo, seo_9router, compliance_roteiro, ordenar_fontes, pos_produzir, extrair_quadros, capa_a9, drive_enviar, publicacao_dryrun, *ATIVIDADES_REGISTRO]

@@ -51,7 +51,11 @@ class Producao(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(r.estado, "reprovado")
 
     async def test_vigia_prazo(self):
-        atraso = 24 * 3600
+        # E2E 12/10: o prazo depende do relógio (janela 21:15 de hoje ou de amanhã). O atraso passa a ser calculado a partir
+        # da própria janela do item (sempre 1 h depois dela), então o teste não depende mais da hora em que roda.
+        it = self.item()
+        jan = datetime.combine(it.data, datetime.strptime(it.janela, "%H:%M").time(), FUSO)
+        atraso = int((jan - datetime.now(FUSO)).total_seconds()) + 3600
         r = await self.run_(P.EpisodioProducaoWorkflow.run, P.PedidoEpisodio(item=self.item(), codigo="PQBR-EP0003", simulacao=P.SimProducao(atraso_producao_s=atraso, tem_reserva=False)))
         self.assertEqual(r.estado, "cancelado")
         r = await self.run_(P.EpisodioProducaoWorkflow.run, P.PedidoEpisodio(item=self.item(), codigo="PQBR-EP0004", simulacao=P.SimProducao(atraso_producao_s=atraso)))

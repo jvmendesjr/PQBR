@@ -43,3 +43,43 @@ def escolher(quadros: list[str]) -> tuple[CandidatoCapa | None, list[CandidatoCa
     med = [medir(q) for q in quadros]
     ordem = ([med[0]] if med else []) + ([med[-1]] if len(med) > 1 else []) + sorted(med[1:-1], key=lambda c: -c.contraste)
     return next((c for c in ordem if c.ok), None), med
+
+
+# ---- t466 (José 16:07): capa com foco único; detecta painéis/grade sem dependências (ffmpeg + Python puro) ----
+class ChecagemPaineis(BaseModel):
+    arquivo: str
+    componentes: int
+    razao_2o: float
+    faixa_vazia: bool
+    unico: bool
+    motivo: str
+
+
+def _pixels(arquivo: str, w: int = 90, h: int = 160) -> list[tuple[int, int, int]]:
+    raw = subprocess.run(["ffmpeg", "-nostdin", "-v", "error", "-i", arquivo, "-vf", f"scale={w}:{h},format=rgb24",
+                          "-frames:v", "1", "-f", "rawvideo", "-"], capture_output=True, check=True).stdout
+    return [tuple(raw[i:i + 3]) for i in range(0, w * h * 3, 3)]
+
+
+def checar_paineis(arquivo: str, w: int = 90, h: int = 160, limiar: int = 45) -> ChecagemPaineis:
+    """Fundo = mediana da borda; objeto = pixel distante do fundo. ≥ 2 blocos grandes separados por fundo, ou uma
+    faixa inteira de fundo no miolo com conteúdo dos dois lados → painéis/grade (não é cena única)."""
+    px = _pixels(arquivo, w, h)
+    borda = [px[x] for x in range(w)] + [px[(h - 1) * w + x] for x in range(w)] + [px[y * w] for y in range(h)] + [px[y * w + w - 1] for y in range(h)]
+    bg = tuple(sorted(c[i] for c in borda)[len(borda) // 2] for i in range(3))
+    obj = [sum(abs(p[i] - bg[i]) for i in range(3)) > limiar for p in px]
+    vistos, areas = [False] * (w * h), []
+    for s in range(w * h):
+        if not obj[s] or vistos[s]: continue
+        pilha, n = [s], 0; vistos[s] = True
+        while pilha:
+            k = pilha.pop(); n += 1; y, x = divmod(k, w)
+            for v in ((k - w) if y else -1, (k + w) if y < h - 1 else -1, (k - 1) if x else -1, (k + 1) if x < w - 1 else -1):
+                if v >= 0 and obj[v] and not vistos[v]: vistos[v] = True; pilha.append(v)
+        areas.append(n)
+    grandes = sorted((a for a in areas if a >= 0.02 * w * h), reverse=True)
+    razao = grandes[1] / grandes[0] if len(grandes) > 1 else 0.0
+    linhas = [sum(obj[y * w:(y + 1) * w]) for y in range(h)]
+    faixa = any(linhas[y] <= 1 and sum(linhas[:y]) > 0.08 * w * h and sum(linhas[y:]) > 0.08 * w * h for y in range(int(h * .2), int(h * .8)))
+    motivo = ("faixa vazia separando blocos" if faixa else f"{len(grandes)} blocos (2º/1º = {razao:.2f})" if len(grandes) > 1 and razao >= 0.15 else "")
+    return ChecagemPaineis(arquivo=arquivo, componentes=len(grandes), razao_2o=round(razao, 3), faixa_vazia=faixa, unico=not motivo, motivo=motivo or "cena única")

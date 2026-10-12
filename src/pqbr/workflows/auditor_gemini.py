@@ -1,0 +1,154 @@
+"""t467 (José 16:07): Auditor visual pelo Gemini Web no Camofox PQBR (conta já logada), humanizado.
+Pranchas rotuladas (S01…, CAPA) → upload pelo menu "Enviar arquivos" → template VISUAL_2D colado → resposta
+validada (RespostaAuditorGemini + auditor_visual.decidir). Erros não de segurança → pqbr.erros_aceitaveis.
+Ações: só clique/tecla/upload humanos; leitura da resposta por evaluate SOMENTE leitura (innerText)."""
+from __future__ import annotations
+import json, re, subprocess, time, urllib.request
+from pathlib import Path
+from typing import Literal
+from pydantic import BaseModel, ConfigDict, Field
+from temporalio import activity
+
+UPLOADS = Path("/home/pc/.pqbr/camofox/uploads")
+FONTE = "DejaVu Sans:bold"
+SN = Literal["sim", "nao", "na"]
+
+
+class CenaAuditada(BaseModel):
+    model_config = ConfigDict(extra="ignore")
+    id: str = Field(pattern=r"^(S[0-9]{2,}|CAPA)$")
+    tem_personagem: SN; tem_texto_na_tela: SN; segue_estilo_declarado: SN; mesmo_personagem_do_bloco: SN
+    imagem_corresponde_a_fala: SN; legivel_no_celular: SN; ambiente_brasileiro: SN; legenda_com_erro: SN
+    parece_pessoa_real: SN; marca_real: SN; estereotipo_ofensivo: SN; texto_com_erro_de_sentido: SN
+
+
+class RespostaAuditorGemini(BaseModel):
+    model_config = ConfigDict(extra="ignore")
+    rodada: int = Field(ge=1, le=3)
+    cenas: list[CenaAuditada] = Field(min_length=1, max_length=60)
+
+
+class ResultadoAuditorGemini(BaseModel):
+    veredito: Literal["aprova", "aprova_com_ressalva", "terceira_rodada", "reprova"]
+    motivos: list[str] = Field(default_factory=list)
+    rodadas: int
+    erros_aceitaveis: int = 0
+    conversas: list[str] = Field(default_factory=list)
+    bruto: dict = Field(default_factory=dict)
+
+
+def _api(metodo: str, path: str, corpo: dict | None = None, t: int = 90) -> dict:
+    from .camofox import BASE, _chave
+    r = urllib.request.Request(BASE + path, data=json.dumps(corpo).encode() if corpo is not None else None, method=metodo,
+                               headers={"Authorization": "Bearer " + _chave(), "Content-Type": "application/json"})
+    with urllib.request.urlopen(r, timeout=t) as x:
+        return json.load(x)
+
+
+def _snap(tab: str) -> str:
+    return _api("GET", f"/tabs/{tab}/snapshot?userId=pqbr").get("snapshot", "")
+
+
+def _ref(tab: str, rotulo: str, tentativas: int = 10) -> str:
+    for _ in range(tentativas):
+        m = re.search(rotulo + r'[^\n]*?\[(e\d+)\]', _snap(tab))
+        if m: return m.group(1)
+        time.sleep(1.5)
+    raise RuntimeError(f"elemento não encontrado: {rotulo}")
+
+
+def preparar_pranchas(quadros: list[str], capa: str | None, destino: Path) -> list[str]:
+    """Rotula cada quadro com o id da cena embaixo (o template pede), no diretório de upload do Camofox."""
+    destino.mkdir(parents=True, exist_ok=True); fonte = subprocess.run(["fc-match", "-f", "%{file}", FONTE], capture_output=True, text=True).stdout
+    itens = [(f"S{i + 1:02d}", q) for i, q in enumerate(quadros)] + ([("CAPA", capa)] if capa else [])
+    out = []
+    for rid, q in itens:
+        f = destino / f"{rid}.png"
+        subprocess.run(["ffmpeg", "-nostdin", "-v", "error", "-y", "-i", q, "-vf",
+                        f"scale=540:-2,pad=iw:ih+90:0:0:white,drawtext=fontfile={fonte}:text={rid}:fontsize=60:fontcolor=black:x=(w-tw)/2:y=h-75",
+                        str(f)], check=True)
+        out.append(str(f))
+    return out
+
+
+def ler_texto_resposta(tab: str) -> str:
+    js = ("(() => { const r = document.querySelectorAll('model-response, .model-response-text, message-content');"
+          " return r.length ? r[r.length - 1].innerText : ''; })()")
+    return str(_api("POST", f"/tabs/{tab}/evaluate", {"userId": "pqbr", "expression": js}).get("result") or "")
+
+
+def perguntar_gemini(arquivos: list[str], prompt: str, espera_s: int = 420) -> tuple[str, str]:
+    """Nova conversa → anexa arquivos → cola prompt → envia → espera terminar. Devolve (texto, url da conversa)."""
+    from .camofox_humano import clicar, escrever, pausa_humana
+    tab = _api("POST", "/tabs", {"userId": "pqbr", "sessionKey": "gemini-auditor", "url": "https://gemini.google.com/app"})["tabId"]
+    try:
+        pausa_humana(2, 4)
+        try: clicar(tab, ref=_ref(tab, r'button "Entendi"', 2))
+        except RuntimeError: pass
+        clicar(tab, ref=_ref(tab, r'button "Envio e ferramentas"'))
+        pausa_humana(0.8, 1.8)
+        _api("POST", f"/tabs/{tab}/upload", {"userId": "pqbr", "ref": _ref(tab, r'menuitem "Enviar arquivos'), "path": arquivos, "timeout": 20000}, t=120)
+        pausa_humana(3, 6)   # previews das imagens
+        clicar(tab, ref=_ref(tab, r'textbox "Insira um comando'))   # mouse humano no campo
+        pausa_humana(0.6, 1.4)
+        _api("POST", f"/tabs/{tab}/type", {"userId": "pqbr", "ref": _ref(tab, r'textbox "Insira um comando'), "text": prompt,
+                                           "mode": "fill"})   # "colar" (texto longo); ref resolvido de novo após o upload
+        pausa_humana(1.5, 3.5)
+        for _ in range(20):   # o botão de enviar só habilita depois de terminar o upload
+            m = re.search(r'button "Enviar mensagem"[^\n]*?\[(e\d+)\](?![^\n]*disabled)', _snap(tab))
+            if m: break
+            time.sleep(3)
+        else: raise RuntimeError("botão Enviar mensagem não habilitou")
+        clicar(tab, ref=m.group(1))
+        t0, txt = time.time(), ""
+        while time.time() - t0 < espera_s:
+            time.sleep(8)
+            s = _snap(tab)
+            if "Parar resposta" in s or 'button "Parar' in s: continue
+            txt = ler_texto_resposta(tab)
+            if '"cenas"' in txt and txt.rstrip().endswith(("}", "```")): break
+        url = _api("GET", f"/tabs?userId=pqbr")
+        url = next((x["url"] for x in url.get("tabs", []) if x["tabId"] == tab), "")
+        return txt, url
+    finally:
+        try: _api("DELETE", f"/tabs/{tab}?userId=pqbr")
+        except Exception: pass
+
+
+def validar(texto: str, ids: list[str]) -> str:
+    t = re.sub(r"```(?:json)?", "", texto); i, j = t.find("{"), t.rfind("}")
+    r = RespostaAuditorGemini.model_validate_json(t[i:j + 1])
+    falt = set(ids) - {c.id for c in r.cenas}
+    if falt: raise ValueError(f"cenas ausentes: {sorted(falt)}")
+    return json.dumps(r.model_dump(), ensure_ascii=False)
+
+
+def auditar(codigo: str, slug: str, quadros: list[str], falas: list[str], bloco_visual: str, capa: str | None = None,
+            rodadas: int = 2) -> ResultadoAuditorGemini:
+    from ..pipeline.auditor_visual import montar_prompt, decidir, linhas_erros_aceitaveis, SQL_ERROS
+    arqs = preparar_pranchas(quadros, capa, UPLOADS / f"auditor-{codigo}")
+    ids = [Path(a).stem for a in arqs]
+    cenas = [(f"S{i + 1:02d}", falas[i] if i < len(falas) else "") for i in range(len(quadros))] + ([("CAPA", "capa do vídeo (sem fala)")] if capa else [])
+    brutos, urls = [], []
+    for n in range(1, rodadas + 1):
+        ok = None
+        for _ in range(2):
+            txt, url = perguntar_gemini(arqs, montar_prompt(bloco_visual, cenas, n)); urls.append(url)
+            try: ok = validar(txt, ids); break
+            except Exception as e: txt = ""; err = str(e)[:200]  # noqa: BLE001
+        brutos.append(ok or "{}")
+    res = decidir(brutos, ids)
+    from .pacote import _banco
+    linhas = linhas_erros_aceitaveis(res, episodio_codigo=codigo)
+    with _banco() as c:
+        for l in linhas: c.execute(SQL_ERROS, l)
+        c.commit()
+    mot = [f"{i}:{k}" for i, k in res["falhas"] + res["divergencias"] + res["ressalvas"]][:20] + res["problemas"][:5]
+    return ResultadoAuditorGemini(veredito=res["veredito"], motivos=mot or ["sem ressalvas"], rodadas=rodadas, erros_aceitaveis=len(linhas),
+                                  conversas=urls, bruto={k: res[k] for k in ("metricas", "rodada_unica")})
+
+
+@activity.defn
+async def auditor_gemini(codigo: str, slug: str, quadros: list[str], falas: list[str], bloco_visual: str, capa: str | None = None) -> dict:
+    import asyncio
+    return (await asyncio.to_thread(auditar, codigo, slug, quadros, falas, bloco_visual, capa)).model_dump()

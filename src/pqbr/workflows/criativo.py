@@ -6,7 +6,7 @@ import asyncio, json, re
 from pathlib import Path
 from temporalio import activity
 from temporalio.exceptions import ApplicationError
-from ..contratos import RoteiroShort, PacoteSEO, ESTILO_PADRAO_2D, CTA
+from ..contratos import RoteiroShort, PacoteSEO, ESTILO_PADRAO_2D, CTA, MARCA_LINK_QUEBRADO
 
 PROMPT_ROTEIRO = (
     "Escreva o roteiro do Short sobre \"{tema}\" seguindo o contrato editorial e o bloco visual §16.7 do pacote PQBR: "
@@ -21,8 +21,11 @@ PROMPT_SEO = (
     "Com base no roteiro deste caderno, gere o SEO do Short do canal Porquê BR (pt-BR): titulo (≤ 70 caracteres, pergunta curiosa, "
     "sem clickbait enganoso), descricao (2–3 frases + as fontes + hashtags), tags (≤ 12), hashtags (3–5, inclua #shorts). "
     'Responda SÓ um JSON: {"titulo":"...","descricao":"...","tags":["..."],"hashtags":["#..."]}')
-PROMPT_CAPA = ("Capa de YouTube Short 9:16: UMA única ilustração 2D de cartum da CENA 1, personagem grande no centro, sem texto, "
-               "sem títulos, sem gráficos, sem ícones; siga [ESTILO] e [PERSONAGEM] da fonte do roteiro.")
+PROMPT_CAPA = (   # t466 (José 16:07): cena única, um foco central, sem painéis
+    "Capa vertical 9:16 de YouTube Short: UMA ÚNICA cena, preenchendo a tela inteira de borda a borda, com UM foco central grande "
+    "(o momento do gancho, cena 1 do roteiro). PROIBIDO: painéis, quadros, grade, mosaico, colagem de várias cenas, linha do tempo, "
+    "mini-ilustrações, ícones, setas, gráficos, molduras, títulos, legendas ou qualquer texto. Fundo contínuo de um só ambiente. "
+    "Siga o estilo e o personagem descritos na fonte do roteiro.")
 
 
 def _obj(texto: str) -> dict:
@@ -66,23 +69,54 @@ async def validar_roteiro(texto: str, slug: str) -> dict:
     return {"roteiro": r, "fontes": f, "markdown": roteiro_markdown(r, f), "steering": steering_de_roteiro(r)}
 
 
+def descricao_com_fontes(texto: str, fontes: list[dict], hashtags: list[str] | None = None) -> str:
+    """t466 (José 16:07): texto do NotebookLM sem links quebrados nem a lista de fontes dele + lista determinística
+    de fontes com URL real do registro do episódio (pqbr.fontes_caderno → source list). Puro; testado."""
+    linhas = []
+    for l in (texto or "").splitlines():
+        if re.match(r"\s*(fontes?|referências|sources?)\s*:", l, re.I): break
+        l = MARCA_LINK_QUEBRADO.sub("", l)
+        l = re.sub(r"https?://\S+", "", l)
+        l = re.sub(r"\s+([,.;:])", r"\1", re.sub(r"[ \t]{2,}", " ", l)).rstrip(" ,;:-")
+        if not re.fullmatch(r"\s*(#\S+\s*)+", l): linhas.append(l)
+    corpo = "\n".join(linhas).strip()
+    fs = [f for f in fontes if f.get("url")][:5]
+    lista = "\n".join(f"- {(f.get('titulo') or '').strip()[:90]}: {f['url']}" for f in fs)
+    tags = " ".join(hashtags or [])
+    return "\n\n".join(x for x in (corpo, "Fontes:\n" + lista if lista else "", tags) if x)[:4900]
+
+
+def escolher_fontes(citadas: list[str], disponiveis: list[dict]) -> list[dict]:
+    """Prioriza as fontes citadas pelo roteiro (casando pelo começo do título); completa com as demais web. Puro."""
+    norm = lambda t: re.sub(r"\W+", " ", (t or "").lower()).strip()[:40]
+    cit = [norm(c.split(" - ")[0]) for c in citadas]
+    pri = [f for f in disponiveis if any(c and (c in norm(f.get("titulo")) or norm(f.get("titulo")) in c) for c in cit)]
+    return pri + [f for f in disponiveis if f not in pri]
+
+
 @activity.defn
-async def validar_seo(texto: str) -> dict:
+async def validar_seo(texto: str, fontes: list[dict] | None = None) -> dict:
     try:
-        return PacoteSEO.model_validate(_obj(texto)).model_dump()
+        d = _obj(texto)
+        if fontes is not None:
+            d["descricao"] = descricao_com_fontes(d.get("descricao", ""), fontes, d.get("hashtags"))
+        return PacoteSEO.model_validate(d).model_dump()
     except Exception as e:  # noqa: BLE001
         raise ApplicationError(f"SEO inválido: {str(e)[:400]}", type="SaidaInvalida", non_retryable=True) from None
 
 
 @activity.defn
-async def seo_9router(roteiro_md: str) -> dict:
+async def seo_9router(roteiro_md: str, fontes: list[dict] | None = None) -> dict:
     """Reserva: o NotebookLM não entregou SEO válido → Especialista de SEO no 9router (combo do papel)."""
     from ..kit.router9 import chat_papel
     erro = ""
     for _ in range(2):
         t = await asyncio.to_thread(chat_papel, "especialista-seo", "Você é o Especialista de SEO do Porquê BR. Responda só JSON.",
                                     PROMPT_SEO + "\n\nRoteiro:\n" + roteiro_md[:6000] + (f"\nCorrija: {erro}" if erro else ""), 1200)
-        try: return PacoteSEO.model_validate(_obj(t)).model_dump() | {"_origem": "9router"}
+        try:
+            d = _obj(t)
+            if fontes is not None: d["descricao"] = descricao_com_fontes(d.get("descricao", ""), fontes, d.get("hashtags"))
+            return PacoteSEO.model_validate(d).model_dump() | {"_origem": "9router"}
         except Exception as e: erro = str(e)[:300]  # noqa: BLE001
     raise ApplicationError("SEO 9router inválido: " + erro, type="SaidaInvalida", non_retryable=True)
 
@@ -103,3 +137,15 @@ async def compliance_roteiro(roteiro_md: str) -> dict:
         d["segunda_opiniao"] = s
         if s.get("aprovado") is True: d["aprovado"] = None   # divergência → escala (não gera)
     return d
+
+
+@activity.defn
+async def ordenar_fontes(citadas: list[str], disponiveis: list[dict]) -> list[dict]:
+    return escolher_fontes(citadas, disponiveis)
+
+
+@activity.defn
+async def capa_conferir(arquivo: str) -> dict:
+    """t466: capa do NotebookLM só vale se for cena única (sem painéis/grade); senão o episódio usa a A9."""
+    from ..pipeline.capa import checar_paineis
+    return checar_paineis(arquivo).model_dump()

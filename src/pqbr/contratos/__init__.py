@@ -387,6 +387,9 @@ CATEGORIA_YOUTUBE = "27"   # Educação — única categoria do canal (José 12/
 _HASHTAG = re.compile(r"^#[0-9A-Za-zÀ-ÿ_]{2,50}$")
 
 
+MARCA_LINK_QUEBRADO = re.compile(r"\[?\s*(suspicious\s+link\s+removed|link\s+removed|link\s+removido)\s*\]?", re.I)
+
+
 class PacoteSEO(Contrato):
     titulo: str = Field(min_length=5, max_length=100)
     descricao: str = Field(min_length=10, max_length=5000)
@@ -408,6 +411,8 @@ class PacoteSEO(Contrato):
 
     @model_validator(mode="after")
     def _regras(self):
+        if any(MARCA_LINK_QUEBRADO.search(t) for t in (self.titulo, self.descricao, *self.tags)):
+            raise ValueError("link quebrado pelo NotebookLM ('[suspicious link removed]'); montar fontes pelo registro (t466)")
         if any("<" in t or ">" in t for t in (self.titulo, self.descricao, *self.tags)):
             raise ValueError("YouTube recusa < e > em título/descrição/tags")
         # limite da API: 500 caracteres somando as tags (tag com espaço conta +2 pelas aspas)
