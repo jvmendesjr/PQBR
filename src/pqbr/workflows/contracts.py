@@ -1,8 +1,9 @@
-"""Contratos Pydantic v2 do teste de 1 dia (subconjunto de ARQUITETURA §11)."""
+"""Contratos Pydantic v2 do teste de 1 dia (subconjunto de ARQUITETURA §11). RoteiroShort vem de pqbr.contratos."""
 from __future__ import annotations
 from datetime import datetime
 from typing import Literal
 from pydantic import BaseModel, Field, ConfigDict
+from ..contratos import RoteiroShort  # t437: formato antigo aposentado; único RoteiroShort
 
 
 class _Base(BaseModel):
@@ -16,15 +17,6 @@ class EpisodioInput(_Base):
     falhas_simuladas: int = Field(ge=0, le=5, default=2)  # tentativas que a Activity falha antes de passar
     espera_aprovacao_segundos: int = Field(ge=1, le=86_400, default=600)
     aprovacao_automatica: bool = False  # só para o soak
-
-
-class RoteiroShort(_Base):
-    episodio_id: str
-    titulo: str = Field(max_length=100)
-    falas: list[str] = Field(min_length=1, max_length=40)
-    palavras: int = Field(ge=1)
-    tentativa: int = Field(ge=1)
-    bloco_visual: dict | None = None   # CONTRATO §16.4 (t427); validado por pqbr.contratos.BlocoVisual
 
 
 class AprovacaoJose(_Base):

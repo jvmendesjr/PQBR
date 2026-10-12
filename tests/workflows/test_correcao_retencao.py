@@ -1,6 +1,6 @@
 """TS-11 (correção autônoma) e TS-12 (retenção) no ambiente de teste do Temporal (tempo acelerado).
 Rodar: PYTHONPATH=src python -m unittest discover -s tests/workflows -t ."""
-import asyncio, unittest, uuid
+import unittest, uuid
 from temporalio import activity
 from temporalio.contrib.pydantic import pydantic_data_converter
 from temporalio.testing import WorkflowEnvironment

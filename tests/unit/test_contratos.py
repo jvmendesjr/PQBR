@@ -108,3 +108,55 @@ class ContratosT436(unittest.TestCase):
             ErroAceitavel(**{**l, "evidencia": _j.loads(l["evidencia"])})
         with self.assertRaises(ValidationError):
             ErroAceitavel(categoria="legenda", chave="x1", descricao="abc", veredito_auditor="reprova", tema_slug="ab")
+
+
+class ContratosT437(unittest.TestCase):
+    CANON = ("Ilustração 2D plana de cartum, traço preto nítido, cores chapadas quentes. Proibido: fotorrealismo, 3D, "
+             "rosto de pessoa real, texto escrito dentro das imagens. Formato vertical 9:16, sem fotorrealismo.")
+
+    def _bv(self, estilo, **kw):
+        from pqbr.contratos import BlocoVisual, CenaVisual
+        c = CenaVisual(fala="oi", acao="acena", enquadramento="plano médio", ambiente="cozinha")
+        return BlocoVisual(estilo=estilo, personagem="adulto de 35 anos, camiseta verde", cenas=[c, c], **kw)
+
+    def test_bloco_visual_3d_realismo(self):
+        self._bv(self.CANON)
+        with self.assertRaises(ValidationError):
+            self._bv("Animação 3D estilo Pixar com iluminação suave e personagem fofo")
+        with self.assertRaises(ValidationError):
+            self._bv("Ilustração 2D mas com rosto fotorrealista e pele detalhada")
+        self._bv("Animação 3D estilo Pixar com iluminação suave e personagem fofo", pedido_3d_ou_realista=True)
+        with self.assertRaises(ValidationError):
+            self._bv("Desenho de cartum plano, traço preto, cores chapadas")   # sem 2D declarado
+
+    def test_jev_email(self):
+        from pqbr.contratos import ClassificacaoEmailYouTube as E
+        E(categoria="upload_status", gravidade="informativo", acao="registrar", confianca=0.9)
+        with self.assertRaises(ValidationError):
+            E(categoria="strike", gravidade="critico", acao="abrir_ticket", confianca=0.9)
+        with self.assertRaises(ValidationError):
+            E(categoria="claim", gravidade="informativo", acao="registrar", confianca=0.9)
+        with self.assertRaises(ValidationError):
+            E(categoria="other", gravidade="informativo", acao="ignorar", confianca=1.2)
+        with self.assertRaises(ValidationError):
+            E(categoria="other", gravidade="informativo", acao="ignorar", confianca=0.5, extra=1)
+
+    def test_jev_popup(self):
+        from pqbr.contratos import ClassificacaoPopupCamofox as P
+        P(categoria="cookie_consent", acao="aceitar", confianca=0.8)
+        for kw in ({"categoria": "captcha", "acao": "fechar"}, {"categoria": "login_required", "acao": "fechar"},
+                   {"categoria": "promo", "acao": "aceitar"}):
+            with self.assertRaises(ValidationError):
+                P(confianca=0.8, **kw)
+
+    def test_seo(self):
+        from pqbr.contratos import PacoteSEO
+        p = PacoteSEO(titulo="Por que a gente fala podre de rico?", descricao="A origem da expressão. #curiosidades",
+                      tags=["expressões brasileiras", "curiosidades"], hashtags=["#shorts", "#curiosidades", "#brasil"])
+        assert p.snippet_status()["status"]["containsSyntheticMedia"] is True and p.idioma == "pt-BR"
+        with self.assertRaises(ValidationError):
+            PacoteSEO(titulo="Título ok aqui", descricao="descrição ok", hashtags=["shorts", "#a1", "#b2"])
+        with self.assertRaises(ValidationError):
+            PacoteSEO(titulo="Título ok aqui", descricao="descrição ok", hashtags=["#ab", "#cd", "#ef"], tags=["x" * 60] * 9)
+        with self.assertRaises(ValidationError):
+            PacoteSEO(titulo="x" * 101, descricao="descrição ok", hashtags=["#ab", "#cd", "#ef"])

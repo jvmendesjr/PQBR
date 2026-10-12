@@ -33,12 +33,20 @@ class BlocoVisual(Contrato):
     estilo: str = Field(min_length=20, max_length=600)        # [ESTILO] 2D + meio/tom/paleta/referência
     personagem: str = Field(min_length=20, max_length=600)    # [PERSONAGEM] repetido palavra por palavra; sem nome
     personagem_2: str | None = Field(default=None, max_length=600)   # máx. 2 (§11.1)
-    cenas: list[CenaVisual] = Field(min_length=2, max_length=60)     # [CENAS] ~3–5 s; cena 1 literal; última retoma a 1ª
+    cenas: list[CenaVisual] = Field(min_length=2, max_length=60)     # [CENAS] ~2–4 s; cena 1 literal; última retoma a 1ª
+    pedido_3d_ou_realista: bool = False   # t437: só true se o roteiro pedir 3D/realismo explicitamente
 
     @model_validator(mode="after")
     def _regras(self):
-        if "2d" not in self.estilo.lower() and "3d" not in self.estilo.lower():
-            raise ValueError("[ESTILO] deve declarar 2D (ou 3D só se o roteiro pedir)")
+        e = self.estilo.lower()
+        # negativas ("sem fotorrealismo", "Proibido: …, 3D, …") não contam como pedido
+        afirm = re.sub(r"proibid[oa]s?:?[^.]*", " ", e)
+        afirm = re.sub(r"\b(sem|nada de|nunca|nem)\s+[^,.;]*", " ", afirm)
+        pede = bool(re.search(r"\b3d\b|fotorreal|realista|photoreal|hiper.?real", afirm))
+        if pede and not self.pedido_3d_ou_realista:
+            raise ValueError("[ESTILO] pede 3D/realismo sem pedido explícito do roteiro (pedido_3d_ou_realista)")
+        if not self.pedido_3d_ou_realista and not re.search(r"\b2d\b", e):
+            raise ValueError("[ESTILO] deve declarar 2D (padrão §16.4)")
         return self
 
 
@@ -221,6 +229,7 @@ class ResultadoCorrecao(Contrato):
 class RegistroConsumo(Contrato):
     provedor: str = Field(min_length=2, max_length=40)
     modelo: str = Field(min_length=1, max_length=120)
+    # 'ficha_visual' = só histórico (fichas pausadas, t400/t437): aceito para ler linhas antigas; código novo não usa.
     tipo_acao: Literal['ideacao', 'roteiro', 'seo', 'pesquisa', 'ficha_visual', 'auditor_visual',
                        'auditor_texto', 'auditor_desempate', 'jev_triagem', 'jev_classificacao',
                        'jev_decisao', 'jev_verificacao', 'correcao_autonoma', 'comunidade',
@@ -329,3 +338,82 @@ class ErroAceitavel(Contrato):
         if self.decisao != "pendente" and not (self.revisado_por and self.revisado_em):
             raise ValueError("decisão exige revisado_por e revisado_em")
         return self
+
+
+# Jev: classificações estruturadas (RNF-02, REGRAS §7; t437) ------------------------------------
+class ClassificacaoEmailYouTube(Contrato):
+    """E-mail do YouTube/Google para a conta do canal. O Jev só classifica; o código age."""
+    categoria: Literal["strike", "claim", "policy_warning", "monetization", "account_security",
+                       "upload_status", "marketing", "other"]
+    gravidade: Literal["informativo", "atencao", "critico"]
+    acao: Literal["ignorar", "registrar", "abrir_ticket", "chamar_jose"]
+    video_id: str | None = Field(default=None, pattern=r"^[A-Za-z0-9_-]{11}$")
+    prazo: date | None = None                      # prazo de recurso/resposta citado no e-mail
+    confianca: float = Field(ge=0, le=1)
+
+    @model_validator(mode="after")
+    def _regras(self):
+        if self.categoria in ("strike", "account_security") and self.acao != "chamar_jose":
+            raise ValueError("strike/segurança da conta sempre chama o José (recurso só com ele)")
+        if self.categoria in ("strike", "claim", "policy_warning", "account_security") and self.gravidade == "informativo":
+            raise ValueError("categoria de risco não pode ser informativa")
+        return self
+
+
+class ClassificacaoPopupCamofox(Contrato):
+    """Pop-up/tela inesperada no Camofox. Ações fora da allowlist (login, captcha) escalam."""
+    categoria: Literal["cookie_consent", "login_required", "captcha", "permission", "promo", "error", "other"]
+    acao: Literal["aceitar", "fechar", "recusar", "recarregar", "reautenticar", "chamar_jose", "ignorar"]
+    seletor: str | None = Field(default=None, max_length=300)    # alvo do clique, se houver
+    confianca: float = Field(ge=0, le=1)
+
+    @model_validator(mode="after")
+    def _regras(self):
+        if self.categoria == "captcha" and self.acao != "chamar_jose":
+            raise ValueError("captcha nunca é resolvido por agente: chamar_jose")
+        if self.categoria == "login_required" and self.acao not in ("reautenticar", "chamar_jose"):
+            raise ValueError("login exige reautenticar (playbook) ou chamar_jose")
+        if self.acao == "aceitar" and self.categoria not in ("cookie_consent", "permission"):
+            raise ValueError("aceitar só para consentimento de cookies/permissão")
+        return self
+
+
+# SEO (RF-06; YouTube Data API snippet/status; t437) --------------------------------------------
+_HASHTAG = re.compile(r"^#[0-9A-Za-zÀ-ÿ_]{2,50}$")
+
+
+class PacoteSEO(Contrato):
+    titulo: str = Field(min_length=5, max_length=100)
+    descricao: str = Field(min_length=10, max_length=5000)
+    tags: list[str] = Field(default_factory=list, max_length=30)
+    hashtags: list[str] = Field(min_length=3, max_length=15)
+    categoria_id: str = Field(default="27", pattern=r"^[0-9]{1,3}$")   # 27 = Educação (PROPOSTA)
+    idioma: Literal["pt-BR"] = "pt-BR"
+    contem_midia_sintetica: bool = True     # status.containsSyntheticMedia; vídeo do NotebookLM = IA
+
+    @field_validator("hashtags")
+    @classmethod
+    def _hashtags(cls, v: list[str]) -> list[str]:
+        for h in v:
+            if not _HASHTAG.match(h):
+                raise ValueError(f"hashtag inválida: {h!r} (precisa de #, sem espaço)")
+        if len({h.lower() for h in v}) != len(v):
+            raise ValueError("hashtag repetida")
+        return v
+
+    @model_validator(mode="after")
+    def _regras(self):
+        if any("<" in t or ">" in t for t in (self.titulo, self.descricao, *self.tags)):
+            raise ValueError("YouTube recusa < e > em título/descrição/tags")
+        # limite da API: 500 caracteres somando as tags (tag com espaço conta +2 pelas aspas)
+        total = sum(len(t) + (2 if " " in t else 0) for t in self.tags) + max(len(self.tags) - 1, 0)
+        if total > 500:
+            raise ValueError(f"tags somam {total} caracteres (> 500)")
+        return self
+
+    def snippet_status(self) -> dict:
+        return {"snippet": {"title": self.titulo, "description": self.descricao, "tags": list(self.tags),
+                            "categoryId": self.categoria_id, "defaultLanguage": self.idioma,
+                            "defaultAudioLanguage": self.idioma},
+                "status": {"privacyStatus": "private", "containsSyntheticMedia": self.contem_midia_sintetica,
+                           "selfDeclaredMadeForKids": False}}

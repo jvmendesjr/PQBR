@@ -7,7 +7,7 @@ import asyncio, fcntl, json, os, re, subprocess, time
 from datetime import date, timedelta
 from pathlib import Path
 from typing import Literal
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, ConfigDict, Field
 from temporalio import activity, workflow
 from temporalio.common import RetryPolicy
 
@@ -22,7 +22,15 @@ MESTRES_PROIBIDOS = {"88246689", "c35d7b24-5d4f-4eee-afc4-7a0eadc860bf"}
 SLUG = re.compile(r"^[a-z0-9][a-z0-9-]{1,60}$")
 
 
+class UsoDia(BaseModel):
+    """Saída de nlm_checar_saldo: contador local do dia + % das janelas do `notebooklm usage` (t437)."""
+    model_config = ConfigDict(extra="forbid", frozen=True)
+    dia: dict[Literal["chat", "video"], int] = Field(default_factory=dict)
+    janelas: dict[str, float] = Field(default_factory=dict)
+
+
 class PedidoNotebookLM(BaseModel):
+    model_config = ConfigDict(extra="forbid", frozen=True)
     tipo: Literal["pesquisa", "roteiro", "seo", "contexto", "short"]
     slug: str = Field(pattern=SLUG.pattern)
     fonte: str = Field(min_length=20, max_length=200_000)   # roteiro/briefing; vira a fonte do caderno
@@ -33,6 +41,7 @@ class PedidoNotebookLM(BaseModel):
 
 
 class ResultadoNotebookLM(BaseModel):
+    model_config = ConfigDict(extra="forbid", frozen=True)
     ok: bool
     tipo: str
     caderno: str | None = None
@@ -40,7 +49,7 @@ class ResultadoNotebookLM(BaseModel):
     artefato: str | None = None
     estado_artefato: str | None = None
     motivo: str | None = None
-    uso_dia: dict = {}
+    uso_dia: UsoDia = Field(default_factory=UsoDia)
 
 
 class SemSaldo(Exception):

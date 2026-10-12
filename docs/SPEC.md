@@ -34,9 +34,9 @@
 
 | ID | Requisito | REGRAS |
 |---|---|---|
-| RF-06 | Ideação, roteiro, SEO e pesquisa no NotebookLM em caderno efêmero; nunca no raiz; Gemini web como reserva. | §9 |
+| RF-06 | Ideação, roteiro, SEO e pesquisa no NotebookLM em caderno efêmero; nunca no raiz; Gemini web como reserva. Saída de SEO validada por `PacoteSEO` (título ≤ 100, descrição ≤ 5000, tags ≤ 500 caracteres somadas, 3–15 hashtags com #, pt-BR, `containsSyntheticMedia`=true; t437). | §9 |
 | RF-07 | `RoteiroShort`: 15 s–3 min, alvo ~50 s, ~2,3 palavras/s; CTA final só "Segue o Porquê BR"; sem pedido de comentário; sem nomes; loop; 1–2 personagens. | §5 |
-| RF-08 | Resolvedor de fichas sem LLM; ficha nova criada na hora sem aprovação bloqueante; verificação "Verificado/Não Aprovado" por Telegram e painel. | §6 |
+| RF-08 | ⚠️ PAUSADO (t400; fichas desligadas, `tipo_acao='ficha_visual'` só histórico, t437). Resolvedor de fichas sem LLM; ficha nova criada na hora sem aprovação bloqueante; verificação "Verificado/Não Aprovado" por Telegram e painel. | §6 |
 | RF-09 | Render no NotebookLM e pós FFmpeg (corte do end card só se detectado; logo com zoom suave sobre a última fala). | §5, §9 |
 | RF-10 | Instalação exclusiva do notebooklm-py 0.8.4, serviço único dono da sessão, `usage --json` gravado; acima de 80% numa janela, espaçar produções. | §9, §10 |
 
@@ -210,7 +210,7 @@
 | ID | Requisito | REGRAS |
 |---|---|---|
 | RNF-01 | Determinismo antes de LLM: tudo que pode ser código é código. | §3 |
-| RNF-02 | Jev só devolve decisão estruturada; nunca redige texto; fallback com o mesmo esquema. | §7 |
+| RNF-02 | Jev só devolve decisão estruturada; nunca redige texto; fallback com o mesmo esquema. Esquemas em `pqbr.contratos` (t437): `ClassificacaoEmailYouTube` (strike/claim/policy_warning/monetization/account_security/upload_status/marketing/other + gravidade + ação; strike e segurança da conta sempre `chamar_jose`) e `ClassificacaoPopupCamofox` (cookie_consent/login_required/captcha/permission/promo/error/other + ação; captcha sempre `chamar_jose`), ambos com `confianca` 0–1 e `extra=forbid`. | §7 |
 | RNF-03 | Sem segredos/PII em repo, Hindsight (inclusive memórias de código), tickets, banco do app e logs; scanner antes de gravar. | §17 |
 | RNF-04 | Camofox: ritmo humano, único dono do login do Studio, fila de concorrência 1. | §11 |
 | RNF-05 | Durabilidade e idempotência: workflows retomam após falha/reboot; nenhuma ação externa duplicada. | §3, §18 |

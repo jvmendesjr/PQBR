@@ -1,7 +1,7 @@
 """Consumo por modelo (F3-06, RF-47) e retenção (F3-07, RF-49; t358/t369: bruto 90 d, resumo 25 meses, 04:15).
 Senhas no ambiente do worker (EnvironmentFile ~/.pqbr/worker.env, 600)."""
 from __future__ import annotations
-import json, os
+import json
 from datetime import timedelta, timezone
 from pydantic import BaseModel, ConfigDict, Field
 from temporalio import activity, workflow

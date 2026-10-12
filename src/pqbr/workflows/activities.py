@@ -24,9 +24,16 @@ async def gerar_roteiro(inp: EpisodioInput) -> RoteiroShort:
     tentativa = activity.info().attempt
     if tentativa <= inp.falhas_simuladas:
         raise ApplicationError(f"falha simulada (tentativa {tentativa})")
-    falas = [f"Por que {inp.tema}?", "Porque sim.", "Fim."]
-    return RoteiroShort(episodio_id=inp.episodio_id, titulo=f"Porquê: {inp.tema}"[:100],
-                        falas=falas, palavras=sum(len(x.split()) for x in falas), tentativa=tentativa)
+    from ..contratos import CTA, BlocoVisual, CenaVisual
+    falas = [f"Por que {inp.tema}?",
+             "A explicação é mais lógica do que parece, e a gente repete isso todo santo dia sem perceber.",
+             "No fim, é só mais uma mania nossa que tem história, e a história é boa demais.", CTA]
+    bloco = BlocoVisual(estilo="Ilustração 2D plana de cartum, traço preto, cores chapadas (demonstração)",
+                        personagem="adulto de uns 35 anos, camiseta verde, bigode (demonstração)",
+                        cenas=[CenaVisual(fala=f, acao="personagem reage", enquadramento="plano médio",
+                                          ambiente="sala brasileira") for f in falas[:2]])
+    return RoteiroShort(episodio_id=inp.episodio_id, titulo=f"Porquê: {inp.tema}"[:100], falas=falas,
+                        entidades_cena=["personagem"], bloco_visual=bloco)
 
 
 @activity.defn

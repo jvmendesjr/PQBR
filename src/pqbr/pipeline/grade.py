@@ -10,7 +10,7 @@ import re, unicodedata
 from dataclasses import dataclass
 from datetime import date
 from typing import Iterable, Literal
-from ..contratos import (DecisaoRepeticao, GradeDiaria, ItemGrade, JANELAS, PontuacaoPolemica)
+from pqbr.contratos import (DecisaoRepeticao, GradeDiaria, ItemGrade, JANELAS, PontuacaoPolemica)
 
 # Mistura configurável (t378: escopo pode virar ≥80% curiosidades/perenes; EM CONSTRUÇÃO — discutir com José)
 FRACAO_PERENE_PADRAO = 0.3  # REGRAS §4 vigente: ~70% em alta / ~30% perenes
