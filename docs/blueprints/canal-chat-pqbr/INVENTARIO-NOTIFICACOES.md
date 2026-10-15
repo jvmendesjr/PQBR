@@ -1,6 +1,6 @@
 # Inventário de notificações operacionais — migração para Discord/Paperclip
 
-Data de referência: 15/10/2026 01:30 (Fortaleza)
+Data de referência: 15/10/2026 09:00 (Fortaleza)
 Escopo: inventário estático do código e dos resultados registrados nos tickets PQBA-87/PQBA-89; nenhuma configuração de canal, serviço ou credencial foi alterada.
 
 ## Resumo executivo
@@ -8,6 +8,10 @@ Escopo: inventário estático do código e dos resultados registrados nos ticket
 A migração cobre mais do que trocar o destino de uma mensagem. Há quatro grupos de avisos: pedidos de acesso e eventos de sessão; decisões de aprovação de workflows Temporal; incidentes de compliance/pós-publicação; relatórios operacionais e de consumo. O inventário do Dev Corretor foi concluído em PQBA-87. Um primeiro recorte de código, PQBA-89, extraiu a formatação dos pedidos de acesso sem mudar o transporte, a agenda ou o comportamento de envio. Validação: 4 testes próprios; 49/49 na suíte do worktree Dev; depois 69/69 ao reaplicar o recorte em um worktree temporário limpo do HEAD 85e3060 e executar pytest.
 
 Isso não fecha F05-08 nem prova que o Discord consegue enviar avisos proativos. O recorte permanece não commitado no worktree isolado do Dev e ainda precisa de revisão antes de qualquer integração. Telegram continua sendo a rota ativa durante a transição; não deve ser pausado até TZ-06, TZ-08, TZ-09 e o rollback TZ-10 estarem aceitos.
+
+## Revisão independente de PQBA-91 — 15/10/2026 09:00
+
+A primeira versão foi aplicada somente em worktree temporário sobre o HEAD oficial 96579e5. A suíte indicada executou 85 testes: 84 passaram e 1 falhou porque o teste de `main(sender=...)` mockava `conectar`, enquanto `main()` prefere `pacote._banco()` e acabou tentando ler `PQBR_APP_PASSWORD`. Nenhuma credencial foi adicionada. Também bloqueiam a aceitação: a migration candidata `0012_pqbr_notificacoes_operacionais.sql` colide com a migration oficial `0012_pqbr_temas_fila.sql`; a tabela usa FORCE RLS e concede a `pqbr_app` sem criar policy correspondente; e o dispatcher não lê nem grava a `notificacoes_outbox`, portanto o ACK não é durável. A tarefa foi devolvida ao Dev para renumerar a migration como 0017, alinhar o rollback, corrigir policy e injetar o estado durável no dispatcher, com teste de falha após envio/antes do commit. O SQL não foi aplicado, a rota ativa não foi alterada e nenhum código foi mesclado.
 
 ## Rotas e estado observado
 

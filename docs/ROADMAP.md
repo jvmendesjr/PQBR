@@ -67,7 +67,7 @@
 
 - [ ] **F05-08** Migrar todos os avisos/notificações operacionais PQBR para Discord/Paperclip
   - Req: RF-19, RF-28, RF-31, RF-43 · Testes: TZ-09 · Depende de: F05-06
-  - Obs: PQBA-87 inventariou as quatro rotas; PQBA-89 extraiu o formatador neutro e passou 69/69 testes unitários no HEAD limpo 85e3060. A falha commit-before-delivery foi reproduzida com stubs; PQBA-91 foi aberta para ACK/retry durável. Ainda sem revisão/merge, integração Discord ou prova TZ-09; gate aberto.
+  - Obs: PQBA-87 inventariou as quatro rotas; o formatador PQBA-89 passou 69/69 testes no HEAD limpo 85e3060. A primeira PQBA-91 falhou revisão no HEAD 96579e5 (84 passaram, 1 falhou): migração 0012 colide com 0012_pqbr_temas_fila, RLS forçado sem policy para pqbr_app e tabela outbox não ligada ao dispatcher. Foi devolvida ao Dev; sem merge, integração Discord ou prova TZ-09; gate aberto.
   - Aceite: inventariar emissores, crons, workflows, playbooks e pedidos Telegram; comprovar entrega proativa privada, deduplicada e rastreável para sessão/Camofox/NotebookLM, compliance/HOLD, tickets e relatório. Telegram permanece como rollback durante a validação.
   - Portão José: nenhum novo. Obs: se alguma classe de aviso não tiver destino privado equivalente, manter Telegram e registrar o bloqueio.
 - [ ] **F05-09** Corte reversível: pausar Telegram PQBR somente após migração integral
