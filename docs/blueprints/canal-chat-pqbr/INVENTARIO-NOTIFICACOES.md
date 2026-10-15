@@ -54,3 +54,12 @@ A candidata de PQBA-91 foi reconstruída e revisada pelo coordenador somente no 
 Validação em 15/10: `py_compile` aprovado; 86/86 testes na suíte do worktree; 106/106 ao aplicar apenas os cinco arquivos candidatos sobre snapshot limpo do commit-base de código `dbd6d61`; migration e rollback passaram parser PostgreSQL, mas não foram aplicados. Os testes usam banco e remetentes stub. Não houve envio de mensagens, credenciais, acesso ao banco, mudança de agenda/configuração, merge ou publicação. Uma revisão independente somente leitura está solicitada ao Dev Revisor (PQBA-95), pendente.
 
 **Estado:** candidato promissor, ainda não aceito nem mesclado; F05-08/TZ-09 permanece aberto até revisão sem blockers, integração aos fluxos e prova de entrega privada com ACK/idempotência. Discord não foi habilitado e Telegram permanece ativo como rollback.
+
+## Revisão manual da candidata r17 — 15/10/2026
+A revisão manual do coordenador encontrou três blockers técnicos e os corrigiu apenas no worktree isolado `dev/agentes`, chegando à r24:
+- As policies de canal da r17 eram permissivas; a policy `revisao_humana_app` da migration 0009 já permite todas as linhas. r24 marca as policies SELECT/INSERT/UPDATE/DELETE de `pqbr_app` como RESTRICTIVE, limitadas a `canal_id = 'pqbr'`.
+- A consulta r17 selecionava toda a fila humana com status pendente. r24 filtra também `item_ref LIKE 'acesso:%'`, evitando enviar outros tipos de revisão como pedidos de acesso.
+- O rollback r17 podia remover uma outbox com dados e falhava se a tabela ainda não existisse. r24 verifica `to_regclass` e bloqueia rollback com linhas existentes.
+- A chamada sem sender e sem sink de ticket é no-op antes de consultar/gravar; a recuperação de ticket esgotado continua disponível pelo sink independente.
+Validação final r24 em 15/10: 88/88 testes no worktree e 108/108 ao aplicar os cinco arquivos F05-08 em snapshot limpo do commit-base `dbd6d61`; `pglast` parseou migration/rollback e o scanner não achou segredos. Nada foi aplicado ao banco, enviado a um canal, integrado a um schedule/workflow, mesclado ou publicado.
+**Parecer:** r24 melhora o contrato da outbox, mas não fecha F05-08/TZ-09: cobre apenas a fila de pedidos de acesso; sender Discord, sink idempotente de ticket e integração/prova privada das rotas de sessão/Camofox, compliance/HOLD, tickets e relatórios permanecem ausentes. Telegram continua ativo como rollback. A revisão independente PQBA-95 não executou porque o Dev Revisor está em erro.
