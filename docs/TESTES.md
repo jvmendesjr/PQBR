@@ -44,7 +44,7 @@ Regras: nenhum teste usa dados pessoais reais nem segredos (RNF-03); nenhum test
 | TZ-06 | ⏸ Pendente. Credenciais Discord do bot salvas e permissões de acesso ao canal privado verificadas; endpoint nativo do Paperclip não criado (API 403; browser `ERR_TUNNEL_CONNECTION_FAILED` (tentativa via túnel temporário: HTTP 502)). Ainda faltam conexão, vínculo de identidade autenticada e prova de aprovação Temporal; Telegram permanece ativo como rollback. |
 | TZ-07 | ✅ Fechado (t374): RAM e estabilidade medidas no soak; motor escolhido = **Temporal**. |
 | TZ-08 | ⏸ Pendente: conector Discord ainda não configurado/testado. |
-| TZ-09 | ⏸ Pendente. Auditoria r24 encontrou bypass pela injeção de `rows`; r25 removeu esse parâmetro e passou a cobrir o caminho via query. Validação: 89/89 testes no worktree, 109/109 no snapshot limpo de c1e7210, scanner/whitespace limpos; SQL não aplicado. Sem endpoint Discord (API 403/UI 502), adapters reais ou prova privada de entrega, ACK/deduplicação e retry nas quatro rotas. |
+| TZ-09 | ⏸ Pendente. r25 removeu o bypass de `rows`; r26 permite recuperar ticket esgotado pela facade sem sender e valida `janela_horas` como inteiro positivo. Validação: 91/91 testes no worktree, 111/111 no snapshot limpo de aae4895; scanner/whitespace limpos. Sem endpoint Discord (API 403; browser ERR_TUNNEL_CONNECTION_FAILED), adapters reais, integração das quatro rotas ou prova privada de entrega/ACK/retry. SQL não aplicado. |
 | TZ-10 | ⏸ Pendente: não pausar Telegram antes do aceite e do rollback ensaiado. |
 
 ## 3. Os 7 itens da validação (REGRAS §14)
