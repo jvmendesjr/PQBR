@@ -77,8 +77,8 @@
 
 - [ ] **F00-01** Revisar SPEC, TESTES e RASTREABILIDADE com o José
   - Req: todos · Testes: — · Depende de: R-005
-  - Aceite: toda seção do REGRAS coberta por RF/RNF; matriz sem lacunas não marcadas.
-  - Portão José: **G0**. Obs:
+  - Aceite: seções do REGRAS vinculadas a RF/RNF ou a gate transversal explicitado; matriz sem lacunas não marcadas.
+  - Portão José: **G0**. Obs: auditoria preliminar conferiu 62 IDs RF/RNF, sem requisito ausente na matriz; REGRAS §14 ficou como gate transversal V1–V7 em RASTREABILIDADE. A revisão final e o aceite G0 continuam pendentes de José.
 
 ## Fase 1: org PQBR no Paperclip (agentes pausados)
 

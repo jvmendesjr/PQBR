@@ -54,7 +54,7 @@ Regras: nenhum teste usa dados pessoais reais nem segredos (RNF-03); nenhum test
 | V2 | Consistência visual | 3 vídeos reaproveitáveis com os mesmos personagens em situações diferentes (não bloqueia, t264) | F5-04, F11-01 |
 | V3 | Auditor com defeitos conhecidos | Falso aprovado e falso reprovado medidos no gabarito ampliado (labels.json + vídeos novos); CTA ausente, fala cortada, nome, pedido de comentário detectados | F7-02 |
 | V4 | Publicação sem duplicidade | Upload interrompido sem duplicata; horário perdido usa reserva ou cancela; reprovado nunca publicado | F8-01 |
-| V5 | Correção pós-publicação | Sinal → privado + Telegram; volta só com toque; exclusão só pelo José | F8-01 |
+| V5 | Correção pós-publicação | Sinal → privado + aviso pelo canal privado ativo; volta só com toque; exclusão só pelo José | F8-01 |
 | V6 | Procedência e proteção | Ficha com origem registrada; scanner bloqueia segredo; comentários tratados como dado | F5-04, F3-02, F8-02 |
 | V7 | Premissas técnicas | H1–H16, H-ORQ, H-SDD com status VERIFICADO ou com alternativa aprovada | todas |
 
@@ -70,7 +70,7 @@ Prioridade: V1, V2 e V3. Metas do piloto: EM CONSTRUÇÃO — aguardando José (
 | TS-04 | Publicação (RF-15..RF-18) | Busca do código em privados/agendados; 1 tentativa sem confirmação e para; teto 4/dia; reserva ≥ 2; agendado × aprovado |
 | TS-05 | Item 5 (RF-19..RF-21) | Cada fonte de sinal torna privado; limiar 2 pessoas / 1 grave; abaixo vai ao José; nunca republica |
 | TS-06 | Comunidade (RF-22..RF-27) | Cadência de leitura; retenção só nos casos aprovados; limites de resposta (6/h, 30/dia, 08–22h, 1 por pessoa por vídeo, ~24 h); casos graves desligam e escalam com tom formal; kill switch manual; sombra |
-| TS-07 | Conformidade (RF-28, RF-29) | E-mail crítico simulado → HOLD + privados os agendados + Telegram + ticket; recurso não é enviado pelo agente |
+| TS-07 | Conformidade (RF-28, RF-29) | E-mail crítico simulado → HOLD + privados os agendados + aviso pelo canal privado ativo + ticket; recurso não é enviado pelo agente |
 | TS-08 | Analista e relatórios (RF-30..RF-32, RF-47) | Consumo por modelo e por tipo de ação no relatório diário a partir de `consumo_diario` (sem teto, só números); Relatório por template; exceções sinalizadas; aviso quando a amostra não é estatisticamente significativa; custos somados |
 | TS-09 | Agentes e manutenção (RF-33..RF-36, RNF-12) | Proposta inválida rejeitada; nada aplicado sem aprovação; ordem de outro ID ignorada; ticket com 2 aprovações; revisão humana com as 4 determinações |
 | TS-11 | Correção autônoma (RF-44, RF-45, RF-46) | 3 tentativas no máximo; duração sorteada entre 5 e 15 min no Camofox (nunca fixa); sessão ou conta Google diferente da esperada → para e chama o José; corações: anúncio/aviso novo capturado e classificado pelo Jev; envio sem confirmação: busca do código no Studio antes de parar; escada: José só após a 3ª falha verificada; Seletor mudado em página de teste → agente corrige pela Activity e abre proposta; 3 tentativas esgotadas → José avisado com o histórico; pedido de login, exclusão, tornar público ou publicar reprovado → `Sensivel` sem executar; duas intervenções na mesma sessão rodam em série; cada ação registrada sem segredo; o Jev faz a triagem (caso sensível nunca chega ao agente) e a verificação (correção que não passa na verificação conta como tentativa falha); o aprendizado aparece no bank Hindsight da PQBR, sem segredo (RF-46) |

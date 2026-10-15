@@ -22,7 +22,7 @@
 | RF-16 | §15 | §9 PublicacaoWorkflow; §8 episodios | F8-01 | TS-04, V4 |
 | RF-17 | §15 | §9 Schedules | F5-02, F8-01 | TS-04, V4 |
 | RF-18 | §7, §15 | §11 DecisaoPublicacao | F8-01 | TS-04 |
-| RF-19 | §16 | §9 Item5Workflow | F8-01 | TS-05, V5 |
+| RF-19 | §16 | §9 Item5Workflow | F8-01, F05-08, F05-09 | TS-05, V5, TZ-09, TZ-10 |
 | RF-20 | §16 | §9 Item5Workflow; §8 acoes | F8-01 | TS-05, V5 |
 | RF-21 | §16 | §11 SinalItem5 | F8-01, F10-03 | TS-05 |
 | RF-22 | §19 | §9 ComentariosWorkflow | F10-03 | TS-06 |
@@ -31,19 +31,19 @@
 | RF-25 | §19 | §9 ComentariosWorkflow (fila camofox) | F10-03 | TS-06 |
 | RF-26 | §19 | §9 sinal pausar_respostas | F10-03 | TS-06 |
 | RF-27 | §19 | — | F10-03 | TS-06 |
-| RF-28 | §13 | §9 ComplianceWorkflow | F9-02 | TS-07 |
+| RF-28 | §13 | §9 ComplianceWorkflow | F9-02, F05-08, F05-09 | TS-07, TZ-09, TZ-10 |
 | RF-29 | §13 | §10 | F9-02 | TS-07 |
 | RF-30 | §20 | §9 AnalistaWorkflow | F9-03 | TS-08 |
-| RF-31 | §19, §20, §22 | §9 RelatorioDiarioWorkflow | F9-01 | TS-08 |
+| RF-31 | §19, §20, §22 | §9 RelatorioDiarioWorkflow | F9-01, F05-08, F05-09 | TS-08, TZ-09, TZ-10 |
 | RF-32 | §22 | §8 consumo | F9-01 | TS-08 |
 | RF-33 | §3 | §10; §11 PropostaAgente | F05-04, F1-01 | TS-09, TZ-04 |
 | RF-44 | §3.1 | §2 Correção autônoma | F3-05 | TS-11 |
 | RF-45 | §11 | §2 Camofox; Correção autônoma | F4C-08 | TS-11 |
 | RF-46 | §3.1, §7 | §2 Correção autônoma (etapas) | F3-05 | TS-11 |
 | RF-47 | §22, §3.1 | §2 Consumo por modelo; migração 0010 | F3-06 | TS-08, TS-DB |
-| RF-48 | §2 | §3 @pqbr-assistente | F1-03 | TS-09 |
+| RF-48 | §2, ADR-009 | ADR-009; §10 | F05-06, F05-08, F05-09 | TS-09, TZ-08, TZ-09, TZ-10 |
 | RF-49 | §22 | §8 Retenção do consumo | F3-07 | TS-DB, TS-08 |
-| RF-34 | §2 | ADR-003; §10 | F05-06, F1-03 | TS-09, TZ-06 |
+| RF-34 | §0, §2, ADR-009 | ADR-009; §10 | F05-06, F05-09 | TS-09, TZ-06, TZ-08, TZ-10 |
 | RF-35 | §24 | ADR-004; §11 TicketManutencao | F1-04 | TS-09 |
 | RF-36 | §5 | §8 revisao_humana; §9 sinal determinacao_revisao | F8-03 | TS-09 |
 | RF-37 | §11 | §9 GuardiaoSessaoWorkflow | F6-01 | TS-10 |
@@ -67,4 +67,16 @@
 | RNF-12 | §0 | — | F1-01 | TS-09 |
 | RNF-13 | §23 | ADR-002 | F05-05, F1-02 | TZ-05 |
 
-Validação (REGRAS §14): V1 contrato editorial · V2 consistência visual · V3 auditor · V4 publicação sem duplicidade · V5 correção pós-publicação · V6 procedência · V7 premissas técnicas. Detalhe em `docs/TESTES.md` §3.
+## Gate transversal de validação (não é requisito RF/RNF)
+
+| Gate | REGRAS | TESTES | ROADMAP |
+|---|---|---|---|
+| V1 — contrato editorial | §14 | TESTES.md §3/V1 | F7-01 |
+| V2 — consistência visual | §14 | TESTES.md §3/V2 | F5-04, F11-01 |
+| V3 — auditor com defeitos conhecidos | §14 | TESTES.md §3/V3 | F7-02 |
+| V4 — publicação sem duplicidade | §14 | TESTES.md §3/V4 | F8-01 |
+| V5 — correção pós-publicação | §14 | TESTES.md §3/V5 | F8-01 |
+| V6 — procedência e proteção | §14 | TESTES.md §3/V6 | F5-04, F3-02, F8-02 |
+| V7 — premissas técnicas | §14 | TESTES.md §3/V7 | todos os gates de validação aplicáveis |
+
+A seção 14 é um gate transversal de liberação: os sete itens precisam ser aprovados antes da produção; não cria RF/RNF independente. O detalhamento e os critérios de aceite estão em `docs/TESTES.md` §3.
