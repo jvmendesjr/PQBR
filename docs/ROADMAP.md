@@ -52,7 +52,7 @@
   - Aceite: o Temporal abre/atualiza issue; agente de teste devolve proposta Pydantic v2 válida; aprovação vira sinal; o agente nunca lê o Postgres do Temporal; heartbeats desligados.
   - Portão José: autorizar projeto/org de teste no Paperclip.
   - Obs: 2026-10-09 (t334): ponte verificada no Paperclip de teste `PQBR-TESTE` (PQB-4, workflow `tz04-ponte-04`). Inválida rejeitada, válida aplicada (stub) só depois do sinal do José. IDs e limpeza em `docs/sdd/adr-001-orquestrador.md`.
-- [x] **F05-05** Resolver H-SDD1/H-ORQ3 (worker seguro ou alternativa) — 2026-10-14 — commit PENDING
+- [x] **F05-05** Resolver H-SDD1/H-ORQ3 (worker seguro ou alternativa) — 2026-10-14 — commit c4601f5
   - Req: RNF-13 · Testes: TZ-05 · Depende de: F05-04
   - Aceite: H-SDD1 resolvida (ou alternativa documentada que respeite o perfil `pqbr`); H-ORQ3 conferida.
   - Portão José: alternativa ao `hermes_local` aceita e documentada em REGRAS §0; agentes Paperclip usam `process`/`opencode_local`, e Hermes `pqbr` fica somente como canal do José. H-SDD1 resolvida pela alternativa. H-ORQ3 verificada no adapter instalado `@paperclipai/hermes-paperclip-adapter` 2026.1001.0: `supportsInstructionsBundle=true`, `instructionsPathKey=instructionsFilePath`, o runtime lê e injeta o bundle no prompt e o pacote inclui uma asserção de teste para esse contrato (não executada; sem runner no pacote instalado). TZ-05 substituído (nenhum worker Hermes executado); sem alteração no código do Paperclip. Evidências em TESTES.md; F05-05 fechado por alternativa documentada.
