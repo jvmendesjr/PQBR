@@ -34,11 +34,11 @@
 
 | ID | Requisito | REGRAS |
 |---|---|---|
-| RF-06 | Ideação, roteiro, SEO e pesquisa no NotebookLM em caderno efêmero; nunca no raiz; Gemini web como reserva. Saída de SEO validada por `PacoteSEO` (título ≤ 100, descrição ≤ 5000, tags ≤ 500 caracteres somadas, 3–15 hashtags com #, pt-BR, `categoryId`=27 Educação, `containsSyntheticMedia`=false — cartum 2D não realista; José 12/10; t437/t459). | §9 |
+| RF-06 | Pesquisa profunda, propostas de temas/ideias, roteiro e SEO via NotebookLM em caderno efêmero; nunca no raiz; mesma persona-base. Agentes apenas orquestram/validam, salvo exceções documentadas; Gemini Web só como reserva intelectual. SEO via `PacoteSEO`: título ≤100, descrição ≤5000, tags ≤500 caracteres somadas, 3–15 hashtags, pt-BR, `categoryId`=27, `containsSyntheticMedia`=false (t437/t459). | §9 |
 | RF-07 | `RoteiroShort`: 15 s–3 min, alvo ~50 s, ~2,3 palavras/s; CTA final só "Segue o Porquê BR"; sem pedido de comentário; sem nomes; loop; 1–2 personagens. | §5 |
-| RF-08 | ⚠️ PAUSADO (t400; fichas desligadas, `tipo_acao='ficha_visual'` só histórico, t437). Resolvedor de fichas sem LLM; ficha nova criada na hora sem aprovação bloqueante; verificação “Verificado/Não Aprovado” pelo Discord/Paperclip após t464 e painel; Telegram só até o corte completo. | §6 |
-| RF-09 | Render no NotebookLM e pós FFmpeg (corte do end card só se detectado; logo com zoom suave sobre a última fala). | §5, §9 |
-| RF-10 | Instalação exclusiva do notebooklm-py 0.8.4, serviço único dono da sessão, `usage --json` gravado; acima de 80% numa janela, espaçar produções. | §9, §10 |
+| RF-08 | [IDENTIDADE APROVADA; IMPLEMENTAÇÃO PENDENTE] Stickmen e fichas consistentes de personagens/objetos/cenários no módulo Flow; resolvedor sem LLM e referências versionadas conforme blueprint; ficha ausente criada sob demanda; José pode marcar “Verificado/Não Aprovado” com observação, rejeição abre ticket; validar pelo Discord/Paperclip durante migração, Telegram só como rollback; não presumir catálogo/resolvedor implantado; piloto sem publicação. | §6 |
+| RF-09 | Geração visual por Google Flow (primário), Google Vids (fallback/camada adicional), depois Gemini Web e Meta Vibes conforme ADR-010; NotebookLM não gera vídeo. Registrar consumo/artefatos; cortar end card só se detectado e aplicar zoom suave do logo na última fala conforme contrato; piloto sem publicação. | §5, §9 |
+| RF-10 | Instalação exclusiva do `notebooklm-py` 0.8.4, serviço único dono da sessão, `usage --json` gravado antes/depois de cada geração; só espaçar quando janela/denominador forem confirmados e o threshold configurado (80% inicial) for alcançado; nunca assumir números históricos de quota. | §9, §10 |
 
 ### F03. Auditor
 

@@ -11,7 +11,7 @@ skills:
 
 **Trilha:** `lane:distribuicao` · **Acorda por:** roteiro aprovado
 
-Título, descrição, tags, código PQBR-EP; nunca pede comentário (t263).
+Orchestrate NotebookLM generation of title, description and tags; extract and validate `PacoteSEO` and code PQBR-EP. Do not author core SEO independently; never request comments (t263).
 
 - Siga `pqbr-contrato` e a skill da trilha. Detalhes, limites e poderes em `docs/AGENTES.md`.
 - Só pegue tarefas da sua trilha; quem escreve não audita, quem mede não corrige, quem corrige não revisa.

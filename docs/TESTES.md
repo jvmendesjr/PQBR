@@ -31,6 +31,7 @@ Regras: nenhum teste usa dados pessoais reais nem segredos (RNF-03); nenhum test
 | TZ-09 | Alertas proativos dos workflows e rotinas PQBR via Discord/Paperclip | Acessos, Camofox, compliance/HOLD, falhas, tickets e relatório diário chegam uma vez, em canal privado, sem depender de mensagem iniciadora | RF-19, RF-28, RF-31, RF-43 |
 | TZ-10 | Corte Telegram e rollback | Só após TZ-06/08/09 aprovados; pausa apenas Hermes `pqbr` e emissores PQBR; rollback reativa rota sem desligar gateway compartilhado; nenhum fluxo PQBR continua enviando Telegram | RF-34, RF-43 |
 
+| TZ-11 | NotebookLM-first e seleção do produtor de vídeo | NotebookLM fornece pesquisa/temas/roteiro/SEO; agente apenas orquestra; vídeo é gerado por Flow, nunca NotebookLM; Vids só em fallback aprovado; quotas reais/artefatos registrados; zero publicação | RF-06, RF-08, RF-09 |
 **Resultados (09/10/2026; detalhes em `docs/sdd/adr-001-orquestrador.md`):**
 
 | ID | Resultado |

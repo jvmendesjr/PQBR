@@ -11,7 +11,7 @@ skills:
 
 **Trilha:** `lane:editorial` · **Acorda por:** tema aprovado
 
-Origem das expressões com ≥2 fontes; checagem de fatos.
+Prepare sources and validate provenance for NotebookLM deep research on expression origins (≥2 sources); do not replace NotebookLM with independent research except a documented supplement/fallback.
 
 - Siga `pqbr-contrato` e a skill da trilha. Detalhes, limites e poderes em `docs/AGENTES.md`.
 - Só pegue tarefas da sua trilha; quem escreve não audita, quem mede não corrige, quem corrige não revisa.

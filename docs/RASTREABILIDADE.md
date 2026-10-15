@@ -9,11 +9,11 @@
 | RF-03 | §4 | §9 GradeDiariaWorkflow | F5-01 | TS-01 |
 | RF-04 | §4 | §9 GradeDiariaWorkflow | F5-01 | TS-01 |
 | RF-05 | §4 | §11 PontuacaoPolemica | F5-01 | TS-01 |
-| RF-06 | §9 | §9 EpisodioWorkflow | F5-02 | TS-02 |
+| RF-06 | §4, §9 | §3 Papéis; ADR-010 | F5-02 | TS-02, TZ-11 |
 | RF-07 | §5 | §11 RoteiroShort | F3-01, F7-01 | TS-02, V1 |
-| RF-08 | §6 | §8 visual_assets; §10 | F5-04 | TS-02, V2, V6 |
-| RF-09 | §5, §9 | §9 EpisodioWorkflow (Activity render) | F5-05 | TS-02 |
-| RF-10 | §9, §10 | §2 NotebookLM; §9 fila notebooklm | F4-01..F4-05 | TS-02, V7 |
+| RF-08 | §6 | ADR-010; §8 visual_assets | módulo vídeo (identidade aprovada; implementação pendente) | TS-02, V2, V6, TZ-11 |
+| RF-09 | §5, §9 | ADR-010; §9 EpisodioWorkflow (Activity render) | F5-05; módulo vídeo | TS-02, TZ-11 |
+| RF-10 | §9, §10 | §2 NotebookLM; §9 fila notebooklm | F4-01..F4-05 | TS-02, V7, TZ-11 |
 | RF-11 | §8 | §9 EpisodioWorkflow (Activity auditor) | F7-02 | TS-03, V3 |
 | RF-12 | §7, §8 | §11 VereditoAuditor | F7-02 | TS-03, V3 |
 | RF-13 | §5, §8 | §11 VereditoAuditor | F7-02 | TS-03, V3 |

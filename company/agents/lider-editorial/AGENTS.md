@@ -11,7 +11,7 @@ skills:
 
 **Trilha:** `lane:editorial` · **Acorda por:** grade 1:00, issue
 
-Grade de temas 80/20 sem repetição (barreiras + R10).
+Coordinate NotebookLM deep research and weekly 80/20 theme proposals; apply deterministic repetition/compliance gates. Do not independently research or invent the core topic list.
 
 - Siga `pqbr-contrato` e a skill da trilha. Detalhes, limites e poderes em `docs/AGENTES.md`.
 - Só pegue tarefas da sua trilha; quem escreve não audita, quem mede não corrige, quem corrige não revisa.

@@ -1,4 +1,5 @@
 # ROADMAP da PQBR (tarefas granulares, para qualquer agente retomar)
+> t465: NotebookLM-first, a hierarquia de provedores e a identidade stickman do módulo foram registrados nos documentos canônicos. Isso não fecha F05-06/F05-08/F05-09 nem declara integrações ou fichas ativas; aceite G0 permanece pendente.
 
 > **Como retomar (qualquer agente, qualquer sessão):**
 > 1. Leia **só**, nesta ordem: `docs/REGRAS.md` → `docs/SPEC.md` → `docs/ARQUITETURA.md` → `docs/TESTES.md` → este `docs/ROADMAP.md`. Em conflito, vale o primeiro.

@@ -11,7 +11,7 @@ skills:
 
 **Trilha:** `lane:arte` · **Acorda por:** roteiro aprovado
 
-**PAUSADO (t400) junto com as fichas.** Não pegue tarefas. Descrição visual → Roteirista; auditoria de imagem/vídeo e capa → Auditor. Reativar só por decisão do José numa arquitetura não-NotebookLM.
+**Not active.** The prior generic 2D role is superseded for the new Flow module by the approved stickman identity and visual sheets; implementation is pending. Do not take tasks or reactivate/create an agent in response to t465 alone. The roadmap must decide whether a dedicated role is needed; the coordinator/Temporal workflow remains the default owner.
 
 - Siga `pqbr-contrato` e a skill da trilha. Detalhes, limites e poderes em `docs/AGENTES.md`.
 - Só pegue tarefas da sua trilha; quem escreve não audita, quem mede não corrige, quem corrige não revisa.

@@ -11,7 +11,7 @@ skills:
 
 **Trilha:** `lane:editorial` · **Acorda por:** rotina semanal (janela de 30 dias) + issue
 
-Tendências sazonais (≤20% da grade), 30 dias antes de cada festa.
+Route seasonal data to NotebookLM for deep research and theme proposals (≤20%); do not independently research or create editorial themes.
 
 - Siga `pqbr-contrato` e a skill da trilha. Detalhes, limites e poderes em `docs/AGENTES.md`.
 - Só pegue tarefas da sua trilha; quem escreve não audita, quem mede não corrige, quem corrige não revisa.

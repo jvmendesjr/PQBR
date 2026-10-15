@@ -76,6 +76,12 @@
 - Hermes `pqbr` e emissores Telegram PQBR permanecem como rollback durante o piloto; após todos os gates, pausar somente o perfil `pqbr` e rotinas PQBR. Preservar gateway Hermes compartilhado, outros perfis, histórico e credenciais.
 - Aprovações Temporal usam principal autenticado em metadado server-side, vínculo com tarefa e estado válido; falha fechada, idempotência persistente, até três tentativas e ticket de manutenção após esgotamento. Nenhum sinal de workflow de produção no piloto.
 
+
+### ADR-010: NotebookLM como fonte intelectual; provedores Google para vídeo [APROVADO t465]
+- NotebookLM conduz pesquisa profunda, cultura brasileira/expressões, propostas semanais de temas, ideação, roteiro e SEO. O caderno canônico é temporário para os documentos/pacote iniciais e recriável após persistir fontes e resultados; cadernos por episódio são efêmeros e copiam a mesma persona-base.
+- Agentes Paperclip orquestram, encaminham insumos, extraem saídas estruturadas e validam. Não fazem pesquisa, tema, roteiro ou SEO independentes, exceto complemento de relatório ou fallback documentado por indisponibilidade central.
+- NotebookLM não gera vídeo. Temporal chama a rota visual pelo Camofox: Flow primário, Vids fallback adicional, Gemini Web terceira rota, Meta Vibes posterior. Medir cotas reais; dois Shorts/dia não é quota prometida. Instruções técnicas em inglês; conteúdo final em pt-BR. Identidade visual aprovada: stickmen/fichas; implementação pendente.
+
 ## 2. Componentes
 
 | Componente | Papel | Status |
@@ -127,16 +133,16 @@
 
 **Padrão dos agentes pensantes [APROVADO t324–t326]:** uma rotina fixa executa tudo; @prod-director, @prod-analista e @prod-comunidade só observam e propõem mudanças como saída estruturada validada por Pydantic v2; nada se aplica sem a aprovação do José.
 
-Princípio [APROVADO t184]: ideação, roteiro, SEO e pesquisa ficam com o NotebookLM; os papéis orquestram, extraem por código, validam com Pydantic e conferem com o Jev. Com o motor de workflow, os papéis sem LLM viram **Activities/workflows** e só alguns continuam como agentes LLM [PROPOSTA, PESQ-orquestração §9].
+Princípio [APROVADO t184, precisado t465]: ideação, roteiro, SEO e pesquisa ficam com o NotebookLM; os papéis orquestram, extraem por código, validam com Pydantic e conferem com o Jev. Com o motor de workflow, os papéis sem LLM viram **Activities/workflows** e só alguns continuam como agentes LLM [PROPOSTA, PESQ-orquestração §9]. NotebookLM é fonte intelectual; agentes apenas orquestram/validam, sem pesquisa/roteiro autoral independente, salvo complemento de relatório ou fallback documentado se a ferramenta central faltar. Vídeo fora do NotebookLM; Flow primário e Vids fallback (ADR-010).
 
 | Papel | Natureza [PROPOSTA salvo indicação] | Faz | Não faz |
 |---|---|---|---|
 | @prod-director | Rotina fixa executa; agente observa e propõe (Pydantic v2), aplica só com aprovação do José [APROVADO t324–t326] | Cadência, rotinas, parâmetros operacionais; recebe propostas do analista e do assistente; limpeza noturna do Drive por script (t270) | Não altera regra canônica; não aplica mudança sem o José; não exclui |
-| @prod-ideador | Workflow que chama o NotebookLM | Entrega coleta e fontes ao caderno de tendências; recebe os temas filtrados | Não escolhe tema sem as 3 barreiras |
-| @prod-roteirista | Workflow que chama o NotebookLM | Roteiro no NotebookLM; lista as entidades da cena; valida `RoteiroShort` | Não redige fora do NotebookLM/Gemini; sem nomes |
-| @prod-render | Activity (sem LLM) | Geração no NotebookLM + pós FFmpeg | Não julga qualidade |
+| @prod-ideador | Workflow que chama o NotebookLM | Workflow que encaminha tendências/fontes ao NotebookLM, recebe propostas e aplica filtros determinísticos | Não pesquisa nem escolhe tema fora do NotebookLM e das barreiras determinísticas |
+| @prod-roteirista | Workflow que chama o NotebookLM | Workflow que pede pesquisa/plano/roteiro ao NotebookLM; lista entidades e valida `RoteiroShort` | Não pesquisa nem redige por conta própria; sem nomes |
+| @prod-render | Activity (sem LLM; Temporal/Camofox) | Geração visual pelo Google Flow (primário), Vids (fallback) e pós-processamento aprovado | Nunca gera vídeo no NotebookLM; não julga qualidade |
 | @prod-auditor | Código decide; Gemini sim/não; Jev nas checagens de texto | Auditoria pré-publicação + item de conformidade | LLM não dá gravidade nem escreve laudo |
-| @prod-seo | Workflow que chama o NotebookLM | Título, descrição, código PQBR-EPxxxx | Não pede comentário (t263) |
+| @prod-seo | Workflow que chama o NotebookLM | Workflow que pede metadados SEO ao NotebookLM e valida `PacoteSEO` | Não redige SEO independentemente nem pede comentário (t263) |
 | @prod-publisher | Activity (sem LLM) | `videos.insert` com agendamento; confere ID e código; executa o item 5 em código | Não decide sozinho; não reenvia sem consultar; não exclui; não volta vídeo a público |
 | @prod-analista [APROVADO] | Coleta por rotina fixa; agente analisa e propõe (Pydantic v2), aplica só com aprovação do José [t324–t326] | Analytics API; análise semanal ou por anomalia; propostas ao director; Hindsight | Não muda parâmetro sozinho |
 | @prod-compliance [APROVADO t198] | Coleta por código + Jev + análise | E-mail do canal, Studio só leitura, Data API; gravidade; HOLD; rascunho de recurso | Nunca recorre, apaga ou altera sem dupla confirmação |
@@ -189,7 +195,7 @@ Nada que depende de uma hipótese é construído antes de ela virar VERIFICADO (
 | H12 | Métricas do canal (30 vs. 46 Shorts; bases de retenção diferentes) | @prod-analista/dev | Números fixados pela Analytics API |
 | H13 | `hermes_local` + Hindsight num heartbeat real (armazenamento do Hindsight verificado em 09/10, §8; Supabase Pro superado por t343) | dev | Confirmação pelo MCP + 1 heartbeat real |
 | H14 | App do GCP em produção (uso interno) sem expiração do token | dev | Token válido além de 7 dias |
-| H15 | Limites do Pro do NotebookLM (5 h/semanal; 20 vídeos/dia) | dev | Monitor de consumo da 1ª semana |
+| H15 | Cotas reais do NotebookLM na conta (janelas/limites medidos; sem assumir números históricos) | dev | Monitor de consumo da 1ª semana e validação na interface oficial |
 | H16 | Corações pelo Camofox (até 10/dia) sem desafio de login | dev | 3 dias de sombra sem incidente de sessão |
 | H-ORQ1 | A RAM do `pc` comporta o motor escolhido dentro do teto de 1,5 GB (t329; o `pc` já usa swap) | dev | Medição no spike da Fase 0.5 |
 | H-ORQ2 | Postgres local dedicado ao motor + backup diário | dev | Restauração testada |
