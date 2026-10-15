@@ -52,14 +52,14 @@
   - Aceite: o Temporal abre/atualiza issue; agente de teste devolve proposta Pydantic v2 válida; aprovação vira sinal; o agente nunca lê o Postgres do Temporal; heartbeats desligados.
   - Portão José: autorizar projeto/org de teste no Paperclip.
   - Obs: 2026-10-09 (t334): ponte verificada no Paperclip de teste `PQBR-TESTE` (PQB-4, workflow `tz04-ponte-04`). Inválida rejeitada, válida aplicada (stub) só depois do sinal do José. IDs e limpeza em `docs/sdd/adr-001-orquestrador.md`.
-- [ ] **F05-05** Agente Hermes no Paperclip sem `--yolo`; versão do Paperclip
+- [x] **F05-05** Resolver H-SDD1/H-ORQ3 (worker seguro ou alternativa) — 2026-10-14 — commit PENDING
   - Req: RNF-13 · Testes: TZ-05 · Depende de: F05-04
   - Aceite: H-SDD1 resolvida (ou alternativa documentada que respeite o perfil `pqbr`); H-ORQ3 conferida.
-  - Portão José: decidir a alternativa se não houver caminho sem `--yolo`. Obs: 2026-10-09: BLOQUEADO e pendente. `hermes_local` 2026.1001.0 força `--yolo` sem opção; nenhum agente Hermes criado nem executado. José (t334): não mexer no código do Paperclip; o adaptador fica como está.
+  - Portão José: alternativa ao `hermes_local` aceita e documentada em REGRAS §0; agentes Paperclip usam `process`/`opencode_local`, e Hermes `pqbr` fica somente como canal do José. H-SDD1 resolvida pela alternativa. H-ORQ3 verificada no adapter instalado `@paperclipai/hermes-paperclip-adapter` 2026.1001.0: `supportsInstructionsBundle=true`, `instructionsPathKey=instructionsFilePath`, o runtime lê e injeta o bundle no prompt e o pacote inclui uma asserção de teste para esse contrato (não executada; sem runner no pacote instalado). TZ-05 substituído (nenhum worker Hermes executado); sem alteração no código do Paperclip. Evidências em TESTES.md; F05-05 fechado por alternativa documentada.
 - [ ] **F05-06** Aprovação pelo Telegram (Hermes `pqbr`) como sinal
   - Req: RF-34 · Testes: TZ-06 · Depende de: F05-04
   - Aceite: aprovar/negar funciona; outro ID é ignorado.
-  - Portão José: nenhum. Obs: Lado do motor ok (remetente diferente do José ignorado). Falta a ponte do Telegram.
+  - Portão José: nenhum. Obs: Parcial (2026-10-14): despachante Telegram→Temporal implementado somente no worktree isolado `dev/agentes`; valida remetente por metadado confiável, falha fechado, é idempotente e limita retry a 3; 45/45 testes unitários passaram. Não foi mesclado nem testado com Telegram real. Conectividade Paperclip corrigida/verificada: API HTTP interna na porta 3101; entrada HTTPS privada pela tailnet na porta 3100; relay Dev encaminha para a API interna. A PQBA-80 ainda conserva o blocker legado de reconciliação; revisão independente final, somente leitura, em andamento na PQBA-86. F05-06 permanece aberto até revisão e teste E2E de aprovar/negar e remetente não autorizado.
 - [x] **F05-07** Relatório do teste e escolha do motor
   - Req: RNF-01, RNF-05, RNF-09 · Testes: TZ-07 · Depende de: F05-01..F05-06
   - Aceite: `docs/sdd/adr-001-orquestrador.md`; ARQUITETURA atualizada. Se o Temporal reprovar, repetir F05-01..F05-04 com o DBOS.
@@ -218,6 +218,7 @@ Precisam do José: F4C-04, F4C-05, F4C-06, F4C-07. F4C-01..03 só pedem o portã
 - [ ] **L-01** Rotação de senhas e tokens (`paperclip_app`, root do Contabo, token do OpenCode) — Portão: José · Obs: adiado (t327).
 - [ ] **L-02** Estudo de outros canais e cota da API para vários canais — Portão: José · Obs: adiado (t327).
 - [ ] **L-03** Excluir `tasks/` se as rotinas ficarem só como Schedules — Depende de: F05-07 · Portão: José · Obs:
+- [ ] **L-04** Corrigir o prefixo dos novos tickets/tasks da organização de `PQBA` para `PQBR` (referência: PQBA-83) — Portão: José · Obs: avaliar o efeito na geração de novos identificadores; preservar tickets históricos e não alterar a configuração até executar esta tarefa.
 
 ---
 

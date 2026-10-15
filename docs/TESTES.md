@@ -24,7 +24,7 @@ Regras: nenhum teste usa dados pessoais reais nem segredos (RNF-03); nenhum test
 | TZ-02 | `EpisodioWorkflow` de brinquedo com timer e Activity que falha; `kill -9` no worker; reboot | Retoma do ponto certo; nenhuma Activity com efeito roda duas vezes | RNF-05 |
 | TZ-03 | Banco do app de teste inacessível durante o workflow | Nada perdido; outbox grava uma vez na volta; nada "agendado/público" sem estado | RF-39, RNF-06 |
 | TZ-04 | Temporal abre issue no Paperclip; agente de teste devolve proposta; aprovação vira sinal | Proposta valida em Pydantic v2; proposta inválida é rejeitada; nada aplicado sem aprovação; agente não acessa o Postgres do Temporal | RF-33, RF-43 |
-| TZ-05 | Agente Hermes no Paperclip | Roda sem `--yolo`; heartbeats desligados; versão com a correção da #3833 | RNF-13 |
+| TZ-05 | Alternativa ao worker `hermes_local` | H-SDD1 resolvida pela alternativa de REGRAS §0; H-ORQ3 verificada por inspeção do adapter Paperclip instalado (bundle lido/injetado no prompt; asserção de teste presente, mas não executada); nenhum worker Hermes executado | RNF-13 |
 | TZ-06 | Aprovação pelo Telegram (Hermes `pqbr`) | Aprovar/negar chega como sinal; mensagem de outro ID ignorada | RF-34 |
 | TZ-07 | Consolidação | Relatório `docs/sdd/adr-001-orquestrador.md`; se o Temporal reprovar algum TZ, repetir TZ-01..TZ-04 com o DBOS | RNF-01 |
 
@@ -36,7 +36,7 @@ Regras: nenhum teste usa dados pessoais reais nem segredos (RNF-03); nenhum test
 | TZ-02 | ✅ Aprovado, com `kill -9` no worker e restart do motor. Reboot do servidor dispensado (t334). |
 | TZ-03 | ✅ Aprovado, com stub; o banco do app de teste fica para a F3. |
 | TZ-04 | ✅ Aprovado no Paperclip de teste `PQBR-TESTE`. |
-| TZ-05 | ⛔ Bloqueado: `--yolo` incondicional no `hermes_local` (H-SDD1); nenhum agente Hermes executado. |
+| TZ-05 | ✅ F05-05 fechado por alternativa documentada em REGRAS §0; H-ORQ3 conferida por inspeção de `@paperclipai/hermes-paperclip-adapter` 2026.1001.0 (`supportsInstructionsBundle`, `instructionsFilePath`, injeção no prompt). Há asserção em `dist/index.test.js`, não executada porque o runner não está incluído no pacote instalado. Nenhum worker Hermes foi executado; não é um E2E desse runtime. |
 | TZ-06 | ⏸ Pendente: falta o Telegram; o filtro de remetente do motor está ok. |
 | TZ-07 | ✅ Fechado (t374): RAM e estabilidade medidas no soak; motor escolhido = **Temporal**. |
 
