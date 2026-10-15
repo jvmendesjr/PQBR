@@ -18,7 +18,7 @@
 - [x] **R-000** Estrutura do repositório — 2026-10-09 — commit ade0ebb
   - Obs: `/home/pc/Workspace/PQBR` (GitHub `jvmendesjr/PQBR`, privado), pastas só com README.
 - [x] **R-001** Perfil Hermes `pqbr` criado — 2026-10-09 — sem commit (config do servidor)
-  - Obs: sem `--yolo` e sem sudo sem senha; ajuste fino em F1-03.
+  - Obs: sem `--yolo` e sem sudo sem senha; o perfil permanece como fallback até o corte F05-09; não fazer ajuste separado em F1-03.
 - [x] **R-002** Saída do CTO (COR-1) e levantamento de vídeos arquivados no Drive — 2026-10-09 — sem commit
   - Obs: Drive `PQBR/_arquivo-docs-2026-10-09/`; sha256 conferido antes de apagar do servidor.
 - [x] **R-003** Sanitização dos documentos — 2026-10-09 — commit 66aacb2
@@ -56,15 +56,23 @@
   - Req: RNF-13 · Testes: TZ-05 · Depende de: F05-04
   - Aceite: H-SDD1 resolvida (ou alternativa documentada que respeite o perfil `pqbr`); H-ORQ3 conferida.
   - Portão José: alternativa ao `hermes_local` aceita e documentada em REGRAS §0; agentes Paperclip usam `process`/`opencode_local`, e Hermes `pqbr` fica somente como canal do José. H-SDD1 resolvida pela alternativa. H-ORQ3 verificada no adapter instalado `@paperclipai/hermes-paperclip-adapter` 2026.1001.0: `supportsInstructionsBundle=true`, `instructionsPathKey=instructionsFilePath`, o runtime lê e injeta o bundle no prompt e o pacote inclui uma asserção de teste para esse contrato (não executada; sem runner no pacote instalado). TZ-05 substituído (nenhum worker Hermes executado); sem alteração no código do Paperclip. Evidências em TESTES.md; F05-05 fechado por alternativa documentada.
-- [ ] **F05-06** Aprovação pelo Telegram (Hermes `pqbr`) como sinal
-  - Req: RF-34 · Testes: TZ-06 · Depende de: F05-04
-  - Aceite: aprovar/negar funciona; outro ID é ignorado.
-  - Portão José: nenhum. Obs: Parcial (2026-10-14): despachante Telegram→Temporal implementado somente no worktree isolado `dev/agentes`; valida remetente por metadado confiável, falha fechado, é idempotente e limita retry a 3; 45/45 testes unitários passaram. Não foi mesclado nem testado com Telegram real. Conectividade Paperclip corrigida/verificada: API HTTP interna na porta 3101; entrada HTTPS privada pela tailnet na porta 3100; relay Dev encaminha para a API interna. A PQBA-80 ainda conserva o blocker legado de reconciliação; revisão independente final, somente leitura, em andamento na PQBA-86. F05-06 permanece aberto até revisão e teste E2E de aprovar/negar e remetente não autorizado.
+- [ ] **F05-06** Piloto Discord/Paperclip direto ao Diretor e aprovação Temporal autenticada
+  - Req: RF-34, RF-43, RF-48 · Testes: TZ-06, TZ-08 · Depende de: F05-04, F05-05
+  - Aceite: conector experimental restrito; menção raiz cria tarefa para o Diretor; aprovar/negar chega ao Temporal por metadado autenticado, estado válido, fail-closed e idempotência persistente; após três falhas abre ticket. Nenhum workflow de produção recebe sinal no piloto.
+  - Portão José: decisão de migração aprovada (t464); credenciais Discord ainda necessárias. Obs: o dispatcher Telegram antigo no worktree `dev/agentes` não será mesclado: PQBA-86 não aprovou por idempotência volátil e falta de ticket após três falhas; a execução independente dos testes não ocorreu.
 - [x] **F05-07** Relatório do teste e escolha do motor
-  - Req: RNF-01, RNF-05, RNF-09 · Testes: TZ-07 · Depende de: F05-01..F05-06
+  - Req: RNF-01, RNF-05, RNF-09 · Testes: TZ-07 · Depende de: F05-01..F05-04
   - Aceite: `docs/sdd/adr-001-orquestrador.md`; ARQUITETURA atualizada. Se o Temporal reprovar, repetir F05-01..F05-04 com o DBOS.
   - Portão José: **G0.5** (motor; dois bancos; outbox; ponte com o Paperclip). Obs: 2026-10-10 (t374): Soak encerrado em 10/10 11:57 (t374, sem esperar as 24 h): **122 execuções em ~20 h** (a cada 10 min), 0 falhas ou expiradas, 0 perdidas (`MissedCatchupWindow` 0), 0 duplicatas no outbox; pico do compose 340 MiB, worker 53 MiB, nenhuma amostra acima de 1536 MiB. **Motor = Temporal**; o DBOS não é necessário. Schedule `pqbr-soak-24h` pausado e timer `pqbr-temporal-ram` desligado (logs mantidos em `runtime/tz/`); stack do Temporal e worker seguem rodando. TZ-05 (`--yolo`) e TZ-06 (Telegram) continuam pendentes fora do motor.
 
+- [ ] **F05-08** Migrar todos os avisos/notificações operacionais PQBR para Discord/Paperclip
+  - Req: RF-19, RF-28, RF-31, RF-43 · Testes: TZ-09 · Depende de: F05-06
+  - Aceite: inventariar emissores, crons, workflows, playbooks e pedidos Telegram; comprovar entrega proativa privada, deduplicada e rastreável para sessão/Camofox/NotebookLM, compliance/HOLD, tickets e relatório. Telegram permanece como rollback durante a validação.
+  - Portão José: nenhum novo. Obs: se alguma classe de aviso não tiver destino privado equivalente, manter Telegram e registrar o bloqueio.
+- [ ] **F05-09** Corte reversível: pausar Telegram PQBR somente após migração integral
+  - Req: RF-34, RF-43, RF-48 · Testes: TZ-10 · Depende de: F05-06, F05-08
+  - Aceite: TZ-06/08/09 aprovados e rollback ensaiado; pausar somente Hermes `pqbr` e rotinas/emissores Telegram PQBR; verificar que nenhum fluxo PQBR continua enviando Telegram. Não desligar gateway compartilhado, afetar outros perfis ou apagar configurações/histórico.
+  - Portão José: t464 aprova o corte somente depois do piloto completo; nenhuma pausa antes do gate.
 ## Fase 0: revisão da especificação (paralela à 0.5)
 
 - [ ] **F00-01** Revisar SPEC, TESTES e RASTREABILIDADE com o José
@@ -76,16 +84,16 @@
 
 - [ ] **F1-01** Pacote `company/` (agentcompanies/v1)
   - Req: RF-33, RNF-12 · Testes: TS-09 · Depende de: F05-07, F00-01
-  - Aceite: `COMPANY.md`, `agents/<slug>/AGENTS.md` (director, analista, comunidade, compliance, assistente, dev), `.paperclip.yaml` sem segredos; validador e scanner passam; personas de compliance e assistente sérias e diretas.
+  - Aceite: `COMPANY.md`, `agents/<slug>/AGENTS.md` (director, analista, comunidade, compliance, dev), `.paperclip.yaml` sem segredos; validador e scanner passam; o Diretor atende José diretamente pelo Discord/Paperclip após t464; não criar agente Hermes/assistente duplicado.
   - Portão José: **G1**. Obs: 2026-10-10 (t376): pacote pronto em `company/` (COMPANY.md, 6 AGENTS.md, `.paperclip.yaml` com adaptador `process` stub, heartbeat desligado, orçamento 0); scanner limpo; dry-run sem avisos nem erros. **Aguarda o G1 do José** (revisar o pacote).
 - [ ] **F1-02** Import dry-run e criação da org pausada
   - Req: RF-43, RNF-13 · Testes: TS-13 · Depende de: F1-01
   - Aceite: dry-run limpo (H-SDD2); agentes pausados, heartbeats desligados.
   - Portão José: autorizar o import; liberar agente é decisão separada. Obs: 2026-10-10 (t376): **só o dry-run**, limpo (`docs/sdd/f1-02-dryrun.md`); nenhuma org criada. O pacote não carrega `paused`: pausar todos logo após o import. Criação real aguarda o José.
-- [ ] **F1-03** (D2) Ajuste do perfil Hermes `pqbr`
-  - Req: RF-34, RNF-13 · Testes: TZ-06 · Depende de: F05-05
-  - Aceite: env mínimo, toolsets restritos, budgets; segredos só no `.env`.
-  - Portão José: revisar o perfil. Obs:
+- **F1-03 [SUPERADO por t464]** O ajuste operacional do perfil Hermes `pqbr` não se executa separadamente; a pausa ocorre somente pelo gate F05-09, após a migração completa.
+  - Req: RF-34, RF-48 · Testes: TZ-10 · Depende de: F05-06, F05-08, F05-09
+  - Aceite: confirmar que o perfil Hermes `pqbr` foi pausado pelo gate F05-09; preservar dados/configuração para rollback e manter ligado o gateway Hermes compartilhado.
+  - Portão José: t464 autoriza a pausa somente após aprovação de F05-09; nenhuma alteração separada no perfil. Obs:
   - Obs: 2026-10-09 (t363): `pqbr` conectado ao Paperclip na PQBR-TESTE por chave de agente escopada (agente `pqbr-assistente`, wrapper com allowlist, skill `paperclip-pqbr`); listar ok, outra empresa recusada, comentário de teste na PQB-4 criado (`4ad87746…`) só com run de heartbeat. **Pendências:** (1) restringir os toolsets do perfil (no teste ele saiu do wrapper e expôs o `DATABASE_URL` do Paperclip ao modelo, ARQUITETURA §10); (2) heartbeat+run dentro do wrapper para escrever; (3) reapontar para a org real na F1-02.
   - Obs: 2026-10-09 (t372): toolsets restritos (sem terminal, arquivos, código, web, navegador, delegação, cron) em `cli` e `telegram`; Paperclip só pelo MCP `paperclip-pqbr` (heartbeat embutido). Teste oneshot: listar ok; comentário na PQB-4 ok (`4488f764…`); pedido de `env`/`/proc/self/environ` recusado (só ferramentas MCP foram chamadas). Sem gateway do `pqbr` rodando, então nada foi recarregado. Mensagem com o `DATABASE_URL` (senha mascarada) apagada do `state.db` e `invoke_run.js` removido. Pendente: reapontar para a org real (F1-02); leitura de `docs/` por MCP se o José quiser.
 - [~] **AÇÃO MANUAL PENDENTE — José (t373):** trocar a senha do banco do Paperclip no Supabase; depois atualizar o `DATABASE_URL` em `~/.config/core-engineering/supabase.env` (EnvironmentFile do `paperclipai.service`) e reiniciar **só** o Paperclip. Passos preparados (não executados): (1) `cp -p ~/.config/core-engineering/supabase.env ~/Backups/paperclip/supabase.env.$(date +%F)` e `chmod 600`; (2) editar só a senha no `DATABASE_URL` (sem imprimir); (3) `systemctl --user restart paperclipai.service`; (4) conferir `paperclipai health`, o painel e `issue list` da PQBR-TESTE; rollback: restaurar o arquivo e reiniciar o serviço. Obs: até lá, a senha atual continua válida (não foi exposta, t372). **[SUPERADO t412: o Supabase não é mais usado; a troca de senha sai das pendências. O risco do DATABASE_URL vazado acaba com o L-01 + desligamento/exclusão do projeto Supabase pelo José.]**
@@ -186,7 +194,7 @@ Precisam do José: F4C-04, F4C-05, F4C-06, F4C-07. F4C-01..03 só pedem o portã
 
 ## Fase 9: monitores, compliance e analista
 
-- [ ] **F9-01** (D12) Monitor de atualizações, consumo, levantamento de custos, relatório diário — Req: RF-31, RF-32, RF-42, RNF-07 · Testes: TS-08, TS-12 · Depende de: F8-01 · Aceite: relatório no Telegram por vários dias · Portão: **G9** · Obs:
+- [ ] **F9-01** (D12) Monitor de atualizações, consumo, levantamento de custos, relatório diário — Req: RF-31, RF-32, RF-42, RNF-07 · Testes: TS-08, TS-12 · Depende de: F8-01 · Aceite: relatório diário chega por Discord/Paperclip após t464; Telegram só durante migração · Portão: G9 · Obs:
 - [ ] **F9-02** @prod-compliance (coleta, gravidade, HOLD, rascunho de recurso) — Req: RF-28, RF-29 · Testes: TS-07 · Depende de: F8-01, F1-02 · Aceite: simulação de crítico gera HOLD · Portão: G9 · Obs:
 - [ ] **F9-03** @prod-analista (Analytics API diária, propostas Pydantic v2) — Req: RF-30, RF-33 · Testes: TS-08 · Depende de: F1-02, F3-01 · Aceite: coleta diária gravada; H14 · Portão: G9 · Obs:
 
@@ -231,7 +239,7 @@ Precisam do José: F4C-04, F4C-05, F4C-06, F4C-07. F4C-01..03 só pedem o portã
 ## 0. Premissas
 
 - Quem constrói: agentes de desenvolvimento, sem core-eng (t284). O José aprova cada portão e cada merge.
-- Espinha: **Temporal** (fluxo determinístico; DBOS plano B) ligado ao **Paperclip** (camada de agentes e painel). Os agentes vivem no Paperclip e só propõem (t324–t327). Telegram pelo Hermes `pqbr` (t281).
+- Espinha: **Temporal** (fluxo determinístico; DBOS plano B) ligado ao **Paperclip** (camada de agentes e painel). Os agentes vivem no Paperclip e só propõem (t324–t327). Durante t464, Hermes `pqbr`/Telegram permanece como fallback; após o piloto, Discord/Paperclip conecta diretamente ao Diretor ativo.
 - Escopo: só o canal Porquê BR (t327).
 - Mudanças na construção são tarefas do ROADMAP, nunca tickets. Nada que depende de hipótese é construído antes de ela virar VERIFICADO (item 7).
 - Branch por tarefa e merge com aprovação do José; nada de push sem autorização.

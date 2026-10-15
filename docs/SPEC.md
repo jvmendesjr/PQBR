@@ -36,7 +36,7 @@
 |---|---|---|
 | RF-06 | Ideação, roteiro, SEO e pesquisa no NotebookLM em caderno efêmero; nunca no raiz; Gemini web como reserva. Saída de SEO validada por `PacoteSEO` (título ≤ 100, descrição ≤ 5000, tags ≤ 500 caracteres somadas, 3–15 hashtags com #, pt-BR, `categoryId`=27 Educação, `containsSyntheticMedia`=false — cartum 2D não realista; José 12/10; t437/t459). | §9 |
 | RF-07 | `RoteiroShort`: 15 s–3 min, alvo ~50 s, ~2,3 palavras/s; CTA final só "Segue o Porquê BR"; sem pedido de comentário; sem nomes; loop; 1–2 personagens. | §5 |
-| RF-08 | ⚠️ PAUSADO (t400; fichas desligadas, `tipo_acao='ficha_visual'` só histórico, t437). Resolvedor de fichas sem LLM; ficha nova criada na hora sem aprovação bloqueante; verificação "Verificado/Não Aprovado" por Telegram e painel. | §6 |
+| RF-08 | ⚠️ PAUSADO (t400; fichas desligadas, `tipo_acao='ficha_visual'` só histórico, t437). Resolvedor de fichas sem LLM; ficha nova criada na hora sem aprovação bloqueante; verificação “Verificado/Não Aprovado” pelo Discord/Paperclip após t464 e painel; Telegram só até o corte completo. | §6 |
 | RF-09 | Render no NotebookLM e pós FFmpeg (corte do end card só se detectado; logo com zoom suave sobre a última fala). | §5, §9 |
 | RF-10 | Instalação exclusiva do notebooklm-py 0.8.4, serviço único dono da sessão, `usage --json` gravado; acima de 80% numa janela, espaçar produções. | §9, §10 |
 
@@ -77,12 +77,12 @@
 **História:** Como José, quero que qualquer problema torne o vídeo privado na hora e me avise, sem republicação.
 
 **Critérios de aceite da funcionalidade:**
-- Sinal de problema → privado e Telegram em minutos, com motivo.
+- Sinal de problema → privado e aviso ao José pelo Discord/Paperclip após t464 (Telegram durante a migração), com motivo.
 - Nenhum vídeo volta a público nem é excluído sem o José.
 
 | ID | Requisito | REGRAS |
 |---|---|---|
-| RF-19 | Qualquer problema detectado → vídeo privado na hora, automático, com aviso no Telegram; sem substituição nem republicação. | §16 |
+| RF-19 | Qualquer problema detectado → vídeo privado na hora, automático, com aviso pelo canal privado ativo (Telegram durante a migração; Discord/Paperclip após t464); sem substituição nem republicação. | §16 |
 | RF-20 | Volta a público só com toque do José; exclusão só pelo José com dupla confirmação; toda ação registrada. | §16 |
 | RF-21 | Limiar por comentários (≥ 2 pessoas diferentes, ou 1 grave); abaixo disso, vai ao José. | §16 |
 
@@ -109,12 +109,12 @@
 **História:** Como José, quero saber de avisos do YouTube e ter a fila parada em caso crítico.
 
 **Critérios de aceite da funcionalidade:**
-- Crítico gera HOLD, privados os agendados, Telegram e ticket.
+- Crítico gera HOLD, privados os agendados, aviso ao José via Discord/Paperclip após t464 (Telegram durante a migração) e ticket.
 - Recurso só enviado pelo José.
 
 | ID | Requisito | REGRAS |
 |---|---|---|
-| RF-28 | Compliance: coleta por código (e-mail do canal, Studio só leitura, Data API); gravidade info/atenção/crítico; crítico = HOLD + privados os agendados + Telegram + ticket. | §13 |
+| RF-28 | Compliance: coleta por código (e-mail do canal, Studio só leitura, Data API); gravidade info/atenção/crítico; crítico = HOLD + privados os agendados + aviso pelo canal privado ativo (Telegram durante a migração; Discord/Paperclip após t464) + ticket. | §13 |
 | RF-29 | Rascunho de recurso preparado pelo agente; o José envia; nada sem dupla confirmação. | §13 |
 
 ### F08. Analista e relatórios
@@ -122,7 +122,7 @@
 **História:** Como José, quero um relatório diário confiável, com custos e com aviso quando os números não significam nada.
 
 **Critérios de aceite da funcionalidade:**
-- Relatório diário por template no Telegram.
+- Relatório diário por template no Discord/Paperclip após t464; Telegram apenas até o corte completo.
 - Exceções sinalizadas; aviso de amostra sem significância estatística.
 - Custos levantados sem teto.
 
@@ -135,7 +135,7 @@
 ### F09. Agentes, interação e manutenção
 > Atualizado t384–t395: autonomia, contratação, runtime 9router, Guardião e Camofox 24/7 em REGRAS §0 (atualização 11/10) e AGENTES.md; prevalecem sobre os itens abaixo.
 
-**História:** Como José, quero que os agentes só proponham e que eu aprove, pelo Telegram, tudo o que muda.
+**História:** Como José, quero que os agentes só proponham e que eu aprove tudo o que muda pelo Discord/Paperclip após o piloto t464; Telegram permanece apenas durante a migração.
 
 **Critérios de aceite da funcionalidade:**
 - Toda proposta é um objeto Pydantic v2 válido; nada se aplica sem aprovação.
@@ -146,13 +146,13 @@
 | ID | Requisito | REGRAS |
 |---|---|---|
 | RF-33 | Padrão dos agentes pensantes: rotina fixa executa; agentes observam e propõem só como saída Pydantic v2; aplicação só após aprovação do José. | §3 |
-| RF-34 | @pqbr-assistente no Hermes `pqbr` pelo Telegram: só consulta, roteia e responde pelo banco; ordem só do ID autorizado do José. | §2 |
+| RF-34 | Canal de controle de José: após o piloto, Discord nativo do Paperclip conectado diretamente ao Diretor ativo; somente identidade Paperclip vinculada do José; Telegram é rota transitória até o corte t464. | §0, §2, ADR-009 |
 | RF-35 | Tickets de manutenção agnósticos, pré-estruturados (localização, falha, correções sugeridas), com 2 aprovações do José (abertura com correções + merge); memórias de código no bank Hindsight único. | §24 |
 | RF-44 | Correção autônoma antes de chamar o José: script primeiro; falha corrigível → agente via Activity do Temporal (concorrência 1 por sessão), tentativas e tempo limitados, cada ação registrada; sucesso vira proposta de ajuste do script com as 2 aprovações; travas duras preservadas. | §3.1 |
 | RF-45 | Agentes usam o Camofox só pela Activity do Temporal, na instância da PQBR, com allowlist de ações; login manual, 2FA, exclusão (cookies: REGRAS §0 item 11, t395) e publicação fora das regras ficam com o José. | §11 |
 | RF-46 | Divisão de papéis na correção autônoma: o Jev faz só triagem, classificação, decisão estruturada e verificação do resultado; um agente com modelo LLM executa a intervenção, registra aprendizados no bank Hindsight único da PQBR e loga tudo no banco do app via Temporal. Runtime e modelo do agente: EM CONSTRUÇÃO. | §3.1, §7 |
 | RF-47 | Consumo por modelo e por tipo de ação (tokens, chamadas, tempo, sucesso, custo estimado) em `pqbr.consumo_modelos`, agregado por dia no relatório diário (por modelo, por tipo de ação, falhas, custo estimado, variação vs. 7 dias); sem teto de tokens. | §22, §3.1 |
-| RF-48 | @pqbr-assistente (Hermes `pqbr`): assistente do José que avisa, aciona agentes do Paperclip, abre tickets, orienta comandos e caminhos, busca arquivos e resultados, consulta especialistas e o Jev; não executa; acesso restrito. | §2 |
+| RF-48 | Interface de José via Diretor no Discord/Paperclip após t464: avisos, roteamento, tickets, estado, arquivos e resultados, com acesso restrito; sem agente de canal duplicado. Hermes/Telegram somente como fallback até a migração completa. | §2, ADR-009 |
 | RF-49 | Retenção do consumo por modelo: Schedule do Temporal agrega as linhas brutas de `pqbr.consumo_modelos` num resumo diário antes de apagar as mais antigas que o prazo; papel de manutenção dedicado (o `pqbr_app` não apaga); idempotente; cada execução registrada. Prazos (t369): brutos 90 dias, resumo diário 25 meses; job ~04:15. | §22 |
 | RF-36 | Revisão humana como último recurso: local dedicado, aviso ao José e registro da determinação (excluir, corrigir, reaproveitar, arquivar). | §5 |
 

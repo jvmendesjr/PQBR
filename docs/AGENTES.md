@@ -2,7 +2,7 @@
 
 **v4.3 (t393):** incorporado, sem mudar o texto, o observador de risco da conta já especificado (Observador de Conformidade, t192/t198, e guardião de sessão, t195). Divisão na §2.2. v4.2 guardada em `PROPOSTA-agentes-paperclip-v4.2.bak.md`.
 
-**v4.2 (t392):** (1) **Perfis Hermes não são usados pelos agentes.** Só o perfil `pqbr` existe, como canal do José para o Diretor. Modelos vêm do **9router** (roteador principal); o Hermes é só ponte para modelos que não se alcançam de outra forma. Ferramentas dos agentes = **kit PQBR** (Temporal, Camofox, NotebookLM py, Pydantic v2) + API do Paperclip. Runtime refeito na §7. (2) **Sem teto de agentes** e sem 1/semana; contratação pelas regras do Paperclip, só por sugestão do Diretor, do dono da trilha ou do José. (3) Rotinas do Paperclip podem acordar agentes **inclusive para produção**. (4) Orçamento **warn-only**; limite de segurança revisto após os primeiros dias de relatório. (5) Novo agente **Guardião de Segurança** (§2.1) → 14 agentes. v4.1 guardada em `PROPOSTA-agentes-paperclip-v4.1.bak.md`.
+**v4.4 (t464):** (1) **Perfis Hermes não são usados pelos agentes.** O perfil Hermes `pqbr` permanece como fallback Telegram até o gate t464; após o piloto, Discord nativo conecta diretamente ao Diretor ativo e Hermes `pqbr` é pausado. Não criar agente de canal duplicado. Modelos vêm do **9router** (roteador principal); o Hermes é só ponte para modelos que não se alcançam de outra forma. Ferramentas dos agentes = **kit PQBR** (Temporal, Camofox, NotebookLM py, Pydantic v2) + API do Paperclip. As referências Telegram nos playbooks são transitórias até a migração completa; depois do piloto, o Diretor usa Discord/Paperclip. Runtime refeito na §7. (2) **Sem teto de agentes** e sem 1/semana; contratação pelas regras do Paperclip, só por sugestão do Diretor, do dono da trilha ou do José. (3) Rotinas do Paperclip podem acordar agentes **inclusive para produção**. (4) Orçamento **warn-only**; limite de segurança revisto após os primeiros dias de relatório. (5) Novo agente **Guardião de Segurança** (§2.1) → 14 agentes. v4.1 guardada em `PROPOSTA-agentes-paperclip-v4.1.bak.md`.
 
 **v4.1 (11/10, validação contra docs oficiais do Paperclip):** ajustes na §10 (rotinas em vez de heartbeats, `toolsets` explícitos, modelo por perfil Hermes, orçamento warn-only, limites de contratação via instruções). v4 guardada em `PROPOSTA-agentes-paperclip-v4.bak.md`.
 
@@ -32,7 +32,7 @@ José (board, ausente por padrão)
    ├─ Dev Corretor
    └─ Dev Revisor
 ```
-`pqbr` (único perfil Hermes, Telegram) fica fora do organograma: canal do José, consulta e abre tarefas/tickets para o Diretor. Nenhum agente do Paperclip usa perfil Hermes.
+`pqbr` (perfil Hermes/Telegram temporário até t464; depois pausado; Discord nativo → Diretor)
 
 | Agente | Responsabilidade única | Acorda por | Absorveu |
 |---|---|---|---|
@@ -56,7 +56,7 @@ Removidos: `assistente` (duplica o `pqbr`), Capista, QA de Narração, Programad
 ### 2.1 Guardião de Segurança (separado do Observador)
 Observador mede saúde/custo/resultado; Guardião protege. Quem vigia segurança não corrige (correção vai ao Dev Corretor) nem opera produção.
 - **Varre:** segredos em repo, `company/`, tickets, logs, Hindsight (substitui/estende o scanner D14); permissões e escopo de ferramentas por agente (lista fechada do MCP `pqbr-kit` vs. o declarado no pacote); idade e rotação de chaves (Paperclip, 9router, Google, YouTube); uso anômalo (chamadas, tokens, horários, ações fora da trilha); auditoria das ações (log de atividade do Paperclip + histórico do Temporal); **prompt injection** em conteúdo externo (comentários, páginas web, transcrições) antes de chegar a outro agente: marca como dado, isola ou descarta.
-- **Poderes autônomos:** pausar um agente (`pause`, reversível); bloquear uma ação/proposta (sinal ao Temporal para não executar a `PropostaAgente`); pôr conteúdo em quarentena; revogar/suspender chave de agente comprometida e abrir ticket de rotação. Avisa Diretor + Telegram na hora.
+- **Poderes autônomos:** pausar um agente (`pause`, reversível); bloquear uma ação/proposta (sinal ao Temporal para não executar a `PropostaAgente`); pôr conteúdo em quarentena; revogar/suspender chave comprometida e abrir ticket de rotação. Avisa Diretor e José pelo canal privado ativo (Telegram durante a migração; Discord/Paperclip após t464).
 - **Não pode:** excluir nada, mudar regra canônica, criar/rotacionar segredo pago, despausar a si mesmo; não pode ser pausado por outro agente além do Diretor (e o Diretor deve justificar no relatório). Despausar agente que ele pausou: Diretor, após ticket resolvido.
 - Ferramentas: só leitura do kit + API Paperclip (pause/comentário/issue) + sinal de bloqueio no Temporal. Modelo do 9router distinto dos agentes que audita.
 
@@ -64,7 +64,7 @@ Observador mede saúde/custo/resultado; Guardião protege. Quem vigia segurança
 Fontes: `prep/decisoes-jose-2026-10-08.md` §"OBSERVADOR DE CONFORMIDADE — @prod-compliance (t192 ponto 1, aprovado t198)" e §"SESSÃO DO YOUTUBE STUDIO" (t194–t196); REGRAS §11 (l.100–112, cópia /tmp/t343); ENTREGA l.45 e l.130.
 - **Risco:** desmonetização por "conteúdo inautêntico" (repetitivo/templated, "mesma situação, mesmo desfecho"; IA dando conselho especializado). Rito: aviso no Studio → 7 dias para recurso → saída do YPP, reaplicação após 90 dias. Diretrizes: aviso único → strikes (3 em 90 dias = encerramento).
 - **Coleta por código (Temporal), o agente só analisa:** e-mail da conta do canal (juniormoedavirtual), com os e-mails do YouTube classificados pelo Jev (info / atenção / crítico); Studio via Camofox **só leitura, ritmo humano** (Restrições/Avisos, Status e recursos, Monetização, notificações, incluindo o rótulo de IA automático); Data API (rejeitado, bloqueado, privado forçado, restrição regional).
-- **Gravidade:** informativo → relatório diário; atenção (claim, anúncio limitado) → Telegram + lição para roteiros; crítico (aviso/strike, inautêntico, remoção) → **HOLD automático da fila** + Telegram + ticket + prazo de recurso monitorado. O agente prepara o rascunho do recurso e o José envia; nunca recorre, apaga ou altera.
+- **Gravidade:** informativo → relatório diário; atenção (claim, anúncio limitado) → canal privado ativo (Telegram durante a migração; Discord/Paperclip após t464) + lição para roteiros; crítico (aviso/strike, inautêntico, remoção) → HOLD automático da fila + canal privado ativo + ticket + prazo de recurso monitorado. O agente prepara rascunho; José envia; nunca recorre, apaga ou altera.
 - **Prevenção:** item de conformidade no Auditor; checagem de advertência ativa antes de cada horário de publicação; relatório semanal de variedade.
 
 **Divisão sem sobreposição:**
@@ -82,7 +82,7 @@ Os e-mails do YouTube passam por uma única coleta e um único classificador (Je
 
 **Guardrails:**
 1. Efeito externo (render, upload, agendar, privar, responder, reter, coração) **só pelo Temporal**; agentes entregam `PropostaAgente` (Pydantic v2) validada.
-2. Escada de falhas do REGRAS §18 mantida (30 s → 2 min → 8 min, rede fora não gasta tentativa, cada tentativa com outra estratégia; **5 idênticas = parada**). Na 2ª falha da mesma ação, em vez de ir ao José, entra o playbook (até **3 tentativas** de correção); Camofox com espaçamento humano de **5–15 min** entre tentativas (confirmado t357, 3 tentativas). Esgotou → Diretor → Telegram.
+2. Escada de falhas do REGRAS §18 mantida (30 s → 2 min → 8 min, rede fora não gasta tentativa, cada tentativa com outra estratégia; 5 idênticas = parada). Na 2ª falha da mesma ação, entra o playbook (até 3 tentativas de correção); Camofox com 5–15 min. Esgotou → Diretor → canal privado ativo (Telegram durante a migração; Discord/Paperclip após t464).
 3. Rollback: toda mudança de parâmetro é versionada e reversível; mudança de código entra com flag e volta sozinha se o smoke/ping falhar.
 4. Freio automático: >3 falhas iguais em 24 h → Diretor pausa a trilha e abre ticket.
 5. Sem segredos/PII em Hindsight, tickets, Supabase ou logs (scanner D14).
@@ -92,7 +92,7 @@ Os e-mails do YouTube passam por uma única coleta e um único classificador (Je
 - Excluir qualquer coisa (vídeo, comentário, arquivo do Drive, agente, org); rejeitar comentário ou banir autor.
 - Voltar a público vídeo que o item 5 tornou privado; recurso ao YouTube.
 - Gastar dinheiro / assinar plano / criar chave paga.
-- Login manual pelo noVNC/2FA, só depois de esgotada a reautenticação autônoma (renovar → cookies do Chrome → outro caminho; log + Telegram). A cópia de cookies passou a ser autônoma em t395.
+- Login manual pelo noVNC/2FA só após esgotar reautenticação autônoma (renovar → cookies do Chrome → outro caminho; log + aviso pelo canal privado ativo: Telegram durante a migração, Discord/Paperclip após t464).
 - Mudança nas regras canônicas (constituição, contrato editorial, item 5).
 
 ## 4. Regras anteriores recalibradas
@@ -106,7 +106,7 @@ Os e-mails do YouTube passam por uma única coleta e um único classificador (Je
 | Atualizar dependência só com autorização | REGRAS §2, §12 | **Relaxada** (linha do monitor abaixo) |
 | Contratação só com OK do José (`hire_agent`) | v2 §4 | Equipe pré-contratada; novas pelo Diretor sob sugestão (Diretor/dono da trilha/José), sem teto (t392) |
 | Ticket com 2 aprovações do José (abertura e merge) | ADR-004, SOUL t357 | **Relaxada:** abertura automática; merge automático se CI + testes + **aprovação do Dev Revisor** passam e mudança não toca regra canônica/segredos/infra; José só vê no relatório. **Aprovado t390** |
-| Monitor de atualizações: José autoriza no Telegram | D12, PLANO | Dev Corretor atualiza em worktree com smoke test, versão fixada e rollback automático; José só para versão major ou que mude cota/preço |
+| Monitor de atualizações: José autoriza no canal privado ativo (Telegram durante a migração; Discord/Paperclip após t464) |
 | Heartbeats desligados (#6596) | PESQUISA §5 | **Mantida:** timer desligado em todos (padrão do Paperclip). Agentes acordam por issue/comentário ou **rotina** (cron) do Paperclip, **inclusive para trabalho de produção (t392)**; efeito externo continua só pelo Temporal; checagens de 20 min ficam no Temporal |
 | Analista só observa até ~30 Shorts/90 dias | t—, ENTREGA | Mantida para *mudar parâmetro editorial*; depois disso o Diretor aplica ajustes propostos dentro de faixas pré-definidas |
 | Diretor: LLM ou rotina? (pendente g.10) | PLANO | LLM, com rotinas fixas por script |
@@ -172,7 +172,7 @@ t392: rotinas acordam produção **sim**; orçamento warn-only **sim**; sem teto
 |---|---|---|
 | Organograma | `reportsTo` do mesmo company, sem ciclo; Diretor `role: ceo`, `reportsTo: null` | https://docs.paperclip.ing/reference/api/agents/ |
 | Equipe inicial | criada pelo board (`POST /agents`, board-only) ou import do pacote; contratações seguintes pelo Diretor via `POST /agent-hires` + skill `paperclip-create-agent`, com `sourceIssueId` | https://docs.paperclip.ing/how-to/handle-board-approvals-for-hires/ |
-| Aprovação de contratação | desligada → contratação ativa na hora; José vê no Telegram/atividade | idem; https://docs.paperclip.ing/guides/day-to-day/approvals/ |
+| Aprovação de contratação | desligada → contratação ativa na hora; José vê pelo canal privado ativo (Telegram durante a migração; Discord/Paperclip após t464)/atividade | idem; https://docs.paperclip.ing/guides/day-to-day/approvals/ |
 | Instruções | `instructionsBundle` (AGENTS.md/SOUL.md), não `promptTemplate` | https://docs.paperclip.ing/reference/api/agents/ |
 | Skills | instaladas no nível da empresa; `desiredSkills` na criação; sem Hermes nos agentes (v4.2) | https://docs.paperclip.ing/reference/api/agents/ |
 | Agendamento | timer desligado; rotinas Paperclip acordam agentes, inclusive produção (t392); efeito externo e calendário de execução seguem no Temporal (ADR-002) | https://docs.paperclip.ing/guides/projects-workflow/routines/ |
@@ -199,7 +199,7 @@ t392: rotinas acordam produção **sim**; orçamento warn-only **sim**; sem teto
 | guardião de sessão (t195) | **Observador** (análise) + watchdog em código | — |
 | scanner D14 / segurança | **Guardião de Segurança** | agente `opencode_local` |
 | agentes de dev | **Dev Corretor** + **Dev Revisor** | `opencode_local` em container |
-| @pqbr-assistente | perfil Hermes `pqbr` (fora do organograma) | canal do José → Diretor |
+| Canal do José | Hermes `pqbr` apenas como fallback de transição; após o piloto, Discord nativo do Paperclip diretamente ao Diretor |
 
 ## Hindsight — manutenção e qualidade (HS-01, decidido pelo José em 12/10)
 - **Dev Corretor** é o dono da manutenção do bank `pqbr`: reindexação/consolidação diária, deduplicação, poda de memórias obsoletas, sem segredos/PII (achou, remove e abre ticket para o Guardião); nada de apagar em massa sem o backup do dia.

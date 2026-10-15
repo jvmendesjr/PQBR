@@ -25,8 +25,11 @@ Regras: nenhum teste usa dados pessoais reais nem segredos (RNF-03); nenhum test
 | TZ-03 | Banco do app de teste inacessível durante o workflow | Nada perdido; outbox grava uma vez na volta; nada "agendado/público" sem estado | RF-39, RNF-06 |
 | TZ-04 | Temporal abre issue no Paperclip; agente de teste devolve proposta; aprovação vira sinal | Proposta valida em Pydantic v2; proposta inválida é rejeitada; nada aplicado sem aprovação; agente não acessa o Postgres do Temporal | RF-33, RF-43 |
 | TZ-05 | Alternativa ao worker `hermes_local` | H-SDD1 resolvida pela alternativa de REGRAS §0; H-ORQ3 verificada por inspeção do adapter Paperclip instalado (bundle lido/injetado no prompt; asserção de teste presente, mas não executada); nenhum worker Hermes executado | RNF-13 |
-| TZ-06 | Aprovação pelo Telegram (Hermes `pqbr`) | Aprovar/negar chega como sinal; mensagem de outro ID ignorada | RF-34 |
+| TZ-06 | Aprovação Temporal pelo Discord/Paperclip | Aprovar/negar só pela identidade vinculada do José; estado válido, fail-closed, idempotência persistente e ticket após 3 falhas | RF-34, RF-43 |
 | TZ-07 | Consolidação | Relatório `docs/sdd/adr-001-orquestrador.md`; se o Temporal reprovar algum TZ, repetir TZ-01..TZ-04 com o DBOS | RNF-01 |
+| TZ-08 | Menção raiz ao bot Discord no canal privado | Cria tarefa Paperclip atribuída ao Diretor; resposta na thread; usuário José vinculado; não vinculados e canais fora do allowlist rejeitados | RF-34, RF-48 |
+| TZ-09 | Alertas proativos dos workflows e rotinas PQBR via Discord/Paperclip | Acessos, Camofox, compliance/HOLD, falhas, tickets e relatório diário chegam uma vez, em canal privado, sem depender de mensagem iniciadora | RF-19, RF-28, RF-31, RF-43 |
+| TZ-10 | Corte Telegram e rollback | Só após TZ-06/08/09 aprovados; pausa apenas Hermes `pqbr` e emissores PQBR; rollback reativa rota sem desligar gateway compartilhado; nenhum fluxo PQBR continua enviando Telegram | RF-34, RF-43 |
 
 **Resultados (09/10/2026; detalhes em `docs/sdd/adr-001-orquestrador.md`):**
 
@@ -37,8 +40,11 @@ Regras: nenhum teste usa dados pessoais reais nem segredos (RNF-03); nenhum test
 | TZ-03 | ✅ Aprovado, com stub; o banco do app de teste fica para a F3. |
 | TZ-04 | ✅ Aprovado no Paperclip de teste `PQBR-TESTE`. |
 | TZ-05 | ✅ F05-05 fechado por alternativa documentada em REGRAS §0; H-ORQ3 conferida por inspeção de `@paperclipai/hermes-paperclip-adapter` 2026.1001.0 (`supportsInstructionsBundle`, `instructionsFilePath`, injeção no prompt). Há asserção em `dist/index.test.js`, não executada porque o runner não está incluído no pacote instalado. Nenhum worker Hermes foi executado; não é um E2E desse runtime. |
-| TZ-06 | ⏸ Pendente: falta o Telegram; o filtro de remetente do motor está ok. |
+| TZ-06 | ⏸ Pendente. A antiga ponte Telegram→Temporal não foi aprovada para merge: PQBA-86 apontou idempotência não persistente e ausência de ticket após 3 falhas; reimplementar/testar com Discord/Paperclip. A execução independente dos testes não foi possível. |
 | TZ-07 | ✅ Fechado (t374): RAM e estabilidade medidas no soak; motor escolhido = **Temporal**. |
+| TZ-08 | ⏸ Pendente: conector Discord ainda não configurado/testado. |
+| TZ-09 | ⏸ Pendente: inventariar e provar entrega proativa de todas as notificações. |
+| TZ-10 | ⏸ Pendente: não pausar Telegram antes do aceite e do rollback ensaiado. |
 
 ## 3. Os 7 itens da validação (REGRAS §14)
 

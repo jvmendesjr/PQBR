@@ -17,14 +17,15 @@
   5. **Runtime (t392):** os agentes usam modelos do **9router** pelos adapters `process` (texto) e `opencode_local` (ferramenta). Nenhum perfil Hermes além do `pqbr`, que é só o canal do José para o Diretor. Ferramentas = kit PQBR (Temporal, Camofox, NotebookLM py, Pydantic v2) + API Paperclip.
   6. **Rotinas** do Paperclip podem acordar agentes, inclusive para produção (t392). Efeito externo continua só pelo Temporal.
   7. **Orçamento:** warn-only, sem pausa por custo; limite de segurança revisto após os primeiros relatórios (t392).
-  8. **Falhas:** na 2ª falha da mesma ação entra o playbook (até 3 tentativas). No Camofox, 5–15 min entre tentativas (t357). Só depois Diretor → Telegram.
+  8. **Falhas:** na 2ª falha da mesma ação entra o playbook (até 3 tentativas). No Camofox, 5–15 min entre tentativas (t357). Só depois Diretor → canal de controle ativo (Telegram durante a transição; Discord/Paperclip após t464).
   9. **Tickets:** abertura automática; merge automático com CI e testes verdes + aprovação do Dev Revisor, se a mudança não tocar regra canônica, segredos nem infra (t390).
   10. **Fonte de verdade:** Postgres local (t343). O Supabase não é usado.
 
-  11. **Camofox PQBR 24/7 (t395):** a instância `pqbr-camofox` fica sempre ligada, com a sessão permanente aberta na mesma tela. Só reinicia se cair (watchdog/`Restart=always`). Se a sessão cair, a reautenticação é **autônoma e por qualquer meio**: renovar no Camofox, depois **sincronizar cookies do Chrome**, depois outro caminho previsto. Cada passo vai para o log + aviso no Telegram. O José só é chamado depois disso (noVNC/2FA). Isso supera a §3.1 (trava "cópia de cookies") e a §11 ("só com OK do José").
+  11. **Camofox PQBR 24/7 (t395):** a instância `pqbr-camofox` fica sempre ligada, com a sessão permanente aberta na mesma tela. Só reinicia se cair (watchdog/`Restart=always`). Se a sessão cair, a reautenticação é **autônoma e por qualquer meio**: renovar no Camofox, depois **sincronizar cookies do Chrome**, depois outro caminho previsto. Cada passo vai para o log + aviso pelo canal privado ativo (Telegram durante a transição; Discord/Paperclip após t464). O José só é chamado depois disso (noVNC/2FA). Isso supera a §3.1 (trava "cópia de cookies") e a §11 ("só com OK do José").
 
 ---
 
+- **Atualização 14/10 (t464, aprovada por José), prevalece sobre referências anteriores ao Telegram abaixo:** (1) conectar o Discord nativo do Paperclip diretamente ao Diretor ativo; não criar agente de canal duplicado. (2) Migrar conversa, aprovação Temporal e todos os avisos/notificações operacionais do PQBR para Discord/Paperclip ou outra rota privada aprovada antes de retirar o Telegram. (3) Durante o piloto, manter Hermes `pqbr` e emissores Telegram disponíveis como rollback; exigir canal Discord privado, identidade Paperclip ativa e vinculada do José, pessoas não vinculadas bloqueadas, nenhuma exposição pública e entrega proativa de alertas comprovada. (4) Só após todos os testes passarem, pausar o perfil Hermes `pqbr` e as rotinas/emissores Telegram exclusivos do PQBR; não desligar o gateway compartilhado, afetar outros perfis nem apagar configuração/histórico. (5) Aprovações Temporal devem usar principal autenticado em metadado confiável, validar tarefa e estado, falhar fechadas, ser idempotentes após reinício e abrir ticket de manutenção após três tentativas. Depois do corte completo, nenhum fluxo PQBR depende do Telegram.
 ## 1. Nome e identidade
 - A organização se chama **PQBR**; os documentos explicam a sigla (Porquê BR); o canal usa o "porquê" por extenso. [08/10 NOME]
 - O canal faz sátira leve, em **desenho 2D genérico** (stickman exclusivo superado, t399/t400), sobre manias, rotinas e a origem das expressões dos brasileiros (≥ 80%). [t212/t213, t265, t399; CONTRATO §16]
@@ -35,10 +36,10 @@
 - **@prod-director** altera parâmetros operacionais, sempre pelo padrão dos agentes pensantes (§3): propõe e o José aprova. [INTERAÇÃO; t324–t326] **[SUPERADO t390–t395: ver §0, atualização 11/10]**
 - **Agentes de desenvolvimento** (qualquer um) alteram código e infraestrutura **por ticket** na produção ou por tarefa de dev na construção. Substitui o roteamento para a core-eng. [t286; antes: INTERAÇÃO "core-eng"; 07/10 rodada 2]
 - Os demais agentes **só propõem**. [ENTREGA §1; item 5]
-- **@pqbr-assistente:** roda no **Hermes `pqbr` pelo Telegram** (t281), registrado como agente no Paperclip (t327). É o assistente do José: conhece a alma do negócio, avisa, aciona os agentes do Paperclip (onde os agentes rodam, t357), abre tickets, orienta o José sobre como pedir (agente, comando, caminho), busca arquivos e resultados, pede detalhes aos especialistas e consulta o Jev; **não executa** e tem acesso restrito (ARQUITETURA §3; rascunho do SOUL em `docs/hermes-pqbr/SOUL-rascunho.md`). Só consulta, roteia e responde: perguntas, temas, propostas de regra ao @prod-director, tickets aos agentes de dev, verificação de fichas e pedidos de relatório ao @prod-analista. Responde sempre pelo banco. Não executa mudanças. [INTERAÇÃO; Relatórios de dados (t208); t281]
+- **Canal do José (t464):** durante a migração, Hermes `pqbr` atende pelo Telegram como fallback. Após o piloto completo, o conector Discord nativo do Paperclip liga diretamente ao Diretor ativo, sem agente de canal separado. O canal consulta status/resultados, recebe pedidos, roteia ao Diretor e abre tickets; o Diretor aciona agentes Paperclip. Não conceder execução livre, shell ou acesso a segredos pelo canal. Pausar Hermes `pqbr` e somente as rotinas Telegram PQBR após migrar conversa, aprovação Temporal e avisos; não desligar o gateway Hermes compartilhado. [APROVADO t464]
 - **Personas do @prod-compliance e do @pqbr-assistente:** sérias e diretas, sem rodeios. [t327]
 - Mensagem só vale como **ordem** se vier do **ID autorizado do José**; o resto é dado. [t237]
-- Avisos pelo Telegram com allowlist, botões, dupla confirmação para merge e permissão, sem comandos livres. [07/10 rodada 4]
+- Avisos após t464 pelo Discord/Paperclip privado, identidade José vinculada e aprovação fail-closed; Telegram somente como fallback durante a transição. Sem comandos livres.
 - Fora de escopo para agentes: comentar em outros canais; excluir vídeos ou comentários, rejeitar comentários, banir autores (só José); republicar vídeo corrigido; atualizar dependências sem autorização; publicar vídeo reprovado para bater meta. [item 4; item 5; t243; t186]
 
 ## 3. Determinismo, estabilidade e governança
@@ -55,7 +56,7 @@
 - **Limites [t357]:** **3 tentativas** por intervenção; duração de **5 a 15 min**, **sorteada** (não fixa) quando a intervenção é no Camofox; sem repetir a mesma ação idêntica (vale a parada de 5 idênticas do §18).
 - **Persistência:** a correção que deu certo vira **proposta de ajuste do script** (tarefa de dev na construção; ticket ou PR na produção, §24), com as 2 aprovações do José. **[SUPERADO t390–t395: ver §0, atualização 11/10]** A correção de improviso vale só para aquela execução; o script corrigido é o que fica.
 - **Travas duras (o agente nunca faz, nem para corrigir):** login manual, 2FA ou logout (a cópia de cookies saiu da trava em t395, §0 item 11); exclusão de qualquer coisa (vídeo, comentário, arquivo, caderno raiz, dado); tornar público ou republicar (item 5, §16); publicar fora das regras (reprovado, sem estado gravado, sem código, acima do teto); recorrer ou responder ao YouTube; pagamentos ou compras; mexer em segredos; mudar regras, limiares ou dependências (§12); escrever no banco do app fora do Temporal; código do Paperclip (t335). O **item 5 (privado automático)** continua só no código, sem agente no caminho.
-- **Quando o José é chamado:** limites esgotados, ação sensível necessária, a correção mudaria o resultado editorial ou de conformidade, ou o caso é marcado EM CONSTRUÇÃO abaixo. O aviso pelo Telegram traz o que foi tentado.
+- **Quando o José é chamado:** limites esgotados, ação sensível necessária, a correção mudaria o resultado editorial ou de conformidade, ou o caso é marcado EM CONSTRUÇÃO abaixo. Após t464, o aviso vai pelo canal privado Discord/Paperclip; Telegram somente durante a transição.
 - **Aplicação por ferramenta e regra** (os detalhes ficam em cada seção):
 
 | Ferramenta/regra | Correção autônoma permitida | Limites e travas |
@@ -81,7 +82,7 @@
   - (c) **Corações:** o agente pode corrigir antes de abortar; janelas flutuantes, avisos e anúncios novos são **capturados e classificados pelo Jev por importância**.
   - (d) **Diálogos de sessão no Camofox:** o agente primeiro confere se está na **sessão e na conta Google certas**, autenticado e não em outra conta; divergência = **para e chama o José**. Login e 2FA continuam com o José.
   - (e) **Envio sem confirmação:** o agente pode **procurar o código no Studio** via Camofox antes de parar.
-  - (f) Os agentes rodam no **Paperclip** (sistema principal de jobs). O Hermes `pqbr` é o assistente do José e **não executa** (ARQUITETURA §3). Runtime e modelo de cada agente do Paperclip: definidos na F1.
+  - (f) Os agentes rodam no **Paperclip** (sistema principal de jobs). O Diretor ativo atende José diretamente pelo Discord/Paperclip após o piloto t464; Hermes `pqbr` permanece somente como fallback Telegram durante a migração e será pausado após o corte. Runtime e modelo dos agentes: F1.
   - (g) **Escada de falhas:** o agente faz até 3 tentativas com **verificação do auditor/Jev**; só depois da 3ª falha chama o José.
   - (h) **Sem teto de tokens:** só monitoramento, na tabela `pqbr.consumo_modelos` (por modelo e por tipo de ação) e no relatório diário.
 
@@ -114,7 +115,7 @@
 - Bíblia visual v002 aprovada (Zé, Lia, Valdemar, Sandra, AMB-001, OBJ-001). Personagens: 2 protagonistas (masc./fem.) + 2 coadjuvantes, tom levemente cômico, com atenção à diferenciação. [08/10; 07/10]
 - Fichas no Drive `00_Biblia_Visual`; catálogo no banco do app (`visual_assets`, `episode_assets`); wiki/galeria gerada da tabela; o roteirista lista as entidades da cena; um **resolvedor sem LLM** injeta só as fichas necessárias no caderno temporário. [08/10]
 - Ficha que falta é criada na hora, **sem aprovação bloqueante**; o José recebe aviso e pode marcar "Verificado" ou "Não Aprovado" com observação. "Não Aprovado" abre ticket e a ficha é refeita para os próximos vídeos. O vídeo publicado só é despublicado e refeito se o José pedir. [08/10]
-- Verificação por botões no Telegram e status/issue no painel do Paperclip, sincronizados pela mesma tabela. [08/10; t282; t327]
+- Verificação por botões no canal ativo e status/issue no painel Paperclip, sincronizados pela mesma tabela (Telegram durante a transição; Discord/Paperclip após t464). [08/10; t282; t327]
 - Cartões (objetos, ambientes, animais) criados sob demanda por roteiro e reaproveitados; pesquisa e criação delegadas ao NotebookLM em caderno temporário, nunca no raiz. [07/10]
 
 ## 7. Camada de decisão (Jev)
@@ -162,12 +163,12 @@ _Origem do bloco: t194–t196, t272._
 - **Isolamento [t354]:** a PQBR tem um Camofox **só dela**: checkout fixado, serviço `pqbr-camofox` em `127.0.0.1:9387` com chave de API, pasta `/home/pc/.pqbr/camofox`, perfil `pqbr` na conta de produção, fila do Temporal com concorrência 1 por sessão. Não compartilha servidor, perfil nem porta com `rede`, MP32 ou outros projetos, e nenhum outro projeto usa o perfil da PQBR. Passos: ROADMAP F4C. Até lá, o perfil `porquebr` no 9377 compartilhado segue como está.
 
 ## 12. Monitor de atualizações
-- Semanal, cobre notebooklm-py, Camofox/camofox-browser, Camoufox, Paperclip, Hermes, FFmpeg, Whisper, Pydantic, PostgreSQL, Jev SDK e demais dependências. O Jev julga relevância e urgência; se afetar, **o José autoriza no Telegram**; com autorização, abre ticket para **qualquer agente de dev** (t286): worktree, smoke test isolado, versão fixada, rollback. **Nunca atualiza sozinho.** [t186; t196; t286]
+- Semanal, cobre notebooklm-py, Camofox/camofox-browser, Camoufox, Paperclip, Hermes, FFmpeg, Whisper, Pydantic, PostgreSQL, Jev SDK e demais dependências. O Jev julga relevância e urgência; se afetar, o José autoriza pelo canal privado ativo (Telegram durante a migração; Discord/Paperclip após t464); com autorização, abre ticket para qualquer agente de dev (t286): worktree, smoke test isolado, versão fixada, rollback. Nunca atualiza sozinho. [t186; t196; t286]
 
 ## 13. Conformidade (@prod-compliance)
 _Origem do bloco: t192 ponto 1, aprovado em t198._
 - Coleta por código, agente só analisa: e-mails do YouTube na conta do canal (Jev classifica gravidade); Studio via Camofox só leitura e ritmo humano (restrições/avisos, status e recursos, monetização, notificações); Data API (status por vídeo). [t198]
-- Gravidade: **informativo** → relatório diário; **atenção** (claim, anúncio limitado) → Telegram + lição para roteiros; **crítico** (aviso/strike, aviso de inautêntico, remoção) → **HOLD automático da fila** + vídeos já agendados viram privados + Telegram + ticket + prazo de recurso monitorado. [t198; item 4]
+- Gravidade: informativo → relatório diário; atenção (claim, anúncio limitado) → canal privado ativo após t464 (Telegram durante a migração) + lição para roteiros; crítico (aviso/strike, aviso de inautêntico, remoção) → HOLD automático da fila + vídeos já agendados viram privados + canal privado ativo (Telegram durante a migração; Discord/Paperclip após t464) + ticket + prazo de recurso monitorado. [t198; item 4]
 - O agente prepara rascunho de recurso; **o José envia**. Nunca recorre, apaga ou altera sem dupla confirmação do José. [t198]
 - Checagem de advertência ativa antes de cada horário de publicação; relatório semanal de variedade. [t198]
 
@@ -187,12 +188,12 @@ _Origem do bloco: item 4 (t233–t234), t273._
 
 ## 16. Correção pós-publicação (item 5)
 _Origem do bloco: item 5 (t234–t235), t239, t245, t250._
-- Diante de **qualquer** problema detectado (conformidade, direitos, erro, ofensa, comentário apontando falha, anomalia de métricas ou aviso do José), o vídeo é tornado **privado na hora, automaticamente**, e o José é avisado no Telegram com o motivo. [item 5]
+- Diante de qualquer problema detectado (conformidade, direitos, erro, ofensa, comentário apontando falha, anomalia de métricas ou aviso do José), o vídeo é tornado privado na hora, automaticamente, e o José é avisado pelo canal privado ativo (Telegram durante a migração; Discord/Paperclip após t464) com o motivo. [item 5]
 - **Sem substituição nem republicação.** O vídeo corrigido não sobe de novo. [item 5]
 - Volta a público **só com um toque do José** (mesmo vídeo e link); o agente nunca faz isso sozinho. [t245]
 - Exclusão: só o José, após análise e com dupla confirmação. Correção de título, descrição ou comentário fixado: o agente propõe e o José aprova com um toque. [item 5]
 - Quem executa é a **regra do item 5 no código**; o @prod-comunidade e os demais só sinalizam. [t250]
-- Limiar por comentários: aviso de erro ou reclamação de **≥ 2 pessoas diferentes**, ou de **1** quando o problema é grave (direitos, ofensa, dado pessoal). Abaixo disso, o caso vai ao José no Telegram. [t239]
+- Limiar por comentários: aviso de erro ou reclamação de ≥ 2 pessoas diferentes, ou de 1 quando o problema é grave (direitos, ofensa, dado pessoal). Abaixo disso, o caso vai ao José pelo canal privado ativo (Telegram durante a migração; Discord/Paperclip após t464). [t239]
   - Refinamentos da pesquisa (pessoa distinta exclui canal, spam, imitação e textos quase iguais; grave só quando o alvo é o vídeo) [t243 pesquisa] valem como critério de análise. Os **relatórios sinalizam situações excepcionais** e **avisam quando não há números estatisticamente significativos**. [t327]
 - Toda ação é registrada no banco do app (motivo, quem, quando) e vira lição para o contrato, os roteiros e o auditor. [item 5]
 
@@ -230,13 +231,13 @@ _Origem do bloco: t240–t242._
 ## 20. Analista (@prod-analista) e relatórios
 - Coleta diária por código pela **YouTube Analytics API** (OAuth, só leitura; app do GCP publicado em produção para uso interno, para o token não expirar; Camofox no Studio como reserva). Análise semanal ou por anomalia; propõe ajustes ao @prod-director (saída estruturada Pydantic v2, aplicada só com aprovação do José, §3) **[SUPERADO t390–t395: ver §0, atualização 11/10]** e salva aprendizados no Hindsight; **só observa até ~30 Shorts/90 dias**. [@prod-analista; t324–t326]
 - Métricas oficiais só pela API; os relatórios de 08/10 divergem e são hipótese. [t208]
-- Relatórios de dados vêm pelo @pqbr-assistente no Telegram, que aciona o analista. [t208]
+- Relatórios de dados vêm pelo Diretor no Discord/Paperclip após o piloto t464; durante a migração, Hermes `pqbr` pode avisar pelo Telegram e acionar o analista. [t208]
 
 ## 21. Armazenamento (Drive) e memória
 - Drive Pro de 5 TB; cota não é restrição. [t266]
 - Estrutura `PQBR/`: `00_Biblia_Visual`, `01_Contrato_e_SOP`, `02_Episodios/AAAA-MM/PQBR-EPxxxx_tema`, `03_Reservas`, `04_Privados_Revisao`, `05_Relatorios`, `99_Arquivo`. [t267; supera 07/10 rodada 6]
 - O servidor é temporário; prioridade é o disco livre. **Tudo sobe** (original do NotebookLM e editado); o arquivo local é apagado após confirmar tamanho/hash. O final fica no servidor até o upload ao YouTube ser confirmado (código no canal) e então é apagado. Intermediários limpos quando a cópia final estiver pronta. [t267; t268]
-- **Limpeza do Drive** por script determinístico na **rotina noturna do @prod-director**: duplicatas (hash/tamanho ou mesmo código) e órfãos vão para `99_Arquivo/_duplicados` e a lista vai ao José no relatório diário e no Telegram; **exclusão definitiva só pelo José**. [t269; t270]
+- **Limpeza do Drive** por script determinístico na rotina noturna do @prod-director: duplicatas (hash/tamanho ou mesmo código) e órfãos vão para `99_Arquivo/_duplicados`; a lista vai ao José no relatório diário pelo canal privado ativo (Telegram durante a migração; Discord/Paperclip após t464). Exclusão definitiva só pelo José. [t269; t270]
 - Memória: **Hindsight local** com backup diário; OpenViking fora do build (importar só o aproveitável). [07/10 item 4; rodada 2]
 - Hindsight: **um único bank por organização** (inclui as memórias de código dos agentes de dev). [t324–t326]
 - **Armazenamentos separados:** o Hindsight fica no **armazenamento próprio** (Postgres embutido pg0), separado do banco do app e do Postgres do Temporal; um bank único da organização PQBR; backup e restauração independentes, alinhados ao backup diário das 03:30; cópia fora do servidor (Drive `PQBR/backups-db`, via rclone) depende do login Google do José. [t349–t350]
