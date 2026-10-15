@@ -41,10 +41,10 @@ Regras: nenhum teste usa dados pessoais reais nem segredos (RNF-03); nenhum test
 | TZ-03 | ✅ Aprovado, com stub; o banco do app de teste fica para a F3. |
 | TZ-04 | ✅ Aprovado no Paperclip de teste `PQBR-TESTE`. |
 | TZ-05 | ✅ F05-05 fechado por alternativa documentada em REGRAS §0; H-ORQ3 conferida por inspeção de `@paperclipai/hermes-paperclip-adapter` 2026.1001.0 (`supportsInstructionsBundle`, `instructionsFilePath`, injeção no prompt). Há asserção em `dist/index.test.js`, não executada porque o runner não está incluído no pacote instalado. Nenhum worker Hermes foi executado; não é um E2E desse runtime. |
-| TZ-06 | ⏸ Pendente. A antiga ponte Telegram→Temporal não foi aprovada para merge: PQBA-86 apontou idempotência não persistente e ausência de ticket após 3 falhas; reimplementar/testar com Discord/Paperclip. A execução independente dos testes não foi possível. |
+| TZ-06 | ⏸ Pendente. Credenciais Discord do bot salvas e permissões de acesso ao canal privado verificadas; endpoint nativo do Paperclip não criado (API 403, UI 502). Ainda faltam conexão, vínculo de identidade autenticada e prova de aprovação Temporal; Telegram permanece ativo como rollback. |
 | TZ-07 | ✅ Fechado (t374): RAM e estabilidade medidas no soak; motor escolhido = **Temporal**. |
 | TZ-08 | ⏸ Pendente: conector Discord ainda não configurado/testado. |
-| TZ-09 | ⏸ Pendente. Revisão manual r24 corrigiu policy permissiva, filtro da fila por `acesso:%` e rollback protegido; 88/88 testes no worktree e 108/108 no snapshot limpo, parser SQL e scanner aprovados. Migration não aplicada; sem sender/adapters Discord reais ou prova de entrega privada, deduplicação e retry para todas as rotas. |
+| TZ-09 | ⏸ Pendente. Auditoria r24 encontrou bypass pela injeção de `rows`; r25 removeu esse parâmetro e passou a cobrir o caminho via query. Validação: 89/89 testes no worktree, 109/109 no snapshot limpo de c1e7210, scanner/whitespace limpos; SQL não aplicado. Sem endpoint Discord (API 403/UI 502), adapters reais ou prova privada de entrega, ACK/deduplicação e retry nas quatro rotas. |
 | TZ-10 | ⏸ Pendente: não pausar Telegram antes do aceite e do rollback ensaiado. |
 
 ## 3. Os 7 itens da validação (REGRAS §14)

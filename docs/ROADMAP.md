@@ -60,7 +60,7 @@
 - [ ] **F05-06** Piloto Discord/Paperclip direto ao Diretor e aprovação Temporal autenticada
   - Req: RF-34, RF-43, RF-48 · Testes: TZ-06, TZ-08 · Depende de: F05-04, F05-05
   - Aceite: conector experimental restrito; menção raiz cria tarefa para o Diretor; aprovar/negar chega ao Temporal por metadado autenticado, estado válido, fail-closed e idempotência persistente; após três falhas abre ticket. Nenhum workflow de produção recebe sinal no piloto.
-  - Portão José: decisão de migração aprovada (t464); credenciais Discord ainda necessárias. Obs: o dispatcher Telegram antigo no worktree `dev/agentes` não será mesclado: PQBA-86 não aprovou por idempotência volátil e falta de ticket após três falhas; a execução independente dos testes não ocorreu.
+  - Portão José: migração aprovada (t464); credenciais do bot salvas e permissões no canal privado configuradas e verificadas. O endpoint Discord nativo ainda não foi criado: a API retornou HTTP 403 e a UI do Paperclip HTTP 502. Não houve conexão, teste de mensagem nem workflow; Telegram segue ativo como rollback.
 - [x] **F05-07** Relatório do teste e escolha do motor
   - Req: RNF-01, RNF-05, RNF-09 · Testes: TZ-07 · Depende de: F05-01..F05-04
   - Aceite: `docs/sdd/adr-001-orquestrador.md`; ARQUITETURA atualizada. Se o Temporal reprovar, repetir F05-01..F05-04 com o DBOS.
@@ -68,7 +68,7 @@
 
 - [ ] **F05-08** Migrar todos os avisos/notificações operacionais PQBR para Discord/Paperclip
   - Req: RF-19, RF-28, RF-31, RF-43 · Testes: TZ-09 · Depende de: F05-06
-  - Obs: PQBA-87/PQBA-89 seguem como base documental. Revisão manual da candidata PQBA-91 em 15/10: r17 foi corrigida no worktree isolado para r24 após detectar policy RLS permissiva herdada da 0009, seleção de toda a fila humana e rollback sem proteção contra dados. r24 usa policies RESTRICTIVE por canal em todas as operações, seleciona apenas pedidos pendentes `acesso:%` e recusa rollback se a outbox tiver linhas. Validação: 88/88 testes no worktree, 108/108 em snapshot limpo do commit-base `dbd6d61`, parser PostgreSQL e scanner aprovados. SQL não aplicado. Sem sender Discord, adapter real de ticket e prova E2E das quatro rotas; F05-08/TZ-09 continua aberto.
+  - Obs: PQBA-87/PQBA-89 seguem como base documental. A auditoria independente da r24 identificou bypass quando `rows` era fornecido; a candidata isolada r25 removeu esse parâmetro público e ajustou os testes para passar pela consulta filtrada. Validação r25: py_compile, 89/89 testes no worktree e 109/109 em snapshot limpo de c1e7210; scanner de segredos e whitespace limpos. SQL segue sem aplicação; a migration/rollback não mudou desde a validação de parser da r24. F05-08/TZ-09 segue aberto: sender Discord, sink idempotente de ticket, integração das quatro rotas e prova E2E privada ainda faltam. O endpoint Paperclip não foi criado (API 403/UI 502).
   - Aceite: inventariar emissores, crons, workflows, playbooks e pedidos Telegram; comprovar entrega proativa privada, deduplicada e rastreável para sessão/Camofox/NotebookLM, compliance/HOLD, tickets e relatório. Telegram permanece como rollback durante a validação.
   - Portão José: nenhum novo. Obs: se alguma classe de aviso não tiver destino privado equivalente, manter Telegram e registrar o bloqueio.
 - [ ] **F05-09** Corte reversível: pausar Telegram PQBR somente após migração integral
