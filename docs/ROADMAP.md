@@ -228,7 +228,7 @@ Precisam do José: F4C-04, F4C-05, F4C-06, F4C-07. F4C-01..03 só pedem o portã
 - [ ] **L-01** Rotação de senhas e tokens (`paperclip_app`, root do Contabo, token do OpenCode) — Portão: José · Obs: adiado (t327).
 - [ ] **L-02** Estudo de outros canais e cota da API para vários canais — Portão: José · Obs: adiado (t327).
 - [ ] **L-03** Excluir `tasks/` se as rotinas ficarem só como Schedules — Depende de: F05-07 · Portão: José · Obs:
-- [ ] **L-04** Corrigir o prefixo dos novos tickets/tasks da organização de `PQBA` para `PQBR` (referência: PQBA-83) — Portão: José · Obs: avaliar o efeito na geração de novos identificadores; preservar tickets históricos e não alterar a configuração até executar esta tarefa.
+- [x] **L-04** Corrigir o prefixo dos novos tickets/tasks da organização para `PQBR` (referência histórica: PQBA-83) — Concluído em 15/10/2026 · `companies.issue_prefix` atualizado; 95 identificadores existentes preservados. O prefixo PQBR estava livre; IDs/tickets anteriores não foram renomeados.
 
 ---
 
