@@ -60,7 +60,7 @@
 - [ ] **F05-06** Piloto Discord/Paperclip direto ao Diretor e aprovação Temporal autenticada
   - Req: RF-34, RF-43, RF-48 · Testes: TZ-06, TZ-08 · Depende de: F05-04, F05-05
   - Aceite: conector experimental restrito; menção raiz cria tarefa para o Diretor; aprovar/negar chega ao Temporal por metadado autenticado, estado válido, fail-closed e idempotência persistente; após três falhas abre ticket. Nenhum workflow de produção recebe sinal no piloto.
-  - Portão José: migração aprovada (t464); credenciais do bot salvas e permissões no canal privado configuradas e verificadas. O endpoint Discord nativo ainda não foi criado: a API retornou HTTP 403 e a UI do Paperclip HTTP 502. Não houve conexão, teste de mensagem nem workflow; Telegram segue ativo como rollback.
+  - Portão José: migração aprovada (t464); credenciais do bot salvas e permissões no canal privado configuradas e verificadas. O endpoint Discord nativo ainda não foi criado: a API retornou HTTP 403; no browser, a navegação direta falhou com `ERR_TUNNEL_CONNECTION_FAILED` (a tentativa pelo túnel temporário havia retornado HTTP 502). A verificação via curl a partir do Debian respondeu HTTP 200, mas a UI não abriu no browser. Não houve conexão, teste de mensagem nem workflow; Telegram segue ativo como rollback.
 - [x] **F05-07** Relatório do teste e escolha do motor
   - Req: RNF-01, RNF-05, RNF-09 · Testes: TZ-07 · Depende de: F05-01..F05-04
   - Aceite: `docs/sdd/adr-001-orquestrador.md`; ARQUITETURA atualizada. Se o Temporal reprovar, repetir F05-01..F05-04 com o DBOS.
