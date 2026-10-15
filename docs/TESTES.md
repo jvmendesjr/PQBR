@@ -43,7 +43,7 @@ Regras: nenhum teste usa dados pessoais reais nem segredos (RNF-03); nenhum test
 | TZ-06 | ⏸ Pendente. A antiga ponte Telegram→Temporal não foi aprovada para merge: PQBA-86 apontou idempotência não persistente e ausência de ticket após 3 falhas; reimplementar/testar com Discord/Paperclip. A execução independente dos testes não foi possível. |
 | TZ-07 | ✅ Fechado (t374): RAM e estabilidade medidas no soak; motor escolhido = **Temporal**. |
 | TZ-08 | ⏸ Pendente: conector Discord ainda não configurado/testado. |
-| TZ-09 | ⏸ Pendente: inventariar e provar entrega proativa de todas as notificações. |
+| TZ-09 | ⏸ Pendente: inventário feito (PQBA-87) e extração preparatória validada (PQBA-89; 49/49), ainda sem revisão/merge; falta provar entrega proativa, ACK/idempotência e retry em todas as rotas. |
 | TZ-10 | ⏸ Pendente: não pausar Telegram antes do aceite e do rollback ensaiado. |
 
 ## 3. Os 7 itens da validação (REGRAS §14)
