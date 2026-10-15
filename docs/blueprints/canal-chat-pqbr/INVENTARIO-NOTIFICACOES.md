@@ -1,11 +1,11 @@
 # Inventário de notificações operacionais — migração para Discord/Paperclip
 
-Data de referência: 15/10/2026 00:41 (Fortaleza)
+Data de referência: 15/10/2026 01:30 (Fortaleza)
 Escopo: inventário estático do código e dos resultados registrados nos tickets PQBA-87/PQBA-89; nenhuma configuração de canal, serviço ou credencial foi alterada.
 
 ## Resumo executivo
 
-A migração cobre mais do que trocar o destino de uma mensagem. Há quatro grupos de avisos: pedidos de acesso e eventos de sessão; decisões de aprovação de workflows Temporal; incidentes de compliance/pós-publicação; relatórios operacionais e de consumo. O inventário do Dev Corretor foi concluído em PQBA-87. Um primeiro recorte de código, PQBA-89, extraiu a formatação dos pedidos de acesso sem mudar o transporte, a agenda ou o comportamento de envio. O recorte passou em 4 testes próprios e na suíte unitária completa (49/49) quando executado no ambiente Python do projeto.
+A migração cobre mais do que trocar o destino de uma mensagem. Há quatro grupos de avisos: pedidos de acesso e eventos de sessão; decisões de aprovação de workflows Temporal; incidentes de compliance/pós-publicação; relatórios operacionais e de consumo. O inventário do Dev Corretor foi concluído em PQBA-87. Um primeiro recorte de código, PQBA-89, extraiu a formatação dos pedidos de acesso sem mudar o transporte, a agenda ou o comportamento de envio. Validação: 4 testes próprios; 49/49 na suíte do worktree Dev; depois 69/69 ao reaplicar o recorte em um worktree temporário limpo do HEAD 85e3060 e executar pytest.
 
 Isso não fecha F05-08 nem prova que o Discord consegue enviar avisos proativos. O recorte permanece não commitado no worktree isolado do Dev e ainda precisa de revisão antes de qualquer integração. Telegram continua sendo a rota ativa durante a transição; não deve ser pausado até TZ-06, TZ-08, TZ-09 e o rollback TZ-10 estarem aceitos.
 
@@ -23,12 +23,12 @@ Isso não fecha F05-08 nem prova que o Discord consegue enviar avisos proativos.
 - Novo módulo puro `src/pqbr/workflows/notificacoes_operacionais.py`, com `formatar_pedidos_acesso()`.
 - `src/pqbr/workflows/pedidos_telegram.py` preserva `formatar()` como wrapper compatível; `main()`, `avisado_em`, agenda e envio atual não foram alterados.
 - Novo teste `tests/unit/test_notificacoes_operacionais.py`, cobrindo vazio, motivo, ausência de motivo, ordenação e equivalência do wrapper.
-- Validação independente no worktree: 4/4 testes do módulo e 49/49 testes de `tests/unit` passaram via `pytest` usando o Python do ambiente do projeto. A tentativa inicial com `unittest discover` não descobriu as funções pytest; não foi usada como evidência de falha do código.
+- Validação independente: 4/4 testes focados; 49/49 em `tests/unit` no worktree Dev; e 69/69 em `tests/unit` após reaplicar somente os três arquivos do patch em um worktree temporário limpo do HEAD 85e3060. A tentativa inicial com `unittest discover` não descobriu as funções pytest; não foi usada como evidência de falha do código.
 - Estado: alterações ainda não commitadas, não mescladas e não implantadas. As alterações anteriores de F05-06 no worktree foram preservadas. Não houve chamada de rede, envio de aviso ou mudança de serviço.
 
 ## Risco operacional a validar
 
-O fluxo existente grava `avisado_em` e faz commit antes de imprimir a mensagem. Isso cria um risco potencial de perda: se o consumidor do stdout falhar depois do commit, a linha pode ser considerada avisada antes de haver confirmação de entrega. Para os itens `aviso:` que não têm lembrete periódico, a consequência pode ser mais grave. Esta é uma inferência estática; ainda não foi demonstrada por um teste de falha do consumidor. Antes de migrar, definir um contrato durável de saída com chave idempotente, estado pendente/enviado, confirmação somente após entrega e retry seguro, evitando tanto perda quanto duplicação.
+O fluxo existente grava `avisado_em` e faz commit antes de imprimir a mensagem. Para confirmar o impacto da ordem, executei uma simulação local com banco stub e stdout substituído por uma função que lança OSError. A sequência observada foi update de avisado_em → commit → falha de stdout. Isso confirma o risco do desenho sem enviar mensagens, conectar banco ou tocar em dados reais. A simulação ainda deve virar teste permanente. Para os itens `aviso:` sem lembrete periódico, o risco de perda merece cobertura explícita. PQBA-91 foi aberta para definir saída durável com chave idempotente, ACK somente após entrega confirmada e retry seguro, sem perda nem duplicação.
 
 ## Próximos gates e critérios
 
