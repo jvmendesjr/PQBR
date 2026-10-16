@@ -1,20 +1,44 @@
-# Docs da PQBR — índice (consolidado em 11/10/2026, t394)
+# Documentação da PQBR — mapa e autoridade
 
-Ordem de autoridade (ler nesta ordem):
-1. `REGRAS.md`: constituição e regras de negócio (§0 traz a atualização t384–t394, que prevalece)
-2. `CONTRATO-EDITORIAL.md`: tom, categorias, gabarito, duração
-3. `SPEC.md`: requisitos
-4. `ARQUITETURA.md`: desenho, ADRs (ADR-006 Paperclip+9router, ADR-007 `--yolo`, ADR-008 Camofox 24/7)
-5. `AGENTES.md`: equipe Paperclip (14 agentes, autonomia, Guardião)
-6. `TESTES.md`: validação
-7. `ROADMAP.md`: tarefas, estado, fases e portões
-- `RASTREABILIDADE.md`: requisito → desenho → tarefa → teste
-- `DECISOES-LOG.md`: histórico tNNN; toda decisão nova entra aqui e no REGRAS
-- `hermes-pqbr/`: config viva do perfil `pqbr` (SOUL, SKILL, MCP `paperclip-pqbr`). Referência do canal do José, não da equipe.
-- `sdd/`: relatórios de fase (ADR-001, F1-02)
+Atualizado em 16/10/2026. Este índice distingue os documentos normativos, o roadmap oficial do projeto e os planos auxiliares por módulo. Não é uma nova fonte de decisão.
 
-⛔ `arquivo/` (ENTREGA, propostas antigas, decisoes-jose, PLANO, rascunhos) e `pesquisas/`: **não consultar sem aprovação do José.**
+## Ordem de autoridade
 
-Consolidado no servidor em 11/10 (t394–t395).
+Siga a ordem definida em `REGRAS.md` §0:
 
-- `REFERENCIA-sessao-google.md`: referência viva da sessão Google persistente (Camofox/Camoufox + notebooklm-py), com changelog.
+1. `REGRAS.md` — regras de negócio e governança.
+2. `SPEC.md` — requisitos.
+3. `ARQUITETURA.md` — decisões e desenho técnico.
+4. `TESTES.md` — critérios e evidências de validação.
+5. `ROADMAP.md` — tarefas, estado atual, dependências e gates do projeto.
+
+Documentos de apoio: `CONTRATO-EDITORIAL.md` (tom e padrão editorial), `AGENTES.md` (papéis), `RASTREABILIDADE.md` (requisito → desenho → tarefa → teste) e `LACUNAS-fluxo.md` (lacunas operacionais).
+
+## Os dois roadmaps não são intercambiáveis
+
+- `docs/ROADMAP.md` é o roadmap canônico de toda a PQBR. Abrange as fases gerais de infraestrutura, organização, canal, produção e liberação; contém o anexo de fases, gates e rollback antes mantido em `PLANO.md`. O primeiro gate operacional ainda aberto é F05-06; F05-08 e F05-09 também permanecem abertos. F00-01 é outra revisão e não deve ser confundida com o G0 do módulo de vídeo.
+- `docs/blueprints/modulo-producao-video/ROADMAP.md` é um checklist auxiliar somente do módulo de produção de vídeo. O G0 deste módulo foi aceito por José em 15/10/2026; isso não fecha os itens técnicos da Fase 0, não substitui o roadmap canônico e não autoriza geração real, upload ou publicação.
+
+## Documentos por diretório
+
+### `blueprints/canal-chat-pqbr/`
+
+Documentação da conversa Discord/Paperclip e da migração das notificações. O `README.md` desse diretório resume o estado; `GUIA-USO-DISCORD.md` orienta o uso do canal; blueprint, avaliação e inventário guardam decisões, evidências e lacunas. Aprovação Temporal e alertas proativos duráveis continuam dependentes dos gates F05-06/F05-08.
+
+### `blueprints/modulo-producao-video/`
+
+Documentos do módulo visual com Flow como rota primária e Vids como fallback. `README.md` é o índice local; `BLUEPRINT.md` define arquitetura, escopo e decisões; `ROADMAP.md` lista fases e evidências. São documentos de planejamento, não implementação já concluída.
+
+### `sdd/`
+
+ADRs, relatórios de gate e evidências de testes. Leia seu status e data antes de aplicar qualquer passo: alguns arquivos registram snapshots históricos. Em particular, `f1-02-dryrun.md` documenta um dry-run antigo de criação de uma segunda organização, nunca executado; F1-01/F1-02 estão suspensos no roadmap canônico e o comando `--target new` não deve ser repetido.
+
+### Outros documentos vivos
+
+- `REFERENCIA-sessao-google.md` — referência operacional da sessão Google/Camofox.
+- `hermes-pqbr/` — configuração legada preservada como rollback durante a migração; não pausar antes de F05-09.
+- `LICOES-pre-E2E.md` — lições para o E2E.
+
+## Preservação e descarte
+
+Não foi identificado um arquivo seguro para excluir nesta revisão. Relatórios de dry-run e snapshots antigos são mantidos como evidência, com seu caráter histórico explicitado, em vez de apagados. `docs/arquivo/`, `docs/pesquisas/` e `docs/DECISOES-LOG.md` continuam sujeitos às restrições de consulta de `REGRAS.md` §0; esta revisão não os abriu nem os alterou.

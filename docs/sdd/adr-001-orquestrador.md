@@ -1,4 +1,5 @@
 # ADR-001 (parcial): orquestrador — Temporal self-hosted (Fase 0.5)
+> **Snapshot histórico:** o status abaixo registra a avaliação de 09/10/2026; não é o estado operacional atual. Consulte `docs/ROADMAP.md` e `docs/TESTES.md` para os gates e resultados atuais.
 
 > Status: **PARCIAL**. Em 09/10/2026: TZ-01 a TZ-04 aprovados (TZ-02 sem reboot, dispensado em t334); TZ-05 **bloqueado** (`--yolo` incondicional no `hermes_local`); TZ-06 pendente (Telegram); soak de 24 h em andamento. A decisão final (TZ-07) sai depois do soak.
 > Autoridade: abaixo de `docs/REGRAS.md`, `docs/SPEC.md` e `docs/ARQUITETURA.md` (ADR-002). Origem: t329, t333, t334.

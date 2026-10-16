@@ -1,4 +1,5 @@
 # F1-02 — dry-run do import da org PQBR (10/10/2026, t376)
+> **Snapshot histórico:** o dry-run planejava criar uma organização nova, mas não criou organização alguma. F1-01/F1-02 estão suspensos em 16/10/2026 enquanto o plano é reconciliado com a PQBR ativa; não repetir `company import --target new`. O estado atual está em `docs/ROADMAP.md`.
 
 Comando: `paperclipai company import ./company --target new --new-company-name PQBR --include company,agents --dry-run --json`
 

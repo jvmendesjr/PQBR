@@ -1,5 +1,5 @@
-# ROADMAP da PQBR (tarefas granulares, para qualquer agente retomar)
-> t465: NotebookLM-first, a hierarquia de provedores e a identidade stickman do módulo foram registrados nos documentos canônicos. Isso não fecha F05-06/F05-08/F05-09 nem declara integrações ou fichas ativas; aceite G0 permanece pendente.
+# ROADMAP canônico da PQBR — fases gerais, tarefas e gates ativos
+> t465: NotebookLM-first, a hierarquia de provedores e a identidade stickman do módulo foram registrados nos documentos canônicos. Isso não fecha F05-06/F05-08/F05-09 nem declara integrações ou fichas ativas; G0 do módulo de vídeo aceito em 15/10; o gate G0/F00-01 do roadmap geral permanece pendente.
 
 > **Como retomar (qualquer agente, qualquer sessão):**
 > 1. Leia **só**, nesta ordem: `docs/REGRAS.md` → `docs/SPEC.md` → `docs/ARQUITETURA.md` → `docs/TESTES.md` → este `docs/ROADMAP.md`. Em conflito, vale o primeiro.
@@ -10,7 +10,7 @@
 >
 > **Como marcar concluída:** troque `- [ ]` por `- [x]` e acrescente na mesma linha `— AAAA-MM-DD — commit <hash curto>`; no `Obs:`, registre o que foi feito, as evidências (IDs de teste do TESTES.md) e os desvios. Parcial continua `- [ ]`, com o estado no `Obs:`.
 > **Atualize este arquivo a cada tarefa concluída**, no mesmo commit do trabalho (ou no seguinte, se precisar do hash).
-> Campos: **Req** = IDs do `SPEC.md`; **Testes** = IDs do `TESTES.md`; **Dn** = numeração antiga das tarefas de desenvolvimento. Fases, portões e rollback: `docs/PLANO.md`.
+> Campos: **Req** = IDs do `SPEC.md`; **Testes** = IDs do `TESTES.md`; **Dn** = numeração antiga das tarefas de desenvolvimento. Fases, portões e rollback: Anexo, neste arquivo (ex-PLANO.md incorporado).
 
 ---
 

@@ -1,6 +1,6 @@
 # ARQUITETURA da PQBR
 
-> Autoridade: abaixo de `docs/REGRAS.md` e `docs/SPEC.md`; acima de `docs/TESTES.md`, `docs/ROADMAP.md` e `docs/PLANO.md`. Requisitos citados como RF/RNF (SPEC). Este arquivo diz **como** as regras são executadas hoje; ele se adapta às regras, nunca o contrário (t285). Em conflito, vale o REGRAS.md.
+> Autoridade: abaixo de `docs/REGRAS.md` e `docs/SPEC.md`; acima de `docs/TESTES.md`, `docs/ROADMAP.md` (incluindo o anexo ex-PLANO). Requisitos citados como RF/RNF (SPEC). Este arquivo diz **como** as regras são executadas hoje; ele se adapta às regras, nunca o contrário (t285). Em conflito, vale o REGRAS.md.
 > Não consultar `docs/arquivo/`, `docs/pesquisas/` nem `docs/DECISOES-LOG.md` sem aprovação explícita do José (t287).
 > Legenda: [APROVADO] · [VERIFICADO] · [HIPÓTESE] · [PROPOSTA] (sugestão ainda sem aprovação) · EM CONSTRUÇÃO — aguardando José.
 
@@ -163,7 +163,7 @@ Personas [APROVADO como fonte]: pt-BR, parafraseadas da Agency Agents (MIT). Com
 
 - Servidor `pc` (casa, acessado pela tailnet). Repositório oficial em `/home/pc/Workspace/PQBR`, GitHub `jvmendesjr/PQBR` (privado, `main`) [VERIFICADO].
 - Paperclip só dentro da tailnet, por HTTPS; 443 livre [VERIFICADO t280].
-- Dependências globais [VERIFICADO 09/10]: Camofox (REST, saudável), Node, Python/uv, FFmpeg, Docker, gh, NotebookLM CLI 0.8.2 global, Hindsight. As dependências da PQBR são tarefas do PLANO.
+- Dependências globais [VERIFICADO 09/10]: Camofox (REST, saudável), Node, Python/uv, FFmpeg, Docker, gh, NotebookLM CLI 0.8.2 global, Hindsight. As dependências da PQBR são tarefas do roadmap canônico (`docs/ROADMAP.md`).
 - Endereços (IP/host da tailnet), IDs de canais/tópicos, tokens e segredos de Telegram ou Discord não entram no Git (REGRAS §17).
 
 ## 6. Estrutura do repositório
