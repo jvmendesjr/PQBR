@@ -2,33 +2,32 @@
 
 Aplicação de produção do canal Porquê BR: Shorts de sátira leve, em stickman, sobre manias e rotinas dos brasileiros.
 
-## Ordem de autoridade e de leitura (em conflito, vale o primeiro)
+## Orientação para agentes e mapa documental
 
-1. `docs/REGRAS.md`: todas as regras aprovadas pelo José; §0–§3 são a constituição.
+`AGENTS.md` na raiz é a porta de entrada para agentes que trabalham neste checkout. `docs/README.md` é o mapa de documentos, diretórios e autoridade. O roster de papéis fica em `docs/AGENTES.md`; as instruções específicas de cada agente Paperclip ficam em `company/agents/<slug>/AGENTS.md`.
+
+Há dois roadmaps com escopos diferentes. `docs/ROADMAP.md` é o roadmap canônico geral e fonte do estado oficial. `docs/blueprints/modulo-producao-video/ROADMAP.md` é auxiliar e cobre apenas o módulo de produção de vídeo. Não misture nem use um para substituir o outro.
+
+## Ordem de autoridade e de leitura
+
+Em conflito, vale o documento de maior autoridade, nesta ordem:
+
+1. `docs/REGRAS.md`: regras aprovadas pelo José; §0–§3 são a constituição.
 2. `docs/SPEC.md`: requisitos funcionais e não funcionais, histórias e critérios de aceite.
-3. `docs/ARQUITETURA.md`: ADRs, modelo de dados, workflows do Temporal, integração com o Paperclip, contratos Pydantic v2.
-4. `docs/TESTES.md`: plano de testes, teste de 1 dia do Temporal e os 7 itens da validação.
-5. `docs/ROADMAP.md`: tarefas, estado e próximo passo. **Qualquer agente retoma daqui.**
-6. `docs/PLANO.md`: fases, portões do José, rollback e riscos.
+3. `docs/ARQUITETURA.md`: ADRs, modelo de dados, workflows do Temporal, integração com o Paperclip e contratos Pydantic v2.
+4. `docs/TESTES.md`: plano de testes e critérios de validação.
+5. `docs/ROADMAP.md`: tarefas, estado e próximo passo do projeto.
 
-`docs/RASTREABILIDADE.md` liga requisito → desenho → tarefa → teste.
+`docs/RASTREABILIDADE.md` liga requisito → desenho → tarefa → teste. As fases, gates e rollback antes descritos em `PLANO.md` foram incorporados ao anexo de `docs/ROADMAP.md`; não há um `docs/PLANO.md` atual separado.
 
-## ⛔ Proibido consultar sem aprovação explícita do José (t287)
+## ⛔ Documentos restritos
 
-Arquivos de pré-construção **nunca** são consultados por agentes; ler qualquer um exige aprovação explícita do José, porque podem ser mal interpretados e aplicados em produção:
-
-- `docs/CONTRATO-EDITORIAL.md` (rascunho; o que vale está no REGRAS §5)
-- `docs/DECISOES-LOG.md` (registro histórico de decisões)
-- `docs/pesquisas/` (pesquisas e referências)
-- `docs/arquivo/` (material superado e legado)
-- qualquer rascunho ou material legado, dentro ou fora do repositório
+Arquivos de pré-construção e material legado não devem ser consultados sem aprovação explícita do José, conforme `docs/REGRAS.md` §0. Isso inclui `docs/CONTRATO-EDITORIAL.md`, `docs/DECISOES-LOG.md`, `docs/pesquisas/`, `docs/arquivo/` e qualquer rascunho legado. O que vale como regra editorial está em `docs/REGRAS.md` §5.
 
 ## Regras do repositório
 
-- Dúvida ou conflito sem certeza: não adivinhar; marcar "EM CONSTRUÇÃO — aguardando José" (t323).
-- Decisão nova entra no `DECISOES-LOG.md` e no `REGRAS.md` no mesmo commit; requisitos, desenho, testes e tarefas afetados são atualizados junto.
-- Nada de senhas, tokens, cookies, dados pessoais, IPs ou IDs internos neste repositório.
-
-- **Sessão Google (referência viva):** [`docs/REFERENCIA-sessao-google.md`](docs/REFERENCIA-sessao-google.md) — Camofox única fonte/renovador; NotebookLM só lê.
-
-- **Antes de qualquer E2E:** [docs/LICOES-pre-E2E.md](docs/LICOES-pre-E2E.md) (checklist em ordem).
+- Dúvida ou conflito sem certeza: não adivinhar; marcar “EM CONSTRUÇÃO — aguardando José” (t323).
+- Decisão nova entra no `DECISOES-LOG.md` e no `REGRAS.md` no mesmo commit; atualizar também requisitos, desenho, testes e tarefas afetados.
+- Não colocar senhas, tokens, cookies, dados pessoais, IPs ou IDs internos neste repositório.
+- **Sessão Google (referência viva):** [`docs/REFERENCIA-sessao-google.md`](docs/REFERENCIA-sessao-google.md) — Camofox é a fonte/renovador da sessão; NotebookLM só a lê.
+- **Antes de qualquer E2E:** [docs/LICOES-pre-E2E.md](docs/LICOES-pre-E2E.md), seguindo o checklist em ordem.

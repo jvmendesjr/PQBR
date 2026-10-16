@@ -12,7 +12,7 @@ Siga a ordem definida em `REGRAS.md` §0:
 4. `TESTES.md` — critérios e evidências de validação.
 5. `ROADMAP.md` — tarefas, estado atual, dependências e gates do projeto.
 
-Documentos de apoio: `AGENTES.md` (papéis), `RASTREABILIDADE.md` (requisito → desenho → tarefa → teste) e `LACUNAS-fluxo.md` (lacunas operacionais). `CONTRATO-EDITORIAL.md` é um rascunho de referência editorial sujeito às restrições de leitura descritas em `REGRAS.md` §0; contém referências de planejamento históricas e não deve substituir o roadmap canônico.
+A `AGENTS.md` da raiz do repositório é a entrada de instruções para agentes; `company/agents/<slug>/AGENTS.md` contém as instruções específicas de cada papel. `docs/AGENTES.md` (com E depois do G) é o roster e desenho dos papéis, não o arquivo de instruções. `RASTREABILIDADE.md` liga requisito → desenho → tarefa → teste e `LACUNAS-fluxo.md` lista lacunas operacionais. `CONTRATO-EDITORIAL.md` é um rascunho sujeito às restrições de leitura de `REGRAS.md` §0; contém referências de planejamento históricas e não deve substituir o roadmap canônico.
 
 ## Os dois roadmaps não são intercambiáveis
 
