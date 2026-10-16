@@ -12,7 +12,7 @@ Siga a ordem definida em `REGRAS.md` §0:
 4. `TESTES.md` — critérios e evidências de validação.
 5. `ROADMAP.md` — tarefas, estado atual, dependências e gates do projeto.
 
-Documentos de apoio: `CONTRATO-EDITORIAL.md` (tom e padrão editorial), `AGENTES.md` (papéis), `RASTREABILIDADE.md` (requisito → desenho → tarefa → teste) e `LACUNAS-fluxo.md` (lacunas operacionais).
+Documentos de apoio: `AGENTES.md` (papéis), `RASTREABILIDADE.md` (requisito → desenho → tarefa → teste) e `LACUNAS-fluxo.md` (lacunas operacionais). `CONTRATO-EDITORIAL.md` é um rascunho de referência editorial sujeito às restrições de leitura descritas em `REGRAS.md` §0; contém referências de planejamento históricas e não deve substituir o roadmap canônico.
 
 ## Os dois roadmaps não são intercambiáveis
 
@@ -23,7 +23,7 @@ Documentos de apoio: `CONTRATO-EDITORIAL.md` (tom e padrão editorial), `AGENTES
 
 ### `blueprints/canal-chat-pqbr/`
 
-Documentação da conversa Discord/Paperclip e da migração das notificações. O `README.md` desse diretório resume o estado; `GUIA-USO-DISCORD.md` orienta o uso do canal; blueprint, avaliação e inventário guardam decisões, evidências e lacunas. Aprovação Temporal e alertas proativos duráveis continuam dependentes dos gates F05-06/F05-08.
+Documentação da conversa Discord/Paperclip e da migração dos avisos. O `README.md` desse diretório resume o estado; `GUIA-USO-DISCORD.md` orienta o uso do canal; blueprint, avaliação e inventário guardam decisões, evidências e lacunas. Aprovação Temporal e alertas proativos duráveis continuam dependentes dos gates F05-06/F05-08.
 
 ### `blueprints/modulo-producao-video/`
 

@@ -1,7 +1,8 @@
 # Blueprint de migração do canal PQBR para Discord nativo do Paperclip
 
 **Data:** 14/10/2026
-**Estado:** direção aprovada por José; desenho e gates documentados; nenhuma conexão, flag, bot ou serviço foi alterado nesta etapa.
+**Estado do documento:** blueprint de migração; o texto abaixo conserva o retrato inicial de 14/10 e não deve ser lido como status operacional atual.
+> **Estado operacional verificado em 15/10/2026:** Discord nativo ativo e conectado diretamente ao Diretor; round-trip em `#pqbr` confirmado; DMs e remetentes não vinculados bloqueados. F05-06/TZ-06 e F05-08/TZ-09 permanecem abertos; Telegram/Hermes segue ativo como rollback. O status corrente é `docs/ROADMAP.md`.
 **Decisão:** conectar o Discord nativo do Paperclip diretamente ao Diretor ativo; migrar também a aprovação Temporal e todos os avisos operacionais; somente após o piloto completo, pausar o Hermes `pqbr` e todos os emissores Telegram pertencentes ao PQBR.
 
 ## 1. Objetivo e limites
@@ -10,7 +11,7 @@ Substituir Telegram/Hermes como canal de interação do PQBR por Discord nativo 
 
 A migração não autoriza exposição pública da instância, mudanças no código do Paperclip, criação de outro agente de canal, publicação de vídeos, exclusão de dados ou remoção de credenciais. O Hermes e os emissores Telegram permanecem disponíveis como rollback durante toda a validação. Após o corte, a instrução é pausá-los, não apagá-los.
 
-## 2. Estado conhecido
+## 2. Estado conhecido (snapshot de 14/10/2026, anterior ao piloto)
 
 - O Paperclip instalado é 2026.1001.0; `enableChatConnectors` estava desligado na última leitura.
 - O conector Discord é experimental e uma conexão atende a um servidor e a um agente. O fluxo documentado começa por uma menção raiz em canal; a resposta continua na thread vinculada à tarefa. DM não será usado como premissa do piloto.

@@ -1,6 +1,7 @@
 # Inventário de notificações operacionais — migração para Discord/Paperclip
 
 Data de referência: 15/10/2026 09:00 (Fortaleza)
+> **Tipo:** inventário estático/snapshot, não status operacional em tempo real. Atualização de navegação em 16/10/2026: o Discord já responde no canal `#pqbr`, mas F05-08/TZ-09 continua aberto porque não há prova de transporte proativo durável integrado a todas as rotas. Confira o estado atual em `docs/ROADMAP.md`.
 Escopo: inventário estático do código e dos resultados registrados nos tickets PQBA-87/PQBA-89; nenhuma configuração de canal, serviço ou credencial foi alterada.
 
 ## Resumo executivo
