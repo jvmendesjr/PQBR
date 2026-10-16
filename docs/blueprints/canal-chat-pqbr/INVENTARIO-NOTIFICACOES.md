@@ -90,6 +90,6 @@ Foi executado um workflow temporário sem efeito de aprovação, usando uma mens
 
 Resultado observado: wake Discord real confirmado; comment ID/run/Update ID coincidentes; autor igual à identidade Paperclip vinculada; issue, endpoint e `#pqbr` coincidentes; um Update aceito; probe concluído. Não houve mensagem enviada pelo agente, aprovação/negação de produção, sinal a workflow de produção, publicação ou alteração do endpoint. Nenhum worker de produção foi reiniciado.
 
-A candidata permanece em `/home/pc/.pqbr/f05-06-discord-approval-update`, isolada do checkout oficial. Suítes focadas: 20 testes passaram, com 27 subtests. Revisão independente somente leitura atribuída ao Dev Revisor em `PQBR-101`.
+A candidata permanece em `/home/pc/.pqbr/f05-06-discord-approval-update`, isolada do checkout oficial. Suítes focadas: 22 testes passaram, com 27 subtests. Revisão independente somente leitura do Dev Revisor em `PQBR-101` concluída, com parecer estático favorável à candidata sem efeitos de produção; commit isolado `9c03f61`, 22 testes e 27 subtests aprovados.
 
 **Limite da evidência:** comprova a correlação real de comentário e execução Temporal, não conecta ainda essa ferramenta ao gate de publicação/proposta real. F05-06/TZ-06 permanece aberto até aprovar/negar autenticado no workflow-alvo, verificar estado válido, falhas fechadas, idempotência durável e o ticket após três falhas; sem receber sinais em workflows de produção durante o piloto.
