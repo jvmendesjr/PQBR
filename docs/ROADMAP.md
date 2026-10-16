@@ -79,10 +79,10 @@
   - Portão José: t464 aprova o corte somente depois do piloto completo; nenhuma pausa antes do gate.
 ## Fase 0: revisão da especificação (paralela à 0.5)
 
-- [x] **F00-01** Revisar SPEC, TESTES e RASTREABILIDADE com o José — 2026-10-15 — commit 9d969df
+- [ ] **F00-01** Revisar SPEC, TESTES e RASTREABILIDADE com o José
   - Req: todos · Testes: — · Depende de: R-005
   - Aceite: seções do REGRAS vinculadas a RF/RNF ou a gate transversal explicitado; matriz sem lacunas não marcadas.
-  - Portão José: **G0** aprovado por José em 2026-10-15. Obs: auditoria preliminar conferiu 62 IDs RF/RNF, sem requisito ausente na matriz; REGRAS §14 ficou como gate transversal V1–V7 em RASTREABILIDADE. Revisão e aceite final concluídos.
+  - Portão José: **G0**. Obs: auditoria preliminar conferiu 62 IDs RF/RNF, sem requisito ausente na matriz; REGRAS §14 ficou como gate transversal V1–V7 em RASTREABILIDADE. Revisão final e aceite deste G0 continuam pendentes. Em 2026-10-15, José aceitou o G0 do roadmap do módulo de Produção de Vídeo; esse aceite não abrange F00-01.
 
 ## Fase 1: org PQBR no Paperclip (agentes pausados)
 > Reconciliação 2026-10-15: a organização PQBR atual já está ativa e integrada ao Discord. F1-01/F1-02 descrevem um pacote antigo que criaria uma segunda organização; ficam suspensas, sem novo G1/importação, até adaptar o plano à organização existente.
