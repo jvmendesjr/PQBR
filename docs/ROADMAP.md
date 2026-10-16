@@ -62,6 +62,7 @@
   - Aceite: conector experimental restrito; menção raiz cria tarefa para o Diretor; aprovar/negar chega ao Temporal por metadado autenticado, estado válido, fail-closed e idempotência persistente; após três falhas abre ticket. Nenhum workflow de produção recebe sinal no piloto.
   - Portão José: migração aprovada (t464); credenciais do bot salvas e permissões no canal privado configuradas/verificadas. O endpoint Discord nativo foi criado e ativado após o teste de round-trip em `#pqbr` (menção de raiz, identidade vinculada e resposta na thread; `PQBR-97`, dois runs concluídos). A configuração final foi conferida: apenas `#pqbr` habilitado, canais de servidor permitidos, DMs bloqueadas e remetentes não vinculados bloqueados; a exceção temporária foi revertida. O teste positivo de conversa passou e uma menção de identidade não vinculada foi filtrada. TZ-08 permanece parcial até comprovação negativa de canal fora do allowlist. F05-06/TZ-06 permanece aberto: nenhum teste de aprovação/negação autenticada no Temporal, estado válido, idempotência persistente/fail-closed ou ticket após três falhas; nenhum workflow de produção recebeu sinal. Nenhuma publicação foi feita; Telegram permanece ativo como rollback. A ponte de aprovação Telegram examinada no worktree `dev/agentes` é candidata local não aprovada e ausente do checkout oficial; a auditoria leu idempotência em memória e sem proteção concorrente, possível repetição após resposta ambígua e exceções em texto bruto. Não integrar nem mesclar; F05-06 exige nova ponte persistente/autenticada via Discord.
   - Evidência adicional (2026-10-15): probe sem efeito de aprovação validou a correlação de mensagem real Discord→Temporal: o comentário de wake, o `wakeCommentId` persistido e o ID do Temporal Update coincidiram; identidade Paperclip vinculada, issue, endpoint e canal `#pqbr` também coincidiram. O workflow descartável concluiu com um Update aceito; não houve aprovação/negação de produção nem publicação. Harness candidato: 22 testes e 27 subtests passaram. Revisão independente PQBR-101 concluída com parecer estático favorável à candidata sem efeito de produção; commit isolado `9c03f61`, 22 testes e 27 subtests aprovados. Isso fecha apenas a prova de correlação, não o F05-06/TZ-06.
+  - Documentação parcial (2026-10-15): criado `docs/blueprints/canal-chat-pqbr/GUIA-USO-DISCORD.md`, com instruções para iniciar/continuar pedidos e os limites atuais. Isso não fecha TZ-06, TZ-08 nem F05-06.
 - [x] **F05-07** Relatório do teste e escolha do motor
   - Req: RNF-01, RNF-05, RNF-09 · Testes: TZ-07 · Depende de: F05-01..F05-04
   - Aceite: `docs/sdd/adr-001-orquestrador.md`; ARQUITETURA atualizada. Se o Temporal reprovar, repetir F05-01..F05-04 com o DBOS.
@@ -78,21 +79,24 @@
   - Portão José: t464 aprova o corte somente depois do piloto completo; nenhuma pausa antes do gate.
 ## Fase 0: revisão da especificação (paralela à 0.5)
 
-- [x] **F00-01** Revisar SPEC, TESTES e RASTREABILIDADE com o José — 2026-10-15
+- [x] **F00-01** Revisar SPEC, TESTES e RASTREABILIDADE com o José — 2026-10-15 — commit 9d969df
   - Req: todos · Testes: — · Depende de: R-005
   - Aceite: seções do REGRAS vinculadas a RF/RNF ou a gate transversal explicitado; matriz sem lacunas não marcadas.
   - Portão José: **G0** aprovado por José em 2026-10-15. Obs: auditoria preliminar conferiu 62 IDs RF/RNF, sem requisito ausente na matriz; REGRAS §14 ficou como gate transversal V1–V7 em RASTREABILIDADE. Revisão e aceite final concluídos.
 
 ## Fase 1: org PQBR no Paperclip (agentes pausados)
+> Reconciliação 2026-10-15: a organização PQBR atual já está ativa e integrada ao Discord. F1-01/F1-02 descrevem um pacote antigo que criaria uma segunda organização; ficam suspensas, sem novo G1/importação, até adaptar o plano à organização existente.
 
-- [ ] **F1-01** Pacote `company/` (agentcompanies/v1)
+- **F1-01 [SUSPENSO — reconciliar com a organização ativa; não importar como nova]** Pacote `company/` (agentcompanies/v1)
   - Req: RF-33, RNF-12 · Testes: TS-09 · Depende de: F05-07, F00-01
   - Aceite: `COMPANY.md`, `agents/<slug>/AGENTS.md` (director, analista, comunidade, compliance, dev), `.paperclip.yaml` sem segredos; validador e scanner passam; o Diretor atende José diretamente pelo Discord/Paperclip após t464; não criar agente Hermes/assistente duplicado.
   - Portão José: **G1**. Obs: 2026-10-10 (t376): pacote pronto em `company/` (COMPANY.md, 6 AGENTS.md, `.paperclip.yaml` com adaptador `process` stub, heartbeat desligado, orçamento 0); scanner limpo; dry-run sem avisos nem erros. **Aguarda o G1 do José** (revisar o pacote).
-- [ ] **F1-02** Import dry-run e criação da org pausada
+  - Estado: o pacote e dry-run registrados em 10/10 pertencem ao plano antigo. Não solicitar G1 nem aplicar esse pacote à organização atual antes da reconciliação.
+- **F1-02 [SUSPENSO — nenhuma organização nova autorizada ou necessária]** Import dry-run e criação da org pausada
   - Req: RF-43, RNF-13 · Testes: TS-13 · Depende de: F1-01
   - Aceite: dry-run limpo (H-SDD2); agentes pausados, heartbeats desligados.
   - Portão José: autorizar o import; liberar agente é decisão separada. Obs: 2026-10-10 (t376): **só o dry-run**, limpo (`docs/sdd/f1-02-dryrun.md`); nenhuma org criada. O pacote não carrega `paused`: pausar todos logo após o import. Criação real aguarda o José.
+  - Estado: dry-run histórico concluído; importação real não executada. Não rodar `company import --target new`; revisar apenas o que ainda se aplica à organização PQBR ativa.
 - **F1-03 [SUPERADO por t464]** O ajuste operacional do perfil Hermes `pqbr` não se executa separadamente; a pausa ocorre somente pelo gate F05-09, após a migração completa.
   - Req: RF-34, RF-48 · Testes: TZ-10 · Depende de: F05-06, F05-08, F05-09
   - Aceite: confirmar que o perfil Hermes `pqbr` foi pausado pelo gate F05-09; preservar dados/configuração para rollback e manter ligado o gateway Hermes compartilhado.
