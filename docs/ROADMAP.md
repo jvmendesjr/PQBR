@@ -78,10 +78,10 @@
   - Portão José: t464 aprova o corte somente depois do piloto completo; nenhuma pausa antes do gate.
 ## Fase 0: revisão da especificação (paralela à 0.5)
 
-- [ ] **F00-01** Revisar SPEC, TESTES e RASTREABILIDADE com o José
+- [x] **F00-01** Revisar SPEC, TESTES e RASTREABILIDADE com o José — 2026-10-15
   - Req: todos · Testes: — · Depende de: R-005
   - Aceite: seções do REGRAS vinculadas a RF/RNF ou a gate transversal explicitado; matriz sem lacunas não marcadas.
-  - Portão José: **G0**. Obs: auditoria preliminar conferiu 62 IDs RF/RNF, sem requisito ausente na matriz; REGRAS §14 ficou como gate transversal V1–V7 em RASTREABILIDADE. A revisão final e o aceite G0 continuam pendentes de José.
+  - Portão José: **G0** aprovado por José em 2026-10-15. Obs: auditoria preliminar conferiu 62 IDs RF/RNF, sem requisito ausente na matriz; REGRAS §14 ficou como gate transversal V1–V7 em RASTREABILIDADE. Revisão e aceite final concluídos.
 
 ## Fase 1: org PQBR no Paperclip (agentes pausados)
 
