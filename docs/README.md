@@ -38,6 +38,7 @@ ADRs, relatórios de gate e evidências de testes. Leia seu status e data antes 
 - `REFERENCIA-sessao-google.md` — referência operacional da sessão Google/Camofox.
 - `hermes-pqbr/` — configuração legada preservada como rollback durante a migração; não pausar antes de F05-09.
 - `LICOES-pre-E2E.md` — lições para o E2E.
+- `operacao/GUIA-ACESSO-PC-PAPERCLIP-CLI.md` — caminhos verificados para acessar o PC, a interface e a CLI do Paperclip, sem credenciais.
 
 ## Preservação e descarte
 
