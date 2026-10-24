@@ -11,16 +11,15 @@ UNIDADES = ["pqbr-camofox", "pqbr-camofox-worker", "pqbr-notebooklm-worker", "pq
 
 # Lista fechada por papel (AGENTES §2, §6). Leitura de docs e API do Paperclip para todos os papéis com ferramenta.
 COMUM = ["docs_ler", "paperclip_comentar", "paperclip_status", "paperclip_criar_issue"]
-PAPEIS = {
+PAPEIS = {  # 8 papéis (t512/t516); legado Paperclip em retirada
     "diretor": COMUM + ["temporal_listar", "saude_servicos", "segunda_opiniao", "memoria_buscar"],
+    "lider-editorial": COMUM + ["notebooklm_enfileirar"],
     "pesquisador-origem": COMUM + ["notebooklm_enfileirar"],
-    "roteirista": COMUM + ["notebooklm_enfileirar"],
-    "especialista-seo": COMUM + ["notebooklm_enfileirar"],
-    "diretor-arte-2d": COMUM + ["notebooklm_enfileirar"],
-    "observador": COMUM + ["temporal_listar", "saude_servicos", "camofox_saude", "memoria_buscar", "memoria_registrar"],
+    "auditor": COMUM + ["segunda_opiniao"],
+    "lider-compliance": COMUM + ["segunda_opiniao"],
     "guardiao-seguranca": COMUM + ["temporal_listar", "saude_servicos", "seguranca_varrer", "seguranca_varrer_logs", "segunda_opiniao"],
-    "dev-corretor": COMUM + ["temporal_listar", "memoria_buscar", "memoria_registrar"],
-    "dev-revisor": COMUM + ["temporal_listar", "memoria_buscar"],
+    "observador": COMUM + ["temporal_listar", "saude_servicos", "camofox_saude", "memoria_buscar", "memoria_registrar"],
+    "dev": COMUM + ["temporal_listar", "memoria_buscar"],   # só diagnostica e propõe
 }
 
 FERR = {

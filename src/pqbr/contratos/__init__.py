@@ -480,7 +480,35 @@ class ResultadoVideo(Contrato):
 
 # t515: versão SemVer de cada contrato. MAJOR = quebra (campo removido/renomeado/regra mais estrita);
 # MINOR = campo opcional novo/regra mais frouxa; PATCH = doc. Todo contrato novo entra aqui (teste obriga).
+# Vigia de atualizações — Dev (t516) -----------------------------------------------------------
+class FerramentaVigiada(Contrato):
+    nome: str = Field(min_length=2, max_length=80)
+    fonte: Literal["pypi", "github", "manual"]
+    alvo: str = Field(min_length=2, max_length=200)
+    python: str | None = None
+    notas: str = ""
+
+
+class ItemAtualizacao(Contrato):
+    nome: str
+    instalada: str = ""
+    ultima: str = ""
+    situacao: Literal["em_dia", "patch", "minor", "major", "desconhecido"]
+    proposta: str = Field(min_length=3, max_length=300)
+    notas: str = ""
+
+
+class RelatorioAtualizacoes(Contrato):
+    semana: str = Field(pattern=r"^\d{4}w\d{2}$")
+    itens: list[ItemAtualizacao]
+    resumo: str = Field(min_length=3, max_length=3000)
+    aplicado: Literal[False] = False   # o Dev nunca aplica
+
+
 VERSOES: dict[str, str] = {
+    "FerramentaVigiada": "1.0.0",
+    "ItemAtualizacao": "1.0.0",
+    "RelatorioAtualizacoes": "1.0.0",
     "CenaVisual": "1.0.0",
     "BlocoVisual": "1.0.0",
     "RoteiroShort": "1.0.0",

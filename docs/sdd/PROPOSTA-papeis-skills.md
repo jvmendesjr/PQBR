@@ -5,7 +5,7 @@
 ## 0. Base (princípios que valem para todos)
 - **Temporal = sistema nervoso** (t514): toda decisão que exigiria humano e roda sozinha é determinística e passa pelo Temporal (durável, registrada, replay, retentativas, sinais). Sem camada de abstração sobre o Temporal.
 - **Contratos Pydantic v2 = determinismo** (t515): entrada e saída de todo papel e motor por contrato de `src/pqbr/contratos/`, versionado em SemVer (`VERSOES`).
-- **Motores trocáveis** (t513): `MotorIntelectual` (hoje NotebookLM) e `GeradorVideo` (hoje Flow; alternativas NotebookLM vídeo, Meta Vibes, Google Vids), selecionados em `config/motores.json`. Papéis chamam a **porta**, nunca o serviço.
+- **Motores trocáveis** (t513): `MotorIntelectual` (hoje NotebookLM) e `GeradorVideo` (hoje Flow; alternativas NotebookLM vídeo e Google Vids, sempre pelo navegador nas cotas já pagas). **Sem API Google (Gemini/Veo/Omni) e sem Meta Vibes** (t516), selecionados em `config/motores.json`. Papéis chamam a **porta**, nunca o serviço.
 - **NotebookLM = motor editorial** (t512): temas, roteiros, decisões e direção do canal; **não gera vídeo**.
 - **Agente só gera e valida**; efeito externo é activity separada. Personas: `company/agents/<papel>/AGENTS.md`; combos: `config/modelos_9router.json`.
 
@@ -26,10 +26,10 @@
 ## 2. Achados da comunidade e atualizações (2025–2026)
 | Tema | Achado | Impacto proposto | Fonte |
 |---|---|---|---|
-| notebooklm-py | 0.8.5 (12/10/2026): sessão deslogada deixa de aparecer como "CSRF token not found / page structure changed" e vira `Authentication expired`; captura headless/CDP recusa sessão deslogada sem sobrescrever a auth salva; `doctor` melhorado; journal de geração. Desde 0.8.0: servidores MCP e REST. | Atualizar 0.8.4 → 0.8.5 no venv isolado (após teste); simplificar `_AUTH_ERR`; usar `doctor` no canário. Avaliar o REST server como adaptador mais estável que o CLI. | https://github.com/teng-lin/notebooklm-py/releases |
+| notebooklm-py | 0.8.5 (12/10/2026): sessão deslogada deixa de aparecer como "CSRF token not found / page structure changed" e vira `Authentication expired`; captura headless/CDP recusa sessão deslogada sem sobrescrever a auth salva; `doctor` melhorado; journal de geração. Desde 0.8.0: servidores MCP e REST. | **Feito em t516** (0.8.5, `doctor` ok); simplificar `_AUTH_ERR`; usar `doctor` no canário. Avaliar o REST server como adaptador mais estável que o CLI. | https://github.com/teng-lin/notebooklm-py/releases |
 | NotebookLM | Deep Research (relatório citado, 3–5 min) além de Fast; Video Overviews Short (~60 s), Explainer, Cinematic (só inglês/Ultra). API oficial (Enterprise) só cobre audio overview. | Pesquisador de Origem/etapa de temas: `add-research --mode deep` para temas novos; manter vídeo fora do NotebookLM (só alternativa da porta). | https://support.google.com/gemininotebook/answer/16454555 · https://blog.google/innovation-and-ai/products/notebooklm/generate-your-own-cinematic-video-overviews-in-notebooklm/ · https://docs.cloud.google.com/gemini/enterprise/notebooklm-enterprise/docs/api-audio-overview |
-| Flow / Veo | Veo 3.1 com 9:16 nativo e Ingredients to Video (imagens de referência = personagem consistente), upscale 1080p/4K. **Veo 3.1 preview na Gemini API desligado em 22/10/2026** → `gemini-omni-1.1-flash`. No Flow, só Veo 3.1 faz retrato; Veo 2 é só paisagem. | Adaptador Flow fixa modelo Veo 3.1 e 9:16 e falha fechado se o Flow trocar para Veo 2; candidato novo de adaptador `GeradorVideo` = Gemini Omni Flash por API (sem navegador). | https://blog.google/innovation-and-ai/technology/ai/veo-3-1-ingredients-to-video/ · https://support.google.com/flow/answer/16893917 · https://ai.google.dev/gemini-api/docs/deprecations |
-| Google Vids / Meta Vibes | Vids gera clipes 9:16 na UI; sem API REST oficial. Vibes sem API pública oficial (só clientes não oficiais). | Manter como adaptadores alternativos via Camofox, prioridade baixa; não usar clientes não oficiais. | https://support.google.com/docs/answer/16143507 · https://ai.google.dev/gemini-api/docs/video |
+| Flow / Veo | Veo 3.1 com 9:16 nativo e Ingredients to Video (imagens de referência = personagem consistente), upscale 1080p/4K. No Flow, só Veo 3.1 faz retrato; Veo 2 é só paisagem. | Adaptador Flow (navegador, cota já paga) fixa Veo 3.1 e 9:16 e falha fechado se o Flow trocar para Veo 2. Ingredients to Video para personagem consistente. | https://blog.google/innovation-and-ai/technology/ai/veo-3-1-ingredients-to-video/ · https://support.google.com/flow/answer/16893917 |
+| Google Vids | Gera clipes 9:16 na UI; sem API REST oficial. | Só alternativa via Camofox, prioridade baixa (ADR-010). Meta Vibes e APIs Google: fora (t516). | https://support.google.com/docs/answer/16143507 |
 | YouTube Data API | Shorts = `videos.insert` normal (vertical/quadrado ≤ 3 min); desde 01/06/2026 upload tem balde próprio de 100/dia (custo 1); demais métodos 10.000 unidades; thumbnail 50; `publishAt` só com `private`. | Contrato `DecisaoPublicacao`/upload: validar ≤ 180 s, 9:16, título ≤ 100, tags ≤ 500, `publishAt` só privado; canário de quota. | https://developers.google.com/youtube/v3/determine_quota_cost · https://developers.google.com/youtube/v3/docs/videos/insert |
 | Camoufox | Mantido de novo em 2026 (v158.0-beta.40, 19/10/2026), ainda beta. | Fixar versão, testar upgrade no canário antes de trocar. | https://github.com/daijro/camoufox/releases |
 | PydanticAI + Temporal | `TemporalDurability` (capability) substitui `TemporalAgent` (deprecated, sai na v3): chamadas de modelo/ferramenta viram activities automaticamente com `PydanticAIPlugin`. | Hoje usamos agente dentro de activity (simples e compatível com t514). Avaliar `TemporalDurability` só para agentes com ferramentas (Diretor/Dev), sem camada extra sobre o Temporal. | https://pydantic.dev/docs/ai/capabilities/durable_execution/temporal/ · https://github.com/pydantic/pydantic-ai/pull/4977 |
@@ -88,9 +88,9 @@ Formato: missão · entradas → saídas (contratos) · ferramentas/skills (exis
 - **NÃO faz:** corrigir, reiniciar serviço, abrir sessão.
 
 ### 3.8 Dev
-- **Missão:** conhecer o sistema, **indicar problemas e propor soluções**; José aplica com agentes externos.
+- **Missão:** conhecer o sistema, **indicar problemas e propor soluções**; José aplica com agentes externos. **Vigia de atualizações (t516):** toda semana, pelo `VigiaAtualizacoesWorkflow` (Temporal), compara versão instalada × publicada de notebooklm-py, Camoufox, Temporal (SDK e CLI), PydanticAI, Pydantic e modelos dos combos do 9router, e entrega `RelatorioAtualizacoes` curto (uma linha por item: versão, risco patch/minor/major, proposta, link das notas). **Nunca aplica** (`aplicado` é sempre `False` no contrato).
 - **Entradas → saídas:** `Falha`/histórico Temporal/testes/diff → `DiagnosticoDev` (novo: sintoma, causa com evidência, arquivos, patch proposto, testes, risco).
-- **Skills:** `pqbr-dev` (melhorada: só diagnóstico e parecer; remove "corrigir em worktree"). Nova: `pqbr-contratos-deriva` (propõe bump SemVer e fixture nova quando o canário quebra).
+- **Skills:** `pqbr-dev` (melhorada: só diagnóstico e parecer; remove "corrigir em worktree"). Nova: `pqbr-vigia-atualizacoes` (esqueleto implementado: `src/pqbr/workflows/atualizacoes.py` + contratos `FerramentaVigiada`/`ItemAtualizacao`/`RelatorioAtualizacoes` + testes; falta registrar no worker e criar o Schedule semanal, com OK do José). Nova: `pqbr-contratos-deriva` (propõe bump SemVer e fixture nova quando o canário quebra).
 - **Combo:** `core-alto` (segunda opinião `core-revisao`).
 - **NÃO faz:** editar, commitar, reiniciar, mudar config, tocar segredos.
 
@@ -104,8 +104,13 @@ Roteiro, SEO e Sazonais: activities que chamam `MotorIntelectual` com pedido do 
 4. **Observador/Dev:** Observador detecta e classifica; Dev propõe a correção (contrato/adaptador/fixture + bump SemVer); José aplica.
 5. **Revisão humana trimestral** das regras de serviço (políticas YouTube, limites NotebookLM/Flow) com lista de links da §2.
 
-## 5. Dúvidas para o José
-1. Atualizar notebooklm-py 0.8.4 → 0.8.5 (correções de auth relevantes)?
-2. Testar adaptador `GeradorVideo` por API (Gemini Omni Flash) como alternativa ao Flow via navegador?
-3. Pasta `contratos` (atual) ou renomear para `contracts`?
-4. Persona `pqbr-assistente` (canal Telegram) fica fora dos 8 papéis, como canal — confirmar.
+## 5. Decisões internas (t516)
+- **Caderno semanal de temas** (`Short - grade-temas-<ano>w<semana>`): passa pelo fluxo de descarte existente (`DescartarCadernoTesteWorkflow`: exportar → 3 cópias verificadas → apagar pelo id). Pré-requisito: registrar o caderno em `pqbr.cadernos_episodio` na criação (hoje só os de episódio são registrados) — implementar junto com o Schedule.
+- **`mcp_kit.PAPEIS`** atualizado para os 8 papéis (legado em retirada).
+- **8 papéis confirmados**; `pqbr-assistente` fica fora (persona do canal); Comunidade adiada.
+
+## 6. Dúvidas para o José
+1. Google Vids pelo navegador (cota do plano já pago) continua como alternativa ou também sai?
+2. Pasta `contratos` (atual) ou renomear para `contracts`?
+3. Ligar o Schedule semanal do vigia de atualizações (dia/hora)?
+4. Camoufox: discussão própria (pin de versão, beta).

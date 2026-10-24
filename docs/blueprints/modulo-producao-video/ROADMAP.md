@@ -1,3 +1,5 @@
+> **t516 (José, 24/10/2026):** sem API Google (Gemini/Veo/Omni, inclusive free tier) e sem Meta Vibes. O sistema usa só cotas já pagas pelo navegador (Flow, NotebookLM). Trechos abaixo que citam essas opções estão descartados.
+
 # Roadmap faseado — Módulo de Produção de Vídeo (PQBR)
 
 > **Estado:** plano de execução proposto; não representa implementação concluída.

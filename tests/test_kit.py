@@ -14,7 +14,7 @@ def test_papel_sem_lista_nao_tem_ferramentas():
     p = subprocess.run([sys.executable, "-m", "pqbr.kit.mcp_kit"], input='{"jsonrpc":"2.0","id":1,"method":"tools/list"}\n',
                        capture_output=True, text=True, env={**os.environ, "PQBR_KIT_PAPEL": "papel-inexistente"})
     assert json.loads(p.stdout)["result"]["tools"] == []
-    assert "notebooklm_enfileirar" in PAPEIS["roteirista"]
+    assert "notebooklm_enfileirar" in PAPEIS["lider-editorial"]
 
 
 def test_observador_tem_camofox_saude_e_nao_seguranca():

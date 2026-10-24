@@ -1,3 +1,5 @@
+> **t516 (José, 24/10/2026):** sem API Google (Gemini/Veo/Omni, inclusive free tier) e sem Meta Vibes. O sistema usa só cotas já pagas pelo navegador (Flow, NotebookLM). Trechos abaixo que citam essas opções estão descartados.
+
 > ⛔ **PESQUISA / REFERÊNCIA DE PRÉ-CONSTRUÇÃO: AGENTES NÃO CONSULTAM SEM APROVAÇÃO EXPLÍCITA DO JOSÉ (t287).** Pode conter premissas superadas que, mal interpretadas, iriam parar em produção. As regras válidas estão em `docs/REGRAS.md`.
 
 > Nota: cita a premissa antiga de 60–80 s, SUPERADA por t271 (15 s a 3 min, alvo ~50 s).

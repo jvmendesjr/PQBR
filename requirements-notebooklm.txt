@@ -1,0 +1,2 @@
+# venv isolado do NotebookLM (~/.pqbr/notebooklm/venv) — t516
+notebooklm-py==0.8.5
