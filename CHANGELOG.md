@@ -5,6 +5,14 @@ Versionamento SemVer (MAJOR.MINOR.PATCH) a partir de t510. Versão do pacote can
 
 
 
+## [0.3.8] — 2026-10-24
+- t532:
+  - keepalive do YT-LLM desligado no box (binário em `_obsoleto`);
+  - plano de migração do acesso do YouTube no BRIEFING;
+  - análise das legendas puladas;
+  - pré-requisito do logo no ROADMAP 4V;
+  - proposta da skill de produção em `docs/sdd/`.
+
 ## [0.3.7] — 2026-10-24
 ### Alterado
 - t530: exceção de leitura (somente leitura) para `docs/pesquisas/PESQUISA-extensoes-geracao-em-serie.md` nas regras de consulta; pesquisa complementada com achados da conversa YT-LLM (§1.1).

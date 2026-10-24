@@ -214,6 +214,7 @@ Ref.: `docs/pesquisas/PESQUISA-extensoes-geracao-em-serie.md` (leitura liberada,
 - [ ] **R5 · Adaptador Meta Vibes** (rota 3, obrigatória como fallback).
 - [ ] **R6 · Tirar o `EpisodioWorkflow` do `nlm_baixar_video`**: ligar `CADEIA_VIDEO` com escolha explícita e registrada; o NotebookLM vídeo fica só como alternativa explícita.
 - [ ] **R7 · HOLD final**: as 3 rotas falharam → estado HOLD + pedido de decisão (Telegram) + sinal do Temporal `decisao_video` (tentar de novo, rota, cancelar); testes com mocks.
+- [ ] **PRÉ-REQUISITO DO 1º VÍDEO DA NOVA FASE (t532):** verificar e ajustar a **silhueta do mapa do Brasil no logo** (logo v4, overlay v8, avatar) antes de gerar ou publicar o primeiro vídeo. Sem isso o 1º vídeo não sai.
 
 ## Fase 5: estabilidade e produção (D5)
 

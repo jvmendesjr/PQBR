@@ -538,4 +538,18 @@ NÃO CABE:
 - **t526 (24/10/2026) — Camofox: PQBR segue individual; migração preparada.** José: o PQBR continua na instalação individual 9387; migração para `camofox@pqbr` fica marcada para a **próxima integração de projeto**. Preparados (sem instalar/iniciar nada): `deploy/camofox/` (template `camofox@.service`, `instancia.env.exemplo`, `criar_instancia.sh`), `config/camofox_instancias.json` (reserva `proxima` porta 9397, estado reservada, 0 memória), porta `NavegadorIdentidade` (`motores/navegador.py`, contratos `InstanciaNavegador`/`SaudeNavegador` 1.0.0, não ligada) e `docs/RUNBOOK-nova-instancia-camofox.md`.
 - **t529 (24/10/2026) — HOLD quando as 3 rotas de vídeo falham (DECISÃO José).** Se Flow, Google Vids e Meta Vibes falharem ou esgotarem a cota, o episódio vai para **HOLD** (publicação suspensa) e o José recebe um pedido de decisão (Telegram), que responde por **sinal do Temporal**. Nada de fallback silencioso. Também em t529: pesquisa `docs/pesquisas/PESQUISA-extensoes-geracao-em-serie.md` (aprender a lógica de navegação das extensões de série de Flow e Vibes e executá-la no Camofox **sem instalar extensões**) e etapas R1–R7 no ROADMAP.
 - **t530 (24/10/2026) — exceção de leitura em `docs/pesquisas/`.** José liberou a leitura (somente leitura) de `docs/pesquisas/PESQUISA-extensoes-geracao-em-serie.md` por qualquer agente; o restante de `docs/pesquisas/` segue sob t287. Exceção anotada em REGRAS §0, AGENTS, README, ARQUITETURA, ROADMAP, skill pqbr-contrato e GUIA-ACESSO. Pesquisa complementada com a conversa YT-LLM.
+- **t532 (José, 24/10/2026) — desligamento do YT-LLM e herança.**
+  1. **Keepalive do YT-LLM desligado de vez:**
+     - no box não havia cron, timer systemd nem processo; a rotina era do app (agente YT-LLM);
+     - o binário `~/.local/bin/notebooklm` do box foi movido para `~/.local/bin/_obsoleto/` (nada apagado; a sessão `~/.notebooklm` do box ficou intacta);
+     - pendente: pausar ou apagar a rotina "NotebookLM keepalive" no app do YT-LLM.
+  2. **Acesso do YouTube (token OAuth + MCP youtube-shorts) vai para a PQBR no pc:**
+     - o novo agente terá acesso ao pc e à tailnet e mantém o sistema junto com o José;
+     - token **não movido** agora; plano no BRIEFING §(g).
+  3. **Legendas puladas:**
+     - problema específico do Short do terremoto (17/09): legendas embutidas pelo Video Overview do NotebookLM;
+     - não houve correção, só waiver humano;
+     - a causa sai de cena porque o vídeo não é mais gerado no NotebookLM (t512); o Auditor mantém o check.
+  4. **Silhueta do mapa no logo:** verificar e ajustar antes do 1º vídeo da nova fase (pré-requisito no ROADMAP 4V).
+  5. **Skill `produ-o-short-b1-notebooklm`:** proposta de texto novo em `docs/sdd/PROPOSTA-skill-producao-short-pqbr.md` (o José grava).
 - Habilidades por papel: só PROPOSTA em `docs/sdd/PROPOSTA-papeis-skills.md` (não aplicada).

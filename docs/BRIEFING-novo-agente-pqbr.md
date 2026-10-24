@@ -63,14 +63,14 @@ t531 · 24/10/2026 · pedido do José. **Só leitura e proposta.** O novo agente
 | Camofox inexistente ou global | Camofox **dedicado** à PQBR (9387); migração para `camofox@pqbr` na próxima integração | ADR-012, t526 |
 
 ## (c) Pendências abertas que estavam com o YT-LLM
-1. **Keepalive NotebookLM falhando desde 20/09.** A rotina está parada à espera de um novo login. **Não reativar**: na PQBR a sessão é do Camofox 9387 e do venv isolado. A rotina deve ser **desligada de vez** quando o agente for arquivado.
-2. **Token OAuth do YouTube no box** (`youtube-auth/`) e MCP `youtube-shorts` com `YOUTUBE_DRY_RUN=true`. Decidir com o José se:
+1. ✅ **(t532) Keepalive desligado no box** (binário em `~/.local/bin/_obsoleto/`; pausar a rotina no app). Histórico: **falhando desde 20/09.** A rotina está parada à espera de um novo login. **Não reativar**: na PQBR a sessão é do Camofox 9387 e do venv isolado. A rotina deve ser **desligada de vez** quando o agente for arquivado.
+2. **(t532: decidido migrar para a PQBR no pc, plano em (g))** Token OAuth do YouTube no box (`youtube-auth/`) e MCP `youtube-shorts` com `YOUTUBE_DRY_RUN=true`. Decidir com o José se:
    - migra para o cofre e o fluxo da PQBR (a DECISOES-LOG cita o token do yt-llm-bot reaproveitado para o Drive), ou
    - é revogado.
 3. **Próximo Short do banco** e a **série 0** (mitos e cultura popular), só ideação. Viram tarefas do motor de temas da PQBR (`ReposicaoTemasWorkflow`).
 4. Sanitizar as fontes entre episódios e criar o template PROMPT-EP. Na PQBR, o caderno efêmero resolve isso.
-5. **Legendas que pulam palavras** (A5, waiver no 1º Short). Passar para o Auditor e o pós da PQBR.
-6. **Silhueta do mapa no logo** ("precisa melhorar", José, 17/09). Fica com a identidade da PQBR.
+5. ✅ **(t532) Legendas puladas:** caso específico do Short do terremoto; causa = legenda embutida do Video Overview do NotebookLM; sem correção (waiver); a causa some com o vídeo fora do NotebookLM. Original: (A5, waiver no 1º Short). Passar para o Auditor e o pós da PQBR.
+6. **(t532) Pré-requisito do 1º vídeo no ROADMAP 4V.** Silhueta do mapa no logo ("precisa melhorar", José, 17/09). Fica com a identidade da PQBR.
 7. Reserva de handles em outras redes: **só depois** das automações (José, 16/09). Segue adiado.
 8. O repo `porque-br` tinha um push pendente de docs do piloto (17/09). Não fazer; a fonte de verdade agora é o `PQBR`.
 
@@ -131,6 +131,26 @@ O resto de `docs/pesquisas/`, `docs/arquivo/`, `docs/_obsoleto/` e o DECISOES-LO
 | **Identidade Google duplicada**: Chrome do box, `~/.notebooklm` do box e OAuth do YT-LLM usando a mesma conta da 9387 (risco de "dispositivo extra" e de derrubar a sessão) | O novo agente **nunca** usa o Chrome nem o notebooklm do box. Confirmar que o keepalive do YT-LLM está desligado; o José decide se desloga a sessão do box |
 | **Tarefas órfãs**: rotina de keepalive, MCP `youtube-shorts` registrado no bot antigo, pedidos pendentes (push do `porque-br`, próximo Short) | Arquivar o YT-LLM só depois de desligar as rotinas dele; a lista (c) vira itens do ROADMAP ou LACUNAS |
 | **Duas fontes de verdade** (`porque-br` × `PQBR`, playbook × REGRAS) | O PQBR prevalece; os docs do YT-LLM ficam como legado somente leitura |
-| A skill `produ-o-short-b1-notebooklm` gerar vídeo no NotebookLM por engano | Marcar a skill como desatualizada ou ajustá-la (geração de vídeo → cadeia 4V) antes de ligar o novo agente |
+| A skill `produ-o-short-b1-notebooklm` gerar vídeo no NotebookLM por engano | Proposta em `docs/sdd/PROPOSTA-skill-producao-short-pqbr.md` (t532). Marcar a skill como desatualizada ou ajustá-la (geração de vídeo → cadeia 4V) antes de ligar o novo agente |
 | **Escopo sobreposto com o jr** (os dois mexendo no servidor `pc`) | A fronteira em (e); o jr mantém a infraestrutura geral e o agente PQBR só o repo e os serviços `pqbr-*` |
 | Perda de contexto histórico | Este briefing + o legado copiado + a conversa YT-LLM continuam acessíveis para leitura |
+
+## (g) Plano de migração do acesso do YouTube para a PQBR (t532, não executado)
+O novo agente terá acesso ao pc e à tailnet e mantém o sistema junto com o José.
+1. **Inventário sem conteúdo:**
+   - listar só nomes e permissões de `/workspace/yt-llm-bot/youtube-auth/` (box) e a configuração do MCP `youtube-shorts`;
+   - nunca usar `cat` nem `echo`.
+2. **Destino no pc:**
+   - `~/.pqbr/secrets/youtube/` (dir 700, arquivos **600**, dono `pc`);
+   - registrar só o caminho no `.env.example`, sem o valor.
+3. **Cópia:**
+   - `scp` direto do box para o pc pela tailnet, com `umask 077`, **sem passar o conteúdo pelo terminal nem pelo chat**;
+   - conferir só o tamanho e o sha256 (não imprimir o conteúdo).
+4. **Validação:**
+   - `doctor` ou `channels.list mine=true` em **dry-run** pelo adaptador da PQBR, só com status ok ou falha;
+   - `YOUTUBE_DRY_RUN=true` mantido; quota medida.
+5. **Corte no box:**
+   - depois de validado, mover o original para `_obsoleto` no box (não apagar);
+   - desregistrar o MCP `youtube-shorts` do YT-LLM;
+   - avaliar com o José revogar ou renovar o refresh_token (pede login dele) para sobrar **um só detentor**.
+6. **Registro:** DECISOES-LOG + CHANGELOG + teste de contrato do adaptador. O hook `verificar_segredos` deve continuar limpo.
