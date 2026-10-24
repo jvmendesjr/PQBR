@@ -509,3 +509,6 @@ NÃO CABE:
 
 ## t472 (23/10/2026) — Criação de `docs/_obsoleto/`
 - José pediu uma lixeira temporária para docs obsoletos. Criada `docs/_obsoleto/` (via `git mv`, caminhos preservados, nada apagado), com índice `README.md` (arquivo, motivo, substituto). Docs mistos ficaram no lugar e foram listados como conflitos. Snapshot antes da limpeza: commit `8836eb1`.
+
+## t473 (23/10/2026) — Contrato editorial v2 oficial
+- José aprovou: o v2 (aprovado no G7, t468) vira `docs/CONTRATO-EDITORIAL.md`; o v1 vai para `docs/_obsoleto/CONTRATO-EDITORIAL-v1.md`. As seções do v1 que seguem canônicas (tom, categorias, gabarito, duração, diretrizes, §15–§17 com o bloco §16.7) foram anexadas sem alteração (Anexo A). O contrato deixa de ser "rascunho de leitura restrita".

@@ -12,3 +12,4 @@ Arquivos tirados do caminho por estarem obsoletos para a arquitetura atual (sem 
 | `docs/hermes-pqbr/perfil/SKILL.md` | Skill Hermes para operar o Paperclip via MCP | Hermes `pqbr` lendo Postgres/Temporal (a definir) |
 | `docs/sdd/f1-02-dryrun.md` | Dry-run de import de 2ª org Paperclip, nunca executado, suspenso | — |
 | `company/playbooks/lock-preso.md` | 409 de checkout do Paperclip (#6007/#3819) | — (lock/retry passam a ser do Temporal) |
+| `docs/CONTRATO-EDITORIAL.md` (v1 + aditivo) → `CONTRATO-EDITORIAL-v1.md` | Substituído pelo v2 oficial (t473) | `docs/CONTRATO-EDITORIAL.md` (v2 + Anexo A com as seções canônicas do v1) |

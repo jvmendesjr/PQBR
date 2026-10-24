@@ -53,7 +53,7 @@ Contagens de testes abaixo pertencem a snapshots distintos: **não devem ser som
 
 **F5-01 implementado/testado localmente:** grade por data, três barreiras contra repetição, R10 inclusive para sugestão do proprietário, categorias bloqueadas e pontuação de polêmica. Pesos/limiares assinalados como proposta não viram parâmetros aprovados por aparecerem no código. [Implementação da grade](../src/pqbr/pipeline/grade.py), [RF-01..05](SPEC.md), [estado oficial](ROADMAP.md).
 
-**F3-01/G3 e F7-01/G7 concluídos:** contratos Pydantic e contrato editorial v2 aprovado; o arquivo mantém o nome histórico [CONTRATO-EDITORIAL-v2-CANDIDATO.md](CONTRATO-EDITORIAL-v2-CANDIDATO.md). CTA contextual, convite natural a seguir e fallback “Segue o Porquê BR”; nunca pedir comentários. Diretrizes R1–R4/R6/R8/R9 são revisáveis e R5 é alerta não bloqueante. Os testes locais não equivalem a um vídeo final aprovado.
+**F3-01/G3 e F7-01/G7 concluídos:** contratos Pydantic e contrato editorial v2 aprovado; oficial desde 23/10/2026 como [CONTRATO-EDITORIAL.md](CONTRATO-EDITORIAL.md) (t473). CTA contextual, convite natural a seguir e fallback “Segue o Porquê BR”; nunca pedir comentários. Diretrizes R1–R4/R6/R8/R9 são revisáveis e R5 é alerta não bloqueante. Os testes locais não equivalem a um vídeo final aprovado.
 
 **F7-03/G7 concluído em 17/10:** `RoteiroShort` exige bloco visual; contadores locais de **500 chats/dia e 20 vídeos/dia são limites de segurança, não quotas oficiais**. O roadmap registra 25 testes focados e 107 unitários naquele snapshot, sem consumo real do NotebookLM. [Contratos](../src/pqbr/contratos/__init__.py), [código NotebookLM](../src/pqbr/workflows/notebooklm.py), [critérios e evidência registrada](TESTES.md).
 

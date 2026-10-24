@@ -22,7 +22,7 @@ Em conflito, vale o documento de maior autoridade, nesta ordem:
 
 ## ⛔ Documentos restritos
 
-Arquivos de pré-construção e material legado não devem ser consultados sem aprovação explícita do José, conforme `docs/REGRAS.md` §0. Isso inclui `docs/CONTRATO-EDITORIAL.md`, `docs/DECISOES-LOG.md`, `docs/pesquisas/`, `docs/arquivo/` e qualquer rascunho legado. O que vale como regra editorial está em `docs/REGRAS.md` §5.
+Arquivos de pré-construção e material legado não devem ser consultados sem aprovação explícita do José, conforme `docs/REGRAS.md` §0. Isso inclui `docs/_obsoleto/`, `docs/DECISOES-LOG.md`, `docs/pesquisas/`, `docs/arquivo/` e qualquer rascunho legado. O que vale como regra editorial está em `docs/REGRAS.md` §5 e no contrato oficial `docs/CONTRATO-EDITORIAL.md` (v2).
 
 ## Regras do repositório
 

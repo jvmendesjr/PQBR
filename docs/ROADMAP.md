@@ -3,7 +3,7 @@
 
 > **Como retomar (qualquer agente, qualquer sessão):**
 > 1. Leia **só**, nesta ordem: `docs/REGRAS.md` → `docs/SPEC.md` → `docs/ARQUITETURA.md` → `docs/TESTES.md` → este `docs/ROADMAP.md`. Em conflito, vale o primeiro.
-> 2. ⛔ **Nunca consulte** `docs/arquivo/`, `docs/pesquisas/`, `docs/DECISOES-LOG.md`, `docs/CONTRATO-EDITORIAL.md` nem qualquer rascunho ou material legado **sem aprovação explícita do José** (t287).
+> 2. ⛔ **Nunca consulte** `docs/arquivo/`, `docs/pesquisas/`, `docs/DECISOES-LOG.md`, `docs/_obsoleto/` nem qualquer rascunho ou material legado **sem aprovação explícita do José** (t287).
 > 3. Pegue a **primeira tarefa `- [ ]` cujas dependências estejam todas `- [x]`**. Não pule portões do José.
 > 4. Dúvida ou conflito que as regras aprovadas não resolvem com certeza: **não adivinhe**. Escreva "EM CONSTRUÇÃO — aguardando José" no `Obs:` e avise (t323).
 > 5. Mudanças durante a construção são tarefas deste roteiro, nunca tickets (REGRAS §24). Nada de push sem autorização do José.
@@ -240,7 +240,7 @@ Precisam do José: F4C-04, F4C-05, F4C-06, F4C-07. F4C-01..03 só pedem o portã
   - G7 aprovado pelo proprietário em 2026-10-17; F7-03 concluído. Evidência: suíte unitária 107/107, contador local de segurança separado do `usage --json` oficial e nenhuma chamada real ao NotebookLM ou consumo de quota.
 
 - [x] **F7-01** (D11) Contrato v2 + RUNBOOK/SOP; diretrizes R1–R6/R8/R9 revisáveis e R5 alerta não bloqueante (t467); CTA contextual — Req: RF-07 · Testes: V1 · Depende de: R-005 · Aceite: contrato aprovado pelo José · Portão: **G7 FECHADO 2026-10-16**.
-  - G7 aprovado por José em 2026-10-16; F7-01 concluído. Documento aprovado: `docs/CONTRATO-EDITORIAL-v2-CANDIDATO.md` (o nome histórico do arquivo foi mantido).
+  - G7 aprovado por José em 2026-10-16; F7-01 concluído. Documento aprovado: `docs/CONTRATO-EDITORIAL.md` (v2, oficial desde 23/10/2026, t473).
   - t467 incorporado: CTA contextual; R1–R4/R6/R8/R9 revisáveis, R5 alerta não bloqueante. Schema/prompt/normalização/testes reconciliados; 25 testes afetados passaram.
   - Dry-run e verificação V1 sem providers ou produção. F05-06 continua aberto e separado; o padrão futuro de overlays (evidência, ação segura, pós-condição) segue apenas reservado no roadmap auxiliar.
   - F3-01/G3 foi fechado em 2026-10-16; a dependência para iniciar F7-02 está resolvida.

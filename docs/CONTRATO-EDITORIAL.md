@@ -1,22 +1,114 @@
-# Contrato editorial da PQBR (rascunho v1 + aditivo de 09/10)
+# Contrato editorial da PQBR (v2, oficial desde 23/10/2026)
 
-> ⛔ **RASCUNHO: AGENTES NÃO CONSULTAM SEM APROVAÇÃO DO JOSÉ (t287).** Este é material de pré-construção: tem trechos superados e números que ainda são hipótese. As regras editoriais válidas estão em `docs/REGRAS.md` §5 (e §4, §8). Em conflito, vale o REGRAS.md.
->
-> Status: rascunho v1 (08/10) com o aditivo dos 4 roteiros (09/10) incorporado como §15. Trechos superados estão marcados **SUPERADO** com a decisão que os substitui. A versão v2 (sem os superados) é a tarefa D11 do `docs/PLANO.md` e depende de aprovação do José. Originais em `docs/arquivo/`.
+- **Status:** aprovado por José em 2026-10-16; gate G7 fechado; F7-01 concluído.
+- **Data:** 2026-10-16. Oficializado como `docs/CONTRATO-EDITORIAL.md` em 23/10/2026 (t473); o v1 foi para `docs/_obsoleto/CONTRATO-EDITORIAL-v1.md`. O anexo A traz, sem alteração, as seções do v1 que continuam canônicas (público, promessa, tom, categorias de sátira, gabarito, duração, diretrizes de roteiro/estilo, §15–§17, incluindo o bloco §16.7 usado pelo pacote canônico). Ficaram só no v1 arquivado: §9 (métricas sugeridas), §10 (divergências entre fontes), a nota de fonte do `rede`, §14 (superado) e as partes de inventário/próximo passo do §15.
+- **Uso:** contrato de processo editorial, runbook e SOP aprovados no G7; complementa REGRAS sem substituí-la e não autoriza produção/publicação.
 
-> Item 1 da fase de validação. É um rascunho para o José corrigir.
->
-> **Fontes (agente rede, YouTube Studio, 08/10/2026):**
-> - o relatório principal (hoje em `docs/pesquisas/REF-canal-analytics-90d.md`, parte A);
-> - o **aditivo** (hoje em `docs/pesquisas/REF-canal-analytics-90d.md`, parte B), que traz a tabela completa de 46 Shorts e as retificações.
->
-> O canal `@porquebr-t4c` existe desde 16/09/2026.
->
-> **Status dos dados: hipótese a verificar.** As duas fontes divergem entre si (ver a seção 10). A core-eng precisa confirmar tudo pela YouTube Analytics API antes de qualquer número virar meta.
->
-> **Ressalva sobre os números derivados:** os valores em "segundos por visualização" e "% da duração" foram calculados por mim a partir da tabela do aditivo (tempo de exibição ÷ visualizações). O tempo de exibição vem arredondado a 0,1 h, então a conta é imprecisa em vídeos com menos de 200 visualizações.
+## 1. Autoridade e limites
+
+Aplicar a precedência de `docs/REGRAS.md` §0 > `SPEC.md` > `ARQUITETURA.md` > `TESTES.md` > `ROADMAP.md`. Para este contrato, as referências operacionais são REGRAS §§4–5 e §9, SPEC RF-07, ARQUITETURA §11, TESTES V1/TS-02 e `docs/AGENTES.md`. José aprovou a CTA contextual em t467 (2026-10-16), agora registrada em `DECISOES-LOG.md` e incorporada a REGRAS §5, RF-07, ARQUITETURA §11, TS-02 e ao validador. `tipo_cta` registra `trocadilho_tema`, `convite_seguir` ou `fallback`; a adequação semântica permanece sujeita à revisão editorial, sem fingir validação automática.
+
+R1–R4/R6/R8/R9 foram aprovadas em t467 como diretrizes revisáveis, não gates automáticos; R5 é alerta não bloqueante. Não há decisão pendente sobre esses itens. Aplicar HOLD por risco material, regra realmente aberta ou bloqueio canônico, não pela falha automática de uma diretriz. R-005 permanece concluído.
+
+Este fluxo descreve gates documentais. Não autoriza geração de vídeo, upload, agendamento, publicação, uso de quota real, criação de issue ou alteração de serviços. O Auditor visual completo pertence a F7-02; o bloco visual e o contador do NotebookLM pertencem a F7-03; os gates de produção e de canal permanecem independentes.
+
+## 2. Regras já confirmadas que o processo deve preservar
+
+- Tom de “nós, brasileiros”: humor predominante, sátira leve e afetuosa do comportamento (nunca da pessoa ou de um grupo), explicação lógica e encerramento caloroso.
+- Narrador único; não falar nem escrever nomes de personagens ou rótulos `Nome:`.
+- **CTA contextual aprovado e canonicalizado em t467:** trocadilho ligado ao tema quando natural; caso contrário, convite natural a seguir o canal; `Segue o Porquê BR` é fallback. Nunca pedir comentários. O schema valida o tipo declarado e o fallback; o contexto semântico exige revisão editorial.
+- Roteiro de 15 a 180 segundos, alvo aproximado de 50 segundos, estimado a 2,3 palavras/segundo.
+- O loop deve conectar o encerramento à primeira cena; não acrescentar cauda, tela parada ou fade. A cadência visual e o tratamento do logo/end card seguem REGRAS §5, mas não são aprovados por um dry-run textual.
+- Personagem: um por padrão; até dois é desejável. Mais de dois não é, por si só, reprovação editorial em REGRAS; a limitação atual do modelo visual é registrada como lacuna de implementação, não como nova regra.
+- Conteúdo fora do escopo ou bloqueado por REGRAS §4/§5 não avança. Dúvida de segurança, direitos ou regra pendente resulta em `HOLD`, nunca em aprovação por conveniência.
+- NotebookLM é o motor intelectual para pesquisa, ideação, roteiro e SEO. Agentes orquestram e validam; não substituem essa etapa com pesquisa/criação independente. Produção usa caderno efêmero, nunca o caderno raiz.
+
+### R1–R6, R8 e R9 — diretrizes aprovadas em t467, revisáveis e não bloqueios automáticos
+
+O rascunho legado foi consultado com autorização. José aprovou estas diretrizes em 2026-10-16 como orientação editorial revisável, não como gates automáticos. Elas estão refletidas em REGRAS §5. R5 permanece apenas alerta não bloqueante porque a evidência é limitada a um caso:
+
+| ID | Proposta mapeada | Observação para validação |
+|---|---|---|
+| R1 | Mostrar a cena do hábito nos primeiros 2 s; evitar abrir com conceito abstrato. | Requer evidência de imagem/timecode; texto isolado não prova. |
+| R2 | O gancho levanta a pergunta e não entrega a resposta; reservar resposta para o payoff. | Conferir no roteiro e no plano de cenas. |
+| R3 | Apresentar conflito ou piada até 4 s, sem introdução longa. | Critério temporal; validar com fala/timecode. |
+| R4 | Se entrar termo técnico, acompanhar no mesmo momento com imagem ou piada. | Diretriz de revisão editorial; fato sem sustentação segue o gate de fontes/factualidade, não bloqueio automático por R4. |
+| R5 | Evitar sensação física incômoda no miolo. | Alerta de revisão não bloqueante aprovado; hipótese baseada em um caso e evidência limitada. |
+| R6 | Explicar o porquê real como recompensa da piada. | Exige fonte para afirmação factual e linguagem simples. |
+| R8 | Priorizar comportamento reconhecível; curiosidade enciclopédica só quando ligada a uma mania. | Diretriz de pauta/enquadramento, sem proibir tema por si só. |
+| R9 | Priorizar situações vividas em casa e em família. | Preferência de pauta, não exclusão de outras situações brasileiras. |
+
+**Aplicação:** R1–R4/R6/R8/R9 são revisáveis, não bloqueios automáticos; R5 é alerta não bloqueante. O gate G7 continua sendo o aceite do contrato completo e do SOP/runbook, não uma reabertura destas decisões.
+
+## 3. Fluxo operacional aprovado no G7 (dry-run sem produção)
+
+| Etapa | Entradas | Saída/evidência | Validações e destino de falha | Responsável desenhado |
+|---|---|---|---|---|
+| 1. Receber pauta | código do episódio, tema vindo da grade, janela e estado de elegibilidade | ficha de entrada versionada | confirmar escopo PQBR, R10/anti-repetição e bloqueios conhecidos; dado ausente ou regra pendente → `HOLD` | Líder Editorial coordena; código/grade fornece os gates determinísticos |
+| 2. Pesquisa e procedência | tema elegível, instrução, persona-base e caderno efêmero | resumo/ideação do NotebookLM, lista de fontes e evidência de origem | conferir procedência e pelo menos duas fontes para o roteiro; caderno raiz proibido; insuficiência → reprocessar nos limites vigentes ou `HOLD` | Roteirista orquestra NotebookLM; Pesquisador de Origem confere fontes |
+| 3. Brief e estrutura | pacote de pesquisa, tema, público/idioma pt-BR e restrições confirmadas | ângulo, gancho, progressão e payoff; proposta de loop | revisar conexão com cotidiano brasileiro, escopo, procedência e segurança; aplicar R1–R4/R6/R8/R9 como orientação revisável, sem bloqueio automático; risco material ou fato sem fonte → `HOLD` pelo gate correspondente | NotebookLM gera; Líder Editorial revisa e registra versão |
+| 4. Roteiro | brief aprovado e fontes | saída estruturada `RoteiroShort` (fala, título, entidades e, quando exigido pela integração atual, bloco visual) | validar schema, duração, `tipo_cta` e CTA conforme §5, veto a pedido de comentário e rótulo de fala; revisão humana adicional para nomes em prosa, tom, lógica, calor e loop, pois o validador não cobre tudo | Roteirista coordena NotebookLM e valida; Líder Editorial responde pela revisão editorial |
+| 5. Conformidade editorial | roteiro versionado, fontes e checklist | checklist de segurança/direitos e parecer `PASS`/`HOLD` | política bloqueada, terceiro/marca, fonte insuficiente ou risco não resolvido não avança; aplicar CTA contextual conforme §5 e nunca pedir comentários | Líder Compliance; escalonamento ao Diretor/José conforme regra vigente |
+| 6. SEO (pós-roteiro, fora do aceite mínimo de V1) | roteiro validado e mesmas fontes | `PacoteSEO` versionado | geração pelo NotebookLM; validar limites do RF-06; nunca inserir pedido de comentário | Especialista SEO orquestra; validação determinística do pacote |
+| 7. Fechamento documental | roteiro, evidências, validações e pareceres | pacote editorial rastreável e pronto apenas para o próximo gate autorizado | todos os itens devem ter evidência e versão; `PASS` editorial não significa G7, liberação de produção ou publicação | Líder Editorial consolida; José aprova o contrato/gate G7 |
+
+### Saída mínima do pacote editorial
+
+1. `episode_id`, tema, estado da pauta e versão do brief;
+2. lista de fontes/procedência e resumo de pesquisa;
+3. `RoteiroShort` validado e versão/hash do artefato;
+4. resultado de cada validação, com evidência e responsável (automático ou humano);
+5. pareceres `PASS`/`HOLD`, defeitos e correções tentadas;
+6. indicação explícita `SEM PRODUÇÃO` até que os gates independentes autorizem a etapa seguinte.
+
+## 4. SOP e runbook aprovados no G7
+
+1. **Abrir** a ficha somente a partir de pauta elegível; registrar código e versão. Não inventar tema, pesquisa ou fato para preencher campo ausente.
+2. **Pesquisar** no NotebookLM em caderno efêmero. Capturar fontes/proveniência; o agente não pesquisa por conta própria, salvo a exceção documentada pelas regras vigentes.
+3. **Gerar** brief e roteiro no NotebookLM conforme o contrato vigente. Manter resposta original e versão normalizada separadas para rastreabilidade.
+4. **Validar primeiro por código**: schema, faixa de duração, campo `tipo_cta`, coerência do fallback, proibição de pedidos de comentário e campos requeridos. Registrar a saída e os erros sem segredos.
+5. **Revisar o que o código não prova**: tom, sátira afetuosa, lógica, nomes falados/escritos, verdade/procedência das afirmações, loop e risco editorial. Não transformar “não detectado” em “aprovado”.
+6. **Corrigir apenas dentro das regras já aprovadas**, com a escada e os limites de REGRAS §3.1. Se a correção mudar resultado editorial/conformidade, se uma regra pendente for necessária ou se o erro persistir, registrar `HOLD` e escalar; não contornar o gate.
+7. **Aprovar somente o pacote documental** quando todas as verificações aplicáveis tiverem evidência. Este status não autoriza workflow de produção, provider, upload ou publicação.
+8. **Fechar a execução** com o veredito, as versões, contagem/duração estimada, fontes e trilha de validação. Manter as evidências de dry-run separadas de episódios reais.
+
+### Estados de trabalho (rótulos deste SOP, não estados implementados no banco)
+
+`RECEBIDO` → `PESQUISA_PRONTA` → `ROTEIRO_RASCUNHO` → `VALIDAÇÃO` → `PASS_EDITORIAL` ou `HOLD`. `PASS_EDITORIAL` pode produzir um handoff documental; não transita para `PRODUÇÃO` por este contrato.
+
+## 5. Matriz de responsabilidade
+
+- **Líder Editorial:** coordena o fluxo, pauta/variedade e revisão do enquadramento; não substitui a pesquisa/ideação do NotebookLM.
+- **Roteirista:** orquestra a pesquisa e o roteiro no caderno efêmero, valida o `RoteiroShort` e monta o handoff; não cria roteiro independente.
+- **Pesquisador de Origem:** confere a procedência e as fontes da pesquisa do NotebookLM; pesquisa adicional só como complemento/fallback documentado.
+- **Líder Compliance:** verifica políticas do YouTube e direitos autorais, escalando dúvidas conforme as regras.
+- **Especialista SEO:** orquestra o SEO no NotebookLM e valida `PacoteSEO`; não redige independentemente nem pede comentários.
+- **Auditor:** seu gate pré-publicação é F7-02; não é simulado nem considerado concluído aqui.
+- **Diretor/José:** diretor roteia/escalona conforme governança; José decide regra canônica e o aceite G7. Este candidato não toma essas decisões por ele.
+
+## 6. Compatibilidade e lacunas da implementação observada
+
+No primeiro dry-run, anterior a t467, o validador aceitou o caso-base e rejeitou a CTA contextual por exigir o fallback literal. Após t467, o código foi atualizado: 25 testes passaram, inclusive o caminho local `roteiro_de_texto` → `RoteiroShort` → Markdown com CTA contextual sintética e sem providers/produção. Também são rejeitados pedido de comentário, rótulo `Nome:`, duração inferior, fonte insuficiente e tipo/fallback incompatível. O dry-run confirma apenas as propriedades estruturais descritas nas lacunas abaixo:
+
+- aceita pontuação final comum após o fallback `Segue o Porquê BR`; t467 define o texto-fallback, sem tornar ponto/exclamação um bloqueio editorial;
+- aceita um nome próprio dentro de uma fala se ele não estiver no formato `Nome:`;
+- não prova semanticamente o loop, o tom, a procedência das fontes ou a ausência de nomes falados/escritos;
+- requer `bloco_visual` e quatro ou mais cenas no validador atual, embora F7-03 continue um item separado e aberto; o fixture visual do dry-run é sintético;
+- representa apenas `personagem`/`personagem_2`, enquanto REGRAS diz que mais de dois não é reprovação automática.
+
+### Superfícies impactadas pela CTA contextual aprovada
+
+A reconciliação t467 abrangeu `src/pqbr/contratos/__init__.py` (campo e validador), `src/pqbr/workflows/criativo.py` (prompt/normalização/artefato), fixtures de `activities.py` e `producao.py`, `scripts/e2e/e2e_pre.py` e os testes de contrato/criativo. RF-07, ARQUITETURA §11 e TS-02 agora documentam `tipo_cta`. O schema valida enum, fallback e veto a comentários; revisão humana avalia se o trocadilho é natural e ligado ao tema.
+
+O código foi atualizado e os testes estruturais passaram; o conteúdo completo ainda é candidato até o aceite G7. O validador não prova o mérito editorial nem o loop visual, e o dry-run não substitui a revisão humana nem os gates F7-02/F7-03 ou operacionais.
+
+## 7. Fechamento de F7-01 — G7 aprovado
+
+José aprovou o contrato v2 e fechou G7 em 2026-10-16. V1: contrato aprovado e `RoteiroShort` coerente, verificado por 25 testes unitários afetados. F7-01 está concluído. Isso não fecha F05-06, F05-08, F05-09, F3-01/G3, F7-02, F7-03 ou qualquer gate de produção.
 
 ---
+
+# Anexo A — regras canônicas herdadas do v1 (texto integral, sem alteração)
 
 ## 1. Público (relatório principal)
 
@@ -138,60 +230,6 @@ Os números vêm do aditivo. "s/vis" é o tempo de exibição dividido pelas vis
 
 **Repetição a não imitar:** feijão no pote de sorvete, publicado duas vezes (lote 1 com 76 visualizações, lote 2 com 387).
 
-## 9. Métricas de sucesso do piloto (sugestão)
-
-**Linha de base do aditivo (46 Shorts):**
-
-| Métrica | Quartil inferior | Mediana | Quartil superior |
-|---|---|---|---|
-| Visualizações | 100 | 251,5 | 926 |
-| Segundos por visualização | ~10 | ~13 | ~15,5 |
-| Inscritos por vídeo | 0 | 1 | 2 |
-
-Total de inscritos ganhos: 60. Vídeos sem nenhum inscrito: 22.
-
-**Proposta: um piloto bem-sucedido é aquele cuja mediana fica no quartil superior atual do canal.**
-
-| Métrica (por vídeo, medida 7 dias após publicar) | Piso (abaixo disso, o vídeo falhou) | Meta (mediana do piloto) |
-|---|---|---|
-| Visualizações | 250 (a mediana atual) | ≥ 900 (o quartil superior atual) |
-| Segundos por visualização / % da duração média | ~10 s (o quartil inferior atual) | ≥ ~15 s (o quartil superior atual) |
-| "Escolheu ver" vs. deslizou (a métrica do feed de Shorts) | Definir após a 1ª semana | Definir após a 1ª semana. O relatório traz 10–64% em vídeos isolados, sem a tabela completa. |
-| Inscritos ganhos | 1 | ≥ 2 (o quartil superior atual) |
-| Queda no gancho (0–5 s) | Nenhuma queda abrupta entre 0:02 e 0:05 | — |
-| Conformidade | **Zero** avisos, claims, anúncio limitado ou aviso de conteúdo inautêntico | Igual ao piso (inegociável) |
-
-**Fora das metas:**
-- **Impressões e CTR da miniatura.** Pela Central de Ajuda do YouTube, impressão de miniatura não conta o feed de Shorts. Por isso o canal tem só 4.269 impressões para 20.946 visualizações, e o CTR de cada vídeo vem de amostras minúsculas: 13,0% da "TV" em 23 impressões; 14,3% da "Despedida" em 7 impressões. Exemplo: "horário de Brasília" teve 1.219 impressões vindas da busca e só 85 visualizações. Isso indica que a busca existe, mas é marginal.
-- **Comentários**, porque a base é pequena (0 a 3 por vídeo) e engajamento não é medida de segurança.
-- **Compartilhamentos.** O rede não obteve o dado por vídeo no Studio e só tem a origem agregada (WhatsApp 60%, Telegram 20%, Google 12%). A Central de Ajuda do YouTube indica que existe o dado de compartilhamentos para Shorts. **Pedir ao @prod-analista pela Analytics API** antes de usar como meta.
-
-**Sobre o CTA (retificação do aditivo):**
-- A frase "o CTA aumentou a conversão" do relatório principal era uma inferência sem teste.
-- O dado observado: a "TV" converteu **1,02%** (14 inscritos em 1.372 visualizações), contra **~0,23%** do sinal amarelo e do picolé (3 inscritos cada em ~1,2–1,3 mil visualizações).
-- É **observação, não causa.** A regra do CTA nos últimos 8 s continua, mas sem atribuir a ela o ganho de inscritos. Se quiser medir, fazer um teste A/B no piloto.
-
-Recalibrar todas as faixas depois de 2 a 4 semanas com o `@prod-analista`.
-
-## 10. Divergências entre as fontes (conferir antes de fechar)
-
-1. **Total de Shorts:** o relatório principal fala em **30**; o aditivo lista **46**.
-   - A soma da tabela dá 20.946 visualizações e 60 inscritos. O relatório principal diz 21.591 e +61.
-2. **Os "menos vistos" do relatório principal não batem com o aditivo.**
-   - "Por que o Brasil se chama Brasil", "PIX se chama PIX", "neve", "furacão" e "Geladeira sem fome" não aparecem na tabela de 46.
-   - Os números divergem: churrasqueiro 531 → 424, chorar desconto 712 → 138, pão na chapa 740 → 346.
-   - O gabarito acima usa o aditivo.
-3. **Retenção:**
-   - O relatório principal dá durações médias altas (por exemplo, sinal amarelo 0:52 e 79,8%).
-   - Tempo de exibição ÷ visualizações dá ~29 s (~44%).
-   - Provavelmente são bases diferentes (visualizações engajadas x todas as visualizações). A core-eng deve fixar as métricas pelas definições da Analytics API.
-4. **Duplicidade:** o feijão no pote de sorvete foi publicado duas vezes. Isso confirma a necessidade da barreira contra repetição.
-
-## Nota de fonte (t211, resposta do rede)
-- Métricas de desempenho e números por vídeo: usar SOMENTE o aditivo (`aditivo_analitico_pqbr_90d.md`, Modo Avançado, 46 vídeos, sem corte de paginação).
-- Público, comentários e retenção: seções 2, 4, 5 e 7 do relatório inicial (tela de conteúdo limitada a 30 itens / top-10 e bottom-10).
-- A retenção de 79,8% do sinal amarelo vem do gráfico do Studio (base diferente de tempo de exibição ÷ visualizações); a core-eng fixa as definições pela API.
-
 ## 11. Diretrizes de roteiro (t212 e t213, José, 08/10/2026), regras
 1. **Elenco enxuto:** um personagem por padrão; nunca mais de dois por vídeo. ⚠️ SUPERADO por t264: até 2 é o desejado; mais que isso **não reprova**. O plano final também respeita esse limite (nada de "foto de grupo" com mais personagens do que o vídeo usa).
 2. **Sem nomes:** nenhum nome de personagem falado ou escrito na legenda ou na tela. O personagem sem nome é "qualquer brasileiro". (Fichas Zé/Lia/Valdemar **pausadas**, t400; §16.)
@@ -238,24 +276,9 @@ Recalibrar todas as faixas depois de 2 a 4 semanas com o `@prod-analista`.
 - Ritmo de vídeo, não de slide: troca de plano/ação a cada ~3–5 s; reprovar sequências estáticas ou só infográfico.
 - Consistência do personagem segue como meta com tolerância (reforçado por t264: métrica, não trava): desvios leves aceitos se o dinamismo e a relação texto-imagem estiverem bons; reavaliar conforme evolução do modelo/plataforma.
 
-## 14. Tolerância de identidade do personagem (t222) — **SUPERADO pela §16 (t399/t400)**; a regra de que estilo não reprova (REGRAS §5, t264/t265) continua
-> ⚠️ **SUPERADO** por t264/t265: nenhum critério visual de estilo reprova (cor, roupa, troca, mais de 2, 3D ou realista); aderência ao elenco é métrica. Texto antigo mantido só como histórico.
-
-Exigir no prompt a máxima fidelidade à bíblia, mas aceitar imperfeição leve. LEVE (ressalva): corpo contornado/volume, contorno duplo, variação de traço. GRAVE (reprova): pele colorida, roupa real, 3D, realista, genérico, personagem trocado, > 2 personagens. Cena sem personagem é válida se a imagem acompanha o texto. Gabarito: toalha molhada v1 (aprovada).
-
-- (t232) Roupa insinuada só por contorno, toda branca e sem cor (linha no peito, golinha), sem botão visível nem estampa, é desvio LEVE.
-
-
----
-
 ## 15. Aditivo: 4 roteiros de referência (09/10/2026, incorporado)
 
 > Completa a seção 12 do rascunho v1. Os roteiros dos 4 vídeos de referência chegaram do rede em `docs/pesquisas/REF-roteiros-4-videos.md`. O levantamento amplo está no levantamento de vídeos publicados (60 vídeos; fora do git, arquivado no Drive `PQBR/_arquivo-docs-2026-10-09/`; a lista de temas está em `db/seeds/temas-publicados.csv`). Métricas por vídeo continuam hipótese até a YouTube Analytics API.
-
-### Fonte
-
-- `docs/pesquisas/REF-roteiros-4-videos.md` (TV, sinal amarelo, controle remoto, tomada do chuveiro)
-- levantamento de vídeos publicados, fora do git (60 publicados no canal; nenhuma transcrição Whisper dedicada; narração só nas marcações do roteiro)
 
 ### O que os 4 roteiros confirmam (vira regra)
 
@@ -271,22 +294,6 @@ Exigir no prompt a máxima fidelidade à bíblia, mas aceitar imperfeição leve
 > **APROVADO:** a CTA segue o contexto do tema conforme §5. O trocadilho contextual é preferido quando natural; na ausência dele, usar convite natural a seguir. `Segue o Porquê BR` é fallback. Nunca pedir comentários (t263).
 
 A decisão t467 substitui t262 (somente frase literal) e os exemplos t214 que pediam comentários. A classificação estrutural `tipo_cta` é validada pelo schema; a pertinência do trocadilho é revisão editorial, não inferência automática.
-
-### Inventário (para o blueprint, não para o tom)
-
-- Levantamento: 60 vídeos únicos no canal.
-- Nenhuma transcrição Whisper salva; o auditor deve usar a narração do roteiro (ou gerar Whisper na esteira).
-- Há títulos duplicados / republicações no histórico (ex.: feijão no pote) - reforça a barreira anti-repetição já no contrato.
-- Métricas finas (% assistiu vs deslizou) vieram "não encontrado" em vários itens do levantamento; não usar como meta até a API.
-
-### Próximo passo sugerido
-
-> ⚠️ **SUPERADO**: o item 1 foi decidido (t262/t263). O item 2 segue como tarefa D11 do PLANO.
-
-1. Você confirma o CTA (t214 vs frase de loop atual).
-2. Jr incorpora este aditivo na seção 12 do rascunho e atualiza o texto do steering/SOP.
-
-> **Precedência t465:** os itens desta seção que instruem geração de vídeo no NotebookLM, fichas pausadas ou estilos genéricos 2D/3D estão superados pelo §17. Para o novo módulo, NotebookLM conduz o trabalho intelectual e Flow gera a parte visual; stickmen com fichas são a identidade aprovada, mas a implantação permanece pendente.
 
 ## 16. Visual 2D genérico e linha editorial 80/20 (t399–t402, 11/10/2026), regra
 **Fontes:** decisões t399/t400/t402; ENTREGA-core-eng §2 (@prod-roteirista, @prod-auditor) e §4 (NotebookLM: "estilo próprio não é aceito no formato Short", 1 personagem funciona, 2 falham); RUNBOOK-auditor-v3b (2 rodadas no Gemini web); Ajuda NotebookLM answer/16454555 (seletor de estilo exclui Short); YouTube answer/1311392 (inauthentic content). Proposta: `prep/PROPOSTA-visual-editorial-2D.md` (box).
