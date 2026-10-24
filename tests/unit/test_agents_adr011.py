@@ -69,3 +69,10 @@ def test_oito_papeis_com_persona_e_combo():
     assert len(REGISTRO) == 8
     for p in REGISTRO:
         assert persona(p) and combo(p).startswith("core-")
+
+
+def test_contratos_versionados_semver():
+    import re, pqbr.contratos as k
+    subs = {n for n, v in vars(k).items() if isinstance(v, type) and issubclass(v, k.Contrato) and v is not k.Contrato}
+    assert subs == set(k.VERSOES)
+    assert all(re.fullmatch(r"\d+\.\d+\.\d+", v) for v in k.VERSOES.values())

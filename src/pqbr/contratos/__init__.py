@@ -445,3 +445,73 @@ class TemaProposto(Contrato):
 class PropostaTemas(Contrato):
     temas: list[TemaProposto] = Field(min_length=1, max_length=10)
     justificativa: str = Field(default="", max_length=500)
+
+
+# t513/t515: contratos das portas de motor (src/pqbr/motores) -------------------------------------
+# ---- MotorIntelectual -------------------------------------------------------------------------
+class PedidoMotor(Contrato):
+    tarefa: Literal["temas", "roteiro", "seo", "pesquisa", "direcao"]
+    pergunta: str = Field(min_length=10, max_length=20000)
+    contexto: str = Field(default="", max_length=200000)     # vira fonte do caderno/sessão (ex.: temas já usados)
+    sessao: str = Field(pattern=r"^[a-z0-9][a-z0-9-]{1,60}$")  # rótulo da sessão efêmera (no NotebookLM: título "Short - <sessao>")
+    pesquisa_web: str | None = Field(default=None, max_length=1500)
+
+
+class RespostaMotor(Contrato):
+    motor: str
+    sessao_id: str
+    texto: str = Field(max_length=20000)
+    meta: dict = Field(default_factory=dict)
+
+
+class PedidoVideo(Contrato):
+    codigo: str
+    roteiro: str = Field(min_length=10)
+    bloco_visual: dict = Field(default_factory=dict)
+    destino: str
+    vertical: bool = True
+
+
+class ResultadoVideo(Contrato):
+    gerador: str
+    arquivo: str
+    meta: dict = Field(default_factory=dict)
+
+
+# t515: versão SemVer de cada contrato. MAJOR = quebra (campo removido/renomeado/regra mais estrita);
+# MINOR = campo opcional novo/regra mais frouxa; PATCH = doc. Todo contrato novo entra aqui (teste obriga).
+VERSOES: dict[str, str] = {
+    "CenaVisual": "1.0.0",
+    "BlocoVisual": "1.0.0",
+    "RoteiroShort": "1.0.0",
+    "DecisaoRepeticao": "1.0.0",
+    "PontuacaoPolemica": "1.0.0",
+    "VereditoAuditor": "1.0.0",
+    "DecisaoPublicacao": "1.0.0",
+    "ClassificacaoComentario": "1.0.0",
+    "SinalItem5": "1.0.0",
+    "PropostaAgente": "1.0.0",
+    "Falha": "1.0.0",
+    "TicketManutencao": "1.0.0",
+    "DeterminacaoRevisao": "1.0.0",
+    "TriagemCorrecao": "1.0.0",
+    "PassoCorrecao": "1.0.0",
+    "ResultadoIntervencao": "1.0.0",
+    "VerificacaoCorrecao": "1.0.0",
+    "ResultadoCorrecao": "1.0.0",
+    "RegistroConsumo": "1.0.0",
+    "ItemGrade": "1.0.0",
+    "GradeDiaria": "1.0.0",
+    "TemaPendente": "1.0.0",
+    "TemaPublicado": "1.0.0",
+    "ErroAceitavel": "1.0.0",
+    "ClassificacaoEmailYouTube": "1.0.0",
+    "ClassificacaoPopupCamofox": "1.0.0",
+    "PacoteSEO": "1.0.0",
+    "TemaProposto": "1.0.0",
+    "PropostaTemas": "1.0.0",
+    "PedidoMotor": "1.0.0",
+    "RespostaMotor": "1.0.0",
+    "PedidoVideo": "1.0.0",
+    "ResultadoVideo": "1.0.0",
+}

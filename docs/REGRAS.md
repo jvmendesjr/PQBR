@@ -94,6 +94,7 @@
 - **NotebookLM é o motor editorial** (temas, roteiros, decisões e direção do canal); **não gera mais o vídeo** (Flow primário, por determinismo).
 - **Motores trocáveis** atrás de contrato Pydantic + adaptador, escolhidos por config (`config/motores.json`); código chama a porta, nunca o serviço direto.
 - **8 papéis-agente** (Diretor, Líder Editorial, Pesquisador de Origem, Auditor, Compliance, Guardião, Observador, Dev). O Dev só indica problemas e propõe correções; quem aplica é o José.
+- **Contratos Pydantic v2 são, com o Temporal, a base do determinismo:** num lugar só (`src/pqbr/contratos/`), versionados em SemVer, revisados continuamente (testes de contrato e canários por adaptador web; Observador/Dev sinalizam deriva).
 
 ## 4. Temas e grade
 - **R10:** um tema, um vídeo, inclusive variações próximas. Tema repetido é recusado mesmo que o José sugira; o sistema avisa ou abre ticket. [pauta 1; item 4] Lista dos temas já publicados: `db/seeds/temas-publicados.csv`.

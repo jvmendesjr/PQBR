@@ -6,52 +6,17 @@ notebooklm_video, meta_vibes, google_vids). Workflows/atividades chamam a PORTA,
 from __future__ import annotations
 import json, os
 from pathlib import Path
-from typing import Literal, Protocol, runtime_checkable
-from pydantic import BaseModel, ConfigDict, Field
+from typing import Protocol, runtime_checkable
+from ..contratos import PedidoMotor, RespostaMotor, PedidoVideo, ResultadoVideo  # contratos num lugar só (t515)
 
 RAIZ = Path(__file__).resolve().parents[3]
 CONFIG = Path(os.environ.get("PQBR_MOTORES_CONFIG", str(RAIZ / "config" / "motores.json")))
-
-
-class _C(BaseModel):
-    model_config = ConfigDict(extra="forbid", frozen=True)
-
-
-# ---- MotorIntelectual -------------------------------------------------------------------------
-class PedidoMotor(_C):
-    tarefa: Literal["temas", "roteiro", "seo", "pesquisa", "direcao"]
-    pergunta: str = Field(min_length=10, max_length=20000)
-    contexto: str = Field(default="", max_length=200000)     # vira fonte do caderno/sessão (ex.: temas já usados)
-    sessao: str = Field(pattern=r"^[a-z0-9][a-z0-9-]{1,60}$")  # rótulo da sessão efêmera (no NotebookLM: título "Short - <sessao>")
-    pesquisa_web: str | None = Field(default=None, max_length=1500)
-
-
-class RespostaMotor(_C):
-    motor: str
-    sessao_id: str
-    texto: str = Field(max_length=20000)
-    meta: dict = Field(default_factory=dict)
 
 
 @runtime_checkable
 class MotorIntelectual(Protocol):
     nome: str
     def consultar(self, pedido: PedidoMotor) -> RespostaMotor: ...
-
-
-# ---- GeradorVideo -----------------------------------------------------------------------------
-class PedidoVideo(_C):
-    codigo: str
-    roteiro: str = Field(min_length=10)
-    bloco_visual: dict = Field(default_factory=dict)
-    destino: str
-    vertical: bool = True
-
-
-class ResultadoVideo(_C):
-    gerador: str
-    arquivo: str
-    meta: dict = Field(default_factory=dict)
 
 
 @runtime_checkable
