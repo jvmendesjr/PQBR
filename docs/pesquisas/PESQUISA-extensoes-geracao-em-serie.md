@@ -14,7 +14,7 @@ t529 · 24/10/2026 · aprovado por José. **Só estudo e registro.** Nenhuma ext
   - preveem um catálogo versionado de overlays, storyboard por cena com continuidade e os estados `PAUSED_QUOTA`, `PAUSED_AUTH`, `PAUSED_SITE_CHANGE` e `PAUSED_REVIEW`;
   - preveem o piloto de 1 cena antes de 5 a 7 cenas.
 - **O que faltava:** nenhum documento cobria a **geração de storyboard em série** a partir de uma lista de prompts vinda do NotebookLM, com nomes e ordem determinísticos, nem um catálogo de ferramentas atuais da comunidade para Flow e Vibes. Também não havia nada sobre o Google Vids nesse sentido. Este documento preenche essa lacuna.
-- Não encontrei o transcript do agente YT-LLM: o id não estava acessível nesta sessão. Se houver mais material lá, ele deve ser anexado aqui.
+- Conversa YT-LLM: ver §1.1 (t530).
 
 ### 1.1 Conversa YT-LLM (agente do canal Porquê BR, 22/10/2026) — achados úteis
 Fonte: conversa YT-LLM (transcript e arquivos de trabalho desse agente, 22/10/2026). Não houve discussão sobre **extensões** de Chrome para geração em série, nem sobre Whisk ou Meta Vibes. O que houve, e serve aqui:
