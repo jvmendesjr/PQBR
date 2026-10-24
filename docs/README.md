@@ -1,6 +1,6 @@
 # Documentação da PQBR — mapa e autoridade
 
-Atualizado em 16/10/2026. Este índice distingue os documentos normativos, o roadmap oficial do projeto e os planos auxiliares por módulo. Não é uma nova fonte de decisão.
+Atualizado em 23/10/2026 (t471–t474: canal Telegram + sinais do Temporal, painel Temporal UI, agentes PydanticAI em activities do Temporal — ADR-011; Paperclip em retirada). Este índice distingue os documentos normativos, o roadmap oficial do projeto e os planos auxiliares por módulo. Não é uma nova fonte de decisão.
 
 ## Ordem de autoridade
 
@@ -12,7 +12,7 @@ Siga a ordem definida em `REGRAS.md` §0:
 4. `TESTES.md` — critérios e evidências de validação.
 5. `ROADMAP.md` — tarefas, estado atual, dependências e gates do projeto.
 
-A `AGENTS.md` da raiz do repositório é a entrada de instruções para agentes; `company/agents/<slug>/AGENTS.md` contém as instruções específicas de cada papel. `docs/AGENTES.md` (com E depois do G) é o roster e desenho dos papéis, não o arquivo de instruções. `RASTREABILIDADE.md` liga requisito → desenho → tarefa → teste e `LACUNAS-fluxo.md` lista lacunas operacionais. `CONTRATO-EDITORIAL.md` é um rascunho sujeito às restrições de leitura de `REGRAS.md` §0; contém referências de planejamento históricas e não deve substituir o roadmap canônico.
+A `AGENTS.md` da raiz do repositório é a entrada de instruções para agentes; `company/agents/<slug>/AGENTS.md` contém as instruções específicas de cada papel. `docs/AGENTES.md` (com E depois do G) é o roster e desenho dos papéis, não o arquivo de instruções. `RASTREABILIDADE.md` liga requisito → desenho → tarefa → teste e `LACUNAS-fluxo.md` lista lacunas operacionais. `CONTRATO-EDITORIAL.md` é o contrato editorial oficial (v2, t473), com as seções canônicas do v1 no Anexo A.
 
 ## Os dois roadmaps não são intercambiáveis
 
@@ -20,10 +20,6 @@ A `AGENTS.md` da raiz do repositório é a entrada de instruções para agentes;
 - `docs/blueprints/modulo-producao-video/ROADMAP.md` é um checklist auxiliar somente do módulo de produção de vídeo. O G0 deste módulo foi aceito por José em 15/10/2026; isso não fecha os itens técnicos da Fase 0, não substitui o roadmap canônico e não autoriza geração real, upload ou publicação.
 
 ## Documentos por diretório
-
-### `blueprints/canal-chat-pqbr/`
-
-Documentação da conversa Discord/Paperclip e da migração dos avisos. O `README.md` desse diretório resume o estado; `GUIA-USO-DISCORD.md` orienta o uso do canal; blueprint, avaliação e inventário guardam decisões, evidências e lacunas. Aprovação Temporal e alertas proativos duráveis continuam dependentes dos gates F05-06/F05-08.
 
 ### `blueprints/modulo-producao-video/`
 
@@ -36,10 +32,12 @@ ADRs, relatórios de gate e evidências de testes. Leia seu status e data antes 
 ### Outros documentos vivos
 
 - `REFERENCIA-sessao-google.md` — referência operacional da sessão Google/Camofox.
-- `hermes-pqbr/` — configuração legada preservada como rollback durante a migração; não pausar antes de F05-09.
+- `hermes-pqbr/SOUL-rascunho.md` — persona do perfil Hermes `pqbr`, canal Telegram do José (t474).
 - `LICOES-pre-E2E.md` — lições para o E2E.
-- `operacao/GUIA-ACESSO-PC-PAPERCLIP-CLI.md` — caminhos verificados para acessar o PC, a interface e a CLI do Paperclip, sem credenciais.
+- `operacao/GUIA-ACESSO-PC-TEMPORAL.md` — caminhos verificados para acessar o PC e o Temporal (UI = painel do José), sem credenciais.
+- `sdd/adr-011-agentes-pydanticai-temporal.md` — agentes PydanticAI em activities do Temporal (substitui ADR-002).
+- `../CHANGELOG.md` — mudanças relevantes do repositório.
 
 ## Preservação e descarte
 
-Não foi identificado um arquivo seguro para excluir nesta revisão. Relatórios de dry-run e snapshots antigos são mantidos como evidência, com seu caráter histórico explicitado, em vez de apagados. `docs/arquivo/`, `docs/pesquisas/` e `docs/DECISOES-LOG.md` continuam sujeitos às restrições de consulta de `REGRAS.md` §0; esta revisão não os abriu nem os alterou.
+`docs/_obsoleto/` é a lixeira temporária (t472): arquivos obsoletos movidos com `git mv`, nada apagado; o índice `_obsoleto/README.md` diz motivo e substituto. José decide depois o destino. Relatórios de dry-run e evidências em `sdd/` continuam como snapshots históricos. `docs/arquivo/`, `docs/_obsoleto/`, `docs/pesquisas/` e `docs/DECISOES-LOG.md` seguem as restrições de consulta de `REGRAS.md` §0.

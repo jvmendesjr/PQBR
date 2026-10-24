@@ -6,7 +6,7 @@
 
 ## Navegação
 
-[Como ler os estados](#como-ler-os-estados) · [Stack](#stack) · [Implementações](#implementações) · [Correção autônoma](#correção-autônoma-f3-05) · [Discord](#discord-e-migração-do-canal) · [Pendências](#pendências-e-pausas) · [Documentação completa](#documentação-completa)
+[Como ler os estados](#como-ler-os-estados) · [Stack](#stack) · [Implementações](#implementações) · [Correção autônoma](#correção-autônoma-f3-05) · [Canal e painel](#canal-do-josé-e-painel-t471t474) · [Pendências](#pendências-e-pausas) · [Documentação completa](#documentação-completa)
 
 ## Como ler os estados
 
@@ -25,7 +25,7 @@ Contagens de testes abaixo pertencem a snapshots distintos: **não devem ser som
 |---|---|---|
 | Código e contratos | Python, Pydantic v2 e SDK Python do Temporal; contratos estruturados com rejeição de campos extras. | **Implementado/testado localmente.** F3-01/G3 fechado em 16/10. [Contratos no código](../src/pqbr/contratos/__init__.py), [interfaces e desenho](ARQUITETURA.md), [critérios de teste](TESTES.md). |
 | Orquestração durável | Temporal self-hosted 1.32.1; Schedules, Activities, timers, sinais e replay. PostgreSQL dedicado ao estado do motor. | **Operação registrada e motor escolhido.** Soak documentado de 122 execuções em aproximadamente 20 h, sem perdas/duplicatas, pico de 340 MiB no compose. DBOS não foi necessário. [ADR e resultados completos](sdd/adr-001-orquestrador.md), [compose](../infra/temporal/docker-compose.yml). |
-| Agentes e painel | Paperclip é plano de controle, organização, issues e agentes; não substitui o Temporal na execução de efeitos externos. Adapters previstos/vigentes: `process` e `opencode_local`. | Organização PQBR existente e integração de conversa **registradas**; disponibilidade atual do roster não foi consultada. F1-01/F1-02 estão suspensos: não importar uma segunda organização. [Regras vigentes](REGRAS.md), [arquitetura](ARQUITETURA.md), [roadmap](ROADMAP.md). |
+| Agentes e painel | **Em transição (ADR-011, t474):** agentes PydanticAI (Pydantic v2) dentro de activities do Temporal; painel = Temporal UI; canal = Telegram/Hermes `pqbr`. O Paperclip (plano de controle, issues e agentes, adapters `process`/`opencode_local`) está sendo retirado. | Organização PQBR existente e integração de conversa **registradas**; disponibilidade atual do roster não foi consultada. F1-01/F1-02 estão suspensos: não importar uma segunda organização. [Regras vigentes](REGRAS.md), [arquitetura](ARQUITETURA.md), [roadmap](ROADMAP.md). |
 | Modelos dos agentes | 9router, com papéis mapeados para `core-alto`, `core-medio`, `core-baixo` e `core-revisao`. Jev/TypeSafe fica na decisão estruturada, não na redação. | **Configuração presente**, sem presumir credenciais ou todos os backends ligados. O roadmap ainda registra pendências de 9router/ponte CLI e fallbacks do Jev. [Mapa único de modelos](../config/modelos_9router.json), [configuração documentada](../config/README.md), [papéis e decisões](ARQUITETURA.md). |
 | Navegador | Camofox sobre Camoufox, instância PQBR isolada em `127.0.0.1:9387`, autenticação, perfil `pqbr`, keepalive e fila própria. | **Operação registrada** em F4C-01..04: saúde/autenticação, duas execuções em série, login e persistência após restart. A migração dos clientes antigos e o agente corretor completo seguem pendentes. [Infra e limites](../infra/pqbr-camofox/README.md), [Worker](../src/pqbr/workflows/worker_camofox.py), [F4C no roadmap](ROADMAP.md). |
 
@@ -113,15 +113,9 @@ O [protótipo offline de autorização humana](sdd/evidencias-f3-05-autorizacao-
 
 **Política preservada:** exceção técnica de intervenção continua terminal, sem retry/fallback que a transforme em sucesso; pode bloquear pendentes. Revisão futura dessa política é uma proposta, não implementação aprovada nem lembrete criado. Os protótipos não fecham TS-11, F3-05/G4 ou F05-06. Para notas posteriores e outras evidências, retorne ao [item F3-05 do roadmap](ROADMAP.md); esta wiki não acompanha automaticamente novas atualizações.
 
-## Discord e migração do canal
+## Canal do José e painel (t471/t474)
 
-**Conversa testada:** menção raiz no canal privado `#pqbr` cria tarefa no Paperclip para o Diretor e recebe resposta na thread. Endpoint restrito, identidade vinculada, DMs e pessoas não vinculadas bloqueadas. Isso não concede shell ou amplia permissões. [Guia de uso completo](blueprints/canal-chat-pqbr/GUIA-USO-DISCORD.md), [índice do canal](blueprints/canal-chat-pqbr/README.md).
-
-**Aprovação e alertas não estão concluídos.** A prova de correlação real Discord→Temporal sem efeito de aprovação não valida aprovar/negar no workflow de produção. F05-06/TZ-06 exige identidade confiável, estado válido, fail-closed, idempotência persistente e tratamento de três falhas; TZ-08 ainda carece do teste negativo de canal fora do allowlist.
-
-F05-08/TZ-09 tem candidata de outbox r26 isolada, com testes de stub/snapshot registrados; SQL não aplicado, adapters reais e E2E privado das rotas ainda faltam. **Resposta em thread não comprova alerta proativo durável.** [Inventário, evolução e evidências completas](blueprints/canal-chat-pqbr/INVENTARIO-NOTIFICACOES.md), [plano de migração](blueprints/canal-chat-pqbr/BLUEPRINT-MIGRACAO-DISCORD-PQBR.md), [TZ-06..10](TESTES.md).
-
-Telegram/Hermes `pqbr` permanece como rollback. F05-09 só autoriza o corte reversível depois dos testes e do ensaio de rollback, preservando gateway compartilhado, outros perfis e histórico. Nenhuma aprovação/negação de produção deve ser armada com base neste resumo.
+**Decisão 23/10/2026:** o plano Discord/Paperclip (t464) foi revogado. O canal do José é o **Telegram (Hermes `pqbr`)**; aprovações são **sinais do Temporal**; o painel é a **Temporal UI** (painel próprio fica para depois). Os documentos do piloto Discord estão em `docs/_obsoleto/blueprints/canal-chat-pqbr/` (histórico; a lista de fontes de aviso do inventário pode ser reaproveitada). Pendente: token de bot próprio do perfil `pqbr` para os avisos (`pqbr-pedidos-jose` não entrega).
 
 ## Pendências e pausas
 
@@ -139,6 +133,6 @@ Telegram/Hermes `pqbr` permanece como rollback. F05-09 só autoriza o corte reve
 
 **Para retomar:** leia as fontes na ordem canônica [REGRAS](REGRAS.md) → [SPEC](SPEC.md) → [ARQUITETURA](ARQUITETURA.md) → [TESTES](TESTES.md) → [ROADMAP](ROADMAP.md); então use o roadmap para localizar o estado e o próximo passo autorizado. O [índice documental](README.md) e as [instruções de entrada dos agentes](../AGENTS.md) explicam a navegação. Blueprints e evidências não substituem essas autoridades.
 
-**Para aprofundar por assunto:** [produção de vídeo](blueprints/modulo-producao-video/BLUEPRINT.md), [checklist técnico do módulo](blueprints/modulo-producao-video/ROADMAP.md), [uso do Discord](blueprints/canal-chat-pqbr/GUIA-USO-DISCORD.md), [inventário de avisos](blueprints/canal-chat-pqbr/INVENTARIO-NOTIFICACOES.md), [motor Temporal](sdd/adr-001-orquestrador.md), [segurança local](sdd/f3-02-ts-sec-20261017.md), [backup offsite ainda offline](sdd/f3-04-preparo-offline-20261017.md) e [candidata de correção](sdd/f3-05-integracao-candidata-20261017.md).
+**Para aprofundar por assunto:** [produção de vídeo](blueprints/modulo-producao-video/BLUEPRINT.md), [checklist técnico do módulo](blueprints/modulo-producao-video/ROADMAP.md), [motor Temporal](sdd/adr-001-orquestrador.md), [segurança local](sdd/f3-02-ts-sec-20261017.md), [backup offsite ainda offline](sdd/f3-04-preparo-offline-20261017.md) e [candidata de correção](sdd/f3-05-integracao-candidata-20261017.md).
 
 As descrições se baseiam nas fontes lidas diretamente ou na análise paralela; os links também facilitam o acesso a recursos/código existentes, sem atribuir a eles capacidades não verificadas. Não foram abertos `docs/arquivo/`, `docs/pesquisas/`, `docs/DECISOES-LOG.md`, o contrato editorial antigo ou outros documentos legados/rascunhos. A versão v2 de nome histórico `CANDIDATO` foi consultada porque o roadmap registra seu aceite. Nenhum documento existente foi editado por este trabalho; não houve commit/push, ticket, mensagem real, geração ou ativação.

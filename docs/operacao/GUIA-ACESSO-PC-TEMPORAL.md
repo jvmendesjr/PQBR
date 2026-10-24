@@ -1,12 +1,11 @@
-# Guia de acesso ao PC, Paperclip e Temporal
+# Guia de acesso ao PC e ao Temporal
 
-Este documento registra caminhos operacionais verificados para apoiar o desenvolvimento do PQBR. Ele não substitui as autorizações do proprietário nem as regras do repositório. Verificado em 16/10/2026.
+Este documento registra caminhos operacionais verificados para apoiar o desenvolvimento do PQBR. Ele não substitui as autorizações do proprietário nem as regras do repositório. Verificado em 16/10/2026. Em 23/10/2026 a parte do Paperclip foi retirada (Paperclip em retirada, ADR-011); o painel do José é a Temporal UI (t471). Nome antigo: `GUIA-ACESSO-PC-PAPERCLIP-CLI.md`.
 
 ## Resumo rápido
 
 - **PC compartilhado:** `ssh pqbr-pc` a partir do computador compartilhado do Cue. O alias usa OpenSSH e uma chave persistente configurada nesse computador.
-- **Paperclip:** interface/API em `https://<MAGICDNS-DO-PC>:3100/`; a CLI autenticada funciona no próprio PC.
-- **Temporal:** stack Docker Compose em `infra/temporal/docker-compose.yml`; UI local na porta 8233, servidor na 7233 e PostgreSQL interno ao container.
+- **Temporal:** stack Docker Compose em `infra/temporal/docker-compose.yml`; UI local na porta 8233 (painel do José, t471), servidor na 7233 e PostgreSQL interno ao container.
 - **Segredos:** não copiar, imprimir, registrar neste guia ou enviar arquivos de autenticação, tokens, senhas ou conteúdo de `.env`.
 
 ## Acesso persistente ao PC
@@ -22,33 +21,6 @@ O alias `pqbr-pc` está em `~/.ssh/config` e usa o usuário local `pc`, OpenSSH 
 Esse acesso persiste entre sessões para agentes que executam **neste mesmo computador compartilhado**, desde que o estado local seja mantido e o PC e o computador compartilhado estejam acessíveis pela tailnet. Se algum deles estiver suspenso/offline, a conexão fica indisponível até voltar; exclusão ou recriação do ambiente pode exigir nova configuração. A chave não é copiada para outros computadores ou ambientes. Não copie a chave privada, não desative `StrictHostKeyChecking` e pare para verificar caso a chave do host mude. O acesso atual é ao usuário `pc`; `sudo -n` foi confirmado, então use privilégios elevados somente quando necessário.
 
 A sessão Tailscale do PC estava online durante a verificação. Se o alias não funcionar, confira primeiro o estado Tailscale e os arquivos locais de configuração; não altere ACLs, tags ou a identidade do dispositivo para contornar uma falha.
-
-## Abrir e validar o Paperclip
-
-Use o nome MagicDNS privado aprovado e HTTPS, sem registrar o endereço privado literal neste documento:
-
-```text
-https://<MAGICDNS-DO-PC>:3100/
-```
-
-Na verificação de 16/10/2026, a rota `/api/health` respondeu HTTP 200. A porta 3100 é a entrada validada para a interface/API; não a substitua automaticamente por 3101.
-
-Execute a CLI autenticada no próprio PC, onde a sessão existente está configurada:
-
-```bash
-n="$HOME/.hermes/node/bin/node"
-p="$HOME/.paperclip/cli/current/node_modules/paperclipai/dist/index.js"
-PAPERCLIP_BASE_URL="https://<MAGICDNS-DO-PC>:3100"
-"$n" "$p" company list --api-base "$PAPERCLIP_BASE_URL" --json
-```
-
-A chamada foi validada e confirmou a organização PQBR (`be3980d6-51ae-4cee-b85f-923b4568188c`). Para listar issues da organização:
-
-```bash
-"$n" "$p" issue list --company-id be3980d6-51ae-4cee-b85f-923b4568188c --api-base "$PAPERCLIP_BASE_URL" --json
-```
-
-Não refaça login se a sessão existente funcionar; não copie tokens nem arquivos de autenticação. Uma resposta HTTP 200, sozinha, não comprova acesso autenticado: valide a CLI quando esse acesso for necessário.
 
 ## Temporal e banco de dados
 
@@ -89,6 +61,6 @@ Depois abra `http://127.0.0.1:18233/`. O túnel foi testado e respondeu HTTP 200
 
 ## Ferramentas e escopo do repositório
 
-No PC foram confirmados Git, Node.js, Docker/Compose e o acesso funcional à CLI do Paperclip. O diretório de trabalho é `/home/pc/Workspace/PQBR`; os arquivos de Temporal do projeto estão em `infra/temporal/` e `scripts/temporal/`. Comece com comandos de leitura e verifique `git status` antes de editar.
+No PC foram confirmados Git, Node.js e Docker/Compose. O diretório de trabalho é `/home/pc/Workspace/PQBR`; os arquivos de Temporal do projeto estão em `infra/temporal/` e `scripts/temporal/`. Comece com comandos de leitura e verifique `git status` antes de editar.
 
-Para este trabalho, preserve alterações preexistentes; não faça commit ou push sem solicitação. Não consulte `docs/arquivo/`, `docs/pesquisas/` nem `docs/DECISOES-LOG.md` sem aprovação explícita do proprietário. Não crie outra organização, não altere configurações de autenticação/rede/serviços sem autorização específica e não exponha segredos.
+Para este trabalho, preserve alterações preexistentes; não faça commit ou push sem solicitação. Não consulte `docs/arquivo/`, `docs/_obsoleto/`, `docs/pesquisas/` nem `docs/DECISOES-LOG.md` sem aprovação explícita do proprietário. Não altere configurações de autenticação/rede/serviços sem autorização específica e não exponha segredos.

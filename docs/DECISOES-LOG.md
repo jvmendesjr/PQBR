@@ -512,3 +512,9 @@ NÃO CABE:
 
 ## t473 (23/10/2026) — Contrato editorial v2 oficial
 - José aprovou: o v2 (aprovado no G7, t468) vira `docs/CONTRATO-EDITORIAL.md`; o v1 vai para `docs/_obsoleto/CONTRATO-EDITORIAL-v1.md`. As seções do v1 que seguem canônicas (tom, categorias, gabarito, duração, diretrizes, §15–§17 com o bloco §16.7) foram anexadas sem alteração (Anexo A). O contrato deixa de ser "rascunho de leitura restrita".
+
+## t474 (23/10/2026) — Revogação da t464 (Discord) e ADR-011
+- José revogou a t464: **não** haverá canal Discord/Paperclip. O canal é o **Telegram (Hermes `pqbr`)**, as aprovações são **sinais do Temporal** e o painel é a **Temporal UI** (t471). Reescritos: REGRAS, SPEC, ARQUITETURA (ADR-003 vigente, ADR-009 revogada), AGENTES, LACUNAS, RESUMO-STACK, AGENTS.md, README, SOUL-rascunho do Hermes, índice `docs/README.md`.
+- Nova **ADR-011** (`docs/sdd/adr-011-agentes-pydanticai-temporal.md`): agentes PydanticAI (Pydantic v2) dentro de activities do Temporal; substitui a ADR-002; Paperclip em retirada (código dele não alterado; `infra/paperclip-db/` mantido por ora). Personas e playbooks de `company/` continuam.
+- Guia de acesso renomeado para `docs/operacao/GUIA-ACESSO-PC-TEMPORAL.md`, sem a parte do Paperclip. `docs/sdd/teste-e2e-short-1.md` sem caderno mestre, `rede` ou issue do Paperclip.
+

@@ -1,10 +1,10 @@
 # PQBR (Porquê BR)
 
-Aplicação de produção do canal Porquê BR: Shorts de sátira leve, em stickman, sobre manias e rotinas dos brasileiros.
+Aplicação de produção do canal Porquê BR: Shorts de sátira leve, em desenho 2D genérico, sobre manias e rotinas dos brasileiros.
 
 ## Orientação para agentes e mapa documental
 
-`AGENTS.md` na raiz é a porta de entrada para agentes que trabalham neste checkout. `docs/README.md` é o mapa de documentos, diretórios e autoridade. O roster de papéis fica em `docs/AGENTES.md`; as instruções específicas de cada agente Paperclip ficam em `company/agents/<slug>/AGENTS.md`.
+`AGENTS.md` na raiz é a porta de entrada para agentes que trabalham neste checkout. `docs/README.md` é o mapa de documentos, diretórios e autoridade. O roster de papéis fica em `docs/AGENTES.md`; as personas de cada agente (PydanticAI em activities do Temporal; ADR-011) ficam em `company/agents/<slug>/AGENTS.md`.
 
 Há dois roadmaps com escopos diferentes. `docs/ROADMAP.md` é o roadmap canônico geral e fonte do estado oficial. `docs/blueprints/modulo-producao-video/ROADMAP.md` é auxiliar e cobre apenas o módulo de produção de vídeo. Não misture nem use um para substituir o outro.
 
@@ -14,7 +14,7 @@ Em conflito, vale o documento de maior autoridade, nesta ordem:
 
 1. `docs/REGRAS.md`: regras aprovadas pelo José; §0–§3 são a constituição.
 2. `docs/SPEC.md`: requisitos funcionais e não funcionais, histórias e critérios de aceite.
-3. `docs/ARQUITETURA.md`: ADRs, modelo de dados, workflows do Temporal, integração com o Paperclip e contratos Pydantic v2.
+3. `docs/ARQUITETURA.md`: ADRs, modelo de dados, workflows do Temporal, agentes PydanticAI (ADR-011; Paperclip em retirada) e contratos Pydantic v2.
 4. `docs/TESTES.md`: plano de testes e critérios de validação.
 5. `docs/ROADMAP.md`: tarefas, estado e próximo passo do projeto.
 
@@ -23,6 +23,10 @@ Em conflito, vale o documento de maior autoridade, nesta ordem:
 ## ⛔ Documentos restritos
 
 Arquivos de pré-construção e material legado não devem ser consultados sem aprovação explícita do José, conforme `docs/REGRAS.md` §0. Isso inclui `docs/_obsoleto/`, `docs/DECISOES-LOG.md`, `docs/pesquisas/`, `docs/arquivo/` e qualquer rascunho legado. O que vale como regra editorial está em `docs/REGRAS.md` §5 e no contrato oficial `docs/CONTRATO-EDITORIAL.md` (v2).
+
+## Canal e painel
+
+José usa o Telegram (Hermes `pqbr`) para avisos, pedidos e aprovações (sinais do Temporal) e a Temporal UI como painel (t471/t474).
 
 ## Regras do repositório
 

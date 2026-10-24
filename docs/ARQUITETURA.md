@@ -15,7 +15,7 @@
 - **Forma-alvo [PROPOSTA]:**
   - Schedules: grade da madrugada, lote da manhã, guardião de sessão, leitura de comentários, limpeza do Drive, relatório diário, monitores. Eles substituem os timers do SO; a **regra** de horários fixos + vigia de prazo (REGRAS §3) não muda.
   - `EpisodioWorkflow(ep)`: pauta → NotebookLM → FFmpeg → auditor → upload privado → agendar → confirmar.
-  - `Item5Workflow`: qualquer problema → vídeo privado na hora + aviso pelo canal ativo (Telegram durante a transição; Discord/Paperclip após t464) (REGRAS §16).
+  - `Item5Workflow`: qualquer problema → vídeo privado na hora + aviso pelo canal ativo (Telegram/Hermes `pqbr`; t474) (REGRAS §16).
   - Workers Python (`src/pqbr`) com filas por recurso: `notebooklm` (concorrência 1), `camofox` (concorrência 1), `render`, `default`.
   - Activities sem LLM: NotebookLM CLI 0.8.4, FFmpeg, juiz Gemini, `decide()` (Jev via Pydantic), YouTube API, Drive, banco do app.
   - **Escopo [t327]:** só o canal Porquê BR. Multi-canal (`canal_id`, config e orçamento por canal, R10 por canal) fica **adiado** para depois dos aprendizados.
@@ -26,16 +26,17 @@
 - **Teto de RAM [APROVADO t329]:** Temporal + Postgres dedicado ≤ 1,5 GB no `pc`; acima disso no TZ-01, considerar o DBOS (plano B).
 - **Cautelas:** RAM e swap do `pc` (H-ORQ1); determinismo e versionamento dos workflows; `NUM_HISTORY_SHARDS` escolhido uma vez; backup diário do Postgres do motor (sem segredos); nenhum agente autônomo dentro de Activity com efeito colateral.
 
-### ADR-002: Paperclip = camada de agentes + painel, ligado ao Temporal
+### ADR-002: Paperclip = camada de agentes + painel, ligado ao Temporal [SUBSTITUÍDA pela ADR-011 em 23/10/2026; histórico]
+> O Paperclip está sendo retirado. Agentes: PydanticAI em activities do Temporal (ADR-011). Painel: Temporal UI; canal: Telegram (t471/t474). O texto abaixo é histórico.
 - **Decisão [APROVADO t282, t327]:** o **Temporal** executa o fluxo determinístico; o **Paperclip** é a **camada de agentes e o painel**. **Os agentes vivem no Paperclip** (org PQBR, pacote `company/` no formato agentcompanies/v1). Pelo padrão dos agentes pensantes (t324–t326), eles observam e propõem (saída Pydantic v2), e nada se aplica sem o José; o Paperclip **não é dono do fluxo**.
 - Abre só dentro da tailnet, por HTTPS; a porta 443 fica livre [VERIFICADO/APROVADO t280].
-- Verificação de fichas: status/issue no painel e botões no canal ativo, sincronizados pela mesma tabela (Telegram durante a transição; Discord/Paperclip após t464) (REGRAS §6).
+- Verificação de fichas: status/issue no painel e botões no canal ativo, sincronizados pela mesma tabela (Telegram/Hermes `pqbr`; t474) (REGRAS §6).
 - **Ligação Temporal ↔ Paperclip [PROPOSTA, a validar na Fase 0.5]:** o Temporal grava eventos e estado de negócio no banco do app (outbox) e abre/atualiza issues no Paperclip; os agentes leem banco do app/issues e devolvem propostas estruturadas; a aprovação do José vira **sinal** para o Temporal. Nunca leem o Postgres do Temporal.
 - Riscos conhecidos: o adapter `hermes_local` força `--yolo` (PR #3850), mas o perfil `pqbr` não pode herdar `--yolo` (REGRAS §23): resolver H-SDD1 antes de ligar qualquer agente Hermes; recovery storm sem internet (issue #6596); injeção do AGENTS.md (issue #3833, corrigida pela PR #8543). Heartbeats desligados até a Fase 0.5 provar a ligação.
 - `company/` continua (pacote dos agentes). `tasks/`: as rotinas viram Schedules do Temporal, então `tasks/` é candidato a exclusão depois da Fase 0.5 [PROPOSTA].
 
-### ADR-003: Telegram com o Hermes `pqbr` [LEGADO; substituída por ADR-009/t464]
-- **Decisão histórica [t281, substituída por ADR-009/t464]:** Telegram ficou com o perfil Hermes `pqbr`; o perfil permanece ativo somente como fallback até o piloto Discord passar. Após o corte, pausar apenas `pqbr` e emissores PQBR; preservar o gateway Hermes compartilhado.
+### ADR-003: Telegram com o Hermes `pqbr` [VIGENTE: restabelecida por t474, que revogou ADR-009/t464]
+- **Decisão [t281; reafirmada t474]:** o canal do José é o Telegram, pelo perfil Hermes `pqbr`: avisos, pedidos e aprovações (as aprovações viram sinais do Temporal). Painel: Temporal UI (t471). Preservar o gateway Hermes compartilhado e os outros perfis. Pendente: token de bot próprio do perfil `pqbr` (decisão do José).
 - Perfil já criado [VERIFICADO 09/10]: não herda `--yolo` nem sudo sem senha; segredos só no `.env` do perfil. Rota: tópico do grupo do José, pelo roteador de bot único (o perfil não tem token próprio). IDs de chat e tópico ficam só na config local, nunca no git.
 - Uso no servidor: `hermes -p pqbr chat` (interativo) ou `hermes -p pqbr chat --query-file - --oneshot -Q` (sem interação).
 - Aprovações do José (botões e dupla confirmação) chegam ao motor como **sinal** [PROPOSTA]; a ponte exata é definida na Fase 0.5.
@@ -65,11 +66,11 @@
 > Referência viva da sessão Google: [`REFERENCIA-sessao-google.md`](REFERENCIA-sessao-google.md) (Camofox única fonte e único renovador; NotebookLM só lê; 12/10).
 - **Instância e perfil únicos (José, 12/10):** a conta Google de produção vive em **um** processo `pqbr-camofox` (127.0.0.1:9387) e **um** perfil persistente: `userId=pqbr` → `~/.pqbr/camofox/profiles/66e057673effe4afdd963a2bd6a45a2a/` (SHA-256 do userId, plugin de persistência). Regras: todo cliente usa `userId=pqbr` (o `sessionKey` é só o grupo de abas, no mesmo contexto); `MAX_SESSIONS=1`; nada de userId novo, perfil efêmero, `--fresh` ou segundo processo; reinícios restauram o mesmo `storage-state.json`. Auditado em 12/10: keepalive, `camofox.py` (fila camofox-pqbr), `sync_cookies_chrome.py`, `mcp_kit` e playbooks usam só `pqbr`; o auditor Gemini ainda não tem código e deve seguir a mesma regra. Outro processo `node server.js` no `pc` (PID do 9377) é de outro projeto, não da PQBR.
 - **NotebookLM gerenciado pelo `notebooklm-py`; autenticação Google única:** toda a gestão do serviço Google NotebookLM é feita pela CLI `notebooklm-py`, que gerencia a sessão lógica NotebookLM e seu armazenamento local no perfil lógico `pqbr`; isso não significa outra conta, perfil de navegador ou renovador. O Camofox é a fonte única de autenticação/renovação da mesma conta Google de produção usada por NotebookLM, Flow e Vids, no perfil persistente único `userId=pqbr` da instância `pqbr-camofox`. O consumidor NotebookLM lê o estado sincronizado pelo mecanismo existente `NOTEBOOKLM_REFRESH_CMD`/`nlm-sync.sh`; a referência viva registra `NOTEBOOKLM_HEADLESS_REAUTH=0` e `NOTEBOOKLM_DISABLE_KEEPALIVE_POKE=1`, sem Chromium/login paralelo ou renovação concorrente. Base: `REFERENCIA-sessao-google.md` §3/§5, REGRAS §10–§11 e blueprint do módulo de vídeo §9; esclarecimento do proprietário em 17/10/2026. Esta precisão documental não altera configuração, comprova operação atual nem fecha F4-07 ou F00-01/G0.
-- `pqbr-camofox` sempre ligado, com a sessão permanente na mesma tela; reinicia só se cair (`Restart=always` + guardião). A sessão caiu: renovar → sincronizar cookies do Chrome → outro caminho; log + aviso pelo canal privado ativo (Telegram durante a migração; Discord/Paperclip após t464); o José só no fim (noVNC/2FA).
+- `pqbr-camofox` sempre ligado, com a sessão permanente na mesma tela; reinicia só se cair (`Restart=always` + guardião). A sessão caiu: renovar → sincronizar cookies do Chrome → outro caminho; log + aviso pelo canal privado ativo (Telegram/Hermes `pqbr`; t474); o José só no fim (noVNC/2FA).
 
 - **Comportamento humano obrigatório (REGRAS §11, José 12/10):** toda automação de navegador (Camofox/Camoufox) simula humano: Camoufox com `humanize: true` (cursor humano, fixo no `server.js` do camofox 1.6.0); clique só por `/click`; texto curto digitado com cadência variável e texto longo colado (`fill`) após clique no campo; pausas sorteadas entre ações; keepalive com jitter. Essas cadências não se confundem com os 5–15 min de pacing entre intervenções de REGRAS §3.1; não implicam garantia anti-detecção. Código: `src/pqbr/workflows/camofox_humano.py` (único caminho para clicar/digitar). Sessão Google: Camofox é a única fonte e o único renovador; o NotebookLM só lê (`NOTEBOOKLM_REFRESH_CMD`).
 
-### ADR-009: Discord nativo do Paperclip como canal PQBR [APROVADO t464; corte condicionado]
+### ADR-009: Discord nativo do Paperclip como canal PQBR [REVOGADA por t474 em 23/10/2026; histórico]
 - Conectar o conector Discord diretamente ao Diretor ativo; não criar agente “Canal PQBR” redundante.
 - O conector experimental fica restrito a servidor/canal privado e à identidade Paperclip ativa do José; “Allow unlinked people” desligado. Não abrir ingresso HTTPS público; confirmar que o Gateway de saída funciona na instância real.
 - Migrar conversa, aprovação Temporal e todos os avisos operacionais antes do corte. Entrega proativa de notificações precisa ser comprovada; respostas em threads, sozinhas, não bastam.
@@ -81,6 +82,14 @@
 - NotebookLM conduz pesquisa profunda, cultura brasileira/expressões, propostas semanais de temas, ideação, roteiro e SEO. O caderno canônico é temporário para os documentos/pacote iniciais e recriável após persistir fontes e resultados; cadernos por episódio são efêmeros e copiam a mesma persona-base.
 - Agentes Paperclip orquestram, encaminham insumos, extraem saídas estruturadas e validam. Não fazem pesquisa, tema, roteiro ou SEO independentes, exceto complemento de relatório ou fallback documentado por indisponibilidade central.
 - NotebookLM não gera vídeo. Temporal chama a rota visual pelo Camofox: Flow primário, Vids fallback adicional, Gemini Web terceira rota, Meta Vibes posterior. Medir cotas reais; dois Shorts/dia não é quota prometida. Instruções técnicas em inglês; conteúdo final em pt-BR. Identidade visual aprovada: stickmen/fichas; implementação pendente.
+
+### ADR-011: agentes PydanticAI em activities do Temporal [APROVADO t474, 23/10/2026; substitui ADR-002]
+- **Decisão:** o Paperclip sai da arquitetura (em retirada; o código dele não é alterado até o desligamento). O **Temporal** continua dono do fluxo; os agentes passam a ser **PydanticAI com Pydantic v2**, executados **dentro de activities do Temporal**. O **Jev** continua como classificador/decisor estruturado.
+- **Regra de efeitos:** o agente só gera e valida (saída tipada Pydantic v2). Efeitos externos (Drive, YouTube, Camofox, banco) ficam em activities determinísticas separadas. Retentativa, timeout e idempotência são do Temporal.
+- **Modelos:** via 9router (combos reais do projeto). Personas: `company/agents/<slug>/AGENTS.md`; playbooks: `company/playbooks/`. Memória: Hindsight por adaptador.
+- **Interface do José:** Telegram (Hermes `pqbr`) para avisos, pedidos e aprovações; aprovação = sinal do Temporal (ID autorizado, estado válido, fail-closed, idempotente). Painel: Temporal UI; painel próprio depois (t471).
+- **Agente-first:** contratos pequenos e fechados, um módulo por agente, testes unitários sem rede, para que agentes de programação construam e mantenham.
+- **Pendências:** reescrever as partes de §3/§10 e do roster (`docs/AGENTES.md`) que ainda descrevem org/issues/heartbeats do Paperclip; definir o primeiro workflow migrado (proposta: `ReposicaoTemasWorkflow`). Detalhe: `docs/sdd/adr-011-agentes-pydanticai-temporal.md`.
 
 ## 2. Componentes
 
@@ -98,9 +107,10 @@
 | **Motor de workflow** (Temporal) | Estado durável dos fluxos, Schedules, retentativas, sinais (ADR-001). Postgres próprio, só estado de workflow, nunca consultado diretamente. | [APROVADO t374] / Temporal escolhido no G0.5; DBOS dispensado |
 | **Banco do app** (Postgres 17 local, `infra/pqbr-db`) | Dados de negócio (base do painel e do analista; recebe por outbox): grade, temas (R10), episódios, `visual_assets`/`episode_assets`, comentários, ações (motivo/quem/quando), consumo, kill switch, relatórios. Plano Pro não confirmado (H13). | [APROVADO] |
 | **Google Drive** | Armazenamento definitivo, estrutura t267 (REGRAS §21). | [APROVADO] |
-| **Hermes `pqbr`** | Fallback Telegram temporário durante o piloto t464; pausar após migração completa, sem desligar gateway compartilhado. | [LEGADO; não desligar antes do gate] |
-| **Discord nativo Paperclip** | Canal de José conectado diretamente ao Diretor ativo; conversa, aprovações e alertas após os gates t464. | [APROVADO; piloto pendente] |
-| **Paperclip** | Camada de agentes + painel, ligado ao Temporal (ADR-002). | [APROVADO t282, t327] |
+| **Hermes `pqbr`** | Canal Telegram do José: avisos, pedidos e aprovações (sinais do Temporal); não desligar o gateway compartilhado. | [APROVADO t281/t474] |
+| **Paperclip** | Em retirada (ADR-011). Era camada de agentes + painel (ADR-002). | [EM RETIRADA t474] |
+| **Temporal UI** | Painel do José: estado, histórico, erros, runs travados (t471). | [APROVADO t471] |
+| **PydanticAI** | Agentes tipados (Pydantic v2) dentro de activities do Temporal (ADR-011). | [APROVADO t474] |
 | **Hindsight** (local, armazenamento próprio: Postgres embutido pg0; t349–t350) | Aprendizados (analista, lições do item 5) e memórias de código para os agentes de dev (ADR-004), num **bank único por organização**. Sem segredos nem PII. | [APROVADO t324–t326] |
 | **Whisper / FFmpeg** | Transcrição com tempos (o Whisper ouve "Porquê BR" como "por KBR"; aceitar variantes). Pós: corte do end card só se detectado + logo com zoom suave curto. | [VERIFICADO] |
 
@@ -126,11 +136,10 @@
 
 > t363: o `pqbr` já fala com o Paperclip (empresa de teste) por chave de agente escopada; ver §10. A restrição de acesso ainda **não** está na configuração do perfil (incidente do teste, §10).
 
-### Canal do José: Discord/Paperclip direto ao Diretor; Hermes transitório até o corte [t464]
-- **Papel:** o canal do José chega diretamente ao Diretor ativo; não criar agente Paperclip separado para “Canal PQBR”. Durante a migração, Hermes `pqbr` permanece somente como fallback. O Diretor conhece a identidade, o escopo e os fluxos canônicos do PQBR.
-- **Capacidades:** responder perguntas; consultar estado/resultados por ferramentas autorizadas; abrir/rotear issues ao responsável; pedir informações aos especialistas; receber aprovações autenticadas e informar o status. Avisos proativos devem ser comprovados antes do corte. Telegram é fallback somente durante a migração, Discord/Paperclip é o destino após t464.
-- **Acesso restrito:** usar apenas skills, memória e ferramentas Paperclip explicitamente concedidas ao Diretor; sem shell livre, acesso ao banco Temporal, segredos, Studio, repositório ou configurações do Paperclip. O conector Discord não amplia essas permissões.
-- **Persona:** séria e direta (t327); aplica-se ao Diretor nas conversas do canal. O rascunho Hermes antigo é referência de conteúdo e permanece somente para rollback até t464.
+### Canal do José: Telegram (Hermes `pqbr`) + sinais do Temporal [t474; revoga t464]
+- **Papel:** o perfil Hermes `pqbr` é a conversa do José com a PQBR: responde perguntas, consulta estado e resultados (Postgres do app e Temporal, só leitura), avisa e coleta aprovações, que viram sinais do Temporal.
+- **Acesso restrito:** sem shell livre, acesso ao banco do Temporal, segredos, Studio ou repositório; só o ID autorizado do José dá ordem.
+- **Persona:** séria e direta (t327); base em `docs/hermes-pqbr/SOUL-rascunho.md`. Painel: Temporal UI (t471).
  (ex-"agentes")
 
 **Padrão dos agentes pensantes [APROVADO t324–t326]:** uma rotina fixa executa tudo; @prod-director, @prod-analista e @prod-comunidade só observam e propõem mudanças como saída estruturada validada por Pydantic v2; nada se aplica sem a aprovação do José.
@@ -149,10 +158,10 @@ Princípio [APROVADO t184, precisado t465]: ideação, roteiro, SEO e pesquisa f
 | @prod-analista [APROVADO] | Coleta por rotina fixa; agente analisa e propõe (Pydantic v2), aplica só com aprovação do José [t324–t326] | Analytics API; análise semanal ou por anomalia; propostas ao director; Hindsight | Não muda parâmetro sozinho |
 | @prod-compliance [APROVADO t198] | Coleta por código + Jev + análise | E-mail do canal, Studio só leitura, Data API; gravidade; HOLD; rascunho de recurso | Nunca recorre, apaga ou altera sem dupla confirmação |
 | @prod-comunidade [APROVADO t245] | Rotina fixa + Jev executam; agente faz resumo e propõe (Pydantic v2), aplica só com aprovação do José [t324–t326] | Lê, classifica, retém, responde pelo banco, corações, agrupa temas | Não torna vídeo privado (t250); não escreve texto livre |
-| Canal do José (sem agente separado) | Discord/Paperclip → Diretor ativo após piloto; Hermes `pqbr` fallback durante a migração | Consulta, estado/resultados, roteamento e tickets com acesso restrito | Não executa livremente nem contorna as permissões do Diretor |
+| Canal do José (sem agente separado) | Telegram/Hermes `pqbr` + sinais do Temporal (t474) | Consulta, estado/resultados, avisos e aprovações com acesso restrito | Não executa livremente |
 | Agentes de dev | LLM (qualquer um) | Tickets de manutenção na produção; tarefas D na construção (ADR-004) | Não faz merge (só o José) |
 
-Personas [APROVADO como fonte]: pt-BR, parafraseadas da Agency Agents (MIT). Comunidade: donchitos `community-manager`, `customer-service.md`, `developer-community-builder`, `feedback-synthesizer`. **Compliance e assistente: sérios e diretos, sem rodeios [t327].** Todos os agentes vivem no Paperclip (ADR-002); Hermes `pqbr` é fallback durante t464; após o piloto, Discord/Paperclip conecta diretamente ao Diretor, sem assistente duplicado.
+Personas [APROVADO como fonte]: pt-BR, parafraseadas da Agency Agents (MIT). Comunidade: donchitos `community-manager`, `customer-service.md`, `developer-community-builder`, `feedback-synthesizer`. **Compliance e assistente: sérios e diretos, sem rodeios [t327].** Os agentes passam a ser PydanticAI em activities do Temporal (ADR-011; Paperclip em retirada); o José fala pelo Telegram/Hermes `pqbr` (t474).
 
 ## 4. Skills
 
@@ -292,12 +301,12 @@ Escrita no banco do app sempre por Activity com **outbox** (idempotente por chav
 | `GradeDiariaWorkflow` | Schedule de madrugada | coleta → caderno diário → Deep Research → filtros/barreiras/polêmica → grava grade | RF-01..RF-05 |
 | `EpisodioWorkflow(ep)` | grade do dia | pacote canônico → caderno do episódio (id) → roteiro (NotebookLM) → fichas → render → pós FFmpeg → auditor → arquivar caderno → Drive → aprovado → `ApagarCadernoWorkflow` D+2 | RF-06..RF-14, RF-40 |
 | `PublicacaoWorkflow(ep)` | episódio aprovado | busca do código → `videos.insert` privado → agendar (API ou Camofox) → conferir | RF-15..RF-18 |
-| `Item5Workflow(video)` | sinal de problema | privado na hora → canal ativo (Telegram durante t464; Discord/Paperclip após corte) → aguarda sinal do José | RF-19..RF-21 |
+| `Item5Workflow(video)` | sinal de problema | privado na hora → canal ativo (Telegram/Hermes `pqbr`; t474) → aguarda sinal do José | RF-19..RF-21 |
 | `ComentariosWorkflow` | Schedules 30 min / 6 h / diário | ler → pré-filtro → Jev → reter/responder/sinalizar | RF-22..RF-27 |
 | `ComplianceWorkflow` | Schedule + antes de cada janela | coleta → gravidade → HOLD se crítico | RF-28, RF-29 |
 | `GuardiaoSessaoWorkflow` | Schedule ~20 min com variação | testa Studio, Gemini, NotebookLM → escada t272 | RF-37 |
 | `AnalistaWorkflow` | Schedule diário/semanal | coleta → agente analisa → `PropostaAgente` | RF-30, RF-33 |
-| `RelatorioDiarioWorkflow` | Schedule noturno | junta dados → template → canal ativo (Telegram durante t464; Discord/Paperclip após corte) | RF-31, RF-32 |
+| `RelatorioDiarioWorkflow` | Schedule noturno | junta dados → template → canal ativo (Telegram/Hermes `pqbr`; t474) | RF-31, RF-32 |
 | `LimpezaDriveWorkflow` | rotina noturna do @prod-director | duplicatas/órfãos → `_duplicados` → lista ao José | RF-41 |
 | `MonitorAtualizacoesWorkflow` | Schedule semanal | lê releases → Jev → pede autorização | RF-42 |
 | `RevisaoHumanaWorkflow(item)` | item que falhou em todos os caminhos | guarda → avisa → aguarda determinação | RF-36 |
@@ -307,9 +316,9 @@ Escrita no banco do app sempre por Activity com **outbox** (idempotente por chav
 - **Retentativas:** `RetryPolicy` 30 s → 2 min → 8 min; espera de rede sem gastar tentativa; 2 falhas da mesma ação → correção autônoma limitada a até 3 tentativas, com verificação do auditor/Jev; esgotamento → José, preservadas as chamadas imediatas por ação sensível ou demais travas de REGRAS §3.1; 5 idênticas → parada (REGRAS §18).
 - **Janelas:** 11:40, 14:40, 18:35, 21:15 (America/Fortaleza).
 
-## 10. Integração com o Paperclip [PROPOSTA; demonstrada em F05-04]
+## 10. Integração com o Paperclip [HISTÓRICO; Paperclip em retirada pela ADR-011]
 
-### Hermes `pqbr` ↔ Paperclip [legado/fallback até t464; t363;
+### Hermes `pqbr` ↔ Paperclip [HISTÓRICO, t474; t363;
 - **Identidade:** agente `pqbr-assistente` (`7d18350e…`) na empresa **PQBR-TESTE** (`d9fa962a…`), adaptador `process` com `/bin/true`, heartbeat desligado, orçamento 0, permissões `canAssignTasks` sim, `canCreateAgents`/`canCreateSkills` não. **Chave de agente** `hermes-pqbr` (id `58b8794a…`), escopada à empresa (outra empresa → 403), guardada só em `~/.hermes/profiles/pqbr/.env` (`PAPERCLIP_PQBR_API_KEY`, 600).
 - **Acesso:** contexto CLI próprio `~/.hermes/profiles/pqbr/paperclip/context.json` (600, persona agent, a URL da tailnet na porta 3100 (`<ip-tailnet>:3100`), porque o Paperclip só escuta na tailnet, não em 127.0.0.1) + wrapper `paperclip/pqbr-paperclip` com allowlist (issue list/get/comments/create/comment/update; agent list/get/me/heartbeat:invoke; project, activity, dashboard) e escopo fixo + skill `skills/productivity/paperclip-pqbr`. Cópias no repo: `docs/hermes-pqbr/perfil/`.
 - **Acesso desde t372:** o perfil **não tem terminal, arquivos, código, web, navegador, delegação nem cron** (desligados em `cli` e `telegram`); ficam skills, memória, busca de sessões, perguntas e o **servidor MCP `paperclip-pqbr`** (`paperclip/mcp_paperclip.py`, só stdlib, ferramentas fixas: listar/ver issues e comentários, criar issue, comentar, listar e acordar agentes). A chave é lida pelo MCP e nunca volta ao modelo. O wrapper `pqbr-paperclip` fica só para uso manual. Busca de arquivos só leitura em `docs/`: o Hermes não oferece escopo por pasta no toolset `file`, então ficou desligada (EM CONSTRUÇÃO: ferramenta MCP de leitura em `docs/`, se o José quiser).
@@ -320,7 +329,7 @@ Escrita no banco do app sempre por Activity com **outbox** (idempotente por chav
 
 - O Temporal publica eventos de negócio (via outbox) no banco do app e abre/atualiza **issues** no Paperclip (episódio, revisão, ticket, proposta).
 - Os agentes no Paperclip (director, analista, comunidade, compliance, assistente, dev) leem o banco do app (só pelo contexto do fluxo ou `pqbr_leitura`) e issues e devolvem **`PropostaAgente`** validada; nunca executam efeito externo.
-- Após t464, a aprovação do José pelo Discord/Paperclip ou pelo painel Paperclip vira sinal `aprovacao_jose`; Telegram é fallback apenas durante a migração. A rota valida identidade vinculada, tarefa e estado, e falha fechada.
+- A aprovação do José pelo Telegram (Hermes `pqbr`) vira sinal `aprovacao_jose` no Temporal (t474). A rota valida o ID autorizado, a tarefa e o estado, e falha fechada.
 - Heartbeats desligados até a liberação; nenhum agente com `--yolo` (H-SDD1).
 
 ## 11. Interfaces: contratos Pydantic v2 [PROPOSTA; fixados em F3-01]
