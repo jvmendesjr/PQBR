@@ -21,7 +21,7 @@ Reserva = nome + porta + diretórios definidos; nenhum processo, nenhuma memóri
 ## 2. Criar instância nova (conta nova, ex.: próximo projeto)
 1. Renomear `proxima` no JSON para o nome real da conta (mantém 9397); commit.
 2. `sh deploy/camofox/criar_instancia.sh <conta> 9397` → confere `~/.camofox-instancias/<conta>.env` (só `stat`, não `cat`).
-3. Com OK do José: `sh deploy/camofox/criar_instancia.sh` já criou o env; instalar unit: rodar de novo apenas a parte `--instalar` (ou `cp` + `systemctl --user daemon-reload`).
+3. Com OK do José: `sh deploy/camofox/criar_instancia.sh <conta> 9397 --instalar`. O script é idempotente (t528): `.env` completo é mantido, placeholders/chaves faltantes são completados sem exibir valores, e o template é copiado + `daemon-reload`; unit fica disabled e parada. Pode ser repetido. Teste sem tocar o sistema: `CAMOFOX_INSTANCIAS_DIR=/tmp/x SYSTEMD_DIR=/tmp/y SKIP_PORT_CHECK=1` (ver `tests/unit/test_criar_instancia.py`).
 4. Com OK: `systemctl --user start camofox@<conta>`; `curl -s 127.0.0.1:9397/health`; teste de aba (POST/GET snapshot/DELETE em example.com).
 5. Login Google da conta **só** nessa instância (regra: nada de login em outros navegadores). Depois `enable`.
 6. JSON: `estado` → `ativa`; teste `tests/unit/test_navegador.py`; mapa 08 + DECISOES-LOG.

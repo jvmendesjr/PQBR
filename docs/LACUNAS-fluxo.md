@@ -27,4 +27,5 @@ Próximo passo: corrigir e revalidar PQBA-91 no worktree isolado; só então rev
 ## Pendência t526 (24/10/2026) — migração Camofox [GATILHO: próxima integração de projeto]
 - Migrar PQBR 9387 → `camofox@pqbr` (runbook §3) e ligar `NavegadorIdentidade` em `acesso.py`.
 - Ativar a instância reservada `proxima`:9397 para a conta do novo projeto (runbook §2).
+- ~~Script de criação não idempotente / `--instalar` falhava na 2ª execução~~ — resolvido em t528.
 - Pendentes do plano ADR-012: backup diário com teste de restauração, canário diário, renovador único.
