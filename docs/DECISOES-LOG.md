@@ -502,3 +502,10 @@ NÃO CABE:
 ## t470 (16/10/2026) — Gate A9 aprovado para F7-02
 - Às 20:41 (-03:00), José aprovou A9 nos termos da proposta t427: critérios métricos orientam a seleção de quadro e não bloqueiam; somente as quatro categorias de risco de A9 reprovam — semelhança com pessoa real, marca/logotipo real, estereótipo ofensivo e erro textual/legenda que mude o sentido.
 - A aprovação é específica ao gate A9 e não substitui nem revoga outras regras de segurança/editoriais canônicas. A integração no Auditor F7-02 e sua validação com gabarito continuam pendentes.
+
+## t471 (23/10/2026) — Painel = Temporal UI + Telegram
+- José aprovou: sem Paperclip, o painel passa a ser a **Temporal UI** (estado, histórico, erros, runs travados) e o **Telegram** (Hermes `pqbr`) é o canal de pedidos e aprovações; aprovações viram **sinais do Temporal** (sim/não). Painel próprio (mobile, só leitura + aprovação, sinais ao Temporal) fica para depois.
+- Consequência: o plano Discord/Paperclip de t464 não segue; referências a “Discord/Paperclip após t464” nos docs canônicos precisam de revisão (lista em `docs/_obsoleto/README.md` e no relatório de 23/10).
+
+## t472 (23/10/2026) — Criação de `docs/_obsoleto/`
+- José pediu uma lixeira temporária para docs obsoletos. Criada `docs/_obsoleto/` (via `git mv`, caminhos preservados, nada apagado), com índice `README.md` (arquivo, motivo, substituto). Docs mistos ficaram no lugar e foram listados como conflitos. Snapshot antes da limpeza: commit `8836eb1`.
