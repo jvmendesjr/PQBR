@@ -1,0 +1,24 @@
+%% EpisodioWorkflow (src/pqbr/workflows/episodio.py) — fila episodio-pqbr. Gerado do código 24/10/2026.
+flowchart TD
+  S(["PedidoEpisodioE2E"]) --> A1["pacote_garantir<br/>(hash do pacote canônico)"]
+  A1 --> A2["registro_buscar_caderno"]
+  A2 --> W1[["filho NotebookLMWorkflow<br/>fila notebooklm-pqbr"]]
+  W1 --> D1{"nlm.ok e artefato?"}
+  D1 -- não --> F1(["fim: falha NotebookLM"])
+  D1 -- sim --> A3["nlm_baixar_video (notebooklm-pqbr)<br/>⚠ ainda é o vídeo do NotebookLM; Flow não ligado aqui"]
+  A3 --> A4["pos_produzir"] --> A5["extrair_quadros"] --> A6["capa_a9"]
+  A6 --> D2{"infográfico do NotebookLM?"}
+  D2 -- sim --> A7["capa_conferir<br/>(cena única? senão A9)"]
+  D2 -- não --> W
+  A7 --> W
+  W{{"espera sinal veredito_auditor<br/>timeout espera_veredito_h"}}
+  W -- timeout --> F2(["fim: sem veredito"])
+  W -- reprova --> F3(["fim: reprovado"])
+  W -- aprova --> A8["nlm_exportar_caderno (notebooklm-pqbr)"]
+  A8 --> A9["arquivar_caderno"] --> A10["drive_enviar"]
+  A10 --> W2[["filho PublicacaoWorkflow<br/>publicacao_dryrun (só dry-run, F8-01)"]]
+  W2 --> D3{"real e enviado?"}
+  D3 -- sim --> A11["tema_publicado (pqbr-episodio)"] --> W3[["start ReposicaoTemasWorkflow(6)"]]
+  D3 -- sim --> W4[["start ApagarCadernoWorkflow (D+2)"]]
+  D3 -- não --> F4(["fim: ok dry-run"])
+  N1>"Nota: GradeDiaria/EpisodioProducao (producao.py) estão PAUSADOS e com etapas EM CONSTRUÇÃO"]

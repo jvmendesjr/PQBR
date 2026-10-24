@@ -156,6 +156,7 @@ class ReposicaoTemasWorkflow:
             if not s["faltam"]: break
             ped = pedido_temas(s["faltam"], s["usados"], workflow.now().date().isoformat())
             resp = await workflow.execute_activity("motor_consultar", ped, task_queue="notebooklm-pqbr", **mot)
+            await workflow.execute_activity(temas_registrar_caderno, args=[resp["sessao_id"], ped["sessao"]], **cur)
             v = await workflow.execute_activity(temas_validar_agente, resp["texto"], **ag)
             metas.append({"motor": resp["motor"], "sessao": resp["sessao_id"], **v["meta"]})
             res = await workflow.execute_activity(temas_inserir, v["propostas"], **cur)
@@ -163,4 +164,17 @@ class ReposicaoTemasWorkflow:
         return {"inseridos": total, "recusas": recusas[:20], "motor": metas}
 
 
-ATIVIDADES_TEMAS = [temas_situacao, temas_inserir, tema_publicado, temas_validar_agente]
+@activity.defn
+async def temas_registrar_caderno(caderno: str, sessao: str) -> None:
+    """t517: o caderno semanal de temas entra em pqbr.cadernos_episodio (classe 'pesquisa') na criação, para o
+    fluxo de descarte (DescartarCadernoTesteWorkflow) cobri-lo. Idempotente."""
+    from .notebooklm import UUID, MESTRES_PROIBIDOS
+    if not UUID.match(caderno) or caderno in MESTRES_PROIBIDOS: raise RuntimeError("caderno inválido ou mestre")
+    with _banco() as c:
+        c.execute("insert into pqbr.cadernos_episodio (caderno_id, episodio_codigo, slug, titulo, classe)"
+                  " values (%s, null, %s, %s, 'pesquisa') on conflict (caderno_id) do nothing",
+                  (caderno, sessao, f"Short - {sessao}"))
+        c.commit()
+
+
+ATIVIDADES_TEMAS = [temas_situacao, temas_inserir, tema_publicado, temas_validar_agente, temas_registrar_caderno]

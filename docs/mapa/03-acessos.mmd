@@ -1,0 +1,14 @@
+%% AcessosWorkflow (src/pqbr/workflows/acesso.py) — Schedule de hora em hora (hh:10). Gerado do código 24/10/2026.
+flowchart TD
+  S(["run"]) --> A1["acesso_google_camofox (camofox-pqbr)"] & A2["acesso_notebooklm (notebooklm-pqbr)"] & A3["acesso_paperclip (registro)<br/>⚠ Paperclip em retirada"]
+  A1 --> D1{"Google/Camofox ok?"}
+  D1 -- não --> R1["registrar_evento queda<br/>pqbr.eventos_acesso"]
+  R1 --> R2["restaurar_sessao_camofox<br/>(do notebooklm-py, mesma sessão SID)"]
+  R2 --> R3["registrar_evento restauro_ok / restauro_falhou"]
+  R3 --> D2{"restaurou?"}
+  D2 -- sim --> AV["avisar_jose (causa + resultado)"]
+  D2 -- não --> PJ
+  A2 & A3 --> D3{"serviço ok?"}
+  D3 -- sim --> RS["acesso_resolvido → registrar_evento normalizado"]
+  D3 -- não --> RQ["registrar_evento queda"] --> PJ["pedir_jose (PedidoJose)<br/>pqbr.revisao_humana → Telegram"]
+  N>"Nunca login headless (NOTEBOOKLM_HEADLESS_REAUTH=0); login só pelo José no Camofox 9387"]

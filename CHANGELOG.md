@@ -3,9 +3,16 @@
 Versionamento SemVer (MAJOR.MINOR.PATCH) a partir de t510. Versão do pacote canônico/contrato segue o próprio hash.
 
 
+
+## [0.3.2] — 2026-10-24 (t517)
+- Meta Vibes restaurado: cadeia de vídeo `flow → google_vids → meta_vibes` (`CADEIA_VIDEO`, `video_fallback`), só navegador; corrige 0.3.1.
+- Vigia de atualizações registrado no worker e agendado (sexta 08:00 Fortaleza); relatório em `pqbr.relatorios_atualizacoes` (migração 0017).
+- Caderno semanal de temas registrado em `pqbr.cadernos_episodio` (classe `pesquisa`) para o descarte.
+- `docs/mapa/`: mapa do sistema em Mermaid + `index.html`.
+
 ## [0.3.1] — 2026-10-24 (t516)
 - notebooklm-py 0.8.4 → 0.8.5 (venv isolado), pin em `requirements-notebooklm.txt` + `requirements-notebooklm.lock`.
-- Sem API Google e sem Meta Vibes: `meta_vibes` fora de `GERADORES_VIDEO`/`config/motores.json`; docs marcados.
+- Sem API Google: docs marcados. (Retirada do Meta Vibes revertida em 0.3.2.)
 - Dev: `VigiaAtualizacoesWorkflow` (esqueleto, não registrado/agendado) + contratos `FerramentaVigiada`, `ItemAtualizacao`, `RelatorioAtualizacoes` 1.0.0.
 - `mcp_kit.PAPEIS` com os 8 papéis; PROPOSTA-papeis-skills atualizada.
 - Testes: 338 passed, 70 skipped, 2 xfailed.

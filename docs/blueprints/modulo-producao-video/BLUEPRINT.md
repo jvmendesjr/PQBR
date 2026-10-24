@@ -1,4 +1,4 @@
-> **t516 (José, 24/10/2026):** sem API Google (Gemini/Veo/Omni, inclusive free tier) e sem Meta Vibes. O sistema usa só cotas já pagas pelo navegador (Flow, NotebookLM). Trechos abaixo que citam essas opções estão descartados.
+> **t517 (José, 24/10/2026):** cadeia de vídeo Flow → Google Vids → Meta Vibes (fallback quando os dois falham ou esgotam cota), tudo pelo navegador nas cotas já pagas; **sem APIs Google**.
 
 # Blueprint — Módulo de Produção de Vídeo
 

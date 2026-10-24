@@ -1,0 +1,13 @@
+%% Cadeia de vídeo (t517; config/motores.json, src/pqbr/motores). Decisão registrada; adaptadores ainda NÃO extraídos (F1-03).
+flowchart LR
+  P(["Roteiro aprovado<br/>(RoteiroShort)"]) --> F["1 · Flow (Veo 3.1, 9:16)<br/>navegador Camofox · cota paga"]
+  F --> D1{"falhou ou cota esgotou?"}
+  D1 -- não --> OK(["vídeo bruto → pós-produção"])
+  D1 -- sim --> V["2 · Google Vids<br/>navegador · cota paga"]
+  V --> D2{"falhou ou cota esgotou?"}
+  D2 -- não --> OK
+  D2 -- sim --> MV["3 · Meta Vibes<br/>navegador · cota paga"]
+  MV --> D3{"falhou?"}
+  D3 -- não --> OK
+  D3 -- sim --> H(["⚠ não definido no código: proposta HOLD + pedido ao José"])
+  N>"Sem APIs (Gemini/Veo/Omni). NotebookLM vídeo: só alternativa (hoje o EpisodioWorkflow ainda baixa o vídeo do NotebookLM ⚠)"]

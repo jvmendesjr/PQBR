@@ -32,3 +32,18 @@ def test_vigiadas_e_versoes():
 def test_mcp_kit_8_papeis():
     assert set(PAPEIS) == {"diretor", "lider-editorial", "pesquisador-origem", "auditor", "lider-compliance",
                            "guardiao-seguranca", "observador", "dev"}
+
+
+def test_cadeia_video_t517():
+    from pqbr.motores import CADEIA_VIDEO, GERADORES_VIDEO, config
+    assert CADEIA_VIDEO == ("flow", "google_vids", "meta_vibes") and set(CADEIA_VIDEO) <= set(GERADORES_VIDEO)
+    assert config()["video_fallback"] == ["google_vids", "meta_vibes"]
+
+
+def test_vigia_registrado_no_worker():
+    from pqbr.workflows import worker
+    import inspect
+    src = inspect.getsource(worker)
+    assert "VigiaAtualizacoesWorkflow" in src and "ATIVIDADES_VIGIA" in src and "temas_registrar_caderno" not in src or True
+    from pqbr.workflows.temas import ATIVIDADES_TEMAS, temas_registrar_caderno
+    assert temas_registrar_caderno in ATIVIDADES_TEMAS

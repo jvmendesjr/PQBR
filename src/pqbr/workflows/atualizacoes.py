@@ -21,7 +21,7 @@ VIGIADAS: list[dict] = [
     {"nome": "camoufox", "fonte": "github", "alvo": "daijro/camoufox", "notas": "https://github.com/daijro/camoufox/releases"},
     {"nome": "temporalio (SDK)", "fonte": "pypi", "alvo": "temporalio", "python": "~/Workspace/PQBR/.venv/bin/python",
      "notas": "https://github.com/temporalio/sdk-python/releases"},
-    {"nome": "temporal (servidor/CLI)", "fonte": "github", "alvo": "temporalio/cli", "notas": "https://github.com/temporalio/cli/releases"},
+    {"nome": "temporal (servidor/CLI)", "fonte": "github", "alvo": "temporalio/cli", "notas": "https://github.com/temporalio/cli/releases"},  # instalada não lida (binário, sem pacote Python)
     {"nome": "pydantic-ai-slim", "fonte": "pypi", "alvo": "pydantic-ai-slim", "python": "~/Workspace/PQBR/.venv/bin/python",
      "notas": "https://github.com/pydantic/pydantic-ai/releases"},
     {"nome": "pydantic", "fonte": "pypi", "alvo": "pydantic", "python": "~/Workspace/PQBR/.venv/bin/python",
@@ -99,13 +99,32 @@ async def vigia_checar(f: dict) -> dict:
 @workflow.defn
 class VigiaAtualizacoesWorkflow:
     @workflow.run
-    async def run(self, semana: str) -> dict:
+    async def run(self, semana: str | None = None) -> dict:
+        if not semana:
+            a, w, _ = workflow.now().isocalendar(); semana = f"{a}w{w:02d}"
         itens = []
         for f in VIGIADAS:
             r = await workflow.execute_activity(vigia_checar, f, start_to_close_timeout=timedelta(minutes=2),
                                                 retry_policy=RetryPolicy(maximum_attempts=2))
             itens.append(ItemAtualizacao.model_validate(r))
-        return montar_relatorio(itens, semana).model_dump()
+        rel = montar_relatorio(itens, semana).model_dump()
+        rel["registro_id"] = await workflow.execute_activity(vigia_gravar, rel, start_to_close_timeout=timedelta(minutes=1),
+                                                             retry_policy=RetryPolicy(maximum_attempts=3))
+        return rel
 
 
-ATIVIDADES_VIGIA = [vigia_checar]
+@activity.defn
+async def vigia_gravar(rel: dict) -> int:
+    """Entrega (t517): Postgres pqbr.relatorios_atualizacoes + log. Telegram depois."""
+    import logging
+    from .pacote import _banco
+    r = RelatorioAtualizacoes.model_validate({k: v for k, v in rel.items() if k != "registro_id"})
+    logging.getLogger("pqbr.vigia").info("vigia %s:\n%s", r.semana, r.resumo)
+    with _banco() as c:
+        i = c.execute("insert into pqbr.relatorios_atualizacoes (semana, resumo, itens) values (%s, %s, %s) returning id",
+                      (r.semana, r.resumo, json.dumps([x.model_dump() for x in r.itens]))).fetchone()[0]
+        c.commit()
+    return i
+
+
+ATIVIDADES_VIGIA = [vigia_checar, vigia_gravar]

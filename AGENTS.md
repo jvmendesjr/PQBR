@@ -26,3 +26,7 @@ Este arquivo é o ponto de entrada operacional para trabalho no checkout. Ele n�
 - `docs/blueprints/modulo-producao-video/ROADMAP.md` — plano auxiliar do módulo visual; não é o roadmap geral.
 - `docs/AGENTES.md` — roster e desenho dos papéis; não é este arquivo de instruções.
 - `company/agents/<slug>/AGENTS.md` — persona/instruções versionadas de cada papel (usadas pelos agentes PydanticAI).
+
+## Mapa do sistema (t517)
+- `docs/mapa/` (Mermaid + `index.html`) é gerado do código e serve de comunicação com o José e entre agentes.
+- **Agentes nunca alteram o mapa sozinhos.** Mudança só por proposta aprovada pelo José. Divergência código × mapa: sinalizar (Observador/Dev) e propor o diff; `tests/unit/test_mapa.py` acusa.

@@ -1,5 +1,6 @@
 {
- "_doc": "t513 (José): motores trocáveis por config; porta + contrato em src/pqbr/motores. intelectual: notebooklm. video: flow | notebooklm_video | google_vids. t516: só cotas já pagas pelo navegador; sem API Google (Gemini/Veo/Omni) e sem Meta Vibes.",
+ "_doc": "t513 (José): motores trocáveis por config; porta + contrato em src/pqbr/motores. intelectual: notebooklm. video: flow | notebooklm_video | google_vids | meta_vibes. t517: cadeia de fallback flow → google_vids → meta_vibes, só navegador e cotas já pagas; sem APIs.",
  "intelectual": "notebooklm",
- "video": "flow"
+ "video": "flow",
+ "video_fallback": ["google_vids", "meta_vibes"]
 }

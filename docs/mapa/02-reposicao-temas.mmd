@@ -1,0 +1,14 @@
+%% ReposicaoTemasWorkflow (src/pqbr/workflows/temas.py) — fila pqbr-episodio, Schedule 00:30. Gerado do código 24/10/2026.
+flowchart TD
+  S(["run(rodadas=3)"]) --> L{"rodada < 3"}
+  L -- não --> E(["fim: inseridos, recusas, motor"])
+  L -- sim --> A1["temas_situacao<br/>(abertos, faltam p/ 7 dias, usados)"]
+  A1 --> D1{"faltam = 0?"}
+  D1 -- sim --> E
+  D1 -- não --> P["pedido_temas (puro, no workflow)<br/>sessão semanal grade-temas-AAAAwSS"]
+  P --> A2["motor_consultar — fila notebooklm-pqbr<br/>NotebookLM PROPÕE os temas<br/>caderno efêmero 'Short - grade-temas-…' (nunca raiz)"]
+  A2 --> A3["temas_registrar_caderno<br/>pqbr.cadernos_episodio classe=pesquisa (t517)"]
+  A3 --> A4["temas_validar_agente<br/>parse_direto JSON → PropostaTemas;<br/>senão Líder Editorial (PydanticAI) só estrutura"]
+  A4 --> A5["temas_inserir<br/>filtros: repetido, sazonal, bloqueio absoluto"]
+  A5 --> L
+  N>"Caderno semanal sai pelo fluxo de descarte (04-descarte)"]

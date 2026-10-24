@@ -29,6 +29,15 @@ async def main() -> None:
             policy=SchedulePolicy(overlap=ScheduleOverlapPolicy.SKIP),
             state=ScheduleState(paused=pausado, note=nota)))
         print(f"criado: {sid} {'hh' if h is None else f'{h:02d}'}:{m:02d} {'PAUSADO' if pausado else 'ativo'}")
+    # t517: vigia de atualizações do Dev — semanal, sexta 08:00 Fortaleza (só leitura; relatório no Postgres + log)
+    if "pqbr-vigia-atualizacoes" not in existentes:
+        await c.create_schedule("pqbr-vigia-atualizacoes", Schedule(
+            action=ScheduleActionStartWorkflow("VigiaAtualizacoesWorkflow", id="pqbr-vigia-atualizacoes-wf", task_queue=FILA),
+            spec=ScheduleSpec(calendars=[ScheduleCalendarSpec(day_of_week=[ScheduleRange(5)], hour=[ScheduleRange(8)], minute=[ScheduleRange(0)])],
+                              time_zone_name=FUSO),
+            policy=SchedulePolicy(overlap=ScheduleOverlapPolicy.SKIP),
+            state=ScheduleState(paused=False, note="t517 José: vigia semanal de atualizações (Dev), sexta 08:00; nunca aplica")))
+        print("criado: pqbr-vigia-atualizacoes sex 08:00 ativo")
     if "--listar" in sys.argv or True:
         async for s in await c.list_schedules():
             if s.id.startswith("pqbr-"):

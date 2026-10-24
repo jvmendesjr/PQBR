@@ -2,7 +2,7 @@
 
 Cada motor é peça trocável atrás de um contrato Pydantic v2 + adaptador, escolhido por config
 (`config/motores.json`). Hoje: MotorIntelectual = notebooklm; GeradorVideo = flow (alternativas:
-notebooklm_video, google_vids; só cotas já pagas, via navegador — t516: sem API Google, sem Meta Vibes). Workflows/atividades chamam a PORTA, nunca o serviço direto."""
+notebooklm_video, google_vids, meta_vibes). Cadeia de fallback (t517): flow → google_vids → meta_vibes, só navegador e cotas já pagas, sem APIs. Workflows/atividades chamam a PORTA, nunca o serviço direto."""
 from __future__ import annotations
 import json, os
 from pathlib import Path
@@ -38,7 +38,8 @@ def motor_intelectual(nome: str | None = None) -> MotorIntelectual:
     raise KeyError(f"MotorIntelectual sem adaptador: {nome}")
 
 
-GERADORES_VIDEO = ("flow", "notebooklm_video", "google_vids")
+GERADORES_VIDEO = ("flow", "notebooklm_video", "google_vids", "meta_vibes")
+CADEIA_VIDEO = ("flow", "google_vids", "meta_vibes")   # t517: fallback quando o anterior falha ou esgota cota
 
 
 def gerador_video(nome: str | None = None) -> GeradorVideo:
