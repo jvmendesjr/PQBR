@@ -434,3 +434,14 @@ class PacoteSEO(Contrato):
                             "defaultAudioLanguage": self.idioma},
                 "status": {"privacyStatus": "private", "containsSyntheticMedia": self.contem_midia_sintetica,
                            "selfDeclaredMadeForKids": False}}
+
+
+# ADR-011 (t510): saída do agente Líder Editorial na reposição da grade ---------------------------
+class TemaProposto(Contrato):
+    categoria: Literal["expressao", "habito_mania", "curiosidade_cultura_pop"]   # sazonal só pelo Caçador
+    tema: str = Field(min_length=8, max_length=300, pattern=r"(?i)^\s*por que\b")
+
+
+class PropostaTemas(Contrato):
+    temas: list[TemaProposto] = Field(min_length=1, max_length=10)
+    justificativa: str = Field(default="", max_length=500)

@@ -1,0 +1,9 @@
+[Unit]
+Description=PQBR alerta de run Temporal preso (t510, ADR-011; > PQBR_PRESO_HORAS)
+
+[Service]
+Type=oneshot
+Environment=PYTHONPATH=/home/pc/Workspace/PQBR/src
+Environment=PQBR_PRESO_HORAS=6
+ExecStart=/home/pc/Workspace/PQBR/.venv/bin/python /home/pc/Workspace/PQBR/scripts/temporal/runs_presos.py
+SuccessExitStatus=0 1

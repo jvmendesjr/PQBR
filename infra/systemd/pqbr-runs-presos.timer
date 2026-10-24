@@ -1,0 +1,9 @@
+[Unit]
+Description=PQBR alerta de run Temporal preso, de hora em hora (t510)
+
+[Timer]
+OnCalendar=hourly
+Persistent=true
+
+[Install]
+WantedBy=timers.target

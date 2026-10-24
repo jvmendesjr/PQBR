@@ -518,3 +518,9 @@ NÃO CABE:
 - Nova **ADR-011** (`docs/sdd/adr-011-agentes-pydanticai-temporal.md`): agentes PydanticAI (Pydantic v2) dentro de activities do Temporal; substitui a ADR-002; Paperclip em retirada (código dele não alterado; `infra/paperclip-db/` mantido por ora). Personas e playbooks de `company/` continuam.
 - Guia de acesso renomeado para `docs/operacao/GUIA-ACESSO-PC-TEMPORAL.md`, sem a parte do Paperclip. `docs/sdd/teste-e2e-short-1.md` sem caderno mestre, `rede` ou issue do Paperclip.
 
+## t475 (23/10/2026) — Primeira migração ADR-011 (t510)
+- José autorizou (t510) gerar nova versão do pacote canônico e deixar de fora as seções do v1 não usadas; e seguir com a migração.
+- `ReposicaoTemasWorkflow` passa a usar o Líder Editorial em PydanticAI dentro de activity; escrita no Postgres em activity separada; sem Paperclip. Fábrica em `src/pqbr/agents/`.
+- 9router: porta 20130 mantida (a 20128 também serve `/v1`, mas mapeia os combos para outros modelos).
+- Run preso `pqbr-reposicao-temas-wf-2026-10-13T03:30:00Z` encerrado (terminate); run real `repor-temas-t510-manual` inseriu 1 tema (grade em 28).
+- Alerta de run preso só no journal até o bot `pqbr` ter token de entrega. SemVer adotado no CHANGELOG (0.2.0).

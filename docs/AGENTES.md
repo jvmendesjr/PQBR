@@ -1,4 +1,4 @@
-# AGENTES da PQBR no Paperclip (canônico; origem: PROPOSTA v4.3, t384–t394)
+# AGENTES da PQBR (canônico; agentes PydanticAI no Temporal, ADR-011; origem: PROPOSTA v4.3, t384–t394)
 
 **v4.3 (t393):** incorporado, sem mudar o texto, o observador de risco da conta já especificado (Observador de Conformidade, t192/t198, e guardião de sessão, t195). Divisão na §2.2. v4.2 guardada em `PROPOSTA-agentes-paperclip-v4.2.bak.md`.
 
@@ -124,14 +124,12 @@ Os e-mails do YouTube passam por uma única coleta e um único classificador (Je
 ## 6. Posse e antiinterferência (mantidos da v2)
 Checkout atômico (409 → pega outra); projeto + etiqueta por trilha; MCP `pqbr-kit` com lista fechada por papel; filas Temporal (Camofox e NotebookLM concorrência 1); autor ≠ auditor; quem mede ≠ quem corrige; Comunidade não redige texto livre; tickets **pré-estruturados e agnósticos** (local, falha observada, correções sugeridas), executáveis por qualquer dev/agente.
 
-## 7. Runtime (v4.2: 9router, sem perfis Hermes)
-Princípio: agente = instruções (`instructionsBundle`) + modelo do 9router + kit PQBR via MCP `pqbr-kit`. Nada de skills/ferramentas do Hermes.
-1. **Agentes só-texto** (Líder Editorial, Roteirista, SEO, Auditor, Compliance, Comunidade, Caçador): adapter **`process`** → script fixo do kit (Python): checkout → 1 chamada ao endpoint OpenAI-compatível do 9router (modelo por agente em `env`) → saída Pydantic v2 → comentário/status pela API. Só API/import (não aparece no menu). Doc: https://docs.paperclip.ing/reference/adapters/overview/
-2. **Agentes com ferramenta** (Diretor, Pesquisador, Arte 2D, Observador, Guardião, Dev Corretor, Dev Revisor): adapter **`opencode_local`**, com o 9router declarado como provider OpenAI-compatível no `opencode.json` e `model: "9router/<modelo>"` por agente (Paperclip faz preflight do modelo e aceita ids fora do catálogo após refresh). Ferramentas nativas do OpenCode **negadas** por permissão (bash/edit/webfetch = deny), exceto nos Devs; só MCP `pqbr-kit` + API Paperclip. Doc: https://docs.paperclip.ing/reference/adapters/opencode/ · https://docs.paperclip.ing/guides/org/agent-adapters/
-3. Alternativa avaliada: **`http`** (serviço próprio do kit que fala com o 9router) — mais controle, mas mais código; fica como plano B se o `opencode_local` não respeitar as permissões. Hermes como runtime de agente: descartado.
-4. **Ponte Hermes:** só para modelos que o 9router não alcança; o 9router aponta para o Hermes como upstream (agentes não sabem disso). Não há perfis por agente.
-5. **Dev Revisor ≠ Dev Corretor:** basta `model` diferente no 9router (famílias diferentes, ex.: um OpenAI, outro Anthropic/Google); não precisa de perfil.
-7. **Pontos de revisão / segunda opinião → `core-revisao` (t419).** Aplicados: Dev Revisor (todo PR do Corretor); desempate da 3ª rodada do Auditor (`agente_texto` troca para `PQBR_MODELO_REVISAO` quando a issue cita `terceira_rodada`/`desempate`). Aplicados também (t421): (a) 2ª tentativa após saída inválida (Pydantic) no `agente_texto` vai ao `core-revisao`; (b) Guardião chama `segunda_opiniao` antes de pausar agente/bloquear publicação (DISCORDO → não aplica, escala ao Diretor; exceção: segredo exposto confirmado bloqueia na hora); (c) Diretor chama `segunda_opiniao` antes de aplicar correção de playbook (DISCORDO → devolve); (d) Compliance: roteiro **sensível** recebe segunda leitura automática (`PQBR_SEGUNDA_LEITURA`) anexada ao comentário; DISCORDO → não aprova. Se o `core-revisao` falhar 2×, a regra é conservadora (não aplica/escala). SEO/Comunidade: sem segunda opinião (baixo risco).
+## 7. Runtime (ADR-011, t510: PydanticAI dentro de activities do Temporal)
+1. **Agente = persona + combo + contrato.** Persona: `company/agents/<papel>/AGENTS.md`; combo: `config/modelos_9router.json`; saída: modelo Pydantic v2 em `src/pqbr/contratos`. Fábrica/registro: `src/pqbr/agents/` (detalhes em ARQUITETURA §10).
+2. **Só gera e valida.** O agente roda numa activity; escrita em banco, Telegram, Drive e publicação são activities separadas. Nenhum agente tem ferramenta de efeito externo.
+3. **Agentes com ferramenta** (Diretor, Pesquisador, Observador, Guardião, Devs): migram depois, com ferramentas PydanticAI explícitas e restritas; até lá seguem no estado anterior (ver `docs/_obsoleto/paperclip-trechos-t510.md`).
+4. **Dev Revisor ≠ Dev Corretor:** combos diferentes (`core-revisao` × `core-alto`).
+5. **Migrados:** Líder Editorial (reposição da grade, `ReposicaoTemasWorkflow`, 23/10).
 
 6. **Modelos (t414): só combos core do 9router.** Nenhum id direto (`ag/*`, `cu/*`) em agente.
 
@@ -143,7 +141,6 @@ Princípio: agente = instruções (`instructionsBundle`) + modelo do 9router + k
 | `core-baixo` | Observador, Especialista SEO, Caçador Sazonal, Comunidade, Diretor de Arte 2D (pausado), Canal José (pqbr) |
 
 Composição no 9router (11/10): `core-alto` = gemini-3.8-flash-high → claude-opus-4-6-thinking; `core-medio` = gemini-3.8-flash-medium → claude-sonnet-4-6 (round-robin); `core-baixo` = gemini-3-flash. Nenhum combo core passa por `cu/*`. `core-revisao` (t416/t419) = claude-sonnet-4-6 → cu/claude-sonnet-5-5-medium (round-robin). **Regra Revisor ≠ Corretor reativada (t419):** Corretor em `core-alto` (Gemini primário), Revisor em `core-revisao` (Claude). Ressalvas: `core-alto` tem Opus como fallback (mesma família Claude em ~metade das chamadas por round-robin) e `core-revisao` inclui `cu/*`, que quebra o `opencode_local`; nos smokes t419 o Revisor passou 2/2, mas a falha de `cu/*` pode aparecer quando o round-robin cair nele (ver §7.1).
-6. **`--yolo` reavaliado:** o problema era do `hermes_local` (força `--yolo`). Sem Hermes nos agentes, **H-SDD1 deixa de bloquear**. O equivalente no OpenCode é a política de permissões, que fica **explícita e restritiva**; liberação ampla (auto-aprovar ferramentas) só nos Devs, em container isolado (worktree, sem rede de produção nem segredos; Revisor sem escrita no repo principal). ADR-007 (t390) passa a valer para essa política. O `pqbr` continua sem `--yolo`.
 
 ## 8. Decisões anteriores incorporadas
 | Tema | Decisão | Ref. |
@@ -170,20 +167,8 @@ Pendente (servidor `pc` inacessível em 11/10 16:07): atualizar REGRAS, ARQUITET
 
 t392: rotinas acordam produção **sim**; orçamento warn-only **sim**; sem teto de agentes; Guardião criado.
 
-## 10. Alinhamento com o Paperclip (docs oficiais, 11/10)
-| Ponto | Como fica | Doc |
-|---|---|---|
-| Organograma | `reportsTo` do mesmo company, sem ciclo; Diretor `role: ceo`, `reportsTo: null` | https://docs.paperclip.ing/reference/api/agents/ |
-| Equipe inicial | criada pelo board (`POST /agents`, board-only) ou import do pacote; contratações seguintes pelo Diretor via `POST /agent-hires` + skill `paperclip-create-agent`, com `sourceIssueId` | https://docs.paperclip.ing/how-to/handle-board-approvals-for-hires/ |
-| Aprovação de contratação | desligada → contratação ativa na hora; José vê pelo canal privado ativo (Telegram/Hermes `pqbr`; t474)/atividade | idem; https://docs.paperclip.ing/guides/day-to-day/approvals/ |
-| Instruções | `instructionsBundle` (AGENTS.md/SOUL.md), não `promptTemplate` | https://docs.paperclip.ing/reference/api/agents/ |
-| Skills | instaladas no nível da empresa; `desiredSkills` na criação; sem Hermes nos agentes (v4.2) | https://docs.paperclip.ing/reference/api/agents/ |
-| Agendamento | timer desligado; rotinas Paperclip acordam agentes, inclusive produção (t392); efeito externo e calendário de execução seguem no Temporal (ADR-002) | https://docs.paperclip.ing/guides/projects-workflow/routines/ |
-| Posse de tarefa | checkout atômico, 409 para dono vivo; lock preso a run morto já corrigido (#5413/#6223), exigir versão com o fix | https://github.com/paperclipai/paperclip/issues/6007 |
-| Chaves/segredos | chave de API por agente; segredos só por `secret_ref` no `env` (respostas mascaram); nunca no AGENTS.md | https://docs.paperclip.ing/reference/api/agents/ |
-| Rollback | `config-revisions/{id}/rollback` para config de agente; arquivos do bundle não têm histórico → versionar `company/` no git | idem |
-| Orçamento | warn-only (ver §3.6) | https://docs.paperclip.ing/how-to/set-monthly-budget/ |
-| Adapters | `process` (texto) e `opencode_local` (ferramenta) → 9router | https://docs.paperclip.ing/reference/adapters/overview/ |
+## 10. Orquestração (ADR-011)
+Temporal é o orquestrador e o agendador (Schedules); organograma, posse de tarefa e aprovações viram estado de workflow e sinais (Telegram → `aprovacao_jose`). Painel: Temporal UI. A tabela de alinhamento com o Paperclip ficou em `docs/_obsoleto/paperclip-trechos-t510.md`.
 
 ## 11. Mapa @prod-* (papéis antigos) → 14 agentes (t395)
 | Papel antigo | Agora | Natureza |

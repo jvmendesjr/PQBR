@@ -316,21 +316,16 @@ Escrita no banco do app sempre por Activity com **outbox** (idempotente por chav
 - **Retentativas:** `RetryPolicy` 30 s → 2 min → 8 min; espera de rede sem gastar tentativa; 2 falhas da mesma ação → correção autônoma limitada a até 3 tentativas, com verificação do auditor/Jev; esgotamento → José, preservadas as chamadas imediatas por ação sensível ou demais travas de REGRAS §3.1; 5 idênticas → parada (REGRAS §18).
 - **Janelas:** 11:40, 14:40, 18:35, 21:15 (America/Fortaleza).
 
-## 10. Integração com o Paperclip [HISTÓRICO; Paperclip em retirada pela ADR-011]
+## 10. Agentes PydanticAI no Temporal (ADR-011, t510)
 
-### Hermes `pqbr` ↔ Paperclip [HISTÓRICO, t474; t363;
-- **Identidade:** agente `pqbr-assistente` (`7d18350e…`) na empresa **PQBR-TESTE** (`d9fa962a…`), adaptador `process` com `/bin/true`, heartbeat desligado, orçamento 0, permissões `canAssignTasks` sim, `canCreateAgents`/`canCreateSkills` não. **Chave de agente** `hermes-pqbr` (id `58b8794a…`), escopada à empresa (outra empresa → 403), guardada só em `~/.hermes/profiles/pqbr/.env` (`PAPERCLIP_PQBR_API_KEY`, 600).
-- **Acesso:** contexto CLI próprio `~/.hermes/profiles/pqbr/paperclip/context.json` (600, persona agent, a URL da tailnet na porta 3100 (`<ip-tailnet>:3100`), porque o Paperclip só escuta na tailnet, não em 127.0.0.1) + wrapper `paperclip/pqbr-paperclip` com allowlist (issue list/get/comments/create/comment/update; agent list/get/me/heartbeat:invoke; project, activity, dashboard) e escopo fixo + skill `skills/productivity/paperclip-pqbr`. Cópias no repo: `docs/hermes-pqbr/perfil/`.
-- **Acesso desde t372:** o perfil **não tem terminal, arquivos, código, web, navegador, delegação nem cron** (desligados em `cli` e `telegram`); ficam skills, memória, busca de sessões, perguntas e o **servidor MCP `paperclip-pqbr`** (`paperclip/mcp_paperclip.py`, só stdlib, ferramentas fixas: listar/ver issues e comentários, criar issue, comentar, listar e acordar agentes). A chave é lida pelo MCP e nunca volta ao modelo. O wrapper `pqbr-paperclip` fica só para uso manual. Busca de arquivos só leitura em `docs/`: o Hermes não oferece escopo por pasta no toolset `file`, então ficou desligada (EM CONSTRUÇÃO: ferramenta MCP de leitura em `docs/`, se o José quiser).
-- **Escrita:** comentar ou atualizar issue com chave de agente exige o contexto de um heartbeat (`Cross-issue writes need a run`); a leitura funciona direto. O comentário de teste na PQB-4 só saiu com o `--run-id` de um heartbeat do próprio `pqbr-assistente`. Desde t372 o MCP faz isso sozinho: heartbeat do próprio agente com `payload.issueId` e o run id na escrita.
-- **Reapontar na F1-02:** criar o mesmo agente na org PQBR real, nova chave, trocar `companyId`/`agentId` no contexto e revogar a chave de teste.
-- **Incidente no teste (09/10 ~19:20):** o Hermes `pqbr` tem terminal e arquivos sem restrição. No teste, além do wrapper, ele leu `/proc/<pid>/environ` do processo do Paperclip e expôs o `DATABASE_URL` do Paperclip ao modelo e ao histórico do perfil. **Conferido em t372:** o Hermes mascarou a senha (`***`) antes de guardar; foram expostos usuário e host do Supabase, não a senha. A mensagem foi apagada do `state.db` (com backup) e o banco foi compactado; também escreveu `cache/scratch/invoke_run.js`, que lê a chave do `.env` e chama a API direto. **O "acesso restrito" do SOUL não está garantido pela configuração.** Antes de ligar o `pqbr` no Telegram: restringir os toolsets do perfil (sem terminal livre; só o wrapper e as skills) e rodar de novo o teste ponta a ponta.
-
-
-- O Temporal publica eventos de negócio (via outbox) no banco do app e abre/atualiza **issues** no Paperclip (episódio, revisão, ticket, proposta).
-- Os agentes no Paperclip (director, analista, comunidade, compliance, assistente, dev) leem o banco do app (só pelo contexto do fluxo ou `pqbr_leitura`) e issues e devolvem **`PropostaAgente`** validada; nunca executam efeito externo.
-- A aprovação do José pelo Telegram (Hermes `pqbr`) vira sinal `aprovacao_jose` no Temporal (t474). A rota valida o ID autorizado, a tarefa e o estado, e falha fechada.
-- Heartbeats desligados até a liberação; nenhum agente com `--yolo` (H-SDD1).
+- **Padrão:** agente = persona (`company/agents/<papel>/AGENTS.md`, sem frontmatter) + combo do 9router (`config/modelos_9router.json`) + contrato de saída Pydantic v2 (`src/pqbr/contratos`). Fábrica e registro em `src/pqbr/agents/` (`criar_agente`, `rodar`, `REGISTRO`).
+- **Modelo:** `OpenAIChatModel(<combo>, provider=OpenAIProvider(base_url=<PQBR_9ROUTER_URL>, api_key=<NINEROUTER_API_KEY>))`; URL padrão `http://127.0.0.1:20130/v1` (20128 também responde, mas resolve os combos para outros modelos; mantido 20130, que já era o do kit). Fallback opcional por papel (`FallbackModel`, ex.: Líder Editorial `core-medio` → `core-baixo`). Chave só pelo `EnvironmentFile` 600 do worker; nunca logada.
+- **Regra:** o agente roda dentro de uma activity e **só gera e valida** (`result.output` já é o contrato). Efeitos (Postgres, Telegram, Drive, publicação) ficam em activities separadas, com retry do Temporal.
+- **Registro:** cada execução devolve `meta` (papel, combo, combos, modelo que respondeu, fallback, tokens), gravado no histórico do Temporal (resultado do workflow) e no journal do worker (`pqbr.agents`). Limite: o 9router devolve o modelo real, não o combo; fallback interno do 9router não aparece como `fallback=true`.
+- **Primeira migração:** `ReposicaoTemasWorkflow` (`temas_situacao` → `temas_propor_agente` → `temas_inserir`), fila `pqbr-episodio` (`pqbr-temporal-worker.service`).
+- **Aprovação do José:** Telegram (Hermes `pqbr`) → sinal `aprovacao_jose` no Temporal; rota valida ID autorizado, tarefa e estado e falha fechada.
+- **Run preso:** `scripts/temporal/runs_presos.py` (timer `pqbr-runs-presos`, de hora em hora; > 6 h → WARNING no journal). Alerta por Telegram fica para quando o bot `pqbr` tiver token de entrega.
+- Texto anterior (integração Paperclip/Hermes): `docs/_obsoleto/paperclip-trechos-t510.md`.
 
 ## 11. Interfaces: contratos Pydantic v2 [PROPOSTA; fixados em F3-01]
 

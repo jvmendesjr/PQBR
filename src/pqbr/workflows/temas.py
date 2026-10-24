@@ -1,5 +1,5 @@
 """t465 (José 14:00): grade sempre com 7 dias de temas abertos em pqbr.temas_pendentes (≥ 80% curiosidade/cultura pop).
-Quem propõe é o Líder Editorial (agente Paperclip, combo core-medio) via issue; o código só orquestra e valida
+Quem propõe é o Líder Editorial (agente PydanticAI numa atividade, ADR-011, combo core-medio); o código só orquestra e valida
 (bloqueio absoluto, anti-repetição, contrato TemaPendente). Tema usado na publicação → pqbr.temas_publicados e
 reposição automática (ReposicaoTemasWorkflow). Agenda diária: Schedule pqbr-reposicao-temas (scripts/temporal/schedules.py)."""
 from __future__ import annotations
@@ -93,59 +93,45 @@ async def tema_publicado(tema_id: int, codigo: str, video_id: str | None, privac
         c.execute("delete from pqbr.temas_pendentes where id = %s", (tema_id,)); c.commit()
 
 
+PEDIDO = (
+    "Reposição da grade (t465): faltam {faltam} temas para manter 7 dias abertos (alvo {alvo}). Proponha até 5 temas NOVOS e curtos "
+    "de curiosidade/cultura popular brasileira (origem de expressões, hábitos e manias, curiosidades que prendem a atenção), "
+    "cada um como pergunta 'Por que …?', categoria ∈ expressao, habito_mania, curiosidade_cultura_pop. "
+    "Sem política, religião, tragédia, marca ou pessoa real; sem repetir os já usados abaixo. Justificativa curta.\n\n"
+    "Já usados (não repetir):\n{usados}")
+
+
+def propostas_de(saida) -> list[dict]:
+    """PropostaTemas → lista de dicts para filtrar/temas_inserir. Puro; testado."""
+    return [{"categoria": t.categoria, "tema": t.tema} for t in saida.temas]
+
+
 @activity.defn
-async def paperclip_ids(papel: str) -> dict:
-    """Resolve company/projeto/agente pelo CLI da ponte (board). Sem ids fixos no código."""
-    from .paperclip import _cli, _lista
-    co = os.environ.get("PQBR_COMPANY_ID", "be3980d6-51ae-4cee-b85f-923b4568188c")
-    ags = _lista(await _cli("agent", "list", "-C", co))
-    ag = next(a for a in ags if (a.get("urlKey") or a.get("slug") or "") == papel or re.sub(r"\W+", "-", (a.get("name") or "").lower()).strip("-") in (papel, papel.replace("lider", "líder")))
-    pj = os.environ.get("PQBR_PROJECT_ID") or _lista(await _cli("project", "list", "-C", co))[0]["id"]
-    return {"company": co, "projeto": pj, "agente": ag["id"]}
-
-
-DESCRICAO = (
-    "Reposição da grade (t465): faltam {faltam} temas para manter 7 dias abertos (alvo {alvo}). Proponha até 5 temas NOVOS e curtos (valor_proposto com no máximo 480 caracteres no total) de "
-    "curiosidade/cultura popular brasileira (≥ 80%: origem de expressões, hábitos e manias, curiosidades inúteis que prendem a atenção), "
-    "sem política, religião, tragédia, marca ou pessoa real, sem repetir os já usados abaixo. "
-    "Responda com UMA PropostaAgente: tipo=parametro, alvo=tema, chave=grade.reposicao, "
-    "valor_proposto = os temas separados por ' || ' no formato 'categoria: Por que …?' (categoria ∈ expressao, habito_mania, "
-    "curiosidade_cultura_pop), justificativa curta.\n\nJá usados (não repetir):\n{usados}")
+async def temas_propor_agente(faltam: int, usados: list[str]) -> dict:
+    """ADR-011: o Líder Editorial (PydanticAI, combo do papel) só gera e valida. Sem escrita aqui."""
+    from ..agents import rodar
+    from ..contratos import PropostaTemas
+    pedido = PEDIDO.format(faltam=faltam, alvo=ALVO, usados="\n".join(f"- {u}" for u in usados[-120:]))[:9000]
+    saida, meta = await rodar("lider-editorial", PropostaTemas, pedido)
+    activity.logger.info("temas_propor_agente %s", meta)
+    return {"propostas": propostas_de(saida), "meta": meta}
 
 
 @workflow.defn
 class ReposicaoTemasWorkflow:
     @workflow.run
     async def run(self, rodadas: int = 6) -> dict:
-        from .paperclip import (PedidoIssue, Comentario, LeituraPropostas, abrir_issue_paperclip, comentar_paperclip,
-                                ler_propostas_paperclip, concluir_issue_paperclip)
         cur = dict(start_to_close_timeout=timedelta(minutes=3), retry_policy=RetryPolicy(maximum_attempts=3))
-        s = await workflow.execute_activity(temas_situacao, **cur)
-        if not s["faltam"]: return {"faltam": 0}
-        ids = await workflow.execute_activity(paperclip_ids, "lider-editorial", **cur)
-        total, recusas = 0, []
-        for r in range(rodadas):
+        ag = dict(start_to_close_timeout=timedelta(minutes=6), retry_policy=RetryPolicy(maximum_attempts=3))
+        total, recusas, metas = 0, [], []
+        for _ in range(rodadas):
             s = await workflow.execute_activity(temas_situacao, **cur)
             if not s["faltam"]: break
-            wid = f"{workflow.info().workflow_id}-r{r}"
-            issue = await workflow.execute_activity(abrir_issue_paperclip, PedidoIssue(
-                company_id=ids["company"], project_id=ids["projeto"], marcador=f"[wf:{wid}]", titulo="Grade: repor temas",
-                descricao=DESCRICAO.format(faltam=s["faltam"], alvo=ALVO, usados="\n".join(f"- {u}" for u in s["usados"][-120:]))[:9000],
-                agente_id=ids["agente"]), **cur)
-            await workflow.execute_activity(comentar_paperclip, Comentario(issue_id=issue, corpo="Acordar: reposição da grade.",
-                                                                           acordar_responsavel=True), **cur)
-            vistos: list[str] = []
-            for _ in range(30):   # até ~60 min por rodada
-                novas = await workflow.execute_activity(ler_propostas_paperclip, LeituraPropostas(
-                    issue_id=issue, agente_id=ids["agente"], ja_vistos=vistos), **cur)
-                props = [x for n in novas for x in ler_proposta((n.dados or {}).get("valor_proposto", ""))]
-                vistos += [n.comentario_id for n in novas]
-                if props:
-                    res = await workflow.execute_activity(temas_inserir, props, **cur)
-                    total += res["inseridos"]; recusas += res["recusas"]; break
-                await workflow.sleep(120)
-            await workflow.execute_activity(concluir_issue_paperclip, issue, **cur)
-        return {"inseridos": total, "recusas": recusas[:20]}
+            r = await workflow.execute_activity(temas_propor_agente, args=[s["faltam"], s["usados"]], **ag)
+            metas.append(r["meta"])
+            res = await workflow.execute_activity(temas_inserir, r["propostas"], **cur)
+            total += res["inseridos"]; recusas += res["recusas"]
+        return {"inseridos": total, "recusas": recusas[:20], "agente": metas}
 
 
-ATIVIDADES_TEMAS = [temas_situacao, temas_inserir, tema_publicado, paperclip_ids]
+ATIVIDADES_TEMAS = [temas_situacao, temas_inserir, tema_publicado, temas_propor_agente]
