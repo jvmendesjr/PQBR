@@ -29,3 +29,8 @@ Próximo passo: corrigir e revalidar PQBA-91 no worktree isolado; só então rev
 - Ativar a instância reservada `proxima`:9397 para a conta do novo projeto (runbook §2).
 - ~~Script de criação não idempotente / `--instalar` falhava na 2ª execução~~ — resolvido em t528.
 - Pendentes do plano ADR-012: backup diário com teste de restauração, canário diário, renovador único.
+
+## Lacuna t529 (24/10/2026) — vídeo em série e HOLD
+- O código ainda não tem Flow, Vids nem Meta Vibes: o `EpisodioWorkflow` baixa o vídeo do NotebookLM (`nlm_baixar_video`). A cadeia existe só como decisão. → ROADMAP Fase 4V R1–R6.
+- HOLD quando as 3 rotas falham: **decidido** (t529), ainda não implementado. → R7.
+- Storyboard em série (prompts do NotebookLM → imagens nomeadas e ordenadas → vídeos): só pesquisa (`docs/pesquisas/PESQUISA-extensoes-geracao-em-serie.md`).

@@ -1,13 +1,16 @@
-%% Cadeia de vídeo (t517; config/motores.json, src/pqbr/motores). Decisão registrada; adaptadores ainda NÃO extraídos (F1-03).
+%% Cadeia de vídeo (t517 + t529; config/motores.json, src/pqbr/motores). Decisões registradas; adaptadores ainda NÃO extraídos (ROADMAP Fase 4V).
 flowchart LR
-  P(["Roteiro aprovado<br/>(RoteiroShort)"]) --> F["1 · Flow (Veo 3.1, 9:16)<br/>navegador Camofox · cota paga"]
+  P(["Roteiro aprovado<br/>(RoteiroShort)"]) --> SB["Prompts por cena (NotebookLM)<br/>ManifestoSerie: ordem + nome determinístico<br/>ep_cNN_tipo_modelo_v"]
+  SB --> F["1 · Flow (Veo 3.1, 9:16) · Camofox · cota paga<br/>a) storyboard de imagens em série (personagem/estilo fixos)<br/>b) vídeo por cena (start frame / chain)"]
   F --> D1{"falhou ou cota esgotou?"}
-  D1 -- não --> OK(["vídeo bruto → pós-produção"])
+  D1 -- não --> OK(["cenas ordenadas → pós-produção"])
   D1 -- sim --> V["2 · Google Vids<br/>navegador · cota paga"]
   V --> D2{"falhou ou cota esgotou?"}
   D2 -- não --> OK
   D2 -- sim --> MV["3 · Meta Vibes<br/>navegador · cota paga"]
   MV --> D3{"falhou?"}
   D3 -- não --> OK
-  D3 -- sim --> H(["⚠ não definido no código: proposta HOLD + pedido ao José"])
-  N>"Sem APIs (Gemini/Veo/Omni). NotebookLM vídeo: só alternativa (hoje o EpisodioWorkflow ainda baixa o vídeo do NotebookLM ⚠)"]
+  D3 -- sim --> H(["HOLD: publicação suspensa (DECISÃO José t529)"])
+  H --> TG["pedido de decisão ao José (Telegram)"]
+  TG --> SG{{"sinal Temporal decisao_video<br/>tentar de novo · trocar rota · cancelar"}}
+  N>"Lógica copiada das extensões de série (fila, nomes, ordem, ritmo humano) executada no Camofox, SEM instalar extensões (PESQUISA-extensoes-geracao-em-serie). Sem APIs. Hoje o EpisodioWorkflow ainda baixa o vídeo do NotebookLM ⚠"]

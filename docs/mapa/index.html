@@ -44,29 +44,33 @@ h2{margin:0 0 4px;font-size:16px}.nota{margin:0 0 8px;color:var(--m);font-size:1
   JOSE -- &quot;aprovação / login&quot; --&gt; SIG
   C -. &quot;todo dado entre peças&quot; .- T
   classDef core fill:#eef3f7,stroke:#33506b;
-  class T core;</pre></div></section><section id="d01"><h2>Episódio</h2><p class="nota">EpisodioWorkflow (src/pqbr/workflows/episodio.py) — fila episodio-pqbr. Gerado do código 24/10/2026. <span class="arq">01-episodio.mmd</span></p><div class="wrap"><pre class="mermaid">flowchart TD
-  S([&quot;PedidoEpisodioE2E&quot;]) --&gt; A1[&quot;pacote_garantir&lt;br/&gt;(hash do pacote canônico)&quot;]
-  A1 --&gt; A2[&quot;registro_buscar_caderno&quot;]
-  A2 --&gt; W1[[&quot;filho NotebookLMWorkflow&lt;br/&gt;fila notebooklm-pqbr&quot;]]
-  W1 --&gt; D1{&quot;nlm.ok e artefato?&quot;}
-  D1 -- não --&gt; F1([&quot;fim: falha NotebookLM&quot;])
-  D1 -- sim --&gt; A3[&quot;nlm_baixar_video (notebooklm-pqbr)&lt;br/&gt;⚠ ainda é o vídeo do NotebookLM; Flow não ligado aqui&quot;]
-  A3 --&gt; A4[&quot;pos_produzir&quot;] --&gt; A5[&quot;extrair_quadros&quot;] --&gt; A6[&quot;capa_a9&quot;]
-  A6 --&gt; D2{&quot;infográfico do NotebookLM?&quot;}
-  D2 -- sim --&gt; A7[&quot;capa_conferir&lt;br/&gt;(cena única? senão A9)&quot;]
+  class T core;</pre></div></section><section id="d01"><h2>Episódio</h2><p class="nota">EpisodioWorkflow (src/pqbr/workflows/episodio.py) — fila episodio-pqbr. Gerado do código 24/10/2026. <span class="arq">01-episodio.mmd</span></p><div class="wrap"><pre class="mermaid">
+%% EpisodioWorkflow (src/pqbr/workflows/episodio.py) — fila episodio-pqbr. Gerado do código 24/10/2026.
+flowchart TD
+  S(["PedidoEpisodioE2E"]) --&gt; A1["pacote_garantir&lt;br/&gt;(hash do pacote canônico)"]
+  A1 --&gt; A2["registro_buscar_caderno"]
+  A2 --&gt; W1[["filho NotebookLMWorkflow&lt;br/&gt;fila notebooklm-pqbr"]]
+  W1 --&gt; D1{"nlm.ok e artefato?"}
+  D1 -- não --&gt; F1(["fim: falha NotebookLM"])
+  D1 -- sim --&gt; A3["nlm_baixar_video (notebooklm-pqbr)&lt;br/&gt;⚠ ainda é o vídeo do NotebookLM; Flow não ligado aqui"]
+  A3 -. "alvo (ROADMAP 4V R6/R7)" .-&gt; CV[["cadeia de vídeo 07: storyboard em série Flow → Vids → Meta Vibes&lt;br/&gt;3 falham → HOLD + pedido ao José"]]
+  A3 --&gt; A4["pos_produzir"] --&gt; A5["extrair_quadros"] --&gt; A6["capa_a9"]
+  A6 --&gt; D2{"infográfico do NotebookLM?"}
+  D2 -- sim --&gt; A7["capa_conferir&lt;br/&gt;(cena única? senão A9)"]
   D2 -- não --&gt; W
   A7 --&gt; W
-  W{{&quot;espera sinal veredito_auditor&lt;br/&gt;timeout espera_veredito_h&quot;}}
-  W -- timeout --&gt; F2([&quot;fim: sem veredito&quot;])
-  W -- reprova --&gt; F3([&quot;fim: reprovado&quot;])
-  W -- aprova --&gt; A8[&quot;nlm_exportar_caderno (notebooklm-pqbr)&quot;]
-  A8 --&gt; A9[&quot;arquivar_caderno&quot;] --&gt; A10[&quot;drive_enviar&quot;]
-  A10 --&gt; W2[[&quot;filho PublicacaoWorkflow&lt;br/&gt;publicacao_dryrun (só dry-run, F8-01)&quot;]]
-  W2 --&gt; D3{&quot;real e enviado?&quot;}
-  D3 -- sim --&gt; A11[&quot;tema_publicado (pqbr-episodio)&quot;] --&gt; W3[[&quot;start ReposicaoTemasWorkflow(6)&quot;]]
-  D3 -- sim --&gt; W4[[&quot;start ApagarCadernoWorkflow (D+2)&quot;]]
-  D3 -- não --&gt; F4([&quot;fim: ok dry-run&quot;])
-  N1&gt;&quot;Nota: GradeDiaria/EpisodioProducao (producao.py) estão PAUSADOS e com etapas EM CONSTRUÇÃO&quot;]</pre></div></section><section id="d02"><h2>Reposição de temas</h2><p class="nota">ReposicaoTemasWorkflow (src/pqbr/workflows/temas.py) — fila pqbr-episodio, Schedule 00:30. Gerado do código 24/10/2026. <span class="arq">02-reposicao-temas.mmd</span></p><div class="wrap"><pre class="mermaid">flowchart TD
+  W{{"espera sinal veredito_auditor&lt;br/&gt;timeout espera_veredito_h"}}
+  W -- timeout --&gt; F2(["fim: sem veredito"])
+  W -- reprova --&gt; F3(["fim: reprovado"])
+  W -- aprova --&gt; A8["nlm_exportar_caderno (notebooklm-pqbr)"]
+  A8 --&gt; A9["arquivar_caderno"] --&gt; A10["drive_enviar"]
+  A10 --&gt; W2[["filho PublicacaoWorkflow&lt;br/&gt;publicacao_dryrun (só dry-run, F8-01)"]]
+  W2 --&gt; D3{"real e enviado?"}
+  D3 -- sim --&gt; A11["tema_publicado (pqbr-episodio)"] --&gt; W3[["start ReposicaoTemasWorkflow(6)"]]
+  D3 -- sim --&gt; W4[["start ApagarCadernoWorkflow (D+2)"]]
+  D3 -- não --&gt; F4(["fim: ok dry-run"])
+  N1&gt;"Nota: GradeDiaria/EpisodioProducao (producao.py) estão PAUSADOS e com etapas EM CONSTRUÇÃO"]
+</pre></div></section><section id="d02"><h2>Reposição de temas</h2><p class="nota">ReposicaoTemasWorkflow (src/pqbr/workflows/temas.py) — fila pqbr-episodio, Schedule 00:30. Gerado do código 24/10/2026. <span class="arq">02-reposicao-temas.mmd</span></p><div class="wrap"><pre class="mermaid">flowchart TD
   S([&quot;run(rodadas=3)&quot;]) --&gt; L{&quot;rodada &lt; 3&quot;}
   L -- não --&gt; E([&quot;fim: inseridos, recusas, motor&quot;])
   L -- sim --&gt; A1[&quot;temas_situacao&lt;br/&gt;(abertos, faltam p/ 7 dias, usados)&quot;]
@@ -115,18 +119,24 @@ h2{margin:0 0 4px;font-size:16px}.nota{margin:0 0 8px;color:var(--m);font-size:1
   L --&gt; D{&quot;há mais de PQBR_PRESO_HORAS (6 h)&lt;br/&gt;e tipo fora de ISENTOS?&quot;}
   D -- sim --&gt; W[&quot;journal WARNING RUN PRESO … · exit 1&quot;]
   D -- não --&gt; O[&quot;journal INFO nenhum run preso · exit 0&quot;]
-  N&gt;&quot;Fora do Temporal (timer systemd); sem Telegram ainda&quot;]</pre></div></section><section id="d07"><h2>Cadeia de vídeo</h2><p class="nota">Cadeia de vídeo (t517; config/motores.json, src/pqbr/motores). Decisão registrada; adaptadores ainda NÃO extraídos (F1-03). <span class="arq">07-cadeia-video.mmd</span></p><div class="wrap"><pre class="mermaid">flowchart LR
-  P([&quot;Roteiro aprovado&lt;br/&gt;(RoteiroShort)&quot;]) --&gt; F[&quot;1 · Flow (Veo 3.1, 9:16)&lt;br/&gt;navegador Camofox · cota paga&quot;]
-  F --&gt; D1{&quot;falhou ou cota esgotou?&quot;}
-  D1 -- não --&gt; OK([&quot;vídeo bruto → pós-produção&quot;])
-  D1 -- sim --&gt; V[&quot;2 · Google Vids&lt;br/&gt;navegador · cota paga&quot;]
-  V --&gt; D2{&quot;falhou ou cota esgotou?&quot;}
+  N&gt;&quot;Fora do Temporal (timer systemd); sem Telegram ainda&quot;]</pre></div></section><section id="d07"><h2>Cadeia de vídeo</h2><p class="nota">Cadeia de vídeo (t517; config/motores.json, src/pqbr/motores). Decisão registrada; adaptadores ainda NÃO extraídos (F1-03). <span class="arq">07-cadeia-video.mmd</span></p><div class="wrap"><pre class="mermaid">
+%% Cadeia de vídeo (t517 + t529; config/motores.json, src/pqbr/motores). Decisões registradas; adaptadores ainda NÃO extraídos (ROADMAP Fase 4V).
+flowchart LR
+  P(["Roteiro aprovado&lt;br/&gt;(RoteiroShort)"]) --&gt; SB["Prompts por cena (NotebookLM)&lt;br/&gt;ManifestoSerie: ordem + nome determinístico&lt;br/&gt;ep_cNN_tipo_modelo_v"]
+  SB --&gt; F["1 · Flow (Veo 3.1, 9:16) · Camofox · cota paga&lt;br/&gt;a) storyboard de imagens em série (personagem/estilo fixos)&lt;br/&gt;b) vídeo por cena (start frame / chain)"]
+  F --&gt; D1{"falhou ou cota esgotou?"}
+  D1 -- não --&gt; OK(["cenas ordenadas → pós-produção"])
+  D1 -- sim --&gt; V["2 · Google Vids&lt;br/&gt;navegador · cota paga"]
+  V --&gt; D2{"falhou ou cota esgotou?"}
   D2 -- não --&gt; OK
-  D2 -- sim --&gt; MV[&quot;3 · Meta Vibes&lt;br/&gt;navegador · cota paga&quot;]
-  MV --&gt; D3{&quot;falhou?&quot;}
+  D2 -- sim --&gt; MV["3 · Meta Vibes&lt;br/&gt;navegador · cota paga"]
+  MV --&gt; D3{"falhou?"}
   D3 -- não --&gt; OK
-  D3 -- sim --&gt; H([&quot;⚠ não definido no código: proposta HOLD + pedido ao José&quot;])
-  N&gt;&quot;Sem APIs (Gemini/Veo/Omni). NotebookLM vídeo: só alternativa (hoje o EpisodioWorkflow ainda baixa o vídeo do NotebookLM ⚠)&quot;]</pre></div></section><section id="d08"><h2>Identidade / Camofox</h2><p class="nota">Identidade/navegador (ADR-012, José 24/10/2026). Estado atual = diagnóstico real do pc 24/10; alvo = decisão, NÃO implementado. <span class="arq">08-identidade-camofox.mmd</span></p><div class="wrap"><pre class="mermaid">
+  D3 -- sim --&gt; H(["HOLD: publicação suspensa (DECISÃO José t529)"])
+  H --&gt; TG["pedido de decisão ao José (Telegram)"]
+  TG --&gt; SG{{"sinal Temporal decisao_video&lt;br/&gt;tentar de novo · trocar rota · cancelar"}}
+  N&gt;"Lógica copiada das extensões de série (fila, nomes, ordem, ritmo humano) executada no Camofox, SEM instalar extensões (PESQUISA-extensoes-geracao-em-serie). Sem APIs. Hoje o EpisodioWorkflow ainda baixa o vídeo do NotebookLM ⚠"]
+</pre></div></section><section id="d08"><h2>Identidade / Camofox</h2><p class="nota">Identidade/navegador (ADR-012, José 24/10/2026). Estado atual = diagnóstico real do pc 24/10; alvo = decisão, NÃO implementado. <span class="arq">08-identidade-camofox.mmd</span></p><div class="wrap"><pre class="mermaid">
 %% Identidade/navegador (ADR-012, José 24/10/2026). t526: PQBR segue individual em 9387; migração na próxima integração; kit pronto, nada instalado.
 flowchart TB
   subgraph HOJE["Hoje (24/10) — PQBR segue individual até a próxima integração"]

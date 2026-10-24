@@ -205,6 +205,16 @@ Plano. Variáveis: `C=/home/pc/.pqbr/camofox`, porta `9387`, unit `pqbr-camofox.
 
 Precisam do José: F4C-04, F4C-05, F4C-06, F4C-07. F4C-01..03 só pedem o portão G4.
 
+## Fase 4V: geração de vídeo em série pelo navegador (t529) — storyboard → vídeo, sem extensões
+Ref.: `docs/pesquisas/PESQUISA-extensoes-geracao-em-serie.md`, ADR-012, t517 (cadeia), t529 (HOLD). Cada passo que abre Flow, Vids ou Vibes ou gasta cota tem portão do José.
+- [ ] **R1 · Estudar e mapear a UI** (Flow, Vids, Vibes): modais, ícones, campos, sequência de cliques e regras por modelo → `PlatformProfile` versionado (snapshots do Camofox, sem gerar). Obs: portão José para abrir as UIs.
+- [ ] **R2 · Contratos** `CenaStoryboard`, `ManifestoSerie`, `ResultadoCena`, `PedidoDecisaoVideo` (VERSOES 1.0.0) + regra de nome `<ep>_c<NN>_<tipo>_<modelo>_<v>` + testes.
+- [ ] **R3 · Adaptador Flow** (`GeradorVideo` sobre `NavegadorIdentidade`): storyboard de imagens em série → vídeo por cena (start frame/chain); concorrência 1, ritmo humano, falha rápida no drift. Piloto de 1 cena antes de 5 a 7.
+- [ ] **R4 · Adaptador Google Vids** (rota 2), mapeado do zero (não há extensão de referência).
+- [ ] **R5 · Adaptador Meta Vibes** (rota 3, obrigatória como fallback).
+- [ ] **R6 · Tirar o `EpisodioWorkflow` do `nlm_baixar_video`**: ligar `CADEIA_VIDEO` com escolha explícita e registrada; o NotebookLM vídeo fica só como alternativa explícita.
+- [ ] **R7 · HOLD final**: as 3 rotas falharam → estado HOLD + pedido de decisão (Telegram) + sinal do Temporal `decisao_video` (tentar de novo, rota, cancelar); testes com mocks.
+
 ## Fase 5: estabilidade e produção (D5)
 
 - [x] **F5-01** Grade, coleta, 3 barreiras, R10, polêmica — Req: RF-01..RF-05 · Testes: TS-01, V4 · Depende de: F3-01 · Aceite: teste do incidente de 08/10 passa · Portão: nenhum · Obs: Obs: 2026-10-10 (t376): `src/pqbr/pipeline/grade.py` — 3 barreiras (exata, variação por núcleo de palavras, índice do banco), R10 também para sugestão do José, bloqueio absoluto por categoria, polêmica por componentes (pesos e limiar **PROPOSTA**, recalibrar), mistura configurável (`fracao_perene`, t378). Teste do incidente de 08/10 passa; no histórico só os 2 repetidos legados são pegos. 7/7. **Depende de t378 (escopo editorial, EM CONSTRUÇÃO — discutir com José).**
