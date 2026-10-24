@@ -1,0 +1,148 @@
+{
+  "canal": "discord",
+  "somente_fakes": true,
+  "antes": {
+    "bloqueado": true,
+    "pendentes": [
+      "SYN-OP-pendente-1",
+      "SYN-OP-pendente-2"
+    ],
+    "falhas": [
+      "SYN-OP-falha"
+    ],
+    "aceitos": [
+      "SYN-OP-concluida",
+      "SYN-OP-falha",
+      "SYN-OP-pendente-1",
+      "SYN-OP-pendente-2"
+    ]
+  },
+  "ticket_canonico": {
+    "ticket_id": "SYN-TICKET-1",
+    "escopo": {
+      "supervisor_id": "SYN-SUP-1",
+      "supervisor_run_id": "SYN-SUP-RUN-1",
+      "revisao_falha": 1,
+      "falha_id": "SYN-OP-falha",
+      "filho_run_id": "SYN-FILHO-RUN-falha",
+      "registro_falha_receipt": "SYN-REGISTRO-FALHA-RECEIPT",
+      "pendentes": [
+        "SYN-OP-pendente-1",
+        "SYN-OP-pendente-2"
+      ],
+      "versao": 1
+    },
+    "criado_em": 1800000000,
+    "expira_em": 1800000300,
+    "abertura_key": "abertura:f3d2bdda619889f43e03268eb367b0d9bc6e0d2931744c02645908770bf91605",
+    "revisao": 2,
+    "versao": 1,
+    "estado": "decidido",
+    "decisao": "aprovar",
+    "ator_id": "SYN-HUMANO-discord",
+    "canal": "discord",
+    "decidido_em": 1800000000,
+    "evento_em": 1800000000,
+    "decisao_key": "SYN-DEC-demo",
+    "receipt": "fake-receipt:247e615db13cccc294c064473c9d32c77ec566a403411ede97397ecf5478dfe7"
+  },
+  "comando": {
+    "ticket_id": "SYN-TICKET-1",
+    "revisao_ticket": 2,
+    "receipt": "fake-receipt:247e615db13cccc294c064473c9d32c77ec566a403411ede97397ecf5478dfe7",
+    "escopo": {
+      "supervisor_id": "SYN-SUP-1",
+      "supervisor_run_id": "SYN-SUP-RUN-1",
+      "revisao_falha": 1,
+      "falha_id": "SYN-OP-falha",
+      "filho_run_id": "SYN-FILHO-RUN-falha",
+      "registro_falha_receipt": "SYN-REGISTRO-FALHA-RECEIPT",
+      "pendentes": [
+        "SYN-OP-pendente-1",
+        "SYN-OP-pendente-2"
+      ],
+      "versao": 1
+    },
+    "ator_id": "SYN-HUMANO-discord",
+    "canal": "discord",
+    "decidido_em": 1800000000,
+    "idempotency_key": "resume:41ece25f1bdcf883cd69696c6587a30ba3cd27fc3c491451ae43f0213e9676b7",
+    "versao": 1,
+    "acao": "retomar_somente_pendentes_ja_aceitos"
+  },
+  "resposta": "retomada_confirmada",
+  "duplicata": "retomada_ja_confirmada",
+  "trilha": [
+    [
+      "ticket_aberto",
+      "SYN-TICKET-1",
+      1
+    ],
+    [
+      "ticket_lido",
+      "SYN-TICKET-1",
+      1
+    ],
+    [
+      "ticket_lido",
+      "SYN-TICKET-1",
+      1
+    ],
+    [
+      "decisao_persistida",
+      "SYN-TICKET-1",
+      2
+    ],
+    [
+      "ticket_lido",
+      "SYN-TICKET-1",
+      2
+    ],
+    [
+      "resume_chamado",
+      "SYN-TICKET-1",
+      2
+    ],
+    [
+      "ticket_lido",
+      "SYN-TICKET-1",
+      2
+    ],
+    [
+      "retomada_aplicada",
+      "SYN-TICKET-1",
+      2
+    ],
+    [
+      "ticket_lido",
+      "SYN-TICKET-1",
+      2
+    ],
+    [
+      "resume_chamado",
+      "SYN-TICKET-1",
+      2
+    ],
+    [
+      "ticket_lido",
+      "SYN-TICKET-1",
+      2
+    ],
+    [
+      "ticket_lido",
+      "SYN-TICKET-1",
+      2
+    ]
+  ],
+  "depois": {
+    "bloqueado": false,
+    "executados": [
+      "SYN-OP-pendente-1",
+      "SYN-OP-pendente-2"
+    ],
+    "falhas": [
+      "SYN-OP-falha"
+    ],
+    "admissao_fechada": true
+  }
+}

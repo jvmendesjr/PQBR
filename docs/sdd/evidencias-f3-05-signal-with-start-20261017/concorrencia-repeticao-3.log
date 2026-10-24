@@ -1,0 +1,13 @@
+19defb9f7318c7cf249518b3642a735efb79876c2b6918afe312336476b796a5  /tmp/temporal-test-server-sdk-python-1.34.0
+Evidencias: /home/pc/Workspace/PQBR/docs/sdd/evidencias-f3-05-signal-with-start-20261017/concorrencia-repeticao-3
+Namespace original: net:[4026531840]
+lo               UNKNOWN        127.0.0.1/8 ::1/128 
+test_concorrencia_start_signal_mesma_sessao (tests.workflows.test_f3_05_signal_with_start_isolado.SignalWithStartIsolado.test_concorrencia_start_signal_mesma_sessao) ... [2m2026-10-17T15:13:38.724964Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+[2m2026-10-17T15:13:38.725095Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+ok
+
+----------------------------------------------------------------------
+Ran 1 test in 1.423s
+
+OK
+Servidor e namespace encerrados; evidencias em /home/pc/Workspace/PQBR/docs/sdd/evidencias-f3-05-signal-with-start-20261017/concorrencia-repeticao-3

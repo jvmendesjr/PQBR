@@ -1,0 +1,27 @@
+{
+  "pid": 3862444,
+  "args": [
+    "sudo",
+    "-n",
+    "nsenter",
+    "-t",
+    "3862257",
+    "-n",
+    "/usr/bin/setpriv",
+    "--reuid=1000",
+    "--regid=1000",
+    "--clear-groups",
+    "/usr/bin/env",
+    "-i",
+    "PYTHONPATH=/home/pc/Workspace/PQBR/src:/home/pc/Workspace/PQBR",
+    "PYTHONDONTWRITEBYTECODE=1",
+    "PQBR_CANDIDATE_ISOLATED=1",
+    "PQBR_CANDIDATE_OUT=/home/pc/Workspace/PQBR/docs/sdd/evidencias-f3-05-integracao-candidata-20261017-B2/runtime",
+    "/home/pc/Workspace/PQBR/.venv/bin/python",
+    "-m",
+    "unittest",
+    "-v",
+    "tests.workflows.test_f3_05_candidate_runtime"
+  ],
+  "expected_netns": "net:[4026534545]"
+}

@@ -1,0 +1,18 @@
+{
+  "workflow_id": "teste-f3-05-supervisor-a82005a074110ba00527905ec8fb88db6223bab5d00f2440290632a110bd9738-op-f555b80ad08f501adb396a95c78948ce18f204b3cf2c93b0b1930a006540a06e",
+  "run_id": "01a14b82-a8be-7da9-b978-3baf369043e9",
+  "eventos": 19,
+  "replay": "ok",
+  "activities": [
+    {
+      "nome": "triagem_jev",
+      "fila": "teste-f3-05-candidato-wf-FAKE-H3-test_02_discord_ack_perdido_replay-supervisor",
+      "max_tentativas": 3
+    },
+    {
+      "nome": "intervir_agente",
+      "fila": "teste-f3-05-candidato-camofox-FAKE-H3-test_02_discord_ack_perdido_replay-supervisor",
+      "max_tentativas": 1
+    }
+  ]
+}

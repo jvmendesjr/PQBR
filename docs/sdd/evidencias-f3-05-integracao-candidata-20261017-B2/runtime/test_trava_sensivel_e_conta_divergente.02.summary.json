@@ -1,0 +1,22 @@
+{
+  "workflow_id": "teste-f3-05-candidato-sessao-bcabfce2a2afb1f5ba82972df6ed21d78f5f670edbff8da7a7de4283901a2523-op-68090cbe92c580648ed57d2bafcf6eb28f0840eb3f981e9737d5ed3c59fdd959",
+  "run_id": "01a14aa8-2ef1-79e7-9843-0d1aa7a1b5f4",
+  "eventos": 17,
+  "replay": "ok",
+  "activities": [
+    {
+      "nome": "triagem_jev",
+      "fila": "teste-f3-05-candidato-wf-test_trava_sensivel_e_conta_divergente",
+      "max_tentativas": 3,
+      "id": "1",
+      "timeout_s": 120
+    },
+    {
+      "nome": "registrar_correcao",
+      "fila": "teste-f3-05-candidato-wf-test_trava_sensivel_e_conta_divergente",
+      "max_tentativas": 3,
+      "id": "2",
+      "timeout_s": 60
+    }
+  ]
+}

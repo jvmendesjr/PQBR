@@ -1,0 +1,139 @@
+{
+  "rounds": 36,
+  "burst_calls": 204,
+  "burst_rpc_errors": 0,
+  "invariant_errors": 10,
+  "harness_errors": 0,
+  "failed_rounds": 0,
+  "pending_cleanup": [],
+  "shutdown_ok": true,
+  "robustez_comprovada": false,
+  "by_block": [
+    {
+      "mode": "prototype-workers",
+      "condition": "cold",
+      "concurrency": 1,
+      "rounds": 2,
+      "failed": 0
+    },
+    {
+      "mode": "prototype-workers",
+      "condition": "cold",
+      "concurrency": 4,
+      "rounds": 2,
+      "failed": 0
+    },
+    {
+      "mode": "prototype-workers",
+      "condition": "cold",
+      "concurrency": 12,
+      "rounds": 2,
+      "failed": 0
+    },
+    {
+      "mode": "prototype-workers",
+      "condition": "warm",
+      "concurrency": 1,
+      "rounds": 2,
+      "failed": 0
+    },
+    {
+      "mode": "prototype-workers",
+      "condition": "warm",
+      "concurrency": 4,
+      "rounds": 2,
+      "failed": 0
+    },
+    {
+      "mode": "prototype-workers",
+      "condition": "warm",
+      "concurrency": 12,
+      "rounds": 2,
+      "failed": 0
+    },
+    {
+      "mode": "prototype-no-worker",
+      "condition": "cold",
+      "concurrency": 1,
+      "rounds": 2,
+      "failed": 0
+    },
+    {
+      "mode": "prototype-no-worker",
+      "condition": "cold",
+      "concurrency": 4,
+      "rounds": 2,
+      "failed": 0
+    },
+    {
+      "mode": "prototype-no-worker",
+      "condition": "cold",
+      "concurrency": 12,
+      "rounds": 2,
+      "failed": 0
+    },
+    {
+      "mode": "prototype-no-worker",
+      "condition": "warm",
+      "concurrency": 1,
+      "rounds": 2,
+      "failed": 0
+    },
+    {
+      "mode": "prototype-no-worker",
+      "condition": "warm",
+      "concurrency": 4,
+      "rounds": 2,
+      "failed": 0
+    },
+    {
+      "mode": "prototype-no-worker",
+      "condition": "warm",
+      "concurrency": 12,
+      "rounds": 2,
+      "failed": 0
+    },
+    {
+      "mode": "raw-no-worker",
+      "condition": "cold",
+      "concurrency": 1,
+      "rounds": 2,
+      "failed": 0
+    },
+    {
+      "mode": "raw-no-worker",
+      "condition": "cold",
+      "concurrency": 4,
+      "rounds": 2,
+      "failed": 0
+    },
+    {
+      "mode": "raw-no-worker",
+      "condition": "cold",
+      "concurrency": 12,
+      "rounds": 2,
+      "failed": 0
+    },
+    {
+      "mode": "raw-no-worker",
+      "condition": "warm",
+      "concurrency": 1,
+      "rounds": 2,
+      "failed": 0
+    },
+    {
+      "mode": "raw-no-worker",
+      "condition": "warm",
+      "concurrency": 4,
+      "rounds": 2,
+      "failed": 0
+    },
+    {
+      "mode": "raw-no-worker",
+      "condition": "warm",
+      "concurrency": 12,
+      "rounds": 2,
+      "failed": 0
+    }
+  ]
+}

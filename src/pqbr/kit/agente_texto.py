@@ -64,6 +64,13 @@ def segunda_leitura(modelo: str, contexto: str, decisao: str) -> str:
         return f"indisponível ({type(e).__name__} {getattr(e, 'code', '')}); seguir a regra conservadora (bloqueia/escala)"
 
 
+def _imprimir_limpo(texto: str, *, flush: bool = False) -> None:
+    try:
+        exigir_limpo(texto, "log")
+    except Exception:
+        return
+    print(texto, flush=flush)
+
 def processar(i: dict, me: dict, modelo: str) -> str:
     pc.checkout(i["id"], me["id"])
     if not i.get("description"):   # inbox traz item compacto; busca a issue completa (t419)
@@ -73,7 +80,7 @@ def processar(i: dict, me: dict, modelo: str) -> str:
     revisao = os.environ.get("PQBR_MODELO_REVISAO") or router9.combo("revisao")
     if revisao and re.search(r"terceira[_ ]rodada|desempate", pedido, re.I):
         modelo = revisao   # t419: desempate do Auditor vai ao combo de revisão (família distinta)
-    print(f"pqbr-kit: modelo={modelo} descricao={len(i.get('description') or '')}", flush=True)
+    _imprimir_limpo(f"pqbr-kit: modelo={modelo} descricao={len(i.get('description') or '')}", flush=True)
     erro = None
     for tentativa in (1, 2):
         m_t = modelo if tentativa == 1 else revisao   # t421: 2ª tentativa após saída inválida vai ao core-revisao
@@ -106,10 +113,10 @@ def main() -> int:
     itens = [pc.issue(alvo)] if alvo else [x for x in pc.inbox() if x.get("status") in ("todo", "in_progress")]
     falhou = False
     for i in itens[:3]:
-        r = processar(i, me, modelo); print(f"pqbr-kit: {i.get('identifier')} -> {r}")
+        r = processar(i, me, modelo); _imprimir_limpo(f"pqbr-kit: {i.get('identifier')} -> {r}")
         if r != "ok": falhou = True
     if not itens:
-        print("pqbr-kit: nada na fila", [(x.get("identifier"), x.get("status")) for x in pc.inbox()][:5])
+        _imprimir_limpo(f"pqbr-kit: nada na fila {[(x.get('identifier'), x.get('status')) for x in pc.inbox()][:5]}")
     return 1 if falhou else 0
 
 

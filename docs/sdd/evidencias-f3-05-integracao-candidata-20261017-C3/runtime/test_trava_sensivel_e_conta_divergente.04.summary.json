@@ -1,0 +1,29 @@
+{
+  "workflow_id": "teste-f3-05-candidato-sessao-5eaeb31d3929ec9bb1c14258d1ed7bafebc1a1df2cb7e52a6bdf5de741830bf0-op-6c28dfd58d2efb6d5e355823cb8705554a593858912654c2c040a5d4e19667f6",
+  "run_id": "01a14aa9-6ae8-7163-9e27-7a8a69700edd",
+  "eventos": 25,
+  "replay": "ok",
+  "activities": [
+    {
+      "nome": "triagem_jev",
+      "fila": "teste-f3-05-candidato-wf-test_trava_sensivel_e_conta_divergente",
+      "max_tentativas": 3,
+      "id": "1",
+      "timeout_s": 120
+    },
+    {
+      "nome": "intervir_agente",
+      "fila": "teste-f3-05-candidato-camofox-test_trava_sensivel_e_conta_divergente",
+      "max_tentativas": 1,
+      "id": "intervencao-1",
+      "timeout_s": 631
+    },
+    {
+      "nome": "registrar_correcao",
+      "fila": "teste-f3-05-candidato-wf-test_trava_sensivel_e_conta_divergente",
+      "max_tentativas": 3,
+      "id": "3",
+      "timeout_s": 60
+    }
+  ]
+}

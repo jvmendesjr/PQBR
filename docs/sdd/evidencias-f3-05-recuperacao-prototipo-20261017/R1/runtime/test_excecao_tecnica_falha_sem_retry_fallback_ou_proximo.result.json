@@ -1,0 +1,21 @@
+{
+  "excecao_propagada": true,
+  "sem_retry": true,
+  "aceito_seguinte_nao_executado": true,
+  "calls": [
+    {
+      "sessao": "test_excecao_tecnica_falha_sem_retry_fallback_ou_proximo",
+      "passo": "acao-falha",
+      "inicio": 411883.64752166,
+      "fim": 411883.688614575,
+      "fila": "teste-f3-05-candidato-camofox-test_excecao_tecnica_falha_sem_retry_fallback_ou_proximo",
+      "tentativa": 1,
+      "workflow_id": "teste-f3-05-candidato-sessao-12f8bdf97ec05bbc1f4e3c4d095420b583c516a153e0bf7ad007084ecc5dd46c-op-0e07b8daee992d1e972944d343e9e34e5bf6511ec0f0f55add331c52c0fff33d"
+    }
+  ],
+  "max_sessao": {
+    "test_excecao_tecnica_falha_sem_retry_fallback_ou_proximo": 1
+  },
+  "max_global": 1,
+  "registros": []
+}

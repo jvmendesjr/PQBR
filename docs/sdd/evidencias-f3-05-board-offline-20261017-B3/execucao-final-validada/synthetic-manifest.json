@@ -1,0 +1,17 @@
+{
+  "issue_id": "issue-synthetic-B3",
+  "interaction_id": "interaction-synthetic-B3",
+  "company_id": "company-synthetic",
+  "ticket": "SYNTHETIC-B3",
+  "board_user": "human-synthetic-tutibom",
+  "board_profile": "board-synthetic-authorized",
+  "scope_id": "scope-synthetic-B3-once",
+  "session_id": "session-synthetic-B3",
+  "operation_id": "second-synthetic-accepted",
+  "idempotency_key": "idempotency-synthetic-B3-once",
+  "description": "Uma única rodada sintética. Primeira já FAILED, uma tentativa, sem retry ou reexecução. Somente a segunda já aceita e pendente pode retomar uma vez. Temporal Server 1.32.1 descartável somente após autorização específica, rede interna isolada, Activities falsas e armazenamento descartável. Sem Workers persistentes, integrações reais, Discord, produção, publicação, deploy ou mudança da política de falha técnica. issueId e interactionId devem ser exclusivamente os IDs do ticket e da própria confirmação aceita, fixados no manifesto ativo e vinculados integralmente ao snapshot e receipt, nunca IDs de outra autorização. IDs de escopo exatos autorizados: {\"idempotencyKey\":\"idempotency-synthetic-B3-once\",\"operationId\":\"second-synthetic-accepted\",\"scopeId\":\"scope-synthetic-B3-once\",\"sessionId\":\"session-synthetic-B3\"}",
+  "payload_json": "{\"acceptLabel\":\"Autorizar execução única\",\"allowDeclineReason\":true,\"detailsMarkdown\":\"Uma única rodada sintética. Primeira já FAILED, uma tentativa, sem retry ou reexecução. Somente a segunda já aceita e pendente pode retomar uma vez. Temporal Server 1.32.1 descartável somente após autorização específica, rede interna isolada, Activities falsas e armazenamento descartável. Sem Workers persistentes, integrações reais, Discord, produção, publicação, deploy ou mudança da política de falha técnica. issueId e interactionId devem ser exclusivamente os IDs do ticket e da própria confirmação aceita, fixados no manifesto ativo e vinculados integralmente ao snapshot e receipt, nunca IDs de outra autorização. IDs de escopo exatos autorizados: {\\\"idempotencyKey\\\":\\\"idempotency-synthetic-B3-once\\\",\\\"operationId\\\":\\\"second-synthetic-accepted\\\",\\\"scopeId\\\":\\\"scope-synthetic-B3-once\\\",\\\"sessionId\\\":\\\"session-synthetic-B3\\\"}\",\"prompt\":\"Autoriza uma única prova sintética deste escopo exato, sem efeitos externos?\",\"rejectLabel\":\"Não autorizar\",\"supersedeOnUserComment\":false,\"version\":1}",
+  "valid_from": 1792274280,
+  "valid_until": 1792275000,
+  "max_snapshot_age": 60
+}

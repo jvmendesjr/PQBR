@@ -1,0 +1,16 @@
+{
+  "serverVersion": "1.32.1",
+  "capabilities": {
+    "signalAndQueryHeader": true,
+    "internalErrorDifferentiation": true,
+    "activityFailureIncludeHeartbeat": true,
+    "supportsSchedules": true,
+    "encodedFailureAttributes": true,
+    "buildIdBasedVersioning": true,
+    "upsertMemo": true,
+    "eagerWorkflowStart": true,
+    "sdkMetadata": true,
+    "countGroupByExecutionStatus": true,
+    "serverScaledDeployments": true
+  }
+}

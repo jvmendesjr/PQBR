@@ -16,7 +16,7 @@ async def main() -> None:
     c = await client()
     w = Worker(c, task_queue=FILA_CAMOFOX, workflows=[CamofoxSaudeWorkflow],
                activities=[camofox_saude, camofox_acao_stub, acesso_google_camofox, restaurar_sessao_camofox, auditor_gemini], max_concurrent_activities=1)
-    print(f"worker camofox em {ADDR} ns={NS} fila={FILA_CAMOFOX} (concorrência 1)", flush=True)
+    logging.getLogger(__name__).info(f"worker camofox em {ADDR} ns={NS} fila={FILA_CAMOFOX} (concorrência 1)")
     await w.run()
 
 

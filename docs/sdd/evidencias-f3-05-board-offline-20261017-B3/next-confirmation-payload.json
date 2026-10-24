@@ -1,0 +1,9 @@
+{
+  "version": 1,
+  "prompt": "Autoriza uma única prova sintética deste escopo exato, sem efeitos externos?",
+  "acceptLabel": "Autorizar execução única",
+  "rejectLabel": "Não autorizar",
+  "allowDeclineReason": true,
+  "detailsMarkdown": "Uma única rodada sintética. Primeira já FAILED, uma tentativa, sem retry ou reexecução. Somente a segunda já aceita e pendente pode retomar uma vez. Temporal Server 1.32.1 descartável somente após autorização específica, rede interna isolada, Activities falsas e armazenamento descartável. Sem Workers persistentes, integrações reais, Discord, produção, publicação, deploy ou mudança da política de falha técnica. issueId e interactionId devem ser exclusivamente os IDs do ticket e da própria confirmação aceita, fixados no manifesto ativo e vinculados integralmente ao snapshot e receipt, nunca IDs de outra autorização. IDs de escopo exatos autorizados: {\"idempotencyKey\":\"pqbr-f3-05-B3-next-single-proof-v1\",\"operationId\":\"second-B3-next-accepted-v1\",\"scopeId\":\"scope-B3-next-once-v1\",\"sessionId\":\"session-B3-next-disposable-v1\"}",
+  "supersedeOnUserComment": false
+}

@@ -1,0 +1,33 @@
+{
+  "status": "PASSED",
+  "protected_files": 115,
+  "protected_files_unchanged_excluding_roadmap": 114,
+  "changed_preexisting": [
+    "docs/ROADMAP.md"
+  ],
+  "roadmap_change_exact_note_only": true,
+  "worker_properties_unchanged": true,
+  "worker_names": [
+    "pqbr-camofox-worker.service",
+    "pqbr-episodio-worker.service",
+    "pqbr-notebooklm-worker.service",
+    "pqbr-temporal-worker.service"
+  ],
+  "actual_sigkill_returncodes": 4,
+  "final_suite": "execucao-final-validada/result.json",
+  "files_verified": [
+    "candidate.py",
+    "fixtures.py",
+    "crash_child.py",
+    "test_candidate.py",
+    "run_offline.py",
+    "README.md",
+    "PROXIMA-AUTORIZACAO.md",
+    "next-confirmation-payload.json",
+    "next-wire-payload.template.json",
+    "roadmap-note.md",
+    "execucao-final-validada/result.json",
+    "execucao-final-validada/tests.log"
+  ],
+  "limits": "Baseline seletivo de arquivos permitidos e propriedades dos Workers; não é auditoria global do host nem hash dos conteúdos das units."
+}

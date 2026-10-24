@@ -1,7 +1,7 @@
 # Blueprint — Módulo de Produção de Vídeo
 
 > **Estado:** proposta documental; não implementado.
-> **Data da pesquisa/atualização:** 2026-10-14.
+> **Data da pesquisa-base:** 2026-10-14. **Atualização documental de acesso/uso:** 2026-10-17; proposta, sem implementação ou geração.
 > **Escopo desta entrega:** desenho do módulo, papéis, contratos, fases, riscos e critérios de teste. Não instalar extensões, alterar código/configuração, autenticar contas, criar conectores, fazer uploads ou publicar.
 
 ## 1. Síntese executiva
@@ -95,7 +95,7 @@ Temporal — VideoProductionWorkflow / EpisodioWorkflow
 Interface conceitual `VideoProviderAdapter`:
 
 - `capabilities()`: entradas, aspect ratios, durações, áudio, edição/exportação e limitações observadas.
-- `preflight(request)`: elegibilidade da conta/sessão, estado do site, quota/saldo visível e permissão da etapa solicitada.
+- `preflight(request)`: aplicar o contrato de acesso/uso proposto da §6 antes de qualquer submissão: perfil PQBR exclusivo, conta/titularidade, consentimento/privacidade, quota/custo e autorização específica da etapa. Acesso não equivale a permissão para gerar; fallback Vids exige seu próprio pré-voo.
 - `submit(scene_request)`, `wait(job_ref)`, `collect(job_ref)`, `inspect(artifact)`, `cancel_if_supported(job_ref)`.
 - Retornar `ProviderJob` e `ArtifactRecord` com origem, versão do adapter, hash do request, tempos, quota observada e evidência não sensível.
 - Em timeout ambíguo, reconciliar histórico/artefatos antes de repetir; não criar duplicata.
@@ -148,6 +148,32 @@ Schemas abaixo são nomes/intenções para validação futura; nenhum código fo
 - `QualityReview`: integridade técnica, fidelidade ao roteiro, consistência de personagem/objetos/cenário, legibilidade mobile, áudio, direitos/risco, defeitos e nota por métrica; separar defeitos de segurança (bloqueadores) de preferências editoriais.
 - `ProductionManifest`: ordem de cenas, escolhas/rejeições de variantes com justificativa, cortes, narração/SFX, mapeamento de marca, versão FFmpeg/presets, saídas e checksum.
 
+### Contrato proposto de pré-voo de acesso e uso — Flow/Vids
+
+Este contrato complementa `VideoProductionRequest`, `PlatformProfile`, `QuotaObservation` e `ProviderJob`; **é proposta documental**, não schema implementado, aprovação canônica nova ou aceite operacional. Flow permanece principal e Vids fallback. A leitura/navegação autorizada e o aceite de um aviso não autorizam criar projeto, enviar arquivos, gerar mídia, consumir créditos, comprar plano ou publicar.
+
+**Campos propostos, a versionar na Fase 1 do roadmap do módulo:**
+
+| Vínculo existente | Dados mínimos propostos (sem segredos/PII) |
+|---|---|
+| `PlatformProfile` | Produto/domínio oficial; instância `pqbr-camofox`, endpoint `127.0.0.1:9387`, `userId=pqbr`, perfil persistente e fila `camofox-pqbr`; referência protegida à conta esperada e resultado da conferência de conta/titularidade na UI, sem nome/e-mail no ledger. |
+| `VideoProductionRequest` | Escopo da ação (`access_only` ou geração especificamente autorizada), provedor/cenas/prompts e referências por hash/versão, modelo/duração/variantes, orçamento máximo aprovado e referência da autorização humana autenticada, com autoria, instante e validade/escopo. Mudança material exige nova autorização. |
+| `QuotaObservation` | Produto/feature/modelo; plano e saldo/limite **visíveis** com unidade, instante/fuso, fonte oficial e referência de evidência sanitizada; custo previsto por geração e renovação/janela separadamente, com `unknown` quando ausentes. Saldo não é quota garantida nem autorização. Não converter créditos Flow em quota Vids. |
+| Resultado de `preflight` vinculado ao request/job | Referência do aviso/versão de privacidade visível, decisão/autorização de consentimento e pós-condição; marketing e pesquisa `false`; estado de conta/consentimento/quota/custo (`confirmed`/`unknown`/`blocked`), evidências e motivo de pausa; separar `access_ready` de `generation_ready`. `unknown` é dado válido, mas não libera geração. |
+
+**Sequência/gate proposto antes do primeiro uso e novamente antes de gerar:**
+
+1. **Sessão exclusiva:** usar somente o mesmo perfil persistente `userId=pqbr` da instância PQBR em `127.0.0.1:9387`. O Camofox global em `9377` é de outro contexto e fica fora desta rota; não criar perfil/processo/login paralelo, copiar/capturar sessão nem interceptar cookies. A implementação futura segue Activity Temporal/fila serializada, sem alegar que as pendências F4C-05/06/08 já foram resolvidas.
+2. **Conta e titularidade pela UI oficial:** comparar a identidade autenticada com a conta de produção autorizada e conferir elegibilidade/assinatura quando expostas. Identidade exibida não prova sozinha direitos sobre inputs ou titularidade contratual; divergência ou vínculo incerto pausa em `PAUSED_AUTH` e exige esclarecimento do proprietário. Não trocar conta automaticamente.
+3. **Privacidade/consentimento antes do primeiro uso:** ler o aviso e aceitar somente no escopo humano autorizado, mantendo marketing e pesquisa desativados. Rolar pelo fluxo normal para habilitar o botão, clicar uma vez e verificar a pós-condição; não forçar controles nem presumir aceite porque houve clique. Novo aviso, opção obrigatória inesperada, opt-in incerto ou ausência de pós-condição pausa em `PAUSED_REVIEW` (ou `PAUSED_AUTH` se envolver autenticação). O aceite específico já informado em 17/10 está registrado na §9; não é consentimento genérico para avisos futuros.
+4. **Quota e custo:** conferir na UI oficial plano/feature, saldo/quota/unidade, custo do modelo/duração/variantes e janela/renovação aplicável; registrar fonte, data/hora e evidência sanitizada. Ausência ou contradição permanece `unknown`. Não assumir custo zero, franquia renovada, limite público ou capacidade diária. Com quota/custo necessário incerto, pausar em `PAUSED_QUOTA`; renovação não visível impede depender de uma janela futura presumida. Não gerar para descobrir o custo.
+5. **Autorização específica de geração:** somente após os gates existentes e pré-voo válido, exigir autorização humana autenticada que vincule provedor, cenas/prompts, referências, modelo/variantes e teto de consumo/custo. Permissão para navegar/aceitar privacidade, plano PRO ou créditos visíveis não bastam. Sem autorização válida, manter `PAUSED_REVIEW`; não criar projeto/job, não gerar mídia nem acionar fallback. Upload e publicação continuam sujeitos a permissões separadas.
+6. **Revalidação e prova:** mudança de conta, consentimento, saldo, custo, modelo ou interface invalida a liberação afetada. Revalidar antes da ação; registrar o motivo e pausar se houver incerteza. Evidência contém somente dados mínimos sanitizados/referência protegida; nunca cookies, tokens, sessão, nome/e-mail ou screenshot bruto com PII. A foto de acesso da §9 não fecha smoke, teste operacional ou produção.
+
+**Fila, estados e reconciliação:** aproveitar somente os padrões conceituais permitidos da §8: painel derivado de Temporal/Postgres; vínculo estável produção↔cena↔prompt↔referência (IDs/hash/versão)↔job↔artefato; uma operação idempotente por cena/variante. Após timeout/ACK incerto, reconciliar apenas por leitura da UI/histórico/artefato antes de considerar nova submissão; sem certeza, preservar pendência e pausar, sem repetir o efeito. Não prometer exactly-once externo nem mudar a política operacional de exceções por esta proposta.
+
+**Proibições preservadas da §8:** nada de extensões executadas, requests privados, interceptação de requests/cookies, captura de sessão, hooks (inclusive `fetch`/XHR/telemetria), execução de tokens de CAPTCHA, bypass de CAPTCHA/bloqueios/quotas ou ocultação de automação. Desafio ou bloqueio pausa e escala, sem contorno, conta secundária ou repetição cega.
+
 Cada tabela/linha deve registrar quem/qual componente fez a ação, `workflow_id`, tentativa, timestamps e versão de contrato. Nunca registrar senha, cookie, token, prompt privado ou PII em log/ticket.
 
 ## 7. Workflow, estados e retomada
@@ -157,6 +183,7 @@ Estados sugeridos: `REQUESTED` → `RESEARCH_READY` → `SCRIPT_READY` → `VISU
 Terminais de controle: `PAUSED_QUOTA`, `PAUSED_AUTH`, `PAUSED_SITE_CHANGE`, `PAUSED_REVIEW`, `FAILED_RETRYABLE`, `FAILED_FINAL`. Publicar/upload nunca é transição automática do módulo-piloto.
 
 Regras de execução:
+0. `PLATFORM_PREFLIGHT` só libera `QUEUED` de geração com conta, consentimento, quota/custo e autorização específica válidos conforme §6. Acesso confirmado sem autorização de geração permanece sem submissão; o fallback Vids não herda a liberação do Flow.
 
 1. Um workflow por produção e um job por cena/variante, com idempotency key estável. Uma repetição só é permitida após verificar que o job/artefato anterior não existe ou foi explicitamente classificado como inválido.
 2. Camofox é serializado; a sessão Google existente mantém seu dono e fila únicos. Testes Meta usam sessão/conta Meta aprovada, sem cruzar cookies. Nenhuma sessão duplicada ou `userId` improvisado.
@@ -195,6 +222,19 @@ Informações consultadas em **2026-10-14**. Condições podem mudar; a UI e a c
 | **Gemini Web (Gemini Apps)** | Candidato terceiro, não no ciclo atual. A ajuda de contas pessoais exige plano Google AI para vídeo; limites são compute-based, renovam em janela e não há contagem fixa universal de vídeos/dia. A configuração de marca visível é específica do Gemini Apps e não governa Flow/Vids. | Adapter de browser separado; não inferir capacidade do Gemini a partir dos créditos Flow. Só planejar teste depois de Flow/Vids, confirmando UI, quota, watermarks e política na conta. |
 | **Meta Vibes** | Quarto candidato/futuro, não no ciclo atual. A Meta não publica no material consultado uma contagem universal diária aplicável à conta; relatos comunitários variam. | Manter `daily_quota=unknown`; nenhum agente tenta substituir silenciosamente outro provider, nem contorna bloqueio/limite. Primeiro preflight e smoke se o usuário decidir abrir essa fase. |
 
+### Pré-voo observado em 17/10/2026 — fotografia, não quota operacional
+
+**Fonte/evidência:** atualização recebida do proprietário/coordenador nesta sessão em **2026-10-17T20:14:18-03:00**, relatando navegação nas UIs oficiais Flow/Vids pelo Camofox próprio PQBR. Registro textual sanitizado; esta edição documental não repetiu navegação nem produziu captura de tela. A conta exibida foi conferida como a conta autorizada do proprietário; nome/e-mail não são reproduzidos no repositório. Esta evidência não é auditoria independente de titularidade ou dos gates operacionais.
+
+| Plataforma/item | Observação relatada | Limite/pendência |
+|---|---|---|
+| Flow — privacidade | Autorização humana para prosseguir no mesmo aviso; rolagem normal habilitou “Continuar”, clicado uma única vez. Marketing e pesquisa permaneceram desmarcados; não apareceu outro consentimento. Flow abriu após a ação. | Onboarding desse aviso confirmado pelo relato, sem inferir consentimento para avisos futuros ou para geração. |
+| Flow — conta/plano/saldo | Conta esperada exibida; rótulo **PRO** e **1.050 créditos** visíveis. | Fotografia de saldo naquela leitura; não limite recorrente, promessa de capacidade nem autorização de consumo. **Custo por geração e data de renovação não mostrados**, seguem `unknown`/por confirmar. |
+| Vids — acesso | UI abriu na mesma conta/perfil PQBR; rótulo **“Assinatura do Google”**. | Plano específico, quota/saldo, custo e renovação não confirmados; não inferir PRO ou franquia por analogia ao Flow. |
+| Efeitos | Nenhum projeto aberto/criado; nenhuma mídia gerada/alterada e nenhum consumo de créditos relatado. | Nenhum smoke de geração, teste operacional, implementação ou produção concluído. Autorização específica de geração segue ausente. |
+
+O acesso/consentimento observado pode informar o futuro pré-voo, mas **não libera geração**. Confirmar custo/renovação Flow, quota/condições Vids e demais gates/autorização antes de qualquer efeito; não gerar mídia para preencher essas lacunas.
+
 ### Impacto preliminar da cota Vids
 
 Dois Shorts diários de 50–70 s representam 60 Shorts/mês, ou aproximadamente **3.000–4.200 segundos de vídeo final**. Se cada Short usar cinco a sete clipes de até 10 s, são **300–420 gerações de clipe/mês**. As referências públicas do Vids (até 50 clipes/mês e/ou 500 s/mês, dependendo da documentação/conta) ficam muito abaixo disso; a referência de 500 s equivale a cerca de 7–10 Shorts completos de 50–70 s antes de refações. Isso não invalida um piloto do Vids, mas impede prometer que ele sustente sozinho dois vídeos diários. A escolha de cadência/fallback exige medir a cota, confirmar o plano e avaliar produção híbrida permitida.
@@ -208,7 +248,7 @@ Dois Shorts diários de 50–70 s representam 60 Shorts/mês, ou aproximadamente
 
 ### Sources e validade
 
-A documentação oficial de quota/funcionalidade descreve limites distintos por conta/plano. `QuotaObservation` deve armazenar o valor realmente visível, unidade, hora, conta/feature sem PII, fonte e confiança; sem valor visível, tratar como `unknown` e limitar-se ao smoke autorizado.
+A documentação oficial de quota/funcionalidade descreve limites distintos por conta/plano. `QuotaObservation` deve armazenar o valor realmente visível, unidade, hora, conta/feature sem PII, fonte e confiança; sem valor visível, tratar como `unknown` e limitar-se à leitura autorizada; geração/smoke permanece bloqueada até satisfazer o contrato proposto da §6.
 
 ## 10. Visual, áudio e pós-produção
 
@@ -235,7 +275,7 @@ A documentação oficial de quota/funcionalidade descreve limites distintos por 
 
 ## 11. Plano de validação e critérios de aceite
 
-Todo piloto é **não publicável**: sem postagem no YouTube, upload público, compartilhamento público ou gravação no Drive. A análise documental atual não acessa conta; a fase de teste exige as permissões/acessos previstos no projeto e seguirá o gate de sessão.
+Todo piloto é **não publicável**: sem postagem no YouTube, upload público, compartilhamento público ou gravação no Drive. Esta atualização documental apenas registra o relato de acesso/consentimento da §9, sem acessar conta ou executar teste; a fase de teste exige as permissões/acessos previstos no projeto e seguirá o gate de sessão.
 
 1. **Pré-condições:** resolver na ordem aplicável as lacunas Paperclip/Temporal e o bloqueio do E2E; verificar status da organização Paperclip; preparar atualização canônica controlada para stickmen/fichas e atualizar testes/prompts no procedimento próprio. Não marcar estas lacunas concluídas por este blueprint.
 2. **Consolidar Flow:** um provider, uma sessão, uma cena; confirmar preflight, envio/espera/coleção permitida, IDs/idempotência, consumo e recuperação sem duplicata. Expandir para 5–7 cenas apenas após critérios passarem.

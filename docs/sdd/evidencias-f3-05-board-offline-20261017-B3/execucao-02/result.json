@@ -1,0 +1,413 @@
+{
+  "status": "PASSED",
+  "offline_only": true,
+  "tests_run": 39,
+  "subtests": 193,
+  "failures": 0,
+  "errors": 0,
+  "subtest_failures": 0,
+  "negative_cases_with_zero_effects": 191,
+  "negative_cases": [
+    "ticket_createdByUserId",
+    "ticket_responsibleUserId",
+    "interaction_createdByUserId",
+    "interaction_addresseeUserId",
+    "interaction_resolvedByUserId",
+    "ticket_nonnull_createdByAgentId",
+    "ticket_nonnull_executionRunId",
+    "ticket_nonnull_checkoutRunId",
+    "ticket_nonnull_executionLockedAt",
+    "ticket_nonnull_completedAt",
+    "ticket_nonnull_cancelledAt",
+    "interaction_nonnull_createdByAgentId",
+    "interaction_nonnull_addresseeAgentId",
+    "interaction_nonnull_resolvedByAgentId",
+    "interaction_nonnull_resolvedByRunId",
+    "interaction_nonnull_sourceRunId",
+    "board_{\"identity_kind\":\"board\",\"observed_at\":1792274400,\"profile\":\"other-profile\",\"user_id\":\"human-synthetic-tutibom\"}",
+    "board_{\"identity_kind\":\"board\",\"observed_at\":1792274400,\"profile\":\"board-synthetic-authorized\",\"user_id\":\"other-human\"}",
+    "board_{\"identity_kind\":\"agent\",\"observed_at\":1792274400,\"profile\":\"board-synthetic-authorized\",\"user_id\":\"human-synthetic-tutibom\"}",
+    "board_{\"identity_kind\":\"run\",\"observed_at\":1792274400,\"profile\":\"board-synthetic-authorized\",\"user_id\":\"human-synthetic-tutibom\"}",
+    "board_{\"identity_kind\":\"Board\",\"observed_at\":1792274400,\"profile\":\"board-synthetic-authorized\",\"user_id\":\"human-synthetic-tutibom\"}",
+    "constructed_snapshot_extra",
+    "duplicate_issue",
+    "replay_consume",
+    "cli_('issue', 'interactions', 'issue-synthetic-B3', '--json')",
+    "cli_('issue', 'create', 'issue-synthetic-B3', '--json')",
+    "cli_('issue', 'resolve', 'issue-synthetic-B3', '--json')",
+    "cli_('issue', 'get', 'issue-synthetic-B3', '--json', '--approve')",
+    "target_wrong_issueId",
+    "target_wrong_interactionId",
+    "target_wrong_scopeId",
+    "target_wrong_sessionId",
+    "target_wrong_operationId",
+    "target_wrong_idempotencyKey",
+    "target_extra",
+    "target_not_pending",
+    "first_not_terminal",
+    "mismatch_ticket_id",
+    "mismatch_ticket_companyId",
+    "mismatch_ticket_identifier",
+    "mismatch_ticket_status",
+    "mismatch_ticket_description",
+    "mismatch_interaction_id",
+    "mismatch_interaction_issueId",
+    "mismatch_interaction_companyId",
+    "mismatch_interaction_kind",
+    "mismatch_interaction_idempotencyKey",
+    "manifest_scope_scope_id",
+    "manifest_scope_session_id",
+    "manifest_scope_operation_id",
+    "idempotency_collision",
+    "json_0",
+    "json_1",
+    "json_2",
+    "json_3",
+    "json_4",
+    "json_5",
+    "json_6",
+    "json_7",
+    "json_8",
+    "json_9",
+    "json_10",
+    "json_11",
+    "context_from_json",
+    "ticket_missing_id",
+    "ticket_wrong_type_id",
+    "ticket_missing_companyId",
+    "ticket_wrong_type_companyId",
+    "ticket_missing_identifier",
+    "ticket_wrong_type_identifier",
+    "ticket_missing_status",
+    "ticket_wrong_type_status",
+    "ticket_missing_createdByUserId",
+    "ticket_wrong_type_createdByUserId",
+    "ticket_missing_responsibleUserId",
+    "ticket_wrong_type_responsibleUserId",
+    "ticket_missing_description",
+    "ticket_wrong_type_description",
+    "ticket_missing_createdByAgentId",
+    "ticket_wrong_type_createdByAgentId",
+    "ticket_missing_executionRunId",
+    "ticket_wrong_type_executionRunId",
+    "ticket_missing_checkoutRunId",
+    "ticket_wrong_type_checkoutRunId",
+    "ticket_missing_executionLockedAt",
+    "ticket_wrong_type_executionLockedAt",
+    "ticket_missing_completedAt",
+    "ticket_wrong_type_completedAt",
+    "ticket_missing_cancelledAt",
+    "ticket_wrong_type_cancelledAt",
+    "ticket_extra",
+    "interaction_missing_id",
+    "interaction_wrong_type_id",
+    "interaction_missing_issueId",
+    "interaction_wrong_type_issueId",
+    "interaction_missing_companyId",
+    "interaction_wrong_type_companyId",
+    "interaction_missing_kind",
+    "interaction_wrong_type_kind",
+    "interaction_missing_status",
+    "interaction_wrong_type_status",
+    "interaction_missing_createdByUserId",
+    "interaction_wrong_type_createdByUserId",
+    "interaction_missing_addresseeUserId",
+    "interaction_wrong_type_addresseeUserId",
+    "interaction_missing_resolvedByUserId",
+    "interaction_wrong_type_resolvedByUserId",
+    "interaction_missing_requestedResolverPolicy",
+    "interaction_wrong_type_requestedResolverPolicy",
+    "interaction_missing_effectiveResolverPolicy",
+    "interaction_wrong_type_effectiveResolverPolicy",
+    "interaction_missing_resolverPolicy",
+    "interaction_wrong_type_resolverPolicy",
+    "interaction_missing_resolverPolicyProvenance",
+    "interaction_wrong_type_resolverPolicyProvenance",
+    "interaction_missing_effectiveResolverPolicySource",
+    "interaction_wrong_type_effectiveResolverPolicySource",
+    "interaction_missing_continuationPolicy",
+    "interaction_wrong_type_continuationPolicy",
+    "interaction_missing_idempotencyKey",
+    "interaction_wrong_type_idempotencyKey",
+    "interaction_missing_resolvedAt",
+    "interaction_wrong_type_resolvedAt",
+    "interaction_missing_payload",
+    "interaction_wrong_type_payload",
+    "interaction_missing_result",
+    "interaction_wrong_type_result",
+    "interaction_missing_createdByAgentId",
+    "interaction_wrong_type_createdByAgentId",
+    "interaction_missing_addresseeAgentId",
+    "interaction_wrong_type_addresseeAgentId",
+    "interaction_missing_resolvedByAgentId",
+    "interaction_wrong_type_resolvedByAgentId",
+    "interaction_missing_resolvedByRunId",
+    "interaction_wrong_type_resolvedByRunId",
+    "interaction_missing_sourceRunId",
+    "interaction_wrong_type_sourceRunId",
+    "interaction_extra",
+    "payload_extra",
+    "payload_bool_version",
+    "payload_prompt",
+    "payload_whitespace",
+    "payload_supersede",
+    "result_extra",
+    "result_outcome",
+    "result_bool_version",
+    "result_version",
+    "not_opted",
+    "truthy_opt",
+    "real_cli_forbidden",
+    "real_target_forbidden",
+    "tampered_outbox",
+    "P119_PQBR-119",
+    "P119_d3b2eb41-63e5-4e7e-8cb7-06672e3ddab9",
+    "P119_815e9e44-cf90-45b4-86a2-23aafd45d0fc",
+    "policy_requestedResolverPolicy",
+    "policy_effectiveResolverPolicy",
+    "policy_resolverPolicy",
+    "policy_resolverPolicyProvenance",
+    "policy_effectiveResolverPolicySource",
+    "policy_continuationPolicy",
+    "receipt_unknown",
+    "receipt_version",
+    "receipt_snapshot",
+    "receipt_manifest",
+    "tampered_receipt",
+    "changed_accepted_binding",
+    "status_pending",
+    "status_rejected",
+    "status_stale",
+    "status_cancelled",
+    "status_superseded",
+    "status_expired",
+    "status_ACCEPTED",
+    "rejected_before_send",
+    "old_observation",
+    "future_observation",
+    "inactive_scope",
+    "not_yet_active",
+    "expired_at_send",
+    "bool_clock",
+    "bad_age_policy",
+    "resolvedAt_2026-10-16T21:59:00Z",
+    "resolvedAt_2026-10-17T22:01:00Z",
+    "resolvedAt_2026-10-17T21:59:00",
+    "resolvedAt_bad",
+    "resolvedAt_2026-10-17T21:59:00+03:00",
+    "wrong_ack_owner",
+    "stale_recovery",
+    "old_fenced_ack",
+    "duplicate_recovery"
+  ],
+  "subprocesses": 19,
+  "sigkill_injection_processes": 8,
+  "events": [
+    {
+      "event": "socket.__new__",
+      "disposition": "blocked"
+    },
+    {
+      "event": "subprocess.Popen",
+      "disposition": "allowed_python_harness",
+      "action": "consume"
+    },
+    {
+      "event": "os.posix_spawn",
+      "disposition": "allowed_python_harness",
+      "action": "consume"
+    },
+    {
+      "event": "subprocess.Popen",
+      "disposition": "allowed_python_harness",
+      "action": "consume"
+    },
+    {
+      "event": "os.posix_spawn",
+      "disposition": "allowed_python_harness",
+      "action": "consume"
+    },
+    {
+      "event": "subprocess.Popen",
+      "disposition": "allowed_python_harness",
+      "action": "consume"
+    },
+    {
+      "event": "os.posix_spawn",
+      "disposition": "allowed_python_harness",
+      "action": "consume"
+    },
+    {
+      "event": "subprocess.Popen",
+      "disposition": "allowed_python_harness",
+      "action": "consume"
+    },
+    {
+      "event": "os.posix_spawn",
+      "disposition": "allowed_python_harness",
+      "action": "consume"
+    },
+    {
+      "event": "subprocess.Popen",
+      "disposition": "allowed_python_harness",
+      "action": "consume"
+    },
+    {
+      "event": "os.posix_spawn",
+      "disposition": "allowed_python_harness",
+      "action": "consume"
+    },
+    {
+      "event": "subprocess.Popen",
+      "disposition": "allowed_python_harness",
+      "action": "consume"
+    },
+    {
+      "event": "os.posix_spawn",
+      "disposition": "allowed_python_harness",
+      "action": "consume"
+    },
+    {
+      "event": "subprocess.Popen",
+      "disposition": "allowed_python_harness",
+      "action": "consume"
+    },
+    {
+      "event": "os.posix_spawn",
+      "disposition": "allowed_python_harness",
+      "action": "consume"
+    },
+    {
+      "event": "subprocess.Popen",
+      "disposition": "allowed_python_harness",
+      "action": "consume"
+    },
+    {
+      "event": "os.posix_spawn",
+      "disposition": "allowed_python_harness",
+      "action": "consume"
+    },
+    {
+      "event": "subprocess.Popen",
+      "disposition": "allowed_python_harness",
+      "action": "send-lose-ack"
+    },
+    {
+      "event": "os.posix_spawn",
+      "disposition": "allowed_python_harness",
+      "action": "send-lose-ack"
+    },
+    {
+      "event": "subprocess.Popen",
+      "disposition": "allowed_python_harness",
+      "action": "send"
+    },
+    {
+      "event": "os.posix_spawn",
+      "disposition": "allowed_python_harness",
+      "action": "send"
+    },
+    {
+      "event": "subprocess.Popen",
+      "disposition": "allowed_python_harness",
+      "action": "send-kill-after"
+    },
+    {
+      "event": "os.posix_spawn",
+      "disposition": "allowed_python_harness",
+      "action": "send-kill-after"
+    },
+    {
+      "event": "subprocess.Popen",
+      "disposition": "allowed_python_harness",
+      "action": "send"
+    },
+    {
+      "event": "os.posix_spawn",
+      "disposition": "allowed_python_harness",
+      "action": "send"
+    },
+    {
+      "event": "subprocess.Popen",
+      "disposition": "allowed_python_harness",
+      "action": "send-kill-before"
+    },
+    {
+      "event": "os.posix_spawn",
+      "disposition": "allowed_python_harness",
+      "action": "send-kill-before"
+    },
+    {
+      "event": "subprocess.Popen",
+      "disposition": "allowed_python_harness",
+      "action": "send"
+    },
+    {
+      "event": "os.posix_spawn",
+      "disposition": "allowed_python_harness",
+      "action": "send"
+    },
+    {
+      "event": "subprocess.Popen",
+      "disposition": "allowed_python_harness",
+      "action": "issue"
+    },
+    {
+      "event": "os.posix_spawn",
+      "disposition": "allowed_python_harness",
+      "action": "issue"
+    },
+    {
+      "event": "subprocess.Popen",
+      "disposition": "allowed_python_harness",
+      "action": "consume"
+    },
+    {
+      "event": "os.posix_spawn",
+      "disposition": "allowed_python_harness",
+      "action": "consume"
+    },
+    {
+      "event": "subprocess.Popen",
+      "disposition": "allowed_python_harness",
+      "action": "send"
+    },
+    {
+      "event": "os.posix_spawn",
+      "disposition": "allowed_python_harness",
+      "action": "send"
+    },
+    {
+      "event": "subprocess.Popen",
+      "disposition": "allowed_python_harness",
+      "action": "consume-kill-cas"
+    },
+    {
+      "event": "os.posix_spawn",
+      "disposition": "allowed_python_harness",
+      "action": "consume-kill-cas"
+    },
+    {
+      "event": "subprocess.Popen",
+      "disposition": "allowed_python_harness",
+      "action": "consume-kill-commit"
+    },
+    {
+      "event": "os.posix_spawn",
+      "disposition": "allowed_python_harness",
+      "action": "consume-kill-commit"
+    }
+  ],
+  "actual_paperclip_calls": 0,
+  "actual_discord_calls": 0,
+  "actual_temporal_server_starts": 0,
+  "actual_external_effects": 0,
+  "runtime": "Python stdlib; fake Temporal backed by disposable SQLite",
+  "guarantees": "CAS local + outbox atomic + at-least-once fake delivery with durable fake dedupe; NOT real exactly-once",
+  "gates": {
+    "F3_05_G4": "OPEN",
+    "F05_06": "NO_ARM",
+    "F7_02_G7": "PAUSED",
+    "PQBR_114": "PAUSED"
+  }
+}

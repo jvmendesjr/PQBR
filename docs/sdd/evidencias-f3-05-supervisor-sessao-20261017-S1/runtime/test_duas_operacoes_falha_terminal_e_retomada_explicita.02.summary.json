@@ -1,0 +1,18 @@
+{
+  "workflow_id": "teste-f3-05-supervisor-60ffed94209811c799c265cbc5267132aac703fa02b9848318772373fb78d166-op-f555b80ad08f501adb396a95c78948ce18f204b3cf2c93b0b1930a006540a06e",
+  "run_id": "01a14b13-cf5a-7bb6-91c5-fb56c2f15c18",
+  "eventos": 19,
+  "replay": "ok",
+  "activities": [
+    {
+      "nome": "triagem_jev",
+      "fila": "teste-f3-05-candidato-wf-test_duas_operacoes_falha_terminal_e_retomada_explicita-supervisor",
+      "max_tentativas": 3
+    },
+    {
+      "nome": "intervir_agente",
+      "fila": "teste-f3-05-candidato-camofox-test_duas_operacoes_falha_terminal_e_retomada_explicita-supervisor",
+      "max_tentativas": 1
+    }
+  ]
+}

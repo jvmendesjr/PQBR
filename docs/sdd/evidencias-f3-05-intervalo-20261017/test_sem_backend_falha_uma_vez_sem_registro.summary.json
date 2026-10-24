@@ -1,0 +1,18 @@
+{
+  "teste": "test_sem_backend_falha_uma_vez_sem_registro",
+  "workflow_id": "f3-05-teste-1717ea78a1bf45569ca60f302d8d6323",
+  "replay": "ok",
+  "eventos": 11,
+  "atividades": [
+    {
+      "activity": "triagem_jev",
+      "attempt": 1,
+      "n": null
+    }
+  ],
+  "registros": [],
+  "resultado": null,
+  "falha": "WorkflowFailureError",
+  "timers": 0,
+  "esperas": []
+}

@@ -1,0 +1,22 @@
+test_unique_B3 (test_pqbr121.Prova121.test_unique_B3) ... Executing <Task pending name='Task-2' coro=<Prova121.test_unique_B3() running at /home/pc/Workspace/PQBR/docs/sdd/evidencias-f3-05-confirmacao-janela-20261017-B3-v2/test_pqbr121.py:145> wait_for=<Future pending cb=[<builtins.PyDoneCallback object at 0x7f4ce7166a30>(), Task.task_wakeup()] created at /home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py:448> cb=[_run_until_complete_cb() at /home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py:181] created at /home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/runners.py:100> took 0.105 seconds
+Completing activity as failed ({'activity_id': '1', 'activity_type': 'pqbr121_fake_intervention', 'attempt': 1, 'namespace': 'f3-05-supervisor', 'task_queue': 'pqbr121-B3-disposable-only', 'workflow_id': 'first-B3-next-failed-v1', 'workflow_run_id': '01a14c0e-f1f3-7781-9290-ffc765cd53bb', 'workflow_type': 'PQBR121B3SyntheticOperation'})
+Traceback (most recent call last):
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 351, in _handle_start_activity_task
+    result = await self._execute_activity(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 681, in _execute_activity
+    return await impl.execute_activity(input)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 889, in execute_activity
+    return await input.fn(*input.args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/docs/sdd/evidencias-f3-05-confirmacao-janela-20261017-B3-v2/test_pqbr121.py", line 106, in intervention
+    if p['operation']==FIRST:raise ApplicationError('intentional synthetic failure',type='SyntheticTechnicalFailure',non_retryable=True)
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+temporalio.exceptions.ApplicationError: SyntheticTechnicalFailure: intentional synthetic failure
+ok
+
+----------------------------------------------------------------------
+Ran 1 test in 1.707s
+
+OK

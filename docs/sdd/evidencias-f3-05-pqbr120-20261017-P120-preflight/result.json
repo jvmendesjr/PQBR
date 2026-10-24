@@ -1,0 +1,21 @@
+{
+  "status": "BLOCKED_BEFORE_RUNTIME",
+  "reason": "ACTIVE_AUTHORIZATION_MANIFEST_WITH_FIXED_VALIDITY_WINDOW_NOT_FOUND",
+  "observed_at": "2026-10-17T22:12:39.579841+00:00",
+  "issueId": "98da9ce7-a3ec-4ad4-b2dc-74d03aec559e",
+  "interactionId": "6c1f0383-239d-4d29-86ec-ed084df13753",
+  "idempotencyKey": "pqbr-f3-05-B3-next-single-proof-v1",
+  "canonical_get_checks_passed": true,
+  "manifest_and_expiry_validated": false,
+  "authorization_consumed_by_this_task": false,
+  "receipt_created_or_consumed": false,
+  "runtime_started": false,
+  "runtime_attempts": 0,
+  "containers_or_networks_created": 0,
+  "external_operational_effects": 0,
+  "pending_runtime_activities_created": 0,
+  "first_and_second_runtime_states": "NOT_TESTED",
+  "consumption_limit": "Nenhum consumo por esta tarefa. Ausência global de consumo não certificada: gate de manifesto bloqueou antes do exame transacional de recibos.",
+  "expiry_limit": "Não há expiresAt no GET nem manifesto real localizado com valid_from/valid_until; não inferir validade a partir de accepted/resolvedAt.",
+  "gates": "F3-05/G4 aberto; F05-06 no-arm; F7-02/G7 e PQBR-114 pausados."
+}

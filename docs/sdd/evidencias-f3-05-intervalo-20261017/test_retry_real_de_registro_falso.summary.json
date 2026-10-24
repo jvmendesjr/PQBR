@@ -1,0 +1,57 @@
+{
+  "teste": "test_retry_real_de_registro_falso",
+  "workflow_id": "f3-05-teste-14d07ed842474d05a9e60f4112f0e8b4",
+  "replay": "ok",
+  "eventos": 29,
+  "atividades": [
+    {
+      "activity": "triagem_jev",
+      "attempt": 1,
+      "n": null
+    },
+    {
+      "activity": "intervir_agente",
+      "attempt": 1,
+      "n": 1
+    },
+    {
+      "activity": "verificar_jev",
+      "attempt": 1,
+      "n": 1
+    },
+    {
+      "activity": "registrar_correcao",
+      "attempt": 1,
+      "n": null
+    },
+    {
+      "activity": "registrar_correcao",
+      "attempt": 2,
+      "n": null
+    },
+    {
+      "activity": "registrar_correcao",
+      "attempt": 3,
+      "n": null
+    }
+  ],
+  "registros": [
+    {
+      "resultado": "corrigido",
+      "tentativas": 1,
+      "motivo": "",
+      "proposta_script": "trocar seletor X por Y",
+      "chamar_jose": false
+    }
+  ],
+  "resultado": {
+    "resultado": "corrigido",
+    "tentativas": 1,
+    "motivo": "",
+    "proposta_script": "trocar seletor X por Y",
+    "chamar_jose": false
+  },
+  "falha": null,
+  "timers": 0,
+  "esperas": []
+}

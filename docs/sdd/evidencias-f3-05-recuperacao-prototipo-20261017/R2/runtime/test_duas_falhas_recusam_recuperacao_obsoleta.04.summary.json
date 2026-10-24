@@ -1,0 +1,22 @@
+{
+  "workflow_id": "teste-f3-05-recuperacao-52858e91c87ef0905db3e431b9f77a7fd42ce6ec4da4bd5bb534cf5e74eaab9e-op-50c6bddc2efa181291ed4ff667fae4dc332b9c3d983187e4ea6767691998db0c",
+  "run_id": "01a14ad1-ad58-723c-b62b-3ba793cb27fc",
+  "eventos": 19,
+  "replay": "ok",
+  "activities": [
+    {
+      "nome": "triagem_jev",
+      "fila": "teste-f3-05-candidato-wf-test_duas_falhas_recusam_recuperacao_obsoleta-recuperacao",
+      "max_tentativas": 3,
+      "id": "1",
+      "timeout_s": 120
+    },
+    {
+      "nome": "intervir_agente",
+      "fila": "teste-f3-05-candidato-camofox-test_duas_falhas_recusam_recuperacao_obsoleta-recuperacao",
+      "max_tentativas": 1,
+      "id": "intervencao-1",
+      "timeout_s": 867
+    }
+  ]
+}

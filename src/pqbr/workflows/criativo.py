@@ -18,11 +18,14 @@ TOM_EDITORIAL = (   # José 12/10 17:13/17:17; contrato §17
 PROMPT_ROTEIRO = (
     "Escreva o roteiro do Short sobre \"{tema}\" seguindo o contrato editorial e o bloco visual §16.7 do pacote PQBR: "
     "gancho até 3 s com a imagem literal da expressão, versão mais aceita + 'mas tem quem diga', ≥ 2 fontes deste caderno, "
-    "loop na última cena. Narrador único, sem nomes, ~50 s (cerca de 115 palavras), última fala exatamente \"" + CTA + "\". "
+    "loop na última cena. Narrador único, sem nomes, ~50 s (cerca de 115 palavras). "
+    "CTA final contextual: trocadilho ligado ao tema quando natural (tipo_cta='trocadilho_tema'); "
+    "senão, convite natural para seguir o canal (tipo_cta='convite_seguir'); "
+    f"fallback exato {CTA!r} (tipo_cta='fallback'). Nunca pedir comentários. "
     "Um personagem 2D sem nome descrito numa frase-ficha detalhada (idade, cabelo, roupa, traço marcante), repetida igual. "
     + TOM_EDITORIAL +
     "Uma cena por fala. Responda SÓ um JSON, sem texto fora dele, neste formato: "
-    '{{"episodio_id":"{slug}","titulo":"...","falas":["..."],"entidades_cena":["..."],'
+    '{{"episodio_id":"{slug}","titulo":"...","falas":["..."],"tipo_cta":"fallback","entidades_cena":["..."],'
     '"bloco_visual":{{"personagem":"...","cenas":[{{"fala":"...","acao":"...","enquadramento":"...","ambiente":"..."}}]}},'
     '"fontes":["URL ou título da fonte do caderno", "..."]}}')
 PROMPT_SEO = (
@@ -49,7 +52,7 @@ def roteiro_de_texto(texto: str, slug: str) -> tuple[dict, list[str]]:
     d["episodio_id"] = slug
     d.setdefault("bloco_visual", {})["estilo"] = ESTILO_PADRAO_2D
     fontes = [str(f) for f in d.get("fontes", []) if str(f).strip()]
-    r = RoteiroShort.model_validate({k: d.get(k) for k in ("episodio_id", "titulo", "falas", "entidades_cena", "bloco_visual")})
+    r = RoteiroShort.model_validate({k: d.get(k) for k in ("episodio_id", "titulo", "falas", "tipo_cta", "entidades_cena", "bloco_visual")})
     if len(fontes) < 2: raise ValueError("roteiro precisa de ≥ 2 fontes (§16.5)")
     if len(r.bloco_visual.cenas) < 4: raise ValueError("poucas cenas (mín. 4)")
     return r.model_dump(), fontes
@@ -57,7 +60,7 @@ def roteiro_de_texto(texto: str, slug: str) -> tuple[dict, list[str]]:
 
 def roteiro_markdown(r: dict, fontes: list[str]) -> str:
     bv = r["bloco_visual"]
-    return (f"# {r['titulo']}\n\n## Falas (narrador único)\n" + "\n".join(f"{i+1}. {f}" for i, f in enumerate(r["falas"])) +
+    return (f"# {r['titulo']}\n\n**Tipo de CTA:** `{r['tipo_cta']}`\n\n## Falas (narrador único)\n" + "\n".join(f"{i+1}. {f}" for i, f in enumerate(r["falas"])) +
             f"\n\n## Bloco visual\n[ESTILO] {bv['estilo']}\n[PERSONAGEM] {bv['personagem']}\n[CENAS]\n" +
             "\n".join(f"S{i+1:02d} — fala: {c['fala']} | ação: {c['acao']} | enquadramento: {c['enquadramento']} | ambiente: {c['ambiente']}"
                       for i, c in enumerate(bv["cenas"])) + "\n\n## Fontes\n" + "\n".join(fontes))

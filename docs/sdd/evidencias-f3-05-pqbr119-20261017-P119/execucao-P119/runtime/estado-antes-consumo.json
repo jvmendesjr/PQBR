@@ -1,0 +1,86 @@
+{
+  "versao": 1,
+  "aceitos": {
+    "primeira": {
+      "ferramenta": "camofox",
+      "sessao": "FAKE-H3-test_unica_rodada",
+      "passo": "primeira",
+      "erro": "falha-tecnica",
+      "episodio": null,
+      "simulacao": {
+        "triagem": "corrigivel",
+        "intervencoes": [
+          true
+        ],
+        "verificacoes": [
+          true
+        ],
+        "conta_confere": true
+      }
+    },
+    "segunda": {
+      "ferramenta": "camofox",
+      "sessao": "FAKE-H3-test_unica_rodada",
+      "passo": "segunda",
+      "erro": "falha falsa",
+      "episodio": null,
+      "simulacao": {
+        "triagem": "corrigivel",
+        "intervencoes": [
+          true
+        ],
+        "verificacoes": [
+          true
+        ],
+        "conta_confere": true
+      }
+    }
+  },
+  "pendentes": [
+    "segunda"
+  ],
+  "resultados": {},
+  "falhas": {
+    "primeira": {
+      "operacao_id": "primeira",
+      "filho_id": "teste-f3-05-supervisor-be18263b65513bde91a1fde0b7e011ad58863f4811bf68c8f3803f85d86e60b3-op-f555b80ad08f501adb396a95c78948ce18f204b3cf2c93b0b1930a006540a06e",
+      "filho_run_id": "01a14bdd-a6ce-77bb-ad73-07fba12bc237",
+      "revisao": 1,
+      "estado": "falha_tecnica_terminal",
+      "resultado_efeito": "nao_reconciliado",
+      "registro": "confirmado",
+      "registro_id": "teste-f3-05-supervisor-be18263b65513bde91a1fde0b7e011ad58863f4811bf68c8f3803f85d86e60b3:01a14bdd-a6ce-77bb-ad73-07fba12bc237:primeira"
+    }
+  },
+  "bloqueio": {
+    "operacao_id": "primeira",
+    "filho_id": "teste-f3-05-supervisor-be18263b65513bde91a1fde0b7e011ad58863f4811bf68c8f3803f85d86e60b3-op-f555b80ad08f501adb396a95c78948ce18f204b3cf2c93b0b1930a006540a06e",
+    "filho_run_id": "01a14bdd-a6ce-77bb-ad73-07fba12bc237",
+    "revisao": 1,
+    "estado": "falha_tecnica_terminal",
+    "resultado_efeito": "nao_reconciliado",
+    "registro": "confirmado",
+    "registro_id": "teste-f3-05-supervisor-be18263b65513bde91a1fde0b7e011ad58863f4811bf68c8f3803f85d86e60b3:01a14bdd-a6ce-77bb-ad73-07fba12bc237:primeira"
+  },
+  "ativo": null,
+  "revisao": 1,
+  "retomadas": [],
+  "observacoes": [
+    {
+      "id": "primeira",
+      "estado": "aceito"
+    },
+    {
+      "id": "segunda",
+      "estado": "aceito"
+    },
+    {
+      "id": "primeira",
+      "estado": "pausado_apos_falha"
+    }
+  ],
+  "consumidos": {},
+  "recibos_rejeitados": 0,
+  "admissao_fechada": true,
+  "fechando": false
+}

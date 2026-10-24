@@ -1,0 +1,30 @@
+{
+  "arquivos_preexistentes_verificados": 1556,
+  "alterados_fora_roadmap": [],
+  "ausentes": [],
+  "roadmap_apenas_insercao_exata": true,
+  "roadmap_hash_antes": "95662a2c88594fb5e5d8100118f880afca168e89c31f120559dfe082f457a858",
+  "roadmap_hash_depois": "7056eb7b51619d9c7947ce70513d53a02c8529a07ee17e98547c7062ac86c2e7",
+  "workers_antes": {
+    "pqbr-temporal-worker.service": "Restart=always\nMainPID=6984\nNRestarts=3\nExecMainStartTimestamp=Mon 2026-10-12 19:36:44 -03\nActiveState=active\nSubState=running\nFragmentPath=/home/pc/.config/systemd/user/pqbr-temporal-worker.service\nDropInPaths=\n",
+    "pqbr-camofox-worker.service": "Restart=always\nMainPID=6867\nNRestarts=1\nExecMainStartTimestamp=Mon 2026-10-12 19:36:43 -03\nActiveState=active\nSubState=running\nFragmentPath=/home/pc/.config/systemd/user/pqbr-camofox-worker.service\nDropInPaths=/home/pc/.config/systemd/user/pqbr-camofox-worker.service.d/restart-always.conf\n",
+    "pqbr-episodio-worker.service": "Restart=always\nMainPID=6868\nNRestarts=1\nExecMainStartTimestamp=Mon 2026-10-12 19:36:43 -03\nActiveState=active\nSubState=running\nFragmentPath=/home/pc/.config/systemd/user/pqbr-episodio-worker.service\nDropInPaths=/home/pc/.config/systemd/user/pqbr-episodio-worker.service.d/20-banco-pqbr.conf\n",
+    "pqbr-notebooklm-worker.service": "Restart=always\nMainPID=6869\nNRestarts=1\nExecMainStartTimestamp=Mon 2026-10-12 19:36:43 -03\nActiveState=active\nSubState=running\nFragmentPath=/home/pc/.config/systemd/user/pqbr-notebooklm-worker.service\nDropInPaths=/home/pc/.config/systemd/user/pqbr-notebooklm-worker.service.d/10-sessao-camofox.conf\n"
+  },
+  "workers_depois": {
+    "pqbr-temporal-worker.service": "Restart=always\nMainPID=6984\nNRestarts=3\nExecMainStartTimestamp=Mon 2026-10-12 19:36:44 -03\nActiveState=active\nSubState=running\nFragmentPath=/home/pc/.config/systemd/user/pqbr-temporal-worker.service\nDropInPaths=\n",
+    "pqbr-camofox-worker.service": "Restart=always\nMainPID=6867\nNRestarts=1\nExecMainStartTimestamp=Mon 2026-10-12 19:36:43 -03\nActiveState=active\nSubState=running\nFragmentPath=/home/pc/.config/systemd/user/pqbr-camofox-worker.service\nDropInPaths=/home/pc/.config/systemd/user/pqbr-camofox-worker.service.d/restart-always.conf\n",
+    "pqbr-episodio-worker.service": "Restart=always\nMainPID=6868\nNRestarts=1\nExecMainStartTimestamp=Mon 2026-10-12 19:36:43 -03\nActiveState=active\nSubState=running\nFragmentPath=/home/pc/.config/systemd/user/pqbr-episodio-worker.service\nDropInPaths=/home/pc/.config/systemd/user/pqbr-episodio-worker.service.d/20-banco-pqbr.conf\n",
+    "pqbr-notebooklm-worker.service": "Restart=always\nMainPID=6869\nNRestarts=1\nExecMainStartTimestamp=Mon 2026-10-12 19:36:43 -03\nActiveState=active\nSubState=running\nFragmentPath=/home/pc/.config/systemd/user/pqbr-notebooklm-worker.service\nDropInPaths=/home/pc/.config/systemd/user/pqbr-notebooklm-worker.service.d/10-sessao-camofox.conf\n"
+  },
+  "workers_mesmos_pids_inicio_restarts_estado_e_restart": true,
+  "quatro_workers_ativos_restart_always": true,
+  "units_alteradas": [],
+  "adicoes_fora_pasta_evidencia": [],
+  "git_diff_check_roadmap": {
+    "codigo": 0,
+    "saida": ""
+  },
+  "somente_systemctl_show_leitura": true,
+  "sucesso": true
+}

@@ -1,0 +1,44 @@
+{
+  "Name": "pqbr-f305-B3121-net",
+  "Id": "24cff2cec2054a234d018381ac7f4c710ca34bad997fd6267e25f7c3dcd0153c",
+  "Created": "2026-10-17T19:50:01.500881112-03:00",
+  "Scope": "local",
+  "Driver": "bridge",
+  "EnableIPv4": true,
+  "EnableIPv6": false,
+  "IPAM": {
+    "Driver": "default",
+    "Options": {},
+    "Config": [
+      {
+        "Subnet": "172.29.0.0/16"
+      }
+    ]
+  },
+  "Internal": true,
+  "Attachable": false,
+  "Ingress": false,
+  "ConfigFrom": {
+    "Network": ""
+  },
+  "ConfigOnly": false,
+  "Options": {
+    "com.docker.network.bridge.gateway_mode_ipv4": "isolated",
+    "com.docker.network.bridge.gateway_mode_ipv6": "isolated",
+    "com.docker.network.bridge.name": "pqbrfcb3121"
+  },
+  "Labels": {
+    "pqbr.candidate.run": "f305-p121-B3121"
+  },
+  "Containers": {},
+  "Status": {
+    "IPAM": {
+      "Subnets": {
+        "172.29.0.0/16": {
+          "IPsInUse": 2,
+          "DynamicIPsAvailable": 65534
+        }
+      }
+    }
+  }
+}

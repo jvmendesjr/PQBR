@@ -1,0 +1,265 @@
+{
+  "rounds": 720,
+  "burst_calls": 13800,
+  "burst_rpc_errors": 2,
+  "invariant_errors": 0,
+  "harness_errors": 0,
+  "failed_rounds": 2,
+  "pending_cleanup": [],
+  "shutdown_ok": true,
+  "robustez_comprovada": false,
+  "by_block": [
+    {
+      "mode": "prototype-workers",
+      "condition": "cold",
+      "concurrency": 1,
+      "rounds": 20,
+      "failed": 0
+    },
+    {
+      "mode": "prototype-workers",
+      "condition": "cold",
+      "concurrency": 2,
+      "rounds": 20,
+      "failed": 0
+    },
+    {
+      "mode": "prototype-workers",
+      "condition": "cold",
+      "concurrency": 4,
+      "rounds": 20,
+      "failed": 0
+    },
+    {
+      "mode": "prototype-workers",
+      "condition": "cold",
+      "concurrency": 12,
+      "rounds": 20,
+      "failed": 0
+    },
+    {
+      "mode": "prototype-workers",
+      "condition": "cold",
+      "concurrency": 32,
+      "rounds": 20,
+      "failed": 0
+    },
+    {
+      "mode": "prototype-workers",
+      "condition": "cold",
+      "concurrency": 64,
+      "rounds": 20,
+      "failed": 1
+    },
+    {
+      "mode": "prototype-workers",
+      "condition": "warm",
+      "concurrency": 1,
+      "rounds": 20,
+      "failed": 0
+    },
+    {
+      "mode": "prototype-workers",
+      "condition": "warm",
+      "concurrency": 2,
+      "rounds": 20,
+      "failed": 0
+    },
+    {
+      "mode": "prototype-workers",
+      "condition": "warm",
+      "concurrency": 4,
+      "rounds": 20,
+      "failed": 0
+    },
+    {
+      "mode": "prototype-workers",
+      "condition": "warm",
+      "concurrency": 12,
+      "rounds": 20,
+      "failed": 0
+    },
+    {
+      "mode": "prototype-workers",
+      "condition": "warm",
+      "concurrency": 32,
+      "rounds": 20,
+      "failed": 0
+    },
+    {
+      "mode": "prototype-workers",
+      "condition": "warm",
+      "concurrency": 64,
+      "rounds": 20,
+      "failed": 0
+    },
+    {
+      "mode": "prototype-no-worker",
+      "condition": "cold",
+      "concurrency": 1,
+      "rounds": 20,
+      "failed": 0
+    },
+    {
+      "mode": "prototype-no-worker",
+      "condition": "cold",
+      "concurrency": 2,
+      "rounds": 20,
+      "failed": 0
+    },
+    {
+      "mode": "prototype-no-worker",
+      "condition": "cold",
+      "concurrency": 4,
+      "rounds": 20,
+      "failed": 0
+    },
+    {
+      "mode": "prototype-no-worker",
+      "condition": "cold",
+      "concurrency": 12,
+      "rounds": 20,
+      "failed": 0
+    },
+    {
+      "mode": "prototype-no-worker",
+      "condition": "cold",
+      "concurrency": 32,
+      "rounds": 20,
+      "failed": 0
+    },
+    {
+      "mode": "prototype-no-worker",
+      "condition": "cold",
+      "concurrency": 64,
+      "rounds": 20,
+      "failed": 0
+    },
+    {
+      "mode": "prototype-no-worker",
+      "condition": "warm",
+      "concurrency": 1,
+      "rounds": 20,
+      "failed": 0
+    },
+    {
+      "mode": "prototype-no-worker",
+      "condition": "warm",
+      "concurrency": 2,
+      "rounds": 20,
+      "failed": 0
+    },
+    {
+      "mode": "prototype-no-worker",
+      "condition": "warm",
+      "concurrency": 4,
+      "rounds": 20,
+      "failed": 0
+    },
+    {
+      "mode": "prototype-no-worker",
+      "condition": "warm",
+      "concurrency": 12,
+      "rounds": 20,
+      "failed": 0
+    },
+    {
+      "mode": "prototype-no-worker",
+      "condition": "warm",
+      "concurrency": 32,
+      "rounds": 20,
+      "failed": 0
+    },
+    {
+      "mode": "prototype-no-worker",
+      "condition": "warm",
+      "concurrency": 64,
+      "rounds": 20,
+      "failed": 0
+    },
+    {
+      "mode": "raw-no-worker",
+      "condition": "cold",
+      "concurrency": 1,
+      "rounds": 20,
+      "failed": 0
+    },
+    {
+      "mode": "raw-no-worker",
+      "condition": "cold",
+      "concurrency": 2,
+      "rounds": 20,
+      "failed": 1
+    },
+    {
+      "mode": "raw-no-worker",
+      "condition": "cold",
+      "concurrency": 4,
+      "rounds": 20,
+      "failed": 0
+    },
+    {
+      "mode": "raw-no-worker",
+      "condition": "cold",
+      "concurrency": 12,
+      "rounds": 20,
+      "failed": 0
+    },
+    {
+      "mode": "raw-no-worker",
+      "condition": "cold",
+      "concurrency": 32,
+      "rounds": 20,
+      "failed": 0
+    },
+    {
+      "mode": "raw-no-worker",
+      "condition": "cold",
+      "concurrency": 64,
+      "rounds": 20,
+      "failed": 0
+    },
+    {
+      "mode": "raw-no-worker",
+      "condition": "warm",
+      "concurrency": 1,
+      "rounds": 20,
+      "failed": 0
+    },
+    {
+      "mode": "raw-no-worker",
+      "condition": "warm",
+      "concurrency": 2,
+      "rounds": 20,
+      "failed": 0
+    },
+    {
+      "mode": "raw-no-worker",
+      "condition": "warm",
+      "concurrency": 4,
+      "rounds": 20,
+      "failed": 0
+    },
+    {
+      "mode": "raw-no-worker",
+      "condition": "warm",
+      "concurrency": 12,
+      "rounds": 20,
+      "failed": 0
+    },
+    {
+      "mode": "raw-no-worker",
+      "condition": "warm",
+      "concurrency": 32,
+      "rounds": 20,
+      "failed": 0
+    },
+    {
+      "mode": "raw-no-worker",
+      "condition": "warm",
+      "concurrency": 64,
+      "rounds": 20,
+      "failed": 0
+    }
+  ]
+}

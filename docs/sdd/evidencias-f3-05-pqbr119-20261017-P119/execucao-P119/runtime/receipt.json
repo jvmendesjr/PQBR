@@ -1,0 +1,21 @@
+{
+  "consumo_key": "consumo:815e9e44-cf90-45b4-86a2-23aafd45d0fc",
+  "decisao": "accepted",
+  "escopo": {
+    "supervisor_id": "teste-f3-05-supervisor-be18263b65513bde91a1fde0b7e011ad58863f4811bf68c8f3803f85d86e60b3",
+    "supervisor_run_id": "e2848dcd-e580-4dde-875e-a9ba2b629709",
+    "revisao": 1,
+    "falha_id": "primeira",
+    "filho_run_id": "01a14bdd-a6ce-77bb-ad73-07fba12bc237",
+    "registro_falha_receipt": "teste-f3-05-supervisor-be18263b65513bde91a1fde0b7e011ad58863f4811bf68c8f3803f85d86e60b3:01a14bdd-a6ce-77bb-ad73-07fba12bc237:primeira",
+    "pendentes": [
+      "segunda"
+    ]
+  },
+  "interaction_id": "815e9e44-cf90-45b4-86a2-23aafd45d0fc",
+  "issue_id": "d3b2eb41-63e5-4e7e-8cb7-06672e3ddab9",
+  "autor": "eHIQgWDGucnmgW8xT19VvSsypXRdbTr7",
+  "confirmacao_key": "pqbr-f3-05-pqbr-119-synthetic-e2e-20261017-v1",
+  "timestamp": "2026-10-17T21:52:24.121Z",
+  "authorizationSha256": "43d7bcf4fbc3c2599ecf94b921f582e45e1304af8e80a55ee9ca9e44f6557ab1"
+}

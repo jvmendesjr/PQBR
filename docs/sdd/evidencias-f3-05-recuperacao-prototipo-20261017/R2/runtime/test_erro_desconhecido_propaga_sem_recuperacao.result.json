@@ -1,0 +1,19 @@
+{
+  "erro_nao_allowlisted_propagou": true,
+  "calls": [
+    {
+      "sessao": "test_erro_desconhecido_propaga_sem_recuperacao",
+      "passo": "falha",
+      "inicio": 412037.338592146,
+      "fim": 412037.37976331,
+      "fila": "teste-f3-05-candidato-camofox-test_erro_desconhecido_propaga_sem_recuperacao-recuperacao",
+      "tentativa": 1,
+      "workflow_id": "teste-f3-05-recuperacao-1f054622cfd0f9a0f78cf7f9d6cf8a7d1be8a4540d73b6985629f6e91651a239-op-38e55e2c50e69560265c4b1886ab446e1ade639a9b30a3395fa4ae2f1f0ae4f2"
+    }
+  ],
+  "registros": [],
+  "max_sessao": {
+    "test_erro_desconhecido_propaga_sem_recuperacao": 1
+  },
+  "max_global": 1
+}

@@ -1,0 +1,30 @@
+{
+  "teste": "test_excecao_tecnica_mantem_uma_execucao_sem_registro",
+  "workflow_id": "roteamento-a5918ab446ac401eb6d05ece3cbd2735",
+  "principal": "teste-pqbr-episodio-2fe5aca8203d451c828e792a43c55287",
+  "sessao": "teste-camofox-pqbr-2fe5aca8203d451c828e792a43c55287",
+  "fila_intervencao": [
+    "teste-pqbr-episodio-2fe5aca8203d451c828e792a43c55287"
+  ],
+  "main_calls": [
+    {
+      "activity": "triagem_jev",
+      "attempt": 1,
+      "n": null,
+      "task_queue": "teste-pqbr-episodio-2fe5aca8203d451c828e792a43c55287",
+      "workflow_id": "roteamento-a5918ab446ac401eb6d05ece3cbd2735"
+    },
+    {
+      "activity": "intervir_agente",
+      "attempt": 1,
+      "n": 1
+    }
+  ],
+  "session_calls": [],
+  "main_records": [],
+  "session_records": [],
+  "resultado": null,
+  "falha": "ActivityError",
+  "replay": "ok",
+  "eventos": 17
+}

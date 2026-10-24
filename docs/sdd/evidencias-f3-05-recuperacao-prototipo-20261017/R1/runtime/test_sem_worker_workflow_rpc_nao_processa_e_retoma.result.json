@@ -1,0 +1,28 @@
+{
+  "rpc_sem_processamento": true,
+  "retomou_mesmo_run": true,
+  "calls": [
+    {
+      "sessao": "test_sem_worker_workflow_rpc_nao_processa_e_retoma",
+      "passo": "acao",
+      "inicio": 411897.040222493,
+      "fim": 411897.081577554,
+      "fila": "teste-f3-05-candidato-camofox-test_sem_worker_workflow_rpc_nao_processa_e_retoma",
+      "tentativa": 1,
+      "workflow_id": "teste-f3-05-candidato-sessao-eed1650c941e852307a05c84201c34755e056f3d7f7eed5b8873999e4d86964b-op-15e8900c9977db61a162bedd13fac114a7b5c06e20d347d9875239f8515b173d"
+    }
+  ],
+  "max_sessao": {
+    "test_sem_worker_workflow_rpc_nao_processa_e_retoma": 1
+  },
+  "max_global": 1,
+  "registros": [
+    {
+      "resultado": "corrigido",
+      "tentativas": 1,
+      "motivo": "",
+      "proposta_script": "proposta falsa",
+      "chamar_jose": false
+    }
+  ]
+}

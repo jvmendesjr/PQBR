@@ -1,4 +1,4 @@
-# Gate A9 — capa/frame do Short (proposta t427, para aprovação do José)
+# Gate A9 — capa/frame do Short (aprovado por José em 16/10/2026)
 
 **Referências:** skill `yt-thumbnail-brief` (sergebulaev/youtube-skills, MIT, varredura A; só brief, não gera imagem) — melhor base para copiar/adaptar; `higgsfield-youtube-thumbnail` (MIT, gera via CLI externo, varredura C: baixa/executa código remoto) — só referência, **não instalar**; guias 2026 de capa de Shorts (ContHunt, YCT, Thumix, CTRpilot). Decisão de desenho: **sem geração de imagem** — a capa é **um quadro do próprio vídeo** (estilo único do NotebookLM, §16.3), escolhido por código + juiz.
 

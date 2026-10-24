@@ -10,7 +10,7 @@ from pydantic import BaseModel, ConfigDict, Field, field_validator, model_valida
 
 PALAVRAS_POR_SEGUNDO = 2.3            # REGRAS §5 (t324–t326)
 DURACAO_MIN_S, DURACAO_MAX_S, DURACAO_ALVO_S = 15, 180, 50
-CTA = "Segue o Porquê BR"             # REGRAS §5 (t262)
+CTA = "Segue o Porquê BR"             # REGRAS §5 (t467; fallback)
 JANELAS = ("11:40", "14:40", "18:35", "21:15")  # REGRAS §15
 POLEMICA_TETO = 75                    # > 75 aguarda o José (REGRAS §4)
 _ROTULO_NOME = re.compile(r"^\s*[A-ZÁÉÍÓÚÂÊÔÃÕÇ][\wÀ-ÿ]{1,20}\s*:")
@@ -59,6 +59,7 @@ class RoteiroShort(Contrato):
     episodio_id: str = Field(pattern=r"^[a-z0-9-]{3,64}$")
     titulo: str = Field(min_length=5, max_length=100)
     falas: list[str] = Field(min_length=2, max_length=60)
+    tipo_cta: Literal["trocadilho_tema", "convite_seguir", "fallback"]
     entidades_cena: list[str] = Field(min_length=1, max_length=40)
     bloco_visual: BlocoVisual                                  # obrigatório (CONTRATO §16.4, t427)
 
@@ -72,8 +73,14 @@ class RoteiroShort(Contrato):
 
     @model_validator(mode="after")
     def _regras(self):
-        if self.falas[-1].rstrip(" .!") != CTA:
-            raise ValueError(f'a última fala deve ser apenas "{CTA}"')
+        cta_final = self.falas[-1].strip()
+        if not cta_final:
+            raise ValueError("a última fala deve conter uma CTA")
+        if self.tipo_cta == "fallback":
+            if cta_final.rstrip(" .!") != CTA:
+                raise ValueError(f'CTA fallback deve ser apenas "{CTA}"')
+        elif cta_final.rstrip(" .!") == CTA:
+            raise ValueError('CTA literal deve declarar tipo_cta="fallback"')
         for f in self.falas:
             if _ROTULO_NOME.match(f):
                 raise ValueError("fala com rótulo 'Nome:' (sem nomes, narrador único)")

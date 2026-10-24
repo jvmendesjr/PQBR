@@ -1,0 +1,78 @@
+{
+  "teste": "test_verificacao_negativa_impede_sucesso",
+  "workflow_id": "f3-05-teste-f0d843136f5a462485bf7294875f2b4f",
+  "replay": "ok",
+  "eventos": 65,
+  "atividades": [
+    {
+      "activity": "triagem_jev",
+      "attempt": 1,
+      "n": null
+    },
+    {
+      "activity": "intervir_agente",
+      "attempt": 1,
+      "n": 1
+    },
+    {
+      "activity": "verificar_jev",
+      "attempt": 1,
+      "n": 1
+    },
+    {
+      "activity": "intervir_agente",
+      "attempt": 1,
+      "n": 2
+    },
+    {
+      "activity": "verificar_jev",
+      "attempt": 1,
+      "n": 2
+    },
+    {
+      "activity": "intervir_agente",
+      "attempt": 1,
+      "n": 3
+    },
+    {
+      "activity": "verificar_jev",
+      "attempt": 1,
+      "n": 3
+    },
+    {
+      "activity": "registrar_correcao",
+      "attempt": 1,
+      "n": null
+    }
+  ],
+  "registros": [
+    {
+      "resultado": "esgotado",
+      "tentativas": 3,
+      "motivo": "3 tentativas sem sucesso",
+      "proposta_script": null,
+      "chamar_jose": true
+    }
+  ],
+  "resultado": {
+    "resultado": "esgotado",
+    "tentativas": 3,
+    "motivo": "3 tentativas sem sucesso",
+    "proposta_script": null,
+    "chamar_jose": true
+  },
+  "falha": null,
+  "timers": 2,
+  "esperas": [
+    {
+      "event_id": 25,
+      "segundos": 731.0,
+      "inicio": "2026-10-17T13:26:44.764000"
+    },
+    {
+      "event_id": 42,
+      "segundos": 393.0,
+      "inicio": "2026-10-17T13:38:55.949000"
+    }
+  ]
+}

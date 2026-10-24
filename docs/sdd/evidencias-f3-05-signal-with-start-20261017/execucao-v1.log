@@ -1,0 +1,239 @@
+19defb9f7318c7cf249518b3642a735efb79876c2b6918afe312336476b796a5  /tmp/temporal-test-server-sdk-python-1.34.0
+Evidencias: /home/pc/Workspace/PQBR/docs/sdd/evidencias-f3-05-signal-with-start-20261017/runtime-v1
+Namespace original: net:[4026531840]
+lo               UNKNOWN        127.0.0.1/8 ::1/128 
+test_concorrencia_start_signal_mesma_sessao (tests.workflows.test_f3_05_signal_with_start_isolado.SignalWithStartIsolado.test_concorrencia_start_signal_mesma_sessao) ... [2m2026-10-17T15:10:39.417903Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+[2m2026-10-17T15:10:39.418043Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+ERROR
+[2m2026-10-17T15:10:39.470179Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker::workflow[0m[2m:[0m Task not found when completing [3merror[0m[2m=[0mcode: 'Some requested entity was not found', message: "Completed workflow" [3mrun_id[0m[2m=[0m"86a728af-fb60-4f3c-be16-305919f9674f"
+test_continue_as_new_preservando_dedup (tests.workflows.test_f3_05_signal_with_start_isolado.SignalWithStartIsolado.test_continue_as_new_preservando_dedup) ... [2m2026-10-17T15:10:39.643901Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+[2m2026-10-17T15:10:39.644042Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+[2m2026-10-17T15:10:39.767714Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker::workflow[0m[2m:[0m Task not found when completing [3merror[0m[2m=[0mcode: 'Some requested entity was not found', message: "workflow execution already completed" [3mrun_id[0m[2m=[0m"10d73361-d581-4bc8-b588-a9434a60e3d9"
+ERROR
+test_continue_as_new_sem_estado_repete_efeito (tests.workflows.test_f3_05_signal_with_start_isolado.SignalWithStartIsolado.test_continue_as_new_sem_estado_repete_efeito) ... [2m2026-10-17T15:11:09.930666Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+[2m2026-10-17T15:11:09.930802Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+[2m2026-10-17T15:11:10.067080Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker::workflow[0m[2m:[0m Task not found when completing [3merror[0m[2m=[0mcode: 'Some requested entity was not found', message: "workflow execution already completed" [3mrun_id[0m[2m=[0m"8cc6cf6e-1de8-4cb1-ab72-2ed4bd48e8f8"
+ERROR
+test_duas_sessoes_paralelas (tests.workflows.test_f3_05_signal_with_start_isolado.SignalWithStartIsolado.test_duas_sessoes_paralelas) ... [2m2026-10-17T15:11:40.220163Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+[2m2026-10-17T15:11:40.220302Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+[2m2026-10-17T15:12:10.511642Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker::workflow[0m[2m:[0m Error while completing workflow activation [3merror[0m[2m=[0mcode: 'The operation was cancelled', message: "Timeout expired", source: tonic::transport::Error(Transport, TimeoutExpired(()))
+ok
+test_duplicado_payload_divergente_e_config (tests.workflows.test_f3_05_signal_with_start_isolado.SignalWithStartIsolado.test_duplicado_payload_divergente_e_config) ... [2m2026-10-17T15:12:10.676204Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+[2m2026-10-17T15:12:10.676360Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+ok
+test_falha_tecnica_sem_retry_dedup_nao_cruza_reuso (tests.workflows.test_f3_05_signal_with_start_isolado.SignalWithStartIsolado.test_falha_tecnica_sem_retry_dedup_nao_cruza_reuso) ... [2m2026-10-17T15:12:11.018260Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+[2m2026-10-17T15:12:11.018567Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+Completing activity as failed ({'activity_id': '1', 'activity_type': 'efeito_signal_sintetico_v1', 'attempt': 1, 'namespace': 'default', 'task_queue': 'teste-sws-act-1ca98fe17f3a4a8cb1aced9d68dba2d1', 'workflow_id': 'prototipo-signal-start-v1-07aa137bd2dc362b90b33958e3ed6b335ab8385dedfb7454998d1219cf0e9f50', 'workflow_run_id': 'fbf1a6f1-b032-4a59-aa19-1f449d9df4c0', 'workflow_type': 'AtorSignalSintetico'})
+Traceback (most recent call last):
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 351, in _handle_start_activity_task
+    result = await self._execute_activity(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 681, in _execute_activity
+    return await impl.execute_activity(input)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 889, in execute_activity
+    return await input.fn(*input.args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_signal_with_start_isolado.py", line 46, in efeito
+    raise ApplicationError("falha tecnica sintetica", type="FalhaTecnicaSintetica")
+temporalio.exceptions.ApplicationError: FalhaTecnicaSintetica: falha tecnica sintetica
+Completing activity as failed ({'activity_id': '1', 'activity_type': 'efeito_signal_sintetico_v1', 'attempt': 1, 'namespace': 'default', 'task_queue': 'teste-sws-act-1ca98fe17f3a4a8cb1aced9d68dba2d1', 'workflow_id': 'prototipo-signal-start-v1-07aa137bd2dc362b90b33958e3ed6b335ab8385dedfb7454998d1219cf0e9f50', 'workflow_run_id': 'fda7d134-805d-4fdc-a8f4-df1093eabdad', 'workflow_type': 'AtorSignalSintetico'})
+Traceback (most recent call last):
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 351, in _handle_start_activity_task
+    result = await self._execute_activity(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 681, in _execute_activity
+    return await impl.execute_activity(input)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 889, in execute_activity
+    return await input.fn(*input.args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_signal_with_start_isolado.py", line 46, in efeito
+    raise ApplicationError("falha tecnica sintetica", type="FalhaTecnicaSintetica")
+temporalio.exceptions.ApplicationError: FalhaTecnicaSintetica: falha tecnica sintetica
+ok
+test_fechando_rejeicao_assincrona_e_reuso_explicito (tests.workflows.test_f3_05_signal_with_start_isolado.SignalWithStartIsolado.test_fechando_rejeicao_assincrona_e_reuso_explicito) ... [2m2026-10-17T15:12:11.417544Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+[2m2026-10-17T15:12:11.417905Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+ok
+test_registro_removido_nao_simula_tempo_de_retention (tests.workflows.test_f3_05_signal_with_start_isolado.SignalWithStartIsolado.test_registro_removido_nao_simula_tempo_de_retention) ... [2m2026-10-17T15:12:11.946971Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+[2m2026-10-17T15:12:11.947145Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+ERROR
+test_sem_worker_rpc_retorna_signal_duravel_retomada (tests.workflows.test_f3_05_signal_with_start_isolado.SignalWithStartIsolado.test_sem_worker_rpc_retorna_signal_duravel_retomada) ... [2m2026-10-17T15:12:12.278481Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+[2m2026-10-17T15:12:12.278912Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+ok
+test_worker_recriado_reconstroi_dedup_do_historico (tests.workflows.test_f3_05_signal_with_start_isolado.SignalWithStartIsolado.test_worker_recriado_reconstroi_dedup_do_historico) ... [2m2026-10-17T15:12:12.589098Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+[2m2026-10-17T15:12:12.589293Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+ok
+
+======================================================================
+ERROR: test_concorrencia_start_signal_mesma_sessao (tests.workflows.test_f3_05_signal_with_start_isolado.SignalWithStartIsolado.test_concorrencia_start_signal_mesma_sessao)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/service.py", line 475, in _rpc_call
+    resp = await client.call(
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/bridge/client.py", line 168, in call
+    resp.ParseFromString(await resp_fut)
+                         ^^^^^^^^^^^^^^
+temporal_sdk_bridge.RPCError: (6, 'WorkflowId: prototipo-signal-start-v1-07aa137bd2dc362b90b33958e3ed6b335ab8385dedfb7454998d1219cf0e9f50, RunId: 86a728af-fb60-4f3c-be16-305919f9674f', b'\x08\x06\x12\x93\x01WorkflowId: prototipo-signal-start-v1-07aa137bd2dc362b90b33958e3ed6b335ab8385dedfb7454998d1219cf0e9f50, RunId: 86a728af-fb60-4f3c-be16-305919f9674f\x1a\xa7\x01\nWtype.googleapis.com/temporal.api.errordetails.v1.WorkflowExecutionAlreadyStartedFailure\x12L\n$c8452069-d9de-4cd9-8fbf-9c508a0e097a\x12$86a728af-fb60-4f3c-be16-305919f9674f')
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/client/_impl.py", line 173, in start_workflow
+    resp = await self._client.workflow_service.signal_with_start_workflow_execution(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/bridge/services_generated.py", line 1766, in signal_with_start_workflow_execution
+    return await self._client._rpc_call(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/service.py", line 490, in _rpc_call
+    raise RPCError(message, RPCStatusCode(status), details)
+temporalio.service.RPCError: WorkflowId: prototipo-signal-start-v1-07aa137bd2dc362b90b33958e3ed6b335ab8385dedfb7454998d1219cf0e9f50, RunId: 86a728af-fb60-4f3c-be16-305919f9674f
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_signal_with_start_isolado.py", line 154, in test_concorrencia_start_signal_mesma_sessao
+    hs = await asyncio.gather(*[self.enviar(f"p{i}", client=self.clients[i % 2]) for i in range(12)])
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_signal_with_start_isolado.py", line 102, in enviar
+    return await enviar_signal_with_start(client or self.env.client, sessao,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/tests/workflows/prototipo_signal_with_start.py", line 108, in enviar_signal_with_start
+    return await client.start_workflow(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/client/_client.py", line 627, in start_workflow
+    return await self._impl.start_workflow(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/client/_impl.py", line 197, in start_workflow
+    raise temporalio.exceptions.WorkflowAlreadyStartedError(
+temporalio.exceptions.WorkflowAlreadyStartedError: Workflow execution already started
+
+======================================================================
+ERROR: test_continue_as_new_preservando_dedup (tests.workflows.test_f3_05_signal_with_start_isolado.SignalWithStartIsolado.test_continue_as_new_preservando_dedup)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/service.py", line 475, in _rpc_call
+    resp = await client.call(
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/bridge/client.py", line 168, in call
+    resp.ParseFromString(await resp_fut)
+                         ^^^^^^^^^^^^^^
+temporal_sdk_bridge.RPCError: (4, 'query deadline exceeded', b'')
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_signal_with_start_isolado.py", line 269, in test_continue_as_new_preservando_dedup
+    await self.verificar_continue(True)
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_signal_with_start_isolado.py", line 282, in verificar_continue
+    await self.observar(h, lambda s: s["geracao"] == 1)
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_signal_with_start_isolado.py", line 115, in observar
+    state = await h.query(Ator.estado)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/client/_workflow.py", line 603, in query
+    return await self._client._impl.query_workflow(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/client/_interceptor.py", line 774, in query_workflow
+    return await self.next.query_workflow(input)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/client/_impl.py", line 436, in query_workflow
+    resp = await self._client.workflow_service.query_workflow(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/bridge/services_generated.py", line 1244, in query_workflow
+    return await self._client._rpc_call(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/service.py", line 490, in _rpc_call
+    raise RPCError(message, RPCStatusCode(status), details)
+temporalio.service.RPCError: query deadline exceeded
+
+======================================================================
+ERROR: test_continue_as_new_sem_estado_repete_efeito (tests.workflows.test_f3_05_signal_with_start_isolado.SignalWithStartIsolado.test_continue_as_new_sem_estado_repete_efeito)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/service.py", line 475, in _rpc_call
+    resp = await client.call(
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/bridge/client.py", line 168, in call
+    resp.ParseFromString(await resp_fut)
+                         ^^^^^^^^^^^^^^
+temporal_sdk_bridge.RPCError: (4, 'query deadline exceeded', b'')
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_signal_with_start_isolado.py", line 272, in test_continue_as_new_sem_estado_repete_efeito
+    await self.verificar_continue(False)
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_signal_with_start_isolado.py", line 282, in verificar_continue
+    await self.observar(h, lambda s: s["geracao"] == 1)
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_signal_with_start_isolado.py", line 115, in observar
+    state = await h.query(Ator.estado)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/client/_workflow.py", line 603, in query
+    return await self._client._impl.query_workflow(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/client/_interceptor.py", line 774, in query_workflow
+    return await self.next.query_workflow(input)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/client/_impl.py", line 436, in query_workflow
+    resp = await self._client.workflow_service.query_workflow(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/bridge/services_generated.py", line 1244, in query_workflow
+    return await self._client._rpc_call(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/service.py", line 490, in _rpc_call
+    raise RPCError(message, RPCStatusCode(status), details)
+temporalio.service.RPCError: query deadline exceeded
+
+======================================================================
+ERROR: test_registro_removido_nao_simula_tempo_de_retention (tests.workflows.test_f3_05_signal_with_start_isolado.SignalWithStartIsolado.test_registro_removido_nao_simula_tempo_de_retention)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/service.py", line 475, in _rpc_call
+    resp = await client.call(
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/bridge/client.py", line 168, in call
+    resp.ParseFromString(await resp_fut)
+                         ^^^^^^^^^^^^^^
+temporal_sdk_bridge.RPCError: (12, 'Method temporal.api.workflowservice.v1.WorkflowService/DeleteWorkflowExecution is unimplemented', b'')
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_signal_with_start_isolado.py", line 233, in test_registro_removido_nao_simula_tempo_de_retention
+    await self.env.client.workflow_service.delete_workflow_execution(DeleteWorkflowExecutionRequest(
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/bridge/services_generated.py", line 290, in delete_workflow_execution
+    return await self._client._rpc_call(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/service.py", line 490, in _rpc_call
+    raise RPCError(message, RPCStatusCode(status), details)
+temporalio.service.RPCError: Method temporal.api.workflowservice.v1.WorkflowService/DeleteWorkflowExecution is unimplemented
+
+----------------------------------------------------------------------
+Ran 10 tests in 93.658s
+
+FAILED (errors=4)

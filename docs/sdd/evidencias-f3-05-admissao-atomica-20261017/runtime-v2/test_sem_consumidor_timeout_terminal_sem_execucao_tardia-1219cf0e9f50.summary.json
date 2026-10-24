@@ -1,0 +1,14 @@
+{
+  "teste": "test_sem_consumidor_timeout_terminal_sem_execucao_tardia",
+  "workflow_id": "prototipo-ator-sessao-atomico-v1-07aa137bd2dc362b90b33958e3ed6b335ab8385dedfb7454998d1219cf0e9f50",
+  "run_id": "05e0fa33-7c06-4fb4-8e65-7693d6e03e7c",
+  "estado": "FAILED",
+  "pending_activities": 0,
+  "replay": "ok",
+  "atividades_agendadas": 1,
+  "fila_explicita": "teste-camofox-ator-3fbf43d92a884c979596b96d4e33ae78",
+  "calls": [],
+  "max_global": 0,
+  "max_por_sessao": {},
+  "erro": "SCHEDULE_TO_CLOSE"
+}

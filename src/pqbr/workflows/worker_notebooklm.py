@@ -16,7 +16,7 @@ async def main() -> None:
     c = await client()
     w = Worker(c, task_queue=FILA_NOTEBOOKLM, workflows=[NotebookLMWorkflow], activities=[*ATIVIDADES, *ATIVIDADES_NLM_CICLO, acesso_notebooklm],
                max_concurrent_activities=1, max_concurrent_workflow_tasks=1)
-    print(f"worker notebooklm em {ADDR} ns={NS} fila={FILA_NOTEBOOKLM} (concorrência 1)", flush=True)
+    logging.getLogger(__name__).info(f"worker notebooklm em {ADDR} ns={NS} fila={FILA_NOTEBOOKLM} (concorrência 1)")
     await w.run()
 
 

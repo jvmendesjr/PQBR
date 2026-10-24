@@ -8,6 +8,7 @@ IDS = ["S01", "S02"]
 def cena(i, **kw):
     base = {"id": i, "tem_personagem": "sim", "tem_texto_na_tela": "nao",
             **{m: "sim" for m in av.METRICAS}, **{s: "nao" for s in av.SEGURANCA}}
+    base.update({"foco_unico_zona_segura": "na", "corresponde_ao_titulo": "na", "legenda_cobre_foco": "na"})
     base["texto_com_erro_de_sentido"] = "na"
     base["legenda_com_erro"] = "nao"
     base.update(kw)
@@ -72,13 +73,28 @@ class AuditorVisual(unittest.TestCase):
 
 
     def test_prompt_preenchido(self):
-        p = av.montar_prompt("[ESTILO] 2D", [("S01", "saiu do banho")], 2)
+        p = av.montar_prompt("[ESTILO] 2D", [("S01", "saiu do banho")], 2, titulo="Título", transmitir_texto=True)
         assert "__" not in p and "Rodada: 2" in p and "- S01: saiu do banho" in p
 
 
-if __name__ == "__main__":
-    unittest.main()
 
+
+    def test_prompt_somente_visual_nao_vaza_texto(self):
+        p = av.montar_prompt("BLOCO_PRIVADO", [("S01", "FALA_PRIVADA")], 1,
+                             titulo="TITULO_PRIVADO", transmitir_texto=False)
+        assert "BLOCO_PRIVADO" not in p and "FALA_PRIVADA" not in p and "TITULO_PRIVADO" not in p
+        assert "SOMENTE VISUAL" in p
+
+    def test_metricas_a9_nao_reprovam(self):
+        x = resp(cena("CAPA", foco_unico_zona_segura="nao", corresponde_ao_titulo="nao",
+                      legenda_cobre_foco="sim", tem_texto_na_tela="sim", legivel_no_celular="nao"))
+        r = av.decidir([x, x], ["CAPA"])
+        assert r["veredito"] == "aprova_com_ressalva" and not r["falhas"]
+        assert r["metricas"]["foco_unico_zona_segura"] == 0.0
+        assert set(r["ressalvas"]) >= {("CAPA", "foco_unico_zona_segura"),
+                                      ("CAPA", "corresponde_ao_titulo"),
+                                      ("CAPA", "legenda_cobre_foco"),
+                                      ("CAPA", "tem_texto_na_tela")}
 
     def test_legenda_com_erro_aceita_e_registra(self):
         x = resp(cena("S01", legenda_com_erro="sim"), cena("S02"))
@@ -99,3 +115,6 @@ if __name__ == "__main__":
         x = resp(cena("S01", tem_texto_na_tela="sim", texto_com_erro_de_sentido="nao"), cena("S02"))
         r = av.decidir([x, x], IDS)
         assert r["veredito"] == "aprova" and r["erros_aceitaveis"] == [("S01", "tem_texto_na_tela")]
+
+if __name__ == "__main__":
+    unittest.main()

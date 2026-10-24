@@ -1,0 +1,4 @@
+PASS docs/sdd/evidencias-f3-05-verificador-offline-20261017-V1/verificador_offline.py (no-index exit=1; nenhum erro de whitespace)
+PASS docs/sdd/evidencias-f3-05-verificador-offline-20261017-V1/test_verificador_offline.py (no-index exit=1; nenhum erro de whitespace)
+PASS docs/sdd/evidencias-f3-05-verificador-offline-20261017-V1/preservacao.py (no-index exit=1; nenhum erro de whitespace)
+PASS docs/sdd/evidencias-f3-05-verificador-offline-20261017-V1/README.md (no-index exit=1; nenhum erro de whitespace)

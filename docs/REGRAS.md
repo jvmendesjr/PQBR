@@ -17,7 +17,7 @@
   5. **Runtime (t392):** os agentes usam modelos do **9router** pelos adapters `process` (texto) e `opencode_local` (ferramenta). Nenhum perfil Hermes além do `pqbr`, que é só o canal do José para o Diretor. Ferramentas = kit PQBR (Temporal, Camofox, NotebookLM py, Pydantic v2) + API Paperclip.
   6. **Rotinas** do Paperclip podem acordar agentes, inclusive para produção (t392). Efeito externo continua só pelo Temporal.
   7. **Orçamento:** warn-only, sem pausa por custo; limite de segurança revisto após os primeiros relatórios (t392).
-  8. **Falhas:** na 2ª falha da mesma ação entra o playbook (até 3 tentativas). No Camofox, 5–15 min entre tentativas (t357). Só depois Diretor → canal de controle ativo (Telegram durante a transição; Discord/Paperclip após t464).
+  8. **Falhas:** na 2ª falha da mesma ação entra o playbook (até 3 tentativas). No Camofox, intervalo sorteado de 5–15 min entre intervenções sucessivas na mesma sessão, não duração da intervenção nem retry automático (t357; precisão aprovada em 17/10/2026, §3.1). Só depois Diretor → canal de controle ativo (Telegram durante a transição; Discord/Paperclip após t464).
   9. **Tickets:** abertura automática; merge automático com CI e testes verdes + aprovação do Dev Revisor, se a mudança não tocar regra canônica, segredos nem infra (t390).
   10. **Fonte de verdade:** Postgres local (t343). O Supabase não é usado.
 
@@ -53,7 +53,10 @@
 - **Camadas:** (1) o **script determinístico** executa; (2) se um passo falha por motivo **corrigível** (site ou seletor mudou, resposta fora do esquema, erro transitório que a escada não resolveu), um **agente intervém** para tentar resolver. O Jev entra nas decisões estruturadas e as ferramentas (Camofox, CLI, API) entram pelo próprio agente. (3) O José só é chamado se o agente falhar dentro dos limites ou se a ação for sensível. Isso **reduz o determinismo de propósito**: é automação inteligente, mas sempre limitada e registrada.
 - **Divisão de papéis [t356]:** o **Jev** faz só as funções dele e pode sempre ser usado nelas: decisão estruturada, classificação, triagem (se a falha é corrigível, se cabe intervenção, se é sensível) e verificação do resultado quando couber. A **intervenção** em si é de um **agente com modelo LLM**, que resolve, **aprende** (registra o aprendizado no bank Hindsight único da PQBR, sem segredos, §17, §21) e **loga tudo** no banco do app pelo Temporal.
 - **Sempre pelo Temporal:** a intervenção é uma Activity na fila da ferramenta/sessão (concorrência 1 por sessão), nunca uma chamada solta. Cada ação do agente (clique, comando, chamada, resposta do Jev) é registrada no banco do app com episódio, passo, motivo e resultado, sem segredos (§17).
-- **Limites [t357]:** **3 tentativas** por intervenção; duração de **5 a 15 min**, **sorteada** (não fixa) quando a intervenção é no Camofox; sem repetir a mesma ação idêntica (vale a parada de 5 idênticas do §18).
+- **Limites [t357; precisão aprovada em 17/10/2026]:** no máximo **3 tentativas** por intervenção, preservadas as paradas imediatas. No Camofox, **5 a 15 min sorteados entre o término de uma intervenção e o início da próxima na mesma sessão**: é pacing operacional local, não duração da intervenção, timeout da Activity ou pausa obrigatória entre cliques. Não repetir a mesma ação idêntica (vale a parada de 5 idênticas do §18).
+- **Sincronização, limites e interrupção:** esperar por condição observável de prontidão da UI, com timeout controlado, em vez de substituir sincronização por sleep fixo. Respeitar as regras do provedor e `Retry-After` quando recebido; se a espera imposta for maior que o intervalo local, prevalece a maior, sem teto artificial de 15 min. CAPTCHA, bloqueio ou consentimento necessário interrompem a automação e exigem avaliação/autorização humana; não contornar desafios nem aceitar consentimento automaticamente. O objetivo local de interação humana não é garantia ou técnica de anti-detecção.
+- **Exceção técnica na intervenção — política terminal preservada:** encerra a operação falha, sem retry/fallback automático nem reexecução da ação externa. O teto de três tentativas e o pacing não autorizam repetir uma exceção técnica; a revisão futura registrada em ROADMAP F3-05 continua pendente, sem mudança operacional.
+- **Base pública consultada para esta precisão:** [Camoufox: `humanize`](https://camoufox.com/python/usage/) descreve movimento do cursor, e o [README comunitário do Camofox](https://github.com/redf0x1/camofox-browser) descreve waits por seletor/estado; não foi encontrada nessas fontes uma recomendação universal de 5–15 min. [Playwright: actionability](https://playwright.dev/docs/actionability) e [Selenium: waits](https://www.selenium.dev/documentation/webdriver/waits/) sustentam esperas por prontidão/condição, não esse intervalo. [MDN: HTTP 429](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/429) e [`Retry-After`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Retry-After) explicam limites e a espera indicada pelo servidor, sem autorizar retry onde a política local o proíbe. Os 5–15 min são decisão local, não padrão comunitário nem recomendação anti-detecção dessas fontes.
 - **Persistência:** a correção que deu certo vira **proposta de ajuste do script** (tarefa de dev na construção; ticket ou PR na produção, §24), com as 2 aprovações do José. **[SUPERADO t390–t395: ver §0, atualização 11/10]** A correção de improviso vale só para aquela execução; o script corrigido é o que fica.
 - **Travas duras (o agente nunca faz, nem para corrigir):** login manual, 2FA ou logout (a cópia de cookies saiu da trava em t395, §0 item 11); exclusão de qualquer coisa (vídeo, comentário, arquivo, caderno raiz, dado); tornar público ou republicar (item 5, §16); publicar fora das regras (reprovado, sem estado gravado, sem código, acima do teto); recorrer ou responder ao YouTube; pagamentos ou compras; mexer em segredos; mudar regras, limiares ou dependências (§12); escrever no banco do app fora do Temporal; código do Paperclip (t335). O **item 5 (privado automático)** continua só no código, sem agente no caminho.
 - **Quando o José é chamado:** limites esgotados, ação sensível necessária, a correção mudaria o resultado editorial ou de conformidade, ou o caso é marcado EM CONSTRUÇÃO abaixo. Após t464, o aviso vai pelo canal privado Discord/Paperclip; Telegram somente durante a transição.
@@ -68,7 +71,7 @@
 | Banco do app (§18) | repetir pelo outbox; conferir a idempotência | correção de esquema só por migração em tarefa ou ticket; agente não escreve direto |
 | Temporal (§3, §18) | repetir a Activity; reiniciar o workflow a partir do checkpoint | sem mudar código em execução; o reinício de serviço segue as regras de manutenção |
 | Paperclip (§2) | reenviar o comentário ou a issue; acordar o responsável (`--resume`) | sem tocar no código nem no adaptador (t335) |
-| Auditor (§8) | repetir a rodada do Gemini que voltou fora do esquema; reextrair quadro ou transcrição | não muda o veredito; divergência entre rodadas: ver casos EM CONSTRUÇÃO |
+| Auditor (§8) | repetir a rodada do Gemini que voltou fora do esquema; reextrair quadro ou transcrição | não muda o veredito; divergência entre rodadas: 3ª rodada desempata; falha ou saída fora do esquema na 3ª → revisão do José (§8) |
 | Conformidade (§13) | repetir a coleta (e-mail, Studio só leitura, Data API) | HOLD e privados são automáticos e sem agente; recurso só o José envia |
 | Publicação (§15) | refazer, trocar pela reserva, corrigir o agendamento no Studio que não bateu com o aprovado | sem duplicata (busca do código antes); vídeo reprovado nunca; "envio sem confirmação" continua com 1 tentativa e parada |
 | Comentários (§19) | repetir o `comments.insert` que falhou; reclassificar com o Jev uma resposta fora do esquema | limites de 6/h e 30/dia valem para as tentativas; retenção só nos casos aprovados; rejeitar, banir ou excluir = José |
@@ -77,7 +80,7 @@
 | Grade e temas (§4) | regenerar a grade do dia pelo código; refazer a coleta | R10, bloqueio absoluto e polêmica > 75 continuam travas |
 
 - **Casos resolvidos [t357]:**
-  - (a) 3 tentativas; 5–15 min sorteados no Camofox.
+  - (a) até 3 tentativas, salvo parada imediata; 5–15 min sorteados entre intervenções sucessivas no Camofox, conforme §3.1 (não duração nem retry técnico).
   - (b) **Auditor:** quando as 2 rodadas divergem, uma **3ª rodada desempata** (antes ia para o José).
   - (c) **Corações:** o agente pode corrigir antes de abortar; janelas flutuantes, avisos e anúncios novos são **capturados e classificados pelo Jev por importância**.
   - (d) **Diálogos de sessão no Camofox:** o agente primeiro confere se está na **sessão e na conta Google certas**, autenticado e não em outra conta; divergência = **para e chama o José**. Login e 2FA continuam com o José.
@@ -99,8 +102,17 @@
 - **Tom:** "nós, brasileiros" + explicação lógica, com o **humor predominando**; sátira leve ("sorrisinho no canto da boca"); sentimento "a gente é assim mesmo"; o final pousa no reconhecimento caloroso; satiriza o comportamento, nunca a pessoa ou o grupo. [t212/t213]
 - **Elenco:** 1 personagem por padrão; até 2 é o desejado; **mais que isso não reprova**. [t212; t264]
 - **Sem nomes** de personagem falados ou escritos. Narrador único, sem rótulos "Nome:". [t212]
-- **CTA:** a última fala é **apenas "Segue o Porquê BR"**, curta e colada ao gancho para fechar o loop, nos últimos ~8 s. [t262; item 3]
+- **CTA contextual:** a fala final, nos últimos ~8 s, usa trocadilho ligado ao tema quando natural; caso contrário, convite natural a seguir o canal; fallback `Segue o Porquê BR`. Nunca pedir comentários. [t467; substitui t262; preserva t263]
 - **Nunca pedir comentário:** nem na narração, nem na descrição, nem no comentário fixado. [t263]
+- **Diretrizes editoriais revisáveis [APROVADO t467; não são bloqueios automáticos]:**
+  - **R1:** mostrar a cena do hábito nos primeiros 2 s, não um conceito abstrato.
+  - **R2:** levantar a pergunta no gancho sem responder cedo; reservar a resposta para o payoff.
+  - **R3:** apresentar conflito ou piada até 4 s, sem introdução longa.
+  - **R4:** acompanhar termo técnico com imagem ou piada no mesmo momento.
+  - **R5:** alerta de revisão não bloqueante para sensação física incômoda no miolo; hipótese com evidência limitada a um caso.
+  - **R6:** explicar o porquê real como recompensa da piada.
+  - **R8:** priorizar comportamento reconhecível; curiosidade enciclopédica só quando houver uma mania por trás.
+  - **R9:** priorizar situações vividas em casa e em família.
 - **Loop:** a última fala emenda na primeira cena; sem cauda, sem tela parada, sem fade. [t215]
 - **Encerramento visual:** logo com zoom suave curto sobre a última fala; corte do end card **só se detectado**. [t212–t217]
 - **Duração:** de **15 s a 3 min**, **alvo de ~50 s**; dimensionada pelo roteiro a **~2,3 palavras/s** (o modelo pode esticar ou acelerar a narração) [t324–t326]. O contrato do roteiro e o auditor seguem essa faixa. Acima de 60 s, a checagem de direitos de áudio vira **bloqueante** (claim do Content ID bloqueia o Short). [t208; t271]
@@ -108,7 +120,7 @@
 - **Engajamento não é medida de segurança.** [itens de validação, item 1]
 - **Visual:** identidade aprovada do módulo Flow: stickmen com caráter e fichas consistentes de personagens, objetos e cenários; estilos genéricos 2D/3D ficam pausados. A implementação das fichas/resolvedor está pendente; não se declara catálogo ativo. Aderência à identidade será validada no piloto. O critério editorial continua sendo humor/sátira leve e cômica do cotidiano brasileiro, além das travas de texto, áudio e segurança. [t465] **Reprova (segurança):** semelhança com pessoa real, marca real, estereótipo ofensivo. [t400]
 - **Revisão humana só como último recurso:** quando um item falha em **todos os caminhos já previstos**, ele é guardado num **local dedicado de revisão**, o José é avisado e o agente coleta a determinação dele: **excluir, corrigir, reaproveitar ou arquivar**. Substitui a "revisão humana antes da grade" do contrato rascunho (§4.3). [t327]
-- Regras de roteiro R1–R6, R8 e R9 do contrato rascunho (R7 superada por t262/t263; R10 está no §4): **EM CONSTRUÇÃO — aguardando José** (dependem do contrato v2, tarefa D11).
+- [RESOLVIDO t467] R1–R4/R6/R8/R9 são diretrizes editoriais revisáveis, não bloqueios automáticos; R5 é alerta não bloqueante. R10 permanece no §4.
 
 ## 6. Fichas visuais de stickmen — identidade aprovada para módulo Flow; implementação pendente [t465]
 > Precedência t465: fichas de personagens, objetos e cenários são referências aprovadas para o módulo Flow. A pausa de t400 para estilos genéricos está superada; os itens seguintes são inventário/decisões anteriores e não afirmam que banco, fichas ou resolvedor estejam implantados. Nenhuma integração ou publicação é autorizada por este registro.
@@ -131,7 +143,7 @@
 ## 8. Auditor
 - O código extrai **1 quadro por cena** e a transcrição (Whisper). O **Gemini 3.8 Flash (modo normal)** responde **só sim/não por traço**, em **2 rodadas** (chats novos); divergência é desempatada por uma **3ª rodada** (t357); só se a 3ª falhar ou vier fora do esquema vai à revisão do José. O Jev ou o código faz as checagens de texto (loop, CTA, fala cortada, tom, nomes). **O código aplica a tabela e decide.** Relatório por template (veredito, motivo, ID da cena), sem prosa de LLM. [t228–t232]
 - Ordem: reprova > revisão > aprova com ressalva > aprova. Duração, silêncio e resposta estruturada são indícios, não prova. [itens de validação, item 3]
-- **Bloqueia:** falta de ironia/sátira leve do cotidiano; narração com problema; loop quebrado; CTA "Segue o Porquê BR" ausente ou incompleto; **qualquer pedido de comentário**; fala cortada; nome de personagem; conteúdo de terceiros; segurança/conformidade (bloqueio absoluto, tom de especialista, direitos de áudio acima de 60 s). [t264; t265]
+- **Bloqueia:** falta de ironia/sátira leve do cotidiano; narração com problema; loop quebrado; CTA final ausente ou incompatível com esta §5; **qualquer pedido de comentário**; fala cortada; nome de personagem; conteúdo de terceiros; segurança/conformidade (bloqueio absoluto, tom de especialista, direitos de áudio acima de 60 s). [t264; t265]
 - Imagem que não corresponde à fala **não reprova o vídeo** (pode ser uma transição breve); a relação texto-imagem é buscada, mas não é critério estrito. [t327]
 - Capa legível e coerente com o título está na rubrica. [07/10 rodada 4]
 - Item de conformidade no auditor: variedade vs. vídeos recentes (situação/desfecho/estrutura); sem tom de especialista em saúde/direito/finanças/política; direitos de áudio; marcação de IA decidida por upload (normalmente "não" para stickman). [t198]
@@ -225,7 +237,7 @@ _Origem do bloco: t240–t242._
 - **Sombra de 3 dias** (ou ~30 respostas simuladas aprovadas sem correção, o que vier primeiro) antes de ligar respostas e corações. **1 resposta real de teste** antes do automático (HIPÓTESE: `comments.insert` sem auditoria do app). [t247; t248]
 - O @prod-comunidade **só sinaliza**; quem torna privado é a regra do item 5. [t250] Mudanças que ele proponha seguem o padrão dos agentes pensantes (§3). [t324–t326]
 - As respostas nunca são automáticas sem regra aprovada pelo José; futuro: área de mensagens para pedir feedback. [t238]
-- **Desligamento automático das respostas** e **escalonamento ao José** só em: reclamação muito grave, direitos autorais ou situação visivelmente grave. O resto segue as regras automáticas. Vale só para respostas automáticas e interação com usuários nos comentários; não altera o item 5 (§13) nem a regra de polêmica > 75 (§4). [t327, t330]
+- **Desligamento automático das respostas** e **escalonamento ao José** só em: reclamação muito grave, direitos autorais ou situação visivelmente grave. O resto segue as regras automáticas. Vale só para respostas automáticas e interação com usuários nos comentários; não altera o item 5 (§16) nem a regra de polêmica > 75 (§4). [t327, t330]
 - **Tom nessas situações:** sempre profissional, direto e formal; **não** absorve o espírito editorial (sem piada, ironia ou sarcasmo). [t327]
 
 ## 20. Analista (@prod-analista) e relatórios

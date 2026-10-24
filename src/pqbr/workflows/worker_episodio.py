@@ -15,7 +15,7 @@ async def main() -> None:
     logging.basicConfig(level=logging.INFO); instalar_no_logging()
     w = Worker(await client(), task_queue=FILA_EPISODIO, workflows=[EpisodioWorkflow, PublicacaoWorkflow, ApagarCadernoWorkflow, DescartarCadernoTesteWorkflow],
                activities=[*ATIVIDADES_EPISODIO, pedir_jose, acesso_resolvido, acesso_paperclip, registrar_evento, avisar_jose, *ATIVIDADES_DESCARTE], max_concurrent_activities=1)
-    print(f"worker episodio em {ADDR} ns={NS} fila={FILA_EPISODIO} (concorrência 1)", flush=True)
+    logging.getLogger(__name__).info(f"worker episodio em {ADDR} ns={NS} fila={FILA_EPISODIO} (concorrência 1)")
     await w.run()
 
 

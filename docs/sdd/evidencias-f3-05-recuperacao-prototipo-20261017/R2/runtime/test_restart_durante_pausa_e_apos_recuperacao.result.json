@@ -1,0 +1,141 @@
+{
+  "estado_final": {
+    "versao": 1,
+    "aceitos": {
+      "falha": {
+        "ferramenta": "camofox",
+        "sessao": "test_restart_durante_pausa_e_apos_recuperacao",
+        "passo": "falha",
+        "erro": "falha-tecnica",
+        "episodio": null,
+        "simulacao": {
+          "triagem": "corrigivel",
+          "intervencoes": [
+            true
+          ],
+          "verificacoes": [
+            true
+          ],
+          "conta_confere": true
+        }
+      },
+      "seguinte": {
+        "ferramenta": "camofox",
+        "sessao": "test_restart_durante_pausa_e_apos_recuperacao",
+        "passo": "seguinte",
+        "erro": "falha falsa",
+        "episodio": null,
+        "simulacao": {
+          "triagem": "corrigivel",
+          "intervencoes": [
+            true
+          ],
+          "verificacoes": [
+            true
+          ],
+          "conta_confere": true
+        }
+      }
+    },
+    "resultados": {
+      "seguinte": {
+        "resultado": "corrigido",
+        "tentativas": 1,
+        "motivo": "",
+        "proposta_script": "proposta falsa",
+        "chamar_jose": false
+      }
+    },
+    "falhas": {
+      "falha": {
+        "operacao_id": "falha",
+        "filho_id": "teste-f3-05-recuperacao-55564ca7847bd7a9fd169f12ff5c3d502ac7406fbeb2e01b8babbf13fb85285c-op-38e55e2c50e69560265c4b1886ab446e1ade639a9b30a3395fa4ae2f1f0ae4f2",
+        "filho_run_id": "01a14ad1-c343-7a14-bb21-e4fe44f9060d",
+        "revisao": 1,
+        "estado": "falha_tecnica_sintetica",
+        "resultado_efeito": "nao_reconciliado"
+      }
+    },
+    "pendentes": [],
+    "ativo": null,
+    "bloqueio": null,
+    "revisao": 1,
+    "recuperacoes": [
+      {
+        "versao": 1,
+        "decisao": "retomar_somente_pendentes",
+        "revisao": 1,
+        "falha_id": "falha",
+        "filho_run_id": "01a14ad1-c343-7a14-bb21-e4fe44f9060d",
+        "pendentes": [
+          "seguinte"
+        ]
+      }
+    ],
+    "observacoes": [
+      {
+        "id": "falha",
+        "estado": "aceito"
+      },
+      {
+        "id": "seguinte",
+        "estado": "aceito"
+      },
+      {
+        "id": "falha",
+        "estado": "pausado_apos_falha"
+      },
+      {
+        "id": "seguinte",
+        "estado": "duplicado"
+      },
+      {
+        "estado": "recuperacao_recusada"
+      },
+      {
+        "estado": "recuperacao_aceita"
+      },
+      {
+        "id": "seguinte",
+        "estado": "duplicado"
+      }
+    ],
+    "admissao_fechada": true,
+    "fechando": true,
+    "geracao": 0
+  },
+  "worker_recriado_duas_vezes": true,
+  "calls": [
+    {
+      "sessao": "test_restart_durante_pausa_e_apos_recuperacao",
+      "passo": "falha",
+      "inicio": 412041.422740181,
+      "fim": 412041.464107917,
+      "fila": "teste-f3-05-candidato-camofox-test_restart_durante_pausa_e_apos_recuperacao-recuperacao",
+      "tentativa": 1,
+      "workflow_id": "teste-f3-05-recuperacao-55564ca7847bd7a9fd169f12ff5c3d502ac7406fbeb2e01b8babbf13fb85285c-op-38e55e2c50e69560265c4b1886ab446e1ade639a9b30a3395fa4ae2f1f0ae4f2"
+    },
+    {
+      "sessao": "test_restart_durante_pausa_e_apos_recuperacao",
+      "passo": "seguinte",
+      "inicio": 412042.218797565,
+      "fim": 412042.259617817,
+      "fila": "teste-f3-05-candidato-camofox-test_restart_durante_pausa_e_apos_recuperacao-recuperacao",
+      "tentativa": 1,
+      "workflow_id": "teste-f3-05-recuperacao-55564ca7847bd7a9fd169f12ff5c3d502ac7406fbeb2e01b8babbf13fb85285c-op-739edf885e87448d156ac297dce4c2d419aad8afce10930777cff6b4c4ea4e35"
+    }
+  ],
+  "registros": [
+    {
+      "resultado": "corrigido",
+      "tentativas": 1,
+      "motivo": "",
+      "proposta_script": "proposta falsa",
+      "chamar_jose": false
+    }
+  ],
+  "max_sessao": {
+    "test_restart_durante_pausa_e_apos_recuperacao": 1
+  },
+  "max_global": 1
+}

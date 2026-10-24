@@ -1,0 +1,36 @@
+{
+  "arquivos_preexistentes": 89,
+  "preservados": 86,
+  "alteracoes_documentais_intencionais": [
+    "docs/sdd/f3-05-admissao-atomica-20261017.md",
+    "docs/sdd/f3-05-ator-sessao-20261017.md",
+    "docs/ROADMAP.md"
+  ],
+  "codigo_preexistente_preservado": true,
+  "processos_remanescentes": [],
+  "namespaces": [
+    "net:[4026533133]",
+    "net:[4026534469]",
+    "pid:[4026533132]",
+    "pid:[4026534468]"
+  ],
+  "replay_todos": 31,
+  "artefatos": {
+    "tests/workflows/prototipo_signal_with_start.py": {
+      "bytes": 5327,
+      "sha256": "06afaabeca5f4c0cf98c790249df83768b18f8aa348decc57b26ee5e4c2af3a6"
+    },
+    "tests/workflows/test_f3_05_signal_with_start_isolado.py": {
+      "bytes": 16837,
+      "sha256": "03d49642d6ca0227fb9ec6f5caedbaa3097a439360ce0855bee8f2c4498274b3"
+    },
+    "tests/workflows/run_f3_05_signal_with_start_isolado.sh": {
+      "bytes": 1439,
+      "sha256": "7416a9f096aa7d605c023571417f9cbf3362afc44dcce87f462038e83c5350d3"
+    },
+    "docs/sdd/f3-05-signal-with-start-20261017.md": {
+      "bytes": 12113,
+      "sha256": "1bc44c0b6f12d586b2b4089111a9b1587893a5eef302a59c246f89e98cbe02e2"
+    }
+  }
+}

@@ -40,7 +40,7 @@ contrato = open("docs/CONTRATO-EDITORIAL.md").read()
 i16 = contrato.find("## 16"); sec16 = contrato[i16:i16 + 9000] if i16 >= 0 else ""
 def val_rot(d):
     d["bloco_visual"]["estilo"] = ESTILO_PADRAO_2D
-    r = RoteiroShort.model_validate({k: d[k] for k in ("episodio_id", "titulo", "falas", "entidades_cena", "bloco_visual")})
+    r = RoteiroShort.model_validate({k: d[k] for k in ("episodio_id", "titulo", "falas", "tipo_cta", "entidades_cena", "bloco_visual")})
     if len(r.bloco_visual.cenas) != len(r.falas) - 0 and len(r.bloco_visual.cenas) < 6: raise ValueError("poucas cenas")
     if len(d.get("fontes", [])) < 2: raise ValueError("≥ 2 fontes (URLs) obrigatórias")
     if not 35 <= r.duracao_estimada_s <= 70: raise ValueError(f"duração {r.duracao_estimada_s}s; alvo ~50 s")
@@ -48,9 +48,11 @@ def val_rot(d):
 (rot, fontes), tent = gerar(combo("roteirista"), ag + "\n\nResponda só JSON.",
     f"Tema: {escolhido['tema']}\nepisodio_id: {slug}\n\nRegras do contrato (§16):\n{sec16}\n\n"
     f"Escreva o RoteiroShort: narrador único, gancho até 3 s com a imagem literal, versão mais aceita + 'mas tem quem diga', "
-    f"~50 s (115 palavras), última fala exatamente \"{CTA}\". bloco_visual: personagem (frase-ficha detalhada, sem nome, 1 personagem), "
+    f"~50 s (115 palavras). CTA final contextual: trocadilho ligado ao tema quando natural (tipo_cta=trocadilho_tema); "
+    f"senão, convite natural a seguir (tipo_cta=convite_seguir); fallback exato {CTA!r} (tipo_cta=fallback); nunca pedir comentários. "
+    "bloco_visual: personagem (frase-ficha detalhada, sem nome, 1 personagem), "
     f"cenas (uma por fala, cena 1 literal, última retoma a 1ª; cada cena com fala, acao, enquadramento, ambiente). Inclua 'fontes': ≥ 2 URLs reais confiáveis. "
-    'JSON: {"episodio_id","titulo","falas":[...],"entidades_cena":[...],"bloco_visual":{"personagem","cenas":[{"fala","acao","enquadramento","ambiente"}]},"fontes":[...]}',
+    'JSON: {"episodio_id","titulo","falas":[...],"tipo_cta":"trocadilho_tema|convite_seguir|fallback","entidades_cena":[...],"bloco_visual":{"personagem","cenas":[{"fala","acao","enquadramento","ambiente"}]},"fontes":[...]}',
     val_rot, mt=6000)
 marca("roteirista", t0, tentativas=tent, falas=len(rot.falas), duracao_s=rot.duracao_estimada_s, fontes=fontes)
 # 3 compliance + guardião

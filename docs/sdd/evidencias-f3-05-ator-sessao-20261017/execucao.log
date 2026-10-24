@@ -1,0 +1,140 @@
+Evidencias: /home/pc/Workspace/PQBR/docs/sdd/evidencias-f3-05-ator-sessao-20261017/runtime
+Namespace original: net:[4026531840]
+19defb9f7318c7cf249518b3642a735efb79876c2b6918afe312336476b796a5  /tmp/temporal-test-server-sdk-python-1.34.0
+Namespace isolado: net:[4026534469]
+lo               UNKNOWN        127.0.0.1/8 ::1/128 
+test_admissao_rejeita_outra_sessao_e_fechamento_drena (tests.workflows.test_f3_05_ator_sessao_isolado.AtorSessaoTemporalIsolado.test_admissao_rejeita_outra_sessao_e_fechamento_drena) ... ERROR
+test_excecao_tecnica_propaga_sem_retry_nem_proximo_pedido (tests.workflows.test_f3_05_ator_sessao_isolado.AtorSessaoTemporalIsolado.test_excecao_tecnica_propaga_sem_retry_nem_proximo_pedido) ... ERROR
+test_mesma_sessao_serial_deduplicada_multiplos_workers (tests.workflows.test_f3_05_ator_sessao_isolado.AtorSessaoTemporalIsolado.test_mesma_sessao_serial_deduplicada_multiplos_workers) ... ERROR
+test_sem_consumidor_timeout_terminal_sem_tarefa_orfa (tests.workflows.test_f3_05_ator_sessao_isolado.AtorSessaoTemporalIsolado.test_sem_consumidor_timeout_terminal_sem_tarefa_orfa) ... ERROR
+test_sessoes_distintas_progridem_em_paralelo (tests.workflows.test_f3_05_ator_sessao_isolado.AtorSessaoTemporalIsolado.test_sessoes_distintas_progridem_em_paralelo) ... ERROR
+
+======================================================================
+ERROR: test_admissao_rejeita_outra_sessao_e_fechamento_drena (tests.workflows.test_f3_05_ator_sessao_isolado.AtorSessaoTemporalIsolado.test_admissao_rejeita_outra_sessao_e_fechamento_drena)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_ator_sessao_isolado.py", line 74, in asyncSetUp
+    await self.stack.enter_async_context(Worker(
+                                         ^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_worker.py", line 413, in __init__
+    self._init_from_config(client, config)
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_worker.py", line 637, in _init_from_config
+    self._bridge_worker = temporalio.bridge.worker.Worker.create(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/bridge/worker.py", line 180, in create
+    temporalio.bridge.temporal_sdk_bridge.new_worker(
+RuntimeError: Failed creating worker
+
+Caused by:
+    Registration of multiple workers with overlapping worker task types on the same namespace, task queue, and deployment build ID not allowed: SlotKey { namespace: "default", task_queue: "teste-ator-workflow-a4416c30ce934afcb43371013b763219" }, worker_instance_key: WorkerTaskTypes { enable_workflows: true, enable_local_activities: false, enable_remote_activities: false, enable_nexus: false } build_id: None, new task types: WorkerTaskTypes { enable_workflows: true, enable_local_activities: false, enable_remote_activities: false, enable_nexus: false }, existing task types: c271f635-36d2-4e59-94f2-c258209e1d37.
+
+======================================================================
+ERROR: test_excecao_tecnica_propaga_sem_retry_nem_proximo_pedido (tests.workflows.test_f3_05_ator_sessao_isolado.AtorSessaoTemporalIsolado.test_excecao_tecnica_propaga_sem_retry_nem_proximo_pedido)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_ator_sessao_isolado.py", line 74, in asyncSetUp
+    await self.stack.enter_async_context(Worker(
+                                         ^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_worker.py", line 413, in __init__
+    self._init_from_config(client, config)
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_worker.py", line 637, in _init_from_config
+    self._bridge_worker = temporalio.bridge.worker.Worker.create(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/bridge/worker.py", line 180, in create
+    temporalio.bridge.temporal_sdk_bridge.new_worker(
+RuntimeError: Failed creating worker
+
+Caused by:
+    Registration of multiple workers with overlapping worker task types on the same namespace, task queue, and deployment build ID not allowed: SlotKey { namespace: "default", task_queue: "teste-ator-workflow-6fa69ac699454b28abab56c2b36e0ea4" }, worker_instance_key: WorkerTaskTypes { enable_workflows: true, enable_local_activities: false, enable_remote_activities: false, enable_nexus: false } build_id: None, new task types: WorkerTaskTypes { enable_workflows: true, enable_local_activities: false, enable_remote_activities: false, enable_nexus: false }, existing task types: 7fe8b894-edd2-4342-b279-5d0df5281ff0.
+
+======================================================================
+ERROR: test_mesma_sessao_serial_deduplicada_multiplos_workers (tests.workflows.test_f3_05_ator_sessao_isolado.AtorSessaoTemporalIsolado.test_mesma_sessao_serial_deduplicada_multiplos_workers)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_ator_sessao_isolado.py", line 74, in asyncSetUp
+    await self.stack.enter_async_context(Worker(
+                                         ^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_worker.py", line 413, in __init__
+    self._init_from_config(client, config)
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_worker.py", line 637, in _init_from_config
+    self._bridge_worker = temporalio.bridge.worker.Worker.create(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/bridge/worker.py", line 180, in create
+    temporalio.bridge.temporal_sdk_bridge.new_worker(
+RuntimeError: Failed creating worker
+
+Caused by:
+    Registration of multiple workers with overlapping worker task types on the same namespace, task queue, and deployment build ID not allowed: SlotKey { namespace: "default", task_queue: "teste-ator-workflow-cdb682d3ec164a6695d18b50fb00d0ae" }, worker_instance_key: WorkerTaskTypes { enable_workflows: true, enable_local_activities: false, enable_remote_activities: false, enable_nexus: false } build_id: None, new task types: WorkerTaskTypes { enable_workflows: true, enable_local_activities: false, enable_remote_activities: false, enable_nexus: false }, existing task types: 8ca2a35e-3a1a-44ba-94bc-8a9c31b470e3.
+
+======================================================================
+ERROR: test_sem_consumidor_timeout_terminal_sem_tarefa_orfa (tests.workflows.test_f3_05_ator_sessao_isolado.AtorSessaoTemporalIsolado.test_sem_consumidor_timeout_terminal_sem_tarefa_orfa)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_ator_sessao_isolado.py", line 74, in asyncSetUp
+    await self.stack.enter_async_context(Worker(
+                                         ^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_worker.py", line 413, in __init__
+    self._init_from_config(client, config)
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_worker.py", line 637, in _init_from_config
+    self._bridge_worker = temporalio.bridge.worker.Worker.create(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/bridge/worker.py", line 180, in create
+    temporalio.bridge.temporal_sdk_bridge.new_worker(
+RuntimeError: Failed creating worker
+
+Caused by:
+    Registration of multiple workers with overlapping worker task types on the same namespace, task queue, and deployment build ID not allowed: SlotKey { namespace: "default", task_queue: "teste-ator-workflow-9f69e6193599468091abf00e6945f0ef" }, worker_instance_key: WorkerTaskTypes { enable_workflows: true, enable_local_activities: false, enable_remote_activities: false, enable_nexus: false } build_id: None, new task types: WorkerTaskTypes { enable_workflows: true, enable_local_activities: false, enable_remote_activities: false, enable_nexus: false }, existing task types: 792bf176-3a3e-4496-8fc0-7e054667ab41.
+
+======================================================================
+ERROR: test_sessoes_distintas_progridem_em_paralelo (tests.workflows.test_f3_05_ator_sessao_isolado.AtorSessaoTemporalIsolado.test_sessoes_distintas_progridem_em_paralelo)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_ator_sessao_isolado.py", line 74, in asyncSetUp
+    await self.stack.enter_async_context(Worker(
+                                         ^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_worker.py", line 413, in __init__
+    self._init_from_config(client, config)
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_worker.py", line 637, in _init_from_config
+    self._bridge_worker = temporalio.bridge.worker.Worker.create(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/bridge/worker.py", line 180, in create
+    temporalio.bridge.temporal_sdk_bridge.new_worker(
+RuntimeError: Failed creating worker
+
+Caused by:
+    Registration of multiple workers with overlapping worker task types on the same namespace, task queue, and deployment build ID not allowed: SlotKey { namespace: "default", task_queue: "teste-ator-workflow-0e3639216597462f8efbffc0db9b8a14" }, worker_instance_key: WorkerTaskTypes { enable_workflows: true, enable_local_activities: false, enable_remote_activities: false, enable_nexus: false } build_id: None, new task types: WorkerTaskTypes { enable_workflows: true, enable_local_activities: false, enable_remote_activities: false, enable_nexus: false }, existing task types: e861cf5d-a99c-485e-a4bd-3a627ff38e72.
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.816s
+
+FAILED (errors=5)

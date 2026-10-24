@@ -1,0 +1,35 @@
+{
+  "trava_sensivel": true,
+  "conta_divergente_interrompe": true,
+  "calls": [
+    {
+      "sessao": "test_trava_sensivel_e_conta_divergente-conta",
+      "passo": "acao-conta",
+      "inicio": 409316.833494285,
+      "fim": 409316.87488493,
+      "fila": "teste-f3-05-candidato-camofox-test_trava_sensivel_e_conta_divergente",
+      "tentativa": 1,
+      "workflow_id": "teste-f3-05-candidato-sessao-5eaeb31d3929ec9bb1c14258d1ed7bafebc1a1df2cb7e52a6bdf5de741830bf0-op-6c28dfd58d2efb6d5e355823cb8705554a593858912654c2c040a5d4e19667f6"
+    }
+  ],
+  "max_sessao": {
+    "test_trava_sensivel_e_conta_divergente-conta": 1
+  },
+  "max_global": 1,
+  "registros": [
+    {
+      "resultado": "sensivel",
+      "tentativas": 0,
+      "motivo": "sensivel: passo sens\u00edvel: login-sensivel",
+      "proposta_script": null,
+      "chamar_jose": true
+    },
+    {
+      "resultado": "sensivel",
+      "tentativas": 1,
+      "motivo": "conta/sess\u00e3o divergente",
+      "proposta_script": null,
+      "chamar_jose": true
+    }
+  ]
+}

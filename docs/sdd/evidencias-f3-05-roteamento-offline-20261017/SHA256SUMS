@@ -1,0 +1,7 @@
+71a7078f945575a4ca6f6c04111303f0d594a546b684810f69e37a55633b56d0  tests/unit/test_f3_05_roteamento_offline.py
+fafb8ff7f91ce26485daacc77c20b824c2f8d3c214a211de9e62ef42921578e2  docs/sdd/f3-05-roteamento-offline-20261017.md
+34cfdd06bca58bf80c7da45ca2cce76fd84f32911718988c1130fa0048508d0f  docs/sdd/evidencias-f3-05-roteamento-offline-20261017/antes.json
+1f56bffdb9278b34eb88a5924635451d43be0e05a6e5c961c01ed069b599bb93  docs/sdd/evidencias-f3-05-roteamento-offline-20261017/focado.log
+34b2e6f41f8e8fc2882f19cb4b1dfcb0bdf0c15c6d5d55a2223c0e1f6a85ae19  docs/sdd/evidencias-f3-05-roteamento-offline-20261017/preservacao.json
+8c8943ececf806f1246d9b5ecb53c0f0c46f21a64e42babb3ba1700e0a226633  docs/sdd/evidencias-f3-05-roteamento-offline-20261017/regressao.log
+8d1aa58e2099ca06e183527964a0dedbbd40012cb9c11326104c393fd2666013  docs/sdd/evidencias-f3-05-roteamento-offline-20261017/status-antes.txt

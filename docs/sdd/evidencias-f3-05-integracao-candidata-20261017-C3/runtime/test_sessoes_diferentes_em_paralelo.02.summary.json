@@ -1,0 +1,36 @@
+{
+  "workflow_id": "teste-f3-05-candidato-sessao-4b9f817b2e2315a578d911b1dc4619916828414003f4024636fb8638868f8cc5-op-2208506dbb9169b81fba7e4ab855eb6e5430b6d97796a4006038cfb5465a404c",
+  "run_id": "01a14aa9-6521-7609-9991-328cf194738b",
+  "eventos": 31,
+  "replay": "ok",
+  "activities": [
+    {
+      "nome": "triagem_jev",
+      "fila": "teste-f3-05-candidato-wf-test_sessoes_diferentes_em_paralelo",
+      "max_tentativas": 3,
+      "id": "1",
+      "timeout_s": 120
+    },
+    {
+      "nome": "intervir_agente",
+      "fila": "teste-f3-05-candidato-camofox-test_sessoes_diferentes_em_paralelo",
+      "max_tentativas": 1,
+      "id": "intervencao-1",
+      "timeout_s": 503
+    },
+    {
+      "nome": "verificar_jev",
+      "fila": "teste-f3-05-candidato-wf-test_sessoes_diferentes_em_paralelo",
+      "max_tentativas": 3,
+      "id": "3",
+      "timeout_s": 120
+    },
+    {
+      "nome": "registrar_correcao",
+      "fila": "teste-f3-05-candidato-wf-test_sessoes_diferentes_em_paralelo",
+      "max_tentativas": 3,
+      "id": "4",
+      "timeout_s": 60
+    }
+  ]
+}

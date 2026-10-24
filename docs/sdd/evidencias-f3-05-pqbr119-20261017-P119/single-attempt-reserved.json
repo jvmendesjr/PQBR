@@ -1,0 +1,8 @@
+{
+  "interactionId": "815e9e44-cf90-45b4-86a2-23aafd45d0fc",
+  "ticket": "PQBR-119",
+  "reservedAt": "2026-10-17T21:56:09.919167+00:00",
+  "maxRounds": 1,
+  "retryForbidden": true,
+  "status": "attempt_reserved_no_reexecution"
+}

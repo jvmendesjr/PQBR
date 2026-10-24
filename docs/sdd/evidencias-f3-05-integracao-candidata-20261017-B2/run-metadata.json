@@ -1,0 +1,13 @@
+{
+  "root": "/home/pc/Workspace/PQBR",
+  "namespace": "f3-05-candidate",
+  "labels": {
+    "pqbr.candidate.run": "f305-candidate-B2"
+  },
+  "images": [
+    "temporalio/server:1.32.1",
+    "postgres:17-alpine",
+    "temporalio/admin-tools:1.32.1"
+  ],
+  "test_timeout_seconds": 300
+}

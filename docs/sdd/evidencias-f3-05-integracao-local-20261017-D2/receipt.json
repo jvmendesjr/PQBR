@@ -1,0 +1,20 @@
+{
+  "actionType": "record_authorization_only",
+  "ticket": "PQBR-118",
+  "issueId": "61ca182f-7342-4dd3-8827-0464ee541fff",
+  "interactionId": "db924b2d-3be6-4c6e-8d77-b2519fcbf4a3",
+  "userId": "eHIQgWDGucnmgW8xT19VvSsypXRdbTr7",
+  "status": "accepted",
+  "timestamp": "2026-10-17T21:30:49.186Z",
+  "scope": {
+    "prompt": "Autoriza somente registrar a decisão desta confirmação de teste? Nenhuma operação será retomada.",
+    "detailsMarkdown": "Fixture de teste aprovada por José. Ticket PQBR-118. Verifica somente a autoria humana e a gravação da decisão da confirmação. Não chama Temporal, não retoma nenhuma fila ou operação e não ativa produção. Sem aviso Discord."
+  },
+  "continuationPolicy": "none",
+  "requestedResolverPolicy": "human_only",
+  "effectiveResolverPolicy": "human_only",
+  "idempotencyKey": "pqbr-f3-05-fixture-pqbr-118-20261017-v1",
+  "pendingCount": 0,
+  "resumeCount": 0,
+  "effectCount": 0
+}

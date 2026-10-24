@@ -1,0 +1,205 @@
+Fonte: /home/pc/.paperclip/cli/installs/npm/2026.1001.0/node_modules/paperclipai/dist/index.js
+SHA256: 4da0caa4288fff4815eeb26686df18fa2e722079835832efe08218b233fbc8e3
+Apenas leitura de código instalado; nenhuma execução do bundle/CLI/API.
+
+=== linhas 262-278 ===
+262:     REQUEST_CHECKBOX_CONFIRMATION_OPTION_LIMIT = 200;
+263:     REQUEST_ITEM_VERDICTS_ITEM_LIMIT = REQUEST_CHECKBOX_CONFIRMATION_OPTION_LIMIT;
+264:     ISSUE_THREAD_INTERACTION_STATUSES = [
+265:       "pending",
+266:       "accepted",
+267:       "rejected",
+268:       "answered",
+269:       "cancelled",
+270:       "expired",
+271:       "failed"
+272:     ];
+273:     ISSUE_THREAD_INTERACTION_CONTINUATION_POLICIES = [
+274:       "none",
+275:       "wake_assignee",
+276:       "wake_assignee_on_accept"
+277:     ];
+278:     ISSUE_WATCHDOG_DISCOVERY_KINDS = ["product_bug", "platform_bug"];
+
+=== linhas 9900-9918 ===
+9900:     });
+9901:     requestConfirmationCustomTargetSchema = requestConfirmationTargetBaseSchema.extend({
+9902:       type: z16.literal("custom"),
+9903:       key: z16.string().trim().min(1).max(120),
+9904:       revisionId: z16.string().trim().min(1).max(255).nullable().optional(),
+9905:       revisionNumber: z16.number().int().positive().nullable().optional()
+9906:     });
+9907:     requestConfirmationTargetSchema = z16.discriminatedUnion("type", [
+9908:       requestConfirmationIssueDocumentTargetSchema,
+9909:       requestConfirmationCustomTargetSchema
+9910:     ]);
+9911:     requestConfirmationToolActionPayloadSchema = z16.object({
+9912:       version: z16.literal(1),
+9913:       actionRequestId: z16.string().guid(),
+9914:       invocationId: z16.string().guid(),
+9915:       toolName: z16.string().trim().min(1).max(500),
+9916:       toolDisplayName: z16.string().trim().min(1).max(500),
+9917:       connectionId: z16.string().guid().nullable(),
+9918:       applicationId: z16.string().guid().nullable(),
+
+=== linhas 9937-9951 ===
+9937:     requestConfirmationPayloadSchema = z16.object({
+9938:       version: z16.literal(1),
+9939:       prompt: z16.string().trim().min(1).max(1e3),
+9940:       acceptLabel: z16.string().trim().min(1).max(80).nullable().optional(),
+9941:       rejectLabel: z16.string().trim().min(1).max(80).nullable().optional(),
+9942:       rejectRequiresReason: z16.boolean().optional(),
+9943:       rejectReasonLabel: z16.string().trim().min(1).max(160).nullable().optional(),
+9944:       allowDeclineReason: z16.boolean().optional().default(true),
+9945:       declineReasonPlaceholder: z16.string().trim().min(1).max(240).nullable().optional(),
+9946:       detailsMarkdown: z16.string().max(2e4).nullable().optional(),
+9947:       supersedeOnUserComment: z16.boolean().optional(),
+9948:       target: requestConfirmationTargetSchema.nullable().optional(),
+9949:       toolAction: requestConfirmationToolActionPayloadSchema.optional(),
+9950:       secretProposal: requestConfirmationSecretProposalPayloadSchema.optional()
+9951:     });
+
+=== linhas 10074-10099 ===
+10074:       outcome: z16.enum([
+10075:         "accepted",
+10076:         "rejected",
+10077:         "superseded_by_comment",
+10078:         "superseded_by_newer_request",
+10079:         "stale_target",
+10080:         "skipped",
+10081:         "withdrawn",
+10082:         "issue_closed",
+10083:         "addressee_deleted"
+10084:       ]),
+10085:       reason: z16.string().trim().max(4e3).nullable().optional(),
+10086:       commentId: z16.string().guid().nullable().optional(),
+10087:       supersededByInteractionId: z16.string().guid().nullable().optional(),
+10088:       staleTarget: requestConfirmationTargetSchema.nullable().optional(),
+10089:       resumeFailure: requestConfirmationResumeFailureSchema.nullable().optional(),
+10090:       toolAction: requestConfirmationToolActionResultSchema.optional(),
+10091:       secretProposal: requestConfirmationSecretProposalResultSchema.optional()
+10092:     });
+10093:     requestCheckboxConfirmationResultSchema = requestConfirmationResultSchema.extend({
+10094:       selectedOptionIds: z16.array(z16.string().trim().min(1).max(120)).max(REQUEST_CHECKBOX_CONFIRMATION_OPTION_LIMIT).optional()
+10095:     }).superRefine((value, ctx) => {
+10096:       const selectedOptionIds = value.selectedOptionIds ?? [];
+10097:       const seenOptionIds = /* @__PURE__ */ new Set();
+10098:       for (const [index120, optionId] of selectedOptionIds.entries()) {
+10099:         if (seenOptionIds.has(optionId)) {
+
+=== linhas 10238-10242 ===
+10238:     createIssueThreadInteractionCommon = {
+10239:       resolverPolicy: issueThreadInteractionResolverPolicySchema.optional(),
+10240:       addresseeAgentId: z16.string().guid().nullable().optional(),
+10241:       addresseeUserId: z16.string().trim().min(1).nullable().optional()
+10242:     };
+
+=== linhas 10299-10309 ===
+10299:       z16.object({
+10300:         ...createIssueThreadInteractionCommon,
+10301:         kind: z16.literal("request_confirmation"),
+10302:         idempotencyKey: z16.string().trim().max(255).nullable().optional(),
+10303:         sourceCommentId: z16.string().guid().nullable().optional(),
+10304:         sourceRunId: z16.string().guid().nullable().optional(),
+10305:         title: z16.string().trim().max(240).nullable().optional(),
+10306:         summary: z16.string().trim().max(1e3).nullable().optional(),
+10307:         continuationPolicy: issueThreadInteractionContinuationPolicySchema.optional().default("none"),
+10308:         payload: requestConfirmationPayloadSchema
+10309:       }),
+
+=== linhas 21749-21783 ===
+21749:     issueThreadInteractions = pgTable51(
+21750:       "issue_thread_interactions",
+21751:       {
+21752:         id: uuid50("id").primaryKey().defaultRandom(),
+21753:         companyId: uuid50("company_id").notNull().references(() => companies.id),
+21754:         issueId: uuid50("issue_id").notNull().references(() => issues.id, { onDelete: "cascade" }),
+21755:         kind: text54("kind").notNull(),
+21756:         status: text54("status").notNull().default("pending"),
+21757:         continuationPolicy: text54("continuation_policy").notNull().default("wake_assignee"),
+21758:         requestedResolverPolicy: text54("requested_resolver_policy").$type().notNull().default("anyone"),
+21759:         effectiveResolverPolicy: text54("effective_resolver_policy").$type().notNull().default("anyone"),
+21760:         resolverPolicyProvenance: text54("resolver_policy_provenance").$type().notNull().default("inherited"),
+21761:         effectiveResolverPolicySource: text54("effective_resolver_policy_source").$type().notNull().default("requested"),
+21762:         idempotencyKey: text54("idempotency_key"),
+21763:         originCommentIds: jsonb34("origin_comment_ids").$type().notNull().default(sql12`'[]'::jsonb`),
+21764:         sourceCommentId: uuid50("source_comment_id").references(() => issueComments.id, { onDelete: "set null" }),
+21765:         sourceIdentityContextId: uuid50("source_identity_context_id"),
+21766:         sourceRunId: uuid50("source_run_id").references(() => heartbeatRuns.id, { onDelete: "set null" }),
+21767:         title: text54("title"),
+21768:         summary: text54("summary"),
+21769:         createdByAgentId: uuid50("created_by_agent_id").references(() => agents.id),
+21770:         addresseeAgentId: uuid50("addressee_agent_id").references(() => agents.id, { onDelete: "set null" }),
+21771:         addresseeUserId: text54("addressee_user_id"),
+21772:         createdByUserId: text54("created_by_user_id"),
+21773:         resolvedByAgentId: uuid50("resolved_by_agent_id").references(() => agents.id),
+21774:         resolvedByRunId: uuid50("resolved_by_run_id").references(() => heartbeatRuns.id, { onDelete: "set null" }),
+21775:         resolvedByUserId: text54("resolved_by_user_id"),
+21776:         payload: jsonb34("payload").$type().notNull(),
+21777:         result: jsonb34("result").$type(),
+21778:         resolvedAt: timestamp51("resolved_at", { withTimezone: true }),
+21779:         createdAt: timestamp51("created_at", { withTimezone: true }).notNull().defaultNow(),
+21780:         updatedAt: timestamp51("updated_at", { withTimezone: true }).notNull().defaultNow()
+21781:       },
+21782:       (table) => ({
+21783:         issueIdx: index44("issue_thread_interactions_issue_idx").on(table.issueId),
+
+=== linhas 52848-52905 ===
+52848:         handleCommandError(err);
+52849:       }
+52850:     })
+52851:   );
+52852:   addCommonClientOptions(
+52853:     issue.command("interactions").description("List issue thread interactions").argument("<issueId>", "Issue ID").action(async (issueId, opts) => {
+52854:       try {
+52855:         const ctx = resolveCommandContext(opts);
+52856:         const interactions = await ctx.api.get(apiPath`/api/issues/${issueId}/interactions`);
+52857:         printOutput(interactions, { json: ctx.json });
+52858:       } catch (err) {
+52859:         handleCommandError(err);
+52860:       }
+52861:     })
+52862:   );
+52863:   addCommonClientOptions(
+52864:     issue.command("interaction:create").description("Create an issue thread interaction from JSON").argument("<issueId>", "Issue ID").requiredOption("--payload-json <json>", "CreateIssueThreadInteraction JSON payload").action(async (issueId, opts) => {
+52865:       try {
+52866:         const ctx = resolveCommandContext(opts);
+52867:         const payload = createIssueThreadInteractionSchema.parse(parseJson5(opts.payloadJson));
+52868:         const interaction = await ctx.api.post(apiPath`/api/issues/${issueId}/interactions`, payload);
+52869:         printOutput(interaction, { json: ctx.json });
+52870:       } catch (err) {
+52871:         handleCommandError(err);
+52872:       }
+52873:     })
+52874:   );
+52875:   addCommonClientOptions(
+52876:     issue.command("interaction:accept").description("Accept an issue thread interaction").argument("<issueId>", "Issue ID").argument("<interactionId>", "Interaction ID").option("--selected-client-keys <csv>", "Client keys to accept").option("--selected-option-ids <csv>", "Checkbox option IDs to accept").action(async (issueId, interactionId, opts) => {
+52877:       try {
+52878:         const ctx = resolveCommandContext(opts);
+52879:         const payload = acceptIssueThreadInteractionSchema.parse({
+52880:           selectedClientKeys: opts.selectedClientKeys === void 0 ? void 0 : parseCsv(opts.selectedClientKeys),
+52881:           selectedOptionIds: opts.selectedOptionIds === void 0 ? void 0 : parseCsv(opts.selectedOptionIds)
+52882:         });
+52883:         const interaction = await ctx.api.post(apiPath`/api/issues/${issueId}/interactions/${interactionId}/accept`, payload);
+52884:         printOutput(interaction, { json: ctx.json });
+52885:       } catch (err) {
+52886:         handleCommandError(err);
+52887:       }
+52888:     })
+52889:   );
+52890:   for (const [name, action, schema, description] of [
+52891:     ["interaction:reject", "reject", rejectIssueThreadInteractionSchema, "Reject an issue thread interaction"],
+52892:     ["interaction:cancel", "cancel", cancelIssueThreadInteractionSchema, "Cancel an issue thread interaction"]
+52893:   ]) {
+52894:     addCommonClientOptions(
+52895:       issue.command(name).description(description).argument("<issueId>", "Issue ID").argument("<interactionId>", "Interaction ID").option("--reason <text>", "Reason").action(async (issueId, interactionId, opts) => {
+52896:         try {
+52897:           const ctx = resolveCommandContext(opts);
+52898:           const payload = schema.parse({ reason: opts.reason });
+52899:           const interaction = await ctx.api.post(`${apiPath`/api/issues/${issueId}/interactions/${interactionId}`}/${action}`, payload);
+52900:           printOutput(interaction, { json: ctx.json });
+52901:         } catch (err) {
+52902:           handleCommandError(err);
+52903:         }
+52904:       })
+52905:     );

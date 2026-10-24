@@ -1,0 +1,18 @@
+{
+  "workflow_id": "teste-f3-05-supervisor-a137a7233b346684bf0e6a69dc2a0b062181a16341fc064b249d842d6f7c68d8",
+  "run_id": "c2e091d3-c7cd-481c-a3c2-f921c16f66e0",
+  "eventos": 32,
+  "replay": "ok",
+  "activities": [
+    {
+      "nome": "registrar_falha_supervisor_falsa",
+      "fila": "teste-f3-05-candidato-wf-FAKE-H3-test_12_receipt_forjado_no_transporte-supervisor",
+      "max_tentativas": 1
+    },
+    {
+      "nome": "reler_confirmacao_canonica_falsa",
+      "fila": "teste-f3-05-candidato-wf-FAKE-H3-test_12_receipt_forjado_no_transporte-supervisor",
+      "max_tentativas": 1
+    }
+  ]
+}

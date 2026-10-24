@@ -1,0 +1,39 @@
+{
+  "namespaceInfo": {
+    "name": "f3-05-recovery",
+    "state": "NAMESPACE_STATE_REGISTERED",
+    "description": "PROTOTIPO RECUPERACAO DESCARTAVEL; somente Activities sinteticas",
+    "id": "8ab78a44-7969-49ef-89ea-9d8abf459b0b",
+    "capabilities": {
+      "eagerWorkflowStart": true,
+      "syncUpdate": true,
+      "asyncUpdate": true,
+      "workerHeartbeats": true,
+      "reportedProblemsSearchAttribute": true,
+      "standaloneActivities": true,
+      "pollerAutoscaling": true,
+      "standaloneActivityStartDelay": true
+    },
+    "limits": {
+      "blobSizeLimitError": "2097152",
+      "memoSizeLimitError": "2097152",
+      "workflowTaskCompletionSizeLimitError": "41943040"
+    },
+    "supportsSchedules": true
+  },
+  "config": {
+    "workflowExecutionRetentionTtl": "86400s",
+    "badBinaries": {},
+    "historyArchivalState": "ARCHIVAL_STATE_DISABLED",
+    "visibilityArchivalState": "ARCHIVAL_STATE_DISABLED"
+  },
+  "replicationConfig": {
+    "activeClusterName": "active",
+    "clusters": [
+      {
+        "clusterName": "active"
+      }
+    ],
+    "state": "REPLICATION_STATE_NORMAL"
+  }
+}

@@ -14,7 +14,7 @@ FALAS = ["Por que a gente desliga a TV e acorda na hora?"] + ["O corpo sabe que 
 
 class Contratos(unittest.TestCase):
     def roteiro(self, **kw):
-        base = dict(episodio_id="ep-0001", titulo="Por que acordamos sem a TV?", falas=FALAS, entidades_cena=["sofá", "TV"], bloco_visual=BLOCO)
+        base = dict(episodio_id="ep-0001", titulo="Por que acordamos sem a TV?", falas=FALAS, tipo_cta="fallback", entidades_cena=["sofá", "TV"], bloco_visual=BLOCO)
         base.update(kw); return RoteiroShort(**base)
 
     def test_roteiro_valido(self):
@@ -26,6 +26,26 @@ class Contratos(unittest.TestCase):
                       [*FALAS[:-1], "Comenta aí embaixo", CTA], ["Oi.", CTA]):
             with self.assertRaises(ValidationError):
                 self.roteiro(falas=falas)
+
+    def test_roteiro_aceita_ctas_contextuais_e_fallback(self):
+        trocadilho = "Se apertar o elevador de novo, segue o canal: aqui a curiosidade também sobe."
+        r = self.roteiro(falas=[*FALAS[:-1], trocadilho], tipo_cta="trocadilho_tema")
+        self.assertEqual(r.tipo_cta, "trocadilho_tema")
+        convite = "Segue o canal para mais manias brasileiras que a gente reconhece."
+        r = self.roteiro(falas=[*FALAS[:-1], convite], tipo_cta="convite_seguir")
+        self.assertEqual(r.tipo_cta, "convite_seguir")
+        r = self.roteiro(falas=[*FALAS[:-1], CTA], tipo_cta="fallback")
+        self.assertEqual(r.falas[-1], CTA)
+
+    def test_roteiro_tipo_cta_inconsistente_reprova(self):
+        with self.assertRaises(ValidationError):
+            self.roteiro(falas=[*FALAS[:-1], "Segue o canal para mais manias."], tipo_cta="fallback")
+        with self.assertRaises(ValidationError):
+            self.roteiro(tipo_cta="convite_seguir")
+        with self.assertRaises(ValidationError):
+            self.roteiro(tipo_cta="invalido")
+        with self.assertRaises(ValidationError):
+            self.roteiro(falas=[*FALAS[:-1], "Comenta sobre o elevador e segue o canal."], tipo_cta="trocadilho_tema")
 
     def test_extra_proibido(self):
         with self.assertRaises(ValidationError):

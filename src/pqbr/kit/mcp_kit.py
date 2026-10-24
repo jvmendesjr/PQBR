@@ -149,8 +149,9 @@ def chamar(nome: str, a: dict) -> str:
     if nome == "memoria_buscar":
         import urllib.request
         u = os.environ.get("HINDSIGHT_URL", "http://127.0.0.1:8890")
+        corpo = {"query": a["consulta"][:500], "max_tokens": 1500}
         r = urllib.request.Request(f"{u}/v1/default/banks/pqbr/memories/recall", method="POST", headers={"Content-Type": "application/json"},
-                                   data=json.dumps({"query": a["consulta"][:500], "max_tokens": 1500}).encode())
+                                   data=json.dumps(corpo).encode())
         with urllib.request.urlopen(r, timeout=60) as resp:
             res = json.load(resp).get("results", [])
         return "\n".join(f"- {x.get('text', '')[:400]}" for x in res[:8]) or "nada na memória"
@@ -165,6 +166,27 @@ def chamar(nome: str, a: dict) -> str:
     if nome == "seguranca_varrer_logs": return _varrer_logs(a.get("horas", 24) or 24)
     raise KeyError(nome)
 
+
+def _imprimir_jsonrpc(obj: dict) -> None:
+    """Valida a resposta inteira e não ecoa ID/dados se a barreira bloquear."""
+    from pqbr.seguranca.barreira import exigir_limpo
+    try:
+        exigir_limpo(obj, "log")
+        linha = json.dumps(obj, ensure_ascii=False)
+    except Exception:
+        identificador = obj.get("id")
+        try:
+            exigir_limpo(identificador, "log")
+        except Exception:
+            identificador = None
+        seguro = {"jsonrpc": "2.0", "id": identificador,
+                  "error": {"code": -32000, "message": "resposta bloqueada"}}
+        try:
+            exigir_limpo(seguro, "log")
+            linha = json.dumps(seguro, ensure_ascii=False)
+        except Exception:
+            return
+    print(linha, flush=True)
 
 def main() -> None:
     papel = os.environ.get("PQBR_KIT_PAPEL", "")
@@ -194,9 +216,9 @@ def main() -> None:
                 except Exception as e:
                     res = {"content": [{"type": "text", "text": f"erro: {type(e).__name__}: {str(e)[:300]}"}], "isError": True}
         else:
-            print(json.dumps({"jsonrpc": "2.0", "id": mid, "error": {"code": -32601, "message": "método"}}), flush=True)
+            _imprimir_jsonrpc({"jsonrpc": "2.0", "id": mid, "error": {"code": -32601, "message": "método"}})
             continue
-        print(json.dumps({"jsonrpc": "2.0", "id": mid, "result": res}, ensure_ascii=False), flush=True)
+        _imprimir_jsonrpc({"jsonrpc": "2.0", "id": mid, "result": res})
 
 
 if __name__ == "__main__":

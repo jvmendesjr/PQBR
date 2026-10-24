@@ -1,0 +1,42 @@
+{
+  "arquivos_anteriores_conferidos": 389,
+  "divergentes": [],
+  "namespace_encerrado": "net:[4026533133]",
+  "processos_restantes_namespace": [],
+  "historicos_novos": 4,
+  "replays_anteriores": 32,
+  "resumos_novos": [
+    {
+      "teste": "test_sem_registro_na_principal_sessao_nao_resgata_activity",
+      "replay": "ok",
+      "fila_intervencao": [
+        "teste-pqbr-episodio-f2b79c34232e498f8bc1f1fa13a829c2"
+      ],
+      "falha": "ActivityError"
+    },
+    {
+      "teste": "test_excecao_tecnica_mantem_uma_execucao_sem_registro",
+      "replay": "ok",
+      "fila_intervencao": [
+        "teste-pqbr-episodio-2fe5aca8203d451c828e792a43c55287"
+      ],
+      "falha": "ActivityError"
+    },
+    {
+      "teste": "test_controle_workflow_na_fila_sessao_herda_sessao",
+      "replay": "ok",
+      "fila_intervencao": [
+        "teste-camofox-pqbr-c6df36702f85494bafce0cc3b2caee9d"
+      ],
+      "falha": null
+    },
+    {
+      "teste": "test_camofox_herda_principal_mesmo_com_worker_sessao_disponivel",
+      "replay": "ok",
+      "fila_intervencao": [
+        "teste-pqbr-episodio-56e5456c7ac1408dafc603479a32c46a"
+      ],
+      "falha": null
+    }
+  ]
+}

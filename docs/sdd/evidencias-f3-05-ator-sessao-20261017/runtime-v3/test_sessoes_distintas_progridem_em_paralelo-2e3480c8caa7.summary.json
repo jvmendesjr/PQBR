@@ -1,0 +1,42 @@
+{
+  "teste": "test_sessoes_distintas_progridem_em_paralelo",
+  "workflow_id": "prototipo-ator-sessao-v1-b055b73aa1749b2b4b3833659d848619dd2921b40dc911c7a1e72e3480c8caa7",
+  "run_id": "406d35ef-b37d-4c6e-bb48-bc54ebebbc29",
+  "estado": "COMPLETED",
+  "pending_activities": 0,
+  "replay": "ok",
+  "atividades_agendadas": 1,
+  "fila_explicita": "teste-camofox-ator-1b2c916ef5ca40d4bb3f1e073c5986a2",
+  "calls": [
+    {
+      "pedido": {
+        "falhar": false,
+        "id": "a1",
+        "sessao": "sessao-A"
+      },
+      "inicio": 404532.013632235,
+      "fim": 404532.042284088,
+      "fila": "teste-camofox-ator-1b2c916ef5ca40d4bb3f1e073c5986a2",
+      "workflow_id": "prototipo-ator-sessao-v1-07aa137bd2dc362b90b33958e3ed6b335ab8385dedfb7454998d1219cf0e9f50",
+      "attempt": 1
+    },
+    {
+      "pedido": {
+        "falhar": false,
+        "id": "b1",
+        "sessao": "sessao-B"
+      },
+      "inicio": 404532.032444356,
+      "fim": 404532.04263767,
+      "fila": "teste-camofox-ator-1b2c916ef5ca40d4bb3f1e073c5986a2",
+      "workflow_id": "prototipo-ator-sessao-v1-b055b73aa1749b2b4b3833659d848619dd2921b40dc911c7a1e72e3480c8caa7",
+      "attempt": 1
+    }
+  ],
+  "max_global": 2,
+  "max_por_sessao": {
+    "sessao-A": 1,
+    "sessao-B": 1
+  },
+  "erro": null
+}

@@ -1,0 +1,611 @@
+Evidencias: /home/pc/Workspace/PQBR/docs/sdd/evidencias-f3-05-admissao-atomica-20261017/runtime-v1
+Namespace original: net:[4026531840]
+19defb9f7318c7cf249518b3642a735efb79876c2b6918afe312336476b796a5  /tmp/temporal-test-server-sdk-python-1.34.0
+Namespace isolado: net:[4026533133]
+lo               UNKNOWN        127.0.0.1/8 ::1/128 
+test_config_divergente_na_reutilizacao_nao_enfileira (tests.workflows.test_f3_05_admissao_atomica_isolado.AdmissaoAtomicaTemporalIsolada.test_config_divergente_na_reutilizacao_nao_enfileira) ... [2m2026-10-17T15:05:02.643750Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+[2m2026-10-17T15:05:02.644071Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+ok
+test_excecao_tecnica_sem_retry_sem_proximo (tests.workflows.test_f3_05_admissao_atomica_isolado.AdmissaoAtomicaTemporalIsolada.test_excecao_tecnica_sem_retry_sem_proximo) ... [2m2026-10-17T15:05:03.172096Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+[2m2026-10-17T15:05:03.172227Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+Completing activity as failed ({'activity_id': '1', 'activity_type': 'intervir_camofox_sintetico_v1', 'attempt': 1, 'namespace': 'default', 'task_queue': 'teste-camofox-ator-c916bf4f02334aff84745a2d00110147', 'workflow_id': 'prototipo-ator-sessao-atomico-v1-07aa137bd2dc362b90b33958e3ed6b335ab8385dedfb7454998d1219cf0e9f50', 'workflow_run_id': '27595c99-07d4-4233-915a-ed60b17de99c', 'workflow_type': 'AtorSessaoAtomicoSintetico'})
+Traceback (most recent call last):
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 351, in _handle_start_activity_task
+    result = await self._execute_activity(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 681, in _execute_activity
+    return await impl.execute_activity(input)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 889, in execute_activity
+    return await input.fn(*input.args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_admissao_atomica_isolado.py", line 49, in intervir
+    raise ApplicationError("falha tecnica sintetica", type="FalhaTecnicaSintetica")
+temporalio.exceptions.ApplicationError: FalhaTecnicaSintetica: falha tecnica sintetica
+ERROR
+test_fechamento_drena_rejeita_novo_e_nao_reabre (tests.workflows.test_f3_05_admissao_atomica_isolado.AdmissaoAtomicaTemporalIsolada.test_fechamento_drena_rejeita_novo_e_nao_reabre) ... [2m2026-10-17T15:05:03.517943Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+[2m2026-10-17T15:05:03.518124Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+Future exception was never retrieved
+future: <Future finished exception=RPCError('ALREADY_EXISTS: WorkflowId: prototipo-ator-sessao-atomico-v1-07aa137bd2dc362b90b33958e3ed6b335ab8385dedfb7454998d1219cf0e9f50, RunId: 27595c99-07d4-4233-915a-ed60b17de99c') created at /home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/client/_workflow.py:1230>
+source_traceback: Object created at (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/unittest/__main__.py", line 18, in <module>
+    main(module=None)
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/unittest/main.py", line 105, in __init__
+    self.runTests()
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/unittest/main.py", line 281, in runTests
+    self.result = testRunner.run(self.test)
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/unittest/runner.py", line 240, in run
+    test(result)
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/unittest/suite.py", line 84, in __call__
+    return self.run(*args, **kwds)
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/unittest/suite.py", line 122, in run
+    test(result)
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/unittest/suite.py", line 84, in __call__
+    return self.run(*args, **kwds)
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/unittest/suite.py", line 122, in run
+    test(result)
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/unittest/suite.py", line 84, in __call__
+    return self.run(*args, **kwds)
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/unittest/suite.py", line 122, in run
+    test(result)
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/unittest/case.py", line 690, in __call__
+    return self.run(*args, **kwds)
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/unittest/async_case.py", line 132, in run
+    return super().run(result)
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/unittest/case.py", line 634, in run
+    self._callTestMethod(testMethod)
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/unittest/async_case.py", line 91, in _callTestMethod
+    if self._callMaybeAsync(method) is not None:
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/unittest/async_case.py", line 113, in _callMaybeAsync
+    return self._asyncioRunner.run(
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py", line 678, in run_until_complete
+    self.run_forever()
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py", line 645, in run_forever
+    self._run_once()
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py", line 1991, in _run_once
+    handle._run()
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_admissao_atomica_isolado.py", line 262, in test_excecao_tecnica_sem_retry_sem_proximo
+    await self.admitir("a3")
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_admissao_atomica_isolado.py", line 102, in admitir
+    return await admitir_atomico(
+  File "/home/pc/Workspace/PQBR/tests/workflows/prototipo_admissao_atomica.py", line 107, in admitir_atomico
+    op = WithStartWorkflowOperation(
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/client/_workflow.py", line 1230, in __init__
+    self._workflow_handle: Future[WorkflowHandle[SelfType, ReturnType]] = Future()
+Traceback (most recent call last):
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/service.py", line 475, in _rpc_call
+    resp = await client.call(
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/bridge/client.py", line 168, in call
+    resp.ParseFromString(await resp_fut)
+                         ^^^^^^^^^^^^^^
+temporal_sdk_bridge.RPCError: (6, 'MultiOperation could not be executed', b'\x08\x06\x12$MultiOperation could not be executed\x1a\xf0\x02\nOtype.googleapis.com/temporal.api.errordetails.v1.MultiOperationExecutionFailure\x12\x9c\x02\n\xaf\x01\x08\x06\x12\xaa\x01ALREADY_EXISTS: WorkflowId: prototipo-ator-sessao-atomico-v1-07aa137bd2dc362b90b33958e3ed6b335ab8385dedfb7454998d1219cf0e9f50, RunId: 27595c99-07d4-4233-915a-ed60b17de99c\nh\x08\n\x12\x16Operation was aborted.\x1aL\nJtype.googleapis.com/temporal.api.failure.v1.MultiOperationExecutionAborted')
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/client/_impl.py", line 970, in start_update_with_start_workflow
+    return await self._start_workflow_update_with_start(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/client/_impl.py", line 1069, in _start_workflow_update_with_start
+    await self._client.workflow_service.execute_multi_operation(
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/bridge/services_generated.py", line 560, in execute_multi_operation
+    return await self._client._rpc_call(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/service.py", line 490, in _rpc_call
+    raise RPCError(message, RPCStatusCode(status), details)
+temporalio.service.RPCError: MultiOperation could not be executed
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/unittest/case.py", line 58, in testPartExecutor
+    yield
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/unittest/case.py", line 634, in run
+    self._callTestMethod(testMethod)
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/unittest/async_case.py", line 91, in _callTestMethod
+    if self._callMaybeAsync(method) is not None:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/unittest/async_case.py", line 113, in _callMaybeAsync
+    return self._asyncioRunner.run(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_admissao_atomica_isolado.py", line 262, in test_excecao_tecnica_sem_retry_sem_proximo
+    await self.admitir("a3")
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_admissao_atomica_isolado.py", line 102, in admitir
+    return await admitir_atomico(
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/tests/workflows/prototipo_admissao_atomica.py", line 115, in admitir_atomico
+    resultado = await client.execute_update_with_start_workflow(
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/client/_client.py", line 1028, in execute_update_with_start_workflow
+    handle = await self._start_update_with_start(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/client/_client.py", line 1227, in _start_update_with_start
+    return await self._impl.start_update_with_start_workflow(input)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/client/_interceptor.py", line 853, in start_update_with_start_workflow
+    return await self.next.start_update_with_start_workflow(input)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/client/_impl.py", line 1031, in start_update_with_start_workflow
+    raise err
+temporalio.service.RPCError: ALREADY_EXISTS: WorkflowId: prototipo-ator-sessao-atomico-v1-07aa137bd2dc362b90b33958e3ed6b335ab8385dedfb7454998d1219cf0e9f50, RunId: 27595c99-07d4-4233-915a-ed60b17de99c
+ERROR
+test_primeiro_pedido_concorrente_cria_um_ator_e_serializa (tests.workflows.test_f3_05_admissao_atomica_isolado.AdmissaoAtomicaTemporalIsolada.test_primeiro_pedido_concorrente_cria_um_ator_e_serializa) ... [2m2026-10-17T15:05:04.036483Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+[2m2026-10-17T15:05:04.036621Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+ok
+test_primeiro_update_invalido_nao_reverte_start (tests.workflows.test_f3_05_admissao_atomica_isolado.AdmissaoAtomicaTemporalIsolada.test_primeiro_update_invalido_nao_reverte_start) ... [2m2026-10-17T15:05:05.601977Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+[2m2026-10-17T15:05:05.602066Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+ok
+test_reenvio_resposta_descartada_e_colisao_payload (tests.workflows.test_f3_05_admissao_atomica_isolado.AdmissaoAtomicaTemporalIsolada.test_reenvio_resposta_descartada_e_colisao_payload) ... [2m2026-10-17T15:05:05.960848Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+[2m2026-10-17T15:05:05.960972Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+ok
+test_rpc_timeout_sem_worker_reenvio_recupera_mesmo_ator (tests.workflows.test_f3_05_admissao_atomica_isolado.AdmissaoAtomicaTemporalIsolada.test_rpc_timeout_sem_worker_reenvio_recupera_mesmo_ator) ... Oct 17, 2026 12:05:06 PM io.grpc.internal.SerializingExecutor run
+SEVERE: Exception while executing runnable io.grpc.internal.ServerImpl$JumpToApplicationThreadServerStreamListener$1HalfClosed@28ee20ae
+java.lang.NullPointerException: Stack trace is imprecise, the top frames are missing and/or have wrong line numbers. To get precise stack traces, build the image with option -H:-ReduceImplicitExceptionStackTraceInformation
+	at io.temporal.internal.testservice.TestWorkflowService.waitForUpdateResponse(TestWorkflowService.java:1353)
+	at io.temporal.internal.testservice.TestWorkflowService.executeMultiOperation(TestWorkflowService.java:1546)
+	at io.temporal.api.workflowservice.v1.WorkflowServiceGrpc$MethodHandlers.invoke(WorkflowServiceGrpc.java:11645)
+	at io.grpc.stub.ServerCalls$UnaryServerCallHandler$UnaryServerCallListener.onHalfClose(ServerCalls.java:182)
+	at io.grpc.internal.ServerCallImpl$ServerStreamListenerImpl.halfClosed(ServerCallImpl.java:356)
+	at io.grpc.internal.ServerImpl$JumpToApplicationThreadServerStreamListener$1HalfClosed.runInContext(ServerImpl.java:861)
+	at io.grpc.internal.ContextRunnable.run(ContextRunnable.java:37)
+	at io.grpc.internal.SerializingExecutor.run(SerializingExecutor.java:133)
+	at java.base@23.0.2/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base@23.0.2/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base@23.0.2/java.lang.Thread.runWith(Thread.java:1588)
+	at java.base@23.0.2/java.lang.Thread.run(Thread.java:1575)
+	at org.graalvm.nativeimage.builder/com.oracle.svm.core.thread.PlatformThreads.threadStartRoutine(PlatformThreads.java:832)
+	at org.graalvm.nativeimage.builder/com.oracle.svm.core.thread.PlatformThreads.threadStartRoutine(PlatformThreads.java:808)
+
+Oct 17, 2026 12:05:06 PM io.grpc.internal.SerializingExecutor run
+SEVERE: Exception while executing runnable io.grpc.internal.ServerImpl$JumpToApplicationThreadServerStreamListener$1HalfClosed@7a59c38e
+java.lang.NullPointerException: Stack trace is imprecise, the top frames are missing and/or have wrong line numbers. To get precise stack traces, build the image with option -H:-ReduceImplicitExceptionStackTraceInformation
+	at io.temporal.internal.testservice.TestWorkflowService.waitForUpdateResponse(TestWorkflowService.java:1353)
+	at io.temporal.internal.testservice.TestWorkflowService.executeMultiOperation(TestWorkflowService.java:1546)
+	at io.temporal.api.workflowservice.v1.WorkflowServiceGrpc$MethodHandlers.invoke(WorkflowServiceGrpc.java:11645)
+	at io.grpc.stub.ServerCalls$UnaryServerCallHandler$UnaryServerCallListener.onHalfClose(ServerCalls.java:182)
+	at io.grpc.internal.ServerCallImpl$ServerStreamListenerImpl.halfClosed(ServerCallImpl.java:356)
+	at io.grpc.internal.ServerImpl$JumpToApplicationThreadServerStreamListener$1HalfClosed.runInContext(ServerImpl.java:861)
+	at io.grpc.internal.ContextRunnable.run(ContextRunnable.java:37)
+	at io.grpc.internal.SerializingExecutor.run(SerializingExecutor.java:133)
+	at java.base@23.0.2/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base@23.0.2/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base@23.0.2/java.lang.Thread.runWith(Thread.java:1588)
+	at java.base@23.0.2/java.lang.Thread.run(Thread.java:1575)
+	at org.graalvm.nativeimage.builder/com.oracle.svm.core.thread.PlatformThreads.threadStartRoutine(PlatformThreads.java:832)
+	at org.graalvm.nativeimage.builder/com.oracle.svm.core.thread.PlatformThreads.threadStartRoutine(PlatformThreads.java:808)
+
+Oct 17, 2026 12:05:06 PM io.grpc.internal.SerializingExecutor run
+SEVERE: Exception while executing runnable io.grpc.internal.ServerImpl$JumpToApplicationThreadServerStreamListener$1HalfClosed@6982d5fb
+java.lang.NullPointerException: Stack trace is imprecise, the top frames are missing and/or have wrong line numbers. To get precise stack traces, build the image with option -H:-ReduceImplicitExceptionStackTraceInformation
+	at io.temporal.internal.testservice.TestWorkflowService.waitForUpdateResponse(TestWorkflowService.java:1353)
+	at io.temporal.internal.testservice.TestWorkflowService.executeMultiOperation(TestWorkflowService.java:1546)
+	at io.temporal.api.workflowservice.v1.WorkflowServiceGrpc$MethodHandlers.invoke(WorkflowServiceGrpc.java:11645)
+	at io.grpc.stub.ServerCalls$UnaryServerCallHandler$UnaryServerCallListener.onHalfClose(ServerCalls.java:182)
+	at io.grpc.internal.ServerCallImpl$ServerStreamListenerImpl.halfClosed(ServerCallImpl.java:356)
+	at io.grpc.internal.ServerImpl$JumpToApplicationThreadServerStreamListener$1HalfClosed.runInContext(ServerImpl.java:861)
+	at io.grpc.internal.ContextRunnable.run(ContextRunnable.java:37)
+	at io.grpc.internal.SerializingExecutor.run(SerializingExecutor.java:133)
+	at java.base@23.0.2/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base@23.0.2/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base@23.0.2/java.lang.Thread.runWith(Thread.java:1588)
+	at java.base@23.0.2/java.lang.Thread.run(Thread.java:1575)
+	at org.graalvm.nativeimage.builder/com.oracle.svm.core.thread.PlatformThreads.threadStartRoutine(PlatformThreads.java:832)
+	at org.graalvm.nativeimage.builder/com.oracle.svm.core.thread.PlatformThreads.threadStartRoutine(PlatformThreads.java:808)
+
+Oct 17, 2026 12:05:06 PM io.grpc.internal.SerializingExecutor run
+SEVERE: Exception while executing runnable io.grpc.internal.ServerImpl$JumpToApplicationThreadServerStreamListener$1HalfClosed@2aa96f7e
+java.lang.NullPointerException: Stack trace is imprecise, the top frames are missing and/or have wrong line numbers. To get precise stack traces, build the image with option -H:-ReduceImplicitExceptionStackTraceInformation
+	at io.temporal.internal.testservice.TestWorkflowService.waitForUpdateResponse(TestWorkflowService.java:1353)
+	at io.temporal.internal.testservice.TestWorkflowService.executeMultiOperation(TestWorkflowService.java:1546)
+	at io.temporal.api.workflowservice.v1.WorkflowServiceGrpc$MethodHandlers.invoke(WorkflowServiceGrpc.java:11645)
+	at io.grpc.stub.ServerCalls$UnaryServerCallHandler$UnaryServerCallListener.onHalfClose(ServerCalls.java:182)
+	at io.grpc.internal.ServerCallImpl$ServerStreamListenerImpl.halfClosed(ServerCallImpl.java:356)
+	at io.grpc.internal.ServerImpl$JumpToApplicationThreadServerStreamListener$1HalfClosed.runInContext(ServerImpl.java:861)
+	at io.grpc.internal.ContextRunnable.run(ContextRunnable.java:37)
+	at io.grpc.internal.SerializingExecutor.run(SerializingExecutor.java:133)
+	at java.base@23.0.2/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base@23.0.2/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base@23.0.2/java.lang.Thread.runWith(Thread.java:1588)
+	at java.base@23.0.2/java.lang.Thread.run(Thread.java:1575)
+	at org.graalvm.nativeimage.builder/com.oracle.svm.core.thread.PlatformThreads.threadStartRoutine(PlatformThreads.java:832)
+	at org.graalvm.nativeimage.builder/com.oracle.svm.core.thread.PlatformThreads.threadStartRoutine(PlatformThreads.java:808)
+
+Oct 17, 2026 12:05:07 PM io.grpc.internal.SerializingExecutor run
+SEVERE: Exception while executing runnable io.grpc.internal.ServerImpl$JumpToApplicationThreadServerStreamListener$1HalfClosed@552a41fe
+java.lang.NullPointerException: Stack trace is imprecise, the top frames are missing and/or have wrong line numbers. To get precise stack traces, build the image with option -H:-ReduceImplicitExceptionStackTraceInformation
+	at io.temporal.internal.testservice.TestWorkflowService.waitForUpdateResponse(TestWorkflowService.java:1353)
+	at io.temporal.internal.testservice.TestWorkflowService.executeMultiOperation(TestWorkflowService.java:1546)
+	at io.temporal.api.workflowservice.v1.WorkflowServiceGrpc$MethodHandlers.invoke(WorkflowServiceGrpc.java:11645)
+	at io.grpc.stub.ServerCalls$UnaryServerCallHandler$UnaryServerCallListener.onHalfClose(ServerCalls.java:182)
+	at io.grpc.internal.ServerCallImpl$ServerStreamListenerImpl.halfClosed(ServerCallImpl.java:356)
+	at io.grpc.internal.ServerImpl$JumpToApplicationThreadServerStreamListener$1HalfClosed.runInContext(ServerImpl.java:861)
+	at io.grpc.internal.ContextRunnable.run(ContextRunnable.java:37)
+	at io.grpc.internal.SerializingExecutor.run(SerializingExecutor.java:133)
+	at java.base@23.0.2/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base@23.0.2/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base@23.0.2/java.lang.Thread.runWith(Thread.java:1588)
+	at java.base@23.0.2/java.lang.Thread.run(Thread.java:1575)
+	at org.graalvm.nativeimage.builder/com.oracle.svm.core.thread.PlatformThreads.threadStartRoutine(PlatformThreads.java:832)
+	at org.graalvm.nativeimage.builder/com.oracle.svm.core.thread.PlatformThreads.threadStartRoutine(PlatformThreads.java:808)
+
+[2m2026-10-17T15:05:07.455635Z[0m [33m WARN[0m [2mtemporalio_client::retry[0m[2m:[0m gRPC call execute_multi_operation retried 5 times [3merror[0m[2m=[0mStatus { code: Unknown, message: "Application error processing RPC", metadata: MetadataMap { headers: {"content-type": "application/grpc"} }, source: None }
+[2m2026-10-17T15:05:08.459413Z[0m [33m WARN[0m [2mtemporalio_client::retry[0m[2m:[0m gRPC call execute_multi_operation retried 6 times [3merror[0m[2m=[0mStatus { code: Unknown, message: "Application error processing RPC", metadata: MetadataMap { headers: {"content-type": "application/grpc"} }, source: None }
+Oct 17, 2026 12:05:08 PM io.grpc.internal.SerializingExecutor run
+SEVERE: Exception while executing runnable io.grpc.internal.ServerImpl$JumpToApplicationThreadServerStreamListener$1HalfClosed@7a84ae9f
+java.lang.NullPointerException: Stack trace is imprecise, the top frames are missing and/or have wrong line numbers. To get precise stack traces, build the image with option -H:-ReduceImplicitExceptionStackTraceInformation
+	at io.temporal.internal.testservice.TestWorkflowService.waitForUpdateResponse(TestWorkflowService.java:1353)
+	at io.temporal.internal.testservice.TestWorkflowService.executeMultiOperation(TestWorkflowService.java:1546)
+	at io.temporal.api.workflowservice.v1.WorkflowServiceGrpc$MethodHandlers.invoke(WorkflowServiceGrpc.java:11645)
+	at io.grpc.stub.ServerCalls$UnaryServerCallHandler$UnaryServerCallListener.onHalfClose(ServerCalls.java:182)
+	at io.grpc.internal.ServerCallImpl$ServerStreamListenerImpl.halfClosed(ServerCallImpl.java:356)
+	at io.grpc.internal.ServerImpl$JumpToApplicationThreadServerStreamListener$1HalfClosed.runInContext(ServerImpl.java:861)
+	at io.grpc.internal.ContextRunnable.run(ContextRunnable.java:37)
+	at io.grpc.internal.SerializingExecutor.run(SerializingExecutor.java:133)
+	at java.base@23.0.2/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base@23.0.2/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base@23.0.2/java.lang.Thread.runWith(Thread.java:1588)
+	at java.base@23.0.2/java.lang.Thread.run(Thread.java:1575)
+	at org.graalvm.nativeimage.builder/com.oracle.svm.core.thread.PlatformThreads.threadStartRoutine(PlatformThreads.java:832)
+	at org.graalvm.nativeimage.builder/com.oracle.svm.core.thread.PlatformThreads.threadStartRoutine(PlatformThreads.java:808)
+
+Oct 17, 2026 12:05:09 PM io.grpc.internal.SerializingExecutor run
+SEVERE: Exception while executing runnable io.grpc.internal.ServerImpl$JumpToApplicationThreadServerStreamListener$1HalfClosed@328d077a
+java.lang.NullPointerException: Stack trace is imprecise, the top frames are missing and/or have wrong line numbers. To get precise stack traces, build the image with option -H:-ReduceImplicitExceptionStackTraceInformation
+	at io.temporal.internal.testservice.TestWorkflowService.waitForUpdateResponse(TestWorkflowService.java:1353)
+	at io.temporal.internal.testservice.TestWorkflowService.executeMultiOperation(TestWorkflowService.java:1546)
+	at io.temporal.api.workflowservice.v1.WorkflowServiceGrpc$MethodHandlers.invoke(WorkflowServiceGrpc.java:11645)
+	at io.grpc.stub.ServerCalls$UnaryServerCallHandler$UnaryServerCallListener.onHalfClose(ServerCalls.java:182)
+	at io.grpc.internal.ServerCallImpl$ServerStreamListenerImpl.halfClosed(ServerCallImpl.java:356)
+	at io.grpc.internal.ServerImpl$JumpToApplicationThreadServerStreamListener$1HalfClosed.runInContext(ServerImpl.java:861)
+	at io.grpc.internal.ContextRunnable.run(ContextRunnable.java:37)
+	at io.grpc.internal.SerializingExecutor.run(SerializingExecutor.java:133)
+	at java.base@23.0.2/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base@23.0.2/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base@23.0.2/java.lang.Thread.runWith(Thread.java:1588)
+	at java.base@23.0.2/java.lang.Thread.run(Thread.java:1575)
+	at org.graalvm.nativeimage.builder/com.oracle.svm.core.thread.PlatformThreads.threadStartRoutine(PlatformThreads.java:832)
+	at org.graalvm.nativeimage.builder/com.oracle.svm.core.thread.PlatformThreads.threadStartRoutine(PlatformThreads.java:808)
+
+[2m2026-10-17T15:05:09.675701Z[0m [33m WARN[0m [2mtemporalio_client::retry[0m[2m:[0m gRPC call execute_multi_operation retried 7 times [3merror[0m[2m=[0mStatus { code: Unknown, message: "Application error processing RPC", metadata: MetadataMap { headers: {"content-type": "application/grpc"} }, source: None }
+Oct 17, 2026 12:05:11 PM io.grpc.internal.SerializingExecutor run
+SEVERE: Exception while executing runnable io.grpc.internal.ServerImpl$JumpToApplicationThreadServerStreamListener$1HalfClosed@7dd967c4
+java.lang.NullPointerException: Stack trace is imprecise, the top frames are missing and/or have wrong line numbers. To get precise stack traces, build the image with option -H:-ReduceImplicitExceptionStackTraceInformation
+	at io.temporal.internal.testservice.TestWorkflowService.waitForUpdateResponse(TestWorkflowService.java:1353)
+	at io.temporal.internal.testservice.TestWorkflowService.executeMultiOperation(TestWorkflowService.java:1546)
+	at io.temporal.api.workflowservice.v1.WorkflowServiceGrpc$MethodHandlers.invoke(WorkflowServiceGrpc.java:11645)
+	at io.grpc.stub.ServerCalls$UnaryServerCallHandler$UnaryServerCallListener.onHalfClose(ServerCalls.java:182)
+	at io.grpc.internal.ServerCallImpl$ServerStreamListenerImpl.halfClosed(ServerCallImpl.java:356)
+	at io.grpc.internal.ServerImpl$JumpToApplicationThreadServerStreamListener$1HalfClosed.runInContext(ServerImpl.java:861)
+	at io.grpc.internal.ContextRunnable.run(ContextRunnable.java:37)
+	at io.grpc.internal.SerializingExecutor.run(SerializingExecutor.java:133)
+	at java.base@23.0.2/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base@23.0.2/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base@23.0.2/java.lang.Thread.runWith(Thread.java:1588)
+	at java.base@23.0.2/java.lang.Thread.run(Thread.java:1575)
+	at org.graalvm.nativeimage.builder/com.oracle.svm.core.thread.PlatformThreads.threadStartRoutine(PlatformThreads.java:832)
+	at org.graalvm.nativeimage.builder/com.oracle.svm.core.thread.PlatformThreads.threadStartRoutine(PlatformThreads.java:808)
+
+[2m2026-10-17T15:05:11.739226Z[0m [33m WARN[0m [2mtemporalio_client::retry[0m[2m:[0m gRPC call execute_multi_operation retried 8 times [3merror[0m[2m=[0mStatus { code: Unknown, message: "Application error processing RPC", metadata: MetadataMap { headers: {"content-type": "application/grpc"} }, source: None }
+[2m2026-10-17T15:05:16.322378Z[0m [33m WARN[0m [2mtemporalio_client::retry[0m[2m:[0m gRPC call execute_multi_operation retried 9 times [3merror[0m[2m=[0mStatus { code: Unknown, message: "Application error processing RPC", metadata: MetadataMap { headers: {"content-type": "application/grpc"} }, source: None }
+Oct 17, 2026 12:05:16 PM io.grpc.internal.SerializingExecutor run
+SEVERE: Exception while executing runnable io.grpc.internal.ServerImpl$JumpToApplicationThreadServerStreamListener$1HalfClosed@2a42ee4
+java.lang.NullPointerException: Stack trace is imprecise, the top frames are missing and/or have wrong line numbers. To get precise stack traces, build the image with option -H:-ReduceImplicitExceptionStackTraceInformation
+	at io.temporal.internal.testservice.TestWorkflowService.waitForUpdateResponse(TestWorkflowService.java:1353)
+	at io.temporal.internal.testservice.TestWorkflowService.executeMultiOperation(TestWorkflowService.java:1546)
+	at io.temporal.api.workflowservice.v1.WorkflowServiceGrpc$MethodHandlers.invoke(WorkflowServiceGrpc.java:11645)
+	at io.grpc.stub.ServerCalls$UnaryServerCallHandler$UnaryServerCallListener.onHalfClose(ServerCalls.java:182)
+	at io.grpc.internal.ServerCallImpl$ServerStreamListenerImpl.halfClosed(ServerCallImpl.java:356)
+	at io.grpc.internal.ServerImpl$JumpToApplicationThreadServerStreamListener$1HalfClosed.runInContext(ServerImpl.java:861)
+	at io.grpc.internal.ContextRunnable.run(ContextRunnable.java:37)
+	at io.grpc.internal.SerializingExecutor.run(SerializingExecutor.java:133)
+	at java.base@23.0.2/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base@23.0.2/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base@23.0.2/java.lang.Thread.runWith(Thread.java:1588)
+	at java.base@23.0.2/java.lang.Thread.run(Thread.java:1575)
+	at org.graalvm.nativeimage.builder/com.oracle.svm.core.thread.PlatformThreads.threadStartRoutine(PlatformThreads.java:832)
+	at org.graalvm.nativeimage.builder/com.oracle.svm.core.thread.PlatformThreads.threadStartRoutine(PlatformThreads.java:808)
+
+ERROR
+test_sem_consumidor_timeout_terminal_sem_execucao_tardia (tests.workflows.test_f3_05_admissao_atomica_isolado.AdmissaoAtomicaTemporalIsolada.test_sem_consumidor_timeout_terminal_sem_execucao_tardia) ... [2m2026-10-17T15:05:18.656430Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+[2m2026-10-17T15:05:18.656638Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+ok
+test_sessoes_distintas_em_paralelo (tests.workflows.test_f3_05_admissao_atomica_isolado.AdmissaoAtomicaTemporalIsolada.test_sessoes_distintas_em_paralelo) ... [2m2026-10-17T15:05:19.137632Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+[2m2026-10-17T15:05:19.138072Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+ok
+
+======================================================================
+ERROR: test_excecao_tecnica_sem_retry_sem_proximo (tests.workflows.test_f3_05_admissao_atomica_isolado.AdmissaoAtomicaTemporalIsolada.test_excecao_tecnica_sem_retry_sem_proximo)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/service.py", line 475, in _rpc_call
+    resp = await client.call(
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/bridge/client.py", line 168, in call
+    resp.ParseFromString(await resp_fut)
+                         ^^^^^^^^^^^^^^
+temporal_sdk_bridge.RPCError: (6, 'MultiOperation could not be executed', b'\x08\x06\x12$MultiOperation could not be executed\x1a\xf0\x02\nOtype.googleapis.com/temporal.api.errordetails.v1.MultiOperationExecutionFailure\x12\x9c\x02\n\xaf\x01\x08\x06\x12\xaa\x01ALREADY_EXISTS: WorkflowId: prototipo-ator-sessao-atomico-v1-07aa137bd2dc362b90b33958e3ed6b335ab8385dedfb7454998d1219cf0e9f50, RunId: 27595c99-07d4-4233-915a-ed60b17de99c\nh\x08\n\x12\x16Operation was aborted.\x1aL\nJtype.googleapis.com/temporal.api.failure.v1.MultiOperationExecutionAborted')
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/client/_impl.py", line 970, in start_update_with_start_workflow
+    return await self._start_workflow_update_with_start(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/client/_impl.py", line 1069, in _start_workflow_update_with_start
+    await self._client.workflow_service.execute_multi_operation(
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/bridge/services_generated.py", line 560, in execute_multi_operation
+    return await self._client._rpc_call(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/service.py", line 490, in _rpc_call
+    raise RPCError(message, RPCStatusCode(status), details)
+temporalio.service.RPCError: MultiOperation could not be executed
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_admissao_atomica_isolado.py", line 262, in test_excecao_tecnica_sem_retry_sem_proximo
+    await self.admitir("a3")
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_admissao_atomica_isolado.py", line 102, in admitir
+    return await admitir_atomico(
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/tests/workflows/prototipo_admissao_atomica.py", line 115, in admitir_atomico
+    resultado = await client.execute_update_with_start_workflow(
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/client/_client.py", line 1028, in execute_update_with_start_workflow
+    handle = await self._start_update_with_start(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/client/_client.py", line 1227, in _start_update_with_start
+    return await self._impl.start_update_with_start_workflow(input)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/client/_interceptor.py", line 853, in start_update_with_start_workflow
+    return await self.next.start_update_with_start_workflow(input)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/client/_impl.py", line 1031, in start_update_with_start_workflow
+    raise err
+temporalio.service.RPCError: ALREADY_EXISTS: WorkflowId: prototipo-ator-sessao-atomico-v1-07aa137bd2dc362b90b33958e3ed6b335ab8385dedfb7454998d1219cf0e9f50, RunId: 27595c99-07d4-4233-915a-ed60b17de99c
+
+======================================================================
+ERROR: test_fechamento_drena_rejeita_novo_e_nao_reabre (tests.workflows.test_f3_05_admissao_atomica_isolado.AdmissaoAtomicaTemporalIsolada.test_fechamento_drena_rejeita_novo_e_nao_reabre)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/service.py", line 475, in _rpc_call
+    resp = await client.call(
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/bridge/client.py", line 168, in call
+    resp.ParseFromString(await resp_fut)
+                         ^^^^^^^^^^^^^^
+temporal_sdk_bridge.RPCError: (6, 'MultiOperation could not be executed', b'\x08\x06\x12$MultiOperation could not be executed\x1a\xf0\x02\nOtype.googleapis.com/temporal.api.errordetails.v1.MultiOperationExecutionFailure\x12\x9c\x02\n\xaf\x01\x08\x06\x12\xaa\x01ALREADY_EXISTS: WorkflowId: prototipo-ator-sessao-atomico-v1-07aa137bd2dc362b90b33958e3ed6b335ab8385dedfb7454998d1219cf0e9f50, RunId: 8c89892b-8151-4287-ab3f-e4d57dcc075b\nh\x08\n\x12\x16Operation was aborted.\x1aL\nJtype.googleapis.com/temporal.api.failure.v1.MultiOperationExecutionAborted')
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/client/_impl.py", line 970, in start_update_with_start_workflow
+    return await self._start_workflow_update_with_start(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/client/_impl.py", line 1069, in _start_workflow_update_with_start
+    await self._client.workflow_service.execute_multi_operation(
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/bridge/services_generated.py", line 560, in execute_multi_operation
+    return await self._client._rpc_call(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/service.py", line 490, in _rpc_call
+    raise RPCError(message, RPCStatusCode(status), details)
+temporalio.service.RPCError: MultiOperation could not be executed
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_admissao_atomica_isolado.py", line 275, in test_fechamento_drena_rejeita_novo_e_nao_reabre
+    await self.admitir("a4")
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_admissao_atomica_isolado.py", line 102, in admitir
+    return await admitir_atomico(
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/tests/workflows/prototipo_admissao_atomica.py", line 115, in admitir_atomico
+    resultado = await client.execute_update_with_start_workflow(
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/client/_client.py", line 1028, in execute_update_with_start_workflow
+    handle = await self._start_update_with_start(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/client/_client.py", line 1227, in _start_update_with_start
+    return await self._impl.start_update_with_start_workflow(input)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/client/_interceptor.py", line 853, in start_update_with_start_workflow
+    return await self.next.start_update_with_start_workflow(input)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/client/_impl.py", line 1031, in start_update_with_start_workflow
+    raise err
+temporalio.service.RPCError: ALREADY_EXISTS: WorkflowId: prototipo-ator-sessao-atomico-v1-07aa137bd2dc362b90b33958e3ed6b335ab8385dedfb7454998d1219cf0e9f50, RunId: 8c89892b-8151-4287-ab3f-e4d57dcc075b
+
+======================================================================
+ERROR: test_rpc_timeout_sem_worker_reenvio_recupera_mesmo_ator (tests.workflows.test_f3_05_admissao_atomica_isolado.AdmissaoAtomicaTemporalIsolada.test_rpc_timeout_sem_worker_reenvio_recupera_mesmo_ator)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/service.py", line 475, in _rpc_call
+    resp = await client.call(
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/bridge/client.py", line 168, in call
+    resp.ParseFromString(await resp_fut)
+                         ^^^^^^^^^^^^^^
+temporal_sdk_bridge.RPCError: (2, 'Application error processing RPC', b'')
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_admissao_atomica_isolado.py", line 206, in test_rpc_timeout_sem_worker_reenvio_recupera_mesmo_ator
+    await admitir_atomico(self.env.client, sessao, queue, self.fila_atividade,
+  File "/home/pc/Workspace/PQBR/tests/workflows/prototipo_admissao_atomica.py", line 115, in admitir_atomico
+    resultado = await client.execute_update_with_start_workflow(
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/client/_client.py", line 1028, in execute_update_with_start_workflow
+    handle = await self._start_update_with_start(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/client/_client.py", line 1227, in _start_update_with_start
+    return await self._impl.start_update_with_start_workflow(input)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/client/_interceptor.py", line 853, in start_update_with_start_workflow
+    return await self.next.start_update_with_start_workflow(input)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/client/_impl.py", line 1031, in start_update_with_start_workflow
+    raise err
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/client/_impl.py", line 970, in start_update_with_start_workflow
+    return await self._start_workflow_update_with_start(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/client/_impl.py", line 1069, in _start_workflow_update_with_start
+    await self._client.workflow_service.execute_multi_operation(
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/bridge/services_generated.py", line 560, in execute_multi_operation
+    return await self._client._rpc_call(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/service.py", line 490, in _rpc_call
+    raise RPCError(message, RPCStatusCode(status), details)
+temporalio.service.RPCError: Application error processing RPC
+
+----------------------------------------------------------------------
+Ran 9 tests in 16.980s
+
+FAILED (errors=3)
+Future exception was never retrieved
+future: <Future finished exception=RPCError('ALREADY_EXISTS: WorkflowId: prototipo-ator-sessao-atomico-v1-07aa137bd2dc362b90b33958e3ed6b335ab8385dedfb7454998d1219cf0e9f50, RunId: 8c89892b-8151-4287-ab3f-e4d57dcc075b') created at /home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/client/_workflow.py:1230>
+source_traceback: Object created at (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/unittest/__main__.py", line 18, in <module>
+    main(module=None)
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/unittest/main.py", line 105, in __init__
+    self.runTests()
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/unittest/main.py", line 281, in runTests
+    self.result = testRunner.run(self.test)
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/unittest/runner.py", line 240, in run
+    test(result)
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/unittest/suite.py", line 84, in __call__
+    return self.run(*args, **kwds)
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/unittest/suite.py", line 122, in run
+    test(result)
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/unittest/suite.py", line 84, in __call__
+    return self.run(*args, **kwds)
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/unittest/suite.py", line 122, in run
+    test(result)
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/unittest/suite.py", line 84, in __call__
+    return self.run(*args, **kwds)
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/unittest/suite.py", line 122, in run
+    test(result)
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/unittest/case.py", line 690, in __call__
+    return self.run(*args, **kwds)
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/unittest/async_case.py", line 132, in run
+    return super().run(result)
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/unittest/case.py", line 634, in run
+    self._callTestMethod(testMethod)
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/unittest/async_case.py", line 91, in _callTestMethod
+    if self._callMaybeAsync(method) is not None:
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/unittest/async_case.py", line 113, in _callMaybeAsync
+    return self._asyncioRunner.run(
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py", line 678, in run_until_complete
+    self.run_forever()
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py", line 645, in run_forever
+    self._run_once()
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py", line 1991, in _run_once
+    handle._run()
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_admissao_atomica_isolado.py", line 275, in test_fechamento_drena_rejeita_novo_e_nao_reabre
+    await self.admitir("a4")
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_admissao_atomica_isolado.py", line 102, in admitir
+    return await admitir_atomico(
+  File "/home/pc/Workspace/PQBR/tests/workflows/prototipo_admissao_atomica.py", line 107, in admitir_atomico
+    op = WithStartWorkflowOperation(
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/client/_workflow.py", line 1230, in __init__
+    self._workflow_handle: Future[WorkflowHandle[SelfType, ReturnType]] = Future()
+Traceback (most recent call last):
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/service.py", line 475, in _rpc_call
+    resp = await client.call(
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/bridge/client.py", line 168, in call
+    resp.ParseFromString(await resp_fut)
+                         ^^^^^^^^^^^^^^
+temporal_sdk_bridge.RPCError: (6, 'MultiOperation could not be executed', b'\x08\x06\x12$MultiOperation could not be executed\x1a\xf0\x02\nOtype.googleapis.com/temporal.api.errordetails.v1.MultiOperationExecutionFailure\x12\x9c\x02\n\xaf\x01\x08\x06\x12\xaa\x01ALREADY_EXISTS: WorkflowId: prototipo-ator-sessao-atomico-v1-07aa137bd2dc362b90b33958e3ed6b335ab8385dedfb7454998d1219cf0e9f50, RunId: 8c89892b-8151-4287-ab3f-e4d57dcc075b\nh\x08\n\x12\x16Operation was aborted.\x1aL\nJtype.googleapis.com/temporal.api.failure.v1.MultiOperationExecutionAborted')
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/client/_impl.py", line 970, in start_update_with_start_workflow
+    return await self._start_workflow_update_with_start(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/client/_impl.py", line 1069, in _start_workflow_update_with_start
+    await self._client.workflow_service.execute_multi_operation(
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/bridge/services_generated.py", line 560, in execute_multi_operation
+    return await self._client._rpc_call(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/service.py", line 490, in _rpc_call
+    raise RPCError(message, RPCStatusCode(status), details)
+temporalio.service.RPCError: MultiOperation could not be executed
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/unittest/case.py", line 58, in testPartExecutor
+    yield
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/unittest/case.py", line 634, in run
+    self._callTestMethod(testMethod)
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/unittest/async_case.py", line 91, in _callTestMethod
+    if self._callMaybeAsync(method) is not None:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/unittest/async_case.py", line 113, in _callMaybeAsync
+    return self._asyncioRunner.run(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_admissao_atomica_isolado.py", line 275, in test_fechamento_drena_rejeita_novo_e_nao_reabre
+    await self.admitir("a4")
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_admissao_atomica_isolado.py", line 102, in admitir
+    return await admitir_atomico(
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/tests/workflows/prototipo_admissao_atomica.py", line 115, in admitir_atomico
+    resultado = await client.execute_update_with_start_workflow(
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/client/_client.py", line 1028, in execute_update_with_start_workflow
+    handle = await self._start_update_with_start(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/client/_client.py", line 1227, in _start_update_with_start
+    return await self._impl.start_update_with_start_workflow(input)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/client/_interceptor.py", line 853, in start_update_with_start_workflow
+    return await self.next.start_update_with_start_workflow(input)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/client/_impl.py", line 1031, in start_update_with_start_workflow
+    raise err
+temporalio.service.RPCError: ALREADY_EXISTS: WorkflowId: prototipo-ator-sessao-atomico-v1-07aa137bd2dc362b90b33958e3ed6b335ab8385dedfb7454998d1219cf0e9f50, RunId: 8c89892b-8151-4287-ab3f-e4d57dcc075b

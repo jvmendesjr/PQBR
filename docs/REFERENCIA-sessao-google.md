@@ -109,3 +109,113 @@ Toda automação de navegador simula humano: Camoufox com `humanize: true` (curs
 - 12/10 19:10 PT (auto, evento #15): paperclip_cli queda: paperclip cli falhou (company list): API error 400: Request failed with status 400
 
 - 12/10 19:59 PT: rede ? serve 3100 ? Paperclip 3101 corrigido (n?o afeta a sess?o Google). 19:35 crash do pc; Camofox/keepalive voltaram com o boot (conferir pqbr-acessos).
+- 12/10 20:10 PT (auto, evento #16): paperclip_cli queda: paperclip cli falhou (company list): API error 400: Request failed with status 400
+
+- 12/10 21:10 PT (auto, evento #17): paperclip_cli queda: paperclip cli falhou (company list): API error 400: Request failed with status 400
+
+- 12/10 22:10 PT (auto, evento #18): paperclip_cli queda: paperclip cli falhou (company list): API error 400: Request failed with status 400
+
+- 12/10 23:10 PT (auto, evento #19): paperclip_cli queda: paperclip cli falhou (company list): API error 400: Request failed with status 400
+
+- 13/10 00:10 PT (auto, evento #20): paperclip_cli queda: paperclip cli falhou (company list): API error 400: Request failed with status 400
+
+- 13/10 01:10 PT (auto, evento #21): paperclip_cli queda: paperclip cli falhou (company list): API error 400: Request failed with status 400
+
+- 13/10 02:10 PT (auto, evento #22): paperclip_cli queda: paperclip cli falhou (company list): API error 400: Request failed with status 400
+
+- 13/10 03:10 PT (auto, evento #23): paperclip_cli queda: paperclip cli falhou (company list): API error 400: Request failed with status 400
+
+- 13/10 04:10 PT (auto, evento #24): paperclip_cli queda: paperclip cli falhou (company list): API error 400: Request failed with status 400
+
+- 13/10 05:10 PT (auto, evento #25): paperclip_cli queda: paperclip cli falhou (company list): API error 400: Request failed with status 400
+
+- 13/10 06:10 PT (auto, evento #26): paperclip_cli queda: paperclip cli falhou (company list): API error 400: Request failed with status 400
+
+- 13/10 07:10 PT (auto, evento #27): paperclip_cli queda: paperclip cli falhou (company list): API error 400: Request failed with status 400
+
+- 13/10 08:10 PT (auto, evento #28): paperclip_cli queda: paperclip cli falhou (company list): API error 400: Request failed with status 400
+
+- 13/10 09:10 PT (auto, evento #29): paperclip_cli queda: paperclip cli falhou (company list): API error 400: Request failed with status 400
+
+- 13/10 10:10 PT (auto, evento #30): paperclip_cli queda: paperclip cli falhou (company list): API error 400: Request failed with status 400
+
+- 13/10 11:10 PT (auto, evento #31): paperclip_cli queda: paperclip cli falhou (company list): API error 400: Request failed with status 400
+
+- 13/10 12:10 PT (auto, evento #32): paperclip_cli queda: paperclip cli falhou (company list): API error 400: Request failed with status 400
+
+- 13/10 13:10 PT (auto, evento #33): paperclip_cli queda: paperclip cli falhou (company list): API error 400: Request failed with status 400
+
+- 13/10 14:10 PT (auto, evento #34): paperclip_cli queda: paperclip cli falhou (company list): API error 400: Request failed with status 400
+
+- 13/10 15:10 PT (auto, evento #35): paperclip_cli queda: paperclip cli falhou (company list): API error 400: Request failed with status 400
+
+- 13/10 16:10 PT (auto, evento #36): paperclip_cli queda: paperclip cli falhou (company list): API error 400: Request failed with status 400
+
+- 13/10 17:10 PT (auto, evento #37): paperclip_cli queda: paperclip cli falhou (company list): API error 400: Request failed with status 400
+
+- 13/10 18:10 PT (auto, evento #38): paperclip_cli queda: paperclip cli falhou (company list): API error 400: Request failed with status 400
+
+- 13/10 19:10 PT (auto, evento #39): paperclip_cli queda: paperclip cli falhou (company list): API error 400: Request failed with status 400
+
+- 13/10 20:10 PT (auto, evento #40): paperclip_cli queda: paperclip cli falhou (company list): API error 400: Request failed with status 400
+
+- 13/10 21:10 PT (auto, evento #41): paperclip_cli queda: paperclip cli falhou (company list): API error 400: Request failed with status 400
+
+- 13/10 22:10 PT (auto, evento #42): paperclip_cli queda: paperclip cli falhou (company list): API error 400: Request failed with status 400
+
+- 13/10 23:10 PT (auto, evento #43): paperclip_cli queda: paperclip cli falhou (company list): API error 400: Request failed with status 400
+
+- 14/10 00:10 PT (auto, evento #44): paperclip_cli queda: paperclip cli falhou (company list): API error 400: Request failed with status 400
+
+- 14/10 01:10 PT (auto, evento #45): paperclip_cli queda: paperclip cli falhou (company list): API error 400: Request failed with status 400
+
+- 14/10 02:10 PT (auto, evento #46): paperclip_cli queda: paperclip cli falhou (company list): API error 400: Request failed with status 400
+
+- 14/10 03:10 PT (auto, evento #47): paperclip_cli queda: paperclip cli falhou (company list): API error 400: Request failed with status 400
+
+- 14/10 04:10 PT (auto, evento #48): paperclip_cli queda: paperclip cli falhou (company list): API error 400: Request failed with status 400
+
+- 14/10 05:10 PT (auto, evento #49): paperclip_cli queda: paperclip cli falhou (company list): API error 400: Request failed with status 400
+
+- 14/10 06:10 PT (auto, evento #50): paperclip_cli queda: paperclip cli falhou (company list): API error 400: Request failed with status 400
+
+- 14/10 07:10 PT (auto, evento #51): paperclip_cli queda: paperclip cli falhou (company list): API error 400: Request failed with status 400
+
+- 14/10 08:10 PT (auto, evento #52): paperclip_cli queda: paperclip cli falhou (company list): API error 400: Request failed with status 400
+
+- 14/10 09:10 PT (auto, evento #53): paperclip_cli queda: paperclip cli falhou (company list): API error 400: Request failed with status 400
+
+- 14/10 10:10 PT (auto, evento #54): paperclip_cli queda: paperclip cli falhou (company list): API error 400: Request failed with status 400
+
+- 14/10 11:10 PT (auto, evento #55): paperclip_cli queda: paperclip cli falhou (company list): API error 400: Request failed with status 400
+
+- 14/10 12:10 PT (auto, evento #56): paperclip_cli queda: paperclip cli falhou (company list): API error 400: Request failed with status 400
+
+- 14/10 13:10 PT (auto, evento #57): paperclip_cli queda: paperclip cli falhou (company list): API error 400: Request failed with status 400
+
+- 14/10 14:10 PT (auto, evento #58): paperclip_cli queda: paperclip cli falhou (company list): API error 400: Request failed with status 400
+
+- 14/10 15:10 PT (auto, evento #59): paperclip_cli queda: paperclip cli falhou (company list): API error 400: Request failed with status 400
+
+- 14/10 16:10 PT (auto, evento #60): paperclip_cli queda: paperclip cli falhou (company list): API error 400: Request failed with status 400
+
+- 14/10 17:10 PT (auto, evento #61): paperclip_cli queda: paperclip cli falhou (company list): API error 400: Request failed with status 400
+
+- 14/10 18:10 PT (auto, evento #62): paperclip_cli queda: paperclip cli falhou (company list): API error 400: Request failed with status 400
+
+- 14/10 19:10 PT (auto, evento #63): paperclip_cli queda: paperclip cli falhou (company list): API error 400: Request failed with status 400
+
+- 14/10 20:10 PT (auto, evento #64): paperclip_cli queda: paperclip cli falhou (company list): API error 400: Request failed with status 400
+
+- 14/10 21:10 PT (auto, evento #65): paperclip_cli queda: paperclip cli falhou (company list): API error 400: Request failed with status 400
+
+- 14/10 22:10 PT (auto, evento #66): paperclip_cli queda: paperclip cli falhou (company list): API error 400: Request failed with status 400
+
+- 14/10 23:10 PT (auto, evento #67): paperclip_cli normalizado: pedido pendente resolvido → ok
+- 15/10 12:10 PT (auto, evento #68): notebooklm queda: notebooklm list rc=1: {
+  "error": true,
+  "code": "NOTEBOOKLM_ERROR",
+  "message": "Error: The server rejected this request (unauthenticated)."
+}
+
+- 15/10 13:10 PT (auto, evento #69): notebooklm normalizado: pedido pendente resolvido → ok

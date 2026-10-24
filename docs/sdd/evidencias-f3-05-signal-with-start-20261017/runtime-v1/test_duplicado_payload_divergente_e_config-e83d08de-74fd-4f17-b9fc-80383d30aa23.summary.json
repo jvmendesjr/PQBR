@@ -1,0 +1,26 @@
+{
+  "teste": "test_duplicado_payload_divergente_e_config",
+  "workflow_id": "prototipo-signal-start-v1-07aa137bd2dc362b90b33958e3ed6b335ab8385dedfb7454998d1219cf0e9f50",
+  "run_id": "e83d08de-74fd-4f17-b9fc-80383d30aa23",
+  "estado": "COMPLETED",
+  "replay": "ok",
+  "pending_activities": 0,
+  "atividades_agendadas": 1,
+  "signals": 5,
+  "calls": [
+    {
+      "pedido": {
+        "falhar": false,
+        "id": "id-1",
+        "sessao": "sessao-A"
+      },
+      "inicio": 405348.48908513,
+      "fim": 405348.515990777,
+      "attempt": 1
+    }
+  ],
+  "max_global": 1,
+  "max_sessao": {
+    "sessao-A": 1
+  }
+}

@@ -53,6 +53,7 @@ class Barreira(unittest.TestCase):
         from pqbr.workflows import paperclip
         chamou = []
         async def falso_cli(*a): chamou.append(a); return {"id": "1"}
+        self.addCleanup(setattr, paperclip, "_cli", paperclip._cli)
         paperclip._cli = falso_cli
         c = paperclip.Comentario(issue_id="i", corpo=f"senha {FALSO}")
         with self.assertRaises(ApplicationError) as e:

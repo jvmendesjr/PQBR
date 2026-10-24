@@ -1,0 +1,8 @@
+{
+  "issueId": "730f420b-4d74-48be-894c-a79b13c035f2",
+  "interactionId": "ee39501d-3787-470a-b871-7800669759b9",
+  "scopeId": "scope-B3-next-once-v1",
+  "sessionId": "session-B3-next-disposable-v1",
+  "operationId": "second-B3-next-accepted-v1",
+  "idempotencyKey": "pqbr-f3-05-B3-next-single-proof-v2"
+}

@@ -1,7 +1,7 @@
 """Fila `notebooklm-pqbr` (concorrência 1): NotebookLM isolado da PQBR (venv 0.8.4, NOTEBOOKLM_HOME próprio, perfil pqbr).
 Regras (ARQUITETURA §NotebookLM, AGENTES Roteirista): caderno **efêmero por episódio** ("Short - <slug>"), nunca o mestre;
 fonte antes de gerar; nunca `ask --new`; em timeout de vídeo, listar artefatos e não regerar; contador diário
-(500 chats, 20 vídeos; Pro) + `usage --json` (>80% numa janela = recusa e espaça). Só comandos fechados abaixo."""
+com limites locais de segurança aprovados pelo proprietário em 17/10/2026 (500 chats/dia e 20 vídeos/dia), separados da quota oficial; `usage --json` monitora a quota oficial independentemente desses defaults; recusa e espaça acima de 80% apenas com janela e denominador confirmados. Só comandos fechados abaixo."""
 from __future__ import annotations
 import asyncio, fcntl, json, os, re, subprocess, time
 from datetime import date, timedelta
@@ -18,6 +18,8 @@ from .criativo import PROMPT_ROTEIRO, PROMPT_SEO, PROMPT_CAPA
 CLI = str(HOME / "venv/bin/notebooklm")
 PERFIL = "pqbr"
 PERSONA = Path(os.environ.get("PQBR_NLM_PERSONA", "/home/pc/Workspace/PQBR/templates/notebooklm/persona-pqbr.txt"))
+# Limites locais de segurança aprovados pelo proprietário (17/10/2026); não são quotas da conta.
+# Quota oficial é observada separadamente via `notebooklm usage --json`.
 LIMITES = {"chat": int(os.environ.get("PQBR_NLM_CHATS_DIA", "500")), "video": int(os.environ.get("PQBR_NLM_VIDEOS_DIA", "20"))}
 TETO_JANELA = 80.0
 MESTRES_PROIBIDOS = {"88246689", "c35d7b24-5d4f-4eee-afc4-7a0eadc860bf"}
@@ -34,7 +36,7 @@ def titulo_caderno(codigo: str, slug: str) -> str:
 
 
 class UsoDia(BaseModel):
-    """Saída de nlm_checar_saldo: contador local do dia + % das janelas do `notebooklm usage` (t437)."""
+    """`dia` é o contador local; `janelas` são observações independentes de `notebooklm usage` (t437)."""
     model_config = ConfigDict(extra="forbid", frozen=True)
     dia: dict[Literal["chat", "video"], int] = Field(default_factory=dict)
     janelas: dict[str, float] = Field(default_factory=dict)
@@ -123,7 +125,7 @@ def _contador(tipo: str | None = None) -> dict:
         c = json.loads(h.read() or "{}")
         if tipo:
             if c.get(tipo, 0) >= LIMITES[tipo]:
-                raise SemSaldo(f"limite diário de {tipo} atingido ({LIMITES[tipo]})")
+                raise SemSaldo(f"limite local de segurança diário de {tipo} atingido ({LIMITES[tipo]})")
             c[tipo] = c.get(tipo, 0) + 1
             h.seek(0); h.truncate(); h.write(json.dumps(c))
         return c
@@ -131,9 +133,10 @@ def _contador(tipo: str | None = None) -> dict:
 
 @activity.defn
 async def nlm_checar_saldo(tipo: str) -> dict:
+    """Aplica o cap local e consulta a quota oficial como sinais separados."""
     c = _contador()
     if c.get(tipo, 0) >= LIMITES[tipo]:
-        raise SemSaldo(f"limite diário de {tipo} atingido ({LIMITES[tipo]})")
+        raise SemSaldo(f"limite local de segurança diário de {tipo} atingido ({LIMITES[tipo]})")
     u = _json(await asyncio.to_thread(_cli, "usage", "--json", timeout=60))
     if u.get("is_exhausted"): raise SemSaldo("conta sem saldo (usage)")
     for w in u.get("windows", []):

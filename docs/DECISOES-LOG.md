@@ -482,3 +482,23 @@ NÃO CABE:
 
 ## t466 (15/10/2026) — Prefixo correto para novos tickets
 - (15/10) José orientou que novos tickets/tasks da organização usem `PQBR`; não renomear identificadores anteriores salvo conflito. O prefixo da organização foi atualizado de `PQBA` para `PQBR`. Verificação transacional: 95 identificadores históricos permaneceram idênticos e `PQBR` não estava atribuído a outra organização.
+
+## t467 (16/10/2026) — CTA contextual e diretrizes editoriais revisáveis
+- José aprovou substituir a regra de CTA exclusivamente literal de t262 pela regra contextual do blueprint: usar trocadilho ligado ao tema quando natural; caso contrário, convite natural a seguir o canal; `Segue o Porquê BR` permanece como fallback. Nunca pedir comentários; a proibição t263 continua vigente. Esta decisão substitui as referências conflitantes a t262 e às regras antigas de CTA no contrato editorial.
+- José aprovou R1, R2, R3, R4, R6, R8 e R9 como diretrizes editoriais revisáveis, não bloqueios automáticos. R5 é somente alerta de revisão não bloqueante, por evidência limitada a um caso.
+- Implementação: `RoteiroShort.tipo_cta` declara `trocadilho_tema`, `convite_seguir` ou `fallback`; a validação automática confere o tipo, o fallback e a proibição de comentários, mas não afirma validar semanticamente se o trocadilho é natural/contextual — essa adequação é revisão editorial. F05-06 e produção/publicação permanecem gates separados.
+
+## t468 (16/10/2026) — Aceite G7 do contrato editorial v2
+- Às 20:10 (-03:00), José aprovou `docs/CONTRATO-EDITORIAL-v2-CANDIDATO.md` como contrato editorial v2 e fechou o gate G7 de F7-01.
+- F7-01 foi concluído: V1 cobre o contrato v2 e a coerência estrutural de `RoteiroShort`; os 25 testes unitários afetados passaram. A execução foi documental/local, sem providers nem produção.
+- Após o aceite, foram alinhadas apenas frases residuais que ainda diziam “CTA exato”, tratavam R1–R4/R6/R8/R9 como pendentes ou descreviam o fluxo como proposta; nenhuma regra nova foi criada, mantendo t467.
+- F05-06 continua separado e aberto. F7-02 não pode iniciar até F3-01 (G3) ser concluído; o catálogo de overlays conhecidos permanece reservado, sem execução.
+
+## t469 (16/10/2026) — G3 de F3-01 aprovado; início de F7-02
+- Às 20:16 (-03:00), José aprovou G3 e autorizou fechar F3-01 e iniciar F7-02.
+- F3-01 foi fechado com os 34 testes locais de TS-01/TS-02 aprovados. A aplicação das migrações e a carga de temas permanecem evidência histórica do roadmap; nesta rodada não houve conexão de escrita, reaplicação de migração ou alteração do banco.
+- F7-02 foi iniciado por revisão local. O G7 de F7-02 permanece aberto; nenhuma chamada ao Gemini Web, upload, produção ou publicação foi realizada.
+
+## t470 (16/10/2026) — Gate A9 aprovado para F7-02
+- Às 20:41 (-03:00), José aprovou A9 nos termos da proposta t427: critérios métricos orientam a seleção de quadro e não bloqueiam; somente as quatro categorias de risco de A9 reprovam — semelhança com pessoa real, marca/logotipo real, estereótipo ofensivo e erro textual/legenda que mude o sentido.
+- A aprovação é específica ao gate A9 e não substitui nem revoga outras regras de segurança/editoriais canônicas. A integração no Auditor F7-02 e sua validação com gabarito continuam pendentes.

@@ -1,0 +1,26 @@
+{
+  "teste": "test_falha_tecnica_sem_retry_dedup_nao_cruza_reuso",
+  "workflow_id": "prototipo-signal-start-v1-07aa137bd2dc362b90b33958e3ed6b335ab8385dedfb7454998d1219cf0e9f50",
+  "run_id": "498a2556-1bd8-473d-9dfc-41d771bd0c63",
+  "estado": "FAILED",
+  "replay": "ok",
+  "pending_activities": 0,
+  "atividades_agendadas": 1,
+  "signals": 2,
+  "calls": [
+    {
+      "pedido": {
+        "falhar": true,
+        "id": "id-falha",
+        "sessao": "sessao-A"
+      },
+      "inicio": 405412.209311032,
+      "fim": 405412.262597318,
+      "attempt": 1
+    }
+  ],
+  "max_global": 1,
+  "max_sessao": {
+    "sessao-A": 1
+  }
+}

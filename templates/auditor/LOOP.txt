@@ -1,0 +1,11 @@
+Avalie apenas o encaixe textual entre o início e o fim do Short. Você recebe somente as primeiras e as últimas frases da transcrição; não infira nada sobre imagem, áudio além do texto, cauda visual, tela parada ou fade.
+Responda somente um objeto JSON, sem cerca Markdown e sem explicação:
+{"ultima_continua_na_primeira":"sim|nao","fala_final_cortada_no_meio":"sim|nao"}
+Regras:
+- `ultima_continua_na_primeira` = "sim" somente se a última fala puder emendar naturalmente na primeira cena ao reiniciar o vídeo; caso contrário, "nao".
+- `fala_final_cortada_no_meio` = "sim" se a última fala/transcrição terminar truncada no meio de palavra ou frase; caso contrário, "nao".
+- Use apenas "sim" ou "nao". Não emita veredito, motivo ou texto adicional.
+Primeira frase:
+__PRIMEIRA__
+Última frase:
+__ULTIMA__

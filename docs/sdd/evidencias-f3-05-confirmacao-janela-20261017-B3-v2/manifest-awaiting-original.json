@@ -1,0 +1,71 @@
+{
+  "version": 1,
+  "status": "awaiting_paperclip_approval",
+  "active": false,
+  "approval_status": "pending",
+  "companyId": "be3980d6-51ae-4cee-b85f-923b4568188c",
+  "shortname": "PQBR-121",
+  "issueId": "730f420b-4d74-48be-894c-a79b13c035f2",
+  "interactionId": "ee39501d-3787-470a-b871-7800669759b9",
+  "projectId": "12127c71-6745-4039-b4be-e4b4c281319f",
+  "projectName": "Engenharia",
+  "board": {
+    "profile": "default",
+    "persona": "Board",
+    "name": "tutibom",
+    "userId": "eHIQgWDGucnmgW8xT19VvSsypXRdbTr7",
+    "source": "board_key"
+  },
+  "scope": {
+    "scopeId": "scope-B3-next-once-v1",
+    "sessionId": "session-B3-next-disposable-v1",
+    "operationId": "second-B3-next-accepted-v1",
+    "idempotencyKey": "pqbr-f3-05-B3-next-single-proof-v2"
+  },
+  "scopeId": "scope-B3-next-once-v1",
+  "sessionId": "session-B3-next-disposable-v1",
+  "operationId": "second-B3-next-accepted-v1",
+  "idempotencyKey": "pqbr-f3-05-B3-next-single-proof-v2",
+  "valid_from": "2026-10-17T19:15:00-03:00",
+  "valid_until": "2026-10-18T19:15:00-03:00",
+  "valid_from_unix_utc": 1792275300,
+  "valid_until_unix_utc": 1792361700,
+  "max_snapshot_age": 60,
+  "confirmation_request_exact": {
+    "kind": "request_confirmation",
+    "resolverPolicy": "human_only",
+    "addresseeAgentId": null,
+    "addresseeUserId": "eHIQgWDGucnmgW8xT19VvSsypXRdbTr7",
+    "sourceRunId": null,
+    "continuationPolicy": "none",
+    "idempotencyKey": "pqbr-f3-05-B3-next-single-proof-v2",
+    "payload": {
+      "version": 1,
+      "prompt": "Autoriza uma única prova sintética deste escopo exato, sem efeitos externos?",
+      "acceptLabel": "Autorizar execução única",
+      "rejectLabel": "Não autorizar",
+      "allowDeclineReason": true,
+      "detailsMarkdown": "Uma única rodada sintética B3, limitada a uma execução apenas. Primeira operação já FAILED, uma tentativa, sem retry, fallback, reabertura ou reexecução; permanece FAILED/1 tentativa. Somente a segunda operação já aceita e pendente pode retomar uma vez. Temporal Server 1.32.1 descartável somente após o novo aceite humano específico, rede interna isolada sem saída externa, Activities falsas e armazenamento temporário descartável. Sem Workers persistentes, integrações reais, Camofox/Hindsight reais, Discord ou avisos Discord, efeitos externos do ensaio, produção, publicação, deploy, restart de Workers ou mudança da política de falha técnica. A criação deste ticket/confirmação é somente preparação; não executa ensaio ou runtime, não consome autorização e não registra receipt. issueId e interactionId devem ser exclusivamente os IDs reais deste novo ticket e da própria confirmação aceita, fixados no manifesto e vinculados integralmente ao futuro snapshot e receipt, nunca IDs de outra autorização. Janela de validade, horário de Brasília (UTC-03): valid_from `2026-10-17T19:15:00-03:00`; valid_until `2026-10-18T19:15:00-03:00`. IDs de escopo exatos autorizados: {\"scopeId\":\"scope-B3-next-once-v1\",\"sessionId\":\"session-B3-next-disposable-v1\",\"operationId\":\"second-B3-next-accepted-v1\",\"idempotencyKey\":\"pqbr-f3-05-B3-next-single-proof-v2\"}. P120 (PQBR-120) não se aplica a esta autorização: não reutilizar, executar, alterar ou cancelar P120. A confirmação anterior foi aceita, mas bloqueada antes do runtime por ausência de manifesto/janela. Esta nova confirmação exige aceite canônico humano do perfil Board tutibom, destinatário autorizado; pending, recusa, expiração, divergência ou resposta ambígua mantêm bloqueio fail-closed. Manifesto durável com status awaiting_paperclip_approval, sem ativação até o novo aceite; max_snapshot_age=60. F3-05/G4 permanece aberto; F05-06 no-arm; F7-02/G7 e PQBR-114 pausados. Sem commit/push ou consulta a documentos restritos.",
+      "supersedeOnUserComment": false
+    }
+  },
+  "confirmation_payload_exact": {
+    "version": 1,
+    "prompt": "Autoriza uma única prova sintética deste escopo exato, sem efeitos externos?",
+    "acceptLabel": "Autorizar execução única",
+    "rejectLabel": "Não autorizar",
+    "allowDeclineReason": true,
+    "detailsMarkdown": "Uma única rodada sintética B3, limitada a uma execução apenas. Primeira operação já FAILED, uma tentativa, sem retry, fallback, reabertura ou reexecução; permanece FAILED/1 tentativa. Somente a segunda operação já aceita e pendente pode retomar uma vez. Temporal Server 1.32.1 descartável somente após o novo aceite humano específico, rede interna isolada sem saída externa, Activities falsas e armazenamento temporário descartável. Sem Workers persistentes, integrações reais, Camofox/Hindsight reais, Discord ou avisos Discord, efeitos externos do ensaio, produção, publicação, deploy, restart de Workers ou mudança da política de falha técnica. A criação deste ticket/confirmação é somente preparação; não executa ensaio ou runtime, não consome autorização e não registra receipt. issueId e interactionId devem ser exclusivamente os IDs reais deste novo ticket e da própria confirmação aceita, fixados no manifesto e vinculados integralmente ao futuro snapshot e receipt, nunca IDs de outra autorização. Janela de validade, horário de Brasília (UTC-03): valid_from `2026-10-17T19:15:00-03:00`; valid_until `2026-10-18T19:15:00-03:00`. IDs de escopo exatos autorizados: {\"scopeId\":\"scope-B3-next-once-v1\",\"sessionId\":\"session-B3-next-disposable-v1\",\"operationId\":\"second-B3-next-accepted-v1\",\"idempotencyKey\":\"pqbr-f3-05-B3-next-single-proof-v2\"}. P120 (PQBR-120) não se aplica a esta autorização: não reutilizar, executar, alterar ou cancelar P120. A confirmação anterior foi aceita, mas bloqueada antes do runtime por ausência de manifesto/janela. Esta nova confirmação exige aceite canônico humano do perfil Board tutibom, destinatário autorizado; pending, recusa, expiração, divergência ou resposta ambígua mantêm bloqueio fail-closed. Manifesto durável com status awaiting_paperclip_approval, sem ativação até o novo aceite; max_snapshot_age=60. F3-05/G4 permanece aberto; F05-06 no-arm; F7-02/G7 e PQBR-114 pausados. Sem commit/push ou consulta a documentos restritos.",
+    "supersedeOnUserComment": false
+  },
+  "issue_title_exact": "F3-05 B3 — confirmação humana única v2 — janela 17–18/10/2026 19:15 BRT",
+  "issue_description_exact": "# Preparação da nova confirmação B3 v2\n\nUma única rodada sintética B3, limitada a uma execução apenas. Primeira operação já FAILED, uma tentativa, sem retry, fallback, reabertura ou reexecução; permanece FAILED/1 tentativa. Somente a segunda operação já aceita e pendente pode retomar uma vez. Temporal Server 1.32.1 descartável somente após o novo aceite humano específico, rede interna isolada sem saída externa, Activities falsas e armazenamento temporário descartável. Sem Workers persistentes, integrações reais, Camofox/Hindsight reais, Discord ou avisos Discord, efeitos externos do ensaio, produção, publicação, deploy, restart de Workers ou mudança da política de falha técnica. A criação deste ticket/confirmação é somente preparação; não executa ensaio ou runtime, não consome autorização e não registra receipt. issueId e interactionId devem ser exclusivamente os IDs reais deste novo ticket e da própria confirmação aceita, fixados no manifesto e vinculados integralmente ao futuro snapshot e receipt, nunca IDs de outra autorização. Janela de validade, horário de Brasília (UTC-03): valid_from `2026-10-17T19:15:00-03:00`; valid_until `2026-10-18T19:15:00-03:00`. IDs de escopo exatos autorizados: {\"scopeId\":\"scope-B3-next-once-v1\",\"sessionId\":\"session-B3-next-disposable-v1\",\"operationId\":\"second-B3-next-accepted-v1\",\"idempotencyKey\":\"pqbr-f3-05-B3-next-single-proof-v2\"}. P120 (PQBR-120) não se aplica a esta autorização: não reutilizar, executar, alterar ou cancelar P120. A confirmação anterior foi aceita, mas bloqueada antes do runtime por ausência de manifesto/janela. Esta nova confirmação exige aceite canônico humano do perfil Board tutibom, destinatário autorizado; pending, recusa, expiração, divergência ou resposta ambígua mantêm bloqueio fail-closed. Manifesto durável com status awaiting_paperclip_approval, sem ativação até o novo aceite; max_snapshot_age=60. F3-05/G4 permanece aberto; F05-06 no-arm; F7-02/G7 e PQBR-114 pausados. Sem commit/push ou consulta a documentos restritos.\n\nPrompt: Autoriza uma única prova sintética deste escopo exato, sem efeitos externos?\n\nBotões: Autorizar execução única / Não autorizar.\n\nPolítica: request_confirmation; human_only; continuationPolicy=none; allowDeclineReason=true; supersedeOnUserComment=false; sem agente ou run.\n",
+  "created_at_utc": "2026-10-17T22:45:43.273970+00:00",
+  "ticket_created_at_utc": "2026-10-17T22:45:41.862Z",
+  "interaction_created_at_utc": "2026-10-17T22:45:43.217Z",
+  "runtime_executed": false,
+  "receipt_recorded": false,
+  "authorization_consumed": false,
+  "p120_applies": false,
+  "continuationPolicy": "none"
+}

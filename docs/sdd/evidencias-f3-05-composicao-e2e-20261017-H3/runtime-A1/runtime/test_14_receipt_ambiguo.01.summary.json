@@ -1,0 +1,13 @@
+{
+  "workflow_id": "teste-f3-05-supervisor-54e2280ec9c3230b9a152d0aa8bd07bc1e1185b06ddf0098f10c10700ecf8e3d",
+  "run_id": "331336e8-32ee-49fe-a409-cbe0de2072a6",
+  "eventos": 21,
+  "replay": "ok",
+  "activities": [
+    {
+      "nome": "registrar_falha_supervisor_falsa",
+      "fila": "teste-f3-05-candidato-wf-FAKE-H3-test_14_receipt_ambiguo-supervisor",
+      "max_tentativas": 1
+    }
+  ]
+}

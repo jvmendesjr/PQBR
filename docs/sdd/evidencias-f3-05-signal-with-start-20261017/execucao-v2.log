@@ -1,0 +1,68 @@
+19defb9f7318c7cf249518b3642a735efb79876c2b6918afe312336476b796a5  /tmp/temporal-test-server-sdk-python-1.34.0
+Evidencias: /home/pc/Workspace/PQBR/docs/sdd/evidencias-f3-05-signal-with-start-20261017/runtime-v2
+Namespace original: net:[4026531840]
+lo               UNKNOWN        127.0.0.1/8 ::1/128 
+test_concorrencia_start_signal_mesma_sessao (tests.workflows.test_f3_05_signal_with_start_isolado.SignalWithStartIsolado.test_concorrencia_start_signal_mesma_sessao) ... [2m2026-10-17T15:13:11.352134Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+[2m2026-10-17T15:13:11.352195Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+ok
+test_continue_as_new_preservando_dedup (tests.workflows.test_f3_05_signal_with_start_isolado.SignalWithStartIsolado.test_continue_as_new_preservando_dedup) ... [2m2026-10-17T15:13:12.684319Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+[2m2026-10-17T15:13:12.684499Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+ok
+test_continue_as_new_sem_estado_repete_efeito (tests.workflows.test_f3_05_signal_with_start_isolado.SignalWithStartIsolado.test_continue_as_new_sem_estado_repete_efeito) ... [2m2026-10-17T15:13:13.141227Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+[2m2026-10-17T15:13:13.141406Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+ok
+test_duas_sessoes_paralelas (tests.workflows.test_f3_05_signal_with_start_isolado.SignalWithStartIsolado.test_duas_sessoes_paralelas) ... [2m2026-10-17T15:13:13.650306Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+[2m2026-10-17T15:13:13.650479Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+ok
+test_duplicado_payload_divergente_e_config (tests.workflows.test_f3_05_signal_with_start_isolado.SignalWithStartIsolado.test_duplicado_payload_divergente_e_config) ... [2m2026-10-17T15:13:14.064252Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+[2m2026-10-17T15:13:14.064427Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+ok
+test_falha_tecnica_sem_retry_dedup_nao_cruza_reuso (tests.workflows.test_f3_05_signal_with_start_isolado.SignalWithStartIsolado.test_falha_tecnica_sem_retry_dedup_nao_cruza_reuso) ... [2m2026-10-17T15:13:14.392840Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+[2m2026-10-17T15:13:14.392941Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+Completing activity as failed ({'activity_id': '1', 'activity_type': 'efeito_signal_sintetico_v1', 'attempt': 1, 'namespace': 'default', 'task_queue': 'teste-sws-act-7185ac8d43524fcfa7e4e0c10b9059d4', 'workflow_id': 'prototipo-signal-start-v1-07aa137bd2dc362b90b33958e3ed6b335ab8385dedfb7454998d1219cf0e9f50', 'workflow_run_id': '498a2556-1bd8-473d-9dfc-41d771bd0c63', 'workflow_type': 'AtorSignalSintetico'})
+Traceback (most recent call last):
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 351, in _handle_start_activity_task
+    result = await self._execute_activity(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 681, in _execute_activity
+    return await impl.execute_activity(input)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 889, in execute_activity
+    return await input.fn(*input.args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_signal_with_start_isolado.py", line 46, in efeito
+    raise ApplicationError("falha tecnica sintetica", type="FalhaTecnicaSintetica")
+temporalio.exceptions.ApplicationError: FalhaTecnicaSintetica: falha tecnica sintetica
+Completing activity as failed ({'activity_id': '1', 'activity_type': 'efeito_signal_sintetico_v1', 'attempt': 1, 'namespace': 'default', 'task_queue': 'teste-sws-act-7185ac8d43524fcfa7e4e0c10b9059d4', 'workflow_id': 'prototipo-signal-start-v1-07aa137bd2dc362b90b33958e3ed6b335ab8385dedfb7454998d1219cf0e9f50', 'workflow_run_id': '212c72d2-8a98-41ff-9ec2-b664d8688fd5', 'workflow_type': 'AtorSignalSintetico'})
+Traceback (most recent call last):
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 351, in _handle_start_activity_task
+    result = await self._execute_activity(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 681, in _execute_activity
+    return await impl.execute_activity(input)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 889, in execute_activity
+    return await input.fn(*input.args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_signal_with_start_isolado.py", line 46, in efeito
+    raise ApplicationError("falha tecnica sintetica", type="FalhaTecnicaSintetica")
+temporalio.exceptions.ApplicationError: FalhaTecnicaSintetica: falha tecnica sintetica
+ok
+test_fechando_rejeicao_assincrona_e_reuso_explicito (tests.workflows.test_f3_05_signal_with_start_isolado.SignalWithStartIsolado.test_fechando_rejeicao_assincrona_e_reuso_explicito) ... [2m2026-10-17T15:13:14.809705Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+[2m2026-10-17T15:13:14.809870Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+ok
+test_registro_removido_nao_simula_tempo_de_retention (tests.workflows.test_f3_05_signal_with_start_isolado.SignalWithStartIsolado.test_registro_removido_nao_simula_tempo_de_retention) ... [2m2026-10-17T15:13:15.336629Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+[2m2026-10-17T15:13:15.337027Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+skipped 'test-server nao implementa DeleteWorkflowExecution; retention nao validada'
+test_sem_worker_rpc_retorna_signal_duravel_retomada (tests.workflows.test_f3_05_signal_with_start_isolado.SignalWithStartIsolado.test_sem_worker_rpc_retorna_signal_duravel_retomada) ... [2m2026-10-17T15:13:15.655181Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+[2m2026-10-17T15:13:15.655456Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+ok
+test_worker_recriado_reconstroi_dedup_do_historico (tests.workflows.test_f3_05_signal_with_start_isolado.SignalWithStartIsolado.test_worker_recriado_reconstroi_dedup_do_historico) ... [2m2026-10-17T15:13:15.962665Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+[2m2026-10-17T15:13:15.962872Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 5.110s
+
+OK (skipped=1)
+Servidor e namespace encerrados; evidencias em /home/pc/Workspace/PQBR/docs/sdd/evidencias-f3-05-signal-with-start-20261017/runtime-v2

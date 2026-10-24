@@ -1,0 +1,23 @@
+test_unica_rodada (test_pqbr119.Prova119.test_unica_rodada) ... Completing activity as failed ({'activity_id': 'intervencao-1', 'activity_type': 'intervir_agente', 'attempt': 1, 'namespace': 'f3-05-supervisor', 'task_queue': 'teste-f3-05-candidato-camofox-FAKE-H3-test_unica_rodada-supervisor', 'workflow_id': 'teste-f3-05-supervisor-be18263b65513bde91a1fde0b7e011ad58863f4811bf68c8f3803f85d86e60b3-op-f555b80ad08f501adb396a95c78948ce18f204b3cf2c93b0b1930a006540a06e', 'workflow_run_id': '01a14bdd-a6ce-77bb-ad73-07fba12bc237', 'workflow_type': 'PQBRCorrecaoCandidata'})
+Traceback (most recent call last):
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 351, in _handle_start_activity_task
+    result = await self._execute_activity(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 681, in _execute_activity
+    return await impl.execute_activity(input)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 889, in execute_activity
+    return await input.fn(*input.args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/docs/sdd/evidencias-f3-05-composicao-e2e-20261017-H3/runtime_base_h3.py", line 57, in intervir
+    return await super().intervir(t)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/tests/workflows/composicao_candidata.py", line 59, in intervir
+    raise ApplicationError('falha técnica falsa', type='FalhaTecnicaFalsa')
+temporalio.exceptions.ApplicationError: FalhaTecnicaFalsa: falha técnica falsa
+ok
+
+----------------------------------------------------------------------
+Ran 1 test in 2.182s
+
+OK

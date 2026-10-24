@@ -1,0 +1,21 @@
+{
+  "arquivos_preservados": 87,
+  "arquivos_anteriores_alterados": [],
+  "namespaces": [
+    "net:[4026533133]",
+    "net:[4026534469]"
+  ],
+  "processos_restantes": [],
+  "historicos_finais": 6,
+  "replays_ok": 6,
+  "estados": [
+    "COMPLETED",
+    "FAILED",
+    "FAILED",
+    "COMPLETED",
+    "COMPLETED",
+    "COMPLETED"
+  ],
+  "max_global": 2,
+  "pending_activities": 0
+}

@@ -1,0 +1,28 @@
+{
+  "workflow_id": "teste-f3-05-supervisor-d68196f9634590177aeee18d84c42139da0f7969c0bbd9a1af84bd5898a33076-op-903862a065445b96fb86886c8c68c119e0fdaaa7d0172be264d350d12e0b0fd1",
+  "run_id": "01a14b82-f8ea-774a-af25-5ee596cad072",
+  "eventos": 31,
+  "replay": "ok",
+  "activities": [
+    {
+      "nome": "triagem_jev",
+      "fila": "teste-f3-05-candidato-wf-FAKE-H3-test_18_mesma_chave_receipt_divergente_apos_consumo-supervisor",
+      "max_tentativas": 3
+    },
+    {
+      "nome": "intervir_agente",
+      "fila": "teste-f3-05-candidato-camofox-FAKE-H3-test_18_mesma_chave_receipt_divergente_apos_consumo-supervisor",
+      "max_tentativas": 1
+    },
+    {
+      "nome": "verificar_jev",
+      "fila": "teste-f3-05-candidato-wf-FAKE-H3-test_18_mesma_chave_receipt_divergente_apos_consumo-supervisor",
+      "max_tentativas": 3
+    },
+    {
+      "nome": "registrar_correcao",
+      "fila": "teste-f3-05-candidato-wf-FAKE-H3-test_18_mesma_chave_receipt_divergente_apos_consumo-supervisor",
+      "max_tentativas": 3
+    }
+  ]
+}

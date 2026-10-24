@@ -1,0 +1,196 @@
+{
+  "estado": {
+    "versao": 1,
+    "aceitos": {
+      "primeira": {
+        "ferramenta": "camofox",
+        "sessao": "FAKE-H3-test_12_receipt_forjado_no_transporte",
+        "passo": "primeira",
+        "erro": "falha-tecnica",
+        "episodio": null,
+        "simulacao": {
+          "triagem": "corrigivel",
+          "intervencoes": [
+            true
+          ],
+          "verificacoes": [
+            true
+          ],
+          "conta_confere": true
+        }
+      },
+      "segunda": {
+        "ferramenta": "camofox",
+        "sessao": "FAKE-H3-test_12_receipt_forjado_no_transporte",
+        "passo": "segunda",
+        "erro": "falha falsa",
+        "episodio": null,
+        "simulacao": {
+          "triagem": "corrigivel",
+          "intervencoes": [
+            true
+          ],
+          "verificacoes": [
+            true
+          ],
+          "conta_confere": true
+        }
+      }
+    },
+    "pendentes": [
+      "segunda"
+    ],
+    "resultados": {},
+    "falhas": {
+      "primeira": {
+        "operacao_id": "primeira",
+        "filho_id": "teste-f3-05-supervisor-a137a7233b346684bf0e6a69dc2a0b062181a16341fc064b249d842d6f7c68d8-op-f555b80ad08f501adb396a95c78948ce18f204b3cf2c93b0b1930a006540a06e",
+        "filho_run_id": "01a14b82-d73f-7679-8c44-efdcd22f34df",
+        "revisao": 1,
+        "estado": "falha_tecnica_terminal",
+        "resultado_efeito": "nao_reconciliado",
+        "registro": "confirmado",
+        "registro_id": "teste-f3-05-supervisor-a137a7233b346684bf0e6a69dc2a0b062181a16341fc064b249d842d6f7c68d8:01a14b82-d73f-7679-8c44-efdcd22f34df:primeira"
+      }
+    },
+    "bloqueio": {
+      "operacao_id": "primeira",
+      "filho_id": "teste-f3-05-supervisor-a137a7233b346684bf0e6a69dc2a0b062181a16341fc064b249d842d6f7c68d8-op-f555b80ad08f501adb396a95c78948ce18f204b3cf2c93b0b1930a006540a06e",
+      "filho_run_id": "01a14b82-d73f-7679-8c44-efdcd22f34df",
+      "revisao": 1,
+      "estado": "falha_tecnica_terminal",
+      "resultado_efeito": "nao_reconciliado",
+      "registro": "confirmado",
+      "registro_id": "teste-f3-05-supervisor-a137a7233b346684bf0e6a69dc2a0b062181a16341fc064b249d842d6f7c68d8:01a14b82-d73f-7679-8c44-efdcd22f34df:primeira"
+    },
+    "ativo": null,
+    "revisao": 1,
+    "retomadas": [],
+    "observacoes": [
+      {
+        "id": "primeira",
+        "estado": "aceito"
+      },
+      {
+        "id": "segunda",
+        "estado": "aceito"
+      },
+      {
+        "id": "primeira",
+        "estado": "pausado_apos_falha"
+      }
+    ],
+    "consumidos": {},
+    "recibos_rejeitados": 1,
+    "admissao_fechada": true,
+    "fechando": false
+  },
+  "trilha": [
+    [
+      "paperclip:criar"
+    ],
+    [
+      "interacao_persistida",
+      "FAKE-ticket-existente-H3",
+      "FAKE-interaction-1"
+    ],
+    [
+      "paperclip:ler"
+    ],
+    [
+      "registro_relido",
+      "FAKE-ticket-existente-H3"
+    ],
+    [
+      "paperclip:criar"
+    ],
+    [
+      "paperclip:ler"
+    ],
+    [
+      "registro_relido",
+      "FAKE-ticket-existente-H3"
+    ],
+    [
+      "paperclip:ler"
+    ],
+    [
+      "registro_relido",
+      "FAKE-ticket-existente-H3"
+    ],
+    [
+      "paperclip:resolver"
+    ],
+    [
+      "decisao_persistida",
+      "FAKE-ticket-existente-H3",
+      "FAKE-interaction-1",
+      "accepted"
+    ],
+    [
+      "paperclip:ler"
+    ],
+    [
+      "registro_relido",
+      "FAKE-ticket-existente-H3"
+    ],
+    [
+      "receipt_enfileirado_sem_ack",
+      "consumo:12cbab9006a6cc1815f72aea664a2539f37b5f0413257e6f61516c3a1600cfce"
+    ],
+    [
+      "paperclip:ler"
+    ],
+    [
+      "registro_relido",
+      "FAKE-ticket-existente-H3"
+    ]
+  ],
+  "interacoes": {
+    "FAKE-interaction-1": {
+      "kind": "request_confirmation",
+      "idempotencyKey": "pqbr-f3-05:0b2cdad7291f2e1aae408056b8c5342d40bea1c46d7e55699dda03ba5107400f",
+      "addresseeUserId": "FAKE-paperclip-owner",
+      "addresseeAgentId": null,
+      "continuationPolicy": "none",
+      "title": "Autorizar somente pendentes já aceitos",
+      "payload": {
+        "version": 1,
+        "prompt": "Autoriza retomar somente os pendentes desta revisão, sem repetir a operação terminal?",
+        "acceptLabel": "Autorizar pendentes",
+        "rejectLabel": "Não autorizar",
+        "supersedeOnUserComment": false,
+        "detailsMarkdown": "PQBR-F3-05/v1\n{\"criadoEm\":1792268228,\"escopo\":{\"falha_id\":\"primeira\",\"filho_run_id\":\"01a14b82-d73f-7679-8c44-efdcd22f34df\",\"pendentes\":[\"segunda\"],\"registro_falha_receipt\":\"teste-f3-05-supervisor-a137a7233b346684bf0e6a69dc2a0b062181a16341fc064b249d842d6f7c68d8:01a14b82-d73f-7679-8c44-efdcd22f34df:primeira\",\"revisao\":1,\"supervisor_id\":\"teste-f3-05-supervisor-a137a7233b346684bf0e6a69dc2a0b062181a16341fc064b249d842d6f7c68d8\",\"supervisor_run_id\":\"c2e091d3-c7cd-481c-a3c2-f921c16f66e0\"},\"expiraEm\":1792268828,\"issueId\":\"FAKE-ticket-existente-H3\",\"version\":1}"
+      },
+      "id": "FAKE-interaction-1",
+      "issueId": "FAKE-ticket-existente-H3",
+      "status": "accepted",
+      "requestedResolverPolicy": "human_only",
+      "effectiveResolverPolicy": "human_only",
+      "resolvedByUserId": "FAKE-paperclip-owner",
+      "resolvedByAgentId": null,
+      "resolvedByRunId": null,
+      "resolvedAt": "2026-10-17T20:17:08Z",
+      "result": {
+        "version": 1,
+        "outcome": "accepted"
+      },
+      "createdAt": "2026-10-17T20:17:08Z",
+      "updatedAt": "2026-10-17T20:17:08Z"
+    }
+  },
+  "chamadas": [
+    {
+      "sessao": "FAKE-H3-test_12_receipt_forjado_no_transporte",
+      "passo": "primeira",
+      "inicio": 423646.328551161,
+      "fim": 423646.370200984,
+      "fila": "teste-f3-05-candidato-camofox-FAKE-H3-test_12_receipt_forjado_no_transporte-supervisor",
+      "tentativa": 1,
+      "workflow_id": "teste-f3-05-supervisor-a137a7233b346684bf0e6a69dc2a0b062181a16341fc064b249d842d6f7c68d8-op-f555b80ad08f501adb396a95c78948ce18f204b3cf2c93b0b1930a006540a06e"
+    }
+  ],
+  "tentativas_validacao": [
+    1
+  ]
+}

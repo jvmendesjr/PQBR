@@ -1,0 +1,44 @@
+[
+  {
+    "mode": "prototype-workers",
+    "condition": "cold",
+    "rounds": 240,
+    "calls": 4600,
+    "errors": 4
+  },
+  {
+    "mode": "prototype-workers",
+    "condition": "warm",
+    "rounds": 240,
+    "calls": 4600,
+    "errors": 0
+  },
+  {
+    "mode": "prototype-no-worker",
+    "condition": "cold",
+    "rounds": 240,
+    "calls": 4600,
+    "errors": 1
+  },
+  {
+    "mode": "prototype-no-worker",
+    "condition": "warm",
+    "rounds": 240,
+    "calls": 4600,
+    "errors": 0
+  },
+  {
+    "mode": "raw-no-worker",
+    "condition": "cold",
+    "rounds": 240,
+    "calls": 4600,
+    "errors": 2
+  },
+  {
+    "mode": "raw-no-worker",
+    "condition": "warm",
+    "rounds": 240,
+    "calls": 4600,
+    "errors": 0
+  }
+]

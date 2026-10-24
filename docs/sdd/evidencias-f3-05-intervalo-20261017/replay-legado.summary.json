@@ -1,0 +1,72 @@
+[
+  {
+    "arquivo": "test_conta_divergente_interrompe_sem_verificar.history.json",
+    "replay": "ok",
+    "sha256": "9a539ac639776b82dd30ed821751ea6054566408fe7c247a3916e6a7ae62dca5"
+  },
+  {
+    "arquivo": "test_corrige_na_primeira_e_serializa_resultado.history.json",
+    "replay": "ok",
+    "sha256": "8484288c108b0a4da87baf59da32a0ed2e1c80c67cd8f07fd5f27d67ab74d569"
+  },
+  {
+    "arquivo": "test_excecao_na_intervencao_nao_repete_activity.history.json",
+    "replay": "ok",
+    "sha256": "2c6a573e1592a2e8e2dfd415cbf89f413497635a914a00b17c48a0db791264af"
+  },
+  {
+    "arquivo": "test_novo_worker_retoma_activity_pendente_no_mesmo_servidor.history.json",
+    "replay": "ok",
+    "sha256": "85b1e1238df527c3e857bcdf46a524b52e44c4fc80fc528ea9c5a314d1f6974c"
+  },
+  {
+    "arquivo": "test_passo_sensivel_para_antes_do_backend.history.json",
+    "replay": "ok",
+    "sha256": "a0794c44aa40c521aec63c032c7b9277d1fb0d74f2ebb05abbaff09cec7523a7"
+  },
+  {
+    "arquivo": "test_retry_de_triagem_para_na_terceira_falha.history.json",
+    "replay": "ok",
+    "sha256": "8aead84e13fab39333e3300bdc911bff7bf5b57026d13793f8cd4c83f191e56e"
+  },
+  {
+    "arquivo": "test_retry_real_de_registro_falso.history.json",
+    "replay": "ok",
+    "sha256": "91203606a98959a87532be0c30fddabbe33ab345a31bd94867e42dc51ce7ce23"
+  },
+  {
+    "arquivo": "test_retry_real_de_triagem.history.json",
+    "replay": "ok",
+    "sha256": "2d582a40111d9faa4106398e85e3d669eaedc67f1d1343331ac1743fa832f5f1"
+  },
+  {
+    "arquivo": "test_retry_real_de_verificacao.history.json",
+    "replay": "ok",
+    "sha256": "04fa643abd7a4f692ae89003c31d589b743ab076bb3122dd75a0a17e90a65526"
+  },
+  {
+    "arquivo": "test_sem_backend_falha_uma_vez_sem_registro.history.json",
+    "replay": "ok",
+    "sha256": "c8a028e8265f7443f9a6e5d5ef1bf97577771a3fd29bf8e29859f4c2a727d5ae"
+  },
+  {
+    "arquivo": "test_terceira_tentativa_tem_limite_e_sem_timer_de_espera.history.json",
+    "replay": "ok",
+    "sha256": "7fb40f117d4f573ee4851210020de370bb393a549022f9451e2e8a75c02237a2"
+  },
+  {
+    "arquivo": "test_tres_intervencoes_negativas_esgotam.history.json",
+    "replay": "ok",
+    "sha256": "f1eb9e27987d480321374ab36c6bb75cf0f5e46da2a8504efdd748d76e64e32e"
+  },
+  {
+    "arquivo": "test_triagem_fora_de_escopo_nao_intervem.history.json",
+    "replay": "ok",
+    "sha256": "357dea3f77f7aadf829081c0b007b526e71a82ccb6de1939131bdf1d333ccb35"
+  },
+  {
+    "arquivo": "test_verificacao_negativa_impede_sucesso.history.json",
+    "replay": "ok",
+    "sha256": "002518dc14c4a84db78df9247fd955f75a39c9ac5d2c5c9a2f0bc542d50f7d73"
+  }
+]

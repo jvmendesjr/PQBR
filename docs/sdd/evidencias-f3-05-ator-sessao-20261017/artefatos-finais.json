@@ -1,0 +1,18 @@
+{
+  "tests/workflows/prototipo_ator_sessao.py": {
+    "bytes": 4037,
+    "sha256": "cef071717f546cd1693dff3043948134451849c6d14832c3df00812a5bcec4e3"
+  },
+  "tests/workflows/test_f3_05_ator_sessao_isolado.py": {
+    "bytes": 11504,
+    "sha256": "e652a8f2732a5fdc9f5391a22a4c146d03b9565dc9fffbe5bc043db915c81f62"
+  },
+  "tests/workflows/run_f3_05_ator_sessao_isolado.sh": {
+    "bytes": 1399,
+    "sha256": "487c9c2c3381528cf7cec1fe0b0dcd5f749adb3f30fe11a6e3f2db31447494f5"
+  },
+  "docs/sdd/f3-05-ator-sessao-20261017.md": {
+    "bytes": 9814,
+    "sha256": "b75f628be9f701d103765da4f011141809ce3af670819096de0be6ef482c8f90"
+  }
+}

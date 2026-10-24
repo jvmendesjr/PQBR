@@ -1,0 +1,29 @@
+{
+  "teste": "test_primeiro_update_invalido_nao_reverte_start",
+  "workflow_id": "prototipo-ator-sessao-atomico-v1-07aa137bd2dc362b90b33958e3ed6b335ab8385dedfb7454998d1219cf0e9f50",
+  "run_id": "28461f20-6279-4d9b-9111-7ec02e31c3d3",
+  "estado": "COMPLETED",
+  "pending_activities": 0,
+  "replay": "ok",
+  "atividades_agendadas": 1,
+  "fila_explicita": "teste-camofox-ator-78e9276d904b4e51a75dbadc0dc262d9",
+  "calls": [
+    {
+      "pedido": {
+        "falhar": false,
+        "id": "valido",
+        "sessao": "sessao-A"
+      },
+      "inicio": 404983.546605311,
+      "fim": 404983.546622042,
+      "fila": "teste-camofox-ator-78e9276d904b4e51a75dbadc0dc262d9",
+      "workflow_id": "prototipo-ator-sessao-atomico-v1-07aa137bd2dc362b90b33958e3ed6b335ab8385dedfb7454998d1219cf0e9f50",
+      "attempt": 1
+    }
+  ],
+  "max_global": 1,
+  "max_por_sessao": {
+    "sessao-A": 1
+  },
+  "erro": null
+}

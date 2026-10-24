@@ -1,0 +1,26 @@
+{
+  "teste": "test_worker_recriado_reconstroi_dedup_do_historico",
+  "workflow_id": "prototipo-signal-start-v1-07aa137bd2dc362b90b33958e3ed6b335ab8385dedfb7454998d1219cf0e9f50",
+  "run_id": "6dbbbd75-3055-4a49-b726-43de762396e6",
+  "estado": "COMPLETED",
+  "replay": "ok",
+  "pending_activities": 0,
+  "atividades_agendadas": 1,
+  "signals": 3,
+  "calls": [
+    {
+      "pedido": {
+        "falhar": false,
+        "id": "id-1",
+        "sessao": "sessao-A"
+      },
+      "inicio": 405350.400859859,
+      "fim": 405350.400880047,
+      "attempt": 1
+    }
+  ],
+  "max_global": 1,
+  "max_sessao": {
+    "sessao-A": 1
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "pid": 304562,
+  "args": [
+    "sudo",
+    "-n",
+    "nsenter",
+    "-t",
+    "304223",
+    "-n",
+    "/usr/bin/setpriv",
+    "--reuid=1000",
+    "--regid=1000",
+    "--clear-groups",
+    "/usr/bin/env",
+    "-i",
+    "PYTHONPATH=/home/pc/Workspace/PQBR/docs/sdd/evidencias-f3-05-confirmacao-janela-20261017-B3-v2:/home/pc/Workspace/PQBR/docs/sdd/evidencias-f3-05-composicao-e2e-20261017-H3:/home/pc/Workspace/PQBR/docs/sdd/evidencias-f3-05-confirmacao-canonica-20261017-H2:/home/pc/Workspace/PQBR/src:/home/pc/Workspace/PQBR",
+    "PYTHONDONTWRITEBYTECODE=1",
+    "PQBR_121_ISOLATED=1",
+    "PQBR_CANDIDATE_OUT=/home/pc/Workspace/PQBR/docs/sdd/evidencias-f3-05-confirmacao-janela-20261017-B3-v2/runtime-run-B3121/runtime",
+    "/home/pc/Workspace/PQBR/.venv/bin/python",
+    "-m",
+    "unittest",
+    "-v",
+    "test_pqbr121.Prova121.test_unique_B3"
+  ],
+  "expected_netns": "net:[4026533287]"
+}

@@ -27,7 +27,7 @@ REGRAS: list[tuple[str, re.Pattern[str]]] = [
     ("url_com_senha", re.compile(r"\b[a-z][a-z0-9+.\-]*://[^\s:/@]+:[^\s@/]{3,}@[^\s]+", re.I)),
     ("atribuicao_segredo", re.compile(
         r"(?i)\b[A-Za-z0-9_]*(?:password|passwd|senha|secret|token|api[_-]?key|private[_-]?key|client[_-]?secret|pwd)[A-Za-z0-9_]*"
-        r"\s*[:=]\s*['\"]?(?!\$|<|\{|scram-sha-256|md5\b|TROCAR|teste-local|xxx|\*\*\*|changeme|None|null|\"\"|'')[^\s'\"]{8,}")),
+        r"['\"]?\s*[:=]\s*['\"]?(?!\$|<|\{|scram-sha-256|md5\b|TROCAR|teste-local|xxx|\*\*\*|changeme|None|null|\"\"|'')[^\s'\"]{8,}")),
     ("cookie_sessao", re.compile(r"(?i)\b(?:SAPISID|__Secure-[0-9A-Za-z]+PSID[A-Za-z]*|SID|HSID|SSID)=[0-9A-Za-z_\-]{16,}")),
     ("email", re.compile(r"\b[A-Za-z0-9._%+\-]+@[A-Za-z0-9\-]+(?:\.[A-Za-z0-9\-]+)*\.[A-Za-z]{2,}\b")),
     ("ip_tailnet", re.compile(r"\b100\.(?:6[4-9]|[7-9][0-9]|1[01][0-9]|12[0-7])\.[0-9]{1,3}\.[0-9]{1,3}\b")),
@@ -54,7 +54,7 @@ class SegredoDetectado(ValueError):
 
 
 def _mascarar(s: str) -> str:
-    return s if len(s) <= 8 else f"{s[:4]}…{s[-2:]} ({len(s)} chars)"
+    return f"[oculto; {len(s)} chars]"
 
 
 def encontrar(texto: str) -> list[Achado]:

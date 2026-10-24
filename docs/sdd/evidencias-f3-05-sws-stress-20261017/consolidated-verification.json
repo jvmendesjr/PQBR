@@ -1,0 +1,168 @@
+{
+  "baseline_files": 174,
+  "changed": [],
+  "used_netns": [
+    "net:[4026533133]"
+  ],
+  "remaining_in_used_netns": [],
+  "test_servers_after": [
+    {
+      "pid": 2185107,
+      "netns": "net:[4026531840]"
+    },
+    {
+      "pid": 2188153,
+      "netns": "net:[4026531840]"
+    }
+  ],
+  "deterministic_workflow_ids_same_across_main_runs": true,
+  "main_rpc_count": 28320,
+  "main_burst_count": 27600,
+  "main_errors": 7,
+  "all_wire_requests_use_existing_and_reject_duplicate": true,
+  "all_effective_rpc_retries_disabled": true,
+  "unique_request_ids_each_main_run": true,
+  "summaries": {
+    "stress-a": {
+      "rounds": 720,
+      "burst_calls": 13800,
+      "burst_rpc_errors": 2,
+      "invariant_errors": 0,
+      "harness_errors": 0,
+      "failed_rounds": 2,
+      "pending_cleanup": [],
+      "shutdown_ok": true,
+      "robustez_comprovada": false
+    },
+    "stress-b": {
+      "rounds": 720,
+      "burst_calls": 13800,
+      "burst_rpc_errors": 5,
+      "invariant_errors": 0,
+      "harness_errors": 0,
+      "failed_rounds": 5,
+      "pending_cleanup": [],
+      "shutdown_ok": true,
+      "robustez_comprovada": false
+    }
+  },
+  "errors": [
+    {
+      "session": "stress-v1-prototype-workers-cold-c64-i0009",
+      "mode": "prototype-workers",
+      "condition": "cold",
+      "concurrency": 64,
+      "iteration": 9,
+      "index": 0,
+      "run": "stress-a",
+      "types": [
+        "temporalio.exceptions.WorkflowAlreadyStartedError",
+        "temporalio.service.RPCError",
+        "temporal_sdk_bridge.RPCError"
+      ],
+      "codes": [
+        6
+      ]
+    },
+    {
+      "session": "stress-v1-raw-no-worker-cold-c02-i0012",
+      "mode": "raw-no-worker",
+      "condition": "cold",
+      "concurrency": 2,
+      "iteration": 12,
+      "index": 0,
+      "run": "stress-a",
+      "types": [
+        "temporalio.service.RPCError",
+        "temporal_sdk_bridge.RPCError"
+      ],
+      "codes": [
+        6
+      ]
+    },
+    {
+      "session": "stress-v1-prototype-workers-cold-c32-i0001",
+      "mode": "prototype-workers",
+      "condition": "cold",
+      "concurrency": 32,
+      "iteration": 1,
+      "index": 0,
+      "run": "stress-b",
+      "types": [
+        "temporalio.exceptions.WorkflowAlreadyStartedError",
+        "temporalio.service.RPCError",
+        "temporal_sdk_bridge.RPCError"
+      ],
+      "codes": [
+        6
+      ]
+    },
+    {
+      "session": "stress-v1-prototype-workers-cold-c32-i0002",
+      "mode": "prototype-workers",
+      "condition": "cold",
+      "concurrency": 32,
+      "iteration": 2,
+      "index": 0,
+      "run": "stress-b",
+      "types": [
+        "temporalio.exceptions.WorkflowAlreadyStartedError",
+        "temporalio.service.RPCError",
+        "temporal_sdk_bridge.RPCError"
+      ],
+      "codes": [
+        6
+      ]
+    },
+    {
+      "session": "stress-v1-prototype-workers-cold-c32-i0003",
+      "mode": "prototype-workers",
+      "condition": "cold",
+      "concurrency": 32,
+      "iteration": 3,
+      "index": 1,
+      "run": "stress-b",
+      "types": [
+        "temporalio.exceptions.WorkflowAlreadyStartedError",
+        "temporalio.service.RPCError",
+        "temporal_sdk_bridge.RPCError"
+      ],
+      "codes": [
+        6
+      ]
+    },
+    {
+      "session": "stress-v1-prototype-no-worker-cold-c32-i0015",
+      "mode": "prototype-no-worker",
+      "condition": "cold",
+      "concurrency": 32,
+      "iteration": 15,
+      "index": 0,
+      "run": "stress-b",
+      "types": [
+        "temporalio.exceptions.WorkflowAlreadyStartedError",
+        "temporalio.service.RPCError",
+        "temporal_sdk_bridge.RPCError"
+      ],
+      "codes": [
+        6
+      ]
+    },
+    {
+      "session": "stress-v1-raw-no-worker-cold-c64-i0001",
+      "mode": "raw-no-worker",
+      "condition": "cold",
+      "concurrency": 64,
+      "iteration": 1,
+      "index": 0,
+      "run": "stress-b",
+      "types": [
+        "temporalio.service.RPCError",
+        "temporal_sdk_bridge.RPCError"
+      ],
+      "codes": [
+        6
+      ]
+    }
+  ]
+}

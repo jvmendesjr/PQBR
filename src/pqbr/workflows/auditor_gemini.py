@@ -4,6 +4,7 @@ validada (RespostaAuditorGemini + auditor_visual.decidir). Erros não de seguran
 Ações: só clique/tecla/upload humanos; leitura da resposta por evaluate SOMENTE leitura (innerText)."""
 from __future__ import annotations
 import json, re, subprocess, time, urllib.request
+from collections import Counter
 from pathlib import Path
 from typing import Literal
 from pydantic import BaseModel, ConfigDict, Field
@@ -20,6 +21,7 @@ class CenaAuditada(BaseModel):
     tem_personagem: SN; tem_texto_na_tela: SN; segue_estilo_declarado: SN; mesmo_personagem_do_bloco: SN
     imagem_corresponde_a_fala: SN; legivel_no_celular: SN; ambiente_brasileiro: SN; legenda_com_erro: SN
     parece_pessoa_real: SN; marca_real: SN; estereotipo_ofensivo: SN; texto_com_erro_de_sentido: SN
+    foco_unico_zona_segura: SN; corresponde_ao_titulo: SN; legenda_cobre_foco: SN
 
 
 class RespostaAuditorGemini(BaseModel):
@@ -33,6 +35,8 @@ class ResultadoAuditorGemini(BaseModel):
     motivos: list[str] = Field(default_factory=list)
     rodadas: int
     erros_aceitaveis: int = 0
+    persistido: bool = False
+    texto_enviado: bool = False
     conversas: list[str] = Field(default_factory=list)
     bruto: dict = Field(default_factory=dict)
 
@@ -118,13 +122,32 @@ def perguntar_gemini(arquivos: list[str], prompt: str, espera_s: int = 420) -> t
 def validar(texto: str, ids: list[str]) -> str:
     t = re.sub(r"```(?:json)?", "", texto); i, j = t.find("{"), t.rfind("}")
     r = RespostaAuditorGemini.model_validate_json(t[i:j + 1])
-    falt = set(ids) - {c.id for c in r.cenas}
-    if falt: raise ValueError(f"cenas ausentes: {sorted(falt)}")
+    if len(ids) != len(set(ids)):
+        raise ValueError("ids esperados duplicados")
+    recebidos = [c.id for c in r.cenas]
+    duplicados = sorted(k for k, n in Counter(recebidos).items() if n > 1)
+    if duplicados:
+        raise ValueError(f"cenas duplicadas: {duplicados}")
+    inesperados = sorted(set(recebidos) - set(ids))
+    if inesperados:
+        raise ValueError(f"cenas inesperadas: {inesperados}")
+    falt = sorted(set(ids) - set(recebidos))
+    if falt:
+        raise ValueError(f"cenas ausentes: {falt}")
     return json.dumps(r.model_dump(), ensure_ascii=False)
 
 
+def _persistir_erros_aceitaveis(linhas: list[dict], sql: str) -> None:
+    from .pacote import _banco
+    with _banco() as c:
+        for linha in linhas:
+            c.execute(sql, linha)
+        c.commit()
+
+
 def auditar(codigo: str, slug: str, quadros: list[str], falas: list[str], bloco_visual: str, capa: str | None = None,
-            rodadas: int = 2) -> ResultadoAuditorGemini:
+            rodadas: int = 2, persistir: bool = True, transmitir_texto: bool = False,
+            titulo: str | None = None) -> ResultadoAuditorGemini:
     from ..pipeline.auditor_visual import montar_prompt, decidir, linhas_erros_aceitaveis, SQL_ERROS
     arqs = preparar_pranchas(quadros, capa, UPLOADS / f"auditor-{codigo}")
     ids = [Path(a).stem for a in arqs]
@@ -133,22 +156,53 @@ def auditar(codigo: str, slug: str, quadros: list[str], falas: list[str], bloco_
     for n in range(1, rodadas + 1):
         ok = None
         for _ in range(2):
-            txt, url = perguntar_gemini(arqs, montar_prompt(bloco_visual, cenas, n)); urls.append(url)
-            try: ok = validar(txt, ids); break
+            prompt = montar_prompt(bloco_visual if transmitir_texto else "",
+                                   cenas if transmitir_texto else [], n,
+                                   titulo=titulo if transmitir_texto else None,
+                                   transmitir_texto=transmitir_texto)
+            txt, url = perguntar_gemini(arqs, prompt); urls.append(url)
+            try:
+                ok = validar(txt, ids)
+                # Nunca aceite avaliação de imagem×fala/título quando esses dados não foram enviados.
+                if not transmitir_texto or not titulo or not bloco_visual.strip():
+                    dados = json.loads(ok)
+                    for item in dados["cenas"]:
+                        if not transmitir_texto:
+                            item["imagem_corresponde_a_fala"] = "na"
+                        if item["id"] == "CAPA" and (not transmitir_texto or not titulo):
+                            item["corresponde_ao_titulo"] = "na"
+                        if not transmitir_texto or not bloco_visual.strip():
+                            item["segue_estilo_declarado"] = "na"
+                            item["mesmo_personagem_do_bloco"] = "na"
+                    ok = json.dumps(dados, ensure_ascii=False)
+                break
             except Exception as e: txt = ""; err = str(e)[:200]  # noqa: BLE001
         brutos.append(ok or "{}")
     res = decidir(brutos, ids)
-    from .pacote import _banco
     linhas = linhas_erros_aceitaveis(res, episodio_codigo=codigo)
-    with _banco() as c:
-        for l in linhas: c.execute(SQL_ERROS, l)
-        c.commit()
+    if persistir and linhas:
+        _persistir_erros_aceitaveis(linhas, SQL_ERROS)
     mot = [f"{i}:{k}" for i, k in res["falhas"] + res["divergencias"] + res["ressalvas"]][:20] + res["problemas"][:5]
-    return ResultadoAuditorGemini(veredito=res["veredito"], motivos=mot or ["sem ressalvas"], rodadas=rodadas, erros_aceitaveis=len(linhas),
+    veredito = res["veredito"]
+    if not transmitir_texto:
+        mot.append("texto não enviado; imagem×fala/loop não avaliados")
+        if veredito == "aprova":
+            veredito = "aprova_com_ressalva"
+    if capa and not titulo:
+        mot.append("título não enviado; correspondência da capa não avaliada")
+        if veredito == "aprova":
+            veredito = "aprova_com_ressalva"
+    return ResultadoAuditorGemini(veredito=veredito, motivos=mot or ["sem ressalvas"], rodadas=rodadas,
+                                  erros_aceitaveis=len(linhas), persistido=bool(persistir and linhas),
+                                  texto_enviado=bool(transmitir_texto and (falas or bloco_visual or titulo)),
                                   conversas=urls, bruto={k: res[k] for k in ("metricas", "rodada_unica")})
 
 
 @activity.defn
-async def auditor_gemini(codigo: str, slug: str, quadros: list[str], falas: list[str], bloco_visual: str, capa: str | None = None) -> dict:
+async def auditor_gemini(codigo: str, slug: str, quadros: list[str], falas: list[str], bloco_visual: str,
+                         capa: str | None = None, persistir: bool = True, transmitir_texto: bool = False,
+                         titulo: str | None = None) -> dict:
     import asyncio
-    return (await asyncio.to_thread(auditar, codigo, slug, quadros, falas, bloco_visual, capa)).model_dump()
+    return (await asyncio.to_thread(auditar, codigo, slug, quadros, falas, bloco_visual, capa,
+                                    persistir=persistir, transmitir_texto=transmitir_texto,
+                                    titulo=titulo)).model_dump()

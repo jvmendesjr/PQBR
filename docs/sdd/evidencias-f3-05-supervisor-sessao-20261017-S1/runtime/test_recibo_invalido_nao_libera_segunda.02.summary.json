@@ -1,0 +1,18 @@
+{
+  "workflow_id": "teste-f3-05-supervisor-6dd8455bc8b0b2579d321e886a3e5012157fa3bdf1bf1939679e614dc720f7bf-op-f555b80ad08f501adb396a95c78948ce18f204b3cf2c93b0b1930a006540a06e",
+  "run_id": "01a14b13-da45-74f0-b701-079fd7b66b9f",
+  "eventos": 19,
+  "replay": "ok",
+  "activities": [
+    {
+      "nome": "triagem_jev",
+      "fila": "teste-f3-05-candidato-wf-test_recibo_invalido_nao_libera_segunda-supervisor",
+      "max_tentativas": 3
+    },
+    {
+      "nome": "intervir_agente",
+      "fila": "teste-f3-05-candidato-camofox-test_recibo_invalido_nao_libera_segunda-supervisor",
+      "max_tentativas": 1
+    }
+  ]
+}

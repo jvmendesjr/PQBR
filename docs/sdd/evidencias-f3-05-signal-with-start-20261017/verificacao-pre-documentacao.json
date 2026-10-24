@@ -1,0 +1,16 @@
+{
+  "arquivos_preexistentes": 89,
+  "alterados_antes_documentacao": [],
+  "namespaces": [
+    "net:[4026533133]",
+    "net:[4026534469]"
+  ],
+  "processos_remanescentes": [],
+  "historicos_v2": 15,
+  "estados_v2": {
+    "FAILED": 2,
+    "CONTINUED_AS_NEW": 2,
+    "COMPLETED": 11
+  },
+  "replays_v2": 15
+}

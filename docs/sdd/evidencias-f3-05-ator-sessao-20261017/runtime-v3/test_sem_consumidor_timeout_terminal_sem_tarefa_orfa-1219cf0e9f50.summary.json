@@ -1,0 +1,14 @@
+{
+  "teste": "test_sem_consumidor_timeout_terminal_sem_tarefa_orfa",
+  "workflow_id": "prototipo-ator-sessao-v1-07aa137bd2dc362b90b33958e3ed6b335ab8385dedfb7454998d1219cf0e9f50",
+  "run_id": "e5da56e3-47ba-438f-b25c-fb89da3f0536",
+  "estado": "FAILED",
+  "pending_activities": 0,
+  "replay": "ok",
+  "atividades_agendadas": 1,
+  "fila_explicita": "teste-camofox-ator-7d02678f2eb8431888aeccd85750f9eb",
+  "calls": [],
+  "max_global": 0,
+  "max_por_sessao": {},
+  "erro": "SCHEDULE_TO_CLOSE"
+}

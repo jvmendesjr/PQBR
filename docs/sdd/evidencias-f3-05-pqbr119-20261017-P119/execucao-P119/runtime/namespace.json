@@ -1,0 +1,39 @@
+{
+  "namespaceInfo": {
+    "name": "f3-05-supervisor",
+    "state": "NAMESPACE_STATE_REGISTERED",
+    "description": "TESTE SUPERVISOR DESCARTAVEL; somente dados sinteticos",
+    "id": "0bd5baae-be83-4e43-8003-2deec5387d47",
+    "capabilities": {
+      "eagerWorkflowStart": true,
+      "syncUpdate": true,
+      "asyncUpdate": true,
+      "workerHeartbeats": true,
+      "reportedProblemsSearchAttribute": true,
+      "standaloneActivities": true,
+      "pollerAutoscaling": true,
+      "standaloneActivityStartDelay": true
+    },
+    "limits": {
+      "blobSizeLimitError": "2097152",
+      "memoSizeLimitError": "2097152",
+      "workflowTaskCompletionSizeLimitError": "41943040"
+    },
+    "supportsSchedules": true
+  },
+  "config": {
+    "workflowExecutionRetentionTtl": "86400s",
+    "badBinaries": {},
+    "historyArchivalState": "ARCHIVAL_STATE_DISABLED",
+    "visibilityArchivalState": "ARCHIVAL_STATE_DISABLED"
+  },
+  "replicationConfig": {
+    "activeClusterName": "active",
+    "clusters": [
+      {
+        "clusterName": "active"
+      }
+    ],
+    "state": "REPLICATION_STATE_NORMAL"
+  }
+}

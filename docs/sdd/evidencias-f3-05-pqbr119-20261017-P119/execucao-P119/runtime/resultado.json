@@ -1,0 +1,181 @@
+{
+  "status": "PASS",
+  "ticket": "PQBR-119",
+  "interactionId": "815e9e44-cf90-45b4-86a2-23aafd45d0fc",
+  "authorizationStatus": "accepted",
+  "roundCount": 1,
+  "receiptCount": 1,
+  "receiptDeliveries": 2,
+  "duplicateReceiptNoEffectCount": 1,
+  "resumeCount": 1,
+  "firstStatus": "FAILED",
+  "firstAttemptCount": 1,
+  "firstRerunCount": 0,
+  "secondAttemptCount": 1,
+  "secondFakeEffectCount": 1,
+  "externalRealEffectCount": 0,
+  "canonicalSnapshotValidationActivityAttempts": [
+    1
+  ],
+  "pendingCount": 0,
+  "serverVersion": "1.32.1",
+  "calls": [
+    {
+      "sessao": "FAKE-H3-test_unica_rodada",
+      "passo": "primeira",
+      "inicio": 4650.939983269,
+      "fim": 4650.981152746,
+      "fila": "teste-f3-05-candidato-camofox-FAKE-H3-test_unica_rodada-supervisor",
+      "tentativa": 1,
+      "workflow_id": "teste-f3-05-supervisor-be18263b65513bde91a1fde0b7e011ad58863f4811bf68c8f3803f85d86e60b3-op-f555b80ad08f501adb396a95c78948ce18f204b3cf2c93b0b1930a006540a06e"
+    },
+    {
+      "sessao": "FAKE-H3-test_unica_rodada",
+      "passo": "segunda",
+      "inicio": 4651.791154583,
+      "fim": 4651.832150252,
+      "fila": "teste-f3-05-candidato-camofox-FAKE-H3-test_unica_rodada-supervisor",
+      "tentativa": 1,
+      "workflow_id": "teste-f3-05-supervisor-be18263b65513bde91a1fde0b7e011ad58863f4811bf68c8f3803f85d86e60b3-op-903862a065445b96fb86886c8c68c119e0fdaaa7d0172be264d350d12e0b0fd1"
+    }
+  ],
+  "finalState": {
+    "versao": 1,
+    "aceitos": {
+      "primeira": {
+        "ferramenta": "camofox",
+        "sessao": "FAKE-H3-test_unica_rodada",
+        "passo": "primeira",
+        "erro": "falha-tecnica",
+        "episodio": null,
+        "simulacao": {
+          "triagem": "corrigivel",
+          "intervencoes": [
+            true
+          ],
+          "verificacoes": [
+            true
+          ],
+          "conta_confere": true
+        }
+      },
+      "segunda": {
+        "ferramenta": "camofox",
+        "sessao": "FAKE-H3-test_unica_rodada",
+        "passo": "segunda",
+        "erro": "falha falsa",
+        "episodio": null,
+        "simulacao": {
+          "triagem": "corrigivel",
+          "intervencoes": [
+            true
+          ],
+          "verificacoes": [
+            true
+          ],
+          "conta_confere": true
+        }
+      }
+    },
+    "pendentes": [],
+    "resultados": {
+      "segunda": {
+        "resultado": "corrigido",
+        "tentativas": 1,
+        "motivo": "",
+        "proposta_script": "proposta falsa",
+        "chamar_jose": false
+      }
+    },
+    "falhas": {
+      "primeira": {
+        "operacao_id": "primeira",
+        "filho_id": "teste-f3-05-supervisor-be18263b65513bde91a1fde0b7e011ad58863f4811bf68c8f3803f85d86e60b3-op-f555b80ad08f501adb396a95c78948ce18f204b3cf2c93b0b1930a006540a06e",
+        "filho_run_id": "01a14bdd-a6ce-77bb-ad73-07fba12bc237",
+        "revisao": 1,
+        "estado": "falha_tecnica_terminal",
+        "resultado_efeito": "nao_reconciliado",
+        "registro": "confirmado",
+        "registro_id": "teste-f3-05-supervisor-be18263b65513bde91a1fde0b7e011ad58863f4811bf68c8f3803f85d86e60b3:01a14bdd-a6ce-77bb-ad73-07fba12bc237:primeira"
+      }
+    },
+    "bloqueio": null,
+    "ativo": null,
+    "revisao": 1,
+    "retomadas": [
+      {
+        "receipt": {
+          "consumo_key": "consumo:815e9e44-cf90-45b4-86a2-23aafd45d0fc",
+          "decisao": "accepted",
+          "escopo": {
+            "supervisor_id": "teste-f3-05-supervisor-be18263b65513bde91a1fde0b7e011ad58863f4811bf68c8f3803f85d86e60b3",
+            "supervisor_run_id": "e2848dcd-e580-4dde-875e-a9ba2b629709",
+            "revisao": 1,
+            "falha_id": "primeira",
+            "filho_run_id": "01a14bdd-a6ce-77bb-ad73-07fba12bc237",
+            "registro_falha_receipt": "teste-f3-05-supervisor-be18263b65513bde91a1fde0b7e011ad58863f4811bf68c8f3803f85d86e60b3:01a14bdd-a6ce-77bb-ad73-07fba12bc237:primeira",
+            "pendentes": [
+              "segunda"
+            ]
+          },
+          "interaction_id": "815e9e44-cf90-45b4-86a2-23aafd45d0fc",
+          "issue_id": "d3b2eb41-63e5-4e7e-8cb7-06672e3ddab9",
+          "autor": "eHIQgWDGucnmgW8xT19VvSsypXRdbTr7",
+          "confirmacao_key": "pqbr-f3-05-pqbr-119-synthetic-e2e-20261017-v1",
+          "timestamp": "2026-10-17T21:52:24.121Z",
+          "authorizationSha256": "43d7bcf4fbc3c2599ecf94b921f582e45e1304af8e80a55ee9ca9e44f6557ab1"
+        },
+        "pendentes": [
+          "segunda"
+        ]
+      }
+    ],
+    "observacoes": [
+      {
+        "id": "primeira",
+        "estado": "aceito"
+      },
+      {
+        "id": "segunda",
+        "estado": "aceito"
+      },
+      {
+        "id": "primeira",
+        "estado": "pausado_apos_falha"
+      },
+      {
+        "estado": "retomada_canonica_aceita"
+      },
+      {
+        "estado": "consumo_duplicado_sem_efeito"
+      }
+    ],
+    "consumidos": {
+      "consumo:815e9e44-cf90-45b4-86a2-23aafd45d0fc": {
+        "consumo_key": "consumo:815e9e44-cf90-45b4-86a2-23aafd45d0fc",
+        "decisao": "accepted",
+        "escopo": {
+          "supervisor_id": "teste-f3-05-supervisor-be18263b65513bde91a1fde0b7e011ad58863f4811bf68c8f3803f85d86e60b3",
+          "supervisor_run_id": "e2848dcd-e580-4dde-875e-a9ba2b629709",
+          "revisao": 1,
+          "falha_id": "primeira",
+          "filho_run_id": "01a14bdd-a6ce-77bb-ad73-07fba12bc237",
+          "registro_falha_receipt": "teste-f3-05-supervisor-be18263b65513bde91a1fde0b7e011ad58863f4811bf68c8f3803f85d86e60b3:01a14bdd-a6ce-77bb-ad73-07fba12bc237:primeira",
+          "pendentes": [
+            "segunda"
+          ]
+        },
+        "interaction_id": "815e9e44-cf90-45b4-86a2-23aafd45d0fc",
+        "issue_id": "d3b2eb41-63e5-4e7e-8cb7-06672e3ddab9",
+        "autor": "eHIQgWDGucnmgW8xT19VvSsypXRdbTr7",
+        "confirmacao_key": "pqbr-f3-05-pqbr-119-synthetic-e2e-20261017-v1",
+        "timestamp": "2026-10-17T21:52:24.121Z",
+        "authorizationSha256": "43d7bcf4fbc3c2599ecf94b921f582e45e1304af8e80a55ee9ca9e44f6557ab1"
+      }
+    },
+    "recibos_rejeitados": 0,
+    "admissao_fechada": true,
+    "fechando": true
+  },
+  "limits": "GET real no host antes do runtime; Activity isolada valida snapshot/binding, não acessa Paperclip. Consumo no histórico Temporal e replay, sem crash injection, transação distribuída ou exactly-once externo."
+}

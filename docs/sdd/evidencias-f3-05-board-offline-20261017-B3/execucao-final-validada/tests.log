@@ -1,0 +1,46 @@
+test_ack_lost_manual_recovery_duplicate_fake_no_extra_effect (test_candidate.CandidateTests.test_ack_lost_manual_recovery_duplicate_fake_no_extra_effect) ... ok
+test_actor_mismatch_all_author_fields (test_candidate.CandidateTests.test_actor_mismatch_all_author_fields) ... ok
+test_agent_and_run_fields_rejected_in_both_sources (test_candidate.CandidateTests.test_agent_and_run_fields_rejected_in_both_sources) ... ok
+test_atomic_rollback_fault_between_cas_and_outbox (test_candidate.CandidateTests.test_atomic_rollback_fault_between_cas_and_outbox) ... ok
+test_atomic_rollback_sqlite_outbox_constraint (test_candidate.CandidateTests.test_atomic_rollback_sqlite_outbox_constraint) ... ok
+test_audit_guard_denies_network (test_candidate.CandidateTests.test_audit_guard_denies_network) ... ok
+test_board_profile_principal_and_identity_kind (test_candidate.CandidateTests.test_board_profile_principal_and_identity_kind) ... ok
+test_cas_does_not_claim_exactly_once_across_two_stores (test_candidate.CandidateTests.test_cas_does_not_claim_exactly_once_across_two_stores) ... ok
+test_constructed_snapshot_is_reparsed (test_candidate.CandidateTests.test_constructed_snapshot_is_reparsed) ... ok
+test_duplicate_issue_and_replay_consume (test_candidate.CandidateTests.test_duplicate_issue_and_replay_consume) ... ok
+test_fake_get_port_cannot_mutate (test_candidate.CandidateTests.test_fake_get_port_cannot_mutate) ... ok
+test_fake_receiver_rejects_scope_expansion_and_nonpending (test_candidate.CandidateTests.test_fake_receiver_rejects_scope_expansion_and_nonpending) ... ok
+test_first_failed_never_retried_or_reopened (test_candidate.CandidateTests.test_first_failed_never_retried_or_reopened) ... ok
+test_id_scope_ticket_and_interaction_mismatch (test_candidate.CandidateTests.test_id_scope_ticket_and_interaction_mismatch) ... ok
+test_idempotency_collision_different_interaction (test_candidate.CandidateTests.test_idempotency_collision_different_interaction) ... ok
+test_invalid_unicode_denied_uniformly (test_candidate.CandidateTests.test_invalid_unicode_denied_uniformly) ... ok
+test_json_duplicate_nonfinite_and_envelopes (test_candidate.CandidateTests.test_json_duplicate_nonfinite_and_envelopes) ... ok
+test_missing_extra_and_wrong_types_every_top_field (test_candidate.CandidateTests.test_missing_extra_and_wrong_types_every_top_field) ... ok
+test_nested_payload_result_forgery (test_candidate.CandidateTests.test_nested_payload_result_forgery) ... ok
+test_opt_in_and_only_exact_fake_types (test_candidate.CandidateTests.test_opt_in_and_only_exact_fake_types) ... ok
+test_outbox_tamper_blocks_dispatch (test_candidate.CandidateTests.test_outbox_tamper_blocks_dispatch) ... ok
+test_p119_never_eligible (test_candidate.CandidateTests.test_p119_never_eligible) ... ok
+test_parallel_claim_one_winner (test_candidate.CandidateTests.test_parallel_claim_one_winner) ... ok
+test_parallel_consume_cas_one_winner_eight_processes (test_candidate.CandidateTests.test_parallel_consume_cas_one_winner_eight_processes) ... ok
+test_parallel_issue_one_winner (test_candidate.CandidateTests.test_parallel_issue_one_winner) ... ok
+test_policies_and_implicit_sources_rejected (test_candidate.CandidateTests.test_policies_and_implicit_sources_rejected) ... ok
+test_positive_send_only_minimal_authorized_ids (test_candidate.CandidateTests.test_positive_send_only_minimal_authorized_ids) ... ok
+test_positive_whitelist_binding_and_read_only (test_candidate.CandidateTests.test_positive_whitelist_binding_and_read_only) ... ok
+test_process_ack_loss_then_restart_dedupes (test_candidate.CandidateTests.test_process_ack_loss_then_restart_dedupes) ... ok
+test_process_kill_after_remote_ack_restart_dedupes (test_candidate.CandidateTests.test_process_kill_after_remote_ack_restart_dedupes) ... ok
+test_process_kill_before_send_restart_preserves_pending (test_candidate.CandidateTests.test_process_kill_before_send_restart_preserves_pending) ... ok
+test_process_restart_after_issue_and_commit_before_dispatch (test_candidate.CandidateTests.test_process_restart_after_issue_and_commit_before_dispatch) ... ok
+test_receipt_mismatch_binding_versions_and_snapshot (test_candidate.CandidateTests.test_receipt_mismatch_binding_versions_and_snapshot) ... ok
+test_receipt_tamper_blocks_dispatch (test_candidate.CandidateTests.test_receipt_tamper_blocks_dispatch) ... ok
+test_reclaimed_old_sender_is_not_remotely_fenced_but_fake_dedupes (test_candidate.CandidateTests.test_reclaimed_old_sender_is_not_remotely_fenced_but_fake_dedupes) ... ok
+test_sigkill_before_local_commit_rolls_back_both_stages (test_candidate.CandidateTests.test_sigkill_before_local_commit_rolls_back_both_stages) ... ok
+test_snapshot_changed_but_still_accepted_blocks_dispatch (test_candidate.CandidateTests.test_snapshot_changed_but_still_accepted_blocks_dispatch) ... ok
+test_status_pending_rejected_stale_cancelled (test_candidate.CandidateTests.test_status_pending_rejected_stale_cancelled) ... ok
+test_status_revoked_after_receipt_blocks_dispatch (test_candidate.CandidateTests.test_status_revoked_after_receipt_blocks_dispatch) ... ok
+test_temporal_window_and_snapshot_freshness (test_candidate.CandidateTests.test_temporal_window_and_snapshot_freshness) ... ok
+test_wrong_owner_stale_ack_and_recovery_cas (test_candidate.CandidateTests.test_wrong_owner_stale_ack_and_recovery_cas) ... ok
+
+----------------------------------------------------------------------
+Ran 41 tests in 1.379s
+
+OK

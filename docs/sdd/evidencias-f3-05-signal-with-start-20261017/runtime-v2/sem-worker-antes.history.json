@@ -1,0 +1,73 @@
+{
+  "events": [
+    {
+      "eventId": "1",
+      "eventTime": "2026-10-17T15:13:15.633Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_EXECUTION_STARTED",
+      "workflowExecutionStartedEventAttributes": {
+        "workflowType": {
+          "name": "AtorSignalSintetico"
+        },
+        "taskQueue": {
+          "name": "teste-sws-wf-033846852f8f486bbfc8e1bb131ba9d7-tardia"
+        },
+        "input": {
+          "payloads": [
+            {
+              "metadata": {
+                "encoding": "anNvbi9wbGFpbg=="
+              },
+              "data": "eyJjb25maWciOnsiZmlsYV9hY3Rpdml0eSI6InRlc3RlLXN3cy1hY3QtMDMzODQ2ODUyZjhmNDg2YmJmYzhlMWJiMTMxYmE5ZDciLCJmaWxhX3dvcmtmbG93IjoidGVzdGUtc3dzLXdmLTAzMzg0Njg1MmY4ZjQ4NmJiZmM4ZTFiYjEzMWJhOWQ3LXRhcmRpYSIsInByYXpvX3MiOjEwLCJzZXNzYW8iOiJzZXNzYW8tQSJ9fQ=="
+            }
+          ]
+        },
+        "workflowExecutionTimeout": "120s",
+        "workflowRunTimeout": "120s",
+        "workflowTaskTimeout": "10s",
+        "originalExecutionRunId": "b3e8648d-f225-42b1-a106-aa5c27315d24",
+        "identity": "1@pc",
+        "firstExecutionRunId": "b3e8648d-f225-42b1-a106-aa5c27315d24",
+        "retryPolicy": {
+          "initialInterval": "1s",
+          "backoffCoefficient": 2.0,
+          "maximumInterval": "100s",
+          "maximumAttempts": 1
+        },
+        "attempt": 1,
+        "firstWorkflowTaskBackoff": "0s",
+        "priority": {}
+      }
+    },
+    {
+      "eventId": "2",
+      "eventTime": "2026-10-17T15:13:15.633Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_TASK_SCHEDULED",
+      "workflowTaskScheduledEventAttributes": {
+        "taskQueue": {
+          "name": "teste-sws-wf-033846852f8f486bbfc8e1bb131ba9d7-tardia"
+        },
+        "startToCloseTimeout": "10s",
+        "attempt": 1
+      }
+    },
+    {
+      "eventId": "3",
+      "eventTime": "2026-10-17T15:13:15.633Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_EXECUTION_SIGNALED",
+      "workflowExecutionSignaledEventAttributes": {
+        "signalName": "solicitar",
+        "input": {
+          "payloads": [
+            {
+              "metadata": {
+                "encoding": "anNvbi9wbGFpbg=="
+              },
+              "data": "eyJjb25maWciOnsiZmlsYV9hY3Rpdml0eSI6InRlc3RlLXN3cy1hY3QtMDMzODQ2ODUyZjhmNDg2YmJmYzhlMWJiMTMxYmE5ZDciLCJmaWxhX3dvcmtmbG93IjoidGVzdGUtc3dzLXdmLTAzMzg0Njg1MmY4ZjQ4NmJiZmM4ZTFiYjEzMWJhOWQ3LXRhcmRpYSIsInByYXpvX3MiOjEwLCJzZXNzYW8iOiJzZXNzYW8tQSJ9LCJwZWRpZG8iOnsiZmFsaGFyIjpmYWxzZSwiaWQiOiJpZC0xIiwic2Vzc2FvIjoic2Vzc2FvLUEifX0="
+            }
+          ]
+        },
+        "identity": "1@pc"
+      }
+    }
+  ]
+}

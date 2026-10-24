@@ -1,6 +1,7 @@
 """TS-02/TS-04 (F5-02): grade do dia, episódio, vigia de prazo — tempo acelerado, sem publicar."""
 import unittest, uuid
 from datetime import date, datetime, timedelta, timezone
+from temporalio import activity
 from temporalio.client import WorkflowFailureError
 from temporalio.contrib.pydantic import pydantic_data_converter
 from temporalio.testing import WorkflowEnvironment
@@ -9,6 +10,12 @@ from pqbr.contratos import ItemGrade
 from pqbr.workflows import producao as P
 
 FUSO = timezone(timedelta(hours=-3))
+_TTS_CALLS = []
+
+
+@activity.defn(name="gerar_narracao")
+async def gerar_narracao_teste(episodio_id: str, falas: list[str]) -> None:
+    _TTS_CALLS.append((episodio_id, len(falas)))
 PUB = ["Por Que a Gente Só Acorda Quando Desligam a TV?", "Por que todo brasileiro guarda feijão no pote de sorvete?"]
 CANDS = [(PUB[0], "em_alta"), ("Por que brasileiro aplaude quando o avião pousa?", "em_alta"),
          ("Por que a gente fala 'vou ali' e demora duas horas?", "em_alta"), (PUB[1].upper(), "perene"),
@@ -17,10 +24,12 @@ CANDS = [(PUB[0], "em_alta"), ("Por que brasileiro aplaude quando o avião pousa
 
 class Producao(unittest.IsolatedAsyncioTestCase):
     async def asyncSetUp(self):
+        _TTS_CALLS.clear()
         self.env = await WorkflowEnvironment.start_time_skipping(data_converter=pydantic_data_converter)
         self.fila = f"p-{uuid.uuid4().hex[:8]}"
         self.w = Worker(self.env.client, task_queue=self.fila,
-                        workflows=[P.GradeDiariaWorkflow, P.EpisodioProducaoWorkflow], activities=P.ATIVIDADES)
+                        workflows=[P.GradeDiariaWorkflow, P.EpisodioProducaoWorkflow],
+                        activities=[a for a in P.ATIVIDADES if a is not P.gerar_narracao] + [gerar_narracao_teste])
         await self.w.__aenter__()
 
     async def asyncTearDown(self):
@@ -45,10 +54,12 @@ class Producao(unittest.IsolatedAsyncioTestCase):
     async def test_episodio_agendado(self):
         r = await self.run_(P.EpisodioProducaoWorkflow.run, P.PedidoEpisodio(item=self.item(), codigo="PQBR-EP0001", simulacao=P.SimProducao()))
         self.assertEqual(r.estado, "agendado")
+        self.assertEqual(len(_TTS_CALLS), 1)
 
     async def test_reprovado_nunca_publica(self):
         r = await self.run_(P.EpisodioProducaoWorkflow.run, P.PedidoEpisodio(item=self.item(), codigo="PQBR-EP0002", simulacao=P.SimProducao(veredito="reprova")))
         self.assertEqual(r.estado, "reprovado")
+        self.assertEqual(_TTS_CALLS, [])
 
     async def test_vigia_prazo(self):
         # E2E 12/10: o prazo depende do relógio (janela 21:15 de hoje ou de amanhã). O atraso passa a ser calculado a partir

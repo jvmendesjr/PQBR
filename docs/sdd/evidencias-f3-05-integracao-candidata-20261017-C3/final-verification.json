@@ -1,0 +1,37 @@
+{
+  "cleanup": [
+    {
+      "container": "323a5af9a82ab53fd436a5d91ff18927865e9619b98abd3b84b8c3f0de5b487b",
+      "removed": true
+    },
+    {
+      "container": "b453d22379b37240ab57682b886d2a143b93c68bc62e946846448e701ccd38a6",
+      "removed": true
+    },
+    {
+      "container": "afbe627eca9186f1eb25a6f5632692b2d1ff66e9999f8d7e59315445a83f04ac",
+      "removed": true
+    },
+    {
+      "network": "744b02f4c31186a0c84c638220e67cb48a3b010527684da7ecbadd6b3379db05",
+      "removed": true
+    }
+  ],
+  "processos_restantes_no_namespace_de_teste": [],
+  "pids_de_containers_descartaveis_restantes": [],
+  "inventario": {
+    "containers": {
+      "novos": [],
+      "ausentes": []
+    },
+    "networks": {
+      "novos": [],
+      "ausentes": []
+    },
+    "volumes": {
+      "novos": [],
+      "ausentes": []
+    }
+  },
+  "teste_exit_code": 0
+}

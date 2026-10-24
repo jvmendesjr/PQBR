@@ -1,0 +1,5 @@
+{
+  "type": "RuntimeError",
+  "message": "Teste candidato terminou com código 1",
+  "traceback": "Traceback (most recent call last):\n  File \"/home/pc/Workspace/PQBR/tests/workflows/run_f3_05_candidate_container.py\", line 341, in <module>\n    raise RuntimeError(f'Teste candidato terminou com código {exit_code}')\nRuntimeError: Teste candidato terminou com código 1\n"
+}

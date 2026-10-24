@@ -1,0 +1,414 @@
+[32m/workspace$ [0mssh -o BatchMode=yes pqbr-pc 'cd /home/pc/Workspace/PQBR && set -C && cat > tests/workflows/test_f3_05_temporal_isolado.py' < /workspace/test_f3_05_temporal_isolado.py && ssh -o BatchMode=yes pqbr-pc 'cd /home/pc/Workspace/PQBR && set -C && cat > tests/workflows/run_f3_05_isolado.sh' < /workspace/run_f3_05_isolado.sh && ssh -o BatchMode=yes pqbr-pc 'cd /home/pc/Workspace/PQBR && sh tests/workflows/run_f3_05_isolado.sh /tmp/pqbr-f3-05-temporal-20261017-1021'
+Evidencias: /tmp/pqbr-f3-05-temporal-20261017-1021
+Namespace original: net:[4026531840]
+19defb9f7318c7cf249518b3642a735efb79876c2b6918afe312336476b796a5  /tmp/temporal-
+test-server-sdk-python-1.34.0
+Namespace isolado: net:[4026533133]
+lo               UNKNOWN        127.0.0.1/8 ::1/128 
+test_conta_divergente_interrompe_sem_verificar (tests.workflows.test_f3_05_tempo
+ral_isolado.TemporalIsolado.test_conta_divergente_interrompe_sem_verificar) ... 
+[2m2026-10-17T13:21:26.981366Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1
+.16.0 or newer is required to guarantee that the latest heartbeat details are pr
+eserved when an activity fails; the server did not advertise the activity_failur
+e_include_heartbeat capability, so heartbeat details may be lost on failure
+Executing <Task pending name='Task-2' coro=<TemporalIsolado.test_conta_divergent
+e_interrompe_sem_verificar() running at /home/pc/Workspace/PQBR/tests/workflows/
+test_f3_05_temporal_isolado.py:212> wait_for=<Future pending cb=[<builtins.PyDon
+eCallback object at 0x7f7ffe9db430>(), Task.task_wakeup()] created at /home/pc/.
+local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/ba
+se_events.py:448> cb=[_run_until_complete_cb() at /home/pc/.local/share/uv/pytho
+n/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py:181] cr
+eated at /home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/py
+thon3.12/asyncio/runners.py:100> took 0.111 seconds
+ok
+test_corrige_na_primeira_e_serializa_resultado (tests.workflows.test_f3_05_tempo
+ral_isolado.TemporalIsolado.test_corrige_na_primeira_e_serializa_resultado) ... 
+[2m2026-10-17T13:21:27.466249Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1
+.16.0 or newer is required to guarantee that the latest heartbeat details are pr
+eserved when an activity fails; the server did not advertise the activity_failur
+e_include_heartbeat capability, so heartbeat details may be lost on failure
+ok
+test_excecao_na_intervencao_nao_repete_activity (tests.workflows.test_f3_05_temp
+oral_isolado.TemporalIsolado.test_excecao_na_intervencao_nao_repete_activity) ..
+. [2m2026-10-17T13:21:27.973470Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server
+ 1.16.0 or newer is required to guarantee that the latest heartbeat details are 
+preserved when an activity fails; the server did not advertise the activity_fail
+ure_include_heartbeat capability, so heartbeat details may be lost on failure
+Completing activity as failed ({'activity_id': '2', 'activity_type': 'intervir_a
+gente', 'attempt': 1, 'namespace': 'default', 'task_queue': 'f3-05-isolado-1be14
+3bac8dd414db59af5fd5e5cd8ac', 'workflow_id': 'f3-05-teste-85192ebd3d7b45299bf062
+aebfc2eb3c', 'workflow_run_id': '3e552f1c-bd4c-467f-9c42-55f74327489a', 'workflo
+w_type': 'CorrecaoAutonomaWorkflow'})
+Traceback (most recent call last):
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/wo
+rker/_activity.py", line 351, in _handle_start_activity_task
+    result = await self._execute_activity(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/wo
+rker/_activity.py", line 681, in _execute_activity
+    return await impl.execute_activity(input)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/wo
+rker/_activity.py", line 889, in execute_activity
+    return await input.fn(*input.args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_temporal_isolado.py",
+ line 54, in intervir
+    self.observar("intervir_agente", t.n)
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_temporal_isolado.py",
+ line 45, in observar
+    raise ApplicationError("falha sintetica transitoria", type="FalhaSintetica")
+temporalio.exceptions.ApplicationError: FalhaSintetica: falha sintetica transito
+ria
+ok
+test_novo_worker_retoma_activity_pendente_no_mesmo_servidor (tests.workflows.tes
+t_f3_05_temporal_isolado.TemporalIsolado.test_novo_worker_retoma_activity_penden
+te_no_mesmo_servidor) ... [2m2026-10-17T13:21:28.482085Z[0m [33m WARN[0m [2mtemporalio_sdk_core:
+:worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the lates
+t heartbeat details are preserved when an activity fails; the server did not adv
+ertise the activity_failure_include_heartbeat capability, so heartbeat details m
+ay be lost on failure
+ok
+test_passo_sensivel_para_antes_do_backend (tests.workflows.test_f3_05_temporal_i
+solado.TemporalIsolado.test_passo_sensivel_para_antes_do_backend) ... [2m2026-10-17
+T13:21:28.925003Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or n
+ewer is required to guarantee that the latest heartbeat details are preserved wh
+en an activity fails; the server did not advertise the activity_failure_include_
+heartbeat capability, so heartbeat details may be lost on failure
+ok
+test_retry_de_triagem_para_na_terceira_falha (tests.workflows.test_f3_05_tempora
+l_isolado.TemporalIsolado.test_retry_de_triagem_para_na_terceira_falha) ... [2m2026
+-10-17T13:21:29.324384Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.
+0 or newer is required to guarantee that the latest heartbeat details are preser
+ved when an activity fails; the server did not advertise the activity_failure_in
+clude_heartbeat capability, so heartbeat details may be lost on failure
+Completing activity as failed ({'activity_id': '1', 'activity_type': 'triagem_je
+v', 'attempt': 1, 'namespace': 'default', 'task_queue': 'f3-05-isolado-488826a17
+e9e411cbb0db4838d536aa5', 'workflow_id': 'f3-05-teste-cb2ec63263b647fcbf149e4b86
+c1533c', 'workflow_run_id': 'fc9ed253-cb44-4f05-b048-96530f1d2569', 'workflow_ty
+pe': 'CorrecaoAutonomaWorkflow'})
+Traceback (most recent call last):
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/wo
+rker/_activity.py", line 351, in _handle_start_activity_task
+    result = await self._execute_activity(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/wo
+rker/_activity.py", line 681, in _execute_activity
+    return await impl.execute_activity(input)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/wo
+rker/_activity.py", line 889, in execute_activity
+    return await input.fn(*input.args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_temporal_isolado.py",
+ line 49, in triagem
+    self.observar("triagem_jev")
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_temporal_isolado.py",
+ line 45, in observar
+    raise ApplicationError("falha sintetica transitoria", type="FalhaSintetica")
+temporalio.exceptions.ApplicationError: FalhaSintetica: falha sintetica transito
+ria
+Completing activity as failed ({'activity_id': '1', 'activity_type': 'triagem_je
+v', 'attempt': 2, 'namespace': 'default', 'task_queue': 'f3-05-isolado-488826a17
+e9e411cbb0db4838d536aa5', 'workflow_id': 'f3-05-teste-cb2ec63263b647fcbf149e4b86
+c1533c', 'workflow_run_id': 'fc9ed253-cb44-4f05-b048-96530f1d2569', 'workflow_ty
+pe': 'CorrecaoAutonomaWorkflow'})
+Traceback (most recent call last):
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/wo
+rker/_activity.py", line 351, in _handle_start_activity_task
+    result = await self._execute_activity(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/wo
+rker/_activity.py", line 681, in _execute_activity
+    return await impl.execute_activity(input)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/wo
+rker/_activity.py", line 889, in execute_activity
+    return await input.fn(*input.args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_temporal_isolado.py",
+ line 49, in triagem
+    self.observar("triagem_jev")
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_temporal_isolado.py",
+ line 45, in observar
+    raise ApplicationError("falha sintetica transitoria", type="FalhaSintetica")
+temporalio.exceptions.ApplicationError: FalhaSintetica: falha sintetica transito
+ria
+Completing activity as failed ({'activity_id': '1', 'activity_type': 'triagem_je
+v', 'attempt': 3, 'namespace': 'default', 'task_queue': 'f3-05-isolado-488826a17
+e9e411cbb0db4838d536aa5', 'workflow_id': 'f3-05-teste-cb2ec63263b647fcbf149e4b86
+c1533c', 'workflow_run_id': 'fc9ed253-cb44-4f05-b048-96530f1d2569', 'workflow_ty
+pe': 'CorrecaoAutonomaWorkflow'})
+Traceback (most recent call last):
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/wo
+rker/_activity.py", line 351, in _handle_start_activity_task
+    result = await self._execute_activity(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/wo
+rker/_activity.py", line 681, in _execute_activity
+    return await impl.execute_activity(input)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/wo
+rker/_activity.py", line 889, in execute_activity
+    return await input.fn(*input.args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_temporal_isolado.py",
+ line 49, in triagem
+    self.observar("triagem_jev")
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_temporal_isolado.py",
+ line 45, in observar
+    raise ApplicationError("falha sintetica transitoria", type="FalhaSintetica")
+temporalio.exceptions.ApplicationError: FalhaSintetica: falha sintetica transito
+ria
+ok
+test_retry_real_de_registro_falso (tests.workflows.test_f3_05_temporal_isolado.T
+emporalIsolado.test_retry_real_de_registro_falso) ... [2m2026-10-17T13:21:29.691464
+Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required
+ to guarantee that the latest heartbeat details are preserved when an activity f
+ails; the server did not advertise the activity_failure_include_heartbeat capabi
+lity, so heartbeat details may be lost on failure
+Completing activity as failed ({'activity_id': '4', 'activity_type': 'registrar_
+correcao', 'attempt': 1, 'namespace': 'default', 'task_queue': 'f3-05-isolado-58
+962c2882a44aacbb2907851ccf3596', 'workflow_id': 'f3-05-teste-bca4bc773c3f4e6fa63
+961914c3204fd', 'workflow_run_id': '05e10c5c-d63e-49f5-b943-67bea1893751', 'work
+flow_type': 'CorrecaoAutonomaWorkflow'})
+Traceback (most recent call last):
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/wo
+rker/_activity.py", line 351, in _handle_start_activity_task
+    result = await self._execute_activity(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/wo
+rker/_activity.py", line 681, in _execute_activity
+    return await impl.execute_activity(input)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/wo
+rker/_activity.py", line 889, in execute_activity
+    return await input.fn(*input.args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_temporal_isolado.py",
+ line 64, in registrar
+    self.observar("registrar_correcao")
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_temporal_isolado.py",
+ line 45, in observar
+    raise ApplicationError("falha sintetica transitoria", type="FalhaSintetica")
+temporalio.exceptions.ApplicationError: FalhaSintetica: falha sintetica transito
+ria
+Completing activity as failed ({'activity_id': '4', 'activity_type': 'registrar_
+correcao', 'attempt': 2, 'namespace': 'default', 'task_queue': 'f3-05-isolado-58
+962c2882a44aacbb2907851ccf3596', 'workflow_id': 'f3-05-teste-bca4bc773c3f4e6fa63
+961914c3204fd', 'workflow_run_id': '05e10c5c-d63e-49f5-b943-67bea1893751', 'work
+flow_type': 'CorrecaoAutonomaWorkflow'})
+Traceback (most recent call last):
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/wo
+rker/_activity.py", line 351, in _handle_start_activity_task
+    result = await self._execute_activity(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/wo
+rker/_activity.py", line 681, in _execute_activity
+    return await impl.execute_activity(input)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/wo
+rker/_activity.py", line 889, in execute_activity
+    return await input.fn(*input.args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_temporal_isolado.py",
+ line 64, in registrar
+    self.observar("registrar_correcao")
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_temporal_isolado.py",
+ line 45, in observar
+    raise ApplicationError("falha sintetica transitoria", type="FalhaSintetica")
+temporalio.exceptions.ApplicationError: FalhaSintetica: falha sintetica transito
+ria
+ok
+test_retry_real_de_triagem (tests.workflows.test_f3_05_temporal_isolado.Temporal
+Isolado.test_retry_real_de_triagem) ... [2m2026-10-17T13:21:30.261387Z[0m [33m WARN[0m [2mtempor
+alio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee 
+that the latest heartbeat details are preserved when an activity fails; the serv
+er did not advertise the activity_failure_include_heartbeat capability, so heart
+beat details may be lost on failure
+Completing activity as failed ({'activity_id': '1', 'activity_type': 'triagem_je
+v', 'attempt': 1, 'namespace': 'default', 'task_queue': 'f3-05-isolado-5a8f1b87f
+a0d4ef7a3b72d9de25c526a', 'workflow_id': 'f3-05-teste-a250c416d9394058b6b7020e58
+cc339a', 'workflow_run_id': '7902a35f-9d4a-48e9-864d-5470209c4add', 'workflow_ty
+pe': 'CorrecaoAutonomaWorkflow'})
+Traceback (most recent call last):
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/wo
+rker/_activity.py", line 351, in _handle_start_activity_task
+    result = await self._execute_activity(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/wo
+rker/_activity.py", line 681, in _execute_activity
+    return await impl.execute_activity(input)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/wo
+rker/_activity.py", line 889, in execute_activity
+    return await input.fn(*input.args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_temporal_isolado.py",
+ line 49, in triagem
+    self.observar("triagem_jev")
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_temporal_isolado.py",
+ line 45, in observar
+    raise ApplicationError("falha sintetica transitoria", type="FalhaSintetica")
+temporalio.exceptions.ApplicationError: FalhaSintetica: falha sintetica transito
+ria
+Completing activity as failed ({'activity_id': '1', 'activity_type': 'triagem_je
+v', 'attempt': 2, 'namespace': 'default', 'task_queue': 'f3-05-isolado-5a8f1b87f
+a0d4ef7a3b72d9de25c526a', 'workflow_id': 'f3-05-teste-a250c416d9394058b6b7020e58
+cc339a', 'workflow_run_id': '7902a35f-9d4a-48e9-864d-5470209c4add', 'workflow_ty
+pe': 'CorrecaoAutonomaWorkflow'})
+Traceback (most recent call last):
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/wo
+rker/_activity.py", line 351, in _handle_start_activity_task
+    result = await self._execute_activity(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/wo
+rker/_activity.py", line 681, in _execute_activity
+    return await impl.execute_activity(input)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/wo
+rker/_activity.py", line 889, in execute_activity
+    return await input.fn(*input.args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_temporal_isolado.py",
+ line 49, in triagem
+    self.observar("triagem_jev")
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_temporal_isolado.py",
+ line 45, in observar
+    raise ApplicationError("falha sintetica transitoria", type="FalhaSintetica")
+temporalio.exceptions.ApplicationError: FalhaSintetica: falha sintetica transito
+ria
+ok
+test_retry_real_de_verificacao (tests.workflows.test_f3_05_temporal_isolado.Temp
+oralIsolado.test_retry_real_de_verificacao) ... [2m2026-10-17T13:21:30.880235Z[0m [33m WAR
+N[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to gu
+arantee that the latest heartbeat details are preserved when an activity fails; 
+the server did not advertise the activity_failure_include_heartbeat capability, 
+so heartbeat details may be lost on failure
+Completing activity as failed ({'activity_id': '3', 'activity_type': 'verificar_
+jev', 'attempt': 1, 'namespace': 'default', 'task_queue': 'f3-05-isolado-236747f
+03d3342529c001413a0159a8c', 'workflow_id': 'f3-05-teste-694f9b9716a14763b373bee1
+3a2f5ac9', 'workflow_run_id': '8d71c720-3edd-4caf-a7bf-0471b2a2ebb8', 'workflow_
+type': 'CorrecaoAutonomaWorkflow'})
+Traceback (most recent call last):
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/wo
+rker/_activity.py", line 351, in _handle_start_activity_task
+    result = await self._execute_activity(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/wo
+rker/_activity.py", line 681, in _execute_activity
+    return await impl.execute_activity(input)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/wo
+rker/_activity.py", line 889, in execute_activity
+    return await input.fn(*input.args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_temporal_isolado.py",
+ line 59, in verificar
+    self.observar("verificar_jev", t.n)
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_temporal_isolado.py",
+ line 45, in observar
+    raise ApplicationError("falha sintetica transitoria", type="FalhaSintetica")
+temporalio.exceptions.ApplicationError: FalhaSintetica: falha sintetica transito
+ria
+Completing activity as failed ({'activity_id': '3', 'activity_type': 'verificar_
+jev', 'attempt': 2, 'namespace': 'default', 'task_queue': 'f3-05-isolado-236747f
+03d3342529c001413a0159a8c', 'workflow_id': 'f3-05-teste-694f9b9716a14763b373bee1
+3a2f5ac9', 'workflow_run_id': '8d71c720-3edd-4caf-a7bf-0471b2a2ebb8', 'workflow_
+type': 'CorrecaoAutonomaWorkflow'})
+Traceback (most recent call last):
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/wo
+rker/_activity.py", line 351, in _handle_start_activity_task
+    result = await self._execute_activity(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/wo
+rker/_activity.py", line 681, in _execute_activity
+    return await impl.execute_activity(input)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/wo
+rker/_activity.py", line 889, in execute_activity
+    return await input.fn(*input.args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_temporal_isolado.py",
+ line 59, in verificar
+    self.observar("verificar_jev", t.n)
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_temporal_isolado.py",
+ line 45, in observar
+    raise ApplicationError("falha sintetica transitoria", type="FalhaSintetica")
+temporalio.exceptions.ApplicationError: FalhaSintetica: falha sintetica transito
+ria
+ok
+test_sem_backend_falha_uma_vez_sem_registro (tests.workflows.test_f3_05_temporal
+_isolado.TemporalIsolado.test_sem_backend_falha_uma_vez_sem_registro) ... [2m2026-1
+0-17T13:21:31.442562Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 
+or newer is required to guarantee that the latest heartbeat details are preserve
+d when an activity fails; the server did not advertise the activity_failure_incl
+ude_heartbeat capability, so heartbeat details may be lost on failure
+Completing activity as failed ({'activity_id': '1', 'activity_type': 'triagem_je
+v', 'attempt': 1, 'namespace': 'default', 'task_queue': 'f3-05-isolado-e3492efb4
+5f8472cb5c0724e20d18b77', 'workflow_id': 'f3-05-teste-584aa73360a14e32ad00a4e3dc
+1749ec', 'workflow_run_id': '6d63b77e-c094-4472-9f63-16051103da06', 'workflow_ty
+pe': 'CorrecaoAutonomaWorkflow'})
+Traceback (most recent call last):
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/wo
+rker/_activity.py", line 351, in _handle_start_activity_task
+    result = await self._execute_activity(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/wo
+rker/_activity.py", line 681, in _execute_activity
+    return await impl.execute_activity(input)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/wo
+rker/_activity.py", line 889, in execute_activity
+    return await input.fn(*input.args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_temporal_isolado.py",
+ line 50, in triagem
+    return await C.triagem_jev(p)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/src/pqbr/workflows/correcao.py", line 61, in tri
+agem_jev
+    s = _sim(p)
+        ^^^^^^^
+  File "/home/pc/Workspace/PQBR/src/pqbr/workflows/correcao.py", line 53, in _si
+m
+    raise ApplicationError("backend real EM CONSTRUÇÃO (Jev/agente no Paperclip)
+", type="EmConstrucao", non_retryable=True)
+temporalio.exceptions.ApplicationError: EmConstrucao: backend real EM CONSTRUÇÃO
+ (Jev/agente no Paperclip)
+ok
+test_terceira_tentativa_tem_limite_e_sem_timer_de_espera (tests.workflows.test_f
+3_05_temporal_isolado.TemporalIsolado.test_terceira_tentativa_tem_limite_e_sem_t
+imer_de_espera) ... [2m2026-10-17T13:21:31.784796Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worke
+r[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest hear
+tbeat details are preserved when an activity fails; the server did not advertise
+ the activity_failure_include_heartbeat capability, so heartbeat details may be 
+lost on failure
+ok
+test_tres_intervencoes_negativas_esgotam (tests.workflows.test_f3_05_temporal_is
+olado.TemporalIsolado.test_tres_intervencoes_negativas_esgotam) ... [2m2026-10-17T1
+3:21:32.502376Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or new
+er is required to guarantee that the latest heartbeat details are preserved when
+ an activity fails; the server did not advertise the activity_failure_include_he
+artbeat capability, so heartbeat details may be lost on failure
+ok
+test_triagem_fora_de_escopo_nao_intervem (tests.workflows.test_f3_05_temporal_is
+olado.TemporalIsolado.test_triagem_fora_de_escopo_nao_intervem) ... [2m2026-10-17T1
+3:21:33.109815Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or new
+er is required to guarantee that the latest heartbeat details are preserved when
+ an activity fails; the server did not advertise the activity_failure_include_he
+artbeat capability, so heartbeat details may be lost on failure
+ok
+test_verificacao_negativa_impede_sucesso (tests.workflows.test_f3_05_temporal_is
+olado.TemporalIsolado.test_verificacao_negativa_impede_sucesso) ... [2m2026-10-17T1
+3:21:33.524309Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or new
+er is required to guarantee that the latest heartbeat details are preserved when
+ an activity fails; the server did not advertise the activity_failure_include_he
+artbeat capability, so heartbeat details may be lost on failure
+ok
+----------------------------------------------------------------------
+Ran 14 tests in 7.520s
+OK
+Servidor e namespace encerrados; evidencias preservadas em /tmp/pqbr-f3-05-tempo
+ral-20261017-1021
+[32m/workspace$ [0m

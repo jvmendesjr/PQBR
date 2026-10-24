@@ -1,0 +1,63 @@
+{
+  "teste": "test_tres_intervencoes_negativas_esgotam",
+  "workflow_id": "f3-05-teste-161cccefe43d4ee58b0911149829723b",
+  "replay": "ok",
+  "eventos": 47,
+  "atividades": [
+    {
+      "activity": "triagem_jev",
+      "attempt": 1,
+      "n": null
+    },
+    {
+      "activity": "intervir_agente",
+      "attempt": 1,
+      "n": 1
+    },
+    {
+      "activity": "intervir_agente",
+      "attempt": 1,
+      "n": 2
+    },
+    {
+      "activity": "intervir_agente",
+      "attempt": 1,
+      "n": 3
+    },
+    {
+      "activity": "registrar_correcao",
+      "attempt": 1,
+      "n": null
+    }
+  ],
+  "registros": [
+    {
+      "resultado": "esgotado",
+      "tentativas": 3,
+      "motivo": "3 tentativas sem sucesso",
+      "proposta_script": null,
+      "chamar_jose": true
+    }
+  ],
+  "resultado": {
+    "resultado": "esgotado",
+    "tentativas": 3,
+    "motivo": "3 tentativas sem sucesso",
+    "proposta_script": null,
+    "chamar_jose": true
+  },
+  "falha": null,
+  "timers": 2,
+  "esperas": [
+    {
+      "event_id": 19,
+      "segundos": 867.0,
+      "inicio": "2026-10-17T13:26:43.434000"
+    },
+    {
+      "event_id": 30,
+      "segundos": 566.0,
+      "inicio": "2026-10-17T13:41:10.531000"
+    }
+  ]
+}

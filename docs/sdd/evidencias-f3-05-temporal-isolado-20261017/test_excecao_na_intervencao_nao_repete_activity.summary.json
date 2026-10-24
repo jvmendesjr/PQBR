@@ -1,0 +1,22 @@
+{
+  "teste": "test_excecao_na_intervencao_nao_repete_activity",
+  "workflow_id": "f3-05-teste-85192ebd3d7b45299bf062aebfc2eb3c",
+  "replay": "ok",
+  "eventos": 17,
+  "atividades": [
+    {
+      "activity": "triagem_jev",
+      "attempt": 1,
+      "n": null
+    },
+    {
+      "activity": "intervir_agente",
+      "attempt": 1,
+      "n": 1
+    }
+  ],
+  "registros": [],
+  "resultado": null,
+  "falha": "WorkflowFailureError",
+  "timers": 0
+}

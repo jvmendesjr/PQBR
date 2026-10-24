@@ -1,0 +1,56 @@
+{
+  "teste": "test_terceira_tentativa_tem_limite_e_sem_timer_de_espera",
+  "workflow_id": "f3-05-teste-67946441df3542feb6b93b2db903b0ee",
+  "replay": "ok",
+  "eventos": 41,
+  "atividades": [
+    {
+      "activity": "triagem_jev",
+      "attempt": 1,
+      "n": null
+    },
+    {
+      "activity": "intervir_agente",
+      "attempt": 1,
+      "n": 1
+    },
+    {
+      "activity": "intervir_agente",
+      "attempt": 1,
+      "n": 2
+    },
+    {
+      "activity": "intervir_agente",
+      "attempt": 1,
+      "n": 3
+    },
+    {
+      "activity": "verificar_jev",
+      "attempt": 1,
+      "n": 3
+    },
+    {
+      "activity": "registrar_correcao",
+      "attempt": 1,
+      "n": null
+    }
+  ],
+  "registros": [
+    {
+      "resultado": "corrigido",
+      "tentativas": 3,
+      "motivo": "",
+      "proposta_script": "trocar seletor X por Y",
+      "chamar_jose": false
+    }
+  ],
+  "resultado": {
+    "resultado": "corrigido",
+    "tentativas": 3,
+    "motivo": "",
+    "proposta_script": "trocar seletor X por Y",
+    "chamar_jose": false
+  },
+  "falha": null,
+  "timers": 0
+}

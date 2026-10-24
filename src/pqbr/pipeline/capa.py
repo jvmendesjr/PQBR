@@ -34,7 +34,8 @@ def medir(arquivo: str) -> CandidatoCapa:
     if yavg is None or not LUMA[0] <= yavg <= LUMA[1]: mot.append(f"luma fora da faixa ({yavg})")
     contr = ((yhigh or 0) - (ylow or 0)) / 2
     if contr < CONTRASTE_MIN: mot.append(f"contraste baixo ({contr:.0f})")
-    if blur is not None and blur > NITIDEZ_MAX: mot.append(f"borrado ({blur:.1f})")
+    if blur is None: mot.append("nitidez indisponível (blurdetect)")
+    elif blur > NITIDEZ_MAX: mot.append(f"borrado ({blur:.1f})")
     return CandidatoCapa(arquivo=arquivo, largura=w, altura=h, luma=yavg or 0, contraste=contr, borrado=blur, ok=not mot, motivos=mot)
 
 

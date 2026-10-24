@@ -1,0 +1,13 @@
+{
+  "workflow_id": "teste-f3-05-supervisor-58a316dad4a9cff2861ca38da3cafd8444895f3f38dda3e7824c167ed760af4c",
+  "run_id": "1cf55ca1-44c3-426b-95be-b2f127797631",
+  "eventos": 26,
+  "replay": "ok",
+  "activities": [
+    {
+      "nome": "registrar_falha_supervisor_falsa",
+      "fila": "teste-f3-05-candidato-wf-test_falha_registro_nao_repete_nem_libera_segunda-supervisor",
+      "max_tentativas": 1
+    }
+  ]
+}

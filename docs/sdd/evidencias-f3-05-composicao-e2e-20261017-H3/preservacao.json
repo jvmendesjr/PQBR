@@ -1,0 +1,44 @@
+{
+  "arquivos_preexistentes_inalterados": true,
+  "workers_mesmos_pids_inicios_restarts": true,
+  "somente_nota_roadmap": true,
+  "quantidade_arquivos": 1264,
+  "workers": {
+    "pqbr-temporal-worker.service": {
+      "MainPID": "6984",
+      "NRestarts": "3",
+      "ExecMainStartTimestamp": "Mon 2026-10-12 19:36:44 -03",
+      "Id": "pqbr-temporal-worker.service",
+      "ActiveState": "active",
+      "SubState": "running",
+      "FragmentPath": "/home/pc/.config/systemd/user/pqbr-temporal-worker.service"
+    },
+    "pqbr-camofox-worker.service": {
+      "MainPID": "6867",
+      "NRestarts": "1",
+      "ExecMainStartTimestamp": "Mon 2026-10-12 19:36:43 -03",
+      "Id": "pqbr-camofox-worker.service",
+      "ActiveState": "active",
+      "SubState": "running",
+      "FragmentPath": "/home/pc/.config/systemd/user/pqbr-camofox-worker.service"
+    },
+    "pqbr-notebooklm-worker.service": {
+      "MainPID": "6869",
+      "NRestarts": "1",
+      "ExecMainStartTimestamp": "Mon 2026-10-12 19:36:43 -03",
+      "Id": "pqbr-notebooklm-worker.service",
+      "ActiveState": "active",
+      "SubState": "running",
+      "FragmentPath": "/home/pc/.config/systemd/user/pqbr-notebooklm-worker.service"
+    },
+    "pqbr-episodio-worker.service": {
+      "MainPID": "6868",
+      "NRestarts": "1",
+      "ExecMainStartTimestamp": "Mon 2026-10-12 19:36:43 -03",
+      "Id": "pqbr-episodio-worker.service",
+      "ActiveState": "active",
+      "SubState": "running",
+      "FragmentPath": "/home/pc/.config/systemd/user/pqbr-episodio-worker.service"
+    }
+  }
+}

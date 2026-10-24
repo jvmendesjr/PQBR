@@ -1,0 +1,38 @@
+[
+  {
+    "id": "interaction-synthetic-B3",
+    "issueId": "issue-synthetic-B3",
+    "companyId": "company-synthetic",
+    "kind": "request_confirmation",
+    "status": "accepted",
+    "createdByUserId": "human-synthetic-tutibom",
+    "addresseeUserId": "human-synthetic-tutibom",
+    "resolvedByUserId": "human-synthetic-tutibom",
+    "requestedResolverPolicy": "human_only",
+    "effectiveResolverPolicy": "human_only",
+    "resolverPolicy": "human_only",
+    "resolverPolicyProvenance": "explicit",
+    "effectiveResolverPolicySource": "requested",
+    "continuationPolicy": "none",
+    "idempotencyKey": "idempotency-synthetic-B3-once",
+    "resolvedAt": "2026-10-17T21:59:00Z",
+    "payload": {
+      "version": 1,
+      "prompt": "Autoriza uma única prova sintética deste escopo exato, sem efeitos externos?",
+      "acceptLabel": "Autorizar execução única",
+      "rejectLabel": "Não autorizar",
+      "allowDeclineReason": true,
+      "detailsMarkdown": "Uma única rodada sintética. Primeira já FAILED, uma tentativa, sem retry ou reexecução. Somente a segunda já aceita e pendente pode retomar uma vez. Temporal Server 1.32.1 descartável somente após autorização específica, rede interna isolada, Activities falsas e armazenamento descartável. Sem Workers persistentes, integrações reais, Discord, produção, publicação, deploy ou mudança da política de falha técnica. issueId e interactionId devem ser exclusivamente os IDs do ticket e da própria confirmação aceita, fixados no manifesto ativo e vinculados integralmente ao snapshot e receipt, nunca IDs de outra autorização. IDs de escopo exatos autorizados: {\"idempotencyKey\":\"idempotency-synthetic-B3-once\",\"operationId\":\"second-synthetic-accepted\",\"scopeId\":\"scope-synthetic-B3-once\",\"sessionId\":\"session-synthetic-B3\"}",
+      "supersedeOnUserComment": false
+    },
+    "result": {
+      "version": 1,
+      "outcome": "accepted"
+    },
+    "createdByAgentId": null,
+    "addresseeAgentId": null,
+    "resolvedByAgentId": null,
+    "resolvedByRunId": null,
+    "sourceRunId": null
+  }
+]

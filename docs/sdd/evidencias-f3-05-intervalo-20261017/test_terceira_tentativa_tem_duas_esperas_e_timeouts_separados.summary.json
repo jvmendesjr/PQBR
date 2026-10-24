@@ -1,0 +1,68 @@
+{
+  "teste": "test_terceira_tentativa_tem_duas_esperas_e_timeouts_separados",
+  "workflow_id": "f3-05-teste-532cc7f3468a4ff3985a8350d9ca43a2",
+  "replay": "ok",
+  "eventos": 53,
+  "atividades": [
+    {
+      "activity": "triagem_jev",
+      "attempt": 1,
+      "n": null
+    },
+    {
+      "activity": "intervir_agente",
+      "attempt": 1,
+      "n": 1
+    },
+    {
+      "activity": "intervir_agente",
+      "attempt": 1,
+      "n": 2
+    },
+    {
+      "activity": "intervir_agente",
+      "attempt": 1,
+      "n": 3
+    },
+    {
+      "activity": "verificar_jev",
+      "attempt": 1,
+      "n": 3
+    },
+    {
+      "activity": "registrar_correcao",
+      "attempt": 1,
+      "n": null
+    }
+  ],
+  "registros": [
+    {
+      "resultado": "corrigido",
+      "tentativas": 3,
+      "motivo": "",
+      "proposta_script": "trocar seletor X por Y",
+      "chamar_jose": false
+    }
+  ],
+  "resultado": {
+    "resultado": "corrigido",
+    "tentativas": 3,
+    "motivo": "",
+    "proposta_script": "trocar seletor X por Y",
+    "chamar_jose": false
+  },
+  "falha": null,
+  "timers": 2,
+  "esperas": [
+    {
+      "event_id": 19,
+      "segundos": 433.0,
+      "inicio": "2026-10-17T13:26:42.581000"
+    },
+    {
+      "event_id": 30,
+      "segundos": 318.0,
+      "inicio": "2026-10-17T13:33:55.697000"
+    }
+  ]
+}

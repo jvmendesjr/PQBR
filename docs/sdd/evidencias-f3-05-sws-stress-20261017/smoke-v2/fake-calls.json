@@ -1,0 +1,742 @@
+[
+  {
+    "pedido": {
+      "falhar": false,
+      "id": "p0000",
+      "sessao": "stress-v1-prototype-workers-cold-c01-i0000"
+    },
+    "attempt": 1,
+    "start": 405766.047644469,
+    "end": 405766.063435735
+  },
+  {
+    "pedido": {
+      "falhar": false,
+      "id": "p0000",
+      "sessao": "stress-v1-prototype-workers-cold-c01-i0001"
+    },
+    "attempt": 1,
+    "start": 405766.177383625,
+    "end": 405766.191971164
+  },
+  {
+    "pedido": {
+      "falhar": false,
+      "id": "p0000",
+      "sessao": "stress-v1-prototype-workers-cold-c04-i0000"
+    },
+    "attempt": 1,
+    "start": 405766.236615464,
+    "end": 405766.26637575
+  },
+  {
+    "pedido": {
+      "falhar": false,
+      "id": "p0001",
+      "sessao": "stress-v1-prototype-workers-cold-c04-i0000"
+    },
+    "attempt": 1,
+    "start": 405766.296166324,
+    "end": 405766.296168788
+  },
+  {
+    "pedido": {
+      "falhar": false,
+      "id": "p0002",
+      "sessao": "stress-v1-prototype-workers-cold-c04-i0000"
+    },
+    "attempt": 1,
+    "start": 405766.316833605,
+    "end": 405766.316837281
+  },
+  {
+    "pedido": {
+      "falhar": false,
+      "id": "p0003",
+      "sessao": "stress-v1-prototype-workers-cold-c04-i0000"
+    },
+    "attempt": 1,
+    "start": 405766.33785186,
+    "end": 405766.337854796
+  },
+  {
+    "pedido": {
+      "falhar": false,
+      "id": "p0000",
+      "sessao": "stress-v1-prototype-workers-cold-c04-i0001"
+    },
+    "attempt": 1,
+    "start": 405766.37747916,
+    "end": 405766.405439655
+  },
+  {
+    "pedido": {
+      "falhar": false,
+      "id": "p0001",
+      "sessao": "stress-v1-prototype-workers-cold-c04-i0001"
+    },
+    "attempt": 1,
+    "start": 405766.436877585,
+    "end": 405766.436880511
+  },
+  {
+    "pedido": {
+      "falhar": false,
+      "id": "p0002",
+      "sessao": "stress-v1-prototype-workers-cold-c04-i0001"
+    },
+    "attempt": 1,
+    "start": 405766.458170427,
+    "end": 405766.458173394
+  },
+  {
+    "pedido": {
+      "falhar": false,
+      "id": "p0003",
+      "sessao": "stress-v1-prototype-workers-cold-c04-i0001"
+    },
+    "attempt": 1,
+    "start": 405766.484088904,
+    "end": 405766.48409286
+  },
+  {
+    "pedido": {
+      "falhar": false,
+      "id": "p0000",
+      "sessao": "stress-v1-prototype-workers-cold-c12-i0000"
+    },
+    "attempt": 1,
+    "start": 405766.531885702,
+    "end": 405766.567614526
+  },
+  {
+    "pedido": {
+      "falhar": false,
+      "id": "p0001",
+      "sessao": "stress-v1-prototype-workers-cold-c12-i0000"
+    },
+    "attempt": 1,
+    "start": 405766.609922028,
+    "end": 405766.609925237
+  },
+  {
+    "pedido": {
+      "falhar": false,
+      "id": "p0003",
+      "sessao": "stress-v1-prototype-workers-cold-c12-i0000"
+    },
+    "attempt": 1,
+    "start": 405766.63785922,
+    "end": 405766.637862067
+  },
+  {
+    "pedido": {
+      "falhar": false,
+      "id": "p0002",
+      "sessao": "stress-v1-prototype-workers-cold-c12-i0000"
+    },
+    "attempt": 1,
+    "start": 405766.66772433,
+    "end": 405766.667727219
+  },
+  {
+    "pedido": {
+      "falhar": false,
+      "id": "p0005",
+      "sessao": "stress-v1-prototype-workers-cold-c12-i0000"
+    },
+    "attempt": 1,
+    "start": 405766.70258389,
+    "end": 405766.702589841
+  },
+  {
+    "pedido": {
+      "falhar": false,
+      "id": "p0004",
+      "sessao": "stress-v1-prototype-workers-cold-c12-i0000"
+    },
+    "attempt": 1,
+    "start": 405766.740732037,
+    "end": 405766.740735064
+  },
+  {
+    "pedido": {
+      "falhar": false,
+      "id": "p0007",
+      "sessao": "stress-v1-prototype-workers-cold-c12-i0000"
+    },
+    "attempt": 1,
+    "start": 405766.783405503,
+    "end": 405766.783409623
+  },
+  {
+    "pedido": {
+      "falhar": false,
+      "id": "p0006",
+      "sessao": "stress-v1-prototype-workers-cold-c12-i0000"
+    },
+    "attempt": 1,
+    "start": 405766.829529096,
+    "end": 405766.829532709
+  },
+  {
+    "pedido": {
+      "falhar": false,
+      "id": "p0008",
+      "sessao": "stress-v1-prototype-workers-cold-c12-i0000"
+    },
+    "attempt": 1,
+    "start": 405766.880355579,
+    "end": 405766.880358891
+  },
+  {
+    "pedido": {
+      "falhar": false,
+      "id": "p0009",
+      "sessao": "stress-v1-prototype-workers-cold-c12-i0000"
+    },
+    "attempt": 1,
+    "start": 405766.938157138,
+    "end": 405766.938161063
+  },
+  {
+    "pedido": {
+      "falhar": false,
+      "id": "p0010",
+      "sessao": "stress-v1-prototype-workers-cold-c12-i0000"
+    },
+    "attempt": 1,
+    "start": 405766.993669727,
+    "end": 405766.993681367
+  },
+  {
+    "pedido": {
+      "falhar": false,
+      "id": "p0011",
+      "sessao": "stress-v1-prototype-workers-cold-c12-i0000"
+    },
+    "attempt": 1,
+    "start": 405767.06275817,
+    "end": 405767.062762643
+  },
+  {
+    "pedido": {
+      "falhar": false,
+      "id": "p0000",
+      "sessao": "stress-v1-prototype-workers-cold-c12-i0001"
+    },
+    "attempt": 1,
+    "start": 405767.176614363,
+    "end": 405767.199989687
+  },
+  {
+    "pedido": {
+      "falhar": false,
+      "id": "p0002",
+      "sessao": "stress-v1-prototype-workers-cold-c12-i0001"
+    },
+    "attempt": 1,
+    "start": 405767.247452152,
+    "end": 405767.247456263
+  },
+  {
+    "pedido": {
+      "falhar": false,
+      "id": "p0001",
+      "sessao": "stress-v1-prototype-workers-cold-c12-i0001"
+    },
+    "attempt": 1,
+    "start": 405767.28199746,
+    "end": 405767.28200264
+  },
+  {
+    "pedido": {
+      "falhar": false,
+      "id": "p0003",
+      "sessao": "stress-v1-prototype-workers-cold-c12-i0001"
+    },
+    "attempt": 1,
+    "start": 405767.319798592,
+    "end": 405767.319803032
+  },
+  {
+    "pedido": {
+      "falhar": false,
+      "id": "p0005",
+      "sessao": "stress-v1-prototype-workers-cold-c12-i0001"
+    },
+    "attempt": 1,
+    "start": 405767.388458479,
+    "end": 405767.388462426
+  },
+  {
+    "pedido": {
+      "falhar": false,
+      "id": "p0004",
+      "sessao": "stress-v1-prototype-workers-cold-c12-i0001"
+    },
+    "attempt": 1,
+    "start": 405767.435996588,
+    "end": 405767.436023198
+  },
+  {
+    "pedido": {
+      "falhar": false,
+      "id": "p0006",
+      "sessao": "stress-v1-prototype-workers-cold-c12-i0001"
+    },
+    "attempt": 1,
+    "start": 405767.487962236,
+    "end": 405767.487967506
+  },
+  {
+    "pedido": {
+      "falhar": false,
+      "id": "p0008",
+      "sessao": "stress-v1-prototype-workers-cold-c12-i0001"
+    },
+    "attempt": 1,
+    "start": 405767.544922073,
+    "end": 405767.544927003
+  },
+  {
+    "pedido": {
+      "falhar": false,
+      "id": "p0007",
+      "sessao": "stress-v1-prototype-workers-cold-c12-i0001"
+    },
+    "attempt": 1,
+    "start": 405767.603616697,
+    "end": 405767.603621694
+  },
+  {
+    "pedido": {
+      "falhar": false,
+      "id": "p0009",
+      "sessao": "stress-v1-prototype-workers-cold-c12-i0001"
+    },
+    "attempt": 1,
+    "start": 405767.665862749,
+    "end": 405767.665868259
+  },
+  {
+    "pedido": {
+      "falhar": false,
+      "id": "p0010",
+      "sessao": "stress-v1-prototype-workers-cold-c12-i0001"
+    },
+    "attempt": 1,
+    "start": 405767.727618132,
+    "end": 405767.727622289
+  },
+  {
+    "pedido": {
+      "falhar": false,
+      "id": "p0011",
+      "sessao": "stress-v1-prototype-workers-cold-c12-i0001"
+    },
+    "attempt": 1,
+    "start": 405767.795238033,
+    "end": 405767.795242507
+  },
+  {
+    "pedido": {
+      "falhar": false,
+      "id": "p-001",
+      "sessao": "stress-v1-prototype-workers-warm-c01-i0000"
+    },
+    "attempt": 1,
+    "start": 405767.892866132,
+    "end": 405767.928474048
+  },
+  {
+    "pedido": {
+      "falhar": false,
+      "id": "p0000",
+      "sessao": "stress-v1-prototype-workers-warm-c01-i0000"
+    },
+    "attempt": 1,
+    "start": 405767.973102225,
+    "end": 405767.973107731
+  },
+  {
+    "pedido": {
+      "falhar": false,
+      "id": "p-001",
+      "sessao": "stress-v1-prototype-workers-warm-c01-i0001"
+    },
+    "attempt": 1,
+    "start": 405768.027928549,
+    "end": 405768.062791966
+  },
+  {
+    "pedido": {
+      "falhar": false,
+      "id": "p0000",
+      "sessao": "stress-v1-prototype-workers-warm-c01-i0001"
+    },
+    "attempt": 1,
+    "start": 405768.109166435,
+    "end": 405768.109171035
+  },
+  {
+    "pedido": {
+      "falhar": false,
+      "id": "p-001",
+      "sessao": "stress-v1-prototype-workers-warm-c04-i0000"
+    },
+    "attempt": 1,
+    "start": 405768.157609122,
+    "end": 405768.201285429
+  },
+  {
+    "pedido": {
+      "falhar": false,
+      "id": "p0000",
+      "sessao": "stress-v1-prototype-workers-warm-c04-i0000"
+    },
+    "attempt": 1,
+    "start": 405768.247237677,
+    "end": 405768.247241072
+  },
+  {
+    "pedido": {
+      "falhar": false,
+      "id": "p0001",
+      "sessao": "stress-v1-prototype-workers-warm-c04-i0000"
+    },
+    "attempt": 1,
+    "start": 405768.275790607,
+    "end": 405768.275794609
+  },
+  {
+    "pedido": {
+      "falhar": false,
+      "id": "p0002",
+      "sessao": "stress-v1-prototype-workers-warm-c04-i0000"
+    },
+    "attempt": 1,
+    "start": 405768.302630387,
+    "end": 405768.302633973
+  },
+  {
+    "pedido": {
+      "falhar": false,
+      "id": "p0003",
+      "sessao": "stress-v1-prototype-workers-warm-c04-i0000"
+    },
+    "attempt": 1,
+    "start": 405768.333434215,
+    "end": 405768.33343776
+  },
+  {
+    "pedido": {
+      "falhar": false,
+      "id": "p-001",
+      "sessao": "stress-v1-prototype-workers-warm-c04-i0001"
+    },
+    "attempt": 1,
+    "start": 405768.397791452,
+    "end": 405768.434593398
+  },
+  {
+    "pedido": {
+      "falhar": false,
+      "id": "p0000",
+      "sessao": "stress-v1-prototype-workers-warm-c04-i0001"
+    },
+    "attempt": 1,
+    "start": 405768.469034775,
+    "end": 405768.469037604
+  },
+  {
+    "pedido": {
+      "falhar": false,
+      "id": "p0001",
+      "sessao": "stress-v1-prototype-workers-warm-c04-i0001"
+    },
+    "attempt": 1,
+    "start": 405768.490262918,
+    "end": 405768.490266242
+  },
+  {
+    "pedido": {
+      "falhar": false,
+      "id": "p0002",
+      "sessao": "stress-v1-prototype-workers-warm-c04-i0001"
+    },
+    "attempt": 1,
+    "start": 405768.520977735,
+    "end": 405768.520981672
+  },
+  {
+    "pedido": {
+      "falhar": false,
+      "id": "p0003",
+      "sessao": "stress-v1-prototype-workers-warm-c04-i0001"
+    },
+    "attempt": 1,
+    "start": 405768.555087164,
+    "end": 405768.555090944
+  },
+  {
+    "pedido": {
+      "falhar": false,
+      "id": "p-001",
+      "sessao": "stress-v1-prototype-workers-warm-c12-i0000"
+    },
+    "attempt": 1,
+    "start": 405768.618324735,
+    "end": 405768.642655297
+  },
+  {
+    "pedido": {
+      "falhar": false,
+      "id": "p0000",
+      "sessao": "stress-v1-prototype-workers-warm-c12-i0000"
+    },
+    "attempt": 1,
+    "start": 405768.690876507,
+    "end": 405768.690880189
+  },
+  {
+    "pedido": {
+      "falhar": false,
+      "id": "p0001",
+      "sessao": "stress-v1-prototype-workers-warm-c12-i0000"
+    },
+    "attempt": 1,
+    "start": 405768.722301685,
+    "end": 405768.722305758
+  },
+  {
+    "pedido": {
+      "falhar": false,
+      "id": "p0002",
+      "sessao": "stress-v1-prototype-workers-warm-c12-i0000"
+    },
+    "attempt": 1,
+    "start": 405768.75946514,
+    "end": 405768.75946928
+  },
+  {
+    "pedido": {
+      "falhar": false,
+      "id": "p0003",
+      "sessao": "stress-v1-prototype-workers-warm-c12-i0000"
+    },
+    "attempt": 1,
+    "start": 405768.79870828,
+    "end": 405768.798712375
+  },
+  {
+    "pedido": {
+      "falhar": false,
+      "id": "p0004",
+      "sessao": "stress-v1-prototype-workers-warm-c12-i0000"
+    },
+    "attempt": 1,
+    "start": 405768.838956026,
+    "end": 405768.838959508
+  },
+  {
+    "pedido": {
+      "falhar": false,
+      "id": "p0005",
+      "sessao": "stress-v1-prototype-workers-warm-c12-i0000"
+    },
+    "attempt": 1,
+    "start": 405768.884168143,
+    "end": 405768.884172328
+  },
+  {
+    "pedido": {
+      "falhar": false,
+      "id": "p0007",
+      "sessao": "stress-v1-prototype-workers-warm-c12-i0000"
+    },
+    "attempt": 1,
+    "start": 405768.936433584,
+    "end": 405768.936437624
+  },
+  {
+    "pedido": {
+      "falhar": false,
+      "id": "p0008",
+      "sessao": "stress-v1-prototype-workers-warm-c12-i0000"
+    },
+    "attempt": 1,
+    "start": 405768.995244865,
+    "end": 405768.99524899
+  },
+  {
+    "pedido": {
+      "falhar": false,
+      "id": "p0006",
+      "sessao": "stress-v1-prototype-workers-warm-c12-i0000"
+    },
+    "attempt": 1,
+    "start": 405769.058061685,
+    "end": 405769.058066117
+  },
+  {
+    "pedido": {
+      "falhar": false,
+      "id": "p0009",
+      "sessao": "stress-v1-prototype-workers-warm-c12-i0000"
+    },
+    "attempt": 1,
+    "start": 405769.126893115,
+    "end": 405769.126898149
+  },
+  {
+    "pedido": {
+      "falhar": false,
+      "id": "p0011",
+      "sessao": "stress-v1-prototype-workers-warm-c12-i0000"
+    },
+    "attempt": 1,
+    "start": 405769.202526956,
+    "end": 405769.202531476
+  },
+  {
+    "pedido": {
+      "falhar": false,
+      "id": "p0010",
+      "sessao": "stress-v1-prototype-workers-warm-c12-i0000"
+    },
+    "attempt": 1,
+    "start": 405769.282277989,
+    "end": 405769.282282626
+  },
+  {
+    "pedido": {
+      "falhar": false,
+      "id": "p-001",
+      "sessao": "stress-v1-prototype-workers-warm-c12-i0001"
+    },
+    "attempt": 1,
+    "start": 405769.406074987,
+    "end": 405769.457558923
+  },
+  {
+    "pedido": {
+      "falhar": false,
+      "id": "p0000",
+      "sessao": "stress-v1-prototype-workers-warm-c12-i0001"
+    },
+    "attempt": 1,
+    "start": 405769.512457673,
+    "end": 405769.512461796
+  },
+  {
+    "pedido": {
+      "falhar": false,
+      "id": "p0001",
+      "sessao": "stress-v1-prototype-workers-warm-c12-i0001"
+    },
+    "attempt": 1,
+    "start": 405769.542604447,
+    "end": 405769.542607378
+  },
+  {
+    "pedido": {
+      "falhar": false,
+      "id": "p0002",
+      "sessao": "stress-v1-prototype-workers-warm-c12-i0001"
+    },
+    "attempt": 1,
+    "start": 405769.572618556,
+    "end": 405769.572621715
+  },
+  {
+    "pedido": {
+      "falhar": false,
+      "id": "p0003",
+      "sessao": "stress-v1-prototype-workers-warm-c12-i0001"
+    },
+    "attempt": 1,
+    "start": 405769.610401705,
+    "end": 405769.610405415
+  },
+  {
+    "pedido": {
+      "falhar": false,
+      "id": "p0004",
+      "sessao": "stress-v1-prototype-workers-warm-c12-i0001"
+    },
+    "attempt": 1,
+    "start": 405769.653653712,
+    "end": 405769.653657257
+  },
+  {
+    "pedido": {
+      "falhar": false,
+      "id": "p0005",
+      "sessao": "stress-v1-prototype-workers-warm-c12-i0001"
+    },
+    "attempt": 1,
+    "start": 405769.69541817,
+    "end": 405769.695421892
+  },
+  {
+    "pedido": {
+      "falhar": false,
+      "id": "p0006",
+      "sessao": "stress-v1-prototype-workers-warm-c12-i0001"
+    },
+    "attempt": 1,
+    "start": 405769.740874008,
+    "end": 405769.740877321
+  },
+  {
+    "pedido": {
+      "falhar": false,
+      "id": "p0007",
+      "sessao": "stress-v1-prototype-workers-warm-c12-i0001"
+    },
+    "attempt": 1,
+    "start": 405769.790342445,
+    "end": 405769.790346608
+  },
+  {
+    "pedido": {
+      "falhar": false,
+      "id": "p0009",
+      "sessao": "stress-v1-prototype-workers-warm-c12-i0001"
+    },
+    "attempt": 1,
+    "start": 405769.845110413,
+    "end": 405769.845113489
+  },
+  {
+    "pedido": {
+      "falhar": false,
+      "id": "p0008",
+      "sessao": "stress-v1-prototype-workers-warm-c12-i0001"
+    },
+    "attempt": 1,
+    "start": 405769.893052656,
+    "end": 405769.893055561
+  },
+  {
+    "pedido": {
+      "falhar": false,
+      "id": "p0010",
+      "sessao": "stress-v1-prototype-workers-warm-c12-i0001"
+    },
+    "attempt": 1,
+    "start": 405769.937989129,
+    "end": 405769.937992054
+  },
+  {
+    "pedido": {
+      "falhar": false,
+      "id": "p0011",
+      "sessao": "stress-v1-prototype-workers-warm-c12-i0001"
+    },
+    "attempt": 1,
+    "start": 405769.985062988,
+    "end": 405769.985066342
+  }
+]

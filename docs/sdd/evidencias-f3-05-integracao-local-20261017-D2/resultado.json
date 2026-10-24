@@ -1,0 +1,21 @@
+{
+  "test": "D2_board_authorization_audit_only",
+  "verifiedAt": "2026-10-17T21:34:25.734175+00:00",
+  "ticket": "PQBR-118",
+  "interactionId": "db924b2d-3be6-4c6e-8d77-b2519fcbf4a3",
+  "initialInsertCount": 1,
+  "concurrentResubmissions": 16,
+  "durableDuplicates": 16,
+  "receiptCount": 1,
+  "pendingCount": 0,
+  "resumeCount": 0,
+  "effectCount": 0,
+  "sqliteIntegrity": "ok",
+  "cliGetCalls": 2,
+  "freshCliProcesses": 2,
+  "localWriterProcesses": 17,
+  "roadmapBeforeSha256": "d4cd22fc5b8096b3928b4ab9afd833ad6bf644ed0c88a295ab48dde47b272d0c",
+  "identityEvidence": "Board decision attributed by Paperclip to expected tutibom userId; no Discord authentication claim",
+  "roadmapAfterSha256": "50bfb32cd980e54f2a90eb5a8e6b60660bbe12740cb7c88bb2d50935abb86183",
+  "roadmapInsertionOnlyVerified": true
+}

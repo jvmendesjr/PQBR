@@ -1,0 +1,15 @@
+{
+  "ticket_id": true,
+  "ticket_identifier": true,
+  "company": true,
+  "ticket_author_responsible": true,
+  "ticket_status_backlog": true,
+  "interaction_id_issue": true,
+  "accepted": true,
+  "human_identity": true,
+  "no_agent_or_run": true,
+  "human_only": true,
+  "continuation_none": true,
+  "idempotency_key": true,
+  "exact_approved_payload": true
+}

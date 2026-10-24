@@ -1,0 +1,92 @@
+[
+  {
+    "pedido": {
+      "falhar": false,
+      "id": "p0000",
+      "sessao": "stress-v1-prototype-workers-cold-c01-i0000"
+    },
+    "attempt": 1,
+    "start": 405734.671193419,
+    "end": 405734.671197028
+  },
+  {
+    "pedido": {
+      "falhar": false,
+      "id": "p0000",
+      "sessao": "stress-v1-prototype-workers-cold-c01-i0001"
+    },
+    "attempt": 1,
+    "start": 405734.764703253,
+    "end": 405734.766118295
+  },
+  {
+    "pedido": {
+      "falhar": false,
+      "id": "p0000",
+      "sessao": "stress-v1-prototype-workers-cold-c04-i0000"
+    },
+    "attempt": 1,
+    "start": 405734.803177258,
+    "end": 405734.806017622
+  },
+  {
+    "pedido": {
+      "falhar": false,
+      "id": "p0000",
+      "sessao": "stress-v1-prototype-workers-cold-c04-i0001"
+    },
+    "attempt": 1,
+    "start": 405734.832558417,
+    "end": 405734.832561099
+  },
+  {
+    "pedido": {
+      "falhar": false,
+      "id": "p-001",
+      "sessao": "stress-v1-prototype-workers-warm-c01-i0000"
+    },
+    "attempt": 1,
+    "start": 405734.889671986,
+    "end": 405734.889674597
+  },
+  {
+    "pedido": {
+      "falhar": false,
+      "id": "p-001",
+      "sessao": "stress-v1-prototype-workers-warm-c01-i0001"
+    },
+    "attempt": 1,
+    "start": 405734.910197578,
+    "end": 405734.910200095
+  },
+  {
+    "pedido": {
+      "falhar": false,
+      "id": "p-001",
+      "sessao": "stress-v1-prototype-workers-warm-c04-i0000"
+    },
+    "attempt": 1,
+    "start": 405734.931549589,
+    "end": 405734.931552287
+  },
+  {
+    "pedido": {
+      "falhar": false,
+      "id": "p-001",
+      "sessao": "stress-v1-prototype-workers-warm-c04-i0001"
+    },
+    "attempt": 1,
+    "start": 405734.95776699,
+    "end": 405734.957770559
+  },
+  {
+    "pedido": {
+      "falhar": false,
+      "id": "p-001",
+      "sessao": "stress-v1-prototype-workers-warm-c12-i0000"
+    },
+    "attempt": 1,
+    "start": 405734.987856957,
+    "end": 405734.987859537
+  }
+]

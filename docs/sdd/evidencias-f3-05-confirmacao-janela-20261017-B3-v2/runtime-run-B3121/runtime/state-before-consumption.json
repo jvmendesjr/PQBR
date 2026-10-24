@@ -1,0 +1,15 @@
+{
+  "accepted": [
+    "first-B3-next-failed-v1",
+    "second-B3-next-accepted-v1"
+  ],
+  "consumed": {},
+  "duplicates": 0,
+  "firstStatus": "FAILED",
+  "pending": [
+    "second-B3-next-accepted-v1"
+  ],
+  "phase": "PAUSED",
+  "resumes": 0,
+  "secondStatus": "PENDING"
+}

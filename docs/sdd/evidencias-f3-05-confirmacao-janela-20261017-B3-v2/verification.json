@@ -1,0 +1,11 @@
+{
+  "status": "prepared_pending",
+  "manifest_verified": true,
+  "roadmap_previous_content_preserved": true,
+  "wiki_previous_content_preserved": true,
+  "verification_api_gets_after_creation": 0,
+  "runtime_executed": false,
+  "receipt_recorded": false,
+  "authorization_consumed": false,
+  "verified_at_utc": "2026-10-17T22:45:43.282513+00:00"
+}

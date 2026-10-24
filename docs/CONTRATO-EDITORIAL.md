@@ -79,7 +79,7 @@
 | "Lata": queda em 0:18, no termo "tixotrópico" sem apoio visual. | **R4. Termo técnico só entra com imagem ou piada no mesmo segundo.** |
 | "Picolé": queda entre 0:20 e 0:24, na "aflição da madeira". | **R5. Evitar sensação física incômoda no miolo.** Hipótese, com um caso só. |
 | "Sinal amarelo" (~29 s por visualização), "TV" (~27 s) e "tomada do chuveiro" seguram pela curiosidade sobre a causa real. | **R6. Explicar o porquê de verdade, como recompensa da piada.** |
-| "Sinal amarelo": queda leve em 0:48, só na transição para o CTA. | **R7. O CTA é uma pergunta curta, integrada à história, nos últimos 8 s (regra do auditor mantida), sem quebra de ritmo.** ⚠️ SUPERADO por t262/t263: CTA = só "Segue o Porquê BR", sem pergunta. |
+| "Sinal amarelo": queda leve em 0:48, só na transição para o CTA. | **R7. CTA contextual no fecho: trocadilho ligado ao tema quando natural; caso contrário, convite natural a seguir, com `Segue o Porquê BR` como fallback. Nunca pedir comentários.** [t467; t263] |
 | Temas de curiosidade enciclopédica tiveram baixo alcance: copo americano (206), horário de Brasília (85, apesar de 1.219 impressões), 127 V/220 V (56), "PIX de graça" (43), filtro de barro (34). A exceção é "terremoto", com 135 visualizações e +3 inscritos. | **R8. Priorizar comportamento que o espectador reconhece em si. Curiosidade "de almanaque" só quando houver uma mania por trás.** |
 | Os dois maiores geradores de inscritos ("TV", +14) e os seguintes ("sabonete" e "tomada do chuveiro", +4 cada) são situações de casa e de família. | **R9. Priorizar situações vividas em casa e em família.** |
 | O feijão no pote de sorvete foi publicado **duas vezes** (76 e 387 visualizações). Há temas vizinhos repetidos: chuveiro elétrico x tomada do chuveiro; sacola de sacolas x sacola bonita. | **R10. Um tema, um vídeo.** A barreira contra repetição vale também para variações próximas (ver o observador de conformidade, item de variedade). |
@@ -215,13 +215,13 @@ Recalibrar todas as faixas depois de 2 a 4 semanas com o `@prod-analista`.
 - **Voz do narrador:** "a gente" / "todo brasileiro", cúmplice, com o sorrisinho no canto da boca; frases curtas; nada de professor.
 - **Ritmo da piada:** uma imagem engraçada ou exagero a cada 5–8 s nos primeiros 25 s (onde a curva se decide); depois a piada continua dentro da explicação.
 - **O porquê:** UM mecanismo real, em palavras do dia a dia, com imagem no mesmo segundo (sem termo técnico solto). Entra depois de ~40% do vídeo.
-- ⚠️ SUPERADO por t262/t263 (CTA = só "Segue o Porquê BR"; nunca pedir comentário). Texto antigo: **Fecho e CTA:** logo depois do payoff, sem "ponte" longa (a queda do sinal amarelo foi na transição). O fecho é o reconhecimento caloroso ("a gente é assim mesmo") e a pergunta curta para os comentários sai do próprio fecho ("e aí na sua casa, quem faz isso?"). Nos últimos 8 s.
+- **CTA contextual vigente (t467):** trocadilho ligado ao tema quando natural; senão, convite natural a seguir; fallback `Segue o Porquê BR`. Nunca pedir comentários. O CTA fecha o payoff sem ponte longa, nos últimos ~5–8 s.
 - ⚠️ SUPERADO em parte por t271 (alvo ~50 s; "60–80 s, 185–235 palavras" não vale mais). Texto antigo: **Duração:** dimensionar pelo texto. Na rodada final de 08/10 a voz leu ~3,0 palavras/s: 178 palavras deram 59,3 s e 190 deram 63,9–67 s. Para 60–80 s, use **185–235 palavras**.
 
 ### 11.1 CTA e encerramento (t214, José, 08/10/2026), regra
-> ⚠️ **SUPERADO** por t262/t263: a última fala é apenas "Segue o Porquê BR", curta e colada ao gancho; nunca pedir comentário (nem narração, nem descrição, nem fixado). O encerramento visual (logo com zoom) continua valendo.
+> **Regra vigente (t467):** CTA contextual conforme §5; t262 (CTA exclusivamente literal) foi substituída; a proibição de comentários de t263 permanece.
 
-- **CTA explícito e falado nos últimos ~8 s**, como última fala: convida a comentar **e** a seguir/inscrever-se no canal, no tom "a gente é assim mesmo" (ex.: "E aí na sua casa, quem faz isso? Conta aqui nos comentários e segue o Porquê BR, porque a gente é assim mesmo."). Substitui a restrição anterior de "sem inscreva-se" (R7 e briefing).
+- **CTA contextual [t467]:** use trocadilho ligado ao tema quando natural; caso contrário, convite natural a seguir, com `Segue o Porquê BR` como fallback; nunca pedir comentários.
 - **Encerramento visual:** o logo do Porquê BR entra no fim com zoom-in suave (~1,5–2 s), feito na pós-produção com FFmpeg.
 - O CTA não pode ser coberto por selo ou logo enquanto é falado.
 
@@ -267,14 +267,10 @@ Exigir no prompt a máxima fidelidade à bíblia, mas aceitar imperfeição leve
 6. **Risco doméstico / trânsito (tomada e sinal amarelo):** satiriza a conta mental ou o hábito, e o fecho aponta a regra certa (conector cerâmico / não passar no amarelo), sem ensinar o atalho. Confirma a categoria 4.3 do contrato.
 7. **Orgulho da gambiarra (controle):** o stickman ergue o controle com fita como troféu. Casa com "a gente é assim mesmo".
 
-### Divergência a decidir (CTA)
+### CTA contextual — decisão encerrada (t467)
+> **APROVADO:** a CTA segue o contexto do tema conforme §5. O trocadilho contextual é preferido quando natural; na ausência dele, usar convite natural a seguir. `Segue o Porquê BR` é fallback. Nunca pedir comentários (t263).
 
-> ⚠️ **SUPERADO**: **resolvida por t262/t263**. CTA = só "Segue o Porquê BR"; nunca pedir comentário. O texto abaixo fica só como histórico.
-
-- **Aprovado por você (t214):** CTA nos últimos ~8 s convida a comentar e a seguir, no tom "a gente é assim mesmo" (ex.: "E aí na sua casa, quem faz isso? Conta nos comentários e segue o Porquê BR, porque a gente é assim mesmo.").
-- **O que a produção ainda grava no steering dos 4 refs:** frase fixa de loop "Segue o Porquê BR pra não perder nenhuma novidade e curiosidade todo dia!", sem pergunta de comentário e sem o pouso de reconhecimento.
-
-Até você escolher, o contrato fica com t214. O SOP/steering do NotebookLM precisa ser atualizado para bater com isso (e o auditor deve checar a frase do CTA, não a antiga).
+A decisão t467 substitui t262 (somente frase literal) e os exemplos t214 que pediam comentários. A classificação estrutural `tipo_cta` é validada pelo schema; a pertinência do trocadilho é revisão editorial, não inferência automática.
 
 ### Inventário (para o blueprint, não para o tom)
 

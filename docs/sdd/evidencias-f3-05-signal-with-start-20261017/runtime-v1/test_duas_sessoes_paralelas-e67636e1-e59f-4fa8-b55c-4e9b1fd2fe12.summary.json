@@ -1,0 +1,37 @@
+{
+  "teste": "test_duas_sessoes_paralelas",
+  "workflow_id": "prototipo-signal-start-v1-b055b73aa1749b2b4b3833659d848619dd2921b40dc911c7a1e72e3480c8caa7",
+  "run_id": "e67636e1-e59f-4fa8-b55c-4e9b1fd2fe12",
+  "estado": "COMPLETED",
+  "replay": "ok",
+  "pending_activities": 0,
+  "atividades_agendadas": 1,
+  "signals": 2,
+  "calls": [
+    {
+      "pedido": {
+        "falhar": false,
+        "id": "b",
+        "sessao": "sessao-B"
+      },
+      "inicio": 405318.045147425,
+      "fim": 405318.064476882,
+      "attempt": 1
+    },
+    {
+      "pedido": {
+        "falhar": false,
+        "id": "a",
+        "sessao": "sessao-A"
+      },
+      "inicio": 405318.048433428,
+      "fim": 405318.064782342,
+      "attempt": 1
+    }
+  ],
+  "max_global": 2,
+  "max_sessao": {
+    "sessao-B": 1,
+    "sessao-A": 1
+  }
+}

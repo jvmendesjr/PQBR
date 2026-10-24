@@ -1,0 +1,372 @@
+{
+  "pid": 182282,
+  "netns": "net:[4026534352]",
+  "inspect": {
+    "Id": "b9baf90d2ee4da190ae3c5a2bd2666d5bb09f553fe5696cf03f41fbd5fd56a12",
+    "Created": "2026-10-17T21:56:15.355778804Z",
+    "Path": "/usr/local/bin/temporal-server",
+    "Args": [
+      "--config-file",
+      "/etc/temporal/experiment/server.yaml",
+      "--allow-no-auth",
+      "start"
+    ],
+    "State": {
+      "Status": "running",
+      "Running": true,
+      "Paused": false,
+      "Restarting": false,
+      "OOMKilled": false,
+      "Dead": false,
+      "Pid": 182282,
+      "ExitCode": 0,
+      "Error": "",
+      "StartedAt": "2026-10-17T21:56:15.414736501Z",
+      "FinishedAt": "0001-01-01T00:00:00Z"
+    },
+    "Image": "sha256:acecbab5b0b8ae9cf4012b508866ca97feda3709577bf157b537239f40029049",
+    "ResolvConfPath": "/var/lib/docker/containers/b9baf90d2ee4da190ae3c5a2bd2666d5bb09f553fe5696cf03f41fbd5fd56a12/resolv.conf",
+    "HostnamePath": "/var/lib/docker/containers/b9baf90d2ee4da190ae3c5a2bd2666d5bb09f553fe5696cf03f41fbd5fd56a12/hostname",
+    "HostsPath": "/var/lib/docker/containers/b9baf90d2ee4da190ae3c5a2bd2666d5bb09f553fe5696cf03f41fbd5fd56a12/hosts",
+    "LogPath": "/var/lib/docker/containers/b9baf90d2ee4da190ae3c5a2bd2666d5bb09f553fe5696cf03f41fbd5fd56a12/b9baf90d2ee4da190ae3c5a2bd2666d5bb09f553fe5696cf03f41fbd5fd56a12-json.log",
+    "Name": "/pqbr-f305-P119-server",
+    "RestartCount": 0,
+    "Driver": "overlayfs",
+    "Platform": "linux",
+    "MountLabel": "",
+    "ProcessLabel": "",
+    "AppArmorProfile": "docker-default",
+    "ExecIDs": null,
+    "HostConfig": {
+      "Binds": null,
+      "ContainerIDFile": "",
+      "LogConfig": {
+        "Type": "json-file",
+        "Config": {
+          "max-file": "3",
+          "max-size": "50m"
+        }
+      },
+      "NetworkMode": "42b788276a4def56829d2016957edaed91dec677d57198f092421c8e37ca55a0",
+      "PortBindings": {},
+      "RestartPolicy": {
+        "Name": "no",
+        "MaximumRetryCount": 0
+      },
+      "AutoRemove": false,
+      "VolumeDriver": "",
+      "VolumesFrom": null,
+      "ConsoleSize": [
+        0,
+        0
+      ],
+      "CapAdd": null,
+      "CapDrop": [
+        "ALL"
+      ],
+      "CgroupnsMode": "private",
+      "Dns": [
+        "127.0.0.1"
+      ],
+      "DnsOptions": [],
+      "DnsSearch": [],
+      "ExtraHosts": null,
+      "GroupAdd": null,
+      "IpcMode": "private",
+      "Cgroup": "",
+      "Links": null,
+      "OomScoreAdj": 0,
+      "PidMode": "",
+      "Privileged": false,
+      "PublishAllPorts": false,
+      "ReadonlyRootfs": true,
+      "SecurityOpt": [
+        "no-new-privileges:true"
+      ],
+      "Tmpfs": {
+        "/tmp": "rw,nosuid,nodev,size=128m"
+      },
+      "UTSMode": "",
+      "UsernsMode": "",
+      "ShmSize": 67108864,
+      "Sysctls": {
+        "net.ipv6.conf.all.disable_ipv6": "1",
+        "net.ipv6.conf.default.disable_ipv6": "1"
+      },
+      "Runtime": "runc",
+      "Isolation": "",
+      "CpuShares": 0,
+      "Memory": 2147483648,
+      "NanoCpus": 2000000000,
+      "CgroupParent": "",
+      "BlkioWeight": 0,
+      "BlkioWeightDevice": [],
+      "BlkioDeviceReadBps": [],
+      "BlkioDeviceWriteBps": [],
+      "BlkioDeviceReadIOps": [],
+      "BlkioDeviceWriteIOps": [],
+      "CpuPeriod": 0,
+      "CpuQuota": 0,
+      "CpuRealtimePeriod": 0,
+      "CpuRealtimeRuntime": 0,
+      "CpusetCpus": "",
+      "CpusetMems": "",
+      "Devices": [],
+      "DeviceCgroupRules": null,
+      "DeviceRequests": null,
+      "MemoryReservation": 0,
+      "MemorySwap": 4294967296,
+      "MemorySwappiness": null,
+      "OomKillDisable": null,
+      "PidsLimit": 512,
+      "Ulimits": null,
+      "CpuCount": 0,
+      "CpuPercent": 0,
+      "IOMaximumIOps": 0,
+      "IOMaximumBandwidth": 0,
+      "Mounts": [
+        {
+          "Type": "bind",
+          "Source": "/home/pc/Workspace/PQBR/docs/sdd/evidencias-f3-05-pqbr119-20261017-P119/execucao-P119/config",
+          "Target": "/etc/temporal/experiment",
+          "ReadOnly": true
+        }
+      ],
+      "MaskedPaths": [
+        "/proc/acpi",
+        "/proc/asound",
+        "/proc/interrupts",
+        "/proc/kcore",
+        "/proc/keys",
+        "/proc/latency_stats",
+        "/proc/sched_debug",
+        "/proc/scsi",
+        "/proc/timer_list",
+        "/proc/timer_stats",
+        "/sys/devices/virtual/powercap",
+        "/sys/firmware",
+        "/sys/devices/system/cpu/cpu0/thermal_throttle",
+        "/sys/devices/system/cpu/cpu1/thermal_throttle",
+        "/sys/devices/system/cpu/cpu2/thermal_throttle",
+        "/sys/devices/system/cpu/cpu3/thermal_throttle",
+        "/sys/devices/system/cpu/cpu4/thermal_throttle",
+        "/sys/devices/system/cpu/cpu5/thermal_throttle",
+        "/sys/devices/system/cpu/cpu6/thermal_throttle",
+        "/sys/devices/system/cpu/cpu7/thermal_throttle",
+        "/sys/devices/system/cpu/cpu8/thermal_throttle",
+        "/sys/devices/system/cpu/cpu9/thermal_throttle",
+        "/sys/devices/system/cpu/cpu10/thermal_throttle",
+        "/sys/devices/system/cpu/cpu11/thermal_throttle",
+        "/sys/devices/system/cpu/cpu12/thermal_throttle",
+        "/sys/devices/system/cpu/cpu13/thermal_throttle",
+        "/sys/devices/system/cpu/cpu14/thermal_throttle",
+        "/sys/devices/system/cpu/cpu15/thermal_throttle",
+        "/sys/devices/system/cpu/cpu16/thermal_throttle",
+        "/sys/devices/system/cpu/cpu17/thermal_throttle",
+        "/sys/devices/system/cpu/cpu18/thermal_throttle",
+        "/sys/devices/system/cpu/cpu19/thermal_throttle",
+        "/sys/devices/system/cpu/cpu20/thermal_throttle",
+        "/sys/devices/system/cpu/cpu21/thermal_throttle",
+        "/sys/devices/system/cpu/cpu22/thermal_throttle",
+        "/sys/devices/system/cpu/cpu23/thermal_throttle"
+      ],
+      "ReadonlyPaths": [
+        "/proc/bus",
+        "/proc/fs",
+        "/proc/irq",
+        "/proc/sys",
+        "/proc/sysrq-trigger"
+      ]
+    },
+    "Storage": {
+      "RootFS": {
+        "Snapshot": {
+          "Name": "overlayfs"
+        }
+      }
+    },
+    "Mounts": [
+      {
+        "Type": "bind",
+        "Source": "/home/pc/Workspace/PQBR/docs/sdd/evidencias-f3-05-pqbr119-20261017-P119/execucao-P119/config",
+        "Destination": "/etc/temporal/experiment",
+        "Mode": "",
+        "RW": false,
+        "Propagation": "rprivate"
+      }
+    ],
+    "Config": {
+      "Hostname": "b9baf90d2ee4",
+      "Domainname": "",
+      "User": "temporal",
+      "AttachStdin": false,
+      "AttachStdout": true,
+      "AttachStderr": true,
+      "Tty": false,
+      "OpenStdin": false,
+      "StdinOnce": false,
+      "Env": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      ],
+      "Cmd": [
+        "--config-file",
+        "/etc/temporal/experiment/server.yaml",
+        "--allow-no-auth",
+        "start"
+      ],
+      "Image": "temporalio/server:1.32.1",
+      "Volumes": null,
+      "WorkingDir": "/etc/temporal",
+      "Entrypoint": [
+        "/usr/local/bin/temporal-server"
+      ],
+      "Labels": {
+        "com.temporal.server.version": "1.32.1",
+        "org.opencontainers.image.created": "2026-10-07T18:25:53Z",
+        "org.opencontainers.image.description": "Temporal Server",
+        "org.opencontainers.image.licenses": "MIT",
+        "org.opencontainers.image.revision": "af08a5e5f2dd40f545f2afac7780daaa6987001e",
+        "org.opencontainers.image.source": "https://github.com/temporalio/temporal",
+        "org.opencontainers.image.title": "server",
+        "org.opencontainers.image.url": "https://github.com/temporalio/temporal",
+        "org.opencontainers.image.version": "1.32.1",
+        "pqbr.candidate.run": "f305-p119-P119"
+      }
+    },
+    "NetworkSettings": {
+      "SandboxID": "e5aee17dfde7edcc2570706636ad08ac1914f9033bbc1244ea02321a98ac218e",
+      "SandboxKey": "/var/run/docker/netns/e5aee17dfde7",
+      "Ports": {},
+      "Networks": {
+        "pqbr-f305-P119-net": {
+          "IPAMConfig": {
+            "IPv4Address": "172.29.0.3"
+          },
+          "Links": null,
+          "Aliases": null,
+          "DriverOpts": null,
+          "GwPriority": 0,
+          "NetworkID": "42b788276a4def56829d2016957edaed91dec677d57198f092421c8e37ca55a0",
+          "EndpointID": "0dc0e882961755e19a113bca978e267c577304e7fc329ab673d9ad844bd3b639",
+          "Gateway": "",
+          "IPAddress": "172.29.0.3",
+          "MacAddress": "56:e1:43:14:1d:f0",
+          "IPPrefixLen": 16,
+          "IPv6Gateway": "",
+          "GlobalIPv6Address": "",
+          "GlobalIPv6PrefixLen": 0,
+          "DNSNames": [
+            "pqbr-f305-P119-server",
+            "b9baf90d2ee4"
+          ]
+        }
+      }
+    },
+    "ImageManifestDescriptor": {
+      "mediaType": "application/vnd.oci.image.manifest.v1+json",
+      "digest": "sha256:2695f2564ec51aa84232bf3fa59b31e2cce99bec437a64f5bc487cbe21b2de0e",
+      "size": 1241,
+      "platform": {
+        "architecture": "amd64",
+        "os": "linux"
+      }
+    }
+  },
+  "routes_ipv4": [
+    {
+      "dst": "172.29.0.0/16",
+      "dev": "eth0",
+      "protocol": "kernel",
+      "scope": "link",
+      "prefsrc": "172.29.0.3",
+      "flags": []
+    }
+  ],
+  "routes_ipv6": [],
+  "addresses": [
+    {
+      "ifindex": 1,
+      "ifname": "lo",
+      "flags": [
+        "LOOPBACK",
+        "UP",
+        "LOWER_UP"
+      ],
+      "mtu": 65536,
+      "qdisc": "noqueue",
+      "operstate": "UNKNOWN",
+      "group": "default",
+      "txqlen": 1000,
+      "link_type": "loopback",
+      "address": "00:00:00:00:00:00",
+      "broadcast": "00:00:00:00:00:00",
+      "addr_info": [
+        {
+          "family": "inet",
+          "local": "127.0.0.1",
+          "prefixlen": 8,
+          "scope": "host",
+          "label": "lo",
+          "valid_life_time": 4294967295,
+          "preferred_life_time": 4294967295
+        }
+      ]
+    },
+    {
+      "ifindex": 2,
+      "link_index": 39,
+      "ifname": "eth0",
+      "flags": [
+        "BROADCAST",
+        "MULTICAST",
+        "UP",
+        "LOWER_UP"
+      ],
+      "mtu": 1500,
+      "qdisc": "noqueue",
+      "operstate": "UP",
+      "group": "default",
+      "link_type": "ether",
+      "address": "56:e1:43:14:1d:f0",
+      "broadcast": "ff:ff:ff:ff:ff:ff",
+      "link_netnsid": 0,
+      "addr_info": [
+        {
+          "family": "inet",
+          "local": "172.29.0.3",
+          "prefixlen": 16,
+          "broadcast": "172.29.255.255",
+          "scope": "global",
+          "label": "eth0",
+          "valid_life_time": 4294967295,
+          "preferred_life_time": 4294967295
+        }
+      ]
+    }
+  ],
+  "host_bridge": [
+    {
+      "ifindex": 36,
+      "ifname": "pqbrfcp119",
+      "flags": [
+        "BROADCAST",
+        "MULTICAST",
+        "UP",
+        "LOWER_UP"
+      ],
+      "mtu": 1500,
+      "qdisc": "noqueue",
+      "operstate": "UP",
+      "group": "default",
+      "link_type": "ether",
+      "address": "5a:7d:8d:db:c0:50",
+      "broadcast": "ff:ff:ff:ff:ff:ff",
+      "addr_info": []
+    }
+  ],
+  "route_get_ipv4": "RTNETLINK answers: Network is unreachable\n",
+  "route_get_ipv6": "RTNETLINK answers: Network is unreachable\n",
+  "sem_rota_padrao": true,
+  "bridge_host_sem_endereco": true,
+  "ipv6_desativado": true
+}

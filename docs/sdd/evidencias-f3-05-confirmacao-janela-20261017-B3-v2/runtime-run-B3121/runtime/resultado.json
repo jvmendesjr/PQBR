@@ -1,0 +1,106 @@
+{
+  "status": "PASS",
+  "ticket": "PQBR-121",
+  "interactionId": "ee39501d-3787-470a-b871-7800669759b9",
+  "roundCount": 1,
+  "firstStatus": "FAILED",
+  "firstAttemptCount": 1,
+  "firstRerunCount": 0,
+  "secondAttemptCount": 1,
+  "secondFakeEffectCount": 1,
+  "resumeCount": 1,
+  "receiptDeliveries": 2,
+  "duplicateReceiptNoEffectCount": 1,
+  "externalRealEffectCount": 0,
+  "serverVersion": "1.32.1",
+  "scope": {
+    "issueId": "730f420b-4d74-48be-894c-a79b13c035f2",
+    "interactionId": "ee39501d-3787-470a-b871-7800669759b9",
+    "scopeId": "scope-B3-next-once-v1",
+    "sessionId": "session-B3-next-disposable-v1",
+    "operationId": "second-B3-next-accepted-v1",
+    "idempotencyKey": "pqbr-f3-05-B3-next-single-proof-v2"
+  },
+  "durableLocal": {
+    "receiptCount": 1,
+    "outboxCount": 1,
+    "effectCount": 1,
+    "receiptStates": [
+      [
+        "CONSUMED",
+        1
+      ]
+    ],
+    "outboxStates": [
+      [
+        "ACKED",
+        2
+      ]
+    ]
+  },
+  "newProcessReadAfterCommit": [
+    1,
+    1,
+    "SENDING"
+  ],
+  "calls": [
+    {
+      "operation": "first-B3-next-failed-v1",
+      "attempt": 1
+    },
+    {
+      "operation": "second-B3-next-accepted-v1",
+      "attempt": 1
+    }
+  ],
+  "histories": [
+    {
+      "workflowId": "session-B3-next-disposable-v1",
+      "status": "COMPLETED",
+      "events": 47,
+      "replay": "ok"
+    },
+    {
+      "workflowId": "first-B3-next-failed-v1",
+      "status": "FAILED",
+      "events": 11,
+      "replay": "ok"
+    },
+    {
+      "workflowId": "second-B3-next-accepted-v1",
+      "status": "COMPLETED",
+      "events": 11,
+      "replay": "ok"
+    }
+  ],
+  "finalState": {
+    "accepted": [
+      "first-B3-next-failed-v1",
+      "second-B3-next-accepted-v1"
+    ],
+    "consumed": {
+      "receipt:ee39501d-3787-470a-b871-7800669759b9": {
+        "acceptedBy": "eHIQgWDGucnmgW8xT19VvSsypXRdbTr7",
+        "id": "receipt:ee39501d-3787-470a-b871-7800669759b9",
+        "manifestHash": "43aa3313386c9cd46ba6b7576b1f0ad4f9d86e7554ab3a1f84b867997a48da11",
+        "resolvedAt": "2026-10-17T22:46:24.589Z",
+        "snapshotHash": "9583ce013c284d62b96af62ea717ad15a9a33657c8d172392ce83a9d26cacbce",
+        "wire": {
+          "idempotencyKey": "pqbr-f3-05-B3-next-single-proof-v2",
+          "interactionId": "ee39501d-3787-470a-b871-7800669759b9",
+          "issueId": "730f420b-4d74-48be-894c-a79b13c035f2",
+          "operationId": "second-B3-next-accepted-v1",
+          "scopeId": "scope-B3-next-once-v1",
+          "sessionId": "session-B3-next-disposable-v1"
+        }
+      }
+    },
+    "duplicates": 1,
+    "firstStatus": "FAILED",
+    "pending": [],
+    "phase": "DONE",
+    "resumes": 1,
+    "secondStatus": "COMPLETED"
+  },
+  "limits": "GET Board real no host; snapshot com freshness 60s validado em Activity fake; receipt/outbox SQLite FULL local e dedup no histórico Temporal descartável. Sem crash injection, atomicidade distribuída, fencing ou exactly-once externo. Harness novo separado, sem mudar candidatas/produção."
+}

@@ -1,0 +1,15 @@
+{
+  "roadmapInsertionOnlyVerifiedAfterWrite": true,
+  "receiptMatchesDatabase": true,
+  "pendingCount": 0,
+  "resumeCount": 0,
+  "effectCount": 0,
+  "artifactFiles": [
+    "README.md",
+    "test_integracao_d2.py",
+    "receipt.json",
+    "resultado.json",
+    "audit.sqlite3",
+    "nota-roadmap.txt"
+  ]
+}

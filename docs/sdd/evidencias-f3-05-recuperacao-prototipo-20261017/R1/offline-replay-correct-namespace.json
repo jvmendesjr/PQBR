@@ -1,0 +1,262 @@
+[
+  {
+    "arquivo": "test_confirmacao_antecipada_nao_autoriza_falha_futura.01.history.json",
+    "namespace": "f3-05-recovery",
+    "replay": "ok"
+  },
+  {
+    "arquivo": "test_continue_as_new_preserva_ids_e_resultados.01.history.json",
+    "namespace": "f3-05-candidate",
+    "replay": "ok"
+  },
+  {
+    "arquivo": "test_continue_as_new_preserva_ids_e_resultados.02.history.json",
+    "namespace": "f3-05-candidate",
+    "replay": "ok"
+  },
+  {
+    "arquivo": "test_continue_as_new_preserva_ids_e_resultados.03.history.json",
+    "namespace": "f3-05-candidate",
+    "replay": "ok"
+  },
+  {
+    "arquivo": "test_continue_as_new_transfere_pausa_fila_e_dedup.01.history.json",
+    "namespace": "f3-05-recovery",
+    "replay": "ok"
+  },
+  {
+    "arquivo": "test_continue_as_new_transfere_pausa_fila_e_dedup.02.history.json",
+    "namespace": "f3-05-recovery",
+    "replay": "ok"
+  },
+  {
+    "arquivo": "test_dedup_payload_config_e_versao.01.history.json",
+    "namespace": "f3-05-candidate",
+    "replay": "ok"
+  },
+  {
+    "arquivo": "test_dedup_payload_config_e_versao.02.history.json",
+    "namespace": "f3-05-candidate",
+    "replay": "ok"
+  },
+  {
+    "arquivo": "test_duas_falhas_recusam_recuperacao_obsoleta.01.history.json",
+    "namespace": "f3-05-recovery",
+    "replay": "ok"
+  },
+  {
+    "arquivo": "test_duas_falhas_recusam_recuperacao_obsoleta.02.history.json",
+    "namespace": "f3-05-recovery",
+    "replay": "ok"
+  },
+  {
+    "arquivo": "test_erro_desconhecido_propaga_sem_recuperacao.01.history.json",
+    "namespace": "f3-05-recovery",
+    "replay": "ok"
+  },
+  {
+    "arquivo": "test_excecao_tecnica_falha_sem_retry_fallback_ou_proximo.01.history.json",
+    "namespace": "f3-05-candidate",
+    "replay": "ok"
+  },
+  {
+    "arquivo": "test_excecao_tecnica_falha_sem_retry_fallback_ou_proximo.02.history.json",
+    "namespace": "f3-05-candidate",
+    "replay": "ok"
+  },
+  {
+    "arquivo": "test_fila_camofox_sem_consumidor_e_retomada_explicita.01.history.json",
+    "namespace": "f3-05-candidate",
+    "replay": "ok"
+  },
+  {
+    "arquivo": "test_fila_camofox_sem_consumidor_e_retomada_explicita.02.history.json",
+    "namespace": "f3-05-candidate",
+    "replay": "ok"
+  },
+  {
+    "arquivo": "test_fila_camofox_sem_consumidor_e_retomada_explicita.03.history.json",
+    "namespace": "f3-05-candidate",
+    "replay": "ok"
+  },
+  {
+    "arquivo": "test_ingresso_invalido_nao_despacha.01.history.json",
+    "namespace": "f3-05-recovery",
+    "replay": "ok"
+  },
+  {
+    "arquivo": "test_mesma_sessao_concorrente_sem_sobreposicao.01.history.json",
+    "namespace": "f3-05-candidate",
+    "replay": "ok"
+  },
+  {
+    "arquivo": "test_mesma_sessao_concorrente_sem_sobreposicao.02.history.json",
+    "namespace": "f3-05-candidate",
+    "replay": "ok"
+  },
+  {
+    "arquivo": "test_mesma_sessao_concorrente_sem_sobreposicao.03.history.json",
+    "namespace": "f3-05-candidate",
+    "replay": "ok"
+  },
+  {
+    "arquivo": "test_mesma_sessao_concorrente_sem_sobreposicao.04.history.json",
+    "namespace": "f3-05-candidate",
+    "replay": "ok"
+  },
+  {
+    "arquivo": "test_mesma_sessao_concorrente_sem_sobreposicao.05.history.json",
+    "namespace": "f3-05-candidate",
+    "replay": "ok"
+  },
+  {
+    "arquivo": "test_mesma_sessao_concorrente_sem_sobreposicao.06.history.json",
+    "namespace": "f3-05-candidate",
+    "replay": "ok"
+  },
+  {
+    "arquivo": "test_mesma_sessao_concorrente_sem_sobreposicao.07.history.json",
+    "namespace": "f3-05-candidate",
+    "replay": "ok"
+  },
+  {
+    "arquivo": "test_mesma_sessao_concorrente_sem_sobreposicao.08.history.json",
+    "namespace": "f3-05-candidate",
+    "replay": "ok"
+  },
+  {
+    "arquivo": "test_mesma_sessao_concorrente_sem_sobreposicao.09.history.json",
+    "namespace": "f3-05-candidate",
+    "replay": "ok"
+  },
+  {
+    "arquivo": "test_mesma_sessao_concorrente_sem_sobreposicao.10.history.json",
+    "namespace": "f3-05-candidate",
+    "replay": "ok"
+  },
+  {
+    "arquivo": "test_mesma_sessao_concorrente_sem_sobreposicao.11.history.json",
+    "namespace": "f3-05-candidate",
+    "replay": "ok"
+  },
+  {
+    "arquivo": "test_mesma_sessao_concorrente_sem_sobreposicao.12.history.json",
+    "namespace": "f3-05-candidate",
+    "replay": "ok"
+  },
+  {
+    "arquivo": "test_mesma_sessao_concorrente_sem_sobreposicao.13.history.json",
+    "namespace": "f3-05-candidate",
+    "replay": "ok"
+  },
+  {
+    "arquivo": "test_pausa_recusa_comandos_e_recupera_so_aceitos.01.history.json",
+    "namespace": "f3-05-recovery",
+    "replay": "ok"
+  },
+  {
+    "arquivo": "test_pausa_recusa_comandos_e_recupera_so_aceitos.02.history.json",
+    "namespace": "f3-05-recovery",
+    "replay": "ok"
+  },
+  {
+    "arquivo": "test_replay_versao_anterior_sem_patch_e_nova_com_patch.01.history.json",
+    "namespace": "f3-05-candidate",
+    "replay": "ok"
+  },
+  {
+    "arquivo": "test_replay_versao_anterior_sem_patch_e_nova_com_patch.02.history.json",
+    "namespace": "f3-05-candidate",
+    "replay": "ok"
+  },
+  {
+    "arquivo": "test_replay_versao_anterior_sem_patch_e_nova_com_patch.03.history.json",
+    "namespace": "f3-05-candidate",
+    "replay": "ok"
+  },
+  {
+    "arquivo": "test_replay_versao_anterior_sem_patch_e_nova_com_patch.04.history.json",
+    "namespace": "f3-05-candidate",
+    "replay": "ok"
+  },
+  {
+    "arquivo": "test_restart_durante_pausa_e_apos_recuperacao.01.history.json",
+    "namespace": "f3-05-recovery",
+    "replay": "ok"
+  },
+  {
+    "arquivo": "test_restart_durante_pausa_e_apos_recuperacao.02.history.json",
+    "namespace": "f3-05-recovery",
+    "replay": "ok"
+  },
+  {
+    "arquivo": "test_restart_worker_reconstroi_dedup_do_historico.01.history.json",
+    "namespace": "f3-05-candidate",
+    "replay": "ok"
+  },
+  {
+    "arquivo": "test_restart_worker_reconstroi_dedup_do_historico.02.history.json",
+    "namespace": "f3-05-candidate",
+    "replay": "ok"
+  },
+  {
+    "arquivo": "test_resultado_anterior_preservado_apos_falha.01.history.json",
+    "namespace": "f3-05-recovery",
+    "replay": "ok"
+  },
+  {
+    "arquivo": "test_sem_worker_workflow_rpc_nao_processa_e_retoma.01.history.json",
+    "namespace": "f3-05-candidate",
+    "replay": "ok"
+  },
+  {
+    "arquivo": "test_sem_worker_workflow_rpc_nao_processa_e_retoma.02.history.json",
+    "namespace": "f3-05-candidate",
+    "replay": "ok"
+  },
+  {
+    "arquivo": "test_sem_worker_workflow_rpc_nao_processa_e_retoma.03.history.json",
+    "namespace": "f3-05-candidate",
+    "replay": "ok"
+  },
+  {
+    "arquivo": "test_sessoes_diferentes_em_paralelo.01.history.json",
+    "namespace": "f3-05-candidate",
+    "replay": "ok"
+  },
+  {
+    "arquivo": "test_sessoes_diferentes_em_paralelo.02.history.json",
+    "namespace": "f3-05-candidate",
+    "replay": "ok"
+  },
+  {
+    "arquivo": "test_sessoes_diferentes_em_paralelo.03.history.json",
+    "namespace": "f3-05-candidate",
+    "replay": "ok"
+  },
+  {
+    "arquivo": "test_sessoes_diferentes_em_paralelo.04.history.json",
+    "namespace": "f3-05-candidate",
+    "replay": "ok"
+  },
+  {
+    "arquivo": "test_trava_sensivel_e_conta_divergente.01.history.json",
+    "namespace": "f3-05-candidate",
+    "replay": "ok"
+  },
+  {
+    "arquivo": "test_trava_sensivel_e_conta_divergente.02.history.json",
+    "namespace": "f3-05-candidate",
+    "replay": "ok"
+  },
+  {
+    "arquivo": "test_trava_sensivel_e_conta_divergente.03.history.json",
+    "namespace": "f3-05-candidate",
+    "replay": "ok"
+  },
+  {
+    "arquivo": "test_trava_sensivel_e_conta_divergente.04.history.json",
+    "namespace": "f3-05-candidate",
+    "replay": "ok"
+  }
+]

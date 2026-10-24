@@ -44,9 +44,16 @@ def itens():
             yield chave, texto, "PQBR decisão-chave (memória)"
 
 
+def validar_estado(feitos: object) -> dict:
+    if not isinstance(feitos, dict) or any(not isinstance(k, str) or not isinstance(v, str) for k, v in feitos.items()):
+        raise ValueError("estado inválido")
+    from pqbr.seguranca.barreira import exigir_limpo
+    exigir_limpo(feitos, "log")
+    return feitos
+
 def main() -> int:
     ESTADO.parent.mkdir(parents=True, exist_ok=True)
-    feitos = json.loads(ESTADO.read_text()) if ESTADO.exists() else {}
+    feitos = validar_estado(json.loads(ESTADO.read_text()) if ESTADO.exists() else {})
     n = 0
     for chave, texto, ctx in itens():
         h = hashlib.sha256(texto.encode()).hexdigest()[:16]
@@ -54,7 +61,8 @@ def main() -> int:
         try:
             reter(texto, ctx); feitos[chave] = h; n += 1
         except Exception as e:  # barreira bloqueou ou API fora: pula o item, registra
-            print(f"pulado {chave}: {type(e).__name__}", file=sys.stderr)
+            print(f"pulado: {type(e).__name__}", file=sys.stderr)
+    feitos = validar_estado(feitos)
     ESTADO.write_text(json.dumps(feitos)); print(f"indexados {n} novos; total {len(feitos)}")
     return 0
 

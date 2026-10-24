@@ -1,0 +1,37 @@
+{
+  "teste": "test_passo_sensivel_para_antes_do_backend",
+  "workflow_id": "f3-05-teste-218de7dc116841398fff6cb50c3e1853",
+  "replay": "ok",
+  "eventos": 17,
+  "atividades": [
+    {
+      "activity": "triagem_jev",
+      "attempt": 1,
+      "n": null
+    },
+    {
+      "activity": "registrar_correcao",
+      "attempt": 1,
+      "n": null
+    }
+  ],
+  "registros": [
+    {
+      "resultado": "sensivel",
+      "tentativas": 0,
+      "motivo": "sensivel: passo sensível: solicitar pagamento",
+      "proposta_script": null,
+      "chamar_jose": true
+    }
+  ],
+  "resultado": {
+    "resultado": "sensivel",
+    "tentativas": 0,
+    "motivo": "sensivel: passo sensível: solicitar pagamento",
+    "proposta_script": null,
+    "chamar_jose": true
+  },
+  "falha": null,
+  "timers": 0,
+  "esperas": []
+}

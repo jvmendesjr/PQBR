@@ -1,0 +1,5 @@
+{
+  "status": "NAO_VALIDADO",
+  "motivo": "Method temporal.api.workflowservice.v1.WorkflowService/DeleteWorkflowExecution is unimplemented",
+  "limite": "Sem expiracao real de retention nem simulacao de remocao"
+}

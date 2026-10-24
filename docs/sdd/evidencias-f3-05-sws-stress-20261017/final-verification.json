@@ -1,0 +1,17 @@
+{
+  "report_path": "/home/pc/Workspace/PQBR/docs/sdd/f3-05-sws-stress-20261017.md",
+  "report_sha256": "3175bf883f633bf59b9cb29eb65451e85d9f975af3d1710f605a4501ee4cc573",
+  "unchanged_baseline_files": 174,
+  "changed_baseline_files": [],
+  "remaining_processes_in_test_netns": [],
+  "new_git_status_entries": [
+    "?? docs/sdd/f3-05-sws-stress-20261017.md",
+    "?? tests/workflows/run_sws_stress_optin.sh",
+    "?? tests/workflows/stress_signal_with_start_optin.py"
+  ],
+  "removed_git_status_entries": [],
+  "experimental_source_hashes": {
+    "tests/workflows/stress_signal_with_start_optin.py": "9bbce4a285e124accacf3ade749b804bbb7c52cc9e969d65bc2498bb3adf160e",
+    "tests/workflows/run_sws_stress_optin.sh": "0373da8333365add7636033c5dee56e739ecfe9f2be6ee5883cc0015bb7fdf1f"
+  }
+}

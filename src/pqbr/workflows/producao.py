@@ -15,6 +15,7 @@ from temporalio.exceptions import ApplicationError
 with workflow.unsafe.imports_passed_through():
     from ..contratos import GradeDiaria, ItemGrade, VereditoAuditor, RoteiroShort, CTA, BlocoVisual, CenaVisual, ESTILO_PADRAO_2D, PUBLICAVEL, VereditoTipo
     from ..pipeline.grade import Candidato, montar_grade
+    from .narracao import gerar_narracao
 
 FUSO = timezone(timedelta(hours=-3))
 MARGEM_PRONTO = timedelta(minutes=30)   # PROPOSTA: vídeo agendado até 30 min antes da janela
@@ -80,8 +81,8 @@ async def gerar_roteiro_nb(p: PedidoEpisodio) -> RoteiroShort:
                         personagem="adulto de uns 35 anos, camiseta verde, bigode (simulado)",
                         cenas=[CenaVisual(fala=f, acao="personagem reage", enquadramento="plano médio",
                                           ambiente="cozinha brasileira") for f in falas[:2]])
-    return RoteiroShort(episodio_id=p.codigo.lower(), titulo=p.item.tema[:100], falas=falas, entidades_cena=["cena"],
-                        bloco_visual=bloco)
+    return RoteiroShort(episodio_id=p.codigo.lower(), titulo=p.item.tema[:100], falas=falas, tipo_cta="fallback",
+                        entidades_cena=["cena"], bloco_visual=bloco)
 
 
 @activity.defn
@@ -133,13 +134,17 @@ class EpisodioProducaoWorkflow:
     async def _produzir(self, p: PedidoEpisodio) -> ResultadoEpisodio:
         if p.simulacao and p.simulacao.atraso_producao_s:
             await workflow.sleep(p.simulacao.atraso_producao_s)
-        await workflow.execute_activity(gerar_roteiro_nb, p, start_to_close_timeout=timedelta(minutes=20), retry_policy=_RT)
+        roteiro = await workflow.execute_activity(gerar_roteiro_nb, p, start_to_close_timeout=timedelta(minutes=20), retry_policy=_RT)
         v = await workflow.execute_activity(auditar, p, start_to_close_timeout=timedelta(minutes=20), retry_policy=_RT)
         if v.veredito not in PUBLICAVEL:
             return ResultadoEpisodio(codigo=p.codigo, estado="reprovado", motivo=v.veredito)
+        # A síntese é uma Activity externa; uma tentativa evita duplicar consumo em timeout ambíguo.
+        await workflow.execute_activity(gerar_narracao, args=[p.codigo, roteiro.falas],
+                                        start_to_close_timeout=timedelta(minutes=3),
+                                        retry_policy=RetryPolicy(maximum_attempts=1))
         await workflow.execute_activity(agendar_publicacao, p, start_to_close_timeout=timedelta(minutes=20),
                                         retry_policy=RetryPolicy(maximum_attempts=1))  # não reenvia sem consultar
         return ResultadoEpisodio(codigo=p.codigo, estado="agendado")
 
 
-ATIVIDADES = [coletar_candidatos, temas_usados, gravar_grade, gerar_roteiro_nb, auditar, agendar_publicacao]
+ATIVIDADES = [coletar_candidatos, temas_usados, gravar_grade, gerar_roteiro_nb, auditar, gerar_narracao, agendar_publicacao]

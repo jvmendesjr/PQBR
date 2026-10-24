@@ -45,12 +45,13 @@ class PropostaBruta(BaseModel):
 
 
 async def _cli(*args: str) -> object:
+    _barreira(args)
     env = {k: v for k, v in os.environ.items() if k != "PAPERCLIP_API_KEY"}  # a ponte age como board
     p = await asyncio.create_subprocess_exec(NODE, CLI, *args, "--json", env=env,
                                             stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE)
     out, err = await p.communicate()
     if p.returncode != 0:
-        raise ApplicationError(f"paperclip cli falhou ({args[0]} {args[1]}): {err.decode()[-300:]}")
+        raise ApplicationError(f"paperclip cli falhou (exit={p.returncode})")
     return json.loads(out or b"null")
 
 

@@ -2,6 +2,7 @@
 Nunca devolve nem registra a chave."""
 from __future__ import annotations
 import json, os, urllib.request, urllib.error
+from ..seguranca.barreira import exigir_limpo
 
 def _base() -> str:
     """URL da API: PQBR_PAPERCLIP_API, senão o apiBase do contexto do CLI (o PAPERCLIP_API_URL do run não escuta)."""
@@ -16,6 +17,7 @@ BASE = _base().rstrip("/")
 
 
 def _req(metodo: str, caminho: str, corpo: dict | None = None) -> dict | list:
+    exigir_limpo({"caminho": caminho, "corpo": corpo}, "ticket")
     h = {"Authorization": "Bearer " + os.environ["PAPERCLIP_API_KEY"], "Content-Type": "application/json"}
     if os.environ.get("PAPERCLIP_RUN_ID"):
         h["X-Paperclip-Run-Id"] = os.environ["PAPERCLIP_RUN_ID"]
@@ -26,7 +28,8 @@ def _req(metodo: str, caminho: str, corpo: dict | None = None) -> dict | list:
             t = resp.read()
             return json.loads(t) if t else {}
     except urllib.error.HTTPError as e:
-        raise RuntimeError(f"Paperclip {metodo} {caminho}: HTTP {e.code} {e.read()[:200]!r}") from None
+        # O servidor pode ecoar conteúdo sensível no corpo da resposta.
+        raise RuntimeError(f"Paperclip: HTTP {e.code}") from None
 
 
 def eu() -> dict: return _req("GET", "/api/agents/me")

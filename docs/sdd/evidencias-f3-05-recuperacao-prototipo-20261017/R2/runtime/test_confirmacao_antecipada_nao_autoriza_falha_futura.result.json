@@ -1,0 +1,133 @@
+{
+  "estado_final": {
+    "versao": 1,
+    "aceitos": {
+      "falha": {
+        "ferramenta": "camofox",
+        "sessao": "test_confirmacao_antecipada_nao_autoriza_falha_futura",
+        "passo": "falha",
+        "erro": "falha-tecnica",
+        "episodio": null,
+        "simulacao": {
+          "triagem": "corrigivel",
+          "intervencoes": [
+            true
+          ],
+          "verificacoes": [
+            true
+          ],
+          "conta_confere": true
+        }
+      },
+      "seguinte": {
+        "ferramenta": "camofox",
+        "sessao": "test_confirmacao_antecipada_nao_autoriza_falha_futura",
+        "passo": "seguinte",
+        "erro": "falha falsa",
+        "episodio": null,
+        "simulacao": {
+          "triagem": "corrigivel",
+          "intervencoes": [
+            true
+          ],
+          "verificacoes": [
+            true
+          ],
+          "conta_confere": true
+        }
+      }
+    },
+    "resultados": {
+      "seguinte": {
+        "resultado": "corrigido",
+        "tentativas": 1,
+        "motivo": "",
+        "proposta_script": "proposta falsa",
+        "chamar_jose": false
+      }
+    },
+    "falhas": {
+      "falha": {
+        "operacao_id": "falha",
+        "filho_id": "teste-f3-05-recuperacao-4d487d946f8bba8ed4573e111e96ec1f246e0ba476a4785c546bd74a029990ff-op-38e55e2c50e69560265c4b1886ab446e1ade639a9b30a3395fa4ae2f1f0ae4f2",
+        "filho_run_id": "01a14ad1-974b-784f-ba0b-7cf78f4e1bff",
+        "revisao": 1,
+        "estado": "falha_tecnica_sintetica",
+        "resultado_efeito": "nao_reconciliado"
+      }
+    },
+    "pendentes": [],
+    "ativo": null,
+    "bloqueio": null,
+    "revisao": 1,
+    "recuperacoes": [
+      {
+        "versao": 1,
+        "decisao": "retomar_somente_pendentes",
+        "revisao": 1,
+        "falha_id": "falha",
+        "filho_run_id": "01a14ad1-974b-784f-ba0b-7cf78f4e1bff",
+        "pendentes": [
+          "seguinte"
+        ]
+      }
+    ],
+    "observacoes": [
+      {
+        "id": "falha",
+        "estado": "aceito"
+      },
+      {
+        "id": "seguinte",
+        "estado": "aceito"
+      },
+      {
+        "estado": "recuperacao_recusada"
+      },
+      {
+        "id": "falha",
+        "estado": "pausado_apos_falha"
+      },
+      {
+        "estado": "recuperacao_aceita"
+      }
+    ],
+    "admissao_fechada": true,
+    "fechando": true,
+    "geracao": 0
+  },
+  "confirmacao_antecipada_recusada": true,
+  "calls": [
+    {
+      "sessao": "test_confirmacao_antecipada_nao_autoriza_falha_futura",
+      "passo": "falha",
+      "inicio": 412030.132194638,
+      "fim": 412030.173774304,
+      "fila": "teste-f3-05-candidato-camofox-test_confirmacao_antecipada_nao_autoriza_falha_futura-recuperacao",
+      "tentativa": 1,
+      "workflow_id": "teste-f3-05-recuperacao-4d487d946f8bba8ed4573e111e96ec1f246e0ba476a4785c546bd74a029990ff-op-38e55e2c50e69560265c4b1886ab446e1ade639a9b30a3395fa4ae2f1f0ae4f2"
+    },
+    {
+      "sessao": "test_confirmacao_antecipada_nao_autoriza_falha_futura",
+      "passo": "seguinte",
+      "inicio": 412030.633424131,
+      "fim": 412030.674878022,
+      "fila": "teste-f3-05-candidato-camofox-test_confirmacao_antecipada_nao_autoriza_falha_futura-recuperacao",
+      "tentativa": 1,
+      "workflow_id": "teste-f3-05-recuperacao-4d487d946f8bba8ed4573e111e96ec1f246e0ba476a4785c546bd74a029990ff-op-739edf885e87448d156ac297dce4c2d419aad8afce10930777cff6b4c4ea4e35"
+    }
+  ],
+  "registros": [
+    {
+      "resultado": "corrigido",
+      "tentativas": 1,
+      "motivo": "",
+      "proposta_script": "proposta falsa",
+      "chamar_jose": false
+    }
+  ],
+  "max_sessao": {
+    "test_confirmacao_antecipada_nao_autoriza_falha_futura": 1
+  },
+  "max_global": 1
+}

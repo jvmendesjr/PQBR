@@ -1,0 +1,14 @@
+{
+  "root": "/home/pc/Workspace/PQBR",
+  "namespace": "f3-05-supervisor",
+  "somente_sintetico": true,
+  "labels": {
+    "pqbr.candidate.run": "f305-supervisor-S1"
+  },
+  "images": [
+    "temporalio/server:1.32.1",
+    "postgres:17-alpine",
+    "temporalio/admin-tools:1.32.1"
+  ],
+  "test_timeout_seconds": 300
+}

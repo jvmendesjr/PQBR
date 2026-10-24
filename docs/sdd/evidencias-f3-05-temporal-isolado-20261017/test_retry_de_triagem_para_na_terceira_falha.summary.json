@@ -1,0 +1,27 @@
+{
+  "teste": "test_retry_de_triagem_para_na_terceira_falha",
+  "workflow_id": "f3-05-teste-cb2ec63263b647fcbf149e4b86c1533c",
+  "replay": "ok",
+  "eventos": 11,
+  "atividades": [
+    {
+      "activity": "triagem_jev",
+      "attempt": 1,
+      "n": null
+    },
+    {
+      "activity": "triagem_jev",
+      "attempt": 2,
+      "n": null
+    },
+    {
+      "activity": "triagem_jev",
+      "attempt": 3,
+      "n": null
+    }
+  ],
+  "registros": [],
+  "resultado": null,
+  "falha": "WorkflowFailureError",
+  "timers": 0
+}

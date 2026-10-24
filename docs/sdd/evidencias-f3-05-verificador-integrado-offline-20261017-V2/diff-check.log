@@ -1,0 +1,7 @@
+PASS verificador_offline.py (no-index exit=1; sem erro de whitespace)
+PASS test_verificador_offline.py (no-index exit=1; sem erro de whitespace)
+PASS verificador_integrado.py (no-index exit=1; sem erro de whitespace)
+PASS test_verificador_integrado.py (no-index exit=1; sem erro de whitespace)
+PASS preservacao_v2.py (no-index exit=1; sem erro de whitespace)
+PASS README.md (no-index exit=1; sem erro de whitespace)
+PASS revisao-estatica.md (no-index exit=1; sem erro de whitespace)

@@ -22,26 +22,49 @@ TEMPLATE = Path(__file__).resolve().parents[3] / "templates" / "auditor" / "VISU
 SEGURANCA = ("parece_pessoa_real", "marca_real", "estereotipo_ofensivo", "texto_com_erro_de_sentido")
 METRICAS = ("segue_estilo_declarado", "mesmo_personagem_do_bloco", "imagem_corresponde_a_fala",
             "legivel_no_celular", "ambiente_brasileiro")
+A9_METRICAS = ("foco_unico_zona_segura", "corresponde_ao_titulo", "legenda_cobre_foco", "tem_texto_na_tela")
+A9_FALHA = {"foco_unico_zona_segura": "nao", "corresponde_ao_titulo": "nao",
+            "legenda_cobre_foco": "sim", "tem_texto_na_tela": "sim"}
 ACEITAVEIS = ("legenda_com_erro",)
-CHAVES = ("tem_personagem", "tem_texto_na_tela") + METRICAS + ACEITAVEIS + SEGURANCA
-PODE_NA = {"mesmo_personagem_do_bloco", "texto_com_erro_de_sentido", "legenda_com_erro"}
+CHAVES = ("tem_personagem", "tem_texto_na_tela") + METRICAS + ACEITAVEIS + SEGURANCA + (
+    "foco_unico_zona_segura", "corresponde_ao_titulo", "legenda_cobre_foco")
+PODE_NA = {"segue_estilo_declarado", "mesmo_personagem_do_bloco", "texto_com_erro_de_sentido", "legenda_com_erro",
+           "imagem_corresponde_a_fala", "foco_unico_zona_segura", "corresponde_ao_titulo", "legenda_cobre_foco"}
 CATEGORIA = {"legenda_com_erro": "legenda", "legivel_no_celular": "visual", "segue_estilo_declarado": "visual",
              "mesmo_personagem_do_bloco": "visual", "imagem_corresponde_a_fala": "visual",
-             "ambiente_brasileiro": "visual", "tem_texto_na_tela": "texto"}
+             "ambiente_brasileiro": "visual", "tem_texto_na_tela": "texto",
+             "foco_unico_zona_segura": "visual", "corresponde_ao_titulo": "visual", "legenda_cobre_foco": "visual"}
 DESCRICAO = {"legenda_com_erro": "legenda do NotebookLM com palavra errada/cortada/fora de sincronia, sem mudar o sentido",
-             "tem_texto_na_tela": "texto escrito dentro da imagem (estilo pede sem texto), sem erro de sentido",
+             "tem_texto_na_tela": "texto escrito dentro do desenho (estilo pede sem texto), sem erro de sentido",
              "legivel_no_celular": "cena pouco legível no celular", "segue_estilo_declarado": "fora do estilo declarado",
              "mesmo_personagem_do_bloco": "personagem diferente do bloco visual",
-             "imagem_corresponde_a_fala": "imagem não ilustra a fala", "ambiente_brasileiro": "ambiente pouco brasileiro"}
+             "imagem_corresponde_a_fala": "imagem não ilustra a fala", "ambiente_brasileiro": "ambiente pouco brasileiro",
+             "foco_unico_zona_segura": "capa sem foco único na zona segura",
+             "corresponde_ao_titulo": "capa não promete o mesmo que o título",
+             "legenda_cobre_foco": "legenda queimada cobre o foco da capa"}
 ORDEM = ("reprova", "terceira_rodada", "aprova_com_ressalva", "aprova")
 
 
-def montar_prompt(bloco_visual: str, cenas: list[tuple[str, str]], rodada: int) -> str:
+def montar_prompt(bloco_visual: str, cenas: list[tuple[str, str]], rodada: int,
+                  titulo: str | None = None, transmitir_texto: bool = False) -> str:
     t = TEMPLATE.read_text(encoding="utf-8")
-    linhas = "\n".join(f"- {i}: {fala}" for i, fala in cenas)
-    return t.replace("__RODADA__", str(rodada)).replace("__BLOCO_VISUAL__", bloco_visual.strip()).replace("__CENAS__", linhas)
-
-
+    if transmitir_texto:
+        bloco = bloco_visual.strip() or "(não fornecido)"
+        linhas = "\n".join(f"- {i}: {fala}" for i, fala in cenas) or "(nenhuma fala fornecida)"
+        titulo_prompt = titulo.strip() if titulo else "(não fornecido; responda na em corresponde_ao_titulo)"
+        modo = "VISUAL + TEXTO; texto autorizado para esta execução"
+    else:
+        bloco = "(não enviado)"
+        linhas = "(nenhuma fala/transcrição enviada)"
+        titulo_prompt = "(não enviado)"
+        modo = "SOMENTE VISUAL; bloco, fala, transcrição e título não enviados"
+    prompt = (t.replace("__RODADA__", str(rodada)).replace("__MODO__", modo)
+              .replace("__TITULO__", titulo_prompt).replace("__BLOCO_VISUAL__", bloco)
+              .replace("__CENAS__", linhas))
+    if not transmitir_texto or not bloco_visual.strip():
+        prompt += ("\nBloco visual não enviado: responda \"na\" em "
+                   "segue_estilo_declarado e mesmo_personagem_do_bloco; não infira esses campos.\n")
+    return prompt
 def _norm(x) -> str | None:
     s = str(x).strip().lower().replace("ã", "a")
     return s if s in ("sim", "nao", "na") else None
@@ -66,6 +89,8 @@ def ler_resposta(texto: str, ids: list[str]) -> tuple[dict, list[str]]:
             if v is None or (v == "na" and k not in PODE_NA):
                 probs.append(f"{cid}:{k}")
                 continue
+            if cid == "CAPA" and k in ("foco_unico_zona_segura", "legenda_cobre_foco") and v == "na":
+                probs.append(f"{cid}:{k}:nao_avaliado")
             r[k] = v
         cenas[cid] = r
     for i in ids:
@@ -82,7 +107,7 @@ def decidir(respostas: list[str], ids: list[str]) -> dict:
         rodadas.append(c)
         problemas += [f"r{n}:{x}" for x in p]
     falhas, divergencias, ressalvas, aceitos = [], [], [], []
-    metricas = {m: [0, 0] for m in METRICAS}  # [sim, total]
+    metricas = {m: [0, 0] for m in METRICAS + A9_METRICAS}  # [passa, total]
     for i in ids:
         for k in SEGURANCA:
             votos = [r[i][k] for r in rodadas if i in r and k in r[i]]
@@ -98,7 +123,17 @@ def decidir(respostas: list[str], ids: list[str]) -> dict:
             if votos and votos.count("nao") == len(votos):
                 ressalvas.append((i, k))
                 aceitos.append((i, k))
+        if i == "CAPA":
+            for k in A9_METRICAS:
+                votos = [r[i][k] for r in rodadas if i in r and k in r[i] and r[i][k] != "na"]
+                metricas[k][0] += sum(v != A9_FALHA[k] for v in votos)
+                metricas[k][1] += len(votos)
+                if votos and all(v == A9_FALHA[k] for v in votos):
+                    ressalvas.append((i, k))
+                    aceitos.append((i, k))
         for k in ACEITAVEIS + ("tem_texto_na_tela",):
+            if i == "CAPA" and k == "tem_texto_na_tela":
+                continue
             votos = [r[i][k] for r in rodadas if i in r and k in r[i] and r[i][k] != "na"]
             if votos and votos.count("sim") == len(votos) and (i, "texto_com_erro_de_sentido") not in falhas:
                 if k != "tem_texto_na_tela":

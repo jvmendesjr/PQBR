@@ -1,0 +1,29 @@
+{
+  "pid": 3967998,
+  "args": [
+    "sudo",
+    "-n",
+    "nsenter",
+    "-t",
+    "3967809",
+    "-n",
+    "/usr/bin/setpriv",
+    "--reuid=1000",
+    "--regid=1000",
+    "--clear-groups",
+    "/usr/bin/env",
+    "-i",
+    "PYTHONPATH=/home/pc/Workspace/PQBR/src:/home/pc/Workspace/PQBR",
+    "PYTHONDONTWRITEBYTECODE=1",
+    "PQBR_CANDIDATE_ISOLATED=1",
+    "PQBR_RECOVERY_ISOLATED=1",
+    "PQBR_CANDIDATE_OUT=/tmp/pqbr-f305-recuperacao-R2/runtime",
+    "/home/pc/Workspace/PQBR/.venv/bin/python",
+    "-m",
+    "unittest",
+    "-v",
+    "tests.workflows.test_f3_05_candidate_runtime",
+    "tests.workflows.test_f3_05_recuperacao_runtime"
+  ],
+  "expected_netns": "net:[4026534544]"
+}

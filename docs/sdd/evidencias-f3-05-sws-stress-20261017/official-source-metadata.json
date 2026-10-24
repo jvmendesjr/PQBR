@@ -1,0 +1,13 @@
+{
+  "TestWorkflowService-official.java": {
+    "url": "https://raw.githubusercontent.com/temporalio/sdk-java/eaa7b337338ebd143a4c6df46b16251f3c130dc3/temporal-test-server/src/main/java/io/temporal/internal/testservice/TestWorkflowService.java",
+    "revision": "eaa7b337338ebd143a4c6df46b16251f3c130dc3",
+    "binary_build_match_proven": false,
+    "sha256": "7fd791e5fd4c52d85d8a5d6da75ff4b52f1f113ca2fe020fa21d0f5cbd1af877"
+  },
+  "SignalWithStartRequest-official.proto": {
+    "url": "https://raw.githubusercontent.com/temporalio/api/master/temporal/api/workflowservice/v1/request_response.proto",
+    "snapshot": "fragmento da mensagem e linhas seguintes; branch master, nao vinculado ao binario local",
+    "sha256": "adb4462d21b31fbbdc8432d007a526dc1449cf6f8c398b1ba6903941fdbcdf45"
+  }
+}

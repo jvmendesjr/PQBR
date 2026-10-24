@@ -1,0 +1,18 @@
+{
+  "workflow_id": "teste-f3-05-supervisor-a82005a074110ba00527905ec8fb88db6223bab5d00f2440290632a110bd9738",
+  "run_id": "a3d08679-5a39-490c-bf18-e161fcb14476",
+  "eventos": 64,
+  "replay": "ok",
+  "activities": [
+    {
+      "nome": "registrar_falha_supervisor_falsa",
+      "fila": "teste-f3-05-candidato-wf-FAKE-H3-test_02_discord_ack_perdido_replay-supervisor",
+      "max_tentativas": 1
+    },
+    {
+      "nome": "reler_confirmacao_canonica_falsa",
+      "fila": "teste-f3-05-candidato-wf-FAKE-H3-test_02_discord_ack_perdido_replay-supervisor",
+      "max_tentativas": 1
+    }
+  ]
+}

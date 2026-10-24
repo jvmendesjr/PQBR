@@ -3,6 +3,8 @@
 Jev faz a triagem → agente com LLM intervém (até 3 tentativas; 5–15 min sorteados no Camofox;
 confere conta/sessão antes de agir) → Jev verifica → registra (banco via Temporal) e aprende
 (Hindsight, sanitizado) → propõe ajuste de script (ticket, 2 aprovações do José).
+No Camofox, há também espera sorteada de 5–15 min entre intervenções (REGRAS §0, item 8),
+independente do timeout da Activity; timer e sorteio pertencem ao workflow Temporal.
 Resultado: corrigido | esgotado | sensivel; só os dois últimos chamam o José.
 
 Backends reais (Jev, agente no Paperclip) ainda não estão ligados: sem `simulacao`, as Activities
@@ -27,8 +29,8 @@ class Simulacao(BaseModel):
     """Só para teste: roteiro do que cada backend devolveria."""
     model_config = ConfigDict(extra="forbid", frozen=True)
     triagem: Literal["corrigivel", "sensivel", "fora_de_escopo"] = "corrigivel"
-    intervencoes: list[bool] = Field(default_factory=lambda: [True])  # resolveu? por tentativa
-    verificacoes: list[bool] = Field(default_factory=lambda: [True])
+    intervencoes: list[bool] = Field(default_factory=lambda: [True], min_length=1)  # resolveu? por tentativa
+    verificacoes: list[bool] = Field(default_factory=lambda: [True], min_length=1)
     conta_confere: bool = True
 
 
@@ -45,7 +47,7 @@ class PedidoCorrecao(BaseModel):
 class Tentativa(BaseModel):
     model_config = ConfigDict(extra="forbid", frozen=True)
     pedido: PedidoCorrecao
-    n: int
+    n: int = Field(ge=1, le=MAX_TENTATIVAS)
 
 
 def _sim(p: PedidoCorrecao) -> Simulacao:
@@ -96,6 +98,12 @@ class CorrecaoAutonomaWorkflow:
             r = ResultadoCorrecao(resultado="sensivel", tentativas=0, motivo=f"{tri.classe}: {tri.motivo}", chamar_jose=True)
             await self._registrar(r); return r
         for n in range(1, MAX_TENTATIVAS + 1):
+            # Sem espera antes da primeira nem após a última/saídas antecipadas.
+            # O patch preserva comandos e sorteios dos históricos sem esse timer.
+            if (p.ferramenta == "camofox" and n > 1
+                    and workflow.patched("f3-05-camofox-intervalo-v1")):
+                espera = workflow.random().randint(CAMOFOX_MIN_S, CAMOFOX_MAX_S)
+                await workflow.sleep(timedelta(seconds=espera))
             limite = (timedelta(seconds=workflow.random().randint(CAMOFOX_MIN_S, CAMOFOX_MAX_S))
                       if p.ferramenta == "camofox" else timedelta(minutes=10))
             t = Tentativa(pedido=p, n=n)

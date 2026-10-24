@@ -1,0 +1,29 @@
+{
+  "teste": "test_excecao_tecnica_propaga_sem_retry_nem_proximo_pedido",
+  "workflow_id": "prototipo-ator-sessao-v1-07aa137bd2dc362b90b33958e3ed6b335ab8385dedfb7454998d1219cf0e9f50",
+  "run_id": "39f1031d-743a-48ae-949a-5de0cffec4fc",
+  "estado": "FAILED",
+  "pending_activities": 0,
+  "replay": "ok",
+  "atividades_agendadas": 1,
+  "fila_explicita": "teste-camofox-ator-a48b4801dfe44f68b8ea320c9837bd62",
+  "calls": [
+    {
+      "pedido": {
+        "falhar": true,
+        "id": "a1",
+        "sessao": "sessao-A"
+      },
+      "inicio": 404528.203659906,
+      "fim": 404528.244086942,
+      "fila": "teste-camofox-ator-a48b4801dfe44f68b8ea320c9837bd62",
+      "workflow_id": "prototipo-ator-sessao-v1-07aa137bd2dc362b90b33958e3ed6b335ab8385dedfb7454998d1219cf0e9f50",
+      "attempt": 1
+    }
+  ],
+  "max_global": 1,
+  "max_por_sessao": {
+    "sessao-A": 1
+  },
+  "erro": "FalhaTecnicaSintetica"
+}

@@ -5,6 +5,8 @@ from pathlib import Path
 from temporalio import activity
 from temporalio.exceptions import ApplicationError
 from .contracts import EpisodioInput, RoteiroShort, OutboxEvento
+from ..seguranca.barreira import exigir_limpo
+from ..seguranca.segredos import SegredoDetectado
 
 RUNTIME = Path(os.environ.get("PQBR_TZ_DIR", Path(__file__).resolve().parents[3] / "runtime" / "tz"))
 RUNTIME.mkdir(parents=True, exist_ok=True)
@@ -14,6 +16,10 @@ SUPABASE_FORA = RUNTIME / "supabase_fora"  # existe = "Supabase" inacessível
 
 
 def _append(p: Path, obj: dict) -> None:
+    try:
+        exigir_limpo(obj, "banco")
+    except SegredoDetectado as e:
+        raise ApplicationError(str(e), type="SegredoDetectado", non_retryable=True) from None
     with open(p, "a") as f:
         fcntl.flock(f, fcntl.LOCK_EX)
         f.write(json.dumps(obj, ensure_ascii=False, default=str) + "\n")
@@ -33,7 +39,7 @@ async def gerar_roteiro(inp: EpisodioInput) -> RoteiroShort:
                         cenas=[CenaVisual(fala=f, acao="personagem reage", enquadramento="plano médio",
                                           ambiente="sala brasileira") for f in falas[:2]])
     return RoteiroShort(episodio_id=inp.episodio_id, titulo=f"Porquê: {inp.tema}"[:100], falas=falas,
-                        entidades_cena=["personagem"], bloco_visual=bloco)
+                        tipo_cta="fallback", entidades_cena=["personagem"], bloco_visual=bloco)
 
 
 @activity.defn

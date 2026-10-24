@@ -1,0 +1,58 @@
+2026-10-17T17:00:57.770249788Z The files belonging to this database system will be owned by user "postgres".
+2026-10-17T17:00:57.770335815Z This user must also own the server process.
+2026-10-17T17:00:57.770343521Z 
+2026-10-17T17:00:57.770352719Z The database cluster will be initialized with locale "en_US.utf8".
+2026-10-17T17:00:57.770357413Z The default database encoding has accordingly been set to "UTF8".
+2026-10-17T17:00:57.770361528Z The default text search configuration will be set to "english".
+2026-10-17T17:00:57.770365780Z 
+2026-10-17T17:00:57.770370370Z Data page checksums are disabled.
+2026-10-17T17:00:57.770374548Z 
+2026-10-17T17:00:57.770438672Z fixing permissions on existing directory /var/lib/postgresql/data ... ok
+2026-10-17T17:00:57.770619663Z creating subdirectories ... ok
+2026-10-17T17:00:57.770722008Z selecting dynamic shared memory implementation ... posix
+2026-10-17T17:00:57.790829220Z selecting default "max_connections" ... 100
+2026-10-17T17:00:57.820150140Z selecting default "shared_buffers" ... 128MB
+2026-10-17T17:00:57.913385354Z selecting default time zone ... UTC
+2026-10-17T17:00:57.914775885Z creating configuration files ... ok
+2026-10-17T17:00:58.114934372Z running bootstrap script ... ok
+2026-10-17T17:00:58.988214189Z performing post-bootstrap initialization ... ok
+2026-10-17T17:00:59.009460163Z syncing data to disk ... ok
+2026-10-17T17:00:59.009484861Z 
+2026-10-17T17:00:59.009488380Z 
+2026-10-17T17:00:59.009491481Z Success. You can now start the database server using:
+2026-10-17T17:00:59.009494430Z 
+2026-10-17T17:00:59.009496872Z     pg_ctl -D /var/lib/postgresql/data -l logfile start
+2026-10-17T17:00:59.009499520Z 
+2026-10-17T17:00:59.072746375Z waiting for server to start....2026-10-17 17:00:59.072 UTC [40] LOG:  starting PostgreSQL 17.11 on x86_64-pc-linux-musl, compiled by gcc (Alpine 15.2.0) 15.2.0, 64-bit
+2026-10-17T17:00:59.072788751Z 2026-10-17 17:00:59.072 UTC [40] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+2026-10-17T17:00:59.075446962Z 2026-10-17 17:00:59.075 UTC [43] LOG:  database system was shut down at 2026-10-17 17:00:58 UTC
+2026-10-17T17:00:59.080051256Z 2026-10-17 17:00:59.079 UTC [40] LOG:  database system is ready to accept connections
+2026-10-17T17:00:59.146685706Z  done
+2026-10-17T17:00:59.146751179Z server started
+2026-10-17T17:00:59.218814858Z CREATE DATABASE
+2026-10-17T17:00:59.219487972Z 
+2026-10-17T17:00:59.219618299Z 
+2026-10-17T17:00:59.219661688Z /usr/local/bin/docker-entrypoint.sh: ignoring /docker-entrypoint-initdb.d/*
+2026-10-17T17:00:59.219667462Z 
+2026-10-17T17:00:59.220698540Z waiting for server to shut down....2026-10-17 17:00:59.220 UTC [40] LOG:  received fast shutdown request
+2026-10-17T17:00:59.220730177Z 2026-10-17 17:00:59.220 UTC [40] LOG:  aborting any active transactions
+2026-10-17T17:00:59.223709312Z 2026-10-17 17:00:59.223 UTC [40] LOG:  background worker "logical replication launcher" (PID 46) exited with exit code 1
+2026-10-17T17:00:59.223875505Z 2026-10-17 17:00:59.223 UTC [41] LOG:  shutting down
+2026-10-17T17:00:59.223916509Z 2026-10-17 17:00:59.223 UTC [41] LOG:  checkpoint starting: shutdown immediate
+2026-10-17T17:00:59.232432817Z 2026-10-17 17:00:59.232 UTC [41] LOG:  checkpoint complete: wrote 926 buffers (5.7%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.008 s, sync=0.001 s, total=0.009 s; sync files=301, longest=0.001 s, average=0.001 s; distance=4266 kB, estimate=4266 kB; lsn=0/191E820, redo lsn=0/191E820
+2026-10-17T17:00:59.239790313Z 2026-10-17 17:00:59.239 UTC [40] LOG:  database system is shut down
+2026-10-17T17:00:59.320973003Z  done
+2026-10-17T17:00:59.321015973Z server stopped
+2026-10-17T17:00:59.322779896Z 
+2026-10-17T17:00:59.322790514Z PostgreSQL init process complete; ready for start up.
+2026-10-17T17:00:59.322793685Z 
+2026-10-17T17:00:58.420080493Z sh: locale: not found
+2026-10-17T17:00:58.420152799Z 2026-10-17 17:00:58.420 UTC [28] WARNING:  no usable system locales were found
+2026-10-17T17:00:59.009465356Z initdb: warning: enabling "trust" authentication for local connections
+2026-10-17T17:00:59.009507927Z initdb: hint: You can change this by editing pg_hba.conf or using the option -A, or --auth-local and --auth-host, the next time you run initdb.
+2026-10-17T17:00:59.349433435Z 2026-10-17 17:00:59.349 UTC [1] LOG:  starting PostgreSQL 17.11 on x86_64-pc-linux-musl, compiled by gcc (Alpine 15.2.0) 15.2.0, 64-bit
+2026-10-17T17:00:59.349464286Z 2026-10-17 17:00:59.349 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+2026-10-17T17:00:59.349476906Z 2026-10-17 17:00:59.349 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+2026-10-17T17:00:59.349572437Z 2026-10-17 17:00:59.349 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+2026-10-17T17:00:59.352163397Z 2026-10-17 17:00:59.352 UTC [56] LOG:  database system was shut down at 2026-10-17 17:00:59 UTC
+2026-10-17T17:00:59.358051846Z 2026-10-17 17:00:59.357 UTC [1] LOG:  database system is ready to accept connections

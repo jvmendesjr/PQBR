@@ -1,0 +1,157 @@
+{
+  "estado": {
+    "versao": 1,
+    "aceitos": {
+      "primeira": {
+        "ferramenta": "camofox",
+        "sessao": "FAKE-H3-test_04_identidade_nao_autorizada",
+        "passo": "primeira",
+        "erro": "falha-tecnica",
+        "episodio": null,
+        "simulacao": {
+          "triagem": "corrigivel",
+          "intervencoes": [
+            true
+          ],
+          "verificacoes": [
+            true
+          ],
+          "conta_confere": true
+        }
+      },
+      "segunda": {
+        "ferramenta": "camofox",
+        "sessao": "FAKE-H3-test_04_identidade_nao_autorizada",
+        "passo": "segunda",
+        "erro": "falha falsa",
+        "episodio": null,
+        "simulacao": {
+          "triagem": "corrigivel",
+          "intervencoes": [
+            true
+          ],
+          "verificacoes": [
+            true
+          ],
+          "conta_confere": true
+        }
+      }
+    },
+    "pendentes": [
+      "segunda"
+    ],
+    "resultados": {},
+    "falhas": {
+      "primeira": {
+        "operacao_id": "primeira",
+        "filho_id": "teste-f3-05-supervisor-dc11d675e20f084b269ed08067183b0561c26527b20b941b7e5457391417ecb8-op-f555b80ad08f501adb396a95c78948ce18f204b3cf2c93b0b1930a006540a06e",
+        "filho_run_id": "01a14b82-b867-7a81-b8ee-93034bab8ca7",
+        "revisao": 1,
+        "estado": "falha_tecnica_terminal",
+        "resultado_efeito": "nao_reconciliado",
+        "registro": "confirmado",
+        "registro_id": "teste-f3-05-supervisor-dc11d675e20f084b269ed08067183b0561c26527b20b941b7e5457391417ecb8:01a14b82-b867-7a81-b8ee-93034bab8ca7:primeira"
+      }
+    },
+    "bloqueio": {
+      "operacao_id": "primeira",
+      "filho_id": "teste-f3-05-supervisor-dc11d675e20f084b269ed08067183b0561c26527b20b941b7e5457391417ecb8-op-f555b80ad08f501adb396a95c78948ce18f204b3cf2c93b0b1930a006540a06e",
+      "filho_run_id": "01a14b82-b867-7a81-b8ee-93034bab8ca7",
+      "revisao": 1,
+      "estado": "falha_tecnica_terminal",
+      "resultado_efeito": "nao_reconciliado",
+      "registro": "confirmado",
+      "registro_id": "teste-f3-05-supervisor-dc11d675e20f084b269ed08067183b0561c26527b20b941b7e5457391417ecb8:01a14b82-b867-7a81-b8ee-93034bab8ca7:primeira"
+    },
+    "ativo": null,
+    "revisao": 1,
+    "retomadas": [],
+    "observacoes": [
+      {
+        "id": "primeira",
+        "estado": "aceito"
+      },
+      {
+        "id": "segunda",
+        "estado": "aceito"
+      },
+      {
+        "id": "primeira",
+        "estado": "pausado_apos_falha"
+      }
+    ],
+    "consumidos": {},
+    "recibos_rejeitados": 0,
+    "admissao_fechada": true,
+    "fechando": false
+  },
+  "trilha": [
+    [
+      "paperclip:criar"
+    ],
+    [
+      "interacao_persistida",
+      "FAKE-ticket-existente-H3",
+      "FAKE-interaction-1"
+    ],
+    [
+      "paperclip:ler"
+    ],
+    [
+      "registro_relido",
+      "FAKE-ticket-existente-H3"
+    ],
+    [
+      "paperclip:criar"
+    ],
+    [
+      "paperclip:ler"
+    ],
+    [
+      "registro_relido",
+      "FAKE-ticket-existente-H3"
+    ]
+  ],
+  "interacoes": {
+    "FAKE-interaction-1": {
+      "kind": "request_confirmation",
+      "idempotencyKey": "pqbr-f3-05:17ff83f910af8e533a9fba82c1973f51227db97f6b1bdbea8a1e050a4c2f00c3",
+      "addresseeUserId": "FAKE-paperclip-owner",
+      "addresseeAgentId": null,
+      "continuationPolicy": "none",
+      "title": "Autorizar somente pendentes já aceitos",
+      "payload": {
+        "version": 1,
+        "prompt": "Autoriza retomar somente os pendentes desta revisão, sem repetir a operação terminal?",
+        "acceptLabel": "Autorizar pendentes",
+        "rejectLabel": "Não autorizar",
+        "supersedeOnUserComment": false,
+        "detailsMarkdown": "PQBR-F3-05/v1\n{\"criadoEm\":1792268221,\"escopo\":{\"falha_id\":\"primeira\",\"filho_run_id\":\"01a14b82-b867-7a81-b8ee-93034bab8ca7\",\"pendentes\":[\"segunda\"],\"registro_falha_receipt\":\"teste-f3-05-supervisor-dc11d675e20f084b269ed08067183b0561c26527b20b941b7e5457391417ecb8:01a14b82-b867-7a81-b8ee-93034bab8ca7:primeira\",\"revisao\":1,\"supervisor_id\":\"teste-f3-05-supervisor-dc11d675e20f084b269ed08067183b0561c26527b20b941b7e5457391417ecb8\",\"supervisor_run_id\":\"44858071-1935-4066-a257-c90cc341d655\"},\"expiraEm\":1792268821,\"issueId\":\"FAKE-ticket-existente-H3\",\"version\":1}"
+      },
+      "id": "FAKE-interaction-1",
+      "issueId": "FAKE-ticket-existente-H3",
+      "status": "pending",
+      "requestedResolverPolicy": "human_only",
+      "effectiveResolverPolicy": "human_only",
+      "resolvedByUserId": null,
+      "resolvedByAgentId": null,
+      "resolvedByRunId": null,
+      "resolvedAt": null,
+      "result": null,
+      "createdAt": "2026-10-17T20:17:01Z",
+      "updatedAt": "2026-10-17T20:17:01Z"
+    }
+  },
+  "chamadas": [
+    {
+      "sessao": "FAKE-H3-test_04_identidade_nao_autorizada",
+      "passo": "primeira",
+      "inicio": 423638.486576347,
+      "fim": 423638.52786766,
+      "fila": "teste-f3-05-candidato-camofox-FAKE-H3-test_04_identidade_nao_autorizada-supervisor",
+      "tentativa": 1,
+      "workflow_id": "teste-f3-05-supervisor-dc11d675e20f084b269ed08067183b0561c26527b20b941b7e5457391417ecb8-op-f555b80ad08f501adb396a95c78948ce18f204b3cf2c93b0b1930a006540a06e"
+    }
+  ],
+  "tentativas_validacao": []
+}
