@@ -1,19 +1,16 @@
 {
- "_doc": "Papel → combo core do 9router (José 12/10 14:02). Fonte única para workers/scripts; espelha os agentes Paperclip (t414).",
+ "_doc": "t512/t513 (José): 8 papéis-agente + etapas de workflow. Papéis: diretor, lider-editorial, pesquisador-origem, auditor, lider-compliance, guardiao-seguranca, observador, dev. Etapas (não são agentes; reserva 9router quando o MotorIntelectual falha): roteirista, especialista-seo, cacador-sazonal. Canal: pqbr-assistente. Segunda opinião: revisao.",
  "diretor": "core-alto",
- "roteirista": "core-alto",
  "auditor": "core-alto",
- "dev-corretor": "core-alto",
- "dev-revisor": "core-alto",
+ "dev": "core-alto",
  "pesquisador-origem": "core-medio",
  "lider-editorial": "core-medio",
  "lider-compliance": "core-medio",
  "guardiao-seguranca": "core-medio",
  "observador": "core-baixo",
+ "roteirista": "core-alto",
  "especialista-seo": "core-baixo",
  "cacador-sazonal": "core-baixo",
- "comunidade": "core-baixo",
- "diretor-arte-2d": "core-baixo",
  "pqbr-assistente": "core-baixo",
  "revisao": "core-revisao"
 }

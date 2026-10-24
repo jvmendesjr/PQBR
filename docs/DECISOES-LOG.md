@@ -524,3 +524,11 @@ NÃO CABE:
 - 9router: porta 20130 mantida (a 20128 também serve `/v1`, mas mapeia os combos para outros modelos).
 - Run preso `pqbr-reposicao-temas-wf-2026-10-13T03:30:00Z` encerrado (terminate); run real `repor-temas-t510-manual` inseriu 1 tema (grade em 28).
 - Alerta de run preso só no journal até o bot `pqbr` ter token de entrega. SemVer adotado no CHANGELOG (0.2.0).
+
+## t476 (24/10/2026) — NotebookLM motor, sistema modular, Temporal sistema nervoso, 8 papéis (t512–t514)
+- **t512:** NotebookLM é o centro nervoso e o motor do canal (decisões, temas, roteiros, direção); a produção depende dos caminhos que ele norteia. A geração de vídeo saiu do NotebookLM por determinismo (Flow primário). Corrigida a linha do CONTRATO que dizia que o NotebookLM gera o vídeo (muda o hash do pacote; autorizado em t510).
+- **t512:** `ReposicaoTemasWorkflow`: temas propostos pelo motor (NotebookLM, caderno efêmero semanal, nunca mestre, sessão do Camofox 9387, `NOTEBOOKLM_DISABLE_KEEPALIVE_POKE=1`, `NOTEBOOKLM_HEADLESS_REAUTH=0`); o Líder Editorial (PydanticAI) só monta o pedido, interpreta, filtra e valida em `PropostaTemas`.
+- **t512:** papéis reduzidos a 8 (Diretor, Líder Editorial, Pesquisador de Origem, Auditor, Compliance, Guardião, Observador, Dev). Dev = fusão Corretor+Revisor; só indica problemas e propõe; José aplica com agentes externos. Roteirista, SEO e Caçador Sazonal viram etapas de workflow que chamam o motor; Comunidade adiada. Personas aposentadas em `docs/_obsoleto/company/agents/`.
+- **t513:** sistema modular: motores atrás de porta (contrato Pydantic + adaptador) escolhidos por config (`config/motores.json`, `src/pqbr/motores/`): `MotorIntelectual` (notebooklm), `GeradorVideo` (flow; alternativas notebooklm_video, meta_vibes, google_vids).
+- **t514:** Temporal é o sistema nervoso e a peça mais rígida (última a trocar). Toda decisão que exigiria humano e roda sozinha é determinística e passa pelo Temporal (durável, registrada, replay, retentativas, sinais). Sem camadas de abstração sobre o Temporal.
+- Habilidades por papel: só PROPOSTA em `docs/sdd/PROPOSTA-papeis-skills.md` (não aplicada).

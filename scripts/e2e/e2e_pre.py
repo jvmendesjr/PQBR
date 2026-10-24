@@ -35,7 +35,7 @@ marca("tema", t0, tema=escolhido["tema"], categoria=escolhido["categoria"])
 # 2 roteiro
 t0 = time.time()
 slug = re.sub(r"[^a-z0-9]+", "-", normalizar(escolhido["tema"]).replace("por que ", ""))[:50].strip("-")
-ag = open("company/agents/roteirista/AGENTS.md").read()
+ag = open("docs/_obsoleto/company/agents/roteirista/AGENTS.md").read()
 contrato = open("docs/CONTRATO-EDITORIAL.md").read()
 i16 = contrato.find("## 16"); sec16 = contrato[i16:i16 + 9000] if i16 >= 0 else ""
 def val_rot(d):

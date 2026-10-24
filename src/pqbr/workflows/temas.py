@@ -1,5 +1,5 @@
 """t465 (José 14:00): grade sempre com 7 dias de temas abertos em pqbr.temas_pendentes (≥ 80% curiosidade/cultura pop).
-Quem propõe é o Líder Editorial (agente PydanticAI numa atividade, ADR-011, combo core-medio); o código só orquestra e valida
+Quem propõe é o MotorIntelectual (NotebookLM hoje, porta src/pqbr/motores, t512/t513); o Líder Editorial (PydanticAI) monta o pedido e valida; o código só orquestra e valida
 (bloqueio absoluto, anti-repetição, contrato TemaPendente). Tema usado na publicação → pqbr.temas_publicados e
 reposição automática (ReposicaoTemasWorkflow). Agenda diária: Schedule pqbr-reposicao-temas (scripts/temporal/schedules.py)."""
 from __future__ import annotations
@@ -97,8 +97,16 @@ PEDIDO = (
     "Reposição da grade (t465): faltam {faltam} temas para manter 7 dias abertos (alvo {alvo}). Proponha até 5 temas NOVOS e curtos "
     "de curiosidade/cultura popular brasileira (origem de expressões, hábitos e manias, curiosidades que prendem a atenção), "
     "cada um como pergunta 'Por que …?', categoria ∈ expressao, habito_mania, curiosidade_cultura_pop. "
-    "Sem política, religião, tragédia, marca ou pessoa real; sem repetir os já usados abaixo. Justificativa curta.\n\n"
-    "Já usados (não repetir):\n{usados}")
+    "Sem política, religião, tragédia, marca ou pessoa real; sem repetir os já usados (fonte 'temas-usados'). "
+    "Responda SÓ com JSON: {{\"temas\": [{{\"categoria\": \"...\", \"tema\": \"Por que ...?\"}}], \"justificativa\": \"...\"}}")
+
+
+def pedido_temas(faltam: int, usados: list[str], hoje: str) -> dict:
+    """Líder Editorial monta o pedido ao MotorIntelectual (t512: NotebookLM propõe). Sessão efêmera semanal. Puro; testado."""
+    sem = date.fromisoformat(hoje).isocalendar()   # dict puro (sandbox do workflow); a atividade valida em PedidoMotor
+    return dict(tarefa="temas", sessao=f"grade-temas-{sem[0]}w{sem[1]:02d}",
+                       pergunta=PEDIDO.format(faltam=faltam, alvo=ALVO),
+                       contexto="# temas-usados (não repetir)\n" + "\n".join(f"- {u}" for u in usados))
 
 
 def propostas_de(saida) -> list[dict]:
@@ -106,32 +114,53 @@ def propostas_de(saida) -> list[dict]:
     return [{"categoria": t.categoria, "tema": t.tema} for t in saida.temas]
 
 
+def parse_direto(texto: str):
+    """JSON do motor → PropostaTemas sem LLM; itens inválidos descartados. None se não houver JSON utilizável. Puro; testado."""
+    from ..contratos import PropostaTemas, TemaProposto
+    a, b = texto.find("{"), texto.rfind("}")
+    if a < 0 or b <= a: return None
+    try: bruto = json.loads(texto[a:b + 1])
+    except ValueError: return None
+    ok = []
+    for t in (bruto.get("temas") or [])[:10]:
+        try: ok.append(TemaProposto.model_validate(t))
+        except Exception: continue   # noqa: BLE001
+    return PropostaTemas(temas=ok, justificativa=str(bruto.get("justificativa", ""))[:500]) if ok else None
+
+
 @activity.defn
-async def temas_propor_agente(faltam: int, usados: list[str]) -> dict:
-    """ADR-011: o Líder Editorial (PydanticAI, combo do papel) só gera e valida. Sem escrita aqui."""
-    from ..agents import rodar
-    from ..contratos import PropostaTemas
-    pedido = PEDIDO.format(faltam=faltam, alvo=ALVO, usados="\n".join(f"- {u}" for u in usados[-120:]))[:9000]
-    saida, meta = await rodar("lider-editorial", PropostaTemas, pedido)
-    activity.logger.info("temas_propor_agente %s", meta)
+async def temas_validar_agente(texto: str) -> dict:
+    """ADR-011/t512: o Líder Editorial (PydanticAI) só interpreta e valida a resposta do motor em PropostaTemas.
+    Primeiro parse determinístico; LLM só se a resposta não vier em JSON válido. Sem escrita aqui."""
+    saida = parse_direto(texto)
+    meta = {"parse": "direto"}
+    if saida is None:
+        from ..agents import rodar
+        from ..contratos import PropostaTemas
+        saida, meta = await rodar("lider-editorial", PropostaTemas,
+                                  "Extraia os temas propostos pelo motor intelectual abaixo, sem inventar nem completar:\n\n" + texto[:15000])
+        meta = {**meta, "parse": "agente"}
     return {"propostas": propostas_de(saida), "meta": meta}
 
 
 @workflow.defn
 class ReposicaoTemasWorkflow:
     @workflow.run
-    async def run(self, rodadas: int = 6) -> dict:
+    async def run(self, rodadas: int = 3) -> dict:
         cur = dict(start_to_close_timeout=timedelta(minutes=3), retry_policy=RetryPolicy(maximum_attempts=3))
         ag = dict(start_to_close_timeout=timedelta(minutes=6), retry_policy=RetryPolicy(maximum_attempts=3))
+        mot = dict(start_to_close_timeout=timedelta(minutes=25), retry_policy=RetryPolicy(maximum_attempts=2))
         total, recusas, metas = 0, [], []
         for _ in range(rodadas):
             s = await workflow.execute_activity(temas_situacao, **cur)
             if not s["faltam"]: break
-            r = await workflow.execute_activity(temas_propor_agente, args=[s["faltam"], s["usados"]], **ag)
-            metas.append(r["meta"])
-            res = await workflow.execute_activity(temas_inserir, r["propostas"], **cur)
+            ped = pedido_temas(s["faltam"], s["usados"], workflow.now().date().isoformat())
+            resp = await workflow.execute_activity("motor_consultar", ped, task_queue="notebooklm-pqbr", **mot)
+            v = await workflow.execute_activity(temas_validar_agente, resp["texto"], **ag)
+            metas.append({"motor": resp["motor"], "sessao": resp["sessao_id"], **v["meta"]})
+            res = await workflow.execute_activity(temas_inserir, v["propostas"], **cur)
             total += res["inseridos"]; recusas += res["recusas"]
-        return {"inseridos": total, "recusas": recusas[:20], "agente": metas}
+        return {"inseridos": total, "recusas": recusas[:20], "motor": metas}
 
 
-ATIVIDADES_TEMAS = [temas_situacao, temas_inserir, tema_publicado, temas_propor_agente]
+ATIVIDADES_TEMAS = [temas_situacao, temas_inserir, tema_publicado, temas_validar_agente]

@@ -20,7 +20,10 @@ Fontes revisadas (servidor `pc` fora da tailnet; usadas cópias locais): espelho
 - Cada agente age antes do problema (loops de verificação), corrige sozinho pelos **playbooks de correção** pré-definidos e **pode escolher o caminho** entre os previstos no playbook.
 - Piloto com **risco aceito não baixo**. A segurança vem de limites de tentativa, rollback e do Temporal como único executor de efeito externo, não de pedir OK.
 
-## 2. Equipe final (14 agentes, todos contratados na criação)
+## 2. Equipe (t512, 24/10/2026: 8 papéis-agente)
+> **Vigente:** Diretor · Líder Editorial (monta pedidos ao MotorIntelectual e valida respostas) · Pesquisador de Origem · Auditor · Compliance (`lider-compliance`) · Guardião de Segurança · Observador · **Dev** (fusão Corretor+Revisor; só indica problemas e propõe, nunca aplica). Roteirista, SEO e Caçador Sazonal = **etapas de workflow** que chamam o MotorIntelectual (NotebookLM hoje); Comunidade adiada; Diretor de Arte 2D aposentado (vídeo = GeradorVideo). Personas aposentadas: `docs/_obsoleto/company/agents/`. Habilidades por papel: proposta em `docs/sdd/PROPOSTA-papeis-skills.md`. A tabela abaixo (14 agentes) é histórica.
+
+### Equipe anterior (14 agentes; histórico)
 ```
 José (board, ausente por padrão)
 └─ Diretor (CEO)

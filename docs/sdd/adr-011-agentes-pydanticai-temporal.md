@@ -11,6 +11,12 @@
 5. **Interface do José:** Telegram (Hermes `pqbr`) para avisos, pedidos e aprovações; aprovação = **sinal do Temporal** (ID autorizado, estado válido, fail-closed, idempotente). **Painel:** Temporal UI; painel próprio mais tarde (t471).
 6. **Paperclip em retirada:** o código dele não é alterado; `infra/paperclip-db/` fica até o desligamento; não criar nada novo nele.
 
+## Princípios acrescentados (t512–t514, 24/10/2026)
+  1. **Temporal = sistema nervoso** (t514): a peça mais rígida; trocável em tese, mas a última a mudar, pela consistência. Toda decisão que exigiria um humano e roda sozinha é **determinística e passa pelo Temporal** (durável, registrada, reexecutável/replay, com retentativas e sinais). O Temporal **não** é escondido atrás de camadas extras: workflows e activities usam o SDK direto.
+  2. **NotebookLM = centro nervoso editorial e motor do canal** (t512): decisões, temas, roteiros e direção do canal; a produção segue os caminhos que ele norteia. A **geração de vídeo saiu do NotebookLM** por determinismo (Flow é a rota primária).
+  3. **Sistema modular** (t513): cada motor é peça trocável atrás de um contrato (interface Pydantic + adaptador), escolhida por config (`config/motores.json`; portas em `src/pqbr/motores/`): `MotorIntelectual` (hoje NotebookLM), `GeradorVideo` (hoje Flow; alternativas NotebookLM vídeo, Meta Vibes, Google Vids). Agentes e motores giram em volta do Temporal.
+  4. **8 papéis-agente** (t512): Diretor, Líder Editorial (monta pedidos ao motor e valida respostas), Pesquisador de Origem, Auditor, Compliance, Guardião, Observador, Dev (diagnostica e propõe; nunca aplica; José aplica com agentes externos). Roteirista, SEO e Caçador Sazonal viram etapas de workflow que chamam o MotorIntelectual; Comunidade adiada.
+
 ## Consequências
 - Docs com org/issues/heartbeats do Paperclip (ARQUITETURA §10, partes do `docs/AGENTES.md`, ROADMAP F05-06/F05-08/F1-*) são históricos até a reescrita.
 - Primeiro workflow a migrar (proposta): `ReposicaoTemasWorkflow`, testado sem publicação.

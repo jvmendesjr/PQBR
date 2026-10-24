@@ -89,6 +89,12 @@
   - (g) **Escada de falhas:** o agente faz até 3 tentativas com **verificação do auditor/Jev**; só depois da 3ª falha chama o José.
   - (h) **Sem teto de tokens:** só monitoramento, na tabela `pqbr.consumo_modelos` (por modelo e por tipo de ação) e no relatório diário.
 
+### 3.x Princípios de arquitetura (t512–t514, 24/10/2026)
+- **Temporal é o sistema nervoso:** toda decisão que exigiria humano e roda sozinha é determinística e passa pelo Temporal (durável, registrada, replay, retentativas, sinais). Sem camadas de abstração sobre o Temporal; é a última peça a trocar.
+- **NotebookLM é o motor editorial** (temas, roteiros, decisões e direção do canal); **não gera mais o vídeo** (Flow primário, por determinismo).
+- **Motores trocáveis** atrás de contrato Pydantic + adaptador, escolhidos por config (`config/motores.json`); código chama a porta, nunca o serviço direto.
+- **8 papéis-agente** (Diretor, Líder Editorial, Pesquisador de Origem, Auditor, Compliance, Guardião, Observador, Dev). O Dev só indica problemas e propõe correções; quem aplica é o José.
+
 ## 4. Temas e grade
 - **R10:** um tema, um vídeo, inclusive variações próximas. Tema repetido é recusado mesmo que o José sugira; o sistema avisa ou abre ticket. [pauta 1; item 4] Lista dos temas já publicados: `db/seeds/temas-publicados.csv`.
 - Coleta por código de madrugada (Data API: em alta BR + Shorts mais vistos 24–48 h com termos do escopo) → caderno diário de tendências (separado do raiz, limpo todo dia) → NotebookLM Deep Research para pesquisa profunda e propostas semanais de temas → filtros em código (barreiras de repetição, variedade do compliance, exclusões sensíveis) → grade no banco do app com pontuação e fonte. [t198; t465] Os agentes orquestram o NotebookLM e validam a saída; não substituem essa etapa com pesquisa/criação autoral. Limites da conta devem ser medidos; não assumir quota fixa.

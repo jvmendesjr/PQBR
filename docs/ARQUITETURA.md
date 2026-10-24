@@ -91,6 +91,12 @@
 - **Agente-first:** contratos pequenos e fechados, um módulo por agente, testes unitários sem rede, para que agentes de programação construam e mantenham.
 - **Pendências:** reescrever as partes de §3/§10 e do roster (`docs/AGENTES.md`) que ainda descrevem org/issues/heartbeats do Paperclip; definir o primeiro workflow migrado (proposta: `ReposicaoTemasWorkflow`). Detalhe: `docs/sdd/adr-011-agentes-pydanticai-temporal.md`.
 
+- **Princípios t512–t514 (José, 24/10/2026):**
+  1. **Temporal = sistema nervoso** (t514): a peça mais rígida; trocável em tese, mas a última a mudar, pela consistência. Toda decisão que exigiria um humano e roda sozinha é **determinística e passa pelo Temporal** (durável, registrada, reexecutável/replay, com retentativas e sinais). O Temporal **não** é escondido atrás de camadas extras: workflows e activities usam o SDK direto.
+  2. **NotebookLM = centro nervoso editorial e motor do canal** (t512): decisões, temas, roteiros e direção do canal; a produção segue os caminhos que ele norteia. A **geração de vídeo saiu do NotebookLM** por determinismo (Flow é a rota primária).
+  3. **Sistema modular** (t513): cada motor é peça trocável atrás de um contrato (interface Pydantic + adaptador), escolhida por config (`config/motores.json`; portas em `src/pqbr/motores/`): `MotorIntelectual` (hoje NotebookLM), `GeradorVideo` (hoje Flow; alternativas NotebookLM vídeo, Meta Vibes, Google Vids). Agentes e motores giram em volta do Temporal.
+  4. **8 papéis-agente** (t512): Diretor, Líder Editorial (monta pedidos ao motor e valida respostas), Pesquisador de Origem, Auditor, Compliance, Guardião, Observador, Dev (diagnostica e propõe; nunca aplica; José aplica com agentes externos). Roteirista, SEO e Caçador Sazonal viram etapas de workflow que chamam o MotorIntelectual; Comunidade adiada.
+
 ## 2. Componentes
 
 | Componente | Papel | Status |
@@ -322,7 +328,7 @@ Escrita no banco do app sempre por Activity com **outbox** (idempotente por chav
 - **Modelo:** `OpenAIChatModel(<combo>, provider=OpenAIProvider(base_url=<PQBR_9ROUTER_URL>, api_key=<NINEROUTER_API_KEY>))`; URL padrão `http://127.0.0.1:20130/v1` (20128 também responde, mas resolve os combos para outros modelos; mantido 20130, que já era o do kit). Fallback opcional por papel (`FallbackModel`, ex.: Líder Editorial `core-medio` → `core-baixo`). Chave só pelo `EnvironmentFile` 600 do worker; nunca logada.
 - **Regra:** o agente roda dentro de uma activity e **só gera e valida** (`result.output` já é o contrato). Efeitos (Postgres, Telegram, Drive, publicação) ficam em activities separadas, com retry do Temporal.
 - **Registro:** cada execução devolve `meta` (papel, combo, combos, modelo que respondeu, fallback, tokens), gravado no histórico do Temporal (resultado do workflow) e no journal do worker (`pqbr.agents`). Limite: o 9router devolve o modelo real, não o combo; fallback interno do 9router não aparece como `fallback=true`.
-- **Primeira migração:** `ReposicaoTemasWorkflow` (`temas_situacao` → `temas_propor_agente` → `temas_inserir`), fila `pqbr-episodio` (`pqbr-temporal-worker.service`).
+- **Primeira migração:** `ReposicaoTemasWorkflow` (t512/t513): `temas_situacao` → `pedido_temas` (Líder Editorial monta o pedido) → `motor_consultar` (porta MotorIntelectual, fila `notebooklm-pqbr`, caderno efêmero semanal `Short - grade-temas-<ano>w<semana>`, nunca mestre) → `temas_validar_agente` (parse JSON; PydanticAI só se preciso) → `temas_inserir` (filtros determinísticos + escrita).
 - **Aprovação do José:** Telegram (Hermes `pqbr`) → sinal `aprovacao_jose` no Temporal; rota valida ID autorizado, tarefa e estado e falha fechada.
 - **Run preso:** `scripts/temporal/runs_presos.py` (timer `pqbr-runs-presos`, de hora em hora; > 6 h → WARNING no journal). Alerta por Telegram fica para quando o bot `pqbr` tiver token de entrega.
 - Texto anterior (integração Paperclip/Hermes): `docs/_obsoleto/paperclip-trechos-t510.md`.

@@ -24,8 +24,16 @@ class Papel:
     extras: dict = field(default_factory=dict)
 
 
+# t512: 8 papéis. Roteirista, SEO e Caçador viraram etapas de workflow que chamam o MotorIntelectual; Comunidade adiada.
 REGISTRO: dict[str, Papel] = {
-    "lider-editorial": Papel("lider-editorial", fallback=("core-baixo",)),
+    "diretor": Papel("diretor"),
+    "lider-editorial": Papel("lider-editorial", fallback=("core-baixo",)),   # monta pedidos ao motor e valida respostas
+    "pesquisador-origem": Papel("pesquisador-origem"),
+    "auditor": Papel("auditor", fallback=("core-revisao",)),
+    "lider-compliance": Papel("lider-compliance"),
+    "guardiao-seguranca": Papel("guardiao-seguranca"),
+    "observador": Papel("observador"),
+    "dev": Papel("dev", fallback=("core-revisao",), temperatura=0.1),        # só diagnostica e propõe; nunca aplica
 }
 
 
