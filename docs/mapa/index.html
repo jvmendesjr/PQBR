@@ -126,26 +126,36 @@ h2{margin:0 0 4px;font-size:16px}.nota{margin:0 0 8px;color:var(--m);font-size:1
   MV --&gt; D3{&quot;falhou?&quot;}
   D3 -- não --&gt; OK
   D3 -- sim --&gt; H([&quot;⚠ não definido no código: proposta HOLD + pedido ao José&quot;])
-  N&gt;&quot;Sem APIs (Gemini/Veo/Omni). NotebookLM vídeo: só alternativa (hoje o EpisodioWorkflow ainda baixa o vídeo do NotebookLM ⚠)&quot;]</pre></div></section><section id="d08"><h2>Identidade / Camofox</h2><p class="nota">Identidade/navegador (ADR-012, José 24/10/2026). Estado atual = diagnóstico real do pc 24/10; alvo = decisão, NÃO implementado. <span class="arq">08-identidade-camofox.mmd</span></p><div class="wrap"><pre class="mermaid">flowchart TB
-  subgraph HOJE[&quot;Hoje (diagnóstico 24/10)&quot;]
-    G[&quot;camofox-browser.service · porta 9377 · escuta em todas as interfaces ⚠&lt;br/&gt;app ~/camofox-browser v1.18.1 (atualizado 24/10)&lt;br/&gt;Camoufox ~/.cache/camoufox 152.0.4-beta.30 · perfis ~/.camofox/profiles (15)&quot;]
-    P[&quot;pqbr-camofox.service · 127.0.0.1:9387 · userId pqbr · MAX_SESSIONS=1&lt;br/&gt;app ~/.pqbr/camofox/app v1.15.0 (CLONE do global = instalação duplicada)&lt;br/&gt;Camoufox ~/.pqbr/camofox/cache 152.0.4-beta.30 (CÓPIA, 1,3 GB) · MemoryMax 2200M&quot;]
-    K[&quot;pqbr-camofox-keepalive.service (keepalive.sh)&lt;br/&gt;renovador da 9387&quot;]
-    S[&quot;nlm-sync.sh (NOTEBOOKLM_REFRESH_CMD)&lt;br/&gt;sincroniza sessão Camofox → notebooklm-py&quot;]
+  N&gt;&quot;Sem APIs (Gemini/Veo/Omni). NotebookLM vídeo: só alternativa (hoje o EpisodioWorkflow ainda baixa o vídeo do NotebookLM ⚠)&quot;]</pre></div></section><section id="d08"><h2>Identidade / Camofox</h2><p class="nota">Identidade/navegador (ADR-012, José 24/10/2026). Estado atual = diagnóstico real do pc 24/10; alvo = decisão, NÃO implementado. <span class="arq">08-identidade-camofox.mmd</span></p><div class="wrap"><pre class="mermaid">
+%% Identidade/navegador (ADR-012, José 24/10/2026). t526: PQBR segue individual em 9387; migração na próxima integração; kit pronto, nada instalado.
+flowchart TB
+  subgraph HOJE["Hoje (24/10) — PQBR segue individual até a próxima integração"]
+    G["camofox-browser.service · porta 9377 · escuta em todas as interfaces ⚠&lt;br/&gt;app ~/camofox-browser v1.18.1 (atualizado 24/10)&lt;br/&gt;Camoufox ~/.cache/camoufox 152.0.4-beta.30 · perfis ~/.camofox/profiles (15)"]
+    P["pqbr-camofox.service · 127.0.0.1:9387 · userId pqbr · MAX_SESSIONS=1&lt;br/&gt;app ~/.pqbr/camofox/app v1.15.0 (CLONE do global = instalação duplicada)&lt;br/&gt;Camoufox ~/.pqbr/camofox/cache (CÓPIA, 1,3 GB) · MemoryMax 2200M"]
+    K["pqbr-camofox-keepalive.service (keepalive.sh)&lt;br/&gt;renovador da 9387"]
+    S["nlm-sync.sh (NOTEBOOKLM_REFRESH_CMD)&lt;br/&gt;sincroniza sessão Camofox → notebooklm-py"]
     K --&gt; P
     P --&gt; S
   end
-  subgraph ALVO[&quot;Alvo (ADR-012): 1 instalação, 1 instância por conta crítica (até ~3)&quot;]
-    I[(&quot;1 instalação Camofox + 1 Camoufox&lt;br/&gt;versão travada (pin)&quot;)]
-    I --&gt; C1[&quot;camofox@pqbr&lt;br/&gt;porta própria · perfil próprio&quot;]
-    I --&gt; C2[&quot;camofox@conta2&quot;]
-    I --&gt; C3[&quot;camofox@conta3&quot;]
-    C1 &amp; C2 &amp; C3 --&gt; R[&quot;1 renovador por instância (único)&quot;]
-    C1 &amp; C2 &amp; C3 --&gt; B[&quot;backup diário do perfil + teste de restauração&quot;]
-    C1 &amp; C2 &amp; C3 --&gt; CN[&quot;canário diário (Temporal Schedule)&quot;]
-    AD{{&quot;adaptador NavegadorIdentidade&lt;br/&gt;(contrato Pydantic; workflows só falam com ele)&quot;}}
+  subgraph KIT["Preparado t526 (no repo, NÃO instalado)"]
+    T["deploy/camofox/camofox@.service + instancia.env.exemplo + criar_instancia.sh"]
+    J["config/camofox_instancias.json&lt;br/&gt;pqbr 9387 individual · proxima 9397 RESERVADA (0 memória)"]
+    RB["docs/RUNBOOK-nova-instancia-camofox.md&lt;br/&gt;criar · migrar · rollback · riscos"]
+  end
+  subgraph ALVO["Alvo (ADR-012): 1 instalação, 1 instância por conta crítica (até 3)"]
+    I[("1 instalação Camofox + 1 Camoufox&lt;br/&gt;versão travada (pin)")]
+    I --&gt; C1["camofox@pqbr&lt;br/&gt;porta 9387 · mesmo perfil"]
+    I --&gt; C2["camofox@proxima&lt;br/&gt;porta 9397 (reservada)"]
+    I --&gt; C3["camofox@conta3"]
+    C1 &amp; C2 &amp; C3 --&gt; R["1 renovador por instância (único)"]
+    C1 &amp; C2 &amp; C3 --&gt; B["backup diário do perfil + teste de restauração"]
+    C1 &amp; C2 &amp; C3 --&gt; CN["canário diário (Temporal Schedule)"]
+    AD{{"adaptador NavegadorIdentidade&lt;br/&gt;motores/navegador.py · contratos 1.0.0 (não ligado)"}}
     AD --&gt; C1 &amp; C2 &amp; C3
   end
-  N&gt;&quot;Regras: uma identidade Google por instância; juniormoedavirtual só em camofox@pqbr; login só pelo José; sem re-login headless&quot;]</pre></div></section></main><footer>Temporal é o sistema nervoso · contratos Pydantic v2 · motores trocáveis</footer>
+  P -. "migração na PRÓXIMA INTEGRAÇÃO (runbook §3)" .-&gt; C1
+  KIT -.-&gt; ALVO
+  N&gt;"Regras: uma identidade Google por instância; juniormoedavirtual só em camofox@pqbr; login só pelo José; sem re-login headless"]
+</pre></div></section></main><footer>Temporal é o sistema nervoso · contratos Pydantic v2 · motores trocáveis</footer>
 <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
 mermaid.initialize({startOnLoad:true,theme:"neutral",securityLevel:"strict",flowchart:{htmlLabels:true,useMaxWidth:true}});</script></body></html>

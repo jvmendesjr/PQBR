@@ -505,7 +505,26 @@ class RelatorioAtualizacoes(Contrato):
     aplicado: Literal[False] = False   # o Dev nunca aplica
 
 
+# Navegador/identidade — ADR-012 (t526) -------------------------------------------------------
+class InstanciaNavegador(Contrato):
+    conta: str = Field(pattern=r"^[a-z0-9-]{2,30}$")
+    porta: int = Field(ge=9000, le=9999)
+    estado: Literal["individual", "ativa", "reservada"]
+    unit: str = Field(min_length=3, max_length=80)
+    nota: str = ""
+
+
+class SaudeNavegador(Contrato):
+    conta: str
+    porta: int
+    ok: bool
+    navegador: bool = False
+    motivo: str = ""
+
+
 VERSOES: dict[str, str] = {
+    "InstanciaNavegador": "1.0.0",
+    "SaudeNavegador": "1.0.0",
     "FerramentaVigiada": "1.0.0",
     "ItemAtualizacao": "1.0.0",
     "RelatorioAtualizacoes": "1.0.0",

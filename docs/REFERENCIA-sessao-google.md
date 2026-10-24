@@ -86,6 +86,9 @@ RAM do pc: 15,5 GB total, ~7,2 GB disponível, swap 2,4/15,7 GB em uso.
 - **Global exposto em todas as interfaces** (9377) — fora do escopo; decidir com o José (rede).
 - **Renovadores duplicados** brigando pela mesma sessão; regra: um por instância.
 
+### 9.4 Estado t526 (24/10/2026)
+PQBR segue individual em 9387. Passos 2–3 do plano 9.2 preparados no repo, sem instalar; reserva `proxima`:9397 em `config/camofox_instancias.json`. Execução: `docs/RUNBOOK-nova-instancia-camofox.md`, gatilho “próxima integração”.
+
 ## 8. Fontes
 - notebooklm-py: [SKILL.md](https://github.com/teng-lin/notebooklm-py/blob/HEAD/SKILL.md), [configuration.md (NOTEBOOKLM_REFRESH_CMD)](https://github.com/teng-lin/notebooklm-py/blob/main/docs/configuration.md), [troubleshooting.md](https://github.com/teng-lin/notebooklm-py/blob/main/docs/troubleshooting.md), [issue #367 (Firefox containers)](https://github.com/teng-lin/notebooklm-py/issues/367)
 - camofox-browser: [README (persistência, cookie import, storage_state)](https://github.com/jo-inc/camofox-browser/blob/4e64ee50/README.md), [plugin persistence (indexedDB)](https://cdn.jsdelivr.net/npm/@askjo/camofox-browser@1.14.0/plugins/persistence/README.md)

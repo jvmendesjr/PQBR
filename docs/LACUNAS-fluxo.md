@@ -23,3 +23,8 @@ PQBA-87 mapeou pedidos de acesso/sessão, aprovação Temporal, incidentes de co
 Lacuna identificada por inspeção estática: `pedidos_telegram.py` atualiza `avisado_em` antes de imprimir a mensagem; se o consumidor falhar após o commit, o pedido pode ficar marcado como avisado sem confirmação de entrega. A sequência foi reproduzida por simulação local com DB stub e stdout simulando OSError; nenhum banco ou transporte real foi acessado. A primeira implementação da correção em PQBA-91 falhou revisão no HEAD limpo 96579e5 (84 testes passaram, 1 falhou), por colisão da migração 0012, falta de policy RLS para pqbr_app e ausência de uso da outbox no dispatcher. O ticket foi devolvido ao Dev; o caso permanente deve provar também queda após envio e antes do commit. Definir e testar uma saída durável com chave idempotente, confirmação após entrega e retry seguro antes de migrar os avisos. O item `aviso:` sem lembrete periódico merece cobertura explícita.
 
 Próximo passo: corrigir e revalidar PQBA-91 no worktree isolado; só então revisar o diff independentemente. ~~Depois ligar o adaptador de saída Discord/Paperclip~~ (revogado, t474): os avisos operacionais saem pelo Telegram (Hermes `pqbr`); falta resolver o token do bot do perfil `pqbr` (decisão pendente do José).
+
+## Pendência t526 (24/10/2026) — migração Camofox [GATILHO: próxima integração de projeto]
+- Migrar PQBR 9387 → `camofox@pqbr` (runbook §3) e ligar `NavegadorIdentidade` em `acesso.py`.
+- Ativar a instância reservada `proxima`:9397 para a conta do novo projeto (runbook §2).
+- Pendentes do plano ADR-012: backup diário com teste de restauração, canário diário, renovador único.

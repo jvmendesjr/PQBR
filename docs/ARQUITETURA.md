@@ -103,6 +103,8 @@
 - **Diagnóstico 24/10 (somente leitura):** a 9387 (PQBR) é **instalação duplicada**: clone git do global em `~/.pqbr/camofox/app` (v1.15.0) + cópia própria do Camoufox 152.0.4-beta.30 em `~/.pqbr/camofox/cache` (1,3 GB). O global (9377) foi atualizado para v1.18.1 em 24/10 (mesmo camoufox-js 0.11.5 e mesmo binário). Ver `docs/REFERENCIA-sessao-google.md` §9 e `docs/mapa/08-identidade-camofox.mmd`.
 - **Migração:** por proposta, com OK do José a cada passo (plano em REFERENCIA §9). A 9387 não muda até lá.
 
+**Atualização t526 (24/10/2026):** PQBR permanece na instalação individual (9387) por decisão do José. Kit pronto no repo (`deploy/camofox/`, `config/camofox_instancias.json`, `motores/navegador.py`); próxima instância reservada `proxima`:9397 (não instalada). Gatilho: próxima integração de projeto. Procedimento: `docs/RUNBOOK-nova-instancia-camofox.md`.
+
 ## 2. Componentes
 
 | Componente | Papel | Status |

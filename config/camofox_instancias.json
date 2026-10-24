@@ -1,0 +1,11 @@
+{
+  "_doc": "ADR-012/t526: instâncias Camofox por conta. Reserva = nome+porta+perfil definidos, NADA rodando (sem memória). Ativar só pelo runbook com OK do José.",
+  "instalacao": {"app": "~/camofox-browser", "app_versao": "v1.18.1", "camoufox": "152.0.4-beta.30", "camoufox_js": "0.11.5"},
+  "instancias": [
+    {"conta": "pqbr", "porta": 9387, "estado": "individual", "unit": "pqbr-camofox",
+     "nota": "instalação individual (duplicada) mantida por t526; migrar para camofox@pqbr na próxima integração de projeto"},
+    {"conta": "proxima", "porta": 9397, "estado": "reservada", "unit": "camofox@proxima",
+     "nota": "reservada para o próximo projeto; renomear a conta ao integrar; não instalada"}
+  ],
+  "limite_simultaneas": 3
+}
