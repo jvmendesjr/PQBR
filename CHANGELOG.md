@@ -4,6 +4,12 @@ Versionamento SemVer (MAJOR.MINOR.PATCH) a partir de t510. Versão do pacote can
 
 
 
+
+## [0.3.3] — 2026-10-24 (t525)
+- ADR-012 (Camofox: 1 instalação, 1 instância por conta, `NavegadorIdentidade`) registrado; diagnóstico e plano em REFERENCIA-sessao-google §9.
+- Camofox global (9377) v1.15.0 → v1.18.1 (fora do repo; 9387 intocada).
+- Mapa: `docs/mapa/08-identidade-camofox.mmd`.
+
 ## [0.3.2] — 2026-10-24 (t517)
 - Meta Vibes restaurado: cadeia de vídeo `flow → google_vids → meta_vibes` (`CADEIA_VIDEO`, `video_fallback`), só navegador; corrige 0.3.1.
 - Vigia de atualizações registrado no worker e agendado (sexta 08:00 Fortaleza); relatório em `pqbr.relatorios_atualizacoes` (migração 0017).

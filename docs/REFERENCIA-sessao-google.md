@@ -54,6 +54,38 @@ Toda automação de navegador simula humano: Camoufox com `humanize: true` (curs
 - `camofox_humano.py` ainda não tem consumidor real (validar no primeiro fluxo de Studio).
 - Ainda não validado ao longo de dias; acompanhar o log do keepalive nos relatórios do Observador.
 
+## 9. Modelo de instâncias (ADR-012) — diagnóstico e plano (24/10/2026)
+### 9.1 Diagnóstico (somente leitura)
+| | Global 9377 | PQBR 9387 |
+|---|---|---|
+| Serviço | `camofox-browser.service` (user) | `pqbr-camofox.service` (user) + drop-ins `memory.conf` (MemoryMax 2200M, swap 400M) e `restart-always.conf` |
+| Bind | todas as interfaces (`*:9377`) ⚠ | 127.0.0.1 |
+| App | `~/camofox-browser` (git jo-inc/camofox-browser), **v1.18.1** desde 24/10 (antes v1.15.0+2 commits de docs) | `~/.pqbr/camofox/app`, **clone local do global**, v1.15.0 |
+| Camoufox | `~/.cache/camoufox` 152.0.4-beta.30 (1,3 GB) | `~/.pqbr/camofox/cache/camoufox` 152.0.4-beta.30 (**cópia**, 1,3 GB) |
+| Perfis | `~/.camofox/profiles` (15 pastas, 2,9 MB) | `~/.pqbr/camofox/profiles` (1 pasta, userId pqbr) |
+| Config | sem EnvironmentFile | `~/.pqbr/camofox/.env` (porta, bind, chaves, perfis, cache, MAX_SESSIONS=1) |
+| Renovador | nenhum | `pqbr-camofox-keepalive.service` (`keepalive.sh`) + `nlm-sync.sh` (refresh do notebooklm-py) |
+| RAM (24/10) | ~50 MB ocioso; ~255 MB com navegador | ~1 GB |
+RAM do pc: 15,5 GB total, ~7,2 GB disponível, swap 2,4/15,7 GB em uso.
+**Conclusão:** a PQBR é instalação **duplicada** (app e binário copiados), mesma versão de base; isolamento hoje é por cópia, não por instância.
+
+### 9.2 Plano de migração (cada passo só com OK do José)
+1. **Travar versão:** escolher a versão-alvo (global v1.18.1 testado) e registrar app + Camoufox + camoufox-js em `config/` (vigia do Dev já acompanha).
+2. **Unit template** `camofox@.service` lendo `~/.pqbr/camofox/instancias/<conta>.env` (porta, bind 127.0.0.1, perfil, MemoryMax), apontando para a instalação única.
+3. **Adaptador `NavegadorIdentidade`** (contrato Pydantic: conta, porta, saúde, sessão ok) usado por `acesso.py`/`camofox.py`; testes com fake.
+4. **Backup diário + restauração testada** do perfil (cópia fria do perfil para pasta datada; restauração num diretório temporário com checagem de sessão sem login).
+5. **Canário diário** (Schedule): saúde + sessão logada por instância; falha → `pqbr.eventos_acesso` + pedido ao José.
+6. **Corte da PQBR:** janela combinada; backup do perfil 9387; subir `camofox@pqbr` com o **mesmo perfil** e a mesma porta 9387; conferir sessão (sem login novo); manter a instalação antiga parada (não apagar) por 7 dias; rollback = voltar o unit antigo.
+7. **Renovador único:** `keepalive.sh` passa a ser `camofox-renovador@<conta>`; nlm-sync continua só na pqbr.
+8. Contas 2 e 3 só depois do corte estável.
+
+### 9.3 Riscos
+- **Queda da sessão Google** no corte (mudança de binário/fingerprint) → exige login do José; mitigar com mesma versão de Camoufox e mesmo perfil, backup antes.
+- **Pin da versão:** Camoufox segue beta; atualizar a instalação única afeta todas as contas → atualizar primeiro no global/canário.
+- **RAM:** ~1 GB por instância ativa; 3 contas ≈ 3 GB + global; MemoryMax por instância.
+- **Global exposto em todas as interfaces** (9377) — fora do escopo; decidir com o José (rede).
+- **Renovadores duplicados** brigando pela mesma sessão; regra: um por instância.
+
 ## 8. Fontes
 - notebooklm-py: [SKILL.md](https://github.com/teng-lin/notebooklm-py/blob/HEAD/SKILL.md), [configuration.md (NOTEBOOKLM_REFRESH_CMD)](https://github.com/teng-lin/notebooklm-py/blob/main/docs/configuration.md), [troubleshooting.md](https://github.com/teng-lin/notebooklm-py/blob/main/docs/troubleshooting.md), [issue #367 (Firefox containers)](https://github.com/teng-lin/notebooklm-py/issues/367)
 - camofox-browser: [README (persistência, cookie import, storage_state)](https://github.com/jo-inc/camofox-browser/blob/4e64ee50/README.md), [plugin persistence (indexedDB)](https://cdn.jsdelivr.net/npm/@askjo/camofox-browser@1.14.0/plugins/persistence/README.md)

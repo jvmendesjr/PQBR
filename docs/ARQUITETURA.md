@@ -98,6 +98,11 @@
   4. **8 papéis-agente** (t512): Diretor, Líder Editorial (monta pedidos ao motor e valida respostas), Pesquisador de Origem, Auditor, Compliance, Guardião, Observador, Dev (diagnostica e propõe; nunca aplica; José aplica com agentes externos). Roteirista, SEO e Caçador Sazonal viram etapas de workflow que chamam o MotorIntelectual; Comunidade adiada.
   5. **Contratos Pydantic v2 = peça central do determinismo, junto com o Temporal** (t515): todo dado que cruza agente, motor ou serviço web passa por contrato. Ficam **num lugar só** (`src/pqbr/contratos/`, inclusive os das portas de motor), cada um **versionado em SemVer** (`contratos.VERSOES`; MAJOR = quebra, MINOR = campo opcional/regra mais frouxa, PATCH = doc; teste obriga). **Revisão contínua**, porque regras e fluxos dos serviços web mudam: testes de contrato por adaptador (respostas reais gravadas como fixtures), canários periódicos por adaptador web em Schedule do Temporal que detectam deriva, e Observador/Dev sinalizando quebras (proposta em `docs/sdd/PROPOSTA-papeis-skills.md` §Revisão de contratos).
 
+### ADR-012: Camofox — uma instalação, uma instância por conta crítica, atrás de `NavegadorIdentidade` [APROVADO José 24/10/2026; NÃO implementado]
+- **Decisão:** uma única instalação do Camofox (app + binário Camoufox, versão travada) e uma instância systemd por conta crítica (`camofox@<conta>`), cada uma com porta e perfil próprios, **um único renovador**, backup diário do perfil com teste de restauração e canário diário (Schedule do Temporal). Até ~3 contas simultâneas. Workflows falam só com o adaptador `NavegadorIdentidade` (contrato Pydantic), nunca com a porta direto.
+- **Diagnóstico 24/10 (somente leitura):** a 9387 (PQBR) é **instalação duplicada**: clone git do global em `~/.pqbr/camofox/app` (v1.15.0) + cópia própria do Camoufox 152.0.4-beta.30 em `~/.pqbr/camofox/cache` (1,3 GB). O global (9377) foi atualizado para v1.18.1 em 24/10 (mesmo camoufox-js 0.11.5 e mesmo binário). Ver `docs/REFERENCIA-sessao-google.md` §9 e `docs/mapa/08-identidade-camofox.mmd`.
+- **Migração:** por proposta, com OK do José a cada passo (plano em REFERENCIA §9). A 9387 não muda até lá.
+
 ## 2. Componentes
 
 | Componente | Papel | Status |

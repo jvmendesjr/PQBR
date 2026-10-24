@@ -10,7 +10,7 @@ h2{margin:0 0 4px;font-size:16px}.nota{margin:0 0 8px;color:var(--m);font-size:1
 .wrap{overflow-x:auto}.mermaid{background:none;margin:0}footer{color:var(--m);font-size:12px;padding:16px;text-align:center}
 .regra{background:#fff8e6;border:1px solid #f0dca8;border-radius:8px;padding:10px;font-size:13px;margin-bottom:16px}
 </style></head><body><header><h1>PQBR — mapa do sistema</h1><p>Gerado do código em 24/10/2026 · ⚠ = não confirmado no código / pendente</p></header>
-<nav><a href="#d00">Visão geral</a><a href="#d01">Episódio</a><a href="#d02">Reposição de temas</a><a href="#d03">Acessos / Camofox</a><a href="#d04">Descarte</a><a href="#d05">Vigia de atualizações</a><a href="#d06">Runs presos</a><a href="#d07">Cadeia de vídeo</a></nav><main><div class="regra"><b>Regra:</b> agentes nunca alteram este mapa sozinhos; mudança só por proposta aprovada pelo José. Fonte: <code>docs/mapa/*.mmd</code>.</div>
+<nav><a href="#d00">Visão geral</a><a href="#d01">Episódio</a><a href="#d02">Reposição de temas</a><a href="#d03">Acessos / Camofox</a><a href="#d04">Descarte</a><a href="#d05">Vigia de atualizações</a><a href="#d06">Runs presos</a><a href="#d07">Cadeia de vídeo</a><a href="#d08">Identidade / Camofox</a></nav><main><div class="regra"><b>Regra:</b> agentes nunca alteram este mapa sozinhos; mudança só por proposta aprovada pelo José. Fonte: <code>docs/mapa/*.mmd</code>.</div>
 <section id="d00"><h2>Visão geral</h2><p class="nota">Mapa PQBR — Visão geral. Gerado do código em 24/10/2026 (commit base c752abc). Só muda por proposta aprovada pelo José. <span class="arq">00-visao-geral.mmd</span></p><div class="wrap"><pre class="mermaid">flowchart TB
   JOSE([&quot;José&quot;])
   TG[&quot;Telegram (Hermes pqbr)&lt;br/&gt;cron pqbr-pedidos-jose lê pqbr.revisao_humana&quot;]
@@ -126,6 +126,26 @@ h2{margin:0 0 4px;font-size:16px}.nota{margin:0 0 8px;color:var(--m);font-size:1
   MV --&gt; D3{&quot;falhou?&quot;}
   D3 -- não --&gt; OK
   D3 -- sim --&gt; H([&quot;⚠ não definido no código: proposta HOLD + pedido ao José&quot;])
-  N&gt;&quot;Sem APIs (Gemini/Veo/Omni). NotebookLM vídeo: só alternativa (hoje o EpisodioWorkflow ainda baixa o vídeo do NotebookLM ⚠)&quot;]</pre></div></section></main><footer>Temporal é o sistema nervoso · contratos Pydantic v2 · motores trocáveis</footer>
+  N&gt;&quot;Sem APIs (Gemini/Veo/Omni). NotebookLM vídeo: só alternativa (hoje o EpisodioWorkflow ainda baixa o vídeo do NotebookLM ⚠)&quot;]</pre></div></section><section id="d08"><h2>Identidade / Camofox</h2><p class="nota">Identidade/navegador (ADR-012, José 24/10/2026). Estado atual = diagnóstico real do pc 24/10; alvo = decisão, NÃO implementado. <span class="arq">08-identidade-camofox.mmd</span></p><div class="wrap"><pre class="mermaid">flowchart TB
+  subgraph HOJE[&quot;Hoje (diagnóstico 24/10)&quot;]
+    G[&quot;camofox-browser.service · porta 9377 · escuta em todas as interfaces ⚠&lt;br/&gt;app ~/camofox-browser v1.18.1 (atualizado 24/10)&lt;br/&gt;Camoufox ~/.cache/camoufox 152.0.4-beta.30 · perfis ~/.camofox/profiles (15)&quot;]
+    P[&quot;pqbr-camofox.service · 127.0.0.1:9387 · userId pqbr · MAX_SESSIONS=1&lt;br/&gt;app ~/.pqbr/camofox/app v1.15.0 (CLONE do global = instalação duplicada)&lt;br/&gt;Camoufox ~/.pqbr/camofox/cache 152.0.4-beta.30 (CÓPIA, 1,3 GB) · MemoryMax 2200M&quot;]
+    K[&quot;pqbr-camofox-keepalive.service (keepalive.sh)&lt;br/&gt;renovador da 9387&quot;]
+    S[&quot;nlm-sync.sh (NOTEBOOKLM_REFRESH_CMD)&lt;br/&gt;sincroniza sessão Camofox → notebooklm-py&quot;]
+    K --&gt; P
+    P --&gt; S
+  end
+  subgraph ALVO[&quot;Alvo (ADR-012): 1 instalação, 1 instância por conta crítica (até ~3)&quot;]
+    I[(&quot;1 instalação Camofox + 1 Camoufox&lt;br/&gt;versão travada (pin)&quot;)]
+    I --&gt; C1[&quot;camofox@pqbr&lt;br/&gt;porta própria · perfil próprio&quot;]
+    I --&gt; C2[&quot;camofox@conta2&quot;]
+    I --&gt; C3[&quot;camofox@conta3&quot;]
+    C1 &amp; C2 &amp; C3 --&gt; R[&quot;1 renovador por instância (único)&quot;]
+    C1 &amp; C2 &amp; C3 --&gt; B[&quot;backup diário do perfil + teste de restauração&quot;]
+    C1 &amp; C2 &amp; C3 --&gt; CN[&quot;canário diário (Temporal Schedule)&quot;]
+    AD{{&quot;adaptador NavegadorIdentidade&lt;br/&gt;(contrato Pydantic; workflows só falam com ele)&quot;}}
+    AD --&gt; C1 &amp; C2 &amp; C3
+  end
+  N&gt;&quot;Regras: uma identidade Google por instância; juniormoedavirtual só em camofox@pqbr; login só pelo José; sem re-login headless&quot;]</pre></div></section></main><footer>Temporal é o sistema nervoso · contratos Pydantic v2 · motores trocáveis</footer>
 <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
 mermaid.initialize({startOnLoad:true,theme:"neutral",securityLevel:"strict",flowchart:{htmlLabels:true,useMaxWidth:true}});</script></body></html>
