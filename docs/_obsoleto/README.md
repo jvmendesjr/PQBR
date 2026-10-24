@@ -13,3 +13,6 @@ Arquivos tirados do caminho por estarem obsoletos para a arquitetura atual (sem 
 | `docs/sdd/f1-02-dryrun.md` | Dry-run de import de 2ª org Paperclip, nunca executado, suspenso | — |
 | `company/playbooks/lock-preso.md` | 409 de checkout do Paperclip (#6007/#3819) | — (lock/retry passam a ser do Temporal) |
 | `docs/CONTRATO-EDITORIAL.md` (v1 + aditivo) → `CONTRATO-EDITORIAL-v1.md` | Substituído pelo v2 oficial (t473) | `docs/CONTRATO-EDITORIAL.md` (v2 + Anexo A com as seções canônicas do v1) |
+
+## Revisão de `docs/pesquisas/` (23/10/2026, autorizada por José)
+Nenhum arquivo movido: nenhum é claramente obsoleto e pesquisa nunca se perde. Todos ainda embasam decisões vigentes ou pendentes, e vários são lidos por código (`scripts/hindsight/indexar.py`, `src/pqbr/workflows/descarte.py`). Parcialmente superados (ficam, com a ressalva): `PESQ-agente-comunidade.md` (templates do Paperclip; skills/boas práticas valem), `PESQ-orquestracao-escala.md` (parte Paperclip; base da ADR-001), `PESQ-auditoria-av.md` (60–80 s superado por t271), `pesquisa-caderno-mestre.md` (base da decisão "sem mestre"), `mapa-drive-rede.md` (necessário para a migração do Drive antigo, pendente), `cadernos-inventario-20261012.md` (registro histórico da limpeza).
