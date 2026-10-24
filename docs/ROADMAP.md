@@ -3,7 +3,7 @@
 
 > **Como retomar (qualquer agente, qualquer sessão):**
 > 1. Leia **só**, nesta ordem: `docs/REGRAS.md` → `docs/SPEC.md` → `docs/ARQUITETURA.md` → `docs/TESTES.md` → este `docs/ROADMAP.md`. Em conflito, vale o primeiro.
-> 2. ⛔ **Nunca consulte** `docs/arquivo/`, `docs/pesquisas/`, `docs/DECISOES-LOG.md`, `docs/_obsoleto/` nem qualquer rascunho ou material legado **sem aprovação explícita do José** (t287).
+> 2. ⛔ **Nunca consulte** `docs/arquivo/`, `docs/pesquisas/`, `docs/DECISOES-LOG.md`, `docs/_obsoleto/` nem qualquer rascunho ou material legado **sem aprovação explícita do José** (t287). **Exceção (t530, José):** `docs/pesquisas/PESQUISA-extensoes-geracao-em-serie.md` pode ser lido por qualquer agente, **somente leitura** (referência da Fase 4V).
 > 3. Pegue a **primeira tarefa `- [ ]` cujas dependências estejam todas `- [x]`**. Não pule portões do José.
 > 4. Dúvida ou conflito que as regras aprovadas não resolvem com certeza: **não adivinhe**. Escreva "EM CONSTRUÇÃO — aguardando José" no `Obs:` e avise (t323).
 > 5. Mudanças durante a construção são tarefas deste roteiro, nunca tickets (REGRAS §24). Nada de push sem autorização do José.
@@ -206,7 +206,7 @@ Plano. Variáveis: `C=/home/pc/.pqbr/camofox`, porta `9387`, unit `pqbr-camofox.
 Precisam do José: F4C-04, F4C-05, F4C-06, F4C-07. F4C-01..03 só pedem o portão G4.
 
 ## Fase 4V: geração de vídeo em série pelo navegador (t529) — storyboard → vídeo, sem extensões
-Ref.: `docs/pesquisas/PESQUISA-extensoes-geracao-em-serie.md`, ADR-012, t517 (cadeia), t529 (HOLD). Cada passo que abre Flow, Vids ou Vibes ou gasta cota tem portão do José.
+Ref.: `docs/pesquisas/PESQUISA-extensoes-geracao-em-serie.md` (leitura liberada, t530), ADR-012, t517 (cadeia), t529 (HOLD). Cada passo que abre Flow, Vids ou Vibes ou gasta cota tem portão do José.
 - [ ] **R1 · Estudar e mapear a UI** (Flow, Vids, Vibes): modais, ícones, campos, sequência de cliques e regras por modelo → `PlatformProfile` versionado (snapshots do Camofox, sem gerar). Obs: portão José para abrir as UIs.
 - [ ] **R2 · Contratos** `CenaStoryboard`, `ManifestoSerie`, `ResultadoCena`, `PedidoDecisaoVideo` (VERSOES 1.0.0) + regra de nome `<ep>_c<NN>_<tipo>_<modelo>_<v>` + testes.
 - [ ] **R3 · Adaptador Flow** (`GeradorVideo` sobre `NavegadorIdentidade`): storyboard de imagens em série → vídeo por cena (start frame/chain); concorrência 1, ritmo humano, falha rápida no drift. Piloto de 1 cena antes de 5 a 7.

@@ -7,7 +7,7 @@ description: Regras comuns a todos os agentes da PQBR.
 ## NotebookLM-first editorial rule (t465)
 NotebookLM is the canonical intellectual engine for deep research, Brazilian culture/expression research, topic and idea proposals, scripts and SEO. Paperclip agents orchestrate the NotebookLM workflow, pass approved inputs, extract artifacts and validate contracts; they must not independently perform core research or write topics/scripts/SEO. The only exceptions are report supplementation or a documented fallback when a central tool is unavailable. Never generate video with NotebookLM; follow the approved video-provider hierarchy. Technical instructions are in English; scripts, narration and editorial content are in Brazilian Portuguese.
 
-Leia `docs/REGRAS.md` §0 (atualização 11/10, prevalece), CONTRATO-EDITORIAL, SPEC, ARQUITETURA e `docs/AGENTES.md`, nessa ordem. Não consulte `docs/arquivo/` nem `docs/pesquisas/` sem aprovação do José.
+Leia `docs/REGRAS.md` §0 (atualização 11/10, prevalece), CONTRATO-EDITORIAL, SPEC, ARQUITETURA e `docs/AGENTES.md`, nessa ordem. Não consulte `docs/arquivo/` nem `docs/pesquisas/` sem aprovação do José. **Exceção (t530, José):** `docs/pesquisas/PESQUISA-extensoes-geracao-em-serie.md` pode ser lido por qualquer agente, **somente leitura** (referência da Fase 4V).
 - Toda saída é estruturada e validada (Pydantic v2: `PropostaAgente` etc.).
 - Efeito externo (render, upload, agendar, privar, responder, coração) só pelo Temporal.
 - Ferramentas: só o kit PQBR (MCP `pqbr-kit`: Temporal, Camofox, NotebookLM py, Pydantic) + API do Paperclip. Nada fora da lista do seu papel.

@@ -16,6 +16,30 @@ t529 · 24/10/2026 · aprovado por José. **Só estudo e registro.** Nenhuma ext
 - **O que faltava:** nenhum documento cobria a **geração de storyboard em série** a partir de uma lista de prompts vinda do NotebookLM, com nomes e ordem determinísticos, nem um catálogo de ferramentas atuais da comunidade para Flow e Vibes. Também não havia nada sobre o Google Vids nesse sentido. Este documento preenche essa lacuna.
 - Não encontrei o transcript do agente YT-LLM: o id não estava acessível nesta sessão. Se houver mais material lá, ele deve ser anexado aqui.
 
+### 1.1 Conversa YT-LLM (agente do canal Porquê BR, 22/10/2026) — achados úteis
+Fonte: conversa YT-LLM (transcript e arquivos de trabalho desse agente, 22/10/2026). Não houve discussão sobre **extensões** de Chrome para geração em série, nem sobre Whisk ou Meta Vibes. O que houve, e serve aqui:
+- **GUÍA VOX — Motor de Producción** (fonte colada pelo José no caderno do YT-LLM): é um wizard que leva de roteiro a **beats** e daí a **um arquivo `.txt` de prompts de imagem**, depois a um **prompt de animação universal**, tudo no **Google Flow** (modelo de imagem, depois modelo de vídeo). As regras que interessam ao manifesto de série:
+  - 1 beat = 2,5 a 3 s de narração (5 a 7 palavras a 2,2 palavras/s), com uma ideia visual por beat; todos os beats viram prompts, **em ordem**;
+  - formato do arquivo: **um bloco por prompt, separados por uma linha em branco, SEM numeração nem rótulos** ("qualquer número solto vira prompt e gera imagem lixo"). É exatamente o formato de entrada das filas de extensão (seção 2);
+  - cada bloco é **autossuficiente**: o bloco de estilo completo vai repetido em todo prompt, o que garante a consistência;
+  - nome `[tema]-prompts.txt`, dividido em arquivos de no máximo 60 prompts;
+  - animação: **o mesmo prompt universal para todas as imagens** (a imagem é o quadro final; câmera travada; 70 % montagem e 30 % "pôster vivo"; clipes de 5 ou 8 s).
+- **Fábrica de Shorts en Gemini Notebook** (canal IATOP, https://www.youtube.com/@Inteligencia-Artificial-IATOP): etapa 4.2, que pede ao NotebookLM um prompt para o Flow/Nano Banana gerar **1 imagem com 6 vinhetas 9:16** para pré-visualizar o estilo antes da série. Serve como "canário de estilo" barato antes do storyboard completo.
+- **Lições do YT-LLM que valem aqui**:
+  - o estilo papercut foi **abortado** no NotebookLM por falta de zoom e movimento nos recortes;
+  - "storyboard" **não** funciona como motor visual *dentro* do NotebookLM (o Video Overview ignora o storyboard). Isso reforça que o storyboard em série deve ser feito no Flow, e não no NotebookLM;
+  - assets nomeados `ASSET_<tipo>_<nome>-v<N>` (ex.: `prop-plugue-3pinos-v1`), personagem stickman travado, descrever 2 a 4 movimentos críticos por beat;
+  - cotas do NotebookLM por capacidade (planejar o lote);
+  - nenhuma extensão instalada.
+- **Cobertura da busca**:
+  - lidas as posições ~502 a 3099 da conversa (amostragem com lacunas pequenas). As posições 0 a 501 não foram lidas;
+  - lidos os arquivos de trabalho do agente em `/workspace/yt-llm-bot/` no box: `notebooklm-video-short-briefing.md`, `sources/guia-vox.md`, `sources/fabrica-shorts.md`, `ops/*.md`.
+
+**Impacto no §5:**
+- `ManifestoSerie` ganha os campos `bloco_estilo` (repetido em todo prompt), `segundos_por_beat` e `prompt_animacao_universal`;
+- ao exportar o `.txt` para revisão humana, usar o formato de blocos separados por linha em branco, sem números;
+- a ordem e o nome ficam só no manifesto e no nome do arquivo (`<ep>_c<NN>_...`).
+
 ## 2. Ferramentas encontradas (fontes reais)
 | Ferramenta | Alvo | Lógica relevante | Fonte |
 |---|---|---|---|
