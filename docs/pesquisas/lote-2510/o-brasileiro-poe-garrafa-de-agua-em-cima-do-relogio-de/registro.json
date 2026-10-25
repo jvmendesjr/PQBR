@@ -1,0 +1,41 @@
+{
+ "postgres": {
+  "temas_pendentes_id": 28,
+  "linhas": 1
+ },
+ "drive": {
+  "pasta": "1yhELaB2u1EGjWJZ_qSUvCkV8qlnltb8Q",
+  "arquivos": {
+   "seo.json": {
+    "id": "1-HVpYltzvaDLY3kW70Lsriq3R4wtcbJq",
+    "md5": "1cfbcee2b4173ccb56feea30385cb63b",
+    "bytes": 4454,
+    "reaproveitado": false
+   },
+   "roteiro.json": {
+    "id": "1X7M6NchWggZDRlI2nXkj1NyrP7998Jxg",
+    "md5": "385a7c52cf6e55d012b14b35b5b7b14c",
+    "bytes": 5558,
+    "reaproveitado": false
+   },
+   "gate-pronto.json": {
+    "id": "16Q9DR6sMvTxNqXaJwuJ9bnDSc-7TeAXi",
+    "md5": "f559181d0a2acbace34df8f0f1660046",
+    "bytes": 1014,
+    "reaproveitado": false
+   },
+   "juiz-gemini.json": {
+    "id": "13F2aJtT46QzcGOsdcYfd9SGnxu4On9dF",
+    "md5": "8f031569d366da8bac404c8ad6e3ad0d",
+    "bytes": 747,
+    "reaproveitado": false
+   },
+   "garrafa-pronto.mp4": {
+    "id": "12C9mGZDmZkQ34Cw2k2e9_Am8swH2Rr9u",
+    "md5": "091d18faab713ac612b5e04532f65306",
+    "bytes": 35650006,
+    "reaproveitado": false
+   }
+  }
+ }
+}

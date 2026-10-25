@@ -1,0 +1,25 @@
+```json
+{
+  "titulo": "Por que chamamos café fraco de chá de bico de chaleira?",
+  "descricao": "Sabe aquele café tão ralo que parece água de batata? Entenda a origem curiosa da expressão 'chá de bico de chaleira' que o brasileiro usa até hoje pra debochar do café fraco.\n\nCódigo: PQBR-EP0005\n\nFontes:\n- Tudo o que você precisa saber sobre o café fraco\n- Café Forte ou Café Fraco? O Que São os 'Chafés' - Coffee & Joy\n- As expressões famosas inspiradas no chá - Mexido de Ideias\n\n#shorts #porquebr #cafe #curiosidades #expressõespopulares",
+  "tags": [
+    "café fraco",
+    "chá de bico de chaleira",
+    "porquê br",
+    "expressões populares",
+    "curiosidades",
+    "cultura brasileira",
+    "origem das expressões",
+    "chafé",
+    "café",
+    "ditados populares"
+  ],
+  "hashtags": [
+    "#shorts",
+    "#porquebr",
+    "#cafe",
+    "#curiosidades",
+    "#expressõespopulares"
+  ]
+}
+```

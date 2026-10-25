@@ -1,0 +1,41 @@
+{
+ "postgres": {
+  "temas_pendentes_id": 20,
+  "linhas": 1
+ },
+ "drive": {
+  "pasta": "1_aPZu5-oENaMKzk5E4mxX3wVWADhKCVc",
+  "arquivos": {
+   "seo.json": {
+    "id": "1t2bv6pvgZ3uy4WHGJidY-KeIlSyRzygC",
+    "md5": "7f764b85e1aec039e4029060d0583c61",
+    "bytes": 5558,
+    "reaproveitado": false
+   },
+   "roteiro.json": {
+    "id": "1JVMvA3BVL13u-o2zsR8nTz49GOeJZSGY",
+    "md5": "69de0a895f71a238421e6c72eeb01ba2",
+    "bytes": 5822,
+    "reaproveitado": false
+   },
+   "gate-pronto.json": {
+    "id": "1oYcR075gEjOz8UgqMEm-pI4JLy6jH39T",
+    "md5": "2fadf638bf4bb7d16f160a37ce4ea11d",
+    "bytes": 1496,
+    "reaproveitado": false
+   },
+   "juiz-gemini.json": {
+    "id": "19pUm20Hw0Ec2RaX_tRIGgn5S_adRP7_l",
+    "md5": "84cf250ef0a10bb1bfb0be055535ae21",
+    "bytes": 947,
+    "reaproveitado": false
+   },
+   "fechadura-pronto-v2.mp4": {
+    "id": "17N7mEF-pQhJO3ykPyAUhgQXsjqC8fj3W",
+    "md5": "0acb16feeabdd33e362d0edb0b9008e9",
+    "bytes": 36316229,
+    "reaproveitado": false
+   }
+  }
+ }
+}

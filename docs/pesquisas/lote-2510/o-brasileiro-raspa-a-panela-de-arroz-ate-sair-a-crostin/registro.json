@@ -1,0 +1,41 @@
+{
+ "postgres": {
+  "temas_pendentes_id": 29,
+  "linhas": 1
+ },
+ "drive": {
+  "pasta": "1WmTPKURzo76y3e3zbRr4-1Ronfupbu5i",
+  "arquivos": {
+   "seo.json": {
+    "id": "1lhJmyyBYM5mFK4gqagKwOz-QjVPKLwdJ",
+    "md5": "91cd1eb981c6f49879fcdaef12a14a27",
+    "bytes": 4616,
+    "reaproveitado": false
+   },
+   "roteiro.json": {
+    "id": "12VeR7SYTQOvdv7R7qbDJdZFYvGKkcSC8",
+    "md5": "936a0724c990804875f2653efebe415f",
+    "bytes": 5237,
+    "reaproveitado": false
+   },
+   "gate-pronto.json": {
+    "id": "10dccxUwED1lT5_ggQ2Rgbc9mLHXq-emt",
+    "md5": "7dec8312b8f9267e60f73bc02128c408",
+    "bytes": 1538,
+    "reaproveitado": false
+   },
+   "juiz-gemini.json": {
+    "id": "1k_iuTW-CrgaKivnaZpmD1in6zsVYr19x",
+    "md5": "432c27e1ffaedbf7180ff27f64f1b7b4",
+    "bytes": 747,
+    "reaproveitado": false
+   },
+   "crostinha-pronto-v2.mp4": {
+    "id": "1d8RxfiRDp8D4tmu7K44uWYCmz1VNIw3I",
+    "md5": "1a514c4a89843a7924ef7de62c44c84d",
+    "bytes": 44302906,
+    "reaproveitado": false
+   }
+  }
+ }
+}

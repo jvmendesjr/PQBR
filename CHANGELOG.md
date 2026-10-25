@@ -5,6 +5,10 @@ Versionamento SemVer (MAJOR.MINOR.PATCH) a partir de t510. Versão do pacote can
 
 
 
+## [0.3.20] — 2026-10-25
+### Adicionado
+- lote-2510: códigos PQBR-EP1002–EP1010; SEO+fontes do NotebookLM (seo.json); juiz Gemini VISUAL via Camofox (juiz-gemini.json); Drive 02_Episodios/2026-10; Postgres temas_pendentes (em_producao); gate rerodado — todos P1_HOLD (LOOP inexistente). Scripts em scripts/lote/. Nada publicado, nada pago.
+
 ## [0.3.19] — 2026-10-25
 ### Corrigido
 - lote-2510 ERR-MON-02: CTA personalizado do roteiro restaurado em 6 Shorts (fechadura, formiga, crostinha, brigadeiro, nao-e-bem-assim, olhos-da-cara) → `<tema>-pronto-v2.mp4` (v1 preservados; P1_HOLD; 467,95 créditos ElevenLabs; nada publicado). `scripts/montar_voz_dinamica.py`: recusa CTA genérico por padrão, fades 30 ms, reusa clipes em vez de still. Catálogo: `ERR-MON-02` (seed). Docs: VOZ-DINAMICA-CTA-PADRAO corrigido, CONTRATO-EDITORIAL (CTA preservado na produção), CATALOGO-ERROS, GATE-PRONTO-LOTE, gate-pronto.json.

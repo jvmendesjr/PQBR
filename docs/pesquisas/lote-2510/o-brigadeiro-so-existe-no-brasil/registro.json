@@ -1,0 +1,41 @@
+{
+ "postgres": {
+  "temas_pendentes_id": 21,
+  "linhas": 1
+ },
+ "drive": {
+  "pasta": "15I5bm7JPhUt5bpYs_gIX8jKWklnzvGOZ",
+  "arquivos": {
+   "seo.json": {
+    "id": "1zkzixZFfq62WupWirl191fEqSEFaoLV_",
+    "md5": "0d4da30cfe8c2f345464e9e3236f33d8",
+    "bytes": 4175,
+    "reaproveitado": false
+   },
+   "roteiro.json": {
+    "id": "1eoWbDES4iwaVKc_YbzHqZjVdgQX6YBxI",
+    "md5": "b6a7a810e82b19ccedea9a4ab16b1247",
+    "bytes": 5548,
+    "reaproveitado": false
+   },
+   "gate-pronto.json": {
+    "id": "1Xie-ecYSUOpiUr5VNVdwIAF-l6rG3THL",
+    "md5": "6f17f09974df01a4803f2944c9efee2b",
+    "bytes": 1497,
+    "reaproveitado": false
+   },
+   "juiz-gemini.json": {
+    "id": "1Xn2j-V8flngQR_1WTZHMxqCTP-p2kVLD",
+    "md5": "058cd837707027d1beb48fe299a757cf",
+    "bytes": 763,
+    "reaproveitado": false
+   },
+   "brigadeiro-pronto-v2.mp4": {
+    "id": "1Bu8IymHvGDZilym-KxpWzHu6J_6Nj6bv",
+    "md5": "fbb6954f7011369f4288bb992ad16b2b",
+    "bytes": 45755365,
+    "reaproveitado": false
+   }
+  }
+ }
+}

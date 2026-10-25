@@ -1,0 +1,25 @@
+{
+  "titulo": "Por que o brasileiro confere a fechadura 3 vezes antes de sair?",
+  "descricao": "Você já voltou até a porta só para chacoalhar a maçaneta três vezes? Entenda o que a psicologia explica sobre essa mania tão comum e como a mente busca segurança no dia a dia. Código do episódio: PQBR-EP0020.\n\nFontes:\n- Estado de Minas: A psicologia explica que checar várias vezes a porta está ligado à ansiedade\n- Super Rádio Tupi: Ansiedade antecipatória e a dúvida na memória\n- Correio Braziliense: Hábito comum ou sinal de ansiedade\n\n#shorts #porquebr #curiosidades #psicologia #habitos",
+  "tags": [
+    "porquê br",
+    "curiosidades",
+    "psicologia",
+    "hábitos brasileiros",
+    "fechadura",
+    "trancar a porta",
+    "ansiedade",
+    "comportamento",
+    "shorts",
+    "humor brasileiro",
+    "manias",
+    "dia a dia"
+  ],
+  "hashtags": [
+    "#shorts",
+    "#porquebr",
+    "#curiosidades",
+    "#psicologia",
+    "#habitos"
+  ]
+}

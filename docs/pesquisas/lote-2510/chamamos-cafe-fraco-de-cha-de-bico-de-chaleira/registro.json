@@ -1,0 +1,41 @@
+{
+ "postgres": {
+  "temas_pendentes_id": 5,
+  "linhas": 1
+ },
+ "drive": {
+  "pasta": "1GbcjapV5kQe29jedS03lOAlBLwtI1hu8",
+  "arquivos": {
+   "seo.json": {
+    "id": "1nm2Wua-k9ZxoXB61qqphkA608Pykhckf",
+    "md5": "e827d81daf734835eb1225bc606170f5",
+    "bytes": 4097,
+    "reaproveitado": false
+   },
+   "roteiro.json": {
+    "id": "1-GOgdI9MO0ONAL9MoR5fkx0WZAczrb3N",
+    "md5": "613f21bb7db1e058a3855495acb8ba59",
+    "bytes": 6176,
+    "reaproveitado": false
+   },
+   "gate-pronto.json": {
+    "id": "1rNJLNyPIJabFTGMwynw088wHd3BRDySa",
+    "md5": "4381814c745e245239ab93837d92445f",
+    "bytes": 1032,
+    "reaproveitado": false
+   },
+   "juiz-gemini.json": {
+    "id": "1BVIu3O6cBxduKSD3H6WEvFks7frpliHu",
+    "md5": "6d281ee1fc3d34e7f30a59ab634d6be7",
+    "bytes": 747,
+    "reaproveitado": false
+   },
+   "cafe-fraco-pronto.mp4": {
+    "id": "1YaJ9azwd6IWhi6LOPbd3tkmSfyk-xa0E",
+    "md5": "1d702f4c74d2c34f836a684bc05608d1",
+    "bytes": 19463037,
+    "reaproveitado": false
+   }
+  }
+ }
+}

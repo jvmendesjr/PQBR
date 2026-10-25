@@ -1,0 +1,41 @@
+{
+ "postgres": {
+  "temas_pendentes_id": 27,
+  "linhas": 1
+ },
+ "drive": {
+  "pasta": "1giIaQF792V7vz91mh_3k7IxGjUVKCWVs",
+  "arquivos": {
+   "seo.json": {
+    "id": "1gtqi2-9CEIxAAQ9L_j89SywFttMOqMdR",
+    "md5": "2ed5c6ce30669a15bddcdf7abbf2df7a",
+    "bytes": 4361,
+    "reaproveitado": false
+   },
+   "roteiro.json": {
+    "id": "16BFxM7B5DssjkSNpOEoZLYtOJWvy8lCD",
+    "md5": "a39b7553d7b003794bd86c0d1a0d6de1",
+    "bytes": 6239,
+    "reaproveitado": false
+   },
+   "gate-pronto.json": {
+    "id": "1l3cZJg9nI2CKudR-JbsEPj1Yom-26SEb",
+    "md5": "b18e76dc7d40ab102716339157ca13f6",
+    "bytes": 1586,
+    "reaproveitado": false
+   },
+   "juiz-gemini.json": {
+    "id": "1QeEqqUipG-yH-NJlbQ_u1YfSbK7wdHVm",
+    "md5": "2d66424a49b19279e00eb6e1a0359356",
+    "bytes": 747,
+    "reaproveitado": false
+   },
+   "nao-e-bem-assim-pronto-v2.mp4": {
+    "id": "1Vd8QtQFk_lgpK1mjTaTtKlh2rUVdBUiP",
+    "md5": "8bb8897302527b52b23e1f997b9f92aa",
+    "bytes": 39253020,
+    "reaproveitado": false
+   }
+  }
+ }
+}

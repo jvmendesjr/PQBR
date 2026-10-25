@@ -1,0 +1,24 @@
+{
+  "titulo": "Por que o brigadeiro só existe no Brasil?",
+  "descricao": "O brigadeiro nasceu durante uma campanha política em 1945 e virou a estrela insubstituível das festas brasileiras. O brasileiro transformou a praticidade do leite condensado num pós-guerra em patrimônio cultural e afeto de aniversário. Descubra a história e as controvérsias desse ícone nacional. [PQBR-EP0021]\n\nFontes:\n- Histori-se: A história do brigadeiro\n- Periódicos Científicos da UFRGS: “O mais popular dos doces brasileiros”: História crítica do brigadeiro\n- BRmais: Brigadeiro: o docinho brasileiro mais famoso dentro e fora do Brasil\n- CNN Brasil V&G: Dia do Brigadeiro: do improviso político ao doce mais amado do Brasil\n\n#brigadeiro #curiosidades #culturabrasileira #shorts",
+  "tags": [
+    "brigadeiro",
+    "origem do brigadeiro",
+    "historia do brigadeiro",
+    "por que br",
+    "cultura brasileira",
+    "curiosidades brasil",
+    "leite condensado",
+    "doces brasileiros",
+    "comida brasileira",
+    "historia do brasil",
+    "culinaria brasileira",
+    "shorts"
+  ],
+  "hashtags": [
+    "#brigadeiro",
+    "#curiosidades",
+    "#culturabrasileira",
+    "#shorts"
+  ]
+}
