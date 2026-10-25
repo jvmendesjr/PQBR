@@ -1,0 +1,13 @@
+{
+ "tema_id": 5, "slug": "chamamos-cafe-fraco-de-cha-de-bico-de-chaleira",
+ "pacote_hash": "17b4cf4f727fd489ec177e3865d768427e4ce149a5a19715e544a1da8ead78fa",
+ "produzido_em": "2026-10-25T12:45-03:00", "publicado": false,
+ "saida": "runtime/lote-saldo/cafe-fraco/cafe-fraco.mp4", "duracao_s": 48.56, "resolucao": "1080x1920",
+ "narracao": {"servico": "elevenlabs", "conta": "meioquedigital", "voz": "Larissa xcNJswC7UcxsIiCuih19", "modelo": "eleven_v3", "duracao_s": 48.56, "custo_creditos": 650.93, "custo_usd": 0.118},
+ "imagens": {"servico": "higgsfield", "modelo": "flux_3_image 1k 9:16", "qtd": 7, "custo_por_img": 2, "custo_total": 14, "ancora_personagem": "c1b76b51-b87d-4af6-8271-5170ce2155b5 (ref. nas cenas 2-7)", "cena8": "reusa imagem da cena 1 (still 1.7s)"},
+ "clipes": {"servico": "higgsfield", "modelo": "kling3_0 std, sound off, i2v", "custo_por_s": 1.5, "duracoes_s": [10,7,9,6,7,6,3], "custo_total": 72, "tempo_geracao_min": "~15-25 por lote"},
+ "cortes_s": [9.80,6.85,8.58,5.76,7.01,5.87,3.02,1.70],
+ "higgsfield_saldo": {"antes": 567.5, "depois": 481.5, "gasto": 86},
+ "runway_teste": {"modelo": "gen-4-turbo i2v 5s 720x1280", "task": "65d409c6-7a0a-44f8-a15c-92661d488f43", "custo": 25, "saldo_plano_antes": 1680, "saldo_plano_depois": 1655},
+ "prompts": "ver cenas.md do pacote; sufixo: Flat 2D cartoon, bold black outlines, no text, no letters, no words, no labels, no signage, no 3D, not photorealistic"
+}
