@@ -1,0 +1,37 @@
+{
+ "tema_id": 3,
+ "slug": "botijao-de-gas-no-brasil-e-sempre-azul-ou-cinza",
+ "classe": "do_momento",
+ "motivo_classe": "Botijão no centro do orçamento com a pressão no custo de vida (out/2026)",
+ "caderno": "476f249a-e688-4496-967d-a6f7343e2938",
+ "palavras": 114,
+ "duracao_estimada_s": 49.6,
+ "n_cenas": 8,
+ "compliance": {
+  "aprovado": false,
+  "motivos": [
+   "Fala 5 afirma que GLP é 'padronizado no país inteiro pela Petrobras' — falso apresentado como certo. Padronização técnica do GLP é regulada pela ANP (Lei 9.478/1997 e resoluções ANP). Petrobras é produtora/distribuidora, não órgão regulador. Atribuir padronização à Petrobras é afirmação factualmente errada.",
+   "Fala 7 menciona 'Liquigás' como marca ativa — Liquigás foi adquirida pela Copagaz em 2020 e a marca Liquigás foi descontinuada. Apresentar como marca atual é afirmação falsa apresentada como certa."
+  ],
+  "ressalvas": [
+   "Fala 3 apresenta mitos ('azul dura mais', 'cinza esquenta mais rápido') sem desmenti-los explicitamente na mesma fala — estrutura narrativa resolve isso na fala 4, mas edição de corte pode isolar a fala 3 e gerar desinformação. Recomendado unir falas 3 e 4 ou adicionar negação explícita na fala 3.",
+   "Cena S05 mostra 'caminhão de gás amarelo' — amarelo é cor associada à Comgás e outras distribuidoras regionais, não à Petrobras. Inconsistência visual pode confundir.",
+   "Ultragaz (fala 7) é marca real citada nominalmente — dentro do critério editorial se usada como exemplo factual neutro, mas verificar se uso comercial de marca exige disclaimer no canal."
+  ],
+  "segunda_opiniao": {
+   "aprovado": false,
+   "motivos": [
+    "Fala 5: afirma que o GLP é 'padronizado no país inteiro pela Petrobras'. Petrobras é marca real citada como responsável pela padronização; além disso, a afirmação é imprecisa — a regulação e padronização do GLP cabe à ANP, não à Petrobras (Petrobras produz parte do GLP, mas não padroniza). Configura marca real + afirmação falsa apresentada como certa.",
+    "Fala 7: cita Ultragaz e Liquigás como marcas reais, associando cores específicas a cada uma. Além disso, a associação 'Ultragaz = azul' e 'Liquigás = cinza' é simplificação imprecisa — existem outras distribuidoras com essas cores e a Liquigás já operou com botijões de outras cores. Configura marca real + afirmação falsa apresentada como certa."
+   ],
+   "ressalvas": [
+    "Fala 3: apresenta crenças populares ('azul dura mais', 'cinza esquenta mais rápido') sem desmentir explicitamente na mesma fala. O desmentido vem só nas falas seguintes; recomenda-se incluir marcador claro de mito na própria fala 3 para evitar que trecho circule isolado como afirmação factual.",
+    "Fala 5 (bloco visual S05): descrição menciona 'caminhão de gás amarelo' — verificar se a cor amarela não remete a identidade visual de distribuidora real.",
+    "Fala 8: CTA 'não ficar sem gás' pode ser lido como conselho prático de consumo; risco baixo, mas vale revisar."
+   ]
+  }
+ },
+ "steering": "[ESTILO] Ilustração 2D plana de cartum, como animação de TV brasileira: traço preto nítido e uniforme, personagem em cores chapadas quentes (amarelo-mostarda, verde-bandeira, terracota) com alto contraste sobre fundo limpo em tom frio ou neutro (azul-céu, bege claro), sem degradê nem sombra realista, fundo minimalista com no máximo 3–5 objetos, humor carinhoso. Personagem sempre grande no quadro (ocupa ≥ 1/3 da altura), centralizado, agindo, com expressões faciais e corporais exageradas. Proibido: fotorrealismo, 3D, rosto de pessoa real ou celebridade, marca ou logo real, texto escrito dentro das imagens (a legenda do NotebookLM não conta). Formato vertical 9:16, deixar livres a faixa de cima e a de baixo da tela. [PERSONAGEM] Homem de cerca de 30 anos, magro, cabelo castanho curto, camiseta amarela, bermuda verde, óculos redondos vermelhos, expressão-base exagerada curiosa. Sem nome.",
+ "pacote_hash": "17b4cf4f727fd489ec177e3865d768427e4ce149a5a19715e544a1da8ead78fa",
+ "origem": "NotebookLMWorkflow(tipo=pesquisa) via Temporal; validação/compliance fora do workflow"
+}
