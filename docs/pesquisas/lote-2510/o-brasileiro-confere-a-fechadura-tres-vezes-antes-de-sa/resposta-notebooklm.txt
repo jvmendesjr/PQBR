@@ -1,0 +1,74 @@
+{
+  "episodio_id": "o-brasileiro-confere-a-fechadura-tres-vezes-antes-de-sa",
+  "titulo": "Por que o brasileiro confere a fechadura três vezes?",
+  "falas": [
+    "Você anda dois passos, trava e volta correndo para chacoalhar a maçaneta três vezes. Por que a gente faz isso antes de sair?",
+    "Você sabe que trancou, mas a mente insiste em projetar a casa de portas abertas.",
+    "A psicologia explica que essa checagem busca reduzir a ansiedade e criar controle num momento de transição.",
+    "Como a tranca é feita no piloto automático, a memória de curto prazo falha e a dúvida aparece.",
+    "Mas tem quem diga que o próprio excesso de checagem apaga a confiança na lembrança anterior.",
+    "Rir dessa mania é entender que todo brasileiro só quer sair em paz.",
+    "Tranca essa ansiedade na chave e segue o Porquê BR!"
+  ],
+  "tipo_cta": "trocadilho_tema",
+  "entidades_cena": [
+    "fechadura de metal",
+    "porta de madeira",
+    "maçaneta prateada",
+    "chaveiro com chave de metal",
+    "tapete de boas-vindas",
+    "relógio de parede"
+  ],
+  "bloco_visual": {
+    "personagem": "Um só: 30 anos, magro, cabelo preto curto, camiseta amarela, calça jeans azul, óculos redondos vermelhos, expressão-base espantada.",
+    "cenas": [
+      {
+        "fala": "Você anda dois passos, trava e volta correndo para chacoalhar a maçaneta três vezes. Por que a gente faz isso antes de sair?",
+        "acao": "O personagem dá dois passos para longe da porta, paralisa com olhar assustado, volta correndo e chacoalha a maçaneta com força três vezes.",
+        "enquadramento": "Plano médio",
+        "ambiente": "Cena 1: Corredor de entrada da casa, hoje, objetos-âncora: porta de madeira, fechadura de metal, tapete de boas-vindas, luz da manhã."
+      },
+      {
+        "fala": "Você sabe que trancou, mas a mente insiste em projetar a casa de portas abertas.",
+        "acao": "O personagem coloca a mão no queixo pensativo enquanto um balão de pensamento cartoon aparece mostrando a porta escancarada.",
+        "enquadramento": "Close",
+        "ambiente": "Cena 2: Calçada em frente de casa, hoje, objetos-âncora: portão de ferro, muro baixo, vaso de planta, luz forte do dia."
+      },
+      {
+        "fala": "A psicologia explica que essa checagem busca reduzir a ansiedade e criar controle num momento de transição.",
+        "acao": "O personagem segura a chave no ar com postura reflexiva enquanto ícones cartoon de engrenagens e relógio flutuam ao fundo.",
+        "enquadramento": "Plano médio",
+        "ambiente": "Cena 3: Corredor interno da casa, hoje, objetos-âncora: relógio de parede, espelho de corredor, porta-chaves de madeira, iluminação suave."
+      },
+      {
+        "fala": "Como a tranca é feita no piloto automático, a memória de curto prazo falha e a dúvida aparece.",
+        "acao": "O personagem gira a chave na fechadura olhando para o lado com cara de distraído enquanto o gesto evapora em nuvem cartoon.",
+        "enquadramento": "Close",
+        "ambiente": "Cena 4: Junto à fechadura da porta, hoje, objetos-âncora: fechadura prateada, chave de metal, trinco de ferro, luz de corredor."
+      },
+      {
+        "fala": "Mas tem quem diga que o próprio excesso de checagem apaga a confiança na lembrança anterior.",
+        "acao": "O personagem segura a maçaneta e pisca confuso com pontos de interrogação animados girando sobre a cabeça.",
+        "enquadramento": "Plano médio",
+        "ambiente": "Cena 5: Entrada da casa, hoje, objetos-âncora: porta de madeira, maçaneta prateada, quadro de parede, iluminação natural."
+      },
+      {
+        "fala": "Rir dessa mania é entender que todo brasileiro só quer sair em paz.",
+        "acao": "O personagem sorri aliviado, guarda a chave no bolso e dá um tchauzinho simpático para a câmera.",
+        "enquadramento": "Plano aberto",
+        "ambiente": "Cena 6: Varanda da casa, hoje, objetos-âncora: planta em vaso de barro, cadeira de macarrão, portãozinho de ferro, luz do sol."
+      },
+      {
+        "fala": "Tranca essa ansiedade na chave e segue o Porquê BR!",
+        "acao": "O personagem dá uma piscadela cúmplice e volta a chacoalhar a maçaneta exatamente como na cena 1 em movimento de loop.",
+        "enquadramento": "Plano médio",
+        "ambiente": "Cena 7: Corredor de entrada da casa, hoje, objetos-âncora: porta de madeira, fechadura de metal, tapete de boas-vindas, luz da manhã."
+      }
+    ]
+  },
+  "fontes": [
+    "A psicologia explica que checar várias vezes se a porta está trancada antes de sair de casa pode estar ligado a níveis elevados de ansiedade e à necessidade de controle, refletindo como a mente busca reduzir incertezas e criar sensação de segurança emocional no dia a dia - Estado de Minas - Em foco",
+    "Segundo a psicologia, quem confere se trancou a porta mais de uma vez ao sair pode não estar só sendo cuidadoso, mas lidando com um nível maior de ansiedade antecipatória - Super Rádio Tupi",
+    "Checar a porta antes de sair: hábito comum ou sinal de ansiedade? - Correio Braziliense"
+  ]
+}

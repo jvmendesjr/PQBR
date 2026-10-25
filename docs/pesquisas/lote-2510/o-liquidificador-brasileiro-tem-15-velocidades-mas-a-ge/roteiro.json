@@ -1,0 +1,84 @@
+{
+ "roteiro": {
+  "episodio_id": "o-liquidificador-brasileiro-tem-15-velocidades-mas-a-ge",
+  "titulo": "Por que o liquidificador tem 15 velocidades se usamos 2?",
+  "falas": [
+   "Por que o liquidificador da sua cozinha tem quinze velocidades se você só usa a dois?",
+   "Se você decide colocar no botão três, o aparelho parece um helicóptero decolando na bancada!",
+   "O brasileiro ama ostentar potência, mas no cotidiano não passa da segunda marcha.",
+   "A versão mais aceita no mercado de eletrodomésticos é puramente uma estratégia de vendas.",
+   "Colocar painéis com números altos passa a ideia de superpotência e atrai o comprador na loja.",
+   "Mas tem quem diga que ter gradações ajuda a evitar trancos fortes no motor ao bater alimentos pesados.",
+   "Na prática, a gente bate a vitamina na velocidade dois e deixa as outras treze só de enfeite.",
+   "Segue o Porquê BR."
+  ],
+  "tipo_cta": "fallback",
+  "entidades_cena": [
+   "liquidificador com 15 velocidades",
+   "copo de vitamina de banana",
+   "filtro de barro",
+   "loja de eletrodomésticos",
+   "bancada de cozinha brasileira"
+  ],
+  "bloco_visual": {
+   "estilo": "Ilustração 2D plana de cartum, como animação de TV brasileira: traço preto nítido e uniforme, personagem em cores chapadas quentes (amarelo-mostarda, verde-bandeira, terracota) com alto contraste sobre fundo limpo em tom frio ou neutro (azul-céu, bege claro), sem degradê nem sombra realista, fundo minimalista com no máximo 3–5 objetos, humor carinhoso. Personagem sempre grande no quadro (ocupa ≥ 1/3 da altura), centralizado, agindo, com expressões faciais e corporais exageradas. Proibido: fotorrealismo, 3D, rosto de pessoa real ou celebridade, marca ou logo real, texto escrito dentro das imagens (a legenda do NotebookLM não conta). Formato vertical 9:16, deixar livres a faixa de cima e a de baixo da tela.",
+   "personagem": "Homem de 30 anos, magro, cabelo preto curto, camiseta amarela, bermuda verde, óculos redondos vermelhos, expressão-base exagerada curiosa.",
+   "personagem_2": null,
+   "cenas": [
+    {
+     "fala": "Por que o liquidificador da sua cozinha tem quinze velocidades se você só usa a dois?",
+     "acao": "O personagem olha espantado para um liquidificador gigante com painel numerado até 15 e aperta receoso o botão 2.",
+     "enquadramento": "Plano médio, centralizado",
+     "ambiente": "Cozinha brasileira do dia a dia, hoje, com filtro de barro, armário simples e mesa de fórmica, luz de manhã."
+    },
+    {
+     "fala": "Se você decide colocar no botão três, o aparelho parece um helicóptero decolando na bancada!",
+     "acao": "O personagem fica com os cabelos esvoaçando enquanto o liquidificador treme intensamente fazendo a bancada chacoalhar.",
+     "enquadramento": "Close-up no personagem e no aparelho",
+     "ambiente": "Cozinha brasileira do dia a dia, hoje, com eletrodomésticos trepidando na bancada, luz de manhã."
+    },
+    {
+     "fala": "O brasileiro ama ostentar potência, mas no cotidiano não passa da segunda marcha.",
+     "acao": "O personagem coça a cabeça sorrindo de canto, encarando o botão 2 com um copo de vitamina pronto na mão.",
+     "enquadramento": "Plano médio",
+     "ambiente": "Cozinha brasileira do dia a dia, hoje, com pano de prato e fruteira na mesa, luz de manhã."
+    },
+    {
+     "fala": "A versão mais aceita no mercado de eletrodomésticos é puramente uma estratégia de vendas.",
+     "acao": "O personagem veste uma gravata divertida e aponta para um gráfico de vendas crescente desenhado num quadro.",
+     "enquadramento": "Plano médio",
+     "ambiente": "Loja de eletrodomésticos brasileira, hoje, com prateleiras cheias de caixas de aparelhos, luz clara."
+    },
+    {
+     "fala": "Colocar painéis com números altos passa a ideia de superpotência e atrai o comprador na loja.",
+     "acao": "O personagem segura o liquidificador cintilante como um troféu brilhante destacando o número 15.",
+     "enquadramento": "Plano americano",
+     "ambiente": "Loja de eletrodomésticos brasileira, hoje, com cartazes promocionais ao fundo, luz clara."
+    },
+    {
+     "fala": "Mas tem quem diga que ter gradações ajuda a evitar trancos fortes no motor ao bater alimentos pesados.",
+     "acao": "O personagem observa lâminas girando suavemente enquanto pedaços pesados de fruta são triturados sem solavanco.",
+     "enquadramento": "Close-up no copo do liquidificador",
+     "ambiente": "Cozinha brasileira do dia a dia, hoje, bancada limpa com pote de frutas ao lado, luz de tarde."
+    },
+    {
+     "fala": "Na prática, a gente bate a vitamina na velocidade dois e deixa as outras treze só de enfeite.",
+     "acao": "O personagem toma um gole saboroso de vitamina sorrindo aliviado ao lado do liquidificador desligado.",
+     "enquadramento": "Plano médio",
+     "ambiente": "Cozinha brasileira do dia a dia, hoje, com mesa arrumada de café da manhã, luz de manhã."
+    },
+    {
+     "fala": "Segue o Porquê BR.",
+     "acao": "O personagem retoma exatamente a mesma pose e enquadramento da primeira cena, apertando o botão 2 do liquidificador e piscando para a tela (loop).",
+     "enquadramento": "Plano médio, centralizado",
+     "ambiente": "Cozinha brasileira do dia a dia, hoje, com filtro de barro, armário simples e mesa de fórmica, luz de manhã."
+    }
+   ],
+   "pedido_3d_ou_realista": false
+  }
+ },
+ "fontes": [
+  "Qual a potência ideal de um liquidificador? Dicas para escolher o seu - Blog Le biscuit",
+  "Conheça as principais estratégias para venda de Eletrodomésticos!"
+ ]
+}

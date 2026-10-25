@@ -34,3 +34,13 @@ Próximo passo: corrigir e revalidar PQBA-91 no worktree isolado; só então rev
 - O código ainda não tem Flow, Vids nem Meta Vibes: o `EpisodioWorkflow` baixa o vídeo do NotebookLM (`nlm_baixar_video`). A cadeia existe só como decisão. → ROADMAP Fase 4V R1–R6.
 - HOLD quando as 3 rotas falham: **decidido** (t529), ainda não implementado. → R7.
 - Storyboard em série (prompts do NotebookLM → imagens nomeadas e ordenadas → vídeos): só pesquisa (`docs/pesquisas/PESQUISA-extensoes-geracao-em-serie.md`).
+
+## Lacuna lote 25/10/2026 — pacotes de roteiro para produção externa (Higgsfield/Runway/ElevenLabs)
+Feito pelo agente externo (Grok Bot). Sem vídeo, imagem ou voz gerados e sem publicação. A parte criativa saiu do NotebookLM pela fila `notebooklm-pqbr`, com a sessão do Camofox 9387 e as flags `NOTEBOOKLM_DISABLE_KEEPALIVE_POKE=1` e `NOTEBOOKLM_HEADLESS_REAUTH=0`.
+- **Falta um modo "só roteiro" no Temporal:** com `tipo=short` + `roteirizar`, o `NotebookLMWorkflow` sempre segue para `nlm_gerar_short`, que gera o vídeo no NotebookLM. Para não gerar vídeo, usei `tipo=pesquisa` com o pacote canônico, a pesquisa web e o `PROMPT_ROTEIRO` como pergunta. → Criar `tipo=roteiro_pacote` que pare depois de `_roteirizar`.
+- **Validação fora do workflow:** `validar_roteiro`, `compliance_roteiro`, os arquivos de cenas e narração e o `meta.json` foram rodados por script (`/tmp/pos.py`), fora do Temporal. → Tornar activities do modo acima.
+- **Checagem de atualidade fora da grade:** a classificação "do momento" ou "de sempre" foi um pedido avulso ao NotebookLM (caderno `0d266053`). O `GradeDiariaWorkflow` não tem esse passo, e `temas_pendentes` não tem coluna de classe.
+- **Caderno e registro:** os temas do lote não têm código `PQBR-EP`, então os cadernos ficaram sem `registro_caderno` e `fontes_caderno` e não há cópia no Drive (`drive_enviar` exige um episódio). Os cadernos ficam no NotebookLM sem apagamento agendado. → Definir os códigos e o descarte.
+- **Barreira 2 vs. R10 semântico:** a variação por palavras deixou passar temas próximos de publicados, como sacola dobrada × sacola bonita e caixinha de suco × caixa de leite. Tirei esses temas à mão (o Jev ainda não está ligado na faixa de dúvida).
+- **Tema com marca real:** "botijão azul ou cinza" exige citar distribuidoras, e o compliance reprovou por marca real e por afirmação errada. → Filtrar temas de marca antes de roteirizar.
+- **EP1002 no formato v1:** `~/.pqbr/rot-EP1002.json` não tem `tipo_cta` nem fontes e não passa no `validar_roteiro` v2. Foi roteirizado de novo no caderno `c47ccd24`.

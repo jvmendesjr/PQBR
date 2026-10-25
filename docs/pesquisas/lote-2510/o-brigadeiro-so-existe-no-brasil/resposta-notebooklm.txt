@@ -1,0 +1,68 @@
+{
+  "episodio_id": "o-brigadeiro-so-existe-no-brasil",
+  "titulo": "Por que o brigadeiro só existe no Brasil?",
+  "falas": [
+    "O brasileiro inventa festa só pra ter desculpa de comer brigadeiro de panela. Mas por que esse doce só existe no Brasil?",
+    "A versão mais aceita é que ele surgiu em mil novecentos e quarenta e cinco, na campanha de um candidato a presidente que era brigadeiro.",
+    "As eleitoras vendiam o docinho de leite condensado com chocolate pra arrecadar fundos. O candidato perdeu a eleição, mas o doce ganhou o país inteiro.",
+    "Mas tem quem diga que a receita já existia antes como negrinho, e só ganhou farda militar pra fazer política!",
+    "A sacada foi usar o leite condensado, que era prático num pós-guerra sem leite fresco. A gente pegou o improviso e transformou em patrimônio do aniversário!",
+    "Pra não perder o ponto, Segue o Porquê BR!"
+  ],
+  "tipo_cta": "trocadilho_tema",
+  "entidades_cena": [
+    "panela de brigadeiro gigante",
+    "colher de pau",
+    "cartaz eleitoral vintage",
+    "urna eleitoral antiga",
+    "docinho com quepe militar",
+    "lata de leite condensado"
+  ],
+  "bloco_visual": {
+    "personagem": "Um só: 30 anos, magro, cabelo preto curto arrepiado, camiseta amarela, calça jeans azul, óculos redondos vermelhos, expressão-base exagerada curiosa. Sem nome. Esta frase se repete idêntica em todas as cenas.",
+    "cenas": [
+      {
+        "fala": "O brasileiro inventa festa só pra ter desculpa de comer brigadeiro de panela. Mas por que esse doce só existe no Brasil?",
+        "acao": "O personagem devora brigadeiro direto de uma panela gigante de alumínio com uma colher de pau, ficando com a boca e o rosto lambuzados de chocolate.",
+        "enquadramento": "plano médio",
+        "ambiente": "Cozinha brasileira, hoje, objetos-âncora: filtro de barro, panela de alumínio, colher de pau, pano de prato xadrez, luz de tarde."
+      },
+      {
+        "fala": "A versão mais aceita é que ele surgiu em mil novecentos e quarenta e cinco, na campanha de um candidato a presidente que era brigadeiro.",
+        "acao": "O personagem veste um terno de época e segura um cartaz eleitoral vintage com o desenho de um oficial militar de quepe.",
+        "enquadramento": "plano aberto",
+        "ambiente": "Comício eleitoral, anos 1940, objetos-âncora: pódio de madeira, microfone vintage de pedestal, faixas de papel, luz de dia."
+      },
+      {
+        "fala": "As eleitoras vendiam o docinho de leite condensado com chocolate pra arrecadar fundos. O candidato perdeu a eleição, mas o doce ganhou o país inteiro.",
+        "acao": "O personagem entrega uma caixinha cheia de brigadeiros enrolados em troca de moedas antigas e depois olha para uma urna eleitoral com surpresa cômica.",
+        "enquadramento": "plano médio",
+        "ambiente": "Mesa de chafariz e chás de campanha, anos 1940, objetos-âncora: caixas de doces, xícaras de porcelana, urna eleitoral de madeira, luz de tarde."
+      },
+      {
+        "fala": "Mas tem quem diga que a receita já existia antes como negrinho, e só ganhou farda militar pra fazer política!",
+        "acao": "O personagem coloca um quepe militar em cima de um docinho de chocolate em formato de bolinha, como se estivesse fardando o doce.",
+        "enquadramento": "close",
+        "ambiente": "Cozinha antiga de fazenda, anos 1920, objetos-âncora: tacho de cobre, fogão a lenha, colher de madeira, luz de manhã."
+      },
+      {
+        "fala": "A sacada foi usar o leite condensado, que era prático num pós-guerra sem leite fresco. A gente pegou o improviso e transformou em patrimônio do aniversário!",
+        "acao": "O personagem abre uma lata vintage de leite condensado e despeja o creme direto em uma panela no fogão, com olhar radiante.",
+        "enquadramento": "plano médio",
+        "ambiente": "Cozinha residencial brasileira, anos 1950, objetos-âncora: fogão a gás vintage, lata de leite condensado, batedeira manual, luz de dia."
+      },
+      {
+        "fala": "Pra não perder o ponto, Segue o Porquê BR!",
+        "acao": "O personagem retoma a cena inicial, sorrindo e piscando o olho enquanto segura a panela gigante e comemora com uma colherada de brigadeiro.",
+        "enquadramento": "plano médio",
+        "ambiente": "Cozinha brasileira, hoje, objetos-âncora: filtro de barro, panela de alumínio, colher de pau, pano de prato xadrez, luz de tarde."
+      }
+    ]
+  },
+  "fontes": [
+    "A história do brigadeiro - Histori-se",
+    "“O mais popular dos doces brasileiros”: História crítica do brigadeiro. - Periódicos Científicos da UFRGS",
+    "Brigadeiro: o docinho brasileiro mais famoso dentro e fora do Brasil - BRmais",
+    "Dia do Brigadeiro: do improviso político ao doce mais amado do Brasil | CNN Brasil V&G"
+  ]
+}

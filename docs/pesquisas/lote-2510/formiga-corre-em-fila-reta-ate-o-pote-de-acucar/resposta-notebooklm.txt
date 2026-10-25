@@ -1,0 +1,82 @@
+{
+  "episodio_id": "formiga-corre-em-fila-reta-ate-o-pote-de-acucar",
+  "titulo": "Por Que Formiga Corre em Fila Reta Até o Pote de Açúcar?",
+  "falas": [
+    "Você deixa o pote de açúcar aberto e surge uma fila reta de formigas! Por que elas andam assim tão alinhadas?",
+    "Na cozinha brasileira, basta uma gota de calda na mesa pra marcha começar.",
+    "O açúcar é energia rápida e pura para a rotina agitada da colônia.",
+    "A versão mais aceita é que a pioneira detecta o doce pelas antenas e volta soltando feromônios.",
+    "As outras seguem o rastro químico em linha reta, que é o caminho mais curto e eficiente.",
+    "Mas tem quem diga que elas têm um GPS interno ou só odeiam trânsito.",
+    "No fim, o brasileiro passa o pano, mas elas já refizeram a rota.",
+    "Segue o Porquê BR pra essa fila de curiosidades ficar mais doce antes que fechem o pote de açúcar!"
+  ],
+  "tipo_cta": "trocadilho_tema",
+  "entidades_cena": [
+    "personagem",
+    "pote de açúcar de vidro",
+    "formigas em fila reta",
+    "cozinha brasileira",
+    "filtro de barro",
+    "pano de prato",
+    "antena de formiga"
+  ],
+  "bloco_visual": {
+    "personagem": "Um só: 32 anos, magro, cabelo castanho curto, camiseta verde-bandeira, calça jeans azul-escuro, óculos redondos vermelhos, expressão-base exagerada curiosa. Sem nome. Esta frase se repete idêntica em todas as cenas.",
+    "cenas": [
+      {
+        "fala": "Você deixa o pote de açúcar aberto e surge uma fila reta de formigas! Por que elas andam assim tão alinhadas?",
+        "acao": "O personagem segura a tampa do pote de açúcar com olhos arregalados enquanto observa uma fila perfeitamente reta de formigas marchando até o pote sobre a mesa.",
+        "enquadramento": "plano médio",
+        "ambiente": "Cena 1: cozinha brasileira simples hoje, mesa de madeira, pote de açúcar de vidro aberto, filtro de barro ao fundo, luz da manhã."
+      },
+      {
+        "fala": "Na cozinha brasileira, basta uma gota de calda na mesa pra marcha começar.",
+        "acao": "O personagem aponta surpreso para uma pequena gota adocicada na mesa, cercada por formigas se aproximando em formação.",
+        "enquadramento": "close",
+        "ambiente": "Cena 2: cozinha brasileira simples hoje, tampo da mesa de madeira, luz da manhã."
+      },
+      {
+        "fala": "O açúcar é energia rápida e pura para a rotina agitada da colônia.",
+        "acao": "O personagem faz gesto de força com o braço enquanto formigas cartunistas carregam pequeninos cristais de açúcar brilhantes como se fossem pesos.",
+        "enquadramento": "plano médio",
+        "ambiente": "Cena 3: cozinha brasileira simples hoje, canto da mesa, luz da manhã."
+      },
+      {
+        "fala": "A versão mais aceita é que a pioneira detecta o doce pelas antenas e volta soltando feromônios.",
+        "acao": "Uma formiga exploradora esbarrando no pote de açúcar, mexendo as antenas e deixando uma trilha brilhante de feromônio ao voltar, observada pelo personagem com uma lupa.",
+        "enquadramento": "close",
+        "ambiente": "Cena 4: caminho da mesa da cozinha hoje, luz da manhã."
+      },
+      {
+        "fala": "As outras seguem o rastro químico em linha reta, que é o caminho mais curto e eficiente.",
+        "acao": "O personagem observa várias formigas andando em fila perfeita sobre uma linha pontilhada brilhante desenhada na mesa.",
+        "enquadramento": "plano aberto",
+        "ambiente": "Cena 5: cozinha brasileira hoje, vista geral da mesa e da parede com azulejos, luz da manhã."
+      },
+      {
+        "fala": "Mas tem quem diga que elas têm um GPS interno ou só odeiam trânsito.",
+        "acao": "O personagem coça a cabeça intrigado olhando para uma formiga segurando um minúsculo mapa com ícone de GPS, enquanto as outras mantêm a fila sem empurrões.",
+        "enquadramento": "plano médio",
+        "ambiente": "Cena 6: cozinha brasileira hoje, ao lado da janela, luz da manhã."
+      },
+      {
+        "fala": "No fim, o brasileiro passa o pano, mas elas já refizeram a rota.",
+        "acao": "O personagem passa um pano de prato na mesa sorrindo vitorioso, mas logo se espanta ao ver a fila de formigas se reorganizando no segundo seguinte.",
+        "enquadramento": "plano médio",
+        "ambiente": "Cena 7: cozinha brasileira hoje, bancada perto do filtro de barro, luz da manhã."
+      },
+      {
+        "fala": "Segue o Porquê BR pra essa fila de curiosidades ficar mais doce antes que fechem o pote de açúcar!",
+        "acao": "O personagem sorri amigavelmente, faz sinal de joinha e retoma a pose inicial segurando a tampa do pote de açúcar com a fila de formigas ao fundo (loop).",
+        "enquadramento": "plano médio",
+        "ambiente": "Cena 8: cozinha brasileira simples hoje, mesa de madeira, pote de açúcar de vidro aberto, filtro de barro ao fundo, luz da manhã."
+      }
+    ]
+  },
+  "fontes": [
+    "Por que as formigas andam em fila? Ciência explica a eficiência por trás do comportamento",
+    "Como as formigas conseguem detectar doce? - Fatos Desconhecidos",
+    "Por que as formigas gostam tanto de açúcar? - Portal Agricultura A a Z - AgriculturaAZ"
+  ]
+}

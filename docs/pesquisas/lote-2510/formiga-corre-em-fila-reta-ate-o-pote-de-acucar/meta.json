@@ -1,0 +1,18 @@
+{
+ "tema_id": 6,
+ "slug": "formiga-corre-em-fila-reta-ate-o-pote-de-acucar",
+ "classe": "do_momento",
+ "motivo_classe": "Primavera quente e úmida (out/2026) aumenta formigas em casa",
+ "caderno": "1ba6bc2a-96a0-4206-8e53-b54cd7d31da7",
+ "palavras": 127,
+ "duracao_estimada_s": 55.2,
+ "n_cenas": 8,
+ "compliance": {
+  "aprovado": true,
+  "motivos": [],
+  "ressalvas": []
+ },
+ "steering": "[ESTILO] Ilustração 2D plana de cartum, como animação de TV brasileira: traço preto nítido e uniforme, personagem em cores chapadas quentes (amarelo-mostarda, verde-bandeira, terracota) com alto contraste sobre fundo limpo em tom frio ou neutro (azul-céu, bege claro), sem degradê nem sombra realista, fundo minimalista com no máximo 3–5 objetos, humor carinhoso. Personagem sempre grande no quadro (ocupa ≥ 1/3 da altura), centralizado, agindo, com expressões faciais e corporais exageradas. Proibido: fotorrealismo, 3D, rosto de pessoa real ou celebridade, marca ou logo real, texto escrito dentro das imagens (a legenda do NotebookLM não conta). Formato vertical 9:16, deixar livres a faixa de cima e a de baixo da tela. [PERSONAGEM] Um só: 32 anos, magro, cabelo castanho curto, camiseta verde-bandeira, calça jeans azul-escuro, óculos redondos vermelhos, expressão-base exagerada curiosa. Sem nome. Esta frase se repete idêntica em todas as cenas.",
+ "pacote_hash": "17b4cf4f727fd489ec177e3865d768427e4ce149a5a19715e544a1da8ead78fa",
+ "origem": "NotebookLMWorkflow(tipo=pesquisa) via Temporal; validação/compliance fora do workflow"
+}

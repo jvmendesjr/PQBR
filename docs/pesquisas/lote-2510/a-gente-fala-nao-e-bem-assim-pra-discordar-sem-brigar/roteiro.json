@@ -1,0 +1,88 @@
+{
+ "roteiro": {
+  "episodio_id": "a-gente-fala-nao-e-bem-assim-pra-discordar-sem-brigar",
+  "titulo": "Por que a gente fala 'não é bem assim' pra discordar sem brigar?",
+  "falas": [
+   "Dizer que o quadro torto tá reto? Não é bem assim! Mas por que a gente fala isso pra discordar?",
+   "O brasileiro usa esse amortecedor no churrasco de família pra conversa não virar confusão.",
+   "Linguistas da pragmática chamam isso de desacordo mitigado.",
+   "A versão mais aceita é que a frase é uma atenuação pra proteger a imagem do outro.",
+   "Em vez do 'tá errado' seco, o 'não é bem assim' funciona como amaciante social.",
+   "Mas tem quem diga que é só um jeito de ganhar tempo pra pensar na resposta.",
+   "No fim, a gente usa a expressão até hoje porque prefere ser educado a perder a amizade.",
+   "Segue o Porquê BR, porque na hora de discordar, não é bem assim que se perde o amigo!"
+  ],
+  "tipo_cta": "trocadilho_tema",
+  "entidades_cena": [
+   "quadro torto na parede",
+   "filtro de barro",
+   "churrasqueira de tijolos",
+   "estante de livros",
+   "garrafa de amaciante",
+   "relógio de parede de galinha",
+   "garrafa térmica vermelha",
+   "cesta de pão de queijo"
+  ],
+  "bloco_visual": {
+   "estilo": "Ilustração 2D plana de cartum, como animação de TV brasileira: traço preto nítido e uniforme, personagem em cores chapadas quentes (amarelo-mostarda, verde-bandeira, terracota) com alto contraste sobre fundo limpo em tom frio ou neutro (azul-céu, bege claro), sem degradê nem sombra realista, fundo minimalista com no máximo 3–5 objetos, humor carinhoso. Personagem sempre grande no quadro (ocupa ≥ 1/3 da altura), centralizado, agindo, com expressões faciais e corporais exageradas. Proibido: fotorrealismo, 3D, rosto de pessoa real ou celebridade, marca ou logo real, texto escrito dentro das imagens (a legenda do NotebookLM não conta). Formato vertical 9:16, deixar livres a faixa de cima e a de baixo da tela.",
+   "personagem": "Homem de cerca de 30 anos, magro, cabelo castanho curto e bagunçado, camiseta amarela, calça jeans azul, óculos redondos vermelhos, expressão-base marota. Sem nome. Esta frase se repete idêntica em todas as cenas.",
+   "personagem_2": null,
+   "cenas": [
+    {
+     "fala": "Dizer que o quadro torto tá reto? Não é bem assim! Mas por que a gente fala isso pra discordar?",
+     "acao": "O personagem tenta pendurar um quadro de ponta-cabeça na parede e afirma que está certo, mas olha intrigado quando percebe que está torto.",
+     "enquadramento": "Plano médio",
+     "ambiente": "Cena 1: Sala de jantar brasileira, hoje, objetos-âncora: filtro de barro na mesa, mesa de madeira, prato de macarronada, quadro torto na parede, luz da tarde."
+    },
+    {
+     "fala": "O brasileiro usa esse amortecedor no churrasco de família pra conversa não virar confusão.",
+     "acao": "O personagem gesticula suavemente com as mãos espalmadas para acalmar um parente animado no churrasco.",
+     "enquadramento": "Plano aberto",
+     "ambiente": "Cena 2: Quintal de casa com churrasqueira, hoje, objetos-âncora: churrasqueira de tijolos, grelha com espeto, lata de guaraná, mesa de plástico branca, luz do sol."
+    },
+    {
+     "fala": "Linguistas da pragmática chamam isso de desacordo mitigado.",
+     "acao": "O personagem segura uma lupa e analisa curiosamente um balão de fala flutuante que se transforma numa almofada fofinha.",
+     "enquadramento": "Plano médio",
+     "ambiente": "Cena 3: Biblioteca caseira, hoje, objetos-âncora: estante de livros, poltrona antiga, abajur amarelado, caneca de café, luz suave."
+    },
+    {
+     "fala": "A versão mais aceita é que a frase é uma atenuação pra proteger a imagem do outro.",
+     "acao": "O personagem coloca delicadamente um capacete protetor de espuma no seu interlocutor antes de expressar uma divergência.",
+     "enquadramento": "Plano médio",
+     "ambiente": "Cena 4: Sala de estar, hoje, objetos-âncora: sofá de tecido, almofadas coloridas, ventilador de pé ligado, luz da tarde."
+    },
+    {
+     "fala": "Em vez do 'tá errado' seco, o 'não é bem assim' funciona como amaciante social.",
+     "acao": "O personagem despeja gotas mágicas de uma garrafa de amaciante sobre uma palavra dura e pontuda, deixando-a macia.",
+     "enquadramento": "Plano fechado",
+     "ambiente": "Cena 5: Lavanderia de casa, hoje, objetos-âncora: máquina de lavar roupa, varal de teto, balde plástico, luz do dia."
+    },
+    {
+     "fala": "Mas tem quem diga que é só um jeito de ganhar tempo pra pensar na resposta.",
+     "acao": "O personagem coça o queixo pensativo enquanto os ponteiros de um relógio de parede giram rapidamente ao fundo.",
+     "enquadramento": "Plano médio",
+     "ambiente": "Cena 6: Cozinha, hoje, objetos-âncora: relógio de parede de galinha, fogão a gás, garrafa térmica vermelha, luz da manhã."
+    },
+    {
+     "fala": "No fim, a gente usa a expressão até hoje porque prefere ser educado a perder a amizade.",
+     "acao": "O personagem abraça carinhosamente o amigo pelo ombro enquanto compartilham risadas na mesa de café.",
+     "enquadramento": "Plano médio",
+     "ambiente": "Cena 7: Varanda de casa, hoje, objetos-âncora: mesa de centro, cesta de pão de queijo, garrafa de café, luz do entardecer."
+    },
+    {
+     "fala": "Segue o Porquê BR, porque na hora de discordar, não é bem assim que se perde o amigo!",
+     "acao": "O personagem pisca para a câmera e volta a ajeitar o mesmo quadro torto da primeira cena, garantindo o loop perfeito.",
+     "enquadramento": "Plano médio",
+     "ambiente": "Cena 8: Sala de jantar brasileira, hoje, objetos-âncora: filtro de barro na mesa, mesa de madeira, prato de macarronada, quadro torto na parede, luz da tarde."
+    }
+   ],
+   "pedido_3d_ou_realista": false
+  }
+ },
+ "fontes": [
+  "Análises de gêneros orais: tecendo articulações a partir de Marcuschi, Dolz e Schneuwly. - SciELO",
+  "A negociação do desacordo mitigado como estratégia de (im)polidez por ministros do Tribunal Superior do Trabalho",
+  "Mecanismos de atenuação e intensificação no ensino- -aprendizagem do português como língua estrangeira - Universidade do Porto"
+ ]
+}
