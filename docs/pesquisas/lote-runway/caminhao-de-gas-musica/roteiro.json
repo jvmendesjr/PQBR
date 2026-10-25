@@ -1,0 +1,149 @@
+{
+ "titulo": "Por que o caminhão de gás toca música clássica na rua?",
+ "gancho": "Você já reparou que o caminhão de gás passa na rua tocando Für Elise de Beethoven? Por que o caminhão de gás toca música clássica na rua?",
+ "falas": [
+  "Você já reparou que o caminhão de gás passa na rua tocando Für Elise de Beethoven? Por que o caminhão de gás toca música clássica na rua?",
+  "Antigamente, os entregadores usavam buzinas estridentes e gritavam 'Ó o gás!'. Para combater essa poluição sonora, São Paulo criou em 1991 uma lei proibindo as buzinas.",
+  "A Ultragaz encomendou um jingle com o músico Hélio Ziskind gravado em um chip à prova de sacolejo. Mas as outras distribuidoras usaram chips chineses baratos com músicas de domínio público.",
+  "Várias clássicas tocaram no começo, mas Für Elise se destacou e virou um meme nacional. Tem quem diga que foi jogada de marketing de luxo, mas foi só economia de direitos autorais.",
+  "Para não deixar a sua curiosidade vazar, segue o Porquê BR!"
+ ],
+ "cta_final": "Para não deixar a sua curiosidade vazar, segue o Porquê BR!",
+ "palavras": 127,
+ "duracao_estimada_s": 51,
+ "cenas": [
+  {
+   "n": 1,
+   "fala": "Você já reparou que o caminhão de gás passa na rua tocando Für Elise de Beethoven? Por que o caminhão de gás toca música clássica na rua?",
+   "duracao_s": 10,
+   "cenario": "Rua residencial brasileira alegre e ensolarada com casas coloridas",
+   "clipes": [
+    {
+     "id": "c1a",
+     "duracao_s": 5,
+     "prompt_imagem_en": "flat 2D cartoon illustration, thick black outlines, warm flat colors, cozy Brazilian everyday aesthetic, no text, no letters, no logos. A 32-year-old slim man with short brown hair, wearing a forest green t-shirt, dark blue jeans, round red glasses, clean-shaven, standing on a sunny sidewalk in a Brazilian suburban neighborhood, looking surprised with wide eyes as a blue gas truck passes on the street.",
+     "movimento_en": "The man turns his head following the movement of the blue gas delivery truck driving slowly from left to right; smooth panning camera. Silent reaction only, mouth closed."
+    },
+    {
+     "id": "c1b",
+     "duracao_s": 5,
+     "prompt_imagem_en": "flat 2D cartoon illustration, thick black outlines, warm flat colors, cozy Brazilian everyday aesthetic, no text, no letters, no logos. A 32-year-old slim man with short brown hair, wearing a forest green t-shirt, dark blue jeans, round red glasses, clean-shaven, looking up in curiosity on the sidewalk while floating glowing musical notes emerge from a loudspeaker on top of a blue delivery truck.",
+     "movimento_en": "Glowing musical notes float gently upwards into the air as the camera slow zooms in towards the character's curious expression. Silent reaction only, mouth closed."
+    },
+    {
+     "id": "c1c",
+     "duracao_s": 5,
+     "prompt_imagem_en": "flat 2D cartoon illustration, thick black outlines, warm flat colors, cozy Brazilian everyday aesthetic, no text, no letters, no logos. A 32-year-old slim man with short brown hair, wearing a forest green t-shirt, dark blue jeans, round red glasses, clean-shaven, looking up in curiosity on the sidewalk while floating glowing musical notes emerge from a loudspeaker on top of a blue delivery truck.",
+     "movimento_en": "Different angle of the same moment: camera slowly orbits while details of the scene animate gently. Silent reaction only, mouth closed."
+    }
+   ]
+  },
+  {
+   "n": 2,
+   "fala": "Antigamente, os entregadores usavam buzinas estridentes e gritavam 'Ó o gás!'. Para combater essa poluição sonora, São Paulo criou em 1991 uma lei proibindo as buzinas.",
+   "duracao_s": 11,
+   "cenario": "Rua urbana movimentada dos anos 1990 com prefeitura ao fundo",
+   "clipes": [
+    {
+     "id": "c2a",
+     "duracao_s": 5,
+     "prompt_imagem_en": "flat 2D cartoon illustration, thick black outlines, warm flat colors, cozy Brazilian everyday aesthetic, no text, no letters, no logos. A 32-year-old slim man with short brown hair, wearing a forest green t-shirt, dark blue jeans, round red glasses, clean-shaven, covering his ears with both hands on a city street while an old delivery truck honks loudly.",
+     "movimento_en": "Sound waves vibrate around the truck while the man winces and covers his ears; slight camera shake effect. Silent reaction only, mouth closed."
+    },
+    {
+     "id": "c2b",
+     "duracao_s": 5,
+     "prompt_imagem_en": "flat 2D cartoon illustration, thick black outlines, warm flat colors, cozy Brazilian everyday aesthetic, no text, no letters, no logos. A 32-year-old slim man with short brown hair, wearing a forest green t-shirt, dark blue jeans, round red glasses, clean-shaven, pointing toward a municipal city hall building with a red prohibition symbol over a horn in the sky.",
+     "movimento_en": "The red prohibition sign glows gently in the sky above the city hall while the camera tilts up slowly. Silent reaction only, mouth closed."
+    },
+    {
+     "id": "c2c",
+     "duracao_s": 5,
+     "prompt_imagem_en": "flat 2D cartoon illustration, thick black outlines, warm flat colors, cozy Brazilian everyday aesthetic, no text, no letters, no logos. A 32-year-old slim man with short brown hair, wearing a forest green t-shirt, dark blue jeans, round red glasses, clean-shaven, reading an official blank document scroll in a city plaza under a quiet, peaceful atmosphere.",
+     "movimento_en": "The man nods in approval while unrolling the scroll; camera pushes in slowly to a medium close-up. Silent reaction only, mouth closed."
+    }
+   ]
+  },
+  {
+   "n": 3,
+   "fala": "A Ultragaz encomendou um jingle com o músico Hélio Ziskind gravado em um chip à prova de sacolejo. Mas as outras distribuidoras usaram chips chineses baratos com músicas de domínio público.",
+   "duracao_s": 12,
+   "cenario": "Oficina de tecnologia e rua de entregas",
+   "clipes": [
+    {
+     "id": "c3a",
+     "duracao_s": 5,
+     "prompt_imagem_en": "flat 2D cartoon illustration, thick black outlines, warm flat colors, cozy Brazilian everyday aesthetic, no text, no letters, no logos. A 32-year-old slim man with short brown hair, wearing a forest green t-shirt, dark blue jeans, round red glasses, clean-shaven, holding a tiny green electronic microchip carefully between his fingers inside a workshop.",
+     "movimento_en": "Sparkles emanate from the tiny microchip as the man holds it up; static camera with subtle lighting shimmer. Silent reaction only, mouth closed."
+    },
+    {
+     "id": "c3b",
+     "duracao_s": 5,
+     "prompt_imagem_en": "flat 2D cartoon illustration, thick black outlines, warm flat colors, cozy Brazilian everyday aesthetic, no text, no letters, no logos. A 32-year-old slim man with short brown hair, wearing a forest green t-shirt, dark blue jeans, round red glasses, clean-shaven, watching a hand install a small loudspeaker onto a truck dashboard while the vehicle shakes on a bumpy road.",
+     "movimento_en": "The truck vibrates over bumps while the sound box remains steady and plays music; camera tracks sideways. Silent reaction only, mouth closed."
+    },
+    {
+     "id": "c3c",
+     "duracao_s": 5,
+     "prompt_imagem_en": "flat 2D cartoon illustration, thick black outlines, warm flat colors, cozy Brazilian everyday aesthetic, no text, no letters, no logos. A 32-year-old slim man with short brown hair, wearing a forest green t-shirt, dark blue jeans, round red glasses, clean-shaven, standing beside a line of generic multicolored gas delivery trucks parked along a Brazilian avenue.",
+     "movimento_en": "The man gestures towards the line of trucks as small musical notes rise from each truck; wide pan shot across the avenue. Silent reaction only, mouth closed."
+    }
+   ]
+  },
+  {
+   "n": 4,
+   "fala": "Várias clássicas tocaram no começo, mas Für Elise se destacou e virou um meme nacional. Tem quem diga que foi jogada de marketing de luxo, mas foi só economia de direitos autorais.",
+   "duracao_s": 13,
+   "cenario": "Sala de estar acolhedora com piano de cauda imaginário e botijão de gás",
+   "clipes": [
+    {
+     "id": "c4a",
+     "duracao_s": 5,
+     "prompt_imagem_en": "flat 2D cartoon illustration, thick black outlines, warm flat colors, cozy Brazilian everyday aesthetic, no text, no letters, no logos. A 32-year-old slim man with short brown hair, wearing a forest green t-shirt, dark blue jeans, round red glasses, clean-shaven, standing next to a classical marble bust of Beethoven on a pedestal inside a cozy room.",
+     "movimento_en": "The classical bust winks humorously while gold musical notes swirl around it; camera zooms in on the character and bust. Silent reaction only, mouth closed."
+    },
+    {
+     "id": "c4b",
+     "duracao_s": 5,
+     "prompt_imagem_en": "flat 2D cartoon illustration, thick black outlines, warm flat colors, cozy Brazilian everyday aesthetic, no text, no letters, no logos. A 32-year-old slim man with short brown hair, wearing a forest green t-shirt, dark blue jeans, round red glasses, clean-shaven, imagining a fancy red carpet commercial that turns into a piggy bank with falling coins.",
+     "movimento_en": "A fantasy cloud above the man shifts from a fancy opera stage to a piggy bank; smooth dolly backward camera. Silent reaction only, mouth closed."
+    },
+    {
+     "id": "c4c",
+     "duracao_s": 5,
+     "prompt_imagem_en": "flat 2D cartoon illustration, thick black outlines, warm flat colors, cozy Brazilian everyday aesthetic, no text, no letters, no logos. A 32-year-old slim man with short brown hair, wearing a forest green t-shirt, dark blue jeans, round red glasses, clean-shaven, smiling next to a blue gas cylinder resting beside floating classical music sheets.",
+     "movimento_en": "The man smiles and shrugs knowingly as music sheets float down around the gas cylinder; static medium shot. Silent reaction only, mouth closed."
+    }
+   ]
+  },
+  {
+   "n": 5,
+   "fala": "Para não deixar a sua curiosidade vazar, segue o Porquê BR!",
+   "duracao_s": 5,
+   "cenario": "Cozinha brasileira aconchegante com fogão e botijão de gás azul",
+   "clipes": [
+    {
+     "id": "c5a",
+     "duracao_s": 5,
+     "prompt_imagem_en": "flat 2D cartoon illustration, thick black outlines, warm flat colors, cozy Brazilian everyday aesthetic, no text, no letters, no logos. A 32-year-old slim man with short brown hair, wearing a forest green t-shirt, dark blue jeans, round red glasses, clean-shaven, standing in a cozy domestic Brazilian kitchen next to a stove and a blue gas canister, giving a thumbs up with a friendly wink.",
+     "movimento_en": "The character winks, smiles warmhearted, and gives a big thumbs-up; slow zoom in to close-up. Silent reaction only, mouth closed."
+    }
+   ]
+  }
+ ],
+ "fontes": [
+  "Como Beethoven virou até “musiquinha do gás” no Brasil - ISTOÉ Independente",
+  "Dentre as músicas clássicas que tinham potencial para... - ProENEM",
+  "Tema da Ultragaz – Wikipédia, a enciclopédia livre",
+  "Folha de S.Paulo - Música nos caminhões de gás é proibida - 1/12/1995",
+  "caminhao-de-gas-musica.md"
+ ],
+ "riscos": [
+  "ERR-PER-01: Manter a ficha do personagem rigorosamente idêntica em todos os prompts (32 anos, magro, cabelo castanho curto, camiseta verde-bandeira, calça jeans azul-escuro, óculos redondos vermelhos, sem barba).",
+  "ERR-ROT-01: Garantir que cada clipe descreva exatamente o que é narrado na fala correspondente.",
+  "ERR-TXT-01: Impedir qualquer texto escrito, letra, placa ou número nas imagens (incluindo explicitamente 'no text, no letters, no logos' nos prompts em inglês).",
+  "ERR-CMP-03: Evitar qualquer marca ou logotipo real de empresas de gás nas cenas e nos caminhões.",
+  "ERR-MON-01: Cobrir cada cena com clipes de 5 s com movimento explícito sem imagem parada (clipes arredondados para cima pela duração da fala).",
+  "ERR-MON-02 / ERR-CMP-01: A última fala do cta_final termina obrigatoriamente com 'segue o Porquê BR!'."
+ ]
+}

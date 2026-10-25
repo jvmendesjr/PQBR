@@ -5,6 +5,16 @@ Versionamento SemVer (MAJOR.MINOR.PATCH) a partir de t510. Versão do pacote can
 
 
 
+## [0.3.21] — 2026-10-25
+### Adicionado
+- ERR-ROT-02 (roteiro): narração fora da 3ª pessoa / personagem "falando" com a voz da narradora. Seed `db/seeds/seed_catalogo_erros_err_rot_02.sql` aplicado em `pqbr.catalogo_erros`; CATALOGO-ERROS atualizado.
+- `pqbr.contratos.roteiro_terceira_pessoa` (validador Pydantic `RoteiroTerceiraPessoa` + `problemas_roteiro`, v1.0.0) com 13 testes em `tests/unit/test_roteiro_terceira_pessoa.py`. Reprova 1ª pessoa do singular, diálogo ou rótulo de fala, e prompts em que o personagem fala, explica ou encara a câmera.
+- `scripts/lote/roteiro_lote_runway.py`: fluxo de roteiro fail-closed (versionado; substitui `runtime/lote-runway/consolidar.py`) com ERR-ROT-02 e cobertura por cena.
+### Corrigido
+- lote-runway, 8 roteiros: personagem só reage (8 trechos de prompt trocados, "Silent reaction only, mouth closed." nos movimentos). Clipes extras sem custo nas cenas curtas: Finados c4d, ENEM c1b, gás c1c, molhar-o-dedo c1c–c4c, panetone c1c. Backups em `roteiro.json.bak-pre-err-rot-02`.
+### Removido
+- Dia do Saci: Short reprovado e tema descartado (José), movido para `_descartado/` sem apagar; lote Runway suspenso. Nada pago, nada publicado.
+
 ## [0.3.20] — 2026-10-25
 ### Adicionado
 - lote-2510: códigos PQBR-EP1002–EP1010; SEO+fontes do NotebookLM (seo.json); juiz Gemini VISUAL via Camofox (juiz-gemini.json); Drive 02_Episodios/2026-10; Postgres temas_pendentes (em_producao); gate rerodado — todos P1_HOLD (LOOP inexistente). Scripts em scripts/lote/. Nada publicado, nada pago.

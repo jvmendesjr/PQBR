@@ -1,0 +1,6 @@
+-- ERR-ROT-02 (lote-runway, agente externo PQBR, 25/10/2026, reprovação do José pt40u). Idempotente por código.
+insert into pqbr.catalogo_erros (codigo, categoria, descricao, exemplo, prevencao, severidade, papeis_interessados) values
+('ERR-ROT-02','roteiro','Narração fora da 3ª pessoa / personagem "falando": o personagem masculino aparece encarando a câmera e gesticulando como se dissesse a fala, enquanto a voz é a narradora Larissa (feminina). Contrato §11.6: narrador único em 3ª pessoa (ou "a gente" como brasileiros); personagens só reagem, sem fala, sem diálogo e sem sincronia labial.',
+ '{"tema":"lote-runway: dia-do-saci-31-de-outubro (Short reprovado e tema descartado)","caminho":"docs/pesquisas/lote-runway/_descartado/dia-do-saci-31-de-outubro"}',
+ 'Pedir ao NotebookLM narração em 3ª pessoa e personagem que só reage. Validar todo roteiro com pqbr.contratos.roteiro_terceira_pessoa (RoteiroTerceiraPessoa / problemas_roteiro): reprova 1ª pessoa do singular, diálogo ou rótulo "Nome:", e prompts com talking/speaking/explaining/lip sync/addressing ou looking at the camera. Os prompts de movimento terminam em "Silent reaction only, mouth closed." scripts/lote/roteiro_lote_runway.py é fail-closed.','alta','{lider-editorial,auditor,dev}')
+on conflict (codigo) do nothing;

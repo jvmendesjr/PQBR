@@ -1,0 +1,137 @@
+{
+ "titulo": "Por que o brasileiro molha o dedo pra virar folha de papel?",
+ "gancho": "Por que a gente molha o dedo pra virar folha de papel?",
+ "falas": [
+  "Quem nunca lambeu a ponta do dedo pra conseguir virar a página de um livro ou contar uma nota de dinheiro?",
+  "Parece estranho, mas por que a gente faz isso?",
+  "A explicação tá na física! A pele seca é rígida e desliza fácil no papel.",
+  "Sem umidade, não existe atrito suficiente pra puxar a folha.",
+  "Ao molhar o dedo, a saliva cria tensão superficial e ação capilar.",
+  "A água amolece a pele, aumenta a tração e faz o papel grudar!",
+  "Esse hábito ficou famoso no filme O Nome da Rosa, onde páginas estavam envenenadas.",
+  "Mas no dia a dia, muita gente prefere usar gel molha-dedos por higiene.",
+  "Assim você folheia seus papéis com agilidade e sem sujeira!",
+  "E pra sua curiosidade nunca ficar seca, segue o Porquê BR!"
+ ],
+ "cta_final": "E pra sua curiosidade nunca ficar seca, segue o Porquê BR!",
+ "palavras": 128,
+ "duracao_estimada_s": 50,
+ "cenas": [
+  {
+   "n": 1,
+   "fala": "Quem nunca lambeu a ponta do dedo pra conseguir virar a página de um livro ou contar uma nota de dinheiro? Parece estranho, mas por que a gente faz isso?",
+   "duracao_s": 10,
+   "cenario": "Sala de estar brasileira aconchegante com estante de livros ao fundo",
+   "clipes": [
+    {
+     "id": "c1a",
+     "duracao_s": 5,
+     "prompt_imagem_en": "flat 2D cartoon illustration, vertical 9:16, 32-year-old slim man, short brown hair, flag-green t-shirt, dark blue jeans, red round glasses, no beard, sitting on a sofa in a Brazilian living room, comically licking his index finger before touching a book page, warm flat colors, thick black outlines, no text, no letters, no words, no logos",
+     "movimento_en": "character brings finger to tongue in slow motion, camera slowly zooms in on his face"
+    },
+    {
+     "id": "c1b",
+     "duracao_s": 5,
+     "prompt_imagem_en": "flat 2D cartoon illustration, vertical 9:16, 32-year-old slim man, short brown hair, flag-green t-shirt, dark blue jeans, red round glasses, no beard, medium shot, holding a stack of paper bills and turning a page with a curious expressive face, warm flat colors, thick black outlines, no text, no letters, no words, no logos",
+     "movimento_en": "character turns the paper page smoothly, subtle camera tilt upward"
+    }
+   ]
+  },
+  {
+   "n": 2,
+   "fala": "A explicação tá na física! A pele seca é rígida e desliza fácil no papel. Sem umidade, não existe atrito suficiente pra puxar a folha.",
+   "duracao_s": 10,
+   "cenario": "Mesa de madeira detalhada sob iluminação focada",
+   "clipes": [
+    {
+     "id": "c2a",
+     "duracao_s": 5,
+     "prompt_imagem_en": "flat 2D cartoon illustration, vertical 9:16, close-up shot of a dry hand trying to grab a smooth sheet of paper on a wooden desk, 32-year-old slim man, short brown hair, flag-green t-shirt sleeve visible, red round glasses reflection on desk, warm flat colors, thick black outlines, no text, no letters, no words, no logos",
+     "movimento_en": "finger slides helplessly across the smooth paper surface, static close-up camera"
+    },
+    {
+     "id": "c2b",
+     "duracao_s": 5,
+     "prompt_imagem_en": "flat 2D cartoon illustration, vertical 9:16, 32-year-old slim man, short brown hair, flag-green t-shirt, dark blue jeans, red round glasses, no beard, pointing at a paper sheet on a desk with a frustrated comedic expression, warm flat colors, thick black outlines, no text, no letters, no words, no logos",
+     "movimento_en": "character shakes his head in minor frustration, camera pans slightly left"
+    }
+   ]
+  },
+  {
+   "n": 3,
+   "fala": "Ao molhar o dedo, a saliva cria tensão superficial e ação capilar. A água amolece a pele, aumenta a tração e faz o papel grudar!",
+   "duracao_s": 10,
+   "cenario": "Espaço de estudo limpo e iluminado",
+   "clipes": [
+    {
+     "id": "c3a",
+     "duracao_s": 5,
+     "prompt_imagem_en": "flat 2D cartoon illustration, vertical 9:16, close-up macro view of a moist fingertip touching a porous paper surface, subtle water droplet effect showing surface tension, warm flat colors, thick black outlines, no text, no letters, no words, no logos",
+     "movimento_en": "finger touches paper and adheres perfectly, gentle slow-motion camera zoom"
+    },
+    {
+     "id": "c3b",
+     "duracao_s": 5,
+     "prompt_imagem_en": "flat 2D cartoon illustration, vertical 9:16, 32-year-old slim man, short brown hair, flag-green t-shirt, dark blue jeans, red round glasses, no beard, smiling triumphantly as he effortlessly lifts a single paper sheet, warm flat colors, thick black outlines, no text, no letters, no words, no logos",
+     "movimento_en": "paper sheet lifts up smoothly in character's hand, camera tracks upward motion"
+    }
+   ]
+  },
+  {
+   "n": 4,
+   "fala": "Esse hábito ficou famoso no filme O Nome da Rosa, onde páginas estavam envenenadas. Mas no dia a dia, muita gente prefere usar gel molha-dedos por higiene.",
+   "duracao_s": 10,
+   "cenario": "Biblioteca clássica com toque misterioso / mesa de escritório",
+   "clipes": [
+    {
+     "id": "c4a",
+     "duracao_s": 5,
+     "prompt_imagem_en": "flat 2D cartoon illustration, vertical 9:16, 32-year-old slim man, short brown hair, flag-green t-shirt, dark blue jeans, red round glasses, no beard, in an old monastery library reading an ancient thick book with a dramatic suspicious look, warm flat colors, thick black outlines, no text, no letters, no words, no logos",
+     "movimento_en": "dramatic shadow passes across character, slow camera push-in"
+    },
+    {
+     "id": "c4b",
+     "duracao_s": 5,
+     "prompt_imagem_en": "flat 2D cartoon illustration, vertical 9:16, 32-year-old slim man, short brown hair, flag-green t-shirt, dark blue jeans, red round glasses, no beard, sitting at a modern office desk touching a small round hygienic damp gel pad container, warm flat colors, thick black outlines, no text, no letters, no words, no logos",
+     "movimento_en": "character taps damp gel pad cheerfully, camera pans right"
+    }
+   ]
+  },
+  {
+   "n": 5,
+   "fala": "Assim você folheia seus papéis com agilidade e sem sujeira! E pra sua curiosidade nunca ficar seca, segue o Porquê BR!",
+   "duracao_s": 10,
+   "cenario": "Escritório luminoso com janelas ao fundo",
+   "clipes": [
+    {
+     "id": "c5a",
+     "duracao_s": 5,
+     "prompt_imagem_en": "flat 2D cartoon illustration, vertical 9:16, 32-year-old slim man, short brown hair, flag-green t-shirt, dark blue jeans, red round glasses, no beard, quickly and neatly flipping through documents at his desk with a happy satisfied expression, warm flat colors, thick black outlines, no text, no letters, no words, no logos",
+     "movimento_en": "character flips pages rapidly and smoothly, camera slowly pulls back"
+    },
+    {
+     "id": "c5b",
+     "duracao_s": 5,
+     "prompt_imagem_en": "flat 2D cartoon illustration, vertical 9:16, 32-year-old slim man, short brown hair, flag-green t-shirt, dark blue jeans, red round glasses, no beard, smiling warm direct-to-camera shot in Brazilian setting, winking and giving a friendly thumbs up, warm flat colors, thick black outlines, no text, no letters, no words, no logos",
+     "movimento_en": "character winks and gives thumbs up, camera stays fixed on character"
+    }
+   ]
+  }
+ ],
+ "fontes": [
+  "O que faz a gente ter mais pegada no papel quando lambe o dedo? : r/askscience",
+  "Simplificando: Por que as pessoas lambem os dedos pra virar a página de um livro? : r/explainlikeimfive",
+  "“Molhando” os dedos - Jornal Semanário",
+  "Mais agilidade e higiene no manuseio de papéis Molha Dedos Aqua Magic Radex - YouTube",
+  "molhar-o-dedo-pra-virar-folha.md"
+ ],
+ "riscos": [
+  "ERR-PER-01: Manter a ficha do personagem idêntica em todos os clipes (32 anos, magro, cabelo castanho curto, camiseta verde-bandeira, calça jeans azul-escuro, óculos redondos vermelhos, sem barba).",
+  "ERR-ROT-01: Garantir que a ação em cada cena corresponda exatamente ao que é narrado na fala.",
+  "ERR-EST-02 / ERR-EST-03: Variar enquadramentos (plano médio, close-up, plano americano) mantendo cenários coerentes com o tema cotidiano.",
+  "ERR-TXT-01 / ERR-CMP-03: Evitar qualquer texto, palavra, número ou logotipo nas imagens geradas.",
+  "ERR-CMP-01 / ERR-MON-02: O CTA final na última fala deve encerrar rigorosamente com 'segue o Porquê BR!'.",
+  "ERR-MON-01: Evitar imagens estáticas, garantindo movimento de cena/câmera em todos os clipes de 5 s.",
+  "Sinalizar a referência ao filme O Nome da Rosa como curiosidade pop/cultural, sem apresentar como fato histórico comprovado."
+ ]
+}

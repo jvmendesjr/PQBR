@@ -1,0 +1,147 @@
+{
+ "titulo": "Por que no ENEM a caneta tem que ser preta de tubo transparente?",
+ "gancho": "Por que no ENEM a caneta tem que ser preta de tubo transparente?",
+ "falas": [
+  "Por que no ENEM a caneta tem que ser preta de tubo transparente?",
+  "Você passa o ano inteiro estudando e, no dia do exame, o maior pavor de todo estudante é levar a caneta errada!",
+  "Tem quem diga por aí que o computador tem alergia a caneta azul, mas o motivo real envolve física e segurança.",
+  "A tinta preta absorve totalmente a luz dos sensores da leitora óptica do Inep, garantindo a leitura precisa da sua folha de gabarito.",
+  "Já o tubo transparente é uma regra antifraude para que os fiscais vejam que não há colinhas ou eletrônicos escondidos dentro da caneta.",
+  "Para preencher sua folha de respostas com tranquilidade e não ficar no vermelho na hora da nota, segue o Porquê BR!"
+ ],
+ "cta_final": "Para preencher sua folha de respostas com tranquilidade e não ficar no vermelho na hora da nota, segue o Porquê BR!",
+ "palavras": 123,
+ "duracao_estimada_s": 52,
+ "cenas": [
+  {
+   "n": 1,
+   "fala": "Por que no ENEM a caneta tem que ser preta de tubo transparente?",
+   "duracao_s": 5,
+   "cenario": "Sala de aula brasileira configurada para aplicação de exame de vestibular, com carteiras individuais organizadas.",
+   "clipes": [
+    {
+     "id": "c1a",
+     "duracao_s": 5,
+     "prompt_imagem_en": "flat 2D cartoon illustration, thick black outlines, warm flat colors, no text, no letters, no numbers, no logos. Medium shot of a slim 32-year-old Brazilian man with short brown hair, green t-shirt, dark blue jeans, round red glasses, no beard, standing in a Brazilian school classroom holding a clear ballpoint pen looking curiously at the camera.",
+     "movimento_en": "The character holds up a transparent ballpoint pen, tilting his head with a curious expression as the camera slowly zooms in slightly over 5 seconds."
+    }
+   ]
+  },
+  {
+   "n": 2,
+   "fala": "Você passa o ano inteiro estudando e, no dia do exame, o maior pavor de todo estudante é levar a caneta errada!",
+   "duracao_s": 10,
+   "cenario": "Quarto de estudante brasileiro à noite, com escrivaninha de madeira cheia de livros de estudo e estojo de canetas.",
+   "clipes": [
+    {
+     "id": "c2a",
+     "duracao_s": 5,
+     "prompt_imagem_en": "flat 2D cartoon illustration, thick black outlines, warm flat colors, no text, no letters, no numbers, no logos. Wide shot of a slim 32-year-old Brazilian man with short brown hair, green t-shirt, dark blue jeans, round red glasses, no beard, sitting at his study desk nervously inspecting various colorful pens.",
+     "movimento_en": "The character anxiousely rummages through pens on his desk, picking up a pen and looking worried while the camera pans smoothly from left to right."
+    },
+    {
+     "id": "c2b",
+     "duracao_s": 5,
+     "prompt_imagem_en": "flat 2D cartoon illustration, thick black outlines, warm flat colors, no text, no letters, no numbers, no logos. Close-up shot of a slim 32-year-old Brazilian man with short brown hair, green t-shirt, dark blue jeans, round red glasses, no beard, sweating slightly and holding an illegal blue opaque pen with a question mark expression.",
+     "movimento_en": "The character wipes sweat from his forehead and shakes his head in panic while the camera holds a tight focus on his expressive face."
+    }
+   ]
+  },
+  {
+   "n": 3,
+   "fala": "Tem quem diga por aí que o computador tem alergia a caneta azul, mas o motivo real envolve física e segurança.",
+   "duracao_s": 10,
+   "cenario": "Espaço conceitual divertido com um scanner leitor óptico amigável estilizado de desenho animado.",
+   "clipes": [
+    {
+     "id": "c3a",
+     "duracao_s": 5,
+     "prompt_imagem_en": "flat 2D cartoon illustration, thick black outlines, warm flat colors, no text, no letters, no numbers, no logos. Medium shot of a slim 32-year-old Brazilian man with short brown hair, green t-shirt, dark blue jeans, round red glasses, no beard, standing next to a humorous giant optical scanner character that is sneezing at a blue pen.",
+     "movimento_en": "The cartoon scanner machine sneezes humorously when shown a blue pen, and the character smiles pointing to the machine as the camera pans up slightly."
+    },
+    {
+     "id": "c3b",
+     "duracao_s": 5,
+     "prompt_imagem_en": "flat 2D cartoon illustration, thick black outlines, warm flat colors, no text, no letters, no numbers, no logos. Medium shot of a slim 32-year-old Brazilian man with short brown hair, green t-shirt, dark blue jeans, round red glasses, no beard, explaining thoughtfully with an open palm gesture.",
+     "movimento_en": "The character winks and gestures with his hands in an explanatory pose while the background shifts smoothly from the cartoon machine to a clean laboratory wall."
+    }
+   ]
+  },
+  {
+   "n": 4,
+   "fala": "A tinta preta absorve totalmente a luz dos sensores da leitora óptica do Inep, garantindo a leitura precisa da sua folha de gabarito.",
+   "duracao_s": 10,
+   "cenario": "Laboratório de digitalização moderno com feixe de luz vermelha estilizado escaneando uma folha de respostas.",
+   "clipes": [
+    {
+     "id": "c4a",
+     "duracao_s": 5,
+     "prompt_imagem_en": "flat 2D cartoon illustration, thick black outlines, warm flat colors, no text, no letters, no numbers, no logos. Close-up diagram style showing a generic answer sheet with black filled bubbles being scanned by a friendly red light sensor beam.",
+     "movimento_en": "A soft red light beam passes horizontally across the black circles on paper, indicating successful optical reading with a gentle pulsing effect."
+    },
+    {
+     "id": "c4b",
+     "duracao_s": 5,
+     "prompt_imagem_en": "flat 2D cartoon illustration, thick black outlines, warm flat colors, no text, no letters, no numbers, no logos. Medium shot of a slim 32-year-old Brazilian man with short brown hair, green t-shirt, dark blue jeans, round red glasses, no beard, nodding approvingly beside a glowing green checkmark symbol.",
+     "movimento_en": "The character gives a confident thumbs-up while the background glows with a warm green tint over 5 seconds."
+    }
+   ]
+  },
+  {
+   "n": 5,
+   "fala": "Já o tubo transparente é uma regra antifraude para que os fiscais vejam que não há colinhas ou eletrônicos escondidos dentro da caneta.",
+   "duracao_s": 10,
+   "cenario": "Corredor de escola brasileira com iluminação clara do dia, ambiente de checagem de prova.",
+   "clipes": [
+    {
+     "id": "c5a",
+     "duracao_s": 5,
+     "prompt_imagem_en": "flat 2D cartoon illustration, thick black outlines, warm flat colors, no text, no letters, no numbers, no logos. Extreme close-up of a clear transparent ballpoint pen body showing its empty clear plastic tube and black ink refill inside, with no hidden papers.",
+     "movimento_en": "The camera rotates slowly 360 degrees around the transparent pen body highlighting its clear see-through structure."
+    },
+    {
+     "id": "c5b",
+     "duracao_s": 5,
+     "prompt_imagem_en": "flat 2D cartoon illustration, thick black outlines, warm flat colors, no text, no letters, no numbers, no logos. Medium shot of a slim 32-year-old Brazilian man with short brown hair, green t-shirt, dark blue jeans, round red glasses, no beard, showing the clear pen to an appreciative exam proctor in a friendly cartoon scene.",
+     "movimento_en": "The character presents his clear pen to an exam proctor who nods happily, with a slow zoom out to reveal the classroom entrance."
+    }
+   ]
+  },
+  {
+   "n": 6,
+   "fala": "Para preencher sua folha de respostas com tranquilidade e não ficar no vermelho na hora da nota, segue o Porquê BR!",
+   "duracao_s": 10,
+   "cenario": "Sala de aula brasileira de exame, retornando ao cenário idêntico da primeira cena para fechar o loop.",
+   "clipes": [
+    {
+     "id": "c6a",
+     "duracao_s": 5,
+     "prompt_imagem_en": "flat 2D cartoon illustration, thick black outlines, warm flat colors, no text, no letters, no numbers, no logos. Medium shot of a slim 32-year-old Brazilian man with short brown hair, green t-shirt, dark blue jeans, round red glasses, no beard, smiling relieved inside the classroom while holding two transparent black pens.",
+     "movimento_en": "The character smiles happily holding up two clear black pens, winking at the camera as the camera pulls back smoothly."
+    },
+    {
+     "id": "c6b",
+     "duracao_s": 5,
+     "prompt_imagem_en": "flat 2D cartoon illustration, thick black outlines, warm flat colors, no text, no letters, no numbers, no logos. Medium close-up of a slim 32-year-old Brazilian man with short brown hair, green t-shirt, dark blue jeans, round red glasses, no beard, doing a cheerful follow gesture pointing towards the screen in the same classroom layout as scene 1.",
+     "movimento_en": "The character points enthusiastically towards the viewer with a friendly smile, matching the framing of scene 1 to seamlessly loop back."
+    }
+   ]
+  }
+ ],
+ "fontes": [
+  "caneta-preta-transparente-no-enem.md",
+  "Enem 2026: por que a caneta deve ser preta e transparente? - NE10 - UOL",
+  "Pode usar caneta azul no Enem 2025? Entenda! - Quero Bolsa",
+  "No Dia do Exame - Portal Gov.br",
+  "Preta ou azul? Qual a cor da caneta que pode usar no Enem 2025? - Blog Pensar Cursos"
+ ],
+ "riscos": [
+  "ERR-PER-01: Mantida exatamente a ficha do único personagem em todos os prompts em inglês.",
+  "ERR-ROT-01: Cada cena ilustra literalmente a fala narrada correspondente.",
+  "ERR-EST-02: Cenários totalmente focados no tema de exame brasileiro do dia a dia.",
+  "ERR-TXT-01: Prompts incluem a instrução explícita de ausência de textos, letras ou números nas imagens.",
+  "ERR-CMP-03: Proibidas marcas ou logos reais nas canetas e materiais.",
+  "ERR-MON-01: Todas as cenas fracionadas em clipes de 5 s com movimentos contínuos e sem imagens estáticas.",
+  "ERR-MON-02 / ERR-CMP-01: Fechamento com CTA personalizado ao tema terminando estritamente em 'segue o Porquê BR!'."
+ ]
+}

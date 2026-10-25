@@ -32,6 +32,7 @@ Contrato Pydantic: `pqbr.contratos.catalogo_erros.ErroCatalogo`, versão `CATALO
 |---|---|---|
 | ERR-PER-01 | Personagem inconsistente (barba, cabelo, camiseta) | alta |
 | ERR-ROT-01 | Café escuro em "café fraco" (detalhe do roteiro ignorado) | alta |
+| ERR-ROT-02 | Narração fora da 3ª pessoa / personagem "falando" com a voz da narradora (Saci, lote-runway; seed `db/seeds/seed_catalogo_erros_err_rot_02.sql`; checagem `pqbr.contratos.roteiro_terceira_pessoa`, 25/10) | alta |
 | ERR-EST-01 | Cenário repetitivo | média |
 | ERR-EST-02 | Cena fora do cenário | média |
 | ERR-MON-01 | Último quadro congelado (clipe mais curto que a fala) | alta |
