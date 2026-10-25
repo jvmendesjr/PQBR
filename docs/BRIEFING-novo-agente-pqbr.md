@@ -86,6 +86,7 @@ t531 · 24/10/2026 · pedido do José. **Só leitura e proposta.** **Atualizaç�
 - Agente específico do Porquê BR que **opera e acompanha** a PQBR pelo repo `jvmendesjr/PQBR` no servidor `pc`.
 - Cuida de: roadmap (Fase 4V e os gates), workflows Temporal, contratos, mapa, docs e relatórios das sextas. Prepara os pedidos de decisão ao José e redige o conteúdo editorial pelo motor NotebookLM.
 - Não faz trabalho fora do PQBR.
+- Princípios [t538-P]: determinismo máximo (Temporal decide e garante) + agentes LLM autônomos como motor; manutenção e atualizações do sistema são do agente externo (hoje o "PQBR", agente Grok Bot do José); agentes internos operam e não se reconfiguram.
 
 **Fronteira com o jr**
 | jr (generalista) | Agente PQBR (específico) |
