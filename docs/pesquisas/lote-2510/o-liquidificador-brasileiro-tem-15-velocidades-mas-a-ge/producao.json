@@ -1,0 +1,72 @@
+{
+ "slug": "o-liquidificador-brasileiro-tem-15-velocidades-mas-a-ge",
+ "produzido_em": "2026-10-25",
+ "publicado": false,
+ "saida": "runtime/lote-saldo/liquidificador/liquidificador.mp4",
+ "duracao_s": 48.96,
+ "resolucao": "1080x1920",
+ "narracao": {
+  "servico": "elevenlabs",
+  "conta": "meioquedigital",
+  "voz": "Larissa xcNJswC7UcxsIiCuih19",
+  "modelo": "eleven_v3",
+  "custo_creditos": 659.9
+ },
+ "imagens": {
+  "servico": "higgsfield",
+  "modelo": "flux_3_image 1k 9:16",
+  "qtd": 7,
+  "custo_total": 14,
+  "ancora": "cena 1 como image_reference"
+ },
+ "clipes": {
+  "servico": "higgsfield",
+  "modelo": "seedance_2_0_mini 720p 9:16, sem audio, i2v",
+  "custo_por_s": 1,
+  "duracoes_s": [
+   7,
+   7,
+   7,
+   7,
+   7,
+   8,
+   8
+  ],
+  "custo_total": 51
+ },
+ "montagem": [
+  [
+   "k1.mp4",
+   6.66
+  ],
+  [
+   "k2.mp4",
+   6.88
+  ],
+  [
+   "k3.mp4",
+   6.21
+  ],
+  [
+   "k4.mp4",
+   6.16
+  ],
+  [
+   "k5.mp4",
+   6.59
+  ],
+  [
+   "k6.mp4",
+   7.36
+  ],
+  [
+   "k7.mp4",
+   7.39
+  ],
+  [
+   "k1.mp4",
+   1.78
+  ]
+ ],
+ "prompts": "ver cenas.md do pacote; sufixo: Flat 2D cartoon, bold black outlines, no text, no 3D"
+}

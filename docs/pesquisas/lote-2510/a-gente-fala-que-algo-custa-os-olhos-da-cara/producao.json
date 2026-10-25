@@ -1,0 +1,88 @@
+{
+ "slug": "a-gente-fala-que-algo-custa-os-olhos-da-cara",
+ "produzido_em": "2026-10-25",
+ "publicado": false,
+ "saida": "runtime/lote-saldo/olhos-da-cara/olhos-da-cara.mp4",
+ "duracao_s": 50.16,
+ "resolucao": "1080x1920",
+ "narracao": {
+  "servico": "elevenlabs",
+  "conta": "meioquedigital",
+  "voz": "Larissa xcNJswC7UcxsIiCuih19",
+  "modelo": "eleven_v3",
+  "custo_creditos": 699.9
+ },
+ "imagens": {
+  "servico": "higgsfield",
+  "modelo": "flux_3_image 1k 9:16",
+  "qtd": 8,
+  "custo_total": 16,
+  "ancora": "cena 1 como image_reference"
+ },
+ "clipes": [
+  {
+   "servico": "higgsfield",
+   "modelo": "seedance_2_0_mini 720p",
+   "cenas": "1-3",
+   "duracoes_s": [
+    5,
+    10,
+    7
+   ],
+   "custo_total": 22
+  },
+  {
+   "servico": "runway",
+   "modelo": "gen4_turbo i2v 5s 720x1280",
+   "cenas": "4-8",
+   "custo_por_clipe": 25,
+   "custo_total": 125,
+   "tasks": [
+    "0f98bbfe-3631-4d6f-82ae-c70cbc7cb2fa",
+    "9b99e2f8-2069-4ad1-aeb6-b2a249c5c20e",
+    "6894f31d-5680-4ae5-b4e5-93469ea44f53",
+    "399a052b-a945-4c99-b363-410784d1dabf",
+    "055babad-1c6b-4f51-8583-d518b76e2234"
+   ]
+  }
+ ],
+ "montagem": [
+  [
+   "k1.mp4",
+   4.05
+  ],
+  [
+   "k2.mp4",
+   9.29
+  ],
+  [
+   "k3.mp4",
+   6.36
+  ],
+  [
+   "k4.mp4",
+   6.35
+  ],
+  [
+   "k5.mp4",
+   5.45
+  ],
+  [
+   "k6.mp4",
+   5.49
+  ],
+  [
+   "k7.mp4",
+   5.23
+  ],
+  [
+   "k8.mp4",
+   4.95
+  ],
+  [
+   "k1.mp4",
+   3.1
+  ]
+ ],
+ "prompts": "ver cenas.md do pacote; sufixo: Flat 2D cartoon, bold black outlines, no text, no 3D"
+}

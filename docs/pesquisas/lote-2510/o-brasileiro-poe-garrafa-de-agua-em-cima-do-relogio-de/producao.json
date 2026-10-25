@@ -1,0 +1,67 @@
+{
+ "slug": "o-brasileiro-poe-garrafa-de-agua-em-cima-do-relogio-de",
+ "produzido_em": "2026-10-25",
+ "publicado": false,
+ "saida": "runtime/lote-saldo/garrafa/garrafa.mp4",
+ "duracao_s": 40.8,
+ "resolucao": "1080x1920",
+ "narracao": {
+  "servico": "elevenlabs",
+  "conta": "meioquedigital",
+  "voz": "Larissa xcNJswC7UcxsIiCuih19",
+  "modelo": "eleven_v3",
+  "custo_creditos": 543.9
+ },
+ "imagens": {
+  "servico": "higgsfield",
+  "modelo": "flux_3_image 1k 9:16",
+  "qtd": 6,
+  "custo_total": 12,
+  "ancora": "cena 1 como image_reference"
+ },
+ "clipes": {
+  "servico": "higgsfield",
+  "modelo": "seedance_2_0_mini 720p 9:16, sem audio, i2v",
+  "custo_por_s": 1,
+  "duracoes_s": [
+   5,
+   8,
+   8,
+   8,
+   8,
+   4
+  ],
+  "custo_total": 41
+ },
+ "montagem": [
+  [
+   "k1.mp4",
+   4.46
+  ],
+  [
+   "k2.mp4",
+   7.58
+  ],
+  [
+   "k3.mp4",
+   7.87
+  ],
+  [
+   "k4.mp4",
+   7.9
+  ],
+  [
+   "k5.mp4",
+   7.99
+  ],
+  [
+   "k6.mp4",
+   3.11
+  ],
+  [
+   "k1.mp4",
+   1.95
+  ]
+ ],
+ "prompts": "ver cenas.md do pacote; sufixo: Flat 2D cartoon, bold black outlines, no text, no 3D"
+}

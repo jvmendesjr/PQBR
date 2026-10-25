@@ -1,0 +1,62 @@
+{
+ "slug": "o-brigadeiro-so-existe-no-brasil",
+ "produzido_em": "2026-10-25",
+ "publicado": false,
+ "saida": "runtime/lote-saldo/brigadeiro/brigadeiro.mp4",
+ "duracao_s": 53.2,
+ "resolucao": "1080x1920",
+ "narracao": {
+  "servico": "elevenlabs",
+  "conta": "meioquedigital",
+  "voz": "Larissa xcNJswC7UcxsIiCuih19",
+  "modelo": "eleven_v3",
+  "custo_creditos": 717.9
+ },
+ "imagens": {
+  "servico": "higgsfield",
+  "modelo": "flux_3_image 1k 9:16",
+  "qtd": 5,
+  "custo_total": 10,
+  "ancora": "cena 1 como image_reference"
+ },
+ "clipes": {
+  "servico": "higgsfield",
+  "modelo": "seedance_2_0_mini 720p 9:16, sem audio, i2v",
+  "custo_por_s": 1,
+  "duracoes_s": [
+   10,
+   10,
+   12,
+   8,
+   7
+  ],
+  "custo_total": 47
+ },
+ "montagem": [
+  [
+   "k1.mp4",
+   9.61
+  ],
+  [
+   "k2.mp4",
+   9.68
+  ],
+  [
+   "k3.mp4",
+   11.53
+  ],
+  [
+   "k4.mp4",
+   7.88
+  ],
+  [
+   "k5.mp4",
+   6.46
+  ],
+  [
+   "k1.mp4",
+   8.1
+  ]
+ ],
+ "prompts": "ver cenas.md do pacote; sufixo: Flat 2D cartoon, bold black outlines, no text, no 3D"
+}
