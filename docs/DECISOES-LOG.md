@@ -1,6 +1,6 @@
 # Registro de decisões do José (DECISOES-LOG)
 
-> ⛔ **ARQUIVO DE PRÉ-CONSTRUÇÃO: AGENTES NÃO CONSULTAM (t287).** Este registro é a prova histórica das decisões. Ler este arquivo exige **aprovação explícita do José**, porque entradas antigas ou superadas podem ser mal interpretadas e aplicadas em produção. As regras válidas estão em `docs/REGRAS.md`.
+> ⛔ **ARQUIVO DE PRÉ-CONSTRUÇÃO: AGENTES ESPECIALISTAS NÃO CONSULTAM (t287).** O agente PQBR (auxiliar do José) pode ler (t536). Este registro é a prova histórica das decisões. Ler este arquivo exige **aprovação explícita do José**, porque entradas antigas ou superadas podem ser mal interpretadas e aplicadas em produção. As regras válidas estão em `docs/REGRAS.md`.
 
 > Registro cronológico, só acrescenta. Em divergência com `REGRAS.md`, vale a entrada mais nova deste log e o REGRAS.md é corrigido no mesmo commit. Toda decisão nova entra aqui **e** no REGRAS.md.
 > Unificação de 09/10: junta o registro de 07/10 (só existia no box), o de 08/10 do servidor e a entrada t280 (só existia no box). Host da tailnet substituído por nome lógico.
@@ -556,3 +556,8 @@ NÃO CABE:
 - **t534:** confirmado que a rotina keepalive do YT-LLM está **pausada**; o binário segue em `_obsoleto` no box.
 - **t535:** mapa visual atualizado. Novo `09-agentes-responsabilidades.mmd`; `03-acessos.mmd` mostra a migração planejada do acesso YouTube (não executada) e o keepalive pausado; README e index atualizados.
 - Habilidades por papel: só PROPOSTA em `docs/sdd/PROPOSTA-papeis-skills.md` (não aplicada).
+- **t536 (José, 25/10/2026):**
+  1. **Leitura dos docs (ajusta t287):** o agente PQBR (auxiliar do José, t533) pode ler **todos** os documentos do PQBR, inclusive este DECISOES-LOG, `arquivo/`, `pesquisas/` e `_obsoleto/`. Os **agentes especialistas** do sistema continuam restritos às suas áreas (t287 vale para eles; exceção t530 mantida). REGRAS §0, ARQUITETURA e ROADMAP atualizados.
+  2. **Paperclip parado, não desinstalado:** o Paperclip fica **parado e desabilitado** (serviço parado; nada desinstalado nem apagado) até a nova arquitetura (PydanticAI no Temporal + Telegram/Hermes `pqbr`) ser validada; só depois é desinstalado. ROADMAP F05-09 reescrito em duas etapas. A parada em si ainda depende do OK do José ao comando exato.
+  3. **Memória persistente externa:** inicialmente só para lembrar as últimas decisões ao José.
+  4. Ordem de trabalho: seguir a ordem recomendada (1º a ponte durável Telegram → sinal do Temporal, F05-06/F05-08).

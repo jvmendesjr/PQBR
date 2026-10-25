@@ -1,7 +1,7 @@
 # ARQUITETURA da PQBR
 
 > Autoridade: abaixo de `docs/REGRAS.md` e `docs/SPEC.md`; acima de `docs/TESTES.md`, `docs/ROADMAP.md` (incluindo o anexo ex-PLANO). Requisitos citados como RF/RNF (SPEC). Este arquivo diz **como** as regras são executadas hoje; ele se adapta às regras, nunca o contrário (t285). Em conflito, vale o REGRAS.md.
-> Não consultar `docs/arquivo/`, `docs/pesquisas/` nem `docs/DECISOES-LOG.md` sem aprovação explícita do José (t287). **Exceção (t530, José):** `docs/pesquisas/PESQUISA-extensoes-geracao-em-serie.md` pode ser lido por qualquer agente, **somente leitura** (referência da Fase 4V).
+> Não consultar `docs/arquivo/`, `docs/pesquisas/` nem `docs/DECISOES-LOG.md` sem aprovação explícita do José (t287). **Exceção (t530, José):** `docs/pesquisas/PESQUISA-extensoes-geracao-em-serie.md` pode ser lido por qualquer agente, **somente leitura** (referência da Fase 4V). **t536:** a restrição vale para os agentes especialistas; o agente PQBR (auxiliar do José) lê todos os docs.
 > Legenda: [APROVADO] · [VERIFICADO] · [HIPÓTESE] · [PROPOSTA] (sugestão ainda sem aprovação) · EM CONSTRUÇÃO — aguardando José.
 
 ---

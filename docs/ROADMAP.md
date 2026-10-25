@@ -3,7 +3,7 @@
 
 > **Como retomar (qualquer agente, qualquer sessão):**
 > 1. Leia **só**, nesta ordem: `docs/REGRAS.md` → `docs/SPEC.md` → `docs/ARQUITETURA.md` → `docs/TESTES.md` → este `docs/ROADMAP.md`. Em conflito, vale o primeiro.
-> 2. ⛔ **Nunca consulte** `docs/arquivo/`, `docs/pesquisas/`, `docs/DECISOES-LOG.md`, `docs/_obsoleto/` nem qualquer rascunho ou material legado **sem aprovação explícita do José** (t287). **Exceção (t530, José):** `docs/pesquisas/PESQUISA-extensoes-geracao-em-serie.md` pode ser lido por qualquer agente, **somente leitura** (referência da Fase 4V).
+> 2. ⛔ **Nunca consulte** `docs/arquivo/`, `docs/pesquisas/`, `docs/DECISOES-LOG.md`, `docs/_obsoleto/` nem qualquer rascunho ou material legado **sem aprovação explícita do José** (t287). **Exceção (t530, José):** `docs/pesquisas/PESQUISA-extensoes-geracao-em-serie.md` pode ser lido por qualquer agente, **somente leitura** (referência da Fase 4V). **t536:** a restrição vale para os agentes especialistas; o agente PQBR (auxiliar do José) lê todos os docs.
 > 3. Pegue a **primeira tarefa `- [ ]` cujas dependências estejam todas `- [x]`**. Não pule portões do José.
 > 4. Dúvida ou conflito que as regras aprovadas não resolvem com certeza: **não adivinhe**. Escreva "EM CONSTRUÇÃO — aguardando José" no `Obs:` e avise (t323).
 > 5. Mudanças durante a construção são tarefas deste roteiro, nunca tickets (REGRAS §24). Nada de push sem autorização do José.
@@ -87,10 +87,12 @@
   - Obs: PQBA-87/PQBA-89 seguem como base documental. Auditoria independente r24 encontrou bypass pela injeção de `rows`, removido em r25. Auditoria r25 apontou bloqueio da facade para recuperação ticket-only e ausência de validação positiva de `janela_horas`; corrigidos em r26 na candidata isolada. Validação r26: 91/91 testes no worktree e 111/111 em snapshot limpo de aae4895; scanner e whitespace limpos. Migration/rollback não mudaram desde parser PostgreSQL aprovado na r24 e seguem não aplicados. F05-08/TZ-09 permanece aberto: faltam adapters reais, integração de todas as rotas e prova E2E privada; endpoint Discord nativo ativo e limitado a `#pqbr`, mas ainda sem integração de alertas proativos nem prova E2E das quatro rotas; F05-08/TZ-09 permanece aberto.
   - Aceite: inventariar emissores, crons, workflows, playbooks e pedidos Telegram; comprovar entrega proativa privada, deduplicada e rastreável para sessão/Camofox/NotebookLM, compliance/HOLD, tickets e relatório. Telegram permanece como rollback durante a validação.
   - Portão José: nenhum novo. Obs: se alguma classe de aviso não tiver destino privado equivalente, manter Telegram e registrar o bloqueio.
-- [ ] **F05-09** [REESCRITO t510] Corte reversível do Paperclip: desligar issues/rotinas Paperclip da PQBR depois que todos os agentes estiverem em PydanticAI/Temporal (o Telegram fica: é o canal)
-  - Req: RF-34, RF-43, RF-48 · Testes: TZ-10 · Depende de: F05-06, F05-08
-  - Aceite: TZ-06/08/09 aprovados e rollback ensaiado; pausar somente Hermes `pqbr` e rotinas/emissores Telegram PQBR; verificar que nenhum fluxo PQBR continua enviando Telegram. Não desligar gateway compartilhado, afetar outros perfis ou apagar configurações/histórico.
-  - Portão José: desligar o Paperclip (serviço/código) exige o José; t464 revogada (t474). Texto anterior em `docs/_obsoleto/paperclip-trechos-t510.md`.
+- [ ] **F05-09** [REESCRITO t510; ATUALIZADO t536] Paperclip **parado/paralisado** agora; desinstalação só depois de validar a nova arquitetura (PydanticAI/Temporal + Telegram)
+  - Req: RF-34, RF-43, RF-48 · Testes: TZ-10 · Depende de: F05-06, F05-08 (só para a etapa 2)
+  - **Etapa 1 — paralisar (t536, aprovado em princípio por José em 25/10):** parar e desabilitar `paperclipai.service` (unit de usuário) **sem desinstalar nem apagar** nada (código, `~/.paperclip`, banco `paperclip-db`, backups e histórico ficam). Antes: remover/neutralizar as dependências PQBR no worker (`acesso_paperclip` no `AcessosWorkflow`, `PonteTemporalPaperclipWorkflow` e activities `*_paperclip`) para não gerar pedidos falsos ao José. O comando exato só roda com OK explícito do José.
+  - **Etapa 2 — desinstalar:** só depois de TZ-06/08/09 aprovados, rollback ensaiado e a nova arquitetura validada; exige novo OK do José. Não desligar o gateway Hermes compartilhado nem afetar outros perfis.
+  - Aceite: etapa 1 sem efeito em Temporal, workers, Camofox e Hermes; religar é `systemctl --user enable --now paperclipai.service`. Etapa 2: TZ-10.
+  - Portão José: etapa 1 (comando) e etapa 2 (desinstalação). Texto anterior em `docs/_obsoleto/paperclip-trechos-t510.md`.
 ## Fase 0: revisão da especificação (paralela à 0.5)
 
 - [x] **F00-01** Revisar SPEC, TESTES e RASTREABILIDADE com o José — 2026-10-17 — sem commit nesta rodada, por instrução do proprietário

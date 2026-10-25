@@ -5,6 +5,10 @@ Versionamento SemVer (MAJOR.MINOR.PATCH) a partir de t510. Versão do pacote can
 
 
 
+## [0.3.10] — 2026-10-25
+### Alterado
+- t536: t287 ajustada (agente PQBR lê todos os docs; especialistas restritos às suas áreas) em REGRAS §0, ARQUITETURA e ROADMAP; DECISOES-LOG com a entrada t536; ROADMAP F05-09 em duas etapas (Paperclip parado/desabilitado agora, desinstalado só após validar a nova arquitetura).
+
 ## [0.3.9] — 2026-10-24
 - t533–t535: agente PQBR criado; keepalive do YT-LLM pausado; mapa ganhou o `09-agentes-responsabilidades` e o `03-acessos` foi atualizado (YouTube planejado); BRIEFING atualizado.
 
