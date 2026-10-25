@@ -5,6 +5,10 @@ Versionamento SemVer (MAJOR.MINOR.PATCH) a partir de t510. Versão do pacote can
 
 
 
+## [0.3.17] — 2026-10-25
+### Adicionado
+- lote-2510: `scripts/montar_voz_dinamica.py` (remontagem genérica: corpo da voz dinâmica + atempo + CTA padrão fixo `cta-padrao-B.mp3` após 0,3 s; cortes nas pausas via silencedetect; sem quadro congelado, último segmento vira still se faltar clipe; nunca sobrescreve). Nota em `docs/pesquisas/lote-2510/VOZ-DINAMICA-CTA-PADRAO.md`.
+
 ## [0.3.16] — 2026-10-25
 ### Adicionado
 - t539: catálogo de erros de produção, com migração 0019, rollback, seed lote-2510 (11 erros), contrato `ErroCatalogo` v1.0.0, leitura por papel com testes, `docs/CATALOGO-ERROS.md`, ARQUITETURA §8 e mapa `10-catalogo-erros` (+ index.html).
