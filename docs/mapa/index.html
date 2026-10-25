@@ -10,7 +10,7 @@ h2{margin:0 0 4px;font-size:16px}.nota{margin:0 0 8px;color:var(--m);font-size:1
 .wrap{overflow-x:auto}.mermaid{background:none;margin:0}footer{color:var(--m);font-size:12px;padding:16px;text-align:center}
 .regra{background:#fff8e6;border:1px solid #f0dca8;border-radius:8px;padding:10px;font-size:13px;margin-bottom:16px}
 </style></head><body><header><h1>PQBR — mapa do sistema</h1><p>Gerado do código em 24/10/2026 · ⚠ = não confirmado no código / pendente</p></header>
-<nav><a href="#d00">Visão geral</a><a href="#d01">Episódio</a><a href="#d02">Reposição de temas</a><a href="#d03">Acessos / Camofox</a><a href="#d04">Descarte</a><a href="#d05">Vigia de atualizações</a><a href="#d06">Runs presos</a><a href="#d07">Cadeia de vídeo</a><a href="#d08">Identidade / Camofox</a><a href="#d09">Agentes</a></nav><main><div class="regra"><b>Regra:</b> agentes nunca alteram este mapa sozinhos; mudança só por proposta aprovada pelo José. Fonte: <code>docs/mapa/*.mmd</code>.</div>
+<nav><a href="#d00">Visão geral</a><a href="#d01">Episódio</a><a href="#d02">Reposição de temas</a><a href="#d03">Acessos / Camofox</a><a href="#d04">Descarte</a><a href="#d05">Vigia de atualizações</a><a href="#d06">Runs presos</a><a href="#d07">Cadeia de vídeo</a><a href="#d08">Identidade / Camofox</a><a href="#d09">Agentes</a><a href="#d10">Catálogo de erros</a></nav><main><div class="regra"><b>Regra:</b> agentes nunca alteram este mapa sozinhos; mudança só por proposta aprovada pelo José. Fonte: <code>docs/mapa/*.mmd</code>.</div>
 <section id="d00"><h2>Visão geral</h2><p class="nota">Mapa PQBR — Visão geral. Gerado do código em 24/10/2026 (commit base c752abc). Só muda por proposta aprovada pelo José. <span class="arq">00-visao-geral.mmd</span></p><div class="wrap"><pre class="mermaid">flowchart TB
   JOSE([&quot;José&quot;])
   TG[&quot;Telegram (Hermes pqbr)&lt;br/&gt;cron pqbr-pedidos-jose lê pqbr.revisao_humana&quot;]
@@ -196,6 +196,26 @@ flowchart LR
   P1{{&quot;Pré-requisito do 1º vídeo: ajustar silhueta do mapa no logo (ROADMAP 4V)&quot;}}
   P2{{&quot;Skill de produção: PROPOSTA em docs/sdd/PROPOSTA-skill-producao-short-pqbr.md (José grava)&quot;}}
   AG --- P1 &amp; P2
+</pre></div></section><section id="d10"><h2>Catálogo de erros</h2><p class="nota">Catálogo de erros de produção (migração 0019, José 25/10/2026). Agentes internos só leem; o agente externo cadastra. <span class="arq">10-catalogo-erros.mmd</span></p><div class="wrap"><pre class="mermaid">%% Catálogo de erros de produção (migração 0019; José 25/10/2026 14:09). Agentes internos só leem; o agente externo cadastra.
+flowchart LR
+  J([&quot;José&lt;br/&gt;aprova o que entra&quot;])
+  EXT[&quot;Agente externo PQBR (Grok Bot)&lt;br/&gt;registra erros vistos na produção&lt;br/&gt;seed: db/seeds/seed_catalogo_erros_lote2510.sql&quot;]
+  subgraph PG[&quot;Postgres pqbr (pc)&quot;]
+    T[(&quot;pqbr.catalogo_erros&lt;br/&gt;codigo · categoria · descricao · exemplo&lt;br/&gt;prevencao · severidade · papeis_interessados · ativo&lt;br/&gt;RLS: pqbr_app grava · pqbr_leitura lê · sem delete&quot;)]
+  end
+  subgraph LEIT[&quot;Leitura antes de gerar (só leitura, READ ONLY)&quot;]
+    F[&quot;catalogo_erros_para_papel(papel)&lt;br/&gt;activity catalogo_erros_consultar&lt;br/&gt;contrato ErroCatalogo v1.0.0&quot;]
+  end
+  LE[&quot;lider-editorial&lt;br/&gt;prompts de roteiro e cenas&quot;]
+  AU[&quot;auditor&lt;br/&gt;checagem de cenas e montagem&quot;]
+  LC[&quot;lider-compliance&lt;br/&gt;CTA, pessoa real, marca, comentário&quot;]
+  DV[&quot;dev&lt;br/&gt;montagem e modelos&quot;]
+  J -. &quot;OK&quot; .-&gt; EXT
+  EXT --&gt;|insert/update via pqbr_app| T
+  T --&gt; F
+  F --&gt; LE &amp; AU &amp; LC &amp; DV
+  N&gt;&quot;⚠ activity ainda não registrada em worker nem chamada por workflow (só função + activity prontas)&quot;]
+  F --- N
 </pre></div></section></main><footer>Temporal é o sistema nervoso · contratos Pydantic v2 · motores trocáveis</footer>
 <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
 mermaid.initialize({startOnLoad:true,theme:"neutral",securityLevel:"strict",flowchart:{htmlLabels:true,useMaxWidth:true}});</script></body></html>

@@ -14,6 +14,7 @@ Diagramas Mermaid **gerados a partir do código real** (workflows, activities, f
 | `08-identidade-camofox.mmd` | Camofox hoje (global 9377 × PQBR 9387 duplicada) e alvo ADR-012 (instâncias por conta, NavegadorIdentidade) | diagnóstico do pc 24/10, `~/.pqbr/camofox/.env` (só nomes) |
 | `09-agentes-responsabilidades.mmd` | Agente PQBR (dedicado, pc) × jr (generalista) × YT-LLM (descontinuação); migração planejada do YouTube; pré-requisito do logo; proposta da skill | DECISOES t532–t535, BRIEFING |
 | `07-cadeia-video.mmd` | Storyboard em série → Flow → Google Vids → Meta Vibes → HOLD (navegador, cotas pagas, sem APIs) | `motores/__init__.py` (`CADEIA_VIDEO`) |
+| `10-catalogo-erros.mmd` | Catálogo de erros (tabela `pqbr.catalogo_erros`, papéis que consultam, agente externo que alimenta) | `db/migrations/0019_*.sql`, `pipeline/catalogo_erros_leitura.py` |
 
 ## Regra
 **Agentes nunca alteram o mapa sozinhos.** Mudança no mapa só por proposta aprovada pelo José (t517). Agente que perceber divergência entre código e mapa **sinaliza** (Observador/Dev) e propõe o diff; não edita.

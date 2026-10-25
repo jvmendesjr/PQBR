@@ -296,6 +296,9 @@ Só dados de negócio. O Postgres do Temporal guarda só estado de workflow e **
 
 Escrita no banco do app sempre por Activity com **outbox** (idempotente por chave).
 
+### Catálogo de erros de produção [José 25/10/2026; APLICADO 0019]
+`pqbr.catalogo_erros` guarda os erros já vistos na produção, cada um com a sua prevenção (instrução para o prompt ou a checagem), a severidade e os papéis interessados. Os agentes internos só leem (`catalogo_erros_para_papel` / activity `catalogo_erros_consultar`, contrato `ErroCatalogo` v1.0.0) antes de gerar. Quem cadastra é o agente externo (t538-P). RLS: `pqbr_app` grava e `pqbr_leitura` lê. Detalhes: `docs/CATALOGO-ERROS.md`; mapa: `docs/mapa/10-catalogo-erros.mmd`.
+
 ### Retenção do consumo por modelo [t358, t369; APROVADO, não aplicado]
 - **Prazos [t369]:** linhas brutas **90 dias**; resumo diário **25 meses** (depois disso o resumo também é apagado pelo mesmo job).
 - **Job:** `RetencaoConsumoWorkflow`, disparado por um **Schedule do Temporal** diário às **~04:15** (Fortaleza), depois dos backups das 03:30/03:45 e fora das janelas de publicação.

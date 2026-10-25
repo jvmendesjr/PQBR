@@ -5,6 +5,10 @@ Versionamento SemVer (MAJOR.MINOR.PATCH) a partir de t510. Versão do pacote can
 
 
 
+## [0.3.16] — 2026-10-25
+### Adicionado
+- t539: catálogo de erros de produção, com migração 0019, rollback, seed lote-2510 (11 erros), contrato `ErroCatalogo` v1.0.0, leitura por papel com testes, `docs/CATALOGO-ERROS.md`, ARQUITETURA §8 e mapa `10-catalogo-erros` (+ index.html).
+
 ## [0.3.15] — 2026-10-25
 ### Alterado
 - t538-A: ponte Telegram ativada (merge local da feature, config ligada, unit `pqbr-telegram-entrada` ativa, drop-in de env no `pqbr-temporal-worker`, job Hermes `pqbr-pedidos-jose` pausado); teste real enviado. DECISOES-LOG, REGRAS §2 e ROADMAP F05-06.

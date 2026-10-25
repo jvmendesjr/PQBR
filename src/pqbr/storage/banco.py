@@ -7,7 +7,7 @@ from ..seguranca.barreira import exigir_limpo
 
 
 DSN_BASE = os.environ.get("PQBR_DB_DSN_BASE", "host=127.0.0.1 port=55433 dbname=pqbr")
-_PAPEIS = {"pqbr_app": "PQBR_APP_PASSWORD", "pqbr_manutencao": "PQBR_MANUT_PASSWORD"}
+_PAPEIS = {"pqbr_app": "PQBR_APP_PASSWORD", "pqbr_leitura": "PQBR_LEITURA_PASSWORD", "pqbr_manutencao": "PQBR_MANUT_PASSWORD"}
 
 
 def _validar(sql, params, contexto=None):
