@@ -5,12 +5,12 @@
   "falas": [
    "Olhou a etiqueta e sentiu as pupilas pulando pra fora? A gente jura que o boleto custa os olhos da cara.",
    "O brasileiro ama um drama financeiro, mas esse exagero começou bem longe daqui.",
-   "No século dezesseis, o espanhol Diego de Almagro perdeu a visão lutando na América.",
-   "Ao prestar contas ao rei, mandou que servir à Coroa lhe custara um olho da cara.",
-   "O desabafo virou meme da época e atravessou os séculos.",
-   "Mas tem quem diga que o negócio é bem mais antigo e tétrico.",
+   "Conta a tradição que no século dezesseis um explorador espanhol teria perdido a visão em batalha.",
+   "Ao prestar contas, ele teria dito ao rei que servir à Coroa lhe custara um olho da cara.",
+   "O desabafo virou meme da época e atravessou os séculos até desembarcar nas nossas faturas.",
+   "Mas tem quem diga que a história é bem mais antiga e tétrica.",
    "Na Mesopotâmia antiga, arrancavam os olhos dos prisioneiros como punição.",
-   "Guerra ou fatura do cartão, o choro do bolso é igual.",
+   "Seja em batalha ou na fatura do cartão, o choro do bolso é o mesmo.",
    "Fica de olho e segue o Porquê BR."
   ],
   "tipo_cta": "trocadilho_tema",
@@ -19,9 +19,9 @@
    "Etiqueta de preço absurdo",
    "Olhos de cartum saltando do rosto",
    "Globo terrestre decorativo",
-   "Conquistador Diego de Almagro com tapa-olho",
-   "Rei Carlos I em salão de trono",
-   "Soldados espanhóis em fogueira",
+   "Explorador espanhol genérico com tapa-olho",
+   "Rei genérico em salão de trono",
+   "Soldados espanhóis genéricos em fogueira",
    "Guerreiros assírios em relevo de pedra",
    "Carteira de couro vazia"
   ],
@@ -43,37 +43,37 @@
      "ambiente": "Sala de estar brasileira do dia a dia, hoje, objetos-âncora: sofá estampado, filtro de barro na mesa, ventilador de pé, luz da janela."
     },
     {
-     "fala": "No século dezesseis, o espanhol Diego de Almagro perdeu a visão lutando na América.",
-     "acao": "O personagem de camiseta amarela observa à distância o conquistador Diego de Almagro com um tapa-olho em meio à fumaça de batalha.",
+     "fala": "Conta a tradição que no século dezesseis um explorador espanhol teria perdido a visão em batalha.",
+     "acao": "O personagem de camiseta amarela observa à distância a silhueta de um explorador espanhol genérico com tapa-olho e sem rosto identificável em meio à fumaça.",
      "enquadramento": "Plano aberto",
-     "ambiente": "Fortaleza de pedra nas montanhas do Peru, século XVI, objetos-âncora: muralha de pedra inca, estandarte real, elmo de ferro, luz de sol da tarde."
+     "ambiente": "Fortaleza de pedra nas montanhas, século XVI, objetos-âncora: muralha de pedra, estandarte real, elmo de ferro, luz de sol da tarde."
     },
     {
-     "fala": "Ao prestar contas ao rei, mandou que servir à Coroa lhe custara um olho da cara.",
-     "acao": "O personagem de camiseta amarela espia o conquistador no salão nobre conversando dramaticamente com o Rei Carlos Primeiro e apontando para o próprio olho.",
+     "fala": "Ao prestar contas, ele teria dito ao rei que servir à Coroa lhe custara um olho da cara.",
+     "acao": "O personagem de camiseta amarela espia o explorador no salão nobre conversando com o rei sem rostos identificáveis e apontando para o próprio olho.",
      "enquadramento": "Plano médio",
-     "ambiente": "Salão real da Coroa Espanhola, século XVI, objetos-âncora: trono de ouro, cortinas vermelhas de veludo, coroa reluzente, luz de grandes janelas."
+     "ambiente": "Salão real de tribunal antigo, século XVI, objetos-âncora: trono de ouro, cortinas vermelhas de veludo, coroa reluzente, luz de grandes janelas."
     },
     {
-     "fala": "O desabafo virou meme da época e atravessou os séculos.",
-     "acao": "O personagem de camiseta amarela vê um grupo de soldados espanhóis rindo e repetindo o gesto do olho em volta de uma fogueira.",
+     "fala": "O desabafo virou meme da época e atravessou os séculos até desembarcar nas nossas faturas.",
+     "acao": "O personagem de camiseta amarela vê soldados espanhóis genéricos rindo e repetindo o gesto do olho ao redor de uma fogueira.",
      "enquadramento": "Plano aberto",
-     "ambiente": "Acampamento militar espanhol, século XVI, objetos-âncora: tendas de lona, fogueira de acampamento, barris de madeira, luz de entardecer."
+     "ambiente": "Acampamento militar antigo, século XVI, objetos-âncora: tendas de lona, fogueira de acampamento, barris de madeira, luz de entardecer."
     },
     {
-     "fala": "Mas tem quem diga que o negócio é bem mais antigo e tétrico.",
+     "fala": "Mas tem quem diga que a história é bem mais antiga e tétrica.",
      "acao": "O personagem de camiseta amarela folheia um livro antigo de história enquanto uma sombra misteriosa surge ao fundo.",
      "enquadramento": "Plano fechado",
      "ambiente": "Biblioteca antiga com estantes de madeira, hoje, objetos-âncora: livros velhos encadernados, luminária de mesa, ampulheta, luz suave."
     },
     {
      "fala": "Na Mesopotâmia antiga, arrancavam os olhos dos prisioneiros como punição.",
-     "acao": "O personagem de camiseta amarela olha assustado para entalhes de pedra mostrando guerreiros assírios em um templo antigo.",
+     "acao": "O personagem de camiseta amarela olha assustado para entalhes de pedra mostrando guerreiros assírios genéricos em um templo antigo.",
      "enquadramento": "Plano aberto",
      "ambiente": "Templo de pedra da Mesopotâmia Antiga, Antiguidade, objetos-âncora: entalhes em alto-relevo na pedra, tochas acesas, vasilhas de barro, luz de fogo."
     },
     {
-     "fala": "Guerra ou fatura do cartão, o choro do bolso é igual.",
+     "fala": "Seja em batalha ou na fatura do cartão, o choro do bolso é o mesmo.",
      "acao": "O personagem de camiseta amarela abre a carteira vazia de onde sai uma nuvenzinha de fumaça e balança a cabeça resignado.",
      "enquadramento": "Plano médio",
      "ambiente": "Corredor de mercado brasileiro, hoje, objetos-âncora: prateleiras com produtos, carrinho de compras, cartaz de promoção, luz fluorescente."
