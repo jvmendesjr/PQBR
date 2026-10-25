@@ -8,13 +8,16 @@
   "gate": {
     "A1_A3_tecnico": "PASS",
     "A9_local": "PASS (frames 0.5/1.5/2.5 s: personagem 2D central, legivel, sem rosto real/marca, sem end-card NotebookLM)",
-    "A4_A8_juiz_gemini": "PENDENTE (VISUAL+LOOP via Camofox nao rodados)",
-    "B1_B10_editorial": "PENDENTE (sem titulo/descricao/tags/fontes no pacote)"
+    "A4_A8_juiz_gemini": "VISUAL terceira_rodada (2 rodadas, texto nao enviado); LOOP: INEXISTENTE no repo (LACUNAS)",
+    "B1_B10_editorial": "PASS (NotebookLM SEO validado PacoteSEO; 10 fontes web; GenAI: cartum 2D nao realista) ressalvas: codigo PQBR-EP fora da descricao (entra no payload/etiqueta)"
   },
   "status": "P1_HOLD",
   "publicado": false,
-  "drive": "PENDENTE (drive_enviar exige codigo PQBR-EP)",
-  "postgres": "PENDENTE (sem episodio; ver LACUNAS)",
+  "drive": "1_aPZu5-oENaMKzk5E4mxX3wVWADhKCVc",
+  "postgres": {
+    "temas_pendentes_id": 20,
+    "linhas": 1
+  },
   "pronto_v2": {
     "arquivo": "runtime/lote-saldo/fechadura/fechadura-pronto-v2.mp4",
     "sha256": "d89e6428ad05e3def5e0d7b388e60fbd47e35c685052c5600355092798b9f577",
@@ -27,5 +30,7 @@
     "motivo": "ERR-MON-02: CTA personalizado do roteiro restaurado (pronto v1 tinha CTA genérico B)",
     "pos": "scripts/pos/post-short.sh"
   },
-  "pronto_vigente": "runtime/lote-saldo/fechadura/fechadura-pronto-v2.mp4"
+  "pronto_vigente": "runtime/lote-saldo/fechadura/fechadura-pronto-v2.mp4",
+  "codigo": "PQBR-EP1006",
+  "motivo_hold": "LOOP do juiz Gemini nao existe no repo (fail-closed); VISUAL=terceira_rodada"
 }

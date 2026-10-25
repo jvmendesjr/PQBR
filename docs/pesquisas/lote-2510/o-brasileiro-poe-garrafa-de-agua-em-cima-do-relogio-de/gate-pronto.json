@@ -8,13 +8,18 @@
   "gate": {
     "A1_A3_tecnico": "PASS",
     "A9_local": "PASS (frames 0.5/1.5/2.5 s: personagem 2D central, legivel, sem rosto real/marca, sem end-card NotebookLM)",
-    "A4_A8_juiz_gemini": "PENDENTE (VISUAL+LOOP via Camofox nao rodados)",
-    "B1_B10_editorial": "PENDENTE (sem titulo/descricao/tags/fontes no pacote)"
+    "A4_A8_juiz_gemini": "VISUAL aprova_com_ressalva (2 rodadas, texto nao enviado); LOOP: INEXISTENTE no repo (LACUNAS)",
+    "B1_B10_editorial": "PASS (NotebookLM SEO validado PacoteSEO; 10 fontes web; GenAI: cartum 2D nao realista) ressalvas: codigo PQBR-EP fora da descricao (entra no payload/etiqueta)"
   },
   "status": "P1_HOLD",
   "publicado": false,
-  "drive": "PENDENTE (drive_enviar exige codigo PQBR-EP)",
-  "postgres": "PENDENTE (sem episodio; ver LACUNAS)",
+  "drive": "1yhELaB2u1EGjWJZ_qSUvCkV8qlnltb8Q",
+  "postgres": {
+    "temas_pendentes_id": 28,
+    "linhas": 1
+  },
   "cta_check": "OK: CTA original do roteiro já é o fallback literal 'Segue o Porquê BR'; pronto v1 vigente, sem v2",
-  "pronto_vigente": "runtime/lote-saldo/garrafa/garrafa-pronto.mp4"
+  "pronto_vigente": "runtime/lote-saldo/garrafa/garrafa-pronto.mp4",
+  "codigo": "PQBR-EP1009",
+  "motivo_hold": "LOOP do juiz Gemini nao existe no repo (fail-closed)"
 }

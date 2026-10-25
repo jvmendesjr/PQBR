@@ -8,13 +8,16 @@
   "gate": {
     "A1_A3_tecnico": "PASS",
     "A9_local": "PASS (frames 0.5/1.5/2.5 s: personagem 2D central, legivel, sem rosto real/marca, sem end-card NotebookLM)",
-    "A4_A8_juiz_gemini": "PENDENTE (VISUAL+LOOP via Camofox nao rodados)",
-    "B1_B10_editorial": "PENDENTE (sem titulo/descricao/tags/fontes no pacote)"
+    "A4_A8_juiz_gemini": "VISUAL aprova_com_ressalva (2 rodadas, texto nao enviado); LOOP: INEXISTENTE no repo (LACUNAS)",
+    "B1_B10_editorial": "PASS (NotebookLM SEO validado PacoteSEO; 10 fontes web; GenAI: cartum 2D nao realista) ressalvas: codigo PQBR-EP fora da descricao (entra no payload/etiqueta)"
   },
   "status": "P1_HOLD",
   "publicado": false,
-  "drive": "PENDENTE (drive_enviar exige codigo PQBR-EP)",
-  "postgres": "PENDENTE (sem episodio; ver LACUNAS)",
+  "drive": "1giIaQF792V7vz91mh_3k7IxGjUVKCWVs",
+  "postgres": {
+    "temas_pendentes_id": 27,
+    "linhas": 1
+  },
   "pronto_v2": {
     "arquivo": "runtime/lote-saldo/nao-e-bem-assim/nao-e-bem-assim-pronto-v2.mp4",
     "sha256": "509bfda78d1fccecd45339a14db80e5cf142f7a8748fe8ab48f90adfe1d02900",
@@ -27,5 +30,7 @@
     "motivo": "ERR-MON-02: CTA personalizado do roteiro restaurado (pronto v1 tinha CTA genérico B)",
     "pos": "scripts/pos/post-short.sh"
   },
-  "pronto_vigente": "runtime/lote-saldo/nao-e-bem-assim/nao-e-bem-assim-pronto-v2.mp4"
+  "pronto_vigente": "runtime/lote-saldo/nao-e-bem-assim/nao-e-bem-assim-pronto-v2.mp4",
+  "codigo": "PQBR-EP1008",
+  "motivo_hold": "LOOP do juiz Gemini nao existe no repo (fail-closed)"
 }
