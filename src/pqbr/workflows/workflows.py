@@ -9,6 +9,7 @@ with workflow.unsafe.imports_passed_through():
     from .contracts import (EpisodioInput, RoteiroShort, AprovacaoJose, PropostaAgente,
                             OutboxEvento, EstadoEpisodio)
     from .activities import gerar_roteiro, gravar_outbox
+    from .ponte_atividades import pedir_aprovacao_telegram
 
 JOSE_ID = "jose"  # identificador lógico; o ID real do Telegram fica na config, fora do git
 RETRY = RetryPolicy(initial_interval=timedelta(seconds=1), backoff_coefficient=2.0,
@@ -36,6 +37,10 @@ class EpisodioWorkflow:
         self._set(etapa="aguardando_aprovacao")
         if inp.aprovacao_automatica:
             self._aprovacao = AprovacaoJose(remetente_id=JOSE_ID, decisao="aprovar", motivo="soak")
+        else:
+            await pedir_aprovacao_telegram("aguardando_aprovacao", f"episódio {inp.episodio_id}",
+                                           f"PQBR — aprovar o roteiro do episódio {inp.episodio_id} ({inp.tema[:120]})?",
+                                           timedelta(seconds=inp.espera_aprovacao_segundos))
         try:
             await workflow.wait_condition(lambda: self._aprovacao is not None,
                                           timeout=timedelta(seconds=inp.espera_aprovacao_segundos))
@@ -137,6 +142,9 @@ class PonteTemporalPaperclipWorkflow:
         await workflow.execute_activity(comentar_paperclip, Comentario(issue_id=issue, corpo=(
             f"[Temporal] Proposta válida ({proposta.tipo}, risco {proposta.risco}): \"{proposta.resumo}\". "
             "Aguardando aprovação do José; nada aplicado ainda.")), **_PC)
+        await pedir_aprovacao_telegram("aguardando_aprovacao", f"proposta {proposta.tipo} (issue {issue})",
+                                       f"PQBR — aprovar proposta {proposta.tipo} (risco {proposta.risco}): {proposta.resumo[:600]}",
+                                       timedelta(seconds=inp.espera_aprovacao_segundos))
         try:
             await workflow.wait_condition(lambda: self._aprovacao is not None,
                                           timeout=timedelta(seconds=inp.espera_aprovacao_segundos))

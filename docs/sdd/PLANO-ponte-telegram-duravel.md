@@ -73,5 +73,15 @@ Rascunho do plugin Hermes movido para `docs/_obsoleto/hermes-plugin-pqbr-ponte-t
 1. Token e ID no `.env` do PQBR (600).
 2. Merge da branch e reinício do worker (para a activity e a query `etapa`; workflows já em execução usam código novo só após replay compatível).
 3. Ligar `saida`/`entrada` na config; instalar e ativar a unit.
-4. Produtores: chamar `registrar_pedido` + `enfileirar` + `enviar_telegram` nos workflows que pedem aprovação (hoje só os testes fazem isso).
+4. ~~Produtores~~ feito (ver abaixo).
 5. Ideia futura (backlog): menu de decisões e pedidos rotineiros no bot.
+
+### Workflows ligados à ponte (25/10/2026, OK do José)
+- `ponte_atividades.py`: activities `registrar_pedido_telegram`, `enfileirar_telegram` (devolve `desligado` com `saida` desligada), `enfileirar_avisos_telegram` (F05-08: `revisao_humana` → outbox) + `enviar_telegram`; registradas no worker `pqbr-episodio`.
+- Helpers determinísticos no workflow: ref = `workflow.uuid4()`, chave `aprov:<workflow_id>:<run8>:<etapa>`, `workflow.patched` (execuções antigas seguem iguais no replay). Falha da ponte não derruba o workflow (aviso é melhor-esforço; ladder interna abre ticket).
+- Ligados: `EpisodioWorkflow` e `PonteTemporalPaperclipWorkflow` (antes de esperar `aprovacao_jose`; soak automático não chama) e `AcessosWorkflow` (avisos/pedidos ao fim de cada rodada).
+- Paperclip (preparo F05-09): `config/paperclip.json` `estado=parado_proposital` → `acesso_paperclip` devolve `pausado` (sem pedido ao José, sem evento de queda). Padrão: `ativo`.
+- Testes `tests/workflows/test_ponte_telegram_wf.py` (WorkflowEnvironment, worker sem cache = replay a cada tarefa; reinício do worker no meio da espera; callback real por `processar_callback` + `sinalizar_temporal`; dedupe; saída desligada; soak; Paperclip pausado/ativo).
+- Corrigido vazamento de `sys.path` em `tests/seguranca/test_f3_02_saidas.py` (o `indexar.py` fixava o src do checkout principal e o sandbox do Temporal importava código velho).
+- Risco conhecido: logo após reiniciar o worker, a query `etapa` pode esperar o timeout do sticky; a escada de 3 tentativas pode virar ticket. Na ativação, reiniciar o worker fora de janela de aprovação.
+- Na ativação: desligar o cron antigo do Hermes que lia `revisao_humana` (senão aviso duplicado).

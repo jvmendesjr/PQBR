@@ -11,6 +11,9 @@ from pydantic import BaseModel, ConfigDict
 from temporalio import activity, workflow
 from temporalio.common import RetryPolicy
 
+with workflow.unsafe.imports_passed_through():
+    from .ponte_atividades import enviar_avisos_telegram
+
 FILA_CAMOFOX = "camofox-pqbr"; FILA_NLM = "notebooklm-pqbr"; FILA_REG = "episodio-pqbr"
 Servico = Literal["google_camofox", "notebooklm", "paperclip_cli"]
 SINAL_DESLOGADO = re.compile(r'Sign in|Fazer login|link "Entrar"|button "Entrar"')
@@ -26,6 +29,7 @@ class EstadoAcesso(BaseModel):
     servico: Servico
     ok: bool
     motivo: str
+    pausado: bool = False      # serviço parado de propósito por config (F05-09): nem pedido, nem queda
 
 
 class PedidoJose(BaseModel):
@@ -64,8 +68,22 @@ async def acesso_notebooklm() -> EstadoAcesso:
         return EstadoAcesso(servico="notebooklm", ok=False, motivo=str(e)[-200:])
 
 
+CONFIG_PAPERCLIP = os.path.join(os.path.dirname(__file__), "..", "..", "..", "config", "paperclip.json")
+
+
+def paperclip_pausado(caminho: str = CONFIG_PAPERCLIP) -> bool:
+    """Puro; testado. `estado: parado_proposital` → a checagem vira 'pausado' (preparo F05-09). Arquivo ausente/inválido → ativo."""
+    try:
+        with open(caminho, encoding="utf-8") as f:
+            return json.load(f).get("estado") == "parado_proposital"
+    except (OSError, ValueError):
+        return False
+
+
 @activity.defn
 async def acesso_paperclip() -> EstadoAcesso:
+    if paperclip_pausado():
+        return EstadoAcesso(servico="paperclip_cli", ok=False, pausado=True, motivo="pausado por config (F05-09)")
     from .paperclip import _cli
     try:
         await _cli("company", "list"); return EstadoAcesso(servico="paperclip_cli", ok=True, motivo="ok")
@@ -197,6 +215,8 @@ class AcessosWorkflow:
                                                     task_queue=FILA_REG, **r)
                 estados[0] = rest
         for e in estados:
+            if e.pausado:
+                continue
             if e.ok:
                 n = await workflow.execute_activity(acesso_resolvido, e.servico, task_queue=FILA_REG, **r)
                 if n: await workflow.execute_activity(registrar_evento, EventoAcesso(servico=e.servico, tipo="normalizado", causa="pedido pendente resolvido", resultado=e.motivo), task_queue=FILA_REG, **r)
@@ -205,4 +225,5 @@ class AcessosWorkflow:
                     await workflow.execute_activity(registrar_evento, EventoAcesso(servico=e.servico, tipo="queda", causa=e.motivo), task_queue=FILA_REG, **r)
                 await workflow.execute_activity(pedir_jose, PedidoJose(servico=e.servico, motivo=e.motivo, acao_jose=ACAO_JOSE[e.servico],
                                                 caminhos_tentados=["conferência automática"] + (["restauração do notebooklm-py"] if e.servico == "google_camofox" else [])), task_queue=FILA_REG, **r)
+        await enviar_avisos_telegram()
         return [e.model_dump() for e in estados]

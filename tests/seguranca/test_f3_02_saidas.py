@@ -26,7 +26,11 @@ def test_estado_indexador_exige_metadados_limpos():
     import importlib.util
     spec = importlib.util.spec_from_file_location("pqbr_indexar_test", RAIZ / "scripts/hindsight/indexar.py")
     indexar = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(indexar)
+    antes = list(sys.path)
+    try:
+        spec.loader.exec_module(indexar)
+    finally:
+        sys.path[:] = antes   # indexar.py fixa o src do checkout principal no sys.path; não vazar para outros testes (sandbox do Temporal)
     assert indexar.validar_estado({"commit:a1": "abcdef0123456789"})["commit:a1"] == "abcdef0123456789"
     with pytest.raises(Exception):
         indexar.validar_estado({"ghp_" + "A" * 36: "abcdef0123456789"})
