@@ -25,8 +25,27 @@ Branch `feature/f05-06-ponte-duravel`. **Não aplicado:** migração 0018 não r
    - O sinal `aprovacao_jose` leva o token. O handler devolve a etapa; se a etapa estiver errada, o resultado é `estado_invalido`.
    - 3 falhas do Temporal → 1 ticket (chave `ticket:sinal:<token>`).
 5. **Sinal no workflow:** o recebedor do callback (processo leve no `pc`, só 127.0.0.1, sem expor porta) usa `Client.get_workflow_handle(wf).signal("aprovacao_jose", AprovacaoJose(..., token))`. Por ora, a etapa é lida por um `@workflow.query etapa`. Mais tarde, o melhor é trocar por um Update com validator, que rejeita no servidor e devolve o resultado de forma síncrona.
-6. **Pendências do José:** token próprio do bot `pqbr`, ou como o gateway Hermes entrega o callback ao recebedor (sem reiniciar o gateway); aplicação da 0018.
+6. **Pendências do José:** t537 decidiu que o gateway Hermes (perfil pqbr) repassa os callbacks (sem bot próprio); faltam os OKs de instalação (ver t537) e a aplicação da 0018.
 
 ## Testes
 `tests/unit/test_ponte_telegram.py` (10): envio uma vez; 3 falhas → ticket sem vazar texto; ambíguo sem reenvio às cegas; fail-closed (config ausente, remetente, token desconhecido, expirado, etapa); um sinal por pedido (update repetido e segunda decisão); 3 falhas do Temporal → 1 ticket; contratos; chave da janela de 6 h.
 **Faltam:** adaptador Postgres contra o banco de teste (`db/test_migrations.sh`), teste com `WorkflowEnvironment` (sinal real, reinício do worker) e corrida de dois workers no claim.
+
+## t537 (José, 25/10/2026) — entrada pelo gateway Hermes (perfil `pqbr`), sem bot próprio
+- **Como o Hermes repassa:** um plugin do perfil `pqbr` (`deploy/hermes-plugin-pqbr-ponte/`, **não instalado**) usa `ctx.register_telegram_handler` com `CallbackQueryHandler(pattern=r"^pq:")`. O padrão é restrito para não engolir os fluxos do core (`ea:`, `sc:`, `cl:`, `mp:`…), cujo handler ignora prefixos desconhecidos.
+  - O plugin lê `from_user.id` do próprio update e manda `{update_id, from_id, chat_id, data}` por **socket Unix 0600** (`/run/user/1000/pqbr/ponte-telegram.sock`), sem porta TCP e sem mudança de rede.
+  - Responde ao botão só com um status curto. Se o PQBR não responder, nada é registrado (fail-closed).
+- **Botões:** `callback_data = "pq:<a|n>:<ref>"`, com no máximo 64 bytes e `ref` opaco de 32 caracteres.
+- **Lado PQBR:** `src/pqbr/workflows/entrada_telegram.py` (`para_evento`, `tratar_envelope`, `servir_unix`).
+  - O adaptador é escolhido em `config/ponte_telegram.json` (`adaptador_entrada`: `desligado` | `hermes_plugin_unix`); o padrão é `desligado`.
+  - O fluxo segue para `processar_callback` (dedupe em `entrada_telegram` e depois o sinal).
+- **Hooks de arquivo** (`hooks/<n>/HOOK.yaml`) não servem: só cobrem gateway, sessão, agente e comando, não callbacks. O `gateway_platform_event` só observa reação e edição.
+- **Ligar exige OK do José:**
+  1. copiar o plugin para `~/.hermes/profiles/pqbr/plugins/pqbr-ponte/`;
+  2. incluir `pqbr-ponte` em `plugins.enabled` do `config.yaml` do perfil (os plugins são opt-in);
+  3. ativar o plugin. O Hermes tem religação tardia de handlers (#87770, `rewire_plugin_handlers`), então talvez dispense reinício. Se a redescoberta não acontecer sozinha, é preciso reiniciar o `hermes-gateway`, o que derruba por segundos todos os perfis e canais desse gateway (`multiplex_profiles: true`);
+  4. subir o recebedor PQBR (unit nova, só socket local);
+  5. aplicar a 0018.
+- **Riscos a verificar antes de ligar:**
+  - com `multiplex_profiles`, confirmar que o handler do plugin do perfil `pqbr` vale para o bot/roteador que entrega o tópico do José;
+  - confirmar que o hoist tardio coloca o handler à frente do `CallbackQueryHandler` catch-all do core.

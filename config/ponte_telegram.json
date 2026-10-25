@@ -1,0 +1,8 @@
+{
+  "versao": "1.0.0",
+  "adaptador_entrada": "desligado",
+  "alternativas": ["hermes_plugin_unix"],
+  "socket": "/run/user/1000/pqbr/ponte-telegram.sock",
+  "id_autorizado_env": "PQBR_TELEGRAM_AUTORIZADO_ID",
+  "obs": "t537: o gateway Hermes (perfil pqbr) repassa callbacks 'pq:*' por socket Unix; ligar só com OK do José"
+}
