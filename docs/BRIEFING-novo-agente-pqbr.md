@@ -1,6 +1,6 @@
 # BRIEFING — novo agente específico PQBR / Porquê BR (substitui o YT-LLM)
 
-t531 · 24/10/2026 · pedido do José. **Só leitura e proposta.** O novo agente ainda não foi criado, nenhuma mensagem foi mandada ao YT-LLM e os arquivos dele não foram alterados. O **jr** continua como agente generalista do José.
+t531 · 24/10/2026 · pedido do José. **Só leitura e proposta.** **Atualização t533–t535:** o novo agente PQBR **foi criado** (id `0ade9874-b724-4055-9000-d61825244b12`); o keepalive do YT-LLM está **pausado (confirmado)**. Originalmente: o novo agente ainda não tinha sido criado, nenhuma mensagem foi mandada ao YT-LLM e os arquivos dele não foram alterados. O **jr** continua como agente generalista do José.
 
 **Fontes**
 - Conversa YT-LLM (agente `018f2ef8-…`): 3100 posições, de 16/09 a 28/09/2026. Lidas quase todas; ficaram de fora só lacunas de 1 a 4 mensagens.
@@ -63,7 +63,7 @@ t531 · 24/10/2026 · pedido do José. **Só leitura e proposta.** O novo agente
 | Camofox inexistente ou global | Camofox **dedicado** à PQBR (9387); migração para `camofox@pqbr` na próxima integração | ADR-012, t526 |
 
 ## (c) Pendências abertas que estavam com o YT-LLM
-1. ✅ **(t532) Keepalive desligado no box** (binário em `~/.local/bin/_obsoleto/`; pausar a rotina no app). Histórico: **falhando desde 20/09.** A rotina está parada à espera de um novo login. **Não reativar**: na PQBR a sessão é do Camofox 9387 e do venv isolado. A rotina deve ser **desligada de vez** quando o agente for arquivado.
+1. ✅ **(t532) Keepalive desligado no box** (binário em `~/.local/bin/_obsoleto/`; rotina no app **pausada, confirmado t534**). Histórico: **falhando desde 20/09.** A rotina está parada à espera de um novo login. **Não reativar**: na PQBR a sessão é do Camofox 9387 e do venv isolado. A rotina deve ser **desligada de vez** quando o agente for arquivado.
 2. **(t532: decidido migrar para a PQBR no pc, plano em (g))** Token OAuth do YouTube no box (`youtube-auth/`) e MCP `youtube-shorts` com `YOUTUBE_DRY_RUN=true`. Decidir com o José se:
    - migra para o cofre e o fluxo da PQBR (a DECISOES-LOG cita o token do yt-llm-bot reaproveitado para o Drive), ou
    - é revogado.
@@ -154,3 +154,6 @@ O novo agente terá acesso ao pc e à tailnet e mantém o sistema junto com o Jo
    - desregistrar o MCP `youtube-shorts` do YT-LLM;
    - avaliar com o José revogar ou renovar o refresh_token (pede login dele) para sobrar **um só detentor**.
 6. **Registro:** DECISOES-LOG + CHANGELOG + teste de contrato do adaptador. O hook `verificar_segredos` deve continuar limpo.
+
+## (h) Mapa visual
+Diagrama `docs/mapa/09-agentes-responsabilidades.mmd` (t535) e nota no `03-acessos.mmd`.

@@ -552,4 +552,7 @@ NÃO CABE:
      - a causa sai de cena porque o vídeo não é mais gerado no NotebookLM (t512); o Auditor mantém o check.
   4. **Silhueta do mapa no logo:** verificar e ajustar antes do 1º vídeo da nova fase (pré-requisito no ROADMAP 4V).
   5. **Skill `produ-o-short-b1-notebooklm`:** proposta de texto novo em `docs/sdd/PROPOSTA-skill-producao-short-pqbr.md` (o José grava).
+- **t533 (José, 24/10/2026):** criado o **agente PQBR** (id `0ade9874-b724-4055-9000-d61825244b12`), dedicado ao projeto e ao sistema no pc junto com o José (acesso ao pc e à tailnet). O jr fica generalista (infra, Camofox global, outros projetos). O YT-LLM entra em descontinuação.
+- **t534:** confirmado que a rotina keepalive do YT-LLM está **pausada**; o binário segue em `_obsoleto` no box.
+- **t535:** mapa visual atualizado. Novo `09-agentes-responsabilidades.mmd`; `03-acessos.mmd` mostra a migração planejada do acesso YouTube (não executada) e o keepalive pausado; README e index atualizados.
 - Habilidades por papel: só PROPOSTA em `docs/sdd/PROPOSTA-papeis-skills.md` (não aplicada).

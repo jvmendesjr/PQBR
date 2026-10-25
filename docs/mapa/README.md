@@ -12,6 +12,7 @@ Diagramas Mermaid **gerados a partir do código real** (workflows, activities, f
 | `05-vigia-atualizacoes.mmd` | Vigia semanal do Dev (só leitura, relatório, nunca aplica) | `workflows/atualizacoes.py` |
 | `06-runs-presos.mmd` | Alerta de run preso (timer systemd) | `scripts/temporal/runs_presos.py` |
 | `08-identidade-camofox.mmd` | Camofox hoje (global 9377 × PQBR 9387 duplicada) e alvo ADR-012 (instâncias por conta, NavegadorIdentidade) | diagnóstico do pc 24/10, `~/.pqbr/camofox/.env` (só nomes) |
+| `09-agentes-responsabilidades.mmd` | Agente PQBR (dedicado, pc) × jr (generalista) × YT-LLM (descontinuação); migração planejada do YouTube; pré-requisito do logo; proposta da skill | DECISOES t532–t535, BRIEFING |
 | `07-cadeia-video.mmd` | Storyboard em série → Flow → Google Vids → Meta Vibes → HOLD (navegador, cotas pagas, sem APIs) | `motores/__init__.py` (`CADEIA_VIDEO`) |
 
 ## Regra

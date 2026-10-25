@@ -12,3 +12,5 @@ flowchart TD
   D3 -- sim --> RS["acesso_resolvido → registrar_evento normalizado"]
   D3 -- não --> RQ["registrar_evento queda"] --> PJ["pedir_jose (PedidoJose)<br/>pqbr.revisao_humana → Telegram"]
   N>"Nunca login headless (NOTEBOOKLM_HEADLESS_REAUTH=0); login só pelo José no Camofox 9387"]
+  YT["Acesso YouTube (Data API, só dry-run até F8)<br/>PLANEJADO t532/t535: token OAuth + MCP youtube-shorts → pc<br/>~/.pqbr/secrets/youtube (600) · ainda NÃO migrado"]
+  N2>"Sessão do YT-LLM no box: keepalive PAUSADO, binário notebooklm em _obsoleto (t532–t534)"]

@@ -10,7 +10,7 @@ h2{margin:0 0 4px;font-size:16px}.nota{margin:0 0 8px;color:var(--m);font-size:1
 .wrap{overflow-x:auto}.mermaid{background:none;margin:0}footer{color:var(--m);font-size:12px;padding:16px;text-align:center}
 .regra{background:#fff8e6;border:1px solid #f0dca8;border-radius:8px;padding:10px;font-size:13px;margin-bottom:16px}
 </style></head><body><header><h1>PQBR — mapa do sistema</h1><p>Gerado do código em 24/10/2026 · ⚠ = não confirmado no código / pendente</p></header>
-<nav><a href="#d00">Visão geral</a><a href="#d01">Episódio</a><a href="#d02">Reposição de temas</a><a href="#d03">Acessos / Camofox</a><a href="#d04">Descarte</a><a href="#d05">Vigia de atualizações</a><a href="#d06">Runs presos</a><a href="#d07">Cadeia de vídeo</a><a href="#d08">Identidade / Camofox</a></nav><main><div class="regra"><b>Regra:</b> agentes nunca alteram este mapa sozinhos; mudança só por proposta aprovada pelo José. Fonte: <code>docs/mapa/*.mmd</code>.</div>
+<nav><a href="#d00">Visão geral</a><a href="#d01">Episódio</a><a href="#d02">Reposição de temas</a><a href="#d03">Acessos / Camofox</a><a href="#d04">Descarte</a><a href="#d05">Vigia de atualizações</a><a href="#d06">Runs presos</a><a href="#d07">Cadeia de vídeo</a><a href="#d08">Identidade / Camofox</a><a href="#d09">Agentes</a></nav><main><div class="regra"><b>Regra:</b> agentes nunca alteram este mapa sozinhos; mudança só por proposta aprovada pelo José. Fonte: <code>docs/mapa/*.mmd</code>.</div>
 <section id="d00"><h2>Visão geral</h2><p class="nota">Mapa PQBR — Visão geral. Gerado do código em 24/10/2026 (commit base c752abc). Só muda por proposta aprovada pelo José. <span class="arq">00-visao-geral.mmd</span></p><div class="wrap"><pre class="mermaid">flowchart TB
   JOSE([&quot;José&quot;])
   TG[&quot;Telegram (Hermes pqbr)&lt;br/&gt;cron pqbr-pedidos-jose lê pqbr.revisao_humana&quot;]
@@ -82,7 +82,9 @@ flowchart TD
   A3 --&gt; A4[&quot;temas_validar_agente&lt;br/&gt;parse_direto JSON → PropostaTemas;&lt;br/&gt;senão Líder Editorial (PydanticAI) só estrutura&quot;]
   A4 --&gt; A5[&quot;temas_inserir&lt;br/&gt;filtros: repetido, sazonal, bloqueio absoluto&quot;]
   A5 --&gt; L
-  N&gt;&quot;Caderno semanal sai pelo fluxo de descarte (04-descarte)&quot;]</pre></div></section><section id="d03"><h2>Acessos / Camofox</h2><p class="nota">AcessosWorkflow (src/pqbr/workflows/acesso.py) — Schedule de hora em hora (hh:10). Gerado do código 24/10/2026. <span class="arq">03-acessos.mmd</span></p><div class="wrap"><pre class="mermaid">flowchart TD
+  N&gt;&quot;Caderno semanal sai pelo fluxo de descarte (04-descarte)&quot;]</pre></div></section><section id="d03"><h2>Acessos / Camofox</h2><p class="nota">AcessosWorkflow (src/pqbr/workflows/acesso.py) — Schedule de hora em hora (hh:10). Gerado do código 24/10/2026. <span class="arq">03-acessos.mmd</span></p><div class="wrap"><pre class="mermaid">
+%% AcessosWorkflow (src/pqbr/workflows/acesso.py) — Schedule de hora em hora (hh:10). Gerado do código 24/10/2026.
+flowchart TD
   S([&quot;run&quot;]) --&gt; A1[&quot;acesso_google_camofox (camofox-pqbr)&quot;] &amp; A2[&quot;acesso_notebooklm (notebooklm-pqbr)&quot;] &amp; A3[&quot;acesso_paperclip (registro)&lt;br/&gt;⚠ Paperclip em retirada&quot;]
   A1 --&gt; D1{&quot;Google/Camofox ok?&quot;}
   D1 -- não --&gt; R1[&quot;registrar_evento queda&lt;br/&gt;pqbr.eventos_acesso&quot;]
@@ -94,7 +96,10 @@ flowchart TD
   A2 &amp; A3 --&gt; D3{&quot;serviço ok?&quot;}
   D3 -- sim --&gt; RS[&quot;acesso_resolvido → registrar_evento normalizado&quot;]
   D3 -- não --&gt; RQ[&quot;registrar_evento queda&quot;] --&gt; PJ[&quot;pedir_jose (PedidoJose)&lt;br/&gt;pqbr.revisao_humana → Telegram&quot;]
-  N&gt;&quot;Nunca login headless (NOTEBOOKLM_HEADLESS_REAUTH=0); login só pelo José no Camofox 9387&quot;]</pre></div></section><section id="d04"><h2>Descarte</h2><p class="nota">DescartarCadernoTesteWorkflow + ApagarCadernoWorkflow (descarte.py, pacote.py) — fila episodio-pqbr. Gerado do código 24/10/2026. <span class="arq">04-descarte.mmd</span></p><div class="wrap"><pre class="mermaid">flowchart TD
+  N&gt;&quot;Nunca login headless (NOTEBOOKLM_HEADLESS_REAUTH=0); login só pelo José no Camofox 9387&quot;]
+  YT[&quot;Acesso YouTube (Data API, só dry-run até F8)&lt;br/&gt;PLANEJADO t532/t535: token OAuth + MCP youtube-shorts → pc&lt;br/&gt;~/.pqbr/secrets/youtube (600) · ainda NÃO migrado&quot;]
+  N2&gt;&quot;Sessão do YT-LLM no box: keepalive PAUSADO, binário notebooklm em _obsoleto (t532–t534)&quot;]
+</pre></div></section><section id="d04"><h2>Descarte</h2><p class="nota">DescartarCadernoTesteWorkflow + ApagarCadernoWorkflow (descarte.py, pacote.py) — fila episodio-pqbr. Gerado do código 24/10/2026. <span class="arq">04-descarte.mmd</span></p><div class="wrap"><pre class="mermaid">flowchart TD
   S([&quot;PedidoDescarteTeste (caderno UUID, rótulo, motivo)&quot;]) --&gt; A1[&quot;registro_reclassificar_teste&lt;br/&gt;classe=pesquisa; recusa mestre/publicado/não registrado&quot;]
   A1 --&gt; A2[&quot;nlm_exportar_caderno (notebooklm-pqbr)&quot;]
   A2 --&gt; A3[&quot;arquivar_teste_3copias&lt;br/&gt;Drive Bíblia + repo + Postgres (+ Hindsight)&quot;]
@@ -166,6 +171,31 @@ flowchart TB
   P -. "migração na PRÓXIMA INTEGRAÇÃO (runbook §3)" .-&gt; C1
   KIT -.-&gt; ALVO
   N&gt;"Regras: uma identidade Google por instância; juniormoedavirtual só em camofox@pqbr; login só pelo José; sem re-login headless"]
+</pre></div></section><section id="d09"><h2>Agentes e responsabilidades</h2><p class="nota">t533–t535 (José, 24/10/2026): agente PQBR dedicado, jr generalista, YT-LLM em descontinuação. <span class="arq">09-agentes-responsabilidades.mmd</span></p><div class="wrap"><pre class="mermaid">
+%% Agentes e responsabilidades (t533–t535, José 24/10/2026). Decisão registrada; não é gerado do código.
+flowchart LR
+  J([&quot;José (gestor)&lt;br/&gt;Telegram · aprovações = sinais Temporal&quot;])
+  subgraph BOX[&quot;Grok Bot (box)&quot;]
+    JR[&quot;jr — generalista&lt;br/&gt;infra do pc, rede/Tailscale (com OK)&lt;br/&gt;Camofox global 9377, outros projetos&quot;]
+    AG[&quot;Agente PQBR (0ade9874)&lt;br/&gt;dedicado ao projeto e ao sistema no pc&lt;br/&gt;repo PQBR, Temporal, contratos, mapa, docs&quot;]
+    YT[&quot;YT-LLM (018f2ef8) — EM DESCONTINUAÇÃO&lt;br/&gt;keepalive PAUSADO · binário notebooklm em _obsoleto&lt;br/&gt;docs = legado só leitura&quot;]
+  end
+  subgraph PC[&quot;Servidor pc&quot;]
+    REPO[&quot;Repo jvmendesjr/PQBR&quot;]
+    TMP[&quot;Temporal + 8 papéis PydanticAI&quot;]
+    CF[&quot;Camofox PQBR 9387&lt;br/&gt;(sessão Google única)&quot;]
+    YTA[&quot;Acesso YouTube (token 600 + adaptador)&lt;br/&gt;PLANEJADO — BRIEFING §g, não migrado&quot;]
+  end
+  J &lt;--&gt; AG
+  J &lt;--&gt; JR
+  AG --&gt; REPO &amp; TMP
+  TMP --&gt;|activities| CF
+  AG -. &quot;pede infra/rede&quot; .-&gt; JR
+  YT -. &quot;herança: briefing, skills, branding&quot; .-&gt; AG
+  YT -. &quot;token OAuth + MCP youtube-shorts (migração planejada)&quot; .-&gt; YTA
+  P1{{&quot;Pré-requisito do 1º vídeo: ajustar silhueta do mapa no logo (ROADMAP 4V)&quot;}}
+  P2{{&quot;Skill de produção: PROPOSTA em docs/sdd/PROPOSTA-skill-producao-short-pqbr.md (José grava)&quot;}}
+  AG --- P1 &amp; P2
 </pre></div></section></main><footer>Temporal é o sistema nervoso · contratos Pydantic v2 · motores trocáveis</footer>
 <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
 mermaid.initialize({startOnLoad:true,theme:"neutral",securityLevel:"strict",flowchart:{htmlLabels:true,useMaxWidth:true}});</script></body></html>

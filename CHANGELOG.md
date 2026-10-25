@@ -5,6 +5,9 @@ Versionamento SemVer (MAJOR.MINOR.PATCH) a partir de t510. Versão do pacote can
 
 
 
+## [0.3.9] — 2026-10-24
+- t533–t535: agente PQBR criado; keepalive do YT-LLM pausado; mapa ganhou o `09-agentes-responsabilidades` e o `03-acessos` foi atualizado (YouTube planejado); BRIEFING atualizado.
+
 ## [0.3.8] — 2026-10-24
 - t532:
   - keepalive do YT-LLM desligado no box (binário em `_obsoleto`);
