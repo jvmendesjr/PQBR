@@ -1,0 +1,18 @@
+{
+  "tema": "crostinha",
+  "id_lote": "lote-2510/crostinha",
+  "pronto": "runtime/lote-saldo/crostinha/crostinha-pronto.mp4",
+  "sha256": "adc0a131d3214d940e79881c5c9ba2ce7c463815b285d40d1509579a87b297a6",
+  "duracao_s": 33.9,
+  "pos": "scripts/pos/post-short.sh (trim protegido silencedetect, logo bug sup. dir., canto inf. dir., sting final)",
+  "gate": {
+    "A1_A3_tecnico": "PASS",
+    "A9_local": "PASS (frames 0.5/1.5/2.5 s: personagem 2D central, legivel, sem rosto real/marca, sem end-card NotebookLM)",
+    "A4_A8_juiz_gemini": "PENDENTE (VISUAL+LOOP via Camofox nao rodados)",
+    "B1_B10_editorial": "PENDENTE (sem titulo/descricao/tags/fontes no pacote)"
+  },
+  "status": "P1_HOLD",
+  "publicado": false,
+  "drive": "PENDENTE (drive_enviar exige codigo PQBR-EP)",
+  "postgres": "PENDENTE (sem episodio; ver LACUNAS)"
+}

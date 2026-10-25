@@ -1,0 +1,18 @@
+{
+  "tema": "brigadeiro",
+  "id_lote": "lote-2510/brigadeiro",
+  "pronto": "runtime/lote-saldo/brigadeiro/brigadeiro-pronto.mp4",
+  "sha256": "f44a8b6859619565c96f8ee4eed69325a950ae2115f51e2b1709d317309f3751",
+  "duracao_s": 45.79,
+  "pos": "scripts/pos/post-short.sh (trim protegido silencedetect, logo bug sup. dir., canto inf. dir., sting final)",
+  "gate": {
+    "A1_A3_tecnico": "PASS",
+    "A9_local": "PASS (frames 0.5/1.5/2.5 s: personagem 2D central, legivel, sem rosto real/marca, sem end-card NotebookLM)",
+    "A4_A8_juiz_gemini": "PENDENTE (VISUAL+LOOP via Camofox nao rodados)",
+    "B1_B10_editorial": "PENDENTE (sem titulo/descricao/tags/fontes no pacote)"
+  },
+  "status": "P1_HOLD",
+  "publicado": false,
+  "drive": "PENDENTE (drive_enviar exige codigo PQBR-EP)",
+  "postgres": "PENDENTE (sem episodio; ver LACUNAS)"
+}

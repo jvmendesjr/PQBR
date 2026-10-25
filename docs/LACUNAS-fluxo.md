@@ -47,3 +47,9 @@ Feito pelo agente externo (Grok Bot). Sem vídeo, imagem ou voz gerados e sem pu
 
 ## Lacuna legenda 25/10/2026 — legenda gravada fora do Temporal
 - `scripts/legendar_short.py` (faster-whisper local, CPU, venv `~/.venvs/whisper`, modelo small) roda à mão, fora de qualquer workflow do Temporal. Ele transcreve com tempo por palavra, alinha ao `narracao.txt`, gera .ass/.srt e grava em `<short>-legendado.mp4` sem sobrescrever. Piloto: café fraco. → Virar activity no fluxo de pós-produção.
+
+## Lacuna lote-2510 — alocação dos prontos (25/10/2026)
+
+- Os 9 `<tema>-pronto.mp4` não têm código `PQBR-EP`: sem `drive_enviar` e sem registro de episódio no Postgres. Identificador provisório `lote-2510/<tema>`; registro em `docs/pesquisas/lote-2510/<slug>/gate-pronto.json`. → José define os códigos; depois Drive/Postgres pelo fluxo.
+- Gate: juiz Gemini (VISUAL+LOOP) e pacote editorial (título/descrição/tags) ausentes na produção externa → todos P1_HOLD.
+- Sting final ainda usa logo stickman v1 (placeholder) — trabalho de produção do logo 2D.
