@@ -54,7 +54,7 @@ def _cenario(etapa="aguardando_aprovacao", expira=AGORA + timedelta(hours=1)):
     repo, tok = RepositorioMemoria(), novo_token()
     repo.registrar_pedido(PedidoAprovacao(token=tok, workflow_id="ep-1", etapa="aguardando_aprovacao", tarefa="publicar EP1", expira_em=expira))
     sinais = []
-    async def sinalizar(wf, t, d): sinais.append((wf, t, d)); return etapa
+    async def sinalizar(wf, t, d, esperada=None): sinais.append((wf, t, d)); return etapa
     return repo, tok, sinais, sinalizar
 
 
@@ -87,7 +87,7 @@ def test_um_sinal_por_pedido_mesmo_com_update_repetido_ou_segunda_decisao():
 
 def test_tres_falhas_do_temporal_viram_um_ticket():
     repo, tok, _, _ = _cenario(); n = []
-    async def cai(wf, t, d): n.append(1); raise RuntimeError("temporal fora")
+    async def cai(wf, t, d, esperada=None): n.append(1); raise RuntimeError("temporal fora")
     r = run(processar_callback(repo, JOSE, _ev(tok), cai, AGORA))
     assert r.status == "ticket" and len(n) == 3 and list(repo.tickets) == [f"ticket:sinal:{tok}"]
 

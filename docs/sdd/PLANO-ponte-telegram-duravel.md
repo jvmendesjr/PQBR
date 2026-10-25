@@ -31,7 +31,7 @@ Branch `feature/f05-06-ponte-duravel`. **Não aplicado:** migração 0018 não r
 `tests/unit/test_ponte_telegram.py` (10): envio uma vez; 3 falhas → ticket sem vazar texto; ambíguo sem reenvio às cegas; fail-closed (config ausente, remetente, token desconhecido, expirado, etapa); um sinal por pedido (update repetido e segunda decisão); 3 falhas do Temporal → 1 ticket; contratos; chave da janela de 6 h.
 **Faltam:** adaptador Postgres contra o banco de teste (`db/test_migrations.sh`), teste com `WorkflowEnvironment` (sinal real, reinício do worker) e corrida de dois workers no claim.
 
-## t537 (José, 25/10/2026) — entrada pelo gateway Hermes (perfil `pqbr`), sem bot próprio
+## [SUPERADA por t538] t537 (José, 25/10/2026) — entrada pelo gateway Hermes (perfil `pqbr`), sem bot próprio
 - **Como o Hermes repassa:** um plugin do perfil `pqbr` (`deploy/hermes-plugin-pqbr-ponte/`, **não instalado**) usa `ctx.register_telegram_handler` com `CallbackQueryHandler(pattern=r"^pq:")`. O padrão é restrito para não engolir os fluxos do core (`ea:`, `sc:`, `cl:`, `mp:`…), cujo handler ignora prefixos desconhecidos.
   - O plugin lê `from_user.id` do próprio update e manda `{update_id, from_id, chat_id, data}` por **socket Unix 0600** (`/run/user/1000/pqbr/ponte-telegram.sock`), sem porta TCP e sem mudança de rede.
   - Responde ao botão só com um status curto. Se o PQBR não responder, nada é registrado (fail-closed).
@@ -49,3 +49,20 @@ Branch `feature/f05-06-ponte-duravel`. **Não aplicado:** migração 0018 não r
 - **Riscos a verificar antes de ligar:**
   - com `multiplex_profiles`, confirmar que o handler do plugin do perfil `pqbr` vale para o bot/roteador que entrega o tópico do José;
   - confirmar que o hoist tardio coloca o handler à frente do `CallbackQueryHandler` catch-all do core.
+
+## t538 (José, 25/10/2026) — bot próprio do PQBR (supera t537)
+
+Rascunho do plugin Hermes movido para `docs/_obsoleto/hermes-plugin-pqbr-ponte-t537/` (nada apagado).
+
+- `src/pqbr/workflows/telegram_bot.py`: transporte stdlib (`urllib` em `asyncio.to_thread`, sem dependência nova), injetável; token lido só de `PQBR_TELEGRAM_BOT_TOKEN` na hora da chamada e nunca em log/exceção (erros mostram só método e código); timeout → `EntregaIncerta` (sem reenvio cego).
+- Saída: `RemetenteTelegram` (porta `Remetente`): `sendMessage` para `PQBR_TELEGRAM_JOSE_ID`, botões `pq:a:<ref>`/`pq:n:<ref>` quando há `ref_pedido`; reenvio marcado "(reenvio)".
+- Entrada: `ciclo_entrada` = `getUpdates` (long polling, `allowed_updates=[callback_query]`) → `processar_callback` (from.id, dedupe, expiração, etapa) → `answerCallbackQuery` → `editMessageReplyMarkup` remove botões (só para o José e decisões finais). Offset persistido (`OffsetArquivo`, atômico, 600) após tratar; reprocessar é seguro.
+- `sinalizar(wf, ref, decisao, etapa_esperada)`: `sinalizar_temporal` faz query `etapa` e só sinaliza se for a esperada.
+- Config `config/ponte_telegram.json` v2: `saida` ∈ {desligado, telegram_bot}, `entrada` ∈ {desligado, telegram_long_polling}; ambos desligados.
+- `deploy/systemd/pqbr-telegram-entrada.service` (user unit, EnvironmentFile=.env do PQBR, hardening) — NÃO instalada.
+- Testes: `tests/unit/test_telegram_bot.py` (11, Telegram simulado).
+
+### Falta antes de ligar
+1. Repositório Postgres da ponte (depois da 0018 aplicada) no lugar do `RepositorioMemoria`.
+2. Query `etapa` nos workflows que pedem aprovação + activity `enviar_telegram` registrada no worker.
+3. `main_entrada` ainda encerra com "EM CONSTRUÇÃO" (fail-closed).

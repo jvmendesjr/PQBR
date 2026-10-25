@@ -1,8 +1,10 @@
 {
-  "versao": "1.0.0",
-  "adaptador_entrada": "desligado",
-  "alternativas": ["hermes_plugin_unix"],
-  "socket": "/run/user/1000/pqbr/ponte-telegram.sock",
-  "id_autorizado_env": "PQBR_TELEGRAM_AUTORIZADO_ID",
-  "obs": "t537: o gateway Hermes (perfil pqbr) repassa callbacks 'pq:*' por socket Unix; ligar só com OK do José"
+  "versao": "2.0.0",
+  "saida": "desligado",
+  "saida_alternativas": ["telegram_bot"],
+  "entrada": "desligado",
+  "entrada_alternativas": ["telegram_long_polling"],
+  "offset_arquivo": "~/.pqbr/state/telegram-offset",
+  "long_polling_timeout_s": 50,
+  "obs": "t538: bot próprio do PQBR (token e ID só no .env, 600); ligar só com OK do José"
 }

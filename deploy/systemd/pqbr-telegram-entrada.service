@@ -1,0 +1,22 @@
+# PQBR (t538) — entrada do bot próprio do Telegram por long polling. NÃO INSTALADO.
+# Instalar só com OK do José: cp para ~/.config/systemd/user/ && systemctl --user daemon-reload && systemctl --user enable --now pqbr-telegram-entrada
+[Unit]
+Description=PQBR ponte Telegram — entrada por long polling (getUpdates; sem webhook, sem porta) (t538)
+After=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=%h/Workspace/PQBR
+EnvironmentFile=%h/Workspace/PQBR/.env
+Environment=PYTHONPATH=%h/Workspace/PQBR/src
+ExecStart=%h/Workspace/PQBR/.venv/bin/python -m pqbr.workflows.telegram_bot
+Restart=on-failure
+RestartSec=30
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ReadWritePaths=%h/.pqbr/state
+MemoryMax=200M
+
+[Install]
+WantedBy=default.target

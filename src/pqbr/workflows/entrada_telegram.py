@@ -24,8 +24,10 @@ class EnvelopeInvalido(ValueError):
 
 def carregar_config(p: Path = CONFIG) -> dict:
     c = json.loads(p.read_text())
-    if c.get("adaptador_entrada") not in ("hermes_plugin_unix", "desligado"):
-        raise ValueError("adaptador_entrada desconhecido")
+    if c.get("saida") not in ("desligado", "telegram_bot"):
+        raise ValueError("saida desconhecida")
+    if c.get("entrada") not in ("desligado", "telegram_long_polling"):
+        raise ValueError("entrada desconhecida")
     return c
 
 
@@ -64,21 +66,3 @@ async def tratar_envelope(linha: bytes, repo: Repositorio, id_autorizado: str,
         return {"ok": False, "status": "envelope_invalido", "motivo": str(e) if isinstance(e, EnvelopeInvalido) else "json"}
     r: ResultadoDecisao = await processar_callback(repo, id_autorizado, ev, sinalizar)
     return {"ok": r.status == "sinalizado", "status": r.status}
-
-
-async def servir_unix(caminho: str, repo: Repositorio, id_autorizado: str, sinalizar) -> asyncio.AbstractServer:
-    """Recebedor local. Não é iniciado por nenhum serviço neste rascunho."""
-    async def conn(reader, writer):
-        try:
-            linha = await asyncio.wait_for(reader.readline(), 5)
-            resp = await tratar_envelope(linha[:2048], repo, id_autorizado, sinalizar)
-            writer.write((json.dumps(resp) + "\n").encode()); await writer.drain()
-        finally:
-            writer.close()
-    old = os.umask(0o177)
-    try:
-        srv = await asyncio.start_unix_server(conn, path=caminho)
-    finally:
-        os.umask(old)
-    os.chmod(caminho, 0o600)
-    return srv

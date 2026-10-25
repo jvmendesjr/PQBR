@@ -68,7 +68,7 @@ async def enviar_idempotente(repo: Repositorio, rem: Remetente, chave: str) -> R
 async def processar_callback(repo: Repositorio, id_autorizado: str, e: EventoCallbackTelegram,
                              sinalizar: Callable[[str, str, str], Awaitable[str]],
                              agora: datetime | None = None) -> ResultadoDecisao:
-    """`sinalizar(workflow_id, token, decisao)` envia o sinal e devolve a etapa lida do workflow."""
+    """sinalizar(workflow_id, ref, decisao, etapa_esperada): le a etapa, so sinaliza se for a esperada; devolve a etapa."""
     agora = agora or datetime.now(timezone.utc)
     def r(s, wf=None, n=0, m=""):
         return ResultadoDecisao.model_validate({"status": s, "ref_pedido": e.ref_pedido, "workflow_id": wf, "tentativas": n, "motivo": m})
@@ -87,7 +87,7 @@ async def processar_callback(repo: Repositorio, id_autorizado: str, e: EventoCal
     ultimo = ""
     for n in range(1, MAX_TENTATIVAS + 1):
         try:
-            etapa = await sinalizar(p.workflow_id, e.ref_pedido, e.decisao)
+            etapa = await sinalizar(p.workflow_id, e.ref_pedido, e.decisao, p.etapa)
         except Exception as ex:  # noqa: BLE001
             ultimo = _limpo(ex)
             continue
