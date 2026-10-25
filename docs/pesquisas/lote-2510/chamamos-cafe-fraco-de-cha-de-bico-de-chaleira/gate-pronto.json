@@ -14,5 +14,7 @@
   "status": "P1_HOLD",
   "publicado": false,
   "drive": "PENDENTE (drive_enviar exige codigo PQBR-EP)",
-  "postgres": "PENDENTE (sem episodio; ver LACUNAS)"
+  "postgres": "PENDENTE (sem episodio; ver LACUNAS)",
+  "cta_check": "OK: CTA original do roteiro já é o fallback literal 'Segue o Porquê BR'; pronto v1 vigente, sem v2",
+  "pronto_vigente": "runtime/lote-saldo/cafe-fraco/cafe-fraco-pronto.mp4"
 }

@@ -14,5 +14,18 @@
   "status": "P1_HOLD",
   "publicado": false,
   "drive": "PENDENTE (drive_enviar exige codigo PQBR-EP)",
-  "postgres": "PENDENTE (sem episodio; ver LACUNAS)"
+  "postgres": "PENDENTE (sem episodio; ver LACUNAS)",
+  "pronto_v2": {
+    "arquivo": "runtime/lote-saldo/crostinha/crostinha-pronto-v2.mp4",
+    "sha256": "62fe719432e0cdaaa1bcc4d60600008f382f86cd07b7ee047943b8e4496b8d40",
+    "duracao_s": 38.5,
+    "cta": "Segue o Porquê BR pra não ficar na rapa do conhecimento... e corre antes que raspem a panela!",
+    "cta_audio": "runtime/lote-saldo/crostinha/cta-tema.mp3",
+    "elevenlabs_generation_id": "gcWkDR9rWSv5pMwHOlcc",
+    "creditos": 103.99,
+    "legenda_alinhamento": "108/114",
+    "motivo": "ERR-MON-02: CTA personalizado do roteiro restaurado (pronto v1 tinha CTA genérico B)",
+    "pos": "scripts/pos/post-short.sh"
+  },
+  "pronto_vigente": "runtime/lote-saldo/crostinha/crostinha-pronto-v2.mp4"
 }

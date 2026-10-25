@@ -35,6 +35,7 @@ Contrato Pydantic: `pqbr.contratos.catalogo_erros.ErroCatalogo`, versão `CATALO
 | ERR-EST-01 | Cenário repetitivo | média |
 | ERR-EST-02 | Cena fora do cenário | média |
 | ERR-MON-01 | Último quadro congelado (clipe mais curto que a fala) | alta |
+| ERR-MON-02 | CTA personalizado substituído por genérico (seed `db/seeds/seed_catalogo_erros_err_mon_02.sql`, 25/10) | alta |
 | ERR-EST-03 | Mistura de modelos com traços diferentes | média |
 | ERR-TXT-01 | Texto inventado na imagem (Runway Kling/Seedance) | alta |
 | ERR-CMP-01 | CTA fora do padrão | média |

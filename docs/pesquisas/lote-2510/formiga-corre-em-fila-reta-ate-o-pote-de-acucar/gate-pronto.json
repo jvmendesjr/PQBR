@@ -14,5 +14,18 @@
   "status": "P1_HOLD",
   "publicado": false,
   "drive": "PENDENTE (drive_enviar exige codigo PQBR-EP)",
-  "postgres": "PENDENTE (sem episodio; ver LACUNAS)"
+  "postgres": "PENDENTE (sem episodio; ver LACUNAS)",
+  "pronto_v2": {
+    "arquivo": "runtime/lote-saldo/formiga/formiga-pronto-v2.mp4",
+    "sha256": "917784c539df005da6fd481964a4cdac9e2640a82b079e22adadec3e980b96d9",
+    "duracao_s": 47.44,
+    "cta": "Segue o Porquê BR pra essa fila de curiosidades ficar mais doce antes que fechem o pote de açúcar!",
+    "cta_audio": "runtime/lote-saldo/formiga/cta-tema.mp3",
+    "elevenlabs_generation_id": "Ke58jCngvbqwbfc4am3Y",
+    "creditos": 108.99,
+    "legenda_alinhamento": "125/127",
+    "motivo": "ERR-MON-02: CTA personalizado do roteiro restaurado (pronto v1 tinha CTA genérico B)",
+    "pos": "scripts/pos/post-short.sh"
+  },
+  "pronto_vigente": "runtime/lote-saldo/formiga/formiga-pronto-v2.mp4"
 }

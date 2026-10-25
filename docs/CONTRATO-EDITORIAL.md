@@ -17,6 +17,7 @@ Este fluxo descreve gates documentais. Não autoriza geração de vídeo, upload
 - Tom de “nós, brasileiros”: humor predominante, sátira leve e afetuosa do comportamento (nunca da pessoa ou de um grupo), explicação lógica e encerramento caloroso.
 - Narrador único; não falar nem escrever nomes de personagens ou rótulos `Nome:`.
 - **CTA contextual aprovado e canonicalizado em t467:** trocadilho ligado ao tema quando natural; caso contrário, convite natural a seguir o canal; `Segue o Porquê BR` é fallback. Nunca pedir comentários. O schema valida o tipo declarado e o fallback; o contexto semântico exige revisão editorial.
+- **CTA preservado na produção (José 25/10/2026, ERR-MON-02):** voz, montagem e pós nunca trocam o CTA aprovado do roteiro por um fechamento genérico; um take padrão (ex.: `cta-padrao-B.mp3`) serve só de referência de entonação. A última linha da legenda deve ser igual à última linha do roteiro.
 - Roteiro de 15 a 180 segundos, alvo aproximado de 50 segundos, estimado a 2,3 palavras/segundo.
 - O loop deve conectar o encerramento à primeira cena; não acrescentar cauda, tela parada ou fade. A cadência visual e o tratamento do logo/end card seguem REGRAS §5, mas não são aprovados por um dry-run textual.
 - Personagem: um por padrão; até dois é desejável. Mais de dois não é, por si só, reprovação editorial em REGRAS; a limitação atual do modelo visual é registrada como lacuna de implementação, não como nova regra.

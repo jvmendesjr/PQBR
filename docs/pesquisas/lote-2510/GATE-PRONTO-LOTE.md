@@ -13,3 +13,17 @@ Tratamento ordinário sem geração paga. Fail-closed: todos em **P1_HOLD** até
 | liquidificador | `runtime/lote-saldo/liquidificador/liquidificador-pronto.mp4` | 45.12 | P1_HOLD |
 | nao-e-bem-assim | `runtime/lote-saldo/nao-e-bem-assim/nao-e-bem-assim-pronto.mp4` | 39.78 | P1_HOLD |
 | olhos-da-cara | `runtime/lote-saldo/olhos-da-cara/olhos-da-cara-pronto.mp4` | 45.44 | P1_HOLD ~7 s de imagem parada no fim (clipes < voz). |
+
+## Correção ERR-MON-02 — CTA personalizado (25/10/2026, 0.3.19)
+Os prontos v1 de 6 temas fecharam com o CTA genérico B. Gerado o CTA original de cada roteiro ([cheerful], eleven_v3, Larissa, speed 1,1, 1 take cada, Whisper sem erro), emendado após ~0,3 s com fades de 30 ms, remontado com os mesmos clipes (sem quadro congelado), legendado e com pós ordinária. Vigente = `-pronto-v2.mp4`. cafe-fraco, garrafa e liquidificador: CTA original já é "Segue o Porquê BR" (fallback literal) → v1 vigente. Todos seguem **P1_HOLD**.
+
+| tema | CTA | créditos | duração s | alinhamento legenda | pronto v2 |
+|---|---|---|---|---|---|
+| crostinha | Segue o Porquê BR pra não ficar na rapa do conhecimento... e corre antes que raspem a panela! | 103.99 | 38.5 | 108/114 | `runtime/lote-saldo/crostinha/crostinha-pronto-v2.mp4` |
+| nao-e-bem-assim | Segue o Porquê BR, porque na hora de discordar, não é bem assim que se perde o amigo! | 95.99 | 43.08 | 125/125 | `runtime/lote-saldo/nao-e-bem-assim/nao-e-bem-assim-pronto-v2.mp4` |
+| brigadeiro | Pra não perder o ponto, Segue o Porquê BR! | 52.99 | 45.36 | 115/127 | `runtime/lote-saldo/brigadeiro/brigadeiro-pronto-v2.mp4` |
+| fechadura | Tranca essa ansiedade na chave e segue o Porquê BR! | 61.99 | 41.98 | 111/112 | `runtime/lote-saldo/fechadura/fechadura-pronto-v2.mp4` |
+| olhos-da-cara | Fica de olho e segue o Porquê BR. | 44.0 | 46.47 | 127/129 | `runtime/lote-saldo/olhos-da-cara/olhos-da-cara-pronto-v2.mp4` |
+| formiga | Segue o Porquê BR pra essa fila de curiosidades ficar mais doce antes que fechem o pote de açúcar! | 108.99 | 47.44 | 125/127 | `runtime/lote-saldo/formiga/formiga-pronto-v2.mp4` |
+
+Total: 467.95 créditos ElevenLabs (teto informado 450; excedido em ~22 porque os 6 takes foram disparados juntos antes da soma; nenhum retake).

@@ -14,5 +14,18 @@
   "status": "P1_HOLD",
   "publicado": false,
   "drive": "PENDENTE (drive_enviar exige codigo PQBR-EP)",
-  "postgres": "PENDENTE (sem episodio; ver LACUNAS)"
+  "postgres": "PENDENTE (sem episodio; ver LACUNAS)",
+  "pronto_v2": {
+    "arquivo": "runtime/lote-saldo/fechadura/fechadura-pronto-v2.mp4",
+    "sha256": "d89e6428ad05e3def5e0d7b388e60fbd47e35c685052c5600355092798b9f577",
+    "duracao_s": 41.98,
+    "cta": "Tranca essa ansiedade na chave e segue o Porquê BR!",
+    "cta_audio": "runtime/lote-saldo/fechadura/cta-tema.mp3",
+    "elevenlabs_generation_id": "QHzKySiZe3VyJoaDgEie",
+    "creditos": 61.99,
+    "legenda_alinhamento": "111/112",
+    "motivo": "ERR-MON-02: CTA personalizado do roteiro restaurado (pronto v1 tinha CTA genérico B)",
+    "pos": "scripts/pos/post-short.sh"
+  },
+  "pronto_vigente": "runtime/lote-saldo/fechadura/fechadura-pronto-v2.mp4"
 }

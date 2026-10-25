@@ -14,5 +14,18 @@
   "status": "P1_HOLD",
   "publicado": false,
   "drive": "PENDENTE (drive_enviar exige codigo PQBR-EP)",
-  "postgres": "PENDENTE (sem episodio; ver LACUNAS)"
+  "postgres": "PENDENTE (sem episodio; ver LACUNAS)",
+  "pronto_v2": {
+    "arquivo": "runtime/lote-saldo/nao-e-bem-assim/nao-e-bem-assim-pronto-v2.mp4",
+    "sha256": "509bfda78d1fccecd45339a14db80e5cf142f7a8748fe8ab48f90adfe1d02900",
+    "duracao_s": 43.08,
+    "cta": "Segue o Porquê BR, porque na hora de discordar, não é bem assim que se perde o amigo!",
+    "cta_audio": "runtime/lote-saldo/nao-e-bem-assim/cta-tema.mp3",
+    "elevenlabs_generation_id": "RT3Y4F2JoftuEg0BTe6p",
+    "creditos": 95.99,
+    "legenda_alinhamento": "125/125",
+    "motivo": "ERR-MON-02: CTA personalizado do roteiro restaurado (pronto v1 tinha CTA genérico B)",
+    "pos": "scripts/pos/post-short.sh"
+  },
+  "pronto_vigente": "runtime/lote-saldo/nao-e-bem-assim/nao-e-bem-assim-pronto-v2.mp4"
 }

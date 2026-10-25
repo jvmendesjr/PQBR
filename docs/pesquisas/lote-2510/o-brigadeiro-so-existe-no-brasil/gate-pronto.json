@@ -14,5 +14,18 @@
   "status": "P1_HOLD",
   "publicado": false,
   "drive": "PENDENTE (drive_enviar exige codigo PQBR-EP)",
-  "postgres": "PENDENTE (sem episodio; ver LACUNAS)"
+  "postgres": "PENDENTE (sem episodio; ver LACUNAS)",
+  "pronto_v2": {
+    "arquivo": "runtime/lote-saldo/brigadeiro/brigadeiro-pronto-v2.mp4",
+    "sha256": "e321e9fe1652c88501a4245657a97a970c3059f7a400ad0efdb9587820abd62b",
+    "duracao_s": 45.36,
+    "cta": "Pra não perder o ponto, Segue o Porquê BR!",
+    "cta_audio": "runtime/lote-saldo/brigadeiro/cta-tema.mp3",
+    "elevenlabs_generation_id": "q777rk9iX5sDOyfXcG0L",
+    "creditos": 52.99,
+    "legenda_alinhamento": "115/127",
+    "motivo": "ERR-MON-02: CTA personalizado do roteiro restaurado (pronto v1 tinha CTA genérico B)",
+    "pos": "scripts/pos/post-short.sh"
+  },
+  "pronto_vigente": "runtime/lote-saldo/brigadeiro/brigadeiro-pronto-v2.mp4"
 }

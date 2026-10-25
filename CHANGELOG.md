@@ -5,6 +5,10 @@ Versionamento SemVer (MAJOR.MINOR.PATCH) a partir de t510. Versão do pacote can
 
 
 
+## [0.3.19] — 2026-10-25
+### Corrigido
+- lote-2510 ERR-MON-02: CTA personalizado do roteiro restaurado em 6 Shorts (fechadura, formiga, crostinha, brigadeiro, nao-e-bem-assim, olhos-da-cara) → `<tema>-pronto-v2.mp4` (v1 preservados; P1_HOLD; 467,95 créditos ElevenLabs; nada publicado). `scripts/montar_voz_dinamica.py`: recusa CTA genérico por padrão, fades 30 ms, reusa clipes em vez de still. Catálogo: `ERR-MON-02` (seed). Docs: VOZ-DINAMICA-CTA-PADRAO corrigido, CONTRATO-EDITORIAL (CTA preservado na produção), CATALOGO-ERROS, GATE-PRONTO-LOTE, gate-pronto.json.
+
 ## [0.3.18] — 2026-10-25
 ### Adicionado
 - lote-2510: pós-produção ordinária (`scripts/pos/post-short.sh`) nos 9 Shorts → `runtime/lote-saldo/<tema>/<tema>-pronto.mp4`; gate fail-closed com `gate-pronto.json` por tema e `docs/pesquisas/lote-2510/GATE-PRONTO-LOTE.md` (todos P1_HOLD); LACUNAS de alocação (sem PQBR-EP). Sem geração paga, sem publicação.
