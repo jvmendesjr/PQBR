@@ -13,6 +13,7 @@ from .producao import GradeDiariaWorkflow, EpisodioProducaoWorkflow, ATIVIDADES 
 from .temas import ReposicaoTemasWorkflow, ATIVIDADES_TEMAS
 from .acesso import AcessosWorkflow
 from .atualizacoes import VigiaAtualizacoesWorkflow, ATIVIDADES_VIGIA
+from .telegram_bot import ATIVIDADES_TELEGRAM
 from .paperclip import (abrir_issue_paperclip, comentar_paperclip, ler_propostas_paperclip,
                         concluir_issue_paperclip)
 
@@ -36,7 +37,7 @@ async def main() -> None:
                activities=[gerar_roteiro, gravar_outbox, aplicar_proposta_stub, abrir_issue_paperclip,
                            comentar_paperclip, ler_propostas_paperclip, concluir_issue_paperclip,
                            triagem_jev, intervir_agente, verificar_jev, registrar_correcao,
-                           reter_consumo, registrar_consumo, *ATIV_PRODUCAO, *ATIVIDADES_TEMAS, *ATIVIDADES_VIGIA])
+                           reter_consumo, registrar_consumo, *ATIV_PRODUCAO, *ATIVIDADES_TEMAS, *ATIVIDADES_VIGIA, *ATIVIDADES_TELEGRAM])
     logging.getLogger(__name__).info(f"worker em {ADDR} ns={NS} fila={FILA}")
     await w.run()
 

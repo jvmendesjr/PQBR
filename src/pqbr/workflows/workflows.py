@@ -71,6 +71,11 @@ class EpisodioWorkflow:
             self._e["propostas_rejeitadas"] = self._e.get("propostas_rejeitadas", 0) + 1
 
     @workflow.query
+    def etapa(self) -> str:
+        """Usada pela ponte Telegram (t538) antes de sinalizar `aprovacao_jose`."""
+        return self._e.get("etapa", "")
+
+    @workflow.query
     def estado(self) -> dict:
         return {k: (v.model_dump(mode="json") if hasattr(v, "model_dump") else v) for k, v in self._e.items()}
 
@@ -157,6 +162,11 @@ class PonteTemporalPaperclipWorkflow:
             self._ignorados += 1
             return
         self._aprovacao = a
+
+    @workflow.query
+    def etapa(self) -> str:
+        """Usada pela ponte Telegram (t538) antes de sinalizar `aprovacao_jose`."""
+        return self._etapa
 
     @workflow.query
     def estado(self) -> dict:

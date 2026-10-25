@@ -8,6 +8,7 @@ After=network-online.target
 Type=simple
 WorkingDirectory=%h/Workspace/PQBR
 EnvironmentFile=%h/Workspace/PQBR/.env
+EnvironmentFile=%h/.pqbr/worker.env
 Environment=PYTHONPATH=%h/Workspace/PQBR/src
 ExecStart=%h/Workspace/PQBR/.venv/bin/python -m pqbr.workflows.telegram_bot
 Restart=on-failure

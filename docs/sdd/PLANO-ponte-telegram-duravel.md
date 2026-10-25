@@ -62,7 +62,16 @@ Rascunho do plugin Hermes movido para `docs/_obsoleto/hermes-plugin-pqbr-ponte-t
 - `deploy/systemd/pqbr-telegram-entrada.service` (user unit, EnvironmentFile=.env do PQBR, hardening) — NÃO instalada.
 - Testes: `tests/unit/test_telegram_bot.py` (11, Telegram simulado).
 
-### Falta antes de ligar
-1. Repositório Postgres da ponte (depois da 0018 aplicada) no lugar do `RepositorioMemoria`.
-2. Query `etapa` nos workflows que pedem aprovação + activity `enviar_telegram` registrada no worker.
-3. `main_entrada` ainda encerra com "EM CONSTRUÇÃO" (fail-closed).
+### Concluído em 25/10/2026 (OK do José)
+- 0018 aplicada no banco do PQBR (backup prévio de `pqbr.revisao_humana` em `~/.pqbr/backups/`, 600); RLS ligado e forçado nas 3 tabelas, políticas `_app`/`_leitura`, `revisao_humana.chave_saida` criada.
+- `ponte_postgres.RepositorioPostgres` (claim atômico, confirmação + `avisado_em` na mesma transação, `vencer_claims` → `incerto`, ticket idempotente pela `localizacao`); teste contra Postgres 17 descartável (`PQBR_TESTE_PG=1`).
+- Query `etapa` em `EpisodioWorkflow` e `PonteTemporalPaperclipWorkflow` (só leitura; seguro para replay).
+- Activity `enviar_telegram` registrada no worker (código; worker não reiniciado). Com `saida` desligada só devolve o recibo.
+- `main_entrada`: fail-closed (config, token, ID); backoff até 60 s; logs só com nome da exceção.
+
+### Falta para ativar (OK do José)
+1. Token e ID no `.env` do PQBR (600).
+2. Merge da branch e reinício do worker (para a activity e a query `etapa`; workflows já em execução usam código novo só após replay compatível).
+3. Ligar `saida`/`entrada` na config; instalar e ativar a unit.
+4. Produtores: chamar `registrar_pedido` + `enfileirar` + `enviar_telegram` nos workflows que pedem aprovação (hoje só os testes fazem isso).
+5. Ideia futura (backlog): menu de decisões e pedidos rotineiros no bot.

@@ -1,4 +1,4 @@
--- PQBR 0018 (rascunho t536, F05-06/F05-08): outbox de saída Telegram + dedupe de entrada. NÃO APLICADA.
+-- PQBR 0018 (rascunho t536, F05-06/F05-08): outbox de saída Telegram + dedupe de entrada. Aplicada no pc em 25/10/2026 (t538, OK do José); backup prévio de revisao_humana em ~/.pqbr/backups.
 begin;
 create table pqbr.saida_telegram (
   chave         text primary key check (chave ~ '^[a-z0-9_:.\-]{8,200}$'),

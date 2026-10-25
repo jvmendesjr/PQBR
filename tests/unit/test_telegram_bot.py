@@ -110,3 +110,24 @@ def test_token_nunca_vaza(monkeypatch):
 def test_sem_token_falha_sem_rede(monkeypatch):
     monkeypatch.delenv(tb.ENV_TOKEN, raising=False)
     with pytest.raises(tb.TelegramErro): run(tb.transporte_http()("getMe", {}))
+
+
+def test_activity_registrada_e_saida_desligada(monkeypatch):
+    from pqbr.workflows import worker
+    assert tb.enviar_telegram in tb.ATIVIDADES_TELEGRAM and "ATIVIDADES_TELEGRAM" in open(worker.__file__).read()
+    class R:
+        def recibo(self, c): return "recibo-atual"
+    monkeypatch.setattr(tb, "RepositorioPostgres", R)
+    assert run(tb.enviar_telegram("aviso:x:0001")) == "recibo-atual"
+
+
+def test_main_entrada_fail_closed(monkeypatch):
+    with pytest.raises(SystemExit, match="desligada"): run(tb.main_entrada(1))
+    monkeypatch.setattr(tb, "carregar_config", lambda: {"entrada": "telegram_long_polling"})
+    monkeypatch.delenv(tb.ENV_TOKEN, raising=False)
+    with pytest.raises(SystemExit, match="faltam"): run(tb.main_entrada(1))
+
+
+def test_workflows_expoem_query_etapa():
+    from pqbr.workflows.workflows import EpisodioWorkflow, PonteTemporalPaperclipWorkflow
+    assert hasattr(EpisodioWorkflow, "etapa") and hasattr(PonteTemporalPaperclipWorkflow, "etapa")

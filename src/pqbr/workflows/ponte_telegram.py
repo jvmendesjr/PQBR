@@ -66,7 +66,7 @@ async def enviar_idempotente(repo: Repositorio, rem: Remetente, chave: str) -> R
 
 
 async def processar_callback(repo: Repositorio, id_autorizado: str, e: EventoCallbackTelegram,
-                             sinalizar: Callable[[str, str, str], Awaitable[str]],
+                             sinalizar: Callable[[str, str, str, str], Awaitable[str]],
                              agora: datetime | None = None) -> ResultadoDecisao:
     """sinalizar(workflow_id, ref, decisao, etapa_esperada): le a etapa, so sinaliza se for a esperada; devolve a etapa."""
     agora = agora or datetime.now(timezone.utc)

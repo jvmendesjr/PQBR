@@ -12,9 +12,11 @@ from __future__ import annotations
 import asyncio, json, logging, os, socket, tempfile, urllib.error, urllib.request
 from pathlib import Path
 from typing import Any, Awaitable, Callable, Protocol
-from ..contratos.ponte_telegram import MensagemSaida
+from temporalio import activity
+from ..contratos.ponte_telegram import MensagemSaida, ReciboEntrega
 from .entrada_telegram import EnvelopeInvalido, callback_data, carregar_config, para_evento
-from .ponte_telegram import EntregaIncerta, Repositorio, processar_callback
+from .ponte_postgres import RepositorioPostgres
+from .ponte_telegram import EntregaIncerta, Repositorio, enviar_idempotente, processar_callback
 
 LOG = logging.getLogger("pqbr.telegram_bot")
 ENV_TOKEN, ENV_JOSE = "PQBR_TELEGRAM_BOT_TOKEN", "PQBR_TELEGRAM_JOSE_ID"
@@ -145,11 +147,41 @@ def sinalizar_temporal(cliente) -> Callable[..., Awaitable[str]]:
     return _s
 
 
-async def main_entrada() -> None:  # pragma: no cover — só roda com OK do José (unit em deploy/systemd)
+@activity.defn(name="enviar_telegram")
+async def enviar_telegram(chave: str) -> ReciboEntrega:
+    """Activity da saída (outbox). Desligada por config → não envia, devolve o recibo atual (pendente)."""
+    repo = RepositorioPostgres()
+    if carregar_config().get("saida") != "telegram_bot":
+        return repo.recibo(chave)
+    return await enviar_idempotente(repo, RemetenteTelegram(transporte_http(30)), chave)
+
+
+ATIVIDADES_TELEGRAM = [enviar_telegram]
+
+
+async def main_entrada(ciclos: int | None = None) -> None:
+    """Processo de entrada (long polling). Fail-closed: config desligada, sem token ou sem ID → sai."""
+    from .worker import client
+    from ..seguranca.barreira import instalar_no_logging
+    logging.basicConfig(level=logging.INFO); instalar_no_logging()
     cfg = carregar_config()
     if cfg.get("entrada") != "telegram_long_polling":
         raise SystemExit("entrada desligada em config/ponte_telegram.json")
-    raise SystemExit("EM CONSTRUÇÃO: repositório Postgres (0018) e query `etapa` nos workflows ainda não ligados")
+    if not os.environ.get(ENV_TOKEN) or not jose_id():
+        raise SystemExit(f"faltam {ENV_TOKEN} e/ou {ENV_JOSE} no ambiente")
+    repo, chamar = RepositorioPostgres(), transporte_http(cfg.get("long_polling_timeout_s", 50) + 15)
+    sinalizar = sinalizar_temporal(await client())
+    offset = OffsetArquivo(Path(os.path.expanduser(cfg.get("offset_arquivo", "~/.pqbr/state/telegram-offset"))))
+    n, pausa = 0, 1
+    while ciclos is None or n < ciclos:
+        n += 1
+        try:
+            await ciclo_entrada(chamar, offset, repo, jose_id(), sinalizar, cfg.get("long_polling_timeout_s", 50)); pausa = 1
+        except EntregaIncerta:
+            pausa = 1                               # timeout de long polling é normal
+        except Exception as e:  # noqa: BLE001
+            LOG.warning("ciclo de entrada falhou: %s", type(e).__name__)
+            await asyncio.sleep(pausa); pausa = min(pausa * 2, 60)
 
 
 if __name__ == "__main__":  # pragma: no cover
