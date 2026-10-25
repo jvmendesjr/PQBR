@@ -1,8 +1,8 @@
 {
   "versao": "2.0.0",
-  "saida": "desligado",
+  "saida": "telegram_bot",
   "saida_alternativas": ["telegram_bot"],
-  "entrada": "desligado",
+  "entrada": "telegram_long_polling",
   "entrada_alternativas": ["telegram_long_polling"],
   "offset_arquivo": "~/.pqbr/state/telegram-offset",
   "long_polling_timeout_s": 50,

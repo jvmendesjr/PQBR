@@ -66,6 +66,7 @@
   - Documentação parcial (2026-10-15): criado `docs/_obsoleto/blueprints/canal-chat-pqbr/GUIA-USO-DISCORD.md`, com instruções para iniciar/continuar pedidos e os limites atuais. Isso não fecha TZ-06, TZ-08 nem F05-06.
   - **Matriz de planejamento proposta (não executada; F05-06 no-arm):** os resultados e as evidências a coletar abaixo são critérios propostos, não evidências de execução ou aceite. Este registro não autoriza dispatch, envio de sinal, teste, retomada ou ativação. Qualquer prova controlada exige novo escopo e aceite explícito de José antes de executar. A integração conversacional já testada permanece preservada; não reabrir instalação ou comunicação básica.
   - 25/10/2026 (t538, OK do José): migração 0018 aplicada no banco do PQBR (backup prévio de `revisao_humana`); código da ponte com bot próprio concluído na branch `feature/f05-06-ponte-duravel` (sem merge, config desligada, unit não instalada).
+  - 25/10/2026 11:48 (t538-A): ponte **ativada** (merge local, workers reiniciados, config ligada, `pqbr-telegram-entrada` ativa, job Hermes `pqbr-pedidos-jose` pausado). Teste real enviado; falta o clique do José para fechar TZ-06 (aprovação autenticada). Push ainda pendente de OK.
   - **Ideia futura (backlog, não implementar agora, José 25/10/2026):** o bot próprio pode ganhar **menu de decisões** e **pedidos rotineiros** (atalhos fixos, sempre como sinais validados do Temporal; nada de comandos livres).
 
     | Cenário | Resultado esperado (proposto) | Evidência a coletar em futura prova autorizada (não produzida por esta matriz) |
