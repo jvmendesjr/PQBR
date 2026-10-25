@@ -44,3 +44,6 @@ Feito pelo agente externo (Grok Bot). Sem vídeo, imagem ou voz gerados e sem pu
 - **Barreira 2 vs. R10 semântico:** a variação por palavras deixou passar temas próximos de publicados, como sacola dobrada × sacola bonita e caixinha de suco × caixa de leite. Tirei esses temas à mão (o Jev ainda não está ligado na faixa de dúvida).
 - **Tema com marca real:** "botijão azul ou cinza" exige citar distribuidoras, e o compliance reprovou por marca real e por afirmação errada. → Filtrar temas de marca antes de roteirizar.
 - **EP1002 no formato v1:** `~/.pqbr/rot-EP1002.json` não tem `tipo_cta` nem fontes e não passa no `validar_roteiro` v2. Foi roteirizado de novo no caderno `c47ccd24`.
+
+## Lacuna legenda 25/10/2026 — legenda gravada fora do Temporal
+- `scripts/legendar_short.py` (faster-whisper local, CPU, venv `~/.venvs/whisper`, modelo small) roda à mão, fora de qualquer workflow do Temporal. Ele transcreve com tempo por palavra, alinha ao `narracao.txt`, gera .ass/.srt e grava em `<short>-legendado.mp4` sem sobrescrever. Piloto: café fraco. → Virar activity no fluxo de pós-produção.
