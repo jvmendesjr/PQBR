@@ -32,7 +32,8 @@
 
 ---
 
-## Fase 0.5: teste de 1 dia do Temporal ligado ao Paperclip ← PRIMEIRO PASSO ABERTO
+## Fase 0.5: teste de 1 dia do Temporal (motor escolhido; ponte Paperclip histórica)
+> Histórico: ADR-011/t474–t476: Paperclip parado (histórico); canal = bot Telegram próprio via Temporal (t538). F05-04/F05-06/TZ-06 abaixo ficam como registro; o escopo vivo de aprovação está na ponte t538.
 
 - [x] **F05-01** Subir o Temporal com Postgres próprio e medir recursos
   - Req: RNF-09 · Testes: TZ-01 · Depende de: R-005
@@ -119,6 +120,7 @@
   - Portão José: aprovar o fluxo. Obs:
 
 ## Fase 3: fundações
+> Menções a Paperclip, Discord e Board nesta fase são histórico (ADR-011/t474–t476: Paperclip parado (histórico); canal = bot Telegram próprio via Temporal (t538)).
 
 - [x] **F3-01** (D3) Contratos Pydantic v2 e migração base
   - Req: RF-02, RF-07, RNF-02 · Testes: TS-01, TS-02 · Depende de: F05-07
@@ -352,7 +354,7 @@ Ref.: `docs/pesquisas/PESQUISA-extensoes-geracao-em-serie.md` (leitura liberada,
 ## 0. Premissas
 
 - Quem constrói: agentes de desenvolvimento, sem core-eng (t284). O José aprova cada portão e cada merge.
-- Espinha: **Temporal** (fluxo determinístico; DBOS plano B) ligado ao **Paperclip** (camada de agentes e painel). Os agentes vivem no Paperclip e só propõem (t324–t327). Durante t464, Hermes `pqbr`/Telegram permanece como fallback; após o piloto, Discord/Paperclip conecta diretamente ao Diretor ativo.
+- Espinha: **Temporal** (fluxo determinístico; DBOS plano B) ligado ao **Paperclip** (camada de agentes e painel). Os agentes vivem no Paperclip e só propõem (t324–t327; **histórico**, hoje PydanticAI no Temporal, ADR-011). Durante t464, Hermes `pqbr`/Telegram permanece como fallback; após o piloto, Discord/Paperclip conecta diretamente ao Diretor ativo.
 - Escopo: só o canal Porquê BR (t327).
 - Mudanças na construção são tarefas do ROADMAP, nunca tickets. Nada que depende de hipótese é construído antes de ela virar VERIFICADO (item 7).
 - Branch por tarefa e merge com aprovação do José; nada de push sem autorização.
@@ -389,11 +391,11 @@ Ordem: 0.5 ∥ 0 → 1 → 3 ∥ 4 → 5 → 6 → 7 → 8 → 9 → 10 → 11 �
 
 | Risco | Mitigação |
 |---|---|
-| `hermes_local` força `--yolo`, mas o perfil `pqbr` não pode herdá-lo | F05-05 antes de ligar agentes Hermes; heartbeats desligados |
+| (histórico) `hermes_local` força `--yolo` | resolvido em F05-05; agentes agora são PydanticAI no Temporal (ADR-011) |
 | Repetir a deriva da COR-1 | REGRAS como autoridade; SPEC e matriz de rastreabilidade; t287 |
 | RAM/swap do servidor com o motor | TZ-01; DBOS como plano B |
 | Determinismo e versionamento de workflows | TS-REPLAY; workflows curtos |
-| Recovery storm do Paperclip sem internet (#6596) | heartbeats desligados; agentes sem efeito |
+| (histórico) Recovery storm do Paperclip (#6596) | Paperclip parado (t474–t476); sem efeito |
 | Sessão do NotebookLM com dois donos | logout antes do login novo (t191) |
 | Quedas da sessão do Studio (H9) | guardião + escada t272 |
 | Auditoria do app do GCP (H1) | privado + Camofox agenda (t273) |
@@ -406,7 +408,7 @@ Ordem: 0.5 ∥ 0 → 1 → 3 ∥ 4 → 5 → 6 → 7 → 8 → 9 → 10 → 11 �
 | Disco do servidor | ciclo t267/t268; `runtime/` limpo |
 
 - [x] Drive PQBR criado (12/10): pasta + 7 subpastas, upload testado; IDs em `config/drive_pastas.json`.
-- [x] **JEV-01** Chave do Jev configurada (12/10): segredo `JEV_API_KEY` na PQBR (Paperclip) + `TYPESAFE_API_KEY` em `~/.pqbr/worker.env`; endpoint `api.typesafe.ai/v1/systemone`, `jev-latest`; teste ok. O `pqbr-temporal-worker` lê no próximo reinício.
+- [x] **JEV-01** Chave do Jev configurada (12/10): `TYPESAFE_API_KEY` em `~/.pqbr/worker.env` (600; o segredo no Paperclip é histórico); endpoint `api.typesafe.ai/v1/systemone`, `jev-latest`; teste ok. O `pqbr-temporal-worker` lê no próximo reinício.
 - [ ] **JEV-02** Chaves de fallback do `decide()` (OpenRouter; depois OpenAI, modelo em H7) — Portão: José (pendente).
 - [x] **HS-01** Dono da manutenção do Hindsight (bank `pqbr`) — 12/10: decidido pelo José. Dev Corretor mantém (reindexação diária, poda, dedupe, sem segredos); Observador mede (hit rate/staleness nos relatórios). Aplicado em `company/agents/*/AGENTS.md`, nas instruções vivas do Paperclip (instructions-file:put, adapters mantidos) e em AGENTES.md.
 - [x] **CAT-01** Categoria YouTube = 27 Educação (12/10, José): `CATEGORIA_YOUTUBE` em `contratos`, usado no dry-run; SPEC RF-06 corrigida (`containsSyntheticMedia`=false).

@@ -1,7 +1,7 @@
 {
-  "versao": "1.1.0",
+  "versao": "1.2.0",
   "bank": "pqbr",
-  "nota": "t84u-t85u: um bank só; cada papel lê/escreve só suas tags e vê só seus caminhos no GitNexus. Papel ausente => negado (fail-closed).",
+  "nota": "t84u-t85u: um bank só; cada papel lê/escreve só suas tags e vê só seus caminhos no GitNexus. Papel ausente => negado (fail-closed). t90u: indexador escreve as tags de conteúdo da regra única (storage.hindsight_tags).",
   "papeis": {
     "diretor": {
       "leitura": [
@@ -214,7 +214,14 @@
         "commit",
         "playbook",
         "doc",
-        "descarte"
+        "descarte",
+        "editorial",
+        "publicacao",
+        "seguranca",
+        "compliance",
+        "auditoria",
+        "pesquisa",
+        "licao"
       ],
       "codigo": [],
       "ferramentas": []

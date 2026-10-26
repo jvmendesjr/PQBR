@@ -1,7 +1,7 @@
 [
  [
   "memoria:jev",
-  "Jev (TypeSafe) na PQBR: endpoint POST https://api.typesafe.ai/v1/systemone, modelo jev-latest (jev-1.13.0). Chave como segredo Paperclip JEV_API_KEY e TYPESAFE_API_KEY no ~/.pqbr/worker.env (600). Teste de classificação ok em 12/10. Fallbacks OpenRouter/OpenAI sem chave."
+  "Jev (TypeSafe) na PQBR: endpoint POST https://api.typesafe.ai/v1/systemone, modelo jev-latest (jev-1.13.0). Chave só como TYPESAFE_API_KEY em ~/.pqbr/worker.env (600, fora do git), lida pelos workers do Temporal; o antigo segredo no Paperclip é histórico (Paperclip parado, ADR-011). Teste de classificação ok em 12/10. Fallbacks OpenRouter/OpenAI sem chave."
  ],
  [
   "memoria:drive",

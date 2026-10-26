@@ -54,9 +54,9 @@ def test_estrutura_e_erro_sem_valor_ou_chave(obj):
 def test_hindsight_antes_do_transporte(valor, campo):
     transporte = Mock(return_value={})
     with pytest.raises(SegredoDetectado):
-        hindsight.reter(**{campo: valor, **({"conteudo": "limpo"} if campo == "contexto" else {})}, transporte=transporte)
+        hindsight.reter(**{campo: valor, **({"conteudo": "limpo"} if campo == "contexto" else {})}, papel="dev", tags=["licao"], transporte=transporte)
     transporte.assert_not_called()
-    hindsight.reter("ajuste de seletor", "licao", transporte=transporte)
+    hindsight.reter("ajuste de seletor", "licao", papel="dev", tags=["licao"], transporte=transporte)
     transporte.assert_called_once()
 
 

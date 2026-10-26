@@ -7,6 +7,13 @@ from pathlib import Path
 
 RAIZ = Path("/home/pc/Workspace/PQBR"); sys.path.insert(0, str(RAIZ / "src"))
 from pqbr.storage.hindsight import reter  # noqa: E402
+from pqbr.storage.hindsight_tags import tags_conteudo  # noqa: E402
+from pqbr.contratos.politica import carregar  # noqa: E402
+
+
+def tags_indexador(ctx: str, texto: str) -> list[str]:
+    """Mesma regra da reclassificação (t90u), limitada ao que o indexador pode escrever."""
+    return sorted(tags_conteudo(ctx, texto, set(carregar().de("indexador").escrita))) or ["doc"]
 
 DOCS = ["docs/REFERENCIA-sessao-google.md", "docs/CONTRATO-EDITORIAL.md", "docs/ARQUITETURA.md", "docs/ROADMAP.md", "docs/SPEC.md",
         "docs/AGENTES.md", "docs/pesquisas/mapa-drive-rede.md", "docs/pesquisas/estilo-2d-referencias.md", "docs/sdd/gate-a9.md",
@@ -59,7 +66,7 @@ def main() -> int:
         h = hashlib.sha256(texto.encode()).hexdigest()[:16]
         if feitos.get(chave) == h: continue
         try:
-            reter(texto, ctx, papel="indexador", tags=[chave.split(":")[0] if chave.split(":")[0] in ("decisao","incidente","commit","playbook") else "doc"]); feitos[chave] = h; n += 1
+            reter(texto, ctx, papel="indexador", tags=tags_indexador(ctx, texto)); feitos[chave] = h; n += 1
         except Exception as e:  # barreira bloqueou ou API fora: pula o item, registra
             print(f"pulado: {type(e).__name__}", file=sys.stderr)
     feitos = validar_estado(feitos)

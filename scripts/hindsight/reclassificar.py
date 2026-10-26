@@ -1,7 +1,7 @@
 """Reclassifica o bank Hindsight `pqbr` por papel (t90u, José: opção A).
 
 Determinístico e idempotente:
-- tags de conteúdo pela origem (contexto do retain) + palavras-chave, só tags que existem em config/politica_papeis.json;
+- tags de conteúdo pela regra única `pqbr.storage.hindsight_tags` (a mesma do indexador);
 - autor `papel:indexador` quando não houver `papel:*` (memórias legadas vieram do indexador);
 - `obsoleto_candidato` quando a memória é versão superada (o texto não existe mais na fonte vigente) ou
   menciona decisão revogada sem fonte vigente que a sustente. NADA é apagado (deleção exige OK do José).
@@ -15,29 +15,8 @@ from pathlib import Path
 
 RAIZ = Path(__file__).resolve().parents[2]
 B = "http://127.0.0.1:8890/v1/default/banks/pqbr"
-TAG_OBS = "obsoleto_candidato"
-
-# decisões vigentes que tornam afirmações antigas conflitantes (padrão, decisão)
-CONFLITOS = [
-    (r"\b(runway|manus)\b", "Runway e Manus descartados para vídeo (26/10/2026)"),
-    (r"\bpaperclip\b", "ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado"),
-    (r"\bdiscord\b", "t474: revogada a t464 (sem canal Discord)"),
-    (r"\bhermes\b[^.\n]{0,120}\b(telegram|callback|pedidos|aprova)|\b(telegram|callback|pedidos)\b[^.\n]{0,120}\bhermes\b",
-     "t538: ponte Telegram por bot próprio via Temporal (Hermes desconsiderado)"),
-    (r"gemini[^.\n]{0,40}\b(1\.5|2\.0|2\.5|3\.0|3 pro|3\.5|flash[- ]lite)\b", "t544: juiz Gemini fixado no 3.8 Flash"),
-    (r"olhos[- ]da[- ]cara|\bEP1002\b", "t75u–t77u: EP1002 olhos-da-cara reprovado e descartado (tema volta a proposto)"),
-    (r"caderno[- ]mestre", "t459/ADR-003: cadernos efêmeros por episódio (sem caderno mestre)"),
-]
-PALAVRAS = {
-    "editorial": r"roteiro|editorial|\btemas?\b|narra|estilo|personage|storyboard|\bcapa\b|\bcta\b|elenco",
-    "publicacao": r"youtube|upload|publica|publishat|agendad",
-    "seguranca": r"segredo|\btoken|oauth|credencia|tailnet|barreira|\.env\b|chmod|2sv|sess[aã]o google",
-    "compliance": r"compliance|direitos? autora|copyright|licen[cç]a|fair use",
-    "auditoria": r"auditor|auditoria|gate a9|veredito|\bloop\b|\bvisual\b",
-    "incidente": r"incidente|crash|\bqueda\b",
-    "pesquisa": r"pesquisa|etimologia|notebooklm|\bfontes?\b",
-    "licao": r"li[cç][aã]o|li[cç][oõ]es|aprendizado",
-}
+sys.path.insert(0, str(RAIZ / "src"))
+from pqbr.storage.hindsight_tags import TAG_OBS, conflitos, fonte, tags_conteudo  # noqa: E402
 
 
 def http(metodo, url, corpo=None):
@@ -54,30 +33,6 @@ def norm(s: str) -> str:
 def politica_tags() -> set[str]:
     p = json.loads((RAIZ / "config/politica_papeis.json").read_text(encoding="utf-8"))
     return {t for v in p["papeis"].values() for k in ("leitura", "escrita") for t in v[k]}
-
-
-def fonte(ctx: str):
-    """(tipo, caminho_fonte|None, tags_base)"""
-    if ctx.startswith("PQBR evolução — commit"): return "commit", None, {"commit"}
-    m = re.match(r"PQBR (decisao|incidente) — DECISOES-LOG: (.*)", ctx)
-    if m: return "log", "docs/DECISOES-LOG.md", {m.group(1)}
-    m = re.match(r"PQBR doc canônico — ([^:]+):", ctx)
-    if m:
-        p, t = m.group(1), {"doc"}
-        if "CONTRATO-EDITORIAL" in p or "estilo" in p or "teste-capa" in p: t |= {"editorial"}
-        if p.startswith("docs/pesquisas/"): t |= {"pesquisa"}
-        if "gate-a9" in p: t |= {"editorial", "auditoria"}
-        if "REFERENCIA-sessao-google" in p: t |= {"seguranca"}
-        if "/adr-" in p or "ARQUITETURA" in p: t |= {"decisao"}
-        if "playbooks" in p: t |= {"playbook"}
-        return "doc", p, t
-    m = re.match(r"PQBR playbook/lição — (.*)", ctx)
-    if m: return "playbook", f"company/playbooks/{m.group(1).strip()}.md", {"playbook", "licao"}
-    if ctx.startswith("PQBR decisão-chave"): return "memoria", "scripts/hindsight/memorias.json", {"decisao"}
-    if "lição registrada" in ctx: return "licao", None, {"licao"}
-    if ctx.startswith("PQBR incidente"): return "incidente", None, {"incidente"}
-    if "caderno de teste" in ctx: return "caderno", None, {"pesquisa"}
-    return "outro", None, {"doc"}
 
 
 def main() -> int:
@@ -102,11 +57,8 @@ def main() -> int:
     for d in docs:
         det = http("GET", f"{B}/documents/{d['id']}")
         txt, ctx = det.get("original_text") or "", (d.get("retain_params") or {}).get("context", "")
-        tipo, p, tags = fonte(ctx)
-        base = txt.lower()
-        for t, rx in PALAVRAS.items():
-            if re.search(rx, base): tags.add(t)
-        if tipo == "log" and re.search(r"incidente", ctx, re.I): tags.add("incidente")
+        tipo, p, _ = fonte(ctx)
+        tags = tags_conteudo(ctx, txt, validas)
         motivos, decisoes = [], []
         vigente = None
         if tipo == "commit":
@@ -122,8 +74,7 @@ def main() -> int:
             elif not vigente: motivos.append(f"versão superada: texto não existe mais em {p}")
         if ctx.startswith("teste diag"): motivos.append("memória de teste de diagnóstico")
         if tipo != "commit":
-            for rx, dec in CONFLITOS:
-                if re.search(rx, txt, re.I): decisoes.append(dec)
+            decisoes = conflitos(txt)
         candidato = bool(motivos) or (bool(decisoes) and vigente is not True and tipo != "commit")
         if candidato and decisoes and not motivos: motivos.append("cita decisão revogada sem fonte vigente")
         atuais = set(d.get("tags") or [])
