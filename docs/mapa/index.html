@@ -9,7 +9,7 @@ main{max-width:1100px;margin:0 auto;padding:12px}section{background:#fff;border:
 h2{margin:0 0 4px;font-size:16px}.nota{margin:0 0 8px;color:var(--m);font-size:12px}.arq{font-family:ui-monospace,monospace}
 .wrap{overflow-x:auto}.mermaid{background:none;margin:0}footer{color:var(--m);font-size:12px;padding:16px;text-align:center}
 .regra{background:#fff8e6;border:1px solid #f0dca8;border-radius:8px;padding:10px;font-size:13px;margin-bottom:16px}
-</style></head><body><header><h1>PQBR — mapa do sistema</h1><p>Regenerado de docs/mapa/*.mmd em 26/10/2026 16:16 · ⚠ = não confirmado no código / pendente</p></header><nav><a href="#d00">Visão geral</a><a href="#d01">Episódio</a><a href="#d02">Reposição de temas</a><a href="#d03">Acessos / Camofox</a><a href="#d04">Descarte</a><a href="#d05">Vigia de atualizações</a><a href="#d06">Runs presos</a><a href="#d07">Cadeia de vídeo</a><a href="#d08">Identidade Camofox</a><a href="#d09">Agentes</a><a href="#d10">Catálogo de erros</a><a href="#d11">Publicação</a><a href="#d12">Storyboard e elenco</a><a href="#d13">13-memoria-mcp-handoff</a></nav><main><div class="regra"><b>Regra:</b> agentes nunca alteram este mapa sozinhos; mudança só por proposta aprovada pelo José. Fonte: <code>docs/mapa/*.mmd</code>.</div><section id="d00"><h2>Visão geral</h2><p class="nota">Mapa PQBR — Visão geral. Gerado do código em 24/10/2026 (commit base c752abc). Só muda por proposta aprovada pelo José. <span class="arq">00-visao-geral.mmd</span></p><div class="wrap"><pre class="mermaid">
+</style></head><body><header><h1>PQBR — mapa do sistema</h1><p>Regenerado de docs/mapa/*.mmd em 26/10/2026 16:57 · ⚠ = não confirmado no código / pendente</p></header><nav><a href="#d00">Visão geral</a><a href="#d01">Episódio</a><a href="#d02">Reposição de temas</a><a href="#d03">Acessos / Camofox</a><a href="#d04">Descarte</a><a href="#d05">Vigia de atualizações</a><a href="#d06">Runs presos</a><a href="#d07">Cadeia de vídeo</a><a href="#d08">Identidade Camofox</a><a href="#d09">Agentes</a><a href="#d10">Catálogo de erros</a><a href="#d11">Publicação</a><a href="#d12">Storyboard e elenco</a><a href="#d13">13-memoria-mcp-handoff</a></nav><main><div class="regra"><b>Regra:</b> agentes nunca alteram este mapa sozinhos; mudança só por proposta aprovada pelo José. Fonte: <code>docs/mapa/*.mmd</code>.</div><section id="d00"><h2>Visão geral</h2><p class="nota">Mapa PQBR — Visão geral. Gerado do código em 24/10/2026 (commit base c752abc). Só muda por proposta aprovada pelo José. <span class="arq">00-visao-geral.mmd</span></p><div class="wrap"><pre class="mermaid">
 flowchart TB
   JOSE([&quot;José&quot;])
   TG[&quot;Telegram (Hermes pqbr)&lt;br/&gt;cron pqbr-pedidos-jose lê pqbr.revisao_humana&quot;]
@@ -253,7 +253,7 @@ flowchart TD
   SC{{&quot;escopo do modo real: PQBR_PUBLICACAO_REAL_CODIGOS&lt;br/&gt;fora da lista ⇒ erro não retentável&quot;}} -.-&gt; U &amp; PR
   WK[[&quot;registrado no pqbr-episodio-worker (fila episodio-pqbr)&lt;br/&gt;⚠ worker ainda não reiniciado · migração 0020 não aplicada&quot;]] -.-&gt; G
   BL{{&quot;⚠ BLOQUEIO: sem YOUTUBE_CLIENT_ID/SECRET/REFRESH_TOKEN no worker&lt;br/&gt;Cloud Console exige 2SV (José)&quot;}} -.-&gt; U
-</pre></div></section><section id="d12"><h2>Storyboard e elenco</h2><p class="nota">Storyboard em série, personagem e elenco (t75u–t78u, 26/10/2026). Regra central do José: CONTRATO-EDITORIAL §18, REGRAS §25. Contrato: src/pqbr/contratos/storyboard.py (FichaCena/Storyboard 1.1.0). Fichas do elenco: config/estilo_visual.json → elenco. <span class="arq">12-storyboard-elenco.mmd</span></p><div class="wrap"><pre class="mermaid">
+</pre></div></section><section id="d12"><h2>Storyboard e elenco</h2><p class="nota">Storyboard em série, personagem e elenco (t75u–t78u, 26/10/2026). Regra central do José: CONTRATO-EDITORIAL §18, REGRAS §25. t108u: juízes por etapa. Contrato: src/pqbr/contratos/storyboard.py (FichaCena/Storyboard 1.1.0). Fichas do elenco: config/estilo_visual.json → elenco. <span class="arq">12-storyboard-elenco.mmd</span></p><div class="wrap"><pre class="mermaid">
 flowchart TD
   COD([&quot;código PQBR-EPxxxx&quot;]) --&gt; ALT{&quot;elenco_alternado&lt;br/&gt;par → masculino · ímpar → feminino&quot;}
   ALT --&gt;|ou elenco_excecao com motivo| SB[&quot;Storyboard&lt;br/&gt;norte_geral · bloco_estilo · ficha_personagem · elenco&quot;]
@@ -267,7 +267,9 @@ flowchart TD
   EPO &amp; ATU &amp; EXP &amp; ENC --&gt; IMG[&quot;imagens por cena&quot;] --&gt; REV{&quot;imagens_revisadas?&quot;}
   REV -- não --&gt; FC
   REV -- sim --&gt; VID[&quot;vídeo por cena (07-cadeia-video)&quot;]
-  VID --&gt; VIS[&quot;⚠ VISUAL do gate: personagem_mexe_labios · corte_oculos_cabeca · grotesco (proposto)&quot;]
+  JPRE[[&quot;juiz pré-produção: 3.8 Flash&lt;br/&gt;roteiro · storyboard/fichas · imagens de referência&quot;]] -.-&gt; FC
+  JPRE -.-&gt; REV
+  VID --&gt; VIS{{&quot;gate VISUAL + LOOP · juiz produção: 4 Argon (raciocínio Baixo)&lt;br/&gt;reprova sozinho: boca_articula_fala · corte_oculos_cabeca · grotesco&lt;br/&gt;2 rodadas concordando; divergiu → terceira_rodada&quot;}}
   SB --&gt; PROT[&quot;protagonista = elenco do episódio (constante)&quot;]
   FC --&gt; CO{&quot;coadjuvante? (outro membro do elenco)&quot;}
   CO --&gt;|sim, com justificativa no roteiro| CJ[&quot;contracena; mesmas proibições&quot;]

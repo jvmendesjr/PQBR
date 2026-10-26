@@ -624,3 +624,8 @@ NÃO CABE:
 - 3 critérios novos que reprovam sozinhos, sempre exigindo as 2 rodadas em acordo (se divergirem, vai para a terceira rodada).
 - Validação no EP1002 com 4 Argon Baixo (595 s): reprova. Detectou os 3 problemas apontados pelo José: corte em S01/S04, grotesco em S01, boca em S02/S05/S09.
 - O worker Temporal não foi reiniciado. Isso fica pendente de OK do José.
+
+## t109u (26/10/2026) — Migração 0020 e reinício do worker (OK do José, card t109s462)
+- Backup antes da migração; `public.pqbr_migracoes` registra a 0020.
+- Antes do reinício não havia nenhum workflow em execução no ns `pqbr`. Depois do reinício: unit ativa, poller registrado (workflow e activity), pré = 3.8 Flash / produção = 4 Argon Baixo, `PublicacaoAgendadaWorkflow` registrado. Nada foi publicado e nenhum upload foi disparado.
+- Mapa 12 atualizado e com render validado.

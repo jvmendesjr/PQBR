@@ -5,6 +5,13 @@ Versionamento SemVer (MAJOR.MINOR.PATCH) a partir de t510. Versão do pacote can
 
 
 
+## [0.14.1] — 2026-10-26
+### Operação
+- Backup `pqbr-20261026-1656.dump` e depois aplicação da migração `0020_pqbr_publicacao_agenda_emergencia.sql` (via `infra/pqbr-db/aplicar.sh`).
+- Worker `pqbr-episodio-worker` reiniciado (0 workflows em execução). Carrega `PublicacaoAgendadaWorkflow` e o juiz por etapa.
+### Documentação
+- Mapa 12: juízes por etapa e os 3 bloqueios do gate VISUAL (antes marcados como proposto).
+
 ## [0.14.0] — 2026-10-26
 ### Adicionado
 - Juiz Gemini por etapa: `gemini_juiz` em `config/motores.json` com contrato `pqbr.contratos.juiz_gemini` v1.0.0. Pré-produção usa 3.8 Flash e produção usa 4 Argon (Baixo). A etapa é passada como argumento das activities `auditor_gemini` e `auditor_loop_gemini`, com padrão "producao".

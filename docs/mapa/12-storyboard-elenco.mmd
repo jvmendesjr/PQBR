@@ -1,4 +1,5 @@
 %% Storyboard em série, personagem e elenco (t75u–t78u, 26/10/2026). Regra central do José: CONTRATO-EDITORIAL §18, REGRAS §25.
+%% t108u: juízes por etapa.
 %% Contrato: src/pqbr/contratos/storyboard.py (FichaCena/Storyboard 1.1.0). Fichas do elenco: config/estilo_visual.json → elenco.
 flowchart TD
   COD(["código PQBR-EPxxxx"]) --> ALT{"elenco_alternado<br/>par → masculino · ímpar → feminino"}
@@ -13,7 +14,10 @@ flowchart TD
   EPO & ATU & EXP & ENC --> IMG["imagens por cena"] --> REV{"imagens_revisadas?"}
   REV -- não --> FC
   REV -- sim --> VID["vídeo por cena (07-cadeia-video)"]
-  VID --> VIS["⚠ VISUAL do gate: personagem_mexe_labios · corte_oculos_cabeca · grotesco (proposto)"]
+  %% t108u: juiz Gemini por etapa (config/motores.json → gemini_juiz, contrato juiz_gemini 1.0.0)
+  JPRE[["juiz pré-produção: 3.8 Flash<br/>roteiro · storyboard/fichas · imagens de referência"]] -.-> FC
+  JPRE -.-> REV
+  VID --> VIS{{"gate VISUAL + LOOP · juiz produção: 4 Argon (raciocínio Baixo)<br/>reprova sozinho: boca_articula_fala · corte_oculos_cabeca · grotesco<br/>2 rodadas concordando; divergiu → terceira_rodada"}}
   %% t79u: protagonista único + coadjuvante opcional
   SB --> PROT["protagonista = elenco do episódio (constante)"]
   FC --> CO{"coadjuvante? (outro membro do elenco)"}
