@@ -49,6 +49,24 @@ def _api(metodo: str, path: str, corpo: dict | None = None, t: int = 90) -> dict
         return json.load(x)
 
 
+ESTAVEL_POLLS = 3        # ~24 s sem mudança e sem "Parar" → resposta terminada
+PRAZO_UPLOAD_S = 90
+
+
+class RespostaRecusada(RuntimeError):
+    """Gemini respondeu, mas não com o JSON pedido (ex.: "Sou uma IA com base em texto…"). Falha fechada."""
+
+
+def _anexos_prontos(tab: str, n: int) -> bool:
+    s = _snap(tab)
+    return s.count('img "attachment"') >= n   # t543: previews no composer
+
+
+def _log(*a) -> None:
+    import sys
+    print(time.strftime("%H:%M:%S"), "[gemini]", *a, file=sys.stderr, flush=True)
+
+
 def _snap(tab: str) -> str:
     return _api("GET", f"/tabs/{tab}/snapshot?userId=pqbr").get("snapshot", "")
 
@@ -85,6 +103,7 @@ def perguntar_gemini(arquivos: list[str], prompt: str, espera_s: int = 420, marc
     """Nova conversa → anexa arquivos → cola prompt → envia → espera terminar. Devolve (texto, url da conversa)."""
     from .camofox_humano import clicar, escrever, pausa_humana
     tab = _api("POST", "/tabs", {"userId": "pqbr", "sessionKey": "gemini-auditor", "url": "https://gemini.google.com/app"})["tabId"]
+    _log("aba aberta", tab)
     try:
         pausa_humana(2, 4)
         try: clicar(tab, ref=_ref(tab, r'button "Entendi"', 2))
@@ -94,6 +113,13 @@ def perguntar_gemini(arquivos: list[str], prompt: str, espera_s: int = 420, marc
             pausa_humana(0.8, 1.8)
             _api("POST", f"/tabs/{tab}/upload", {"userId": "pqbr", "ref": _ref(tab, r'menuitem "Enviar arquivos'), "path": arquivos, "timeout": 20000}, t=120)
             pausa_humana(3, 6)   # previews das imagens
+            t_up = time.time()
+            while not _anexos_prontos(tab, len(arquivos)):   # t543: não envia sem os anexos (senão o Gemini recusa)
+                if time.time() - t_up > PRAZO_UPLOAD_S:
+                    _log("snapshot do campo:", "\n".join(l[:140] for l in _snap(tab).split("\n") if "Insira" in l or "img" in l or "image" in l.lower() or "arquivo" in l.lower())[:1500])
+                    raise TimeoutError(f"anexos não apareceram em {PRAZO_UPLOAD_S}s")
+                time.sleep(3)
+            _log(f"{len(arquivos)} anexos prontos")
         clicar(tab, ref=_ref(tab, r'textbox "Insira um comando'))   # mouse humano no campo
         pausa_humana(0.6, 1.4)
         _api("POST", f"/tabs/{tab}/type", {"userId": "pqbr", "ref": _ref(tab, r'textbox "Insira um comando'), "text": prompt,
@@ -104,14 +130,21 @@ def perguntar_gemini(arquivos: list[str], prompt: str, espera_s: int = 420, marc
             if m: break
             time.sleep(3)
         else: raise RuntimeError("botão Enviar mensagem não habilitou")
-        clicar(tab, ref=m.group(1))
-        t0, txt = time.time(), ""
-        while time.time() - t0 < espera_s:
+        clicar(tab, ref=m.group(1)); _log("enviado; esperando resposta")
+        t0, txt, ant, estavel = time.time(), "", None, 0
+        while True:
+            if time.time() - t0 > espera_s:
+                raise TimeoutError(f"Gemini sem resposta completa em {espera_s}s (len={len(txt)})")   # falha fechada
             time.sleep(8)
             s = _snap(tab)
-            if "Parar resposta" in s or 'button "Parar' in s: continue
+            gerando = "Parar resposta" in s or 'button "Parar' in s
             txt = ler_texto_resposta(tab)
+            _log(f"t={time.time()-t0:.0f}s gerando={gerando} len={len(txt)} fim={txt.rstrip()[-60:]!r}")
+            if gerando: estavel = 0; ant = txt; continue
             if marcador in txt and txt.rstrip().endswith(("}", "```")): break
+            estavel = estavel + 1 if (txt and txt == ant) else 0; ant = txt
+            if estavel >= ESTAVEL_POLLS:   # terminou sem o JSON esperado: recusa/erro → não espera o prazo todo
+                raise RespostaRecusada(f"Gemini terminou sem o JSON esperado: {txt.strip()[:160]!r}")
         url = _api("GET", f"/tabs?userId=pqbr")
         url = next((x["url"] for x in url.get("tabs", []) if x["tabId"] == tab), "")
         return txt, url

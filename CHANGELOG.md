@@ -5,6 +5,10 @@ Versionamento SemVer (MAJOR.MINOR.PATCH) a partir de t510. Versão do pacote can
 
 
 
+## [0.4.1] — 2026-10-25
+### Corrigido
+- t543: juiz Gemini (`perguntar_gemini`) parava de responder sem aviso. Duas falhas: (1) uma resposta terminada que não era JSON (recusa) só saía depois do prazo inteiro (420 s × até 4 tentativas); (2) o envio não conferia os anexos. Agora: confere `img "attachment"` = n antes de enviar (prazo de 90 s), aborta com `RespostaRecusada` após 3 leituras estáveis sem o JSON, levanta `TimeoutError` no prazo e registra o progresso por etapa no stderr. Tudo com falha fechada.
+
 ## [0.4.0] — 2026-10-25
 ### Adicionado
 - F8-01 v2 (t540): `PublicacaoAgendadaWorkflow` — publicação AUTOMÁTICA (sem aprovação humana): gate → reserva 11:40/18:35 America/Fortaleza (1 por janela, idempotente) → upload privado → público na janela → `temas_publicados` + Drive → aviso Telegram (só aviso). Sinal `reverter` (volta para privado, nunca apaga).
