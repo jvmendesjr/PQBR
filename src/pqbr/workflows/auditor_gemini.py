@@ -128,12 +128,45 @@ def _ref(tab: str, rotulo: str, tentativas: int = 10) -> str:
     raise RuntimeError(f"elemento não encontrado: {rotulo}")
 
 
+ULTIMO_FECHAMENTO = 0.0
+
+
+class MemoriaAlta(RuntimeError):
+    """Camofox não baixou da memória mínima para abrir aba nova a tempo. Falha fechada."""
+
+
+def _cfg() -> dict:
+    from ..motores import CONFIG
+    try: return json.loads(Path(CONFIG).read_text())
+    except (OSError, ValueError): return {}
+
+
+def memoria_camofox_mb() -> int | None:
+    r = subprocess.run(["systemctl", "--user", "show", "pqbr-camofox", "-p", "MemoryCurrent", "--value"], capture_output=True, text=True)
+    try: return int(r.stdout.strip()) // 1048576
+    except ValueError: return None
+
+
+def aguardar_folga(agora=time.time, dormir=time.sleep, mem=memoria_camofox_mb, cfg=None) -> int | None:
+    """t546: respeita gemini_espera_s desde a última aba fechada e espera a memória < gemini_mem_abrir_mb."""
+    c = cfg if cfg is not None else _cfg()
+    espera, lim, prazo = float(c.get("gemini_espera_s", 90)), int(c.get("gemini_mem_abrir_mb", 1400)), float(c.get("gemini_mem_timeout_s", 600))
+    falta = ULTIMO_FECHAMENTO + espera - agora()
+    if ULTIMO_FECHAMENTO and falta > 0: _log(f"espera {falta:.0f}s"); dormir(falta)
+    t0 = agora()
+    while True:
+        m = mem()
+        if m is not None and m < lim: return m
+        if agora() - t0 > prazo: raise MemoriaAlta(f"Camofox em {m} MB ≥ {lim} MB por {prazo:.0f}s")
+        dormir(10)
+
+
 def config_pranchas() -> tuple[int, int]:
     """t545: (largura px de cada quadro, nº de anexos por pedido) de config/motores.json; padrão (360, 3)."""
     from ..motores import CONFIG
     try: d = json.loads(Path(CONFIG).read_text())
     except (OSError, ValueError): d = {}
-    return int(d.get("gemini_prancha_px", 360)), max(1, int(d.get("gemini_pranchas_por_pedido", 3)))
+    return int(d.get("gemini_prancha_px", 300)), max(1, int(d.get("gemini_pranchas_por_pedido", 2)))
 
 
 def grupos(itens: list, n: int) -> list[list]:
@@ -186,8 +219,10 @@ def ler_texto_resposta(tab: str) -> str:
 def perguntar_gemini(arquivos: list[str], prompt: str, espera_s: int = 420, marcador: str = '"cenas"') -> tuple[str, str]:
     """Nova conversa → anexa arquivos → cola prompt → envia → espera terminar. Devolve (texto, url da conversa)."""
     from .camofox_humano import clicar, escrever, pausa_humana
+    global ULTIMO_FECHAMENTO
+    m0 = aguardar_folga()
     tab = _api("POST", "/tabs", {"userId": "pqbr", "sessionKey": "gemini-auditor", "url": "https://gemini.google.com/app"})["tabId"]
-    _log("aba aberta", tab)
+    _log("aba aberta", tab, f"(camofox {m0} MB)")
     try:
         pausa_humana(2, 4)
         try: clicar(tab, ref=_ref(tab, r'button "Entendi"', 2))
@@ -238,6 +273,7 @@ def perguntar_gemini(arquivos: list[str], prompt: str, espera_s: int = 420, marc
     finally:
         try: _api("DELETE", f"/tabs/{tab}?userId=pqbr")
         except Exception: pass
+        ULTIMO_FECHAMENTO = time.time()
 
 
 def validar(texto: str, ids: list[str]) -> str:
@@ -283,7 +319,9 @@ def auditar(codigo: str, slug: str, quadros: list[str], falas: list[str], bloco_
                                    cenas if transmitir_texto else [], n,
                                    titulo=titulo if transmitir_texto else None,
                                    transmitir_texto=transmitir_texto)
-            txt, url = perguntar_gemini(arqs, prompt); urls.append(url)
+            try: txt, url = perguntar_gemini(arqs, prompt)
+            except RespostaRecusada as e: _log("recusa; nova tentativa:", str(e)[:80]); txt, url = "", ""   # t546: recusa = tentativa falha
+            urls.append(url)
             try:
                 ok = validar(txt, ids)
                 # Nunca aceite avaliação de imagem×fala/título quando esses dados não foram enviados.

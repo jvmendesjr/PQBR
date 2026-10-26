@@ -82,7 +82,7 @@ def auditar_loop(codigo: str, slug: str, quadros: list[str], falas: list[str], b
                      transmitir_texto=True, titulo=titulo).model_dump()
     prompt = montar_prompt(falas[0], falas[-1]); resp, urls = [], []
     for _ in range(rodadas_loop):
-        txt, url = perguntar_gemini([], prompt, espera_s=240, marcador='"ultima_continua_na_primeira"')
+        txt, url = perguntar_gemini([], prompt, espera_s=int(__import__("pqbr.workflows.auditor_gemini", fromlist=["x"])._cfg().get("gemini_loop_espera_s", 480)), marcador='"ultima_continua_na_primeira"')
         resp.append(txt); urls.append(url)
     from . import auditor_gemini as ag
     return combinar(codigo, visual, resp, urls).model_copy(update={"modelo": ag.ULTIMO_MODELO or visual.get("modelo", "")})

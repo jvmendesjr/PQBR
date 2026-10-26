@@ -5,6 +5,11 @@ Versionamento SemVer (MAJOR.MINOR.PATCH) a partir de t510. Versão do pacote can
 
 
 
+## [0.4.4] — 2026-10-25
+### Alterado
+- t546: o juiz Gemini espera `gemini_espera_s` (90 s) desde a última aba fechada e só abre aba nova com o `pqbr-camofox` abaixo de `gemini_mem_abrir_mb` (1400). Se não baixar, levanta `MemoriaAlta` após `gemini_mem_timeout_s` (600 s), com falha fechada. Pranchas: 2 por pedido, 300 px. Uma recusa conta como tentativa falha (1 nova tentativa). A espera do LOOP textual ficou configurável (`gemini_loop_espera_s` = 480 s; com 240 s estourou). Testes `test_gemini_memoria.py`.
+- Lote: olhos-da-cara chegou a completar as 2 rodadas VISUAL com o 3.8 Flash (pico de 1848 MB). O LOOP textual estourou 240 s. Na nova execução, a memória passou de 1,9 GB (1990 MB) na 1ª rodada e o lote parou. Gates regenerados: todos em P1_HOLD. Nada publicado.
+
 ## [0.4.3] — 2026-10-25
 ### Alterado
 - t545: pranchas do juiz Gemini com 360 px por quadro, todas do mesmo tamanho, compostas em grade (até 4 colunas) com o id de cada cena visível. São N pranchas por pedido (padrão 3), cobrindo todas as cenas. `gemini_prancha_px` e `gemini_pranchas_por_pedido` ficam em `config/motores.json`. Teste `test_gemini_pranchas.py`.
