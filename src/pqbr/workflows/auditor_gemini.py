@@ -37,6 +37,7 @@ class ResultadoAuditorGemini(BaseModel):
     erros_aceitaveis: int = 0
     persistido: bool = False
     texto_enviado: bool = False
+    modelo: str = ""
     conversas: list[str] = Field(default_factory=list)
     bruto: dict = Field(default_factory=dict)
 
@@ -60,6 +61,54 @@ class RespostaRecusada(RuntimeError):
 def _anexos_prontos(tab: str, n: int) -> bool:
     s = _snap(tab)
     return s.count('img "attachment"') >= n   # t543: previews no composer
+
+
+MODELO_PADRAO = "3.8 Flash"
+ULTIMO_MODELO = ""        # modelo confirmado no último envio (vai para o resultado)
+
+
+class ModeloIndisponivel(RuntimeError):
+    """Não foi possível selecionar/confirmar o modelo configurado. Falha fechada."""
+
+
+def modelo_configurado() -> str:
+    from ..motores import CONFIG
+    try: return str(json.loads(Path(CONFIG).read_text()).get("gemini_modelo") or MODELO_PADRAO)
+    except (OSError, ValueError): return MODELO_PADRAO
+
+
+def modelo_selecionado(snap: str) -> str | None:
+    """Do menu aberto: 'menuitem "Selecionado 3.1 Pro Raciocínio avançado"' → '3.1 Pro Raciocínio avançado'."""
+    m = re.search(r'menuitem "Selecionado ([^"]+)"', snap)
+    return m.group(1).strip() if m else None
+
+
+def ref_do_modelo(snap: str, modelo: str) -> str | None:
+    for m in re.finditer(r'menuitem "(?:Selecionado )?([^"]+)"[^\n]*?\[(e\d+)\]', snap):
+        if m.group(1).startswith(modelo + " ") or m.group(1) == modelo: return m.group(2)
+    return None
+
+
+SELETOR_MODO = 'button[aria-label^="Abrir seletor de modo"]'
+
+
+def selecionar_modelo(tab: str, modelo: str) -> str:
+    """Abre o seletor pelo rótulo, escolhe `modelo`, reabre e confirma o "Selecionado". Senão ModeloIndisponivel."""
+    from .camofox_humano import clicar, pausa_humana
+    clicar(tab, selector=SELETOR_MODO); pausa_humana(1.2, 2.2)
+    s = _snap(tab); atual = modelo_selecionado(s)
+    if not (atual and atual.startswith(modelo + " ")):
+        ref = ref_do_modelo(s, modelo)
+        if not ref:
+            _api("POST", f"/tabs/{tab}/press", {"userId": "pqbr", "key": "Escape"})
+            raise ModeloIndisponivel(f"modelo {modelo!r} não aparece no seletor")
+        clicar(tab, ref=ref); pausa_humana(1.2, 2.2)
+        clicar(tab, selector=SELETOR_MODO); pausa_humana(1.2, 2.2)
+        atual = modelo_selecionado(_snap(tab))
+    _api("POST", f"/tabs/{tab}/press", {"userId": "pqbr", "key": "Escape"}); pausa_humana(0.6, 1.2)
+    if not (atual and atual.startswith(modelo + " ")):
+        raise ModeloIndisponivel(f"selecionado {atual!r} ≠ {modelo!r}")
+    return modelo
 
 
 def _log(*a) -> None:
@@ -108,6 +157,9 @@ def perguntar_gemini(arquivos: list[str], prompt: str, espera_s: int = 420, marc
         pausa_humana(2, 4)
         try: clicar(tab, ref=_ref(tab, r'button "Entendi"', 2))
         except RuntimeError: pass
+        global ULTIMO_MODELO
+        ULTIMO_MODELO = ""
+        ULTIMO_MODELO = selecionar_modelo(tab, modelo_configurado()); _log("modelo confirmado:", ULTIMO_MODELO)
         if arquivos:   # t540: LOOP textual vai sem anexos
             clicar(tab, ref=_ref(tab, r'button "Envio e ferramentas"'))
             pausa_humana(0.8, 1.8)
@@ -226,7 +278,7 @@ def auditar(codigo: str, slug: str, quadros: list[str], falas: list[str], bloco_
         mot.append("título não enviado; correspondência da capa não avaliada")
         if veredito == "aprova":
             veredito = "aprova_com_ressalva"
-    return ResultadoAuditorGemini(veredito=veredito, motivos=mot or ["sem ressalvas"], rodadas=rodadas,
+    return ResultadoAuditorGemini(modelo=ULTIMO_MODELO, veredito=veredito, motivos=mot or ["sem ressalvas"], rodadas=rodadas,
                                   erros_aceitaveis=len(linhas), persistido=bool(persistir and linhas),
                                   texto_enviado=bool(transmitir_texto and (falas or bloco_visual or titulo)),
                                   conversas=urls, bruto={k: res[k] for k in ("metricas", "rodada_unica")})

@@ -17,7 +17,7 @@ VIS = {"veredito": "aprova", "motivos": [], "conversas": [], "bruto": {"metricas
 
 def test_loop_aprova_e_contrato_fechado():
     r = al.combinar("PQBR-EP1002", VIS, [OK, OK], [])
-    assert r.veredito == "aprova" and r.publicavel and r.versao == "1.0.0"
+    assert r.veredito == "aprova" and r.publicavel and r.versao == "1.1.0"
     with pytest.raises(Exception): al.ResultadoLoopGemini(codigo="X", imagem_fala="aprova", capa_titulo="aprova", loop_texto="aprova", veredito="aprova")
 
 

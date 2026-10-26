@@ -10,7 +10,7 @@ from typing import Literal
 from pydantic import BaseModel, ConfigDict, Field
 from temporalio import activity
 
-VERSAO = "1.0.0"
+VERSAO = "1.1.0"   # t544: + modelo
 Veredito = Literal["aprova", "aprova_com_ressalva", "terceira_rodada", "reprova"]
 ORDEM = ("reprova", "terceira_rodada", "aprova_com_ressalva", "aprova")
 
@@ -18,7 +18,8 @@ ORDEM = ("reprova", "terceira_rodada", "aprova_com_ressalva", "aprova")
 class ResultadoLoopGemini(BaseModel):
     """Contrato do resultado LOOP (v1.0.0). `publicavel` é derivado só pelo código."""
     model_config = ConfigDict(extra="forbid")
-    versao: Literal["1.0.0"] = VERSAO
+    versao: Literal["1.0.0", "1.1.0"] = VERSAO
+    modelo: str = ""   # modelo Gemini confirmado no seletor
     codigo: str = Field(pattern=r"^PQBR-EP[0-9]{4,}$")
     imagem_fala: Veredito
     capa_titulo: Veredito
@@ -83,7 +84,8 @@ def auditar_loop(codigo: str, slug: str, quadros: list[str], falas: list[str], b
     for _ in range(rodadas_loop):
         txt, url = perguntar_gemini([], prompt, espera_s=240, marcador='"ultima_continua_na_primeira"')
         resp.append(txt); urls.append(url)
-    return combinar(codigo, visual, resp, urls)
+    from . import auditor_gemini as ag
+    return combinar(codigo, visual, resp, urls).model_copy(update={"modelo": ag.ULTIMO_MODELO or visual.get("modelo", "")})
 
 
 @activity.defn

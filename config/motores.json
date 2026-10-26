@@ -2,5 +2,10 @@
  "_doc": "t513 (José): motores trocáveis por config; porta + contrato em src/pqbr/motores. intelectual: notebooklm. video: flow | notebooklm_video | google_vids | meta_vibes. t517: cadeia de fallback flow → google_vids → meta_vibes, só navegador e cotas já pagas; sem APIs.",
  "intelectual": "notebooklm",
  "video": "flow",
- "video_fallback": ["google_vids", "meta_vibes"]
+ "video_fallback": [
+  "google_vids",
+  "meta_vibes"
+ ],
+ "gemini_modelo": "3.8 Flash",
+ "_doc_gemini": "t544 (José 22:52): modelo do juiz Gemini web (LOOP e VISUAL), escolhido no seletor antes de cada envio; falha fechada se não confirmar."
 }
