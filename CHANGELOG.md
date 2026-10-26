@@ -5,6 +5,12 @@ Versionamento SemVer (MAJOR.MINOR.PATCH) a partir de t510. Versão do pacote can
 
 
 
+## [0.3.22] — 2026-10-25
+### Adicionado
+- lote-runway: `MANUS-MODELOS.md` (modelos de vídeo/imagem do Manus, estimativas da comunidade; Seedance 2.0 Fast falhou por confirmação de autoria no modo sem interação). `PRECO-RUNWAY.md` atualizado (gen-4-turbo 29/clipe medido, kling-3 49/clipe).
+### Removido
+- Encerramento do lote de saldo (José): Runway e Manus descartados para vídeo; volta ao fluxo ordinário (Fase 4V R1). Nada publicado.
+
 ## [0.3.21] — 2026-10-25
 ### Adicionado
 - ERR-ROT-02 (roteiro): narração fora da 3ª pessoa / personagem "falando" com a voz da narradora. Seed `db/seeds/seed_catalogo_erros_err_rot_02.sql` aplicado em `pqbr.catalogo_erros`; CATALOGO-ERROS atualizado.

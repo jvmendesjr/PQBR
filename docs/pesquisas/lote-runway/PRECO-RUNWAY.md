@@ -34,3 +34,21 @@ Projeção: ~12–13 clipes/Short × 29 ≈ 350–380 créditos → 1805 cabem ~
 ### Status (25/10/2026, 19:40 UTC-3) — José
 - **Saci REPROVADO e tema DESCARTADO de vez:** o personagem parecia falar com a voz da Larissa (ERR-ROT-02; a narração é sempre em 3ª pessoa e o personagem só reage), e o visual do gen-4-turbo foi reprovado. Artefatos movidos, sem apagar, para `docs/pesquisas/lote-runway/_descartado/` e `runtime/lote-runway/_descartado/`; o motivo está em `_descartado/MOTIVO.md`. Postgres: `temas_pendentes` id 31, status `falhou` + `metadados.descarte` (o check da tabela não tem `descartado`).
 - **Lote Runway SUSPENSO:** nenhuma geração paga até nova ordem.
+
+## Teste kling-3-standard — pagar-o-pato cena 1 (2026-10-25)
+
+Aprovado por José: 1 clipe único, sem repetição. Lote segue SUSPENSO.
+
+| Item | Valor |
+|---|---|
+| Keyframe | nano-banana-2.1, 1K, 9:16 (task 81005339…) |
+| Vídeo | kling-3-standard (taskType kling_3_0_standard, mode std), i2v, 5 s, 9:16, `sound: false` (task d18dd44f…) |
+| Saldo antes | 1486 (plano 1174 + comprado 312) |
+| Saldo depois | 1437 (plano 1125 + comprado 312) |
+| **Custo real** | **49 cr** (≈4 keyframe + ≈45 vídeo ⇒ ~9 cr/s) |
+| Saída | 716×1284, 24 fps, 5,04 s, sem trilha de áudio; freezedetect sem congelamentos |
+| Tempo | ~10 min na fila/render (98 % por vários minutos) |
+
+Arquivos: `runtime/lote-runway/pagar-o-pato/teste-kling3.mp4` (+ keyframe, sheet.png, faces.png).
+
+Avaliação: estilo cartum 2D plano fiel ao keyframe (contorno preto, cores chapadas), bem melhor que o gen-4-turbo. Personagem não fala nem faz lip sync; a boca muda de forma como reação (careta com dentes no início → "o" de espanto ~1,5–2,5 s → fechada no fim). Defeitos: zoom forte corta o vaso quebrado (contexto perdido), leve variação nos óculos/cabelo, resolução 716×1284 (abaixo de 720×1280 nativo exige upscale/pad), boca não fica 100 % fechada.
