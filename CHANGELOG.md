@@ -5,6 +5,14 @@ Versionamento SemVer (MAJOR.MINOR.PATCH) a partir de t510. Versão do pacote can
 
 
 
+## [0.10.0] — 2026-10-26
+### Adicionado
+- t90s398: `pqbr.storage.hindsight_tags` (regra única de tags, usada por `indexar.py` e `reclassificar.py`) + `tests/unit/test_hindsight_tags.py`.
+### Alterado
+- Política 1.2.0: indexador escreve as tags de conteúdo. ROADMAP/REFERENCIA com Paperclip histórico; AGENTES.md só com os 8 papéis (histórico em `docs/_obsoleto/agentes-equipe-14-t395.md`); `memoria:jev` corrigida. Teste F3-02 do Hindsight atualizado para `papel`/`tags`.
+### Removido
+- 231 documentos obsoletos do bank `pqbr` (backup antes; ids no doc de candidatos).
+
 ## [0.9.0] — 2026-10-26
 ### Adicionado
 - t90u: `scripts/hindsight/reclassificar.py` (tags por papel nos documentos legados do bank `pqbr`, `obsoleto_candidato` reversível, dry-run/idempotente) e `docs/operacao/hindsight-descarte-candidatos.md`.

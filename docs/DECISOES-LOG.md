@@ -590,3 +590,9 @@ NÃO CABE:
 - **Opção A — reclassificar:** `scripts/hindsight/reclassificar.py` (determinístico, idempotente, dry-run por padrão) deu tags de conteúdo da política 1.1.0 aos 947 documentos legados (origem do retain + palavras-chave) e autor `papel:indexador`. Nenhum documento ficou sem tag de leitura. Backup antes: `~/.pqbr/hindsight/backup/` (export do bank + JSON, 600).
 - **Obsoletos:** 220 documentos (1.303 unidades) marcados `obsoleto_candidato` (versão superada da fonte, decisão revogada sem fonte vigente, teste). **Nada apagado**; lista em `docs/operacao/hindsight-descarte-candidatos.md`. Apagar exige OK do José. Observações derivadas foram invalidadas pelo próprio Hindsight e se refazem na reconsolidação.
 
+## t90s398 (26/10/2026) — Docs corrigidos, regra única de tags e descarte no Hindsight
+- José aprovou (card t90s398): corrigir ROADMAP, AGENTES.md e `memoria:jev`; indexador com a mesma regra de tags; apagar as candidatas após a próxima indexação.
+- Docs: Paperclip marcado como histórico no ROADMAP (Fase 0.5, Fase 3, Riscos, Premissas, JEV-01) e na REFERENCIA §8; AGENTES.md fica só com os 8 papéis (equipe de 14 e mapa @prod-* movidos para `docs/_obsoleto/agentes-equipe-14-t395.md`); `memoria:jev` aponta a chave só no `~/.pqbr/worker.env` (600).
+- `pqbr.storage.hindsight_tags` é a regra única (indexador e reclassificação); política 1.2.0 deixa o indexador escrever as tags de conteúdo.
+- Indexação manual rodada (sem reinício); 0 seções vigentes faltando no bank. Descarte: 231 documentos apagados (backup antes), 7 mantidos para revisão. IDs em `docs/operacao/hindsight-descarte-candidatos.md`.
+
