@@ -5,6 +5,13 @@ Versionamento SemVer (MAJOR.MINOR.PATCH) a partir de t510. Versão do pacote can
 
 
 
+## [0.11.0] — 2026-10-26
+### Adicionado
+- t95u/t96u: ferramentas MCP `registrar_memoria` e `registrar_alteracao` (`pqbr.contratos.memoria_mcp` 1.0.0, `pqbr.mcp.escrita`), autor por cliente do token, commit verificado; `tests/unit/test_mcp_escrita.py`.
+### Alterado
+- Servidor MCP 0.2.0; onboarding e AGENTS.md com o protocolo obrigatório; `hindsight.reter` aceita `autor`; mapa 09 com a aresta MCP → Hindsight.
+- Guia de acesso com nota do MCP (commit do teste de agente do zero).
+
 ## [0.10.0] — 2026-10-26
 ### Adicionado
 - t90s398: `pqbr.storage.hindsight_tags` (regra única de tags, usada por `indexar.py` e `reclassificar.py`) + `tests/unit/test_hindsight_tags.py`.

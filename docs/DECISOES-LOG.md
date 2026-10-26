@@ -596,3 +596,7 @@ NÃO CABE:
 - `pqbr.storage.hindsight_tags` é a regra única (indexador e reclassificação); política 1.2.0 deixa o indexador escrever as tags de conteúdo.
 - Indexação manual rodada (sem reinício); 0 seções vigentes faltando no bank. Descarte: 231 documentos apagados (backup antes), 7 mantidos para revisão. IDs em `docs/operacao/hindsight-descarte-candidatos.md`.
 
+## t95u/t96u (26/10/2026) — Agentes externos registram memória pelo MCP
+- José pediu que as alterações de agentes externos sejam também memorizadas. O MCP deixa de ser só leitura: `registrar_memoria` e `registrar_alteracao` (esta exige commit existente), contrato Pydantic 1.0.0, via `hindsight.reter`.
+- Só escreve papel com escrita na política (o indexador não escreve pelo MCP); tags dentro das tags de escrita do papel, `obsoleto_candidato` proibida; autor `autor:<cliente>` vem do token, nunca do pedido; texto passa pela barreira de segredos.
+- Protocolo obrigatório no onboarding/AGENTS.md: onboarding → buscar_memoria antes de agir → commit local + DECISOES-LOG/CHANGELOG → registrar ao final. Servidor 0.2.0 (reinício só do `pqbr-mcp`). Teste de agente do zero aprovado.
