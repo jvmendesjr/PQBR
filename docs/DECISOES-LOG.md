@@ -584,3 +584,9 @@ NÃO CABE:
 ## t89u (26/10/2026) — Servidor MCP dentro da PQBR, só tailnet; saúde do Hindsight
 - José confirmou: o servidor MCP fica na própria aplicação; acesso autorizado só pela tailnet (127.0.0.1 + `tailscale serve`, nunca Funnel/0.0.0.0). Só leitura; papel por token de cliente; papel desconhecido ⇒ negado.
 - Hindsight verificado saudável (0.10.2, bank `pqbr` com 5.012 memórias). O filtro de tags funciona no servidor; as memórias legadas sem tag ficam fora da política.
+
+## t90u (26/10/2026) — Licença do GitNexus aceita; reclassificação do Hindsight por papel
+- **Licença GitNexus (PolyForm Noncommercial) aceita pelo José:** a PQBR é de uso pessoal, sem revenda nem inclusão em produto vendido. Pendência do ROADMAP encerrada.
+- **Opção A — reclassificar:** `scripts/hindsight/reclassificar.py` (determinístico, idempotente, dry-run por padrão) deu tags de conteúdo da política 1.1.0 aos 947 documentos legados (origem do retain + palavras-chave) e autor `papel:indexador`. Nenhum documento ficou sem tag de leitura. Backup antes: `~/.pqbr/hindsight/backup/` (export do bank + JSON, 600).
+- **Obsoletos:** 220 documentos (1.303 unidades) marcados `obsoleto_candidato` (versão superada da fonte, decisão revogada sem fonte vigente, teste). **Nada apagado**; lista em `docs/operacao/hindsight-descarte-candidatos.md`. Apagar exige OK do José. Observações derivadas foram invalidadas pelo próprio Hindsight e se refazem na reconsolidação.
+

@@ -339,7 +339,9 @@ Ref.: `docs/pesquisas/PESQUISA-extensoes-geracao-em-serie.md` (leitura liberada,
 - [x] **AGENTS.md gerado (t89u)** do onboarding do MCP.
 - [ ] Reclassificar com tags as ~4.975 memórias legadas sem tag [pendente decisão].
 - [ ] **Teste de agente do zero [pendente].**
-- [ ] Licença do GitNexus (Noncommercial × canal monetizado) [decisão do José].
+- [x] Licença do GitNexus aceita (uso pessoal, sem revenda; t90u).
+- [x] **Reclassificação do Hindsight por papel (t90u):** `scripts/hindsight/reclassificar.py`; 220 candidatas a descarte em `docs/operacao/hindsight-descarte-candidatos.md`.
+- [ ] Descarte das candidatas [OK do José] e revisão dos docs vigentes que ainda citam decisões revogadas (ROADMAP Fase 0.5/Paperclip, AGENTES equipe de 14).
 
 ## Anexo: fases e portões (ex-PLANO.md, incorporado em 11/10, t394)
 ### PLANO da PQBR (fases, portões e rollback)
