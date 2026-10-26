@@ -81,8 +81,15 @@ def auditar_loop(codigo: str, slug: str, quadros: list[str], falas: list[str], b
     visual = auditar(codigo, slug, quadros, falas, bloco_visual, capa, rodadas=2, persistir=persistir,
                      transmitir_texto=True, titulo=titulo).model_dump()
     prompt = montar_prompt(falas[0], falas[-1]); resp, urls = [], []
+    from .auditor_gemini import RespostaRecusada, _cfg
+    espera = int(_cfg().get("gemini_loop_espera_s", 480))
     for _ in range(rodadas_loop):
-        txt, url = perguntar_gemini([], prompt, espera_s=int(__import__("pqbr.workflows.auditor_gemini", fromlist=["x"])._cfg().get("gemini_loop_espera_s", 480)), marcador='"ultima_continua_na_primeira"')
+        txt, url = "", ""
+        for _t in range(2):   # t547: recusa = tentativa falha; 2ª falha → texto vazio → terceira_rodada (falha fechada)
+            try:
+                txt, url = perguntar_gemini([], prompt, espera_s=espera, marcador='"ultima_continua_na_primeira"'); break
+            except RespostaRecusada:
+                txt, url = "", ""
         resp.append(txt); urls.append(url)
     from . import auditor_gemini as ag
     return combinar(codigo, visual, resp, urls).model_copy(update={"modelo": ag.ULTIMO_MODELO or visual.get("modelo", "")})

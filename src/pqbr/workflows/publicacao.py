@@ -159,13 +159,18 @@ async def pub_upload_privado(p: dict, codigo: str, video: str, sha: str) -> dict
         return {"video_id": it.get("video_id"), "privacidade": "private", "idempotente": True, "simulado": not _real()}
     yt.conferir_hash(video, sha)
     from ..storage.banco import conectar
+    if _real() and not yt.real_para(codigo):   # t69s317: escopo mínimo
+        raise ApplicationError(f"{codigo} fora de PQBR_PUBLICACAO_REAL_CODIGOS", non_retryable=True)
+    if _real() and not yt.credenciais_presentes():
+        raise ApplicationError("credenciais OAuth do YouTube ausentes no worker (LACUNA)", non_retryable=True)
     if _real():
         with conectar() as c:
             if c.execute("select 1 from pqbr.temas_publicados where codigo=%s", (codigo,)).fetchone():
                 raise ApplicationError("código já publicado (duplicata)", non_retryable=True)
     dup = yt.buscar_no_canal(codigo)
     if dup: raise ApplicationError(f"duplicata no canal: {dup}", non_retryable=True)
-    corpo = yt.montar_corpo(codigo, p["titulo"], p["descricao"], p.get("tags", []))
+    corpo = yt.montar_corpo(codigo, p["titulo"], p["descricao"], p.get("tags", []),
+                            publish_at=datetime.fromisoformat(it["horario"]).astimezone(ZoneInfo("UTC")).strftime("%Y-%m-%dT%H:%M:%SZ") if it.get("horario") else None)
     r = yt.enviar_privado(video, corpo, codigo)
     _salvar_item(codigo, {**it, "estado": "enviado_privado", "video_id": r.get("video_id")})
     return r
@@ -175,6 +180,8 @@ async def pub_upload_privado(p: dict, codigo: str, video: str, sha: str) -> dict
 async def pub_privacidade(codigo: str, privacidade: str, motivo: str, autor: str, origem: str) -> dict:
     from ..integrations import youtube as yt
     it = _item(codigo) or {}
+    if _real() and not yt.real_para(codigo):
+        raise ApplicationError(f"{codigo} fora de PQBR_PUBLICACAO_REAL_CODIGOS", non_retryable=True)
     r = yt.definir_privacidade(it.get("video_id"), privacidade)
     estado = "publicado" if privacidade == "public" else ("revertido" if origem == "sinal" else "privado")
     _salvar_item(codigo, {**it, "estado": estado})

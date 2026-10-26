@@ -12,7 +12,7 @@
  "gemini_pranchas_por_pedido": 2,
  "_doc_pranchas": "t545: largura de cada quadro rotulado e nº de pranchas compostas por pedido (memória do Camofox).",
  "gemini_espera_s": 90,
- "gemini_mem_abrir_mb": 1400,
+ "gemini_mem_abrir_mb": 1800,
  "gemini_mem_timeout_s": 600,
  "_doc_memoria": "t546: espera mínima entre abas do juiz (s) e só abre aba nova com o serviço pqbr-camofox abaixo de gemini_mem_abrir_mb; senão MemoriaAlta (falha fechada) após gemini_mem_timeout_s.",
  "gemini_loop_espera_s": 480

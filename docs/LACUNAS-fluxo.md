@@ -53,3 +53,14 @@ Feito pelo agente externo (Grok Bot). Sem vídeo, imagem ou voz gerados e sem pu
 - Os 9 `<tema>-pronto.mp4` não têm código `PQBR-EP`: sem `drive_enviar` e sem registro de episódio no Postgres. Identificador provisório `lote-2510/<tema>`; registro em `docs/pesquisas/lote-2510/<slug>/gate-pronto.json`. → José define os códigos; depois Drive/Postgres pelo fluxo.
 - Gate: juiz Gemini (VISUAL+LOOP) e pacote editorial (título/descrição/tags) ausentes na produção externa → todos P1_HOLD.
 - Sting final ainda usa logo stickman v1 (placeholder) — trabalho de produção do logo 2D.
+
+## Lacuna publicação real pelo flow (t69s317/t70, 25/10/2026)
+- **Credenciais OAuth do YouTube ausentes no worker:** `integrations/youtube.py` lê `YOUTUBE_CLIENT_ID`, `YOUTUBE_CLIENT_SECRET` e `YOUTUBE_REFRESH_TOKEN` do ambiente, mas nenhum env file dos workers (`~/.pqbr/secrets/episodio.env`, `~/.pqbr/worker.env`, `.env`) tem essas chaves. O OAuth existente está só no conector MCP `youtube-shorts`, fora do Temporal. → O José coloca as 3 chaves (escopo `youtube.upload` + `youtube.readonly`, mesmo canal Porquê BR) em `~/.pqbr/secrets/episodio.env` (chmod 600); o agente nunca as lê nem imprime. Até lá, `pub_upload_privado` em modo real falha fechado ("credenciais OAuth do YouTube ausentes").
+- **Agendamento:** corrigido no flow. O upload vai `private` + `status.publishAt` (próxima janela 11:40/18:35 America/Fortaleza), e o workflow confirma a janela.
+- **Escopo do modo real:** corrigido no flow. `PQBR_PUBLICACAO_REAL_CODIGOS` (lista de códigos), e fora dela modo real = erro não retentável.
+- **Registro no worker:** corrigido. `PublicacaoAgendadaWorkflow`, `ControlePublicacaoWorkflow` e `ATIVIDADES_PUBLICACAO` agora no `worker_episodio` (fila `episodio-pqbr`). Falta reiniciar.
+- **Aviso Telegram pelo outbox no worker do episódio:** o `pqbr-episodio-worker` não tem o drop-in `telegram.conf` (só o `pqbr-temporal-worker` tem). O aviso real pode sair como "desligado"; é melhor esforço e não bloqueia.
+
+## Testes pendentes pós-fluxo (t71u–t72u, só registro, não executar agora)
+1. **LOOP do Gemini por cena:** julgar cada cena separadamente, depois uma consolidação final só em texto (capa×título). O gate reprova se qualquer cena reprovar. Comparar com o método atual em tempo, memória e qualidade.
+2. **Modelo:** 4 Argon com raciocínio baixo vs 3.8 Flash no mesmo lote.

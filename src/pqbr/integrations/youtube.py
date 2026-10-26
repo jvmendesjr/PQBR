@@ -19,6 +19,19 @@ def modo_real() -> bool:
             and os.environ.get("PQBR_PUBLICACAO_REAL") == "1")
 
 
+def codigos_reais() -> set[str]:
+    """t69s317: envio real só para os códigos listados (escopo mínimo). Vazio = nenhum."""
+    return {c.strip() for c in os.environ.get("PQBR_PUBLICACAO_REAL_CODIGOS", "").split(",") if c.strip()}
+
+
+def real_para(codigo: str) -> bool:
+    return modo_real() and codigo in codigos_reais()
+
+
+def credenciais_presentes() -> bool:
+    return all(os.environ.get(k) for k in ("YOUTUBE_CLIENT_ID", "YOUTUBE_CLIENT_SECRET", "YOUTUBE_REFRESH_TOKEN"))
+
+
 def sha256(arquivo: str) -> str:
     h = hashlib.sha256()
     with open(arquivo, "rb") as f:
@@ -31,7 +44,7 @@ def conferir_hash(arquivo: str, esperado: str) -> None:
     if real != esperado: raise ValueError(f"hash diverge do gate: {real[:12]} != {esperado[:12]}")
 
 
-def montar_corpo(codigo: str, titulo: str, descricao: str, tags: list[str]) -> dict:
+def montar_corpo(codigo: str, titulo: str, descricao: str, tags: list[str], publish_at: str | None = None) -> dict:
     if not CODIGO.match(codigo): raise ValueError("código PQBR-EP inválido")
     if not titulo or len(titulo) > 100: raise ValueError("título inválido")
     desc = descricao if codigo in descricao else f"{descricao.rstrip()}\n\n{codigo}"
@@ -40,7 +53,8 @@ def montar_corpo(codigo: str, titulo: str, descricao: str, tags: list[str]) -> d
     return {"snippet": {"title": titulo, "description": desc[:5000], "tags": tg, "categoryId": CATEGORIA,
                         "defaultLanguage": "pt-BR", "defaultAudioLanguage": "pt-BR"},
             "status": {"privacyStatus": "private", "selfDeclaredMadeForKids": False, "containsSyntheticMedia": True,
-                       "embeddable": True, "license": "youtube"}}
+                       "embeddable": True, "license": "youtube",
+                       **({"publishAt": publish_at} if publish_at else {})}}   # t70: agendado pelo YouTube; segue private até lá
 
 
 def _token() -> str:
