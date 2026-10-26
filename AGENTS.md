@@ -11,7 +11,7 @@ Este arquivo é o ponto de entrada operacional para trabalho no checkout. Ele n�
 1. Leia `docs/README.md` para localizar documentos e distinguir os roadmaps.
 2. Para trabalho geral, siga a ordem autoritativa indicada em `docs/REGRAS.md` §0: REGRAS → SPEC → ARQUITETURA → TESTES → ROADMAP. Preserve decisões e gates; em conflito, vale o documento de maior autoridade.
 3. Para uma tarefa de vídeo, leia `docs/blueprints/modulo-producao-video/README.md`, depois o blueprint e o roadmap do módulo. Esse roadmap é auxiliar: o estado global continua em `docs/ROADMAP.md`.
-4. Canal do José: Telegram (Hermes `pqbr`) + sinais do Temporal; painel: Temporal UI (t471/t474). Agentes: PydanticAI em activities do Temporal (ADR-011); o Paperclip está sendo retirado.
+4. Canal do José: Telegram (bot próprio do PQBR, t538) + sinais do Temporal; painel: Temporal UI (t471/t474). Agentes: PydanticAI em activities do Temporal (ADR-011); o Paperclip está sendo retirado.
 5. Trate relatórios em `docs/sdd/` como snapshots: confira data e status antes de usá-los como estado atual.
 
 ## Regras de segurança e escopo
@@ -38,7 +38,14 @@ Este arquivo é o ponto de entrada operacional para trabalho no checkout. Ele n�
 
 ## Conexão MCP
 
-Servidor MCP da PQBR (só leitura, só tailnet): porta HTTPS 8791 do host pc na tailnet (nome MagicDNS fora do repo), caminho /mcp, Streamable HTTP, Bearer token por cliente. Ferramentas: onboarding, buscar_memoria, codigo, estado — conforme o papel.
+Servidor MCP da PQBR (só tailnet): porta HTTPS 8791 do host pc na tailnet (nome MagicDNS fora do repo), caminho /mcp, Streamable HTTP, Bearer token por cliente. Ferramentas conforme o papel: onboarding, buscar_memoria, codigo, estado (leitura) e registrar_memoria, registrar_alteracao (única escrita: Hindsight).
+
+## Protocolo obrigatório do agente externo (t95u/t96u)
+
+1. `onboarding` (este pacote).
+2. `buscar_memoria` sobre o assunto antes de agir; em conflito, vale o doc canônico.
+3. Implementar no checkout com commit local (sem push) e registrar a decisão em docs/DECISOES-LOG.md e a versão em CHANGELOG.md (SemVer).
+4. Ao final, `registrar_alteracao` com o hash do commit (ou `registrar_memoria` se não houve commit), citando arquivos. Sem esse registro a alteração não conta como entregue.
 
 ## BRIEFING
 
@@ -131,24 +138,6 @@ t531 · 24/10/2026 · pedido do José. **Só leitura e proposta.** **Atualizaç�
 
 ## Decisões recentes
 
-## t473 (23/10/2026) — Contrato editorial v2 oficial
-- José aprovou: o v2 (aprovado no G7, t468) vira `docs/CONTRATO-EDITORIAL.md`; o v1 vai para `docs/_obsoleto/CONTRATO-EDITORIAL-v1.md`. As seções do v1 que seguem canônicas (tom, categorias, gabarito, duração, diretrizes, §15–§17 com o bloco §16.7) foram anexadas sem alteração (Anexo A). O contrato deixa de ser "rascunho de leitura restrita".
-
-
-## t474 (23/10/2026) — Revogação da t464 (Discord) e ADR-011
-- José revogou a t464: **não** haverá canal Discord/Paperclip. O canal é o **Telegram (Hermes `pqbr`)**, as aprovações são **sinais do Temporal** e o painel é a **Temporal UI** (t471). Reescritos: REGRAS, SPEC, ARQUITETURA (ADR-003 vigente, ADR-009 revogada), AGENTES, LACUNAS, RESUMO-STACK, AGENTS.md, README, SOUL-rascunho do Hermes, índice `docs/README.md`.
-- Nova **ADR-011** (`docs/sdd/adr-011-agentes-pydanticai-temporal.md`): agentes PydanticAI (Pydantic v2) dentro de activities do Temporal; substitui a ADR-002; Paperclip em retirada (código dele não alterado; `infra/paperclip-db/` mantido por ora). Personas e playbooks de `company/` continuam.
-- Guia de acesso renomeado para `docs/operacao/GUIA-ACESSO-PC-TEMPORAL.md`, sem a parte do Paperclip. `docs/sdd/teste-e2e-short-1.md` sem caderno mestre, `rede` ou issue do Paperclip.
-
-
-## t475 (23/10/2026) — Primeira migração ADR-011 (t510)
-- José autorizou (t510) gerar nova versão do pacote canônico e deixar de fora as seções do v1 não usadas; e seguir com a migração.
-- `ReposicaoTemasWorkflow` passa a usar o Líder Editorial em PydanticAI dentro de activity; escrita no Postgres em activity separada; sem Paperclip. Fábrica em `src/pqbr/agents/`.
-- 9router: porta 20130 mantida (a 20128 também serve `/v1`, mas mapeia os combos para outros modelos).
-- Run preso `pqbr-reposicao-temas-wf-2026-10-13T03:30:00Z` encerrado (terminate); run real `repor-temas-t510-manual` inseriu 1 tema (grade em 28).
-- Alerta de run preso só no journal até o bot `pqbr` ter token de entrega. SemVer adotado no CHANGELOG (0.2.0).
-
-
 ## t476 (24/10/2026) — NotebookLM motor, sistema modular, Temporal sistema nervoso, 8 papéis (t512–t514)
 - **t512:** NotebookLM é o centro nervoso e o motor do canal (decisões, temas, roteiros, direção); a produção depende dos caminhos que ele norteia. A geração de vídeo saiu do NotebookLM por determinismo (Flow primário). Corrigida a linha do CONTRATO que dizia que o NotebookLM gera o vídeo (muda o hash do pacote; autorizado em t510).
 - **t512:** `ReposicaoTemasWorkflow`: temas propostos pelo motor (NotebookLM, caderno efêmero semanal, nunca mestre, sessão do Camofox 9387, `NOTEBOOKLM_DISABLE_KEEPALIVE_POKE=1`, `NOTEBOOKLM_HEADLESS_REAUTH=0`); o Líder Editorial (PydanticAI) só monta o pedido, interpreta, filtra e valida em `PropostaTemas`.
@@ -160,6 +149,25 @@ t531 · 24/10/2026 · pedido do José. **Só leitura e proposta.** **Atualizaç�
 - **t84u–t85u:** um bank só (`pqbr`); cada papel só lê/escreve as tags e só vê o código que `config/politica_papeis.json` libera; papel desconhecido ⇒ negado. GitNexus vira pré-requisito de instalação como Hindsight e Camofox.
 - **t86u:** GitNexus é de uso global do servidor (compartilhado), instalado fora do repo; a PQBR só registra o índice dela e declara o pré-requisito. Versão 1.6.12 em `~/.local/opt/node22` (wrapper `~/.local/bin/gitnexus`), informar ao jr.
 - Risco registrado: licença PolyForm Noncommercial.
+
+
+## t89u (26/10/2026) — Servidor MCP dentro da PQBR, só tailnet; saúde do Hindsight
+- José confirmou: o servidor MCP fica na própria aplicação; acesso autorizado só pela tailnet (127.0.0.1 + `tailscale serve`, nunca Funnel/0.0.0.0). Só leitura; papel por token de cliente; papel desconhecido ⇒ negado.
+- Hindsight verificado saudável (0.10.2, bank `pqbr` com 5.012 memórias). O filtro de tags funciona no servidor; as memórias legadas sem tag ficam fora da política.
+
+
+## t90u (26/10/2026) — Licença do GitNexus aceita; reclassificação do Hindsight por papel
+- **Licença GitNexus (PolyForm Noncommercial) aceita pelo José:** a PQBR é de uso pessoal, sem revenda nem inclusão em produto vendido. Pendência do ROADMAP encerrada.
+- **Opção A — reclassificar:** `scripts/hindsight/reclassificar.py` (determinístico, idempotente, dry-run por padrão) deu tags de conteúdo da política 1.1.0 aos 947 documentos legados (origem do retain + palavras-chave) e autor `papel:indexador`. Nenhum documento ficou sem tag de leitura. Backup antes: `~/.pqbr/hindsight/backup/` (export do bank + JSON, 600).
+- **Obsoletos:** 220 documentos (1.303 unidades) marcados `obsoleto_candidato` (versão superada da fonte, decisão revogada sem fonte vigente, teste). **Nada apagado**; lista em `docs/operacao/hindsight-descarte-candidatos.md`. Apagar exige OK do José. Observações derivadas foram invalidadas pelo próprio Hindsight e se refazem na reconsolidação.
+
+
+## t90s398 (26/10/2026) — Docs corrigidos, regra única de tags e descarte no Hindsight
+- José aprovou (card t90s398): corrigir ROADMAP, AGENTES.md e `memoria:jev`; indexador com a mesma regra de tags; apagar as candidatas após a próxima indexação.
+- Docs: Paperclip marcado como histórico no ROADMAP (Fase 0.5, Fase 3, Riscos, Premissas, JEV-01) e na REFERENCIA §8; AGENTES.md fica só com os 8 papéis (equipe de 14 e mapa @prod-* movidos para `docs/_obsoleto/agentes-equipe-14-t395.md`); `memoria:jev` aponta a chave só no `~/.pqbr/worker.env` (600).
+- `pqbr.storage.hindsight_tags` é a regra única (indexador e reclassificação); política 1.2.0 deixa o indexador escrever as tags de conteúdo.
+- Indexação manual rodada (sem reinício); 0 seções vigentes faltando no bank. Descarte: 231 documentos apagados (backup antes), 7 mantidos para revisão. IDs em `docs/operacao/hindsight-descarte-candidatos.md`.
+
 
 
 ## Estado do ROADMAP
@@ -192,10 +200,14 @@ t531 · 24/10/2026 · pedido do José. **Só leitura e proposta.** **Atualizaç�
 ## Fase: Conhecimento e agente externo agnóstico (t84u–t86u, 26/10/2026)
 - [x] **GitNexus [agora]:** global no servidor (1.6.12, fora do repo), índice da PQBR registrado, reindex no post-commit, pré-requisito fail-closed. ARQUITETURA §12.
 - [x] **Política por papel [agora]:** `config/politica_papeis.json` + filtro no Hindsight e no adaptador GitNexus.
-- [ ] **Servidor MCP da PQBR só na tailnet [pendente OK do José].**
-- [ ] **AGENTS.md gerado [pendente].**
+- [x] **Servidor MCP da PQBR só na tailnet (t89u, OK do José):** `pqbr-mcp`, 127.0.0.1:8791 + tailscale serve, só leitura, token por cliente.
+- [x] **AGENTS.md gerado (t89u)** do onboarding do MCP.
+- [ ] Reclassificar com tags as ~4.975 memórias legadas sem tag [pendente decisão].
 - [ ] **Teste de agente do zero [pendente].**
-- [ ] Licença do GitNexus (Noncommercial × canal monetizado) [decisão do José].
+- [x] Licença do GitNexus aceita (uso pessoal, sem revenda; t90u).
+- [x] **Reclassificação do Hindsight por papel (t90u):** `scripts/hindsight/reclassificar.py`; 220 candidatas a descarte em `docs/operacao/hindsight-descarte-candidatos.md`.
+- [x] Descarte das candidatas (t90s398): 231 apagadas após a indexação; docs vigentes corrigidos; indexador com a regra única de tags.
+- [ ] Revisar as 7 candidatas mantidas (sem substituta direta).
 
 
 ## LACUNAS (início)

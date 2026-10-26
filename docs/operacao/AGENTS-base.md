@@ -7,7 +7,7 @@ Este arquivo é o ponto de entrada operacional para trabalho no checkout. Ele n�
 1. Leia `docs/README.md` para localizar documentos e distinguir os roadmaps.
 2. Para trabalho geral, siga a ordem autoritativa indicada em `docs/REGRAS.md` §0: REGRAS → SPEC → ARQUITETURA → TESTES → ROADMAP. Preserve decisões e gates; em conflito, vale o documento de maior autoridade.
 3. Para uma tarefa de vídeo, leia `docs/blueprints/modulo-producao-video/README.md`, depois o blueprint e o roadmap do módulo. Esse roadmap é auxiliar: o estado global continua em `docs/ROADMAP.md`.
-4. Canal do José: Telegram (Hermes `pqbr`) + sinais do Temporal; painel: Temporal UI (t471/t474). Agentes: PydanticAI em activities do Temporal (ADR-011); o Paperclip está sendo retirado.
+4. Canal do José: Telegram (bot próprio do PQBR, t538) + sinais do Temporal; painel: Temporal UI (t471/t474). Agentes: PydanticAI em activities do Temporal (ADR-011); o Paperclip está sendo retirado.
 5. Trate relatórios em `docs/sdd/` como snapshots: confira data e status antes de usá-los como estado atual.
 
 ## Regras de segurança e escopo

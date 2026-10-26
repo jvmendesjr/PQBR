@@ -24,18 +24,19 @@ def test_papel_desconhecido_negado():
 
 
 def test_ferramentas_por_papel():
-    assert set(S.ferramentas_do_papel("mantenedor")) == {"onboarding", "buscar_memoria", "codigo", "estado"}
+    assert set(S.ferramentas_do_papel("mantenedor")) == {"onboarding", "buscar_memoria", "codigo", "estado", "registrar_memoria", "registrar_alteracao"}
     assert S.ferramentas_do_papel("indexador") == ["onboarding"]
     assert "codigo" not in S.ferramentas_do_papel("auditor")
 
 
-def test_sem_ferramenta_de_escrita():
-    assert not any(k in n for n in S.FERR for k in ("registrar", "criar", "enfileirar", "comentar", "status"))
+def test_unica_escrita_e_memoria():
+    escrita = {n for n in S.FERR if any(k in n for k in ("registrar", "criar", "enfileirar", "comentar", "status"))}
+    assert escrita == {"registrar_memoria", "registrar_alteracao"}
 
 
 def test_jsonrpc_list_e_call():
     r = S.tratar({"jsonrpc": "2.0", "id": 1, "method": "tools/list"}, "auditor", IMPL)
-    assert {t["name"] for t in r["result"]["tools"]} == {"onboarding", "buscar_memoria"}
+    assert {t["name"] for t in r["result"]["tools"]} == {"onboarding", "buscar_memoria", "registrar_memoria", "registrar_alteracao"}
     r = S.tratar({"jsonrpc": "2.0", "id": 2, "method": "tools/call", "params": {"name": "codigo", "arguments": {}}}, "auditor", IMPL)
     assert r["result"]["isError"] and "negado" in r["result"]["content"][0]["text"]
     r = S.tratar({"jsonrpc": "2.0", "id": 3, "method": "tools/call", "params": {"name": "buscar_memoria", "arguments": {"consulta": "q"}}}, "auditor", IMPL)
