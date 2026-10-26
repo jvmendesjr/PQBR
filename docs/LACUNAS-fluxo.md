@@ -64,3 +64,11 @@ Feito pelo agente externo (Grok Bot). Sem vídeo, imagem ou voz gerados e sem pu
 ## Testes pendentes pós-fluxo (t71u–t72u, só registro, não executar agora)
 1. **LOOP do Gemini por cena:** julgar cada cena separadamente, depois uma consolidação final só em texto (capa×título). O gate reprova se qualquer cena reprovar. Comparar com o método atual em tempo, memória e qualidade.
 2. **Modelo:** 4 Argon com raciocínio baixo vs 3.8 Flash no mesmo lote.
+
+## Lacuna storyboard (t75u–t77u, 26/10/2026), auditoria do lote 2510
+- (a) Storyboard geral: **parcial**. O `cenas.md` de cada tema tem bloco de estilo + ficha de personagem, mas não tem norte geral do episódio.
+- (b) Revisão das imagens antes do vídeo: **não**. O `producao.json` vai de 8 imagens (Higgsfield flux, âncora cena 1) direto aos clipes (Seedance/Runway). O juiz Gemini só viu o vídeo pronto.
+- (c) Storyboard por cena com norte/início/fim: **não**. As 67 fichas têm só "Fala" e "Prompt visual"; não há norte, início, fim nem frame final.
+- (d) Prompt por cena: **parcial**. Há prompt de imagem por cena, mas a animação usou sufixo genérico ("Flat 2D cartoon, bold black outlines…"), sem prompt de movimento por cena, sem "lips closed" e sem plano nomeado.
+- Extensões e tutoriais (`PESQUISA-extensoes-geracao-em-serie.md`, t529: VEO Automation, Flow Queue, Flow Automator, AutoFlow, GUÍA VOX): **não seguidos**. O lote 2510 foi gerado no Higgsfield e no Runway, sem Flow, sem manifesto JSONL e sem rótulo `<ep>_cNN`.
+- → Implementado: contrato `FichaCena`/`Storyboard` 1.0.0 + testes. Falta: (1) uma activity que gere o Storyboard (NotebookLM → fichas) e bloqueie a geração sem ele; (2) o VISUAL do juiz Gemini ganhar 3 critérios fail-closed: `personagem_mexe_labios`, `corte_oculos_cabeca`, `grotesco` (muda o schema do JSON do juiz, então fica para a próxima versão do `auditor_gemini`).

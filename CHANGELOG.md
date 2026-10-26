@@ -5,6 +5,14 @@ Versionamento SemVer (MAJOR.MINOR.PATCH) a partir de t510. Versão do pacote can
 
 
 
+## [0.5.0] — 2026-10-26
+### Adicionado
+- t75u–t77u: contrato `contratos/storyboard.py` (`FichaCena`/`Storyboard` 1.0.0), com ficha numerada e rotulada, norte/início/fim, refs `ASSET_*`, "lips closed", proibição de framing descritivo e de fala no prompt, personagem observador ou caracterizado no passado, e vídeo só com imagens revisadas. Testes `test_storyboard.py`.
+- CONTRATO-EDITORIAL §18 e REGRAS §25; pesquisa `docs/pesquisas/flow-storyboard-por-cena.md`.
+### Alterado
+- EP1002 olhos-da-cara descartado (reversível); o tema voltou a `proposto`.
+- 0.4.5: publicação agendada com publishAt, escopo por código e registro no worker do episódio. Upload real bloqueado: sem OAuth (2SV pendente).
+
 ## [0.4.4] — 2026-10-25
 ### Alterado
 - t546: o juiz Gemini espera `gemini_espera_s` (90 s) desde a última aba fechada e só abre aba nova com o `pqbr-camofox` abaixo de `gemini_mem_abrir_mb` (1400). Se não baixar, levanta `MemoriaAlta` após `gemini_mem_timeout_s` (600 s), com falha fechada. Pranchas: 2 por pedido, 300 px. Uma recusa conta como tentativa falha (1 nova tentativa). A espera do LOOP textual ficou configurável (`gemini_loop_espera_s` = 480 s; com 240 s estourou). Testes `test_gemini_memoria.py`.

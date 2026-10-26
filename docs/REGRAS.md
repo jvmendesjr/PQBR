@@ -283,3 +283,6 @@ _Origem do bloco: t240–t242._
 - Transição: o perfil Hermes `rede` é **pausado quando a PQBR estiver definida**; daí em diante usa-se o perfil `pqbr`. Até lá, o `rede` deixa de ter automação/cron e roda só sob demanda. [07/10 rodada 2; t327] _(Fluxo de ticket inter-org com a core-eng: SUPERADO por t284/t286.)_
 - Dúvida não se adivinha: "EM CONSTRUÇÃO — aguardando José". [t323]
 - Arquivos de pré-construção não são consultados pelos agentes especialistas sem aprovação do José; o agente PQBR (auxiliar do José) lê tudo. [t287; t536]
+
+## 25. Storyboard e personagem (t75u)
+Ver CONTRATO-EDITORIAL §18: storyboard geral + ficha por cena + prompt por cena antes de gerar; imagens revisadas antes do vídeo; personagem observador ou caracterizado da época no passado; nunca mexe os lábios; sem corte de óculos ou cabeça; nada grotesco.
