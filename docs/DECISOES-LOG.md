@@ -609,3 +609,7 @@ NÃO CABE:
 - José aprovou ("isso mesmo, e garanta que atualize a cada correção ou solução de pendências"). `docs/ESTADO-ATUAL.md` é a fonte única de onde estamos, do próximo passo e das pendências (dono/bloqueio). Aponta os ids do ROADMAP sem repetir; a seção "Estado em 26/10" do ROADMAP vira histórico.
 - Garantia determinística: o hook pre-commit recusa commit que toca ROADMAP/LACUNAS/DECISOES-LOG/CHANGELOG sem o ESTADO-ATUAL (commit trivial não é afetado); `registrar_alteracao` 1.1.0 com `tipo` correcao/pendencia_resolvida exige o ESTADO-ATUAL no commit e sempre grava um handoff (tag `estado`) com o próximo passo vigente.
 - Política 1.3.0: tag `estado` lida por todos os papéis. ESTADO-ATUAL é a 1ª seção do onboarding/AGENTS.md e entra no indexador. MCP 0.3.0.
+
+## t101u (26/10/2026) — Inovações do dia no mapa; publicação depois
+- Novo diagrama `docs/mapa/13-memoria-mcp-handoff.mmd` (Hindsight por papel, hindsight_tags e descarte, GitNexus global + instância PQBR, pqbr-mcp, ESTADO-ATUAL + hook + handoff, branch no GitHub). O 09 só aponta para o 13; a visão geral 00 ganhou o nó. ARQUITETURA §12 completada (tags, escrita MCP, handoff).
+- José: seguir a ordem do ESTADO-ATUAL e publicar os vídeos prontos só depois de analisá-los pessoalmente.

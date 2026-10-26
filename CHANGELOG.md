@@ -5,6 +5,10 @@ Versionamento SemVer (MAJOR.MINOR.PATCH) a partir de t510. Versão do pacote can
 
 
 
+## [0.12.1] — 2026-10-26
+### Alterado
+- t101u: mapa 13 (memória, MCP e handoff); 09 e 00 apontam para ele; ARQUITETURA §12 completada.
+
 ## [0.12.0] — 2026-10-26
 ### Adicionado
 - t98u/t99u: `docs/ESTADO-ATUAL.md`; `pqbr.governanca.estado_atual` + `scripts/seguranca/verificar_estado_atual.py` no pre-commit; `registrar_alteracao` 1.1.0 (`tipo`, `handoff`, handoff no Hindsight); `tests/unit/test_estado_atual.py`.
