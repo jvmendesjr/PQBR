@@ -5,6 +5,10 @@ Versionamento SemVer (MAJOR.MINOR.PATCH) a partir de t510. Versão do pacote can
 
 
 
+## [0.7.0] — 2026-10-26
+### Adicionado
+- t84u–t86u: `config/politica_papeis.json` + `pqbr.contratos.politica` (papel desconhecido ⇒ negado); `storage.hindsight.reter` exige `papel`/`tags` e novo `recuperar` filtrado; `integrations/gitnexus.py` filtra por caminho; `scripts/gitnexus/verificar.sh` (pré-requisito fail-closed) e reindex no post-commit. GitNexus 1.6.12 global, fora do repo.
+
 ## [0.6.1] — 2026-10-26
 ### Alterado
 - t79u: `Storyboard`/`FichaCena` 1.2.0 com protagonista único e campo `coadjuvante` (outro membro do elenco) com justificativa obrigatória. Ficha feminina: morena, cabelo liso, penteados variados, mais baixa. CONTRATO-EDITORIAL §18.10, REGRAS §25, mapa 12, index regenerado.

@@ -74,7 +74,7 @@ async def arquivar_teste_3copias(caderno: str, rotulo: str, arquivos: list[str],
     texto = f"Caderno de teste descartado {caderno} ({rotulo}). Motivo: {motivo}. Arquivado em Drive 00_Biblia_Visual/cadernos-teste, {REPO_ARQ} e pqbr.arquivo_caderno:\n{resumo}"
     for f in arqs:
         if f.suffix in (".md", ".json"): texto += f"\n\n## {f.name}\n" + f.read_text(errors="replace")[:1500]
-    reter(texto[:3500], f"PQBR arquivo de caderno de teste — {rotulo}")
+    reter(texto[:3500], f"PQBR arquivo de caderno de teste — {rotulo}", papel="indexador", tags=["descarte"])
     (repo / "HINDSIGHT.ok").write_text(hashlib.sha256(texto[:3500].encode()).hexdigest())
     return {"repo": str(repo), "drive_pasta": pasta, "arquivos": [f.name for f in arqs]}
 

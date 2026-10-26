@@ -188,7 +188,7 @@ Personas [APROVADO como fonte]: pt-BR, parafraseadas da Agency Agents (MIT). Com
 
 - Servidor `pc` (casa, acessado pela tailnet). Repositório oficial em `/home/pc/Workspace/PQBR`, GitHub `jvmendesjr/PQBR` (privado, `main`) [VERIFICADO].
 - Paperclip só dentro da tailnet, por HTTPS; 443 livre [VERIFICADO t280].
-- Dependências globais [VERIFICADO 09/10]: Camofox (REST, saudável), Node, Python/uv, FFmpeg, Docker, gh, NotebookLM CLI 0.8.2 global, Hindsight. As dependências da PQBR são tarefas do roadmap canônico (`docs/ROADMAP.md`).
+- Dependências globais [VERIFICADO 09/10]: Camofox (REST, saudável), Node, Python/uv, FFmpeg, Docker, gh, NotebookLM CLI 0.8.2 global, Hindsight, GitNexus [t84u–t86u]. As dependências da PQBR são tarefas do roadmap canônico (`docs/ROADMAP.md`).
 - Endereços (IP/host da tailnet), IDs de canais/tópicos, tokens e segredos de Telegram ou Discord não entram no Git (REGRAS §17).
 
 ## 6. Estrutura do repositório
@@ -366,3 +366,10 @@ Combo do 9router `core-revisao` (família distinta dos combos de produção) par
 
 ## Modelos 9router por papel (José 12/10 14:02)
 Toda chamada ao 9router de worker ou script usa `pqbr.kit.router9.combo(papel)` / `chat_papel`, lendo **`config/modelos_9router.json`** (fonte única, mesmo mapeamento dos agentes Paperclip): core-alto = Diretor, Roteirista, Auditor, Devs; core-medio = Pesquisador de Origem, Líder Editorial, Compliance, Guardião; core-baixo = Observador, SEO, Caçador Sazonal, Comunidade, Diretor de Arte, pqbr; core-revisao = revisões e segundas opiniões. Proibido nome de combo fixo no código.
+
+
+## 12. Conhecimento por papel: Hindsight + GitNexus (t84u–t86u, 26/10/2026)
+- **Pré-requisitos de instalação (fail-closed):** Camofox (`scripts/camofox/verificar.sh`), Hindsight (bank `pqbr`, `scripts/hindsight/`) e **GitNexus** (`scripts/gitnexus/verificar.sh`: binário, versão ≥ 1.6.12 e índice da PQBR registrado). Realocou o app ⇒ instalar o GitNexus global antes.
+- **GitNexus é global do servidor**, compartilhado com outros apps e fora do repo: Node 22 em `~/.local/opt/node22`, `gitnexus` no prefixo npm dele, wrapper `~/.local/bin/gitnexus`, registry em `~/.gitnexus/`. A PQBR só registra o índice dela (`.gitnexus/` no repo, ignorado pelo git) com `analyze --index-only` (sem AGENTS.md, skills ou hooks do GitNexus no repo). Reindexa em segundo plano no `post-commit` (`scripts/gitnexus/hook-post-commit.sh`). Interface: CLI e MCP **stdio**; `--http` proibido (nada na rede ou tailnet).
+- **Política por papel:** `config/politica_papeis.json` (contrato `pqbr.contratos.politica`). Para cada papel (8 PydanticAI + `mantenedor` externo + `indexador` de serviço): tags que lê, tags que escreve, prefixos de código visíveis no GitNexus e ferramentas. Aplicada em `storage/hindsight.py` (`reter` exige `papel`+`tags`; `recuperar` filtra no pedido e na volta) e em `integrations/gitnexus.py` (filtra resultados por caminho; só `query|context|impact`). Papel desconhecido ⇒ negado.
+- **Licença:** GitNexus é PolyForm Noncommercial 1.0.0. O canal é monetizado ⇒ uso pode exigir licença comercial (decisão do José).

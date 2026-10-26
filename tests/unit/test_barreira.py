@@ -35,9 +35,9 @@ class Barreira(unittest.TestCase):
     def test_hindsight(self):
         enviados = []
         with self.assertRaises(SegredoDetectado):
-            hindsight.reter(f"autor {EMAIL} disse", transporte=lambda u, c: enviados.append(c))
+            hindsight.reter(f"autor {EMAIL} disse", papel="dev", tags=["licao"], transporte=lambda u, c: enviados.append(c))
         self.assertEqual(enviados, [])
-        hindsight.reter("ajuste: botão Publicar mudou de lugar", transporte=lambda u, c: enviados.append(c) or {})
+        hindsight.reter("ajuste: botão Publicar mudou de lugar", papel="dev", tags=["licao"], transporte=lambda u, c: enviados.append(c) or {})
         self.assertEqual(len(enviados), 1)
 
     def test_banco(self):

@@ -59,7 +59,7 @@ def main() -> int:
         h = hashlib.sha256(texto.encode()).hexdigest()[:16]
         if feitos.get(chave) == h: continue
         try:
-            reter(texto, ctx); feitos[chave] = h; n += 1
+            reter(texto, ctx, papel="indexador", tags=[chave.split(":")[0] if chave.split(":")[0] in ("decisao","incidente","commit","playbook") else "doc"]); feitos[chave] = h; n += 1
         except Exception as e:  # barreira bloqueou ou API fora: pula o item, registra
             print(f"pulado: {type(e).__name__}", file=sys.stderr)
     feitos = validar_estado(feitos)

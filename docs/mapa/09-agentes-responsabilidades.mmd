@@ -26,3 +26,11 @@ flowchart LR
   P3{{"Bloqueio: Cloud Console exige 2SV na conta do canal → sem OAuth do YouTube no worker (José ativa a 2SV)"}}
   P4{{"Regra central t78u: elenco masc./fem. brasileiro alternado · caras e bocas sem fala · figurino por papel"}}
   AG --- P3 & P4
+  %% t84u–t86u (26/10/2026)
+  GNX["GitNexus 1.6.12 GLOBAL do servidor<br/>~/.local/bin/gitnexus · MCP stdio, sem rede<br/>PQBR só registra o índice"]
+  HS["Hindsight bank único pqbr"]
+  POL{{"config/politica_papeis.json<br/>tags lê/escreve + caminhos por papel<br/>papel desconhecido ⇒ negado"}}
+  TMP --> POL
+  AG --> POL
+  POL --> HS & GNX
+  JR -. "infra global (informar versão)" .-> GNX

@@ -156,7 +156,7 @@ def chamar(nome: str, a: dict) -> str:
         return "\n".join(f"- {x.get('text', '')[:400]}" for x in res[:8]) or "nada na memória"
     if nome == "memoria_registrar":
         from pqbr.storage.hindsight import reter
-        reter(a["licao"][:3000], f"PQBR lição registrada por {os.environ.get('PQBR_KIT_PAPEL', '?')}"); return "registrado"
+        reter(a["licao"][:3000], f"PQBR lição registrada por {os.environ.get('PQBR_KIT_PAPEL', '?')}", papel=os.environ.get("PQBR_KIT_PAPEL", ""), tags=["licao"]); return "registrado"
     if nome == "segunda_opiniao":
         from pqbr.kit.agente_texto import segunda_leitura; from pqbr.kit import router9
         from pqbr.seguranca.barreira import exigir_limpo
