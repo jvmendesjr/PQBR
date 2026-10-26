@@ -50,3 +50,12 @@ def test_dados_tres_blocos_e_html_escapado():
 def test_repo_real_gera():
     d = roadmap.dados()
     assert d["feito"] and d["proximos"]
+
+
+def test_checkboxes_marcadas_feito_vazias_falta_e_nada_editavel():
+    d = roadmap.dados(RM, EST)
+    h = roadmap.secao(d)
+    assert h.count("☑") == len(d["feito"])
+    assert h.count("☐") == len(d["falta"]) + len(d["proximos"])
+    for x in ("<input", "<form", "onclick", "contenteditable", "POST", "<button"):
+        assert x not in h

@@ -53,24 +53,27 @@ def dados(roadmap: str | None = None, estado: str | None = None) -> dict:
     return {"feito": feito, "falta": r["falta"], "proximos": prox}
 
 
-def _grupos(itens: list[tuple[str, str]], aberto: bool) -> str:
+MARCA = {True: '<span class="cb ok" aria-label="feito">☑</span> ', False: '<span class="cb" aria-label="falta">☐</span> '}  # t121u: só símbolo, nada clicável
+
+
+def _grupos(itens: list[tuple[str, str]], aberto: bool, feito: bool = False) -> str:
     g: dict[str, list[str]] = {}
     for k, t in itens:
         g.setdefault(k or "Geral", []).append(t)
     op = " open" if aberto else ""
     return "".join(f"<details{op}><summary>{html.escape(k)} ({len(ts)})</summary><ul>"
-                   + "".join(f"<li>{html.escape(t)}</li>" for t in ts) + "</ul></details>" for k, ts in g.items())
+                   + "".join(f"<li>{MARCA[feito]}{html.escape(t)}</li>" for t in ts) + "</ul></details>" for k, ts in g.items())
 
 
 CSS = ("<style>.rm h3{font-size:14px;margin:12px 0 4px}.rm details{margin:2px 0}.rm summary{cursor:pointer;color:var(--a);font-size:13px}"
-       ".rm ul,.rm ol{margin:4px 0 8px 18px;padding:0;font-size:13px}.rm .ok{color:#2e7d32}.rm .fa{color:#b26a00}.rm .px{color:#33506b}</style>")
+       ".rm ul,.rm ol{margin:4px 0 8px 18px;padding:0;font-size:13px}.rm .ok{color:#2e7d32}.rm .fa{color:#b26a00}.rm .px{color:#33506b}.rm li{list-style:none}.rm ol,.rm ul{margin-left:4px}.rm .cb{font-size:15px;user-select:none}</style>")
 
 
 def secao(d: dict | None = None) -> str:
     d = d or dados()
-    prox = "<ol>" + "".join(f"<li><b>{html.escape(g)}</b>: {html.escape(t)}</li>" for g, t in d["proximos"]) + "</ol>"
+    prox = "<ol>" + "".join(f"<li>{MARCA[False]}<b>{html.escape(g)}</b>: {html.escape(t)}</li>" for g, t in d["proximos"]) + "</ol>"
     return ('<section id="roadmap" class="rm"><h2>Roadmap</h2><p class="nota">Só leitura. Gerado de docs/ROADMAP.md e '
             "docs/ESTADO-ATUAL.md (editados só pelos agentes) a cada geração do index.</p>" + CSS
             + f'<h3 class="px">Próximos passos ({len(d["proximos"])})</h3>{prox}'
             + f'<h3 class="fa">Falta ({len(d["falta"])})</h3>{_grupos(d["falta"], True)}'
-            + f'<h3 class="ok">Feito ({len(d["feito"])})</h3>{_grupos(d["feito"], False)}</section>')
+            + f'<h3 class="ok">Feito ({len(d["feito"])})</h3>{_grupos(d["feito"], False, True)}</section>')

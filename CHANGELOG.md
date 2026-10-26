@@ -5,6 +5,10 @@ Versionamento SemVer (MAJOR.MINOR.PATCH) a partir de t510. Versão do pacote can
 
 
 
+## [0.16.2] — 2026-10-26
+### Alterado
+- Aba Roadmap: ☑ em itens feitos, ☐ em falta e próximos passos (só leitura); teste cobre contagens e ausência de elementos editáveis.
+
 ## [0.16.1] — 2026-10-26
 ### Corrigido
 - ESTADO-ATUAL P2: removidos passos já feitos (2SV, migração 0020/reinício do worker); aba Roadmap regenerada.

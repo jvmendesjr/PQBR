@@ -646,3 +646,6 @@ NÃO CABE:
 
 ## t121u (26/10/2026) — Correção da P2 no ESTADO-ATUAL
 - 2SV de juniormoedavirtual já ativa (t106u) e migração 0020 aplicada 16:56 com worker reiniciado 16:57 (t109u). Resta: conferir perfil/conta do Camofox na tentativa bloqueada do Cloud Console e criar o OAuth do YouTube pelo Camofox. Demais P* revisadas: sem outra divergência comprovada.
+
+## t121u (26/10/2026) — Checkboxes na aba Roadmap
+- Cada item mostra ☑ (feito) ou ☐ (falta e próximos passos), derivado do mesmo parser; só símbolo, sem input/form/POST.
