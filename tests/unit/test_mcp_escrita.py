@@ -1,5 +1,6 @@
 """Escrita de memória pelo MCP (t95u/t96u)."""
 import json
+from pqbr.contratos.politica import carregar
 import pytest
 from pqbr.mcp import servidor as S
 from pqbr.contratos.politica import AcessoNegado
@@ -29,7 +30,7 @@ def test_registrar_memoria_ok_autor_e_referencias():
 
 def test_tags_derivadas_dentro_da_escrita():
     _call("registrar_memoria", {"conteudo": "Incidente de queda corrigido no fluxo, lição registrada."})
-    assert set(GRAV[0][2]["tags"]) <= {"licao", "decisao", "incidente"} and GRAV[0][2]["tags"]
+    assert set(GRAV[0][2]["tags"]) <= set(carregar().papeis["mantenedor"].escrita) and GRAV[0][2]["tags"]
 
 
 def test_tag_fora_da_escrita_negada():

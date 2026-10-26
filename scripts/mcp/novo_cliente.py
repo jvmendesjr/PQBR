@@ -7,6 +7,8 @@ RAIZ = Path(__file__).resolve().parents[2]; sys.path.insert(0, str(RAIZ / "src")
 from pqbr.contratos.politica import carregar  # noqa: E402
 nome, papel = sys.argv[1], sys.argv[2]
 carregar().de(papel)
+if papel != "mantenedor":
+    sys.exit("t114u: o MCP externo é exclusivo do papel mantenedor")
 d = Path.home() / ".pqbr/secrets"; d.mkdir(parents=True, exist_ok=True); os.chmod(d, 0o700)
 arq = d / "mcp_clientes.json"
 dados = json.loads(arq.read_text()) if arq.exists() else {"clientes": []}

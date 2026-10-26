@@ -66,3 +66,44 @@ def test_caminho_absoluto_ou_curinga_invalido():
         PoliticaPapeis.model_validate({"versao": "1", "bank": "pqbr", "papeis": {"x": {"leitura": ["*"]}}})
     with pytest.raises(ValueError):
         PoliticaPapeis.model_validate({"versao": "1", "bank": "outro", "papeis": {}})
+
+
+# t112u/t113u: mantenedor externo lê tudo; internos continuam restritos
+def test_mantenedor_le_todas_as_tags_de_conteudo():
+    todas = set(P.papeis["indexador"].escrita)
+    assert set(P.papeis["mantenedor"].leitura) == todas
+    for papel, pol in P.papeis.items():
+        assert set(pol.leitura) <= set(P.papeis["mantenedor"].leitura), papel
+
+
+def test_mantenedor_recebe_memoria_de_qualquer_papel():
+    res = [{"text": t, "tags": [t]} for t in sorted(P.papeis["indexador"].escrita)]
+    r = hindsight.recuperar("q", papel="mantenedor", transporte=lambda u, c: {"results": res})
+    assert len(r) == len(res)
+
+
+def test_mantenedor_ve_repo_todo_e_escreve_manutencao():
+    for c in ("src/pqbr/seguranca/x.py", "docs/mapa/13.mmd", "company/agents/auditor/AGENTS.md", "infra/mcp/x"):
+        assert P.ve_caminho("mantenedor", c)
+    P.exigir_escrita("mantenedor", ["decisao", "incidente", "licao", "playbook", "doc", "estado"])
+    for proibida in (["obsoleto_candidato"], ["commit"], ["publicacao"], ["seguranca"]):
+        with pytest.raises(AcessoNegado):
+            P.exigir_escrita("mantenedor", proibida)
+
+
+@pytest.mark.parametrize("papel", ["diretor", "lider-editorial", "pesquisador-origem", "auditor",
+                                   "lider-compliance", "guardiao-seguranca", "observador", "dev"])
+def test_papeis_internos_continuam_restritos(papel):
+    assert set(P.papeis[papel].leitura) < set(P.papeis["mantenedor"].leitura)
+    fora = sorted(set(P.papeis["indexador"].escrita) - set(P.papeis[papel].leitura))[0]
+    r = hindsight.recuperar("q", papel=papel, transporte=lambda u, c: {"results": [{"text": "x", "tags": [fora]}]})
+    assert r == []
+    assert "" not in P.papeis[papel].codigo
+
+
+def test_sem_papel_sem_escrita():
+    for p in (None, "", "intruso"):
+        with pytest.raises(AcessoNegado):
+            P.exigir_escrita(p, ["licao"])
+        with pytest.raises(AcessoNegado):
+            hindsight.reter("x", papel=p, tags=["licao"], transporte=lambda u, c: {})

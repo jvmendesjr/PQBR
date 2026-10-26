@@ -5,6 +5,15 @@ Versionamento SemVer (MAJOR.MINOR.PATCH) a partir de t510. Versão do pacote can
 
 
 
+## [0.15.0] — 2026-10-26
+### Adicionado
+- Política de papéis 1.4.0: `mantenedor` externo lê todas as tags de conteúdo e o repo todo; escreve decisao, incidente, licao, playbook, doc, estado.
+- `docs/operacao/onboarding-agente-externo.md` (cliente-agnóstico, inclui construir e ligar módulo novo).
+### Alterado
+- pqbr-mcp 0.4.0: exclusivo do papel `mantenedor` (token de outro papel recusado; `X-PQBR-Papel` diferente ⇒ 403); `scripts/mcp/novo_cliente.py` só aceita mantenedor.
+### Testes
+- Mantenedor lê tudo, internos restritos, sem papel sem escrita, MCP recusa outros papéis.
+
 ## [0.14.1] — 2026-10-26
 ### Operação
 - Backup `pqbr-20261026-1656.dump` e depois aplicação da migração `0020_pqbr_publicacao_agenda_emergencia.sql` (via `infra/pqbr-db/aplicar.sh`).

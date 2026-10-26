@@ -16,7 +16,9 @@ from . import onboarding
 HOST = "127.0.0.1"
 PORTA = int(os.environ.get("PQBR_MCP_PORTA", "8791"))
 CLIENTES = Path(os.environ.get("PQBR_MCP_CLIENTES", str(Path.home() / ".pqbr/secrets/mcp_clientes.json")))
-VERSAO = "0.3.0"
+VERSAO = "0.4.0"
+# t114u: o MCP externo é EXCLUSIVO do papel mantenedor; papéis internos rodam no Temporal e não entram por aqui.
+PAPEL_EXTERNO = "mantenedor"
 
 FERR: dict[str, tuple[str, str | None, dict]] = {  # nome: (descrição, ferramenta exigida na política, parâmetros)
     "onboarding": ("Pacote de entrada no projeto (BRIEFING, REGRAS, DECISOES recentes, estado do ROADMAP, LACUNAS, mapa).", None, {}),
@@ -63,8 +65,18 @@ def papel_do_token(token: str | None, clientes: dict[str, str]) -> str | None:
     h = hashlib.sha256(token.encode()).hexdigest()
     for k, p in clientes.items():
         if hmac.compare_digest(k, h):
-            return p
+            return p if p == PAPEL_EXTERNO else None  # t114u: token de outro papel não entra
     return None
+
+
+def papel_externo_aceito(papel_token: str | None, papel_pedido: str | None) -> str | None:
+    """t114u: só `mantenedor`. Se o cliente declarar papel (cabeçalho X-PQBR-Papel, espelho do PQBR_KIT_PAPEL),
+    tem que ser `mantenedor` e igual ao do token; qualquer outro valor é recusado."""
+    if papel_token != PAPEL_EXTERNO:
+        return None
+    if papel_pedido not in (None, "", PAPEL_EXTERNO):
+        return None
+    return papel_token
 
 
 def ferramentas_do_papel(papel: str) -> list[str]:
@@ -170,6 +182,9 @@ class Handler(BaseHTTPRequestHandler):
         aut = self.headers.get("Authorization", "")
         cl = cliente_do_token(aut[7:] if aut.startswith("Bearer ") else None)
         cliente, papel = cl if cl else ("", None)
+        pedido = (self.headers.get("X-PQBR-Papel") or "").strip()
+        if cl and papel_externo_aceito(papel, pedido) is None:
+            return self._enviar(403, {"error": "MCP externo é exclusivo do papel mantenedor"})
         try:
             carregar().de(papel)
         except AcessoNegado:

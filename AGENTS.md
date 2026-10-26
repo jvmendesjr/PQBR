@@ -4,7 +4,7 @@
 
 Fonte única de "onde estamos". Não repete o ROADMAP: aponta os itens por id. **Atualize este arquivo a cada correção ou pendência resolvida.** O hook pre-commit exige isso quando o commit toca ROADMAP, LACUNAS, DECISOES-LOG ou CHANGELOG, e o `registrar_alteracao` exige isso para `tipo` correcao ou pendencia_resolvida.
 
-Atualizado: 26/10/2026 (t98u/t99u) · versão 0.12.0
+Atualizado: 26/10/2026 (t112u–t116u: papel mantenedor externo, MCP exclusivo do mantenedor, pqbr-mcp reiniciado) · versão 0.15.0
 
 ## Onde estamos
 - **Produção:** o lote do saldo está em `runtime/lote-saldo/` (um diretório por tema). O EP1002 olhos-da-cara foi reprovado e descartado (`runtime/lote-saldo/_descartado/`), e o tema voltou a `proposto`.
@@ -20,14 +20,14 @@ José assiste o EP1003 cafe-fraco (`runtime/lote-saldo/cafe-fraco/cafe-fraco-fin
 | P1 | EP1003 cafe-fraco: José assiste antes do LOOP do Gemini | Estado 26/10 · Próximo 5 | José | aguardando José |
 | P2 | Publicação: (a) José ativa a verificação em 2 etapas na conta juniormoedavirtual → (b) criar o OAuth do YouTube via Camofox (projeto `pqbr-publicacao`, chaves em `episodio.env`) → (c) aplicar a migração 0020 e reiniciar o worker → (d) upload pelo `PublicacaoAgendadaWorkflow` | F8-01 · Estado 26/10 · Próximo 1 | José (a); agente (b–d) | (a) José; (c) exige OK do José |
 | P3 | Teste: LOOP por cena vs o atual | Estado 26/10 · Testes pendentes | agente | depois do fluxo de publicação |
-| P4 | Teste: 4 Argon com raciocínio baixo vs 3.8 Flash | Estado 26/10 · Testes pendentes; LACUNAS | agente | depois do fluxo de publicação |
+| P4 | **Feito (t108u/t109u).** Juiz por etapa (`gemini_juiz` v1.0.0): pré-produção usa 3.8 Flash; produção (VISUAL e LOOP) usa 4 Argon Baixo. O worker `pqbr-episodio-worker` foi reiniciado com OK do José às 16:57 (-03), e o poller está ativo na fila `episodio-pqbr`, ns `pqbr` | Estado 26/10 · DECISOES-LOG t109u | agente | concluído |
 | P5 | Imagens de referência do elenco (`ASSET_personagem_{masculino,feminino}-v1`) | Estado 26/10 · Próximo 4 | agente | geração paga: OK do José (postergado) |
 | P6 | Activity do Storyboard no Temporal (bloqueia a geração sem ele) | Estado 26/10 · Próximo 2; R2 | agente | postergado |
-| P7 | Gate VISUAL: 3 critérios novos (lábios, enquadramento cortado, grotesco) | Estado 26/10 · Próximo 3 | agente | postergado |
+| P7 | **Feito (t108u).** O gate VISUAL agora tem `boca_articula_fala`, `corte_oculos_cabeca` e `grotesco` (FichaCena/REGRAS §25), e cada um reprova sozinho. Validado no EP1002 (`loop-gemini-4argon-v2.json`): reprova, com S01 corte+grotesco, S04 corte e S02/S05/S09 boca | Estado 26/10 · CHANGELOG 0.14.0 | agente | concluído |
 | P8 | 7 memórias `obsoleto_candidato` para revisão | `docs/operacao/hindsight-descarte-candidatos.md` | José | apagar exige OK |
-| P9 | `PQBR_KIT_PAPEL` nos configs do opencode | Fase Conhecimento | agente | — |
+| P9 | **Feito (t112u–t116u).** Papel `mantenedor` (política 1.4.0) lê todas as tags e o repo todo; pqbr-mcp 0.4.0 exclusivo do mantenedor; onboarding em `docs/operacao/onboarding-agente-externo.md`. Falta só entregar token por cliente novo (`scripts/mcp/novo_cliente.py <nome> mantenedor`) | Fase Conhecimento | agente | concluído |
 | P10 | Reconsolidação do Hindsight em andamento (observações sendo refeitas) | Fase Conhecimento | Hindsight (automático) | só conferir |
-| P11 | Commits locais sem push (~190+) | — | José | push exige OK |
+| P11 | Merge da branch `feat/f8-01-publicacao-automatica` (já no GitHub) na main | — | José | merge/PR exige OK |
 | P12 | ERR-01: revisar os erros aceitáveis | ERR-01 | agente | depois dos primeiros dias de produção |
 
 ## Como atualizar
@@ -173,34 +173,35 @@ t531 · 24/10/2026 · pedido do José. **Só leitura e proposta.** **Atualizaç�
 
 ## Decisões recentes
 
-## t90u (26/10/2026) — Licença do GitNexus aceita; reclassificação do Hindsight por papel
-- **Licença GitNexus (PolyForm Noncommercial) aceita pelo José:** a PQBR é de uso pessoal, sem revenda nem inclusão em produto vendido. Pendência do ROADMAP encerrada.
-- **Opção A — reclassificar:** `scripts/hindsight/reclassificar.py` (determinístico, idempotente, dry-run por padrão) deu tags de conteúdo da política 1.1.0 aos 947 documentos legados (origem do retain + palavras-chave) e autor `papel:indexador`. Nenhum documento ficou sem tag de leitura. Backup antes: `~/.pqbr/hindsight/backup/` (export do bank + JSON, 600).
-- **Obsoletos:** 220 documentos (1.303 unidades) marcados `obsoleto_candidato` (versão superada da fonte, decisão revogada sem fonte vigente, teste). **Nada apagado**; lista em `docs/operacao/hindsight-descarte-candidatos.md`. Apagar exige OK do José. Observações derivadas foram invalidadas pelo próprio Hindsight e se refazem na reconsolidação.
+## t101u (26/10/2026) — Inovações do dia no mapa; publicação depois
+- Novo diagrama `docs/mapa/13-memoria-mcp-handoff.mmd` (Hindsight por papel, hindsight_tags e descarte, GitNexus global + instância PQBR, pqbr-mcp, ESTADO-ATUAL + hook + handoff, branch no GitHub). O 09 só aponta para o 13; a visão geral 00 ganhou o nó. ARQUITETURA §12 completada (tags, escrita MCP, handoff).
+- José: seguir a ordem do ESTADO-ATUAL e publicar os vídeos prontos só depois de analisá-los pessoalmente.
 
 
-## t90s398 (26/10/2026) — Docs corrigidos, regra única de tags e descarte no Hindsight
-- José aprovou (card t90s398): corrigir ROADMAP, AGENTES.md e `memoria:jev`; indexador com a mesma regra de tags; apagar as candidatas após a próxima indexação.
-- Docs: Paperclip marcado como histórico no ROADMAP (Fase 0.5, Fase 3, Riscos, Premissas, JEV-01) e na REFERENCIA §8; AGENTES.md fica só com os 8 papéis (equipe de 14 e mapa @prod-* movidos para `docs/_obsoleto/agentes-equipe-14-t395.md`); `memoria:jev` aponta a chave só no `~/.pqbr/worker.env` (600).
-- `pqbr.storage.hindsight_tags` é a regra única (indexador e reclassificação); política 1.2.0 deixa o indexador escrever as tags de conteúdo.
-- Indexação manual rodada (sem reinício); 0 seções vigentes faltando no bank. Descarte: 231 documentos apagados (backup antes), 7 mantidos para revisão. IDs em `docs/operacao/hindsight-descarte-candidatos.md`.
+## t105u (26/10/2026) — LOOP do juiz Gemini com 4 Argon (raciocínio Baixo) no EP1002 descartado
+- José pediu o 4 Argon, no nível de raciocínio mais baixo, no mesmo vídeo cheio de problemas. Override só por execução: `PQBR_GEMINI_MODELO` / `PQBR_GEMINI_RACIOCINIO` (Baixo|Médio|Alto). O padrão continua `gemini_modelo: 3.8 Flash` em `config/motores.json`. O nível é confirmado no menu antes de cada envio (evidência do seletor gravada no resultado). Script `scripts/lote/loop_comparar_modelo.py`: mesmos quadros e mesma rubrica; não sobrescreve o resultado oficial.
+- Resultado (`loop-gemini-4argon.json`): **reprova** (imagem×fala aprova_com_ressalva, capa aprova, loop reprova). O 3.8 deu terceira_rodada, com todas as métricas visuais em 1.0. O Argon pegou o desvio de estilo (0.1), a legenda sobre o foco na capa e a legenda com erro em S04–S06. Óculos cortados, olho grotesco e lábios mexendo não estão na rubrica, e nenhum dos dois apontou (critérios novos = P7). Tempo: 4 Argon 614 s no total (respostas visuais de 37 s, loop de 9–18 s); o tempo do 3.8 nesse vídeo não foi registrado.
 
 
-## t95u/t96u (26/10/2026) — Agentes externos registram memória pelo MCP
-- José pediu que as alterações de agentes externos sejam também memorizadas. O MCP deixa de ser só leitura: `registrar_memoria` e `registrar_alteracao` (esta exige commit existente), contrato Pydantic 1.0.0, via `hindsight.reter`.
-- Só escreve papel com escrita na política (o indexador não escreve pelo MCP); tags dentro das tags de escrita do papel, `obsoleto_candidato` proibida; autor `autor:<cliente>` vem do token, nunca do pedido; texto passa pela barreira de segredos.
-- Protocolo obrigatório no onboarding/AGENTS.md: onboarding → buscar_memoria antes de agir → commit local + DECISOES-LOG/CHANGELOG → registrar ao final. Servidor 0.2.0 (reinício só do `pqbr-mcp`). Teste de agente do zero aprovado.
+## t108u (26/10/2026) — 3.8 antes da produção, 4 Argon na produção; P7 implementado
+- José: "Vamos deixa o 3.8 antes da produção, na produção adicionamos o Argo".
+- A config por etapa (`gemini_juiz`) tem a seguinte precedência: env da execução > etapa > `gemini_modelo` legado. A verificação do seletor (modelo e raciocínio) continua sendo feita a cada envio.
+- 3 critérios novos que reprovam sozinhos, sempre exigindo as 2 rodadas em acordo (se divergirem, vai para a terceira rodada).
+- Validação no EP1002 com 4 Argon Baixo (595 s): reprova. Detectou os 3 problemas apontados pelo José: corte em S01/S04, grotesco em S01, boca em S02/S05/S09.
+- O worker Temporal não foi reiniciado. Isso fica pendente de OK do José.
 
 
-## t97u (26/10/2026) — Memória superada da licença do GitNexus corrigida
-- José autorizou ("pode corrigir logo"). Fonte: ARQUITETURA §12 ainda dizia "pode exigir licença comercial" e o log t84u–t86u só "risco registrado"; ambos agora citam a aceitação de t90u.
-- Hindsight: 3 documentos superados apagados (2 versões antigas da ARQUITETURA §12 e a seção t84u–t86u), backup em `~/.pqbr/hindsight/backup/licenca-gitnexus-20261026.json` (600); seções reindexadas e a versão correta registrada pelo MCP.
+## t109u (26/10/2026) — Migração 0020 e reinício do worker (OK do José, card t109s462)
+- Backup antes da migração; `public.pqbr_migracoes` registra a 0020.
+- Antes do reinício não havia nenhum workflow em execução no ns `pqbr`. Depois do reinício: unit ativa, poller registrado (workflow e activity), pré = 3.8 Flash / produção = 4 Argon Baixo, `PublicacaoAgendadaWorkflow` registrado. Nada foi publicado e nenhum upload foi disparado.
+- Mapa 12 atualizado e com render validado.
 
 
-## t98u/t99u (26/10/2026) — ESTADO-ATUAL: qualquer agente continua de onde paramos
-- José aprovou ("isso mesmo, e garanta que atualize a cada correção ou solução de pendências"). `docs/ESTADO-ATUAL.md` é a fonte única de onde estamos, do próximo passo e das pendências (dono/bloqueio). Aponta os ids do ROADMAP sem repetir; a seção "Estado em 26/10" do ROADMAP vira histórico.
-- Garantia determinística: o hook pre-commit recusa commit que toca ROADMAP/LACUNAS/DECISOES-LOG/CHANGELOG sem o ESTADO-ATUAL (commit trivial não é afetado); `registrar_alteracao` 1.1.0 com `tipo` correcao/pendencia_resolvida exige o ESTADO-ATUAL no commit e sempre grava um handoff (tag `estado`) com o próximo passo vigente.
-- Política 1.3.0: tag `estado` lida por todos os papéis. ESTADO-ATUAL é a 1ª seção do onboarding/AGENTS.md e entra no indexador. MCP 0.3.0.
+## t112u–t116u (26/10/2026) — Papel `mantenedor` para agentes externos
+- t112u: agentes externos de manutenção (qualquer cliente MCP) leem TODAS as memórias do Hindsight e todo o código para debug e correção. Política 1.4.0: mantenedor lê as 14 tags de conteúdo (menos `obsoleto_candidato`), vê o repo todo, grava decisao/incidente/licao/playbook/doc/estado. Papéis internos inalterados.
+- t113u: o mantenedor também constrói e liga módulos novos (contrato, porta/adaptador, Temporal, agentes, testes, docs, mapa). Ligar algo que peça reinício de serviço ou migração continua exigindo OK do José.
+- t114u: o pqbr-mcp externo é exclusivo do `mantenedor` (0.4.0): token de outro papel ⇒ 401; papel declarado (`X-PQBR-Papel`) diferente ⇒ 403; `novo_cliente.py` só cria mantenedor.
+- t116u: OK do José para reiniciar SOMENTE o `pqbr-mcp` após a suíte verde.
 
 
 ## Fase atual do ROADMAP
@@ -237,4 +238,4 @@ Regra (José 17:17): nenhuma etapa de fluxo à mão. Se o fluxo não está ativo
 
 ## Mapa visual
 
-docs/mapa/index.html (servido em :8088) — diagramas: 00-visao-geral.mmd, 01-episodio.mmd, 02-reposicao-temas.mmd, 03-acessos.mmd, 04-descarte.mmd, 05-vigia-atualizacoes.mmd, 06-runs-presos.mmd, 07-cadeia-video.mmd, 08-identidade-camofox.mmd, 09-agentes-responsabilidades.mmd, 10-catalogo-erros.mmd, 11-publicacao.mmd, 12-storyboard-elenco.mmd
+docs/mapa/index.html (servido em :8088) — diagramas: 00-visao-geral.mmd, 01-episodio.mmd, 02-reposicao-temas.mmd, 03-acessos.mmd, 04-descarte.mmd, 05-vigia-atualizacoes.mmd, 06-runs-presos.mmd, 07-cadeia-video.mmd, 08-identidade-camofox.mmd, 09-agentes-responsabilidades.mmd, 10-catalogo-erros.mmd, 11-publicacao.mmd, 12-storyboard-elenco.mmd, 13-memoria-mcp-handoff.mmd

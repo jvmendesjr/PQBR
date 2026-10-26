@@ -1,11 +1,11 @@
-%% Memória, MCP e handoff (t84u–t101u, 26/10/2026). Decisões em DECISOES-LOG; detalhes em ARQUITETURA §12 e docs/ESTADO-ATUAL.md.
+%% Memória, MCP e handoff (t84u–t116u, 26/10/2026). Decisões em DECISOES-LOG; detalhes em ARQUITETURA §12 e docs/ESTADO-ATUAL.md.
 flowchart LR
   subgraph AG["Quem usa"]
     PAP["8 papéis PydanticAI<br/>(Temporal)"]
-    EXT(["Agente externo<br/>token por cliente → papel"])
+    EXT(["Agente externo = só mantenedor<br/>lê todas as tags · repo todo<br/>constrói/liga módulos (OK p/ reinício/migração)<br/>docs/operacao/onboarding-agente-externo.md"])
     IDX["indexador (serviço)<br/>scripts/hindsight/indexar.py"]
   end
-  POL{{"config/politica_papeis.json 1.3.0<br/>tags que lê/escreve + caminhos por papel<br/>tag estado: todos leem · papel desconhecido ⇒ negado"}}
+  POL{{"config/politica_papeis.json 1.4.0<br/>tags que lê/escreve + caminhos por papel<br/>tag estado: todos leem · papel desconhecido ⇒ negado"}}
   subgraph MEM["Hindsight 127.0.0.1:8890 — bank único pqbr"]
     TAGS["pqbr.storage.hindsight_tags<br/>regra única de tags (indexador + reclassificação)"]
     HS[("memórias com tags + autor:cliente")]
@@ -15,7 +15,7 @@ flowchart LR
     GNX["~/.local/bin/gitnexus · registry ~/.gitnexus<br/>licença PolyForm NC aceita (uso pessoal, t90u)"]
     IDXG["instância PQBR: .gitnexus/ (fora do git)<br/>reindex no hook post-commit"]
   end
-  subgraph MCPS["pqbr-mcp 0.3.0 (na aplicação) · 127.0.0.1:8791 → tailscale serve (só tailnet)"]
+  subgraph MCPS["pqbr-mcp 0.4.0 · exclusivo mantenedor (na aplicação) · 127.0.0.1:8791 → tailscale serve (só tailnet)"]
     LEI["leitura: onboarding · buscar_memoria · codigo · estado"]
     ESC["escrita: registrar_memoria · registrar_alteracao 1.1.0<br/>(tipo alteracao|correcao|pendencia_resolvida · commit verificado)"]
   end
@@ -24,9 +24,9 @@ flowchart LR
     AGM["AGENTS.md (gerado do onboarding)<br/>1ª seção = ESTADO-ATUAL + protocolo obrigatório"]
     HK{{"pre-commit: segredos + ESTADO-ATUAL exigido<br/>se ROADMAP/LACUNAS/DECISOES-LOG/CHANGELOG mudam"}}
   end
-  EXT -->|"HTTPS tailnet + Bearer (sem token ⇒ 401)"| MCPS
+  EXT -->|"HTTPS tailnet + Bearer (sem token ou outro papel ⇒ 401/403)"| MCPS
   MCPS --> POL
-  PAP --> POL
+  PAP -->|"internos: dentro do sistema, não pelo MCP"| POL
   POL --> HS & GNX
   LEI -->|"recall filtrado por tags"| HS
   LEI --> IDXG

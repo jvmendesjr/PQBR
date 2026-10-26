@@ -52,3 +52,23 @@ def test_onboarding_real_tem_fontes():
     from pqbr.mcp.onboarding import pacote
     t = pacote()
     assert "BRIEFING" in t and "Decisões recentes" in t and "docs/mapa" in t
+
+
+# t114u: MCP externo exclusivo do mantenedor
+def test_token_de_papel_interno_recusado(tmp_path):
+    import os
+    arq = tmp_path / "c.json"
+    arq.write_text(json.dumps({"clientes": [{"nome": "a", "papel": "auditor", "sha256": hashlib.sha256(b"aud").hexdigest()},
+                                            {"nome": "m", "papel": "mantenedor", "sha256": hashlib.sha256(b"man").hexdigest()}]}))
+    os.chmod(arq, 0o600)
+    assert S.cliente_do_token("aud", arq) is None
+    assert S.cliente_do_token("man", arq) == ("m", "mantenedor")
+
+
+def test_papel_declarado_diferente_recusado():
+    assert S.papel_externo_aceito("mantenedor", None) == "mantenedor"
+    assert S.papel_externo_aceito("mantenedor", "mantenedor") == "mantenedor"
+    for p in ("auditor", "dev", "diretor", "indexador", "intruso"):
+        assert S.papel_externo_aceito("mantenedor", p) is None
+        assert S.papel_externo_aceito(p, p) is None
+    assert S.papel_externo_aceito(None, None) is None

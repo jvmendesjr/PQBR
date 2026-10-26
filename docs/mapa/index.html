@@ -9,7 +9,7 @@ main{max-width:1100px;margin:0 auto;padding:12px}section{background:#fff;border:
 h2{margin:0 0 4px;font-size:16px}.nota{margin:0 0 8px;color:var(--m);font-size:12px}.arq{font-family:ui-monospace,monospace}
 .wrap{overflow-x:auto}.mermaid{background:none;margin:0}footer{color:var(--m);font-size:12px;padding:16px;text-align:center}
 .regra{background:#fff8e6;border:1px solid #f0dca8;border-radius:8px;padding:10px;font-size:13px;margin-bottom:16px}
-</style></head><body><header><h1>PQBR — mapa do sistema</h1><p>Regenerado de docs/mapa/*.mmd em 26/10/2026 16:57 · ⚠ = não confirmado no código / pendente</p></header><nav><a href="#d00">Visão geral</a><a href="#d01">Episódio</a><a href="#d02">Reposição de temas</a><a href="#d03">Acessos / Camofox</a><a href="#d04">Descarte</a><a href="#d05">Vigia de atualizações</a><a href="#d06">Runs presos</a><a href="#d07">Cadeia de vídeo</a><a href="#d08">Identidade Camofox</a><a href="#d09">Agentes</a><a href="#d10">Catálogo de erros</a><a href="#d11">Publicação</a><a href="#d12">Storyboard e elenco</a><a href="#d13">13-memoria-mcp-handoff</a></nav><main><div class="regra"><b>Regra:</b> agentes nunca alteram este mapa sozinhos; mudança só por proposta aprovada pelo José. Fonte: <code>docs/mapa/*.mmd</code>.</div><section id="d00"><h2>Visão geral</h2><p class="nota">Mapa PQBR — Visão geral. Gerado do código em 24/10/2026 (commit base c752abc). Só muda por proposta aprovada pelo José. <span class="arq">00-visao-geral.mmd</span></p><div class="wrap"><pre class="mermaid">
+</style></head><body><header><h1>PQBR — mapa do sistema</h1><p>Regenerado de docs/mapa/*.mmd em 26/10/2026 18:19 · ⚠ = não confirmado no código / pendente</p></header><nav><a href="#d00">Visão geral</a><a href="#d01">Episódio</a><a href="#d02">Reposição de temas</a><a href="#d03">Acessos / Camofox</a><a href="#d04">Descarte</a><a href="#d05">Vigia de atualizações</a><a href="#d06">Runs presos</a><a href="#d07">Cadeia de vídeo</a><a href="#d08">Identidade Camofox</a><a href="#d09">Agentes</a><a href="#d10">Catálogo de erros</a><a href="#d11">Publicação</a><a href="#d12">Storyboard e elenco</a><a href="#d13">13-memoria-mcp-handoff</a></nav><main><div class="regra"><b>Regra:</b> agentes nunca alteram este mapa sozinhos; mudança só por proposta aprovada pelo José. Fonte: <code>docs/mapa/*.mmd</code>.</div><section id="d00"><h2>Visão geral</h2><p class="nota">Mapa PQBR — Visão geral. Gerado do código em 24/10/2026 (commit base c752abc). Só muda por proposta aprovada pelo José. <span class="arq">00-visao-geral.mmd</span></p><div class="wrap"><pre class="mermaid">
 flowchart TB
   JOSE([&quot;José&quot;])
   TG[&quot;Telegram (Hermes pqbr)&lt;br/&gt;cron pqbr-pedidos-jose lê pqbr.revisao_humana&quot;]
@@ -274,14 +274,14 @@ flowchart TD
   FC --&gt; CO{&quot;coadjuvante? (outro membro do elenco)&quot;}
   CO --&gt;|sim, com justificativa no roteiro| CJ[&quot;contracena; mesmas proibições&quot;]
   CO --&gt;|mesmo do protagonista| PROI
-</pre></div></section><section id="d13"><h2>13-memoria-mcp-handoff</h2><p class="nota">Memória, MCP e handoff (t84u–t101u, 26/10/2026). Decisões em DECISOES-LOG; detalhes em ARQUITETURA §12 e docs/ESTADO-ATUAL.md. <span class="arq">13-memoria-mcp-handoff.mmd</span></p><div class="wrap"><pre class="mermaid">
+</pre></div></section><section id="d13"><h2>13-memoria-mcp-handoff</h2><p class="nota">Memória, MCP e handoff (t84u–t116u, 26/10/2026). Decisões em DECISOES-LOG; detalhes em ARQUITETURA §12 e docs/ESTADO-ATUAL.md. <span class="arq">13-memoria-mcp-handoff.mmd</span></p><div class="wrap"><pre class="mermaid">
 flowchart LR
   subgraph AG[&quot;Quem usa&quot;]
     PAP[&quot;8 papéis PydanticAI&lt;br/&gt;(Temporal)&quot;]
-    EXT([&quot;Agente externo&lt;br/&gt;token por cliente → papel&quot;])
+    EXT([&quot;Agente externo = só mantenedor&lt;br/&gt;lê todas as tags · repo todo&lt;br/&gt;constrói/liga módulos (OK p/ reinício/migração)&lt;br/&gt;docs/operacao/onboarding-agente-externo.md&quot;])
     IDX[&quot;indexador (serviço)&lt;br/&gt;scripts/hindsight/indexar.py&quot;]
   end
-  POL{{&quot;config/politica_papeis.json 1.3.0&lt;br/&gt;tags que lê/escreve + caminhos por papel&lt;br/&gt;tag estado: todos leem · papel desconhecido ⇒ negado&quot;}}
+  POL{{&quot;config/politica_papeis.json 1.4.0&lt;br/&gt;tags que lê/escreve + caminhos por papel&lt;br/&gt;tag estado: todos leem · papel desconhecido ⇒ negado&quot;}}
   subgraph MEM[&quot;Hindsight 127.0.0.1:8890 — bank único pqbr&quot;]
     TAGS[&quot;pqbr.storage.hindsight_tags&lt;br/&gt;regra única de tags (indexador + reclassificação)&quot;]
     HS[(&quot;memórias com tags + autor:cliente&quot;)]
@@ -291,7 +291,7 @@ flowchart LR
     GNX[&quot;~/.local/bin/gitnexus · registry ~/.gitnexus&lt;br/&gt;licença PolyForm NC aceita (uso pessoal, t90u)&quot;]
     IDXG[&quot;instância PQBR: .gitnexus/ (fora do git)&lt;br/&gt;reindex no hook post-commit&quot;]
   end
-  subgraph MCPS[&quot;pqbr-mcp 0.3.0 (na aplicação) · 127.0.0.1:8791 → tailscale serve (só tailnet)&quot;]
+  subgraph MCPS[&quot;pqbr-mcp 0.4.0 · exclusivo mantenedor (na aplicação) · 127.0.0.1:8791 → tailscale serve (só tailnet)&quot;]
     LEI[&quot;leitura: onboarding · buscar_memoria · codigo · estado&quot;]
     ESC[&quot;escrita: registrar_memoria · registrar_alteracao 1.1.0&lt;br/&gt;(tipo alteracao|correcao|pendencia_resolvida · commit verificado)&quot;]
   end
@@ -300,9 +300,9 @@ flowchart LR
     AGM[&quot;AGENTS.md (gerado do onboarding)&lt;br/&gt;1ª seção = ESTADO-ATUAL + protocolo obrigatório&quot;]
     HK{{&quot;pre-commit: segredos + ESTADO-ATUAL exigido&lt;br/&gt;se ROADMAP/LACUNAS/DECISOES-LOG/CHANGELOG mudam&quot;}}
   end
-  EXT --&gt;|&quot;HTTPS tailnet + Bearer (sem token ⇒ 401)&quot;| MCPS
+  EXT --&gt;|&quot;HTTPS tailnet + Bearer (sem token ou outro papel ⇒ 401/403)&quot;| MCPS
   MCPS --&gt; POL
-  PAP --&gt; POL
+  PAP --&gt;|&quot;internos: dentro do sistema, não pelo MCP&quot;| POL
   POL --&gt; HS &amp; GNX
   LEI --&gt;|&quot;recall filtrado por tags&quot;| HS
   LEI --&gt; IDXG

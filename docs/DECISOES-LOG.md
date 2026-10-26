@@ -629,3 +629,9 @@ NÃO CABE:
 - Backup antes da migração; `public.pqbr_migracoes` registra a 0020.
 - Antes do reinício não havia nenhum workflow em execução no ns `pqbr`. Depois do reinício: unit ativa, poller registrado (workflow e activity), pré = 3.8 Flash / produção = 4 Argon Baixo, `PublicacaoAgendadaWorkflow` registrado. Nada foi publicado e nenhum upload foi disparado.
 - Mapa 12 atualizado e com render validado.
+
+## t112u–t116u (26/10/2026) — Papel `mantenedor` para agentes externos
+- t112u: agentes externos de manutenção (qualquer cliente MCP) leem TODAS as memórias do Hindsight e todo o código para debug e correção. Política 1.4.0: mantenedor lê as 14 tags de conteúdo (menos `obsoleto_candidato`), vê o repo todo, grava decisao/incidente/licao/playbook/doc/estado. Papéis internos inalterados.
+- t113u: o mantenedor também constrói e liga módulos novos (contrato, porta/adaptador, Temporal, agentes, testes, docs, mapa). Ligar algo que peça reinício de serviço ou migração continua exigindo OK do José.
+- t114u: o pqbr-mcp externo é exclusivo do `mantenedor` (0.4.0): token de outro papel ⇒ 401; papel declarado (`X-PQBR-Papel`) diferente ⇒ 403; `novo_cliente.py` só cria mantenedor.
+- t116u: OK do José para reiniciar SOMENTE o `pqbr-mcp` após a suíte verde.

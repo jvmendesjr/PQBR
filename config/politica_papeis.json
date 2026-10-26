@@ -1,7 +1,7 @@
 {
-  "versao": "1.3.0",
+  "versao": "1.4.0",
   "bank": "pqbr",
-  "nota": "t84u-t85u: um bank só; cada papel lê/escreve só suas tags e vê só seus caminhos no GitNexus. Papel ausente => negado (fail-closed). t90u: indexador escreve as tags de conteúdo da regra única (storage.hindsight_tags). t98u: tag `estado` (ESTADO-ATUAL e handoffs) lida por todos os papéis.",
+  "nota": "t84u-t85u: um bank só; cada papel lê/escreve só suas tags e vê só seus caminhos no GitNexus. Papel ausente => negado (fail-closed). t90u: indexador escreve as tags de conteúdo da regra única (storage.hindsight_tags). t98u: tag `estado` (ESTADO-ATUAL e handoffs) lida por todos os papéis. t112u/t113u: `mantenedor` (agente externo de manutenção e construção de módulos) lê TODAS as tags de conteúdo (as que o indexador grava; obsoleto_candidato fica de fora por ser marcação de descarte) e vê o repo todo; escreve decisao, incidente, licao, playbook, doc e estado. Papéis internos inalterados.",
   "papeis": {
     "diretor": {
       "leitura": [
@@ -193,25 +193,27 @@
     },
     "mantenedor": {
       "leitura": [
+        "auditoria",
+        "commit",
+        "compliance",
+        "decisao",
+        "descarte",
+        "doc",
+        "editorial",
+        "estado",
+        "incidente",
+        "licao",
+        "pesquisa",
+        "playbook",
+        "publicacao",
+        "seguranca"
+      ],
+      "escrita": [
         "decisao",
         "incidente",
-        "commit",
         "licao",
         "playbook",
         "doc",
-        "editorial",
-        "pesquisa",
-        "publicacao",
-        "auditoria",
-        "compliance",
-        "seguranca",
-        "descarte",
-        "estado"
-      ],
-      "escrita": [
-        "licao",
-        "decisao",
-        "incidente",
         "estado"
       ],
       "codigo": [
