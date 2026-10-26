@@ -5,6 +5,12 @@ Versionamento SemVer (MAJOR.MINOR.PATCH) a partir de t510. Versão do pacote can
 
 
 
+## [0.4.3] — 2026-10-25
+### Alterado
+- t545: pranchas do juiz Gemini com 360 px por quadro, todas do mesmo tamanho, compostas em grade (até 4 colunas) com o id de cada cena visível. São N pranchas por pedido (padrão 3), cobrindo todas as cenas. `gemini_prancha_px` e `gemini_pranchas_por_pedido` ficam em `config/motores.json`. Teste `test_gemini_pranchas.py`.
+- `loop_lote2510.py`: `persistir=False` (o registro fica em `loop-gemini.json`; sem escrita no banco, que exigia credencial).
+- `gate_lote2510.py` agora usa o gate determinístico (`gate_publicacao.avaliar_pasta`) e o `loop-gemini.json`; brigadeiro adiado. `GATE-PRONTO-LOTE.md` regenerado: todos em P1_HOLD (LOOP ausente), porque o lote parou por memória do Camofox (pico de 2057 MB > 1,9 GB) na 2ª rodada VISUAL de olhos-da-cara. Nada publicado.
+
 ## [0.4.2] — 2026-10-25
 ### Adicionado
 - t544 (José 22:52): modelo do juiz Gemini (LOOP e VISUAL) fixado por config (`config/motores.json` → `gemini_modelo`, padrão "3.8 Flash"). Antes de CADA envio: abre o seletor pelo rótulo, escolhe, reabre e confere "Selecionado"; senão `ModeloIndisponivel` (falha fechada). Modelo registrado no log e nos resultados (`ResultadoAuditorGemini.modelo`, `ResultadoLoopGemini` 1.1.0 `modelo`). Testes `test_gemini_modelo.py`. Observação: no Camofox a escolha persiste entre abas novas.

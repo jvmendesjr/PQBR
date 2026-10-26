@@ -43,3 +43,19 @@ Códigos, SEO/fontes do NotebookLM (sessão do Camofox), juiz Gemini VISUAL via 
 | PQBR-EP1010 | crostinha | Por que a gente raspa a panela de arroz até a crostinha? | aprova_com_ressalva | ok | ok | P1_HOLD |
 | PQBR-EP1007 | brigadeiro | Por que o brigadeiro só existe no Brasil? | reprova | ok | ok | P1_HOLD |
 | PQBR-EP1005 | liquidificador | Por que o liquidificador tem 15 velocidades se usamos só 2? | aprova_com_ressalva | ok | ok | P1_HOLD |
+
+
+## Gate com LOOP do juiz Gemini (25/10/2026, 0.4.3)
+Gate determinístico `pipeline/gate_publicacao.py`. LOOP via Camofox 9387 (humanizado, modelo **3.8 Flash** fixado e conferido antes de cada envio; pranchas 360 px compostas em 3 anexos). Brigadeiro adiado. Nada publicado.
+
+| código | tema | LOOP | imagem×fala / capa×título / loop | status | bloqueios | motivos do juiz (até 4) |
+|---|---|---|---|---|---|---|
+| PQBR-EP1008 | nao-e-bem-assim | pendente | — | P1_HOLD | loop_gemini_ausente | — |
+| PQBR-EP1002 | olhos-da-cara | pendente | — | P1_HOLD | loop_gemini_ausente | — |
+| PQBR-EP1003 | cafe-fraco | pendente | — | P1_HOLD | loop_gemini_ausente | — |
+| PQBR-EP1004 | formiga | pendente | — | P1_HOLD | loop_gemini_ausente | — |
+| PQBR-EP1006 | fechadura | pendente | — | P1_HOLD | loop_gemini_ausente | — |
+| PQBR-EP1009 | garrafa | pendente | — | P1_HOLD | loop_gemini_ausente | — |
+| PQBR-EP1010 | crostinha | pendente | — | P1_HOLD | loop_gemini_ausente | — |
+| PQBR-EP1007 | brigadeiro | pendente | — | P1_HOLD | tema_adiado; loop_gemini_ausente | — |
+| PQBR-EP1005 | liquidificador | pendente | — | P1_HOLD | loop_gemini_ausente | — |

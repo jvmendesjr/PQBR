@@ -128,17 +128,52 @@ def _ref(tab: str, rotulo: str, tentativas: int = 10) -> str:
     raise RuntimeError(f"elemento não encontrado: {rotulo}")
 
 
-def preparar_pranchas(quadros: list[str], capa: str | None, destino: Path) -> list[str]:
-    """Rotula cada quadro com o id da cena embaixo (o template pede), no diretório de upload do Camofox."""
+def config_pranchas() -> tuple[int, int]:
+    """t545: (largura px de cada quadro, nº de anexos por pedido) de config/motores.json; padrão (360, 3)."""
+    from ..motores import CONFIG
+    try: d = json.loads(Path(CONFIG).read_text())
+    except (OSError, ValueError): d = {}
+    return int(d.get("gemini_prancha_px", 360)), max(1, int(d.get("gemini_pranchas_por_pedido", 3)))
+
+
+def grupos(itens: list, n: int) -> list[list]:
+    """Divide em até n grupos contíguos, equilibrados, sem perder nenhum item (cobertura total)."""
+    n = max(1, min(n, len(itens))); q, r = divmod(len(itens), n); out, k = [], 0
+    for g in range(n):
+        t = q + (1 if g < r else 0); out.append(itens[k:k + t]); k += t
+    return out
+
+
+def preparar_pranchas(quadros: list[str], capa: str | None, destino: Path, largura: int | None = None) -> list[str]:
+    """Rotula cada quadro com o id da cena embaixo (o template pede), no diretório de upload do Camofox.
+    t545: tamanho uniforme (largura × 16:9 vertical) para compor em grade."""
+    largura = largura or config_pranchas()[0]; alt = (largura * 16 // 9) // 2 * 2; faixa = max(40, largura // 6)
     destino.mkdir(parents=True, exist_ok=True); fonte = subprocess.run(["fc-match", "-f", "%{file}", FONTE], capture_output=True, text=True).stdout
     itens = [(f"S{i + 1:02d}", q) for i, q in enumerate(quadros)] + ([("CAPA", capa)] if capa else [])
     out = []
     for rid, q in itens:
         f = destino / f"{rid}.png"
         subprocess.run(["ffmpeg", "-nostdin", "-v", "error", "-y", "-i", q, "-vf",
-                        f"scale=540:-2,pad=iw:ih+90:0:0:white,drawtext=fontfile={fonte}:text={rid}:fontsize=60:fontcolor=black:x=(w-tw)/2:y=h-75",
+                        f"scale={largura}:{alt}:force_original_aspect_ratio=decrease,pad={largura}:{alt}:(ow-iw)/2:(oh-ih)/2:white,"
+                        f"pad=iw:ih+{faixa}:0:0:white,drawtext=fontfile={fonte}:text={rid}:fontsize={faixa * 2 // 3}:fontcolor=black:x=(w-tw)/2:y=h-{faixa * 5 // 6}",
                         str(f)], check=True)
         out.append(str(f))
+    return out
+
+
+def compor_pranchas(rotuladas: list[str], n: int, destino: Path) -> list[str]:
+    """t545: junta os quadros rotulados em n pranchas compostas (grade, até 4 colunas). Cada id segue visível."""
+    if n >= len(rotuladas): return rotuladas
+    out = []
+    for g, grp in enumerate(grupos(rotuladas, n), 1):
+        f = destino / f"PRANCHA-{g}.png"
+        if len(grp) == 1:
+            subprocess.run(["cp", grp[0], str(f)], check=True); out.append(str(f)); continue
+        cols = min(4, len(grp)); lay = "|".join(f"{'+'.join(['w0'] * (k % cols)) or '0'}_{'+'.join(['h0'] * (k // cols)) or '0'}" for k in range(len(grp)))
+        cmd = ["ffmpeg", "-nostdin", "-v", "error", "-y"]
+        for a in grp: cmd += ["-i", a]
+        cmd += ["-filter_complex", f"xstack=inputs={len(grp)}:layout={lay}:fill=white", str(f)]
+        subprocess.run(cmd, check=True); out.append(str(f))
     return out
 
 
@@ -235,8 +270,10 @@ def auditar(codigo: str, slug: str, quadros: list[str], falas: list[str], bloco_
             rodadas: int = 2, persistir: bool = True, transmitir_texto: bool = False,
             titulo: str | None = None) -> ResultadoAuditorGemini:
     from ..pipeline.auditor_visual import montar_prompt, decidir, linhas_erros_aceitaveis, SQL_ERROS
-    arqs = preparar_pranchas(quadros, capa, UPLOADS / f"auditor-{codigo}")
-    ids = [Path(a).stem for a in arqs]
+    destino = UPLOADS / f"auditor-{codigo}"
+    rot = preparar_pranchas(quadros, capa, destino)
+    ids = [Path(a).stem for a in rot]
+    arqs = compor_pranchas(rot, config_pranchas()[1], destino); _log(f"{len(ids)} cenas em {len(arqs)} pranchas")
     cenas = [(f"S{i + 1:02d}", falas[i] if i < len(falas) else "") for i in range(len(quadros))] + ([("CAPA", "capa do vídeo (sem fala)")] if capa else [])
     brutos, urls = [], []
     for n in range(1, rodadas + 1):

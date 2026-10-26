@@ -23,7 +23,7 @@ for d in sorted(L.glob("*/seo.json")):
     try:
         res = auditar_loop(s["codigo"], d.parent.name, q, r["falas"],
                            "[ESTILO] " + str(bv.get("estilo", "")) + "\n[PERSONAGEM] " + str(bv.get("personagem", "")),
-                           str(capa), s["seo"]["titulo"])
+                           str(capa), s["seo"]["titulo"], persistir=False)   # t545: registro no loop-gemini.json; sem escrita no banco
         out.write_text(res.model_dump_json(indent=1)); print(s["codigo"], s["tema"], res.veredito, res.imagem_fala, res.capa_titulo, res.loop_texto, flush=True)
     except Exception as e:
         print(s["codigo"], "ERRO", type(e).__name__, str(e)[:300], flush=True)

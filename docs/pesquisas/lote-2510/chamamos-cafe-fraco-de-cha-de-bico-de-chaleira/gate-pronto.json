@@ -8,8 +8,8 @@
   "gate": {
     "A1_A3_tecnico": "PASS",
     "A9_local": "PASS (frames 0.5/1.5/2.5 s: personagem 2D central, legivel, sem rosto real/marca, sem end-card NotebookLM)",
-    "A4_A8_juiz_gemini": "VISUAL aprova_com_ressalva (2 rodadas, texto nao enviado); LOOP: INEXISTENTE no repo (LACUNAS)",
-    "B1_B10_editorial": "PASS (NotebookLM SEO validado PacoteSEO; 10 fontes web; GenAI: cartum 2D nao realista) ressalvas: codigo PQBR-EP fora da descricao (entra no payload/etiqueta)"
+    "A4_A8_juiz_gemini": "PENDENTE (LOOP não rodado)",
+    "B1_B10_editorial": "PASS (NotebookLM SEO validado PacoteSEO; 10 fontes web; GenAI: cartum 2D nao realista) ressalvas: codigo PQBR-EP fora da descricao (entra no payload)"
   },
   "status": "P1_HOLD",
   "publicado": false,
@@ -21,5 +21,6 @@
   "cta_check": "OK: CTA original do roteiro já é o fallback literal 'Segue o Porquê BR'; pronto v1 vigente, sem v2",
   "pronto_vigente": "runtime/lote-saldo/cafe-fraco/cafe-fraco-pronto.mp4",
   "codigo": "PQBR-EP1003",
-  "motivo_hold": "LOOP do juiz Gemini nao existe no repo (fail-closed)"
+  "motivo_hold": "loop_gemini_ausente",
+  "ressalvas_gate": []
 }

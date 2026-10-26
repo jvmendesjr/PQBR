@@ -8,7 +8,7 @@
   "gate": {
     "A1_A3_tecnico": "PASS",
     "A9_local": "PASS (frames 0.5/1.5/2.5 s: personagem 2D central, legivel, sem rosto real/marca, sem end-card NotebookLM)",
-    "A4_A8_juiz_gemini": "VISUAL aprova_com_ressalva (2 rodadas, texto nao enviado); LOOP: INEXISTENTE no repo (LACUNAS)",
+    "A4_A8_juiz_gemini": "PENDENTE (LOOP não rodado)",
     "B1_B10_editorial": "PASS (NotebookLM SEO validado PacoteSEO; 8 fontes web; GenAI: cartum 2D nao realista)"
   },
   "status": "P1_HOLD",
@@ -32,5 +32,6 @@
   },
   "pronto_vigente": "runtime/lote-saldo/olhos-da-cara/olhos-da-cara-pronto-v2.mp4",
   "codigo": "PQBR-EP1002",
-  "motivo_hold": "LOOP do juiz Gemini nao existe no repo (fail-closed)"
+  "motivo_hold": "loop_gemini_ausente",
+  "ressalvas_gate": []
 }

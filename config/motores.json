@@ -7,5 +7,8 @@
   "meta_vibes"
  ],
  "gemini_modelo": "3.8 Flash",
- "_doc_gemini": "t544 (José 22:52): modelo do juiz Gemini web (LOOP e VISUAL), escolhido no seletor antes de cada envio; falha fechada se não confirmar."
+ "_doc_gemini": "t544 (José 22:52): modelo do juiz Gemini web (LOOP e VISUAL), escolhido no seletor antes de cada envio; falha fechada se não confirmar.",
+ "gemini_prancha_px": 360,
+ "gemini_pranchas_por_pedido": 3,
+ "_doc_pranchas": "t545: largura de cada quadro rotulado e nº de pranchas compostas por pedido (memória do Camofox)."
 }
