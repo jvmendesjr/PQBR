@@ -64,3 +64,6 @@ Depois abra `http://127.0.0.1:18233/`. O túnel foi testado e respondeu HTTP 200
 No PC foram confirmados Git, Node.js e Docker/Compose. O diretório de trabalho é `/home/pc/Workspace/PQBR`; os arquivos de Temporal do projeto estão em `infra/temporal/` e `scripts/temporal/`. Comece com comandos de leitura e verifique `git status` antes de editar.
 
 Para este trabalho, preserve alterações preexistentes; não faça commit ou push sem solicitação. Não consulte `docs/arquivo/`, `docs/_obsoleto/`, `docs/pesquisas/` nem `docs/DECISOES-LOG.md` sem aprovação explícita do proprietário. Não altere configurações de autenticação/rede/serviços sem autorização específica e não exponha segredos. **Exceção (t530, José):** `docs/pesquisas/PESQUISA-extensoes-geracao-em-serie.md` pode ser lido por qualquer agente, **somente leitura** (referência da Fase 4V).
+
+## Agente externo pelo MCP (agente do zero t96u)
+Protocolo obrigatório e ferramentas em `AGENTS.md` (seção "Protocolo obrigatório do agente externo").
