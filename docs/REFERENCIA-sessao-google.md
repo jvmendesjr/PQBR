@@ -254,3 +254,8 @@ PQBR segue individual em 9387. Passos 2–3 do plano 9.2 preparados no repo, sem
 }
 
 - 15/10 13:10 PT (auto, evento #69): notebooklm normalizado: pedido pendente resolvido → ok
+
+## Google Cloud Console — bloqueio por 2SV (26/10/2026, t73s333)
+- Conta do canal (juniormoedavirtual), logada no Camofox 9387. Em `console.cloud.google.com` aparece "Acesso ao Google Cloud bloqueado": desde 01/10/2026 o Google Cloud exige verificação em duas etapas (2SV/MFA) na conta.
+- Sem 2SV não dá para criar projeto, ativar a YouTube Data API nem criar o cliente OAuth. Ativar a 2SV muda a segurança da conta (telefone ou passkey), então é passo do José; o agente não faz.
+- Depois que o José ativar (pode levar alguns minutos para valer), o roteiro continua: projeto `pqbr-publicacao`, YouTube Data API v3, consentimento Externo "PQBR" com `youtube.upload` + `youtube.readonly`, cliente Desktop, refresh token via loopback e as chaves gravadas em `~/.pqbr/secrets/episodio.env` (600).
