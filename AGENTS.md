@@ -138,19 +138,6 @@ t531 · 24/10/2026 · pedido do José. **Só leitura e proposta.** **Atualizaç�
 
 ## Decisões recentes
 
-## t476 (24/10/2026) — NotebookLM motor, sistema modular, Temporal sistema nervoso, 8 papéis (t512–t514)
-- **t512:** NotebookLM é o centro nervoso e o motor do canal (decisões, temas, roteiros, direção); a produção depende dos caminhos que ele norteia. A geração de vídeo saiu do NotebookLM por determinismo (Flow primário). Corrigida a linha do CONTRATO que dizia que o NotebookLM gera o vídeo (muda o hash do pacote; autorizado em t510).
-- **t512:** `ReposicaoTemasWorkflow`: temas propostos pelo motor (NotebookLM, caderno efêmero semanal, nunca mestre, sessão do Camofox 9387, `NOTEBOOKLM_DISABLE_KEEPALIVE_POKE=1`, `NOTEBOOKLM_HEADLESS_REAUTH=0`); o Líder Editorial (PydanticAI) só monta o pedido, interpreta, filtra e valida em `PropostaTemas`.
-- **t512:** papéis reduzidos a 8 (Diretor, Líder Editorial, Pesquisador de Origem, Auditor, Compliance, Guardião, Observador, Dev). Dev = fusão Corretor+Revisor; só indica problemas e propõe; José aplica com agentes externos. Roteirista, SEO e Caçador Sazonal viram etapas de workflow que chamam o motor; Comunidade adiada. Personas aposentadas em `docs/_obsoleto/company/agents/`.
-- **t513:** sistema modular: motores atrás de porta (contrato Pydantic + adaptador) escolhidos por config (`config/motores.json`, `src/pqbr/motores/`): `MotorIntelectual` (notebooklm), `GeradorVideo` (flow; alternativas notebooklm_video, google_vids, meta_vibes; cadeia de fallback em t517).
-- **t514:** Temporal é o sistema nervoso e a peça mais rígida (última a tro
-
-## t84u–t86u (26/10/2026) — Hindsight bank único com política por papel; GitNexus global como pré-requisito
-- **t84u–t85u:** um bank só (`pqbr`); cada papel só lê/escreve as tags e só vê o código que `config/politica_papeis.json` libera; papel desconhecido ⇒ negado. GitNexus vira pré-requisito de instalação como Hindsight e Camofox.
-- **t86u:** GitNexus é de uso global do servidor (compartilhado), instalado fora do repo; a PQBR só registra o índice dela e declara o pré-requisito. Versão 1.6.12 em `~/.local/opt/node22` (wrapper `~/.local/bin/gitnexus`), informar ao jr.
-- Risco registrado: licença PolyForm Noncommercial.
-
-
 ## t89u (26/10/2026) — Servidor MCP dentro da PQBR, só tailnet; saúde do Hindsight
 - José confirmou: o servidor MCP fica na própria aplicação; acesso autorizado só pela tailnet (127.0.0.1 + `tailscale serve`, nunca Funnel/0.0.0.0). Só leitura; papel por token de cliente; papel desconhecido ⇒ negado.
 - Hindsight verificado saudável (0.10.2, bank `pqbr` com 5.012 memórias). O filtro de tags funciona no servidor; as memórias legadas sem tag ficam fora da política.
@@ -168,6 +155,16 @@ t531 · 24/10/2026 · pedido do José. **Só leitura e proposta.** **Atualizaç�
 - `pqbr.storage.hindsight_tags` é a regra única (indexador e reclassificação); política 1.2.0 deixa o indexador escrever as tags de conteúdo.
 - Indexação manual rodada (sem reinício); 0 seções vigentes faltando no bank. Descarte: 231 documentos apagados (backup antes), 7 mantidos para revisão. IDs em `docs/operacao/hindsight-descarte-candidatos.md`.
 
+
+## t95u/t96u (26/10/2026) — Agentes externos registram memória pelo MCP
+- José pediu que as alterações de agentes externos sejam também memorizadas. O MCP deixa de ser só leitura: `registrar_memoria` e `registrar_alteracao` (esta exige commit existente), contrato Pydantic 1.0.0, via `hindsight.reter`.
+- Só escreve papel com escrita na política (o indexador não escreve pelo MCP); tags dentro das tags de escrita do papel, `obsoleto_candidato` proibida; autor `autor:<cliente>` vem do token, nunca do pedido; texto passa pela barreira de segredos.
+- Protocolo obrigatório no onboarding/AGENTS.md: onboarding → buscar_memoria antes de agir → commit local + DECISOES-LOG/CHANGELOG → registrar ao final. Servidor 0.2.0 (reinício só do `pqbr-mcp`). Teste de agente do zero aprovado.
+
+
+## t97u (26/10/2026) — Memória superada da licença do GitNexus corrigida
+- José autorizou ("pode corrigir logo"). Fonte: ARQUITETURA §12 ainda dizia "pode exigir licença comercial" e o log t84u–t86u só "risco registrado"; ambos agora citam a aceitação de t90u.
+- Hindsight: 3 documentos superados apagados (2 versões antigas da ARQUITETURA §12 e a seção t84u–t86u), backup em `~/.pqbr/hindsight/backup/licenca-gitnexus-20261026.json` (600); seções reindexadas e a versão correta registrada pelo MCP.
 
 
 ## Estado do ROADMAP
@@ -202,8 +199,9 @@ t531 · 24/10/2026 · pedido do José. **Só leitura e proposta.** **Atualizaç�
 - [x] **Política por papel [agora]:** `config/politica_papeis.json` + filtro no Hindsight e no adaptador GitNexus.
 - [x] **Servidor MCP da PQBR só na tailnet (t89u, OK do José):** `pqbr-mcp`, 127.0.0.1:8791 + tailscale serve, só leitura, token por cliente.
 - [x] **AGENTS.md gerado (t89u)** do onboarding do MCP.
-- [ ] Reclassificar com tags as ~4.975 memórias legadas sem tag [pendente decisão].
-- [ ] **Teste de agente do zero [pendente].**
+- [x] Reclassificar com tags as memórias legadas sem tag (feito em t90u).
+- [x] **Escrita de memória pelo MCP (t95u/t96u):** `registrar_memoria`/`registrar_alteracao` (contrato 1.0.0), só papel com escrita na política, autor = cliente do token, referência a commit verificado e arquivos.
+- [x] **Teste de agente do zero (t96u):** URL tailnet + token `mantenedor-externo` → onboarding → buscar_memoria → commit local `b63fa56` → registrar_alteracao → buscar_memoria retornou em ~10 s; indexador negado; sem token 401.
 - [x] Licença do GitNexus aceita (uso pessoal, sem revenda; t90u).
 - [x] **Reclassificação do Hindsight por papel (t90u):** `scripts/hindsight/reclassificar.py`; 220 candidatas a descarte em `docs/operacao/hindsight-descarte-candidatos.md`.
 - [x] Descarte das candidatas (t90s398): 231 apagadas após a indexação; docs vigentes corrigidos; indexador com a regra única de tags.

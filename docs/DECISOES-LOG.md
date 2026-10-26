@@ -579,7 +579,7 @@ NÃO CABE:
 ## t84u–t86u (26/10/2026) — Hindsight bank único com política por papel; GitNexus global como pré-requisito
 - **t84u–t85u:** um bank só (`pqbr`); cada papel só lê/escreve as tags e só vê o código que `config/politica_papeis.json` libera; papel desconhecido ⇒ negado. GitNexus vira pré-requisito de instalação como Hindsight e Camofox.
 - **t86u:** GitNexus é de uso global do servidor (compartilhado), instalado fora do repo; a PQBR só registra o índice dela e declara o pré-requisito. Versão 1.6.12 em `~/.local/opt/node22` (wrapper `~/.local/bin/gitnexus`), informar ao jr.
-- Risco registrado: licença PolyForm Noncommercial.
+- Risco registrado: licença PolyForm Noncommercial (superado: aceita em t90u, uso pessoal, sem revenda).
 
 ## t89u (26/10/2026) — Servidor MCP dentro da PQBR, só tailnet; saúde do Hindsight
 - José confirmou: o servidor MCP fica na própria aplicação; acesso autorizado só pela tailnet (127.0.0.1 + `tailscale serve`, nunca Funnel/0.0.0.0). Só leitura; papel por token de cliente; papel desconhecido ⇒ negado.
@@ -600,3 +600,7 @@ NÃO CABE:
 - José pediu que as alterações de agentes externos sejam também memorizadas. O MCP deixa de ser só leitura: `registrar_memoria` e `registrar_alteracao` (esta exige commit existente), contrato Pydantic 1.0.0, via `hindsight.reter`.
 - Só escreve papel com escrita na política (o indexador não escreve pelo MCP); tags dentro das tags de escrita do papel, `obsoleto_candidato` proibida; autor `autor:<cliente>` vem do token, nunca do pedido; texto passa pela barreira de segredos.
 - Protocolo obrigatório no onboarding/AGENTS.md: onboarding → buscar_memoria antes de agir → commit local + DECISOES-LOG/CHANGELOG → registrar ao final. Servidor 0.2.0 (reinício só do `pqbr-mcp`). Teste de agente do zero aprovado.
+
+## t97u (26/10/2026) — Memória superada da licença do GitNexus corrigida
+- José autorizou ("pode corrigir logo"). Fonte: ARQUITETURA §12 ainda dizia "pode exigir licença comercial" e o log t84u–t86u só "risco registrado"; ambos agora citam a aceitação de t90u.
+- Hindsight: 3 documentos superados apagados (2 versões antigas da ARQUITETURA §12 e a seção t84u–t86u), backup em `~/.pqbr/hindsight/backup/licenca-gitnexus-20261026.json` (600); seções reindexadas e a versão correta registrada pelo MCP.

@@ -5,6 +5,10 @@ Versionamento SemVer (MAJOR.MINOR.PATCH) a partir de t510. Versão do pacote can
 
 
 
+## [0.11.1] — 2026-10-26
+### Corrigido
+- t97u: licença do GitNexus (PolyForm Noncommercial aceita em t90u, uso pessoal, sem revenda) corrigida na ARQUITETURA §12 e no DECISOES-LOG; 3 documentos superados do bank `pqbr` substituídos (backup antes).
+
 ## [0.11.0] — 2026-10-26
 ### Adicionado
 - t95u/t96u: ferramentas MCP `registrar_memoria` e `registrar_alteracao` (`pqbr.contratos.memoria_mcp` 1.0.0, `pqbr.mcp.escrita`), autor por cliente do token, commit verificado; `tests/unit/test_mcp_escrita.py`.
