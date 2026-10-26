@@ -5,6 +5,11 @@ Versionamento SemVer (MAJOR.MINOR.PATCH) a partir de t510. Versão do pacote can
 
 
 
+## [0.15.1] — 2026-10-26
+### Documentação
+- Mapa 13: bloco de persistência (units, linger, containers, checagem); 00 e 09: MCP só do mantenedor.
+- ROADMAP, AGENTES.md, REGRAS, ARQUITETURA §12, ESTADO-ATUAL e DECISOES-LOG com mantenedor exclusivo, construção de módulos e persistência.
+
 ## [0.15.0] — 2026-10-26
 ### Adicionado
 - Política de papéis 1.4.0: `mantenedor` externo lê todas as tags de conteúdo e o repo todo; escreve decisao, incidente, licao, playbook, doc, estado.

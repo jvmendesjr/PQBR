@@ -2,7 +2,7 @@
 
 Fonte única de "onde estamos". Não repete o ROADMAP: aponta os itens por id. **Atualize este arquivo a cada correção ou pendência resolvida.** O hook pre-commit exige isso quando o commit toca ROADMAP, LACUNAS, DECISOES-LOG ou CHANGELOG, e o `registrar_alteracao` exige isso para `tipo` correcao ou pendencia_resolvida.
 
-Atualizado: 26/10/2026 (t112u–t116u: papel mantenedor externo, MCP exclusivo do mantenedor, pqbr-mcp reiniciado) · versão 0.15.0
+Atualizado: 26/10/2026 (t118u/t119u: mapa e docs com mantenedor exclusivo, módulos e persistência) · versão 0.15.1
 
 ## Onde estamos
 - **Produção:** o lote do saldo está em `runtime/lote-saldo/` (um diretório por tema). O EP1002 olhos-da-cara foi reprovado e descartado (`runtime/lote-saldo/_descartado/`), e o tema voltou a `proposto`.

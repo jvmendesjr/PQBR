@@ -635,3 +635,7 @@ NÃO CABE:
 - t113u: o mantenedor também constrói e liga módulos novos (contrato, porta/adaptador, Temporal, agentes, testes, docs, mapa). Ligar algo que peça reinício de serviço ou migração continua exigindo OK do José.
 - t114u: o pqbr-mcp externo é exclusivo do `mantenedor` (0.4.0): token de outro papel ⇒ 401; papel declarado (`X-PQBR-Papel`) diferente ⇒ 403; `novo_cliente.py` só cria mantenedor.
 - t116u: OK do José para reiniciar SOMENTE o `pqbr-mcp` após a suíte verde.
+
+## t117u–t119u (26/10/2026) — Persistência verificada; mapa e docs atualizados
+- t117u: pqbr-mcp e hindsight-api são user units enabled (linger=yes); containers DB/Temporal `unless-stopped`; nada a corrigir. Comando de checagem no onboarding.
+- t118u/t119u: mapas 13 (bloco de persistência), 00 e 09 e os docs (ROADMAP, AGENTES, REGRAS, ARQUITETURA) registram o mantenedor exclusivo do MCP, a construção de módulos e a persistência.

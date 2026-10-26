@@ -4,7 +4,7 @@
 
 Fonte única de "onde estamos". Não repete o ROADMAP: aponta os itens por id. **Atualize este arquivo a cada correção ou pendência resolvida.** O hook pre-commit exige isso quando o commit toca ROADMAP, LACUNAS, DECISOES-LOG ou CHANGELOG, e o `registrar_alteracao` exige isso para `tipo` correcao ou pendencia_resolvida.
 
-Atualizado: 26/10/2026 (t112u–t116u: papel mantenedor externo, MCP exclusivo do mantenedor, pqbr-mcp reiniciado) · versão 0.15.0
+Atualizado: 26/10/2026 (t118u/t119u: mapa e docs com mantenedor exclusivo, módulos e persistência) · versão 0.15.1
 
 ## Onde estamos
 - **Produção:** o lote do saldo está em `runtime/lote-saldo/` (um diretório por tema). O EP1002 olhos-da-cara foi reprovado e descartado (`runtime/lote-saldo/_descartado/`), e o tema voltou a `proposto`.
@@ -176,11 +176,6 @@ t531 · 24/10/2026 · pedido do José. **Só leitura e proposta.** **Atualizaç�
 
 ## Decisões recentes
 
-## t101u (26/10/2026) — Inovações do dia no mapa; publicação depois
-- Novo diagrama `docs/mapa/13-memoria-mcp-handoff.mmd` (Hindsight por papel, hindsight_tags e descarte, GitNexus global + instância PQBR, pqbr-mcp, ESTADO-ATUAL + hook + handoff, branch no GitHub). O 09 só aponta para o 13; a visão geral 00 ganhou o nó. ARQUITETURA §12 completada (tags, escrita MCP, handoff).
-- José: seguir a ordem do ESTADO-ATUAL e publicar os vídeos prontos só depois de analisá-los pessoalmente.
-
-
 ## t105u (26/10/2026) — LOOP do juiz Gemini com 4 Argon (raciocínio Baixo) no EP1002 descartado
 - José pediu o 4 Argon, no nível de raciocínio mais baixo, no mesmo vídeo cheio de problemas. Override só por execução: `PQBR_GEMINI_MODELO` / `PQBR_GEMINI_RACIOCINIO` (Baixo|Médio|Alto). O padrão continua `gemini_modelo: 3.8 Flash` em `config/motores.json`. O nível é confirmado no menu antes de cada envio (evidência do seletor gravada no resultado). Script `scripts/lote/loop_comparar_modelo.py`: mesmos quadros e mesma rubrica; não sobrescreve o resultado oficial.
 - Resultado (`loop-gemini-4argon.json`): **reprova** (imagem×fala aprova_com_ressalva, capa aprova, loop reprova). O 3.8 deu terceira_rodada, com todas as métricas visuais em 1.0. O Argon pegou o desvio de estilo (0.1), a legenda sobre o foco na capa e a legenda com erro em S04–S06. Óculos cortados, olho grotesco e lábios mexendo não estão na rubrica, e nenhum dos dois apontou (critérios novos = P7). Tempo: 4 Argon 614 s no total (respostas visuais de 37 s, loop de 9–18 s); o tempo do 3.8 nesse vídeo não foi registrado.
@@ -207,6 +202,11 @@ t531 · 24/10/2026 · pedido do José. **Só leitura e proposta.** **Atualizaç�
 - t116u: OK do José para reiniciar SOMENTE o `pqbr-mcp` após a suíte verde.
 
 
+## t117u–t119u (26/10/2026) — Persistência verificada; mapa e docs atualizados
+- t117u: pqbr-mcp e hindsight-api são user units enabled (linger=yes); containers DB/Temporal `unless-stopped`; nada a corrigir. Comando de checagem no onboarding.
+- t118u/t119u: mapas 13 (bloco de persistência), 00 e 09 e os docs (ROADMAP, AGENTES, REGRAS, ARQUITETURA) registram o mantenedor exclusivo do MCP, a construção de módulos e a persistência.
+
+
 ## Fase atual do ROADMAP
 
 ## Fase: Conhecimento e agente externo agnóstico (t84u–t86u, 26/10/2026)
@@ -217,6 +217,7 @@ t531 · 24/10/2026 · pedido do José. **Só leitura e proposta.** **Atualizaç�
 - [x] Reclassificar com tags as memórias legadas sem tag (feito em t90u).
 - [x] **Escrita de memória pelo MCP (t95u/t96u):** `registrar_memoria`/`registrar_alteracao` (contrato 1.0.0), só papel com escrita na política, autor = cliente do token, referência a commit verificado e arquivos.
 - [x] **ESTADO-ATUAL (t98u/t99u):** `docs/ESTADO-ATUAL.md` é a fonte única do handoff, a 1ª seção do onboarding/AGENTS.md; hook pre-commit e `registrar_alteracao` (tipo correcao/pendencia_resolvida) exigem a atualização; handoff no Hindsight (tag `estado`, todos os papéis).
+- [x] **Papel `mantenedor` externo (t112u–t117u):** política 1.4.0 (lê todas as tags, repo todo, constrói/liga módulos; reinício/migração com OK); pqbr-mcp 0.4.0 exclusivo do mantenedor (outro papel 401/403); reiniciado e validado ao vivo; persistência verificada. Doc: `docs/operacao/onboarding-agente-externo.md`.
 - [x] **Teste de agente do zero (t96u):** URL tailnet + token `mantenedor-externo` → onboarding → buscar_memoria → commit local `b63fa56` → registrar_alteracao → buscar_memoria retornou em ~10 s; indexador negado; sem token 401.
 - [x] Licença do GitNexus aceita (uso pessoal, sem revenda; t90u).
 - [x] **Reclassificação do Hindsight por papel (t90u):** `scripts/hindsight/reclassificar.py`; 220 candidatas a descarte em `docs/operacao/hindsight-descarte-candidatos.md`.

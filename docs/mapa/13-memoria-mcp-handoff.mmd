@@ -38,5 +38,13 @@ flowchart LR
   HK --> EST
   OBS --- HS
   GNX --- IDXG
+  subgraph PERS["Persistência (verificada 26/10 18:21)"]
+    UN["systemd user: pqbr-mcp (Restart=on-failure) · hindsight-api (always)<br/>enabled · linger=yes"]
+    CT["Docker: pqbr-db · Temporal · temporal-postgresql<br/>restart unless-stopped"]
+    CHK["checagem: comando em onboarding-agente-externo.md"]
+  end
+  MCPS --- UN
+  HS --- UN
+  UN --- CT
   P{{"Protocolo: onboarding → buscar_memoria → commit local + DECISOES-LOG/CHANGELOG + ESTADO-ATUAL → registrar_alteracao"}}
   EXT --- P
