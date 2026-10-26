@@ -65,6 +65,10 @@ def _anexos_prontos(tab: str, n: int) -> bool:
 
 MODELO_PADRAO = "3.8 Flash"
 ULTIMO_MODELO = ""        # modelo confirmado no último envio (vai para o resultado)
+ULTIMO_RACIOCINIO = ""    # nível de raciocínio confirmado (só quando há override por execução)
+ENV_MODELO, ENV_RACIOCINIO = "PQBR_GEMINI_MODELO", "PQBR_GEMINI_RACIOCINIO"   # t105u: override só da execução
+NIVEIS = ("Baixo", "Médio", "Alto")
+EVIDENCIA: list[str] = []  # linhas do menu confirmado (evidência do modelo/nível antes do envio)
 
 
 class ModeloIndisponivel(RuntimeError):
@@ -72,6 +76,9 @@ class ModeloIndisponivel(RuntimeError):
 
 
 def modelo_configurado() -> str:
+    """Override por execução (env PQBR_GEMINI_MODELO) > config/motores.json (gemini_modelo) > 3.8 Flash. A config não muda."""
+    import os
+    if os.environ.get(ENV_MODELO, "").strip(): return os.environ[ENV_MODELO].strip()
     from ..motores import CONFIG
     try: return str(json.loads(Path(CONFIG).read_text()).get("gemini_modelo") or MODELO_PADRAO)
     except (OSError, ValueError): return MODELO_PADRAO
@@ -109,6 +116,45 @@ def selecionar_modelo(tab: str, modelo: str) -> str:
     if not (atual and atual.startswith(modelo + " ")):
         raise ModeloIndisponivel(f"selecionado {atual!r} ≠ {modelo!r}")
     return modelo
+
+
+def raciocinio_configurado() -> str | None:
+    """Só por execução (env PQBR_GEMINI_RACIOCINIO = Baixo|Médio|Alto); ausente ⇒ não mexe no nível. Inválido ⇒ ValueError."""
+    import os
+    v = os.environ.get(ENV_RACIOCINIO, "").strip()
+    if not v: return None
+    if v not in NIVEIS: raise ValueError(f"{ENV_RACIOCINIO} deve ser um de {NIVEIS}")
+    return v
+
+
+def nivel_selecionado(snap: str) -> str | None:
+    for n in NIVEIS:
+        if re.search(rf'menuitem "Selecionado {n}( |")', snap): return n
+    return None
+
+
+def selecionar_raciocinio(tab: str, nivel: str) -> str:
+    """Abre o seletor → "Nível de raciocínio" → escolhe `nivel` → reabre e confirma. Sem o submenu ⇒ ModeloIndisponivel."""
+    from .camofox_humano import clicar, pausa_humana
+    def abrir() -> str:
+        clicar(tab, selector=SELETOR_MODO); pausa_humana(1.2, 2.2)
+        try: clicar(tab, ref=_ref(tab, r'menuitem "Nível de raciocínio"', 3))
+        except RuntimeError:
+            _api("POST", f"/tabs/{tab}/press", {"userId": "pqbr", "key": "Escape"})
+            raise ModeloIndisponivel("seletor 'Nível de raciocínio' não existe")
+        pausa_humana(1.0, 1.8); return _snap(tab)
+    def fechar():
+        for _ in range(2): _api("POST", f"/tabs/{tab}/press", {"userId": "pqbr", "key": "Escape"}); pausa_humana(0.4, 0.9)
+    s = abrir()
+    if nivel_selecionado(s) != nivel:
+        m = re.search(rf'menuitem "{nivel} [^"]*"[^\n]*?\[(e\d+)\]', s)
+        if not m: fechar(); raise ModeloIndisponivel(f"nível {nivel!r} não aparece")
+        clicar(tab, ref=m.group(1)); pausa_humana(1.0, 1.8); fechar(); s = abrir()
+    EVIDENCIA[:] = [l.strip()[:160] for l in s.split("\n") if "menuitem" in l]
+    fechar()
+    atual = nivel_selecionado(s)
+    if atual != nivel: raise ModeloIndisponivel(f"nível selecionado {atual!r} ≠ {nivel!r}")
+    return nivel
 
 
 def _log(*a) -> None:
@@ -230,6 +276,13 @@ def perguntar_gemini(arquivos: list[str], prompt: str, espera_s: int = 420, marc
         global ULTIMO_MODELO
         ULTIMO_MODELO = ""
         ULTIMO_MODELO = selecionar_modelo(tab, modelo_configurado()); _log("modelo confirmado:", ULTIMO_MODELO)
+        global ULTIMO_RACIOCINIO
+        niv = raciocinio_configurado()
+        if niv:
+            ULTIMO_RACIOCINIO = ""
+            ULTIMO_RACIOCINIO = selecionar_raciocinio(tab, niv); _log("raciocínio confirmado:", ULTIMO_RACIOCINIO)
+            if not any(l.startswith(f'- menuitem "Selecionado {ULTIMO_MODELO}') for l in EVIDENCIA):
+                raise ModeloIndisponivel("evidência não mostra o modelo selecionado junto do nível")
         if arquivos:   # t540: LOOP textual vai sem anexos
             clicar(tab, ref=_ref(tab, r'button "Envio e ferramentas"'))
             pausa_humana(0.8, 1.8)

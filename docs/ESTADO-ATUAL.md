@@ -2,7 +2,7 @@
 
 Fonte única de "onde estamos". Não repete o ROADMAP: aponta os itens por id. **Atualize este arquivo a cada correção ou pendência resolvida.** O hook pre-commit exige isso quando o commit toca ROADMAP, LACUNAS, DECISOES-LOG ou CHANGELOG, e o `registrar_alteracao` exige isso para `tipo` correcao ou pendencia_resolvida.
 
-Atualizado: 26/10/2026 (t101u: mapa 13 das inovações; publicação fica para depois da análise do José) · versão 0.12.0
+Atualizado: 26/10/2026 (t105u: 4 Argon no EP1002; publicação fica para depois da análise do José) · versão 0.12.0
 
 ## Onde estamos
 - **Produção:** o lote do saldo está em `runtime/lote-saldo/` (um diretório por tema). O EP1002 olhos-da-cara foi reprovado e descartado (`runtime/lote-saldo/_descartado/`), e o tema voltou a `proposto`.
@@ -18,7 +18,7 @@ José assiste o EP1003 cafe-fraco (`runtime/lote-saldo/cafe-fraco/cafe-fraco-fin
 | P1 | EP1003 cafe-fraco: José assiste antes do LOOP do Gemini | Estado 26/10 · Próximo 5 | José | aguardando José |
 | P2 | Publicação: (a) José ativa a verificação em 2 etapas na conta juniormoedavirtual → (b) criar o OAuth do YouTube via Camofox (projeto `pqbr-publicacao`, chaves em `episodio.env`) → (c) aplicar a migração 0020 e reiniciar o worker → (d) upload pelo `PublicacaoAgendadaWorkflow` | F8-01 · Estado 26/10 · Próximo 1 | José (a); agente (b–d) | (a) José; (c) exige OK do José |
 | P3 | Teste: LOOP por cena vs o atual | Estado 26/10 · Testes pendentes | agente | depois do fluxo de publicação |
-| P4 | Teste: 4 Argon com raciocínio baixo vs 3.8 Flash | Estado 26/10 · Testes pendentes; LACUNAS | agente | depois do fluxo de publicação |
+| P4 | Teste 4 Argon vs 3.8 Flash. **1ª rodada feita (t105u)** no EP1002 descartado: Argon (raciocínio Baixo) **reprova** e o 3.8 deu terceira_rodada. Argon viu desvio de estilo em 8/9 cenas e problemas de legenda que o 3.8 deu como perfeitos. Nenhum dos dois tem critério para óculos cortados, olho grotesco ou lábios (P7). Resultado em `loop-gemini-4argon.json` | Estado 26/10 · Testes pendentes; LACUNAS | José | decidir se troca o juiz ou repete em outro vídeo |
 | P5 | Imagens de referência do elenco (`ASSET_personagem_{masculino,feminino}-v1`) | Estado 26/10 · Próximo 4 | agente | geração paga: OK do José (postergado) |
 | P6 | Activity do Storyboard no Temporal (bloqueia a geração sem ele) | Estado 26/10 · Próximo 2; R2 | agente | postergado |
 | P7 | Gate VISUAL: 3 critérios novos (lábios, enquadramento cortado, grotesco) | Estado 26/10 · Próximo 3 | agente | postergado |

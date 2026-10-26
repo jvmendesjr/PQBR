@@ -1,0 +1,65 @@
+{
+ "versao": "1.1.0",
+ "modelo": "4 Argon",
+ "codigo": "PQBR-EP1002",
+ "imagem_fala": "aprova_com_ressalva",
+ "capa_titulo": "aprova",
+ "loop_texto": "reprova",
+ "veredito": "reprova",
+ "motivos": [
+  "S01:mesmo_personagem_do_bloco",
+  "S02:segue_estilo_declarado",
+  "S03:segue_estilo_declarado",
+  "S04:segue_estilo_declarado",
+  "S04:imagem_corresponde_a_fala",
+  "S04:ambiente_brasileiro",
+  "S04:legenda_com_erro",
+  "S05:segue_estilo_declarado",
+  "S05:legivel_no_celular",
+  "S05:legenda_com_erro",
+  "S06:segue_estilo_declarado",
+  "S06:legenda_com_erro",
+  "S07:segue_estilo_declarado",
+  "S08:segue_estilo_declarado",
+  "S08:imagem_corresponde_a_fala",
+  "S09:segue_estilo_declarado",
+  "CAPA:legenda_cobre_foco",
+  "loop:ultima_fala_nao_emenda_na_primeira"
+ ],
+ "conversas": [
+  "https://gemini.google.com/app/1f4cb2c66a489f39",
+  "https://gemini.google.com/app/e6320f07a9e96121",
+  "https://gemini.google.com/app/197c964e25843ee1",
+  "https://gemini.google.com/app/205b24b95bc03710"
+ ],
+ "visual_bruto": {
+  "metricas": {
+   "segue_estilo_declarado": 0.1,
+   "mesmo_personagem_do_bloco": 0.9,
+   "imagem_corresponde_a_fala": 0.7777777777777778,
+   "legivel_no_celular": 0.9,
+   "ambiente_brasileiro": 0.9,
+   "foco_unico_zona_segura": 1.0,
+   "corresponde_ao_titulo": 1.0,
+   "legenda_cobre_foco": 0.0,
+   "tem_texto_na_tela": 1.0
+  },
+  "rodada_unica": false
+ },
+ "_execucao": {
+  "modelo_pedido": "4 Argon",
+  "raciocinio": "Baixo",
+  "tempo_total_s": 614,
+  "evidencia_seletor": [
+   "- menuitem \"3.5 Flash Lite Respostas mais rápidas\" [e65]",
+   "- menuitem \"3.8 Flash Ajuda para tudo\" [e66]",
+   "- menuitem \"3.1 Pro Raciocínio avançado\" [e67]",
+   "- menuitem \"Selecionado 4 Argon Tarefas complexas\" [e68]: 4 Argon Tarefas complexas",
+   "- menuitem \"Nível de raciocínio\" [e69] [expanded]",
+   "- menuitem \"Selecionado Baixo Rápido e eficiente\" [e70]: Baixo Rápido e eficiente",
+   "- menuitem \"Médio Aprofundamento equilibrado\" [e71]",
+   "- menuitem \"Alto Muito detalhado\" [e72]"
+  ],
+  "quando": "2026-10-26 16:36 -0300"
+ }
+}

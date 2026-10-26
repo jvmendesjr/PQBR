@@ -5,6 +5,10 @@ Versionamento SemVer (MAJOR.MINOR.PATCH) a partir de t510. Versão do pacote can
 
 
 
+## [0.13.0] — 2026-10-26
+### Adicionado
+- t105u: override por execução do juiz Gemini (`PQBR_GEMINI_MODELO`, `PQBR_GEMINI_RACIOCINIO`, com confirmação do nível no seletor), `scripts/lote/loop_comparar_modelo.py`, `tests/unit/test_gemini_override.py`; resultado 4 Argon do EP1002 em `loop-gemini-4argon.json`. Padrão 3.8 Flash inalterado.
+
 ## [0.12.1] — 2026-10-26
 ### Alterado
 - t101u: mapa 13 (memória, MCP e handoff); 09 e 00 apontam para ele; ARQUITETURA §12 completada.
