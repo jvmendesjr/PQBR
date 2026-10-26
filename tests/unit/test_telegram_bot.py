@@ -42,8 +42,9 @@ def _cb(uid, ref, de=JOSE, d="a"):
             "message": {"message_id": 7, "chat": {"id": int(JOSE)}}}}
 
 
-def test_config_padrao_desligada():
-    c = carregar_config(); assert c["saida"] == c["entrada"] == "desligado"
+def test_config_valida_e_ligada_por_t538a():
+    # t538-A (OK do José): ponte ativada; a config real tem de ser uma das alternativas válidas.
+    c = carregar_config(); assert c["saida"] in ("desligado", *c["saida_alternativas"]) and c["entrada"] in ("desligado", *c["entrada_alternativas"])
 
 
 def test_saida_pedido_com_botoes_e_reenvio_marcado(monkeypatch):
@@ -118,10 +119,12 @@ def test_activity_registrada_e_saida_desligada(monkeypatch):
     class R:
         def recibo(self, c): return "recibo-atual"
     monkeypatch.setattr(tb, "RepositorioPostgres", R)
+    monkeypatch.setattr(tb, "carregar_config", lambda: {"saida": "desligado"})   # desligada → só o recibo atual
     assert run(tb.enviar_telegram("aviso:x:0001")) == "recibo-atual"
 
 
 def test_main_entrada_fail_closed(monkeypatch):
+    monkeypatch.setattr(tb, "carregar_config", lambda: {"entrada": "desligado"})
     with pytest.raises(SystemExit, match="desligada"): run(tb.main_entrada(1))
     monkeypatch.setattr(tb, "carregar_config", lambda: {"entrada": "telegram_long_polling"})
     monkeypatch.delenv(tb.ENV_TOKEN, raising=False)

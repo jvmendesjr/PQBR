@@ -24,7 +24,8 @@ def _linha(ref, uid=1, de=JOSE, d="a"):
 
 
 def test_config_padrao_desligada_e_valida():
-    assert carregar_config(CONFIG)["entrada"] == "desligado"
+    c = carregar_config(CONFIG)   # t538-A: ligada pelo José; continua válida
+    assert c["entrada"] in ("desligado", *c["entrada_alternativas"])
 
 
 def test_callback_data_cabe_em_64_bytes():

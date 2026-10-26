@@ -1,0 +1,20 @@
+%% Publicação automática + botão de emergência (t540/t541, José 25/10/2026). Alterado pelo agente externo PQBR com autorização do José.
+%% Sem aprovação humana: o gate é a única barreira. Telegram só AVISA. Simulação por padrão (YOUTUBE_DRY_RUN + PQBR_PUBLICACAO_REAL).
+flowchart TD
+  subgraph PUB["PublicacaoAgendadaWorkflow (fila episodio-pqbr)"]
+    G["pub_gate<br/>técnico + editorial + LOOP Gemini (imagem×fala, capa×título, loop) + hash"] -->|reprovado| AR["pub_avisar (reprovado)"]
+    G -->|publicável| R["pub_reservar<br/>11:40 / 18:35 Fortaleza, 1 por janela (idempotente)"]
+    R --> P1{"pub_checar_pausa<br/>fail-closed"} -->|pausado| P1
+    P1 -->|livre| U["pub_upload_privado<br/>private + containsSyntheticMedia, hash, PQBR-EP, duplicata"]
+    U --> W["espera a janela<br/>sinal reverter → private"]
+    W --> P2{"pub_checar_pausa"} -->|livre| PR["pub_privacidade (public)"]
+    PR --> RG["pub_registrar<br/>temas_publicados + Drive"] --> AP["pub_avisar (publicado)"]
+    W -->|reverter| RV["pub_privacidade (private, nunca apaga)"]
+  end
+  subgraph EMG["Botão de emergência"]
+    TG(["@ottopulsar_bot<br/>/pausar · /retomar · /privar EP|todos<br/>só from.id do José"]) -->|Signal-With-Start comando| CTL["ControlePublicacaoWorkflow<br/>ctl_aplicar"]
+    CTL --> FLAG[("pqbr.controle_publicacao<br/>flag global")]
+    CTL --> AUD[("pqbr.auditoria_publicacao<br/>motivo · autor · hora")]
+    CTL --> AV2["pub_avisar"]
+  end
+  FLAG -.lida antes de cada ação externa.-> P1 & P2

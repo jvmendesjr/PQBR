@@ -5,6 +5,20 @@ Versionamento SemVer (MAJOR.MINOR.PATCH) a partir de t510. Versão do pacote can
 
 
 
+## [0.4.0] — 2026-10-25
+### Adicionado
+- F8-01 v2 (t540): `PublicacaoAgendadaWorkflow` — publicação AUTOMÁTICA (sem aprovação humana): gate → reserva 11:40/18:35 America/Fortaleza (1 por janela, idempotente) → upload privado → público na janela → `temas_publicados` + Drive → aviso Telegram (só aviso). Sinal `reverter` (volta para privado, nunca apaga).
+- Adaptador `integrations/youtube.py` (Data API v3): sempre `private` + `containsSyntheticMedia=true`, hash sha256, PQBR-EP na descrição/tags, duplicata no banco e no canal. **Simulação por padrão** (real exige `YOUTUBE_DRY_RUN=false` + `PQBR_PUBLICACAO_REAL=1`).
+- `pipeline/gate_publicacao.py` (DecisaoGate): técnico, editorial, LOOP Gemini, hash, tema adiado.
+- Pedido LOOP do juiz Gemini (`workflows/auditor_loop.py`, contrato `ResultadoLoopGemini` 1.0.0): imagem×fala, capa×título e loop textual, pelo Camofox 9387 humanizado; `perguntar_gemini` aceita pedido sem anexos. `scripts/lote/loop_lote2510.py`.
+- Botão de emergência (t541): contrato `contratos/emergencia.py` 1.0.0 (`/pausar`, `/retomar`, `/privar EP|todos`), `ControlePublicacaoWorkflow`, flag global fail-closed, auditoria; entrada do Telegram trata comandos só do `from.id` do José (desligado por padrão: `comandos_emergencia`).
+- Migração 0020 (`agenda_publicacao`, `controle_publicacao`, `auditoria_publicacao`) + rollback — testada em Postgres descartável, **não aplicada**.
+- Mapa `docs/mapa/11-publicacao.mmd` (agente externo, autorizado) e cobertura no verificador.
+### Alterado
+- t542: Telegram = manutenção/relatórios/observabilidade, não aprovação de publicação (DECISOES, PLANO da ponte, ROADMAP; trechos movidos para `docs/_obsoleto/telegram-aprovacao-publicacao-t542.md`).
+### Corrigido
+- 4 testes antigos do Telegram que esperavam a ponte desligada (agora fixam a config por monkeypatch; a real foi ligada na t538-A).
+
 ## [0.3.22] — 2026-10-25
 ### Adicionado
 - lote-runway: `MANUS-MODELOS.md` (modelos de vídeo/imagem do Manus, estimativas da comunidade; Seedance 2.0 Fast falhou por confirmação de autoria no modo sem interação). `PRECO-RUNWAY.md` atualizado (gen-4-turbo 29/clipe medido, kling-3 49/clipe).

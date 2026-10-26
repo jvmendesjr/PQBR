@@ -15,6 +15,7 @@ Diagramas Mermaid **gerados a partir do código real** (workflows, activities, f
 | `09-agentes-responsabilidades.mmd` | Agente PQBR (dedicado, pc) × jr (generalista) × YT-LLM (descontinuação); migração planejada do YouTube; pré-requisito do logo; proposta da skill | DECISOES t532–t535, BRIEFING |
 | `07-cadeia-video.mmd` | Storyboard em série → Flow → Google Vids → Meta Vibes → HOLD (navegador, cotas pagas, sem APIs) | `motores/__init__.py` (`CADEIA_VIDEO`) |
 | `10-catalogo-erros.mmd` | Catálogo de erros (tabela `pqbr.catalogo_erros`, papéis que consultam, agente externo que alimenta) | `db/migrations/0019_*.sql`, `pipeline/catalogo_erros_leitura.py` |
+| `11-publicacao.mmd` | Publicação automática (gate com LOOP → 11:40/18:35 → upload privado → público → registro; Telegram só avisa) + botão de emergência (/pausar, /retomar, /privar; flag global fail-closed; auditoria) | `workflows/publicacao.py`, `contratos/emergencia.py`, `db/migrations/0020_*.sql` |
 
 ## Regra
 **Agentes nunca alteram o mapa sozinhos.** Mudança no mapa só por proposta aprovada pelo José (t517). Agente que perceber divergência entre código e mapa **sinaliza** (Observador/Dev) e propõe o diff; não edita.

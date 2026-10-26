@@ -16,6 +16,8 @@ COBERTURA = {  # workflow → (arquivo do código, diagrama)
     "DescartarCadernoTesteWorkflow": ("descarte.py", "04-descarte.mmd"),
     "ApagarCadernoWorkflow": ("pacote.py", "04-descarte.mmd"),
     "VigiaAtualizacoesWorkflow": ("atualizacoes.py", "05-vigia-atualizacoes.mmd"),
+    "PublicacaoAgendadaWorkflow": ("publicacao.py", "11-publicacao.mmd"),
+    "ControlePublicacaoWorkflow": ("publicacao.py", "11-publicacao.mmd"),
 }
 FORA = {"NotebookLMWorkflow", "CamofoxSaudeWorkflow", "GradeDiariaWorkflow", "EpisodioProducaoWorkflow",
         "RetencaoConsumoWorkflow", "CorrecaoAutonomaWorkflow", "PonteTemporalPaperclipWorkflow",

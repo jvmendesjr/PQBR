@@ -102,13 +102,16 @@ class OffsetArquivo:
 
 
 async def ciclo_entrada(chamar: Transporte, offset: Offset, repo: Repositorio, id_autorizado: str,
-                        sinalizar, espera_s: int = 50) -> int:
-    """Uma rodada de long polling; devolve quantos updates tratou."""
-    ups = await chamar("getUpdates", {"offset": offset.ler(), "timeout": espera_s, "allowed_updates": ["callback_query"]})
+                        sinalizar, espera_s: int = 50, comandar=None) -> int:
+    """Uma rodada de long polling; devolve quantos updates tratou. `comandar` (t541) liga os comandos de emergência."""
+    tipos = ["callback_query"] + (["message"] if comandar else [])
+    ups = await chamar("getUpdates", {"offset": offset.ler(), "timeout": espera_s, "allowed_updates": tipos})
     for u in ups:
         q = u.get("callback_query")
         if q:
             await _tratar_callback(chamar, u["update_id"], q, repo, id_autorizado, sinalizar)
+        elif comandar and u.get("message"):
+            await tratar_comando(chamar, u["update_id"], u["message"], id_autorizado, comandar)
         offset.gravar(int(u["update_id"]) + 1)      # depois de tratar: reprocessar é seguro (dedupe)
     return len(ups)
 
@@ -126,6 +129,35 @@ async def _tratar_callback(chamar, update_id, q, repo, id_autorizado, sinalizar)
     if status in _REMOVE_BOTOES and msg.get("chat") and msg.get("message_id"):
         await _seguro(chamar, "editMessageReplyMarkup", {"chat_id": msg["chat"]["id"], "message_id": msg["message_id"],
                                                          "reply_markup": {"inline_keyboard": []}})
+
+
+async def tratar_comando(chamar, update_id, msg, id_autorizado, comandar) -> str:
+    """t541 — /pausar, /retomar, /privar: só do from.id do José (comparação numérica); vira sinal do Temporal."""
+    from ..contratos.emergencia import interpretar
+    de = str((msg.get("from") or {}).get("id", ""))
+    if not de.isdigit() or not str(id_autorizado).isdigit() or int(de) != int(id_autorizado):
+        LOG.info("comando update=%s status=remetente_recusado", update_id); return "remetente_recusado"
+    try:
+        cmd = interpretar(msg.get("text", ""), update_id, de)
+    except ValueError:
+        return "ignorado"
+    try:
+        await comandar(cmd.model_dump(mode="json")); status = "sinalizado"
+    except Exception as e:  # noqa: BLE001
+        LOG.warning("comando update=%s falhou: %s", update_id, type(e).__name__); status = "falha_temporal"
+    LOG.info("comando update=%s acao=%s status=%s", update_id, cmd.acao, status)
+    if msg.get("chat"):
+        await _seguro(chamar, "sendMessage", {"chat_id": msg["chat"]["id"], "text": f"{cmd.acao}: {status}"})
+    return status
+
+
+def sinalizar_controle(cliente):
+    """Signal-With-Start no singleton ControlePublicacaoWorkflow."""
+    from .publicacao import ControlePublicacaoWorkflow, ID_CONTROLE, FILA_PUBLICACAO
+    async def _c(cmd: dict) -> None:
+        await cliente.start_workflow(ControlePublicacaoWorkflow.run, id=ID_CONTROLE, task_queue=FILA_PUBLICACAO,
+                                     start_signal="comando", start_signal_args=[cmd])
+    return _c
 
 
 async def _seguro(chamar, metodo, payload) -> None:
@@ -170,13 +202,14 @@ async def main_entrada(ciclos: int | None = None) -> None:
     if not os.environ.get(ENV_TOKEN) or not jose_id():
         raise SystemExit(f"faltam {ENV_TOKEN} e/ou {ENV_JOSE} no ambiente")
     repo, chamar = RepositorioPostgres(), transporte_http(cfg.get("long_polling_timeout_s", 50) + 15)
-    sinalizar = sinalizar_temporal(await client())
+    cli = await client(); sinalizar = sinalizar_temporal(cli)
+    comandar = sinalizar_controle(cli) if cfg.get("comandos_emergencia") else None   # t541: desligado por padrão
     offset = OffsetArquivo(Path(os.path.expanduser(cfg.get("offset_arquivo", "~/.pqbr/state/telegram-offset"))))
     n, pausa = 0, 1
     while ciclos is None or n < ciclos:
         n += 1
         try:
-            await ciclo_entrada(chamar, offset, repo, jose_id(), sinalizar, cfg.get("long_polling_timeout_s", 50)); pausa = 1
+            await ciclo_entrada(chamar, offset, repo, jose_id(), sinalizar, cfg.get("long_polling_timeout_s", 50), comandar); pausa = 1
         except EntregaIncerta:
             pausa = 1                               # timeout de long polling é normal
         except Exception as e:  # noqa: BLE001

@@ -81,7 +81,7 @@ def ler_texto_resposta(tab: str) -> str:
     return str(_api("POST", f"/tabs/{tab}/evaluate", {"userId": "pqbr", "expression": js}).get("result") or "")
 
 
-def perguntar_gemini(arquivos: list[str], prompt: str, espera_s: int = 420) -> tuple[str, str]:
+def perguntar_gemini(arquivos: list[str], prompt: str, espera_s: int = 420, marcador: str = '"cenas"') -> tuple[str, str]:
     """Nova conversa → anexa arquivos → cola prompt → envia → espera terminar. Devolve (texto, url da conversa)."""
     from .camofox_humano import clicar, escrever, pausa_humana
     tab = _api("POST", "/tabs", {"userId": "pqbr", "sessionKey": "gemini-auditor", "url": "https://gemini.google.com/app"})["tabId"]
@@ -89,10 +89,11 @@ def perguntar_gemini(arquivos: list[str], prompt: str, espera_s: int = 420) -> t
         pausa_humana(2, 4)
         try: clicar(tab, ref=_ref(tab, r'button "Entendi"', 2))
         except RuntimeError: pass
-        clicar(tab, ref=_ref(tab, r'button "Envio e ferramentas"'))
-        pausa_humana(0.8, 1.8)
-        _api("POST", f"/tabs/{tab}/upload", {"userId": "pqbr", "ref": _ref(tab, r'menuitem "Enviar arquivos'), "path": arquivos, "timeout": 20000}, t=120)
-        pausa_humana(3, 6)   # previews das imagens
+        if arquivos:   # t540: LOOP textual vai sem anexos
+            clicar(tab, ref=_ref(tab, r'button "Envio e ferramentas"'))
+            pausa_humana(0.8, 1.8)
+            _api("POST", f"/tabs/{tab}/upload", {"userId": "pqbr", "ref": _ref(tab, r'menuitem "Enviar arquivos'), "path": arquivos, "timeout": 20000}, t=120)
+            pausa_humana(3, 6)   # previews das imagens
         clicar(tab, ref=_ref(tab, r'textbox "Insira um comando'))   # mouse humano no campo
         pausa_humana(0.6, 1.4)
         _api("POST", f"/tabs/{tab}/type", {"userId": "pqbr", "ref": _ref(tab, r'textbox "Insira um comando'), "text": prompt,
@@ -110,7 +111,7 @@ def perguntar_gemini(arquivos: list[str], prompt: str, espera_s: int = 420) -> t
             s = _snap(tab)
             if "Parar resposta" in s or 'button "Parar' in s: continue
             txt = ler_texto_resposta(tab)
-            if '"cenas"' in txt and txt.rstrip().endswith(("}", "```")): break
+            if marcador in txt and txt.rstrip().endswith(("}", "```")): break
         url = _api("GET", f"/tabs?userId=pqbr")
         url = next((x["url"] for x in url.get("tabs", []) if x["tabId"] == tab), "")
         return txt, url

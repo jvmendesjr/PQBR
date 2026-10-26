@@ -2,6 +2,8 @@
 
 Branch `feature/f05-06-ponte-duravel`. **Não aplicado:** migração 0018 não rodada, nenhum serviço reiniciado, Hermes intocado.
 
+> **t542 (José, 25/10/2026) — papel do Telegram:** manutenção, relatórios, observabilidade e afins; **não** é etapa de aprovação de publicação. A publicação é automática (gate com LOOP do Gemini → agenda 11:40/18:35); o bot só AVISA (publicado, reprovado, erro) sem esperar resposta, e recebe os comandos de emergência `/pausar`, `/retomar` e `/privar` (t541, só do `from.id` do José, `ControlePublicacaoWorkflow`). Trechos que tratavam o Telegram como aprovação de publicação foram movidos para `docs/_obsoleto/telegram-aprovacao-publicacao-t542.md`.
+
 ## Achados
 - `pedidos_telegram.py` (main): grava `avisado_em` e faz commit **antes** do `print`; se o cron Hermes falhar, o pedido some do lembrete.
 - Candidata `telegram_aprovacao.py` (worktree `dev/agentes`, não commitada): dedupe em memória (`set`), sem trava de concorrência, reenvio após resposta ambígua, exceção em texto bruto. Reprovada.
@@ -79,7 +81,7 @@ Rascunho do plugin Hermes movido para `docs/_obsoleto/hermes-plugin-pqbr-ponte-t
 ### Workflows ligados à ponte (25/10/2026, OK do José)
 - `ponte_atividades.py`: activities `registrar_pedido_telegram`, `enfileirar_telegram` (devolve `desligado` com `saida` desligada), `enfileirar_avisos_telegram` (F05-08: `revisao_humana` → outbox) + `enviar_telegram`; registradas no worker `pqbr-episodio`.
 - Helpers determinísticos no workflow: ref = `workflow.uuid4()`, chave `aprov:<workflow_id>:<run8>:<etapa>`, `workflow.patched` (execuções antigas seguem iguais no replay). Falha da ponte não derruba o workflow (aviso é melhor-esforço; ladder interna abre ticket).
-- Ligados: `EpisodioWorkflow` e `PonteTemporalPaperclipWorkflow` (antes de esperar `aprovacao_jose`; soak automático não chama) e `AcessosWorkflow` (avisos/pedidos ao fim de cada rodada).
+- Ligados: `AcessosWorkflow` (avisos/pedidos ao fim de cada rodada). **t542:** a ponte NÃO aprova publicação; os pedidos `aprovacao_jose` dos workflows antigos (`EpisodioWorkflow` brinquedo e `PonteTemporalPaperclipWorkflow`) ficam só por compatibilidade de replay (`workflow.patched`) e não fazem parte da publicação — trecho original em `docs/_obsoleto/telegram-aprovacao-publicacao-t542.md`.
 - Paperclip (preparo F05-09): `config/paperclip.json` `estado=parado_proposital` → `acesso_paperclip` devolve `pausado` (sem pedido ao José, sem evento de queda). Padrão: `ativo`.
 - Testes `tests/workflows/test_ponte_telegram_wf.py` (WorkflowEnvironment, worker sem cache = replay a cada tarefa; reinício do worker no meio da espera; callback real por `processar_callback` + `sinalizar_temporal`; dedupe; saída desligada; soak; Paperclip pausado/ativo).
 - Corrigido vazamento de `sys.path` em `tests/seguranca/test_f3_02_saidas.py` (o `indexar.py` fixava o src do checkout principal e o sandbox do Temporal importava código velho).
