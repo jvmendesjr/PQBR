@@ -29,3 +29,13 @@ Vale para qualquer cliente MCP (Cursor, Claude, opencode, Codex, script próprio
 6. **Docs e mapa:** ARQUITETURA, CHANGELOG, DECISOES-LOG, ESTADO-ATUAL e o `.mmd` em `docs/mapa/` (regerar com `scripts/mapa/gerar_index.py`).
 7. **Registro:** `registrar_alteracao` com o commit.
 8. **Exige OK do José:** ligar o módulo quando isso pedir reiniciar serviço (worker, MCP etc.), aplicar migração, mexer em rede, gastar dinheiro, publicar ou fazer merge em main. Nunca apagar docs (mover para `docs/_obsoleto/`), nunca expor segredos/.env.
+
+## Operacional e persistência (verificado em 26/10/2026 18:21 -03, t117u)
+- `pqbr-mcp.service`: unit systemd **de usuário** (`~/.config/systemd/user/`, fonte `infra/mcp/pqbr-mcp.service`), `enabled` (WantedBy=default.target), `Restart=on-failure`, `After=hindsight-api.service`. Reiniciado em t116u (OK do José): ativo, `/saude` = 0.4.0. A política é lida do repo ao subir, então sobrevive a reinício.
+- Linger do usuário `pc`: **yes** (user units sobem no boot sem login).
+- Dependências: `hindsight-api.service` (user, enabled, Restart=always); Ollama (system, enabled); Docker (system, enabled) com `pqbr-db-pqbr-db-1`, `pqbr-temporal-temporal-1`, `pqbr-temporal-postgresql-1`, `pqbr-temporal-temporal-ui-1` em `restart: unless-stopped`; `pqbr-episodio-worker`/`pqbr-temporal-worker` enabled.
+- Validação ao vivo (t116u): mantenedor recebeu memórias de auditoria, decisao, seguranca, doc, pesquisa, incidente, licao, playbook, compliance, editorial e publicacao; `X-PQBR-Papel: auditor` ⇒ 403; token inválido ⇒ 401.
+- Checagem:
+```
+systemctl --user is-enabled pqbr-mcp hindsight-api && systemctl --user is-active pqbr-mcp hindsight-api && loginctl show-user pc -p Linger && docker inspect -f "{{.Name}} {{.HostConfig.RestartPolicy.Name}} {{.State.Status}}" pqbr-db-pqbr-db-1 pqbr-temporal-temporal-1 pqbr-temporal-postgresql-1 && curl -s http://127.0.0.1:8791/saude
+```
