@@ -22,6 +22,7 @@ class CenaAuditada(BaseModel):
     imagem_corresponde_a_fala: SN; legivel_no_celular: SN; ambiente_brasileiro: SN; legenda_com_erro: SN
     parece_pessoa_real: SN; marca_real: SN; estereotipo_ofensivo: SN; texto_com_erro_de_sentido: SN
     foco_unico_zona_segura: SN; corresponde_ao_titulo: SN; legenda_cobre_foco: SN
+    boca_articula_fala: SN; corte_oculos_cabeca: SN; grotesco: SN   # t108u (P7)
 
 
 class RespostaAuditorGemini(BaseModel):
@@ -75,10 +76,22 @@ class ModeloIndisponivel(RuntimeError):
     """Não foi possível selecionar/confirmar o modelo configurado. Falha fechada."""
 
 
-def modelo_configurado() -> str:
-    """Override por execução (env PQBR_GEMINI_MODELO) > config/motores.json (gemini_modelo) > 3.8 Flash. A config não muda."""
+def juiz_da_etapa(etapa: str | None):
+    """JuizEtapa de config/motores.json["gemini_juiz"] (t108u); sem etapa/sem bloco ⇒ None (legado gemini_modelo)."""
+    if not etapa: return None
+    from ..motores import CONFIG
+    from ..contratos.juiz_gemini import JuizGeminiConfig
+    bloco = json.loads(Path(CONFIG).read_text()).get("gemini_juiz")
+    if not bloco: return None
+    return JuizGeminiConfig.model_validate(bloco).de(etapa)   # etapa inválida ⇒ AttributeError/ValidationError (falha fechada)
+
+
+def modelo_configurado(etapa: str | None = None) -> str:
+    """Override por execução (env PQBR_GEMINI_MODELO) > juiz da etapa > gemini_modelo > 3.8 Flash. A config não muda."""
     import os
     if os.environ.get(ENV_MODELO, "").strip(): return os.environ[ENV_MODELO].strip()
+    j = juiz_da_etapa(etapa)
+    if j: return j.modelo
     from ..motores import CONFIG
     try: return str(json.loads(Path(CONFIG).read_text()).get("gemini_modelo") or MODELO_PADRAO)
     except (OSError, ValueError): return MODELO_PADRAO
@@ -118,10 +131,13 @@ def selecionar_modelo(tab: str, modelo: str) -> str:
     return modelo
 
 
-def raciocinio_configurado() -> str | None:
-    """Só por execução (env PQBR_GEMINI_RACIOCINIO = Baixo|Médio|Alto); ausente ⇒ não mexe no nível. Inválido ⇒ ValueError."""
+def raciocinio_configurado(etapa: str | None = None) -> str | None:
+    """Env PQBR_GEMINI_RACIOCINIO > juiz da etapa; ausente ⇒ não mexe no nível. Inválido ⇒ ValueError."""
     import os
     v = os.environ.get(ENV_RACIOCINIO, "").strip()
+    if not v:
+        if os.environ.get(ENV_MODELO, "").strip(): return None   # override de modelo sem nível ⇒ não mexe
+        j = juiz_da_etapa(etapa); v = (j.raciocinio if j else None) or ""
     if not v: return None
     if v not in NIVEIS: raise ValueError(f"{ENV_RACIOCINIO} deve ser um de {NIVEIS}")
     return v
@@ -262,7 +278,8 @@ def ler_texto_resposta(tab: str) -> str:
     return str(_api("POST", f"/tabs/{tab}/evaluate", {"userId": "pqbr", "expression": js}).get("result") or "")
 
 
-def perguntar_gemini(arquivos: list[str], prompt: str, espera_s: int = 420, marcador: str = '"cenas"') -> tuple[str, str]:
+def perguntar_gemini(arquivos: list[str], prompt: str, espera_s: int = 420, marcador: str = '"cenas"',
+                     etapa: str | None = None) -> tuple[str, str]:
     """Nova conversa → anexa arquivos → cola prompt → envia → espera terminar. Devolve (texto, url da conversa)."""
     from .camofox_humano import clicar, escrever, pausa_humana
     global ULTIMO_FECHAMENTO
@@ -275,9 +292,9 @@ def perguntar_gemini(arquivos: list[str], prompt: str, espera_s: int = 420, marc
         except RuntimeError: pass
         global ULTIMO_MODELO
         ULTIMO_MODELO = ""
-        ULTIMO_MODELO = selecionar_modelo(tab, modelo_configurado()); _log("modelo confirmado:", ULTIMO_MODELO)
+        ULTIMO_MODELO = selecionar_modelo(tab, modelo_configurado(etapa)); _log("modelo confirmado:", ULTIMO_MODELO)
         global ULTIMO_RACIOCINIO
-        niv = raciocinio_configurado()
+        niv = raciocinio_configurado(etapa)
         if niv:
             ULTIMO_RACIOCINIO = ""
             ULTIMO_RACIOCINIO = selecionar_raciocinio(tab, niv); _log("raciocínio confirmado:", ULTIMO_RACIOCINIO)
@@ -357,7 +374,7 @@ def _persistir_erros_aceitaveis(linhas: list[dict], sql: str) -> None:
 
 def auditar(codigo: str, slug: str, quadros: list[str], falas: list[str], bloco_visual: str, capa: str | None = None,
             rodadas: int = 2, persistir: bool = True, transmitir_texto: bool = False,
-            titulo: str | None = None) -> ResultadoAuditorGemini:
+            titulo: str | None = None, etapa: str | None = "producao") -> ResultadoAuditorGemini:
     from ..pipeline.auditor_visual import montar_prompt, decidir, linhas_erros_aceitaveis, SQL_ERROS
     destino = UPLOADS / f"auditor-{codigo}"
     rot = preparar_pranchas(quadros, capa, destino)
@@ -372,7 +389,7 @@ def auditar(codigo: str, slug: str, quadros: list[str], falas: list[str], bloco_
                                    cenas if transmitir_texto else [], n,
                                    titulo=titulo if transmitir_texto else None,
                                    transmitir_texto=transmitir_texto)
-            try: txt, url = perguntar_gemini(arqs, prompt)
+            try: txt, url = perguntar_gemini(arqs, prompt, etapa=etapa)
             except RespostaRecusada as e: _log("recusa; nova tentativa:", str(e)[:80]); txt, url = "", ""   # t546: recusa = tentativa falha
             urls.append(url)
             try:
@@ -415,8 +432,8 @@ def auditar(codigo: str, slug: str, quadros: list[str], falas: list[str], bloco_
 @activity.defn
 async def auditor_gemini(codigo: str, slug: str, quadros: list[str], falas: list[str], bloco_visual: str,
                          capa: str | None = None, persistir: bool = True, transmitir_texto: bool = False,
-                         titulo: str | None = None) -> dict:
+                         titulo: str | None = None, etapa: str = "producao") -> dict:
     import asyncio
     return (await asyncio.to_thread(auditar, codigo, slug, quadros, falas, bloco_visual, capa,
                                     persistir=persistir, transmitir_texto=transmitir_texto,
-                                    titulo=titulo)).model_dump()
+                                    titulo=titulo, etapa=etapa)).model_dump()

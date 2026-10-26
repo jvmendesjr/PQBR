@@ -9,6 +9,7 @@ O código decide. Regras: CONTRATO §16.6, REGRAS §5.
 - METRICAS (nunca reprovam; "nao" vira ressalva): segue_estilo_declarado,
   mesmo_personagem_do_bloco, imagem_corresponde_a_fala, legivel_no_celular,
   ambiente_brasileiro.
+- BLOQUEIO_VISUAL (t108u, reprova): boca_articula_fala, corte_oculos_cabeca, grotesco = "sim" (REGRAS §25).
 - 2 rodadas: falha só se as duas concordam; divergência → terceira_rodada
   (o agente Auditor desempata). 1 rodada: a falha vale, com aviso.
 - Resposta inválida/incompleta → terceira_rodada.
@@ -20,16 +21,19 @@ from pathlib import Path
 
 TEMPLATE = Path(__file__).resolve().parents[3] / "templates" / "auditor" / "VISUAL_2D.txt"
 SEGURANCA = ("parece_pessoa_real", "marca_real", "estereotipo_ofensivo", "texto_com_erro_de_sentido")
+# t108u (P7, REGRAS §25, FichaCena.expressao): reprovam como segurança (2 rodadas concordando)
+BLOQUEIO_VISUAL = ("boca_articula_fala", "corte_oculos_cabeca", "grotesco")
 METRICAS = ("segue_estilo_declarado", "mesmo_personagem_do_bloco", "imagem_corresponde_a_fala",
             "legivel_no_celular", "ambiente_brasileiro")
 A9_METRICAS = ("foco_unico_zona_segura", "corresponde_ao_titulo", "legenda_cobre_foco", "tem_texto_na_tela")
 A9_FALHA = {"foco_unico_zona_segura": "nao", "corresponde_ao_titulo": "nao",
             "legenda_cobre_foco": "sim", "tem_texto_na_tela": "sim"}
 ACEITAVEIS = ("legenda_com_erro",)
-CHAVES = ("tem_personagem", "tem_texto_na_tela") + METRICAS + ACEITAVEIS + SEGURANCA + (
+CHAVES = ("tem_personagem", "tem_texto_na_tela") + METRICAS + ACEITAVEIS + SEGURANCA + BLOQUEIO_VISUAL + (
     "foco_unico_zona_segura", "corresponde_ao_titulo", "legenda_cobre_foco")
 PODE_NA = {"segue_estilo_declarado", "mesmo_personagem_do_bloco", "texto_com_erro_de_sentido", "legenda_com_erro",
-           "imagem_corresponde_a_fala", "foco_unico_zona_segura", "corresponde_ao_titulo", "legenda_cobre_foco"}
+           "imagem_corresponde_a_fala", "foco_unico_zona_segura", "corresponde_ao_titulo", "legenda_cobre_foco",
+           "boca_articula_fala", "corte_oculos_cabeca"}
 CATEGORIA = {"legenda_com_erro": "legenda", "legivel_no_celular": "visual", "segue_estilo_declarado": "visual",
              "mesmo_personagem_do_bloco": "visual", "imagem_corresponde_a_fala": "visual",
              "ambiente_brasileiro": "visual", "tem_texto_na_tela": "texto",
@@ -109,7 +113,7 @@ def decidir(respostas: list[str], ids: list[str]) -> dict:
     falhas, divergencias, ressalvas, aceitos = [], [], [], []
     metricas = {m: [0, 0] for m in METRICAS + A9_METRICAS}  # [passa, total]
     for i in ids:
-        for k in SEGURANCA:
+        for k in SEGURANCA + BLOQUEIO_VISUAL:
             votos = [r[i][k] for r in rodadas if i in r and k in r[i]]
             sims = votos.count("sim")
             if sims and sims == len(votos) and len(votos) == len(rodadas):

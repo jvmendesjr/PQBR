@@ -7,7 +7,7 @@ IDS = ["S01", "S02"]
 
 def cena(i, **kw):
     base = {"id": i, "tem_personagem": "sim", "tem_texto_na_tela": "nao",
-            **{m: "sim" for m in av.METRICAS}, **{s: "nao" for s in av.SEGURANCA}}
+            **{m: "sim" for m in av.METRICAS}, **{s: "nao" for s in av.SEGURANCA + av.BLOQUEIO_VISUAL}}
     base.update({"foco_unico_zona_segura": "na", "corresponde_ao_titulo": "na", "legenda_cobre_foco": "na"})
     base["texto_com_erro_de_sentido"] = "na"
     base["legenda_com_erro"] = "nao"

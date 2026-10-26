@@ -26,7 +26,7 @@ def cena(cid, **overrides):
         "texto_com_erro_de_sentido": "na",
         "foco_unico_zona_segura": "na",
         "corresponde_ao_titulo": "na",
-        "legenda_cobre_foco": "na",
+        "legenda_cobre_foco": "na", "boca_articula_fala": "nao", "corte_oculos_cabeca": "nao", "grotesco": "nao",
     }
     base.update(overrides)
     return base

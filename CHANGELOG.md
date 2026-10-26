@@ -5,6 +5,14 @@ Versionamento SemVer (MAJOR.MINOR.PATCH) a partir de t510. Versão do pacote can
 
 
 
+## [0.14.0] — 2026-10-26
+### Adicionado
+- Juiz Gemini por etapa: `gemini_juiz` em `config/motores.json` com contrato `pqbr.contratos.juiz_gemini` v1.0.0. Pré-produção usa 3.8 Flash e produção usa 4 Argon (Baixo). A etapa é passada como argumento das activities `auditor_gemini` e `auditor_loop_gemini`, com padrão "producao".
+- Gate VISUAL com 3 bloqueios automáticos: `boca_articula_fala`, `corte_oculos_cabeca`, `grotesco`.
+- `scripts/lote/loop_comparar_modelo.py` aceita `PQBR_ETAPA` e deixa de exigir o override.
+### Nota
+- O worker Temporal precisa ser reiniciado (com OK) para aplicar a mudança.
+
 ## [0.13.0] — 2026-10-26
 ### Adicionado
 - t105u: override por execução do juiz Gemini (`PQBR_GEMINI_MODELO`, `PQBR_GEMINI_RACIOCINIO`, com confirmação do nível no seletor), `scripts/lote/loop_comparar_modelo.py`, `tests/unit/test_gemini_override.py`; resultado 4 Argon do EP1002 em `loop-gemini-4argon.json`. Padrão 3.8 Flash inalterado.

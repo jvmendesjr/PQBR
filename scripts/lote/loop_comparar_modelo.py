@@ -10,15 +10,15 @@ from pqbr.workflows import auditor_gemini as ag
 doc, rt, suf = Path(sys.argv[1]), Path(sys.argv[2]), sys.argv[3]
 out = doc / f"loop-gemini-{suf}.json"
 if out.exists() or suf in ("", "oficial"): sys.exit(f"{out} já existe ou sufixo inválido")
-if not os.environ.get(ag.ENV_MODELO): sys.exit("defina PQBR_GEMINI_MODELO (override só desta execução)")
+ETAPA = os.environ.get("PQBR_ETAPA", "producao")
 s = json.loads((doc / "seo.json").read_text()); r = json.loads((doc / "roteiro.json").read_text())["roteiro"]
 fq = rt / "quadros-loop"; q = sorted(str(p) for p in fq.glob("q*.png")); capa = fq / "capa.png"
 assert len(q) == len(r["falas"]) and capa.exists(), "quadros-loop incompletos"
 bv = r.get("bloco_visual") or {}
 t0 = time.time()
 res = auditar_loop(s["codigo"], doc.name, q, r["falas"], "[ESTILO] " + str(bv.get("estilo", "")) + "\n[PERSONAGEM] " + str(bv.get("personagem", "")),
-                   str(capa), s["seo"]["titulo"], persistir=False)
+                   str(capa), s["seo"]["titulo"], persistir=False, etapa=ETAPA)
 dt = round(time.time() - t0)
-d = json.loads(res.model_dump_json()); d["_execucao"] = {"modelo_pedido": os.environ[ag.ENV_MODELO], "raciocinio": ag.ULTIMO_RACIOCINIO,
+d = json.loads(res.model_dump_json()); d["_execucao"] = {"modelo_pedido": os.environ.get(ag.ENV_MODELO) or ag.modelo_configurado(ETAPA), "etapa": ETAPA, "raciocinio": ag.ULTIMO_RACIOCINIO,
     "tempo_total_s": dt, "evidencia_seletor": ag.EVIDENCIA, "quando": time.strftime("%Y-%m-%d %H:%M %z")}
 out.write_text(json.dumps(d, ensure_ascii=False, indent=1)); print(s["codigo"], res.modelo, ag.ULTIMO_RACIOCINIO, res.veredito, res.imagem_fala, res.capa_titulo, res.loop_texto, f"{dt}s")

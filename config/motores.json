@@ -15,5 +15,17 @@
  "gemini_mem_abrir_mb": 1800,
  "gemini_mem_timeout_s": 600,
  "_doc_memoria": "t546: espera mínima entre abas do juiz (s) e só abre aba nova com o serviço pqbr-camofox abaixo de gemini_mem_abrir_mb; senão MemoriaAlta (falha fechada) após gemini_mem_timeout_s.",
- "gemini_loop_espera_s": 480
+ "gemini_loop_espera_s": 480,
+ "gemini_juiz": {
+  "versao": "1.0.0",
+  "pre_producao": {
+   "modelo": "3.8 Flash",
+   "raciocinio": null
+  },
+  "producao": {
+   "modelo": "4 Argon",
+   "raciocinio": "Baixo"
+  }
+ },
+ "_doc_gemini_juiz": "t108u (José): juiz por etapa. pre_producao (roteiro, storyboard/fichas, imagens de referência antes do vídeo) = 3.8 Flash; producao (vídeo gerado, VISUAL/LOOP final) = 4 Argon com raciocínio Baixo. Contrato pqbr.contratos.juiz_gemini. gemini_modelo fica só para workers antigos (até o reinício). Override por execução: PQBR_GEMINI_MODELO/PQBR_GEMINI_RACIOCINIO."
 }

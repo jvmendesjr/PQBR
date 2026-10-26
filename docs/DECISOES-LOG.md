@@ -617,3 +617,10 @@ NÃO CABE:
 ## t105u (26/10/2026) — LOOP do juiz Gemini com 4 Argon (raciocínio Baixo) no EP1002 descartado
 - José pediu o 4 Argon, no nível de raciocínio mais baixo, no mesmo vídeo cheio de problemas. Override só por execução: `PQBR_GEMINI_MODELO` / `PQBR_GEMINI_RACIOCINIO` (Baixo|Médio|Alto). O padrão continua `gemini_modelo: 3.8 Flash` em `config/motores.json`. O nível é confirmado no menu antes de cada envio (evidência do seletor gravada no resultado). Script `scripts/lote/loop_comparar_modelo.py`: mesmos quadros e mesma rubrica; não sobrescreve o resultado oficial.
 - Resultado (`loop-gemini-4argon.json`): **reprova** (imagem×fala aprova_com_ressalva, capa aprova, loop reprova). O 3.8 deu terceira_rodada, com todas as métricas visuais em 1.0. O Argon pegou o desvio de estilo (0.1), a legenda sobre o foco na capa e a legenda com erro em S04–S06. Óculos cortados, olho grotesco e lábios mexendo não estão na rubrica, e nenhum dos dois apontou (critérios novos = P7). Tempo: 4 Argon 614 s no total (respostas visuais de 37 s, loop de 9–18 s); o tempo do 3.8 nesse vídeo não foi registrado.
+
+## t108u (26/10/2026) — 3.8 antes da produção, 4 Argon na produção; P7 implementado
+- José: "Vamos deixa o 3.8 antes da produção, na produção adicionamos o Argo".
+- A config por etapa (`gemini_juiz`) tem a seguinte precedência: env da execução > etapa > `gemini_modelo` legado. A verificação do seletor (modelo e raciocínio) continua sendo feita a cada envio.
+- 3 critérios novos que reprovam sozinhos, sempre exigindo as 2 rodadas em acordo (se divergirem, vai para a terceira rodada).
+- Validação no EP1002 com 4 Argon Baixo (595 s): reprova. Detectou os 3 problemas apontados pelo José: corte em S01/S04, grotesco em S01, boca em S02/S05/S09.
+- O worker Temporal não foi reiniciado. Isso fica pendente de OK do José.

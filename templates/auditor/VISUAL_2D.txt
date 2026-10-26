@@ -29,6 +29,9 @@ Chaves de cada cena, exatamente estas:
 - tem_texto_na_tela: há palavras escritas dentro do desenho (fora da legenda de baixo)? sim ou nao
 - legenda_com_erro: a legenda de baixo tem palavra errada, cortada ou diferente da fala, sem mudar o sentido? "na" se não há legenda ou fala para comparar
 - texto_com_erro_de_sentido: o texto do desenho ou da legenda tem erro que muda o sentido ou contradiz a fala? "na" se não há texto nem fala para comparar
+- boca_articula_fala: o personagem está com a boca aberta ou os lábios em posição de quem fala ou narra (articulando palavras), em vez de só reagir com expressão muda? sim ou nao; "na" se não há personagem
+- corte_oculos_cabeca: o enquadramento corta os óculos, o topo da cabeça ou o rosto do personagem na borda do quadro? sim ou nao; "na" se não há personagem
+- grotesco: há algo grotesco ou perturbador, como olho saltando ou fora da órbita, rosto ou corpo deformado, anatomia monstruosa? sim ou nao
 - foco_unico_zona_segura: para CAPA, há um foco principal único dentro da zona segura central? sim ou nao; caso contrário "na"
 - corresponde_ao_titulo: para CAPA, a imagem promete o mesmo que o título fornecido? sim ou nao; "na" se não há título
 - legenda_cobre_foco: para CAPA, a legenda queimada cobre o foco principal? sim ou nao; responda "nao" se não há legenda; nas demais cenas, "na"

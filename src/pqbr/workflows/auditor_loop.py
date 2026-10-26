@@ -3,6 +3,7 @@ Três checagens, o código decide:
  1. imagem×fala  — pranchas S01… + falas do roteiro (auditor_gemini.auditar, transmitir_texto=True);
  2. capa×título  — CAPA + título do SEO no mesmo pedido (corresponde_ao_titulo);
  3. loop textual — 1ª e última fala, só texto (templates/auditor/LOOP.txt, pipeline.auditor_texto).
+Etapa (t108u): o workflow passa `etapa` (producao = 4 Argon Baixo; pre_producao = 3.8 Flash; config/motores.json).
 Camofox PQBR 127.0.0.1:9387, sessão já logada, ações humanizadas; nenhum login novo. 2 rodadas no loop
 textual: divergência → terceira_rodada. Veredito final: reprova > terceira_rodada > aprova_com_ressalva > aprova."""
 from __future__ import annotations
@@ -74,12 +75,12 @@ def combinar(codigo: str, visual: dict, loop_respostas: list[str], conversas: li
 
 
 def auditar_loop(codigo: str, slug: str, quadros: list[str], falas: list[str], bloco_visual: str, capa: str,
-                 titulo: str, rodadas_loop: int = 2, persistir: bool = True) -> ResultadoLoopGemini:
+                 titulo: str, rodadas_loop: int = 2, persistir: bool = True, etapa: str = "producao") -> ResultadoLoopGemini:
     from .auditor_gemini import auditar, perguntar_gemini
     from ..pipeline.auditor_texto import montar_prompt
     if not falas or not titulo: raise ValueError("falas e título obrigatórios no LOOP")
     visual = auditar(codigo, slug, quadros, falas, bloco_visual, capa, rodadas=2, persistir=persistir,
-                     transmitir_texto=True, titulo=titulo).model_dump()
+                     transmitir_texto=True, titulo=titulo, etapa=etapa).model_dump()
     prompt = montar_prompt(falas[0], falas[-1]); resp, urls = [], []
     from .auditor_gemini import RespostaRecusada, _cfg
     espera = int(_cfg().get("gemini_loop_espera_s", 480))
@@ -87,7 +88,7 @@ def auditar_loop(codigo: str, slug: str, quadros: list[str], falas: list[str], b
         txt, url = "", ""
         for _t in range(2):   # t547: recusa = tentativa falha; 2ª falha → texto vazio → terceira_rodada (falha fechada)
             try:
-                txt, url = perguntar_gemini([], prompt, espera_s=espera, marcador='"ultima_continua_na_primeira"'); break
+                txt, url = perguntar_gemini([], prompt, espera_s=espera, marcador='"ultima_continua_na_primeira"', etapa=etapa); break
             except RespostaRecusada:
                 txt, url = "", ""
         resp.append(txt); urls.append(url)
@@ -97,6 +98,7 @@ def auditar_loop(codigo: str, slug: str, quadros: list[str], falas: list[str], b
 
 @activity.defn
 async def auditor_loop_gemini(codigo: str, slug: str, quadros: list[str], falas: list[str], bloco_visual: str,
-                              capa: str, titulo: str) -> dict:
+                              capa: str, titulo: str, etapa: str = "producao") -> dict:
     import asyncio
-    return (await asyncio.to_thread(auditar_loop, codigo, slug, quadros, falas, bloco_visual, capa, titulo)).model_dump()
+    return (await asyncio.to_thread(auditar_loop, codigo, slug, quadros, falas, bloco_visual, capa, titulo,
+                                    etapa=etapa)).model_dump()
