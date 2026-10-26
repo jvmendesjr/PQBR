@@ -6,7 +6,7 @@ from typing import Literal
 from pydantic import Field, model_validator
 from . import Contrato
 
-VERSAO = "1.1.0"
+VERSAO = "1.2.0"
 ROTULO = re.compile(r"^PQBR-EP\d{4,}_c\d{2}$")          # ex.: PQBR-EP1003_c04
 REF = re.compile(r"^ASSET_[a-z]+_[a-z0-9-]+-v\d+$")     # ex.: ASSET_personagem_pqbr-v1
 PROIBIDO_FRAMING = re.compile(r"from the (chest|waist) up|do peito para cima|da cintura para cima", re.I)
@@ -14,7 +14,7 @@ FALA_NO_PROMPT = re.compile(r"[\"“”].{3,}[\"“”]|\b(speaks|says|talking|n
 
 
 class FichaCena(Contrato):
-    versao: Literal["1.0.0", "1.1.0"] = VERSAO
+    versao: Literal["1.0.0", "1.1.0", "1.2.0"] = VERSAO
     numero: int = Field(ge=1, le=60)
     rotulo: str = Field(pattern=ROTULO.pattern)
     fala: str = Field(min_length=3, max_length=400)               # narração em off; nunca vai no prompt
@@ -33,6 +33,9 @@ class FichaCena(Contrato):
     caracterizacao: str | None = Field(default=None, max_length=400)   # roupa/traços da época ou local, ou a roupa atual escolhida
     expressao: str = Field(min_length=5, max_length=300)           # caras e bocas ligadas à situação; reação, nunca articulação de fala
     cenario_encaixe: str = Field(min_length=10, max_length=400)    # onde e como o personagem está no cenário (escondido, ao fundo, no meio)
+    # t79u: o outro membro do elenco pode contracenar com o protagonista quando o roteiro pedir (com justificativa)
+    coadjuvante: Literal["masculino", "feminino"] | None = None
+    coadjuvante_justificativa: str | None = Field(default=None, max_length=300)
 
     @model_validator(mode="after")
     def _regras(self):
@@ -49,6 +52,8 @@ class FichaCena(Contrato):
             raise ValueError("figurino de época/local exige caracterizacao")
         if self.epoca == "presente" and self.figurino == "epoca_local" and self.papel_personagem == "observa":
             raise ValueError("observador no presente usa figurino atual")
+        if self.coadjuvante and not (self.coadjuvante_justificativa and len(self.coadjuvante_justificativa) >= 10):
+            raise ValueError("coadjuvante do elenco exige justificativa no roteiro")
         if FALA_NO_PROMPT.search(self.expressao) or re.search(r"\b(lábios? mexendo|mouthing|lip ?sync|articula)", self.expressao, re.I):
             raise ValueError("expressão é reação (caras e bocas), nunca articulação de fala")
         return self
@@ -63,7 +68,7 @@ def elenco_alternado(codigo: str) -> str:
 
 
 class Storyboard(Contrato):
-    versao: Literal["1.0.0", "1.1.0"] = VERSAO
+    versao: Literal["1.0.0", "1.1.0", "1.2.0"] = VERSAO
     codigo: str = Field(pattern=r"^PQBR-EP\d{4,}$")
     norte_geral: str = Field(min_length=20, max_length=600)
     bloco_estilo: str = Field(min_length=20, max_length=1500)
@@ -78,6 +83,8 @@ class Storyboard(Contrato):
         if [c.numero for c in self.cenas] != list(range(1, len(self.cenas) + 1)): raise ValueError("cenas fora de ordem")
         if self.elenco != elenco_alternado(self.codigo) and not self.elenco_excecao:
             raise ValueError(f"alternância: {self.codigo} pede elenco {elenco_alternado(self.codigo)} (ou elenco_excecao)")
+        if any(c.coadjuvante == self.elenco for c in self.cenas):
+            raise ValueError("protagonista é único e constante; coadjuvante deve ser o outro membro do elenco")
         if any(not c.rotulo.startswith(self.codigo + "_") for c in self.cenas): raise ValueError("rótulo de outro episódio")
         return self
 

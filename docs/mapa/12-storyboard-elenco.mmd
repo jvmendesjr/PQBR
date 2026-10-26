@@ -14,3 +14,8 @@ flowchart TD
   REV -- não --> FC
   REV -- sim --> VID["vídeo por cena (07-cadeia-video)"]
   VID --> VIS["⚠ VISUAL do gate: personagem_mexe_labios · corte_oculos_cabeca · grotesco (proposto)"]
+  %% t79u: protagonista único + coadjuvante opcional
+  SB --> PROT["protagonista = elenco do episódio (constante)"]
+  FC --> CO{"coadjuvante? (outro membro do elenco)"}
+  CO -->|sim, com justificativa no roteiro| CJ["contracena; mesmas proibições"]
+  CO -->|mesmo do protagonista| PROI

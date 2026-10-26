@@ -33,3 +33,15 @@ def test_storyboard_ordem_e_revisao():
     with pytest.raises(ValidationError):
         Storyboard(codigo="PQBR-EP1003", norte_geral="x" * 25, bloco_estilo="y" * 25, ficha_personagem="z" * 25,
                    cenas=[FichaCena(**ficha(i)) for i in (1, 3, 2)], elenco="feminino")
+
+
+def test_coadjuvante_com_justificativa():
+    assert FichaCena(**ficha(coadjuvante="masculino", coadjuvante_justificativa="roteiro pede a reação de outra pessoa ao café"))
+    with pytest.raises(ValidationError): FichaCena(**ficha(coadjuvante="masculino"))
+
+def test_protagonista_unico():
+    cenas = [FichaCena(**ficha(i)) for i in (1, 2)] + [FichaCena(**ficha(3, coadjuvante="feminino", coadjuvante_justificativa="dupla no balcão, roteiro cena 3"))]
+    with pytest.raises(ValidationError):
+        Storyboard(codigo="PQBR-EP1003", norte_geral="x" * 25, bloco_estilo="y" * 25, ficha_personagem="z" * 25, cenas=cenas, elenco="feminino")
+    cenas[2] = FichaCena(**ficha(3, coadjuvante="masculino", coadjuvante_justificativa="dupla no balcão, roteiro cena 3"))
+    assert Storyboard(codigo="PQBR-EP1003", norte_geral="x" * 25, bloco_estilo="y" * 25, ficha_personagem="z" * 25, cenas=cenas, elenco="feminino")

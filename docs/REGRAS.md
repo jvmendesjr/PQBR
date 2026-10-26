@@ -289,5 +289,5 @@ Ver CONTRATO-EDITORIAL §18:
 - storyboard geral + ficha por cena + prompt por cena antes de gerar; imagens revisadas antes do vídeo;
 - personagem engraçado de caras e bocas: reage, nunca articula fala nem mexe os lábios como se narrasse;
 - encaixe no cenário: participa ⇒ figurino da época/local; observa ⇒ roupa atual, que varia entre vídeos (a consistência é do rosto e dos traços);
-- elenco masculino/feminino brasileiro alternado por episódio;
+- elenco masculino/feminino brasileiro alternado por episódio; protagonista único e constante, com interação com o outro membro do elenco quando o roteiro pedir (t79u); a feminina é morena, de cabelo liso e penteados variados, mais baixa que o masculino;
 - sem corte de óculos ou cabeça; nada grotesco.

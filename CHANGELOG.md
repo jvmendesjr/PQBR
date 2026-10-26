@@ -5,6 +5,10 @@ Versionamento SemVer (MAJOR.MINOR.PATCH) a partir de t510. Versão do pacote can
 
 
 
+## [0.6.1] — 2026-10-26
+### Alterado
+- t79u: `Storyboard`/`FichaCena` 1.2.0 com protagonista único e campo `coadjuvante` (outro membro do elenco) com justificativa obrigatória. Ficha feminina: morena, cabelo liso, penteados variados, mais baixa. CONTRATO-EDITORIAL §18.10, REGRAS §25, mapa 12, index regenerado.
+
 ## [0.6.0] — 2026-10-26
 ### Adicionado
 - t78u: `FichaCena`/`Storyboard` 1.1.0. Campos `papel_personagem` (observa|participa), `figurino` (epoca_local|atual_variavel), `expressao` (caras e bocas, sem fala), `cenario_encaixe`; `Storyboard.elenco` alternado por `elenco_alternado(codigo)`, com `elenco_excecao`. 15 testes.

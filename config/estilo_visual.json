@@ -5,7 +5,7 @@
     "D": "Estilo visual: stickman arredondado em 2D: bonequinhos de cabeça redonda grande e corpo de traços grossos e arredondados (não linhas finas), membros como tubos macios com pontas redondas, expressões simples e muito expressivas, cores chapadas com um acento de cor por personagem, fundo limpo e claro com poucos objetos, humor de cartum. O protagonista é sempre o mesmo stickman (mesma cabeça, mesma cor de acento, mesmo acessório)."
   },
   "elenco": {
-    "_nota": "t78u: consistência de rosto/traços, não de roupa. Alternância por episódio: código par = masculino, ímpar = feminino (contratos/storyboard.elenco_alternado). Sem nome falado/escrito. Imagem de referência ASSET_personagem_<id>-v1 ainda NÃO gerada (geração paga exige OK do José).",
+    "_nota": "t78u: consistência de rosto/traços, não de roupa. Alternância por episódio: código par = masculino, ímpar = feminino (contratos/storyboard.elenco_alternado). Sem nome falado/escrito. Imagem de referência ASSET_personagem_<id>-v1 ainda NÃO gerada (geração paga exige OK do José). t79u: protagonista único e constante no episódio; o outro membro do elenco pode contracenar quando o roteiro pedir (FichaCena.coadjuvante + justificativa). Proporção: a feminina é mais baixa que o masculino.",
     "masculino": {
       "asset": "ASSET_personagem_masculino-v1",
       "rosto_tracos": "Homem brasileiro de uns 30 anos, pele morena clara, magro, cabelo preto curto e despenteado, sobrancelhas grossas e muito expressivas, óculos redondos vermelhos (sempre inteiros no quadro)",
@@ -14,7 +14,7 @@
     },
     "feminino": {
       "asset": "ASSET_personagem_feminino-v1",
-      "rosto_tracos": "Mulher brasileira de uns 30 anos, pele parda, rosto redondo, bochechas marcadas, cabelo crespo volumoso preso num coque alto com fios soltos, sobrancelhas expressivas, pinta pequena acima do lábio, brinco de argola dourada pequena",
+      "rosto_tracos": "Mulher brasileira de uns 30 anos, morena, cabelo LISO escuro com penteados variados por episódio (ex.: coque alto com fios soltos, rabo de cavalo, solto), rosto redondo, sobrancelhas expressivas, pinta pequena acima do lábio, brinco de argola dourada pequena; mais baixa que o personagem masculino",
       "personalidade": "engraçada, de caras e bocas exageradas (olhar desconfiado de lado, boca torta de deboche, espanto de olhos arregalados sem deformar); reage, nunca articula fala",
       "figurino": "varia por episódio; participa ⇒ época/local, observa ⇒ roupa atual (ex.: camiseta colorida e calça jeans, vestido de chita, moletom)"
     }
