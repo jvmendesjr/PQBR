@@ -580,3 +580,7 @@ NÃO CABE:
 - **t84u–t85u:** um bank só (`pqbr`); cada papel só lê/escreve as tags e só vê o código que `config/politica_papeis.json` libera; papel desconhecido ⇒ negado. GitNexus vira pré-requisito de instalação como Hindsight e Camofox.
 - **t86u:** GitNexus é de uso global do servidor (compartilhado), instalado fora do repo; a PQBR só registra o índice dela e declara o pré-requisito. Versão 1.6.12 em `~/.local/opt/node22` (wrapper `~/.local/bin/gitnexus`), informar ao jr.
 - Risco registrado: licença PolyForm Noncommercial.
+
+## t89u (26/10/2026) — Servidor MCP dentro da PQBR, só tailnet; saúde do Hindsight
+- José confirmou: o servidor MCP fica na própria aplicação; acesso autorizado só pela tailnet (127.0.0.1 + `tailscale serve`, nunca Funnel/0.0.0.0). Só leitura; papel por token de cliente; papel desconhecido ⇒ negado.
+- Hindsight verificado saudável (0.10.2, bank `pqbr` com 5.012 memórias). O filtro de tags funciona no servidor; as memórias legadas sem tag ficam fora da política.

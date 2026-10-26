@@ -335,8 +335,9 @@ Ref.: `docs/pesquisas/PESQUISA-extensoes-geracao-em-serie.md` (leitura liberada,
 ## Fase: Conhecimento e agente externo agnóstico (t84u–t86u, 26/10/2026)
 - [x] **GitNexus [agora]:** global no servidor (1.6.12, fora do repo), índice da PQBR registrado, reindex no post-commit, pré-requisito fail-closed. ARQUITETURA §12.
 - [x] **Política por papel [agora]:** `config/politica_papeis.json` + filtro no Hindsight e no adaptador GitNexus.
-- [ ] **Servidor MCP da PQBR só na tailnet [pendente OK do José].**
-- [ ] **AGENTS.md gerado [pendente].**
+- [x] **Servidor MCP da PQBR só na tailnet (t89u, OK do José):** `pqbr-mcp`, 127.0.0.1:8791 + tailscale serve, só leitura, token por cliente.
+- [x] **AGENTS.md gerado (t89u)** do onboarding do MCP.
+- [ ] Reclassificar com tags as ~4.975 memórias legadas sem tag [pendente decisão].
 - [ ] **Teste de agente do zero [pendente].**
 - [ ] Licença do GitNexus (Noncommercial × canal monetizado) [decisão do José].
 

@@ -5,6 +5,10 @@ Versionamento SemVer (MAJOR.MINOR.PATCH) a partir de t510. Versão do pacote can
 
 
 
+## [0.8.0] — 2026-10-26
+### Adicionado
+- t89u: servidor MCP `pqbr-mcp` (`src/pqbr/mcp/`, só leitura, Streamable HTTP em 127.0.0.1:8791, só tailnet via tailscale serve), token por cliente (`scripts/mcp/novo_cliente.py`), `AGENTS.md` gerado do onboarding (base manual movida para `docs/operacao/AGENTS-base.md`), política 1.1.0 com `estado_ler`.
+
 ## [0.7.0] — 2026-10-26
 ### Adicionado
 - t84u–t86u: `config/politica_papeis.json` + `pqbr.contratos.politica` (papel desconhecido ⇒ negado); `storage.hindsight.reter` exige `papel`/`tags` e novo `recuperar` filtrado; `integrations/gitnexus.py` filtra por caminho; `scripts/gitnexus/verificar.sh` (pré-requisito fail-closed) e reindex no post-commit. GitNexus 1.6.12 global, fora do repo.

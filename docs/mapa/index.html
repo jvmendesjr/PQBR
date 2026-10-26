@@ -9,7 +9,7 @@ main{max-width:1100px;margin:0 auto;padding:12px}section{background:#fff;border:
 h2{margin:0 0 4px;font-size:16px}.nota{margin:0 0 8px;color:var(--m);font-size:12px}.arq{font-family:ui-monospace,monospace}
 .wrap{overflow-x:auto}.mermaid{background:none;margin:0}footer{color:var(--m);font-size:12px;padding:16px;text-align:center}
 .regra{background:#fff8e6;border:1px solid #f0dca8;border-radius:8px;padding:10px;font-size:13px;margin-bottom:16px}
-</style></head><body><header><h1>PQBR — mapa do sistema</h1><p>Regenerado de docs/mapa/*.mmd em 26/10/2026 12:28 · ⚠ = não confirmado no código / pendente</p></header><nav><a href="#d00">Visão geral</a><a href="#d01">Episódio</a><a href="#d02">Reposição de temas</a><a href="#d03">Acessos / Camofox</a><a href="#d04">Descarte</a><a href="#d05">Vigia de atualizações</a><a href="#d06">Runs presos</a><a href="#d07">Cadeia de vídeo</a><a href="#d08">Identidade Camofox</a><a href="#d09">Agentes</a><a href="#d10">Catálogo de erros</a><a href="#d11">Publicação</a><a href="#d12">Storyboard e elenco</a></nav><main><div class="regra"><b>Regra:</b> agentes nunca alteram este mapa sozinhos; mudança só por proposta aprovada pelo José. Fonte: <code>docs/mapa/*.mmd</code>.</div><section id="d00"><h2>Visão geral</h2><p class="nota">Mapa PQBR — Visão geral. Gerado do código em 24/10/2026 (commit base c752abc). Só muda por proposta aprovada pelo José. <span class="arq">00-visao-geral.mmd</span></p><div class="wrap"><pre class="mermaid">
+</style></head><body><header><h1>PQBR — mapa do sistema</h1><p>Regenerado de docs/mapa/*.mmd em 26/10/2026 13:20 · ⚠ = não confirmado no código / pendente</p></header><nav><a href="#d00">Visão geral</a><a href="#d01">Episódio</a><a href="#d02">Reposição de temas</a><a href="#d03">Acessos / Camofox</a><a href="#d04">Descarte</a><a href="#d05">Vigia de atualizações</a><a href="#d06">Runs presos</a><a href="#d07">Cadeia de vídeo</a><a href="#d08">Identidade Camofox</a><a href="#d09">Agentes</a><a href="#d10">Catálogo de erros</a><a href="#d11">Publicação</a><a href="#d12">Storyboard e elenco</a></nav><main><div class="regra"><b>Regra:</b> agentes nunca alteram este mapa sozinhos; mudança só por proposta aprovada pelo José. Fonte: <code>docs/mapa/*.mmd</code>.</div><section id="d00"><h2>Visão geral</h2><p class="nota">Mapa PQBR — Visão geral. Gerado do código em 24/10/2026 (commit base c752abc). Só muda por proposta aprovada pelo José. <span class="arq">00-visao-geral.mmd</span></p><div class="wrap"><pre class="mermaid">
 flowchart TB
   JOSE([&quot;José&quot;])
   TG[&quot;Telegram (Hermes pqbr)&lt;br/&gt;cron pqbr-pedidos-jose lê pqbr.revisao_humana&quot;]
@@ -213,6 +213,10 @@ flowchart LR
   AG --&gt; POL
   POL --&gt; HS &amp; GNX
   JR -. &quot;infra global (informar versão)&quot; .-&gt; GNX
+  MCP[&quot;pqbr-mcp (só leitura)&lt;br/&gt;127.0.0.1:8791 → tailscale serve (só tailnet)&lt;br/&gt;onboarding · buscar_memoria · codigo · estado&quot;]
+  EXT([&quot;Agente externo&lt;br/&gt;token por cliente → papel&quot;])
+  EXT --&gt;|&quot;HTTPS tailnet + Bearer&quot;| MCP
+  MCP --&gt; POL
 </pre></div></section><section id="d10"><h2>Catálogo de erros</h2><p class="nota">Catálogo de erros de produção (migração 0019; José 25/10/2026 14:09). Agentes internos só leem; o agente externo cadastra. <span class="arq">10-catalogo-erros.mmd</span></p><div class="wrap"><pre class="mermaid">
 flowchart LR
   J([&quot;José&lt;br/&gt;aprova o que entra&quot;])

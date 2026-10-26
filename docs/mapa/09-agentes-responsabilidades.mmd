@@ -34,3 +34,8 @@ flowchart LR
   AG --> POL
   POL --> HS & GNX
   JR -. "infra global (informar versão)" .-> GNX
+  %% t89u (26/10/2026)
+  MCP["pqbr-mcp (só leitura)<br/>127.0.0.1:8791 → tailscale serve (só tailnet)<br/>onboarding · buscar_memoria · codigo · estado"]
+  EXT(["Agente externo<br/>token por cliente → papel"])
+  EXT -->|"HTTPS tailnet + Bearer"| MCP
+  MCP --> POL

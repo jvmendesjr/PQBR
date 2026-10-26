@@ -1,17 +1,223 @@
 {
-  "versao": "1.0.0",
+  "versao": "1.1.0",
   "bank": "pqbr",
   "nota": "t84u-t85u: um bank só; cada papel lê/escreve só suas tags e vê só seus caminhos no GitNexus. Papel ausente => negado (fail-closed).",
   "papeis": {
-    "diretor":            {"leitura": ["decisao","incidente","editorial","publicacao","licao","pesquisa"], "escrita": ["decisao","licao"], "codigo": ["docs/","company/","config/"], "ferramentas": ["memoria_buscar","memoria_registrar"]},
-    "lider-editorial":    {"leitura": ["editorial","decisao","licao","pesquisa"], "escrita": ["editorial","licao"], "codigo": ["docs/CONTRATO-EDITORIAL.md","docs/REGRAS.md","src/pqbr/contratos/","config/estilo_visual.json"], "ferramentas": ["memoria_buscar","memoria_registrar","segunda_opiniao"]},
-    "pesquisador-origem": {"leitura": ["pesquisa","editorial"], "escrita": ["pesquisa"], "codigo": ["docs/pesquisas/"], "ferramentas": ["memoria_buscar","memoria_registrar"]},
-    "auditor":            {"leitura": ["editorial","licao","incidente","auditoria"], "escrita": ["auditoria","licao"], "codigo": ["src/pqbr/contratos/","src/pqbr/pipeline/","docs/CONTRATO-EDITORIAL.md","docs/REGRAS.md"], "ferramentas": ["memoria_buscar","memoria_registrar","segunda_opiniao"]},
-    "lider-compliance":   {"leitura": ["compliance","editorial","decisao","incidente"], "escrita": ["compliance"], "codigo": ["docs/","src/pqbr/contratos/"], "ferramentas": ["memoria_buscar","memoria_registrar"]},
-    "guardiao-seguranca": {"leitura": ["seguranca","incidente","decisao"], "escrita": ["seguranca","incidente"], "codigo": ["src/pqbr/seguranca/","src/pqbr/guardian/","scripts/","config/"], "ferramentas": ["memoria_buscar","memoria_registrar"]},
-    "observador":         {"leitura": ["incidente","publicacao","commit"], "escrita": ["incidente"], "codigo": ["src/pqbr/workflows/","docs/mapa/"], "ferramentas": ["memoria_buscar","memoria_registrar"]},
-    "dev":                {"leitura": ["decisao","incidente","commit","licao","playbook","doc"], "escrita": ["licao"], "codigo": ["src/","tests/","scripts/","config/","docs/"], "ferramentas": ["memoria_buscar","memoria_registrar","gitnexus_consultar"]},
-    "mantenedor":         {"leitura": ["decisao","incidente","commit","licao","playbook","doc","editorial","pesquisa","publicacao","auditoria","compliance","seguranca","descarte"], "escrita": ["licao","decisao","incidente"], "codigo": [""], "ferramentas": ["memoria_buscar","memoria_registrar","gitnexus_consultar"]},
-    "indexador":          {"leitura": [], "escrita": ["decisao","incidente","commit","playbook","doc","descarte"], "codigo": [], "ferramentas": []}
+    "diretor": {
+      "leitura": [
+        "decisao",
+        "incidente",
+        "editorial",
+        "publicacao",
+        "licao",
+        "pesquisa"
+      ],
+      "escrita": [
+        "decisao",
+        "licao"
+      ],
+      "codigo": [
+        "docs/",
+        "company/",
+        "config/"
+      ],
+      "ferramentas": [
+        "memoria_buscar",
+        "memoria_registrar",
+        "estado_ler"
+      ]
+    },
+    "lider-editorial": {
+      "leitura": [
+        "editorial",
+        "decisao",
+        "licao",
+        "pesquisa"
+      ],
+      "escrita": [
+        "editorial",
+        "licao"
+      ],
+      "codigo": [
+        "docs/CONTRATO-EDITORIAL.md",
+        "docs/REGRAS.md",
+        "src/pqbr/contratos/",
+        "config/estilo_visual.json"
+      ],
+      "ferramentas": [
+        "memoria_buscar",
+        "memoria_registrar",
+        "segunda_opiniao"
+      ]
+    },
+    "pesquisador-origem": {
+      "leitura": [
+        "pesquisa",
+        "editorial"
+      ],
+      "escrita": [
+        "pesquisa"
+      ],
+      "codigo": [
+        "docs/pesquisas/"
+      ],
+      "ferramentas": [
+        "memoria_buscar",
+        "memoria_registrar"
+      ]
+    },
+    "auditor": {
+      "leitura": [
+        "editorial",
+        "licao",
+        "incidente",
+        "auditoria"
+      ],
+      "escrita": [
+        "auditoria",
+        "licao"
+      ],
+      "codigo": [
+        "src/pqbr/contratos/",
+        "src/pqbr/pipeline/",
+        "docs/CONTRATO-EDITORIAL.md",
+        "docs/REGRAS.md"
+      ],
+      "ferramentas": [
+        "memoria_buscar",
+        "memoria_registrar",
+        "segunda_opiniao"
+      ]
+    },
+    "lider-compliance": {
+      "leitura": [
+        "compliance",
+        "editorial",
+        "decisao",
+        "incidente"
+      ],
+      "escrita": [
+        "compliance"
+      ],
+      "codigo": [
+        "docs/",
+        "src/pqbr/contratos/"
+      ],
+      "ferramentas": [
+        "memoria_buscar",
+        "memoria_registrar"
+      ]
+    },
+    "guardiao-seguranca": {
+      "leitura": [
+        "seguranca",
+        "incidente",
+        "decisao"
+      ],
+      "escrita": [
+        "seguranca",
+        "incidente"
+      ],
+      "codigo": [
+        "src/pqbr/seguranca/",
+        "src/pqbr/guardian/",
+        "scripts/",
+        "config/"
+      ],
+      "ferramentas": [
+        "memoria_buscar",
+        "memoria_registrar",
+        "estado_ler"
+      ]
+    },
+    "observador": {
+      "leitura": [
+        "incidente",
+        "publicacao",
+        "commit"
+      ],
+      "escrita": [
+        "incidente"
+      ],
+      "codigo": [
+        "src/pqbr/workflows/",
+        "docs/mapa/"
+      ],
+      "ferramentas": [
+        "memoria_buscar",
+        "memoria_registrar",
+        "estado_ler"
+      ]
+    },
+    "dev": {
+      "leitura": [
+        "decisao",
+        "incidente",
+        "commit",
+        "licao",
+        "playbook",
+        "doc"
+      ],
+      "escrita": [
+        "licao"
+      ],
+      "codigo": [
+        "src/",
+        "tests/",
+        "scripts/",
+        "config/",
+        "docs/"
+      ],
+      "ferramentas": [
+        "memoria_buscar",
+        "memoria_registrar",
+        "gitnexus_consultar",
+        "estado_ler"
+      ]
+    },
+    "mantenedor": {
+      "leitura": [
+        "decisao",
+        "incidente",
+        "commit",
+        "licao",
+        "playbook",
+        "doc",
+        "editorial",
+        "pesquisa",
+        "publicacao",
+        "auditoria",
+        "compliance",
+        "seguranca",
+        "descarte"
+      ],
+      "escrita": [
+        "licao",
+        "decisao",
+        "incidente"
+      ],
+      "codigo": [
+        ""
+      ],
+      "ferramentas": [
+        "memoria_buscar",
+        "memoria_registrar",
+        "gitnexus_consultar",
+        "estado_ler"
+      ]
+    },
+    "indexador": {
+      "leitura": [],
+      "escrita": [
+        "decisao",
+        "incidente",
+        "commit",
+        "playbook",
+        "doc",
+        "descarte"
+      ],
+      "codigo": [],
+      "ferramentas": []
+    }
   }
 }

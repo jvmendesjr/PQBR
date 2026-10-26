@@ -1,3 +1,7 @@
+# PQBR — onboarding do agente (gerado; não editar à mão)
+
+Fontes canônicas: docs/BRIEFING-novo-agente-pqbr.md, docs/REGRAS.md, docs/DECISOES-LOG.md, docs/ROADMAP.md, docs/LACUNAS-fluxo.md, docs/ARQUITETURA.md, docs/mapa/. Em conflito, vale o doc canônico.
+
 # Instruções para agentes que trabalham no repositório PQBR
 
 Este arquivo é o ponto de entrada operacional para trabalho no checkout. Ele não cria uma nova fonte de decisão nem substitui as regras do projeto.
@@ -30,3 +34,185 @@ Este arquivo é o ponto de entrada operacional para trabalho no checkout. Ele n�
 ## Mapa do sistema (t517)
 - `docs/mapa/` (Mermaid + `index.html`) é gerado do código e serve de comunicação com o José e entre agentes.
 - **Agentes nunca alteram o mapa sozinhos.** Mudança só por proposta aprovada pelo José. Divergência código × mapa: sinalizar (Observador/Dev) e propor o diff; `tests/unit/test_mapa.py` acusa.
+
+
+## Conexão MCP
+
+Servidor MCP da PQBR (só leitura, só tailnet): porta HTTPS 8791 do host pc na tailnet (nome MagicDNS fora do repo), caminho /mcp, Streamable HTTP, Bearer token por cliente. Ferramentas: onboarding, buscar_memoria, codigo, estado — conforme o papel.
+
+## BRIEFING
+
+# BRIEFING — novo agente específico PQBR / Porquê BR (substitui o YT-LLM)
+
+t531 · 24/10/2026 · pedido do José. **Só leitura e proposta.** **Atualização t533–t535:** o novo agente PQBR **foi criado** (id `0ade9874-b724-4055-9000-d61825244b12`); o keepalive do YT-LLM está **pausado (confirmado)**. Originalmente: o novo agente ainda não tinha sido criado, nenhuma mensagem foi mandada ao YT-LLM e os arquivos dele não foram alterados. O **jr** continua como agente generalista do José.
+
+**Fontes**
+- Conversa YT-LLM (agente `018f2ef8-…`): 3100 posições, de 16/09 a 28/09/2026. Lidas quase todas; ficaram de fora só lacunas de 1 a 4 mensagens.
+- Arquivos do YT-LLM em `/workspace/yt-llm-bot/` no box: `playbook-decisoes.md`, `roadmap-b1.md`, `ops/`, `branding/`, `notebooks/`, `sources/`, `scripts/`, `temas/`.
+- No repo PQBR: `docs/REGRAS.md`, `docs/ARQUITETURA.md` (ADR-011 e ADR-012), `docs/CONTRATO-EDITORIAL.md`, `docs/ROADMAP.md`, `docs/AGENTES.md` e as entradas de 23 e 24/10 do `docs/DECISOES-LOG.md` (t474, t476/t512–t517, t525–t530).
+
+## Linha do tempo do YT-LLM (resumo)
+- **16/09:**
+  - instalou o notebooklm-py e a rotina de keepalive de 20 min no box;
+  - analisou o caderno da "Fábrica de Shorts" e montou os cadernos B1;
+  - escolheu o nicho B1, "Por que o Brasil funciona assim?";
+  - criou o canal **Porquê BR** (`@porquebr-t4c`) e fez o OAuth da YouTube Data API (projeto `yt-llm-b1`) com o MCP `youtube-shorts`;
+  - definiu o estilo **Stickman**, no lugar do VOX/papercut.
+- **17/09:**
+  - fez os Shorts v1 a v7 da tomada de 3 pinos (o v7 foi "quase lá"), o 127V/220V (FAIL) e o terremoto (PASS);
+  - travou o overlay v8 e o logo v4;
+  - publicou o 1º Short (privado e depois público): https://www.youtube.com/watch?v=-Af4vua4v9c;
+  - criou o repo `jvmendesjr/porque-br` e o `BOOTSTRAP-AGENTE.md`.
+- **20/09 a 28/09:** só rodou o keepalive, que falhou repetidamente. A última mensagem pede um novo login da conta e diz que a rotina fica parada até lá.
+- **Depois disso:** o projeto foi refeito como **PQBR** no servidor `pc` (repo `jvmendesjr/PQBR`). O YT-LLM não acompanhou essa mudança.
+
+## (a) O que continua válido e deve ser herdado
+| Item | Onde está | Observação |
+|---|---|---|
+| Nicho B1 e o nome **Porquê BR** | `playbook-decisoes.md` §3; REGRAS §1 | Igual na PQBR. |
+| Identidade **Stickman**: personagem expressivo e humanizado ("caras e bocas"), logo v4 com mapa e "?" teal, kraft + `#0D9488` | `branding/stickman-character-bible.md`, `identidade-stickman-brief.md`, `paleta-stickman-v1.md` | Aprovada na PQBR para o módulo Flow (REGRAS §6, t465). |
+| **Overlay v8**: bug no topo direito com −50 % de tamanho e 50 % de alpha; lockup no canto inferior direito; logo final que cresce opaco por ~2,2 s | `ops/overlay-padrao-shorts-v1.md`, `branding/overlay/` | Vale para o pós. |
+| Público, voz e postura: irreverente sem ser brega; curiosidades do **Brasil**, não genéricas | `branding/publico-voz-postura.md` | Vale como regra editorial; conferir com o CONTRATO-EDITORIAL. |
+| **Um vídeo, avaliar e só então refazer** (substitui "2 por tema"; José, 17/09) | conversa YT-LLM, 17/09 | Bate com a economia de cota da PQBR. |
+| **Séries e blocos** em vez de vídeos aleatórios; série 0 de mitos e cultura popular (só ideação) | `ops/ideacao-serie-mitos-cultura-popular.md`, `ops/ideacao-series-pilares-adiada.md` | Pendente; ver (c). |
+| Descrever **2 a 4 movimentos críticos** (origem → destino, props nomeados); compor sem espremer os objetos | `ops/nlm-motion-e-composicao.md` | Passa a valer para os prompts de Flow e Vids. |
+| Método **VOX / GUÍA VOX**: beats de 2,5 a 3 s, `.txt` com um prompt por bloco sem números, bloco de estilo repetido, prompt de animação universal | `sources/guia-vox.md`; PESQUISA-extensoes §1.1 | Base do storyboard em série (Fase 4V). |
+| **Fábrica de Shorts**: prompts 1.1 a 4.3, persona, prévia de 6 vinhetas | `sources/fabrica-shorts.md`, `notebooks/` | O motor de temas e roteiros reaproveita; a geração de vídeo não. |
+| **Gate pré-publicação fail-closed** com dry-run por padrão e live só com ordem explícita | `scripts/prepublish-gate.sh`, skill `gate-pr-publish-porqu-br` | Coerente com a Fase 8 da PQBR (só dry-run). |
+| Duração 40 a 55 s; CTA de inscrição e like | `ops/duracao-shorts-porque-br.md`, `ops/cta-shorts-inscreva-like.md` | Conferir com o CONTRATO v2. |
+| Hooks de documentação (`on_decision_lock`…) | `playbook-decisoes.md` §14, skill `documentar-decis-es-de-projeto` | Na PQBR viram o DECISOES-LOG e o CHANGELOG. |
+| Lições de falha: o papercut sem movimento foi abortado, o stickman sumia, as refs de imagem eram ignoradas pelo Video Overview, as legendas pulavam palavras | `ops/log-falhas-stickman-nlm.md`, `ops/aprendizados-stickman-fluxo-v1.md` | Explicam por que o vídeo saiu do NotebookLM (t512). |
+
+**Skills do usuário que vieram do YT-LLM**: `produ-o-short-b1-notebooklm`, `gate-pr-publish-porqu-br`, `p-s-short-porqu-br`, `capa-canal-porqu-br` e `documentar-decis-es-de-projeto`.
+- Herdar: o gate, o pós (trim e logo) e a capa.
+- **Revisar antes de usar**: a `produ-o-short-b1-notebooklm`, porque ela gera o vídeo no NotebookLM (ver b).
+
+## (b) O que ficou desatualizado ou mudou
+| Antes no YT-LLM | Agora na PQBR | Fonte |
+|---|---|---|
+| O NotebookLM gera o vídeo (Video Overview Short 9:16 "em volume") | O NotebookLM é o **motor intelectual** (temas, roteiros, direção, SEO). Vídeo pela cadeia **Flow → Google Vids → Meta Vibes → HOLD**, pelo navegador | DECISOES t512, t517, t529; ROADMAP 4V |
+| Higgsfield/VOX como camada premium paga | **Sem APIs de geração** (Gemini/Veo/Omni, inclusive free tier); só as cotas já pagas, pelo navegador | DECISOES t516/t517 |
+| Agente único que faz tudo pelo chat | **Temporal** como sistema nervoso + **PydanticAI** nas activities + **8 papéis** (Diretor, Líder Editorial, Pesquisador de Origem, Auditor, Compliance, Guardião, Observador, Dev) | ADR-011 (t510), DECISOES t512–t515, AGENTES §2 |
+| Sem contratos | Contratos **Pydantic v2** versionados (SemVer em `VER
+
+## REGRAS (início)
+
+# REGRAS da PQBR (Porquê BR)
+
+## 0. Autoridade e uso deste arquivo
+
+- **Este é o arquivo de autoridade.** As §0–§3 são a **constituição** do projeto (t328). Ordem: `docs/REGRAS.md` > `docs/SPEC.md` (requisitos) > `docs/ARQUITETURA.md` (desenho) > `docs/TESTES.md` (testes e validação) > `docs/ROADMAP.md` (tarefas, estado, fases e portões; o PLANO foi incorporado). `docs/AGENTES.md` detalha a equipe do Paperclip (abaixo da ARQUITETURA). `docs/CONTRATO-EDITORIAL.md` é canônico para tom, categorias e gabarito (t394). `docs/RASTREABILIDADE.md` liga requisito → desenho → tarefa → teste. Agentes leem nessa ordem. As regras são o núcleo e não podem se perder; a arquitetura se adapta a elas (t285).
+- **Leitura (t536, José, 25/10/2026, ajusta t287):** o **agente PQBR** (auxiliar do José, t533) pode ler **todos** os documentos do PQBR, inclusive `docs/DECISOES-LOG.md`, `docs/arquivo/`, `docs/pesquisas/` e `docs/_obsoleto/`. Ele usa o material legado como histórico e aplica sempre o que é vigente neste arquivo. A restrição abaixo vale para os **agentes especialistas** do sistema, que se limitam às suas áreas.
+- ⛔ **Agentes especialistas — proibido consultar sem aprovação explícita do José (t287):** `docs/arquivo/`, `docs/pesquisas/`, `docs/DECISOES-LOG.md` (só para registrar decisão nova) e qualquer rascunho ou material legado. Eles podem ser mal interpretados e aplicados em produção. Tudo o que vale deles já está aqui. **Exceção (t530, José):** `docs/pesquisas/PESQUISA-extensoes-geracao-em-serie.md` pode ser lido por qualquer agente, **somente leitura** (referência da Fase 4V).
+- **Dúvida ou conflito sem certeza** nas decisões aprovadas: não adivinhar. Marcar "EM CONSTRUÇÃO — aguardando José" e levar a ele (t323).
+- **Decisão nova:** entra no `DECISOES-LOG.md` (tNNN) **e** aqui, no mesmo commit. Se este arquivo divergir do log, vale a entrada mais nova do log e este arquivo é corrigido.
+- **Legenda:** [APROVADO] decisão do José · [VERIFICADO] testado/visto na fonte · [HIPÓTESE] a confirmar antes de construir o que depende dela · EM CONSTRUÇÃO — aguardando José.
+- Origem: os códigos (tNNN, "item N", nomes de bloco) remetem ao `DECISOES-LOG.md`; "07/10" = registro de 07/10/2026.
+
+- **Atualização 11/10 (t384–t394), prevalece sobre qualquer trecho abaixo que diga o contrário:**
+  1. **Estratégia:** a entrega à core-eng foi abolida; o jr constrói a PQBR **no Paperclip** (t394). **[SUPERADO por ADR-011/t510 e t536:** agentes em PydanticAI nas activities do Temporal; o Paperclip fica **parado e desabilitado** até a nova arquitetura ser validada, e só depois é desinstalado.**]** A ENTREGA está em `arquivo/`. A equipe vigente e o mapa @prod-* → agentes estão em `AGENTES.md` (§3 e §11).
+  2. **Autonomia/proatividade (t384, t390):** a empresa opera semanas ou meses sem o José. Agentes aplicam sozinhos dentro de faixas e playbooks; o José só vê no relatório. Ainda exigem o José: excluir/rejeitar/banir; voltar a público vídeo do item 5 ou recorrer ao YouTube; gastar dinheiro; login manual pelo noVNC ou 2FA (só depois de esgotada a reautenticação autônoma, item 11); mudar regra canônica; segredos e infraestrutura.
+  3. **Equipe:** 14 agentes já contratados (AGENTES.md §2), incluindo Observador, Guardião de Segurança e Dev Revisor (t390, t392).
+  4. **Contratação (t392):** sem teto de agentes; só com sugestão do Diretor, do dono da trilha ou do José; o Diretor executa, sem aprovação do board.
+  5. **Runtime (t392):** os agentes usam modelos do **9router** pelos adapters `process` (texto) e `opencode_local` (ferramenta). Nenhum perfil Hermes além do `pqbr`, que é só o canal do José para o Diretor. Ferramentas = kit PQBR (Temporal, Camofox, NotebookLM py, Pydantic v2) + API Paperclip.
+  6. **Rotinas** do Paperclip podem acordar agentes, inclusive para produção (t392). Efeito externo continua só pelo Temporal.
+  7. **Orçamento:** warn-only, sem pausa por custo; limite de segurança revisto após os primeiros relatórios (t392).
+  8. **Falhas:** na 2ª falha da mesma ação entra o playbook (até 3 tentativas). No Camofox, intervalo sorteado de 5–15 min entre intervenções sucessivas na mesma sessão, não duração da intervenção nem retry automático (t357; precisão aprovada em 17/10/2026, §3.1). Só depois Diretor → canal de controle ativo (Telegram/Hermes `pqbr`; t474).
+  9. **Tickets:** abertura automática; merge automático com CI e testes verdes + aprovação do Dev Revisor, se a mudança não tocar regra canônica, segredos nem infra (t390).
+  10. **Fonte de verdade:** Postgres local (t343). O Supabase não é usado.
+
+  11. **Camofox PQBR 24/7 (t395):** a instância `pqbr-camofox` fica sempre ligada, com a sessão permanente aberta na mesma tela. Só reinicia se cair (watchdog/`Restart=always`). Se a sessão cair, a reautenticação é **autônoma e por qualquer meio**: renovar no Camofox, depois **sincronizar cookies do Chrome**, depois outro caminho previsto. Cada passo vai para o log + aviso pelo canal privado ativo (Telegram/Hermes `pqbr`; t474). O José só é chamado depois disso (noVNC/2FA). Isso supera a §3.1 (trava "cópia de cookies") e a §11 ("só com OK do José").
+
+---
+
+- **Atualização 23/10 (t474, aprovada por José), revoga a t464 (Discord) e prevalece:** (1) o canal do José é o **Telegram (Hermes `pqbr`)**; pedidos, avisos e aprovações saem por lá. (2) Aprovações são **sinais do Temporal** (sim/não), com principal autenticado (ID autorizado do José), validação de tarefa e estado, fail-closed, idempotência após reinício e ticket de manutenção após três tentativas. (3) O painel é a **Temporal UI** (estado, histórico, erros, runs travados); painel próprio fica para depois (t471). (4) O **Paperclip está sendo retirado** da arquitetura (ADR-011): referências a Paperclip abaixo valem só até o corte. Não desligar o gateway Hermes compartilhado nem afetar outros perfis; nenhuma exposição pública.
+## 1. Nome e identidade
+- A organização se chama **PQBR**; os documentos explicam a sigla (Porquê BR); o canal usa o "porquê" por extenso. [08/
+
+## Decisões recentes
+
+## t473 (23/10/2026) — Contrato editorial v2 oficial
+- José aprovou: o v2 (aprovado no G7, t468) vira `docs/CONTRATO-EDITORIAL.md`; o v1 vai para `docs/_obsoleto/CONTRATO-EDITORIAL-v1.md`. As seções do v1 que seguem canônicas (tom, categorias, gabarito, duração, diretrizes, §15–§17 com o bloco §16.7) foram anexadas sem alteração (Anexo A). O contrato deixa de ser "rascunho de leitura restrita".
+
+
+## t474 (23/10/2026) — Revogação da t464 (Discord) e ADR-011
+- José revogou a t464: **não** haverá canal Discord/Paperclip. O canal é o **Telegram (Hermes `pqbr`)**, as aprovações são **sinais do Temporal** e o painel é a **Temporal UI** (t471). Reescritos: REGRAS, SPEC, ARQUITETURA (ADR-003 vigente, ADR-009 revogada), AGENTES, LACUNAS, RESUMO-STACK, AGENTS.md, README, SOUL-rascunho do Hermes, índice `docs/README.md`.
+- Nova **ADR-011** (`docs/sdd/adr-011-agentes-pydanticai-temporal.md`): agentes PydanticAI (Pydantic v2) dentro de activities do Temporal; substitui a ADR-002; Paperclip em retirada (código dele não alterado; `infra/paperclip-db/` mantido por ora). Personas e playbooks de `company/` continuam.
+- Guia de acesso renomeado para `docs/operacao/GUIA-ACESSO-PC-TEMPORAL.md`, sem a parte do Paperclip. `docs/sdd/teste-e2e-short-1.md` sem caderno mestre, `rede` ou issue do Paperclip.
+
+
+## t475 (23/10/2026) — Primeira migração ADR-011 (t510)
+- José autorizou (t510) gerar nova versão do pacote canônico e deixar de fora as seções do v1 não usadas; e seguir com a migração.
+- `ReposicaoTemasWorkflow` passa a usar o Líder Editorial em PydanticAI dentro de activity; escrita no Postgres em activity separada; sem Paperclip. Fábrica em `src/pqbr/agents/`.
+- 9router: porta 20130 mantida (a 20128 também serve `/v1`, mas mapeia os combos para outros modelos).
+- Run preso `pqbr-reposicao-temas-wf-2026-10-13T03:30:00Z` encerrado (terminate); run real `repor-temas-t510-manual` inseriu 1 tema (grade em 28).
+- Alerta de run preso só no journal até o bot `pqbr` ter token de entrega. SemVer adotado no CHANGELOG (0.2.0).
+
+
+## t476 (24/10/2026) — NotebookLM motor, sistema modular, Temporal sistema nervoso, 8 papéis (t512–t514)
+- **t512:** NotebookLM é o centro nervoso e o motor do canal (decisões, temas, roteiros, direção); a produção depende dos caminhos que ele norteia. A geração de vídeo saiu do NotebookLM por determinismo (Flow primário). Corrigida a linha do CONTRATO que dizia que o NotebookLM gera o vídeo (muda o hash do pacote; autorizado em t510).
+- **t512:** `ReposicaoTemasWorkflow`: temas propostos pelo motor (NotebookLM, caderno efêmero semanal, nunca mestre, sessão do Camofox 9387, `NOTEBOOKLM_DISABLE_KEEPALIVE_POKE=1`, `NOTEBOOKLM_HEADLESS_REAUTH=0`); o Líder Editorial (PydanticAI) só monta o pedido, interpreta, filtra e valida em `PropostaTemas`.
+- **t512:** papéis reduzidos a 8 (Diretor, Líder Editorial, Pesquisador de Origem, Auditor, Compliance, Guardião, Observador, Dev). Dev = fusão Corretor+Revisor; só indica problemas e propõe; José aplica com agentes externos. Roteirista, SEO e Caçador Sazonal viram etapas de workflow que chamam o motor; Comunidade adiada. Personas aposentadas em `docs/_obsoleto/company/agents/`.
+- **t513:** sistema modular: motores atrás de porta (contrato Pydantic + adaptador) escolhidos por config (`config/motores.json`, `src/pqbr/motores/`): `MotorIntelectual` (notebooklm), `GeradorVideo` (flow; alternativas notebooklm_video, google_vids, meta_vibes; cadeia de fallback em t517).
+- **t514:** Temporal é o sistema nervoso e a peça mais rígida (última a tro
+
+## t84u–t86u (26/10/2026) — Hindsight bank único com política por papel; GitNexus global como pré-requisito
+- **t84u–t85u:** um bank só (`pqbr`); cada papel só lê/escreve as tags e só vê o código que `config/politica_papeis.json` libera; papel desconhecido ⇒ negado. GitNexus vira pré-requisito de instalação como Hindsight e Camofox.
+- **t86u:** GitNexus é de uso global do servidor (compartilhado), instalado fora do repo; a PQBR só registra o índice dela e declara o pré-requisito. Versão 1.6.12 em `~/.local/opt/node22` (wrapper `~/.local/bin/gitnexus`), informar ao jr.
+- Risco registrado: licença PolyForm Noncommercial.
+
+
+## Estado do ROADMAP
+
+## Estado em 26/10/2026 (consolidação t63s292 → t78u)
+**Feito:**
+- Camofox PQBR com MemoryMax 3000M (t63s292); pico de 2316 MB no lote.
+- Juiz Gemini fixado no **3.8 Flash**, selecionado e conferido antes de cada envio; aceita imagens (2 pranchas de 300 px).
+- LOOP do EP1002 com veredito `terceira_rodada`; o José reprovou visualmente (t75u) e o episódio foi **descartado** (reversível) e o tema voltou a `proposto`.
+- Fluxo de publicação via Temporal: `publishAt` no upload privado, escopo `PQBR_PUBLICACAO_REAL_CODIGOS`, `PublicacaoAgendadaWorkflow` registrado no `worker_episodio` (fila `episodio-pqbr`).
+- Contrato `FichaCena`/`Storyboard` 1.1.0, com ficha por cena, figurino por papel, caras e bocas sem fala e elenco alternado.
+- Pesquisa `flow-storyboard-por-cena.md` e auditoria do storyboard do lote 2510.
+
+**Bloqueado:**
+- Upload real: sem credenciais OAuth do YouTube no worker, e o Cloud Console exige 2SV na conta do canal (o José ativa).
+- Migração 0020 não aplicada; worker não reiniciado.
+
+**Próximo:**
+1. 2SV → projeto `pqbr-publicacao` → OAuth Desktop → chaves em `episodio.env` → `channels.list`.
+2. Activity que gera o `Storyboard` e bloqueia a geração sem ele.
+3. Critérios VISUAL `personagem_mexe_labios`, `corte_oculos_cabeca` e `grotesco`.
+4. Referências `ASSET_personagem_{masculino,feminino}-v1` (geração paga: pedir OK).
+5. EP1003 cafe-fraco (o José vê antes).
+
+**Testes pendentes (t71u–t72u, não executar ainda):**
+- LOOP do Gemini por cena + consolidação final só em texto; comparar tempo, memória e qualidade.
+- 4 Argon com raciocínio baixo vs 3.8 Flash.
+
+
+## Fase: Conhecimento e agente externo agnóstico (t84u–t86u, 26/10/2026)
+- [x] **GitNexus [agora]:** global no servidor (1.6.12, fora do repo), índice da PQBR registrado, reindex no post-commit, pré-requisito fail-closed. ARQUITETURA §12.
+- [x] **Política por papel [agora]:** `config/politica_papeis.json` + filtro no Hindsight e no adaptador GitNexus.
+- [ ] **Servidor MCP da PQBR só na tailnet [pendente OK do José].**
+- [ ] **AGENTS.md gerado [pendente].**
+- [ ] **Teste de agente do zero [pendente].**
+- [ ] Licença do GitNexus (Noncommercial × canal monetizado) [decisão do José].
+
+
+## LACUNAS (início)
+
+# Lacunas: etapas feitas à mão em 12/10 → fluxo determinístico (José 17:18)
+
+Regra (José 17:17): nenhuma etapa de fluxo à mão. Se o fluxo não está ativo: parar, registrar e consertar o fluxo. José usa o Telegram PQBR (Hermes `pqbr`) e a Temporal UI; aprovações são sinais do Temporal (t471/t474; o plano Discord/Paperclip de t464 foi revogado).
+
+| # | Etapa manual hoje | Dono | Contrato Pydantic | Temporal | Agente → código → ferramenta | Instrução do agente (instructions-file:put) | Teste | Status |
+|---|---|---|---|---|---|---|---|---|
+| 1 | Temas via 9router fora do Paperclip (`repor_temas_sem_ponte.py`) | Líder Editorial | `PropostaAgente` / `PropostaBruta` (temas.py) | `ReposicaoTemasWorkflow` + agenda `pqbr-reposicao-temas` 00:30 | issue no Paperclip → agente propõe JSON → `temas_inserir` → Postgres | "Mantenha 7 dias de temas (≥80% curiosidades), ≤5 por proposta, ≤480 caracteres; responda só o bloco json" | `tests/unit/test_temas_t465.py` | Agenda ativa; **bloqueado pela ponte (pedido #2: login da CLI do Paperclip)** |
+| 2 | Revisão do Auditor feita à mão | Auditor (agente) + `auditor_gemini` | `RespostaAuditorGemini` / `ResultadoAuditorGemini` | atividade `auditor_gemini` (fila camofox-pqbr), chamada no `EpisodioWorkflow` após o pós | episódio → quadros → Camofox/Gemini → contrato → `erros_aceitaveis`; terceira_rodada → sinal para o Auditor no Paperclip | "Só atue em terceira_rodada; decida aprova/reprova com os motivos do contrato; nunca peça roteiro novo à mão" | test_auditor_visual + teste de `validar` | Atividade registrada no worker; **falta ligar no EpisodioWorkflow** e o teste no EP1002 (Google voltou 17:25) |
+| 3 | Auditoria Gemini por script (`auditor_gemini_ep.py`) | código | idem 2 | idem 2 | — | — | idem | Script aposentado após o item 2 entrar no fluxo |
+| 4 | Arquivar e apagar cadernos de teste (`arquivar_estilos.py`) | código | `PedidoDescarteTeste`, `CopiasVerificadas` (descarte.py) | `DescartarCadernoTesteWorkflow` → filho `ApagarCadernoWorkflow(teste=True)` | fluxo → CLI notebooklm (exportar) → Drive 00_Biblia_Visual/cadernos-teste + repo `docs/pesquisas/arquivo-cadernos` + `pqbr.arquivo_caderno` + Hindsight → verificar → apagar pelo id | — | `tests/unit/test_descarte.py` | **Feito** (18:06); 1º uso: EP1001 |
+| 5 | Regra de espera da publicação bloqueava EP1001 (nunca publicado) | código + decisão do José (18:06) | `registro_reclassificar_teste` (só não publicado) + `registro_autorizar_apagar_teste` | `DescartarCadernoTesteWorkflow` (reclassifica para `pesquisa`) | — | — | idem 4 | **Feito**: reclassificado e descartado pelo fluxo |
+| 6 | Teste de estilos por script (`teste_estilos.py`) | Diretor de Arte | `PedidoNotebookLM.steering` + `config/estilo_visual.json` | `EpisodioWorkflow` com `steering`/estilo ativo (próximo teste: estilo D via fluxo) | issue do Diretor de Arte → config de estilo → fluxo do episódio | "Proponha estilo em config/estilo_visual.json via proposta; não gere vídeo fora do fluxo" | unit de `steering_s
+
+## Mapa visual
+
+docs/mapa/index.html (servido em :8088) — diagramas: 00-visao-geral.mmd, 01-episodio.mmd, 02-reposicao-temas.mmd, 03-acessos.mmd, 04-descarte.mmd, 05-vigia-atualizacoes.mmd, 06-runs-presos.mmd, 07-cadeia-video.mmd, 08-identidade-camofox.mmd, 09-agentes-responsabilidades.mmd, 10-catalogo-erros.mmd, 11-publicacao.mmd, 12-storyboard-elenco.mmd
