@@ -15,7 +15,7 @@ def tags_indexador(ctx: str, texto: str) -> list[str]:
     """Mesma regra da reclassificação (t90u), limitada ao que o indexador pode escrever."""
     return sorted(tags_conteudo(ctx, texto, set(carregar().de("indexador").escrita))) or ["doc"]
 
-DOCS = ["docs/REFERENCIA-sessao-google.md", "docs/CONTRATO-EDITORIAL.md", "docs/ARQUITETURA.md", "docs/ROADMAP.md", "docs/SPEC.md",
+DOCS = ["docs/ESTADO-ATUAL.md", "docs/REFERENCIA-sessao-google.md", "docs/CONTRATO-EDITORIAL.md", "docs/ARQUITETURA.md", "docs/ROADMAP.md", "docs/SPEC.md",
         "docs/AGENTES.md", "docs/pesquisas/mapa-drive-rede.md", "docs/pesquisas/estilo-2d-referencias.md", "docs/sdd/gate-a9.md",
         "docs/sdd/adr-003-cadernos-efemeros.md", "docs/pesquisas/estilo-2d-deep-research-relatorio.md", "docs/pesquisas/cadernos-inventario-20261012.md", "docs/pesquisas/teste-capa-e-persona-20261012.md", "docs/pesquisas/pesquisa-caderno-mestre.md", "company/playbooks/nlm-cadernos.md"]
 ESTADO = Path.home() / ".pqbr/hindsight/indexados.json"

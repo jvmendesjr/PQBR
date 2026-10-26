@@ -42,6 +42,7 @@ def fonte(ctx: str) -> tuple[str, str | None, set[str]]:
         if "CONTRATO-EDITORIAL" in p or "estilo" in p or "teste-capa" in p: t |= {"editorial"}
         if p.startswith("docs/pesquisas/"): t |= {"pesquisa"}
         if "gate-a9" in p: t |= {"editorial", "auditoria"}
+        if p == "docs/ESTADO-ATUAL.md": t |= {"estado"}
         if "REFERENCIA-sessao-google" in p: t |= {"seguranca"}
         if "/adr-" in p or "ARQUITETURA" in p: t |= {"decisao"}
         if "playbooks" in p: t |= {"playbook"}

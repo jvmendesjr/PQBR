@@ -1,6 +1,40 @@
 # PQBR — onboarding do agente (gerado; não editar à mão)
 
-Fontes canônicas: docs/BRIEFING-novo-agente-pqbr.md, docs/REGRAS.md, docs/DECISOES-LOG.md, docs/ROADMAP.md, docs/LACUNAS-fluxo.md, docs/ARQUITETURA.md, docs/mapa/. Em conflito, vale o doc canônico.
+## ESTADO ATUAL da PQBR — continue daqui
+
+Fonte única de "onde estamos". Não repete o ROADMAP: aponta os itens por id. **Atualize este arquivo a cada correção ou pendência resolvida.** O hook pre-commit exige isso quando o commit toca ROADMAP, LACUNAS, DECISOES-LOG ou CHANGELOG, e o `registrar_alteracao` exige isso para `tipo` correcao ou pendencia_resolvida.
+
+Atualizado: 26/10/2026 (t98u/t99u) · versão 0.12.0
+
+## Onde estamos
+- **Produção:** o lote do saldo está em `runtime/lote-saldo/` (um diretório por tema). O EP1002 olhos-da-cara foi reprovado e descartado (`runtime/lote-saldo/_descartado/`), e o tema voltou a `proposto`.
+- **Publicação (ROADMAP F8-01):** o fluxo pelo Temporal está pronto (`PublicacaoAgendadaWorkflow` no `worker_episodio`). O upload real está bloqueado por falta das credenciais OAuth do YouTube.
+- **Agente externo:** o servidor MCP 0.2+ só funciona pela tailnet. A memória escrita leva o autor (o cliente) e o commit. O protocolo obrigatório está no AGENTS.md. Hindsight: bank `pqbr` reclassificado, com as obsoletas apagadas.
+
+## Próximo passo
+José assiste o EP1003 cafe-fraco (`runtime/lote-saldo/cafe-fraco/cafe-fraco-final.mp4`). Só depois disso roda o LOOP do Gemini nesse episódio.
+
+## Pendências abertas
+| # | Pendência | Ref. ROADMAP | Dono | Bloqueio |
+|---|---|---|---|---|
+| P1 | EP1003 cafe-fraco: José assiste antes do LOOP do Gemini | Estado 26/10 · Próximo 5 | José | aguardando José |
+| P2 | Publicação: (a) José ativa a verificação em 2 etapas na conta juniormoedavirtual → (b) criar o OAuth do YouTube via Camofox (projeto `pqbr-publicacao`, chaves em `episodio.env`) → (c) aplicar a migração 0020 e reiniciar o worker → (d) upload pelo `PublicacaoAgendadaWorkflow` | F8-01 · Estado 26/10 · Próximo 1 | José (a); agente (b–d) | (a) José; (c) exige OK do José |
+| P3 | Teste: LOOP por cena vs o atual | Estado 26/10 · Testes pendentes | agente | depois do fluxo de publicação |
+| P4 | Teste: 4 Argon com raciocínio baixo vs 3.8 Flash | Estado 26/10 · Testes pendentes; LACUNAS | agente | depois do fluxo de publicação |
+| P5 | Imagens de referência do elenco (`ASSET_personagem_{masculino,feminino}-v1`) | Estado 26/10 · Próximo 4 | agente | geração paga: OK do José (postergado) |
+| P6 | Activity do Storyboard no Temporal (bloqueia a geração sem ele) | Estado 26/10 · Próximo 2; R2 | agente | postergado |
+| P7 | Gate VISUAL: 3 critérios novos (lábios, enquadramento cortado, grotesco) | Estado 26/10 · Próximo 3 | agente | postergado |
+| P8 | 7 memórias `obsoleto_candidato` para revisão | `docs/operacao/hindsight-descarte-candidatos.md` | José | apagar exige OK |
+| P9 | `PQBR_KIT_PAPEL` nos configs do opencode | Fase Conhecimento | agente | — |
+| P10 | Reconsolidação do Hindsight em andamento (observações sendo refeitas) | Fase Conhecimento | Hindsight (automático) | só conferir |
+| P11 | Commits locais sem push (~190+) | — | José | push exige OK |
+| P12 | ERR-01: revisar os erros aceitáveis | ERR-01 | agente | depois dos primeiros dias de produção |
+
+## Como atualizar
+Resolveu ou corrigiu algo: tire a linha da tabela (ou mude o bloqueio), ajuste "Próximo passo" e a data acima, faça o commit junto com o DECISOES-LOG/CHANGELOG e chame `registrar_alteracao` com `tipo` igual a `pendencia_resolvida` ou `correcao`.
+
+
+Fontes canônicas: docs/ESTADO-ATUAL.md (onde estamos), docs/BRIEFING-novo-agente-pqbr.md, docs/REGRAS.md, docs/DECISOES-LOG.md, docs/ROADMAP.md, docs/LACUNAS-fluxo.md, docs/ARQUITETURA.md, docs/mapa/. Em conflito, vale o doc canônico.
 
 # Instruções para agentes que trabalham no repositório PQBR
 
@@ -45,7 +79,8 @@ Servidor MCP da PQBR (só tailnet): porta HTTPS 8791 do host pc na tailnet (nome
 1. `onboarding` (este pacote).
 2. `buscar_memoria` sobre o assunto antes de agir; em conflito, vale o doc canônico.
 3. Implementar no checkout com commit local (sem push) e registrar a decisão em docs/DECISOES-LOG.md e a versão em CHANGELOG.md (SemVer).
-4. Ao final, `registrar_alteracao` com o hash do commit (ou `registrar_memoria` se não houve commit), citando arquivos. Sem esse registro a alteração não conta como entregue.
+4. Atualizar docs/ESTADO-ATUAL.md a cada correção ou pendência resolvida (o hook pre-commit exige quando ROADMAP/LACUNAS/DECISOES-LOG/CHANGELOG mudam).
+5. Ao final, `registrar_alteracao` com o hash do commit e `tipo` (alteracao | correcao | pendencia_resolvida), citando arquivos; ele grava também o handoff. Sem commit, `registrar_memoria`. Sem esse registro a alteração não conta como entregue.
 
 ## BRIEFING
 
@@ -138,11 +173,6 @@ t531 · 24/10/2026 · pedido do José. **Só leitura e proposta.** **Atualizaç�
 
 ## Decisões recentes
 
-## t89u (26/10/2026) — Servidor MCP dentro da PQBR, só tailnet; saúde do Hindsight
-- José confirmou: o servidor MCP fica na própria aplicação; acesso autorizado só pela tailnet (127.0.0.1 + `tailscale serve`, nunca Funnel/0.0.0.0). Só leitura; papel por token de cliente; papel desconhecido ⇒ negado.
-- Hindsight verificado saudável (0.10.2, bank `pqbr` com 5.012 memórias). O filtro de tags funciona no servidor; as memórias legadas sem tag ficam fora da política.
-
-
 ## t90u (26/10/2026) — Licença do GitNexus aceita; reclassificação do Hindsight por papel
 - **Licença GitNexus (PolyForm Noncommercial) aceita pelo José:** a PQBR é de uso pessoal, sem revenda nem inclusão em produto vendido. Pendência do ROADMAP encerrada.
 - **Opção A — reclassificar:** `scripts/hindsight/reclassificar.py` (determinístico, idempotente, dry-run por padrão) deu tags de conteúdo da política 1.1.0 aos 947 documentos legados (origem do retain + palavras-chave) e autor `papel:indexador`. Nenhum documento ficou sem tag de leitura. Backup antes: `~/.pqbr/hindsight/backup/` (export do bank + JSON, 600).
@@ -167,32 +197,13 @@ t531 · 24/10/2026 · pedido do José. **Só leitura e proposta.** **Atualizaç�
 - Hindsight: 3 documentos superados apagados (2 versões antigas da ARQUITETURA §12 e a seção t84u–t86u), backup em `~/.pqbr/hindsight/backup/licenca-gitnexus-20261026.json` (600); seções reindexadas e a versão correta registrada pelo MCP.
 
 
-## Estado do ROADMAP
+## t98u/t99u (26/10/2026) — ESTADO-ATUAL: qualquer agente continua de onde paramos
+- José aprovou ("isso mesmo, e garanta que atualize a cada correção ou solução de pendências"). `docs/ESTADO-ATUAL.md` é a fonte única de onde estamos, do próximo passo e das pendências (dono/bloqueio). Aponta os ids do ROADMAP sem repetir; a seção "Estado em 26/10" do ROADMAP vira histórico.
+- Garantia determinística: o hook pre-commit recusa commit que toca ROADMAP/LACUNAS/DECISOES-LOG/CHANGELOG sem o ESTADO-ATUAL (commit trivial não é afetado); `registrar_alteracao` 1.1.0 com `tipo` correcao/pendencia_resolvida exige o ESTADO-ATUAL no commit e sempre grava um handoff (tag `estado`) com o próximo passo vigente.
+- Política 1.3.0: tag `estado` lida por todos os papéis. ESTADO-ATUAL é a 1ª seção do onboarding/AGENTS.md e entra no indexador. MCP 0.3.0.
 
-## Estado em 26/10/2026 (consolidação t63s292 → t78u)
-**Feito:**
-- Camofox PQBR com MemoryMax 3000M (t63s292); pico de 2316 MB no lote.
-- Juiz Gemini fixado no **3.8 Flash**, selecionado e conferido antes de cada envio; aceita imagens (2 pranchas de 300 px).
-- LOOP do EP1002 com veredito `terceira_rodada`; o José reprovou visualmente (t75u) e o episódio foi **descartado** (reversível) e o tema voltou a `proposto`.
-- Fluxo de publicação via Temporal: `publishAt` no upload privado, escopo `PQBR_PUBLICACAO_REAL_CODIGOS`, `PublicacaoAgendadaWorkflow` registrado no `worker_episodio` (fila `episodio-pqbr`).
-- Contrato `FichaCena`/`Storyboard` 1.1.0, com ficha por cena, figurino por papel, caras e bocas sem fala e elenco alternado.
-- Pesquisa `flow-storyboard-por-cena.md` e auditoria do storyboard do lote 2510.
 
-**Bloqueado:**
-- Upload real: sem credenciais OAuth do YouTube no worker, e o Cloud Console exige 2SV na conta do canal (o José ativa).
-- Migração 0020 não aplicada; worker não reiniciado.
-
-**Próximo:**
-1. 2SV → projeto `pqbr-publicacao` → OAuth Desktop → chaves em `episodio.env` → `channels.list`.
-2. Activity que gera o `Storyboard` e bloqueia a geração sem ele.
-3. Critérios VISUAL `personagem_mexe_labios`, `corte_oculos_cabeca` e `grotesco`.
-4. Referências `ASSET_personagem_{masculino,feminino}-v1` (geração paga: pedir OK).
-5. EP1003 cafe-fraco (o José vê antes).
-
-**Testes pendentes (t71u–t72u, não executar ainda):**
-- LOOP do Gemini por cena + consolidação final só em texto; comparar tempo, memória e qualidade.
-- 4 Argon com raciocínio baixo vs 3.8 Flash.
-
+## Fase atual do ROADMAP
 
 ## Fase: Conhecimento e agente externo agnóstico (t84u–t86u, 26/10/2026)
 - [x] **GitNexus [agora]:** global no servidor (1.6.12, fora do repo), índice da PQBR registrado, reindex no post-commit, pré-requisito fail-closed. ARQUITETURA §12.
@@ -201,6 +212,7 @@ t531 · 24/10/2026 · pedido do José. **Só leitura e proposta.** **Atualizaç�
 - [x] **AGENTS.md gerado (t89u)** do onboarding do MCP.
 - [x] Reclassificar com tags as memórias legadas sem tag (feito em t90u).
 - [x] **Escrita de memória pelo MCP (t95u/t96u):** `registrar_memoria`/`registrar_alteracao` (contrato 1.0.0), só papel com escrita na política, autor = cliente do token, referência a commit verificado e arquivos.
+- [x] **ESTADO-ATUAL (t98u/t99u):** `docs/ESTADO-ATUAL.md` é a fonte única do handoff, a 1ª seção do onboarding/AGENTS.md; hook pre-commit e `registrar_alteracao` (tipo correcao/pendencia_resolvida) exigem a atualização; handoff no Hindsight (tag `estado`, todos os papéis).
 - [x] **Teste de agente do zero (t96u):** URL tailnet + token `mantenedor-externo` → onboarding → buscar_memoria → commit local `b63fa56` → registrar_alteracao → buscar_memoria retornou em ~10 s; indexador negado; sem token 401.
 - [x] Licença do GitNexus aceita (uso pessoal, sem revenda; t90u).
 - [x] **Reclassificação do Hindsight por papel (t90u):** `scripts/hindsight/reclassificar.py`; 220 candidatas a descarte em `docs/operacao/hindsight-descarte-candidatos.md`.

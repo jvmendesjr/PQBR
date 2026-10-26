@@ -16,7 +16,7 @@ from . import onboarding
 HOST = "127.0.0.1"
 PORTA = int(os.environ.get("PQBR_MCP_PORTA", "8791"))
 CLIENTES = Path(os.environ.get("PQBR_MCP_CLIENTES", str(Path.home() / ".pqbr/secrets/mcp_clientes.json")))
-VERSAO = "0.2.0"
+VERSAO = "0.3.0"
 
 FERR: dict[str, tuple[str, str | None, dict]] = {  # nome: (descrição, ferramenta exigida na política, parâmetros)
     "onboarding": ("Pacote de entrada no projeto (BRIEFING, REGRAS, DECISOES recentes, estado do ROADMAP, LACUNAS, mapa).", None, {}),
@@ -26,8 +26,11 @@ FERR: dict[str, tuple[str, str | None, dict]] = {  # nome: (descrição, ferrame
     "registrar_memoria": ("Grava uma memória no Hindsight (contrato RegistroMemoriaEntrada 1.0.0): conteudo, tags (opcional; "
                           "só as que seu papel escreve), arquivos e commit (opcionais). Autor = seu cliente MCP.",
                           "memoria_registrar", {"conteudo": "string", "tags": "array", "arquivos": "array", "commit": "string"}),
-    "registrar_alteracao": ("Como registrar_memoria, mas exige o hash de um commit que exista no repo (RegistroAlteracaoEntrada 1.0.0).",
-                            "memoria_registrar", {"conteudo": "string", "commit": "string", "tags": "array", "arquivos": "array"}),
+    "registrar_alteracao": ("Como registrar_memoria, mas exige o hash de um commit que exista no repo (RegistroAlteracaoEntrada 1.1.0). "
+                            "tipo: alteracao | correcao | pendencia_resolvida (as duas últimas exigem docs/ESTADO-ATUAL.md no commit). "
+                            "Grava também um handoff (tag estado) com o próximo passo do ESTADO-ATUAL.",
+                            "memoria_registrar", {"conteudo": "string", "commit": "string", "tags": "array", "arquivos": "array",
+                                                  "tipo": "string", "handoff": "string"}),
 }
 OBRIGATORIOS = {"registrar_memoria": ["conteudo"], "registrar_alteracao": ["conteudo", "commit"]}
 
@@ -101,7 +104,7 @@ def executar(papel: str, nome: str, a: dict, impl: dict[str, Callable[..., Any]]
         if not cliente:
             raise AcessoNegado("cliente MCP desconhecido")
         r = registrar(papel, cliente, a, exige_commit=nome == "registrar_alteracao", reter=impl.get("reter"),
-                      **({"verificar_commit": impl["verificar_commit"]} if "verificar_commit" in impl else {}))
+                      **{k: impl[k] for k in ("verificar_commit", "listar_arquivos", "estado_txt") if k in impl})
         return r.model_dump_json()
     raise AcessoNegado(nome)
 
@@ -113,7 +116,7 @@ def tratar(msg: dict, papel: str, impl: dict | None = None, cliente: str = "") -
     if met == "initialize":
         res = {"protocolVersion": (msg.get("params") or {}).get("protocolVersion", "2025-03-26"),
                "capabilities": {"tools": {}}, "serverInfo": {"name": "pqbr", "version": VERSAO},
-               "instructions": f"Papel: {papel}. Protocolo: `onboarding` → `buscar_memoria` antes de agir → commit local + DECISOES-LOG/CHANGELOG → `registrar_alteracao`/`registrar_memoria` ao final."}
+               "instructions": f"Papel: {papel}. Protocolo: `onboarding` → `buscar_memoria` antes de agir → commit local + DECISOES-LOG/CHANGELOG + docs/ESTADO-ATUAL.md → `registrar_alteracao`/`registrar_memoria` ao final."}
     elif met == "ping":
         res = {}
     elif met == "tools/list":

@@ -1,4 +1,7 @@
 #!/bin/sh
-# Barreira de segredos/PII do PQBR (F3-02). Instalar: git config core.hooksPath .githooks
+# Barreira de segredos/PII do PQBR (F3-02) + ESTADO-ATUAL (t98u/t99u). Instalar: git config core.hooksPath .githooks
 # Desinstalar: git config --unset core.hooksPath
-exec python3 "$(git rev-parse --show-toplevel)/scripts/seguranca/verificar_segredos.py" --staged
+R="$(git rev-parse --show-toplevel)"
+python3 "$R/scripts/seguranca/verificar_segredos.py" --staged || exit 1
+E="$R/scripts/seguranca/verificar_estado_atual.py"; [ -f "$E" ] || exit 0
+exec python3 "$E"

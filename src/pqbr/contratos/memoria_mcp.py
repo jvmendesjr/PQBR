@@ -6,7 +6,7 @@ from typing import Literal
 from pydantic import Field, field_validator
 from . import Contrato
 
-VERSAO = "1.0.0"
+VERSAO = "1.1.0"  # 1.1.0 (t98u): tipo + handoff; 1.0.0 continua aceito
 _COMMIT = r"^[0-9a-f]{7,40}$"
 
 
@@ -17,7 +17,7 @@ def _caminho_ok(p: str) -> str:
 
 
 class RegistroMemoriaEntrada(Contrato):
-    versao: Literal["1.0.0"] = VERSAO
+    versao: Literal["1.0.0", "1.1.0"] = VERSAO
     conteudo: str = Field(min_length=20, max_length=4000)
     tags: tuple[str, ...] = ()                    # vazio ⇒ derivadas por hindsight_tags dentro do que o papel escreve
     arquivos: tuple[str, ...] = Field(default=(), max_length=30)
@@ -38,13 +38,16 @@ class RegistroMemoriaEntrada(Contrato):
 
 class RegistroAlteracaoEntrada(RegistroMemoriaEntrada):
     commit: str = Field(pattern=_COMMIT)          # obrigatório: a alteração precisa existir no repo
+    tipo: Literal["alteracao", "correcao", "pendencia_resolvida"] = "alteracao"  # correcao/pendencia ⇒ commit toca ESTADO-ATUAL
+    handoff: str | None = Field(default=None, min_length=20, max_length=1500)    # resumo p/ o próximo agente (padrão: conteudo)
 
 
 class RegistroMemoriaSaida(Contrato):
-    versao: Literal["1.0.0"] = VERSAO
+    versao: Literal["1.0.0", "1.1.0"] = VERSAO
     ok: bool
     autor: str
     papel: str
     tags: tuple[str, ...]
     commit: str | None = None
     commit_verificado: bool = False
+    handoff_registrado: bool = False

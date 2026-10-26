@@ -22,7 +22,7 @@ def test_registrar_memoria_ok_autor_e_referencias():
     r = _call("registrar_memoria", {"conteudo": "Ajustei o guia de acesso do MCP.", "tags": ["licao"], "arquivos": ["docs/x.md"]})
     assert not r["isError"], r
     out = json.loads(r["content"][0]["text"])
-    assert out["autor"] == "mantenedor-externo" and out["tags"] == ["licao"] and out["versao"] == "1.0.0"
+    assert out["autor"] == "mantenedor-externo" and out["tags"] == ["licao"] and out["versao"] == "1.1.0"
     texto, ctx, k = GRAV[0]
     assert "docs/x.md" in texto and k["autor"] == "mantenedor-externo" and k["papel"] == "mantenedor"
 

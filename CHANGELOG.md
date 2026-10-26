@@ -5,6 +5,12 @@ Versionamento SemVer (MAJOR.MINOR.PATCH) a partir de t510. Versão do pacote can
 
 
 
+## [0.12.0] — 2026-10-26
+### Adicionado
+- t98u/t99u: `docs/ESTADO-ATUAL.md`; `pqbr.governanca.estado_atual` + `scripts/seguranca/verificar_estado_atual.py` no pre-commit; `registrar_alteracao` 1.1.0 (`tipo`, `handoff`, handoff no Hindsight); `tests/unit/test_estado_atual.py`.
+### Alterado
+- Política 1.3.0 (tag `estado` para todos); onboarding/AGENTS.md começam pelo ESTADO-ATUAL e o protocolo inclui atualizá-lo; MCP 0.3.0; indexador inclui o ESTADO-ATUAL; mapa 09.
+
 ## [0.11.1] — 2026-10-26
 ### Corrigido
 - t97u: licença do GitNexus (PolyForm Noncommercial aceita em t90u, uso pessoal, sem revenda) corrigida na ARQUITETURA §12 e no DECISOES-LOG; 3 documentos superados do bank `pqbr` substituídos (backup antes).

@@ -604,3 +604,8 @@ NÃO CABE:
 ## t97u (26/10/2026) — Memória superada da licença do GitNexus corrigida
 - José autorizou ("pode corrigir logo"). Fonte: ARQUITETURA §12 ainda dizia "pode exigir licença comercial" e o log t84u–t86u só "risco registrado"; ambos agora citam a aceitação de t90u.
 - Hindsight: 3 documentos superados apagados (2 versões antigas da ARQUITETURA §12 e a seção t84u–t86u), backup em `~/.pqbr/hindsight/backup/licenca-gitnexus-20261026.json` (600); seções reindexadas e a versão correta registrada pelo MCP.
+
+## t98u/t99u (26/10/2026) — ESTADO-ATUAL: qualquer agente continua de onde paramos
+- José aprovou ("isso mesmo, e garanta que atualize a cada correção ou solução de pendências"). `docs/ESTADO-ATUAL.md` é a fonte única de onde estamos, do próximo passo e das pendências (dono/bloqueio). Aponta os ids do ROADMAP sem repetir; a seção "Estado em 26/10" do ROADMAP vira histórico.
+- Garantia determinística: o hook pre-commit recusa commit que toca ROADMAP/LACUNAS/DECISOES-LOG/CHANGELOG sem o ESTADO-ATUAL (commit trivial não é afetado); `registrar_alteracao` 1.1.0 com `tipo` correcao/pendencia_resolvida exige o ESTADO-ATUAL no commit e sempre grava um handoff (tag `estado`) com o próximo passo vigente.
+- Política 1.3.0: tag `estado` lida por todos os papéis. ESTADO-ATUAL é a 1ª seção do onboarding/AGENTS.md e entra no indexador. MCP 0.3.0.

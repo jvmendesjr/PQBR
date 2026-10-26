@@ -35,9 +35,13 @@ flowchart LR
   POL --> HS & GNX
   JR -. "infra global (informar versão)" .-> GNX
   %% t89u (26/10/2026)
-  MCP["pqbr-mcp 0.2.0<br/>127.0.0.1:8791 → tailscale serve (só tailnet)<br/>leitura: onboarding · buscar_memoria · codigo · estado<br/>escrita: registrar_memoria · registrar_alteracao (só Hindsight)"]
+  MCP["pqbr-mcp 0.3.0<br/>127.0.0.1:8791 → tailscale serve (só tailnet)<br/>leitura: onboarding · buscar_memoria · codigo · estado<br/>escrita: registrar_memoria · registrar_alteracao (só Hindsight)"]
   EXT(["Agente externo<br/>token por cliente → papel"])
   EXT -->|"HTTPS tailnet + Bearer"| MCP
   MCP --> POL
   %% t95u–t96u (26/10/2026)
   MCP -->|"memória com autor:cliente + commit"| HS
+  %% t98u–t99u (26/10/2026)
+  EST["docs/ESTADO-ATUAL.md<br/>onde estamos · próximo passo · pendências<br/>1ª seção do onboarding; hook exige"]
+  EST --> MCP
+  MCP -->|"handoff (tag estado)"| HS
