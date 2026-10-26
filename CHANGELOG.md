@@ -5,6 +5,10 @@ Versionamento SemVer (MAJOR.MINOR.PATCH) a partir de t510. Versão do pacote can
 
 
 
+## [0.16.1] — 2026-10-26
+### Corrigido
+- ESTADO-ATUAL P2: removidos passos já feitos (2SV, migração 0020/reinício do worker); aba Roadmap regenerada.
+
 ## [0.16.0] — 2026-10-26
 ### Adicionado
 - Aba **Roadmap** no painel do mapa (:8088), só leitura: Próximos passos, Falta, Feito, gerados de ROADMAP + ESTADO-ATUAL (`scripts/mapa/roadmap.py`, testes em `tests/unit/test_mapa_roadmap.py`).

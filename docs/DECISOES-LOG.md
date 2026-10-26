@@ -643,3 +643,6 @@ NÃO CABE:
 ## t120u (26/10/2026) — Aba Roadmap no painel do mapa
 - Aba só leitura (sem formulário/POST) com Próximos passos, Falta e Feito, gerada de `docs/ROADMAP.md` (itens `- [ ]`/`- [x]` de 1º nível, até o Anexo) e `docs/ESTADO-ATUAL.md` (Próximo passo + pendências P* na ordem; P* "Feito" vai para Feito). Só agentes editam as fontes.
 - `scripts/mapa/roadmap.py` chamado por `gerar_index.py`; o pre-commit regenera e adiciona o `index.html` quando ROADMAP, ESTADO-ATUAL, `docs/mapa/*.mmd` ou `scripts/mapa/` mudam. Servidor :8088 é estático: sem reinício.
+
+## t121u (26/10/2026) — Correção da P2 no ESTADO-ATUAL
+- 2SV de juniormoedavirtual já ativa (t106u) e migração 0020 aplicada 16:56 com worker reiniciado 16:57 (t109u). Resta: conferir perfil/conta do Camofox na tentativa bloqueada do Cloud Console e criar o OAuth do YouTube pelo Camofox. Demais P* revisadas: sem outra divergência comprovada.

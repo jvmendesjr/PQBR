@@ -4,7 +4,7 @@
 
 Fonte única de "onde estamos". Não repete o ROADMAP: aponta os itens por id. **Atualize este arquivo a cada correção ou pendência resolvida.** O hook pre-commit exige isso quando o commit toca ROADMAP, LACUNAS, DECISOES-LOG ou CHANGELOG, e o `registrar_alteracao` exige isso para `tipo` correcao ou pendencia_resolvida.
 
-Atualizado: 26/10/2026 (t120u: aba Roadmap no painel :8088, gerada de ROADMAP + ESTADO-ATUAL) · versão 0.16.0
+Atualizado: 26/10/2026 (t121u: P2 corrigida — 2SV e migração 0020 já feitas) · versão 0.16.1
 
 ## Onde estamos
 - **Produção:** o lote do saldo está em `runtime/lote-saldo/` (um diretório por tema). O EP1002 olhos-da-cara foi reprovado e descartado (`runtime/lote-saldo/_descartado/`), e o tema voltou a `proposto`.
@@ -18,7 +18,7 @@ José assiste o EP1003 cafe-fraco (`runtime/lote-saldo/cafe-fraco/cafe-fraco-fin
 | # | Pendência | Ref. ROADMAP | Dono | Bloqueio |
 |---|---|---|---|---|
 | P1 | EP1003 cafe-fraco: José assiste antes do LOOP do Gemini | Estado 26/10 · Próximo 5 | José | aguardando José |
-| P2 | Publicação: (a) José ativa a verificação em 2 etapas na conta juniormoedavirtual → (b) criar o OAuth do YouTube via Camofox (projeto `pqbr-publicacao`, chaves em `episodio.env`) → (c) aplicar a migração 0020 e reiniciar o worker → (d) upload pelo `PublicacaoAgendadaWorkflow` | F8-01 · Estado 26/10 · Próximo 1 | José (a); agente (b–d) | (a) José; (c) exige OK do José |
+| P2 | Publicação: (a) verificar qual perfil/conta do Camofox PQBR (127.0.0.1:9387) foi usado na tentativa bloqueada do Cloud Console (t107u) → (b) criar o OAuth do YouTube pelo Camofox (projeto `pqbr-publicacao`, chaves em `episodio.env`; se o Google pedir confirmação, José confirma na tela) → (c) upload pelo `PublicacaoAgendadaWorkflow`. Já feito: 2 etapas de juniormoedavirtual ativa (t106u); migração 0020 aplicada 26/10 16:56 e worker reiniciado 16:57 (t109u) | F8-01 · Estado 26/10 · Próximo 1 | agente | (b) confirmação do Google pelo José, se pedir |
 | P3 | Teste: LOOP por cena vs o atual | Estado 26/10 · Testes pendentes | agente | depois do fluxo de publicação |
 | P4 | **Feito (t108u/t109u).** Juiz por etapa (`gemini_juiz` v1.0.0): pré-produção usa 3.8 Flash; produção (VISUAL e LOOP) usa 4 Argon Baixo. O worker `pqbr-episodio-worker` foi reiniciado com OK do José às 16:57 (-03), e o poller está ativo na fila `episodio-pqbr`, ns `pqbr` | Estado 26/10 · DECISOES-LOG t109u | agente | concluído |
 | P5 | Imagens de referência do elenco (`ASSET_personagem_{masculino,feminino}-v1`) | Estado 26/10 · Próximo 4 | agente | geração paga: OK do José (postergado) |
@@ -179,14 +179,6 @@ t531 · 24/10/2026 · pedido do José. **Só leitura e proposta.** **Atualizaç�
 
 ## Decisões recentes
 
-## t108u (26/10/2026) — 3.8 antes da produção, 4 Argon na produção; P7 implementado
-- José: "Vamos deixa o 3.8 antes da produção, na produção adicionamos o Argo".
-- A config por etapa (`gemini_juiz`) tem a seguinte precedência: env da execução > etapa > `gemini_modelo` legado. A verificação do seletor (modelo e raciocínio) continua sendo feita a cada envio.
-- 3 critérios novos que reprovam sozinhos, sempre exigindo as 2 rodadas em acordo (se divergirem, vai para a terceira rodada).
-- Validação no EP1002 com 4 Argon Baixo (595 s): reprova. Detectou os 3 problemas apontados pelo José: corte em S01/S04, grotesco em S01, boca em S02/S05/S09.
-- O worker Temporal não foi reiniciado. Isso fica pendente de OK do José.
-
-
 ## t109u (26/10/2026) — Migração 0020 e reinício do worker (OK do José, card t109s462)
 - Backup antes da migração; `public.pqbr_migracoes` registra a 0020.
 - Antes do reinício não havia nenhum workflow em execução no ns `pqbr`. Depois do reinício: unit ativa, poller registrado (workflow e activity), pré = 3.8 Flash / produção = 4 Argon Baixo, `PublicacaoAgendadaWorkflow` registrado. Nada foi publicado e nenhum upload foi disparado.
@@ -208,6 +200,10 @@ t531 · 24/10/2026 · pedido do José. **Só leitura e proposta.** **Atualizaç�
 ## t120u (26/10/2026) — Aba Roadmap no painel do mapa
 - Aba só leitura (sem formulário/POST) com Próximos passos, Falta e Feito, gerada de `docs/ROADMAP.md` (itens `- [ ]`/`- [x]` de 1º nível, até o Anexo) e `docs/ESTADO-ATUAL.md` (Próximo passo + pendências P* na ordem; P* "Feito" vai para Feito). Só agentes editam as fontes.
 - `scripts/mapa/roadmap.py` chamado por `gerar_index.py`; o pre-commit regenera e adiciona o `index.html` quando ROADMAP, ESTADO-ATUAL, `docs/mapa/*.mmd` ou `scripts/mapa/` mudam. Servidor :8088 é estático: sem reinício.
+
+
+## t121u (26/10/2026) — Correção da P2 no ESTADO-ATUAL
+- 2SV de juniormoedavirtual já ativa (t106u) e migração 0020 aplicada 16:56 com worker reiniciado 16:57 (t109u). Resta: conferir perfil/conta do Camofox na tentativa bloqueada do Cloud Console e criar o OAuth do YouTube pelo Camofox. Demais P* revisadas: sem outra divergência comprovada.
 
 
 ## Fase atual do ROADMAP
