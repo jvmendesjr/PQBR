@@ -297,6 +297,30 @@ Ref.: `docs/pesquisas/PESQUISA-extensoes-geracao-em-serie.md` (leitura liberada,
 - [ ] Atualizar o perfil `rede` para gravar só na `PQBR`.
 - [ ] **ERR-01** Revisar `pqbr.erros_aceitaveis` (view `erros_aceitaveis_resumo`) depois dos primeiros dias de produção: decidir por linha `aceito` / `corrigir_prompt` / `virar_seguranca`; erro recorrente vira ajuste de prompt ou regra (t435). Por ora a legenda PT-BR do NotebookLM é considerada **boa**; se aparecerem muitos erros de legenda, avaliar uma solução de **legenda por overlay** no pós conforme os resultados (t436). Quem: José + Observador.
 
+## Estado em 26/10/2026 (consolidação t63s292 → t78u)
+**Feito:**
+- Camofox PQBR com MemoryMax 3000M (t63s292); pico de 2316 MB no lote.
+- Juiz Gemini fixado no **3.8 Flash**, selecionado e conferido antes de cada envio; aceita imagens (2 pranchas de 300 px).
+- LOOP do EP1002 com veredito `terceira_rodada`; o José reprovou visualmente (t75u) e o episódio foi **descartado** (reversível) e o tema voltou a `proposto`.
+- Fluxo de publicação via Temporal: `publishAt` no upload privado, escopo `PQBR_PUBLICACAO_REAL_CODIGOS`, `PublicacaoAgendadaWorkflow` registrado no `worker_episodio` (fila `episodio-pqbr`).
+- Contrato `FichaCena`/`Storyboard` 1.1.0, com ficha por cena, figurino por papel, caras e bocas sem fala e elenco alternado.
+- Pesquisa `flow-storyboard-por-cena.md` e auditoria do storyboard do lote 2510.
+
+**Bloqueado:**
+- Upload real: sem credenciais OAuth do YouTube no worker, e o Cloud Console exige 2SV na conta do canal (o José ativa).
+- Migração 0020 não aplicada; worker não reiniciado.
+
+**Próximo:**
+1. 2SV → projeto `pqbr-publicacao` → OAuth Desktop → chaves em `episodio.env` → `channels.list`.
+2. Activity que gera o `Storyboard` e bloqueia a geração sem ele.
+3. Critérios VISUAL `personagem_mexe_labios`, `corte_oculos_cabeca` e `grotesco`.
+4. Referências `ASSET_personagem_{masculino,feminino}-v1` (geração paga: pedir OK).
+5. EP1003 cafe-fraco (o José vê antes).
+
+**Testes pendentes (t71u–t72u, não executar ainda):**
+- LOOP do Gemini por cena + consolidação final só em texto; comparar tempo, memória e qualidade.
+- 4 Argon com raciocínio baixo vs 3.8 Flash.
+
 ## Segundo momento (fora do caminho crítico)
 
 - [x] **L-01 — PRIORIDADE (t412)** Migrar o banco do Paperclip do Supabase para Postgres local próprio no `pc` (container dedicado, ao lado de app/Temporal/Hindsight) (t367) — Passos: (1) inventariar só leitura onde o `DATABASE_URL` do Paperclip é usado (serviço, `.env`, CLI, backups); (2) `pg_dump` do Supabase (versão do cliente ≥ servidor); (3) container `paperclip-db` em 127.0.0.1 com `mem_limit`, senha só no `.env` 600; (4) restaurar e conferir contagens por tabela contra a origem; (5) trocar o `DATABASE_URL` do Paperclip numa janela curta de manutenção (**reinício do serviço do Paperclip**, não do Hermes) e conferir painel, issues e heartbeats; (6) timer de backup diário com rotação; (7) manter o Supabase como rollback por N dias (N a definir); (8) depois, decidir que a pendência de RLS do Supabase deixou de valer · Aceite: contagens iguais, painel e TZ-04 ok no banco novo, backup e restauração testados · Portão: **José (OK antes de executar; janela de reinício do Paperclip)** · Rollback: voltar o `DATABASE_URL` para o Supabase e reiniciar o serviço do Paperclip · Obs: não executado. · Obs t412: prioridade; é a última dependência real do Supabase (o Paperclip ainda usa o DATABASE_URL do projeto `paperclip`). Não migrar sem a janela combinada. · 2026-10-11 21:45 (t412): FEITO. Dump public+drizzle do Supabase (600, `~/.paperclip-migration/`), Postgres 17 local dedicado (`infra/paperclip-db`, 127.0.0.1:55434, role/banco `paperclip`), restaurado, `DATABASE_URL` trocado por drop-in (Paperclip parado ~1 min). Verificado: 5 empresas e contagens iguais ao Supabase (26 agentes, 29 issues, 8 rotinas, 4 segredos, 5 chaves), 15 agentes PQBR ativos+pausados, UI/API 200 no 3100, MCP do `pqbr` lê agentes/issues, chave de agente autentica, heartbeat do Observador `succeeded`. Backup diário 04:00 (`paperclip-db-backup.timer`). Supabase intocado como rollback até 18/10 (`infra/paperclip-db/README.md`); depois o José desliga/exclui o projeto.

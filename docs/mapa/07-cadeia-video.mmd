@@ -1,8 +1,10 @@
 %% Cadeia de vídeo (t517 + t529; config/motores.json, src/pqbr/motores). Decisões registradas; adaptadores ainda NÃO extraídos (ROADMAP Fase 4V).
 flowchart LR
-  P(["Roteiro aprovado<br/>(RoteiroShort)"]) --> SB["Prompts por cena (NotebookLM)<br/>ManifestoSerie: ordem + nome determinístico<br/>ep_cNN_tipo_modelo_v"]
+  P(["Roteiro aprovado<br/>(RoteiroShort)"]) --> STB["Storyboard (contratos/storyboard.py 1.1.0)<br/>norte geral · bloco de estilo · elenco alternado<br/>FichaCena por cena: rótulo ep_cNN · norte/início/fim · plano · refs ASSET_*<br/>papel observa|participa · figurino · caras e bocas sem fala"] --> SB["Prompts por cena (NotebookLM)<br/>ManifestoSerie: ordem + nome determinístico<br/>ep_cNN_tipo_modelo_v"]
   SB --> F["1 · Flow (Veo 3.1, 9:16) · Camofox · cota paga<br/>a) storyboard de imagens em série (personagem/estilo fixos)<br/>b) vídeo por cena (start frame / chain)"]
-  F --> D1{"falhou ou cota esgotou?"}
+  F --> RV{"imagens revisadas?<br/>(antes do vídeo, t75u)"}
+  RV -- não --> STB
+  RV -- sim --> D1{"falhou ou cota esgotou?"}
   D1 -- não --> OK(["cenas ordenadas → pós-produção"])
   D1 -- sim --> V["2 · Google Vids<br/>navegador · cota paga"]
   V --> D2{"falhou ou cota esgotou?"}

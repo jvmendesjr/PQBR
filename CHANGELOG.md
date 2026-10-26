@@ -5,6 +5,14 @@ Versionamento SemVer (MAJOR.MINOR.PATCH) a partir de t510. Versão do pacote can
 
 
 
+## [0.6.0] — 2026-10-26
+### Adicionado
+- t78u: `FichaCena`/`Storyboard` 1.1.0. Campos `papel_personagem` (observa|participa), `figurino` (epoca_local|atual_variavel), `expressao` (caras e bocas, sem fala), `cenario_encaixe`; `Storyboard.elenco` alternado por `elenco_alternado(codigo)`, com `elenco_excecao`. 15 testes.
+- `config/estilo_visual.json` → `elenco` com as fichas masculina e feminina (texto).
+- Mapa: `12-storyboard-elenco.mmd`; 01, 07, 09 e 11 atualizados; `scripts/mapa/gerar_index.py` regenera o `index.html`.
+### Consolidado do dia
+- ROADMAP "Estado em 26/10/2026": Camofox 3 GB, 3.8 Flash com imagens, LOOP e descarte do EP1002, bloqueio 2SV/OAuth, publicação Temporal (publishAt + escopo), auditoria do storyboard, pesquisa Flow e testes pendentes (por cena; 4 Argon).
+
 ## [0.5.0] — 2026-10-26
 ### Adicionado
 - t75u–t77u: contrato `contratos/storyboard.py` (`FichaCena`/`Storyboard` 1.0.0), com ficha numerada e rotulada, norte/início/fim, refs `ASSET_*`, "lips closed", proibição de framing descritivo e de fala no prompt, personagem observador ou caracterizado no passado, e vídeo só com imagens revisadas. Testes `test_storyboard.py`.

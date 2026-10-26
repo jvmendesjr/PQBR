@@ -6,7 +6,7 @@ from typing import Literal
 from pydantic import Field, model_validator
 from . import Contrato
 
-VERSAO = "1.0.0"
+VERSAO = "1.1.0"
 ROTULO = re.compile(r"^PQBR-EP\d{4,}_c\d{2}$")          # ex.: PQBR-EP1003_c04
 REF = re.compile(r"^ASSET_[a-z]+_[a-z0-9-]+-v\d+$")     # ex.: ASSET_personagem_pqbr-v1
 PROIBIDO_FRAMING = re.compile(r"from the (chest|waist) up|do peito para cima|da cintura para cima", re.I)
@@ -14,7 +14,7 @@ FALA_NO_PROMPT = re.compile(r"[\"“”].{3,}[\"“”]|\b(speaks|says|talking|n
 
 
 class FichaCena(Contrato):
-    versao: Literal["1.0.0"] = VERSAO
+    versao: Literal["1.0.0", "1.1.0"] = VERSAO
     numero: int = Field(ge=1, le=60)
     rotulo: str = Field(pattern=ROTULO.pattern)
     fala: str = Field(min_length=3, max_length=400)               # narração em off; nunca vai no prompt
@@ -27,8 +27,12 @@ class FichaCena(Contrato):
     prompt_animacao: str = Field(min_length=10, max_length=1000)
     refs: list[str] = Field(min_length=1, max_length=4)            # imagem de referência identificada
     epoca: Literal["presente", "passado"] = "presente"
-    papel_personagem: Literal["protagonista", "observador_escondido", "caracterizado_epoca", "ausente"]
-    caracterizacao: str | None = None                              # roupa e traços da época, se for caracterizado_epoca
+    # t78u: participa do ambiente ⇒ figurino da época/local; só observa ⇒ roupa atual (varia entre vídeos)
+    papel_personagem: Literal["observa", "participa"]
+    figurino: Literal["epoca_local", "atual_variavel"]
+    caracterizacao: str | None = Field(default=None, max_length=400)   # roupa/traços da época ou local, ou a roupa atual escolhida
+    expressao: str = Field(min_length=5, max_length=300)           # caras e bocas ligadas à situação; reação, nunca articulação de fala
+    cenario_encaixe: str = Field(min_length=10, max_length=400)    # onde e como o personagem está no cenário (escondido, ao fundo, no meio)
 
     @model_validator(mode="after")
     def _regras(self):
@@ -39,25 +43,41 @@ class FichaCena(Contrato):
             if PROIBIDO_FRAMING.search(campo): raise ValueError("enquadramento descritivo corta cabeça/óculos; use o tipo de plano")
             if FALA_NO_PROMPT.search(campo): raise ValueError("fala ou verbo de fala no prompt faz a boca mexer; personagem nunca narra")
         if "lips closed" not in self.prompt_animacao.lower(): raise ValueError("prompt_animacao deve fixar 'lips closed'")
-        if self.epoca == "passado" and self.papel_personagem == "protagonista":
-            raise ValueError("no passado o personagem observa escondido ou vai caracterizado da época")
-        if self.papel_personagem == "caracterizado_epoca" and not self.caracterizacao:
-            raise ValueError("caracterizado_epoca exige caracterizacao")
+        if self.papel_personagem == "participa" and self.figurino != "epoca_local":
+            raise ValueError("participa do ambiente ⇒ figurino da época/local")
+        if self.figurino == "epoca_local" and not self.caracterizacao:
+            raise ValueError("figurino de época/local exige caracterizacao")
+        if self.epoca == "presente" and self.figurino == "epoca_local" and self.papel_personagem == "observa":
+            raise ValueError("observador no presente usa figurino atual")
+        if FALA_NO_PROMPT.search(self.expressao) or re.search(r"\b(lábios? mexendo|mouthing|lip ?sync|articula)", self.expressao, re.I):
+            raise ValueError("expressão é reação (caras e bocas), nunca articulação de fala")
         return self
 
 
+ELENCO = ("masculino", "feminino")
+
+
+def elenco_alternado(codigo: str) -> str:
+    """t78u: alterna por episódio pelo número do código (par = masculino, ímpar = feminino)."""
+    return ELENCO[int(codigo.rsplit("EP", 1)[1]) % 2]
+
+
 class Storyboard(Contrato):
-    versao: Literal["1.0.0"] = VERSAO
+    versao: Literal["1.0.0", "1.1.0"] = VERSAO
     codigo: str = Field(pattern=r"^PQBR-EP\d{4,}$")
     norte_geral: str = Field(min_length=20, max_length=600)
     bloco_estilo: str = Field(min_length=20, max_length=1500)
     ficha_personagem: str = Field(min_length=20, max_length=800)
     cenas: list[FichaCena] = Field(min_length=3, max_length=60)
+    elenco: Literal["masculino", "feminino"]
+    elenco_excecao: str | None = Field(default=None, max_length=200)   # motivo, se quebrar a alternância
     imagens_revisadas: bool = False                                # True só depois da revisão das imagens, antes do vídeo
 
     @model_validator(mode="after")
     def _ordem(self):
         if [c.numero for c in self.cenas] != list(range(1, len(self.cenas) + 1)): raise ValueError("cenas fora de ordem")
+        if self.elenco != elenco_alternado(self.codigo) and not self.elenco_excecao:
+            raise ValueError(f"alternância: {self.codigo} pede elenco {elenco_alternado(self.codigo)} (ou elenco_excecao)")
         if any(not c.rotulo.startswith(self.codigo + "_") for c in self.cenas): raise ValueError("rótulo de outro episódio")
         return self
 

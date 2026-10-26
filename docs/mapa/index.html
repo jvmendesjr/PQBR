@@ -9,9 +9,8 @@ main{max-width:1100px;margin:0 auto;padding:12px}section{background:#fff;border:
 h2{margin:0 0 4px;font-size:16px}.nota{margin:0 0 8px;color:var(--m);font-size:12px}.arq{font-family:ui-monospace,monospace}
 .wrap{overflow-x:auto}.mermaid{background:none;margin:0}footer{color:var(--m);font-size:12px;padding:16px;text-align:center}
 .regra{background:#fff8e6;border:1px solid #f0dca8;border-radius:8px;padding:10px;font-size:13px;margin-bottom:16px}
-</style></head><body><header><h1>PQBR — mapa do sistema</h1><p>Gerado do código em 24/10/2026 · ⚠ = não confirmado no código / pendente</p></header>
-<nav><a href="#d00">Visão geral</a><a href="#d01">Episódio</a><a href="#d02">Reposição de temas</a><a href="#d03">Acessos / Camofox</a><a href="#d04">Descarte</a><a href="#d05">Vigia de atualizações</a><a href="#d06">Runs presos</a><a href="#d07">Cadeia de vídeo</a><a href="#d08">Identidade / Camofox</a><a href="#d09">Agentes</a><a href="#d10">Catálogo de erros</a></nav><main><div class="regra"><b>Regra:</b> agentes nunca alteram este mapa sozinhos; mudança só por proposta aprovada pelo José. Fonte: <code>docs/mapa/*.mmd</code>.</div>
-<section id="d00"><h2>Visão geral</h2><p class="nota">Mapa PQBR — Visão geral. Gerado do código em 24/10/2026 (commit base c752abc). Só muda por proposta aprovada pelo José. <span class="arq">00-visao-geral.mmd</span></p><div class="wrap"><pre class="mermaid">flowchart TB
+</style></head><body><header><h1>PQBR — mapa do sistema</h1><p>Regenerado de docs/mapa/*.mmd em 26/10/2026 10:47 · ⚠ = não confirmado no código / pendente</p></header><nav><a href="#d00">Visão geral</a><a href="#d01">Episódio</a><a href="#d02">Reposição de temas</a><a href="#d03">Acessos / Camofox</a><a href="#d04">Descarte</a><a href="#d05">Vigia de atualizações</a><a href="#d06">Runs presos</a><a href="#d07">Cadeia de vídeo</a><a href="#d08">Identidade Camofox</a><a href="#d09">Agentes</a><a href="#d10">Catálogo de erros</a><a href="#d11">Publicação</a><a href="#d12">Storyboard e elenco</a></nav><main><div class="regra"><b>Regra:</b> agentes nunca alteram este mapa sozinhos; mudança só por proposta aprovada pelo José. Fonte: <code>docs/mapa/*.mmd</code>.</div><section id="d00"><h2>Visão geral</h2><p class="nota">Mapa PQBR — Visão geral. Gerado do código em 24/10/2026 (commit base c752abc). Só muda por proposta aprovada pelo José. <span class="arq">00-visao-geral.mmd</span></p><div class="wrap"><pre class="mermaid">
+flowchart TB
   JOSE([&quot;José&quot;])
   TG[&quot;Telegram (Hermes pqbr)&lt;br/&gt;cron pqbr-pedidos-jose lê pqbr.revisao_humana&quot;]
   subgraph T[&quot;TEMPORAL — sistema nervoso (127.0.0.1:7233, ns pqbr)&quot;]
@@ -44,33 +43,36 @@ h2{margin:0 0 4px;font-size:16px}.nota{margin:0 0 8px;color:var(--m);font-size:1
   JOSE -- &quot;aprovação / login&quot; --&gt; SIG
   C -. &quot;todo dado entre peças&quot; .- T
   classDef core fill:#eef3f7,stroke:#33506b;
-  class T core;</pre></div></section><section id="d01"><h2>Episódio</h2><p class="nota">EpisodioWorkflow (src/pqbr/workflows/episodio.py) — fila episodio-pqbr. Gerado do código 24/10/2026. <span class="arq">01-episodio.mmd</span></p><div class="wrap"><pre class="mermaid">
-%% EpisodioWorkflow (src/pqbr/workflows/episodio.py) — fila episodio-pqbr. Gerado do código 24/10/2026.
+  class T core;
+</pre></div></section><section id="d01"><h2>Episódio</h2><p class="nota">EpisodioWorkflow (src/pqbr/workflows/episodio.py) — fila episodio-pqbr. Gerado do código 24/10/2026. <span class="arq">01-episodio.mmd</span></p><div class="wrap"><pre class="mermaid">
 flowchart TD
-  S(["PedidoEpisodioE2E"]) --&gt; A1["pacote_garantir&lt;br/&gt;(hash do pacote canônico)"]
-  A1 --&gt; A2["registro_buscar_caderno"]
-  A2 --&gt; W1[["filho NotebookLMWorkflow&lt;br/&gt;fila notebooklm-pqbr"]]
-  W1 --&gt; D1{"nlm.ok e artefato?"}
-  D1 -- não --&gt; F1(["fim: falha NotebookLM"])
-  D1 -- sim --&gt; A3["nlm_baixar_video (notebooklm-pqbr)&lt;br/&gt;⚠ ainda é o vídeo do NotebookLM; Flow não ligado aqui"]
-  A3 -. "alvo (ROADMAP 4V R6/R7)" .-&gt; CV[["cadeia de vídeo 07: storyboard em série Flow → Vids → Meta Vibes&lt;br/&gt;3 falham → HOLD + pedido ao José"]]
-  A3 --&gt; A4["pos_produzir"] --&gt; A5["extrair_quadros"] --&gt; A6["capa_a9"]
-  A6 --&gt; D2{"infográfico do NotebookLM?"}
-  D2 -- sim --&gt; A7["capa_conferir&lt;br/&gt;(cena única? senão A9)"]
+  S([&quot;PedidoEpisodioE2E&quot;]) --&gt; A1[&quot;pacote_garantir&lt;br/&gt;(hash do pacote canônico)&quot;]
+  A1 --&gt; A2[&quot;registro_buscar_caderno&quot;]
+  A2 --&gt; W1[[&quot;filho NotebookLMWorkflow&lt;br/&gt;fila notebooklm-pqbr&quot;]]
+  W1 --&gt; D1{&quot;nlm.ok e artefato?&quot;}
+  D1 -- não --&gt; F1([&quot;fim: falha NotebookLM&quot;])
+  D1 -- sim --&gt; A3[&quot;nlm_baixar_video (notebooklm-pqbr)&lt;br/&gt;⚠ ainda é o vídeo do NotebookLM; Flow não ligado aqui&quot;]
+  A3 -. &quot;alvo (ROADMAP 4V R6/R7)&quot; .-&gt; CV[[&quot;cadeia de vídeo 07: storyboard em série Flow → Vids → Meta Vibes&lt;br/&gt;3 falham → HOLD + pedido ao José&quot;]]
+  A3 --&gt; A4[&quot;pos_produzir&quot;] --&gt; A5[&quot;extrair_quadros&quot;] --&gt; A6[&quot;capa_a9&quot;]
+  A6 --&gt; D2{&quot;infográfico do NotebookLM?&quot;}
+  D2 -- sim --&gt; A7[&quot;capa_conferir&lt;br/&gt;(cena única? senão A9)&quot;]
   D2 -- não --&gt; W
   A7 --&gt; W
-  W{{"espera sinal veredito_auditor&lt;br/&gt;timeout espera_veredito_h"}}
-  W -- timeout --&gt; F2(["fim: sem veredito"])
-  W -- reprova --&gt; F3(["fim: reprovado"])
-  W -- aprova --&gt; A8["nlm_exportar_caderno (notebooklm-pqbr)"]
-  A8 --&gt; A9["arquivar_caderno"] --&gt; A10["drive_enviar"]
-  A10 --&gt; W2[["filho PublicacaoWorkflow&lt;br/&gt;publicacao_dryrun (só dry-run, F8-01)"]]
-  W2 --&gt; D3{"real e enviado?"}
-  D3 -- sim --&gt; A11["tema_publicado (pqbr-episodio)"] --&gt; W3[["start ReposicaoTemasWorkflow(6)"]]
-  D3 -- sim --&gt; W4[["start ApagarCadernoWorkflow (D+2)"]]
-  D3 -- não --&gt; F4(["fim: ok dry-run"])
-  N1&gt;"Nota: GradeDiaria/EpisodioProducao (producao.py) estão PAUSADOS e com etapas EM CONSTRUÇÃO"]
-</pre></div></section><section id="d02"><h2>Reposição de temas</h2><p class="nota">ReposicaoTemasWorkflow (src/pqbr/workflows/temas.py) — fila pqbr-episodio, Schedule 00:30. Gerado do código 24/10/2026. <span class="arq">02-reposicao-temas.mmd</span></p><div class="wrap"><pre class="mermaid">flowchart TD
+  W{{&quot;espera sinal veredito_auditor&lt;br/&gt;timeout espera_veredito_h&quot;}}
+  W -- timeout --&gt; F2([&quot;fim: sem veredito&quot;])
+  W -- reprova --&gt; F3([&quot;fim: reprovado&quot;])
+  W -- aprova --&gt; A8[&quot;nlm_exportar_caderno (notebooklm-pqbr)&quot;]
+  A8 --&gt; A9[&quot;arquivar_caderno&quot;] --&gt; A10[&quot;drive_enviar&quot;]
+  A10 --&gt; W2[[&quot;filho PublicacaoWorkflow&lt;br/&gt;publicacao_dryrun (só dry-run, F8-01)&quot;]]
+  W2 --&gt; D3{&quot;real e enviado?&quot;}
+  D3 -- sim --&gt; A11[&quot;tema_publicado (pqbr-episodio)&quot;] --&gt; W3[[&quot;start ReposicaoTemasWorkflow(6)&quot;]]
+  D3 -- sim --&gt; W4[[&quot;start ApagarCadernoWorkflow (D+2)&quot;]]
+  D3 -- não --&gt; F4([&quot;fim: ok dry-run&quot;])
+  N1&gt;&quot;Nota: GradeDiaria/EpisodioProducao (producao.py) estão PAUSADOS e com etapas EM CONSTRUÇÃO&quot;]
+  SBG{{&quot;⚠ portão Storyboard (FichaCena 1.1.0) antes de gerar imagem/vídeo&lt;br/&gt;imagens revisadas antes do vídeo · activity ainda não existe&quot;}}
+  SBG -.-&gt; A1
+</pre></div></section><section id="d02"><h2>Reposição de temas</h2><p class="nota">ReposicaoTemasWorkflow (src/pqbr/workflows/temas.py) — fila pqbr-episodio, Schedule 00:30. Gerado do código 24/10/2026. <span class="arq">02-reposicao-temas.mmd</span></p><div class="wrap"><pre class="mermaid">
+flowchart TD
   S([&quot;run(rodadas=3)&quot;]) --&gt; L{&quot;rodada &lt; 3&quot;}
   L -- não --&gt; E([&quot;fim: inseridos, recusas, motor&quot;])
   L -- sim --&gt; A1[&quot;temas_situacao&lt;br/&gt;(abertos, faltam p/ 7 dias, usados)&quot;]
@@ -82,8 +84,8 @@ flowchart TD
   A3 --&gt; A4[&quot;temas_validar_agente&lt;br/&gt;parse_direto JSON → PropostaTemas;&lt;br/&gt;senão Líder Editorial (PydanticAI) só estrutura&quot;]
   A4 --&gt; A5[&quot;temas_inserir&lt;br/&gt;filtros: repetido, sazonal, bloqueio absoluto&quot;]
   A5 --&gt; L
-  N&gt;&quot;Caderno semanal sai pelo fluxo de descarte (04-descarte)&quot;]</pre></div></section><section id="d03"><h2>Acessos / Camofox</h2><p class="nota">AcessosWorkflow (src/pqbr/workflows/acesso.py) — Schedule de hora em hora (hh:10). Gerado do código 24/10/2026. <span class="arq">03-acessos.mmd</span></p><div class="wrap"><pre class="mermaid">
-%% AcessosWorkflow (src/pqbr/workflows/acesso.py) — Schedule de hora em hora (hh:10). Gerado do código 24/10/2026.
+  N&gt;&quot;Caderno semanal sai pelo fluxo de descarte (04-descarte)&quot;]
+</pre></div></section><section id="d03"><h2>Acessos / Camofox</h2><p class="nota">AcessosWorkflow (src/pqbr/workflows/acesso.py) — Schedule de hora em hora (hh:10). Gerado do código 24/10/2026. <span class="arq">03-acessos.mmd</span></p><div class="wrap"><pre class="mermaid">
 flowchart TD
   S([&quot;run&quot;]) --&gt; A1[&quot;acesso_google_camofox (camofox-pqbr)&quot;] &amp; A2[&quot;acesso_notebooklm (notebooklm-pqbr)&quot;] &amp; A3[&quot;acesso_paperclip (registro)&lt;br/&gt;⚠ Paperclip em retirada&quot;]
   A1 --&gt; D1{&quot;Google/Camofox ok?&quot;}
@@ -99,7 +101,8 @@ flowchart TD
   N&gt;&quot;Nunca login headless (NOTEBOOKLM_HEADLESS_REAUTH=0); login só pelo José no Camofox 9387&quot;]
   YT[&quot;Acesso YouTube (Data API, só dry-run até F8)&lt;br/&gt;PLANEJADO t532/t535: token OAuth + MCP youtube-shorts → pc&lt;br/&gt;~/.pqbr/secrets/youtube (600) · ainda NÃO migrado&quot;]
   N2&gt;&quot;Sessão do YT-LLM no box: keepalive PAUSADO, binário notebooklm em _obsoleto (t532–t534)&quot;]
-</pre></div></section><section id="d04"><h2>Descarte</h2><p class="nota">DescartarCadernoTesteWorkflow + ApagarCadernoWorkflow (descarte.py, pacote.py) — fila episodio-pqbr. Gerado do código 24/10/2026. <span class="arq">04-descarte.mmd</span></p><div class="wrap"><pre class="mermaid">flowchart TD
+</pre></div></section><section id="d04"><h2>Descarte</h2><p class="nota">DescartarCadernoTesteWorkflow + ApagarCadernoWorkflow (descarte.py, pacote.py) — fila episodio-pqbr. Gerado do código 24/10/2026. <span class="arq">04-descarte.mmd</span></p><div class="wrap"><pre class="mermaid">
+flowchart TD
   S([&quot;PedidoDescarteTeste (caderno UUID, rótulo, motivo)&quot;]) --&gt; A1[&quot;registro_reclassificar_teste&lt;br/&gt;classe=pesquisa; recusa mestre/publicado/não registrado&quot;]
   A1 --&gt; A2[&quot;nlm_exportar_caderno (notebooklm-pqbr)&quot;]
   A2 --&gt; A3[&quot;arquivar_teste_3copias&lt;br/&gt;Drive Bíblia + repo + Postgres (+ Hindsight)&quot;]
@@ -111,7 +114,9 @@ flowchart TD
   subgraph EP[&quot;Ramo episódio (publicado)&quot;]
     E1[&quot;registro_publicado (D+2)&quot;] --&gt; E2[&quot;verificar_arquivo&quot;] --&gt; E3[&quot;registro_autorizar_apagar&quot;] --&gt; E4[&quot;nlm_apagar_caderno&quot;] --&gt; E5[&quot;registro_apagado&quot;]
   end
-  N&gt;&quot;⚠ Como o caderno semanal de temas entra aqui (quem dispara e quando) ainda não está automatizado&quot;]</pre></div></section><section id="d05"><h2>Vigia de atualizações</h2><p class="nota">VigiaAtualizacoesWorkflow (src/pqbr/workflows/atualizacoes.py) — fila pqbr-episodio, Schedule sex 08:00. Gerado do código 24/10/2026. <span class="arq">05-vigia-atualizacoes.mmd</span></p><div class="wrap"><pre class="mermaid">flowchart TD
+  N&gt;&quot;⚠ Como o caderno semanal de temas entra aqui (quem dispara e quando) ainda não está automatizado&quot;]
+</pre></div></section><section id="d05"><h2>Vigia de atualizações</h2><p class="nota">VigiaAtualizacoesWorkflow (src/pqbr/workflows/atualizacoes.py) — fila pqbr-episodio, Schedule sex 08:00. Gerado do código 24/10/2026. <span class="arq">05-vigia-atualizacoes.mmd</span></p><div class="wrap"><pre class="mermaid">
+flowchart TD
   S([&quot;run(semana opcional → AAAAwSS)&quot;]) --&gt; L[&quot;para cada VIGIADAS:&lt;br/&gt;notebooklm-py · camoufox · temporalio SDK · temporal CLI · pydantic-ai-slim · pydantic · 9router&quot;]
   L --&gt; A1[&quot;vigia_checar (só leitura)&lt;br/&gt;instalada: importlib.metadata · última: PyPI / GitHub releases&quot;]
   A1 --&gt; C{&quot;classificar&quot;}
@@ -119,60 +124,62 @@ flowchart TD
   K1 &amp; K2 &amp; K3 &amp; K4 &amp; K5 --&gt; R[&quot;montar_relatorio → RelatorioAtualizacoes 1.0.0&lt;br/&gt;aplicado = False sempre&quot;]
   R --&gt; A2[&quot;vigia_gravar&lt;br/&gt;pqbr.relatorios_atualizacoes + log&quot;]
   A2 --&gt; E([&quot;Dev propõe; José decide e aplica&quot;])
-  N&gt;&quot;Telegram: depois (token do bot ausente)&quot;]</pre></div></section><section id="d06"><h2>Runs presos</h2><p class="nota">runs_presos (scripts/temporal/runs_presos.py) — systemd pqbr-runs-presos.timer (de hora em hora). Gerado do código 24/10/2026. <span class="arq">06-runs-presos.mmd</span></p><div class="wrap"><pre class="mermaid">flowchart TD
+  N&gt;&quot;Telegram: depois (token do bot ausente)&quot;]
+</pre></div></section><section id="d06"><h2>Runs presos</h2><p class="nota">runs_presos (scripts/temporal/runs_presos.py) — systemd pqbr-runs-presos.timer (de hora em hora). Gerado do código 24/10/2026. <span class="arq">06-runs-presos.mmd</span></p><div class="wrap"><pre class="mermaid">
+flowchart TD
   T([&quot;timer horário&quot;]) --&gt; L[&quot;list_workflows ExecutionStatus=Running&quot;]
   L --&gt; D{&quot;há mais de PQBR_PRESO_HORAS (6 h)&lt;br/&gt;e tipo fora de ISENTOS?&quot;}
   D -- sim --&gt; W[&quot;journal WARNING RUN PRESO … · exit 1&quot;]
   D -- não --&gt; O[&quot;journal INFO nenhum run preso · exit 0&quot;]
-  N&gt;&quot;Fora do Temporal (timer systemd); sem Telegram ainda&quot;]</pre></div></section><section id="d07"><h2>Cadeia de vídeo</h2><p class="nota">Cadeia de vídeo (t517; config/motores.json, src/pqbr/motores). Decisão registrada; adaptadores ainda NÃO extraídos (F1-03). <span class="arq">07-cadeia-video.mmd</span></p><div class="wrap"><pre class="mermaid">
-%% Cadeia de vídeo (t517 + t529; config/motores.json, src/pqbr/motores). Decisões registradas; adaptadores ainda NÃO extraídos (ROADMAP Fase 4V).
+  N&gt;&quot;Fora do Temporal (timer systemd); sem Telegram ainda&quot;]
+</pre></div></section><section id="d07"><h2>Cadeia de vídeo</h2><p class="nota">Cadeia de vídeo (t517 + t529; config/motores.json, src/pqbr/motores). Decisões registradas; adaptadores ainda NÃO extraídos (ROADMAP Fase 4V). <span class="arq">07-cadeia-video.mmd</span></p><div class="wrap"><pre class="mermaid">
 flowchart LR
-  P(["Roteiro aprovado&lt;br/&gt;(RoteiroShort)"]) --&gt; SB["Prompts por cena (NotebookLM)&lt;br/&gt;ManifestoSerie: ordem + nome determinístico&lt;br/&gt;ep_cNN_tipo_modelo_v"]
-  SB --&gt; F["1 · Flow (Veo 3.1, 9:16) · Camofox · cota paga&lt;br/&gt;a) storyboard de imagens em série (personagem/estilo fixos)&lt;br/&gt;b) vídeo por cena (start frame / chain)"]
-  F --&gt; D1{"falhou ou cota esgotou?"}
-  D1 -- não --&gt; OK(["cenas ordenadas → pós-produção"])
-  D1 -- sim --&gt; V["2 · Google Vids&lt;br/&gt;navegador · cota paga"]
-  V --&gt; D2{"falhou ou cota esgotou?"}
+  P([&quot;Roteiro aprovado&lt;br/&gt;(RoteiroShort)&quot;]) --&gt; STB[&quot;Storyboard (contratos/storyboard.py 1.1.0)&lt;br/&gt;norte geral · bloco de estilo · elenco alternado&lt;br/&gt;FichaCena por cena: rótulo ep_cNN · norte/início/fim · plano · refs ASSET_*&lt;br/&gt;papel observa|participa · figurino · caras e bocas sem fala&quot;] --&gt; SB[&quot;Prompts por cena (NotebookLM)&lt;br/&gt;ManifestoSerie: ordem + nome determinístico&lt;br/&gt;ep_cNN_tipo_modelo_v&quot;]
+  SB --&gt; F[&quot;1 · Flow (Veo 3.1, 9:16) · Camofox · cota paga&lt;br/&gt;a) storyboard de imagens em série (personagem/estilo fixos)&lt;br/&gt;b) vídeo por cena (start frame / chain)&quot;]
+  F --&gt; RV{&quot;imagens revisadas?&lt;br/&gt;(antes do vídeo, t75u)&quot;}
+  RV -- não --&gt; STB
+  RV -- sim --&gt; D1{&quot;falhou ou cota esgotou?&quot;}
+  D1 -- não --&gt; OK([&quot;cenas ordenadas → pós-produção&quot;])
+  D1 -- sim --&gt; V[&quot;2 · Google Vids&lt;br/&gt;navegador · cota paga&quot;]
+  V --&gt; D2{&quot;falhou ou cota esgotou?&quot;}
   D2 -- não --&gt; OK
-  D2 -- sim --&gt; MV["3 · Meta Vibes&lt;br/&gt;navegador · cota paga"]
-  MV --&gt; D3{"falhou?"}
+  D2 -- sim --&gt; MV[&quot;3 · Meta Vibes&lt;br/&gt;navegador · cota paga&quot;]
+  MV --&gt; D3{&quot;falhou?&quot;}
   D3 -- não --&gt; OK
-  D3 -- sim --&gt; H(["HOLD: publicação suspensa (DECISÃO José t529)"])
-  H --&gt; TG["pedido de decisão ao José (Telegram)"]
-  TG --&gt; SG{{"sinal Temporal decisao_video&lt;br/&gt;tentar de novo · trocar rota · cancelar"}}
-  N&gt;"Lógica copiada das extensões de série (fila, nomes, ordem, ritmo humano) executada no Camofox, SEM instalar extensões (PESQUISA-extensoes-geracao-em-serie). Sem APIs. Hoje o EpisodioWorkflow ainda baixa o vídeo do NotebookLM ⚠"]
-</pre></div></section><section id="d08"><h2>Identidade / Camofox</h2><p class="nota">Identidade/navegador (ADR-012, José 24/10/2026). Estado atual = diagnóstico real do pc 24/10; alvo = decisão, NÃO implementado. <span class="arq">08-identidade-camofox.mmd</span></p><div class="wrap"><pre class="mermaid">
-%% Identidade/navegador (ADR-012, José 24/10/2026). t526: PQBR segue individual em 9387; migração na próxima integração; kit pronto, nada instalado.
+  D3 -- sim --&gt; H([&quot;HOLD: publicação suspensa (DECISÃO José t529)&quot;])
+  H --&gt; TG[&quot;pedido de decisão ao José (Telegram)&quot;]
+  TG --&gt; SG{{&quot;sinal Temporal decisao_video&lt;br/&gt;tentar de novo · trocar rota · cancelar&quot;}}
+  N&gt;&quot;Lógica copiada das extensões de série (fila, nomes, ordem, ritmo humano) executada no Camofox, SEM instalar extensões (PESQUISA-extensoes-geracao-em-serie). Sem APIs. Hoje o EpisodioWorkflow ainda baixa o vídeo do NotebookLM ⚠&quot;]
+</pre></div></section><section id="d08"><h2>Identidade Camofox</h2><p class="nota">Identidade/navegador (ADR-012, José 24/10/2026). t526: PQBR segue individual em 9387; migração na próxima integração; kit pronto, nada instalado. <span class="arq">08-identidade-camofox.mmd</span></p><div class="wrap"><pre class="mermaid">
 flowchart TB
-  subgraph HOJE["Hoje (24/10) — PQBR segue individual até a próxima integração"]
-    G["camofox-browser.service · porta 9377 · escuta em todas as interfaces ⚠&lt;br/&gt;app ~/camofox-browser v1.18.1 (atualizado 24/10)&lt;br/&gt;Camoufox ~/.cache/camoufox 152.0.4-beta.30 · perfis ~/.camofox/profiles (15)"]
-    P["pqbr-camofox.service · 127.0.0.1:9387 · userId pqbr · MAX_SESSIONS=1&lt;br/&gt;app ~/.pqbr/camofox/app v1.15.0 (CLONE do global = instalação duplicada)&lt;br/&gt;Camoufox ~/.pqbr/camofox/cache (CÓPIA, 1,3 GB) · MemoryMax 2200M"]
-    K["pqbr-camofox-keepalive.service (keepalive.sh)&lt;br/&gt;renovador da 9387"]
-    S["nlm-sync.sh (NOTEBOOKLM_REFRESH_CMD)&lt;br/&gt;sincroniza sessão Camofox → notebooklm-py"]
+  subgraph HOJE[&quot;Hoje (24/10) — PQBR segue individual até a próxima integração&quot;]
+    G[&quot;camofox-browser.service · porta 9377 · escuta em todas as interfaces ⚠&lt;br/&gt;app ~/camofox-browser v1.18.1 (atualizado 24/10)&lt;br/&gt;Camoufox ~/.cache/camoufox 152.0.4-beta.30 · perfis ~/.camofox/profiles (15)&quot;]
+    P[&quot;pqbr-camofox.service · 127.0.0.1:9387 · userId pqbr · MAX_SESSIONS=1&lt;br/&gt;app ~/.pqbr/camofox/app v1.15.0 (CLONE do global = instalação duplicada)&lt;br/&gt;Camoufox ~/.pqbr/camofox/cache (CÓPIA, 1,3 GB) · MemoryMax 2200M&quot;]
+    K[&quot;pqbr-camofox-keepalive.service (keepalive.sh)&lt;br/&gt;renovador da 9387&quot;]
+    S[&quot;nlm-sync.sh (NOTEBOOKLM_REFRESH_CMD)&lt;br/&gt;sincroniza sessão Camofox → notebooklm-py&quot;]
     K --&gt; P
     P --&gt; S
   end
-  subgraph KIT["Preparado t526 (no repo, NÃO instalado)"]
-    T["deploy/camofox/camofox@.service + instancia.env.exemplo + criar_instancia.sh"]
-    J["config/camofox_instancias.json&lt;br/&gt;pqbr 9387 individual · proxima 9397 RESERVADA (0 memória)"]
-    RB["docs/RUNBOOK-nova-instancia-camofox.md&lt;br/&gt;criar · migrar · rollback · riscos"]
+  subgraph KIT[&quot;Preparado t526 (no repo, NÃO instalado)&quot;]
+    T[&quot;deploy/camofox/camofox@.service + instancia.env.exemplo + criar_instancia.sh&quot;]
+    J[&quot;config/camofox_instancias.json&lt;br/&gt;pqbr 9387 individual · proxima 9397 RESERVADA (0 memória)&quot;]
+    RB[&quot;docs/RUNBOOK-nova-instancia-camofox.md&lt;br/&gt;criar · migrar · rollback · riscos&quot;]
   end
-  subgraph ALVO["Alvo (ADR-012): 1 instalação, 1 instância por conta crítica (até 3)"]
-    I[("1 instalação Camofox + 1 Camoufox&lt;br/&gt;versão travada (pin)")]
-    I --&gt; C1["camofox@pqbr&lt;br/&gt;porta 9387 · mesmo perfil"]
-    I --&gt; C2["camofox@proxima&lt;br/&gt;porta 9397 (reservada)"]
-    I --&gt; C3["camofox@conta3"]
-    C1 &amp; C2 &amp; C3 --&gt; R["1 renovador por instância (único)"]
-    C1 &amp; C2 &amp; C3 --&gt; B["backup diário do perfil + teste de restauração"]
-    C1 &amp; C2 &amp; C3 --&gt; CN["canário diário (Temporal Schedule)"]
-    AD{{"adaptador NavegadorIdentidade&lt;br/&gt;motores/navegador.py · contratos 1.0.0 (não ligado)"}}
+  subgraph ALVO[&quot;Alvo (ADR-012): 1 instalação, 1 instância por conta crítica (até 3)&quot;]
+    I[(&quot;1 instalação Camofox + 1 Camoufox&lt;br/&gt;versão travada (pin)&quot;)]
+    I --&gt; C1[&quot;camofox@pqbr&lt;br/&gt;porta 9387 · mesmo perfil&quot;]
+    I --&gt; C2[&quot;camofox@proxima&lt;br/&gt;porta 9397 (reservada)&quot;]
+    I --&gt; C3[&quot;camofox@conta3&quot;]
+    C1 &amp; C2 &amp; C3 --&gt; R[&quot;1 renovador por instância (único)&quot;]
+    C1 &amp; C2 &amp; C3 --&gt; B[&quot;backup diário do perfil + teste de restauração&quot;]
+    C1 &amp; C2 &amp; C3 --&gt; CN[&quot;canário diário (Temporal Schedule)&quot;]
+    AD{{&quot;adaptador NavegadorIdentidade&lt;br/&gt;motores/navegador.py · contratos 1.0.0 (não ligado)&quot;}}
     AD --&gt; C1 &amp; C2 &amp; C3
   end
-  P -. "migração na PRÓXIMA INTEGRAÇÃO (runbook §3)" .-&gt; C1
+  P -. &quot;migração na PRÓXIMA INTEGRAÇÃO (runbook §3)&quot; .-&gt; C1
   KIT -.-&gt; ALVO
-  N&gt;"Regras: uma identidade Google por instância; juniormoedavirtual só em camofox@pqbr; login só pelo José; sem re-login headless"]
-</pre></div></section><section id="d09"><h2>Agentes e responsabilidades</h2><p class="nota">t533–t535 (José, 24/10/2026): agente PQBR dedicado, jr generalista, YT-LLM em descontinuação. <span class="arq">09-agentes-responsabilidades.mmd</span></p><div class="wrap"><pre class="mermaid">
-%% Agentes e responsabilidades (t533–t535, José 24/10/2026). Decisão registrada; não é gerado do código.
+  N&gt;&quot;Regras: uma identidade Google por instância; juniormoedavirtual só em camofox@pqbr; login só pelo José; sem re-login headless&quot;]
+</pre></div></section><section id="d09"><h2>Agentes</h2><p class="nota">Agentes e responsabilidades (t533–t535, José 24/10/2026). Decisão registrada; não é gerado do código. <span class="arq">09-agentes-responsabilidades.mmd</span></p><div class="wrap"><pre class="mermaid">
 flowchart LR
   J([&quot;José (gestor)&lt;br/&gt;Telegram · aprovações = sinais Temporal&quot;])
   subgraph BOX[&quot;Grok Bot (box)&quot;]
@@ -196,7 +203,10 @@ flowchart LR
   P1{{&quot;Pré-requisito do 1º vídeo: ajustar silhueta do mapa no logo (ROADMAP 4V)&quot;}}
   P2{{&quot;Skill de produção: PROPOSTA em docs/sdd/PROPOSTA-skill-producao-short-pqbr.md (José grava)&quot;}}
   AG --- P1 &amp; P2
-</pre></div></section><section id="d10"><h2>Catálogo de erros</h2><p class="nota">Catálogo de erros de produção (migração 0019, José 25/10/2026). Agentes internos só leem; o agente externo cadastra. <span class="arq">10-catalogo-erros.mmd</span></p><div class="wrap"><pre class="mermaid">%% Catálogo de erros de produção (migração 0019; José 25/10/2026 14:09). Agentes internos só leem; o agente externo cadastra.
+  P3{{&quot;Bloqueio: Cloud Console exige 2SV na conta do canal → sem OAuth do YouTube no worker (José ativa a 2SV)&quot;}}
+  P4{{&quot;Regra central t78u: elenco masc./fem. brasileiro alternado · caras e bocas sem fala · figurino por papel&quot;}}
+  AG --- P3 &amp; P4
+</pre></div></section><section id="d10"><h2>Catálogo de erros</h2><p class="nota">Catálogo de erros de produção (migração 0019; José 25/10/2026 14:09). Agentes internos só leem; o agente externo cadastra. <span class="arq">10-catalogo-erros.mmd</span></p><div class="wrap"><pre class="mermaid">
 flowchart LR
   J([&quot;José&lt;br/&gt;aprova o que entra&quot;])
   EXT[&quot;Agente externo PQBR (Grok Bot)&lt;br/&gt;registra erros vistos na produção&lt;br/&gt;seed: db/seeds/seed_catalogo_erros_lote2510.sql&quot;]
@@ -216,6 +226,44 @@ flowchart LR
   F --&gt; LE &amp; AU &amp; LC &amp; DV
   N&gt;&quot;⚠ activity ainda não registrada em worker nem chamada por workflow (só função + activity prontas)&quot;]
   F --- N
+</pre></div></section><section id="d11"><h2>Publicação</h2><p class="nota">Publicação automática + botão de emergência (t540/t541, José 25/10/2026). Alterado pelo agente externo PQBR com autorização do José. Sem aprovação humana: o gate é a única barreira. Telegram só AVISA. Simulação por padrão (YOUTUBE_DRY_RUN + PQBR_PUBLICACAO_REAL). <span class="arq">11-publicacao.mmd</span></p><div class="wrap"><pre class="mermaid">
+flowchart TD
+  subgraph PUB[&quot;PublicacaoAgendadaWorkflow (fila episodio-pqbr)&quot;]
+    G[&quot;pub_gate&lt;br/&gt;técnico + editorial + LOOP Gemini (imagem×fala, capa×título, loop) + hash&quot;] --&gt;|reprovado| AR[&quot;pub_avisar (reprovado)&quot;]
+    G --&gt;|publicável| R[&quot;pub_reservar&lt;br/&gt;11:40 / 18:35 Fortaleza, 1 por janela (idempotente)&quot;]
+    R --&gt; P1{&quot;pub_checar_pausa&lt;br/&gt;fail-closed&quot;} --&gt;|pausado| P1
+    P1 --&gt;|livre| U[&quot;pub_upload_privado&lt;br/&gt;private + containsSyntheticMedia, hash, PQBR-EP, duplicata&quot;]
+    U --&gt; W[&quot;espera a janela&lt;br/&gt;sinal reverter → private&quot;]
+    W --&gt; P2{&quot;pub_checar_pausa&quot;} --&gt;|livre| PR[&quot;pub_privacidade (public)&quot;]
+    PR --&gt; RG[&quot;pub_registrar&lt;br/&gt;temas_publicados + Drive&quot;] --&gt; AP[&quot;pub_avisar (publicado)&quot;]
+    W --&gt;|reverter| RV[&quot;pub_privacidade (private, nunca apaga)&quot;]
+  end
+  subgraph EMG[&quot;Botão de emergência&quot;]
+    TG([&quot;@ottopulsar_bot&lt;br/&gt;/pausar · /retomar · /privar EP|todos&lt;br/&gt;só from.id do José&quot;]) --&gt;|Signal-With-Start comando| CTL[&quot;ControlePublicacaoWorkflow&lt;br/&gt;ctl_aplicar&quot;]
+    CTL --&gt; FLAG[(&quot;pqbr.controle_publicacao&lt;br/&gt;flag global&quot;)]
+    CTL --&gt; AUD[(&quot;pqbr.auditoria_publicacao&lt;br/&gt;motivo · autor · hora&quot;)]
+    CTL --&gt; AV2[&quot;pub_avisar&quot;]
+  end
+  FLAG -.lida antes de cada ação externa.-&gt; P1 &amp; P2
+  U -.-&gt; PA[&quot;upload com status.publishAt = janela reservada (UTC)&lt;br/&gt;segue private até a janela&quot;]
+  SC{{&quot;escopo do modo real: PQBR_PUBLICACAO_REAL_CODIGOS&lt;br/&gt;fora da lista ⇒ erro não retentável&quot;}} -.-&gt; U &amp; PR
+  WK[[&quot;registrado no pqbr-episodio-worker (fila episodio-pqbr)&lt;br/&gt;⚠ worker ainda não reiniciado · migração 0020 não aplicada&quot;]] -.-&gt; G
+  BL{{&quot;⚠ BLOQUEIO: sem YOUTUBE_CLIENT_ID/SECRET/REFRESH_TOKEN no worker&lt;br/&gt;Cloud Console exige 2SV (José)&quot;}} -.-&gt; U
+</pre></div></section><section id="d12"><h2>Storyboard e elenco</h2><p class="nota">Storyboard em série, personagem e elenco (t75u–t78u, 26/10/2026). Regra central do José: CONTRATO-EDITORIAL §18, REGRAS §25. Contrato: src/pqbr/contratos/storyboard.py (FichaCena/Storyboard 1.1.0). Fichas do elenco: config/estilo_visual.json → elenco. <span class="arq">12-storyboard-elenco.mmd</span></p><div class="wrap"><pre class="mermaid">
+flowchart TD
+  COD([&quot;código PQBR-EPxxxx&quot;]) --&gt; ALT{&quot;elenco_alternado&lt;br/&gt;par → masculino · ímpar → feminino&quot;}
+  ALT --&gt;|ou elenco_excecao com motivo| SB[&quot;Storyboard&lt;br/&gt;norte_geral · bloco_estilo · ficha_personagem · elenco&quot;]
+  SB --&gt; FC[&quot;FichaCena NN (rótulo ep_cNN)&lt;br/&gt;fala em off (fora do prompt) · norte · início · fim · movimento · plano&lt;br/&gt;prompt_imagem · prompt_animacao com lips closed · refs ASSET_*&quot;]
+  FC --&gt; PAP{&quot;papel_personagem&quot;}
+  PAP --&gt;|participa| EPO[&quot;figurino = epoca_local&lt;br/&gt;caracterização da época/local obrigatória&quot;]
+  PAP --&gt;|observa| ATU[&quot;figurino = atual_variavel&lt;br/&gt;roupa atual, varia entre vídeos&lt;br/&gt;escondido, terceira pessoa, outros atuam&quot;]
+  FC --&gt; EXP[&quot;expressao: caras e bocas ligadas à situação&lt;br/&gt;reação sim · articular fala NÃO&quot;]
+  FC --&gt; ENC[&quot;cenario_encaixe: onde e como está no cenário&quot;]
+  FC --&gt; PROI{{&quot;reprova: framing descritivo (corta cabeça/óculos) · fala/aspas no prompt&lt;br/&gt;sem lips closed · participa sem figurino de época&quot;}}
+  EPO &amp; ATU &amp; EXP &amp; ENC --&gt; IMG[&quot;imagens por cena&quot;] --&gt; REV{&quot;imagens_revisadas?&quot;}
+  REV -- não --&gt; FC
+  REV -- sim --&gt; VID[&quot;vídeo por cena (07-cadeia-video)&quot;]
+  VID --&gt; VIS[&quot;⚠ VISUAL do gate: personagem_mexe_labios · corte_oculos_cabeca · grotesco (proposto)&quot;]
 </pre></div></section></main><footer>Temporal é o sistema nervoso · contratos Pydantic v2 · motores trocáveis</footer>
 <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
 mermaid.initialize({startOnLoad:true,theme:"neutral",securityLevel:"strict",flowchart:{htmlLabels:true,useMaxWidth:true}});</script></body></html>

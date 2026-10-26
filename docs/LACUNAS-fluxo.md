@@ -72,3 +72,8 @@ Feito pelo agente externo (Grok Bot). Sem vídeo, imagem ou voz gerados e sem pu
 - (d) Prompt por cena: **parcial**. Há prompt de imagem por cena, mas a animação usou sufixo genérico ("Flat 2D cartoon, bold black outlines…"), sem prompt de movimento por cena, sem "lips closed" e sem plano nomeado.
 - Extensões e tutoriais (`PESQUISA-extensoes-geracao-em-serie.md`, t529: VEO Automation, Flow Queue, Flow Automator, AutoFlow, GUÍA VOX): **não seguidos**. O lote 2510 foi gerado no Higgsfield e no Runway, sem Flow, sem manifesto JSONL e sem rótulo `<ep>_cNN`.
 - → Implementado: contrato `FichaCena`/`Storyboard` 1.0.0 + testes. Falta: (1) uma activity que gere o Storyboard (NotebookLM → fichas) e bloqueie a geração sem ele; (2) o VISUAL do juiz Gemini ganhar 3 critérios fail-closed: `personagem_mexe_labios`, `corte_oculos_cabeca`, `grotesco` (muda o schema do JSON do juiz, então fica para a próxima versão do `auditor_gemini`).
+
+## Lacuna personagem, cenário e elenco (t78u, 26/10/2026)
+- Regra em CONTRATO-EDITORIAL §18.3–9 e contrato `FichaCena` 1.1.0 (`papel_personagem` observa|participa, `figurino` epoca_local|atual_variavel, `expressao`, `cenario_encaixe`, `Storyboard.elenco` alternado).
+- Falta: (1) gerar as imagens de referência dos dois personagens (paga, exige OK do José); (2) o roteirista e o storyboard (NotebookLM) preencherem esses campos; (3) o VISUAL checar a coerência do figurino com o papel.
+- O consolidado do dia está em ROADMAP, "Estado em 26/10/2026".

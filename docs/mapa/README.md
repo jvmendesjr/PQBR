@@ -32,3 +32,5 @@ Diagramas Mermaid **gerados a partir do código real** (workflows, activities, f
 
 ## Acesso
 Página servida só na tailnet: http://<IP tailnet do pc>:8088/ (serviço de usuário `pqbr-mapa.service`, `python3 -m http.server` com bind no IP Tailscale; sem Funnel, sem 0.0.0.0 — t519).
+| `12-storyboard-elenco.mmd` | Storyboard em série (FichaCena 1.1.0), papel observa/participa, figurino, caras e bocas sem fala, elenco alternado | `contratos/storyboard.py`, `config/estilo_visual.json`, CONTRATO-EDITORIAL §18 |
+Regenerar a página: `python scripts/mapa/gerar_index.py` (t78u).
