@@ -40,6 +40,6 @@ def pacote() -> str:
         "## Decisões recentes", "\n\n".join(d[:1500] for d in decisoes),
         "## Fase atual do ROADMAP", fase,
         "## LACUNAS (início)", _ler("docs/LACUNAS-fluxo.md")[:LIMITE // 2],
-        "## Mapa visual", "docs/mapa/index.html (servido em :8088) — diagramas: " + ", ".join(mapa),
+        "## Mapa visual", "docs/mapa/index.html (servido em :8088) — diagramas: " + ", ".join(mapa) + " · aba Roadmap gerada de ROADMAP + ESTADO-ATUAL (scripts/mapa/roadmap.py; edite as fontes, nunca o HTML)",
     ]
     return "\n\n".join(p for p in partes if p)

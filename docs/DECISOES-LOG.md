@@ -639,3 +639,7 @@ NÃO CABE:
 ## t117u–t119u (26/10/2026) — Persistência verificada; mapa e docs atualizados
 - t117u: pqbr-mcp e hindsight-api são user units enabled (linger=yes); containers DB/Temporal `unless-stopped`; nada a corrigir. Comando de checagem no onboarding.
 - t118u/t119u: mapas 13 (bloco de persistência), 00 e 09 e os docs (ROADMAP, AGENTES, REGRAS, ARQUITETURA) registram o mantenedor exclusivo do MCP, a construção de módulos e a persistência.
+
+## t120u (26/10/2026) — Aba Roadmap no painel do mapa
+- Aba só leitura (sem formulário/POST) com Próximos passos, Falta e Feito, gerada de `docs/ROADMAP.md` (itens `- [ ]`/`- [x]` de 1º nível, até o Anexo) e `docs/ESTADO-ATUAL.md` (Próximo passo + pendências P* na ordem; P* "Feito" vai para Feito). Só agentes editam as fontes.
+- `scripts/mapa/roadmap.py` chamado por `gerar_index.py`; o pre-commit regenera e adiciona o `index.html` quando ROADMAP, ESTADO-ATUAL, `docs/mapa/*.mmd` ou `scripts/mapa/` mudam. Servidor :8088 é estático: sem reinício.

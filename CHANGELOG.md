@@ -5,6 +5,13 @@ Versionamento SemVer (MAJOR.MINOR.PATCH) a partir de t510. Versão do pacote can
 
 
 
+## [0.16.0] — 2026-10-26
+### Adicionado
+- Aba **Roadmap** no painel do mapa (:8088), só leitura: Próximos passos, Falta, Feito, gerados de ROADMAP + ESTADO-ATUAL (`scripts/mapa/roadmap.py`, testes em `tests/unit/test_mapa_roadmap.py`).
+- Pre-commit regenera o `docs/mapa/index.html` quando ROADMAP/ESTADO-ATUAL/mapa mudam.
+### Corrigido
+- Título da aba 13 do painel ("Memória, MCP e handoff").
+
 ## [0.15.1] — 2026-10-26
 ### Documentação
 - Mapa 13: bloco de persistência (units, linger, containers, checagem); 00 e 09: MCP só do mantenedor.

@@ -3,5 +3,9 @@
 # Desinstalar: git config --unset core.hooksPath
 R="$(git rev-parse --show-toplevel)"
 python3 "$R/scripts/seguranca/verificar_segredos.py" --staged || exit 1
+# t120u: aba Roadmap do painel acompanha ROADMAP/ESTADO-ATUAL/mapa
+if git diff --cached --name-only | grep -qE '^docs/(ROADMAP|ESTADO-ATUAL)\.md$|^docs/mapa/.*\.mmd$|^scripts/mapa/'; then
+  python3 "$R/scripts/mapa/gerar_index.py" >/dev/null && git add "$R/docs/mapa/index.html" || exit 1
+fi
 E="$R/scripts/seguranca/verificar_estado_atual.py"; [ -f "$E" ] || exit 0
 exec python3 "$E"

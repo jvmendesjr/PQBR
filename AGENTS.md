@@ -4,7 +4,7 @@
 
 Fonte única de "onde estamos". Não repete o ROADMAP: aponta os itens por id. **Atualize este arquivo a cada correção ou pendência resolvida.** O hook pre-commit exige isso quando o commit toca ROADMAP, LACUNAS, DECISOES-LOG ou CHANGELOG, e o `registrar_alteracao` exige isso para `tipo` correcao ou pendencia_resolvida.
 
-Atualizado: 26/10/2026 (t118u/t119u: mapa e docs com mantenedor exclusivo, módulos e persistência) · versão 0.15.1
+Atualizado: 26/10/2026 (t120u: aba Roadmap no painel :8088, gerada de ROADMAP + ESTADO-ATUAL) · versão 0.16.0
 
 ## Onde estamos
 - **Produção:** o lote do saldo está em `runtime/lote-saldo/` (um diretório por tema). O EP1002 olhos-da-cara foi reprovado e descartado (`runtime/lote-saldo/_descartado/`), e o tema voltou a `proposto`.
@@ -29,6 +29,9 @@ José assiste o EP1003 cafe-fraco (`runtime/lote-saldo/cafe-fraco/cafe-fraco-fin
 | P10 | Reconsolidação do Hindsight em andamento (observações sendo refeitas) | Fase Conhecimento | Hindsight (automático) | só conferir |
 | P11 | Merge da branch `feat/f8-01-publicacao-automatica` (já no GitHub) na main | — | José | merge/PR exige OK |
 | P12 | ERR-01: revisar os erros aceitáveis | ERR-01 | agente | depois dos primeiros dias de produção |
+
+## Painel
+Aba **Roadmap** no painel (:8088): Próximos passos, Falta e Feito gerados deste arquivo e do ROADMAP por `scripts/mapa/roadmap.py` (via `gerar_index.py`; o pre-commit regenera quando ROADMAP/ESTADO-ATUAL/mapa mudam). Só leitura.
 
 ## Operacional e persistência (verificado 26/10/2026 18:21 -03)
 pqbr-mcp 0.4.0 (user unit, enabled, Restart=on-failure, linger=yes), hindsight-api (enabled, Restart=always), Docker DB/Temporal (`unless-stopped`), worker enabled. Comando de checagem e detalhes: `docs/operacao/onboarding-agente-externo.md` § Operacional e persistência.
@@ -176,11 +179,6 @@ t531 · 24/10/2026 · pedido do José. **Só leitura e proposta.** **Atualizaç�
 
 ## Decisões recentes
 
-## t105u (26/10/2026) — LOOP do juiz Gemini com 4 Argon (raciocínio Baixo) no EP1002 descartado
-- José pediu o 4 Argon, no nível de raciocínio mais baixo, no mesmo vídeo cheio de problemas. Override só por execução: `PQBR_GEMINI_MODELO` / `PQBR_GEMINI_RACIOCINIO` (Baixo|Médio|Alto). O padrão continua `gemini_modelo: 3.8 Flash` em `config/motores.json`. O nível é confirmado no menu antes de cada envio (evidência do seletor gravada no resultado). Script `scripts/lote/loop_comparar_modelo.py`: mesmos quadros e mesma rubrica; não sobrescreve o resultado oficial.
-- Resultado (`loop-gemini-4argon.json`): **reprova** (imagem×fala aprova_com_ressalva, capa aprova, loop reprova). O 3.8 deu terceira_rodada, com todas as métricas visuais em 1.0. O Argon pegou o desvio de estilo (0.1), a legenda sobre o foco na capa e a legenda com erro em S04–S06. Óculos cortados, olho grotesco e lábios mexendo não estão na rubrica, e nenhum dos dois apontou (critérios novos = P7). Tempo: 4 Argon 614 s no total (respostas visuais de 37 s, loop de 9–18 s); o tempo do 3.8 nesse vídeo não foi registrado.
-
-
 ## t108u (26/10/2026) — 3.8 antes da produção, 4 Argon na produção; P7 implementado
 - José: "Vamos deixa o 3.8 antes da produção, na produção adicionamos o Argo".
 - A config por etapa (`gemini_juiz`) tem a seguinte precedência: env da execução > etapa > `gemini_modelo` legado. A verificação do seletor (modelo e raciocínio) continua sendo feita a cada envio.
@@ -205,6 +203,11 @@ t531 · 24/10/2026 · pedido do José. **Só leitura e proposta.** **Atualizaç�
 ## t117u–t119u (26/10/2026) — Persistência verificada; mapa e docs atualizados
 - t117u: pqbr-mcp e hindsight-api são user units enabled (linger=yes); containers DB/Temporal `unless-stopped`; nada a corrigir. Comando de checagem no onboarding.
 - t118u/t119u: mapas 13 (bloco de persistência), 00 e 09 e os docs (ROADMAP, AGENTES, REGRAS, ARQUITETURA) registram o mantenedor exclusivo do MCP, a construção de módulos e a persistência.
+
+
+## t120u (26/10/2026) — Aba Roadmap no painel do mapa
+- Aba só leitura (sem formulário/POST) com Próximos passos, Falta e Feito, gerada de `docs/ROADMAP.md` (itens `- [ ]`/`- [x]` de 1º nível, até o Anexo) e `docs/ESTADO-ATUAL.md` (Próximo passo + pendências P* na ordem; P* "Feito" vai para Feito). Só agentes editam as fontes.
+- `scripts/mapa/roadmap.py` chamado por `gerar_index.py`; o pre-commit regenera e adiciona o `index.html` quando ROADMAP, ESTADO-ATUAL, `docs/mapa/*.mmd` ou `scripts/mapa/` mudam. Servidor :8088 é estático: sem reinício.
 
 
 ## Fase atual do ROADMAP
@@ -242,4 +245,4 @@ Regra (José 17:17): nenhuma etapa de fluxo à mão. Se o fluxo não está ativo
 
 ## Mapa visual
 
-docs/mapa/index.html (servido em :8088) — diagramas: 00-visao-geral.mmd, 01-episodio.mmd, 02-reposicao-temas.mmd, 03-acessos.mmd, 04-descarte.mmd, 05-vigia-atualizacoes.mmd, 06-runs-presos.mmd, 07-cadeia-video.mmd, 08-identidade-camofox.mmd, 09-agentes-responsabilidades.mmd, 10-catalogo-erros.mmd, 11-publicacao.mmd, 12-storyboard-elenco.mmd, 13-memoria-mcp-handoff.mmd
+docs/mapa/index.html (servido em :8088) — diagramas: 00-visao-geral.mmd, 01-episodio.mmd, 02-reposicao-temas.mmd, 03-acessos.mmd, 04-descarte.mmd, 05-vigia-atualizacoes.mmd, 06-runs-presos.mmd, 07-cadeia-video.mmd, 08-identidade-camofox.mmd, 09-agentes-responsabilidades.mmd, 10-catalogo-erros.mmd, 11-publicacao.mmd, 12-storyboard-elenco.mmd, 13-memoria-mcp-handoff.mmd · aba Roadmap gerada de ROADMAP + ESTADO-ATUAL (scripts/mapa/roadmap.py; edite as fontes, nunca o HTML)
