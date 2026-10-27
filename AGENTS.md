@@ -4,21 +4,21 @@
 
 Fonte única de "onde estamos". Não repete o ROADMAP: aponta os itens por id. **Atualize este arquivo a cada correção ou pendência resolvida.** O hook pre-commit exige isso quando o commit toca ROADMAP, LACUNAS, DECISOES-LOG ou CHANGELOG, e o `registrar_alteracao` exige isso para `tipo` correcao ou pendencia_resolvida.
 
-Atualizado: 26/10/2026 (t122u: OAuth do YouTube no projeto pqbr-publicacao; cafe-fraco aprovado) · versão 0.16.3
+Atualizado: 26/10/2026 (t123u: worker reiniciado com as chaves; envio real continua desligado) · versão 0.16.4
 
 ## Onde estamos
 - **Produção:** o lote do saldo está em `runtime/lote-saldo/` (um diretório por tema). O EP1002 olhos-da-cara foi reprovado e descartado (`runtime/lote-saldo/_descartado/`), e o tema voltou a `proposto`.
-- **Publicação (ROADMAP F8-01):** o fluxo pelo Temporal está pronto (`PublicacaoAgendadaWorkflow` no `worker_episodio`). O OAuth do projeto `pqbr-publicacao` existe e o `channels.list` confirmou o canal Porquê BR. O worker ainda não carregou as chaves (reinício exige OK). Nada foi enviado ao YouTube.
+- **Publicação (ROADMAP F8-01):** o fluxo pelo Temporal está pronto. O OAuth do `pqbr-publicacao` está no worker desde o reinício das 22:06 (Fortaleza, t123u, OK do José). `YOUTUBE_DRY_RUN=true`. Nada foi enviado. Até a produção ativa, vídeo aprovado que subir fica privado; público só depois, na ordem dos roteiros e nas janelas.
 - **Agente externo:** o servidor MCP 0.2+ só funciona pela tailnet. A memória escrita leva o autor (o cliente) e o commit. O protocolo obrigatório está no AGENTS.md. Hindsight: bank `pqbr` reclassificado, com as obsoletas apagadas.
 
 ## Próximo passo
-José vê os outros vídeos do lote. O EP1003 cafe-fraco já está aprovado por ele (único até agora); não roda o LOOP nesse episódio. A publicação espera o OK para reiniciar o worker e carregar o OAuth.
+José vê os outros vídeos do lote. O EP1003 cafe-fraco já está aprovado (único até agora). Nenhum vídeo vai a público até ele declarar a produção ativa.
 
 ## Pendências abertas
 | # | Pendência | Ref. ROADMAP | Dono | Bloqueio |
 |---|---|---|---|---|
 | P1 | José ainda vê os outros vídeos do lote. O EP1003 cafe-fraco já está aprovado (26/10, único até agora); não roda o LOOP nesse episódio | Estado 26/10 · Próximo 5 | José | aguardando José nos demais |
-| P2 | Publicação (t122u): (a) e (b) feitos. Camofox 9387, perfil único `userId=pqbr`, conta do canal no Studio Porquê BR. Projeto `pqbr-publicacao`, YouTube Data API v3, app OAuth Externo "PQBR" em Testando, escopos `youtube.upload` + `youtube.readonly`, cliente Desktop, chaves em `episodio.env` (600). `channels.list` = Porquê BR (`@porquebr-t4c`). Falta (c): reiniciar o worker para carregar as chaves; o refresh de app em teste expira em 7 dias até publicar (o branding pede página e política — não inventar); upload real só com as duas flags e o código na lista | F8-01 · Estado 26/10 · Próximo 1 | agente | OK do José para reiniciar o worker |
+| P2 | Publicação: OAuth no worker (t123u, 22:06). Envio real desligado de propósito. Até a produção ativa, subida aprovada fica privada; a API (`videos.insert` / `videos.update`) é o caminho, Camofox só o que a API não alcança. App OAuth segue em Testando: refresh vence ~2/11 21:20 (Fortaleza); publicar o app no Console exige branding que não vamos inventar | F8-01 | agente | sem envio até a produção ativa |
 | P3 | Teste: LOOP por cena vs o atual | Estado 26/10 · Testes pendentes | agente | depois do fluxo de publicação |
 | P4 | **Feito (t108u/t109u).** Juiz por etapa (`gemini_juiz` v1.0.0): pré-produção usa 3.8 Flash; produção (VISUAL e LOOP) usa 4 Argon Baixo. O worker `pqbr-episodio-worker` foi reiniciado com OK do José às 16:57 (-03), e o poller está ativo na fila `episodio-pqbr`, ns `pqbr` | Estado 26/10 · DECISOES-LOG t109u | agente | concluído |
 | P5 | Imagens de referência do elenco (`ASSET_personagem_{masculino,feminino}-v1`) | Estado 26/10 · Próximo 4 | agente | geração paga: OK do José (postergado) |
@@ -179,11 +179,6 @@ t531 · 24/10/2026 · pedido do José. **Só leitura e proposta.** **Atualizaç�
 
 ## Decisões recentes
 
-## t117u–t119u (26/10/2026) — Persistência verificada; mapa e docs atualizados
-- t117u: pqbr-mcp e hindsight-api são user units enabled (linger=yes); containers DB/Temporal `unless-stopped`; nada a corrigir. Comando de checagem no onboarding.
-- t118u/t119u: mapas 13 (bloco de persistência), 00 e 09 e os docs (ROADMAP, AGENTES, REGRAS, ARQUITETURA) registram o mantenedor exclusivo do MCP, a construção de módulos e a persistência.
-
-
 ## t120u (26/10/2026) — Aba Roadmap no painel do mapa
 - Aba só leitura (sem formulário/POST) com Próximos passos, Falta e Feito, gerada de `docs/ROADMAP.md` (itens `- [ ]`/`- [x]` de 1º nível, até o Anexo) e `docs/ESTADO-ATUAL.md` (Próximo passo + pendências P* na ordem; P* "Feito" vai para Feito). Só agentes editam as fontes.
 - `scripts/mapa/roadmap.py` chamado por `gerar_index.py`; o pre-commit regenera e adiciona o `index.html` quando ROADMAP, ESTADO-ATUAL, `docs/mapa/*.mmd` ou `scripts/mapa/` mudam. Servidor :8088 é estático: sem reinício.
@@ -203,6 +198,13 @@ t531 · 24/10/2026 · pedido do José. **Só leitura e proposta.** **Atualizaç�
 - (b) Criado o projeto `pqbr-publicacao` (sem organização). YouTube Data API v3 ativada. App OAuth Externo "PQBR", status Testando, usuário de teste = a conta do canal, escopos `youtube.upload` e `youtube.readonly`. Cliente Desktop `pqbr-publicacao` (a opção de cliente para agente de IA ficou desmarcada). JSON em `~/.pqbr/secrets/oauth-pqbr-publicacao.json` (600). As três chaves `YOUTUBE_*` foram acrescentadas a `~/.pqbr/secrets/episodio.env` (600). `channels.list` devolveu um canal: Porquê BR. Nada foi impresso.
 - Consentimento: o Google mostrou "app não verificado"; seguir foi Continuar, marcar os dois escopos e Continuar de novo. A primeira tentativa sem marcar os escopos voltou `access_denied`.
 - Não feito de propósito: upload de logotipo (a própria tela diz que o logo leva o app à verificação); página inicial e política de privacidade (não existem no projeto; não inventar). Por isso o botão Publicar segue desabilitado e o refresh de app em
+
+## t123u (26/10/2026) — Worker reiniciado; nada público até a produção ativa
+- José deu OK para reiniciar o `pqbr-episodio-worker` se não houvesse workflow no ar e se não precisasse de outra etapa. Às 22:06 (Fortaleza): 0 workflows `Running` no ns `pqbr`; reinício; unit ativa; log `worker episodio em 127.0.0.1:7233 ns=pqbr fila=episodio-pqbr`. As três chaves `YOUTUBE_*` entraram no processo. `YOUTUBE_DRY_RUN=true`. `PQBR_PUBLICACAO_REAL` não está definido. Nada enviado.
+- Até ele declarar a produção ativa: nenhum vídeo vai a público. Subida de vídeo já aprovado fica privada. Depois, a publicação segue a ordem cronológica dos roteiros e as janelas 11:40/18:35. Vários podem ficar na fila, privados, segurando o lugar.
+- Caminho vigente (t540): a API muda a privacidade (`videos.update`). O Camofox no Studio é reserva para o que a API não alcança, não o caminho padrão. O desenho t540 (virar público na janela) fica suspenso enquanto a produção não estiver ativa.
+- App OAuth permanece em Testando. Não houve pedido de verificação no YouTube nem publicação do app no Console. O refresh foi testado de novo nesta noite e trocou por access token.
+
 
 ## Fase atual do ROADMAP
 

@@ -5,6 +5,10 @@ Versionamento SemVer (MAJOR.MINOR.PATCH) a partir de t510. Versão do pacote can
 
 
 
+## [0.16.4] — 2026-10-26
+### Operação
+- `pqbr-episodio-worker` reiniciado às 22:06 (Fortaleza) com OK do José (t123u). Chaves do YouTube no processo; `YOUTUBE_DRY_RUN=true`. Nada publicado.
+
 ## [0.16.3] — 2026-10-26
 ### Operação
 - OAuth do YouTube no projeto `pqbr-publicacao` (app Externo PQBR, em teste; cliente Desktop). Chaves em `episodio.env` (600). `channels.list` confirmou o canal Porquê BR. Worker não reiniciado; nada publicado.

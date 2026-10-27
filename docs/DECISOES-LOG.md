@@ -657,3 +657,9 @@ NÃO CABE:
 - Consentimento: o Google mostrou "app não verificado"; seguir foi Continuar, marcar os dois escopos e Continuar de novo. A primeira tentativa sem marcar os escopos voltou `access_denied`.
 - Não feito de propósito: upload de logotipo (a própria tela diz que o logo leva o app à verificação); página inicial e política de privacidade (não existem no projeto; não inventar). Por isso o botão Publicar segue desabilitado e o refresh de app em teste expira em 7 dias.
 - (c) Nenhum upload. O `pqbr-episodio-worker` não foi reiniciado (exige OK) e portanto ainda não lê as chaves novas. Envio real continua exigindo `YOUTUBE_DRY_RUN=false`, `PQBR_PUBLICACAO_REAL=1` e o código em `PQBR_PUBLICACAO_REAL_CODIGOS`.
+
+## t123u (26/10/2026) — Worker reiniciado; nada público até a produção ativa
+- José deu OK para reiniciar o `pqbr-episodio-worker` se não houvesse workflow no ar e se não precisasse de outra etapa. Às 22:06 (Fortaleza): 0 workflows `Running` no ns `pqbr`; reinício; unit ativa; log `worker episodio em 127.0.0.1:7233 ns=pqbr fila=episodio-pqbr`. As três chaves `YOUTUBE_*` entraram no processo. `YOUTUBE_DRY_RUN=true`. `PQBR_PUBLICACAO_REAL` não está definido. Nada enviado.
+- Até ele declarar a produção ativa: nenhum vídeo vai a público. Subida de vídeo já aprovado fica privada. Depois, a publicação segue a ordem cronológica dos roteiros e as janelas 11:40/18:35. Vários podem ficar na fila, privados, segurando o lugar.
+- Caminho vigente (t540): a API muda a privacidade (`videos.update`). O Camofox no Studio é reserva para o que a API não alcança, não o caminho padrão. O desenho t540 (virar público na janela) fica suspenso enquanto a produção não estiver ativa.
+- App OAuth permanece em Testando. Não houve pedido de verificação no YouTube nem publicação do app no Console. O refresh foi testado de novo nesta noite e trocou por access token.
