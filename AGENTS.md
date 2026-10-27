@@ -4,7 +4,7 @@
 
 Fonte única de "onde estamos". Não repete o ROADMAP: aponta os itens por id. **Atualize este arquivo a cada correção ou pendência resolvida.** O hook pre-commit exige isso quando o commit toca ROADMAP, LACUNAS, DECISOES-LOG ou CHANGELOG, e o `registrar_alteracao` exige isso para `tipo` correcao ou pendencia_resolvida.
 
-Atualizado: 26/10/2026 (t124u: refresh recusado manda o envio inteiro ao Camofox) · versão 0.16.5
+Atualizado: 26/10/2026 (t125u: ensaio de cliques em memória sobre a base da API) · versão 0.16.6
 
 ## Onde estamos
 - **Produção:** o lote do saldo está em `runtime/lote-saldo/` (um diretório por tema). O EP1002 olhos-da-cara foi reprovado e descartado (`runtime/lote-saldo/_descartado/`), e o tema voltou a `proposto`.
@@ -18,7 +18,7 @@ José vê os outros vídeos do lote. O EP1003 cafe-fraco já está aprovado (ún
 | # | Pendência | Ref. ROADMAP | Dono | Bloqueio |
 |---|---|---|---|---|
 | P1 | José ainda vê os outros vídeos do lote. O EP1003 cafe-fraco já está aprovado (26/10, único até agora); não roda o LOOP nesse episódio | Estado 26/10 · Próximo 5 | José | aguardando José nos demais |
-| P2 | Publicação: API no worker (t123u, 22:06). Se o refresh de 7 dias for recusado, o envio inteiro passa ao Studio pelo Camofox (t124u); o roteiro de cliques ainda é hipótese, então esse caso grava o plano, avisa e não envia. Envio real desligado. App em Testando: refresh vence ~2/11 21:20 (Fortaleza). O worker em execução ainda é o das 22:06; este desvio entra no próximo reinício | F8-01 | agente | sem envio até a produção ativa; reinício do worker exige OK |
+| P2 | Publicação: API no worker (t123u, 22:06). Se o refresh de 7 dias for recusado, o envio inteiro passa ao Studio pelo Camofox (t124u). O ensaio de cliques (t125u, base 0.1.0) roda em memória sobre o corpo da API e pode estar desatualizado; clique ao vivo desligado. Envio real desligado. App em Testando: refresh vence ~2/11 21:20 (Fortaleza). O worker em execução ainda é o das 22:06 | F8-01 | agente | sem envio até a produção ativa; reinício do worker exige OK |
 | P3 | Teste: LOOP por cena vs o atual | Estado 26/10 · Testes pendentes | agente | depois do fluxo de publicação |
 | P4 | **Feito (t108u/t109u).** Juiz por etapa (`gemini_juiz` v1.0.0): pré-produção usa 3.8 Flash; produção (VISUAL e LOOP) usa 4 Argon Baixo. O worker `pqbr-episodio-worker` foi reiniciado com OK do José às 16:57 (-03), e o poller está ativo na fila `episodio-pqbr`, ns `pqbr` | Estado 26/10 · DECISOES-LOG t109u | agente | concluído |
 | P5 | Imagens de referência do elenco (`ASSET_personagem_{masculino,feminino}-v1`) | Estado 26/10 · Próximo 4 | agente | geração paga: OK do José (postergado) |
@@ -179,10 +179,6 @@ t531 · 24/10/2026 · pedido do José. **Só leitura e proposta.** **Atualizaç�
 
 ## Decisões recentes
 
-## t121u (26/10/2026) — Correção da P2 no ESTADO-ATUAL
-- 2SV de juniormoedavirtual já ativa (t106u) e migração 0020 aplicada 16:56 com worker reiniciado 16:57 (t109u). Resta: conferir perfil/conta do Camofox na tentativa bloqueada do Cloud Console e criar o OAuth do YouTube pelo Camofox. Demais P* revisadas: sem outra divergência comprovada.
-
-
 ## t121u (26/10/2026) — Checkboxes na aba Roadmap
 - Cada item mostra ☑ (feito) ou ☐ (falta e próximos passos), derivado do mesmo parser; só símbolo, sem input/form/POST.
 
@@ -206,6 +202,13 @@ t531 · 24/10/2026 · pedido do José. **Só leitura e proposta.** **Atualizaç�
 - O caminho segue a API (`videos.insert` / `videos.update`, `private` + `publishAt`). O desvio só ocorre quando o Google recusa o refresh (`invalid_grant`). Outra falha da API não troca de caminho.
 - Nesse caso o envio inteiro daquele vídeo (subida privada, agenda e privacidade, inclusive o `/privar`) fica para o Studio no Camofox. O roteiro de cliques ainda é hipótese: o fluxo grava o plano, avisa no Telegram e não abre o navegador nem envia. Ver a navegação no Studio antes de executá-la.
 - `YOUTUBE_DRY_RUN` segue `true`. Nada enviado. O `pqbr-episodio-worker` em execução continua o das 22:06; este desvio entra no próximo reinício, que exige OK.
+
+
+## t125u (26/10/2026) — Ensaio de cliques em memória, com a API como base
+- José: simular e testar a clicagem das funções que a API faria se ela faltar. Essa informação fica como resíduo e pode estar desatualizada. Quando uma atualização for conhecida, os agentes atualizam contratos, scripts e processos.
+- Até aqui os scripts só gravavam o payload da API (`enviar_privado` em simulação e o plano `*-camofox.json`). Não havia ensaio de clique nem de agendamento na tela do Studio.
+- O ensaio (contrato `studio_fallback` 0.1.0) percorre em memória subida privada, agenda (`publishAt`) e privacidade, lendo os campos do corpo da API. Campo ausente ou fora da regra reprova o ensaio. Seletor de tela só entra junto com a data em que a tela foi vista. Clique ao vivo permanece desligado: o canal é o de produção e um clique no envio criaria vídeo de verdade.
+- Nada enviado. `YOUTUBE_DRY_RUN` segue `true`. O worker em execução continua o das 22:06.
 
 
 ## Fase atual do ROADMAP

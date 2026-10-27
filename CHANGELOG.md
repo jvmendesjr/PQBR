@@ -5,6 +5,10 @@ Versionamento SemVer (MAJOR.MINOR.PATCH) a partir de t510. Versão do pacote can
 
 
 
+## [0.16.6] — 2026-10-26
+### Adicionado
+- Ensaio de cliques do fallback de publicação, em memória, sobre o corpo da API (t125u, base 0.1.0). Pode estar desatualizado. Não abre o Studio e não envia.
+
 ## [0.16.5] — 2026-10-26
 ### Adicionado
 - Publicação: se o refresh de 7 dias for recusado (`invalid_grant`), o envio inteiro passa ao Studio pelo Camofox (t124u). O roteiro de cliques ainda é hipótese: grava o plano, avisa e não envia. Nada publicado.

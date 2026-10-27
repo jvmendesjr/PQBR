@@ -669,3 +669,9 @@ NÃO CABE:
 - O caminho segue a API (`videos.insert` / `videos.update`, `private` + `publishAt`). O desvio só ocorre quando o Google recusa o refresh (`invalid_grant`). Outra falha da API não troca de caminho.
 - Nesse caso o envio inteiro daquele vídeo (subida privada, agenda e privacidade, inclusive o `/privar`) fica para o Studio no Camofox. O roteiro de cliques ainda é hipótese: o fluxo grava o plano, avisa no Telegram e não abre o navegador nem envia. Ver a navegação no Studio antes de executá-la.
 - `YOUTUBE_DRY_RUN` segue `true`. Nada enviado. O `pqbr-episodio-worker` em execução continua o das 22:06; este desvio entra no próximo reinício, que exige OK.
+
+## t125u (26/10/2026) — Ensaio de cliques em memória, com a API como base
+- José: simular e testar a clicagem das funções que a API faria se ela faltar. Essa informação fica como resíduo e pode estar desatualizada. Quando uma atualização for conhecida, os agentes atualizam contratos, scripts e processos.
+- Até aqui os scripts só gravavam o payload da API (`enviar_privado` em simulação e o plano `*-camofox.json`). Não havia ensaio de clique nem de agendamento na tela do Studio.
+- O ensaio (contrato `studio_fallback` 0.1.0) percorre em memória subida privada, agenda (`publishAt`) e privacidade, lendo os campos do corpo da API. Campo ausente ou fora da regra reprova o ensaio. Seletor de tela só entra junto com a data em que a tela foi vista. Clique ao vivo permanece desligado: o canal é o de produção e um clique no envio criaria vídeo de verdade.
+- Nada enviado. `YOUTUBE_DRY_RUN` segue `true`. O worker em execução continua o das 22:06.

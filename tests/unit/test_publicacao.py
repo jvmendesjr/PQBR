@@ -123,6 +123,27 @@ def test_upload_cai_para_camofox_quando_refresh_recusado(tmp_path, monkeypatch):
     assert plano["_caminho"] == "camofox" and plano["_executado"] is False
     assert plano["status"]["privacyStatus"] == "private" and plano["status"]["containsSyntheticMedia"] is True
     assert plano["status"]["publishAt"].endswith("Z") and "PQBR-EP1003" in plano["snippet"]["description"]
+    assert plano["_ensaio"]["ok"] is True and plano["_ensaio"]["clicavel"] is False
+    assert plano["_ensaio"]["funcoes"] == ["subir_privado", "agendar"]
+
+
+def test_ensaio_de_cliques_usa_a_base_da_api_e_recusa_base_velha():
+    from pqbr.contratos.studio_fallback import BASE_PASSOS, PassoBase
+    from pqbr.integrations.studio_publicacao import ensaiar_envio, ensaiar_privacidade
+    c = yt.montar_corpo("PQBR-EP1003", "Título bom", "descrição longa o bastante", ["shorts"], publish_at="2026-10-27T14:40:00Z")
+    e = ensaiar_envio(c, "/tmp/v.mp4")
+    assert e.ok and e.clicavel is False and e.versao_base == "0.1.0"
+    assert {p.funcao for p in e.passos} == {"subir_privado", "agendar"}
+    agenda = next(p for p in e.passos if p.campo_api == "status.publishAt")
+    assert agenda.valor == "2026-10-27T14:40:00Z" and agenda.base_ok
+    assert all(p.seletor is None and p.observado_em is None for p in BASE_PASSOS)
+    sem_agenda = yt.montar_corpo("PQBR-EP1003", "Título bom", "descrição longa o bastante", ["shorts"])
+    ruim = ensaiar_envio(sem_agenda, "/tmp/v.mp4")
+    assert ruim.ok is False
+    assert any(p.funcao == "agendar" and p.base_ok is False for p in ruim.passos)
+    assert ensaiar_privacidade("public").ok and ensaiar_privacidade("private").ok
+    with pytest.raises(Exception):
+        PassoBase(funcao="subir_privado", ordem=1, acao="abrir", alvo="tela de envio", campo_api="status.privacyStatus", seletor="#x")
 
 
 def test_agenda_1140_1835():
