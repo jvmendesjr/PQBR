@@ -5,6 +5,10 @@ Versionamento SemVer (MAJOR.MINOR.PATCH) a partir de t510. Versão do pacote can
 
 
 
+## [0.16.8] — 2026-10-27
+### Corrigido
+- Diagrama 11: o worker está no ar desde 26/10 22:06 (Fortaleza), a migração 0020 já foi aplicada e as chaves do YouTube já estão no processo. O código de t124u–t126u entra no próximo reinício.
+
 ## [0.16.7] — 2026-10-26
 ### Adicionado
 - Honestidade como regra comum (t126u), no onboarding e na instrução do MCP: dizer o que foi visto, e questionar ideia que não se sustenta ou só aumenta o sistema.

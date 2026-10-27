@@ -348,7 +348,7 @@ Ref.: `docs/pesquisas/PESQUISA-extensoes-geracao-em-serie.md` (leitura liberada,
 - [x] Licença do GitNexus aceita (uso pessoal, sem revenda; t90u).
 - [x] **Reclassificação do Hindsight por papel (t90u):** `scripts/hindsight/reclassificar.py`; 220 candidatas a descarte em `docs/operacao/hindsight-descarte-candidatos.md`.
 - [x] Descarte das candidatas (t90s398): 231 apagadas após a indexação; docs vigentes corrigidos; indexador com a regra única de tags.
-- [ ] Revisar as 7 candidatas mantidas (sem substituta direta).
+- [ ] Revisar as 7 candidatas mantidas (sem substituta direta). Obs: 27/10 revisão recomenda apagar (roster antigo do AGENTES.md, superado pela ADR-011); nada apagado, OK do José pendente.
 
 ## Anexo: fases e portões (ex-PLANO.md, incorporado em 11/10, t394)
 ### PLANO da PQBR (fases, portões e rollback)

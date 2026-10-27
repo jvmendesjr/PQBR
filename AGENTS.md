@@ -4,7 +4,7 @@
 
 Fonte única de "onde estamos". Não repete o ROADMAP: aponta os itens por id. **Atualize este arquivo a cada correção ou pendência resolvida.** O hook pre-commit exige isso quando o commit toca ROADMAP, LACUNAS, DECISOES-LOG ou CHANGELOG, e o `registrar_alteracao` exige isso para `tipo` correcao ou pendencia_resolvida.
 
-Atualizado: 26/10/2026 (t126u: honestidade comum e mapa de cliques vazio) · versão 0.16.7
+Atualizado: 27/10/2026 (t127u: diagrama de publicação alinhado ao que já está no ar) · versão 0.16.8
 
 ## Onde estamos
 - **Produção:** o lote do saldo está em `runtime/lote-saldo/` (um diretório por tema). O EP1002 olhos-da-cara foi reprovado e descartado (`runtime/lote-saldo/_descartado/`), e o tema voltou a `proposto`.
@@ -18,15 +18,15 @@ José vê os outros vídeos do lote. O EP1003 cafe-fraco já está aprovado (ún
 | # | Pendência | Ref. ROADMAP | Dono | Bloqueio |
 |---|---|---|---|---|
 | P1 | José ainda vê os outros vídeos do lote. O EP1003 cafe-fraco já está aprovado (26/10, único até agora); não roda o LOOP nesse episódio | Estado 26/10 · Próximo 5 | José | aguardando José nos demais |
-| P2 | Publicação: API no worker (t123u, 22:06). Se o refresh de 7 dias for recusado, o envio inteiro passa ao Studio pelo Camofox (t124u). Ensaio em memória sobre a API (t125u). Mapa de cliques vazio (t126u): elemento só entra quando a tela for vista; pop-up e botão fora do lugar atualizam o registro e seguem. Envio real desligado. App em Testando: refresh vence ~2/11 21:20 (Fortaleza). O worker em execução ainda é o das 22:06 | F8-01 | agente | sem envio até a produção ativa; reinício do worker exige OK |
+| P2 | Publicação: API no worker (t123u, 22:06, conferido de novo 27/10 08:10, NRestarts=0). Se o refresh de 7 dias for recusado, o envio inteiro passa ao Studio pelo Camofox (t124u). Ensaio em memória sobre a API (t125u). Mapa de cliques vazio (t126u). Envio real desligado. App em Testando: refresh vence ~2/11 21:20 (Fortaleza). O diagrama 11 não diz mais que faltam chaves nem que a 0020 está por aplicar (t127u) | F8-01 | agente | sem envio até a produção ativa; reinício do worker exige OK |
 | P3 | Teste: LOOP por cena vs o atual | Estado 26/10 · Testes pendentes | agente | depois do fluxo de publicação |
 | P4 | **Feito (t108u/t109u).** Juiz por etapa (`gemini_juiz` v1.0.0): pré-produção usa 3.8 Flash; produção (VISUAL e LOOP) usa 4 Argon Baixo. O worker `pqbr-episodio-worker` foi reiniciado com OK do José às 16:57 (-03), e o poller está ativo na fila `episodio-pqbr`, ns `pqbr` | Estado 26/10 · DECISOES-LOG t109u | agente | concluído |
 | P5 | Imagens de referência do elenco (`ASSET_personagem_{masculino,feminino}-v1`) | Estado 26/10 · Próximo 4 | agente | geração paga: OK do José (postergado) |
 | P6 | Activity do Storyboard no Temporal (bloqueia a geração sem ele) | Estado 26/10 · Próximo 2; R2 | agente | postergado |
 | P7 | **Feito (t108u).** O gate VISUAL agora tem `boca_articula_fala`, `corte_oculos_cabeca` e `grotesco` (FichaCena/REGRAS §25), e cada um reprova sozinho. Validado no EP1002 (`loop-gemini-4argon-v2.json`): reprova, com S01 corte+grotesco, S04 corte e S02/S05/S09 boca | Estado 26/10 · CHANGELOG 0.14.0 | agente | concluído |
-| P8 | 7 memórias `obsoleto_candidato` para revisão | `docs/operacao/hindsight-descarte-candidatos.md` | José | apagar exige OK |
+| P8 | 7 memórias `obsoleto_candidato`: revisão de 27/10 recomenda apagar (roster antigo do AGENTES.md, superado pela ADR-011). Nada apagado | `docs/operacao/hindsight-descarte-candidatos.md` | José | apagar exige OK |
 | P9 | **Feito (t112u–t116u).** Papel `mantenedor` (política 1.4.0) lê todas as tags e o repo todo; pqbr-mcp 0.4.0 exclusivo do mantenedor; onboarding em `docs/operacao/onboarding-agente-externo.md`. Falta só entregar token por cliente novo (`scripts/mcp/novo_cliente.py <nome> mantenedor`) | Fase Conhecimento | agente | concluído |
-| P10 | Reconsolidação do Hindsight em andamento (observações sendo refeitas) | Fase Conhecimento | Hindsight (automático) | só conferir |
+| P10 | Hindsight conferido 27/10 08:10 (São Paulo): API healthy, banco conectado. A reconsolidação segue automática | Fase Conhecimento | Hindsight (automático) | só conferir de novo se o bank acusar falha |
 | P11 | Merge da branch `feat/f8-01-publicacao-automatica` (já no GitHub) na main | — | José | merge/PR exige OK |
 | P12 | ERR-01: revisar os erros aceitáveis | ERR-01 | agente | depois dos primeiros dias de produção |
 
@@ -184,13 +184,6 @@ t531 · 24/10/2026 · pedido do José. **Só leitura e proposta.** **Atualizaç�
 
 ## Decisões recentes
 
-## t122u (26/10/2026) — OAuth do YouTube no projeto pqbr-publicacao
-- José: o EP1003 cafe-fraco já está aprovado e é o único aprovado até agora. Ele ainda vai ver os outros vídeos. O passo seguinte pedido foi a P2.
-- (a) Camofox PQBR 127.0.0.1:9387, um único perfil (`userId=pqbr`, pasta `66e05767…`). A conta logada é a do canal. O Studio aberto é o Porquê BR (`@porquebr-t4c`, `UC4xgIr6KdbfEgjsW7FEzQww`). O Cloud Console não bloqueia mais por 2SV. O projeto que estava selecionado na entrada era o antigo `yt-llm-b1`; não foi reutilizado.
-- (b) Criado o projeto `pqbr-publicacao` (sem organização). YouTube Data API v3 ativada. App OAuth Externo "PQBR", status Testando, usuário de teste = a conta do canal, escopos `youtube.upload` e `youtube.readonly`. Cliente Desktop `pqbr-publicacao` (a opção de cliente para agente de IA ficou desmarcada). JSON em `~/.pqbr/secrets/oauth-pqbr-publicacao.json` (600). As três chaves `YOUTUBE_*` foram acrescentadas a `~/.pqbr/secrets/episodio.env` (600). `channels.list` devolveu um canal: Porquê BR. Nada foi impresso.
-- Consentimento: o Google mostrou "app não verificado"; seguir foi Continuar, marcar os dois escopos e Continuar de novo. A primeira tentativa sem marcar os escopos voltou `access_denied`.
-- Não feito de propósito: upload de logotipo (a própria tela diz que o logo leva o app à verificação); página inicial e política de privacidade (não existem no projeto; não inventar). Por isso o botão Publicar segue desabilitado e o refresh de app em
-
 ## t123u (26/10/2026) — Worker reiniciado; nada público até a produção ativa
 - José deu OK para reiniciar o `pqbr-episodio-worker` se não houvesse workflow no ar e se não precisasse de outra etapa. Às 22:06 (Fortaleza): 0 workflows `Running` no ns `pqbr`; reinício; unit ativa; log `worker episodio em 127.0.0.1:7233 ns=pqbr fila=episodio-pqbr`. As três chaves `YOUTUBE_*` entraram no processo. `YOUTUBE_DRY_RUN=true`. `PQBR_PUBLICACAO_REAL` não está definido. Nada enviado.
 - Até ele declarar a produção ativa: nenhum vídeo vai a público. Subida de vídeo já aprovado fica privada. Depois, a publicação segue a ordem cronológica dos roteiros e as janelas 11:40/18:35. Vários podem ficar na fila, privados, segurando o lugar.
@@ -217,6 +210,12 @@ t531 · 24/10/2026 · pedido do José. **Só leitura e proposta.** **Atualizaç�
 - O que existe até t125u não é esse mapa. É um ensaio em memória das funções da API. Nenhum botão de Flow, Vids, Vibes ou Studio foi visto para este registro. Inventar seletor agora seria o excesso que a própria regra nova barra. `config/mapa_cliques.json` fica com a lista vazia.
 - O que fica valendo: obstáculo de tela (pop-up, botão fora do lugar) atualiza o registro, com data, e o processo segue. O diagrama em `docs/mapa/` (11 e 07) mostra isso. A trava dura continua: apagar, tornar público fora da regra, gastar, login/2FA, aceitar consentimento OAuth, mexer em segredo. "Não parar" não cobre essas ações. O clique que cria vídeo continua sob simulação por padrão e sob privado até a produção ativa.
 - Honestidade: REGRAS §0, onboarding (`AGENTS-base`) e a frase do `initialize` do MCP. O processo do `pqbr-mcp` ainda não foi reiniciado; a frase do handshake entra no próximo reinício, que exige OK. O onboarding já lê a regra no disco. Nada enviado.
+
+
+## t127u (27/10/2026) — Diagrama 11 alinhado; o que não foi feito nas pendências
+- José pediu para prosseguir com os ajustes das pendências. Conferido às 08:10 (São Paulo): `pqbr-episodio-worker` ativo desde 26/10 22:06 (Fortaleza), `NRestarts=0`; `pqbr-mcp` 0.4.0 no ar; Hindsight `healthy` com banco conectado.
+- O diagrama 11 ainda dizia que o worker não tinha sido reiniciado, que a migração 0020 faltava e que as chaves do YouTube não estavam no processo. Isso já era falso desde t109u e t123u. Corrigido. O código de t124u–t126u continua fora desse processo até o próximo reinício.
+- Não feito, de propósito: reiniciar worker ou `pqbr-mcp`; envio ao YouTube; apagar as 7 memórias (a revisão recomenda apagar: são o roster antigo do AGENTES.md; o OK continua necessário); merge na main; LOOP por cena (a lacuna manda não executar agora); imagens pagas do elenco; activity do Storyboard. Nada enviado.
 
 
 ## Fase atual do ROADMAP

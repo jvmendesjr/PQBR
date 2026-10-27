@@ -23,5 +23,5 @@ flowchart TD
   U -.-> CF["t124u: invalid_grant no refresh de 7 dias<br/>envio inteiro pelo Studio no Camofox<br/>t125u: ensaio em memória sobre a base da API 0.1.0"]
   CF -.-> MC["t126u config/mapa_cliques.json<br/>elemento, componente e local, com data da tela<br/>lista vazia: Studio ainda não mapeado<br/>pop-up ou botão fora do lugar: atualiza e segue"]
   SC{{"escopo do modo real: PQBR_PUBLICACAO_REAL_CODIGOS<br/>fora da lista ⇒ erro não retentável"}} -.-> U & PR
-  WK[["registrado no pqbr-episodio-worker (fila episodio-pqbr)<br/>⚠ worker ainda não reiniciado · migração 0020 não aplicada"]] -.-> G
-  BL{{"⚠ BLOQUEIO: sem YOUTUBE_CLIENT_ID/SECRET/REFRESH_TOKEN no worker<br/>Cloud Console exige 2SV (José)"}} -.-> U
+  WK[["registrado no pqbr-episodio-worker (fila episodio-pqbr)<br/>processo no ar desde 26/10 22:06 Fortaleza (t123u)<br/>migração 0020 já aplicada (t109u)<br/>código t124u–t126u entra no próximo reinício"]] -.-> G
+  BL{{"chaves YOUTUBE_* no processo desde t123u<br/>YOUTUBE_DRY_RUN=true · envio real desligado<br/>2SV da conta já ativa (t106u)"}} -.-> U
