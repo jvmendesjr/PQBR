@@ -128,7 +128,7 @@ def tratar(msg: dict, papel: str, impl: dict | None = None, cliente: str = "") -
     if met == "initialize":
         res = {"protocolVersion": (msg.get("params") or {}).get("protocolVersion", "2025-03-26"),
                "capabilities": {"tools": {}}, "serverInfo": {"name": "pqbr", "version": VERSAO},
-               "instructions": f"Papel: {papel}. Protocolo: `onboarding` → `buscar_memoria` antes de agir → commit local + DECISOES-LOG/CHANGELOG + docs/ESTADO-ATUAL.md → `registrar_alteracao`/`registrar_memoria` ao final."}
+               "instructions": f"Papel: {papel}. Honestidade (t126u): diga o que viu e o que não viu; não invente seletor nem resultado; se uma ideia não se sustenta ou só aumenta o sistema, diga isso antes de construir. Protocolo: `onboarding` → `buscar_memoria` antes de agir → commit local + DECISOES-LOG/CHANGELOG + docs/ESTADO-ATUAL.md → `registrar_alteracao`/`registrar_memoria` ao final."}
     elif met == "ping":
         res = {}
     elif met == "tools/list":

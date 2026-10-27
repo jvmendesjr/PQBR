@@ -4,7 +4,7 @@
 
 Fonte única de "onde estamos". Não repete o ROADMAP: aponta os itens por id. **Atualize este arquivo a cada correção ou pendência resolvida.** O hook pre-commit exige isso quando o commit toca ROADMAP, LACUNAS, DECISOES-LOG ou CHANGELOG, e o `registrar_alteracao` exige isso para `tipo` correcao ou pendencia_resolvida.
 
-Atualizado: 26/10/2026 (t125u: ensaio de cliques em memória sobre a base da API) · versão 0.16.6
+Atualizado: 26/10/2026 (t126u: honestidade comum e mapa de cliques vazio) · versão 0.16.7
 
 ## Onde estamos
 - **Produção:** o lote do saldo está em `runtime/lote-saldo/` (um diretório por tema). O EP1002 olhos-da-cara foi reprovado e descartado (`runtime/lote-saldo/_descartado/`), e o tema voltou a `proposto`.
@@ -18,7 +18,7 @@ José vê os outros vídeos do lote. O EP1003 cafe-fraco já está aprovado (ún
 | # | Pendência | Ref. ROADMAP | Dono | Bloqueio |
 |---|---|---|---|---|
 | P1 | José ainda vê os outros vídeos do lote. O EP1003 cafe-fraco já está aprovado (26/10, único até agora); não roda o LOOP nesse episódio | Estado 26/10 · Próximo 5 | José | aguardando José nos demais |
-| P2 | Publicação: API no worker (t123u, 22:06). Se o refresh de 7 dias for recusado, o envio inteiro passa ao Studio pelo Camofox (t124u). O ensaio de cliques (t125u, base 0.1.0) roda em memória sobre o corpo da API e pode estar desatualizado; clique ao vivo desligado. Envio real desligado. App em Testando: refresh vence ~2/11 21:20 (Fortaleza). O worker em execução ainda é o das 22:06 | F8-01 | agente | sem envio até a produção ativa; reinício do worker exige OK |
+| P2 | Publicação: API no worker (t123u, 22:06). Se o refresh de 7 dias for recusado, o envio inteiro passa ao Studio pelo Camofox (t124u). Ensaio em memória sobre a API (t125u). Mapa de cliques vazio (t126u): elemento só entra quando a tela for vista; pop-up e botão fora do lugar atualizam o registro e seguem. Envio real desligado. App em Testando: refresh vence ~2/11 21:20 (Fortaleza). O worker em execução ainda é o das 22:06 | F8-01 | agente | sem envio até a produção ativa; reinício do worker exige OK |
 | P3 | Teste: LOOP por cena vs o atual | Estado 26/10 · Testes pendentes | agente | depois do fluxo de publicação |
 | P4 | **Feito (t108u/t109u).** Juiz por etapa (`gemini_juiz` v1.0.0): pré-produção usa 3.8 Flash; produção (VISUAL e LOOP) usa 4 Argon Baixo. O worker `pqbr-episodio-worker` foi reiniciado com OK do José às 16:57 (-03), e o poller está ativo na fila `episodio-pqbr`, ns `pqbr` | Estado 26/10 · DECISOES-LOG t109u | agente | concluído |
 | P5 | Imagens de referência do elenco (`ASSET_personagem_{masculino,feminino}-v1`) | Estado 26/10 · Próximo 4 | agente | geração paga: OK do José (postergado) |
@@ -74,6 +74,12 @@ Este arquivo é o ponto de entrada operacional para trabalho no checkout. Ele n�
 ## Mapa do sistema (t517)
 - `docs/mapa/` (Mermaid + `index.html`) é gerado do código e serve de comunicação com o José e entre agentes.
 - **Agentes nunca alteram o mapa sozinhos.** Mudança só por proposta aprovada pelo José. Divergência código × mapa: sinalizar (Observador/Dev) e propor o diff; `tests/unit/test_mapa.py` acusa.
+- O registro de cliques (`config/mapa_cliques.json`, t126u) é outra coisa: elemento visto na tela, com data. Pop-up e botão fora do lugar atualizam esse registro e o processo segue.
+
+## Honestidade (t126u)
+- Dizer o que foi visto e o que não foi. Não inventar seletor, medida ou resultado.
+- Se uma ideia do José não se sustenta, ou só aumenta o sistema, dizer isso antes de construir.
+- Vale para todos os papéis e para quem entra pelo MCP.
 
 
 ## Conexão MCP
@@ -153,6 +159,7 @@ t531 · 24/10/2026 · pedido do José. **Só leitura e proposta.** **Atualizaç�
 - **Leitura (t536, José, 25/10/2026, ajusta t287):** o **agente PQBR** (auxiliar do José, t533) pode ler **todos** os documentos do PQBR, inclusive `docs/DECISOES-LOG.md`, `docs/arquivo/`, `docs/pesquisas/` e `docs/_obsoleto/`. Ele usa o material legado como histórico e aplica sempre o que é vigente neste arquivo. A restrição abaixo vale para os **agentes especialistas** do sistema, que se limitam às suas áreas.
 - ⛔ **Agentes especialistas — proibido consultar sem aprovação explícita do José (t287):** `docs/arquivo/`, `docs/pesquisas/`, `docs/DECISOES-LOG.md` (só para registrar decisão nova) e qualquer rascunho ou material legado. Eles podem ser mal interpretados e aplicados em produção. Tudo o que vale deles já está aqui. **Exceção (t530, José):** `docs/pesquisas/PESQUISA-extensoes-geracao-em-serie.md` pode ser lido por qualquer agente, **somente leitura** (referência da Fase 4V).
 - **Dúvida ou conflito sem certeza** nas decisões aprovadas: não adivinhar. Marcar "EM CONSTRUÇÃO — aguardando José" e levar a ele (t323).
+- **Honestidade (t126u, José):** o agente diz o que viu e o que não viu. Não inventa seletor, número ou resultado para a conta fechar. Se uma ideia do José não se sustenta, ou só aumenta o sistema, o agente diz isso antes de construir. Vale para todos os papéis e para o agente externo no MCP.
 - **Decisão nova:** entra no `DECISOES-LOG.md` (tNNN) **e** aqui, no mesmo commit. Se este arquivo divergir do log, vale a entrada mais nova do log e este arquivo é corrigido.
 - **Legenda:** [APROVADO] decisão do José · [VERIFICADO] testado/visto na fonte · [HIPÓTESE] a confirmar antes de construir o que depende dela · EM CONSTRUÇÃO — aguardando José.
 - Origem: os códigos (tNNN, "item N", nomes de bloco) remetem ao `DECISOES-LOG.md`; "07/10" = registro de 07/10/2026.
@@ -173,15 +180,9 @@ t531 · 24/10/2026 · pedido do José. **Só leitura e proposta.** **Atualizaç�
 
 ---
 
-- **Atualização 23/10 (t474, aprovada por José), revoga a t464 (Discord) e prevalece:** (1) o canal do José é o **Telegram (Hermes `pqbr`)**; pedidos, avisos e aprovações saem por lá. (2) Aprovações são **sinais do Temporal** (sim/não), com principal autenticado (ID autorizado do José), validação de tarefa e estado, fail-closed, idempotência após reinício e ticket de manutenção após três tentativas. (3) O painel é a **Temporal UI** (estado, histórico, erros, runs travados); painel próprio fica para depois (t471). (4) O **Paperclip está sendo retirado** da arquitetura (ADR-011): referências a Paperclip abaixo valem só até o corte. Não desligar o gateway Hermes compartilhado nem afetar outros perfis; nenhuma exposição pública.
-## 1. Nome e identidade
-- A organização se chama **PQBR**; os documentos explicam a sigla (Porquê BR); o canal usa o "porquê" por extenso. [08/
+- **Atualização 23/10 (t474, aprovada por José), revoga a t464 (Discord) e prevalece:** (1) o canal do José é o **Telegram (Hermes `pqbr`)**; pedidos, avisos e aprovações saem por lá. (2) Aprovações são **sinais do Temporal** (sim/não), com principal autenticado (ID autorizado do José), validação de tarefa e estado, fail-closed, idempotência após reinício e ticket de manutenção após três tentativas. (3) O painel é a **Temporal UI** (estado, histórico, erros, runs travados); painel próprio fica para depois (t471). (4) O **Paperclip está sendo retirado** da arquitetura (ADR-011):
 
 ## Decisões recentes
-
-## t121u (26/10/2026) — Checkboxes na aba Roadmap
-- Cada item mostra ☑ (feito) ou ☐ (falta e próximos passos), derivado do mesmo parser; só símbolo, sem input/form/POST.
-
 
 ## t122u (26/10/2026) — OAuth do YouTube no projeto pqbr-publicacao
 - José: o EP1003 cafe-fraco já está aprovado e é o único aprovado até agora. Ele ainda vai ver os outros vídeos. O passo seguinte pedido foi a P2.
@@ -209,6 +210,13 @@ t531 · 24/10/2026 · pedido do José. **Só leitura e proposta.** **Atualizaç�
 - Até aqui os scripts só gravavam o payload da API (`enviar_privado` em simulação e o plano `*-camofox.json`). Não havia ensaio de clique nem de agendamento na tela do Studio.
 - O ensaio (contrato `studio_fallback` 0.1.0) percorre em memória subida privada, agenda (`publishAt`) e privacidade, lendo os campos do corpo da API. Campo ausente ou fora da regra reprova o ensaio. Seletor de tela só entra junto com a data em que a tela foi vista. Clique ao vivo permanece desligado: o canal é o de produção e um clique no envio criaria vídeo de verdade.
 - Nada enviado. `YOUTUBE_DRY_RUN` segue `true`. O worker em execução continua o das 22:06.
+
+
+## t126u (26/10/2026) — Honestidade comum; mapa de cliques a partir do que for visto
+- José: mapear elementos, componentes e locais de clique, como no Flow e nos outros sites do fluxo. O agente identifica a alteração, corrige, atualiza e segue. Pop-up e botão que mudou de lugar não são risco e não param a publicação. Documentar e registrar no mapa de visualização. Antes de prosseguir: honestidade obrigatória, também no MCP; questionar ideia dele quando não for válida ou quando for excesso de aperfeiçoamento.
+- O que existe até t125u não é esse mapa. É um ensaio em memória das funções da API. Nenhum botão de Flow, Vids, Vibes ou Studio foi visto para este registro. Inventar seletor agora seria o excesso que a própria regra nova barra. `config/mapa_cliques.json` fica com a lista vazia.
+- O que fica valendo: obstáculo de tela (pop-up, botão fora do lugar) atualiza o registro, com data, e o processo segue. O diagrama em `docs/mapa/` (11 e 07) mostra isso. A trava dura continua: apagar, tornar público fora da regra, gastar, login/2FA, aceitar consentimento OAuth, mexer em segredo. "Não parar" não cobre essas ações. O clique que cria vídeo continua sob simulação por padrão e sob privado até a produção ativa.
+- Honestidade: REGRAS §0, onboarding (`AGENTS-base`) e a frase do `initialize` do MCP. O processo do `pqbr-mcp` ainda não foi reiniciado; a frase do handshake entra no próximo reinício, que exige OK. O onboarding já lê a regra no disco. Nada enviado.
 
 
 ## Fase atual do ROADMAP

@@ -30,3 +30,9 @@ Este arquivo é o ponto de entrada operacional para trabalho no checkout. Ele n�
 ## Mapa do sistema (t517)
 - `docs/mapa/` (Mermaid + `index.html`) é gerado do código e serve de comunicação com o José e entre agentes.
 - **Agentes nunca alteram o mapa sozinhos.** Mudança só por proposta aprovada pelo José. Divergência código × mapa: sinalizar (Observador/Dev) e propor o diff; `tests/unit/test_mapa.py` acusa.
+- O registro de cliques (`config/mapa_cliques.json`, t126u) é outra coisa: elemento visto na tela, com data. Pop-up e botão fora do lugar atualizam esse registro e o processo segue.
+
+## Honestidade (t126u)
+- Dizer o que foi visto e o que não foi. Não inventar seletor, medida ou resultado.
+- Se uma ideia do José não se sustenta, ou só aumenta o sistema, dizer isso antes de construir.
+- Vale para todos os papéis e para quem entra pelo MCP.

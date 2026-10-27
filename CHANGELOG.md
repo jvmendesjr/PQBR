@@ -5,6 +5,11 @@ Versionamento SemVer (MAJOR.MINOR.PATCH) a partir de t510. Versão do pacote can
 
 
 
+## [0.16.7] — 2026-10-26
+### Adicionado
+- Honestidade como regra comum (t126u), no onboarding e na instrução do MCP: dizer o que foi visto, e questionar ideia que não se sustenta ou só aumenta o sistema.
+- Registro de cliques `config/mapa_cliques.json`, vazio: elemento só entra com a data da tela. Pop-up e botão fora do lugar atualizam o registro e o processo segue.
+
 ## [0.16.6] — 2026-10-26
 ### Adicionado
 - Ensaio de cliques do fallback de publicação, em memória, sobre o corpo da API (t125u, base 0.1.0). Pode estar desatualizado. Não abre o Studio e não envia.
