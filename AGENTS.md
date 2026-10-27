@@ -4,27 +4,27 @@
 
 Fonte única de "onde estamos". Não repete o ROADMAP: aponta os itens por id. **Atualize este arquivo a cada correção ou pendência resolvida.** O hook pre-commit exige isso quando o commit toca ROADMAP, LACUNAS, DECISOES-LOG ou CHANGELOG, e o `registrar_alteracao` exige isso para `tipo` correcao ou pendencia_resolvida.
 
-Atualizado: 27/10/2026 (t127u: diagrama de publicação alinhado ao que já está no ar) · versão 0.16.8
+Atualizado: 27/10/2026 (t128u: worker e MCP reiniciados; 7 memórias apagadas) · versão 0.16.9
 
 ## Onde estamos
 - **Produção:** o lote do saldo está em `runtime/lote-saldo/` (um diretório por tema). O EP1002 olhos-da-cara foi reprovado e descartado (`runtime/lote-saldo/_descartado/`), e o tema voltou a `proposto`.
-- **Publicação (ROADMAP F8-01):** o fluxo pelo Temporal está pronto. O OAuth do `pqbr-publicacao` está no worker desde o reinício das 22:06 (Fortaleza, t123u, OK do José). `YOUTUBE_DRY_RUN=true`. Nada foi enviado. Até a produção ativa, vídeo aprovado que subir fica privado; público só depois, na ordem dos roteiros e nas janelas.
-- **Agente externo:** o servidor MCP 0.2+ só funciona pela tailnet. A memória escrita leva o autor (o cliente) e o commit. O protocolo obrigatório está no AGENTS.md. Hindsight: bank `pqbr` reclassificado, com as obsoletas apagadas.
+- **Publicação (ROADMAP F8-01):** o fluxo pelo Temporal está pronto. O worker foi reiniciado em 27/10 às 08:56 (-03, São Paulo; t128u) e carrega o fallback do refresh e o ensaio. `YOUTUBE_DRY_RUN=true`. Nada foi enviado. Até a produção ativa, vídeo aprovado que subir fica privado; público só depois, na ordem dos roteiros e nas janelas.
+- **Agente externo:** o servidor MCP 0.2+ só funciona pela tailnet. A memória escrita leva o autor (o cliente) e o commit. O protocolo obrigatório está no AGENTS.md. O `initialize` do `pqbr-mcp` já devolve a frase de honestidade (t126u), desde o reinício das 08:56. Hindsight: bank `pqbr` com 877 documentos; as 7 candidatas restantes foram apagadas (t128u).
 
 ## Próximo passo
-José vê os outros vídeos do lote. O EP1003 cafe-fraco já está aprovado (único até agora). Nenhum vídeo vai a público até ele declarar a produção ativa.
+José vê os outros vídeos do lote quando puder. Em 27/10 ele disse que não consegue vê-los agora. O EP1003 cafe-fraco segue o único aprovado. Nenhum vídeo vai a público até ele declarar a produção ativa.
 
 ## Pendências abertas
 | # | Pendência | Ref. ROADMAP | Dono | Bloqueio |
 |---|---|---|---|---|
-| P1 | José ainda vê os outros vídeos do lote. O EP1003 cafe-fraco já está aprovado (26/10, único até agora); não roda o LOOP nesse episódio | Estado 26/10 · Próximo 5 | José | aguardando José nos demais |
-| P2 | Publicação: API no worker (t123u, 22:06, conferido de novo 27/10 08:10, NRestarts=0). Se o refresh de 7 dias for recusado, o envio inteiro passa ao Studio pelo Camofox (t124u). Ensaio em memória sobre a API (t125u). Mapa de cliques vazio (t126u). Envio real desligado. App em Testando: refresh vence ~2/11 21:20 (Fortaleza). O diagrama 11 não diz mais que faltam chaves nem que a 0020 está por aplicar (t127u) | F8-01 | agente | sem envio até a produção ativa; reinício do worker exige OK |
+| P1 | José ainda vê os outros vídeos do lote. Em 27/10 ele disse que não consegue vê-los agora. O EP1003 cafe-fraco já está aprovado (26/10, único até agora); não roda o LOOP nesse episódio | Estado 26/10 · Próximo 5 | José | aguardando José nos demais |
+| P2 | Publicação: worker reiniciado 27/10 08:56 (-03), 0 workflows Running antes e depois. Código t124u–t126u neste processo. `YOUTUBE_DRY_RUN=true`. Envio real desligado. Refresh do app em teste vence ~2/11 21:20 (-03). Mapa de cliques continua vazio: nenhuma tela foi vista | F8-01 | agente | sem envio até a produção ativa |
 | P3 | Teste: LOOP por cena vs o atual | Estado 26/10 · Testes pendentes | agente | depois do fluxo de publicação |
 | P4 | **Feito (t108u/t109u).** Juiz por etapa (`gemini_juiz` v1.0.0): pré-produção usa 3.8 Flash; produção (VISUAL e LOOP) usa 4 Argon Baixo. O worker `pqbr-episodio-worker` foi reiniciado com OK do José às 16:57 (-03), e o poller está ativo na fila `episodio-pqbr`, ns `pqbr` | Estado 26/10 · DECISOES-LOG t109u | agente | concluído |
 | P5 | Imagens de referência do elenco (`ASSET_personagem_{masculino,feminino}-v1`) | Estado 26/10 · Próximo 4 | agente | geração paga: OK do José (postergado) |
 | P6 | Activity do Storyboard no Temporal (bloqueia a geração sem ele) | Estado 26/10 · Próximo 2; R2 | agente | postergado |
 | P7 | **Feito (t108u).** O gate VISUAL agora tem `boca_articula_fala`, `corte_oculos_cabeca` e `grotesco` (FichaCena/REGRAS §25), e cada um reprova sozinho. Validado no EP1002 (`loop-gemini-4argon-v2.json`): reprova, com S01 corte+grotesco, S04 corte e S02/S05/S09 boca | Estado 26/10 · CHANGELOG 0.14.0 | agente | concluído |
-| P8 | 7 memórias `obsoleto_candidato`: revisão de 27/10 recomenda apagar (roster antigo do AGENTES.md, superado pela ADR-011). Nada apagado | `docs/operacao/hindsight-descarte-candidatos.md` | José | apagar exige OK |
+| P8 | **Feito (t128u).** As 7 memórias `obsoleto_candidato` do roster antigo de `docs/AGENTES.md` foram apagadas em 27/10 ~08:57 (-03). Bank 884 → 877. Backup fora do git | `docs/operacao/hindsight-descarte-candidatos.md` | agente | concluído |
 | P9 | **Feito (t112u–t116u).** Papel `mantenedor` (política 1.4.0) lê todas as tags e o repo todo; pqbr-mcp 0.4.0 exclusivo do mantenedor; onboarding em `docs/operacao/onboarding-agente-externo.md`. Falta só entregar token por cliente novo (`scripts/mcp/novo_cliente.py <nome> mantenedor`) | Fase Conhecimento | agente | concluído |
 | P10 | Hindsight conferido 27/10 08:10 (São Paulo): API healthy, banco conectado. A reconsolidação segue automática | Fase Conhecimento | Hindsight (automático) | só conferir de novo se o bank acusar falha |
 | P11 | Merge da branch `feat/f8-01-publicacao-automatica` (já no GitHub) na main | — | José | merge/PR exige OK |
@@ -184,13 +184,6 @@ t531 · 24/10/2026 · pedido do José. **Só leitura e proposta.** **Atualizaç�
 
 ## Decisões recentes
 
-## t123u (26/10/2026) — Worker reiniciado; nada público até a produção ativa
-- José deu OK para reiniciar o `pqbr-episodio-worker` se não houvesse workflow no ar e se não precisasse de outra etapa. Às 22:06 (Fortaleza): 0 workflows `Running` no ns `pqbr`; reinício; unit ativa; log `worker episodio em 127.0.0.1:7233 ns=pqbr fila=episodio-pqbr`. As três chaves `YOUTUBE_*` entraram no processo. `YOUTUBE_DRY_RUN=true`. `PQBR_PUBLICACAO_REAL` não está definido. Nada enviado.
-- Até ele declarar a produção ativa: nenhum vídeo vai a público. Subida de vídeo já aprovado fica privada. Depois, a publicação segue a ordem cronológica dos roteiros e as janelas 11:40/18:35. Vários podem ficar na fila, privados, segurando o lugar.
-- Caminho vigente (t540): a API muda a privacidade (`videos.update`). O Camofox no Studio é reserva para o que a API não alcança, não o caminho padrão. O desenho t540 (virar público na janela) fica suspenso enquanto a produção não estiver ativa.
-- App OAuth permanece em Testando. Não houve pedido de verificação no YouTube nem publicação do app no Console. O refresh foi testado de novo nesta noite e trocou por access token.
-
-
 ## t124u (26/10/2026) — API na publicação; Camofox se o refresh de 7 dias falhar
 - José: usar a API e, se a renovação de 7 dias não acontecer, fazer o processo inteiro de publicação pelo Camofox, em navegação web.
 - O caminho segue a API (`videos.insert` / `videos.update`, `private` + `publishAt`). O desvio só ocorre quando o Google recusa o refresh (`invalid_grant`). Outra falha da API não troca de caminho.
@@ -218,6 +211,13 @@ t531 · 24/10/2026 · pedido do José. **Só leitura e proposta.** **Atualizaç�
 - Não feito, de propósito: reiniciar worker ou `pqbr-mcp`; envio ao YouTube; apagar as 7 memórias (a revisão recomenda apagar: são o roster antigo do AGENTES.md; o OK continua necessário); merge na main; LOOP por cena (a lacuna manda não executar agora); imagens pagas do elenco; activity do Storyboard. Nada enviado.
 
 
+## t128u (27/10/2026) — Worker e MCP reiniciados; 7 memórias apagadas
+- José: "Tem meu ok. Só não vou poder ver os vídeos agora. Continue para progredir." Esse OK cobre o reinício dos serviços e o apagamento das 7 memórias que estavam parados à espera dele. Não cobre envio ao YouTube, gasto com imagens, o teste de LOOP por cena, o merge na main, nem ver os vídeos no lugar dele.
+- Às 08:56 (-03, São Paulo): 0 workflows `Running` no ns `pqbr`. Reinício do `pqbr-episodio-worker`. Log: `worker episodio em 127.0.0.1:7233 ns=pqbr fila=episodio-pqbr`. O processo lê o checkout desta branch, onde estão t124u–t126u. `YOUTUBE_DRY_RUN=true`. `PQBR_PUBLICACAO_REAL` não está no ambiente. Nada enviado. Depois do reinício, de novo 0 `Running`.
+- No mesmo horário, reinício só do `pqbr-mcp`. `GET /saude` devolve 0.4.0. Um `initialize` ao vivo devolve a frase de honestidade (t126u).
+- P8: cada uma das 7 memórias foi lida antes de apagar. Todas tinham a tag `obsoleto_candidato` e o contexto em `docs/AGENTES.md` (equipe de 14 ou mapa `@prod-*`). Backup: `~/.pqbr/hindsight/backup/pqbr-7-obsoletos-20261027.json` (600) e o export do bank `pqbr-bank-pre-delete-20261027.zip` (1.602.712 bytes). DELETE 200 nas sete. Conferência: as sete respondem 404; o bank foi de 884 para 877 documentos. Nenhuma outra foi apagada.
+- Não feito: ver os vídeos (P1); envio real; imagens pagas do elenco; LOOP por cena; activity do Storyboard; merge na main; preencher `config/mapa_cliques.json` (nenhuma tela de Flow, Vids, 
+
 ## Fase atual do ROADMAP
 
 ## Fase: Conhecimento e agente externo agnóstico (t84u–t86u, 26/10/2026)
@@ -233,7 +233,7 @@ t531 · 24/10/2026 · pedido do José. **Só leitura e proposta.** **Atualizaç�
 - [x] Licença do GitNexus aceita (uso pessoal, sem revenda; t90u).
 - [x] **Reclassificação do Hindsight por papel (t90u):** `scripts/hindsight/reclassificar.py`; 220 candidatas a descarte em `docs/operacao/hindsight-descarte-candidatos.md`.
 - [x] Descarte das candidatas (t90s398): 231 apagadas após a indexação; docs vigentes corrigidos; indexador com a regra única de tags.
-- [ ] Revisar as 7 candidatas mantidas (sem substituta direta).
+- [x] Revisar as 7 candidatas mantidas (sem substituta direta). Feito em t128u (27/10): as sete apagadas com OK do José; backup fora do git; bank 884 → 877.
 
 
 ## LACUNAS (início)

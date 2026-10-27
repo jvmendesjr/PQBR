@@ -292,7 +292,7 @@ Mantidos com `obsoleto_candidato` para revisão (7; sem substituta direta, conte
 - `5363bfb7-c5d6-4618-88c3-14ca471aa3a9` — PQBR doc canônico — docs/AGENTES.md: Equipe anterior (14 agentes; histórico)
 - `15f4a772-24f4-46de-a145-235de432fe13` — PQBR doc canônico — docs/AGENTES.md: Equipe anterior (14 agentes; histórico)
 
-Revisão de 27/10/2026, sem apagar: as sete são o roster antigo de `docs/AGENTES.md` (equipe de 14 e o mapa `@prod-*`). A fonte vigente é a ADR-011 (agentes no Temporal; Paperclip em retirada). Recomendação: apagar. Continua exigindo OK do José.
+Revisão de 27/10/2026: as sete são o roster antigo de `docs/AGENTES.md` (equipe de 14 e o mapa `@prod-*`). A fonte vigente é a ADR-011 (agentes no Temporal; Paperclip em retirada). Apagadas no mesmo dia, ~08:57 (-03), com OK do José (t128u). Cada uma foi lida antes: tag `obsoleto_candidato` e contexto nesse arquivo. Backup: `~/.pqbr/hindsight/backup/pqbr-7-obsoletos-20261027.json` e `pqbr-bank-pre-delete-20261027.zip`. Conferência: as sete respondem 404; o bank foi de 884 para 877. Nenhuma outra foi apagada.
 
 IDs apagados:
 

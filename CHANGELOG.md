@@ -5,6 +5,11 @@ Versionamento SemVer (MAJOR.MINOR.PATCH) a partir de t510. Versão do pacote can
 
 
 
+## [0.16.9] — 2026-10-27
+### Operação
+- `pqbr-episodio-worker` e `pqbr-mcp` reiniciados às 08:56 (-03) com OK do José (t128u). O processo do worker carrega t124u–t126u. O handshake do MCP devolve a frase de honestidade. `YOUTUBE_DRY_RUN=true`. Nada enviado.
+- Apagadas as 7 memórias `obsoleto_candidato` do roster antigo de `docs/AGENTES.md`. Bank de 884 para 877. Backup fora do git.
+
 ## [0.16.8] — 2026-10-27
 ### Corrigido
 - Diagrama 11: o worker está no ar desde 26/10 22:06 (Fortaleza), a migração 0020 já foi aplicada e as chaves do YouTube já estão no processo. O código de t124u–t126u entra no próximo reinício.
