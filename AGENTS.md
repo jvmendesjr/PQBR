@@ -4,7 +4,7 @@
 
 Fonte única de "onde estamos". Não repete o ROADMAP: aponta os itens por id. **Atualize este arquivo a cada correção ou pendência resolvida.** O hook pre-commit exige isso quando o commit toca ROADMAP, LACUNAS, DECISOES-LOG ou CHANGELOG, e o `registrar_alteracao` exige isso para `tipo` correcao ou pendencia_resolvida.
 
-Atualizado: 27/10/2026 (t130u: storyboard no fluxo; NotebookLM sem vídeo; Paperclip parado) · versão 0.17.0
+Atualizado: 27/10/2026 (t131u: logo não bloqueia; gasto do Flow; mapa de cliques só para surpresa) · versão 0.17.1
 
 ## Onde estamos
 - **Produção:** o lote do saldo está em `runtime/lote-saldo/` (um diretório por tema). O EP1002 olhos-da-cara foi reprovado e descartado (`runtime/lote-saldo/_descartado/`), e o tema voltou a `proposto`.
@@ -15,13 +15,13 @@ Atualizado: 27/10/2026 (t130u: storyboard no fluxo; NotebookLM sem vídeo; Paper
 - **Paperclip (t130u):** `paperclipai.service` parado e desabilitado em 27/10. Sem desinstalar e sem apagar dados. `config/paperclip.json` está `parado_proposital`.
 
 ## Próximo passo
-Seguir a ordem do roadmap: testes no Camofox e o roteiro, sem ligar a publicação antes. O mapa de cliques só ganha seletor quando uma tela for usada. O LOOP por cena e o drop-in do Telegram ficam para depois. Nenhum vídeo vai a público até a produção ativa.
+Teste de imagem no Google Flow pelo Camofox. Imagem é gratuita e está autorizada (t131u). Vídeo só no saldo que houver; acabou, Google Vids; depois Meta Vibes. Nada está agendado no YouTube. Antes de tornar um vídeo público, avisar o José para olhar a silhueta do mapa no logo. O LOOP e o drop-in do Telegram ficam para depois.
 
 ## Pendências abertas
 | # | Pendência | Ref. ROADMAP | Dono | Bloqueio |
 |---|---|---|---|---|
 | P1 | Vídeos do saldo ficam parados. José assiste quando puder. O EP1003 cafe-fraco já está aprovado (26/10, único até agora). Não roda o LOOP e não publica agora | Estado 27/10 · t130u | José | sem mexer nos arquivos até a etapa do Studio |
-| P2 | Publicação: worker reiniciado 27/10 11:27 (-03), 0 workflows Running antes e depois. `YOUTUBE_DRY_RUN=true`. Envio real desligado. Refresh do app em teste vence ~2/11 21:20 (-03). Mapa de cliques continua vazio: nenhuma tela foi vista | F8-01 | agente | sem envio até a produção ativa |
+| P2 | Publicação: worker reiniciado 27/10 11:50 (-03), 0 workflows Running. `YOUTUBE_DRY_RUN=true`. Nada agendado (`agenda_publicacao` com 0 linhas). Envio real desligado. Refresh do app em teste vence ~2/11 21:20 (-03) | F8-01 | agente | sem envio até a produção ativa |
 | P3 | Teste: LOOP por cena vs o atual | Estado 26/10 · Testes pendentes | agente | depois do fluxo de publicação |
 | P4 | **Feito (t108u/t109u).** Juiz por etapa (`gemini_juiz` v1.0.0): pré-produção usa 3.8 Flash; produção (VISUAL e LOOP) usa 4 Argon Baixo. O worker `pqbr-episodio-worker` foi reiniciado com OK do José às 16:57 (-03), e o poller está ativo na fila `episodio-pqbr`, ns `pqbr` | Estado 26/10 · DECISOES-LOG t109u | agente | concluído |
 | P5 | Imagens de referência do elenco (`ASSET_personagem_{masculino,feminino}-v1`) | Estado 26/10 · Próximo 4 | agente | o contrato do storyboard não autoriza esse gasto |
@@ -40,7 +40,7 @@ Aba **Roadmap** no painel (:8088): Próximos passos, Falta e Feito gerados deste
 pqbr-mcp 0.4.0 (user unit, enabled, Restart=on-failure, linger=yes), hindsight-api (enabled, Restart=always), Docker DB/Temporal (`unless-stopped`), worker enabled. Comando de checagem e detalhes: `docs/operacao/onboarding-agente-externo.md` § Operacional e persistência.
 
 ## Como atualizar
-Resolveu ou corrigiu algo: tire a linha da tabela (ou mude o bloqueio), ajuste "Próximo passo" e a data acima, faça o commit junto com o DE
+Resolveu ou corrigiu algo: tire a linha da tabela (ou mude o bloqueio), ajuste "Pró
 
 Fontes canônicas: docs/ESTADO-ATUAL.md (onde estamos), docs/REGRAS.md, docs/DECISOES-LOG.md, docs/ROADMAP.md, docs/LACUNAS-fluxo.md, docs/ARQUITETURA.md, docs/AGENTES.md, docs/mapa/. Em conflito, vale o doc canônico. O briefing do YT-LLM está em docs/_obsoleto/BRIEFING-novo-agente-pqbr.md e não é procedimento.
 
@@ -115,7 +115,9 @@ Histórico, fora do procedimento: docs/_obsoleto/BRIEFING-novo-agente-pqbr.md (h
 - **Gasto (t130u):** o contrato da etapa diz se pode gastar, qual modelo e qual meio (`src/pqbr/contratos/gasto.py`). O que o contrato não autoriza não roda. Storyboard: chat do NotebookLM, sim. Vídeo e infográfico do NotebookLM, não. O fallback de SEO usa o 9router no combo `especialista-seo` só depois de duas respostas inválidas do caderno.
 - **Paperclip (t130u):** `paperclipai.service` parado e desabilitado, sem desinstalar e sem apagar dados. `config/paperclip.json` está `parado_proposital`, então a checagem não abre pedido. Apagar o produto fica para depois, com novo OK.
 - **Login (t130u):** consentimento permanente para manter as sessões ativas. José entra só se a reautenticação autônoma não fechar. Parar um fluxo, pelo Telegram ou por pedido ao mantenedor, não desloga.
-- **Saldo e cliques (t130u):** os vídeos já prontos ficam parados até a etapa de publicação no YouTube Studio. Envio real continua desligado. O mapa de cliques continua vazio até uma tela ser usada de verdade. Não inventar seletor.
+- **Saldo e cliques (t130u, ajustado t131u):** os vídeos já prontos ficam parados até a etapa de publicação no YouTube Studio. Envio real continua desligado. Não inventar seletor. O arquivo `config/mapa_cliques.json` não é catálogo: a tela do Camofox manda. O arquivo só anota surpresa, com data.
+- **Logo (t131u):** a silhueta do mapa do Brasil não bloqueia geração nem subida. Antes de tornar público, avisar o José para ele olhar o logo. A correção do desenho pode ficar para depois.
+- **Gasto visual (t131u):** imagem no Google Flow é gratuita e pode ser gerada na quantidade que o storyboard pedir. Vídeo gasta o saldo que houver no Flow; acabou, Google Vids; depois, Meta Vibes.
 - **Honestidade (t126u, José):** o agente diz o que viu e o que não viu. Não inventa seletor, número ou resultado para a conta fechar. Se uma ideia do José não se sustenta, ou só aumenta o sistema, o agente diz isso antes de construir. Vale para todos os papéis e para o agente externo no MCP.
 - **Decisão nova:** entra no `DECISOES-LOG.md` (tNNN) **e** aqui, no mesmo commit. Se este arquivo divergir do log, vale a entrada mais nova do log e este arquivo é corrigido.
 - **Legenda:** [APROVADO] decisão do José · [VERIFICADO] testado/visto na fonte · [HIPÓTESE] a confirmar antes de construir o que depende dela · EM CONSTRUÇÃO — aguardando José.
@@ -126,19 +128,9 @@ Histórico, fora do procedimento: docs/_obsoleto/BRIEFING-novo-agente-pqbr.md (h
   2. **Autonomia/proatividade (t384, t390):** a empresa opera semanas ou meses sem o José. Agentes aplicam sozinhos dentro de faixas e playbooks; o José só vê no relatório. Ainda exigem o José: excluir/rejeitar/banir; voltar a público vídeo do item 5 ou recorrer ao YouTube; gastar dinheiro; login manual pelo noVNC ou 2FA (só depois de esgotada a reautenticação autônoma, item 11); mudar regra canônica; segredos e infraestrutura.
   3. **Equipe:** 14 agentes já contratados (AGENTES.md §2), incluindo Observador, Guardião de Segurança e Dev Revisor (t390, t392).
   4. **Contratação (t392):** sem teto de agentes; só com sugestão do Diretor, do dono da trilha ou do José; o Diretor executa, sem aprovação do board.
-  5. **Runtime (t392):** os agentes usam modelos do **9router** pelos adapters `process` (texto) e `opencode_local` (ferramenta). Nenhum perfil Hermes além do `pqbr`, que é só o canal do José para o Diretor. Ferramentas = kit PQBR (Temporal, Camofox, NotebookLM py, Pydantic v2) + API Paperclip.
-  6. **Rotinas** do Paperclip podem acordar agentes, inclusive para produção (t392). Efeito externo continua só pelo Temporal.
-  7. **Orçamento:** warn-only, sem pausa por custo; limite de segurança revisto após os primeiros relatórios (t392).
-  8. **Falhas:** na 2ª falha da mesma ação entra o playbook (até 3 tentativas). No Camofox, intervalo sorteado de 5–15 min entre intervenções sucessivas na mesma
+  5. **Runtime (t392):** os agentes usam modelos do **9router** pelos adapters `process` (texto) e `opencode_local` (ferramenta). Nenhum perfil Hermes além do `pqbr`, que é só o canal do José para o Diretor. Ferramentas = kit PQBR (Temporal, Camofo
 
 ## Decisões recentes
-
-## t126u (26/10/2026) — Honestidade comum; mapa de cliques a partir do que for visto
-- José: mapear elementos, componentes e locais de clique, como no Flow e nos outros sites do fluxo. O agente identifica a alteração, corrige, atualiza e segue. Pop-up e botão que mudou de lugar não são risco e não param a publicação. Documentar e registrar no mapa de visualização. Antes de prosseguir: honestidade obrigatória, também no MCP; questionar ideia dele quando não for válida ou quando for excesso de aperfeiçoamento.
-- O que existe até t125u não é esse mapa. É um ensaio em memória das funções da API. Nenhum botão de Flow, Vids, Vibes ou Studio foi visto para este registro. Inventar seletor agora seria o excesso que a própria regra nova barra. `config/mapa_cliques.json` fica com a lista vazia.
-- O que fica valendo: obstáculo de tela (pop-up, botão fora do lugar) atualiza o registro, com data, e o processo segue. O diagrama em `docs/mapa/` (11 e 07) mostra isso. A trava dura continua: apagar, tornar público fora da regra, gastar, login/2FA, aceitar consentimento OAuth, mexer em segredo. "Não parar" não cobre essas ações. O clique que cria vídeo continua sob simulação por padrão e sob privado até a produção ativa.
-- Honestidade: REGRAS §0, onboarding (`AGENTS-base`) e a frase do `initialize` do MCP. O processo do `pqbr-mcp` ainda não foi reiniciado; a frase do handshake entra no próximo reinício, que exige OK. O onboarding já lê a regra no disco. Nada enviado.
-
 
 ## t127u (27/10/2026) — Diagrama 11 alinhado; o que não foi feito nas pendências
 - José pediu para prosseguir com os ajustes das pendências. Conferido às 08:10 (São Paulo): `pqbr-episodio-worker` ativo desde 26/10 22:06 (Fortaleza), `NRestarts=0`; `pqbr-mcp` 0.4.0 no ar; Hindsight `healthy` com banco conectado.
@@ -162,6 +154,14 @@ Histórico, fora do procedimento: docs/_obsoleto/BRIEFING-novo-agente-pqbr.md (h
 ## t130u (27/10/2026) — Storyboard no fluxo; NotebookLM sem vídeo; Paperclip parado
 - José: não liga a publicação antes da ordem. Os vídeos já publicados foram para usar saldo da plataforma. Seguir o roadmap, os testes no Camofox e o roteiro. Os outros vídeos ficam parados e entram na publicação quando o fluxo chegar ao YouTube Studio. Commit e push do que for preciso. Efetivar a activity de storyboard. O NotebookLM não gera vídeo: tirar isso dos processos e dos fluxos; o resto (item intelectual: roteiro, direção, SEO) fica. Reajustar o Flow pelo que já está documentado nas extensões, sem inventar seletor. O mapa de cliques nasce quando a tela for usada. Telegram e o teste de LOOP ficam para depois. Consentimento permanente de login: o sistema funciona com as sessões ativas; José só entra se a reautenticação autônoma falhar. Parar um fluxo não desloga. Gasto só o que o contrato da etapa autorizar, com modelo definido. Parar o serviço Paperclip agora, sem apagar; a saída dos documentos ativos fica para quando for deletado.
 - Código: `NotebookLMWorkflow` com `tipo=short` não chama `nlm_gerar_short`, não espera artefato e não gera infográfico. `nlm_gerar_short` levanta `VideoNotebookLMDescartado` antes do CLI. `EpisodioWorkflow` pede o JSON no chat (`nlm_perguntar`) e `storyboard_criar` valida o `Storyboard` 1.2.0, grava `storyboard.json` e devolve `pode_gerar_video` false. Pós, Drive e publicação dry-run continuam no worker e não rodam neste caminho. `src/pqbr/contratos/gasto.p
+
+## t131u (27/10/2026) — Logo depois; gasto do Flow; mapa de cliques enxuto
+- José: a silhueta do mapa do Brasil pode ser resolvida depois da publicação. Ele não lembra se estava tão errado. Avisar para ele verificar antes de liberar (tornar público). Não há publicação agendada: `pqbr.agenda_publicacao` tem 0 linhas. O único arquivo local é o dry-run reprovado `~/.pqbr/publicacao-dryrun/PQBR-EP1002.json`, não enviado. Os logos para ele olhar estão em `branding/overlay/logo-corner-br.png`, `logo-sting.png` e `logo-bug.png`. Eu abri os três. O contorno parece o do Brasil (nordeste saliente, sul afinando). Não comparei com um mapa de referência, então não afirmo que a costa está certa.
+- Gasto: usar o saldo que houver. Imagens no Google Flow são gratuitas e ficam autorizadas, na quantidade que o storyboard pedir. Vídeo gasta o saldo do Flow; acabou, Google Vids; depois Meta Vibes. Contratos `GASTO_FLOW_IMAGEM` e `GASTO_FLOW_VIDEO`.
+- Mapa de cliques: não é necessário como catálogo. A tela aberta já mostra o botão. Manter o JSON só para surpresa (pop-up, botão que mudou), com data. Não depende do José e não se preenche por antecipação.
+- O aviso antes de tornar público entrou em `PublicacaoAgendadaWorkflow`, na etapa `publicando`. Com `YOUTUBE_DRY_RUN=true` esse caminho não roda. Nada enviado.
+- Às 11:50 (-03): 0 workflows `Running`. Reinício só do `pqbr-episodio-worker`, para carregar o aviso. `YOUTUBE_DRY_RUN=true`. Nada enviado.
+
 
 ## Fase atual do ROADMAP
 

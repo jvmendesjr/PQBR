@@ -2,7 +2,7 @@
 
 Fonte única de "onde estamos". Não repete o ROADMAP: aponta os itens por id. **Atualize este arquivo a cada correção ou pendência resolvida.** O hook pre-commit exige isso quando o commit toca ROADMAP, LACUNAS, DECISOES-LOG ou CHANGELOG, e o `registrar_alteracao` exige isso para `tipo` correcao ou pendencia_resolvida.
 
-Atualizado: 27/10/2026 (t130u: storyboard no fluxo; NotebookLM sem vídeo; Paperclip parado) · versão 0.17.0
+Atualizado: 27/10/2026 (t131u: logo não bloqueia; gasto do Flow; mapa de cliques só para surpresa) · versão 0.17.1
 
 ## Onde estamos
 - **Produção:** o lote do saldo está em `runtime/lote-saldo/` (um diretório por tema). O EP1002 olhos-da-cara foi reprovado e descartado (`runtime/lote-saldo/_descartado/`), e o tema voltou a `proposto`.
@@ -13,13 +13,13 @@ Atualizado: 27/10/2026 (t130u: storyboard no fluxo; NotebookLM sem vídeo; Paper
 - **Paperclip (t130u):** `paperclipai.service` parado e desabilitado em 27/10. Sem desinstalar e sem apagar dados. `config/paperclip.json` está `parado_proposital`.
 
 ## Próximo passo
-Seguir a ordem do roadmap: testes no Camofox e o roteiro, sem ligar a publicação antes. O mapa de cliques só ganha seletor quando uma tela for usada. O LOOP por cena e o drop-in do Telegram ficam para depois. Nenhum vídeo vai a público até a produção ativa.
+Teste de imagem no Google Flow pelo Camofox. Imagem é gratuita e está autorizada (t131u). Vídeo só no saldo que houver; acabou, Google Vids; depois Meta Vibes. Nada está agendado no YouTube. Antes de tornar um vídeo público, avisar o José para olhar a silhueta do mapa no logo. O LOOP e o drop-in do Telegram ficam para depois.
 
 ## Pendências abertas
 | # | Pendência | Ref. ROADMAP | Dono | Bloqueio |
 |---|---|---|---|---|
 | P1 | Vídeos do saldo ficam parados. José assiste quando puder. O EP1003 cafe-fraco já está aprovado (26/10, único até agora). Não roda o LOOP e não publica agora | Estado 27/10 · t130u | José | sem mexer nos arquivos até a etapa do Studio |
-| P2 | Publicação: worker reiniciado 27/10 11:27 (-03), 0 workflows Running antes e depois. `YOUTUBE_DRY_RUN=true`. Envio real desligado. Refresh do app em teste vence ~2/11 21:20 (-03). Mapa de cliques continua vazio: nenhuma tela foi vista | F8-01 | agente | sem envio até a produção ativa |
+| P2 | Publicação: worker reiniciado 27/10 11:50 (-03), 0 workflows Running. `YOUTUBE_DRY_RUN=true`. Nada agendado (`agenda_publicacao` com 0 linhas). Envio real desligado. Refresh do app em teste vence ~2/11 21:20 (-03) | F8-01 | agente | sem envio até a produção ativa |
 | P3 | Teste: LOOP por cena vs o atual | Estado 26/10 · Testes pendentes | agente | depois do fluxo de publicação |
 | P4 | **Feito (t108u/t109u).** Juiz por etapa (`gemini_juiz` v1.0.0): pré-produção usa 3.8 Flash; produção (VISUAL e LOOP) usa 4 Argon Baixo. O worker `pqbr-episodio-worker` foi reiniciado com OK do José às 16:57 (-03), e o poller está ativo na fila `episodio-pqbr`, ns `pqbr` | Estado 26/10 · DECISOES-LOG t109u | agente | concluído |
 | P5 | Imagens de referência do elenco (`ASSET_personagem_{masculino,feminino}-v1`) | Estado 26/10 · Próximo 4 | agente | o contrato do storyboard não autoriza esse gasto |

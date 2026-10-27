@@ -1,5 +1,5 @@
 {
- "_doc": "t513 (José): motores trocáveis por config; porta + contrato em src/pqbr/motores. intelectual: notebooklm. video: flow | notebooklm_video | google_vids | meta_vibes. t517: cadeia de fallback flow → google_vids → meta_vibes, só navegador e cotas já pagas; sem APIs.",
+ "_doc": "t513 (José): motores trocáveis por config; porta + contrato em src/pqbr/motores. intelectual: notebooklm. t130u: notebooklm não gera vídeo. t131u: imagem no Flow é gratuita; vídeo gasta o saldo do Flow, depois google_vids, depois meta_vibes. Só navegador, sem APIs.",
  "intelectual": "notebooklm",
  "video": "flow",
  "video_fallback": [

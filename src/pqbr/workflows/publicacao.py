@@ -321,6 +321,10 @@ class PublicacaoAgendadaWorkflow:
                 await self._aviso(cod, "revertido", f"PQBR {cod}: revertido antes de publicar ({self._reverter}). Segue privado.")
                 return {"etapa": "revertido_antes", "video": up}
             await self._esperar_liberado(); self.etapa = "publicando"
+            await self._aviso(cod, "logo",
+                              f"PQBR {cod}: antes de tornar público, confira a silhueta do mapa do Brasil no logo "
+                              "(branding/overlay/logo-corner-br.png, logo-sting.png e logo-bug.png). "
+                              "A correção do desenho pode ficar para depois (t131u).")
             await workflow.execute_activity(pub_privacidade, args=[cod, "public", "janela " + h, "sistema", "sistema"], retry_policy=TRES, **o)
             await workflow.execute_activity(pub_registrar, args=[cod, p.model_dump(), up.get("video_id"), g], retry_policy=TRES, **o)
             await self._aviso(cod, "publicado", f"PQBR {cod} publicado ({h}): {p.titulo}" + (" [SIMULAÇÃO]" if up.get("simulado") else ""))

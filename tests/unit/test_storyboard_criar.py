@@ -2,7 +2,7 @@ import asyncio, json
 from pathlib import Path
 import pytest
 from pydantic import ValidationError
-from pqbr.contratos.gasto import GASTO_IMAGEM_NLM, GASTO_STORYBOARD, GASTO_VIDEO_NLM
+from pqbr.contratos.gasto import GASTO_FLOW_IMAGEM, GASTO_FLOW_VIDEO, GASTO_IMAGEM_NLM, GASTO_STORYBOARD, GASTO_VIDEO_NLM
 from pqbr.workflows import storyboard as sb
 
 
@@ -56,6 +56,8 @@ def test_gasto_desta_etapa():
     assert GASTO_STORYBOARD.pode_gastar and GASTO_STORYBOARD.modelo == "notebooklm-chat"
     assert GASTO_STORYBOARD.meio == "chat_caderno"
     assert GASTO_VIDEO_NLM.pode_gastar is False and GASTO_IMAGEM_NLM.pode_gastar is False
+    assert GASTO_FLOW_IMAGEM.pode_gastar and GASTO_FLOW_IMAGEM.meio == "imagem"
+    assert GASTO_FLOW_VIDEO.pode_gastar and "Vids" in GASTO_FLOW_VIDEO.deterministico
 
 
 def test_activity_grava_so_dentro_do_trabalho(monkeypatch, tmp_path):
