@@ -1,7 +1,7 @@
 """Fila `notebooklm-pqbr` (concorrência 1): NotebookLM isolado da PQBR (venv 0.8.4, NOTEBOOKLM_HOME próprio, perfil pqbr).
-Regras (ARQUITETURA §NotebookLM, AGENTES Roteirista): caderno **efêmero por episódio** ("Short - <slug>"), nunca o mestre;
-fonte antes de gerar; nunca `ask --new`; em timeout de vídeo, listar artefatos e não regerar; contador diário
-com limites locais de segurança aprovados pelo proprietário em 17/10/2026 (500 chats/dia e 20 vídeos/dia), separados da quota oficial; `usage --json` monitora a quota oficial independentemente desses defaults; recusa e espaça acima de 80% apenas com janela e denominador confirmados. Só comandos fechados abaixo."""
+Regras (ARQUITETURA §NotebookLM): caderno **efêmero por episódio** ("Short - <slug>"), nunca o mestre;
+fonte antes de perguntar; nunca `ask --new`. t130u: o NotebookLM não gera vídeo. Entrega pesquisa, roteiro, compliance e SEO.
+Contador diário com limites locais de segurança aprovados pelo proprietário em 17/10/2026 (500 chats/dia e 20 vídeos/dia), separados da quota oficial; `usage --json` monitora a quota oficial independentemente desses defaults; recusa e espaça acima de 80% apenas com janela e denominador confirmados. O teto de vídeo permanece no contador e não é usado: `nlm_gerar_short` recusa antes do CLI. Só comandos fechados abaixo."""
 from __future__ import annotations
 import asyncio, fcntl, json, os, re, subprocess, time
 from datetime import date, timedelta
@@ -10,11 +10,12 @@ from typing import Literal
 from pydantic import BaseModel, ConfigDict, Field
 from temporalio import activity, workflow
 from temporalio.common import RetryPolicy
+from ..contratos.gasto import GASTO_SEO_FALLBACK, GASTO_SEO_NOTEBOOK, GASTO_VIDEO_NLM
 
 FILA_NOTEBOOKLM = "notebooklm-pqbr"
 HOME = Path(os.environ.get("PQBR_NOTEBOOKLM_HOME", "/home/pc/.pqbr/notebooklm"))
 TRAB_NLM = os.environ.get("PQBR_TRABALHO", "/home/pc/.pqbr/episodios")   # t464: capa do NotebookLM no mesmo diretório do episódio
-from .criativo import PROMPT_ROTEIRO, PROMPT_SEO, PROMPT_CAPA
+from .criativo import PROMPT_ROTEIRO, PROMPT_SEO
 CLI = str(HOME / "venv/bin/notebooklm")
 PERFIL = "pqbr"
 PERSONA = Path(os.environ.get("PQBR_NLM_PERSONA", "/home/pc/Workspace/PQBR/templates/notebooklm/persona-pqbr.txt"))
@@ -176,13 +177,14 @@ async def nlm_persona(caderno: str) -> str:
     return "persona ok"
 
 
+class VideoNotebookLMDescartado(RuntimeError):
+    """t130u: o NotebookLM não gera vídeo. Download e generate ficam registrados para falhar fechado."""
+
+
 @activity.defn
 async def nlm_baixar_video(caderno: str, artefato: str, destino: str) -> dict:
-    Path(destino).parent.mkdir(parents=True, exist_ok=True)
-    await asyncio.to_thread(_cli, "download", "video", destino, "-n", caderno, "-a", artefato, timeout=900)
-    f = Path(destino)
-    if not f.is_file() or f.stat().st_size < 10_000: raise RuntimeError("download vazio")
-    return {"arquivo": str(f), "bytes": f.stat().st_size}
+    _ = (caderno, artefato, destino)
+    raise VideoNotebookLMDescartado("NotebookLM não gera vídeo; download descartado (t130u)")
 
 
 @activity.defn
@@ -253,23 +255,21 @@ def steering_short(bloco: str = "") -> str:
 
 @activity.defn
 async def nlm_gerar_short(caderno: str, steering: str = "") -> str:
-    _contador("video")
-    extra = [steering_short(steering)]
-    out = await asyncio.to_thread(_cli, "generate", "video", "-n", caderno, "--format", "short", "--language", "pt_BR",
-                                  "--no-wait", "--json", *extra, timeout=300)
-    a = next(_ids(_json(out)), None)
-    return a["id"] if a else ""
+    _ = (caderno, steering)
+    if GASTO_VIDEO_NLM.pode_gastar:
+        raise RuntimeError("contrato de vídeo do NotebookLM não pode autorizar gasto")
+    raise VideoNotebookLMDescartado("NotebookLM não gera vídeo (t130u)")
 
 
 @workflow.defn
 class NotebookLMWorkflow:
-    """Um pedido por vez (fila concorrência 1). Pesquisa: caderno efêmero + fonte + ask. Short: caderno + fonte +
-    generate --format short (não-bloqueante) + acompanha por artifact list; nunca regera se já há vídeo."""
+    """Um pedido por vez (fila concorrência 1). Pesquisa: caderno efêmero + fonte + ask.
+    Short: caderno + fonte + roteiro/SEO no chat. Não gera vídeo (t130u)."""
     @workflow.run
     async def run(self, p: PedidoNotebookLM) -> ResultadoNotebookLM:
         curto = dict(start_to_close_timeout=timedelta(minutes=12),
                      retry_policy=RetryPolicy(maximum_attempts=3, non_retryable_error_types=["SemSaldo"]))
-        tipo = "video" if p.tipo == "short" else "chat"
+        tipo = "chat"   # t130u: short intelectual não consome cota de vídeo
         try:
             uso = await workflow.execute_activity(nlm_checar_saldo, tipo, **curto)
         except Exception as e:
@@ -312,27 +312,10 @@ class NotebookLMWorkflow:
                 await workflow.execute_activity("nlm_conferir_fontes", args=[nb, ok_ids], start_to_close_timeout=timedelta(minutes=5),
                                                 retry_policy=RetryPolicy(maximum_attempts=2, non_retryable_error_types=["ContaminacaoCaderno"]))
             except Exception as e:
-                return ResultadoNotebookLM(ok=False, tipo=p.tipo, caderno=nb, motivo=f"bloqueado: {e}")
-        vids = await workflow.execute_activity(nlm_artefatos_video, nb, **curto)
-        art = vids[0]["id"] if vids else await workflow.execute_activity(
-            nlm_gerar_short, args=[nb, cri.get("steering") or p.steering or ""], start_to_close_timeout=timedelta(minutes=6), retry_policy=RetryPolicy(maximum_attempts=1))
-        estado = ""
-        for _ in range(60):   # até ~60 min
-            vids = await workflow.execute_activity(nlm_artefatos_video, nb, **curto)
-            if all(v["id"] != art for v in vids) and len(vids) == 1:
-                art = vids[0]["id"]   # E2E 12/10: `generate --json` devolve o id da tarefa, não o do artefato
-            estado = next((v["status"] for v in vids if v["id"] == art), estado)
-            if re.search(r"complet|fail|error", estado, re.I): break
-            await workflow.sleep(60)
-        ok = bool(re.search("complet", estado, re.I))
-        if ok and p.roteirizar:
+                return ResultadoNotebookLM(ok=False, tipo=p.tipo, caderno=nb, motivo=f"bloqueado: {e}", criativo=cri)
+        if p.roteirizar:
             cri["seo"] = await self._seo(nb, cri, curto)
-            try:
-                cri["capa"] = await workflow.execute_activity(nlm_gerar_capa, args=[nb, f"{TRAB_NLM}/{p.slug}/capa_nlm.png", PROMPT_CAPA],
-                                                              start_to_close_timeout=timedelta(minutes=20), retry_policy=RetryPolicy(maximum_attempts=1))
-            except Exception as e:  # noqa: BLE001
-                cri["capa"] = {"falhou": str(e)[:300]}
-        return ResultadoNotebookLM(ok=ok, tipo=p.tipo, caderno=nb, artefato=art, estado_artefato=estado, uso_dia=uso, criativo=cri)
+        return ResultadoNotebookLM(ok=True, tipo=p.tipo, caderno=nb, uso_dia=uso, criativo=cri)
 
     async def _registrar_novas(self, nb: str, tipo: str, curto: dict) -> None:
         ja = set(await workflow.execute_activity("registro_fontes_listar", nb, task_queue=FILA_REGISTRO, **curto))
@@ -376,10 +359,11 @@ class NotebookLMWorkflow:
         for _ in range(2):
             try:
                 txt = await workflow.execute_activity(nlm_perguntar, args=[nb, PROMPT_SEO + (f" Corrija: {erro}" if erro else "")], **uma)
-                return (await workflow.execute_activity("validar_seo", args=[txt, fontes], task_queue=FILA_REGISTRO, **uma)) | {"_origem": "notebooklm"}
+                return (await workflow.execute_activity("validar_seo", args=[txt, fontes], task_queue=FILA_REGISTRO, **uma)) | {"_origem": "notebooklm", "_gasto": GASTO_SEO_NOTEBOOK.model_dump()}
             except Exception as e:  # noqa: BLE001
                 erro = str(getattr(e, "cause", e))[:300]
-        return await workflow.execute_activity("seo_9router", args=[cri["markdown"], fontes], task_queue=FILA_REGISTRO, **uma)
+        fb = await workflow.execute_activity("seo_9router", args=[cri["markdown"], fontes], task_queue=FILA_REGISTRO, **uma)
+        return {**fb, "_origem": "9router", "_gasto": GASTO_SEO_FALLBACK.model_dump()}
 
 
 @activity.defn

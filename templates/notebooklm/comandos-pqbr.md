@@ -6,12 +6,12 @@ Fonte de verdade: Postgres `pqbr.pacote_canonico` (hash). Este arquivo é um ite
 1. `create "Short - <PQBR-EPxxxx> - <slug>"` → id registrado em `pqbr.cadernos_episodio`.
 2. `configure --persona` (persona-pqbr.txt) antes de qualquer outra coisa.
 3. `source add --type file` do pacote canônico ("PQBR pacote <hash12>") e depois do roteiro.
-4. `generate video --format short --language pt_BR --no-wait "<steering>"` (steering = bloco visual 2D do roteiro + reforços fixos: movimento cinematográfico; personagem consistente sempre que aparecer (não precisa estar em todas, José 16:08); sem texto escrito na imagem); acompanhar com `artifact list`; nunca regerar se já há vídeo.
-5. `ask` sem `--new`; no máximo 3 chats por caderno; pesquisa web com `source add-research` (fast ou deep) + `--import-all`.
-6. Arquivar (`metadata`, `source fulltext`, `history`, vídeo) → Drive + Postgres.
+4. `ask` sem `--new` para roteiro, compliance, SEO e o JSON do storyboard. Não existe `generate video` (t130u). O storyboard sai da activity `storyboard_criar`.
+5. No máximo 3 chats por caderno; pesquisa web com `source add-research` (fast ou deep) + `--import-all`.
+6. Arquivar (`metadata`, `source fulltext`, `history`) → Drive + Postgres. Sem vídeo do caderno.
 7. `delete -n <UUID completo> -y` só via `ApagarCadernoWorkflow` (D+2 após publicação, allowlist, nunca mestre, nunca por título).
 
 ## Prompts
 - **Roteiro:** "Escreva o roteiro do Short sobre <tema> seguindo o contrato editorial e o bloco visual §16.7 do pacote: gancho até 3 s com a imagem literal da expressão, versão mais aceita + 'mas tem quem diga', ≥ 2 fontes, loop na última cena."
 - **SEO:** "Gere título (≤ 100), descrição (≤ 5000) e 3–15 hashtags pt-BR para o roteiro, sem pedir comentário; categoria 27 Educação."
-- **Vídeo:** a fonte do roteiro já leva o bloco [ESTILO]/[PERSONAGEM]/[AMBIENTE]/[CENAS] preenchido; o Short não tem seletor de estilo.
+- **Storyboard:** o chat devolve só o JSON da ficha (contrato Storyboard 1.2.0). Imagem e vídeo não saem deste caderno. A cadeia visual é Flow → Vids → Vibes, fora desta etapa.

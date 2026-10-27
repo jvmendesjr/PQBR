@@ -75,23 +75,16 @@ def test_contador_de_chat_bloqueia_antes_da_segunda_chamada(monkeypatch, tmp_pat
     assert notebooklm._contador() == {"chat": 1}
 
 
-def test_contador_de_video_bloqueia_antes_da_segunda_chamada(monkeypatch, tmp_path):
+def test_gerar_short_recusa_sem_chamar_cli(monkeypatch, tmp_path):
     setup_limits(monkeypatch, tmp_path)
     chamadas = []
+    monkeypatch.setattr(notebooklm, "_cli", lambda *args, **kwargs: chamadas.append(args))
 
-    def cli_mock(*args, **kwargs):
-        chamadas.append(args)
-        return '{"id":"artefato-teste"}'
-
-    monkeypatch.setattr(notebooklm, "_cli", cli_mock)
-    monkeypatch.setattr(notebooklm, "steering_short", lambda _steering: "prompt de teste")
-
-    assert asyncio.run(notebooklm.nlm_gerar_short("caderno-teste")) == "artefato-teste"
-    with pytest.raises(notebooklm.SemSaldo, match="limite local de segurança"):
+    with pytest.raises(notebooklm.VideoNotebookLMDescartado, match="não gera vídeo"):
         asyncio.run(notebooklm.nlm_gerar_short("caderno-teste"))
 
-    assert len(chamadas) == 1
-    assert notebooklm._contador() == {"video": 1}
+    assert chamadas == []
+    assert notebooklm._contador() == {}
 
 
 def test_preflight_de_saldo_bloqueia_no_limite_sem_consultar_provider(monkeypatch, tmp_path):

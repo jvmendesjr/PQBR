@@ -1,1 +1,6 @@
-{"versao": "1.0.0", "estado": "ativo", "estado_alternativas": ["parado_proposital"], "obs": "t538/F05-09: parado_proposital faz a checagem acesso_paperclip virar pausado (sem pedido ao José). Mudar só com OK do José."}
+{
+  "versao": "1.0.0",
+  "estado": "parado_proposital",
+  "estado_alternativas": ["parado_proposital"],
+  "obs": "t130u: José mandou parar. acesso_paperclip devolve pausado e não abre pedido. Serviço paperclipai parado e desabilitado, sem desinstalar. Apagar só com novo OK."
+}

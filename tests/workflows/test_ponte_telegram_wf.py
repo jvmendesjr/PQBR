@@ -127,9 +127,9 @@ class Ponte(unittest.IsolatedAsyncioTestCase):
 
 
 class PaperclipConfig(unittest.TestCase):
-    def test_config_padrao_ativo_e_flag(self):
+    def test_config_padrao_parado_e_flag(self):
         import json, os, tempfile
-        self.assertFalse(A.paperclip_pausado())
+        self.assertTrue(A.paperclip_pausado())   # t130u: parado_proposital
         d = tempfile.mkdtemp(); p = os.path.join(d, "c.json")
         json.dump({"estado": "parado_proposital"}, open(p, "w")); self.assertTrue(A.paperclip_pausado(p))
         self.assertFalse(A.paperclip_pausado(os.path.join(d, "nada.json")))

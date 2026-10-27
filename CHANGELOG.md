@@ -5,6 +5,14 @@ Versionamento SemVer (MAJOR.MINOR.PATCH) a partir de t510. Versão do pacote can
 
 
 
+## [0.17.0] — 2026-10-27
+### Alterado
+- O episódio para no storyboard. `storyboard_criar` grava a ficha (Storyboard 1.2.0) com `imagens_revisadas` false. Não gera imagem nem vídeo (t130u).
+- O NotebookLM deixa de gerar vídeo. `tipo=short` faz roteiro, compliance e SEO no chat. `nlm_gerar_short` recusa antes do CLI.
+- Contrato de gasto por etapa (`src/pqbr/contratos/gasto.py`): diz se pode gastar, o modelo e o meio. Vídeo e infográfico do NotebookLM estão negados.
+- `paperclipai.service` parado e desabilitado, sem desinstalar. `config/paperclip.json` em `parado_proposital`.
+- `pqbr-episodio-worker` e `pqbr-notebooklm-worker` reiniciados às 11:27 (-03), com 0 workflows em execução. `YOUTUBE_DRY_RUN=true`. Nada enviado.
+
 ## [0.16.10] — 2026-10-27
 ### Corrigido
 - Lacunas: sai o que o código já faz ou o que era ponte do Paperclip. Ficam auditor no episódio, pacote só de roteiro, códigos do lote 2510, Fase 4V, storyboard, porta do navegador sem uso, cliques do Studio e o teste de LOOP adiado (t129u).

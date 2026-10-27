@@ -197,7 +197,7 @@ async def acesso_resolvido(servico: str) -> int:
 
 @workflow.defn
 class AcessosWorkflow:
-    """Agenda pqbr-acessos (de hora em hora): confere Google/Camofox, NotebookLM e ponte Paperclip; pede ao José o que cair."""
+    """Agenda pqbr-acessos (de hora em hora): confere Google/Camofox e NotebookLM. Paperclip parado (t130u) não abre pedido."""
     @workflow.run
     async def run(self) -> list[dict]:
         r = dict(start_to_close_timeout=timedelta(minutes=3), retry_policy=RetryPolicy(maximum_attempts=2))
