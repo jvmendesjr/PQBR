@@ -5,7 +5,9 @@ nunca espera resposta. Fluxo: gate → reserva de horário (idempotente) → upl
 público → registro (temas_publicados + Drive) → aviso. Sinal `reverter` volta para privado (nunca apaga).
 Botão de emergência (t541): flag global de pausa checada ANTES de cada ação externa (fail-closed: erro de leitura =
 pausado); `ControlePublicacaoWorkflow` recebe /pausar, /retomar e /privar do Telegram (só from.id do José).
-Simulação é o padrão (integrations.youtube.modo_real)."""
+Simulação é o padrão (integrations.youtube.modo_real).
+t124u: se o refresh de 7 dias voltar invalid_grant, o envio inteiro daquele vídeo passa ao Studio
+pelo Camofox. O roteiro de cliques ainda é hipótese: grava o plano, avisa e não envia."""
 from __future__ import annotations
 import json, os
 from datetime import datetime, timedelta, time
@@ -167,11 +169,17 @@ async def pub_upload_privado(p: dict, codigo: str, video: str, sha: str) -> dict
         with conectar() as c:
             if c.execute("select 1 from pqbr.temas_publicados where codigo=%s", (codigo,)).fetchone():
                 raise ApplicationError("código já publicado (duplicata)", non_retryable=True)
-    dup = yt.buscar_no_canal(codigo)
-    if dup: raise ApplicationError(f"duplicata no canal: {dup}", non_retryable=True)
     corpo = yt.montar_corpo(codigo, p["titulo"], p["descricao"], p.get("tags", []),
                             publish_at=datetime.fromisoformat(it["horario"]).astimezone(ZoneInfo("UTC")).strftime("%Y-%m-%dT%H:%M:%SZ") if it.get("horario") else None)
-    r = yt.enviar_privado(video, corpo, codigo)
+    try:
+        dup = yt.buscar_no_canal(codigo)
+        if dup: raise ApplicationError(f"duplicata no canal: {dup}", non_retryable=True)
+        r = yt.enviar_privado(video, corpo, codigo)
+    except yt.RenovacaoOAuthFalhou:
+        from ..integrations.studio_publicacao import planejar
+        planejar(video, corpo, codigo)
+        raise ApplicationError("refresh de 7 dias recusado; envio inteiro pelo Camofox; roteiro do Studio ainda não verificado",
+                               type="renovacao_oauth", non_retryable=True)
     _salvar_item(codigo, {**it, "estado": "enviado_privado", "video_id": r.get("video_id")})
     return r
 
@@ -182,7 +190,13 @@ async def pub_privacidade(codigo: str, privacidade: str, motivo: str, autor: str
     it = _item(codigo) or {}
     if _real() and not yt.real_para(codigo):
         raise ApplicationError(f"{codigo} fora de PQBR_PUBLICACAO_REAL_CODIGOS", non_retryable=True)
-    r = yt.definir_privacidade(it.get("video_id"), privacidade)
+    try:
+        r = yt.definir_privacidade(it.get("video_id"), privacidade)
+    except yt.RenovacaoOAuthFalhou:
+        from ..integrations.studio_publicacao import planejar_privacidade
+        planejar_privacidade(codigo, it.get("video_id"), privacidade)
+        raise ApplicationError("refresh de 7 dias recusado; privacidade pelo Camofox; roteiro do Studio ainda não verificado",
+                               type="renovacao_oauth", non_retryable=True)
     estado = "publicado" if privacidade == "public" else ("revertido" if origem == "sinal" else "privado")
     _salvar_item(codigo, {**it, "estado": estado})
     auditar("publicar" if privacidade == "public" else ("reverter" if origem == "sinal" else "privar"),
@@ -240,7 +254,12 @@ async def ctl_aplicar(cmd: dict) -> dict:
     feitos = []
     for cod in alvos:
         it = _item(cod) or {}
-        yt.definir_privacidade(it.get("video_id"), "private")
+        try:
+            yt.definir_privacidade(it.get("video_id"), "private")
+        except yt.RenovacaoOAuthFalhou:
+            from ..integrations.studio_publicacao import planejar_privacidade
+            planejar_privacidade(cod, it.get("video_id"), "private")
+            return {"status": "renovacao_oauth", "alvos": feitos, "pendente": cod}
         _salvar_item(cod, {**it, "estado": "privado"}); feitos.append(cod)
     return {"status": "privado", "alvos": feitos}
 
@@ -306,7 +325,13 @@ class PublicacaoAgendadaWorkflow:
             await workflow.execute_activity(pub_registrar, args=[cod, p.model_dump(), up.get("video_id"), g], retry_policy=TRES, **o)
             await self._aviso(cod, "publicado", f"PQBR {cod} publicado ({h}): {p.titulo}" + (" [SIMULAÇÃO]" if up.get("simulado") else ""))
         except ActivityError as e:
-            await self._aviso(cod, "erro", f"PQBR {cod}: erro na publicação na etapa {self.etapa} ({type(e.cause).__name__}). Nada apagado.")
+            tipo = getattr(e.cause, "type", "") or ""
+            if tipo == "renovacao_oauth":
+                texto = (f"PQBR {cod}: refresh de 7 dias recusado. O envio inteiro passa ao Studio pelo Camofox. "
+                         "O roteiro de cliques ainda não foi verificado, e nada foi enviado.")
+            else:
+                texto = f"PQBR {cod}: erro na publicação na etapa {self.etapa} ({type(e.cause).__name__}). Nada apagado."
+            await self._aviso(cod, "erro", texto)
             raise
         self.etapa = "publicado"
         if p.janela_reversao_h:

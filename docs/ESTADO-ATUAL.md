@@ -2,7 +2,7 @@
 
 Fonte única de "onde estamos". Não repete o ROADMAP: aponta os itens por id. **Atualize este arquivo a cada correção ou pendência resolvida.** O hook pre-commit exige isso quando o commit toca ROADMAP, LACUNAS, DECISOES-LOG ou CHANGELOG, e o `registrar_alteracao` exige isso para `tipo` correcao ou pendencia_resolvida.
 
-Atualizado: 26/10/2026 (t123u: worker reiniciado com as chaves; a lacuna de reinício do registro fechou) · versão 0.16.4
+Atualizado: 26/10/2026 (t124u: refresh recusado manda o envio inteiro ao Camofox) · versão 0.16.5
 
 ## Onde estamos
 - **Produção:** o lote do saldo está em `runtime/lote-saldo/` (um diretório por tema). O EP1002 olhos-da-cara foi reprovado e descartado (`runtime/lote-saldo/_descartado/`), e o tema voltou a `proposto`.
@@ -16,7 +16,7 @@ José vê os outros vídeos do lote. O EP1003 cafe-fraco já está aprovado (ún
 | # | Pendência | Ref. ROADMAP | Dono | Bloqueio |
 |---|---|---|---|---|
 | P1 | José ainda vê os outros vídeos do lote. O EP1003 cafe-fraco já está aprovado (26/10, único até agora); não roda o LOOP nesse episódio | Estado 26/10 · Próximo 5 | José | aguardando José nos demais |
-| P2 | Publicação: OAuth no worker (t123u, 22:06). Envio real desligado de propósito. Até a produção ativa, subida aprovada fica privada; a API (`videos.insert` / `videos.update`) é o caminho, Camofox só o que a API não alcança. App OAuth segue em Testando: refresh vence ~2/11 21:20 (Fortaleza); publicar o app no Console exige branding que não vamos inventar | F8-01 | agente | sem envio até a produção ativa |
+| P2 | Publicação: API no worker (t123u, 22:06). Se o refresh de 7 dias for recusado, o envio inteiro passa ao Studio pelo Camofox (t124u); o roteiro de cliques ainda é hipótese, então esse caso grava o plano, avisa e não envia. Envio real desligado. App em Testando: refresh vence ~2/11 21:20 (Fortaleza). O worker em execução ainda é o das 22:06; este desvio entra no próximo reinício | F8-01 | agente | sem envio até a produção ativa; reinício do worker exige OK |
 | P3 | Teste: LOOP por cena vs o atual | Estado 26/10 · Testes pendentes | agente | depois do fluxo de publicação |
 | P4 | **Feito (t108u/t109u).** Juiz por etapa (`gemini_juiz` v1.0.0): pré-produção usa 3.8 Flash; produção (VISUAL e LOOP) usa 4 Argon Baixo. O worker `pqbr-episodio-worker` foi reiniciado com OK do José às 16:57 (-03), e o poller está ativo na fila `episodio-pqbr`, ns `pqbr` | Estado 26/10 · DECISOES-LOG t109u | agente | concluído |
 | P5 | Imagens de referência do elenco (`ASSET_personagem_{masculino,feminino}-v1`) | Estado 26/10 · Próximo 4 | agente | geração paga: OK do José (postergado) |

@@ -20,6 +20,7 @@ flowchart TD
   FLAG -.lida antes de cada ação externa.-> P1 & P2
   %% 0.4.5 (t69s317/t70u, 26/10/2026)
   U -.-> PA["upload com status.publishAt = janela reservada (UTC)<br/>segue private até a janela"]
+  U -.-> CF["t124u: invalid_grant no refresh de 7 dias<br/>envio inteiro pelo Studio no Camofox<br/>roteiro de cliques = hipótese: grava o plano e não envia"]
   SC{{"escopo do modo real: PQBR_PUBLICACAO_REAL_CODIGOS<br/>fora da lista ⇒ erro não retentável"}} -.-> U & PR
   WK[["registrado no pqbr-episodio-worker (fila episodio-pqbr)<br/>⚠ worker ainda não reiniciado · migração 0020 não aplicada"]] -.-> G
   BL{{"⚠ BLOQUEIO: sem YOUTUBE_CLIENT_ID/SECRET/REFRESH_TOKEN no worker<br/>Cloud Console exige 2SV (José)"}} -.-> U

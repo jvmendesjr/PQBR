@@ -663,3 +663,9 @@ NÃO CABE:
 - Até ele declarar a produção ativa: nenhum vídeo vai a público. Subida de vídeo já aprovado fica privada. Depois, a publicação segue a ordem cronológica dos roteiros e as janelas 11:40/18:35. Vários podem ficar na fila, privados, segurando o lugar.
 - Caminho vigente (t540): a API muda a privacidade (`videos.update`). O Camofox no Studio é reserva para o que a API não alcança, não o caminho padrão. O desenho t540 (virar público na janela) fica suspenso enquanto a produção não estiver ativa.
 - App OAuth permanece em Testando. Não houve pedido de verificação no YouTube nem publicação do app no Console. O refresh foi testado de novo nesta noite e trocou por access token.
+
+## t124u (26/10/2026) — API na publicação; Camofox se o refresh de 7 dias falhar
+- José: usar a API e, se a renovação de 7 dias não acontecer, fazer o processo inteiro de publicação pelo Camofox, em navegação web.
+- O caminho segue a API (`videos.insert` / `videos.update`, `private` + `publishAt`). O desvio só ocorre quando o Google recusa o refresh (`invalid_grant`). Outra falha da API não troca de caminho.
+- Nesse caso o envio inteiro daquele vídeo (subida privada, agenda e privacidade, inclusive o `/privar`) fica para o Studio no Camofox. O roteiro de cliques ainda é hipótese: o fluxo grava o plano, avisa no Telegram e não abre o navegador nem envia. Ver a navegação no Studio antes de executá-la.
+- `YOUTUBE_DRY_RUN` segue `true`. Nada enviado. O `pqbr-episodio-worker` em execução continua o das 22:06; este desvio entra no próximo reinício, que exige OK.
