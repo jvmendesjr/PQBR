@@ -5,6 +5,11 @@ Versionamento SemVer (MAJOR.MINOR.PATCH) a partir de t510. Versão do pacote can
 
 
 
+## [0.16.10] — 2026-10-27
+### Corrigido
+- Lacunas: sai o que o código já faz ou o que era ponte do Paperclip. Ficam auditor no episódio, pacote só de roteiro, códigos do lote 2510, Fase 4V, storyboard, porta do navegador sem uso, cliques do Studio e o teste de LOOP adiado (t129u).
+- Documentos que não são regra, decisão, contrato, mapa nem diagrama vigente foram para `docs/_obsoleto/`, sem apagar.
+
 ## [0.16.9] — 2026-10-27
 ### Operação
 - `pqbr-episodio-worker` e `pqbr-mcp` reiniciados às 08:56 (-03) com OK do José (t128u). O processo do worker carrega t124u–t126u. O handshake do MCP devolve a frase de honestidade. `YOUTUBE_DRY_RUN=true`. Nada enviado.

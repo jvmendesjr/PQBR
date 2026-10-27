@@ -1,5 +1,5 @@
 """EpisodioWorkflow + PublicacaoWorkflow (dry-run) — fila `episodio-pqbr` (t427).
-Ordem (docs/sdd/teste-e2e-short-1.md): NotebookLM short (fila notebooklm-pqbr, filho) → download → pós (trim+logo)
+Ordem (roteiro antigo em docs/_obsoleto/sdd/teste-e2e-short-1.md): NotebookLM short (fila notebooklm-pqbr, filho) → download → pós (trim+logo)
 → quadros por cena + capa A9 (código) → espera o veredito do Auditor (sinal) → Drive → Publicação **dry-run**
 (payload privado, sem agendar, nada enviado ao YouTube). Nada torna público; sem veredito ou reprovado, para."""
 from __future__ import annotations

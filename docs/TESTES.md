@@ -7,16 +7,17 @@
 
 | Nível | O que cobre | Onde | Quando roda |
 |---|---|---|---|
-| Unitário | Funções puras (grade, barreiras, pontuação, limites de resposta, templates) | `tests/unit/` | todo commit |
-| Contrato | Modelos Pydantic v2 (ARQUITETURA §11): válidos, inválidos, fallback do Jev com o mesmo esquema | `tests/contratos/` | todo commit |
-| Replay | Histórico do motor reproduzido contra o código novo (determinismo) | `tests/replay/` | todo commit que muda workflow |
-| Integração | Activities contra serviços de **desenvolvimento** (banco do app de teste, caderno clonado, canal em privado) | `tests/integracao/` | por tarefa, com autorização |
-| Simulação de falha | Rede fora, banco do app fora, `kill -9`, reboot, sessão caída | `tests/falhas/` | Fases 0.5 e 6 |
+| Unitário | Funções puras (grade, barreiras, pontuação, limites de resposta, templates) e contratos Pydantic | `tests/unit/` | todo commit |
+| Workflow | Workflows com o teste de tempo do Temporal | `tests/workflows/` | quando o fluxo muda |
+| Segurança | Barreira de segredo e saídas | `tests/seguranca/` | todo commit que mexe em saída |
+| Contrato, replay, integração, falha (plano) | Pastas previstas e **não criadas**: `tests/contratos/`, `tests/replay/`, `tests/integracao/`, `tests/falhas/`, `tests/auditor/` | — | não existem em 27/10/2026 |
 | Sombra | Fluxo completo sem efeito externo (respostas e corações simulados) | — | Fases 5 e 10 |
 
 Regras: nenhum teste usa dados pessoais reais nem segredos (RNF-03); nenhum teste publica vídeo público sem portão do José; testes de canal usam vídeo privado.
 
-## 2. Teste de 1 dia do Temporal ligado ao Paperclip (Fase 0.5)
+## 2. Teste de 1 dia do Temporal ligado ao Paperclip (Fase 0.5) [HISTÓRICO]
+
+Discord e Paperclip como canal de aprovação foram revogados (t474). O resultado TZ-01..TZ-03 permanece. TZ-04, TZ-06, TZ-08, TZ-09 e TZ-10 não são testes vigentes.
 
 | ID | Teste | Critério de aprovação | Req |
 |---|---|---|---|

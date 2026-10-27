@@ -1,6 +1,6 @@
 # Documentação da PQBR — mapa e autoridade
 
-Atualizado em 23/10/2026 (t471–t474: canal Telegram + sinais do Temporal, painel Temporal UI, agentes PydanticAI em activities do Temporal — ADR-011; Paperclip em retirada). Este índice distingue os documentos normativos, o roadmap oficial do projeto e os planos auxiliares por módulo. Não é uma nova fonte de decisão.
+Atualizado em 27/10/2026 (t129u). Este índice distingue os documentos normativos, o roadmap oficial e os planos auxiliares. Não é uma nova fonte de decisão. Paperclip só aparece como histórico ou como infraestrutura em retirada.
 
 ## Ordem de autoridade
 
@@ -12,7 +12,7 @@ Siga a ordem definida em `REGRAS.md` §0:
 4. `TESTES.md` — critérios e evidências de validação.
 5. `ROADMAP.md` — tarefas, estado atual, dependências e gates do projeto.
 
-A `AGENTS.md` da raiz do repositório é a entrada de instruções para agentes; `company/agents/<slug>/AGENTS.md` contém as instruções específicas de cada papel. `docs/AGENTES.md` (com E depois do G) é o roster e desenho dos papéis, não o arquivo de instruções. `RASTREABILIDADE.md` liga requisito → desenho → tarefa → teste e `LACUNAS-fluxo.md` lista lacunas operacionais. `CONTRATO-EDITORIAL.md` é o contrato editorial oficial (v2, t473), com as seções canônicas do v1 no Anexo A.
+A `AGENTS.md` da raiz é gerada do onboarding. `company/agents/<slug>/AGENTS.md` guarda a persona de cada papel. `docs/AGENTES.md` é o roster vigente (8 papéis). `RASTREABILIDADE.md` liga requisito → desenho → tarefa → teste. `LACUNAS-fluxo.md` lista só o que ainda falta no código. `CONTRATO-EDITORIAL.md` é o contrato editorial oficial (v2, t473).
 
 ## Os dois roadmaps não são intercambiáveis
 
@@ -27,13 +27,13 @@ Documentos do módulo visual com Flow como rota primária e Vids como fallback. 
 
 ### `sdd/`
 
-ADRs, relatórios de gate e evidências de testes. Leia seu status e data antes de aplicar qualquer passo: alguns arquivos registram snapshots históricos. Em particular, `f1-02-dryrun.md` documenta um dry-run antigo de criação de uma segunda organização, nunca executado; F1-01/F1-02 estão suspensos no roadmap canônico e o comando `--target new` não deve ser repetido.
+ADRs vigentes e evidências. Leia a data antes de aplicar qualquer passo. O dry-run de uma segunda organização está em `_obsoleto/sdd/f1-02-dryrun.md` e não se repete. As pastas `evidencias-f3-05-*` ficam aqui porque o F3-05 ainda está aberto no ROADMAP.
 
 ### Outros documentos vivos
 
 - `REFERENCIA-sessao-google.md` — referência operacional da sessão Google/Camofox.
-- `hermes-pqbr/SOUL-rascunho.md` — persona do perfil Hermes `pqbr`, canal Telegram do José (t474).
-- `LICOES-pre-E2E.md` — lições para o E2E.
+- `operacao/onboarding-agente-externo.md` — como o agente externo entra pelo MCP.
+- O rascunho de SOUL, o briefing do YT-LLM, o resumo de stack de 17/10 e o checklist pré-E2E de 12/10 estão em `_obsoleto/` (t129u).
 - `operacao/GUIA-ACESSO-PC-TEMPORAL.md` — caminhos verificados para acessar o PC e o Temporal (UI = painel do José), sem credenciais.
 - `sdd/adr-011-agentes-pydanticai-temporal.md` — agentes PydanticAI em activities do Temporal (substitui ADR-002).
 - `../CHANGELOG.md` — mudanças relevantes do repositório.
