@@ -5,6 +5,10 @@ Versionamento SemVer (MAJOR.MINOR.PATCH) a partir de t510. Versão do pacote can
 
 
 
+## [0.16.3] — 2026-10-26
+### Operação
+- OAuth do YouTube no projeto `pqbr-publicacao` (app Externo PQBR, em teste; cliente Desktop). Chaves em `episodio.env` (600). `channels.list` confirmou o canal Porquê BR. Worker não reiniciado; nada publicado.
+
 ## [0.16.2] — 2026-10-26
 ### Alterado
 - Aba Roadmap: ☑ em itens feitos, ☐ em falta e próximos passos (só leitura); teste cobre contagens e ausência de elementos editáveis.

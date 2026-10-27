@@ -4,21 +4,21 @@
 
 Fonte única de "onde estamos". Não repete o ROADMAP: aponta os itens por id. **Atualize este arquivo a cada correção ou pendência resolvida.** O hook pre-commit exige isso quando o commit toca ROADMAP, LACUNAS, DECISOES-LOG ou CHANGELOG, e o `registrar_alteracao` exige isso para `tipo` correcao ou pendencia_resolvida.
 
-Atualizado: 26/10/2026 (t121u: P2 corrigida — 2SV e migração 0020 já feitas) · versão 0.16.1
+Atualizado: 26/10/2026 (t122u: OAuth do YouTube no projeto pqbr-publicacao; cafe-fraco aprovado) · versão 0.16.3
 
 ## Onde estamos
 - **Produção:** o lote do saldo está em `runtime/lote-saldo/` (um diretório por tema). O EP1002 olhos-da-cara foi reprovado e descartado (`runtime/lote-saldo/_descartado/`), e o tema voltou a `proposto`.
-- **Publicação (ROADMAP F8-01):** o fluxo pelo Temporal está pronto (`PublicacaoAgendadaWorkflow` no `worker_episodio`). O upload real está bloqueado por falta das credenciais OAuth do YouTube.
+- **Publicação (ROADMAP F8-01):** o fluxo pelo Temporal está pronto (`PublicacaoAgendadaWorkflow` no `worker_episodio`). O OAuth do projeto `pqbr-publicacao` existe e o `channels.list` confirmou o canal Porquê BR. O worker ainda não carregou as chaves (reinício exige OK). Nada foi enviado ao YouTube.
 - **Agente externo:** o servidor MCP 0.2+ só funciona pela tailnet. A memória escrita leva o autor (o cliente) e o commit. O protocolo obrigatório está no AGENTS.md. Hindsight: bank `pqbr` reclassificado, com as obsoletas apagadas.
 
 ## Próximo passo
-José assiste o EP1003 cafe-fraco (`runtime/lote-saldo/cafe-fraco/cafe-fraco-final.mp4`). Só depois disso roda o LOOP do Gemini nesse episódio.
+José vê os outros vídeos do lote. O EP1003 cafe-fraco já está aprovado por ele (único até agora); não roda o LOOP nesse episódio. A publicação espera o OK para reiniciar o worker e carregar o OAuth.
 
 ## Pendências abertas
 | # | Pendência | Ref. ROADMAP | Dono | Bloqueio |
 |---|---|---|---|---|
-| P1 | EP1003 cafe-fraco: José assiste antes do LOOP do Gemini | Estado 26/10 · Próximo 5 | José | aguardando José |
-| P2 | Publicação: (a) verificar qual perfil/conta do Camofox PQBR (127.0.0.1:9387) foi usado na tentativa bloqueada do Cloud Console (t107u) → (b) criar o OAuth do YouTube pelo Camofox (projeto `pqbr-publicacao`, chaves em `episodio.env`; se o Google pedir confirmação, José confirma na tela) → (c) upload pelo `PublicacaoAgendadaWorkflow`. Já feito: 2 etapas de juniormoedavirtual ativa (t106u); migração 0020 aplicada 26/10 16:56 e worker reiniciado 16:57 (t109u) | F8-01 · Estado 26/10 · Próximo 1 | agente | (b) confirmação do Google pelo José, se pedir |
+| P1 | José ainda vê os outros vídeos do lote. O EP1003 cafe-fraco já está aprovado (26/10, único até agora); não roda o LOOP nesse episódio | Estado 26/10 · Próximo 5 | José | aguardando José nos demais |
+| P2 | Publicação (t122u): (a) e (b) feitos. Camofox 9387, perfil único `userId=pqbr`, conta do canal no Studio Porquê BR. Projeto `pqbr-publicacao`, YouTube Data API v3, app OAuth Externo "PQBR" em Testando, escopos `youtube.upload` + `youtube.readonly`, cliente Desktop, chaves em `episodio.env` (600). `channels.list` = Porquê BR (`@porquebr-t4c`). Falta (c): reiniciar o worker para carregar as chaves; o refresh de app em teste expira em 7 dias até publicar (o branding pede página e política — não inventar); upload real só com as duas flags e o código na lista | F8-01 · Estado 26/10 · Próximo 1 | agente | OK do José para reiniciar o worker |
 | P3 | Teste: LOOP por cena vs o atual | Estado 26/10 · Testes pendentes | agente | depois do fluxo de publicação |
 | P4 | **Feito (t108u/t109u).** Juiz por etapa (`gemini_juiz` v1.0.0): pré-produção usa 3.8 Flash; produção (VISUAL e LOOP) usa 4 Argon Baixo. O worker `pqbr-episodio-worker` foi reiniciado com OK do José às 16:57 (-03), e o poller está ativo na fila `episodio-pqbr`, ns `pqbr` | Estado 26/10 · DECISOES-LOG t109u | agente | concluído |
 | P5 | Imagens de referência do elenco (`ASSET_personagem_{masculino,feminino}-v1`) | Estado 26/10 · Próximo 4 | agente | geração paga: OK do José (postergado) |
@@ -31,7 +31,7 @@ José assiste o EP1003 cafe-fraco (`runtime/lote-saldo/cafe-fraco/cafe-fraco-fin
 | P12 | ERR-01: revisar os erros aceitáveis | ERR-01 | agente | depois dos primeiros dias de produção |
 
 ## Painel
-Aba **Roadmap** no painel (:8088): Próximos passos, Falta e Feito gerados deste arquivo e do ROADMAP por `scripts/mapa/roadmap.py` (via `gerar_index.py`; o pre-commit regenera quando ROADMAP/ESTADO-ATUAL/mapa mudam). Só leitura.
+Aba **Roadmap** no painel (:8088): Próximos passos, Falta e Feito gerados deste arquivo e do ROADMAP por `scripts/mapa/roadmap.py` (via `gerar_index.py`; o pre-commit regenera quando ROADMAP/ESTADO-ATUAL/mapa mudam). Itens com ☑ (feito) e ☐ (falta/próximos), só símbolo, nada clicável. Só leitura.
 
 ## Operacional e persistência (verificado 26/10/2026 18:21 -03)
 pqbr-mcp 0.4.0 (user unit, enabled, Restart=on-failure, linger=yes), hindsight-api (enabled, Restart=always), Docker DB/Temporal (`unless-stopped`), worker enabled. Comando de checagem e detalhes: `docs/operacao/onboarding-agente-externo.md` § Operacional e persistência.
@@ -179,19 +179,6 @@ t531 · 24/10/2026 · pedido do José. **Só leitura e proposta.** **Atualizaç�
 
 ## Decisões recentes
 
-## t109u (26/10/2026) — Migração 0020 e reinício do worker (OK do José, card t109s462)
-- Backup antes da migração; `public.pqbr_migracoes` registra a 0020.
-- Antes do reinício não havia nenhum workflow em execução no ns `pqbr`. Depois do reinício: unit ativa, poller registrado (workflow e activity), pré = 3.8 Flash / produção = 4 Argon Baixo, `PublicacaoAgendadaWorkflow` registrado. Nada foi publicado e nenhum upload foi disparado.
-- Mapa 12 atualizado e com render validado.
-
-
-## t112u–t116u (26/10/2026) — Papel `mantenedor` para agentes externos
-- t112u: agentes externos de manutenção (qualquer cliente MCP) leem TODAS as memórias do Hindsight e todo o código para debug e correção. Política 1.4.0: mantenedor lê as 14 tags de conteúdo (menos `obsoleto_candidato`), vê o repo todo, grava decisao/incidente/licao/playbook/doc/estado. Papéis internos inalterados.
-- t113u: o mantenedor também constrói e liga módulos novos (contrato, porta/adaptador, Temporal, agentes, testes, docs, mapa). Ligar algo que peça reinício de serviço ou migração continua exigindo OK do José.
-- t114u: o pqbr-mcp externo é exclusivo do `mantenedor` (0.4.0): token de outro papel ⇒ 401; papel declarado (`X-PQBR-Papel`) diferente ⇒ 403; `novo_cliente.py` só cria mantenedor.
-- t116u: OK do José para reiniciar SOMENTE o `pqbr-mcp` após a suíte verde.
-
-
 ## t117u–t119u (26/10/2026) — Persistência verificada; mapa e docs atualizados
 - t117u: pqbr-mcp e hindsight-api são user units enabled (linger=yes); containers DB/Temporal `unless-stopped`; nada a corrigir. Comando de checagem no onboarding.
 - t118u/t119u: mapas 13 (bloco de persistência), 00 e 09 e os docs (ROADMAP, AGENTES, REGRAS, ARQUITETURA) registram o mantenedor exclusivo do MCP, a construção de módulos e a persistência.
@@ -205,6 +192,17 @@ t531 · 24/10/2026 · pedido do José. **Só leitura e proposta.** **Atualizaç�
 ## t121u (26/10/2026) — Correção da P2 no ESTADO-ATUAL
 - 2SV de juniormoedavirtual já ativa (t106u) e migração 0020 aplicada 16:56 com worker reiniciado 16:57 (t109u). Resta: conferir perfil/conta do Camofox na tentativa bloqueada do Cloud Console e criar o OAuth do YouTube pelo Camofox. Demais P* revisadas: sem outra divergência comprovada.
 
+
+## t121u (26/10/2026) — Checkboxes na aba Roadmap
+- Cada item mostra ☑ (feito) ou ☐ (falta e próximos passos), derivado do mesmo parser; só símbolo, sem input/form/POST.
+
+
+## t122u (26/10/2026) — OAuth do YouTube no projeto pqbr-publicacao
+- José: o EP1003 cafe-fraco já está aprovado e é o único aprovado até agora. Ele ainda vai ver os outros vídeos. O passo seguinte pedido foi a P2.
+- (a) Camofox PQBR 127.0.0.1:9387, um único perfil (`userId=pqbr`, pasta `66e05767…`). A conta logada é a do canal. O Studio aberto é o Porquê BR (`@porquebr-t4c`, `UC4xgIr6KdbfEgjsW7FEzQww`). O Cloud Console não bloqueia mais por 2SV. O projeto que estava selecionado na entrada era o antigo `yt-llm-b1`; não foi reutilizado.
+- (b) Criado o projeto `pqbr-publicacao` (sem organização). YouTube Data API v3 ativada. App OAuth Externo "PQBR", status Testando, usuário de teste = a conta do canal, escopos `youtube.upload` e `youtube.readonly`. Cliente Desktop `pqbr-publicacao` (a opção de cliente para agente de IA ficou desmarcada). JSON em `~/.pqbr/secrets/oauth-pqbr-publicacao.json` (600). As três chaves `YOUTUBE_*` foram acrescentadas a `~/.pqbr/secrets/episodio.env` (600). `channels.list` devolveu um canal: Porquê BR. Nada foi impresso.
+- Consentimento: o Google mostrou "app não verificado"; seguir foi Continuar, marcar os dois escopos e Continuar de novo. A primeira tentativa sem marcar os escopos voltou `access_denied`.
+- Não feito de propósito: upload de logotipo (a própria tela diz que o logo leva o app à verificação); página inicial e política de privacidade (não existem no projeto; não inventar). Por isso o botão Publicar segue desabilitado e o refresh de app em
 
 ## Fase atual do ROADMAP
 

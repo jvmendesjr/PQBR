@@ -649,3 +649,11 @@ NÃO CABE:
 
 ## t121u (26/10/2026) — Checkboxes na aba Roadmap
 - Cada item mostra ☑ (feito) ou ☐ (falta e próximos passos), derivado do mesmo parser; só símbolo, sem input/form/POST.
+
+## t122u (26/10/2026) — OAuth do YouTube no projeto pqbr-publicacao
+- José: o EP1003 cafe-fraco já está aprovado e é o único aprovado até agora. Ele ainda vai ver os outros vídeos. O passo seguinte pedido foi a P2.
+- (a) Camofox PQBR 127.0.0.1:9387, um único perfil (`userId=pqbr`, pasta `66e05767…`). A conta logada é a do canal. O Studio aberto é o Porquê BR (`@porquebr-t4c`, `UC4xgIr6KdbfEgjsW7FEzQww`). O Cloud Console não bloqueia mais por 2SV. O projeto que estava selecionado na entrada era o antigo `yt-llm-b1`; não foi reutilizado.
+- (b) Criado o projeto `pqbr-publicacao` (sem organização). YouTube Data API v3 ativada. App OAuth Externo "PQBR", status Testando, usuário de teste = a conta do canal, escopos `youtube.upload` e `youtube.readonly`. Cliente Desktop `pqbr-publicacao` (a opção de cliente para agente de IA ficou desmarcada). JSON em `~/.pqbr/secrets/oauth-pqbr-publicacao.json` (600). As três chaves `YOUTUBE_*` foram acrescentadas a `~/.pqbr/secrets/episodio.env` (600). `channels.list` devolveu um canal: Porquê BR. Nada foi impresso.
+- Consentimento: o Google mostrou "app não verificado"; seguir foi Continuar, marcar os dois escopos e Continuar de novo. A primeira tentativa sem marcar os escopos voltou `access_denied`.
+- Não feito de propósito: upload de logotipo (a própria tela diz que o logo leva o app à verificação); página inicial e política de privacidade (não existem no projeto; não inventar). Por isso o botão Publicar segue desabilitado e o refresh de app em teste expira em 7 dias.
+- (c) Nenhum upload. O `pqbr-episodio-worker` não foi reiniciado (exige OK) e portanto ainda não lê as chaves novas. Envio real continua exigindo `YOUTUBE_DRY_RUN=false`, `PQBR_PUBLICACAO_REAL=1` e o código em `PQBR_PUBLICACAO_REAL_CODIGOS`.
