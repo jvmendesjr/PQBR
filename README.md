@@ -34,4 +34,4 @@ José usa o Telegram (Hermes `pqbr`) para avisos, pedidos e aprovações (sinais
 - Decisão nova entra no `DECISOES-LOG.md` e no `REGRAS.md` no mesmo commit; atualizar também requisitos, desenho, testes e tarefas afetados.
 - Não colocar senhas, tokens, cookies, dados pessoais, IPs ou IDs internos neste repositório.
 - **Sessão Google (referência viva):** [`docs/REFERENCIA-sessao-google.md`](docs/REFERENCIA-sessao-google.md) — Camofox é a fonte/renovador da sessão; NotebookLM só a lê.
-- **Antes de qualquer E2E:** [docs/LICOES-pre-E2E.md](docs/LICOES-pre-E2E.md), seguindo o checklist em ordem.
+- **Lacunas vivas:** [docs/LACUNAS-fluxo.md](docs/LACUNAS-fluxo.md). O checklist pré-E2E de 12/10 está em [docs/_obsoleto/LICOES-pre-E2E.md](docs/_obsoleto/LICOES-pre-E2E.md) e não manda mais abrir a CLI do Paperclip.

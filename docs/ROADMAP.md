@@ -194,7 +194,7 @@ Estado em 09/10 (lido só leitura):
 - Um único servidor compartilhado: serviço de usuário `camofox-browser` (`~/camofox-browser`, v1.6.0, commit 2c0036a de 10/09, `node server.js`, Restart=on-failure, ~116 MB RSS). Sem `Environment` na unit, então tudo está no padrão.
 - **Porta 9377 escutando em todas as interfaces (`*:9377`), inclusive LAN e tailnet, sem chave de API** (`CAMOFOX_API_KEY`/`CAMOFOX_ACCESS_KEY` não definidas). noVNC desligado.
 - Perfis em `~/.camofox/profiles/<sha256(userId)[:32]>` (291 MB, 14 pastas), todos no mesmo processo e no mesmo `~/.camofox`. Identificados pelo hash, sem abrir cookies: `porquebr` (PQBR/`rede`, usado hoje), `tutibom10` e a conta do MP32 por e-mail (MP32/Gemini/Flow/Studio), `mp3_isolated_worker` (Hermes `mp3`), a conta pessoal do José (`~/Workspace/runway_keepalive.py`, usado hoje). Outras 9 pastas sem dono identificado (por exemplo `me`, das skills `pet`/`gpu`).
-- Clientes: `rede` (skills do Porquê BR), MP32 (`src/mp32/web/camofox.py`), Hermes `mp3`, `pet` e `gpu`, `runway_keepalive.py`.
+- Clientes naquele dia: `rede` (skills do Porquê BR), MP32 (código fora deste repositório), Hermes `mp3`, `pet` e `gpu`, `runway_keepalive.py`.
 - Controle de concorrência: só os limites padrão do servidor (`MAX_SESSIONS`, `MAX_CONCURRENT_PER_USER`, `MAX_TABS_*` não ajustados). Não existe trava entre projetos. Uma queda ou reinício por memória (`BROWSER_RSS_RESTART_THRESHOLD_MB`) derruba todos ao mesmo tempo.
 
 Conflitos: (1) reinício, atualização ou travamento do servidor de outro projeto derruba o Studio da PQBR; (2) dois clientes podem usar o mesmo `userId` ao mesmo tempo (nada impede que outro projeto use `porquebr`); (3) a exposição em LAN/tailnet sem chave deixa qualquer cliente da rede abrir a sessão do Studio; (4) a atualização do código é única para todos.
@@ -210,7 +210,7 @@ Plano. Variáveis: `C=/home/pc/.pqbr/camofox`, porta `9387`, unit `pqbr-camofox.
 
 - [ ] **F4C-08** Activity de agente no Camofox (t355) — ferramenta Camofox para o agente com allowlist (navegar, ler, clicar, digitar, colar, upload), só em `127.0.0.1:9387` com a chave, sem login, cookies ou exclusão; cada ação registrada · Req: RF-45 · Testes: TS-11 · Depende de: F4C-03, F3-05 · Aceite: seletor quebrado de propósito numa página de teste é corrigido pelo agente e vira proposta de script · Portão: G4 · Rollback: desligar a Activity (só scripts) · Obs:
 
-Precisam do José: F4C-04, F4C-05, F4C-06, F4C-07. F4C-01..03 só pedem o portão G4.
+Precisam do José: F4C-05, F4C-06, F4C-07. F4C-04 já foi feito (t405). F4C-01..03 só pedem o portão G4.
 
 ## Fase 4V: geração de vídeo em série pelo navegador (t529) — storyboard → vídeo, sem extensões
 Ref.: `docs/pesquisas/PESQUISA-extensoes-geracao-em-serie.md` (leitura liberada, t530), ADR-012, t517 (cadeia), t529 (HOLD). Cada passo que abre Flow, Vids ou Vibes ou gasta cota tem portão do José.
@@ -421,4 +421,4 @@ Ordem: 0.5 ∥ 0 → 1 → 3 ∥ 4 → 5 → 6 → 7 → 8 → 9 → 10 → 11 �
 - [ ] **NLM-EF-02** Limpeza dos 55 cadernos antigos — lista classificada entregue; apagar só após aprovação do José, por id.
 - [ ] **NLM-EF-03** Validar o ciclo completo no E2E nº 1 (dry-run: cria, injeta, arquiva; não apaga).
 
-- [ ] **t462–t465 (12/10):** steering do Short; combos 9router por papel; NotebookLM-first (roteiro/SEO/capa no caderno); reposição automática de temas (7 dias, Líder Editorial). Pré-requisitos do E2E: [LICOES-pre-E2E](LICOES-pre-E2E.md). Pendentes: chave 9router no worker.env (formulário seguro do José), ponte CLI Paperclip na porta 3101 (re-login board), auditoria Gemini Web no fluxo.
+- [ ] **t462–t465 (12/10):** steering do Short; combos 9router por papel; NotebookLM-first (roteiro/SEO/capa no caderno); reposição automática de temas (7 dias, Líder Editorial). O checklist da época está em [docs/_obsoleto/LICOES-pre-E2E.md](_obsoleto/LICOES-pre-E2E.md). Pendência que ainda vale (t129u): o `EpisodioWorkflow` não chama o auditor Gemini. A ponte CLI do Paperclip na porta 3101 não é pendência. A chave do 9router em `worker.env` não foi reaberta nesta passagem.

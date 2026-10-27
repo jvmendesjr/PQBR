@@ -30,12 +30,13 @@ def pacote() -> str:
     partes = [
         "# PQBR — onboarding do agente (gerado; não editar à mão)",
         _ler("docs/ESTADO-ATUAL.md").replace("# ESTADO ATUAL", "## ESTADO ATUAL", 1)[:LIMITE],
-        "Fontes canônicas: docs/ESTADO-ATUAL.md (onde estamos), docs/BRIEFING-novo-agente-pqbr.md, docs/REGRAS.md, docs/DECISOES-LOG.md, docs/ROADMAP.md, "
-        "docs/LACUNAS-fluxo.md, docs/ARQUITETURA.md, docs/mapa/. Em conflito, vale o doc canônico.",
+        "Fontes canônicas: docs/ESTADO-ATUAL.md (onde estamos), docs/REGRAS.md, docs/DECISOES-LOG.md, docs/ROADMAP.md, "
+        "docs/LACUNAS-fluxo.md, docs/ARQUITETURA.md, docs/AGENTES.md, docs/mapa/. Em conflito, vale o doc canônico. "
+        "O briefing do YT-LLM está em docs/_obsoleto/BRIEFING-novo-agente-pqbr.md e não é procedimento.",
         _ler("docs/operacao/AGENTS-base.md"),  # instruções operacionais manuais (ex-AGENTS.md)
         "## Conexão MCP", "Servidor MCP da PQBR (só tailnet): porta HTTPS 8791 do host pc na tailnet (nome MagicDNS fora do repo), caminho /mcp, Streamable HTTP, Bearer token por cliente. Ferramentas conforme o papel: onboarding, buscar_memoria, codigo, estado (leitura) e registrar_memoria, registrar_alteracao (única escrita: Hindsight).",
         "## Protocolo obrigatório do agente externo (t95u/t96u)", PROTOCOLO,
-        "## BRIEFING", _ler("docs/BRIEFING-novo-agente-pqbr.md")[:LIMITE],
+        "## BRIEFING", "Histórico, fora do procedimento: docs/_obsoleto/BRIEFING-novo-agente-pqbr.md (herança do YT-LLM, 24/10/2026). O que vale está em REGRAS, CONTRATO-EDITORIAL e ESTADO-ATUAL.",
         "## REGRAS (início)", _ler("docs/REGRAS.md")[:LIMITE],
         "## Decisões recentes", "\n\n".join(d[:1500] for d in decisoes),
         "## Fase atual do ROADMAP", fase,
