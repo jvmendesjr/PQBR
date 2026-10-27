@@ -5,6 +5,12 @@ Versionamento SemVer (MAJOR.MINOR.PATCH) a partir de t510. Versão do pacote can
 
 
 
+## [0.17.1] — 2026-10-27
+### Alterado
+- A silhueta do mapa do Brasil no logo não bloqueia gerar nem subir. O aviso sai antes de tornar público (t131u).
+- Imagem no Google Flow está autorizada, sem teto. Vídeo gasta o saldo do Flow e depois cai no Google Vids e no Meta Vibes.
+- `config/mapa_cliques.json` deixa de ser catálogo. A tela do Camofox manda; o arquivo só anota surpresa.
+
 ## [0.17.0] — 2026-10-27
 ### Alterado
 - O episódio para no storyboard. `storyboard_criar` grava a ficha (Storyboard 1.2.0) com `imagens_revisadas` false. Não gera imagem nem vídeo (t130u).

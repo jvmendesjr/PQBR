@@ -1,6 +1,6 @@
 {
   "versao": "0.1.0",
-  "atualizado": "2026-10-26",
-  "regra": "Só entra elemento visto na tela, com data. Pop-up e botão fora do lugar: atualizar este registro e seguir. A lista vazia é o estado honesto de 26/10/2026: Flow, Vids, Vibes e o Studio ainda não foram mapeados.",
+  "atualizado": "2026-10-27",
+  "regra": "t131u: não é um catálogo para preencher antes. A tela aberta no Camofox é a fonte. Aqui só entra surpresa (pop-up, botão que mudou de lugar), com a data, e o fluxo segue. Lista vazia enquanto nada surpreendeu.",
   "sitios": []
 }

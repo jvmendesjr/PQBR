@@ -61,3 +61,21 @@ GASTO_IMAGEM_NLM = AutorizacaoGasto(
     deterministico="o episódio não chama nlm_gerar_capa nesta etapa",
     agente="nenhum",
 )
+
+GASTO_FLOW_IMAGEM = AutorizacaoGasto(
+    etapa="flow_imagem",
+    modelo="google-flow",
+    pode_gastar=True,
+    meio="imagem",
+    deterministico="imagens do Flow são gratuitas (t131u); sem teto de quantidade para o storyboard",
+    agente="gera as imagens das fichas; não troca para um modelo pago de imagem",
+)
+
+GASTO_FLOW_VIDEO = AutorizacaoGasto(
+    etapa="flow_video",
+    modelo="google-flow",
+    pode_gastar=True,
+    meio="video",
+    deterministico="gasta o saldo que houver no Flow; acabou, Google Vids; depois Meta Vibes",
+    agente="lê a tela no Camofox e segue; não inventa seletor",
+)
