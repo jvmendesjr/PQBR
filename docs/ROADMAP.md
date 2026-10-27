@@ -93,7 +93,7 @@
   - Portão José: nenhum novo. Obs: se alguma classe de aviso não tiver destino privado equivalente, manter Telegram e registrar o bloqueio.
 - [ ] **F05-09** [REESCRITO t510; ATUALIZADO t536] Paperclip **parado/paralisado** agora; desinstalação só depois de validar a nova arquitetura (PydanticAI/Temporal + Telegram)
   - Req: RF-34, RF-43, RF-48 · Testes: TZ-10 · Depende de: F05-06, F05-08 (só para a etapa 2)
-  - **Etapa 1 — paralisar (t536, aprovado em princípio por José em 25/10):** parar e desabilitar `paperclipai.service` (unit de usuário) **sem desinstalar nem apagar** nada (código, `~/.paperclip`, banco `paperclip-db`, backups e histórico ficam). Antes: remover/neutralizar as dependências PQBR no worker (`acesso_paperclip` no `AcessosWorkflow`, `PonteTemporalPaperclipWorkflow` e activities `*_paperclip`) para não gerar pedidos falsos ao José. O comando exato só roda com OK explícito do José.
+  - **Etapa 1 — paralisar (t536; executada em 27/10/2026, t130u):** `paperclipai.service` parado e desabilitado, sem desinstalar nem apagar (código, `~/.paperclip`, banco `paperclip-db`, backups e histórico ficam). `config/paperclip.json` está `parado_proposital`: `acesso_paperclip` devolve pausado e o `AcessosWorkflow` não abre pedido. Religar é `systemctl --user enable --now paperclipai.service`.
   - **Etapa 2 — desinstalar:** só depois de TZ-06/08/09 aprovados, rollback ensaiado e a nova arquitetura validada; exige novo OK do José. Não desligar o gateway Hermes compartilhado nem afetar outros perfis.
   - Aceite: etapa 1 sem efeito em Temporal, workers, Camofox e Hermes; religar é `systemctl --user enable --now paperclipai.service`. Etapa 2: TZ-10.
   - Portão José: etapa 1 (comando) e etapa 2 (desinstalação). Texto anterior em `docs/_obsoleto/paperclip-trechos-t510.md`.
@@ -219,7 +219,7 @@ Ref.: `docs/pesquisas/PESQUISA-extensoes-geracao-em-serie.md` (leitura liberada,
 - [ ] **R3 · Adaptador Flow** (`GeradorVideo` sobre `NavegadorIdentidade`): storyboard de imagens em série → vídeo por cena (start frame/chain); concorrência 1, ritmo humano, falha rápida no drift. Piloto de 1 cena antes de 5 a 7.
 - [ ] **R4 · Adaptador Google Vids** (rota 2), mapeado do zero (não há extensão de referência).
 - [ ] **R5 · Adaptador Meta Vibes** (rota 3, obrigatória como fallback).
-- [ ] **R6 · Tirar o `EpisodioWorkflow` do `nlm_baixar_video`**: ligar `CADEIA_VIDEO` com escolha explícita e registrada; o NotebookLM vídeo fica só como alternativa explícita.
+- [ ] **R6 · Ligar a cadeia no episódio:** o `EpisodioWorkflow` já não baixa vídeo do NotebookLM (t130u; essa geração foi descartada, não é alternativa). Falta ligar `CADEIA_VIDEO` com escolha explícita e registrada.
 - [ ] **R7 · HOLD final**: as 3 rotas falharam → estado HOLD + pedido de decisão (Telegram) + sinal do Temporal `decisao_video` (tentar de novo, rota, cancelar); testes com mocks.
 - [ ] **PRÉ-REQUISITO DO 1º VÍDEO DA NOVA FASE (t532):** verificar e ajustar a **silhueta do mapa do Brasil no logo** (logo v4, overlay v8, avatar) antes de gerar ou publicar o primeiro vídeo. Sem isso o 1º vídeo não sai.
 

@@ -1,7 +1,8 @@
-"""EpisodioWorkflow + PublicacaoWorkflow (dry-run) — fila `episodio-pqbr` (t427).
-Ordem (roteiro antigo em docs/_obsoleto/sdd/teste-e2e-short-1.md): NotebookLM short (fila notebooklm-pqbr, filho) → download → pós (trim+logo)
-→ quadros por cena + capa A9 (código) → espera o veredito do Auditor (sinal) → Drive → Publicação **dry-run**
-(payload privado, sem agendar, nada enviado ao YouTube). Nada torna público; sem veredito ou reprovado, para."""
+"""EpisodioWorkflow + PublicacaoWorkflow (dry-run) — fila `episodio-pqbr` (t427, t130u).
+Ordem vigente: NotebookLM intelectual (roteiro, compliance, SEO; sem vídeo) → storyboard_criar.
+Para com a ficha gravada, imagens_revisadas false e pode_gerar_video false.
+Pós, quadros, Drive e publicação dry-run continuam registrados e não rodam neste fluxo.
+Nada torna público. Os vídeos já prontos do saldo não entram aqui."""
 from __future__ import annotations
 import asyncio, json, os, re, subprocess
 from datetime import timedelta, datetime
@@ -12,11 +13,11 @@ from temporalio import activity, workflow
 from temporalio.common import RetryPolicy
 
 with workflow.unsafe.imports_passed_through():
-    from .notebooklm import NotebookLMWorkflow, PedidoNotebookLM, FILA_NOTEBOOKLM, nlm_baixar_video
-    from .pacote import (ApagarCadernoWorkflow, ATIVIDADES_REGISTRO, pacote_garantir, registro_buscar_caderno,
-                         arquivar_caderno, nlm_exportar_caderno)
+    from .notebooklm import NotebookLMWorkflow, PedidoNotebookLM, FILA_NOTEBOOKLM, nlm_perguntar
+    from .storyboard import PROMPT_STORYBOARD, storyboard_criar
+    from ..contratos.storyboard import elenco_alternado
+    from .pacote import ATIVIDADES_REGISTRO, pacote_garantir, registro_buscar_caderno
     from ..contratos import CATEGORIA_YOUTUBE
-    from temporalio.workflow import ParentClosePolicy
 
 FILA_EPISODIO = "episodio-pqbr"
 RAIZ = Path("/home/pc/Workspace/PQBR")
@@ -158,45 +159,35 @@ class EpisodioWorkflow:
                                                      pacote_fonte=pac["fonte"], pacote_hash=pac["hash"], steering=p.steering,
                                                      roteirizar=p.roteirizar, tema=p.tema),
             id=f"nlm-short-{p.slug}-{workflow.info().workflow_id[-6:]}", task_queue=FILA_NOTEBOOKLM)
-        if not nlm.ok or not nlm.artefato:
-            return ResultadoEpisodioE2E(etapa="geracao", ok=False, detalhes=nlm.model_dump())
-        raw = await workflow.execute_activity(nlm_baixar_video, args=[nlm.caderno, nlm.artefato, f"{base}/raw.mp4"],
-                                              task_queue=FILA_NOTEBOOKLM, **curto)
-        pos = await workflow.execute_activity(pos_produzir, args=[raw["arquivo"], f"{base}/final.mp4"], **curto)
-        quadros = await workflow.execute_activity(extrair_quadros, args=[f"{base}/final.mp4", p.n_cenas, f"{base}/pranchas"], **curto)
-        capa = await workflow.execute_activity(capa_a9, quadros, **curto)
-        capa_nlm = (nlm.criativo.get("capa") or {}).get("arquivo")
-        if capa_nlm:   # t464/t466: infográfico retrato do NotebookLM só se for cena única; senão A9
-            chk = await workflow.execute_activity("capa_conferir", capa_nlm, **curto)
-            capa = ({**capa, "escolhido": capa_nlm, "origem": "notebooklm-infografico", "a9": capa.get("escolhido"), "checagem": chk}
-                    if chk["unico"] else {**capa, "origem": "a9 (infográfico reprovado: " + chk["motivo"] + ")", "checagem": chk})
+        if not nlm.ok or not nlm.caderno:
+            return ResultadoEpisodioE2E(etapa="roteiro", ok=False, detalhes=nlm.model_dump())
         self._criativo = nlm.criativo
-        try:
-            await workflow.wait_condition(lambda: self._veredito is not None, timeout=timedelta(hours=p.espera_veredito_h))
-        except asyncio.TimeoutError:
-            return ResultadoEpisodioE2E(etapa="auditor", ok=False, detalhes={"motivo": "sem veredito no prazo", "pranchas": quadros, "capa": capa})
-        if self._veredito.veredito == "reprova":
-            return ResultadoEpisodioE2E(etapa="auditor", ok=False, detalhes=self._veredito.model_dump())
-        exp = await workflow.execute_activity(nlm_exportar_caderno, args=[nlm.caderno, p.codigo], task_queue=FILA_NOTEBOOKLM, **curto)
-        arq = await workflow.execute_activity(arquivar_caderno, args=[nlm.caderno, p.codigo, p.slug, exp, raw["arquivo"]], **curto)
-        seo = nlm.criativo.get("seo") or {}
-        drv = await workflow.execute_activity(drive_enviar, args=[p.codigo, p.slug, [raw["arquivo"], f"{base}/final.mp4"]], **curto)
-        pub = await workflow.execute_child_workflow(PublicacaoWorkflow.run, {
-            "codigo": p.codigo, "titulo": seo.get("titulo") or p.titulo, "descricao": seo.get("descricao") or p.descricao,
-            "tags": (seo.get("tags") or p.tags)[:15], "dry_run": p.dry_run,
-            "video": f"{base}/final.mp4", "capa": capa.get("escolhido")}, id=f"pub-{p.codigo}-{workflow.info().workflow_id[-6:]}")
-        if not p.dry_run and pub.get("enviado") and p.tema_id:   # t465: tema usado → temas_publicados + reposição automática
-            await workflow.execute_activity("tema_publicado", args=[p.tema_id, p.codigo, pub.get("video_id"), "private"],
-                                            task_queue="pqbr-episodio", **curto)
-            await workflow.start_child_workflow("ReposicaoTemasWorkflow", 6, id=f"repor-temas-{p.codigo}", task_queue="pqbr-episodio",
-                                                parent_close_policy=ParentClosePolicy.ABANDON)
-        if not p.dry_run and pub.get("enviado"):   # t459: só publicação real agenda o apagamento D+2
-            await workflow.start_child_workflow(ApagarCadernoWorkflow.run, args=[nlm.caderno, p.codigo, workflow.now().isoformat()],
-                                                id=f"apagar-caderno-{p.codigo}", parent_close_policy=ParentClosePolicy.ABANDON)
-        return ResultadoEpisodioE2E(etapa="publicacao_dryrun", ok=True,
-                                    detalhes={"criativo": {k: v for k, v in nlm.criativo.items() if k != "markdown"}, "arquivo_caderno": arq, "pos": pos, "capa": capa.get("escolhido"), "drive": drv, "publicacao": pub,
-                                              "auditor": self._veredito.model_dump()})
+        elenco = elenco_alternado(p.codigo)
+        outro = "masculino" if elenco == "feminino" else "feminino"
+        roteiro = (nlm.criativo.get("markdown") or p.roteiro_texto)[:6000]
+        base_prompt = PROMPT_STORYBOARD.format(codigo=p.codigo, elenco=elenco, outro=outro, roteiro=roteiro)
+        uma = dict(start_to_close_timeout=timedelta(minutes=12), retry_policy=RetryPolicy(maximum_attempts=1))
+        erro, sb = "", None
+        for _ in range(2):
+            txt = await workflow.execute_activity(
+                nlm_perguntar, args=[nlm.caderno, base_prompt + (f" A resposta anterior foi inválida: {erro}. Corrija." if erro else "")],
+                task_queue=FILA_NOTEBOOKLM, **uma)
+            try:
+                sb = await workflow.execute_activity(
+                    storyboard_criar, args=[txt, p.codigo, f"{base}/storyboard.json"],
+                    start_to_close_timeout=timedelta(minutes=2), retry_policy=RetryPolicy(maximum_attempts=1))
+                break
+            except Exception as e:  # noqa: BLE001
+                erro = str(getattr(e, "cause", e))[:300]
+                sb = None
+        if not sb:
+            return ResultadoEpisodioE2E(etapa="storyboard", ok=False, detalhes={"motivo": f"storyboard inválido: {erro}", "caderno": nlm.caderno})
+        return ResultadoEpisodioE2E(
+            etapa="storyboard", ok=True,
+            detalhes={"storyboard": sb, "caderno": nlm.caderno,
+                      "criativo": {k: v for k, v in nlm.criativo.items() if k != "markdown"},
+                      "pode_gerar_video": False})
 
 
 from .criativo import validar_roteiro, validar_seo, seo_9router, compliance_roteiro, ordenar_fontes, capa_conferir
-ATIVIDADES_EPISODIO = [capa_conferir, validar_roteiro, validar_seo, seo_9router, compliance_roteiro, ordenar_fontes, pos_produzir, extrair_quadros, capa_a9, drive_enviar, publicacao_dryrun, *ATIVIDADES_REGISTRO]
+ATIVIDADES_EPISODIO = [storyboard_criar, capa_conferir, validar_roteiro, validar_seo, seo_9router, compliance_roteiro, ordenar_fontes, pos_produzir, extrair_quadros, capa_a9, drive_enviar, publicacao_dryrun, *ATIVIDADES_REGISTRO]

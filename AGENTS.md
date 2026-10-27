@@ -4,26 +4,28 @@
 
 Fonte única de "onde estamos". Não repete o ROADMAP: aponta os itens por id. **Atualize este arquivo a cada correção ou pendência resolvida.** O hook pre-commit exige isso quando o commit toca ROADMAP, LACUNAS, DECISOES-LOG ou CHANGELOG, e o `registrar_alteracao` exige isso para `tipo` correcao ou pendencia_resolvida.
 
-Atualizado: 27/10/2026 (t129u: lacunas conferidas no código; documentos obsoletos movidos) · versão 0.16.10
+Atualizado: 27/10/2026 (t130u: storyboard no fluxo; NotebookLM sem vídeo; Paperclip parado) · versão 0.17.0
 
 ## Onde estamos
 - **Produção:** o lote do saldo está em `runtime/lote-saldo/` (um diretório por tema). O EP1002 olhos-da-cara foi reprovado e descartado (`runtime/lote-saldo/_descartado/`), e o tema voltou a `proposto`.
 - **Publicação (ROADMAP F8-01):** o fluxo pelo Temporal está pronto. O worker foi reiniciado em 27/10 às 08:56 (-03, São Paulo; t128u) e carrega o fallback do refresh e o ensaio. `YOUTUBE_DRY_RUN=true`. Nada foi enviado. Até a produção ativa, vídeo aprovado que subir fica privado; público só depois, na ordem dos roteiros e nas janelas.
 - **Agente externo:** o servidor MCP 0.2+ só funciona pela tailnet. A memória escrita leva o autor (o cliente) e o commit. O protocolo obrigatório está no AGENTS.md. O `initialize` do `pqbr-mcp` já devolve a frase de honestidade (t126u), desde o reinício das 08:56. Hindsight: bank `pqbr` com 877 documentos; as 7 candidatas restantes foram apagadas (t128u).
 - **Documentos (t129u):** `docs/LACUNAS-fluxo.md` só lista o que ainda falta no código. O roster vigente está em `docs/AGENTES.md`. Briefing, checklist pré-E2E, rascunho de SOUL e propostas não aplicadas foram para `docs/_obsoleto/`. As provas do F3-05 continuam em `docs/sdd/` porque o item segue aberto no ROADMAP.
+- **Fluxo (t130u):** o episódio para no storyboard. O NotebookLM entrega roteiro, compliance e SEO, e não gera vídeo. `YOUTUBE_DRY_RUN=true`. Os vídeos de `runtime/lote-saldo/` ficam parados até a etapa de publicação.
+- **Paperclip (t130u):** `paperclipai.service` parado e desabilitado em 27/10. Sem desinstalar e sem apagar dados. `config/paperclip.json` está `parado_proposital`.
 
 ## Próximo passo
-José vê os outros vídeos do lote quando puder. Em 27/10 ele disse que não consegue vê-los agora. O EP1003 cafe-fraco segue o único aprovado. Nenhum vídeo vai a público até ele declarar a produção ativa.
+Seguir a ordem do roadmap: testes no Camofox e o roteiro, sem ligar a publicação antes. O mapa de cliques só ganha seletor quando uma tela for usada. O LOOP por cena e o drop-in do Telegram ficam para depois. Nenhum vídeo vai a público até a produção ativa.
 
 ## Pendências abertas
 | # | Pendência | Ref. ROADMAP | Dono | Bloqueio |
 |---|---|---|---|---|
-| P1 | José ainda vê os outros vídeos do lote. Em 27/10 ele disse que não consegue vê-los agora. O EP1003 cafe-fraco já está aprovado (26/10, único até agora); não roda o LOOP nesse episódio | Estado 26/10 · Próximo 5 | José | aguardando José nos demais |
-| P2 | Publicação: worker reiniciado 27/10 08:56 (-03), 0 workflows Running antes e depois. Código t124u–t126u neste processo. `YOUTUBE_DRY_RUN=true`. Envio real desligado. Refresh do app em teste vence ~2/11 21:20 (-03). Mapa de cliques continua vazio: nenhuma tela foi vista | F8-01 | agente | sem envio até a produção ativa |
+| P1 | Vídeos do saldo ficam parados. José assiste quando puder. O EP1003 cafe-fraco já está aprovado (26/10, único até agora). Não roda o LOOP e não publica agora | Estado 27/10 · t130u | José | sem mexer nos arquivos até a etapa do Studio |
+| P2 | Publicação: worker reiniciado 27/10 11:27 (-03), 0 workflows Running antes e depois. `YOUTUBE_DRY_RUN=true`. Envio real desligado. Refresh do app em teste vence ~2/11 21:20 (-03). Mapa de cliques continua vazio: nenhuma tela foi vista | F8-01 | agente | sem envio até a produção ativa |
 | P3 | Teste: LOOP por cena vs o atual | Estado 26/10 · Testes pendentes | agente | depois do fluxo de publicação |
 | P4 | **Feito (t108u/t109u).** Juiz por etapa (`gemini_juiz` v1.0.0): pré-produção usa 3.8 Flash; produção (VISUAL e LOOP) usa 4 Argon Baixo. O worker `pqbr-episodio-worker` foi reiniciado com OK do José às 16:57 (-03), e o poller está ativo na fila `episodio-pqbr`, ns `pqbr` | Estado 26/10 · DECISOES-LOG t109u | agente | concluído |
-| P5 | Imagens de referência do elenco (`ASSET_personagem_{masculino,feminino}-v1`) | Estado 26/10 · Próximo 4 | agente | geração paga: OK do José (postergado) |
-| P6 | Activity do Storyboard no Temporal (bloqueia a geração sem ele) | Estado 26/10 · Próximo 2; R2 | agente | postergado |
+| P5 | Imagens de referência do elenco (`ASSET_personagem_{masculino,feminino}-v1`) | Estado 26/10 · Próximo 4 | agente | o contrato do storyboard não autoriza esse gasto |
+| P6 | **Feito (t130u).** `storyboard_criar` valida o Storyboard 1.2.0, grava a ficha e deixa `pode_gerar_video` false. O episódio para aí. Imagem e vídeo desta etapa não rodam | Estado 27/10 · DECISOES-LOG t130u | agente | concluído |
 | P7 | **Feito (t108u).** O gate VISUAL agora tem `boca_articula_fala`, `corte_oculos_cabeca` e `grotesco` (FichaCena/REGRAS §25), e cada um reprova sozinho. Validado no EP1002 (`loop-gemini-4argon-v2.json`): reprova, com S01 corte+grotesco, S04 corte e S02/S05/S09 boca | Estado 26/10 · CHANGELOG 0.14.0 | agente | concluído |
 | P8 | **Feito (t128u).** As 7 memórias `obsoleto_candidato` do roster antigo de `docs/AGENTES.md` foram apagadas em 27/10 ~08:57 (-03). Bank 884 → 877. Backup fora do git | `docs/operacao/hindsight-descarte-candidatos.md` | agente | concluído |
 | P9 | **Feito (t112u–t116u).** Papel `mantenedor` (política 1.4.0) lê todas as tags e o repo todo; pqbr-mcp 0.4.0 exclusivo do mantenedor; onboarding em `docs/operacao/onboarding-agente-externo.md`. Falta só entregar token por cliente novo (`scripts/mcp/novo_cliente.py <nome> mantenedor`) | Fase Conhecimento | agente | concluído |
@@ -38,8 +40,7 @@ Aba **Roadmap** no painel (:8088): Próximos passos, Falta e Feito gerados deste
 pqbr-mcp 0.4.0 (user unit, enabled, Restart=on-failure, linger=yes), hindsight-api (enabled, Restart=always), Docker DB/Temporal (`unless-stopped`), worker enabled. Comando de checagem e detalhes: `docs/operacao/onboarding-agente-externo.md` § Operacional e persistência.
 
 ## Como atualizar
-Resolveu ou corrigiu algo: tire a linha da tabela (ou mude o bloqueio), ajuste "Próximo passo" e a data acima, faça o commit junto com o DECISOES-LOG/CHANGELOG e chame `registrar_alteracao` com `tipo` igual a `pendencia_resolvida` ou `correcao`.
-
+Resolveu ou corrigiu algo: tire a linha da tabela (ou mude o bloqueio), ajuste "Próximo passo" e a data acima, faça o commit junto com o DE
 
 Fontes canônicas: docs/ESTADO-ATUAL.md (onde estamos), docs/REGRAS.md, docs/DECISOES-LOG.md, docs/ROADMAP.md, docs/LACUNAS-fluxo.md, docs/ARQUITETURA.md, docs/AGENTES.md, docs/mapa/. Em conflito, vale o doc canônico. O briefing do YT-LLM está em docs/_obsoleto/BRIEFING-novo-agente-pqbr.md e não é procedimento.
 
@@ -110,6 +111,11 @@ Histórico, fora do procedimento: docs/_obsoleto/BRIEFING-novo-agente-pqbr.md (h
 - ⛔ **Agentes especialistas — proibido consultar sem aprovação explícita do José (t287):** `docs/arquivo/`, `docs/pesquisas/`, `docs/DECISOES-LOG.md` (só para registrar decisão nova) e qualquer rascunho ou material legado. Eles podem ser mal interpretados e aplicados em produção. Tudo o que vale deles já está aqui. **Exceção (t530, José):** `docs/pesquisas/PESQUISA-extensoes-geracao-em-serie.md` pode ser lido por qualquer agente, **somente leitura** (referência da Fase 4V).
 - **Dúvida ou conflito sem certeza** nas decisões aprovadas: não adivinhar. Marcar "EM CONSTRUÇÃO — aguardando José" e levar a ele (t323).
 - **Lacuna (t129u):** só entra em `docs/LACUNAS-fluxo.md` o que foi conferido no código e ainda falta. Login, issue ou ponte do Paperclip não são lacuna. O Paperclip aparece como histórico e como infraestrutura em retirada (ADR-011, F05-09).
+- **NotebookLM (t130u):** não gera vídeo. Entrega pesquisa, roteiro, compliance e SEO. `storyboard_criar` valida o `Storyboard` 1.2.0 e grava a ficha. `imagens_revisadas` fica false. Esta etapa não gera imagem nem vídeo.
+- **Gasto (t130u):** o contrato da etapa diz se pode gastar, qual modelo e qual meio (`src/pqbr/contratos/gasto.py`). O que o contrato não autoriza não roda. Storyboard: chat do NotebookLM, sim. Vídeo e infográfico do NotebookLM, não. O fallback de SEO usa o 9router no combo `especialista-seo` só depois de duas respostas inválidas do caderno.
+- **Paperclip (t130u):** `paperclipai.service` parado e desabilitado, sem desinstalar e sem apagar dados. `config/paperclip.json` está `parado_proposital`, então a checagem não abre pedido. Apagar o produto fica para depois, com novo OK.
+- **Login (t130u):** consentimento permanente para manter as sessões ativas. José entra só se a reautenticação autônoma não fechar. Parar um fluxo, pelo Telegram ou por pedido ao mantenedor, não desloga.
+- **Saldo e cliques (t130u):** os vídeos já prontos ficam parados até a etapa de publicação no YouTube Studio. Envio real continua desligado. O mapa de cliques continua vazio até uma tela ser usada de verdade. Não inventar seletor.
 - **Honestidade (t126u, José):** o agente diz o que viu e o que não viu. Não inventa seletor, número ou resultado para a conta fechar. Se uma ideia do José não se sustenta, ou só aumenta o sistema, o agente diz isso antes de construir. Vale para todos os papéis e para o agente externo no MCP.
 - **Decisão nova:** entra no `DECISOES-LOG.md` (tNNN) **e** aqui, no mesmo commit. Se este arquivo divergir do log, vale a entrada mais nova do log e este arquivo é corrigido.
 - **Legenda:** [APROVADO] decisão do José · [VERIFICADO] testado/visto na fonte · [HIPÓTESE] a confirmar antes de construir o que depende dela · EM CONSTRUÇÃO — aguardando José.
@@ -123,24 +129,9 @@ Histórico, fora do procedimento: docs/_obsoleto/BRIEFING-novo-agente-pqbr.md (h
   5. **Runtime (t392):** os agentes usam modelos do **9router** pelos adapters `process` (texto) e `opencode_local` (ferramenta). Nenhum perfil Hermes além do `pqbr`, que é só o canal do José para o Diretor. Ferramentas = kit PQBR (Temporal, Camofox, NotebookLM py, Pydantic v2) + API Paperclip.
   6. **Rotinas** do Paperclip podem acordar agentes, inclusive para produção (t392). Efeito externo continua só pelo Temporal.
   7. **Orçamento:** warn-only, sem pausa por custo; limite de segurança revisto após os primeiros relatórios (t392).
-  8. **Falhas:** na 2ª falha da mesma ação entra o playbook (até 3 tentativas). No Camofox, intervalo sorteado de 5–15 min entre intervenções sucessivas na mesma sessão, não duração da intervenção nem retry automático (t357; precisão aprovada em 17/10/2026, §3.1). Só depois Diretor → canal de controle ativo (Telegram/Hermes `pqbr`; t474).
-  9. **Tickets:** abertura automática; merge automático com CI e testes verdes + aprovação do Dev Revisor, se a mudança não tocar regra canônica, segredos nem infra (t390).
-  10. **Fonte de verdade:** Postgres local (t343). O Supabase não é usado.
-
-  11. **Camofox PQBR 24/7 (t395):** a instância `pqbr-camofox` fica sempre ligada, com a sessão permanente aberta na mesma tela. Só reinicia se cair (watchdog/`Restart=always`). Se a sessão cair, a reautenticação é **autônoma e por qualquer meio**: renovar no Camofox, depois **sincronizar cookies do Chrome**, depois outro caminho previsto. Cada passo vai para o log + aviso pelo canal privado ativo (Telegram/Hermes `pqbr`; t474). O José só é chamado depois disso (noVNC/2FA). Isso supera a §3.1 (trava "cópia de cookies") e a §11 ("só com OK do José").
-
----
-
-- **Atualização 23/10 (t474, aprovada por José), revoga a t464 (Discord) e prevalece:** (1) o canal do José é o **Telegram (Hermes `pqbr`)**; pedidos, avisos e aprovações saem por lá. (2) Aprovações são **sinais do Temporal** (sim/não), com principa
+  8. **Falhas:** na 2ª falha da mesma ação entra o playbook (até 3 tentativas). No Camofox, intervalo sorteado de 5–15 min entre intervenções sucessivas na mesma
 
 ## Decisões recentes
-
-## t125u (26/10/2026) — Ensaio de cliques em memória, com a API como base
-- José: simular e testar a clicagem das funções que a API faria se ela faltar. Essa informação fica como resíduo e pode estar desatualizada. Quando uma atualização for conhecida, os agentes atualizam contratos, scripts e processos.
-- Até aqui os scripts só gravavam o payload da API (`enviar_privado` em simulação e o plano `*-camofox.json`). Não havia ensaio de clique nem de agendamento na tela do Studio.
-- O ensaio (contrato `studio_fallback` 0.1.0) percorre em memória subida privada, agenda (`publishAt`) e privacidade, lendo os campos do corpo da API. Campo ausente ou fora da regra reprova o ensaio. Seletor de tela só entra junto com a data em que a tela foi vista. Clique ao vivo permanece desligado: o canal é o de produção e um clique no envio criaria vídeo de verdade.
-- Nada enviado. `YOUTUBE_DRY_RUN` segue `true`. O worker em execução continua o das 22:06.
-
 
 ## t126u (26/10/2026) — Honestidade comum; mapa de cliques a partir do que for visto
 - José: mapear elementos, componentes e locais de clique, como no Flow e nos outros sites do fluxo. O agente identifica a alteração, corrige, atualiza e segue. Pop-up e botão que mudou de lugar não são risco e não param a publicação. Documentar e registrar no mapa de visualização. Antes de prosseguir: honestidade obrigatória, também no MCP; questionar ideia dele quando não for válida ou quando for excesso de aperfeiçoamento.
@@ -168,6 +159,10 @@ Histórico, fora do procedimento: docs/_obsoleto/BRIEFING-novo-agente-pqbr.md (h
 - Continua lacuna, porque o código confirma: o episódio espera sinal de auditor e não chama `auditor_gemini`; `tipo=short` com roteiro segue para gerar o vídeo no NotebookLM; o lote 2510 não tem código `PQBR-EP`; Flow/Vids/Vibes não estão no episódio; falta a activity do storyboard; `NavegadorIdentidade` não é importada por workflow; o mapa de cliques segue vazio. O backup e o canário do ADR-012 não foram conferidos: não entram como feitos.
 - Movidos com `git mv`, sem apagar: roster operacional antigo, briefing do YT-LLM, resumo de stack de 17/10, lições pré-E2E, rascunho de S
 
+## t130u (27/10/2026) — Storyboard no fluxo; NotebookLM sem vídeo; Paperclip parado
+- José: não liga a publicação antes da ordem. Os vídeos já publicados foram para usar saldo da plataforma. Seguir o roadmap, os testes no Camofox e o roteiro. Os outros vídeos ficam parados e entram na publicação quando o fluxo chegar ao YouTube Studio. Commit e push do que for preciso. Efetivar a activity de storyboard. O NotebookLM não gera vídeo: tirar isso dos processos e dos fluxos; o resto (item intelectual: roteiro, direção, SEO) fica. Reajustar o Flow pelo que já está documentado nas extensões, sem inventar seletor. O mapa de cliques nasce quando a tela for usada. Telegram e o teste de LOOP ficam para depois. Consentimento permanente de login: o sistema funciona com as sessões ativas; José só entra se a reautenticação autônoma falhar. Parar um fluxo não desloga. Gasto só o que o contrato da etapa autorizar, com modelo definido. Parar o serviço Paperclip agora, sem apagar; a saída dos documentos ativos fica para quando for deletado.
+- Código: `NotebookLMWorkflow` com `tipo=short` não chama `nlm_gerar_short`, não espera artefato e não gera infográfico. `nlm_gerar_short` levanta `VideoNotebookLMDescartado` antes do CLI. `EpisodioWorkflow` pede o JSON no chat (`nlm_perguntar`) e `storyboard_criar` valida o `Storyboard` 1.2.0, grava `storyboard.json` e devolve `pode_gerar_video` false. Pós, Drive e publicação dry-run continuam no worker e não rodam neste caminho. `src/pqbr/contratos/gasto.p
+
 ## Fase atual do ROADMAP
 
 ## Fase: Conhecimento e agente externo agnóstico (t84u–t86u, 26/10/2026)
@@ -188,17 +183,17 @@ Histórico, fora do procedimento: docs/_obsoleto/BRIEFING-novo-agente-pqbr.md (h
 
 ## LACUNAS (início)
 
-# Lacunas que ainda existem (conferidas no código em 27/10/2026, t129u)
+# Lacunas que ainda existem (conferidas no código em 27/10/2026, t130u)
 
 A tabela de 12/10 que bloqueava o fluxo no login da CLI do Paperclip foi para `docs/_obsoleto/lacunas-fluxo-ate-20261027.md`. Não é lacuna. A reposição de temas (`ReposicaoTemasWorkflow`) consulta o NotebookLM e grava no Postgres, sem Paperclip. O descarte de caderno de teste e o episódio estão registrados no `pqbr-episodio-worker`. Itens já feitos (descarte do EP1001, estilo via config, pedido de acesso que se fechou, restauração de sessão) não se repetem aqui.
 
 ## Abertas
 
-1. **Auditor no episódio.** `EpisodioWorkflow` (`src/pqbr/workflows/episodio.py`) espera o sinal `veredito_auditor`. Não chama `auditor_gemini` nem `auditor_loop_gemini`. A activity `auditor_gemini` está no worker da fila `camofox-pqbr`. O script `scripts/e2e/auditor_gemini_ep.py` ainda existe. Os critérios `boca_articula_fala`, `corte_oculos_cabeca` e `grotesco` já reprovam sozinhos (t108u); isso não falta.
-2. **Pacote só de roteiro.** Com `tipo=short` e `roteirizar`, `NotebookLMWorkflow` segue para `nlm_gerar_short`. Não há um tipo que pare depois do roteiro. Visto em `src/pqbr/workflows/notebooklm.py`.
+1. **Auditor no episódio.** `EpisodioWorkflow` para na ficha e não espera `veredito_auditor` (t130u). O sinal continua registrado e não é chamado. Não chama `auditor_gemini` nem `auditor_loop_gemini`. A activity `auditor_gemini` está no worker da fila `camofox-pqbr`. O script `scripts/e2e/auditor_gemini_ep.py` ainda existe. Os critérios `boca_articula_fala`, `corte_oculos_cabeca` e `grotesco` já reprovam sozinhos (t108u); isso não falta.
+2. **Fechado (t130u).** `tipo=short` não gera vídeo. `nlm_gerar_short` recusa antes do CLI. O episódio segue para roteiro, SEO e `storyboard_criar`.
 3. **Códigos do lote 2510.** Os prontos em `docs/pesquisas/lote-2510/` não têm `PQBR-EP`. Sem código não há `drive_enviar` nem episódio no Postgres. Quem define os códigos é o José.
-4. **Vídeo em série (Fase 4V).** O episódio ainda baixa o vídeo do NotebookLM. Flow, Vids e Vibes não estão no código. HOLD das três rotas está decidido (t529) e não implementado.
-5. **Storyboard.** O contrato `FichaCena`/`Storyboard` existe. Falta a activity que gera o storyboard e impede a geração sem ele. As imagens de referência do elenco são pagas e seguem postergadas.
+4. **Vídeo em série (Fase 4V).** O episódio para na ficha e não baixa vídeo do NotebookLM (t130u). Flow, Vids e Vibes continuam fora do código. HOLD das três rotas está decidido (t529) e não implementado. O mapa de cliques segue vazio.
+5. **Imagens do storyboard.** A activity `storyboard_criar` existe e grava a ficha com `imagens_revisadas` false. Falta gerar e revisar as imagens. As referências do elenco são pagas e o contrato desta etapa não autoriza esse gasto.
 6. **Navegador.** `NavegadorIdentidade` está em `src/pqbr/motores/navegador.py`. Nenhum workflow importa essa porta. O backup diário e o canário do ADR-012 não foram conferidos nesta passagem: não entram como feitos nem como lacuna confirmada.
 7. **Publicação, o que ainda falta.** O envio real está desligado de propósito (`YOUTUBE_DRY_RUN=true`) até a produção ativa. O roteiro de cliques do Studio não foi visto. `config/mapa_cliques.json` está vazio. O worker do episódio não tem o drop-in `telegram.conf`. O resto dessa etapa (chaves, agenda, registro no worker, fallback do refresh) está no ar desde 27/10 08:56 (-03).
 8. **Teste adiado, não executar agora.** LOOP do Gemini por cena, e 4 Argon baixo contra 3.8 Flash no mesmo lote.
@@ -206,8 +201,7 @@ A tabela de 12/10 que bloqueava o fluxo no login da CLI do Paperclip foi para `d
 ## Não são lacunas
 
 - Login da CLI do Paperclip, issue no Paperclip para começar episódio ou descarte, e o token do bot Hermes citado em 15/10. O canal vigente é o bot próprio (t538). O corte do serviço Paperclip é o item F05-09 do ROADMAP, não um login pendente.
-- Legenda extra no pós. José decidiu em t435 que a legenda do NotebookLM fica e o pós não grava outra. `scripts/legendar_short.py` é sobra, não um passo do fluxo.
-- Critérios visuais `personagem_mexe_labios` / corte / grotesco como "próxima versão do auditor". Já estão n
+- Geração de vídeo no NotebookLM. Descartada no fluxo (t130u). `nlm_gerar_short` recusa. A legenda extra no pós continua fora: `scripts/legendar_short.py` é sobra. A decisão t435 vale para o vídeo da c
 
 ## Mapa visual
 
