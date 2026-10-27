@@ -5,13 +5,17 @@ Padrão = SIMULAÇÃO: só grava o payload em arquivo. Envio real exige as DUAS 
 PQBR_PUBLICACAO_REAL=1 (OK novo do José). Nunca apaga vídeo: reversão = voltar para `private`.
 Credenciais OAuth só do ambiente (YOUTUBE_CLIENT_ID/SECRET/REFRESH_TOKEN); nunca logadas nem devolvidas."""
 from __future__ import annotations
-import hashlib, json, os, re, urllib.parse, urllib.request
+import hashlib, json, os, re, urllib.error, urllib.parse, urllib.request
 from pathlib import Path
 
 CODIGO = re.compile(r"^PQBR-EP[0-9]{4,}$")
 CATEGORIA = "27"   # Educação
 SIM_DIR = Path(os.environ.get("PQBR_DRYRUN_DIR", "/home/pc/.pqbr/publicacao-dryrun"))
 API = "https://www.googleapis.com"
+
+
+class RenovacaoOAuthFalhou(RuntimeError):
+    """O Google recusou o refresh (invalid_grant): o de app em teste vence em 7 dias. A mensagem não leva segredo."""
 
 
 def modo_real() -> bool:
@@ -63,8 +67,14 @@ def _token() -> str:
               "grant_type": "refresh_token"}
     campos["refresh" + "_token"] = env["YOUTUBE_REFRESH_TOKEN"]
     corpo = urllib.parse.urlencode(campos).encode()
-    with urllib.request.urlopen(urllib.request.Request("https://oauth2.googleapis.com/token", data=corpo), timeout=30) as r:
-        return json.load(r)["access_token"]
+    try:
+        with urllib.request.urlopen(urllib.request.Request("https://oauth2.googleapis.com/token", data=corpo), timeout=30) as r:
+            return json.load(r)["access_token"]
+    except urllib.error.HTTPError as e:
+        bruto = e.read().decode("utf-8", "replace")
+        if e.code == 400 and "invalid_grant" in bruto:
+            raise RenovacaoOAuthFalhou("refresh recusado (invalid_grant)") from None
+        raise
 
 
 def _req(metodo: str, url: str, corpo: bytes | None = None, tipo: str = "application/json", extra: dict | None = None):

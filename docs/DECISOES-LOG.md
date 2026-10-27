@@ -649,3 +649,47 @@ NÃO CABE:
 
 ## t121u (26/10/2026) — Checkboxes na aba Roadmap
 - Cada item mostra ☑ (feito) ou ☐ (falta e próximos passos), derivado do mesmo parser; só símbolo, sem input/form/POST.
+
+## t122u (26/10/2026) — OAuth do YouTube no projeto pqbr-publicacao
+- José: o EP1003 cafe-fraco já está aprovado e é o único aprovado até agora. Ele ainda vai ver os outros vídeos. O passo seguinte pedido foi a P2.
+- (a) Camofox PQBR 127.0.0.1:9387, um único perfil (`userId=pqbr`, pasta `66e05767…`). A conta logada é a do canal. O Studio aberto é o Porquê BR (`@porquebr-t4c`, `UC4xgIr6KdbfEgjsW7FEzQww`). O Cloud Console não bloqueia mais por 2SV. O projeto que estava selecionado na entrada era o antigo `yt-llm-b1`; não foi reutilizado.
+- (b) Criado o projeto `pqbr-publicacao` (sem organização). YouTube Data API v3 ativada. App OAuth Externo "PQBR", status Testando, usuário de teste = a conta do canal, escopos `youtube.upload` e `youtube.readonly`. Cliente Desktop `pqbr-publicacao` (a opção de cliente para agente de IA ficou desmarcada). JSON em `~/.pqbr/secrets/oauth-pqbr-publicacao.json` (600). As três chaves `YOUTUBE_*` foram acrescentadas a `~/.pqbr/secrets/episodio.env` (600). `channels.list` devolveu um canal: Porquê BR. Nada foi impresso.
+- Consentimento: o Google mostrou "app não verificado"; seguir foi Continuar, marcar os dois escopos e Continuar de novo. A primeira tentativa sem marcar os escopos voltou `access_denied`.
+- Não feito de propósito: upload de logotipo (a própria tela diz que o logo leva o app à verificação); página inicial e política de privacidade (não existem no projeto; não inventar). Por isso o botão Publicar segue desabilitado e o refresh de app em teste expira em 7 dias.
+- (c) Nenhum upload. O `pqbr-episodio-worker` não foi reiniciado (exige OK) e portanto ainda não lê as chaves novas. Envio real continua exigindo `YOUTUBE_DRY_RUN=false`, `PQBR_PUBLICACAO_REAL=1` e o código em `PQBR_PUBLICACAO_REAL_CODIGOS`.
+
+## t123u (26/10/2026) — Worker reiniciado; nada público até a produção ativa
+- José deu OK para reiniciar o `pqbr-episodio-worker` se não houvesse workflow no ar e se não precisasse de outra etapa. Às 22:06 (Fortaleza): 0 workflows `Running` no ns `pqbr`; reinício; unit ativa; log `worker episodio em 127.0.0.1:7233 ns=pqbr fila=episodio-pqbr`. As três chaves `YOUTUBE_*` entraram no processo. `YOUTUBE_DRY_RUN=true`. `PQBR_PUBLICACAO_REAL` não está definido. Nada enviado.
+- Até ele declarar a produção ativa: nenhum vídeo vai a público. Subida de vídeo já aprovado fica privada. Depois, a publicação segue a ordem cronológica dos roteiros e as janelas 11:40/18:35. Vários podem ficar na fila, privados, segurando o lugar.
+- Caminho vigente (t540): a API muda a privacidade (`videos.update`). O Camofox no Studio é reserva para o que a API não alcança, não o caminho padrão. O desenho t540 (virar público na janela) fica suspenso enquanto a produção não estiver ativa.
+- App OAuth permanece em Testando. Não houve pedido de verificação no YouTube nem publicação do app no Console. O refresh foi testado de novo nesta noite e trocou por access token.
+
+## t124u (26/10/2026) — API na publicação; Camofox se o refresh de 7 dias falhar
+- José: usar a API e, se a renovação de 7 dias não acontecer, fazer o processo inteiro de publicação pelo Camofox, em navegação web.
+- O caminho segue a API (`videos.insert` / `videos.update`, `private` + `publishAt`). O desvio só ocorre quando o Google recusa o refresh (`invalid_grant`). Outra falha da API não troca de caminho.
+- Nesse caso o envio inteiro daquele vídeo (subida privada, agenda e privacidade, inclusive o `/privar`) fica para o Studio no Camofox. O roteiro de cliques ainda é hipótese: o fluxo grava o plano, avisa no Telegram e não abre o navegador nem envia. Ver a navegação no Studio antes de executá-la.
+- `YOUTUBE_DRY_RUN` segue `true`. Nada enviado. O `pqbr-episodio-worker` em execução continua o das 22:06; este desvio entra no próximo reinício, que exige OK.
+
+## t125u (26/10/2026) — Ensaio de cliques em memória, com a API como base
+- José: simular e testar a clicagem das funções que a API faria se ela faltar. Essa informação fica como resíduo e pode estar desatualizada. Quando uma atualização for conhecida, os agentes atualizam contratos, scripts e processos.
+- Até aqui os scripts só gravavam o payload da API (`enviar_privado` em simulação e o plano `*-camofox.json`). Não havia ensaio de clique nem de agendamento na tela do Studio.
+- O ensaio (contrato `studio_fallback` 0.1.0) percorre em memória subida privada, agenda (`publishAt`) e privacidade, lendo os campos do corpo da API. Campo ausente ou fora da regra reprova o ensaio. Seletor de tela só entra junto com a data em que a tela foi vista. Clique ao vivo permanece desligado: o canal é o de produção e um clique no envio criaria vídeo de verdade.
+- Nada enviado. `YOUTUBE_DRY_RUN` segue `true`. O worker em execução continua o das 22:06.
+
+## t126u (26/10/2026) — Honestidade comum; mapa de cliques a partir do que for visto
+- José: mapear elementos, componentes e locais de clique, como no Flow e nos outros sites do fluxo. O agente identifica a alteração, corrige, atualiza e segue. Pop-up e botão que mudou de lugar não são risco e não param a publicação. Documentar e registrar no mapa de visualização. Antes de prosseguir: honestidade obrigatória, também no MCP; questionar ideia dele quando não for válida ou quando for excesso de aperfeiçoamento.
+- O que existe até t125u não é esse mapa. É um ensaio em memória das funções da API. Nenhum botão de Flow, Vids, Vibes ou Studio foi visto para este registro. Inventar seletor agora seria o excesso que a própria regra nova barra. `config/mapa_cliques.json` fica com a lista vazia.
+- O que fica valendo: obstáculo de tela (pop-up, botão fora do lugar) atualiza o registro, com data, e o processo segue. O diagrama em `docs/mapa/` (11 e 07) mostra isso. A trava dura continua: apagar, tornar público fora da regra, gastar, login/2FA, aceitar consentimento OAuth, mexer em segredo. "Não parar" não cobre essas ações. O clique que cria vídeo continua sob simulação por padrão e sob privado até a produção ativa.
+- Honestidade: REGRAS §0, onboarding (`AGENTS-base`) e a frase do `initialize` do MCP. O processo do `pqbr-mcp` ainda não foi reiniciado; a frase do handshake entra no próximo reinício, que exige OK. O onboarding já lê a regra no disco. Nada enviado.
+
+## t127u (27/10/2026) — Diagrama 11 alinhado; o que não foi feito nas pendências
+- José pediu para prosseguir com os ajustes das pendências. Conferido às 08:10 (São Paulo): `pqbr-episodio-worker` ativo desde 26/10 22:06 (Fortaleza), `NRestarts=0`; `pqbr-mcp` 0.4.0 no ar; Hindsight `healthy` com banco conectado.
+- O diagrama 11 ainda dizia que o worker não tinha sido reiniciado, que a migração 0020 faltava e que as chaves do YouTube não estavam no processo. Isso já era falso desde t109u e t123u. Corrigido. O código de t124u–t126u continua fora desse processo até o próximo reinício.
+- Não feito, de propósito: reiniciar worker ou `pqbr-mcp`; envio ao YouTube; apagar as 7 memórias (a revisão recomenda apagar: são o roster antigo do AGENTES.md; o OK continua necessário); merge na main; LOOP por cena (a lacuna manda não executar agora); imagens pagas do elenco; activity do Storyboard. Nada enviado.
+
+## t128u (27/10/2026) — Worker e MCP reiniciados; 7 memórias apagadas
+- José: "Tem meu ok. Só não vou poder ver os vídeos agora. Continue para progredir." Esse OK cobre o reinício dos serviços e o apagamento das 7 memórias que estavam parados à espera dele. Não cobre envio ao YouTube, gasto com imagens, o teste de LOOP por cena, o merge na main, nem ver os vídeos no lugar dele.
+- Às 08:56 (-03, São Paulo): 0 workflows `Running` no ns `pqbr`. Reinício do `pqbr-episodio-worker`. Log: `worker episodio em 127.0.0.1:7233 ns=pqbr fila=episodio-pqbr`. O processo lê o checkout desta branch, onde estão t124u–t126u. `YOUTUBE_DRY_RUN=true`. `PQBR_PUBLICACAO_REAL` não está no ambiente. Nada enviado. Depois do reinício, de novo 0 `Running`.
+- No mesmo horário, reinício só do `pqbr-mcp`. `GET /saude` devolve 0.4.0. Um `initialize` ao vivo devolve a frase de honestidade (t126u).
+- P8: cada uma das 7 memórias foi lida antes de apagar. Todas tinham a tag `obsoleto_candidato` e o contexto em `docs/AGENTES.md` (equipe de 14 ou mapa `@prod-*`). Backup: `~/.pqbr/hindsight/backup/pqbr-7-obsoletos-20261027.json` (600) e o export do bank `pqbr-bank-pre-delete-20261027.zip` (1.602.712 bytes). DELETE 200 nas sete. Conferência: as sete respondem 404; o bank foi de 884 para 877 documentos. Nenhuma outra foi apagada.
+- Não feito: ver os vídeos (P1); envio real; imagens pagas do elenco; LOOP por cena; activity do Storyboard; merge na main; preencher `config/mapa_cliques.json` (nenhuma tela de Flow, Vids, Vibes ou Studio foi vista nesta etapa).

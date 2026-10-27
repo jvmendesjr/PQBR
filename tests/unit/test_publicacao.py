@@ -63,6 +63,89 @@ def test_youtube_corpo_e_simulacao(tmp_path, monkeypatch):
     assert yt.definir_privacidade(None, "private")["simulado"]
 
 
+def test_invalid_grant_e_renovacao(monkeypatch):
+    import io, urllib.error
+    from email.message import Message
+    monkeypatch.setenv("YOUTUBE_CLIENT_ID", "cid")
+    monkeypatch.setenv("YOUTUBE_CLIENT_SECRET", "csec")
+    monkeypatch.setenv("YOUTUBE_REFRESH_TOKEN", "refresh-segredo-teste")
+
+    def estoura(req, timeout=30):
+        corpo = b'{"error":"invalid_grant","error_description":"Token has been expired or revoked."}'
+        raise urllib.error.HTTPError(req.full_url, 400, "Bad Request", Message(), io.BytesIO(corpo))
+
+    monkeypatch.setattr(yt.urllib.request, "urlopen", estoura)
+    with pytest.raises(yt.RenovacaoOAuthFalhou) as ei:
+        yt._token()
+    assert "invalid_grant" in str(ei.value) and "refresh-segredo-teste" not in str(ei.value)
+
+    def outro(req, timeout=30):
+        raise urllib.error.HTTPError(req.full_url, 500, "Erro", Message(), io.BytesIO(b'{"error":"backend"}'))
+
+    monkeypatch.setattr(yt.urllib.request, "urlopen", outro)
+    with pytest.raises(urllib.error.HTTPError):
+        yt._token()
+
+
+def test_upload_cai_para_camofox_quando_refresh_recusado(tmp_path, monkeypatch):
+    from temporalio.exceptions import ApplicationError
+    video = tmp_path / "v.mp4"; video.write_bytes(b"video")
+    sha = yt.sha256(str(video))
+    item = {"sha256": sha, "horario": "2026-10-27T11:40:00-03:00", "estado": "reservado", "video_id": None, "workflow_id": "w"}
+    monkeypatch.setattr(yt, "SIM_DIR", tmp_path)
+    monkeypatch.setattr(pub, "_real", lambda: True)
+    monkeypatch.setattr(pub, "_item", lambda codigo: item)
+    monkeypatch.setattr(pub, "_salvar_item", lambda codigo, it: (_ for _ in ()).throw(AssertionError("não grava envio")))
+    monkeypatch.setenv("YOUTUBE_DRY_RUN", "false")
+    monkeypatch.setenv("PQBR_PUBLICACAO_REAL", "1")
+    monkeypatch.setenv("PQBR_PUBLICACAO_REAL_CODIGOS", "PQBR-EP1003")
+    monkeypatch.setenv("YOUTUBE_CLIENT_ID", "cid")
+    monkeypatch.setenv("YOUTUBE_CLIENT_SECRET", "csec")
+    monkeypatch.setenv("YOUTUBE_REFRESH_TOKEN", "refresh-segredo-teste")
+
+    class DB:
+        def __enter__(self): return self
+        def __exit__(self, *a): return False
+        def execute(self, *a, **k):
+            class R:
+                def fetchone(self): return None
+            return R()
+        def commit(self): pass
+
+    monkeypatch.setattr("pqbr.storage.banco.conectar", lambda: DB())
+    monkeypatch.setattr(yt, "buscar_no_canal", lambda codigo: (_ for _ in ()).throw(yt.RenovacaoOAuthFalhou("refresh recusado (invalid_grant)")))
+    p = {"titulo": "Título bom", "descricao": "descrição longa o bastante", "tags": ["shorts"]}
+    with pytest.raises(ApplicationError) as ei:
+        asyncio.run(pub.pub_upload_privado(p, "PQBR-EP1003", str(video), sha))
+    assert ei.value.type == "renovacao_oauth" and ei.value.non_retryable
+    assert "refresh-segredo-teste" not in str(ei.value)
+    plano = json.loads((tmp_path / "PQBR-EP1003-camofox.json").read_text())
+    assert plano["_caminho"] == "camofox" and plano["_executado"] is False
+    assert plano["status"]["privacyStatus"] == "private" and plano["status"]["containsSyntheticMedia"] is True
+    assert plano["status"]["publishAt"].endswith("Z") and "PQBR-EP1003" in plano["snippet"]["description"]
+    assert plano["_ensaio"]["ok"] is True and plano["_ensaio"]["clicavel"] is False
+    assert plano["_ensaio"]["funcoes"] == ["subir_privado", "agendar"]
+
+
+def test_ensaio_de_cliques_usa_a_base_da_api_e_recusa_base_velha():
+    from pqbr.contratos.studio_fallback import BASE_PASSOS, PassoBase
+    from pqbr.integrations.studio_publicacao import ensaiar_envio, ensaiar_privacidade
+    c = yt.montar_corpo("PQBR-EP1003", "Título bom", "descrição longa o bastante", ["shorts"], publish_at="2026-10-27T14:40:00Z")
+    e = ensaiar_envio(c, "/tmp/v.mp4")
+    assert e.ok and e.clicavel is False and e.versao_base == "0.1.0"
+    assert {p.funcao for p in e.passos} == {"subir_privado", "agendar"}
+    agenda = next(p for p in e.passos if p.campo_api == "status.publishAt")
+    assert agenda.valor == "2026-10-27T14:40:00Z" and agenda.base_ok
+    assert all(p.seletor is None and p.observado_em is None for p in BASE_PASSOS)
+    sem_agenda = yt.montar_corpo("PQBR-EP1003", "Título bom", "descrição longa o bastante", ["shorts"])
+    ruim = ensaiar_envio(sem_agenda, "/tmp/v.mp4")
+    assert ruim.ok is False
+    assert any(p.funcao == "agendar" and p.base_ok is False for p in ruim.passos)
+    assert ensaiar_privacidade("public").ok and ensaiar_privacidade("private").ok
+    with pytest.raises(Exception):
+        PassoBase(funcao="subir_privado", ordem=1, acao="abrir", alvo="tela de envio", campo_api="status.privacyStatus", seletor="#x")
+
+
 def test_agenda_1140_1835():
     a = datetime(2026, 10, 26, 9, 0, tzinfo=TZ)
     h1 = pub.proximo_horario(a, set()); assert (h1.hour, h1.minute) == (11, 40)
@@ -106,6 +189,18 @@ def test_privar_audita_e_dedup(tmp_path, monkeypatch):
     assert asyncio.run(pub.ctl_aplicar(cmd))["status"] == "duplicado"
     aud = json.loads((tmp_path / "auditoria.json").read_text()); assert aud[0]["autor_id"] == "123" and aud[0]["motivo"] == "teste"
     assert pub._item("PQBR-EP1003")["estado"] == "privado"
+
+
+def test_privar_cai_para_camofox_sem_marcar_privado(tmp_path, monkeypatch):
+    monkeypatch.setattr(pub, "ESTADO_DIR", tmp_path)
+    monkeypatch.setattr(yt, "SIM_DIR", tmp_path)
+    pub._salvar_item("PQBR-EP1003", {"sha256": "a" * 64, "horario": "x", "estado": "publicado", "video_id": "abc", "workflow_id": "w"})
+    monkeypatch.setattr(yt, "definir_privacidade", lambda video_id, privacidade: (_ for _ in ()).throw(yt.RenovacaoOAuthFalhou("refresh recusado (invalid_grant)")))
+    cmd = interpretar("/privar PQBR-EP1003 teste", 51, "123").model_dump(mode="json")
+    r = asyncio.run(pub.ctl_aplicar(cmd))
+    assert r["status"] == "renovacao_oauth" and r["pendente"] == "PQBR-EP1003"
+    assert pub._item("PQBR-EP1003")["estado"] == "publicado"
+    assert json.loads((tmp_path / "PQBR-EP1003-camofox-privacidade.json").read_text())["_executado"] is False
 
 
 @pytest.mark.parametrize("reverter", [False, True])

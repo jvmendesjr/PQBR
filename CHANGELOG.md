@@ -5,6 +5,36 @@ Versionamento SemVer (MAJOR.MINOR.PATCH) a partir de t510. Versão do pacote can
 
 
 
+## [0.16.9] — 2026-10-27
+### Operação
+- `pqbr-episodio-worker` e `pqbr-mcp` reiniciados às 08:56 (-03) com OK do José (t128u). O processo do worker carrega t124u–t126u. O handshake do MCP devolve a frase de honestidade. `YOUTUBE_DRY_RUN=true`. Nada enviado.
+- Apagadas as 7 memórias `obsoleto_candidato` do roster antigo de `docs/AGENTES.md`. Bank de 884 para 877. Backup fora do git.
+
+## [0.16.8] — 2026-10-27
+### Corrigido
+- Diagrama 11: o worker está no ar desde 26/10 22:06 (Fortaleza), a migração 0020 já foi aplicada e as chaves do YouTube já estão no processo. O código de t124u–t126u entra no próximo reinício.
+
+## [0.16.7] — 2026-10-26
+### Adicionado
+- Honestidade como regra comum (t126u), no onboarding e na instrução do MCP: dizer o que foi visto, e questionar ideia que não se sustenta ou só aumenta o sistema.
+- Registro de cliques `config/mapa_cliques.json`, vazio: elemento só entra com a data da tela. Pop-up e botão fora do lugar atualizam o registro e o processo segue.
+
+## [0.16.6] — 2026-10-26
+### Adicionado
+- Ensaio de cliques do fallback de publicação, em memória, sobre o corpo da API (t125u, base 0.1.0). Pode estar desatualizado. Não abre o Studio e não envia.
+
+## [0.16.5] — 2026-10-26
+### Adicionado
+- Publicação: se o refresh de 7 dias for recusado (`invalid_grant`), o envio inteiro passa ao Studio pelo Camofox (t124u). O roteiro de cliques ainda é hipótese: grava o plano, avisa e não envia. Nada publicado.
+
+## [0.16.4] — 2026-10-26
+### Operação
+- `pqbr-episodio-worker` reiniciado às 22:06 (Fortaleza) com OK do José (t123u). Chaves do YouTube no processo; `YOUTUBE_DRY_RUN=true`. Nada publicado.
+
+## [0.16.3] — 2026-10-26
+### Operação
+- OAuth do YouTube no projeto `pqbr-publicacao` (app Externo PQBR, em teste; cliente Desktop). Chaves em `episodio.env` (600). `channels.list` confirmou o canal Porquê BR. Worker não reiniciado; nada publicado.
+
 ## [0.16.2] — 2026-10-26
 ### Alterado
 - Aba Roadmap: ☑ em itens feitos, ☐ em falta e próximos passos (só leitura); teste cobre contagens e ausência de elementos editáveis.
