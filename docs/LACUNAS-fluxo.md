@@ -58,7 +58,7 @@ Feito pelo agente externo (Grok Bot). Sem vídeo, imagem ou voz gerados e sem pu
 - **Credenciais OAuth do YouTube (t122u):** as três chaves `YOUTUBE_CLIENT_ID`, `YOUTUBE_CLIENT_SECRET` e `YOUTUBE_REFRESH_TOKEN` estão em `~/.pqbr/secrets/episodio.env` (600), projeto `pqbr-publicacao`, escopos `youtube.upload` + `youtube.readonly`, canal Porquê BR conferido por `channels.list`. O `pqbr-episodio-worker` foi reiniciado às 22:06 de 26/10 (t123u) e carregou as chaves. `YOUTUBE_DRY_RUN` segue `true`, então não há envio. O app OAuth está em Testando: o refresh expira em 7 dias (~2/11 21:20 Fortaleza). Com as flags de envio real ligadas, `pub_upload_privado` deixa de falhar por credencial ausente.
 - **Agendamento:** corrigido no flow. O upload vai `private` + `status.publishAt` (próxima janela 11:40/18:35 America/Fortaleza), e o workflow confirma a janela.
 - **Escopo do modo real:** corrigido no flow. `PQBR_PUBLICACAO_REAL_CODIGOS` (lista de códigos), e fora dela modo real = erro não retentável.
-- **Registro no worker:** corrigido. `PublicacaoAgendadaWorkflow`, `ControlePublicacaoWorkflow` e `ATIVIDADES_PUBLICACAO` agora no `worker_episodio` (fila `episodio-pqbr`). Falta reiniciar.
+- **Registro no worker:** corrigido. `PublicacaoAgendadaWorkflow`, `ControlePublicacaoWorkflow` e `ATIVIDADES_PUBLICACAO` no `worker_episodio` (fila `episodio-pqbr`). Reinícios: t109u (16:57) e t123u (22:06).
 - **Aviso Telegram pelo outbox no worker do episódio:** o `pqbr-episodio-worker` não tem o drop-in `telegram.conf` (só o `pqbr-temporal-worker` tem). O aviso real pode sair como "desligado"; é melhor esforço e não bloqueia.
 
 ## Testes pendentes pós-fluxo (t71u–t72u, só registro, não executar agora)
