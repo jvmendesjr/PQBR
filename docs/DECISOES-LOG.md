@@ -714,3 +714,4 @@ NÃO CABE:
 - Gasto: usar o saldo que houver. Imagens no Google Flow são gratuitas e ficam autorizadas, na quantidade que o storyboard pedir. Vídeo gasta o saldo do Flow; acabou, Google Vids; depois Meta Vibes. Contratos `GASTO_FLOW_IMAGEM` e `GASTO_FLOW_VIDEO`.
 - Mapa de cliques: não é necessário como catálogo. A tela aberta já mostra o botão. Manter o JSON só para surpresa (pop-up, botão que mudou), com data. Não depende do José e não se preenche por antecipação.
 - O aviso antes de tornar público entrou em `PublicacaoAgendadaWorkflow`, na etapa `publicando`. Com `YOUTUBE_DRY_RUN=true` esse caminho não roda. Nada enviado.
+- Às 11:50 (-03): 0 workflows `Running`. Reinício só do `pqbr-episodio-worker`, para carregar o aviso. `YOUTUBE_DRY_RUN=true`. Nada enviado.
