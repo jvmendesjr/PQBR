@@ -8,6 +8,8 @@
   // Zonas seguras 9:16: topo 14%, base 20%, direita 12%.
   const ZONA = { x: 0, y: Math.round(H * 0.14), w: Math.round(W * 0.88), h: Math.round(H * (1 - 0.14 - 0.20)) };
   const MARGEM = 72;
+  // Paleta do elenco de t144u, aposentada em t148u: a base passa a ser o conjunto flat colorido de
+  // banco-fichas/ (indice.json 2.0.0) e a paleta é re-basixada no MG-03. Não usar como referência nova.
   const CORES = {
     fundo: "#f6f1e7", tinta: "#1f2328", tintaClara: "#6b7280", branco: "#ffffff", marca: "#0f766e",
     "PERS-M": { principal: "#2b6cb0", acento: "#e23b2f", escuro: "#334155" },

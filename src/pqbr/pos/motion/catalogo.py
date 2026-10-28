@@ -9,7 +9,8 @@ RAIZ = Path(__file__).resolve().parent
 INDICE = RAIZ / "catalogo" / "indice.json"
 MOTOR_JS = RAIZ / "motor.js"
 
-# Cores do elenco (banco-fichas, t144u) e da marca. Qualquer cor fora daqui é recusada pelo contrato.
+# Cores do elenco de t144u — aposentadas em t148u (conjunto flat colorido de banco-fichas/, indice.json 2.0.0);
+# a paleta é re-basiada no MG-03. O contrato segue aceitando só o que está aqui até o re-base.
 PALETA = {
     "#2b6cb0", "#e23b2f", "#334155",   # PERS-M: camiseta, óculos, bermuda
     "#d96b43", "#e6b325", "#1e3a5f",   # PERS-F: camiseta, argola, bermuda

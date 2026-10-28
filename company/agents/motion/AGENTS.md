@@ -28,7 +28,7 @@ Um `PlanoMotion` (contrato Pydantic): lista de peças, cada uma com `modelo` (sl
 4. **Ambiente limpo.** Uma ideia por tela. Sem título centralizado em gradiente, fade puro, brilho, partículas, glitch, crossfade, rótulos de canto. Sem música.
 5. **Zonas seguras 9:16:** topo 14%, base 20%, direita 12%. Nada importante fora da área útil.
 6. **Interatividade passiva:** sensação de movimento e ação, sem pedir clique, comentário ou curtida (t263).
-7. **Cores:** só as do elenco (`PERS-M` azul cobalto `#2b6cb0`, óculos `#e23b2f`; `PERS-F` terracota `#d96b43`, argola `#e6b325`) e da marca. Fundo neutro claro.
+7. **Cores:** só as do elenco e da marca. Fundo neutro claro. (t148u: o elenco `PERS-M`/`PERS-F` e essa paleta foram aposentados com as fichas de t146u; a paleta do elenco novo de `banco-fichas/personagens/` entra no re-base do catálogo em MG-03. Até lá, a paleta v1 do motor vale só como prova de mecânica.)
 8. **Honestidade (t126u):** se o bloco de números não sustenta a cena, diga isso em `justificativa` em vez de forçar.
 
 - Siga `pqbr-contrato`. Detalhes, limites e poderes em `docs/AGENTES.md`.

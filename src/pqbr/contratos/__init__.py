@@ -29,16 +29,17 @@ class CenaVisual(Contrato):
     ambiente: str = Field(min_length=3, max_length=400)       # lugar, época, 3–5 objetos-âncora, luz/horário
 
 
-# CONTRATO-EDITORIAL §19 [ESTILO], José 27/10/2026 (t133u). Identidade única: stickman.
+# CONTRATO-EDITORIAL §19 [ESTILO], José 27/10/2026 (t133u), texto do padrão definitivo de t148u
+# (conjunto flat colorido entregue pelo José no Drive Fontes/Imagens; nanquim de t146u descartado).
 # O nome ESTILO_PADRAO_2D permanece só como apelido do texto vigente, para import antigo.
 ESTILO_PADRAO_STICKMAN = (
-    "Stickman de cabeça redonda branca com contorno preto, membros finos de palito, traço chapado, "
-    "uma roupa simples e fixa, cara com olho, sobrancelha e boca de reação. "
-    "Sem dedos desenhados, sem pessoa de cartum e sem volume. "
-    "Fundo limpo e claro, no máximo 3 a 5 objetos, humor de comédia leve. Personagem grande no quadro, "
-    "cabeça inteira visível, agindo, expressão simples e exagerada. "
-    "Proibido: pessoa desenhada, fotorrealismo, volume 3D, rosto de pessoa real ou celebridade, marca ou logo real, "
-    "texto escrito dentro da imagem. Formato vertical 9:16, faixas de cima e de baixo livres."
+    "Stickman flat colorido do canal Porquê BR (padrão definitivo t148u, banco-fichas/): cartum 2D de contorno preto "
+    "e cores chapadas suaves, cabeça redonda branca grande, dois olhos pretos sempre visíveis, boca simples de reação, "
+    "corpo e membros em traço preto fino, roupa chapada colorida fixa por personagem, cabelo preto simples quando houver, "
+    "fundo limpo em tom creme. Personagem grande no quadro, cabeça inteira visível, agindo, expressão simples e exagerada. "
+    "Proibido: texto escrito dentro da imagem, marca ou logo real, pessoa realista ou fotorrealismo, "
+    "rosto de pessoa real ou celebridade, volume 3D, um olho só (ciclope). "
+    "Formato vertical 9:16, faixas de cima e de baixo livres."
 )
 ESTILO_PADRAO_2D = ESTILO_PADRAO_STICKMAN
 
@@ -539,7 +540,7 @@ VERSOES: dict[str, str] = {
     "ItemAtualizacao": "1.0.0",
     "RelatorioAtualizacoes": "1.0.0",
     "CenaVisual": "1.0.0",
-    "BlocoVisual": "2.0.0",
+    "BlocoVisual": "3.0.0",
     "RoteiroShort": "1.0.0",
     "DecisaoRepeticao": "1.0.0",
     "PontuacaoPolemica": "1.0.0",

@@ -42,13 +42,18 @@ Recusado em 28/10 (t140u). José comparou com a busca e com tutoriais de stickma
 Atualizado em 28/10 (t146u — regra canônica do José + geração real no Google Flow com `🍌 Nano Banana Pro`):
 - José enviou 5 recortes reais tirados de vídeos do próprio canal Porquê BR (`banco-fichas/referencias-canal/`) e reprovou os desenhos programáticos anteriores (inclusive um erro grotesco de um olho só na pose de perfil).
 - **Regra canônica fixada (t146u):** para **personagens, objetos e locais permanentes** (`banco-fichas/`), usar **fichas permanentes geradas no Google Flow com o modelo mais potente de geração de imagens (atualmente `🍌 Nano Banana Pro`, 0 créditos)**, ancoradas nas 5 imagens reais do canal.
-- **12 fichas permanentes geradas no Google Flow com `🍌 Nano Banana Pro` e inspecionadas visualmente (`permanente_aguardando_ok_jose`):**
+- **12 fichas permanentes geradas no Google Flow com `🍌 Nano Banana Pro` e inspecionadas visualmente (`permanente_aguardando_ok_jose`) — descartadas em t148u, ver o bloco abaixo:**
   - `PERS-M.png` (`768×1376`, 9:16) e `PERS-M-folha.png` (`1376×768`, 16:9, 3 poses de corpo inteiro com 2 olhos sempre visíveis): stickman 2D em nanquim preto sobre papel creme (`#f5f0e4`) com hachura na bochecha, óculos redondos vermelhos (`#e23b2f`), luvas brancas e pés pretos ovais.
   - `PERS-F.png` (`768×1376`, 9:16) e `PERS-F-folha.png` (`1376×768`, 16:9, 3 poses de corpo inteiro com 2 olhos sempre visíveis): stickman feminina no mesmo traço, com coque preto no topo e argola amarela (`#e6b325`) à esquerda.
   - `PERS-M-classico.png` (`768×1376`, 9:16) e `PERS-M-classico-folha.png` (`1376×768`, 16:9): stickman clássico do canal sem óculos.
   - `AMB-cozinha.png` e `AMB-sala.png` (`768×1376`, 9:16): cozinha e sala brasileiras em nanquim + hachura sobre papel creme (`#f5f0e4`).
   - `OBJ-chaleira.png`, `OBJ-xicara.png`, `OBJ-filtro-pano.png` e `OBJ-controle-remoto.png` (`1024×1024`, 1:1): objetos permanentes em nanquim + hachura sobre papel creme (`#f5f0e4`).
 - **Agente do Google Flow calibrado no projeto (`e2dacb70-b9d0-4dc7-8b93-e6ac1688a454`):** `Confirmar antes de gerar = Sempre`, imagem padrão `9:16` + `x1` + `🍌 Nano Banana Pro`, vídeo padrão `9:16` + `x1` + `Omni 1.1 Flash` e `Instruções para o agente` gravadas com a diretriz canônica do canal. Pesquisa completa e receita técnica do upload Angular (`.sidebar-upload-btn`) em `docs/pesquisas/flow-agente-e-nano-banana-pro-20261028.md`.
+
+Atualizado em 28/10 (t148u — o conjunto definitivo veio pronto do José):
+- José reprovou as 12 fichas nanquim de t146u ("não estavam num bom nível"), mandou descartá-las e tirá-las do diretório, e entregou no Drive (`Fontes/Imagens`) 20 imagens no estilo que quer, declarado **o padrão definitivo do canal**. Elas viraram o `banco-fichas/` novo: catálogo dos 12 personagens + 6 folhas individuais multi-pose, 11 ambientes, catálogos de 12 objetos e de 12 animais (`indice.json` 2.0.0).
+- O gerador programático de t144u foi aposentado (`scripts/aposentado/frente_stickman.py`) e os IDs `PERS-M`/`PERS-F`/`PERS-M-classico` morreram com as fichas antigas. Os protagonistas por gênero da alternância par/ímpar aguardam o José (P17).
+- Pendem: regravar as `Instruções para o agente` no Flow com o traço t148u e espelhar o banco novo em `00_Biblia_Visual/banco-fichas` (P17).
 
 ## Fase 4 — Vídeos que já existem no Drive
 

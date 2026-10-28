@@ -1,25 +1,31 @@
 # Banco de fichas — stickman
 
-Texto de produção. Os PNG do elenco de 27/10 foram recusados em 28/10 (t140u) e não travam o Flow. Ambiente e objeto ainda não têm imagem.
+Padrão visual definitivo do canal (t148u): o conjunto entregue pelo José no Drive (`Fontes/Imagens`, id `1ziYivEewPQIvlgt6Z7v7R8wXPerPLvLd`) em 28/10/2026. As fichas em nanquim geradas no Flow em t146u foram descartadas a pedido dele e saíram do diretório (preservadas no histórico do git, commit `ad1b689`).
 
-Identidade: stickman. Não é pessoa de cartum e não é volume 3D. O desenho sem roupa de t139u foi recusado em t140u.
+Identidade: stickman flat colorido — cartum 2D de contorno preto, cores chapadas suaves, fundo claro em tom creme. Não é pessoa realista, não é 3D e não é o nanquim de t146u.
 
 ## O que entra
 
-| Tipo | Para que serve | O que a ficha pede | O que ainda não existe |
-|---|---|---|---|
-| Personagem | o mesmo boneco em toda cena | frente, lado, expressões, uma roupa chapada | a folha nova; os PNG de 27/10 estão recusados |
-| Ambiente | o lugar, com poucos objetos | plano geral limpo, luz, 3 a 5 âncoras, o que não entra | a imagem |
-| Objeto | a coisa sozinha, para não mudar de cena | fundo neutro, dois ângulos, escala ao lado do stickman, sem marca | a imagem |
+| Tipo | Pasta | O que é |
+|---|---|---|
+| Elenco | `personagens/ELENCO-catalogo.png` | grade 4×3 com os 12 personagens numerados |
+| Personagem | `personagens/PERS-*-folha.png` | folha individual multi-pose (turnarounds, 9 expressões, ~13 poses); 6 personagens têm folha própria |
+| Ambiente | `ambientes/AMB-*.png` | 11 lugares em 16:9; 3 fichas incluem 3 personagens do elenco em cena (prova de escala) |
+| Objeto | `objetos/OBJ-catalogo.png` | grade 4×3 com os 12 objetos permanentes |
+| Animal | `animais/ANIM-catalogo.png` | grade 4×3 com os 12 animais domésticos |
 
-Modelos em `modelos/`. Rascunhos preenchidos em `personagens/`, `ambientes/` e `objetos/`. Índice: `indice.json`.
+Modelos de ficha em `modelos/`. Índice legível por máquina: `indice.json`.
 
 ## Como o Flow usa
 
-Quando a folha nova existir, ela entra como referência (Ingredients), citada pelo id curto. O prompt da cena muda pose, expressão, objeto e lugar. Não redesenha a cabeça nem a roupa. Os PNG de 27/10, inclusive `ELENCO-frente.png`, não vão para o Flow.
+A folha do personagem entra como referência (`Elemento`), citada pelo id curto. O recorte individual para a cena é gerado a partir da folha quando a produção pedir; a folha inteira nunca vai como imagem única para animar vídeo (t146u). O prompt da cena muda pose, expressão, objeto e lugar; não redesenha cabeça nem roupa.
 
 ## O que não volta
 
-A bíblia de 08/10 (Zé, Lia, Valdemar, Sandra) fica histórica. Nome não entra no vídeo. O elenco ativo é `PERS-M` e `PERS-F`.
+- As fichas em nanquim de t146u (descartadas pelo José em t148u).
+- A bíblia de 08/10 (Zé, Lia, Valdemar, Sandra) fica histórica. Nome não entra no vídeo.
+- Os 5 frames reais do canal em `referencias-canal/` ficam como histórico das âncoras de t146u; a âncora vigente é este conjunto.
 
-A roupa do cotidiano é uma só, chapada, e a cor ainda não foi escolhida. Figurino de época é outra ficha, quando a história for de outra época.
+## Protagonistas
+
+A alternância do storyboard segue por gênero (par = masculino, ímpar = feminino). Quem do elenco novo assume cada gênero: **EM CONSTRUÇÃO — aguardando o José**.

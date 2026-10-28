@@ -1,11 +1,12 @@
 %% Storyboard em série, personagem e elenco (t75u–t78u, 26/10/2026). Regra central do José: CONTRATO-EDITORIAL §18 e §19, REGRAS §25.
 %% t108u: juízes por etapa. t141u: stickman; o material externo não troca o fluxo.
+%% t148u: padrão definitivo = conjunto do Drive (Fontes/Imagens) em banco-fichas/; fichas nanquim de t146u descartadas; protagonistas por gênero aguardam o José.
 %% Contrato: src/pqbr/contratos/storyboard.py (FichaCena/Storyboard 1.2.0). Activity: storyboard_criar (t130u). Fichas: config/estilo_visual.json e banco-fichas/.
 flowchart TD
-  COD(["código PQBR-EPxxxx"]) --> ALT{"elenco_alternado<br/>par → PERS-M · ímpar → PERS-F"}
-  ALT -->|ou elenco_excecao com motivo| VIS["stickman (t141u)<br/>cabeça branca · palito · roupa chapada<br/>cor da roupa ainda não escolhida<br/>PNG sem roupa recusado (t140u)<br/>folha nova só depois da cor"]
+  COD(["código PQBR-EPxxxx"]) --> ALT{"elenco_alternado<br/>par → masculino · ímpar → feminino<br/>membros concretos: aguardando o José (t148u)"}
+  ALT -->|ou elenco_excecao com motivo| VIS["stickman flat colorido (t148u)<br/>padrão definitivo: conjunto do Drive Fontes/Imagens<br/>banco-fichas/: catálogo dos 12 + 6 folhas individuais<br/>11 ambientes · catálogos de objetos e animais<br/>fichas nanquim de t146u descartadas"]
   VIS --> SB["Storyboard<br/>norte_geral · bloco_estilo · ficha_personagem · elenco<br/>NotebookLM devolve o JSON · não gera vídeo"]
-  SB --> FC["FichaCena NN (rótulo ep_cNN)<br/>fala em off (fora do prompt) · norte · início · fim · movimento · plano<br/>prompt_imagem = frame de início + frase-trava<br/>prompt_animacao = corpo até o fim · lips closed<br/>ref = recorte de um boneco, não a folha inteira"]
+  SB --> FC["FichaCena NN (rótulo ep_cNN)<br/>fala em off (fora do prompt) · norte · início · fim · movimento · plano<br/>prompt_imagem = frame de início + frase-trava<br/>prompt_animacao = corpo até o fim · lips closed<br/>ref = recorte da folha do boneco, não a folha inteira"]
   FC --> PAP{"papel_personagem"}
   PAP -->|participa| EPO["figurino = epoca_local<br/>caracterização da época/local obrigatória"]
   PAP -->|observa| ATU["figurino = atual_variavel<br/>visual cotidiano travado da ficha (t133u)<br/>escondido, terceira pessoa, outros atuam"]

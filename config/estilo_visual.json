@@ -1,28 +1,20 @@
 {
-  "_nota": "Identidade stickman (t133u). O desenho sem roupa de t139u foi recusado em 28/10 (t140u). A roupa chapada ainda não tem cor. Não gerar o personagem até a folha nova.",
+  "_nota": "Padrão visual definitivo (t148u): conjunto entregue pelo José no Drive (Fontes/Imagens) e versionado em banco-fichas/. As fichas nanquim de t146u foram descartadas. Elenco sem nomes. Os protagonistas por gênero aguardam o José (a alternância par/ímpar segue no contrato do storyboard).",
   "ativo": "stickman",
   "estilos": {
-    "stickman": "Stickman de cabeça redonda branca com contorno preto, membros finos de palito, traço chapado, uma roupa simples e fixa, cara com olho, sobrancelha e boca de reação. Sem dedos e sem pessoa de cartum. Fundo limpo e claro, poucos objetos, humor de comédia. O protagonista é o mesmo stickman em todas as cenas."
+    "stickman": "Stickman flat colorido do canal Porquê BR (padrão definitivo t148u): cartum 2D de contorno preto e cores chapadas suaves, cabeça redonda branca grande, dois olhos pretos sempre visíveis, boca simples de reação, corpo e membros em traço preto fino, roupa chapada colorida fixa por personagem, fundo limpo em tom creme. Sem dedos realistas, sem pessoa realista e sem volume 3D. Fundo com poucos objetos, humor de comédia leve. O protagonista é o mesmo stickman em todas as cenas."
   },
   "elenco": {
-    "_nota": "t140u: PNG sem roupa recusado. Código par = PERS-M, ímpar = PERS-F. Sem nome. A feminina é mais baixa. Roupa chapada ainda sem cor; não gerar até a folha nova.",
-    "masculino": {
-      "id": "PERS-M",
-      "asset": "ASSET_personagem_masculino-v1",
-      "ficha": "banco-fichas/personagens/PERS-M.md",
-      "imagem": null,
-      "trava": "Stickman de cabeça redonda branca, membros de palito, óculos redondos vermelhos, mais alto, roupa chapada ainda sem cor, boca de reação, sem dedos",
-      "personalidade": "caras e bocas de reação; nunca articula fala",
-      "acento": "óculos vermelhos; a cor da roupa espera a escolha do José"
+    "_nota": "t148u: elenco permanente em banco-fichas/personagens/ (catálogo dos 12 + 6 folhas individuais). Os IDs antigos PERS-M/PERS-F/PERS-M-classico morreram com as fichas de t146u. Código par = masculino, ímpar = feminino (contrato storyboard); quem assume cada gênero: EM CONSTRUÇÃO — aguardando o José.",
+    "catalogo": "banco-fichas/personagens/ELENCO-catalogo.png",
+    "folhas": {
+      "PERS-menina-rosa": {"elenco_num": 2, "ficha": "banco-fichas/personagens/PERS-menina-rosa.md", "imagem": "banco-fichas/personagens/PERS-menina-rosa-folha.png", "acento": "vestido rosa"},
+      "PERS-cacheada": {"elenco_num": 5, "ficha": "banco-fichas/personagens/PERS-cacheada.md", "imagem": "banco-fichas/personagens/PERS-cacheada-folha.png", "acento": "camiseta amarela"},
+      "PERS-bone-verde": {"elenco_num": 8, "ficha": "banco-fichas/personagens/PERS-bone-verde.md", "imagem": "banco-fichas/personagens/PERS-bone-verde-folha.png", "acento": "boné verde"},
+      "PERS-gravata-azul": {"elenco_num": 9, "ficha": "banco-fichas/personagens/PERS-gravata-azul.md", "imagem": "banco-fichas/personagens/PERS-gravata-azul-folha.png", "acento": "gravata azul"},
+      "PERS-roxo-ansioso": {"elenco_num": 12, "ficha": "banco-fichas/personagens/PERS-roxo-ansioso.md", "imagem": "banco-fichas/personagens/PERS-roxo-ansioso-folha.png", "acento": "moletom roxo"},
+      "PERS-bob-oculos": {"elenco_num": null, "obs": "fora do catálogo dos 12 (sinalizado em t148u)", "ficha": "banco-fichas/personagens/PERS-bob-oculos.md", "imagem": "banco-fichas/personagens/PERS-bob-oculos-folha.png", "acento": "óculos redondos"}
     },
-    "feminino": {
-      "id": "PERS-F",
-      "asset": "ASSET_personagem_feminino-v1",
-      "ficha": "banco-fichas/personagens/PERS-F.md",
-      "imagem": null,
-      "trava": "Stickman de cabeça redonda branca, membros de palito, mais baixa, coque, argola e pinta, sem óculos, roupa chapada ainda sem cor, boca de reação, sem dedos",
-      "personalidade": "caras e bocas de reação; nunca articula fala",
-      "acento": "argola e pinta continuam; a cor da roupa espera a escolha do José"
-    }
+    "protagonistas": "EM CONSTRUÇÃO — aguardando o José apontar quem assume masculino e feminino na alternância par/ímpar"
   }
 }

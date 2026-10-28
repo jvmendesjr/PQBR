@@ -57,7 +57,7 @@ class PlanoMotion(Contrato):
     episodio: str = Field(pattern=EPISODIO.pattern)
     duracao_video_s: float = Field(gt=0, le=180)
     fps: int = Field(default=30, ge=24, le=60)
-    elenco: Literal["PERS-M", "PERS-F"]
+    elenco: Literal["PERS-M", "PERS-F"]   # IDs aposentados em t148u; o conjunto novo de banco-fichas/ entra no re-base do MG-03
     bloco_numeros: BlocoNumeros
     bloco: FaixaBloco | None = None              # trecho cortado para tela cheia (o porquê)
     pecas: list[PecaMotion] = Field(min_length=1, max_length=40)

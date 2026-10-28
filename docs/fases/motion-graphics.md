@@ -19,19 +19,21 @@ O piloto prova a **mecânica** (contrato, motor, render, composição, autocrít
 
 **Direção aprovada como regra (REGRAS §26, "Base visual"):** o motion é desenhado na **mesma folha do stickman** — papel creme com textura, traço de nanquim, hachura, cores do elenco como acento e **uma tipografia manuscrita única** (licença OFL, com acentos do português, a escolher em MG-03). A referência que ninguém copia é a própria biblioteca do canal (mesma lição do material de estudo de t145u: nomear um visual e alimentar o modelo com um frame dele).
 
+**Atualização t148u (28/10, depois desta entrega):** as fichas nanquim de t146u foram descartadas pelo José e o padrão visual definitivo do canal passou a ser o conjunto flat colorido entregue por ele no Drive (`Fontes/Imagens` → `banco-fichas/`, `indice.json` 2.0.0). A "mesma folha do stickman" citada acima passa a ser esse conjunto: o catálogo v2 (MG-03), a paleta do motor e a REF-MG-00 são re-baixados para ele. A mecânica e o desenho das fases não mudam.
+
 ## Fase 2 — Coletânea de referências (`banco-fichas/referencias-motion/`)
 
 Responde ao pedido "um padrão, com mudanças sutis que atendam ao tipo de conteúdo".
 
-**O que é fixo (o padrão, não varia nunca):** papel creme, traço de nanquim, hachura, tipografia única, molas, cortina padrão, zonas seguras 9:16, bloco de números travados.
+**O que é fixo (o padrão, não varia nunca):** o conjunto flat colorido de `banco-fichas/` (t148u) — fundo creme claro, contorno preto, cabeça redonda branca, dois olhos sempre visíveis, roupa chapada fixa por personagem; mais tipografia única, molas, cortina padrão, zonas seguras 9:16 e bloco de números travados. Até o MG-03 o catálogo v1 e a REF-MG-00 seguem no nanquim de t146u, valendo como prova de mecânica.
 
-**O que varia (lista fechada, uma escolha por episódio):** acento de cor do elenco; densidade da hachura; forma do cartão (folha solta, ficha pautada, cartão com clipe); idioma de entrada (surgir, riscar, datilografar); ornamento do tema (p.ex. vapor para café, floco para gelo); direção da cortina.
+**O que varia (lista fechada, uma escolha por episódio):** acento de cor do elenco; textura do fundo; forma do cartão (folha solta, ficha pautada, cartão com clipe); idioma de entrada (surgir, riscar, datilografar); ornamento do tema (p.ex. vapor para café, floco para gelo); direção da cortina.
 
 **Como se escolhe:** o tipo de conteúdo do episódio (expressão/origem; curiosidade do cotidiano; sazonal; risco doméstico/trânsito — CONTRATO §4) restringe o conjunto; dentro dele, uma semente derivada do código do episódio (`PQBR-EPnnnn`) escolhe a variante, **sem repetir a variante do episódio anterior**. A escolha fica registrada no `PlanoMotion`; o Auditor confere a aderência à ficha (quem monta não julga). Determinístico: o mesmo episódio gera sempre a mesma variante.
 
 **De onde saem:** três fontes, detalhadas no README da coletânea — a biblioteca do próprio canal (âncora), o material de estudo que o José trouxe em t145u e a pesquisa nova de referências externas (MG-02, propostas minhas, escolha dele).
 
-**Referências externas:** entram só como **gramática** (paleta, tipografia, textura, ritmo), nunca conteúdo, personagem, logo ou música. No repositório ficam a ficha em texto, o link, a data da consulta e a **prova renderizada pelo nosso motor**; nenhum frame de terceiro é guardado. Referência nova nasce `aguardando_ok_jose` e só vira `aprovada` com OK do José, como as fichas permanentes. A coletânea abre com a `REF-MG-00` (o papel e o nanquim do próprio canal, ancorada em `banco-fichas/referencias-canal/`); as propostas de referências externas são o item MG-02, para o José escolher.
+**Referências externas:** entram só como **gramática** (paleta, tipografia, textura, ritmo), nunca conteúdo, personagem, logo ou música. No repositório ficam a ficha em texto, o link, a data da consulta e a **prova renderizada pelo nosso motor**; nenhum frame de terceiro é guardado. Referência nova nasce `aguardando_ok_jose` e só vira `aprovada` com OK do José, como as fichas permanentes. A coletânea abre com a `REF-MG-00` (o papel e o nanquim de t146u, ancorada em `banco-fichas/referencias-canal/`), que é re-basixada no conjunto t148u no MG-03; as propostas de referências externas são o item MG-02, para o José escolher.
 
 ## Fase 3 — Trabalho (itens do ROADMAP, Fase MG)
 

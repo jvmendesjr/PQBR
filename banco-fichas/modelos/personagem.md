@@ -2,7 +2,7 @@
 
 Id estável. Sem nome falado ou escrito no vídeo.
 
-Preencher só o que estiver decidido. A roupa do cotidiano é uma só e chapada. A cor entra quando o José escolher.
+Preencher só o que estiver decidido. A roupa do cotidiano é a da folha individual aprovada (t148u); não trocar roupa nem acento entre cenas.
 
 ## Trava
 
@@ -10,15 +10,12 @@ Uma frase curta, repetida igual. Cabeça, corpo, um acessório, uma cor de acent
 
 ## Folha
 
-1. Frente, corpo inteiro, cabeça inteira, fundo liso, sem sombra forte.
-2. Três quartos, se a frente já estiver aprovada.
-3. Seis expressões no mesmo rosto: neutro, espanto, nojo, desconfiança, alívio, riso. Boca de reação, não boca de fala.
-4. O acessório isolado, do tamanho em que aparece na cabeça.
+Folha multi-pose 16:9 (contact sheet): turnarounds (frente, três quartos, perfil, costas), ~9 expressões no mesmo rosto e ~10 poses de corpo inteiro. O recorte individual para o Flow sai da folha, sob demanda. Boca de reação, não boca de fala.
 
 ## Proibido na imagem
 
-Pessoa de cartum, dedos desenhados, volume, marca, texto, óculos ou cabeça cortados.
+Pessoa realista, dedos desenhados, volume 3D, marca, texto, um olho só (ciclope), cabeça cortada.
 
 ## Estado
 
-`rascunho_texto` enquanto não houver arquivo aceito. `recusado` é o caso dos PNG de 27/10 (t140u): ficam no disco e não são referência. `definido` só quando o José aceitar a folha nova. A roupa chapada tem uma cor só, e essa cor ainda não foi escolhida.
+`permanente` quando selecionada pelo José (conjunto de t148u). `aguardando_ok_jose` para ficha nova gerada pelo agente. Recusada sai do diretório a pedido do José (t148u).

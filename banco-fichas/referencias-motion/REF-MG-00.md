@@ -2,6 +2,7 @@
 
 - **Origem:** interna. Âncora da coletânea: a identidade visual do próprio canal, fixada em t146u a partir dos frames reais de `banco-fichas/referencias-canal/` (`ref-01..05` e `ref-canal-composta-sem-texto.png`).
 - **Estado:** `aguardando_ok_jose` (28/10/2026, t147u).
+- **Nota t148u:** esta ficha nasceu no nanquim de t146u, que o José reprovou e mandou descartar. A âncora visual passou a ser o conjunto flat colorido de `banco-fichas/` (`indice.json` 2.0.0) e esta ficha é re-basixada nele no MG-03 — inclusive a paleta de acento, que hoje lista as cores dos personagens `PERS-M`/`PERS-F` aposentados.
 - **Prova renderizada:** pendente — sai do catálogo v2 (MG-03) e vai para `provas/REF-MG-00.png`.
 
 ## Gramática (o que o motion copia daqui)

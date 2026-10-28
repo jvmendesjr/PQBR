@@ -1,114 +1,219 @@
 {
-  "versao": "1.0.0",
-  "decisao": "t146u",
+  "versao": "2.0.0",
+  "decisao": "t148u",
   "atualizado": "2026-10-28",
-  "regra_modelo_fichas": "Para personagens, objetos e locais permanentes, usar fichas permanentes geradas a partir do modelo mais potente de geracao de imagens (atualmente Nano Banana Pro no Google Flow), ancoradas nas referencias reais do canal em banco-fichas/referencias-canal/.",
-  "modelo_geracao": "Nano Banana Pro",
-  "nota": "Fichas permanentes geradas no Google Flow com Nano Banana Pro (0 creditos) usando upload de referencia real do canal (banco-fichas/referencias-canal/). Inspecionadas visualmente: 2 olhos sempre visiveis, zero texto, traco nanquim 2D com hachura sutil sobre papel creme (#f5f0e4).",
-  "estilo": "ilustracao 2D desenhada a mao em nanquim preto sobre papel creme texturizado (#f5f0e4) com hachura sutil (cross-hatching), stickman de cabeca redonda branca grande, DOIS OLHOS expressivos sempre visiveis, tronco e membros em traco preto solido grosso de caneta, maos brancas estilo luva cartum com contorno preto, pes pretos ovais sobre sombra oval hachurada, sem texto na imagem",
-  "referencias_canal": [
-    "referencias-canal/ref-01-close-expressao-picole.jpeg",
-    "referencias-canal/ref-02-duplo-susto-calmo.png",
-    "referencias-canal/ref-03-apontando-mapa-brasil.png",
-    "referencias-canal/ref-04-corpo-inteiro-hachura-escudo.png",
-    "referencias-canal/ref-05-corpo-inteiro-olhos-fechados.png",
-    "referencias-canal/ref-canal-composta-sem-texto.png"
+  "regra_modelo_fichas": "Para personagens, objetos e locais permanentes, usar fichas permanentes geradas a partir do modelo mais potente de geracao de imagens (t146u). Em t148u o proprio Jose entregou o conjunto definitivo no Drive (Fontes/Imagens) e mandou descartar as fichas nanquim de t146u; ficha nova que faltar nasce ancorada neste conjunto.",
+  "origem": {
+    "drive_pasta": "Fontes/Imagens",
+    "drive_id": "1ziYivEewPQIvlgt6Z7v7R8wXPerPLvLd",
+    "selecionado_por": "Jose",
+    "data": "2026-10-28",
+    "obs": "20 imagens entregues prontas (nomes originais 'Agent Image - *'), renomeadas para o padrao PQBR. Modelo gerador nao verificado no Flow; a selecao do Jose vale como aprovacao (padrao definitivo)."
+  },
+  "estilo": "cartum 2D flat colorido: stickman de cabeca redonda branca grande com contorno preto, dois olhos pretos sempre visíveis, boca simples de reacao, corpo e membros em traco preto fino, roupa chapada colorida fixa por personagem, fundo claro em tom creme, paleta suave, sombra leve chapada no chao; sem texto, sem marca, sem volume 3D, sem fotorrealismo",
+  "estado": "permanente (padrao definitivo do canal, selecionado pelo Jose em t148u)",
+  "historico": [
+    {
+      "decisao": "t146u",
+      "estado": "descartado em t148u a pedido do Jose",
+      "nota": "12 fichas em nanquim preto sobre papel creme geradas no Flow (Nano Banana Pro), ancoradas nos frames reais do canal; conteudo preservado no historico do git (commit ad1b689)"
+    },
+    {
+      "decisao": "t133u..t141u",
+      "estado": "historico",
+      "nota": "desenhos programaticos (scripts/aposentado/frente_stickman.py) e PNG recusados"
+    }
   ],
+  "referencias_canal": {
+    "estado": "historico (ancoras do conjunto descartado de t146u; frames reais do canal preservados)",
+    "arquivos": [
+      "referencias-canal/ref-01-close-expressao-picole.jpeg",
+      "referencias-canal/ref-02-duplo-susto-calmo.png",
+      "referencias-canal/ref-03-apontando-mapa-brasil.png",
+      "referencias-canal/ref-04-corpo-inteiro-hachura-escudo.png",
+      "referencias-canal/ref-05-corpo-inteiro-olhos-fechados.png",
+      "referencias-canal/ref-canal-composta-sem-texto.png"
+    ]
+  },
   "fichas": [
     {
-      "id": "PERS-M",
+      "id": "ELENCO-catalogo",
       "tipo": "personagem",
+      "papel": "catalogo_elenco",
       "permanente": true,
-      "modelo_ficha": "Nano Banana Pro",
-      "arquivo": "personagens/PERS-M.md",
-      "asset": "ASSET_personagem_masculino-v2",
-      "estado": "permanente_aguardando_ok_jose",
-      "imagem": "personagens/PERS-M.png",
-      "folha": "personagens/PERS-M-folha.png",
-      "acento": "#e23b2f"
+      "estado": "permanente",
+      "arquivo": "personagens/ELENCO-catalogo.md",
+      "imagem": "personagens/ELENCO-catalogo.png"
     },
     {
-      "id": "PERS-F",
+      "id": "PERS-menina-rosa",
       "tipo": "personagem",
       "permanente": true,
-      "modelo_ficha": "Nano Banana Pro",
-      "arquivo": "personagens/PERS-F.md",
-      "asset": "ASSET_personagem_feminino-v2",
-      "estado": "permanente_aguardando_ok_jose",
-      "imagem": "personagens/PERS-F.png",
-      "folha": "personagens/PERS-F-folha.png",
-      "acento": "#e6b325"
+      "estado": "permanente",
+      "arquivo": "personagens/PERS-menina-rosa.md",
+      "imagem": "personagens/PERS-menina-rosa-folha.png",
+      "elenco_num": 2,
+      "acento": "vestido rosa"
     },
     {
-      "id": "PERS-M-classico",
+      "id": "PERS-cacheada",
       "tipo": "personagem",
       "permanente": true,
-      "modelo_ficha": "Nano Banana Pro",
-      "arquivo": "personagens/PERS-M-classico.md",
-      "asset": "ASSET_personagem_classico-v1",
-      "estado": "permanente_aguardando_ok_jose",
-      "imagem": "personagens/PERS-M-classico.png",
-      "folha": "personagens/PERS-M-classico-folha.png"
+      "estado": "permanente",
+      "arquivo": "personagens/PERS-cacheada.md",
+      "imagem": "personagens/PERS-cacheada-folha.png",
+      "elenco_num": 5,
+      "acento": "camiseta amarela"
     },
     {
-      "id": "AMB-cozinha",
+      "id": "PERS-bone-verde",
+      "tipo": "personagem",
+      "permanente": true,
+      "estado": "permanente",
+      "arquivo": "personagens/PERS-bone-verde.md",
+      "imagem": "personagens/PERS-bone-verde-folha.png",
+      "elenco_num": 8,
+      "acento": "boné verde"
+    },
+    {
+      "id": "PERS-gravata-azul",
+      "tipo": "personagem",
+      "permanente": true,
+      "estado": "permanente",
+      "arquivo": "personagens/PERS-gravata-azul.md",
+      "imagem": "personagens/PERS-gravata-azul-folha.png",
+      "elenco_num": 9,
+      "acento": "gravata azul"
+    },
+    {
+      "id": "PERS-roxo-ansioso",
+      "tipo": "personagem",
+      "permanente": true,
+      "estado": "permanente",
+      "arquivo": "personagens/PERS-roxo-ansioso.md",
+      "imagem": "personagens/PERS-roxo-ansioso-folha.png",
+      "elenco_num": 12,
+      "acento": "moletom roxo"
+    },
+    {
+      "id": "PERS-bob-oculos",
+      "tipo": "personagem",
+      "permanente": true,
+      "estado": "permanente",
+      "arquivo": "personagens/PERS-bob-oculos.md",
+      "imagem": "personagens/PERS-bob-oculos-folha.png",
+      "elenco_num": null,
+      "obs": "fora do catalogo dos 12",
+      "acento": "óculos redondos"
+    },
+    {
+      "id": "AMB-praca",
       "tipo": "ambiente",
       "permanente": true,
-      "modelo_ficha": "Nano Banana Pro",
-      "arquivo": "ambientes/AMB-cozinha.md",
-      "asset": "ASSET_ambiente_cozinha-v2",
-      "estado": "permanente_aguardando_ok_jose",
-      "imagem": "ambientes/AMB-cozinha.png"
+      "estado": "permanente",
+      "arquivo": "ambientes/AMB-praca.md",
+      "imagem": "ambientes/AMB-praca.png"
     },
     {
-      "id": "AMB-sala",
+      "id": "AMB-calcadao-mar",
       "tipo": "ambiente",
       "permanente": true,
-      "modelo_ficha": "Nano Banana Pro",
-      "arquivo": "ambientes/AMB-sala.md",
-      "asset": "ASSET_ambiente_sala-v2",
-      "estado": "permanente_aguardando_ok_jose",
-      "imagem": "ambientes/AMB-sala.png"
+      "estado": "permanente",
+      "arquivo": "ambientes/AMB-calcadao-mar.md",
+      "imagem": "ambientes/AMB-calcadao-mar.png"
     },
     {
-      "id": "OBJ-chaleira",
-      "tipo": "objeto",
+      "id": "AMB-pista-skate",
+      "tipo": "ambiente",
       "permanente": true,
-      "modelo_ficha": "Nano Banana Pro",
-      "arquivo": "objetos/OBJ-chaleira.md",
-      "asset": "ASSET_objeto_chaleira-v2",
-      "estado": "permanente_aguardando_ok_jose",
-      "imagem": "objetos/OBJ-chaleira.png"
+      "estado": "permanente",
+      "arquivo": "ambientes/AMB-pista-skate.md",
+      "imagem": "ambientes/AMB-pista-skate.png"
     },
     {
-      "id": "OBJ-xicara",
-      "tipo": "objeto",
+      "id": "AMB-jardim",
+      "tipo": "ambiente",
       "permanente": true,
-      "modelo_ficha": "Nano Banana Pro",
-      "arquivo": "objetos/OBJ-xicara.md",
-      "asset": "ASSET_objeto_xicara-v2",
-      "estado": "permanente_aguardando_ok_jose",
-      "imagem": "objetos/OBJ-xicara.png"
+      "estado": "permanente",
+      "arquivo": "ambientes/AMB-jardim.md",
+      "imagem": "ambientes/AMB-jardim.png"
     },
     {
-      "id": "OBJ-filtro-pano",
-      "tipo": "objeto",
+      "id": "AMB-sala-estar",
+      "tipo": "ambiente",
       "permanente": true,
-      "modelo_ficha": "Nano Banana Pro",
-      "arquivo": "objetos/OBJ-filtro-pano.md",
-      "asset": "ASSET_objeto_filtro_pano-v2",
-      "estado": "permanente_aguardando_ok_jose",
-      "imagem": "objetos/OBJ-filtro-pano.png"
+      "estado": "permanente",
+      "arquivo": "ambientes/AMB-sala-estar.md",
+      "imagem": "ambientes/AMB-sala-estar.png"
     },
     {
-      "id": "OBJ-controle-remoto",
-      "tipo": "objeto",
+      "id": "AMB-escritorio",
+      "tipo": "ambiente",
       "permanente": true,
-      "modelo_ficha": "Nano Banana Pro",
-      "arquivo": "objetos/OBJ-controle-remoto.md",
-      "asset": "ASSET_objeto_controle_remoto-v2",
-      "estado": "permanente_aguardando_ok_jose",
-      "imagem": "objetos/OBJ-controle-remoto.png"
+      "estado": "permanente",
+      "arquivo": "ambientes/AMB-escritorio.md",
+      "imagem": "ambientes/AMB-escritorio.png"
+    },
+    {
+      "id": "AMB-estudio-foto",
+      "tipo": "ambiente",
+      "permanente": true,
+      "estado": "permanente",
+      "arquivo": "ambientes/AMB-estudio-foto.md",
+      "imagem": "ambientes/AMB-estudio-foto.png"
+    },
+    {
+      "id": "AMB-cafe",
+      "tipo": "ambiente",
+      "permanente": true,
+      "estado": "permanente",
+      "arquivo": "ambientes/AMB-cafe.md",
+      "imagem": "ambientes/AMB-cafe.png"
+    },
+    {
+      "id": "AMB-metro",
+      "tipo": "ambiente",
+      "permanente": true,
+      "estado": "permanente",
+      "arquivo": "ambientes/AMB-metro.md",
+      "imagem": "ambientes/AMB-metro.png",
+      "com_elenco": true
+    },
+    {
+      "id": "AMB-skate-urbano",
+      "tipo": "ambiente",
+      "permanente": true,
+      "estado": "permanente",
+      "arquivo": "ambientes/AMB-skate-urbano.md",
+      "imagem": "ambientes/AMB-skate-urbano.png",
+      "com_elenco": true
+    },
+    {
+      "id": "AMB-calcada-compras",
+      "tipo": "ambiente",
+      "permanente": true,
+      "estado": "permanente",
+      "arquivo": "ambientes/AMB-calcada-compras.md",
+      "imagem": "ambientes/AMB-calcada-compras.png",
+      "com_elenco": true
+    },
+    {
+      "id": "OBJ-catalogo",
+      "tipo": "objeto",
+      "papel": "catalogo_objetos",
+      "permanente": true,
+      "estado": "permanente",
+      "arquivo": "objetos/OBJ-catalogo.md",
+      "imagem": "objetos/OBJ-catalogo.png"
+    },
+    {
+      "id": "ANIM-catalogo",
+      "tipo": "animal",
+      "papel": "catalogo_animais",
+      "permanente": true,
+      "estado": "permanente",
+      "arquivo": "animais/ANIM-catalogo.md",
+      "imagem": "animais/ANIM-catalogo.png"
     }
   ]
 }

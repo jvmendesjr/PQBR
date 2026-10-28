@@ -5,6 +5,17 @@ Versionamento SemVer (MAJOR.MINOR.PATCH) a partir de t510. Versão do pacote can
 
 
 
+## [0.22.0] — 2026-10-28
+### Adicionado
+- Padrão visual definitivo do canal (t148u): conjunto de 20 imagens selecionadas pelo José no Drive (`Fontes/Imagens`) versionado em `banco-fichas/` — catálogo do elenco com 12 personagens (`personagens/ELENCO-catalogo.png`), 6 folhas individuais multi-pose (`PERS-menina-rosa`, `PERS-cacheada`, `PERS-bone-verde`, `PERS-gravata-azul`, `PERS-roxo-ansioso`, `PERS-bob-oculos`), 11 ambientes 16:9 (`ambientes/AMB-*.png`), catálogo de 12 objetos (`objetos/OBJ-catalogo.png`) e de 12 animais domésticos (`animais/ANIM-catalogo.png`, pasta nova). 20 fichas Markdown novas e `banco-fichas/indice.json` 2.0.0 (estado `permanente`, decisão t148u, origem Drive; `referencias-canal/` marcada como histórico).
+- Testes `tests/unit/test_banco_fichas.py` (índice × arquivos, contagens 7 pers/11 amb/1 obj/1 anim, ausência das fichas antigas e do gerador aposentado, folhas em paisagem).
+### Alterado
+- Estilo canônico reescrito para o cartum 2D flat colorido do conjunto t148u: `docs/REGRAS.md` §5/§6/§26, `docs/CONTRATO-EDITORIAL.md` §19, `config/estilo_visual.json`, `ESTILO_PADRAO_STICKMAN` e `BlocoVisual` 3.0.0 (`src/pqbr/contratos/__init__.py`), `docs/fases/stickman.md`, `docs/fases/motion-graphics.md`, `company/agents/motion/AGENTS.md` e mapa `docs/mapa/12-storyboard-elenco.mmd`.
+- Motion graphics: a âncora visual do catálogo v2 (MG-03) deixa de ser o nanquim de t146u e passa a ser o conjunto flat colorido t148u; paleta do motor, persona `motion` e `PlanoMotion.elenco` (PERS-M/PERS-F aposentados) entram no re-base do MG-03 (ROADMAP Fase MG).
+- Pacote de onboarding: `LIMITE_ESTADO` sobe de 12000 para 20000 caracteres (`src/pqbr/mcp/onboarding.py`) porque o `ESTADO-ATUAL` passou de 13,4k com a P17 e a linha P15 era cortada; `AGENTS.md` regenerado (`scripts/mcp/gerar_agents_md.py`).
+### Removido
+- As 12 fichas permanentes nanquim de t146u (reprovadas pelo José) e o `ELENCO-frente.*` saem do `banco-fichas/`; o gerador programático `scripts/visual/frente_stickman.py` é aposentado em `scripts/aposentado/` e `tests/unit/test_frente_stickman.py` removido. Os IDs `PERS-M`, `PERS-F` e `PERS-M-classico` deixam de existir; os protagonistas por gênero aguardam o José (P17).
+
 ## [0.21.0] — 2026-10-28
 ### Adicionado
 - Motion graphics no pós (REGRAS §26, t145u): `src/pqbr/pos/motion/` com `motor.js` (quadro = função pura do tempo, molas fechadas, ruído com semente, zona segura 9:16), catálogo inicial de 8 modelos (`transicao-cortina`, `titulo-expressao`, `linha-tempo`, `origem-pino`, `versus`, `recorte-aponta`, `barra-progresso`, `imagem-cena`), `render.py` (Playwright + Chrome do sistema, PNG por quadro, checagem de determinismo e de zona), `compor.py` (FFmpeg troca o trecho do porquê, aplica a camada sobre, copia a narração; folha de contato e teste a 360 px), `cli.py` e `biblioteca/regras.md`.

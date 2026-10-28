@@ -2,6 +2,8 @@
 
 Coletânea de referências visuais do bloco de motion (REGRAS §26, t145u/t147u). Um padrão fixo (papel creme `#f5f0e4`, nanquim, hachura, tipografia manuscrita única, molas, cortina padrão) com variações sutis de lista fechada, escolhidas pelo tipo de conteúdo e por semente do episódio. Desenho completo em `docs/fases/motion-graphics.md`.
 
+> **Nota t148u (28/10/2026):** o padrão visual do canal mudou — as fichas nanquim de t146u foram reprovadas e descartadas, e a base passou a ser o conjunto flat colorido de `banco-fichas/` (`indice.json` 2.0.0). Esta coletânea ainda está no nanquim de t146u e é re-basixada no MG-03 (catálogo v2, paleta do motor e REF-MG-00). Ela continua `aguardando_ok_jose`; o OK deve considerar o re-base.
+
 ## Regras da pasta
 
 1. Referência externa entra só como **gramática** (paleta, tipografia, textura, ritmo). Nunca conteúdo, personagem, logo ou música de terceiros.
