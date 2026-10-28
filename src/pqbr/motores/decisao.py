@@ -26,9 +26,16 @@ from collections.abc import Callable, Mapping, Sequence
 from dataclasses import dataclass
 from typing import Any, Generic, Literal, Protocol, TypeVar, runtime_checkable
 
-from pydantic import BaseModel, ValidationError
+from pydantic import BaseModel, ConfigDict, Field, ValidationError
 
-from ..contratos import RegistroConsumo
+from ..contratos import (
+    ClassificacaoEmailYouTube,
+    ClassificacaoPopupCamofox,
+    DecisaoRepeticao,
+    RegistroConsumo,
+    TriagemCorrecao,
+    VerificacaoCorrecao,
+)
 from ..storage.consumo import gravar
 from . import config
 
@@ -331,3 +338,244 @@ def decide(contrato: type[M], estado: str, perguntas: Sequence[Pergunta],
     """Interface única do Jev (REGRAS §7). Usa o decisor da config; ver `DecisorJev.decidir`."""
     return decisor_padrao().decidir(contrato, estado, perguntas, montar, tipo_acao=tipo_acao,
                                     workflow_id=workflow_id, activity=activity)
+
+
+def jev_disponivel(decisor: DecisorJev | None = None) -> bool:
+    """True se um decisor explícito foi passado ou se ao menos um provedor ativo tem chave no ambiente."""
+    if decisor is not None:
+        return True
+    bloco = config().get("decisao") or {}
+    for item in [bloco.get("principal") or {}, bloco.get("fallback") or {}]:
+        if item.get("ativo", True) and os.environ.get(str(item.get("chave_env", ""))).strip() if os.environ.get(str(item.get("chave_env", ""))) else False:
+            return True
+    return False
+
+
+class EscolhaRefCanario(BaseModel):
+    """Segundo nível do canário de interface (ADR-012 / JEV-EF): ref observado na tela ou abstain."""
+
+    model_config = ConfigDict(extra="forbid", frozen=True)
+    ref: str = Field(min_length=1, max_length=120)
+    absteve: bool = False
+    confianca: float = Field(ge=0.0, le=1.0)
+
+
+_CATS_POPUP = {
+    "cookie_consent": "Banner ou aviso de consentimento de cookies/privacidade.",
+    "login_required": "Tela pedindo login, senha, escolha de conta ou sessão expirada.",
+    "captcha": "Desafio de verificação humana (CAPTCHA, reCAPTCHA, quebra-cabeça).",
+    "permission": "Pedido de permissão do navegador ou do site necessário para continuar.",
+    "promo": "Diálogo promocional, anúncio, tour de novidades ('O que há de novo', 'Começar') ou aviso dispensável.",
+    "error": "Mensagem de erro técnico, página indisponível ou falha de carregamento.",
+    "other": "Outro elemento ou estado que não se encaixa nas categorias anteriores.",
+}
+_ACOES_POPUP = {
+    "aceitar": "Aceitar apenas consentimento de cookies ou permissão necessária.",
+    "fechar": "Fechar ou dispensar diálogo promocional/novidades ('Começar', 'Fechar', 'Agora não').",
+    "recusar": "Recusar oferta ou pedido opcional sem bloquear a navegação.",
+    "recarregar": "Recarregar a página diante de erro transitório de carregamento.",
+    "reautenticar": "Acionar o playbook autônomo de reautenticação para sessão expirada.",
+    "chamar_jose": "Escalar imediatamente ao José (obrigatório em captcha, 2FA ou bloqueio de conta).",
+    "ignorar": "Seguir sem interagir com o aviso quando ele não bloqueia o fluxo.",
+}
+
+
+def classificar_popup_camofox(estado: str, *, seletor: str | None = None, decisor: DecisorJev | None = None,
+                              workflow_id: str | None = None,
+                              activity: str | None = None) -> Decisao[ClassificacaoPopupCamofox]:
+    """Classifica pop-up ou tela inesperada no Camofox/Flow dentro da allowlist de ações (REGRAS §7)."""
+    d = decisor or decisor_padrao()
+    perguntas = [
+        Pergunta("categoria", "choice", "Qual é a categoria da tela ou diálogo inesperado observado?", _CATS_POPUP),
+        Pergunta("acao", "choice",
+                 "Qual é a ação segura permitida (captcha sempre chamar_jose; login sempre reautenticar ou chamar_jose; aceitar só em cookie_consent/permission)?",
+                 _ACOES_POPUP),
+    ]
+    return d.decidir(
+        ClassificacaoPopupCamofox,
+        estado[:MAX_ESTADO_CHARS],
+        perguntas,
+        lambda r: {"categoria": str(r["categoria"].escolha), "acao": str(r["acao"].escolha), "seletor": seletor},
+        tipo_acao="jev_classificacao",
+        workflow_id=workflow_id,
+        activity=activity,
+    )
+
+
+def escolher_ref_canario(objetivo: str, elementos: Mapping[str, str], *, decisor: DecisorJev | None = None,
+                         workflow_id: str | None = None,
+                         activity: str | None = None) -> Decisao[EscolhaRefCanario]:
+    """Segundo nível do canário (ADR-012): escolhe um `ref` observado pelo Camofox ou `abstain`."""
+    limpos = {str(k).strip(): str(v).strip() for k, v in elementos.items()
+              if str(k).strip() and str(k).strip() != "abstain" and str(v).strip()}
+    if not limpos or not objetivo.strip():
+        raise ValueError("objetivo e elementos observados são obrigatórios")
+    criterios = {**limpos, "abstain": "Nenhum dos elementos listados corresponde com segurança ao objetivo; abster-se."}
+    estado = f"Objetivo na tela: {objetivo.strip()}\nElementos observados pelo Camofox:\n" + "\n".join(
+        f"- {k}: {v}" for k, v in limpos.items()
+    )
+    d = decisor or decisor_padrao()
+    perguntas = [
+        Pergunta("ref", "choice",
+                 "Qual elemento observado cumpre exatamente o objetivo sem adivinhar seletor (ou 'abstain' na dúvida)?",
+                 criterios),
+    ]
+    return d.decidir(
+        EscolhaRefCanario,
+        estado[:MAX_ESTADO_CHARS],
+        perguntas,
+        lambda r: {"ref": str(r["ref"].escolha), "absteve": str(r["ref"].escolha) == "abstain"},
+        tipo_acao="jev_decisao",
+        workflow_id=workflow_id,
+        activity=activity,
+    )
+
+
+_CLASSES_TRIAGEM = {
+    "corrigivel": "Falha operacional de seletor, botão que mudou de lugar, timeout ou estado de interface recuperável sem tocar em login, 2FA, senha, exclusão, pagamento ou publicação externa.",
+    "sensivel": "Envolve login, 2FA, captcha, senha, cookies de autenticação, exclusão/apagamento, pagamento ou publicação externa; exige escalar ao José.",
+    "fora_de_escopo": "Mudança de regra de negócio, serviço desativado propositalmente ou erro estrutural fora do escopo de intervenção automática.",
+}
+
+
+def triagem_correcao_jev(passo: str, erro: str, ferramenta: str = "camofox", *,
+                         decisor: DecisorJev | None = None, workflow_id: str | None = None,
+                         activity: str | None = None) -> Decisao[TriagemCorrecao]:
+    """Triagem de falha operacional para o CorrecaoAutonomaWorkflow (F3-05 / JEV-EF)."""
+    estado = f"Ferramenta: {ferramenta}\nPasso: {passo.strip()}\nErro observado: {erro.strip()}"
+    d = decisor or decisor_padrao()
+    perguntas = [
+        Pergunta("classe", "choice",
+                 "Como classificar esta falha para decidir se o agente pode tentar corrigir sozinho ou se deve escalar?",
+                 _CLASSES_TRIAGEM),
+    ]
+    return d.decidir(
+        TriagemCorrecao,
+        estado[:MAX_ESTADO_CHARS],
+        perguntas,
+        lambda r: {"classe": str(r["classe"].escolha), "motivo": f"jev:{r['classe'].escolha}"},
+        tipo_acao="jev_triagem",
+        workflow_id=workflow_id,
+        activity=activity,
+    )
+
+
+def verificar_correcao_jev(passo: str, erro: str, evidencia: str = "", *,
+                           decisor: DecisorJev | None = None, workflow_id: str | None = None,
+                           activity: str | None = None) -> Decisao[VerificacaoCorrecao]:
+    """Verifica se a intervenção autônoma resolveu o passo que havia falhado (F3-05 / JEV-EF)."""
+    ev = evidencia.strip() or "Intervenção executada; verificando se o passo ficou concluído sem erro."
+    estado = f"Passo: {passo.strip()}\nErro original: {erro.strip()}\nEvidência pós-intervenção: {ev}"
+    d = decisor or decisor_padrao()
+    perguntas = [
+        Pergunta("ok", "noul",
+                 "A evidência pós-intervenção comprova que o erro original foi resolvido com segurança e o passo foi concluído?"),
+    ]
+    return d.decidir(
+        VerificacaoCorrecao,
+        estado[:MAX_ESTADO_CHARS],
+        perguntas,
+        lambda r: {
+            "ok": bool((r["ok"].nivel or 0.0) >= 0.5),
+            "motivo": f"jev:{'ok' if (r['ok'].nivel or 0.0) >= 0.5 else 'falhou'}",
+        },
+        tipo_acao="jev_verificacao",
+        workflow_id=workflow_id,
+        activity=activity,
+    )
+
+
+def decidir_repeticao_jev(tema: str, usados: Sequence[str], *, decisor: DecisorJev | None = None,
+                          workflow_id: str | None = None,
+                          activity: str | None = None) -> Decisao[DecisaoRepeticao]:
+    """Desempata na faixa de dúvida de R10 (variação semântica próxima de tema já usado)."""
+    limpos = [u.strip() for u in usados if u and u.strip()][:25]
+    if not limpos:
+        raise ValueError("lista de temas usados não pode ser vazia")
+    mapa = {f"u{i}": u for i, u in enumerate(limpos)}
+    criterios = {**mapa, "nenhum": "Tema inédito: não repete o mesmo assunto nem é variação próxima de nenhum listado."}
+    estado = f"Tema candidato: {tema.strip()}\nTemas já usados no canal:\n" + "\n".join(
+        f"- {k}: {v}" for k, v in mapa.items()
+    )
+    d = decisor or decisor_padrao()
+    perguntas = [
+        Pergunta("mesmo_assunto", "noul",
+                 "O tema candidato trata do mesmo assunto central ou é variação próxima de algum tema já usado (regra R10: um tema, um vídeo)?"),
+        Pergunta("qual", "choice",
+                 "Qual tema usado é o equivalente ou variação próxima do tema candidato (ou 'nenhum' se for inédito)?",
+                 criterios),
+    ]
+
+    def _montar(r: Mapping[str, Resposta]) -> Mapping[str, Any]:
+        escolhido = str(r["qual"].escolha)
+        mesmo = bool((r["mesmo_assunto"].nivel or 0.0) >= 0.5)
+        repetido = mesmo and escolhido != "nenhum"
+        return {
+            "repetido": repetido,
+            "barreira": "variacao" if repetido else "nenhuma",
+            "tema_parecido": mapa.get(escolhido) if repetido else mapa.get(escolhido),
+        }
+
+    return d.decidir(
+        DecisaoRepeticao,
+        estado[:MAX_ESTADO_CHARS],
+        perguntas,
+        _montar,
+        tipo_acao="jev_decisao",
+        workflow_id=workflow_id,
+        activity=activity,
+    )
+
+
+_CATS_EMAIL = {
+    "strike": "Aviso de strike de direitos autorais ou diretrizes da comunidade no canal.",
+    "claim": "Reivindicação de Content ID em vídeo do canal.",
+    "policy_warning": "Aviso de política ou diretrizes da comunidade sem strike imediato.",
+    "monetization": "Mudança, aviso ou aprovação/suspensão de monetização (YPP).",
+    "account_security": "Alerta de segurança da conta Google/YouTube, login suspeito ou alteração de acesso.",
+    "upload_status": "Confirmação rotineira de envio, processamento ou publicação de vídeo.",
+    "marketing": "Boletim, novidade de produto, convite ou marketing do YouTube.",
+    "other": "Outro assunto administrativo ou geral sem encaixe nas categorias anteriores.",
+}
+_GRAV_EMAIL = {
+    "informativo": "Apenas informativo, sem risco ao canal ou à conta (proibido para strike, claim, policy_warning e account_security).",
+    "atencao": "Exige atenção ou acompanhamento (ex.: claim de Content ID, aviso de política ou monetização).",
+    "critico": "Risco alto ou imediato ao canal ou à conta (ex.: strike ou segurança da conta).",
+}
+_ACOES_EMAIL = {
+    "ignorar": "Ignorar (boletins de marketing ou avisos triviais sem efeito).",
+    "registrar": "Apenas registrar no histórico operacional (ex.: status de upload).",
+    "abrir_ticket": "Abrir ticket operacional para análise (ex.: claim, policy_warning ou monetização).",
+    "chamar_jose": "Acionar o José imediatamente (obrigatório em strike e account_security).",
+}
+
+
+def classificar_email_youtube(assunto: str, trecho: str, *, video_id: str | None = None,
+                              decisor: DecisorJev | None = None, workflow_id: str | None = None,
+                              activity: str | None = None) -> Decisao[ClassificacaoEmailYouTube]:
+    """Classifica e-mail do YouTube/Google respeitando as travas de strike e segurança da conta."""
+    estado = f"Assunto: {assunto.strip()}\nTrecho: {trecho.strip()}"
+    d = decisor or decisor_padrao()
+    perguntas = [
+        Pergunta("categoria", "choice", "Qual é a categoria deste e-mail enviado pelo YouTube/Google?", _CATS_EMAIL),
+        Pergunta("gravidade", "choice",
+                 "Qual é a gravidade (strike, claim, policy_warning e account_security nunca são informativo)?",
+                 _GRAV_EMAIL),
+        Pergunta("acao", "choice",
+                 "Qual é a ação recomendada (strike e account_security exigem sempre chamar_jose)?",
+                 _ACOES_EMAIL),
+    ]
+    return d.decidir(
+        ClassificacaoEmailYouTube,
+        estado[:MAX_ESTADO_CHARS],
+        perguntas,
+        lambda r: {
+            "categoria": str(r["categoria"].escolha),
+            "gravidade": str(r["gravidade"].escolha),
+            "acao": str(r["acao"].escolha),
+            "video_id": video_id,
+        },
+        tipo_acao="jev_classificacao",
+        workflow_id=workflow_id,
+        activity=activity,
+    )

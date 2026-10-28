@@ -345,3 +345,106 @@ def test_consumo_grava_uma_coluna_por_campo():
     sql, params = sql_insercao(registro)
     assert sql.startswith("insert into pqbr.consumo_modelos (")
     assert sql.count("%s") == len(params) == len(registro.model_dump())
+
+
+# usos estruturados e ligação aos fluxos (t144u) ------------------------------------------------
+
+def _decisor_usos(respostas: list[Any], registros: list[RegistroConsumo] | None = None) -> d.DecisorJev:
+    reg = registros if registros is not None else []
+    return d.DecisorJev(
+        [Falso("typesafe", respostas)],
+        limiares={
+            "ClassificacaoPopupCamofox": 0.9,
+            "EscolhaRefCanario": 0.9,
+            "TriagemCorrecao": 0.9,
+            "DecisaoRepeticao": 0.85,
+            "VerificacaoCorrecao": 0.8,
+            "ClassificacaoEmailYouTube": 0.8,
+        },
+        registrar=reg.append,
+    )
+
+
+def _choice_mock(escolha: str, confianca: float = 0.98) -> dict[str, Any]:
+    return {"type": "choice", "choice": escolha, "probabilities": {escolha: confianca}, "confidence": confianca}
+
+
+def test_classificar_popup_camofox_fechar_novidades():
+    dec = _decisor_usos([{
+        "answers": {
+            "categoria": _choice_mock("promo", 0.98),
+            "acao": _choice_mock("fechar", 0.98),
+        },
+        "usage": {"input_tokens": 800, "output_tokens": 140},
+    }])
+    r = d.classificar_popup_camofox("Modal O que há de novo no Flow com botão Começar", seletor="e5", decisor=dec)
+    assert not r.escalar and r.valor is not None
+    assert (r.valor.categoria, r.valor.acao, r.valor.seletor) == ("promo", "fechar", "e5")
+
+
+def test_escolher_ref_canario_escolhe_elemento_ou_abstain():
+    dec = _decisor_usos([
+        {"answers": {"ref": _choice_mock("e19", 0.99)}},
+        {"answers": {"ref": _choice_mock("abstain", 1.0)}},
+    ])
+    elems = {"e5": "button 'Começar'", "e19": "button 'Criar'"}
+    r1 = d.escolher_ref_canario("Clicar em Criar", elems, decisor=dec)
+    assert not r1.escalar and r1.valor is not None and r1.valor.ref == "e19" and not r1.valor.absteve
+    r2 = d.escolher_ref_canario("Clicar em Publicar", elems, decisor=dec)
+    assert not r2.escalar and r2.valor is not None and r2.valor.ref == "abstain" and r2.valor.absteve
+
+
+def test_triagem_e_verificacao_correcao_ligadas_ao_workflow(monkeypatch):
+    import asyncio
+    from pqbr.workflows import correcao as wf
+
+    dec = _decisor_usos([
+        {"answers": {"classe": _choice_mock("corrigivel", 0.99)}},
+        {"answers": {"ok": {"type": "noul", "noul": 0.92}}},
+    ])
+    monkeypatch.setattr(d, "jev_disponivel", lambda decisor=None: True)
+    monkeypatch.setattr(d, "decisor_padrao", lambda registrar=None: dec)
+    ped = wf.PedidoCorrecao(ferramenta="camofox", passo="clicar no botão Criar", erro="TimeoutError: e14 ausente")
+    tri = asyncio.run(wf.triagem_jev(ped))
+    assert tri.classe == "corrigivel" and "jev:corrigivel" in tri.motivo
+    ver = asyncio.run(wf.verificar_jev(wf.Tentativa(pedido=ped, n=1)))
+    assert ver.ok is True and "jev:ok" in ver.motivo
+
+
+def test_checar_repeticao_usa_jev_na_faixa_de_duvida_semantica():
+    from pqbr.pipeline.grade import checar_repeticao
+
+    dec = _decisor_usos([
+        {
+            "answers": {
+                "mesmo_assunto": {"type": "noul", "noul": 0.95},
+                "qual": _choice_mock("u0", 0.96),
+            }
+        },
+        {
+            "answers": {
+                "mesmo_assunto": {"type": "noul", "noul": 0.05},
+                "qual": _choice_mock("nenhum", 0.94),
+            }
+        },
+    ])
+    usados = ["Por que batemos na madeira para afastar azar?"]
+    # Sem palavras do núcleo em comum, mas variação semântica direta:
+    r1 = checar_repeticao("De onde surgiu a superstição de dar três toques no móvel?", usados, decisor=dec)
+    assert r1.repetido is True and r1.barreira == "variacao" and r1.tema_parecido == usados[0]
+    r2 = checar_repeticao("Por que o chuveiro elétrico faz barulho no modo inverno?", usados, decisor=dec)
+    assert r2.repetido is False and r2.barreira == "nenhuma"
+
+
+def test_classificar_email_youtube_strike_chama_jose():
+    dec = _decisor_usos([{
+        "answers": {
+            "categoria": _choice_mock("strike", 0.99),
+            "gravidade": _choice_mock("critico", 0.99),
+            "acao": _choice_mock("chamar_jose", 0.99),
+        }
+    }])
+    r = d.classificar_email_youtube("Strike de direitos autorais", "Seu vídeo recebeu um strike.", decisor=dec)
+    assert not r.escalar and r.valor is not None
+    assert (r.valor.categoria, r.valor.gravidade, r.valor.acao) == ("strike", "critico", "chamar_jose")
+

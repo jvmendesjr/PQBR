@@ -5,6 +5,15 @@ Versionamento SemVer (MAJOR.MINOR.PATCH) a partir de t510. Versão do pacote can
 
 
 
+## [0.19.0] — 2026-10-28
+### Adicionado
+- Funções de decisão estruturada do Jev (`src/pqbr/motores/decisao.py`): `jev_disponivel`, `classificar_popup_camofox`, `escolher_ref_canario` (`EscolhaRefCanario`), `triagem_correcao_jev`, `verificar_correcao_jev`, `decidir_repeticao_jev` e `classificar_email_youtube` (t144u).
+- Ligação do Jev em `CorrecaoAutonomaWorkflow` (`triagem_jev` e `verificar_jev`, `src/pqbr/workflows/correcao.py`) e na checagem semântica de repetição R10 (`checar_repeticao`, `src/pqbr/pipeline/grade.py`).
+- Folhas completas de personagens (`PERS-M-folha.png`/`.svg`, `PERS-F-folha.png`/`.svg`, 1920×1080 com frente, perfil e 4 expressões de boca fechada), recortes 9:16 com roupa 2D chapada fixa (`PERS-M.png`, `PERS-F.png`), ambientes (`AMB-cozinha.png`, `AMB-sala.png`) e objetos (`OBJ-chaleira.png`, `OBJ-xicara.png`, `OBJ-filtro-pano.png`, `OBJ-controle-remoto.png`) gerados por `scripts/visual/frente_stickman.py` (t144u).
+### Alterado
+- Limiares de confiança calibrados empiricamente na API real TypeSafe (`jev-latest`, 12 casos canônicos, 100% de acerto) em `config/motores.json`: `0.9` para pop-up, canário e triagem; `0.85` para repetição; `0.8` para verificação e e-mail YouTube. Workers `pqbr-temporal-worker`, `pqbr-episodio-worker` e `pqbr-mcp` reiniciados com `TYPESAFE_API_KEY` ativa (t144u).
+- `banco-fichas/indice.json` (v0.4.0) e fichas Markdown atualizados para `aguardando_ok_jose` com as cores chapadas e caminhos dos PNG/SVG.
+
 ## [0.18.0] — 2026-10-28
 ### Adicionado
 - Porta `decide()` do Jev (`src/pqbr/motores/decisao.py`): adaptador TypeSafe (`systemone`, `jev-latest`), fallback OpenRouter desligado, limiar de confiança por contrato e registro de cada chamada em `pqbr.consumo_modelos`. Sem uso em workflow ainda (JEV-EF, t143u).

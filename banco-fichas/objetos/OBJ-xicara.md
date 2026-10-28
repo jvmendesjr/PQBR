@@ -1,5 +1,9 @@
 # OBJ-xicara
 
-Estado: `rascunho_texto`. Imagem: nenhuma.
+Estado: `aguardando_ok_jose` (t144u, 28/10).
+- Imagem (1:1, 1080×1080): `banco-fichas/objetos/OBJ-xicara.png` (`.svg`)
+- Asset: `ASSET_objeto_xicara-v1`
 
-Xícara branca lisa, alça simples, sem estampa e sem texto. O líquido muda conforme a cena (café claro, café escuro) e não faz parte desta ficha. Fundo neutro.
+## Trava
+
+Xícara branca lisa (`#ffffff`) com pires branco em desenho 2D chapado e contorno preto (`#141414`) sobre fundo neutro (`#f5f2eb`), alça lateral simples, sem estampa e sem texto. O líquido varia conforme a cena do storyboard.

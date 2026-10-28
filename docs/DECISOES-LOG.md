@@ -804,3 +804,19 @@ NÃO CABE:
 - Confiança: a menor das respostas (no noul, a certeza do lado escolhido, max(p, 1-p)). Sem limiar, abaixo dele ou com contrato recusado, escala (`escalar=True`).
 - Protocolo: cliente `jevkit` (`/v1/systemone`, `jev-latest`). Toda resposta é checada contra a pergunta; o score exige `confidence` (o jevkit assume 1.0).
 - Fallback: OpenRouter desligado (`ativo: false`). Ligar pede a chave (JEV-02) e confirmar o modelo `~typesafe/jev-latest`, não testado aqui.
+
+## t144u (28/10/2026) — JEV-EF concluído, calibrado na API real e ligado aos fluxos + fichas completas em `banco-fichas/`
+- **Diretriz do José:** prosseguir autonomamente para concluir todo o ciclo do JEV-EF (ligar `decide()`, calibrar com casos reais, reiniciar workers) e definir/gerar as fichas completas de personagens (com roupa 2D chapada fixa e expressões), ambientes e objetos em `banco-fichas/`, apresentando as primeiras definições para o OK dele.
+- **JEV-EF ligado nos fluxos (`src/pqbr/motores/decisao.py`, `src/pqbr/workflows/correcao.py`, `src/pqbr/pipeline/grade.py`):**
+  - Funções estruturadas: `jev_disponivel`, `classificar_popup_camofox`, `escolher_ref_canario` (`EscolhaRefCanario`, segundo nível do canário ADR-012), `triagem_correcao_jev`, `verificar_correcao_jev`, `decidir_repeticao_jev` e `classificar_email_youtube`.
+  - `CorrecaoAutonomaWorkflow` (`triagem_jev` e `verificar_jev`): mantém a trava dura de `SENSIVEIS` e `simulacao`; quando `simulacao is None` e `jev_disponivel()` é `True`, chama o Jev via `asyncio.to_thread` (escalando para `sensivel` / `ok=False` se `dec.escalar`). Sem chave, preserva `EmConstrucao` (compatível com testes offline).
+  - `checar_repeticao` (`grade.py`): consulta `decidir_repeticao_jev` na faixa semântica quando `usar_jev=True` ou `decisor` é passado.
+- **Calibração empírica real na API TypeSafe (`jev-latest`, 12 casos canônicos, 100% de acerto, gravado em `pqbr.consumo_modelos`):**
+  - Pop-up promo (`0.98`), pop-up CAPTCHA (`0.99`), canário ref presente (`0.99`), canário ref ausente/abstain (`1.00`), triagem seletor (`1.00`), triagem 2FA (`1.00`), verificação resolvida (`0.85`), verificação falha 500 (`0.96`), repetição R10 variação semântica (`0.96`), repetição R10 tema inédito (`0.92`), e-mail YouTube strike (`0.99`), e-mail YouTube marketing (`0.83`).
+  - Limiares calibrados em `config/motores.json`: `ClassificacaoPopupCamofox=0.9`, `EscolhaRefCanario=0.9`, `TriagemCorrecao=0.9`, `DecisaoRepeticao=0.85`, `VerificacaoCorrecao=0.8`, `ClassificacaoEmailYouTube=0.8`.
+- **Workers reiniciados e verificados:** `pqbr-temporal-worker`, `pqbr-episodio-worker` e `pqbr-mcp` reiniciados; `TYPESAFE_API_KEY` confirmada ativa no ambiente dos dois workers.
+- **Fichas visuais completas geradas (`scripts/visual/frente_stickman.py` e `banco-fichas/`):**
+  - `PERS-M` (`PERS-M.png` 9:16 + `PERS-M-folha.png` 16:9 com frente, perfil e 4 expressões): cabeça branca redonda, membros finos de palito, óculos redondos vermelhos (`#e23b2f`), sobrancelhas acima do aro, camiseta 2D chapada azul cobalto (`#2b6cb0`) e bermuda cinza-ardósia escuro (`#334155`).
+  - `PERS-F` (`PERS-F.png` 9:16 + `PERS-F-folha.png` 16:9 com frente, perfil e 4 expressões): mais baixa, coque circular preto à direita, argola amarela (`#e6b325`) e pinta preta à esquerda, camiseta 2D chapada terracota/coral (`#d96b43`) e bermuda azul-marinho (`#1e3a5f`).
+  - `ELENCO-frente.png` (16:9), `AMB-cozinha.png` (9:16), `AMB-sala.png` (9:16), `OBJ-chaleira.png`, `OBJ-xicara.png`, `OBJ-filtro-pano.png` e `OBJ-controle-remoto.png` (1:1), todos com par `.svg` e zero texto na imagem (`Estado: aguardando_ok_jose`).
+

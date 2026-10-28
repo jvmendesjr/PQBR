@@ -1,15 +1,21 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1920" viewBox="0 0 1080 1920">
   <rect width="100%" height="100%" fill="#f4f1ea"/>
-  <line x1="540" y1="806" x2="540" y2="1151" stroke="#1a1a1a" stroke-width="41" stroke-linecap="round"/>
-  <line x1="540" y1="909" x2="253" y2="1081" stroke="#1a1a1a" stroke-width="41" stroke-linecap="round"/>
-  <line x1="540" y1="909" x2="827" y2="1081" stroke="#1a1a1a" stroke-width="41" stroke-linecap="round"/>
-  <line x1="540" y1="1151" x2="368" y2="1680" stroke="#1a1a1a" stroke-width="41" stroke-linecap="round"/>
-  <line x1="540" y1="1151" x2="712" y2="1680" stroke="#1a1a1a" stroke-width="41" stroke-linecap="round"/>
-  <circle cx="540" cy="634" r="172" fill="#ffffff" stroke="#1a1a1a" stroke-width="41"/>
-  <circle cx="481" cy="643" r="11" fill="#1a1a1a"/>
-  <circle cx="599" cy="643" r="11" fill="#1a1a1a"/>
-  <line x1="508" y1="723" x2="572" y2="723" stroke="#1a1a1a" stroke-width="9" stroke-linecap="round"/>
-  <circle cx="481" cy="643" r="66" fill="none" stroke="#e23b2f" stroke-width="16"/>
-  <circle cx="599" cy="643" r="66" fill="none" stroke="#e23b2f" stroke-width="16"/>
-  <line x1="547" y1="643" x2="533" y2="643" stroke="#e23b2f" stroke-width="16" stroke-linecap="round"/>
+  <line x1="540" y1="816" x2="540" y2="891" stroke="#1a1a1a" stroke-width="20" stroke-linecap="round"/>
+  <line x1="446" y1="895" x2="293" y2="1120" stroke="#1a1a1a" stroke-width="20" stroke-linecap="round"/>
+  <line x1="634" y1="895" x2="787" y2="1120" stroke="#1a1a1a" stroke-width="20" stroke-linecap="round"/>
+  <line x1="462" y1="1361" x2="397" y2="1700" stroke="#1a1a1a" stroke-width="20" stroke-linecap="round"/>
+  <line x1="618" y1="1361" x2="683" y2="1700" stroke="#1a1a1a" stroke-width="20" stroke-linecap="round"/>
+  <line x1="397" y1="1700" x2="365" y2="1700" stroke="#1a1a1a" stroke-width="20" stroke-linecap="round"/>
+  <line x1="683" y1="1700" x2="715" y2="1700" stroke="#1a1a1a" stroke-width="20" stroke-linecap="round"/>
+  <polygon points="442,1170 638,1170 647,1372 556,1372 540,1231 524,1372 433,1372" fill="#334155" stroke="#1a1a1a" stroke-width="13" stroke-linejoin="round"/>
+  <polygon points="435,868 645,868 693,957 636,977 638,1183 442,1183 444,977 387,957" fill="#2b6cb0" stroke="#1a1a1a" stroke-width="13" stroke-linejoin="round"/>
+  <circle cx="540" cy="661" r="166" fill="#ffffff" stroke="#1a1a1a" stroke-width="20"/>
+  <circle cx="483" cy="667" r="12" fill="#1a1a1a"/>
+  <circle cx="597" cy="667" r="12" fill="#1a1a1a"/>
+  <line x1="454" y1="587" x2="512" y2="598" stroke="#1a1a1a" stroke-width="11" stroke-linecap="round"/>
+  <line x1="568" y1="598" x2="626" y2="585" stroke="#1a1a1a" stroke-width="11" stroke-linecap="round"/>
+  <path d="M 508 748 Q 540 760 572 745" fill="none" stroke="#1a1a1a" stroke-width="11" stroke-linecap="round"/>
+  <circle cx="483" cy="667" r="52" fill="none" stroke="#e23b2f" stroke-width="12"/>
+  <circle cx="597" cy="667" r="52" fill="none" stroke="#e23b2f" stroke-width="12"/>
+  <line x1="535" y1="667" x2="545" y2="667" stroke="#e23b2f" stroke-width="12" stroke-linecap="round"/>
 </svg>

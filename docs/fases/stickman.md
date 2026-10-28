@@ -39,6 +39,11 @@ Leitura de canais grandes em 27/10: `docs/pesquisas/canais-que-repetem-o-desenho
 
 Recusado em 28/10 (t140u). José comparou com a busca e com tutoriais de stickman e não quis o tubo sem roupa. Os PNG ficam no disco e não são referência. Em t141u ele fechou: a arquitetura e o NotebookLM ficam; o material inspira o desenho e o prompt do storyboard que já existe. A próxima folha, depois da cor da roupa, é frente, lado e expressões. Análise em `docs/pesquisas/referencias-stickman-20261028.md`.
 
+Atualizado em 28/10 (t144u): definidas e geradas por `scripts/visual/frente_stickman.py` todas as fichas visuais em `banco-fichas/` com estado `aguardando_ok_jose`:
+- `PERS-M` (`PERS-M.png` 9:16 + `PERS-M-folha.png` 16:9 com frente, perfil e 4 expressões de boca fechada): camiseta 2D chapada azul cobalto (`#2b6cb0`), bermuda cinza-ardósia escuro (`#334155`), óculos redondos vermelhos (`#e23b2f`).
+- `PERS-F` (`PERS-F.png` 9:16 + `PERS-F-folha.png` 16:9 com frente, perfil e 4 expressões de boca fechada): camiseta 2D chapada terracota/coral (`#d96b43`), bermuda azul-marinho (`#1e3a5f`), coque preto à direita, argola amarela (`#e6b325`) e pinta preta à esquerda.
+- `AMB-cozinha.png` e `AMB-sala.png` (9:16), `OBJ-chaleira.png`, `OBJ-xicara.png`, `OBJ-filtro-pano.png` e `OBJ-controle-remoto.png` (1:1), todos com par `.svg` e sem letras na imagem.
+
 ## Fase 4 — Vídeos que já existem no Drive
 
 Lidos em 27/10, só nomes e pastas. Nada foi movido nem apagado.

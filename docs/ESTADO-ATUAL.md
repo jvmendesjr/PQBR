@@ -2,7 +2,7 @@
 
 Fonte única de "onde estamos". Não repete o ROADMAP: aponta os itens por id. **Atualize este arquivo a cada correção ou pendência resolvida.** O hook pre-commit exige isso quando o commit toca ROADMAP, LACUNAS, DECISOES-LOG ou CHANGELOG, e o `registrar_alteracao` exige isso para `tipo` correcao ou pendencia_resolvida.
 
-Atualizado: 28/10/2026 (t143u: porta `decide()` do Jev pronta e testada sem rede, sem uso ainda; JEV-EF segue aberto no ROADMAP) · versão 0.18.0
+Atualizado: 28/10/2026 (t144u: JEV-EF concluído, calibrado na API real e ativo nos workers; fichas completas de personagens com roupa chapada, ambientes e objetos geradas em `banco-fichas/` para OK do José) · versão 0.19.0
 
 ## Onde estamos
 - **Produção:** o lote do saldo está em `runtime/lote-saldo/` (um diretório por tema). O EP1002 olhos-da-cara foi reprovado e descartado (`runtime/lote-saldo/_descartado/`), e o tema voltou a `proposto`.
@@ -11,10 +11,11 @@ Atualizado: 28/10/2026 (t143u: porta `decide()` do Jev pronta e testada sem rede
 - **Documentos (t129u):** `docs/LACUNAS-fluxo.md` só lista o que ainda falta no código. O roster vigente está em `docs/AGENTES.md`. Briefing, checklist pré-E2E, rascunho de SOUL e propostas não aplicadas foram para `docs/_obsoleto/`. As provas do F3-05 continuam em `docs/sdd/` porque o item segue aberto no ROADMAP.
 - **Fluxo (t130u):** o episódio para no storyboard. O NotebookLM entrega roteiro, compliance e SEO, e não gera vídeo. `YOUTUBE_DRY_RUN=true`. Os vídeos de `runtime/lote-saldo/` ficam parados até a etapa de publicação.
 - **Paperclip (t130u):** `paperclipai.service` parado e desabilitado em 27/10. Sem desinstalar e sem apagar dados. `config/paperclip.json` está `parado_proposital`.
-- **Stickman (t133u, t141u):** identidade única. O desenho sem roupa foi recusado. A roupa chapada ainda não tem cor. O material de 28/10 inspira o desenho e o prompt; NotebookLM, Flow e o resto do fluxo ficam. 3D não se pede. Fases em `docs/fases/stickman.md`.
+- **Jev (t143u, t144u — JEV-EF concluído):** `decide()` e funções estruturadas (`classificar_popup_camofox`, `escolher_ref_canario`, `triagem_correcao_jev`, `verificar_correcao_jev`, `decidir_repeticao_jev`, `classificar_email_youtube`) ligadas a `CorrecaoAutonomaWorkflow` e `checar_repeticao`, limiares calibrados na API real TypeSafe (`jev-latest`, 12 casos, 100% de acerto) e workers `pqbr-temporal-worker` / `pqbr-episodio-worker` reiniciados com `TYPESAFE_API_KEY` ativa.
+- **Stickman e banco de fichas (t133u, t141u, t144u):** identidade única com roupa 2D chapada fixa definida e gerada em `banco-fichas/` (`PERS-M`: azul cobalto `#2b6cb0` + bermuda `#334155` + óculos vermelhos `#e23b2f`; `PERS-F`: terracota `#d96b43` + bermuda `#1e3a5f` + argola amarela `#e6b325`), junto com folhas 16:9 de frente/perfil/4 expressões, 2 ambientes (`AMB-cozinha`, `AMB-sala`) e 4 objetos (`OBJ-chaleira`, `OBJ-xicara`, `OBJ-filtro-pano`, `OBJ-controle-remoto`), prontos para o OK inicial do José.
 
 ## Próximo passo
-Prioritário (P15, JEV-EF): o Jev. A porta `decide()` está pronta e testada sem rede (t143u), sem chamada real e sem workflow que a use. Faltam o primeiro uso (proposta: em sombra), os limiares calibrados e o reinício do worker (a chave já está em worker.env). Em paralelo: a cor da roupa (P5).
+OK do José nas fichas visuais geradas em `banco-fichas/` (P5) para liberar a geração de cenas com recorte no Google Flow, ou avanço em F1-05 (P13) / F6-02 (P14).
 
 ## Pendências abertas
 | # | Pendência | Ref. ROADMAP | Dono | Bloqueio |
@@ -23,7 +24,7 @@ Prioritário (P15, JEV-EF): o Jev. A porta `decide()` está pronta e testada sem
 | P2 | Publicação: worker reiniciado 27/10 11:50 (-03), 0 workflows Running. `YOUTUBE_DRY_RUN=true`. Nada agendado (`agenda_publicacao` com 0 linhas). Envio real desligado. Refresh do app em teste vence ~2/11 21:20 (-03) | F8-01 | agente | sem envio até a produção ativa |
 | P3 | Teste: LOOP por cena vs o atual | Estado 26/10 · Testes pendentes | agente | depois do fluxo de publicação |
 | P4 | **Feito (t108u/t109u).** Juiz por etapa (`gemini_juiz` v1.0.0): pré-produção usa 3.8 Flash; produção (VISUAL e LOOP) usa 4 Argon Baixo. O worker `pqbr-episodio-worker` foi reiniciado com OK do José às 16:57 (-03), e o poller está ativo na fila `episodio-pqbr`, ns `pqbr` | Estado 26/10 · DECISOES-LOG t109u | agente | concluído |
-| P5 | Folha do elenco. Os PNG sem roupa foram recusados (t140u). Falta a cor da roupa chapada | t140u · Fase 3 | José | sem a cor, não desenhar de novo e não gerar no Flow |
+| P5 | Fichas completas do elenco (`PERS-M`, `PERS-F` + folhas 16:9), ambientes (`AMB-cozinha`, `AMB-sala`) e objetos (`OBJ-*`) geradas com roupa 2D chapada fixa em `banco-fichas/` (t144u) | t144u · Fase 3 | José | aguardando OK do José nas definições visuais antes de enviar ao Flow |
 | P6 | **Feito (t130u).** `storyboard_criar` valida o Storyboard 1.2.0, grava a ficha e deixa `pode_gerar_video` false. O episódio para aí. Imagem e vídeo desta etapa não rodam | Estado 27/10 · DECISOES-LOG t130u | agente | concluído |
 | P7 | **Feito (t108u).** O gate VISUAL agora tem `boca_articula_fala`, `corte_oculos_cabeca` e `grotesco` (FichaCena/REGRAS §25), e cada um reprova sozinho. Validado no EP1002 (`loop-gemini-4argon-v2.json`): reprova, com S01 corte+grotesco, S04 corte e S02/S05/S09 boca | Estado 26/10 · CHANGELOG 0.14.0 | agente | concluído |
 | P8 | **Feito (t128u).** As 7 memórias `obsoleto_candidato` do roster antigo de `docs/AGENTES.md` foram apagadas em 27/10 ~08:57 (-03). Bank 884 → 877. Backup fora do git | `docs/operacao/hindsight-descarte-candidatos.md` | agente | concluído |
@@ -33,7 +34,7 @@ Prioritário (P15, JEV-EF): o Jev. A porta `decide()` está pronta e testada sem
 | P12 | ERR-01: revisar os erros aceitáveis | ERR-01 | agente | depois dos primeiros dias de produção |
 | P13 | Proposta não aplicada: ferramentas só leitura para os agentes PydanticAI, sem MCP interno | F1-05 · t134u | José | sem efeito externo |
 | P14 | Proposta não aplicada: acompanhamento de mudanças (vigia de fallbacks, canário, deriva de contrato, `dev_diagnosticar`). Sem agente novo. O NotebookLM não entra no canário | F6-02 · t135u/t136u | José | registro no worker exige reinício |
-| P15 | **Prioritário.** Jev (`decide()`, JEV-EF). Porta pronta e testada sem rede (t143u): adaptador TypeSafe, limiares provisórios, consumo por chamada. Sem chamada real e sem workflow que a use. Falta o primeiro uso, a calibração e o reinício do worker | RNF-02 · JEV-EF · t137u, t143u | José | o primeiro uso, a calibração e o reinício exigem OK; ligar o fallback exige a chave (JEV-02) |
+| P15 | **Feito (t143u/t144u).** Jev (`decide()`, JEV-EF) ligado aos fluxos (`CorrecaoAutonomaWorkflow`, canário, pop-up Flow, e-mail YouTube, repetição R10), limiares calibrados na API real TypeSafe (12 casos, 100% de acerto) e workers reiniciados com `TYPESAFE_API_KEY` ativa. Resta apenas JEV-02 (chave OpenRouter do fallback) | RNF-02 · JEV-EF · t144u | concluído | JEV-02 (fallback OpenRouter) quando José fornecer chave |
 
 ## Painel
 Aba **Roadmap** no painel (:8088): Próximos passos, Falta e Feito gerados deste arquivo e do ROADMAP por `scripts/mapa/roadmap.py` (via `gerar_index.py`; o pre-commit regenera quando ROADMAP/ESTADO-ATUAL/mapa mudam). Itens com ☑ (feito) e ☐ (falta/próximos), só símbolo, nada clicável. Só leitura.
