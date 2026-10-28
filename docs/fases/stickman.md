@@ -35,6 +35,8 @@ Tentativa 1 feita em 27/10, seguindo o fluxo (manifesto antes, bloco único sem 
 3. O José olha a frente. Se servir, grava como `ASSET_personagem_masculino-v1` ou `feminino-v1` e a ficha muda de estado. Se não servir, a ficha continua rascunho.
 4. Expressões e objetos vêm depois da frente. Não gerar a folha inteira antes.
 
+Leitura de canais grandes em 27/10, sem gerar imagem: `docs/pesquisas/canais-que-repetem-o-desenho-20261027.md`. O que se copia é um corpo preso (no Dick Figures, a identidade é a cor do stick figure) e um Short de uma situação. Não se copia tom adulto, choque, nem luta. A próxima frente não é outro parágrafo: é uma imagem de tubos que o José aceite, e só então o Flow varia a cena.
+
 ## Fase 4 — Vídeos que já existem no Drive
 
 Lidos em 27/10, só nomes e pastas. Nada foi movido nem apagado.
