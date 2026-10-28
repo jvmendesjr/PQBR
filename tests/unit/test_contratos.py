@@ -5,7 +5,7 @@ from pydantic import ValidationError
 from pqbr.contratos import (RoteiroShort, DecisaoRepeticao, PontuacaoPolemica, VereditoAuditor,
     PropostaAgente, TicketManutencao, Falha, GradeDiaria, ItemGrade, RegistroConsumo, CTA)
 
-BLOCO = dict(estilo="ilustração 2D plana de cartum, traço preto grosso, cores chapadas quentes",
+BLOCO = dict(estilo="stickman de tubos grossos, traço chapado, cabeça redonda, sem pessoa de cartum",
              personagem="homem de ~40 anos, magro, cabelo grisalho curto, camiseta verde, bigode, expressão curiosa",
              cenas=[dict(fala="Por que a gente fala isso?", acao="ele olha a TV desligada", enquadramento="plano médio", ambiente="sala brasileira, sofá, TV de tubo, noite"),
                     dict(fala="Comenta aí", acao="ele volta ao sofá", enquadramento="plano aberto", ambiente="mesma sala, noite")])
@@ -96,7 +96,7 @@ if __name__ == "__main__":
 
 
 class BlocoVisualT(unittest.TestCase):
-    def test_bloco_sem_2d_falha(self):
+    def test_bloco_sem_stickman_falha(self):
         from pqbr.contratos import BlocoVisual
         with self.assertRaises(Exception):
             BlocoVisual(**{**BLOCO, "estilo": "fotografia realista de um homem na sala"})
@@ -131,8 +131,8 @@ class ContratosT436(unittest.TestCase):
 
 
 class ContratosT437(unittest.TestCase):
-    CANON = ("Ilustração 2D plana de cartum, traço preto nítido, cores chapadas quentes. Proibido: fotorrealismo, 3D, "
-             "rosto de pessoa real, texto escrito dentro das imagens. Formato vertical 9:16, sem fotorrealismo.")
+    CANON = ("Stickman de tubos grossos, traço chapado, cabeça redonda. Proibido: fotorrealismo, 3D, "
+             "rosto de pessoa real, texto escrito dentro das imagens. Formato vertical 9:16.")
 
     def _bv(self, estilo, **kw):
         from pqbr.contratos import BlocoVisual, CenaVisual
@@ -145,9 +145,10 @@ class ContratosT437(unittest.TestCase):
             self._bv("Animação 3D estilo Pixar com iluminação suave e personagem fofo")
         with self.assertRaises(ValidationError):
             self._bv("Ilustração 2D mas com rosto fotorrealista e pele detalhada")
-        self._bv("Animação 3D estilo Pixar com iluminação suave e personagem fofo", pedido_3d_ou_realista=True)
         with self.assertRaises(ValidationError):
-            self._bv("Desenho de cartum plano, traço preto, cores chapadas")   # sem 2D declarado
+            self._bv(self.CANON, pedido_3d_ou_realista=True)
+        with self.assertRaises(ValidationError):
+            self._bv("Desenho de cartum plano, traço preto, cores chapadas")   # sem stickman
 
     def test_jev_email(self):
         from pqbr.contratos import ClassificacaoEmailYouTube as E

@@ -5,6 +5,12 @@ Versionamento SemVer (MAJOR.MINOR.PATCH) a partir de t510. Versão do pacote can
 
 
 
+## [0.17.3] — 2026-10-27
+### Alterado
+- Stickman passa a ser a identidade única (t133u). O bloco de cartum genérico sai do contrato vigente. `BlocoVisual` 2.0.0 exige a palavra stickman e recusa 3D.
+- Banco de fichas em texto: `banco-fichas/` (dois personagens, cozinha, sala, quatro objetos). Sem imagem. Espelho no Drive `00_Biblia_Visual/banco-fichas` (`config/drive_pastas.json`, chave `banco_fichas`).
+- O roteiro e o storyboard recebem o estilo stickman. Roupa nova por episódio fica pausada até a imagem de referência.
+
 ## [0.17.2] — 2026-10-27
 ### Operação
 - Duas imagens estáticas no Google Flow, pelo Camofox, modelo Nano Banana 2 Lite, 9:16 (t132u). A ficha não mostrou crédito. As duas saíram cartum de pessoa, não stickman. Vídeo não foi gerado. Baixado só o 1K original.

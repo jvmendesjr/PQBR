@@ -29,9 +29,11 @@ FONTES_PACOTE = {   # nome do item → arquivo do repo (o bloco §16.7 é extra�
 
 
 def bloco_visual_16_7(contrato: str) -> str:
-    sec = contrato.split("### 16.7", 1)[1]
+    """Slot antigo do pacote. O texto vigente é o bloco da seção 19 (t133u), não o cartum de 12/10."""
+    sec = contrato.split("## 19.", 1)[1]
     m = re.search(r"```\n(.*?)```", sec, re.S)
-    if not m or "[ESTILO]" not in m.group(1): raise ValueError("bloco §16.7 não encontrado no contrato")
+    if not m or "[ESTILO]" not in m.group(1) or "stickman" not in m.group(1).lower():
+        raise ValueError("bloco visual do stickman não encontrado na seção 19")
     return m.group(1).strip()
 
 
@@ -40,7 +42,7 @@ def montar_pacote(raiz: Path = RAIZ) -> dict:
     itens = {k: (raiz / v).read_text(encoding="utf-8") for k, v in FONTES_PACOTE.items()}
     itens["bloco_visual_16_7"] = bloco_visual_16_7(itens["contrato_editorial"])
     h = hashlib.sha256(json.dumps(itens, ensure_ascii=False, sort_keys=True).encode()).hexdigest()
-    return {"hash": h, "itens": itens, "origem": {**FONTES_PACOTE, "bloco_visual_16_7": "docs/CONTRATO-EDITORIAL.md §16.7"}}
+    return {"hash": h, "itens": itens, "origem": {**FONTES_PACOTE, "bloco_visual_16_7": "docs/CONTRATO-EDITORIAL.md §19"}}
 
 
 def texto_fonte_pacote(p: dict) -> str:

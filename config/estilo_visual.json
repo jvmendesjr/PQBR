@@ -1,22 +1,26 @@
 {
-  "_nota": "Estilo ativo do steering do Short (José 12/10 17:13: estilo D em teste; o canônico §16.7 ainda não foi trocado). Lido por notebooklm.steering_short.",
-  "ativo": "D",
+  "_nota": "Identidade única do canal (José 27/10, t133u): stickman. O estilo D deixa de ser teste. Lido por notebooklm.steering_short. Imagem de referência ainda não existe; fichas de texto em banco-fichas/.",
+  "ativo": "stickman",
   "estilos": {
-    "D": "Estilo visual: stickman arredondado em 2D: bonequinhos de cabeça redonda grande e corpo de traços grossos e arredondados (não linhas finas), membros como tubos macios com pontas redondas, expressões simples e muito expressivas, cores chapadas com um acento de cor por personagem, fundo limpo e claro com poucos objetos, humor de cartum. O protagonista é sempre o mesmo stickman (mesma cabeça, mesma cor de acento, mesmo acessório)."
+    "stickman": "Stickman de tubos grossos e arredondados, cabeça redonda grande, membros com ponta redonda, traço chapado, sem dedos e sem pessoa de cartum. Um acento de cor por personagem, fundo limpo e claro, poucos objetos, humor de comédia. O protagonista é o mesmo stickman em todas as cenas: mesma cabeça, mesmo acessório, mesma cor de acento."
   },
   "elenco": {
-    "_nota": "t78u: consistência de rosto/traços, não de roupa. Alternância por episódio: código par = masculino, ímpar = feminino (contratos/storyboard.elenco_alternado). Sem nome falado/escrito. Imagem de referência ASSET_personagem_<id>-v1 ainda NÃO gerada (geração paga exige OK do José). t79u: protagonista único e constante no episódio; o outro membro do elenco pode contracenar quando o roteiro pedir (FichaCena.coadjuvante + justificativa). Proporção: a feminina é mais baixa que o masculino.",
+    "_nota": "t133u: consistência do corpo, da cabeça, do acessório e da cor de acento. Roupa nova por episódio e penteado variável ficam pausados. Sem nome falado ou escrito. Alternância: código par = PERS-M, ímpar = PERS-F. Imagem ASSET_personagem_<elenco>-v1 ainda não gerada. Protagonista único no episódio; o outro pode contracenar com justificativa. A feminina é mais baixa.",
     "masculino": {
+      "id": "PERS-M",
       "asset": "ASSET_personagem_masculino-v1",
-      "rosto_tracos": "Homem brasileiro de uns 30 anos, pele morena clara, magro, cabelo preto curto e despenteado, sobrancelhas grossas e muito expressivas, óculos redondos vermelhos (sempre inteiros no quadro)",
-      "personalidade": "engraçado, de caras e bocas exageradas que reagem ao que vê ou vive; nunca articula fala",
-      "figurino": "varia por episódio; participa ⇒ época/local, observa ⇒ roupa atual"
+      "ficha": "banco-fichas/personagens/PERS-M.md",
+      "trava": "Stickman de tubos grossos, cabeça redonda grande, óculos redondos vermelhos inteiros, sem barba, sem dedos, boca fechada",
+      "personalidade": "caras e bocas de reação; nunca articula fala",
+      "acento": "a definir na imagem de referência; não inventar cor antes disso"
     },
     "feminino": {
+      "id": "PERS-F",
       "asset": "ASSET_personagem_feminino-v1",
-      "rosto_tracos": "Mulher brasileira de uns 30 anos, morena, cabelo LISO escuro com penteados variados por episódio (ex.: coque alto com fios soltos, rabo de cavalo, solto), rosto redondo, sobrancelhas expressivas, pinta pequena acima do lábio, brinco de argola dourada pequena; mais baixa que o personagem masculino",
-      "personalidade": "engraçada, de caras e bocas exageradas (olhar desconfiado de lado, boca torta de deboche, espanto de olhos arregalados sem deformar); reage, nunca articula fala",
-      "figurino": "varia por episódio; participa ⇒ época/local, observa ⇒ roupa atual (ex.: camiseta colorida e calça jeans, vestido de chita, moletom)"
+      "ficha": "banco-fichas/personagens/PERS-F.md",
+      "trava": "Stickman de tubos grossos, cabeça redonda grande, coque simples, argola pequena, pinta acima do lábio, mais baixa que o masculino, sem óculos, sem dedos, boca fechada",
+      "personalidade": "caras e bocas de reação; nunca articula fala",
+      "acento": "a definir na imagem de referência; a camiseta mostarda do teste de 27/10 não foi aprovada"
     }
   }
 }

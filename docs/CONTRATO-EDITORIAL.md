@@ -296,39 +296,18 @@ Os números vêm do aditivo. "s/vis" é o tempo de exibição dividido pelas vis
 
 A decisão t467 substitui t262 (somente frase literal) e os exemplos t214 que pediam comentários. A classificação estrutural `tipo_cta` é validada pelo schema; a pertinência do trocadilho é revisão editorial, não inferência automática.
 
-## 16. Visual 2D genérico e linha editorial 80/20 (t399–t402, 11/10/2026), regra
-**Fontes:** decisões t399/t400/t402; ENTREGA-core-eng §2 (@prod-roteirista, @prod-auditor) e §4 (NotebookLM: "estilo próprio não é aceito no formato Short", 1 personagem funciona, 2 falham); RUNBOOK-auditor-v3b (2 rodadas no Gemini web); Ajuda NotebookLM answer/16454555 (seletor de estilo exclui Short); YouTube answer/1311392 (inauthentic content). Proposta: `prep/PROPOSTA-visual-editorial-2D.md` (box).
-1. **Estilo padrão: 2D** (desenho genérico). Fim do stickman exclusivo. 3D/convencional só se o roteiro pedir. O modelo do NotebookLM escolhe livremente personagens, objetos e ambientes; o roteiro dá o norte.
-2. **Fichas pausadas** (bíblia v002, resolvedor, `00_Biblia_Visual`): ficam guardadas e **desligadas**, reservadas a uma futura arquitetura não-NotebookLM. Nenhuma ficha é injetada no caderno.
-3. **O Short do NotebookLM continua o formato único:** o NotebookLM pesquisa, planeja, roteiriza e propõe temas (motor editorial, t512); **o vídeo não é mais gerado pelo NotebookLM** (Flow primário, por determinismo; t465/t512); nós só orquestramos com os comandos/prompts canônicos (inalterados). Teste Brief/Explainer **descartado** (t400). Como o Short não aceita estilo próprio, o estilo vai **escrito no roteiro** (fonte do caderno).
-4. **Bloco visual obrigatório no roteiro** (adicionado como fonte antes de gerar):
-   - `[ESTILO]` 2D + frase meio/tom/paleta/referência. Padrão: "ilustração 2D plana de cartum, traço preto grosso, cores chapadas quentes, humor carinhoso, cenário brasileiro do dia a dia; sem fotorrealismo, sem rosto de pessoa real, sem texto escrito dentro das imagens". A **regra histórica de legenda do Short gerado no NotebookLM** (obrigatória, sempre queimada no Short) **fica** e não conta como "texto na imagem"; o pós **não** queima legenda extra (t435).
-   - `[PERSONAGEM]` 1 por padrão (máx. 2, §11.1): idade aprox., tipo físico, cabelo, roupa (cor + peça), 1 traço marcante, expressão-base; repetido **palavra por palavra** em cada cena; sem nome.
-   - `[AMBIENTE]` por cena: lugar, época, 3–5 objetos-âncora brasileiros, luz/horário.
-   - `[CENAS]` troca a cada ~3–5 s: fala → ação visível → enquadramento. Cena 1 = imagem literal da expressão (gancho); última cena retoma a 1ª (loop, §11.2).
+## 16. Linha editorial 80/20 (t399–t402). O visual desta seção foi substituído (t133u)
+> O cartum genérico, a pausa das fichas e o bloco que pedia ilustração plana não são mais a regra. A identidade é stickman, seção 19. O texto antigo do bloco está no DECISOES-LOG (t429) e em `docs/pesquisas/estilo-2d-referencias.md`. Não copiar daqui para prompt.
+1. **Vídeo:** o NotebookLM pesquisa, planeja, roteiriza e propõe temas. Não gera vídeo (t130u). Flow primeiro, Vids e Vibes na sequência do contrato de gasto.
+2. **Bloco visual do roteiro:** o estilo vigente é o da seção 19 (`ESTILO_PADRAO_STICKMAN`). Uma frase-trava de stickman, repetida. Sem nome. Cena 1 = a imagem literal da expressão; a última retoma a primeira.
+3. **Ambiente por cena:** lugar, época, 3 a 5 objetos-âncora, luz. Os objetos recorrentes têm ficha em `banco-fichas/`.
+4. **Legenda:** a regra de legenda queimada do Short do NotebookLM é histórica. No vídeo da cadeia Flow/Vids/Vibes, o pós não queima legenda extra (t435). A imagem continua sem texto escrito dentro do desenho.
+
 5. **Linha editorial 80/20:** ≥ 80% origem de expressões brasileiras e curiosidades "inúteis" do cotidiano (ex.: "podre de rico", "o cão chupando manga"); ≤ 20% sazonal, só na janela do Caçador Sazonal (30 dias antes). Fora da janela, sem tendência. Etimologia disputada: "a versão mais aceita é… mas tem quem diga…"; ≥ 2 fontes. Gancho: a expressão em cena literal absurda + "Por que a gente fala isso?" até 3 s.
-6. **Auditoria visual sem fichas** (Auditor, §AGENTES): estilo, coerência do personagem dentro do vídeo, legibilidade mobile e adequação cultural são **métrica** (não reprovam, REGRAS §5). **Reprovam** (segurança): semelhança com pessoa real/celebridade, marca/logo real, estereótipo ofensivo, texto na tela (imagem **ou legenda**) com erro que mude o sentido. **Erros aceitáveis (t435):** erro sem risco de segurança (ex.: legenda com palavra errada sem mudar o sentido, texto dentro da imagem sem erro) não reprova; o Auditor registra em `pqbr.erros_aceitaveis` para revisão (ROADMAP ERR-01).
+6. **Auditoria visual** (Auditor): enquanto a imagem da ficha não estiver aprovada, estilo e coerência do personagem dentro do vídeo seguem **métrica** (não reprovam, REGRAS §5), junto com legibilidade mobile e adequação cultural. **Reprovam** (segurança): semelhança com pessoa real/celebridade, marca/logo real, estereótipo ofensivo, texto na tela (imagem **ou legenda**) com erro que mude o sentido. **Erros aceitáveis (t435):** erro sem risco de segurança (ex.: legenda com palavra errada sem mudar o sentido, texto dentro da imagem sem erro) não reprova; o Auditor registra em `pqbr.erros_aceitaveis` para revisão (ROADMAP ERR-01).
 
-### 16.7 Bloco visual padrão (t429) — **aprovado pelo José (12/10/2026), canônico**
-**Fontes:** §16.4; Ajuda NotebookLM answer/16454555 (Short não tem seletor de estilo → estilo vai no texto da fonte); "Keeping One Character Consistent…" (dev.to, 2026: ficha literal e contável, repetida palavra por palavra; negativos repetidos; personagem grande e agindo); JDKola "Directing the Frame" (paleta, traço, luz e referência explícitos > adjetivos vagos); ENTREGA §4 (1 personagem funciona, 2 falham). Validação: `BlocoVisual` (Pydantic, `src/pqbr/contratos`) exige "2D" no estilo e barra fotorrealismo/3D sem pedido.
-
-Texto canônico (o Roteirista preenche só o que está entre `< >`; o resto é fixo):
-
-```
-[ESTILO] Ilustração 2D plana de cartum, como animação de TV brasileira: traço preto nítido e uniforme, personagem em cores chapadas quentes (amarelo-mostarda, verde-bandeira, terracota) com alto contraste sobre fundo limpo em tom frio ou neutro (azul-céu, bege claro), sem degradê nem sombra realista, fundo minimalista com no máximo 3–5 objetos, humor carinhoso. Personagem sempre grande no quadro (ocupa ≥ 1/3 da altura), centralizado, agindo, com expressões faciais e corporais exageradas. Proibido: fotorrealismo, 3D, rosto de pessoa real ou celebridade, marca ou logo real, texto escrito dentro das imagens (a legenda do NotebookLM não conta). Formato vertical 9:16, deixar livres a faixa de cima e a de baixo da tela.
-
-[PERSONAGEM] Um só: <idade aprox.> anos, <tipo físico>, cabelo <cor + corte>, <peça de roupa + cor>, <peça 2 + cor>, <1 traço marcante contável, ex.: "bigode grosso", "óculos redondos vermelhos">, expressão-base exagerada <curiosa/espantada/marota>. Sem nome. Esta frase se repete idêntica em todas as cenas.
-
-[AMBIENTE] Cena <n>: <lugar>, <época: hoje / anos 80 / Brasil colonial>, objetos-âncora: <3 a 5 objetos brasileiros concretos, ex.: filtro de barro, TV de tubo, ventilador de pé>, luz <manhã/tarde/noite + fonte>.
-
-[CENAS] (troca de cena ou de enquadramento a cada 2–4 s; a imagem absurda da cena 1 aparece já no 1º segundo)
-1. Fala: "<frase>" → Ação: o personagem vive a expressão ao pé da letra, de forma absurda → Plano: <aberto/médio/close>.
-…
-N. Fala: "<frase final / CTA>" → Ação: retoma a imagem da cena 1 (loop) → Plano: o mesmo da cena 1.
-```
-
-Regras de preenchimento: 1 personagem (2 só se o roteiro exigir, §11.1, e então 2 frases-ficha distintas); contar traços ("dois", "um") em vez de adjetivos; uma ação visível por cena; época histórica só no trecho de etimologia; sem crianças em situação de risco nem estereótipo regional (§16.6). **Revisão t430 (pesquisa NotebookLM, `docs/pesquisas/estilo-2d-referencias.md`):** mantido o cartum 2D plano com 1 personagem (fica entre flat vector e cutout, os estilos com mais tração em curiosidade curta). Mudou: contraste personagem quente × fundo frio/limpo; fundo minimalista (3–5 objetos); expressões exageradas; ritmo 2–4 s (era 3–5 s); gancho visual no 1º segundo (OpusClip: 50–60% da evasão nos 3 s iniciais). Texto: as fontes dão +15–25% de retenção com legenda embutida. A geração de vídeo no NotebookLM foi descartada (t130u); a decisão t435 (sem legenda extra no pós) vale para o vídeo da cadeia Flow/Vids/Vibes, quando existir. A imagem continua **sem texto escrito dentro do desenho**; erros de legenda sem mudança de sentido vão para `pqbr.erros_aceitaveis` (§16.4 item 6; Gate A9 item 8). **Aprovado (12/10/2026):** este é o bloco padrão do `RoteiroShort` (`ESTILO_PADRAO_2D` em `src/pqbr/contratos`). O bloco divergente gerado por rotina periódica no caderno "PQBR - pesquisa bloco visual 2D" (fundo creme, cortes 3–5 s) **não** foi adotado.
-
+### 16.7 Bloco visual de 12/10 — histórico
+O bloco que começava com "Ilustração plana de cartum" deixou de ser o padrão em 27/10 (t133u). Não está reproduzido aqui para não ser copiado. O padrão vigente é a seção 19.
 
 ## 17. Tom editorial: cultura brasileira, ironia leve, nunca aula (José, 12/10/2026 17:13 e 17:17), regra
 - **A essência é a cultura brasileira:** ditados, expressões, atitudes, gestos e comportamentos do brasileiro.
@@ -341,19 +320,42 @@ Regras de preenchimento: 1 personagem (2 só se o roteiro exigir, §11.1, e ent�
 - Aplicação: este tom vai no pacote canônico (este contrato), no prompt do roteiro (`criativo.TOM_EDITORIAL`) e no steering do vídeo (`notebooklm.TOM_NARRACAO`). O Auditor reprova roteiro com cara de aula.
 
 ## 17. Precedência visual e de geração de vídeo (t465)
-> Este adendo posterior prevalece sobre afirmações incompatíveis do §16 e de suas subseções: a identidade aprovada para o novo módulo é stickmen com fichas consistentes de personagens, objetos e cenários; o estilo genérico 2D/3D e a pausa das fichas deixam de ser a decisão vigente. A implementação das fichas, catálogo, resolvedor e integração Flow permanece pendente; não é declarada concluída por este contrato.
+> t133u e a seção 19 fecham o que aqui ainda estava em aberto: a identidade é stickman, e o 3D não se pede. O texto das fichas existe; a imagem, o catálogo e o resolvedor não. Isso não está concluído.
 > NotebookLM continua o cérebro intelectual para pesquisa, temas, ideias, roteiro e SEO, mas sua geração antiga de vídeo fica desativada. Rota visual: Google Flow primeiro, Vids como fallback adicional, Gemini Web terceira rota e Meta Vibes posterior, conforme blueprint. Agentes Paperclip orquestram/validam, não substituem a autoria intelectual do NotebookLM. A regra de legenda do Short gerado no NotebookLM é histórica; a política de legendas/pós-produção do Flow precisa ser definida e testada separadamente no blueprint. Piloto sem publicação; preservar marca d'água/proveniência e direitos; não remover nem encobrir marcas do provedor. Instruções técnicas em inglês; roteiro, narração e conteúdo editorial em pt-BR.
 
 ## 18. Storyboard em série, personagem, cenário e elenco (t75u–t79u, 26/10/2026), regra central autorizada pelo José
 1. **Antes de gerar qualquer imagem ou vídeo** é obrigatório ter: storyboard geral (norte do episódio, bloco de estilo, ficha do personagem) e uma **ficha por cena** numerada e rotulada (`<ep>_cNN`), com norte, início, fim, movimento, plano, prompt de imagem catalogado, prompt de animação e referência identificada (`ASSET_*`). Contrato: `contratos/storyboard.py`.
 2. **Imagens revisadas antes do vídeo** (`imagens_revisadas`); sem revisão não há vídeo.
-3. **Personagem engraçado, de caras e bocas (t78u).** É uma pessoa engraçada que faz expressões faciais exageradas ligadas diretamente à situação que observa ou vive (espanto, nojo, desconfiança, alívio). A consistência vale para **rosto e traços**, não para a roupa.
+3. **Personagem engraçado, de caras e bocas (t78u, travado t133u).** É um stickman de tubos, com expressão exagerada ligada à situação (espanto, nojo, desconfiança, alívio). A consistência vale para o corpo, a cabeça, o acessório e a cor de acento. Roupa nova a cada episódio fica pausada.
 4. **Reagir sim, falar não.** O personagem nunca mexe os lábios como se narrasse: a narração é em off, nenhum prompt leva fala, aspas ou verbo de fala, e a animação usa "lips closed". Caras e bocas de reação (boca aberta de espanto, careta, beiço) são permitidas; articular palavras é proibido.
 5. **Proibido cortar óculos ou cabeça** no enquadramento: plano nomeado, cabeça inteira com folga acima.
 6. **Nada grotesco** (olho saltando, deformação corporal, gore), nem como metáfora visual de expressão.
 7. **Encaixe no cenário (t78u).** Toda ficha define como o personagem está no cenário (`cenario_encaixe`). As roupas respeitam o ambiente temático, histórico e cultural:
    - **participa** do ambiente → caracterizado com roupas e traços da época ou do local (`figurino=epoca_local`);
-   - **só observa** (ex.: espiando o passado, escondido, em terceira pessoa, enquanto outros personagens atuam) → pode usar roupa atual convencional (`figurino=atual_variavel`).
-8. **Figurino atual varia entre vídeos.** Não precisa ser sempre o mesmo estilo; a roupa de cada episódio é escolhida no storyboard e repetida igual em todas as cenas daquele vídeo.
+   - **só observa** (ex.: espiando o passado, escondido, em terceira pessoa, enquanto outros personagens atuam) → usa o visual cotidiano travado da ficha (`figurino=atual_variavel`), não uma roupa inventada na cena.
+8. **Visual cotidiano travado (t133u).** O campo `atual_variavel` permanece no contrato por compatibilidade, mas não autoriza roupa nova a cada episódio. O cotidiano é o da ficha `PERS-M` ou `PERS-F`, igual em todas as cenas e entre vídeos, até o José aprovar outra imagem. Dentro de um mesmo vídeo, não muda.
 9. **Elenco alternado (t78u).** Um personagem masculino e uma feminina, ambos com características brasileiras, alternando por episódio (número do código par = masculino, ímpar = feminino; exceção só com motivo em `elenco_excecao`). Fichas em `config/estilo_visual.json` → `elenco`. Sem nomes falados nem escritos (§16).
-10. **Protagonista único, interação livre (t79u).** O protagonista escolhido no episódio fica constante. Quando o roteiro e o contexto permitirem ou exigirem, ele pode contracenar com o outro membro do elenco (`FichaCena.coadjuvante` + justificativa no roteiro). As proibições acima continuam valendo para os dois. Ficha feminina (t79u): morena, cabelo liso com penteados variados (ex.: coque alto com fios soltos) e mais baixa que o masculino.
+10. **Protagonista único, interação livre (t79u, t133u).** O protagonista do episódio fica constante. Quando o roteiro pedir, contracena com o outro do elenco (`coadjuvante` + justificativa). Os dois são stickmen. A feminina é mais baixa, com coque, argola e pinta; penteado variável ficou pausado. Sem nome no vídeo. Fichas: `banco-fichas/personagens/`.
+
+## 19. Stickman único (José, 27/10/2026, t133u), regra
+Fecha a identidade. Prevalece sobre o visual do §16, sobre o §16.7 antigo e sobre o que no §17 ainda dizia que a ficha estava só prometida.
+
+1. **Só stickman.** Cabeça redonda grande, corpo e membros de tubos grossos com ponta redonda, traço chapado, sem dedos, sem pessoa de cartum, sem volume. Comédia de costumes brasileiros, leve e com respeito. Folclore é tema eventual, não o estilo do canal.
+2. **3D descartado.** Não se pede volume, fotorrealismo nem desenho 3D. Vídeo de teste 3D, se for localizado, vai para o Drive em `99_Arquivo/desenvolvimento-3d`, sem apagar o original. Em 27/10 essa pasta de teste não foi encontrada. Ver `docs/fases/stickman.md`.
+3. **Fichas.** Texto em `banco-fichas/` (personagem, ambiente, objeto). Imagem de referência ainda não existe. Sem imagem aprovada pelo José, o id `ASSET_*` não está travado. O Flow cita a imagem pelo id e não redescreve o boneco.
+4. **Elenco.** `PERS-M` (óculos redondos vermelhos) e `PERS-F` (coque, argola, pinta, mais baixa). Cor de acento a definir na imagem. Nomes da bíblia de 08/10 não voltam.
+5. **Estilo no código.** `ESTILO_PADRAO_STICKMAN` (`BlocoVisual` 2.0.0). O roteiro e o storyboard recebem esse texto. Pedido com 3D é recusado. O pacote do caderno ainda guarda o bloco no slot `bloco_visual_16_7`; o texto é este:
+
+```
+[ESTILO] Stickman de tubos grossos e arredondados, cabeça redonda grande, membros com ponta redonda, traço chapado, sem dedos desenhados e sem pessoa de cartum. Um acento de cor chapada por personagem, fundo limpo e claro, no máximo 3 a 5 objetos, humor de comédia leve. Personagem grande no quadro, cabeça inteira visível, agindo, expressão simples e exagerada, boca fechada. Proibido: pessoa desenhada, fotorrealismo, volume 3D, rosto de pessoa real ou celebridade, marca ou logo real, texto escrito dentro da imagem. Formato vertical 9:16, faixas de cima e de baixo livres.
+
+[PERSONAGEM] Um stickman, a frase-trava da ficha (PERS-M ou PERS-F), sem nome e sem cor de roupa inventada. A mesma frase em todas as cenas.
+
+[AMBIENTE] Cena <n>: <lugar>, <época: hoje / passado>, objetos-âncora: <3 a 5>, luz <hora>.
+
+[CENAS]
+1. Fala: "<frase>" → Ação: o stickman vive a situação → Plano: <plano_geral / plano_medio / plano_medio_curto / close>.
+N. Fala: "<frase final>" → Ação: retoma a imagem da cena 1 → Plano: o mesmo da cena 1.
+```
+6. **Drive.** Ferramenta da mesma conta Google, já em uso. Estrutura `PQBR/` na REGRAS §21. O banco em texto espelha em `00_Biblia_Visual/banco-fichas`. Isso não cria o catálogo no banco do app.
+

@@ -29,28 +29,37 @@ class CenaVisual(Contrato):
     ambiente: str = Field(min_length=3, max_length=400)       # lugar, época, 3–5 objetos-âncora, luz/horário
 
 
-# CONTRATO-EDITORIAL §16.7 [ESTILO], aprovado pelo José em 12/10/2026 (padrão de todo RoteiroShort)
-ESTILO_PADRAO_2D = 'Ilustração 2D plana de cartum, como animação de TV brasileira: traço preto nítido e uniforme, personagem em cores chapadas quentes (amarelo-mostarda, verde-bandeira, terracota) com alto contraste sobre fundo limpo em tom frio ou neutro (azul-céu, bege claro), sem degradê nem sombra realista, fundo minimalista com no máximo 3–5 objetos, humor carinhoso. Personagem sempre grande no quadro (ocupa ≥ 1/3 da altura), centralizado, agindo, com expressões faciais e corporais exageradas. Proibido: fotorrealismo, 3D, rosto de pessoa real ou celebridade, marca ou logo real, texto escrito dentro das imagens (a legenda do NotebookLM não conta). Formato vertical 9:16, deixar livres a faixa de cima e a de baixo da tela.'
+# CONTRATO-EDITORIAL §19 [ESTILO], José 27/10/2026 (t133u). Identidade única: stickman.
+# O nome ESTILO_PADRAO_2D permanece só como apelido do texto vigente, para import antigo.
+ESTILO_PADRAO_STICKMAN = (
+    "Stickman de tubos grossos e arredondados, cabeça redonda grande, membros com ponta redonda, "
+    "traço chapado, sem dedos desenhados e sem pessoa de cartum. Um acento de cor chapada por personagem, "
+    "fundo limpo e claro, no máximo 3 a 5 objetos, humor de comédia leve. Personagem grande no quadro, "
+    "cabeça inteira visível, agindo, expressão simples e exagerada, boca fechada. "
+    "Proibido: pessoa desenhada, fotorrealismo, volume 3D, rosto de pessoa real ou celebridade, marca ou logo real, "
+    "texto escrito dentro da imagem. Formato vertical 9:16, faixas de cima e de baixo livres."
+)
+ESTILO_PADRAO_2D = ESTILO_PADRAO_STICKMAN
 
 
 class BlocoVisual(Contrato):
-    estilo: str = Field(default=ESTILO_PADRAO_2D, min_length=20, max_length=900)        # [ESTILO] 2D + meio/tom/paleta/referência
-    personagem: str = Field(min_length=20, max_length=600)    # [PERSONAGEM] repetido palavra por palavra; sem nome
+    estilo: str = Field(default=ESTILO_PADRAO_STICKMAN, min_length=20, max_length=900)
+    personagem: str = Field(min_length=20, max_length=600)    # frase-trava do stickman; sem nome falado
     personagem_2: str | None = Field(default=None, max_length=600)   # máx. 2 (§11.1)
     cenas: list[CenaVisual] = Field(min_length=2, max_length=60)     # [CENAS] ~2–4 s; cena 1 literal; última retoma a 1ª
-    pedido_3d_ou_realista: bool = False   # t437: só true se o roteiro pedir 3D/realismo explicitamente
+    pedido_3d_ou_realista: bool = False   # t133u: o campo fica, mas true é recusado (3D descartado)
 
     @model_validator(mode="after")
     def _regras(self):
+        if self.pedido_3d_ou_realista:
+            raise ValueError("[ESTILO] 3D e realismo foram descartados (t133u)")
         e = self.estilo.lower()
-        # negativas ("sem fotorrealismo", "Proibido: …, 3D, …") não contam como pedido
         afirm = re.sub(r"proibid[oa]s?:?[^.]*", " ", e)
         afirm = re.sub(r"\b(sem|nada de|nunca|nem)\s+[^,.;]*", " ", afirm)
-        pede = bool(re.search(r"\b3d\b|fotorreal|realista|photoreal|hiper.?real", afirm))
-        if pede and not self.pedido_3d_ou_realista:
-            raise ValueError("[ESTILO] pede 3D/realismo sem pedido explícito do roteiro (pedido_3d_ou_realista)")
-        if not self.pedido_3d_ou_realista and not re.search(r"\b2d\b", e):
-            raise ValueError("[ESTILO] deve declarar 2D (padrão §16.4)")
+        if re.search(r"\b3d\b|fotorreal|realista|photoreal|hiper.?real", afirm):
+            raise ValueError("[ESTILO] pede 3D ou realismo; descartado (t133u)")
+        if "stickman" not in e:
+            raise ValueError("[ESTILO] a identidade é stickman (t133u)")
         return self
 
 
@@ -529,7 +538,7 @@ VERSOES: dict[str, str] = {
     "ItemAtualizacao": "1.0.0",
     "RelatorioAtualizacoes": "1.0.0",
     "CenaVisual": "1.0.0",
-    "BlocoVisual": "1.0.0",
+    "BlocoVisual": "2.0.0",
     "RoteiroShort": "1.0.0",
     "DecisaoRepeticao": "1.0.0",
     "PontuacaoPolemica": "1.0.0",

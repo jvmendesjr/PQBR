@@ -4,7 +4,7 @@
 
 Fonte única de "onde estamos". Não repete o ROADMAP: aponta os itens por id. **Atualize este arquivo a cada correção ou pendência resolvida.** O hook pre-commit exige isso quando o commit toca ROADMAP, LACUNAS, DECISOES-LOG ou CHANGELOG, e o `registrar_alteracao` exige isso para `tipo` correcao ou pendencia_resolvida.
 
-Atualizado: 27/10/2026 (t132u: duas imagens no Flow; stickman não saiu) · versão 0.17.2
+Atualizado: 27/10/2026 (t133u: stickman único; banco de fichas em texto) · versão 0.17.3
 
 ## Onde estamos
 - **Produção:** o lote do saldo está em `runtime/lote-saldo/` (um diretório por tema). O EP1002 olhos-da-cara foi reprovado e descartado (`runtime/lote-saldo/_descartado/`), e o tema voltou a `proposto`.
@@ -13,9 +13,10 @@ Atualizado: 27/10/2026 (t132u: duas imagens no Flow; stickman não saiu) · vers
 - **Documentos (t129u):** `docs/LACUNAS-fluxo.md` só lista o que ainda falta no código. O roster vigente está em `docs/AGENTES.md`. Briefing, checklist pré-E2E, rascunho de SOUL e propostas não aplicadas foram para `docs/_obsoleto/`. As provas do F3-05 continuam em `docs/sdd/` porque o item segue aberto no ROADMAP.
 - **Fluxo (t130u):** o episódio para no storyboard. O NotebookLM entrega roteiro, compliance e SEO, e não gera vídeo. `YOUTUBE_DRY_RUN=true`. Os vídeos de `runtime/lote-saldo/` ficam parados até a etapa de publicação.
 - **Paperclip (t130u):** `paperclipai.service` parado e desabilitado em 27/10. Sem desinstalar e sem apagar dados. `config/paperclip.json` está `parado_proposital`.
+- **Stickman (t133u):** identidade única. Banco de texto em `banco-fichas/` e no Drive `00_Biblia_Visual/banco-fichas`. Sem imagem aprovada. 3D não se pede. Fases em `docs/fases/stickman.md`.
 
 ## Próximo passo
-Não repetir o mesmo prompt no Flow. As duas imagens de 27/10 ~21:15 (-03) estão em `~/.pqbr/episodios/flow-teste/` e saíram cartum de pessoa, não stickman de tubos. O próximo teste é outra rota na mesma tela (aba Personagens), ainda sem vídeo. Nada está agendado no YouTube. Antes de tornar um vídeo público, avisar o José para olhar a silhueta do mapa no logo. O LOOP e o drop-in do Telegram ficam para depois.
+Fase 3: gerar a frente do stickman no Flow (Nano Banana 2 Lite, 9:16, 1K), pela aba Personagens ou Ingredients, a partir da ficha `PERS-F` ou `PERS-M`. Não repetir o prompt de 27/10 que saiu pessoa de cartum. O José olha a imagem antes de ela virar asset. Nada está agendado no YouTube. Logos e a silhueta do mapa: o José disse que estão certos. O LOOP e o drop-in do Telegram ficam para depois.
 
 ## Pendências abertas
 | # | Pendência | Ref. ROADMAP | Dono | Bloqueio |
@@ -24,7 +25,7 @@ Não repetir o mesmo prompt no Flow. As duas imagens de 27/10 ~21:15 (-03) estã
 | P2 | Publicação: worker reiniciado 27/10 11:50 (-03), 0 workflows Running. `YOUTUBE_DRY_RUN=true`. Nada agendado (`agenda_publicacao` com 0 linhas). Envio real desligado. Refresh do app em teste vence ~2/11 21:20 (-03) | F8-01 | agente | sem envio até a produção ativa |
 | P3 | Teste: LOOP por cena vs o atual | Estado 26/10 · Testes pendentes | agente | depois do fluxo de publicação |
 | P4 | **Feito (t108u/t109u).** Juiz por etapa (`gemini_juiz` v1.0.0): pré-produção usa 3.8 Flash; produção (VISUAL e LOOP) usa 4 Argon Baixo. O worker `pqbr-episodio-worker` foi reiniciado com OK do José às 16:57 (-03), e o poller está ativo na fila `episodio-pqbr`, ns `pqbr` | Estado 26/10 · DECISOES-LOG t109u | agente | concluído |
-| P5 | Imagens de referência do elenco (`ASSET_personagem_{masculino,feminino}-v1`) | Estado 26/10 · Próximo 4 | agente | o contrato do storyboard não autoriza esse gasto |
+| P5 | Imagem de referência do elenco. O texto está em `banco-fichas/personagens/`. O asset ainda não existe | t133u · Fase 3 | agente | gerar no Flow e o José olhar; imagem já autorizada (t131u) |
 | P6 | **Feito (t130u).** `storyboard_criar` valida o Storyboard 1.2.0, grava a ficha e deixa `pode_gerar_video` false. O episódio para aí. Imagem e vídeo desta etapa não rodam | Estado 27/10 · DECISOES-LOG t130u | agente | concluído |
 | P7 | **Feito (t108u).** O gate VISUAL agora tem `boca_articula_fala`, `corte_oculos_cabeca` e `grotesco` (FichaCena/REGRAS §25), e cada um reprova sozinho. Validado no EP1002 (`loop-gemini-4argon-v2.json`): reprova, com S01 corte+grotesco, S04 corte e S02/S05/S09 boca | Estado 26/10 · CHANGELOG 0.14.0 | agente | concluído |
 | P8 | **Feito (t128u).** As 7 memórias `obsoleto_candidato` do roster antigo de `docs/AGENTES.md` foram apagadas em 27/10 ~08:57 (-03). Bank 884 → 877. Backup fora do git | `docs/operacao/hindsight-descarte-candidatos.md` | agente | concluído |
@@ -37,10 +38,7 @@ Não repetir o mesmo prompt no Flow. As duas imagens de 27/10 ~21:15 (-03) estã
 Aba **Roadmap** no painel (:8088): Próximos passos, Falta e Feito gerados deste arquivo e do ROADMAP por `scripts/mapa/roadmap.py` (via `gerar_index.py`; o pre-commit regenera quando ROADMAP/ESTADO-ATUAL/mapa mudam). Itens com ☑ (feito) e ☐ (falta/próximos), só símbolo, nada clicável. Só leitura.
 
 ## Operacional e persistência (verificado 26/10/2026 18:21 -03)
-pqbr-mcp 0.4.0 (user unit, enabled, Restart=on-failure, linger=yes), hindsight-api (enabled, Restart=always), Docker DB/Temporal (`unless-stopped`), worker enabled. Comando de checagem e detalhes: `docs/operacao/onboarding-agente-externo.md` § Operacional e persistência.
-
-## Como atualizar
-Resolveu ou corrigiu algo:
+pqbr-mcp 0.4.0 (user unit, enabled, Restart=on-failure, linger=yes), hindsight-api (enabled, Restart=always), Docke
 
 Fontes canônicas: docs/ESTADO-ATUAL.md (onde estamos), docs/REGRAS.md, docs/DECISOES-LOG.md, docs/ROADMAP.md, docs/LACUNAS-fluxo.md, docs/ARQUITETURA.md, docs/AGENTES.md, docs/mapa/. Em conflito, vale o doc canônico. O briefing do YT-LLM está em docs/_obsoleto/BRIEFING-novo-agente-pqbr.md e não é procedimento.
 
@@ -131,13 +129,6 @@ Histórico, fora do procedimento: docs/_obsoleto/BRIEFING-novo-agente-pqbr.md (h
 
 ## Decisões recentes
 
-## t128u (27/10/2026) — Worker e MCP reiniciados; 7 memórias apagadas
-- José: "Tem meu ok. Só não vou poder ver os vídeos agora. Continue para progredir." Esse OK cobre o reinício dos serviços e o apagamento das 7 memórias que estavam parados à espera dele. Não cobre envio ao YouTube, gasto com imagens, o teste de LOOP por cena, o merge na main, nem ver os vídeos no lugar dele.
-- Às 08:56 (-03, São Paulo): 0 workflows `Running` no ns `pqbr`. Reinício do `pqbr-episodio-worker`. Log: `worker episodio em 127.0.0.1:7233 ns=pqbr fila=episodio-pqbr`. O processo lê o checkout desta branch, onde estão t124u–t126u. `YOUTUBE_DRY_RUN=true`. `PQBR_PUBLICACAO_REAL` não está no ambiente. Nada enviado. Depois do reinício, de novo 0 `Running`.
-- No mesmo horário, reinício só do `pqbr-mcp`. `GET /saude` devolve 0.4.0. Um `initialize` ao vivo devolve a frase de honestidade (t126u).
-- P8: cada uma das 7 memórias foi lida antes de apagar. Todas tinham a tag `obsoleto_candidato` e o contexto em `docs/AGENTES.md` (equipe de 14 ou mapa `@prod-*`). Backup: `~/.pqbr/hindsight/backup/pqbr-7-obsoletos-20261027.json` (600) e o export do bank `pqbr-bank-pre-delete-20261027.zip` (1.602.712 bytes). DELETE 200 nas sete. Conferência: as sete respondem 404; o bank foi de 884 para 877 documentos. Nenhuma outra foi apagada.
-- Não feito: ver os vídeos (P1); envio real; imagens pagas do elenco; LOOP por cena; activity do Storyboard; merge na main; preencher `config/mapa_cliques.json` (nenhuma tela de Flow, Vids, 
-
 ## t129u (27/10/2026) — Documentos ativos conferidos; o que não é lacuna saiu
 - José pediu uma verificação dos documentos ativos: caminho citado tem de existir; documento obsoleto vai para `docs/_obsoleto/` para ele descartar depois; lacuna que o código já não tem sai da lista; Paperclip fica só como histórico e como infraestrutura em retirada.
 - Conferido no código, e por isso deixou de ser lacuna: `ReposicaoTemasWorkflow` não usa Paperclip; login da CLI do Paperclip não é passo; `DescartarCadernoTesteWorkflow` e `EpisodioWorkflow` estão no worker do episódio; os três critérios visuais do juiz já reprovam sozinhos (t108u); a legenda extra no pós foi recusada em t435; F4C-04 (login do Camofox) está feito desde t405. As pastas `tests/contratos/`, `tests/replay/`, `tests/integracao/`, `tests/falhas/` e `tests/auditor/` não existem; os testes estão em `tests/unit/`, `tests/workflows/` e `tests/seguranca/`.
@@ -163,6 +154,13 @@ Histórico, fora do procedimento: docs/_obsoleto/BRIEFING-novo-agente-pqbr.md (h
 - Duas imagens, por volta de 21:15 (-03). As duas fichas dizem "Criação: 27 de out. de 2026", Nano Banana 2 Lite, 9:16. Nenhuma ficha mostrou número de crédito. Não afirmo que o saldo não moveu: só que a tela não mostrou cobrança. "Confirmar antes de gerar = Sempre" não mostrou diálogo antes de nenhuma das duas.
 - Arquivos (fora do git): `~/.pqbr/episodios/flow-teste/PQBR-EP1003-c01-flow-1k.jpg` e `PQBR-EP1003-c01b-flow-1k.jpg`. Os dois têm 768×1376. O menu Baixar oferecia 1K Tamanho original, 2K Aprimorada e 4K Aprimorada (4K desabilitado). Baixei só o 1K.
 - O que a imagem mostra, e o que não mostra. Pedi stickman de tubos, elenco feminino do EP1003 (coque, argola, pinta, camiseta mostarda, 
+
+## t133u (27/10/2026) — Stickman único; banco de fichas em texto
+- José: stickman 100%. Fichas de personagem, ambiente e objeto como referência do storyboard. Buscar a estrutura e guardar num banco, também no Drive. 3D sai da fase atual; os vídeos dessa experiência ficam no Drive como desenvolvimento, sem apagar. Tirar o cartum genérico dos documentos desta fase. O Drive já é ferramenta da mesma conta Google, não um sistema novo. Organizar em fases.
+- Na mesma noite, antes desta decisão, ele disse que os logotipos e a silhueta do mapa do Brasil estão certos. Não reabri os PNG aqui. O aviso de olhar a silhueta antes de tornar público deixa de ser pendência.
+- Estrutura lida em 27/10: Wikipedia "Model sheet" e o guia DreamDrive de Ingredients do Flow (15/10/2026). Recorte em `docs/pesquisas/fichas-stickman-estrutura-20261027.md`. Não achei um padrão brasileiro de ficha de stickman. A folha da PQBR fica curta: frente, expressão, um acessório, uma cor. Giro completo e dedos ficam de fora.
+- Banco: `banco-fichas/`, estado `rascunho_texto`. PERS-M (óculos redondos vermelhos), PERS-F (coque, argola, pinta, mais baixa). Cor de roupa não foi escolhida. A bíblia v002 (Zé, Lia, Valdemar, Sandra) não volta. Roupa nova por episódio e penteado variável, do t78u/t79u, ficam pausados porque redescrever a roupa foi o que derrubou a consistência.
+- Código: `ESTILO_PADRAO_STICKMAN`. `BlocoVisual` 2.0.0 recusa estilo sem "stickman" e recusa `pedido_3d_ou_realista`. O storyboard força esse estilo
 
 ## Fase atual do ROADMAP
 
@@ -194,15 +192,14 @@ A tabela de 12/10 que bloqueava o fluxo no login da CLI do Paperclip foi para `d
 2. **Fechado (t130u).** `tipo=short` não gera vídeo. `nlm_gerar_short` recusa antes do CLI. O episódio segue para roteiro, SEO e `storyboard_criar`.
 3. **Códigos do lote 2510.** Os prontos em `docs/pesquisas/lote-2510/` não têm `PQBR-EP`. Sem código não há `drive_enviar` nem episódio no Postgres. Quem define os códigos é o José.
 4. **Vídeo em série (Fase 4V).** O episódio para na ficha e não baixa vídeo do NotebookLM (t130u). Flow, Vids e Vibes continuam fora do código. Em 27/10 o Flow foi aberto à mão (t132u): duas imagens, nenhum vídeo. HOLD das três rotas está decidido (t529) e não implementado. O mapa de cliques só tem as três surpresas dessa tela.
-5. **Imagens do storyboard.** A activity `storyboard_criar` grava a ficha com `imagens_revisadas` false e não gera imagem. O teste manual (t132u) fez duas imagens no Flow; as duas saíram cartum de pessoa, não stickman de tubos. As referências pagas do elenco seguem fora do contrato.
+5. **Imagens do storyboard.** A activity `storyboard_criar` grava a ficha com `imagens_revisadas` false e não gera imagem. O teste manual (t132u) fez duas imagens no Flow; as duas saíram pessoa de cartum, não stickman. O banco `banco-fichas/` é texto (t133u), sem imagem aprovada. A referência do elenco continua por gerar.
 6. **Navegador.** `NavegadorIdentidade` está em `src/pqbr/motores/navegador.py`. Nenhum workflow importa essa porta. O backup diário e o canário do ADR-012 não foram conferidos nesta passagem: não entram como feitos nem como lacuna confirmada.
 7. **Publicação, o que ainda falta.** O envio real está desligado de propósito (`YOUTUBE_DRY_RUN=true`) até a produção ativa. O roteiro de cliques do Studio não foi visto. `config/mapa_cliques.json` tem só surpresas do Flow (t132u), não um roteiro do Studio. O worker do episódio não tem o drop-in `telegram.conf`. O resto dessa etapa (chaves, agenda, registro no worker, fallback do refresh) está no ar desde 27/10 08:56 (-03).
 8. **Teste adiado, não executar agora.** LOOP do Gemini por cena, e 4 Argon baixo contra 3.8 Flash no mesmo lote.
 
 ## Não são lacunas
 
-- Login da CLI do Paperclip, issue no Paperclip para começar episódio ou descarte, e o token do bot Hermes citado em 15/10. O canal vigente é o bot próprio (t538). O corte do serviço Paperclip é o item F05-09 do ROADMAP, não um login pendente.
-- Geraçã
+- Login da CLI do Paperclip, issue no Paperclip para começar episódio ou descarte, e o token do bot Hermes citado em 15/10. O canal vigente é o bot próprio (t538). O corte do serviço Paperclip é o item F05-09 do 
 
 ## Mapa visual
 

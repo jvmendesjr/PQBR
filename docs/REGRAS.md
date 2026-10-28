@@ -39,7 +39,7 @@
 - **Atualização 23/10 (t474, aprovada por José), revoga a t464 (Discord) e prevalece:** (1) o canal do José é o **Telegram (Hermes `pqbr`)**; pedidos, avisos e aprovações saem por lá. (2) Aprovações são **sinais do Temporal** (sim/não), com principal autenticado (ID autorizado do José), validação de tarefa e estado, fail-closed, idempotência após reinício e ticket de manutenção após três tentativas. (3) O painel é a **Temporal UI** (estado, histórico, erros, runs travados); painel próprio fica para depois (t471). (4) O **Paperclip está sendo retirado** da arquitetura (ADR-011): referências a Paperclip abaixo valem só até o corte. Não desligar o gateway Hermes compartilhado nem afetar outros perfis; nenhuma exposição pública.
 ## 1. Nome e identidade
 - A organização se chama **PQBR**; os documentos explicam a sigla (Porquê BR); o canal usa o "porquê" por extenso. [08/10 NOME]
-- O canal faz sátira leve, em **desenho 2D genérico** (stickman exclusivo superado, t399/t400), sobre manias, rotinas e a origem das expressões dos brasileiros (≥ 80%). [t212/t213, t265, t399; CONTRATO §16]
+- O canal faz sátira leve, em **stickman** de tubos, sobre manias, rotinas e expressões dos brasileiros (≥ 80%). Comédia de costumes, com respeito. O cartum genérico e o 3D não são a identidade. [t212/t213, t265, t465, t133u; CONTRATO §19]
 - **Escopo:** por enquanto, **só o canal Porquê BR**. Outros canais serão estudados depois, com os aprendizados; cota da API para vários canais fica adiada. [t327]
 
 ## 2. Quem pode o quê e interação
@@ -139,17 +139,18 @@
 - **Duração:** de **15 s a 3 min**, **alvo de ~50 s**; dimensionada pelo roteiro a **~2,3 palavras/s** (o modelo pode esticar ou acelerar a narração) [t324–t326]. O contrato do roteiro e o auditor seguem essa faixa. Acima de 60 s, a checagem de direitos de áudio vira **bloqueante** (claim do Content ID bloqueia o Short). [t208; t271]
 - **Dinamismo:** cada fala com imagem correspondente (buscado; não reprova, ver §8); personagem age em cena; troca de plano a cada ~3–5 s. [t217; t327]
 - **Engajamento não é medida de segurança.** [itens de validação, item 1]
-- **Visual:** identidade aprovada do módulo Flow: stickmen com caráter e fichas consistentes de personagens, objetos e cenários; estilos genéricos 2D/3D ficam pausados. A implementação das fichas/resolvedor está pendente; não se declara catálogo ativo. Aderência à identidade será validada no piloto. O critério editorial continua sendo humor/sátira leve e cômica do cotidiano brasileiro, além das travas de texto, áudio e segurança. [t465] **Reprova (segurança):** semelhança com pessoa real, marca real, estereótipo ofensivo. [t400]
+- **Visual:** stickman único (t133u). Fichas de texto em `banco-fichas/`; imagem de referência ainda não aprovada; catálogo e resolvedor não estão implantados. 3D não se pede. O critério editorial continua sendo humor leve do cotidiano brasileiro, além das travas de texto, áudio e segurança. [t465; t133u] **Reprova (segurança):** semelhança com pessoa real, marca real, estereótipo ofensivo. [t400]
 - **Revisão humana só como último recurso:** quando um item falha em **todos os caminhos já previstos**, ele é guardado num **local dedicado de revisão**, o José é avisado e o agente coleta a determinação dele: **excluir, corrigir, reaproveitar ou arquivar**. Substitui a "revisão humana antes da grade" do contrato rascunho (§4.3). [t327]
 - [RESOLVIDO t467] R1–R4/R6/R8/R9 são diretrizes editoriais revisáveis, não bloqueios automáticos; R5 é alerta não bloqueante. R10 permanece no §4.
 
-## 6. Fichas visuais de stickmen — identidade aprovada para módulo Flow; implementação pendente [t465]
-> Precedência t465: fichas de personagens, objetos e cenários são referências aprovadas para o módulo Flow. A pausa de t400 para estilos genéricos está superada; os itens seguintes são inventário/decisões anteriores e não afirmam que banco, fichas ou resolvedor estejam implantados. Nenhuma integração ou publicação é autorizada por este registro.
-- Bíblia visual v002 aprovada (Zé, Lia, Valdemar, Sandra, AMB-001, OBJ-001). Personagens: 2 protagonistas (masc./fem.) + 2 coadjuvantes, tom levemente cômico, com atenção à diferenciação. [08/10; 07/10]
-- Fichas no Drive `00_Biblia_Visual`; catálogo no banco do app (`visual_assets`, `episode_assets`); wiki/galeria gerada da tabela; o roteirista lista as entidades da cena; um **resolvedor sem LLM** injeta só as fichas necessárias no caderno temporário. [08/10]
-- Ficha que falta é criada na hora, **sem aprovação bloqueante**; o José recebe aviso e pode marcar "Verificado" ou "Não Aprovado" com observação. "Não Aprovado" abre ticket e a ficha é refeita para os próximos vídeos. O vídeo publicado só é despublicado e refeito se o José pedir. [08/10]
-- Verificação por botões no canal ativo e status/issue no painel Paperclip, sincronizados pela mesma tabela (Telegram/Hermes `pqbr`; t474). [08/10; t282; t327]
-- Cartões (objetos, ambientes, animais) criados sob demanda por roteiro e reaproveitados; pesquisa e criação delegadas ao NotebookLM em caderno temporário, nunca no raiz. [07/10]
+## 6. Fichas do stickman [t465; fechado como identidade em t133u]
+> José, 27/10: stickman 100%. Banco de texto em `banco-fichas/` (PERS-M, PERS-F, dois ambientes, quatro objetos). Sem imagem. O espelho no Drive é `00_Biblia_Visual/banco-fichas`. Catálogo no Postgres e resolvedor sem LLM continuam por fazer. Não declarar ficha ativa no Flow.
+> Inventário antigo, não usar como elenco: bíblia v002 (Zé, Lia, Valdemar, Sandra, AMB-001, OBJ-001), aprovada em 08/10 e pausada em t399. Os nomes não entram no vídeo.
+- Bíblia visual v002 (histórico, 08/10): Zé, Lia, Valdemar, Sandra, AMB-001, OBJ-001. Não é o banco atual.
+- Histórico 08/10, não executar como se estivesse no ar: fichas no Drive com catálogo `visual_assets` / `episode_assets`, wiki gerada da tabela e resolvedor sem LLM. O banco de texto de t133u não liga isso.
+- Histórico 08/10, não executar: ficha criada na hora sem aprovação bloqueante. Imagem de personagem só entra no fluxo depois que o José olhar (t133u).
+- Histórico: botões no canal e painel Paperclip para verificar ficha. Paperclip está parado.
+- Cartões sob demanda continuam a ideia: objeto ou ambiente novo nasce de roteiro que volta a usar, no `banco-fichas/`, não no caderno raiz. [07/10; t133u]
 
 ## 7. Camada de decisão (Jev)
 - Interface única `decide()`, com provedor trocável. Começa com o TypeSafe Jev (só texto). Troca para modelo com imagem se precisar. Limiares de confiança calibrados com casos reais; confiança baixa escala para um LLM ou para o José. [CAMADA DE DECISÃO]
@@ -270,6 +271,7 @@ _Origem do bloco: t240–t242._
 ## 21. Armazenamento (Drive) e memória
 - Drive Pro de 5 TB; cota não é restrição. [t266]
 - Estrutura `PQBR/`: `00_Biblia_Visual`, `01_Contrato_e_SOP`, `02_Episodios/AAAA-MM/PQBR-EPxxxx_tema`, `03_Reservas`, `04_Privados_Revisao`, `05_Relatorios`, `99_Arquivo`. [t267; supera 07/10 rodada 6]
+- O Drive é ferramenta da mesma conta Google do Flow, do Studio e do NotebookLM. Agente usa para guardar e ler o que a regra manda (episódio, bíblia, arquivo). Não é um produto à parte. Leitura de 27/10 (t133u), só nomes de pasta: `02_Episodios/2026-10` tem os mp4 do lote EP1002–EP1010; `00_Biblia_Visual` não tinha ficha de personagem; `99_Arquivo` estava vazia; a pasta antiga `Porquê BR` continua com os masters stickman, ainda sem a cópia do ROADMAP. Detalhe em `docs/fases/stickman.md`.
 - O servidor é temporário; prioridade é o disco livre. **Tudo sobe** (original do NotebookLM e editado); o arquivo local é apagado após confirmar tamanho/hash. O final fica no servidor até o upload ao YouTube ser confirmado (código no canal) e então é apagado. Intermediários limpos quando a cópia final estiver pronta. [t267; t268]
 - **Limpeza do Drive** por script determinístico na rotina noturna do @prod-director: duplicatas (hash/tamanho ou mesmo código) e órfãos vão para `99_Arquivo/_duplicados`; a lista vai ao José no relatório diário pelo canal privado ativo (Telegram/Hermes `pqbr`; t474). Exclusão definitiva só pelo José. [t269; t270]
 - Memória: **Hindsight local** com backup diário; OpenViking fora do build (importar só o aproveitável). [07/10 item 4; rodada 2]

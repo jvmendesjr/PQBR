@@ -27,7 +27,7 @@ class FichaCena(Contrato):
     prompt_animacao: str = Field(min_length=10, max_length=1000)
     refs: list[str] = Field(min_length=1, max_length=4)            # imagem de referência identificada
     epoca: Literal["presente", "passado"] = "presente"
-    # t78u: participa do ambiente ⇒ figurino da época/local; só observa ⇒ roupa atual (varia entre vídeos)
+    # t78u: participa ⇒ figurino da época/local. t133u: atual_variavel é o visual cotidiano travado da ficha, não roupa nova a cada vídeo.
     papel_personagem: Literal["observa", "participa"]
     figurino: Literal["epoca_local", "atual_variavel"]
     caracterizacao: str | None = Field(default=None, max_length=400)   # roupa/traços da época ou local, ou a roupa atual escolhida

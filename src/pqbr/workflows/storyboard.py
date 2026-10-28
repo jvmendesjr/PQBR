@@ -5,6 +5,7 @@ from __future__ import annotations
 import json, os, re
 from pathlib import Path
 from temporalio import activity
+from ..contratos import ESTILO_PADRAO_STICKMAN
 from ..contratos.gasto import GASTO_STORYBOARD
 from ..contratos.storyboard import Storyboard, elenco_alternado
 
@@ -18,12 +19,12 @@ PROMPT_STORYBOARD = (
     "prompt_animacao em inglês, com a frase exata 'lips closed, only blinking and breathing'. "
     "Uma ação e um movimento de câmera. Início e fim como foto parada, mesma câmera e mesma luz. "
     "Enquadramento só: plano_geral, plano_medio, plano_medio_curto ou close. Nunca 'from the chest up'. "
-    "Quem participa do ambiente usa figurino epoca_local e caracterizacao. Quem só observa usa figurino atual_variavel. "
+    "Quem participa do ambiente usa figurino epoca_local e caracterizacao. Quem só observa usa o visual cotidiano travado da ficha (figurino atual_variavel), sem inventar roupa nova. "
     "expressao é reação (caras e bocas), nunca articulação de fala. "
     "refs: uma lista com \"ASSET_personagem_{elenco}-v1\". "
     "Coadjuvante, se o roteiro pedir outra pessoa, é o outro do elenco ({outro}) e leva justificativa. "
     "Roteiro:\n{roteiro}\n"
-    '{{"norte_geral":"...","bloco_estilo":"Flat 2D cartoon, bold outlines, ...",'
+    '{{"norte_geral":"...","bloco_estilo":"Stickman de tubos grossos, cabeça redonda grande, sem pessoa de cartum",'
     '"ficha_personagem":"...","cenas":[{{"fala":"...","norte":"...","inicio":"...","fim":"...",'
     '"movimento":"...","enquadramento":"plano_medio","prompt_imagem":"...","prompt_animacao":"... lips closed, only blinking and breathing.",'
     '"refs":["ASSET_personagem_{elenco}-v1"],"epoca":"presente","papel_personagem":"observa","figurino":"atual_variavel",'
@@ -52,6 +53,8 @@ def storyboard_de_texto(texto: str, codigo: str) -> Storyboard:
     d["imagens_revisadas"] = False
     d.pop("elenco_excecao", None)
     d["elenco"] = elenco
+    d["bloco_estilo"] = ESTILO_PADRAO_STICKMAN
+    trava = "Stickman de tubos grossos e arredondados, cabeça redonda grande, sem pessoa de cartum. "
     cenas = list(d.get("cenas") or [])
     for i, c in enumerate(cenas, start=1):
         c["versao"] = "1.2.0"
@@ -63,6 +66,9 @@ def storyboard_de_texto(texto: str, codigo: str) -> Storyboard:
         c["prompt_animacao"] = anim[:1000]
         refs = [r for r in (c.get("refs") or []) if isinstance(r, str)]
         c["refs"] = refs or [ref_elenco(elenco)]
+        img = c.get("prompt_imagem") or ""
+        if "stickman" not in img.lower():
+            c["prompt_imagem"] = (trava + img).strip()[:2000]
     return Storyboard.model_validate(d)
 
 

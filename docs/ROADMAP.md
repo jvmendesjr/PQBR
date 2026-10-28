@@ -237,7 +237,7 @@ Ref.: `docs/pesquisas/PESQUISA-extensoes-geracao-em-serie.md` (leitura liberada,
 
 ## Fase 7: editorial e auditor
 
-- [x] **F7-00** (t378 → decidido t399/t400) Escopo editorial ≥ 80% origem de expressões/curiosidades, sazonal só na janela; visual 2D genérico; fichas pausadas. Regra em CONTRATO §16. Afeta F5-01 (fração configurável: 0,8) e F7-01.
+- [x] **F7-00** (t378 → decidido t399/t400) Escopo editorial ≥ 80% origem de expressões/curiosidades, sazonal só na janela. O visual genérico e as fichas pausadas dessa data foram substituídos pelo stickman (t133u, CONTRATO §19). A fração 0,8 segue em F5-01.
 
 - [x] **F7-03** (t400) Modelo de roteiro com bloco visual (`[ESTILO]/[PERSONAGEM]/[AMBIENTE]/[CENAS]`, CONTRATO §16.4) no `RoteiroShort` (Pydantic) + limite diário de uso do NotebookLM por contagem própria · Depende de: F3-01 · Aceite: roteiro inválido sem o bloco; contador bloqueia acima do limite · Portão: **G7 FECHADO 2026-10-17**
   - 2026-10-17: retomado por pedido do proprietário. `RoteiroShort` já exige `bloco_visual`; `tests/unit/test_f7_03_limits.py` cobre rejeição sem o bloco, bloqueio dos contadores locais e separação de `usage --json` via mock; 25 testes focados passaram, suíte `tests/unit` 107/107, `compileall` e `git diff --check` limpos. Nenhum uso real ou quota do NotebookLM foi executado. F7-03/G7 fechado pela aprovação do proprietário em 2026-10-17.
