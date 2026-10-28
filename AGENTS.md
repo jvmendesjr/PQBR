@@ -4,7 +4,7 @@
 
 Fonte única de "onde estamos". Não repete o ROADMAP: aponta os itens por id. **Atualize este arquivo a cada correção ou pendência resolvida.** O hook pre-commit exige isso quando o commit toca ROADMAP, LACUNAS, DECISOES-LOG ou CHANGELOG, e o `registrar_alteracao` exige isso para `tipo` correcao ou pendencia_resolvida.
 
-Atualizado: 27/10/2026 (t138u: frente do stickman saiu pessoa; JEV-EF segue no ROADMAP) · versão 0.17.5
+Atualizado: 27/10/2026 (t139u: corpo do elenco fechado, sem roupa; JEV-EF segue no ROADMAP) · versão 0.17.6
 
 ## Onde estamos
 - **Produção:** o lote do saldo está em `runtime/lote-saldo/` (um diretório por tema). O EP1002 olhos-da-cara foi reprovado e descartado (`runtime/lote-saldo/_descartado/`), e o tema voltou a `proposto`.
@@ -13,10 +13,10 @@ Atualizado: 27/10/2026 (t138u: frente do stickman saiu pessoa; JEV-EF segue no R
 - **Documentos (t129u):** `docs/LACUNAS-fluxo.md` só lista o que ainda falta no código. O roster vigente está em `docs/AGENTES.md`. Briefing, checklist pré-E2E, rascunho de SOUL e propostas não aplicadas foram para `docs/_obsoleto/`. As provas do F3-05 continuam em `docs/sdd/` porque o item segue aberto no ROADMAP.
 - **Fluxo (t130u):** o episódio para no storyboard. O NotebookLM entrega roteiro, compliance e SEO, e não gera vídeo. `YOUTUBE_DRY_RUN=true`. Os vídeos de `runtime/lote-saldo/` ficam parados até a etapa de publicação.
 - **Paperclip (t130u):** `paperclipai.service` parado e desabilitado em 27/10. Sem desinstalar e sem apagar dados. `config/paperclip.json` está `parado_proposital`.
-- **Stickman (t133u):** identidade única. Banco de texto em `banco-fichas/` e no Drive `00_Biblia_Visual/banco-fichas`. Sem imagem aprovada. 3D não se pede. Fases em `docs/fases/stickman.md`.
+- **Stickman (t133u, t139u):** identidade única, corpo fechado. Sem roupa. Frente em `banco-fichas/personagens/PERS-M.png` e `PERS-F.png`. Ambiente e objeto seguem em texto. 3D não se pede. Fases em `docs/fases/stickman.md`.
 
 ## Próximo passo
-A frente do PERS-M foi gerada na aba Personagens e saiu pessoa com volume, em paisagem (t138u). Não está aprovada e o prompt não se repete. O José olha o arquivo `~/.pqbr/episodios/flow-teste/REF_personagem_masculino_imagem_tentativa1.jpg`. Nada está agendado no YouTube. O LOOP e o drop-in do Telegram ficam para depois.
+O corpo do elenco está definido nos PNG de `banco-fichas/personagens/` (t139u). O José olha o traço. Se não servir, muda `scripts/visual/frente_stickman.py`; a regra (sem roupa, um acento) fica. O Flow não redesenha o corpo e a aba Personagens ainda não recebeu esses arquivos. Nada está agendado no YouTube. O LOOP e o drop-in do Telegram ficam para depois.
 
 ## Pendências abertas
 | # | Pendência | Ref. ROADMAP | Dono | Bloqueio |
@@ -25,7 +25,7 @@ A frente do PERS-M foi gerada na aba Personagens e saiu pessoa com volume, em pa
 | P2 | Publicação: worker reiniciado 27/10 11:50 (-03), 0 workflows Running. `YOUTUBE_DRY_RUN=true`. Nada agendado (`agenda_publicacao` com 0 linhas). Envio real desligado. Refresh do app em teste vence ~2/11 21:20 (-03) | F8-01 | agente | sem envio até a produção ativa |
 | P3 | Teste: LOOP por cena vs o atual | Estado 26/10 · Testes pendentes | agente | depois do fluxo de publicação |
 | P4 | **Feito (t108u/t109u).** Juiz por etapa (`gemini_juiz` v1.0.0): pré-produção usa 3.8 Flash; produção (VISUAL e LOOP) usa 4 Argon Baixo. O worker `pqbr-episodio-worker` foi reiniciado com OK do José às 16:57 (-03), e o poller está ativo na fila `episodio-pqbr`, ns `pqbr` | Estado 26/10 · DECISOES-LOG t109u | agente | concluído |
-| P5 | Imagem de referência do elenco. O texto está em `banco-fichas/personagens/`. O asset ainda não existe | t133u · Fase 3 | agente | gerar no Flow e o José olhar; imagem já autorizada (t131u) |
+| P5 | Frente do elenco desenhada (t139u). O José olha `PERS-M.png`, `PERS-F.png` e `ELENCO-frente.png`. Ajuste é no script, não numa roupa nova | t139u · Fase 3 | José | a aba Personagens do Flow ainda não recebeu esses arquivos |
 | P6 | **Feito (t130u).** `storyboard_criar` valida o Storyboard 1.2.0, grava a ficha e deixa `pode_gerar_video` false. O episódio para aí. Imagem e vídeo desta etapa não rodam | Estado 27/10 · DECISOES-LOG t130u | agente | concluído |
 | P7 | **Feito (t108u).** O gate VISUAL agora tem `boca_articula_fala`, `corte_oculos_cabeca` e `grotesco` (FichaCena/REGRAS §25), e cada um reprova sozinho. Validado no EP1002 (`loop-gemini-4argon-v2.json`): reprova, com S01 corte+grotesco, S04 corte e S02/S05/S09 boca | Estado 26/10 · CHANGELOG 0.14.0 | agente | concluído |
 | P8 | **Feito (t128u).** As 7 memórias `obsoleto_candidato` do roster antigo de `docs/AGENTES.md` foram apagadas em 27/10 ~08:57 (-03). Bank 884 → 877. Backup fora do git | `docs/operacao/hindsight-descarte-candidatos.md` | agente | concluído |
@@ -35,7 +35,7 @@ A frente do PERS-M foi gerada na aba Personagens e saiu pessoa com volume, em pa
 | P12 | ERR-01: revisar os erros aceitáveis | ERR-01 | agente | depois dos primeiros dias de produção |
 | P13 | Proposta não aplicada: ferramentas só leitura para os agentes PydanticAI, sem MCP interno | F1-05 · t134u | José | sem efeito externo |
 | P14 | Proposta não aplicada: acompanhamento de mudanças (vigia de fallbacks, canário, deriva de contrato, `dev_diagnosticar`). Sem agente novo. O NotebookLM não entra no canário | F6-02 · t135u/t136u | José | registro no worker exige reinício |
-| P15 | **Prioritário.** Efetivar o Jev (`decide()`), item JEV-EF. Chave OpenRouter (JEV-02) só na hora de ligar | RNF-02 · t137u | José | ligar exige reiníc
+| P15 | **Prioritário.** Efetivar o Jev (`decide(
 
 Fontes canônicas: docs/ESTADO-ATUAL.md (onde estamos), docs/REGRAS.md, docs/DECISOES-LOG.md, docs/ROADMAP.md, docs/LACUNAS-fluxo.md, docs/ARQUITETURA.md, docs/AGENTES.md, docs/mapa/. Em conflito, vale o doc canônico. O briefing do YT-LLM está em docs/_obsoleto/BRIEFING-novo-agente-pqbr.md e não é procedimento.
 
@@ -126,14 +126,6 @@ Histórico, fora do procedimento: docs/_obsoleto/BRIEFING-novo-agente-pqbr.md (h
 
 ## Decisões recentes
 
-## t138u (27/10/2026) — Frente na aba Personagens, pelo fluxo, e saiu pessoa
-- José pediu a fase 3 e, em seguida, que a geração seguisse o fluxo já fechado: prompt autossuficiente, rótulo fora do texto, manifesto antes de enviar, uma imagem por vez, sem número solto e sem fala no prompt.
-- Aba do Studio continuou aberta. No projeto do Flow de 27/10, o botão Voltar da imagem antiga não aceitou o clique (sem caixa). O voltar do navegador abriu o projeto. Aba Personagens abriu em `.../character`.
-- A tela "Novo personagem" oferecia seis exemplos de gente (excêntrico, profissional, curinga, comum, malvado, fantástico). Não cliquei em nenhum. O modelo estava em Nano Banana 2.1. O menu mostrou Pro, 2 Lite e 2.1. Escolhi 2 Lite. Não havia botão de proporção.
-- Manifesto gravado antes do clique, fora do git: `~/.pqbr/episodios/flow-teste/manifesto-ASSET_personagem_masculino-v1.json`. O prompt não leva o rótulo, nem número, nem aspas, nem verbo de fala. É a trava do PERS-M em inglês: tubos grossos, cabeça redonda, frente, corpo inteiro, cabeça inteira, fundo liso, boca fechada, óculos redondos vermelhos. Sem cor de roupa.
-- A geração mostrou 15% e 49% e depois a imagem. O botão de modelo, nessa tela seguinte, dizia Nano Banana 2.1. Não vi número de crédito. Não afirmo qual dos dois modelos desenhou.
-- O arquivo baixado pela URL da imagem tem 1376×768. Eu abri. É uma pessoa azul, com volume, cabelo preto, óculos redondos vermelhos, mãos com dedos, fundo claro. Não é stickman de tubos. 
-
 ## t134u (27/10/2026) — Ferramentas só leitura para agentes PydanticAI [PROPOSTA; NÃO aplicada]
 - Conversa paralela (cliente MCP `cursor-paralelo-mantenedor`). José concordou: o MCP não vira camada interna. Fica só na fronteira com agentes externos. Determinismo e modularidade já vêm do Temporal, dos contratos Pydantic v2 e das portas (t512–t515).
 - Proposta: catálogo só leitura em `src/pqbr/agents/ferramentas.py`; `criar_agente` ganha `ferramentas` filtrado pela `config/politica_papeis.json`; ferramenta nativa do PydanticAI, no processo, sem escrita (ADR-011); limite de chamadas; testes com `TestModel`. O destino do `pqbr-kit` fica para o José.
@@ -157,6 +149,14 @@ Histórico, fora do procedimento: docs/_obsoleto/BRIEFING-novo-agente-pqbr.md (h
 - José [APROVADO]: efetivar o Jev. Item prioritário **JEV-EF** no ROADMAP, junto com F1-05 (t134u) e F6-02 (t135u/t136u). A chave OpenRouter (JEV-02) entra no JEV-EF e só é pedida ao ligar.
 - No canário, o Jev escolhe um `ref` da lista que o Camofox observou, ou `abstain`. Não escreve seletor nem vê imagem.
 - Junção: estas quatro entradas foram escritas na branch `cursor/proposta-ferramentas-agentes-b9f6` e reaplicadas em cima de `57f8b97` (stickman, t133u). O stickman, o `banco-fichas/` e o código desse commit não foram alterados.
+
+
+## t139u (27/10/2026) — Corpo do stickman definido
+- José pediu para continuar a leitura dos canais e definir de vez. A cor de roupa, que t133u tinha deixado aberta, fecha: não há roupa.
+- Corpo igual nos dois: tubo preto grosso, ponta redonda, cabeça branca com o mesmo tamanho, boca fechada, sem pele, sem dedo, sem letra na imagem. PERS-M é mais alto porque a perna é mais longa. Não tem cabelo. O único acento é o óculos redondo vermelho. PERS-F é mais baixa. O coque é um círculo do mesmo tubo, no alto, do lado direito de quem olha. O único acento é a argola amarela, do lado esquerdo de quem olha. A pinta é preta, pequena, ao lado da boca, nesse mesmo lado.
+- O desenho está em `banco-fichas/personagens/PERS-M.png`, `PERS-F.png` e `ELENCO-frente.png` (este último só compara a altura e não vai para o Flow). O script que regrava é `scripts/visual/frente_stickman.py`. Não passou pelo Flow. A tentativa 1 de 27/10 (pessoa azul, t138u) continua fora.
+- Não afirmo que o José já olhou estes PNG. A regra não volta para "cor a definir". Se o traço não servir, muda o script. Não se abre peça de roupa. A aba Personagens do Flow não recebeu estes arquivos. Ambiente e objeto seguem em texto.
+- O espelho `00_Biblia_Visual/banco-fichas` foi atualizado no mesmo dia. Os markdown já existentes foram substituídos no mesmo arquivo, com hash conferido. Os PNG e os SVG entraram na pasta `personagens`. Nada foi apagado.
 
 
 ## Fase atual do ROADMAP

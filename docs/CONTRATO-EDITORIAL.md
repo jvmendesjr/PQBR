@@ -342,14 +342,14 @@ Fecha a identidade. Prevalece sobre o visual do §16, sobre o §16.7 antigo e so
 
 1. **Só stickman.** Cabeça redonda grande, corpo e membros de tubos grossos com ponta redonda, traço chapado, sem dedos, sem pessoa de cartum, sem volume. Comédia de costumes brasileiros, leve e com respeito. Folclore é tema eventual, não o estilo do canal.
 2. **3D descartado.** Não se pede volume, fotorrealismo nem desenho 3D. Vídeo de teste 3D, se for localizado, vai para o Drive em `99_Arquivo/desenvolvimento-3d`, sem apagar o original. Em 27/10 essa pasta de teste não foi encontrada. Ver `docs/fases/stickman.md`.
-3. **Fichas.** Texto em `banco-fichas/` (personagem, ambiente, objeto). Imagem de referência ainda não existe. Sem imagem aprovada pelo José, o id `ASSET_*` não está travado. O Flow cita a imagem pelo id e não redescreve o boneco.
-4. **Elenco.** `PERS-M` (óculos redondos vermelhos) e `PERS-F` (coque, argola, pinta, mais baixa). Cor de acento a definir na imagem. Nomes da bíblia de 08/10 não voltam.
+3. **Fichas.** Texto em `banco-fichas/` (personagem, ambiente, objeto). A frente do elenco está desenhada em `banco-fichas/personagens/` (t139u), sem letra dentro do arquivo. O Flow cita essa imagem e não redesenha o corpo. Ambiente e objeto seguem sem imagem.
+4. **Elenco.** Sem roupa. Tubo preto, cabeça branca, a mesma cabeça nos dois. `PERS-M`: óculos redondos vermelhos, sem cabelo, mais alto. `PERS-F`: mais baixa, coque redondo, argola amarela e pinta preta do lado esquerdo de quem olha, sem óculos. Nomes da bíblia de 08/10 não voltam.
 5. **Estilo no código.** `ESTILO_PADRAO_STICKMAN` (`BlocoVisual` 2.0.0). O roteiro e o storyboard recebem esse texto. Pedido com 3D é recusado. O pacote do caderno ainda guarda o bloco no slot `bloco_visual_16_7`; o texto é este:
 
 ```
-[ESTILO] Stickman de tubos grossos e arredondados, cabeça redonda grande, membros com ponta redonda, traço chapado, sem dedos desenhados e sem pessoa de cartum. Um acento de cor chapada por personagem, fundo limpo e claro, no máximo 3 a 5 objetos, humor de comédia leve. Personagem grande no quadro, cabeça inteira visível, agindo, expressão simples e exagerada, boca fechada. Proibido: pessoa desenhada, fotorrealismo, volume 3D, rosto de pessoa real ou celebridade, marca ou logo real, texto escrito dentro da imagem. Formato vertical 9:16, faixas de cima e de baixo livres.
+[ESTILO] Stickman de tubos pretos grossos e arredondados, cabeça redonda grande branca com contorno preto, membros com ponta redonda, traço chapado, sem roupa, sem pele, sem dedos desenhados e sem pessoa de cartum. O acento é um só e já está na ficha, nunca numa peça de roupa. Fundo limpo e claro, no máximo 3 a 5 objetos, humor de comédia leve. Personagem grande no quadro, cabeça inteira visível, agindo, expressão simples e exagerada, boca fechada. Proibido: pessoa desenhada, fotorrealismo, volume 3D, rosto de pessoa real ou celebridade, marca ou logo real, texto escrito dentro da imagem. Formato vertical 9:16, faixas de cima e de baixo livres.
 
-[PERSONAGEM] Um stickman, a frase-trava da ficha (PERS-M ou PERS-F), sem nome e sem cor de roupa inventada. A mesma frase em todas as cenas.
+[PERSONAGEM] Um stickman sem roupa, a frase-trava da ficha do episódio (PERS-M ou PERS-F), sem nome. A mesma frase em todas as cenas. Não inventar cor de roupa: o acento único já está na ficha.
 
 [AMBIENTE] Cena <n>: <lugar>, <época: hoje / passado>, objetos-âncora: <3 a 5>, luz <hora>.
 

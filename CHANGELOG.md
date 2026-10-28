@@ -5,6 +5,10 @@ Versionamento SemVer (MAJOR.MINOR.PATCH) a partir de t510. Versão do pacote can
 
 
 
+## [0.17.6] — 2026-10-27
+### Alterado
+- Corpo do elenco fechado (t139u). Sem roupa. Tubo preto, cabeça branca. PERS-M: óculos vermelhos, sem cabelo, mais alto. PERS-F: mais baixa, coque, argola amarela e pinta do lado esquerdo de quem olha. Desenho em `banco-fichas/personagens/`, regravado por `scripts/visual/frente_stickman.py`. Não é geração do Flow. A aba Personagens não recebeu esses arquivos.
+
 ## [0.17.5] — 2026-10-27
 ### Operação
 - Frente do personagem masculino no Flow, pela aba Personagens, com manifesto gravado antes (t138u). A imagem saiu pessoa com volume, 1376×768. Não virou asset. O prompt não se repete.

@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080">
+  <rect width="100%" height="100%" fill="#f4f1ea"/>
+  <line x1="480" y1="433" x2="480" y2="649" stroke="#1a1a1a" stroke-width="25" stroke-linecap="round"/>
+  <line x1="480" y1="497" x2="300" y2="605" stroke="#1a1a1a" stroke-width="25" stroke-linecap="round"/>
+  <line x1="480" y1="497" x2="660" y2="605" stroke="#1a1a1a" stroke-width="25" stroke-linecap="round"/>
+  <line x1="480" y1="649" x2="372" y2="980" stroke="#1a1a1a" stroke-width="25" stroke-linecap="round"/>
+  <line x1="480" y1="649" x2="588" y2="980" stroke="#1a1a1a" stroke-width="25" stroke-linecap="round"/>
+  <circle cx="480" cy="325" r="108" fill="#ffffff" stroke="#1a1a1a" stroke-width="25"/>
+  <circle cx="443" cy="330" r="7" fill="#1a1a1a"/>
+  <circle cx="517" cy="330" r="7" fill="#1a1a1a"/>
+  <line x1="460" y1="381" x2="500" y2="381" stroke="#1a1a1a" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="443" cy="330" r="41" fill="none" stroke="#e23b2f" stroke-width="10"/>
+  <circle cx="517" cy="330" r="41" fill="none" stroke="#e23b2f" stroke-width="10"/>
+  <line x1="484" y1="330" x2="476" y2="330" stroke="#e23b2f" stroke-width="10" stroke-linecap="round"/>
+  <line x1="1440" y1="570" x2="1440" y2="750" stroke="#1a1a1a" stroke-width="25" stroke-linecap="round"/>
+  <line x1="1440" y1="634" x2="1260" y2="742" stroke="#1a1a1a" stroke-width="25" stroke-linecap="round"/>
+  <line x1="1440" y1="634" x2="1620" y2="742" stroke="#1a1a1a" stroke-width="25" stroke-linecap="round"/>
+  <line x1="1440" y1="750" x2="1361" y2="980" stroke="#1a1a1a" stroke-width="25" stroke-linecap="round"/>
+  <line x1="1440" y1="750" x2="1519" y2="980" stroke="#1a1a1a" stroke-width="25" stroke-linecap="round"/>
+  <circle cx="1440" cy="462" r="108" fill="#ffffff" stroke="#1a1a1a" stroke-width="25"/>
+  <circle cx="1496" cy="378" r="37" fill="#ffffff" stroke="#1a1a1a" stroke-width="18"/>
+  <circle cx="1403" cy="467" r="7" fill="#1a1a1a"/>
+  <circle cx="1477" cy="467" r="7" fill="#1a1a1a"/>
+  <line x1="1420" y1="518" x2="1460" y2="518" stroke="#1a1a1a" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="1328" cy="487" r="11" fill="none" stroke="#e6b325" stroke-width="5"/>
+  <circle cx="1389" cy="507" r="5" fill="#1a1a1a"/>
+</svg>

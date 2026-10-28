@@ -2,7 +2,7 @@
 
 Id estável. Sem nome falado ou escrito no vídeo.
 
-Preencher só o que estiver decidido. O que não estiver, deixar "a definir na imagem". Não inventar cor de roupa.
+Preencher só o que estiver decidido. O elenco vigente não tem roupa. Um acento só.
 
 ## Trava
 
@@ -21,4 +21,4 @@ Pessoa de cartum, dedos desenhados, volume, marca, texto, óculos ou cabeça cor
 
 ## Estado
 
-`rascunho_texto` até existir arquivo de imagem e o José dizer que serve. Só então o id vira `ASSET_personagem_<elenco>-v1`.
+`rascunho_texto` enquanto não houver arquivo. `definido` quando o desenho da ficha estiver no banco, como em t139u. Ajuste de traço troca o arquivo e mantém a regra. Não reabre roupa.

@@ -1,12 +1,12 @@
 {
-  "versao": "0.1.0",
-  "decisao": "t133u",
+  "versao": "0.2.0",
+  "decisao": "t139u",
   "atualizado": "2026-10-27",
-  "nota": "Só texto. imagem null significa que o arquivo não existe e o José não aprovou. Não usar como referência do Flow.",
-  "estilo": "stickman de tubos grossos e arredondados, cabeça redonda grande, sem pessoa de cartum e sem volume 3D",
+  "nota": "O elenco está definido no desenho (PERS-M.png, PERS-F.png, ELENCO-frente.png). Sem letra dentro da imagem. ELENCO-frente.png é a comparação dos dois e não vai para o Flow. Ambiente e objeto seguem sem imagem.",
+  "estilo": "stickman de tubos pretos grossos, cabeça branca, sem roupa, um acento só",
   "fichas": [
-    {"id": "PERS-M", "tipo": "personagem", "arquivo": "personagens/PERS-M.md", "asset": "ASSET_personagem_masculino-v1", "estado": "rascunho_texto", "imagem": null},
-    {"id": "PERS-F", "tipo": "personagem", "arquivo": "personagens/PERS-F.md", "asset": "ASSET_personagem_feminino-v1", "estado": "rascunho_texto", "imagem": null},
+    {"id": "PERS-M", "tipo": "personagem", "arquivo": "personagens/PERS-M.md", "asset": "ASSET_personagem_masculino-v1", "estado": "definido", "imagem": "personagens/PERS-M.png"},
+    {"id": "PERS-F", "tipo": "personagem", "arquivo": "personagens/PERS-F.md", "asset": "ASSET_personagem_feminino-v1", "estado": "definido", "imagem": "personagens/PERS-F.png"},
     {"id": "AMB-cozinha", "tipo": "ambiente", "arquivo": "ambientes/AMB-cozinha.md", "asset": null, "estado": "rascunho_texto", "imagem": null},
     {"id": "AMB-sala", "tipo": "ambiente", "arquivo": "ambientes/AMB-sala.md", "asset": null, "estado": "rascunho_texto", "imagem": null},
     {"id": "OBJ-chaleira", "tipo": "objeto", "arquivo": "objetos/OBJ-chaleira.md", "asset": null, "estado": "rascunho_texto", "imagem": null},

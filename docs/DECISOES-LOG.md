@@ -765,3 +765,10 @@ NÃO CABE:
 - José [APROVADO]: efetivar o Jev. Item prioritário **JEV-EF** no ROADMAP, junto com F1-05 (t134u) e F6-02 (t135u/t136u). A chave OpenRouter (JEV-02) entra no JEV-EF e só é pedida ao ligar.
 - No canário, o Jev escolhe um `ref` da lista que o Camofox observou, ou `abstain`. Não escreve seletor nem vê imagem.
 - Junção: estas quatro entradas foram escritas na branch `cursor/proposta-ferramentas-agentes-b9f6` e reaplicadas em cima de `57f8b97` (stickman, t133u). O stickman, o `banco-fichas/` e o código desse commit não foram alterados.
+
+## t139u (27/10/2026) — Corpo do stickman definido
+- José pediu para continuar a leitura dos canais e definir de vez. A cor de roupa, que t133u tinha deixado aberta, fecha: não há roupa.
+- Corpo igual nos dois: tubo preto grosso, ponta redonda, cabeça branca com o mesmo tamanho, boca fechada, sem pele, sem dedo, sem letra na imagem. PERS-M é mais alto porque a perna é mais longa. Não tem cabelo. O único acento é o óculos redondo vermelho. PERS-F é mais baixa. O coque é um círculo do mesmo tubo, no alto, do lado direito de quem olha. O único acento é a argola amarela, do lado esquerdo de quem olha. A pinta é preta, pequena, ao lado da boca, nesse mesmo lado.
+- O desenho está em `banco-fichas/personagens/PERS-M.png`, `PERS-F.png` e `ELENCO-frente.png` (este último só compara a altura e não vai para o Flow). O script que regrava é `scripts/visual/frente_stickman.py`. Não passou pelo Flow. A tentativa 1 de 27/10 (pessoa azul, t138u) continua fora.
+- Não afirmo que o José já olhou estes PNG. A regra não volta para "cor a definir". Se o traço não servir, muda o script. Não se abre peça de roupa. A aba Personagens do Flow não recebeu estes arquivos. Ambiente e objeto seguem em texto.
+- O espelho `00_Biblia_Visual/banco-fichas` foi atualizado no mesmo dia. Os markdown já existentes foram substituídos no mesmo arquivo, com hash conferido. Os PNG e os SVG entraram na pasta `personagens`. Nada foi apagado.

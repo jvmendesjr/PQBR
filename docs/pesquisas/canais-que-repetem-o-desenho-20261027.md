@@ -61,8 +61,8 @@ Não gerar de novo só com texto. As duas tentativas de descrever o elenco (as f
 
 O que cabe no nosso contrato, sem inventar canal:
 
-- Um corpo de tubos, chapado, preso numa imagem. A cor da roupa continua sem escolha. A marca do masculino é o óculos, no mesmo papel do vermelho e do azul do Dick Figures: uma diferença só.
-- Essa imagem, aprovada pelo José, é a referência. O Flow passa a variar pose e cena, não a inventar a pessoa.
+- Um corpo de tubos, chapado, preso numa imagem. A marca do masculino é o óculos, no mesmo papel do vermelho e do azul do Dick Figures: uma diferença só.
+- Essa imagem é a referência. O Flow passa a variar pose e cena, não a inventar a pessoa.
 - Uma piada por Short. O desenho simples não pede mais objeto nem mais fala.
 
-Enquanto não houver esse desenho aprovado, a ficha segue `rascunho_texto`.
+Fechado na sequência, t139u. Sem roupa. O acento do PERS-M é o óculos vermelho. O da PERS-F é a argola amarela. O desenho está em `banco-fichas/personagens/`. Não foi outra geração do Flow.

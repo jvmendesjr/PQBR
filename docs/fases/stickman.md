@@ -14,7 +14,7 @@ Feito nesta entrega.
 
 Feito nesta entrega. Pasta `banco-fichas/`.
 
-Dois personagens, dois ambientes e quatro objetos. Estado `rascunho_texto`. Sem imagem. A cor da roupa não foi escolhida.
+Dois personagens, dois ambientes e quatro objetos. O elenco passou a `definido` na fase 3. Ambiente e objeto seguem `rascunho_texto`.
 
 A pesquisa da estrutura está em `docs/pesquisas/fichas-stickman-estrutura-20261027.md`.
 
@@ -30,12 +30,14 @@ Os pacotes `pacote-c913c002c9be` e `pacote-17b4cf4f727f` continuam como estavam:
 
 Tentativa 1 feita em 27/10, seguindo o fluxo (manifesto antes, bloco único sem número e sem fala, rótulo só no arquivo, Lite escolhido no menu, exemplos humanos da tela não usados). A imagem saiu pessoa com volume, 1376×768, mãos com dedos. Não é a frente. Não virou asset. O mesmo prompt não se repete. Detalhe no DECISOES-LOG t138u. A aba Personagens foi aberta; a imagem não foi concluída como personagem.
 
-1. Gerar no Flow, imagem, Nano Banana 2 Lite, 9:16, só 1K. Imagem está autorizada (t131u). Não repetir o prompt de 27/10 que saiu pessoa.
-2. A aba Personagens foi aberta em 27/10 (t138u). A frente que sair stickman, e que o José aceitar, é que fica presa. A tentativa 1 não serve.
-3. O José olha a frente. Se servir, grava como `ASSET_personagem_masculino-v1` ou `feminino-v1` e a ficha muda de estado. Se não servir, a ficha continua rascunho.
-4. Expressões e objetos vêm depois da frente. Não gerar a folha inteira antes.
+1. A frente não se pede de novo ao Flow. O desenho fechado em t139u é a referência.
+2. A aba Personagens foi aberta em 27/10 (t138u) e a tentativa 1 não serve. Esses PNG ainda não foram colocados lá.
+3. O José olha `PERS-M.png`, `PERS-F.png` e `ELENCO-frente.png`. Se o traço não servir, muda o script. A regra (sem roupa, um acento) fica.
+4. Expressões e objetos vêm depois. Não gerar a folha inteira antes.
 
-Leitura de canais grandes em 27/10, sem gerar imagem: `docs/pesquisas/canais-que-repetem-o-desenho-20261027.md`. O que se copia é um corpo preso (no Dick Figures, a identidade é a cor do stick figure) e um Short de uma situação. Não se copia tom adulto, choque, nem luta. A próxima frente não é outro parágrafo: é uma imagem de tubos que o José aceite, e só então o Flow varia a cena.
+Leitura de canais grandes em 27/10: `docs/pesquisas/canais-que-repetem-o-desenho-20261027.md`. O que se copia é um corpo preso e um Short de uma situação. Não se copia tom adulto, choque, nem luta.
+
+Fechado em t139u, no desenho do repositório, não numa nova geração do Flow. Sem roupa. Tubo preto, cabeça branca. PERS-M: óculos vermelhos, sem cabelo, mais alto. PERS-F: mais baixa, coque, argola amarela e pinta do lado esquerdo de quem olha. Arquivos: `banco-fichas/personagens/PERS-M.png`, `PERS-F.png` e `ELENCO-frente.png`. O script que regrava é `scripts/visual/frente_stickman.py`. A aba Personagens do Flow não recebeu esses arquivos. Expressões continuam para depois.
 
 ## Fase 4 — Vídeos que já existem no Drive
 

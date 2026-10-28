@@ -2,7 +2,7 @@
 
 Fonte única de "onde estamos". Não repete o ROADMAP: aponta os itens por id. **Atualize este arquivo a cada correção ou pendência resolvida.** O hook pre-commit exige isso quando o commit toca ROADMAP, LACUNAS, DECISOES-LOG ou CHANGELOG, e o `registrar_alteracao` exige isso para `tipo` correcao ou pendencia_resolvida.
 
-Atualizado: 27/10/2026 (pesquisa de canais: o desenho se trava numa imagem, não num parágrafo; JEV-EF segue no ROADMAP) · versão 0.17.5
+Atualizado: 27/10/2026 (t139u: corpo do elenco fechado, sem roupa; JEV-EF segue no ROADMAP) · versão 0.17.6
 
 ## Onde estamos
 - **Produção:** o lote do saldo está em `runtime/lote-saldo/` (um diretório por tema). O EP1002 olhos-da-cara foi reprovado e descartado (`runtime/lote-saldo/_descartado/`), e o tema voltou a `proposto`.
@@ -11,10 +11,10 @@ Atualizado: 27/10/2026 (pesquisa de canais: o desenho se trava numa imagem, não
 - **Documentos (t129u):** `docs/LACUNAS-fluxo.md` só lista o que ainda falta no código. O roster vigente está em `docs/AGENTES.md`. Briefing, checklist pré-E2E, rascunho de SOUL e propostas não aplicadas foram para `docs/_obsoleto/`. As provas do F3-05 continuam em `docs/sdd/` porque o item segue aberto no ROADMAP.
 - **Fluxo (t130u):** o episódio para no storyboard. O NotebookLM entrega roteiro, compliance e SEO, e não gera vídeo. `YOUTUBE_DRY_RUN=true`. Os vídeos de `runtime/lote-saldo/` ficam parados até a etapa de publicação.
 - **Paperclip (t130u):** `paperclipai.service` parado e desabilitado em 27/10. Sem desinstalar e sem apagar dados. `config/paperclip.json` está `parado_proposital`.
-- **Stickman (t133u):** identidade única. Banco de texto em `banco-fichas/` e no Drive `00_Biblia_Visual/banco-fichas`. Sem imagem aprovada. 3D não se pede. Fases em `docs/fases/stickman.md`.
+- **Stickman (t133u, t139u):** identidade única, corpo fechado. Sem roupa. Frente em `banco-fichas/personagens/PERS-M.png` e `PERS-F.png`. Ambiente e objeto seguem em texto. 3D não se pede. Fases em `docs/fases/stickman.md`.
 
 ## Próximo passo
-A frente do PERS-M saiu pessoa com volume (t138u) e o mesmo texto não se repete. A leitura dos canais grandes está em `docs/pesquisas/canais-que-repetem-o-desenho-20261027.md`: o que funciona é um corpo desenhado uma vez. A próxima frente espera uma imagem de tubos que o José aceite, antes de pedir outra geração. Nada está agendado no YouTube. O LOOP e o drop-in do Telegram ficam para depois.
+O corpo do elenco está definido nos PNG de `banco-fichas/personagens/` (t139u). O José olha o traço. Se não servir, muda `scripts/visual/frente_stickman.py`; a regra (sem roupa, um acento) fica. O Flow não redesenha o corpo e a aba Personagens ainda não recebeu esses arquivos. Nada está agendado no YouTube. O LOOP e o drop-in do Telegram ficam para depois.
 
 ## Pendências abertas
 | # | Pendência | Ref. ROADMAP | Dono | Bloqueio |
@@ -23,7 +23,7 @@ A frente do PERS-M saiu pessoa com volume (t138u) e o mesmo texto não se repete
 | P2 | Publicação: worker reiniciado 27/10 11:50 (-03), 0 workflows Running. `YOUTUBE_DRY_RUN=true`. Nada agendado (`agenda_publicacao` com 0 linhas). Envio real desligado. Refresh do app em teste vence ~2/11 21:20 (-03) | F8-01 | agente | sem envio até a produção ativa |
 | P3 | Teste: LOOP por cena vs o atual | Estado 26/10 · Testes pendentes | agente | depois do fluxo de publicação |
 | P4 | **Feito (t108u/t109u).** Juiz por etapa (`gemini_juiz` v1.0.0): pré-produção usa 3.8 Flash; produção (VISUAL e LOOP) usa 4 Argon Baixo. O worker `pqbr-episodio-worker` foi reiniciado com OK do José às 16:57 (-03), e o poller está ativo na fila `episodio-pqbr`, ns `pqbr` | Estado 26/10 · DECISOES-LOG t109u | agente | concluído |
-| P5 | Imagem de referência do elenco. O texto está em `banco-fichas/personagens/`. O asset ainda não existe. A tentativa 1 saiu pessoa (t138u) | t133u · Fase 3 | José | a próxima geração parte de um desenho de tubos aceito por ele; outro parágrafo não trava (pesquisa 27/10) |
+| P5 | Frente do elenco desenhada (t139u). O José olha `PERS-M.png`, `PERS-F.png` e `ELENCO-frente.png`. Ajuste é no script, não numa roupa nova | t139u · Fase 3 | José | a aba Personagens do Flow ainda não recebeu esses arquivos |
 | P6 | **Feito (t130u).** `storyboard_criar` valida o Storyboard 1.2.0, grava a ficha e deixa `pode_gerar_video` false. O episódio para aí. Imagem e vídeo desta etapa não rodam | Estado 27/10 · DECISOES-LOG t130u | agente | concluído |
 | P7 | **Feito (t108u).** O gate VISUAL agora tem `boca_articula_fala`, `corte_oculos_cabeca` e `grotesco` (FichaCena/REGRAS §25), e cada um reprova sozinho. Validado no EP1002 (`loop-gemini-4argon-v2.json`): reprova, com S01 corte+grotesco, S04 corte e S02/S05/S09 boca | Estado 26/10 · CHANGELOG 0.14.0 | agente | concluído |
 | P8 | **Feito (t128u).** As 7 memórias `obsoleto_candidato` do roster antigo de `docs/AGENTES.md` foram apagadas em 27/10 ~08:57 (-03). Bank 884 → 877. Backup fora do git | `docs/operacao/hindsight-descarte-candidatos.md` | agente | concluído |

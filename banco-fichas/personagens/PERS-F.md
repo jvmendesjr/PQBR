@@ -1,27 +1,25 @@
 # PERS-F
 
-Estado: `rascunho_texto`. Imagem: nenhuma. Asset previsto, ainda não gerado: `ASSET_personagem_feminino-v1`.
+Estado: `definido` (t139u). Imagem: `PERS-F.png` e `PERS-F.svg`, 1080×1920, sem letra. Asset: `ASSET_personagem_feminino-v1`.
 
 Elenco do código ímpar. Sem nome no vídeo.
 
 ## Trava
 
-Stickman de tubos grossos e arredondados, cabeça redonda grande, coque simples, argola pequena, pinta acima do lábio, mais baixa que o PERS-M, boca fechada, sem dedos, sem pessoa de cartum.
+Stickman de tubos pretos grossos, cabeça redonda branca, sem roupa, mais baixa que o PERS-M, coque redondo, argola amarela e pinta preta do lado esquerdo de quem olha, sem óculos, boca fechada, sem dedos, sem pessoa de cartum.
 
-## O que já estava no elenco e continua
+## O que está fechado
 
-Argola, pinta, coque como o penteado único. A variação de penteado (rabo, cabelo solto) pausou em 27/10. Outro penteado só com outra ficha aprovada.
+A argola amarela é o único acento. A pinta é preta, pequena, ao lado da boca, no mesmo lado da argola. O coque é um círculo do mesmo tubo, no alto, do lado direito de quem olha. Não vira outro penteado.
 
-Mais baixa que o masculino. Expressão de reação, nunca fala. Não usa óculos.
+Mais baixa, com a mesma cabeça e as pernas mais curtas. Não usa óculos. Expressão de reação, nunca fala.
 
-## O que ficou em aberto de propósito
+A camiseta mostarda do teste de 27/10 não entrou. Roupa não faz parte deste elenco.
 
-Cor de acento da peça chapada. Não escolhi a cor. A imagem do café fraco em 27/10 pediu camiseta mostarda e saiu pessoa de cartum; essa cor não ficou aprovada.
+## Folha
 
-## Folha que a imagem precisa ter
-
-Frente, corpo inteiro, cabeça inteira, fundo liso. Expressões na mesma cabeça, depois que a frente for aceita.
+Frente, corpo inteiro, neste arquivo. Expressões na mesma cabeça ficam para depois. Não gerar outra frente a partir de texto.
 
 ## Proibido
 
-Pele, mão com dedo, cabelo com fio, óculos, texto, marca.
+Pele, roupa, mão com dedo, cabelo com fio, óculos, pinta do outro lado, texto, marca.

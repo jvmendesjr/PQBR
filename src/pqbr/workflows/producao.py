@@ -78,7 +78,7 @@ async def gerar_roteiro_nb(p: PedidoEpisodio) -> RoteiroShort:
     _sim(p.simulacao, "NotebookLM (conta de produção)")
     falas = [f"{p.item.tema}"] + ["E a explicação é mais lógica do que parece, e a gente nem percebe no dia a dia."] * 6 + [CTA]
     bloco = BlocoVisual(estilo=ESTILO_PADRAO_STICKMAN,
-                        personagem="stickman de tubos, óculos redondos vermelhos, boca fechada (simulado)",
+                        personagem="stickman de tubos pretos, sem roupa, óculos redondos vermelhos, boca fechada (simulado)",
                         cenas=[CenaVisual(fala=f, acao="personagem reage", enquadramento="plano médio",
                                           ambiente="cozinha brasileira") for f in falas[:2]])
     return RoteiroShort(episodio_id=p.codigo.lower(), titulo=p.item.tema[:100], falas=falas, tipo_cta="fallback",
