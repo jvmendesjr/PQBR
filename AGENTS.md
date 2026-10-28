@@ -4,7 +4,7 @@
 
 Fonte única de "onde estamos". Não repete o ROADMAP: aponta os itens por id. **Atualize este arquivo a cada correção ou pendência resolvida.** O hook pre-commit exige isso quando o commit toca ROADMAP, LACUNAS, DECISOES-LOG ou CHANGELOG, e o `registrar_alteracao` exige isso para `tipo` correcao ou pendencia_resolvida.
 
-Atualizado: 27/10/2026 (t133u: stickman único; banco de fichas em texto) · versão 0.17.3
+Atualizado: 27/10/2026 (t138u: frente do stickman saiu pessoa; JEV-EF segue no ROADMAP) · versão 0.17.5
 
 ## Onde estamos
 - **Produção:** o lote do saldo está em `runtime/lote-saldo/` (um diretório por tema). O EP1002 olhos-da-cara foi reprovado e descartado (`runtime/lote-saldo/_descartado/`), e o tema voltou a `proposto`.
@@ -16,7 +16,7 @@ Atualizado: 27/10/2026 (t133u: stickman único; banco de fichas em texto) · ver
 - **Stickman (t133u):** identidade única. Banco de texto em `banco-fichas/` e no Drive `00_Biblia_Visual/banco-fichas`. Sem imagem aprovada. 3D não se pede. Fases em `docs/fases/stickman.md`.
 
 ## Próximo passo
-Fase 3: gerar a frente do stickman no Flow (Nano Banana 2 Lite, 9:16, 1K), pela aba Personagens ou Ingredients, a partir da ficha `PERS-F` ou `PERS-M`. Não repetir o prompt de 27/10 que saiu pessoa de cartum. O José olha a imagem antes de ela virar asset. Nada está agendado no YouTube. Logos e a silhueta do mapa: o José disse que estão certos. O LOOP e o drop-in do Telegram ficam para depois.
+A frente do PERS-M foi gerada na aba Personagens e saiu pessoa com volume, em paisagem (t138u). Não está aprovada e o prompt não se repete. O José olha o arquivo `~/.pqbr/episodios/flow-teste/REF_personagem_masculino_imagem_tentativa1.jpg`. Nada está agendado no YouTube. O LOOP e o drop-in do Telegram ficam para depois.
 
 ## Pendências abertas
 | # | Pendência | Ref. ROADMAP | Dono | Bloqueio |
@@ -33,12 +33,9 @@ Fase 3: gerar a frente do stickman no Flow (Nano Banana 2 Lite, 9:16, 1K), pela 
 | P10 | Hindsight conferido 27/10 08:10 (São Paulo): API healthy, banco conectado. A reconsolidação segue automática | Fase Conhecimento | Hindsight (automático) | só conferir de novo se o bank acusar falha |
 | P11 | Merge da branch `feat/f8-01-publicacao-automatica` (já no GitHub) na main | — | José | merge/PR exige OK |
 | P12 | ERR-01: revisar os erros aceitáveis | ERR-01 | agente | depois dos primeiros dias de produção |
-
-## Painel
-Aba **Roadmap** no painel (:8088): Próximos passos, Falta e Feito gerados deste arquivo e do ROADMAP por `scripts/mapa/roadmap.py` (via `gerar_index.py`; o pre-commit regenera quando ROADMAP/ESTADO-ATUAL/mapa mudam). Itens com ☑ (feito) e ☐ (falta/próximos), só símbolo, nada clicável. Só leitura.
-
-## Operacional e persistência (verificado 26/10/2026 18:21 -03)
-pqbr-mcp 0.4.0 (user unit, enabled, Restart=on-failure, linger=yes), hindsight-api (enabled, Restart=always), Docke
+| P13 | Proposta não aplicada: ferramentas só leitura para os agentes PydanticAI, sem MCP interno | F1-05 · t134u | José | sem efeito externo |
+| P14 | Proposta não aplicada: acompanhamento de mudanças (vigia de fallbacks, canário, deriva de contrato, `dev_diagnosticar`). Sem agente novo. O NotebookLM não entra no canário | F6-02 · t135u/t136u | José | registro no worker exige reinício |
+| P15 | **Prioritário.** Efetivar o Jev (`decide()`), item JEV-EF. Chave OpenRouter (JEV-02) só na hora de ligar | RNF-02 · t137u | José | ligar exige reiníc
 
 Fontes canônicas: docs/ESTADO-ATUAL.md (onde estamos), docs/REGRAS.md, docs/DECISOES-LOG.md, docs/ROADMAP.md, docs/LACUNAS-fluxo.md, docs/ARQUITETURA.md, docs/AGENTES.md, docs/mapa/. Em conflito, vale o doc canônico. O briefing do YT-LLM está em docs/_obsoleto/BRIEFING-novo-agente-pqbr.md e não é procedimento.
 
@@ -129,38 +126,38 @@ Histórico, fora do procedimento: docs/_obsoleto/BRIEFING-novo-agente-pqbr.md (h
 
 ## Decisões recentes
 
-## t129u (27/10/2026) — Documentos ativos conferidos; o que não é lacuna saiu
-- José pediu uma verificação dos documentos ativos: caminho citado tem de existir; documento obsoleto vai para `docs/_obsoleto/` para ele descartar depois; lacuna que o código já não tem sai da lista; Paperclip fica só como histórico e como infraestrutura em retirada.
-- Conferido no código, e por isso deixou de ser lacuna: `ReposicaoTemasWorkflow` não usa Paperclip; login da CLI do Paperclip não é passo; `DescartarCadernoTesteWorkflow` e `EpisodioWorkflow` estão no worker do episódio; os três critérios visuais do juiz já reprovam sozinhos (t108u); a legenda extra no pós foi recusada em t435; F4C-04 (login do Camofox) está feito desde t405. As pastas `tests/contratos/`, `tests/replay/`, `tests/integracao/`, `tests/falhas/` e `tests/auditor/` não existem; os testes estão em `tests/unit/`, `tests/workflows/` e `tests/seguranca/`.
-- Continua lacuna, porque o código confirma: o episódio espera sinal de auditor e não chama `auditor_gemini`; `tipo=short` com roteiro segue para gerar o vídeo no NotebookLM; o lote 2510 não tem código `PQBR-EP`; Flow/Vids/Vibes não estão no episódio; falta a activity do storyboard; `NavegadorIdentidade` não é importada por workflow; o mapa de cliques segue vazio. O backup e o canário do ADR-012 não foram conferidos: não entram como feitos.
-- Movidos com `git mv`, sem apagar: roster operacional antigo, briefing do YT-LLM, resumo de stack de 17/10, lições pré-E2E, rascunho de S
+## t138u (27/10/2026) — Frente na aba Personagens, pelo fluxo, e saiu pessoa
+- José pediu a fase 3 e, em seguida, que a geração seguisse o fluxo já fechado: prompt autossuficiente, rótulo fora do texto, manifesto antes de enviar, uma imagem por vez, sem número solto e sem fala no prompt.
+- Aba do Studio continuou aberta. No projeto do Flow de 27/10, o botão Voltar da imagem antiga não aceitou o clique (sem caixa). O voltar do navegador abriu o projeto. Aba Personagens abriu em `.../character`.
+- A tela "Novo personagem" oferecia seis exemplos de gente (excêntrico, profissional, curinga, comum, malvado, fantástico). Não cliquei em nenhum. O modelo estava em Nano Banana 2.1. O menu mostrou Pro, 2 Lite e 2.1. Escolhi 2 Lite. Não havia botão de proporção.
+- Manifesto gravado antes do clique, fora do git: `~/.pqbr/episodios/flow-teste/manifesto-ASSET_personagem_masculino-v1.json`. O prompt não leva o rótulo, nem número, nem aspas, nem verbo de fala. É a trava do PERS-M em inglês: tubos grossos, cabeça redonda, frente, corpo inteiro, cabeça inteira, fundo liso, boca fechada, óculos redondos vermelhos. Sem cor de roupa.
+- A geração mostrou 15% e 49% e depois a imagem. O botão de modelo, nessa tela seguinte, dizia Nano Banana 2.1. Não vi número de crédito. Não afirmo qual dos dois modelos desenhou.
+- O arquivo baixado pela URL da imagem tem 1376×768. Eu abri. É uma pessoa azul, com volume, cabelo preto, óculos redondos vermelhos, mãos com dedos, fundo claro. Não é stickman de tubos. 
 
-## t130u (27/10/2026) — Storyboard no fluxo; NotebookLM sem vídeo; Paperclip parado
-- José: não liga a publicação antes da ordem. Os vídeos já publicados foram para usar saldo da plataforma. Seguir o roadmap, os testes no Camofox e o roteiro. Os outros vídeos ficam parados e entram na publicação quando o fluxo chegar ao YouTube Studio. Commit e push do que for preciso. Efetivar a activity de storyboard. O NotebookLM não gera vídeo: tirar isso dos processos e dos fluxos; o resto (item intelectual: roteiro, direção, SEO) fica. Reajustar o Flow pelo que já está documentado nas extensões, sem inventar seletor. O mapa de cliques nasce quando a tela for usada. Telegram e o teste de LOOP ficam para depois. Consentimento permanente de login: o sistema funciona com as sessões ativas; José só entra se a reautenticação autônoma falhar. Parar um fluxo não desloga. Gasto só o que o contrato da etapa autorizar, com modelo definido. Parar o serviço Paperclip agora, sem apagar; a saída dos documentos ativos fica para quando for deletado.
-- Código: `NotebookLMWorkflow` com `tipo=short` não chama `nlm_gerar_short`, não espera artefato e não gera infográfico. `nlm_gerar_short` levanta `VideoNotebookLMDescartado` antes do CLI. `EpisodioWorkflow` pede o JSON no chat (`nlm_perguntar`) e `storyboard_criar` valida o `Storyboard` 1.2.0, grava `storyboard.json` e devolve `pode_gerar_video` false. Pós, Drive e publicação dry-run continuam no worker e não rodam neste caminho. `src/pqbr/contratos/gasto.p
-
-## t131u (27/10/2026) — Logo depois; gasto do Flow; mapa de cliques enxuto
-- José: a silhueta do mapa do Brasil pode ser resolvida depois da publicação. Ele não lembra se estava tão errado. Avisar para ele verificar antes de liberar (tornar público). Não há publicação agendada: `pqbr.agenda_publicacao` tem 0 linhas. O único arquivo local é o dry-run reprovado `~/.pqbr/publicacao-dryrun/PQBR-EP1002.json`, não enviado. Os logos para ele olhar estão em `branding/overlay/logo-corner-br.png`, `logo-sting.png` e `logo-bug.png`. Eu abri os três. O contorno parece o do Brasil (nordeste saliente, sul afinando). Não comparei com um mapa de referência, então não afirmo que a costa está certa.
-- Gasto: usar o saldo que houver. Imagens no Google Flow são gratuitas e ficam autorizadas, na quantidade que o storyboard pedir. Vídeo gasta o saldo do Flow; acabou, Google Vids; depois Meta Vibes. Contratos `GASTO_FLOW_IMAGEM` e `GASTO_FLOW_VIDEO`.
-- Mapa de cliques: não é necessário como catálogo. A tela aberta já mostra o botão. Manter o JSON só para surpresa (pop-up, botão que mudou), com data. Não depende do José e não se preenche por antecipação.
-- O aviso antes de tornar público entrou em `PublicacaoAgendadaWorkflow`, na etapa `publicando`. Com `YOUTUBE_DRY_RUN=true` esse caminho não roda. Nada enviado.
-- Às 11:50 (-03): 0 workflows `Running`. Reinício só do `pqbr-episodio-worker`, para carregar o aviso. `YOUTUBE_DRY_RUN=true`. Nada enviado.
+## t134u (27/10/2026) — Ferramentas só leitura para agentes PydanticAI [PROPOSTA; NÃO aplicada]
+- Conversa paralela (cliente MCP `cursor-paralelo-mantenedor`). José concordou: o MCP não vira camada interna. Fica só na fronteira com agentes externos. Determinismo e modularidade já vêm do Temporal, dos contratos Pydantic v2 e das portas (t512–t515).
+- Proposta: catálogo só leitura em `src/pqbr/agents/ferramentas.py`; `criar_agente` ganha `ferramentas` filtrado pela `config/politica_papeis.json`; ferramenta nativa do PydanticAI, no processo, sem escrita (ADR-011); limite de chamadas; testes com `TestModel`. O destino do `pqbr-kit` fica para o José.
+- Numeração: esta entrada foi t133u na branch paralela e passou a t134u na junção, porque o stickman já ocupou t133u/0.17.3. Nada de código.
 
 
-## t132u (27/10/2026) — Primeiras imagens no Flow
-- A sessão Google já estava logada no Camofox (aba do YouTube Studio aberta; não desloguei). Abri `https://flow.google.com/` numa aba nova. A home mostrou o selo PRO. Cliquei em "Novo projeto". Apareceu o diálogo "O que há de novo"; cliquei em "Começar".
-- Projeto: `https://flow.google.com/project/e2dacb70-b9d0-4dc7-8b93-e6ac1688a454`, título que a tela deu: "out. 27 - 17:09". Não conferi o fuso desse título.
-- Configurações do agente, como ficaram: confirmar antes de gerar = Sempre; imagem 9:16, quantidade x1, modelo Nano Banana 2 Lite (a tela abriu em Nano Banana 2.1; troquei porque a ajuda pública chama o Lite de modelo sem cobrança — o menu em si não mostrou preço). Vídeo ficou no padrão da tela, Omni 1.1 Flash, 16:9, e não foi usado.
-- Duas imagens, por volta de 21:15 (-03). As duas fichas dizem "Criação: 27 de out. de 2026", Nano Banana 2 Lite, 9:16. Nenhuma ficha mostrou número de crédito. Não afirmo que o saldo não moveu: só que a tela não mostrou cobrança. "Confirmar antes de gerar = Sempre" não mostrou diálogo antes de nenhuma das duas.
-- Arquivos (fora do git): `~/.pqbr/episodios/flow-teste/PQBR-EP1003-c01-flow-1k.jpg` e `PQBR-EP1003-c01b-flow-1k.jpg`. Os dois têm 768×1376. O menu Baixar oferecia 1K Tamanho original, 2K Aprimorada e 4K Aprimorada (4K desabilitado). Baixei só o 1K.
-- O que a imagem mostra, e o que não mostra. Pedi stickman de tubos, elenco feminino do EP1003 (coque, argola, pinta, camiseta mostarda, 
+## t135u (27/10/2026) — Acompanhamento de mudanças [PROPOSTA; NÃO aplicada]
+- Levantamento ao vivo em 27/10 ~11:50 (-03): `VigiaAtualizacoesWorkflow` agendado sexta 08:00, 0 execuções (primeira prevista 30/10); `AcessosWorkflow` de hora em hora cobre queda de sessão, não mudança de tela; `CorrecaoAutonomaWorkflow` com 0 execuções; `verificar_mapa.py` acusa diagrama desatualizado. Não há detecção de mudança de interface, de degradação de fallback nem de deriva de contrato.
+- Sem agente novo. Observador mede, Dev propõe, José aplica. Itens, nesta ordem: vigia de fallbacks; `dev_diagnosticar` no fim dos vigias, com aviso e `aprovacao_jose`; deriva de contrato por fixture (t515); canário de interface no Camofox sobre o `mapa_cliques.json`; rascunho de diff do mapa pelo Dev; `CorrecaoAutonoma` só para sessão e fila.
+- Fora: `pip install` automático, seletor ou diagrama editado por agente, MCP nesta camada. Nada aplicado.
 
-## t133u (27/10/2026) — Stickman único; banco de fichas em texto
-- José: stickman 100%. Fichas de personagem, ambiente e objeto como referência do storyboard. Buscar a estrutura e guardar num banco, também no Drive. 3D sai da fase atual; os vídeos dessa experiência ficam no Drive como desenvolvimento, sem apagar. Tirar o cartum genérico dos documentos desta fase. O Drive já é ferramenta da mesma conta Google, não um sistema novo. Organizar em fases.
-- Na mesma noite, antes desta decisão, ele disse que os logotipos e a silhueta do mapa do Brasil estão certos. Não reabri os PNG aqui. O aviso de olhar a silhueta antes de tornar público deixa de ser pendência.
-- Estrutura lida em 27/10: Wikipedia "Model sheet" e o guia DreamDrive de Ingredients do Flow (15/10/2026). Recorte em `docs/pesquisas/fichas-stickman-estrutura-20261027.md`. Não achei um padrão brasileiro de ficha de stickman. A folha da PQBR fica curta: frente, expressão, um acessório, uma cor. Giro completo e dedos ficam de fora.
-- Banco: `banco-fichas/`, estado `rascunho_texto`. PERS-M (óculos redondos vermelhos), PERS-F (coque, argola, pinta, mais baixa). Cor de roupa não foi escolhida. A bíblia v002 (Zé, Lia, Valdemar, Sandra) não volta. Roupa nova por episódio e penteado variável, do t78u/t79u, ficam pausados porque redescrever a roupa foi o que derrubou a consistência.
-- Código: `ESTILO_PADRAO_STICKMAN`. `BlocoVisual` 2.0.0 recusa estilo sem "stickman" e recusa `pedido_3d_ou_realista`. O storyboard força esse estilo
+
+## t136u (27/10/2026) — Sem agente novo [APROVADO]; NotebookLM só pela CLI
+- José [APROVADO]: não entra agente novo para acompanhar mudanças.
+- Nenhum documento vigente nem o código usa o NotebookLM pela web. É a CLI `notebooklm-py`, com a sessão Google do Camofox. O NotebookLM sai do canário de interface e fica na deriva de contrato.
+
+
+## t137u (27/10/2026) — Jev: oráculo, e item prioritário no ROADMAP [APROVADO José]
+- Varredura: `decide()` não existe em `src/` nem em `scripts/`. Os contratos de saída existem. `CorrecaoAutonomaWorkflow` levanta `EmConstrucao`. `TYPESAFE_API_KEY` está em `~/.pqbr/worker.env` e nenhum processo da PQBR a lê. A CLI `jev` 0.19.0, fora da PQBR, responde.
+- Nenhum documento contradiz o papel de oráculo. REGRAS §7 é esse papel. A frase "o Jev decide refazer/trocar/chamar José" entrega `DecisaoPublicacao` e quem age é o código. Verificação visual é do juiz Gemini; verificação estruturada de uma intervenção é do Jev (`VerificacaoCorrecao`, t356).
+- José [APROVADO]: efetivar o Jev. Item prioritário **JEV-EF** no ROADMAP, junto com F1-05 (t134u) e F6-02 (t135u/t136u). A chave OpenRouter (JEV-02) entra no JEV-EF e só é pedida ao ligar.
+- No canário, o Jev escolhe um `ref` da lista que o Camofox observou, ou `abstain`. Não escreve seletor nem vê imagem.
+- Junção: estas quatro entradas foram escritas na branch `cursor/proposta-ferramentas-agentes-b9f6` e reaplicadas em cima de `57f8b97` (stickman, t133u). O stickman, o `banco-fichas/` e o código desse commit não foram alterados.
+
 
 ## Fase atual do ROADMAP
 

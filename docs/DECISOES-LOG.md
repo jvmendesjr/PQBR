@@ -736,6 +736,15 @@ NÃO CABE:
 - Envio do banco de texto para `PQBR/00_Biblia_Visual/banco-fichas`, id `1JcDUFDEdiQmDtHX_4c57lgLFcM6-yoT4`. O cliente conferiu md5 e tamanho. Nada apagado. Os pacotes com hash antigo no Drive não foram reescritos. `pacote_garantir` não rodou: o pacote ativo no Postgres continua o hash anterior até a próxima chamada.
 - Não feito: imagem no Flow; aba Personagens; mover vídeo; catálogo `visual_assets`; publicar. `YOUTUBE_DRY_RUN` segue true. Fases: `docs/fases/stickman.md`. A próxima é a frente do stickman, para o José olhar.
 
+## t138u (27/10/2026) — Frente na aba Personagens, pelo fluxo, e saiu pessoa
+- José pediu a fase 3 e, em seguida, que a geração seguisse o fluxo já fechado: prompt autossuficiente, rótulo fora do texto, manifesto antes de enviar, uma imagem por vez, sem número solto e sem fala no prompt.
+- Aba do Studio continuou aberta. No projeto do Flow de 27/10, o botão Voltar da imagem antiga não aceitou o clique (sem caixa). O voltar do navegador abriu o projeto. Aba Personagens abriu em `.../character`.
+- A tela "Novo personagem" oferecia seis exemplos de gente (excêntrico, profissional, curinga, comum, malvado, fantástico). Não cliquei em nenhum. O modelo estava em Nano Banana 2.1. O menu mostrou Pro, 2 Lite e 2.1. Escolhi 2 Lite. Não havia botão de proporção.
+- Manifesto gravado antes do clique, fora do git: `~/.pqbr/episodios/flow-teste/manifesto-ASSET_personagem_masculino-v1.json`. O prompt não leva o rótulo, nem número, nem aspas, nem verbo de fala. É a trava do PERS-M em inglês: tubos grossos, cabeça redonda, frente, corpo inteiro, cabeça inteira, fundo liso, boca fechada, óculos redondos vermelhos. Sem cor de roupa.
+- A geração mostrou 15% e 49% e depois a imagem. O botão de modelo, nessa tela seguinte, dizia Nano Banana 2.1. Não vi número de crédito. Não afirmo qual dos dois modelos desenhou.
+- O arquivo baixado pela URL da imagem tem 1376×768. Eu abri. É uma pessoa azul, com volume, cabelo preto, óculos redondos vermelhos, mãos com dedos, fundo claro. Não é stickman de tubos. Não é 9:16.
+- Não cliquei em Concluir, Retrato, Criar corpo, nem troquei o nome "Personagem sem nome". Não é `ASSET_personagem_masculino-v1`. Cópia local: `~/.pqbr/episodios/flow-teste/REF_personagem_masculino_imagem_tentativa1.jpg`. O mesmo prompt não se repete. `YOUTUBE_DRY_RUN` segue true. Nada enviado.
+
 ## t134u (27/10/2026) — Ferramentas só leitura para agentes PydanticAI [PROPOSTA; NÃO aplicada]
 - Conversa paralela (cliente MCP `cursor-paralelo-mantenedor`). José concordou: o MCP não vira camada interna. Fica só na fronteira com agentes externos. Determinismo e modularidade já vêm do Temporal, dos contratos Pydantic v2 e das portas (t512–t515).
 - Proposta: catálogo só leitura em `src/pqbr/agents/ferramentas.py`; `criar_agente` ganha `ferramentas` filtrado pela `config/politica_papeis.json`; ferramenta nativa do PydanticAI, no processo, sem escrita (ADR-011); limite de chamadas; testes com `TestModel`. O destino do `pqbr-kit` fica para o José.

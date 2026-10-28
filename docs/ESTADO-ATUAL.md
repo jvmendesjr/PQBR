@@ -2,7 +2,7 @@
 
 Fonte única de "onde estamos". Não repete o ROADMAP: aponta os itens por id. **Atualize este arquivo a cada correção ou pendência resolvida.** O hook pre-commit exige isso quando o commit toca ROADMAP, LACUNAS, DECISOES-LOG ou CHANGELOG, e o `registrar_alteracao` exige isso para `tipo` correcao ou pendencia_resolvida.
 
-Atualizado: 27/10/2026 (t137u: JEV-EF no ROADMAP; stickman único segue o t133u) · versão 0.17.4
+Atualizado: 27/10/2026 (t138u: frente do stickman saiu pessoa; JEV-EF segue no ROADMAP) · versão 0.17.5
 
 ## Onde estamos
 - **Produção:** o lote do saldo está em `runtime/lote-saldo/` (um diretório por tema). O EP1002 olhos-da-cara foi reprovado e descartado (`runtime/lote-saldo/_descartado/`), e o tema voltou a `proposto`.
@@ -14,7 +14,7 @@ Atualizado: 27/10/2026 (t137u: JEV-EF no ROADMAP; stickman único segue o t133u)
 - **Stickman (t133u):** identidade única. Banco de texto em `banco-fichas/` e no Drive `00_Biblia_Visual/banco-fichas`. Sem imagem aprovada. 3D não se pede. Fases em `docs/fases/stickman.md`.
 
 ## Próximo passo
-Fase 3: gerar a frente do stickman no Flow (Nano Banana 2 Lite, 9:16, 1K), pela aba Personagens ou Ingredients, a partir da ficha `PERS-F` ou `PERS-M`. Não repetir o prompt de 27/10 que saiu pessoa de cartum. O José olha a imagem antes de ela virar asset. Nada está agendado no YouTube. Logos e a silhueta do mapa: o José disse que estão certos. O LOOP e o drop-in do Telegram ficam para depois.
+A frente do PERS-M foi gerada na aba Personagens e saiu pessoa com volume, em paisagem (t138u). Não está aprovada e o prompt não se repete. O José olha o arquivo `~/.pqbr/episodios/flow-teste/REF_personagem_masculino_imagem_tentativa1.jpg`. Nada está agendado no YouTube. O LOOP e o drop-in do Telegram ficam para depois.
 
 ## Pendências abertas
 | # | Pendência | Ref. ROADMAP | Dono | Bloqueio |

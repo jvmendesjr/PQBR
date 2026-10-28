@@ -5,6 +5,10 @@ Versionamento SemVer (MAJOR.MINOR.PATCH) a partir de t510. Versão do pacote can
 
 
 
+## [0.17.5] — 2026-10-27
+### Operação
+- Frente do personagem masculino no Flow, pela aba Personagens, com manifesto gravado antes (t138u). A imagem saiu pessoa com volume, 1376×768. Não virou asset. O prompt não se repete.
+
 ## [0.17.4] — 2026-10-27
 ### Documentação
 - Juntada da conversa paralela, renumerada porque t133u/0.17.3 já são o stickman. t134u: ferramentas só leitura para os agentes, sem MCP interno. t135u: acompanhamento de mudanças sem agente novo. t136u: José aprovou sem agente novo; o NotebookLM é só CLI e sai do canário. t137u: Jev efetivo como item prioritário JEV-EF. Nenhum código destas propostas foi alterado; o stickman e o banco de fichas ficam como estão.

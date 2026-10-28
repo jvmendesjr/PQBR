@@ -23,6 +23,20 @@
       "onde": "Configurações do agente, antes das duas imagens",
       "observado_em": "2026-10-27",
       "acao": "a imagem saiu sem um botão de confirmação na tela"
+    },
+    {
+      "sitio": "google-flow",
+      "elemento": "Novo personagem abre em Nano Banana 2.1; o menu tem Pro, Lite e 2.1",
+      "onde": "tela Personagens, botão Selecionar família de modelos",
+      "observado_em": "2026-10-27",
+      "acao": "Lite foi escolhido antes de gerar; depois da imagem o mesmo botão mostrava 2.1"
+    },
+    {
+      "sitio": "google-flow",
+      "elemento": "Novo personagem não mostra controle de proporção",
+      "onde": "tela Personagens; a imagem saiu 1376x768",
+      "observado_em": "2026-10-27",
+      "acao": "não houve botão 9:16 para clicar"
     }
   ]
 }

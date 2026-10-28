@@ -28,10 +28,10 @@ Os pacotes `pacote-c913c002c9be` e `pacote-17b4cf4f727f` continuam como estavam:
 
 ## Fase 3 — Imagem de referência
 
-Ainda não. É o próximo trabalho de produção.
+Tentativa 1 feita em 27/10, seguindo o fluxo (manifesto antes, bloco único sem número e sem fala, rótulo só no arquivo, Lite escolhido no menu, exemplos humanos da tela não usados). A imagem saiu pessoa com volume, 1376×768, mãos com dedos. Não é a frente. Não virou asset. O mesmo prompt não se repete. Detalhe no DECISOES-LOG t138u. A aba Personagens foi aberta; a imagem não foi concluída como personagem.
 
 1. Gerar no Flow, imagem, Nano Banana 2 Lite, 9:16, só 1K. Imagem está autorizada (t131u). Não repetir o prompt de 27/10 que saiu pessoa.
-2. Abrir a aba Personagens, ou Ingredients, e prender a frente aprovada. Essa aba foi vista na barra em 27/10 e não foi aberta.
+2. A aba Personagens foi aberta em 27/10 (t138u). A frente que sair stickman, e que o José aceitar, é que fica presa. A tentativa 1 não serve.
 3. O José olha a frente. Se servir, grava como `ASSET_personagem_masculino-v1` ou `feminino-v1` e a ficha muda de estado. Se não servir, a ficha continua rascunho.
 4. Expressões e objetos vêm depois da frente. Não gerar a folha inteira antes.
 
