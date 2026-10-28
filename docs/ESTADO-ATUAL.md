@@ -2,7 +2,7 @@
 
 Fonte única de "onde estamos". Não repete o ROADMAP: aponta os itens por id. **Atualize este arquivo a cada correção ou pendência resolvida.** O hook pre-commit exige isso quando o commit toca ROADMAP, LACUNAS, DECISOES-LOG ou CHANGELOG, e o `registrar_alteracao` exige isso para `tipo` correcao ou pendencia_resolvida.
 
-Atualizado: 27/10/2026 (t131u: logo não bloqueia; gasto do Flow; mapa de cliques só para surpresa) · versão 0.17.1
+Atualizado: 27/10/2026 (t132u: duas imagens no Flow; stickman não saiu) · versão 0.17.2
 
 ## Onde estamos
 - **Produção:** o lote do saldo está em `runtime/lote-saldo/` (um diretório por tema). O EP1002 olhos-da-cara foi reprovado e descartado (`runtime/lote-saldo/_descartado/`), e o tema voltou a `proposto`.
@@ -13,7 +13,7 @@ Atualizado: 27/10/2026 (t131u: logo não bloqueia; gasto do Flow; mapa de clique
 - **Paperclip (t130u):** `paperclipai.service` parado e desabilitado em 27/10. Sem desinstalar e sem apagar dados. `config/paperclip.json` está `parado_proposital`.
 
 ## Próximo passo
-Teste de imagem no Google Flow pelo Camofox. Imagem é gratuita e está autorizada (t131u). Vídeo só no saldo que houver; acabou, Google Vids; depois Meta Vibes. Nada está agendado no YouTube. Antes de tornar um vídeo público, avisar o José para olhar a silhueta do mapa no logo. O LOOP e o drop-in do Telegram ficam para depois.
+Não repetir o mesmo prompt no Flow. As duas imagens de 27/10 ~21:15 (-03) estão em `~/.pqbr/episodios/flow-teste/` e saíram cartum de pessoa, não stickman de tubos. O próximo teste é outra rota na mesma tela (aba Personagens), ainda sem vídeo. Nada está agendado no YouTube. Antes de tornar um vídeo público, avisar o José para olhar a silhueta do mapa no logo. O LOOP e o drop-in do Telegram ficam para depois.
 
 ## Pendências abertas
 | # | Pendência | Ref. ROADMAP | Dono | Bloqueio |

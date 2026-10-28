@@ -214,7 +214,7 @@ Precisam do José: F4C-05, F4C-06, F4C-07. F4C-04 já foi feito (t405). F4C-01..
 
 ## Fase 4V: geração de vídeo em série pelo navegador (t529) — storyboard → vídeo, sem extensões
 Ref.: `docs/pesquisas/PESQUISA-extensoes-geracao-em-serie.md` (leitura liberada, t530), ADR-012, t517 (cadeia), t529 (HOLD). Cada passo que abre Flow, Vids ou Vibes ou gasta cota tem portão do José.
-- [ ] **R1 · Estudar e mapear a UI** (Flow, Vids, Vibes): modais, ícones, campos, sequência de cliques e regras por modelo → `PlatformProfile` versionado (snapshots do Camofox, sem gerar). Obs: portão José para abrir as UIs.
+- [ ] **R1 · Estudar e mapear a UI** (Flow, Vids, Vibes): modais, ícones, campos, sequência de cliques e regras por modelo → `PlatformProfile` versionado (snapshots do Camofox). Obs: 27/10 (t132u) o Flow foi aberto e duas imagens saíram (Nano Banana 2 Lite, 9:16). Não há PlatformProfile. Vids e Vibes não foram abertos. O checkbox segue aberto.
 - [ ] **R2 · Contratos** `CenaStoryboard`, `ManifestoSerie`, `ResultadoCena`, `PedidoDecisaoVideo` (VERSOES 1.0.0) + regra de nome `<ep>_c<NN>_<tipo>_<modelo>_<v>` + testes.
 - [ ] **R3 · Adaptador Flow** (`GeradorVideo` sobre `NavegadorIdentidade`): storyboard de imagens em série → vídeo por cena (start frame/chain); concorrência 1, ritmo humano, falha rápida no drift. Piloto de 1 cena antes de 5 a 7.
 - [ ] **R4 · Adaptador Google Vids** (rota 2), mapeado do zero (não há extensão de referência).

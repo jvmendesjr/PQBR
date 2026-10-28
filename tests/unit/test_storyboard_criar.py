@@ -57,6 +57,7 @@ def test_gasto_desta_etapa():
     assert GASTO_STORYBOARD.meio == "chat_caderno"
     assert GASTO_VIDEO_NLM.pode_gastar is False and GASTO_IMAGEM_NLM.pode_gastar is False
     assert GASTO_FLOW_IMAGEM.pode_gastar and GASTO_FLOW_IMAGEM.meio == "imagem"
+    assert "Nano Banana 2 Lite" in GASTO_FLOW_IMAGEM.deterministico
     assert GASTO_FLOW_VIDEO.pode_gastar and "Vids" in GASTO_FLOW_VIDEO.deterministico
 
 

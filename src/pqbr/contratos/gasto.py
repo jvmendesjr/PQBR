@@ -67,8 +67,8 @@ GASTO_FLOW_IMAGEM = AutorizacaoGasto(
     modelo="google-flow",
     pode_gastar=True,
     meio="imagem",
-    deterministico="imagens do Flow são gratuitas (t131u); sem teto de quantidade para o storyboard",
-    agente="gera as imagens das fichas; não troca para um modelo pago de imagem",
+    deterministico="imagens do Flow são gratuitas (t131u). Em 27/10 a tela gerou com Nano Banana 2 Lite, 9:16, e a ficha não mostrou crédito (t132u). Sem teto para o storyboard",
+    agente="não troca para vídeo nem para 2K/4K Aprimorada; se sair pessoa em vez de stickman, não repete o mesmo texto",
 )
 
 GASTO_FLOW_VIDEO = AutorizacaoGasto(

@@ -4,7 +4,7 @@
 
 Fonte única de "onde estamos". Não repete o ROADMAP: aponta os itens por id. **Atualize este arquivo a cada correção ou pendência resolvida.** O hook pre-commit exige isso quando o commit toca ROADMAP, LACUNAS, DECISOES-LOG ou CHANGELOG, e o `registrar_alteracao` exige isso para `tipo` correcao ou pendencia_resolvida.
 
-Atualizado: 27/10/2026 (t131u: logo não bloqueia; gasto do Flow; mapa de cliques só para surpresa) · versão 0.17.1
+Atualizado: 27/10/2026 (t132u: duas imagens no Flow; stickman não saiu) · versão 0.17.2
 
 ## Onde estamos
 - **Produção:** o lote do saldo está em `runtime/lote-saldo/` (um diretório por tema). O EP1002 olhos-da-cara foi reprovado e descartado (`runtime/lote-saldo/_descartado/`), e o tema voltou a `proposto`.
@@ -15,7 +15,7 @@ Atualizado: 27/10/2026 (t131u: logo não bloqueia; gasto do Flow; mapa de clique
 - **Paperclip (t130u):** `paperclipai.service` parado e desabilitado em 27/10. Sem desinstalar e sem apagar dados. `config/paperclip.json` está `parado_proposital`.
 
 ## Próximo passo
-Teste de imagem no Google Flow pelo Camofox. Imagem é gratuita e está autorizada (t131u). Vídeo só no saldo que houver; acabou, Google Vids; depois Meta Vibes. Nada está agendado no YouTube. Antes de tornar um vídeo público, avisar o José para olhar a silhueta do mapa no logo. O LOOP e o drop-in do Telegram ficam para depois.
+Não repetir o mesmo prompt no Flow. As duas imagens de 27/10 ~21:15 (-03) estão em `~/.pqbr/episodios/flow-teste/` e saíram cartum de pessoa, não stickman de tubos. O próximo teste é outra rota na mesma tela (aba Personagens), ainda sem vídeo. Nada está agendado no YouTube. Antes de tornar um vídeo público, avisar o José para olhar a silhueta do mapa no logo. O LOOP e o drop-in do Telegram ficam para depois.
 
 ## Pendências abertas
 | # | Pendência | Ref. ROADMAP | Dono | Bloqueio |
@@ -40,7 +40,7 @@ Aba **Roadmap** no painel (:8088): Próximos passos, Falta e Feito gerados deste
 pqbr-mcp 0.4.0 (user unit, enabled, Restart=on-failure, linger=yes), hindsight-api (enabled, Restart=always), Docker DB/Temporal (`unless-stopped`), worker enabled. Comando de checagem e detalhes: `docs/operacao/onboarding-agente-externo.md` § Operacional e persistência.
 
 ## Como atualizar
-Resolveu ou corrigiu algo: tire a linha da tabela (ou mude o bloqueio), ajuste "Pró
+Resolveu ou corrigiu algo:
 
 Fontes canônicas: docs/ESTADO-ATUAL.md (onde estamos), docs/REGRAS.md, docs/DECISOES-LOG.md, docs/ROADMAP.md, docs/LACUNAS-fluxo.md, docs/ARQUITETURA.md, docs/AGENTES.md, docs/mapa/. Em conflito, vale o doc canônico. O briefing do YT-LLM está em docs/_obsoleto/BRIEFING-novo-agente-pqbr.md e não é procedimento.
 
@@ -118,6 +118,7 @@ Histórico, fora do procedimento: docs/_obsoleto/BRIEFING-novo-agente-pqbr.md (h
 - **Saldo e cliques (t130u, ajustado t131u):** os vídeos já prontos ficam parados até a etapa de publicação no YouTube Studio. Envio real continua desligado. Não inventar seletor. O arquivo `config/mapa_cliques.json` não é catálogo: a tela do Camofox manda. O arquivo só anota surpresa, com data.
 - **Logo (t131u):** a silhueta do mapa do Brasil não bloqueia geração nem subida. Antes de tornar público, avisar o José para ele olhar o logo. A correção do desenho pode ficar para depois.
 - **Gasto visual (t131u):** imagem no Google Flow é gratuita e pode ser gerada na quantidade que o storyboard pedir. Vídeo gasta o saldo que houver no Flow; acabou, Google Vids; depois, Meta Vibes.
+- **Flow, primeira tela (t132u) [VERIFICADO]:** em 27/10 a sessão já logada abriu `https://flow.google.com/`. Duas imagens estáticas, modelo Nano Banana 2 Lite, 9:16, 768×1376. A ficha da imagem não mostrou crédito. O pedido de stickman de tubos saiu cartum de pessoa, nas duas. O líquido claro só apareceu na segunda. O menu Baixar oferece 2K e 4K; só o 1K original foi baixado. Vídeo não foi gerado. O episódio ainda não chama o Flow. Não repetir o mesmo prompt.
 - **Honestidade (t126u, José):** o agente diz o que viu e o que não viu. Não inventa seletor, número ou resultado para a conta fechar. Se uma ideia do José não se sustenta, ou só aumenta o sistema, o agente diz isso antes de construir. Vale para todos os papéis e para o agente externo no MCP.
 - **Decisão nova:** entra no `DECISOES-LOG.md` (tNNN) **e** aqui, no mesmo commit. Se este arquivo divergir do log, vale a entrada mais nova do log e este arquivo é corrigido.
 - **Legenda:** [APROVADO] decisão do José · [VERIFICADO] testado/visto na fonte · [HIPÓTESE] a confirmar antes de construir o que depende dela · EM CONSTRUÇÃO — aguardando José.
@@ -126,17 +127,9 @@ Histórico, fora do procedimento: docs/_obsoleto/BRIEFING-novo-agente-pqbr.md (h
 - **Atualização 11/10 (t384–t394), prevalece sobre qualquer trecho abaixo que diga o contrário:**
   1. **Estratégia:** a entrega à core-eng foi abolida; o jr constrói a PQBR **no Paperclip** (t394). **[SUPERADO por ADR-011/t510 e t536:** agentes em PydanticAI nas activities do Temporal; o Paperclip fica **parado e desabilitado** até a nova arquitetura ser validada, e só depois é desinstalado.**]** A ENTREGA está em `arquivo/`. A equipe vigente e o mapa @prod-* → agentes estão em `AGENTES.md` (§3 e §11).
   2. **Autonomia/proatividade (t384, t390):** a empresa opera semanas ou meses sem o José. Agentes aplicam sozinhos dentro de faixas e playbooks; o José só vê no relatório. Ainda exigem o José: excluir/rejeitar/banir; voltar a público vídeo do item 5 ou recorrer ao YouTube; gastar dinheiro; login manual pelo noVNC ou 2FA (só depois de esgotada a reautenticação autônoma, item 11); mudar regra canônica; segredos e infraestrutura.
-  3. **Equipe:** 14 agentes já contratados (AGENTES.md §2), incluindo Observador, Guardião de Segurança e Dev Revisor (t390, t392).
-  4. **Contratação (t392):** sem teto de agentes; só com sugestão do Diretor, do dono da trilha ou do José; o Diretor executa, sem aprovação do board.
-  5. **Runtime (t392):** os agentes usam modelos do **9router** pelos adapters `process` (texto) e `opencode_local` (ferramenta). Nenhum perfil Hermes além do `pqbr`, que é só o canal do José para o Diretor. Ferramentas = kit PQBR (Temporal, Camofo
+  3. **Equipe:** 14 agentes já contratados (AGENTES.md §2), inclui
 
 ## Decisões recentes
-
-## t127u (27/10/2026) — Diagrama 11 alinhado; o que não foi feito nas pendências
-- José pediu para prosseguir com os ajustes das pendências. Conferido às 08:10 (São Paulo): `pqbr-episodio-worker` ativo desde 26/10 22:06 (Fortaleza), `NRestarts=0`; `pqbr-mcp` 0.4.0 no ar; Hindsight `healthy` com banco conectado.
-- O diagrama 11 ainda dizia que o worker não tinha sido reiniciado, que a migração 0020 faltava e que as chaves do YouTube não estavam no processo. Isso já era falso desde t109u e t123u. Corrigido. O código de t124u–t126u continua fora desse processo até o próximo reinício.
-- Não feito, de propósito: reiniciar worker ou `pqbr-mcp`; envio ao YouTube; apagar as 7 memórias (a revisão recomenda apagar: são o roster antigo do AGENTES.md; o OK continua necessário); merge na main; LOOP por cena (a lacuna manda não executar agora); imagens pagas do elenco; activity do Storyboard. Nada enviado.
-
 
 ## t128u (27/10/2026) — Worker e MCP reiniciados; 7 memórias apagadas
 - José: "Tem meu ok. Só não vou poder ver os vídeos agora. Continue para progredir." Esse OK cobre o reinício dos serviços e o apagamento das 7 memórias que estavam parados à espera dele. Não cobre envio ao YouTube, gasto com imagens, o teste de LOOP por cena, o merge na main, nem ver os vídeos no lugar dele.
@@ -162,6 +155,14 @@ Histórico, fora do procedimento: docs/_obsoleto/BRIEFING-novo-agente-pqbr.md (h
 - O aviso antes de tornar público entrou em `PublicacaoAgendadaWorkflow`, na etapa `publicando`. Com `YOUTUBE_DRY_RUN=true` esse caminho não roda. Nada enviado.
 - Às 11:50 (-03): 0 workflows `Running`. Reinício só do `pqbr-episodio-worker`, para carregar o aviso. `YOUTUBE_DRY_RUN=true`. Nada enviado.
 
+
+## t132u (27/10/2026) — Primeiras imagens no Flow
+- A sessão Google já estava logada no Camofox (aba do YouTube Studio aberta; não desloguei). Abri `https://flow.google.com/` numa aba nova. A home mostrou o selo PRO. Cliquei em "Novo projeto". Apareceu o diálogo "O que há de novo"; cliquei em "Começar".
+- Projeto: `https://flow.google.com/project/e2dacb70-b9d0-4dc7-8b93-e6ac1688a454`, título que a tela deu: "out. 27 - 17:09". Não conferi o fuso desse título.
+- Configurações do agente, como ficaram: confirmar antes de gerar = Sempre; imagem 9:16, quantidade x1, modelo Nano Banana 2 Lite (a tela abriu em Nano Banana 2.1; troquei porque a ajuda pública chama o Lite de modelo sem cobrança — o menu em si não mostrou preço). Vídeo ficou no padrão da tela, Omni 1.1 Flash, 16:9, e não foi usado.
+- Duas imagens, por volta de 21:15 (-03). As duas fichas dizem "Criação: 27 de out. de 2026", Nano Banana 2 Lite, 9:16. Nenhuma ficha mostrou número de crédito. Não afirmo que o saldo não moveu: só que a tela não mostrou cobrança. "Confirmar antes de gerar = Sempre" não mostrou diálogo antes de nenhuma das duas.
+- Arquivos (fora do git): `~/.pqbr/episodios/flow-teste/PQBR-EP1003-c01-flow-1k.jpg` e `PQBR-EP1003-c01b-flow-1k.jpg`. Os dois têm 768×1376. O menu Baixar oferecia 1K Tamanho original, 2K Aprimorada e 4K Aprimorada (4K desabilitado). Baixei só o 1K.
+- O que a imagem mostra, e o que não mostra. Pedi stickman de tubos, elenco feminino do EP1003 (coque, argola, pinta, camiseta mostarda, 
 
 ## Fase atual do ROADMAP
 
@@ -192,16 +193,16 @@ A tabela de 12/10 que bloqueava o fluxo no login da CLI do Paperclip foi para `d
 1. **Auditor no episódio.** `EpisodioWorkflow` para na ficha e não espera `veredito_auditor` (t130u). O sinal continua registrado e não é chamado. Não chama `auditor_gemini` nem `auditor_loop_gemini`. A activity `auditor_gemini` está no worker da fila `camofox-pqbr`. O script `scripts/e2e/auditor_gemini_ep.py` ainda existe. Os critérios `boca_articula_fala`, `corte_oculos_cabeca` e `grotesco` já reprovam sozinhos (t108u); isso não falta.
 2. **Fechado (t130u).** `tipo=short` não gera vídeo. `nlm_gerar_short` recusa antes do CLI. O episódio segue para roteiro, SEO e `storyboard_criar`.
 3. **Códigos do lote 2510.** Os prontos em `docs/pesquisas/lote-2510/` não têm `PQBR-EP`. Sem código não há `drive_enviar` nem episódio no Postgres. Quem define os códigos é o José.
-4. **Vídeo em série (Fase 4V).** O episódio para na ficha e não baixa vídeo do NotebookLM (t130u). Flow, Vids e Vibes continuam fora do código. HOLD das três rotas está decidido (t529) e não implementado. O mapa de cliques segue vazio.
-5. **Imagens do storyboard.** A activity `storyboard_criar` existe e grava a ficha com `imagens_revisadas` false. Falta gerar e revisar as imagens. As referências do elenco são pagas e o contrato desta etapa não autoriza esse gasto.
+4. **Vídeo em série (Fase 4V).** O episódio para na ficha e não baixa vídeo do NotebookLM (t130u). Flow, Vids e Vibes continuam fora do código. Em 27/10 o Flow foi aberto à mão (t132u): duas imagens, nenhum vídeo. HOLD das três rotas está decidido (t529) e não implementado. O mapa de cliques só tem as três surpresas dessa tela.
+5. **Imagens do storyboard.** A activity `storyboard_criar` grava a ficha com `imagens_revisadas` false e não gera imagem. O teste manual (t132u) fez duas imagens no Flow; as duas saíram cartum de pessoa, não stickman de tubos. As referências pagas do elenco seguem fora do contrato.
 6. **Navegador.** `NavegadorIdentidade` está em `src/pqbr/motores/navegador.py`. Nenhum workflow importa essa porta. O backup diário e o canário do ADR-012 não foram conferidos nesta passagem: não entram como feitos nem como lacuna confirmada.
-7. **Publicação, o que ainda falta.** O envio real está desligado de propósito (`YOUTUBE_DRY_RUN=true`) até a produção ativa. O roteiro de cliques do Studio não foi visto. `config/mapa_cliques.json` está vazio. O worker do episódio não tem o drop-in `telegram.conf`. O resto dessa etapa (chaves, agenda, registro no worker, fallback do refresh) está no ar desde 27/10 08:56 (-03).
+7. **Publicação, o que ainda falta.** O envio real está desligado de propósito (`YOUTUBE_DRY_RUN=true`) até a produção ativa. O roteiro de cliques do Studio não foi visto. `config/mapa_cliques.json` tem só surpresas do Flow (t132u), não um roteiro do Studio. O worker do episódio não tem o drop-in `telegram.conf`. O resto dessa etapa (chaves, agenda, registro no worker, fallback do refresh) está no ar desde 27/10 08:56 (-03).
 8. **Teste adiado, não executar agora.** LOOP do Gemini por cena, e 4 Argon baixo contra 3.8 Flash no mesmo lote.
 
 ## Não são lacunas
 
 - Login da CLI do Paperclip, issue no Paperclip para começar episódio ou descarte, e o token do bot Hermes citado em 15/10. O canal vigente é o bot próprio (t538). O corte do serviço Paperclip é o item F05-09 do ROADMAP, não um login pendente.
-- Geração de vídeo no NotebookLM. Descartada no fluxo (t130u). `nlm_gerar_short` recusa. A legenda extra no pós continua fora: `scripts/legendar_short.py` é sobra. A decisão t435 vale para o vídeo da c
+- Geraçã
 
 ## Mapa visual
 

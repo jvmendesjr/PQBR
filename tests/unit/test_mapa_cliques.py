@@ -1,14 +1,19 @@
-"""t126u: o registro de cliques começa vazio. Elemento só entra com data de observação."""
+"""t126u/t132u: o registro não é catálogo. Surpresa só entra com data de observação."""
 import json
 from pathlib import Path
 
 ARQ = Path(__file__).resolve().parents[2] / "config/mapa_cliques.json"
 
 
-def test_registro_comeca_vazio_e_exige_data():
+def test_registro_so_anota_surpresa_com_data():
     reg = json.loads(ARQ.read_text(encoding="utf-8"))
-    assert reg["versao"] == "0.1.0" and reg["sitios"] == []
-    assert "ainda não foram mapeados" in reg["regra"]
+    assert reg["versao"] == "0.1.0"
+    assert "catálogo" in reg["regra"]
+    assert reg["sitios"], "surpresa vista fica registrada"
+    for item in reg["sitios"]:
+        for k in ("sitio", "elemento", "onde", "observado_em"):
+            assert item.get(k), k
+        assert len(item["observado_em"]) == 10
 
     def aceitar(item: dict) -> None:
         for k in ("sitio", "elemento", "onde", "observado_em"):

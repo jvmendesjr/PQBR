@@ -5,6 +5,11 @@ Versionamento SemVer (MAJOR.MINOR.PATCH) a partir de t510. Versão do pacote can
 
 
 
+## [0.17.2] — 2026-10-27
+### Operação
+- Duas imagens estáticas no Google Flow, pelo Camofox, modelo Nano Banana 2 Lite, 9:16 (t132u). A ficha não mostrou crédito. As duas saíram cartum de pessoa, não stickman. Vídeo não foi gerado. Baixado só o 1K original.
+- `config/mapa_cliques.json` ganhou três surpresas dessa tela: o diálogo "O que há de novo", o menu 2K/4K e a confirmação que não apareceu.
+
 ## [0.17.1] — 2026-10-27
 ### Alterado
 - A silhueta do mapa do Brasil no logo não bloqueia gerar nem subir. O aviso sai antes de tornar público (t131u).
