@@ -1,23 +1,22 @@
-# PERS-M
+# PERS-M — Ficha Permanente
 
-Estado: `aguardando_ok_jose` (t144u, 28/10). Gerado por `scripts/visual/frente_stickman.py`.
-- Recorte individual (9:16, 1080×1920, para envio ao Flow em "add to prompt"): `banco-fichas/personagens/PERS-M.png` (`.svg`)
-- Folha completa (16:9, 1920×1080, frente + perfil + 4 expressões): `banco-fichas/personagens/PERS-M-folha.png` (`.svg`)
-- Asset: `ASSET_personagem_masculino-v1`
+Estado: `permanente_aguardando_ok_jose` (t146u, 28/10/2026).
+- **Caráter:** Ficha **permanente** do elenco principal masculino (`elenco_alternado`, código par).
+- **Modelo gerador (regra t146u):** `🍌 Nano Banana Pro` no Google Flow (modelo mais potente de geração de imagens), ancorado nas 5 imagens reais do canal (`banco-fichas/referencias-canal/`).
+- **Recorte individual (9:16, 768×1376, para anexar como `Elemento` no Flow):** `banco-fichas/personagens/PERS-M.png`
+- **Folha de poses e expressões (16:9, 1376×768, 3 poses de corpo inteiro):** `banco-fichas/personagens/PERS-M-folha.png`
+- **Asset:** `ASSET_personagem_masculino-v2`
 
-Elenco do código par (`elenco_alternado`). Sem nome no vídeo.
+## Trava (frase-trava para o prompt e para o Agente do Flow)
 
-## Trava (frase-trava para o prompt do Flow)
-
-Stickman 2D de cabeça redonda branca (`#ffffff`) com contorno preto uniforme (`#141414`), membros finos de palito, mais alto que a PERS-F, camiseta 2D chapada azul cobalto (`#2b6cb0`), bermuda 2D chapada cinza-ardósia escuro (`#334155`), óculos redondos vermelhos (`#e23b2f`), sobrancelhas de reação acima dos óculos, boca fechada (`lips closed`), sem dedos, sem cabelo, sem pele humana, sem volume 3D, sem texto.
+Stickman 2D desenhado à mão em nanquim preto sobre papel creme texturizado (`#f5f0e4`), cabeça redonda branca grande com contorno preto orgânico e hachura sutil (cross-hatching) na lateral da bochecha, **dois olhos expressivos sempre visíveis**, sobrancelhas expressivas, óculos redondos vermelhos finos (`#e23b2f`), boca fechada (`lips closed`), tronco e membros em traço preto sólido grosso de caneta, mãos brancas estilo luva cartum com contorno preto, pés pretos ovais preenchidos e sombra oval hachurada no chão, sem texto na imagem.
 
 ## O que está fechado
 
-- **Cabeça e rosto:** círculo branco puro (`#ffffff`), contorno preto (`#141414`), olhos de ponto preto centrados nas lentes, óculos redondos vermelhos (`#e23b2f`) com ponte central, sobrancelhas expressivas acima do aro e boca sempre fechada (linha ou curva simples).
-- **Roupa 2D chapada fixa:** camiseta azul cobalto (`#2b6cb0`) de mangas curtas trapezoidais e bermuda cinza-ardósia escuro (`#334155`), preenchimento 100% chapado com contorno preto (`#141414`), sem dobras nem degradê.
-- **Proporção e membros:** braços e pernas em linha preta fina de palito com ponta redonda e pés curtos horizontais; pernas mais longas que as da PERS-F (diferença de altura visível em `ELENCO-frente.png`).
-- **Expressões na folha (`PERS-M-folha.png`):** curioso (padrão), surpreso, pensativo e satisfeito — todas de boca fechada.
+- **Cabeça e rosto:** círculo branco grande com contorno preto orgânico, hachura sutil na bochecha, **dois olhos expressivos sempre visíveis** centrados nas lentes, óculos redondos vermelhos (`#e23b2f`), sobrancelhas de reação e boca fechada.
+- **Corpo do canal:** tronco e membros em traço preto sólido grosso de caneta (fiel aos vídeos reais do canal em `banco-fichas/referencias-canal/`), mãos brancas estilo luva cartum com contorno preto, pés pretos ovais sobre sombra hachurada.
+- **Folha de poses (`PERS-M-folha.png`):** (1) calmo frontal amigável, (2) assustado/chocado com mãos perto da cabeça e gotas de suor, (3) curioso apontando — todas com 2 olhos visíveis e sem texto.
 
 ## Proibido
 
-Pele humana, volume 3D, sombreamento realista, mão com dedos, cabelo, barba, boca aberta articulando fala (`boca_articula_fala`), corte da cabeça/óculos no topo (`corte_oculos_cabeca`), texto ou marca na imagem.
+Um olho só (ciclope / `grotesco`), pele humana, volume 3D, sombreamento realista, dedos humanos realistas, cabelo, barba, boca aberta articulando fala (`boca_articula_fala`), corte da cabeça/óculos no topo (`corte_oculos_cabeca`), texto ou marca na imagem.

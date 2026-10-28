@@ -5,6 +5,14 @@ Versionamento SemVer (MAJOR.MINOR.PATCH) a partir de t510. Versão do pacote can
 
 
 
+## [0.20.0] — 2026-10-28
+### Adicionado
+- Referências reais do canal Porquê BR preservadas em `banco-fichas/referencias-canal/` (`ref-01..05` + `ref-canal-composta-sem-texto.png`) e ficha permanente do stickman clássico sem óculos (`PERS-M-classico.png`, `PERS-M-classico-folha.png`, `PERS-M-classico.md`) (t146u).
+- Pesquisa e validação empírica em `docs/pesquisas/flow-agente-e-nano-banana-pro-20261028.md`: avaliação do Agente do Google Flow na produção de vídeo, configuração real do Agente (`Confirmar antes de gerar = Sempre`, `9:16`, `x1`, `🍌 Nano Banana Pro`, `Instruções para o agente`) e receita determinística para upload de imagens em Angular Material (`.sidebar-upload-btn`) via Camofox (t146u).
+### Alterado
+- **Regra canônica das fichas permanentes (`docs/REGRAS.md` §5/§6, `docs/CONTRATO-EDITORIAL.md` §19, `docs/fases/stickman.md`):** para personagens, objetos e locais permanentes (`banco-fichas/`), as fichas são permanentes e geradas no Google Flow com o modelo mais potente de geração de imagens (`🍌 Nano Banana Pro`, 0 créditos), padronizadas pelo traço real do canal (nanquim preto + hachura sobre papel creme `#f5f0e4`, dois olhos expressivos sempre visíveis, mãos estilo luva branca, pés pretos ovais) (t146u).
+- Todas as 12 fichas permanentes de `banco-fichas/` (`PERS-M`, `PERS-M-folha`, `PERS-F`, `PERS-F-folha`, `PERS-M-classico`, `PERS-M-classico-folha`, `AMB-cozinha`, `AMB-sala`, `OBJ-chaleira`, `OBJ-xicara`, `OBJ-filtro-pano`, `OBJ-controle-remoto`) regeneradas ao vivo no Google Flow com `🍌 Nano Banana Pro` e inspecionadas visualmente (`banco-fichas/indice.json` v1.0.0) (t146u).
+
 ## [0.19.0] — 2026-10-28
 ### Adicionado
 - Funções de decisão estruturada do Jev (`src/pqbr/motores/decisao.py`): `jev_disponivel`, `classificar_popup_camofox`, `escolher_ref_canario` (`EscolhaRefCanario`), `triagem_correcao_jev`, `verificar_correcao_jev`, `decidir_repeticao_jev` e `classificar_email_youtube` (t144u).

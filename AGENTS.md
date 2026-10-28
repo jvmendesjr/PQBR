@@ -4,7 +4,7 @@
 
 Fonte única de "onde estamos". Não repete o ROADMAP: aponta os itens por id. **Atualize este arquivo a cada correção ou pendência resolvida.** O hook pre-commit exige isso quando o commit toca ROADMAP, LACUNAS, DECISOES-LOG ou CHANGELOG, e o `registrar_alteracao` exige isso para `tipo` correcao ou pendencia_resolvida.
 
-Atualizado: 28/10/2026 (t144u: JEV-EF concluído, calibrado na API real e ativo nos workers; fichas completas de personagens com roupa chapada, ambientes e objetos geradas em `banco-fichas/` para OK do José) · versão 0.19.0
+Atualizado: 28/10/2026 (t146u: regra canônica das fichas permanentes em `🍌 Nano Banana Pro` fixada; todas as 12 fichas permanentes geradas no Google Flow ancoradas nos 5 frames reais do canal em `banco-fichas/`; Agente do Flow pesquisado, documentado e calibrado no projeto) · versão 0.20.0
 
 ## Onde estamos
 - **Produção:** o lote do saldo está em `runtime/lote-saldo/` (um diretório por tema). O EP1002 olhos-da-cara foi reprovado e descartado (`runtime/lote-saldo/_descartado/`), e o tema voltou a `proposto`.
@@ -14,10 +14,10 @@ Atualizado: 28/10/2026 (t144u: JEV-EF concluído, calibrado na API real e ativo 
 - **Fluxo (t130u):** o episódio para no storyboard. O NotebookLM entrega roteiro, compliance e SEO, e não gera vídeo. `YOUTUBE_DRY_RUN=true`. Os vídeos de `runtime/lote-saldo/` ficam parados até a etapa de publicação.
 - **Paperclip (t130u):** `paperclipai.service` parado e desabilitado em 27/10. Sem desinstalar e sem apagar dados. `config/paperclip.json` está `parado_proposital`.
 - **Jev (t143u, t144u — JEV-EF concluído):** `decide()` e funções estruturadas (`classificar_popup_camofox`, `escolher_ref_canario`, `triagem_correcao_jev`, `verificar_correcao_jev`, `decidir_repeticao_jev`, `classificar_email_youtube`) ligadas a `CorrecaoAutonomaWorkflow` e `checar_repeticao`, limiares calibrados na API real TypeSafe (`jev-latest`, 12 casos, 100% de acerto) e workers `pqbr-temporal-worker` / `pqbr-episodio-worker` reiniciados com `TYPESAFE_API_KEY` ativa.
-- **Stickman e banco de fichas (t133u, t141u, t144u):** identidade única com roupa 2D chapada fixa definida e gerada em `banco-fichas/` (`PERS-M`: azul cobalto `#2b6cb0` + bermuda `#334155` + óculos vermelhos `#e23b2f`; `PERS-F`: terracota `#d96b43` + bermuda `#1e3a5f` + argola amarela `#e6b325`), junto com folhas 16:9 de frente/perfil/4 expressões, 2 ambientes (`AMB-cozinha`, `AMB-sala`) e 4 objetos (`OBJ-chaleira`, `OBJ-xicara`, `OBJ-filtro-pano`, `OBJ-controle-remoto`), prontos para o OK inicial do José.
+- **Stickman, fichas permanentes em Nano Banana Pro e Agente do Flow (t133u, t141u, t146u):** regra canônica fixada pelo José — para personagens, objetos e locais permanentes (`banco-fichas/`), usar fichas permanentes geradas no Google Flow com o modelo mais potente de geração de imagens (`🍌 Nano Banana Pro`, 0 créditos), padronizadas a partir dos 5 frames reais do canal (`banco-fichas/referencias-canal/`). Todas as 12 fichas permanentes (`PERS-M`, `PERS-M-folha`, `PERS-F`, `PERS-F-folha`, `PERS-M-classico`, `PERS-M-classico-folha`, `AMB-cozinha`, `AMB-sala`, `OBJ-chaleira`, `OBJ-xicara`, `OBJ-filtro-pano`, `OBJ-controle-remoto`) foram geradas no Flow com `Nano Banana Pro` e inspecionadas (nanquim preto + hachura sobre papel creme `#f5f0e4`, 2 olhos sempre visíveis, zero texto). Agente do Flow calibrado no projeto (`Confirmar antes de gerar = Sempre`, `9:16`, `x1`, `Nano Banana Pro` + `Instruções para o agente`).
 
 ## Próximo passo
-OK do José nas fichas visuais geradas em `banco-fichas/` (P5) para liberar a geração de cenas com recorte no Google Flow, ou avanço em F1-05 (P13) / F6-02 (P14).
+OK do José nas 12 fichas permanentes geradas no Google Flow com `🍌 Nano Banana Pro` em `banco-fichas/` (P5) para liberar a produção das cenas `S01..S0N` no Flow com o Agente + fichas permanentes.
 
 ## Pendências abertas
 | # | Pendência | Ref. ROADMAP | Dono | Bloqueio |
@@ -26,7 +26,7 @@ OK do José nas fichas visuais geradas em `banco-fichas/` (P5) para liberar a ge
 | P2 | Publicação: worker reiniciado 27/10 11:50 (-03), 0 workflows Running. `YOUTUBE_DRY_RUN=true`. Nada agendado (`agenda_publicacao` com 0 linhas). Envio real desligado. Refresh do app em teste vence ~2/11 21:20 (-03) | F8-01 | agente | sem envio até a produção ativa |
 | P3 | Teste: LOOP por cena vs o atual | Estado 26/10 · Testes pendentes | agente | depois do fluxo de publicação |
 | P4 | **Feito (t108u/t109u).** Juiz por etapa (`gemini_juiz` v1.0.0): pré-produção usa 3.8 Flash; produção (VISUAL e LOOP) usa 4 Argon Baixo. O worker `pqbr-episodio-worker` foi reiniciado com OK do José às 16:57 (-03), e o poller está ativo na fila `episodio-pqbr`, ns `pqbr` | Estado 26/10 · DECISOES-LOG t109u | agente | concluído |
-| P5 | Fichas completas do elenco (`PERS-M`, `PERS-F` + folhas 16:9), ambientes (`AMB-cozinha`, `AMB-sala`) e objetos (`OBJ-*`) geradas com roupa 2D chapada fixa em `banco-fichas/` (t144u) | t144u · Fase 3 | José | aguardando OK do José nas definições visuais antes de enviar ao Flow |
+| P5 | 12 fichas permanentes do elenco (`PERS-M`, `PERS-F`, `PERS-M-classico` + folhas 16:9), ambientes (`AMB-cozinha`, `AMB-sala`) e objetos (`OBJ-*`) geradas no Google Flow com `🍌 Nano Banana Pro` a partir dos frames reais do canal em `banco-fichas/` (t146u) | t146u · Fase 3 | José | aguardando OK do José nas fichas permanentes geradas no Nano Banana Pro |
 | P6 | **Feito (t130u).** `storyboard_criar` valida o Storyboard 1.2.0, grava a ficha e deixa `pode_gerar_video` false. O episódio para aí. Imagem e vídeo desta etapa não rodam | Estado 27/10 · DECISOES-LOG t130u | agente | concluído |
 | P7 | **Feito (t108u).** O gate VISUAL agora tem `boca_articula_fala`, `corte_oculos_cabeca` e `grotesco` (FichaCena/REGRAS §25), e cada um reprova sozinho. Validado no EP1002 (`loop-gemini-4argon-v2.json`): reprova, com S01 corte+grotesco, S04 corte e S02/S05/S09 boca | Estado 26/10 · CHANGELOG 0.14.0 | agente | concluído |
 | P8 | **Feito (t128u).** As 7 memórias `obsoleto_candidato` do roster antigo de `docs/AGENTES.md` foram apagadas em 27/10 ~08:57 (-03). Bank 884 → 877. Backup fora do git | `docs/operacao/hindsight-descarte-candidatos.md` | agente | concluído |
@@ -39,13 +39,7 @@ OK do José nas fichas visuais geradas em `banco-fichas/` (P5) para liberar a ge
 | P15 | **Feito (t143u/t144u).** Jev (`decide()`, JEV-EF) ligado aos fluxos (`CorrecaoAutonomaWorkflow`, canário, pop-up Flow, e-mail YouTube, repetição R10), limiares calibrados na API real TypeSafe (12 casos, 100% de acerto) e workers reiniciados com `TYPESAFE_API_KEY` ativa. Resta apenas JEV-02 (chave OpenRouter do fallback) | RNF-02 · JEV-EF · t144u | concluído | JEV-02 (fallback OpenRouter) quando José fornecer chave |
 
 ## Painel
-Aba **Roadmap** no painel (:8088): Próximos passos, Falta e Feito gerados deste arquivo e do ROADMAP por `scripts/mapa/roadmap.py` (via `gerar_index.py`; o pre-commit regenera quando ROADMAP/ESTADO-ATUAL/mapa mudam). Itens com ☑ (feito) e ☐ (falta/próximos), só símbolo, nada clicável. Só leitura.
-
-## Operacional e persistência (verificado 26/10/2026 18:21 -03)
-pqbr-mcp 0.4.0 (user unit, enabled, Restart=on-failure, linger=yes), hindsight-api (enabled, Restart=always), Docker DB/Temporal (`unless-stopped`), worker enabled. Comando de checagem e detalhes: `docs/operacao/onboarding-agente-externo.md` § Operacional e persistência.
-
-## Como atualizar
-Resolveu ou corrigiu algo: tire a linha da tabela (ou mude o bloqueio), ajuste "Próximo passo" e a data acima, faça o commit junto com o DECISOES-LOG/CHANGELOG e chame `registrar_alteracao` com `tipo` igual a `pendenci
+Aba **Roadmap** no painel (:8088): Próximos passos, Falta e Feito gerados deste arquivo e do ROADMAP por `scripts/mapa/roadmap.py` (via `gerar_index.py`; o pre-commit regenera quando ROADMAP/ESTADO-ATUAL/mapa mudam). Itens com ☑ (feito) e ☐ (falta/próximos), só símbolo, nada clicá
 
 Fontes canônicas: docs/ESTADO-ATUAL.md (onde estamos), docs/REGRAS.md, docs/DECISOES-LOG.md, docs/ROADMAP.md, docs/LACUNAS-fluxo.md, docs/ARQUITETURA.md, docs/AGENTES.md, docs/mapa/. Em conflito, vale o doc canônico. O briefing do YT-LLM está em docs/_obsoleto/BRIEFING-novo-agente-pqbr.md e não é procedimento.
 
@@ -136,12 +130,6 @@ Histórico, fora do procedimento: docs/_obsoleto/BRIEFING-novo-agente-pqbr.md (h
 
 ## Decisões recentes
 
-## t140u (28/10/2026) — O desenho sem roupa foi recusado
-- José viu os PNG de t139u e disse que não gostou. Mandou a busca do Google e quatro materiais: transcrição "5 Stick Figure Styles" (youtube.com/watch?v=RyMPBz7LeZc), transcrição "Create Viral Stickman Animation Videos" (youtube.com/watch?v=pe4vBpgbDMg), o pipeline Proventube de 11 páginas, a folha "Historical Stickman Video Instructions" de 6 páginas e o modelo "STICKMAN VIDEO GENERATOR" de 4 páginas.
-- O que essas imagens têm em comum, e o nosso tubo não tem: cabeça redonda branca, contorno preto, membros finos, uma roupa chapada, cara com olho, sobrancelha e boca de reação, personagem agindo. Uma das folhas de modelo usa cabeça cor de pele, camiseta branca e bermuda azul. Os quadros de Pompeia usam cabelo, lenço amarelo, camisa e calça.
-- O que não entra: o estilo 1 do pipeline (roupa 3D, cabelo com volume, cenário de cinema) e o estilo 5 (corpo de pessoa, não palito). O tutorial pede 16:9 e Nano Banana Pro; o Short da PQBR é 9:16 e a imagem autorizada é o Nano Banana 2 Lite. O mesmo vídeo sugere várias contas Gmail para passar do teto diário do Flow e empurra o site Vsub. Isso não se faz. O número "58M" está desenhado na miniatura; não é uma medição.
-- O que se aproveita: um personagem só, enviado ao Flow como imagem ("add to prompt"), e o prompt muda pose, expressão, objeto e lugar. Folha com frente, lado e expressões; na cena, um recorte de um boneco só, porque a folha inteira confunde o modelo. Narração fora. Sem
-
 ## t141u (28/10/2026) — O material é inspiração; o fluxo não muda
 - José: manter a arquitetura e o fluxo, tudo o que está aparelhado. O material entrou para ver o processo e os prompts que dá para usar. Continua o NotebookLM. Tudo o mais permanece. O que muda é a inspiração da identidade visual e o reajuste do que o fluxo precisa para chegar nesse desenho.
 - Não entra ferramenta nova. Claude não escreve o roteiro. Vsub, CapCut e várias contas Gmail ficam de fora. Imagem segue Nano Banana 2 Lite, 9:16, uma por vez, com manifesto. Vídeo segue a cadeia já definida, e o episódio continua parando no storyboard.
@@ -175,6 +163,12 @@ Histórico, fora do procedimento: docs/_obsoleto/BRIEFING-novo-agente-pqbr.md (h
   - `checar_repeticao` (`grade.py`): consulta `decidir_repeticao_jev` na faixa semântica quando `usar_jev=True` ou `decisor` é passado.
 - **Calibração empírica real na API TypeSafe (`jev-latest`, 12 casos canônicos, 100% de acerto, gravado em `pqbr.consumo_modelos`):**
   - Pop-up promo (`0.98`), pop-up CAPTCHA (`0.99`
+
+## t146u (28/10/2026) — Regra das fichas permanentes em Nano Banana Pro (ancoradas nos frames reais do canal) + pesquisa sobre o Agente do Google Flow
+- **Feedback e decisão do José:** avaliou os desenhos programáticos anteriores (`t144u`), apontou que ainda não gostou (inclusive erro grotesco de um olho só na pose lateral), enviou 5 recortes reais tirados de vídeos do próprio canal Porquê BR (`banco-fichas/referencias-canal/`) e determinou:
+  1. **Regra canônica [APROVADO]:** para **personagens, objetos e locais permanentes** (`banco-fichas/`), as fichas são **permanentes** e devem ser geradas no Google Flow usando o **modelo mais potente de geração de imagens (atualmente `🍌 Nano Banana Pro`)**, mantendo a padronização estética dos personagens principais do canal.
+  2. **Pesquisa solicitada:** verificar se é melhor usar o **Agente do Google Flow** entregando as imagens de referência (fichas permanentes), os storyboards como referência e os prompts na produção do vídeo.
+- **Achado técnico de automação no Google Flow (`flow-media-upload`):** o botão `.sidebar-upload-btn` dentro de `Adicionar elementos à caixa de comando` (Angular Material) só monta o `<input type="file">` quando recebe `.click()`. Como `/tabs/:id/upload` do Camofox tenta primeiro `locator.focus()`, validamos a receita determinística: registrar `b.addEventListener("focus", () => b.click(), { once: true })` antes de chamar `/tabs/:id/upload` com `selector=".sidebar-upload-btn"`, anexando imagens de referência co
 
 ## Fase atual do ROADMAP
 

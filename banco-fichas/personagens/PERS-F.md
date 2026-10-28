@@ -1,23 +1,22 @@
-# PERS-F
+# PERS-F — Ficha Permanente
 
-Estado: `aguardando_ok_jose` (t144u, 28/10). Gerado por `scripts/visual/frente_stickman.py`.
-- Recorte individual (9:16, 1080×1920, para envio ao Flow em "add to prompt"): `banco-fichas/personagens/PERS-F.png` (`.svg`)
-- Folha completa (16:9, 1920×1080, frente + perfil + 4 expressões): `banco-fichas/personagens/PERS-F-folha.png` (`.svg`)
-- Asset: `ASSET_personagem_feminino-v1`
+Estado: `permanente_aguardando_ok_jose` (t146u, 28/10/2026).
+- **Caráter:** Ficha **permanente** do elenco principal feminino (`elenco_alternado`, código ímpar).
+- **Modelo gerador (regra t146u):** `🍌 Nano Banana Pro` no Google Flow (modelo mais potente de geração de imagens), ancorado nas 5 imagens reais do canal (`banco-fichas/referencias-canal/`).
+- **Recorte individual (9:16, 768×1376, para anexar como `Elemento` no Flow):** `banco-fichas/personagens/PERS-F.png`
+- **Folha de poses e expressões (16:9, 1376×768, 3 poses de corpo inteiro):** `banco-fichas/personagens/PERS-F-folha.png`
+- **Asset:** `ASSET_personagem_feminino-v2`
 
-Elenco do código ímpar (`elenco_alternado`). Sem nome no vídeo.
+## Trava (frase-trava para o prompt e para o Agente do Flow)
 
-## Trava (frase-trava para o prompt do Flow)
-
-Stickman 2D de cabeça redonda branca (`#ffffff`) com contorno preto uniforme (`#141414`), membros finos de palito, mais baixa que o PERS-M, coque circular preto no alto à direita de quem olha, argola amarela (`#e6b325`) à esquerda de quem olha, pinta preta pequena ao lado da boca no mesmo lado da argola, camiseta 2D chapada terracota/coral (`#d96b43`), bermuda 2D chapada azul-marinho (`#1e3a5f`), boca fechada (`lips closed`), sem óculos, sem dedos, sem pele humana, sem volume 3D, sem texto.
+Stickman feminina 2D desenhada à mão em nanquim preto sobre papel creme texturizado (`#f5f0e4`), cabeça redonda branca grande com contorno preto orgânico e hachura sutil (cross-hatching) na lateral da bochecha, **dois olhos expressivos com cílios sempre visíveis**, sobrancelhas expressivas, coque redondo preto no topo da cabeça, pequeno brinco de argola dourada/amarela (`#e6b325`) na lateral esquerda, boca fechada (`lips closed`), tronco e membros em traço preto sólido grosso de caneta, mãos brancas estilo luva cartum com contorno preto, pés pretos ovais preenchidos e sombra oval hachurada no chão, sem texto na imagem.
 
 ## O que está fechado
 
-- **Cabeça e rosto:** círculo branco puro (`#ffffff`) do mesmo raio do PERS-M, contorno preto (`#141414`), coque circular do mesmo traço no alto à direita de quem olha, brinco de argola amarela (`#e6b325`) à esquerda de quem olha, pinta preta pequena ao lado esquerdo da boca, olhos de ponto preto, sobrancelhas de reação e boca sempre fechada.
-- **Roupa 2D chapada fixa:** camiseta terracota/coral (`#d96b43`) de mangas curtas trapezoidais e bermuda azul-marinho (`#1e3a5f`), preenchimento 100% chapado com contorno preto (`#141414`), alto contraste com o PERS-M.
-- **Proporção e membros:** braços e pernas em linha preta fina de palito com ponta redonda; tronco e pernas mais curtos que os do PERS-M.
-- **Expressões na folha (`PERS-F-folha.png`):** curioso (padrão), surpreso, pensativo e satisfeito — todas de boca fechada.
+- **Cabeça e rosto:** círculo branco grande com contorno preto orgânico, hachura sutil na bochecha, **dois olhos expressivos sempre visíveis** com cílios discretos, coque preto no topo, argola amarela (`#e6b325`) à esquerda, sobrancelhas de reação e boca fechada.
+- **Corpo do canal:** tronco e membros em traço preto sólido grosso de caneta (mesma família estética de `PERS-M` e dos frames reais em `banco-fichas/referencias-canal/`), mãos brancas estilo luva cartum com contorno preto, pés pretos ovais sobre sombra hachurada.
+- **Folha de poses (`PERS-F-folha.png`):** (1) calma frontal amigável, (2) surpresa com mãos próximas às bochechas, (3) confiante de olhos fechados em arco e mãos na cintura — todas com 2 olhos visíveis e sem texto.
 
 ## Proibido
 
-Pele humana, volume 3D, cabelo solto ou com fios, óculos, pinta do lado oposto, mão com dedos, boca aberta articulando fala (`boca_articula_fala`), texto ou marca na imagem.
+Um olho só (ciclope / `grotesco`), pele humana, volume 3D, cabelo solto realista, óculos, dedos humanos realistas, boca aberta articulando fala (`boca_articula_fala`), corte da cabeça no topo (`corte_oculos_cabeca`), texto ou marca na imagem.

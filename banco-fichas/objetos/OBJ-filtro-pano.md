@@ -1,9 +1,11 @@
-# OBJ-filtro-pano
+# OBJ-filtro-pano — Ficha Permanente
 
-Estado: `aguardando_ok_jose` (t144u, 28/10).
-- Imagem (1:1, 1080×1080): `banco-fichas/objetos/OBJ-filtro-pano.png` (`.svg`)
-- Asset: `ASSET_objeto_filtro_pano-v1`
+Estado: `permanente_aguardando_ok_jose` (t146u, 28/10/2026).
+- **Caráter:** Ficha **permanente** de objeto recorrente.
+- **Modelo gerador (regra t146u):** `🍌 Nano Banana Pro` no Google Flow (1:1, `1024×1024`), ancorado nas referências do canal (`banco-fichas/referencias-canal/`).
+- **Imagem (1:1, 1024×1024):** `banco-fichas/objetos/OBJ-filtro-pano.png`
+- **Asset:** `ASSET_objeto_filtro_pano-v2`
 
 ## Trava
 
-Filtro de pano de café (coador tradicional) em desenho 2D chapado sobre fundo neutro (`#f5f2eb`), haste e base metálica escura (`#141414`) e coador cônico de algodão cru (`#e8dcc4`) sem estampa e sem marca.
+Coador de pano brasileiro tradicional suspenso em suporte vertical de arame e madeira, desenhado à mão em nanquim preto com hachura sutil (cross-hatching) sobre fundo de papel creme texturizado (`#f5f0e4`), funil de algodão claro com cabo de madeira e sombra hachurada na base. Sem texto e sem marca.

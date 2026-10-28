@@ -1,17 +1,13 @@
-# AMB-sala
+# AMB-sala — Ficha Permanente
 
-Estado: `aguardando_ok_jose` (t144u, 28/10).
-- Imagem (9:16, 1080×1920): `banco-fichas/ambientes/AMB-sala.png` (`.svg`)
-- Asset: `ASSET_ambiente_sala-v1`
-
-Lugar recorrente dos roteiros domésticos noturnos ou de descanso.
+Estado: `permanente_aguardando_ok_jose` (t146u, 28/10/2026).
+- **Caráter:** Ficha **permanente** de local recorrente (roteiros domésticos de sala/descanso).
+- **Modelo gerador (regra t146u):** `🍌 Nano Banana Pro` no Google Flow (9:16, `768×1376`), ancorado no estilo nanquim + hachura sobre papel creme das referências do canal (`banco-fichas/referencias-canal/`).
+- **Imagem (9:16, 768×1376):** `banco-fichas/ambientes/AMB-sala.png`
+- **Asset:** `ASSET_ambiente_sala-v2`
 
 ## Trava
 
-Sala de estar brasileira em traço 2D chapado, contorno preto uniforme (`#141414`), parede clara (`#eae6df`), piso (`#d8d0c5`), abajur de pé com cúpula amarela suave (`#f6e05e`), rack de madeira (`#8c6239`) com televisão de tela escura azulada (`#38bdf8` / `#1e293b`) sem marca, sofá verde-sálvia chapado (`#6b8e78`) e controle remoto cinza-escuro (`#334155`) com fita amarela. Sem quadros com texto e sem estante poluída.
+Sala de estar brasileira aconchegante desenhada à mão em nanquim preto com hachura sutil (cross-hatching) sobre fundo de papel creme texturizado (`#f5f0e4`), com sofá de dois lugares, mesinha lateral de madeira com vaso de planta, tapete simples e quadro de colinas na parede. Sem personagens na ficha base, sem texto e sem marcas.
 
-## Fora
-
-Marca na televisão, logotipo no controle, legenda ou letras dentro do desenho.
-
-Objeto com ficha própria: `OBJ-controle-remoto`.
+Objeto permanente relacionado: `OBJ-controle-remoto`.

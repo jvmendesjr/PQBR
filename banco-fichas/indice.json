@@ -1,93 +1,114 @@
 {
-  "versao": "0.4.0",
-  "decisao": "t144u",
+  "versao": "1.0.0",
+  "decisao": "t146u",
   "atualizado": "2026-10-28",
-  "nota": "Fichas completas geradas em scripts/visual/frente_stickman.py com roupa 2D chapada fixa, folhas de expressão 16:9, recortes 9:16 individuais, ambientes e objetos. Prontas para o OK inicial do José.",
-  "estilo": "cabeça redonda branca, contorno preto (#141414), membros finos de palito, roupa 2D chapada fixa sem 3D, cara de reação de boca fechada, sem texto na imagem",
+  "regra_modelo_fichas": "Para personagens, objetos e locais permanentes, usar fichas permanentes geradas a partir do modelo mais potente de geracao de imagens (atualmente Nano Banana Pro no Google Flow), ancoradas nas referencias reais do canal em banco-fichas/referencias-canal/.",
+  "modelo_geracao": "Nano Banana Pro",
+  "nota": "Fichas permanentes geradas no Google Flow com Nano Banana Pro (0 creditos) usando upload de referencia real do canal (banco-fichas/referencias-canal/). Inspecionadas visualmente: 2 olhos sempre visiveis, zero texto, traco nanquim 2D com hachura sutil sobre papel creme (#f5f0e4).",
+  "estilo": "ilustracao 2D desenhada a mao em nanquim preto sobre papel creme texturizado (#f5f0e4) com hachura sutil (cross-hatching), stickman de cabeca redonda branca grande, DOIS OLHOS expressivos sempre visiveis, tronco e membros em traco preto solido grosso de caneta, maos brancas estilo luva cartum com contorno preto, pes pretos ovais sobre sombra oval hachurada, sem texto na imagem",
+  "referencias_canal": [
+    "referencias-canal/ref-01-close-expressao-picole.jpeg",
+    "referencias-canal/ref-02-duplo-susto-calmo.png",
+    "referencias-canal/ref-03-apontando-mapa-brasil.png",
+    "referencias-canal/ref-04-corpo-inteiro-hachura-escudo.png",
+    "referencias-canal/ref-05-corpo-inteiro-olhos-fechados.png",
+    "referencias-canal/ref-canal-composta-sem-texto.png"
+  ],
   "fichas": [
     {
       "id": "PERS-M",
       "tipo": "personagem",
+      "permanente": true,
+      "modelo_ficha": "Nano Banana Pro",
       "arquivo": "personagens/PERS-M.md",
-      "asset": "ASSET_personagem_masculino-v1",
-      "estado": "aguardando_ok_jose",
+      "asset": "ASSET_personagem_masculino-v2",
+      "estado": "permanente_aguardando_ok_jose",
       "imagem": "personagens/PERS-M.png",
       "folha": "personagens/PERS-M-folha.png",
-      "svg": "personagens/PERS-M.svg",
-      "roupa": {
-        "camiseta": "#2b6cb0",
-        "bermuda": "#334155",
-        "acento": "#e23b2f"
-      }
+      "acento": "#e23b2f"
     },
     {
       "id": "PERS-F",
       "tipo": "personagem",
+      "permanente": true,
+      "modelo_ficha": "Nano Banana Pro",
       "arquivo": "personagens/PERS-F.md",
-      "asset": "ASSET_personagem_feminino-v1",
-      "estado": "aguardando_ok_jose",
+      "asset": "ASSET_personagem_feminino-v2",
+      "estado": "permanente_aguardando_ok_jose",
       "imagem": "personagens/PERS-F.png",
       "folha": "personagens/PERS-F-folha.png",
-      "svg": "personagens/PERS-F.svg",
-      "roupa": {
-        "camiseta": "#d96b43",
-        "bermuda": "#1e3a5f",
-        "acento": "#e6b325"
-      }
+      "acento": "#e6b325"
+    },
+    {
+      "id": "PERS-M-classico",
+      "tipo": "personagem",
+      "permanente": true,
+      "modelo_ficha": "Nano Banana Pro",
+      "arquivo": "personagens/PERS-M-classico.md",
+      "asset": "ASSET_personagem_classico-v1",
+      "estado": "permanente_aguardando_ok_jose",
+      "imagem": "personagens/PERS-M-classico.png",
+      "folha": "personagens/PERS-M-classico-folha.png"
     },
     {
       "id": "AMB-cozinha",
       "tipo": "ambiente",
+      "permanente": true,
+      "modelo_ficha": "Nano Banana Pro",
       "arquivo": "ambientes/AMB-cozinha.md",
-      "asset": "ASSET_ambiente_cozinha-v1",
-      "estado": "aguardando_ok_jose",
-      "imagem": "ambientes/AMB-cozinha.png",
-      "svg": "ambientes/AMB-cozinha.svg"
+      "asset": "ASSET_ambiente_cozinha-v2",
+      "estado": "permanente_aguardando_ok_jose",
+      "imagem": "ambientes/AMB-cozinha.png"
     },
     {
       "id": "AMB-sala",
       "tipo": "ambiente",
+      "permanente": true,
+      "modelo_ficha": "Nano Banana Pro",
       "arquivo": "ambientes/AMB-sala.md",
-      "asset": "ASSET_ambiente_sala-v1",
-      "estado": "aguardando_ok_jose",
-      "imagem": "ambientes/AMB-sala.png",
-      "svg": "ambientes/AMB-sala.svg"
+      "asset": "ASSET_ambiente_sala-v2",
+      "estado": "permanente_aguardando_ok_jose",
+      "imagem": "ambientes/AMB-sala.png"
     },
     {
       "id": "OBJ-chaleira",
       "tipo": "objeto",
+      "permanente": true,
+      "modelo_ficha": "Nano Banana Pro",
       "arquivo": "objetos/OBJ-chaleira.md",
-      "asset": "ASSET_objeto_chaleira-v1",
-      "estado": "aguardando_ok_jose",
-      "imagem": "objetos/OBJ-chaleira.png",
-      "svg": "objetos/OBJ-chaleira.svg"
+      "asset": "ASSET_objeto_chaleira-v2",
+      "estado": "permanente_aguardando_ok_jose",
+      "imagem": "objetos/OBJ-chaleira.png"
     },
     {
       "id": "OBJ-xicara",
       "tipo": "objeto",
+      "permanente": true,
+      "modelo_ficha": "Nano Banana Pro",
       "arquivo": "objetos/OBJ-xicara.md",
-      "asset": "ASSET_objeto_xicara-v1",
-      "estado": "aguardando_ok_jose",
-      "imagem": "objetos/OBJ-xicara.png",
-      "svg": "objetos/OBJ-xicara.svg"
+      "asset": "ASSET_objeto_xicara-v2",
+      "estado": "permanente_aguardando_ok_jose",
+      "imagem": "objetos/OBJ-xicara.png"
     },
     {
       "id": "OBJ-filtro-pano",
       "tipo": "objeto",
+      "permanente": true,
+      "modelo_ficha": "Nano Banana Pro",
       "arquivo": "objetos/OBJ-filtro-pano.md",
-      "asset": "ASSET_objeto_filtro_pano-v1",
-      "estado": "aguardando_ok_jose",
-      "imagem": "objetos/OBJ-filtro-pano.png",
-      "svg": "objetos/OBJ-filtro-pano.svg"
+      "asset": "ASSET_objeto_filtro_pano-v2",
+      "estado": "permanente_aguardando_ok_jose",
+      "imagem": "objetos/OBJ-filtro-pano.png"
     },
     {
       "id": "OBJ-controle-remoto",
       "tipo": "objeto",
+      "permanente": true,
+      "modelo_ficha": "Nano Banana Pro",
       "arquivo": "objetos/OBJ-controle-remoto.md",
-      "asset": "ASSET_objeto_controle_remoto-v1",
-      "estado": "aguardando_ok_jose",
-      "imagem": "objetos/OBJ-controle-remoto.png",
-      "svg": "objetos/OBJ-controle-remoto.svg"
+      "asset": "ASSET_objeto_controle_remoto-v2",
+      "estado": "permanente_aguardando_ok_jose",
+      "imagem": "objetos/OBJ-controle-remoto.png"
     }
   ]
 }
