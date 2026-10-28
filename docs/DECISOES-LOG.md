@@ -735,3 +735,24 @@ NÃO CABE:
 - Drive, leitura só de nomes, mesma conta: `PQBR` com as sete pastas de t267 mais `estilos-teste-20261012` (A.mp4, B.mp4, C.mp4). `02_Episodios/2026-10` tem EP1002 a EP1010. `00_Biblia_Visual` não tinha ficha. `99_Arquivo` vazia. A pasta antiga `Porquê BR` continua com os masters stickman; a migração do ROADMAP não foi feita. Busca por "3d" no nome não achou vídeo do canal. Arquivo pessoal fora das pastas PQBR apareceu na busca e não foi aberto nem movido. Nenhum mp4 com "3d" no nome em `~/.pqbr` nem no repositório.
 - Envio do banco de texto para `PQBR/00_Biblia_Visual/banco-fichas`, id `1JcDUFDEdiQmDtHX_4c57lgLFcM6-yoT4`. O cliente conferiu md5 e tamanho. Nada apagado. Os pacotes com hash antigo no Drive não foram reescritos. `pacote_garantir` não rodou: o pacote ativo no Postgres continua o hash anterior até a próxima chamada.
 - Não feito: imagem no Flow; aba Personagens; mover vídeo; catálogo `visual_assets`; publicar. `YOUTUBE_DRY_RUN` segue true. Fases: `docs/fases/stickman.md`. A próxima é a frente do stickman, para o José olhar.
+
+## t134u (27/10/2026) — Ferramentas só leitura para agentes PydanticAI [PROPOSTA; NÃO aplicada]
+- Conversa paralela (cliente MCP `cursor-paralelo-mantenedor`). José concordou: o MCP não vira camada interna. Fica só na fronteira com agentes externos. Determinismo e modularidade já vêm do Temporal, dos contratos Pydantic v2 e das portas (t512–t515).
+- Proposta: catálogo só leitura em `src/pqbr/agents/ferramentas.py`; `criar_agente` ganha `ferramentas` filtrado pela `config/politica_papeis.json`; ferramenta nativa do PydanticAI, no processo, sem escrita (ADR-011); limite de chamadas; testes com `TestModel`. O destino do `pqbr-kit` fica para o José.
+- Numeração: esta entrada foi t133u na branch paralela e passou a t134u na junção, porque o stickman já ocupou t133u/0.17.3. Nada de código.
+
+## t135u (27/10/2026) — Acompanhamento de mudanças [PROPOSTA; NÃO aplicada]
+- Levantamento ao vivo em 27/10 ~11:50 (-03): `VigiaAtualizacoesWorkflow` agendado sexta 08:00, 0 execuções (primeira prevista 30/10); `AcessosWorkflow` de hora em hora cobre queda de sessão, não mudança de tela; `CorrecaoAutonomaWorkflow` com 0 execuções; `verificar_mapa.py` acusa diagrama desatualizado. Não há detecção de mudança de interface, de degradação de fallback nem de deriva de contrato.
+- Sem agente novo. Observador mede, Dev propõe, José aplica. Itens, nesta ordem: vigia de fallbacks; `dev_diagnosticar` no fim dos vigias, com aviso e `aprovacao_jose`; deriva de contrato por fixture (t515); canário de interface no Camofox sobre o `mapa_cliques.json`; rascunho de diff do mapa pelo Dev; `CorrecaoAutonoma` só para sessão e fila.
+- Fora: `pip install` automático, seletor ou diagrama editado por agente, MCP nesta camada. Nada aplicado.
+
+## t136u (27/10/2026) — Sem agente novo [APROVADO]; NotebookLM só pela CLI
+- José [APROVADO]: não entra agente novo para acompanhar mudanças.
+- Nenhum documento vigente nem o código usa o NotebookLM pela web. É a CLI `notebooklm-py`, com a sessão Google do Camofox. O NotebookLM sai do canário de interface e fica na deriva de contrato.
+
+## t137u (27/10/2026) — Jev: oráculo, e item prioritário no ROADMAP [APROVADO José]
+- Varredura: `decide()` não existe em `src/` nem em `scripts/`. Os contratos de saída existem. `CorrecaoAutonomaWorkflow` levanta `EmConstrucao`. `TYPESAFE_API_KEY` está em `~/.pqbr/worker.env` e nenhum processo da PQBR a lê. A CLI `jev` 0.19.0, fora da PQBR, responde.
+- Nenhum documento contradiz o papel de oráculo. REGRAS §7 é esse papel. A frase "o Jev decide refazer/trocar/chamar José" entrega `DecisaoPublicacao` e quem age é o código. Verificação visual é do juiz Gemini; verificação estruturada de uma intervenção é do Jev (`VerificacaoCorrecao`, t356).
+- José [APROVADO]: efetivar o Jev. Item prioritário **JEV-EF** no ROADMAP, junto com F1-05 (t134u) e F6-02 (t135u/t136u). A chave OpenRouter (JEV-02) entra no JEV-EF e só é pedida ao ligar.
+- No canário, o Jev escolhe um `ref` da lista que o Camofox observou, ou `abstain`. Não escreve seletor nem vê imagem.
+- Junção: estas quatro entradas foram escritas na branch `cursor/proposta-ferramentas-agentes-b9f6` e reaplicadas em cima de `57f8b97` (stickman, t133u). O stickman, o `banco-fichas/` e o código desse commit não foram alterados.

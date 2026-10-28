@@ -5,6 +5,10 @@ Versionamento SemVer (MAJOR.MINOR.PATCH) a partir de t510. Versão do pacote can
 
 
 
+## [0.17.4] — 2026-10-27
+### Documentação
+- Juntada da conversa paralela, renumerada porque t133u/0.17.3 já são o stickman. t134u: ferramentas só leitura para os agentes, sem MCP interno. t135u: acompanhamento de mudanças sem agente novo. t136u: José aprovou sem agente novo; o NotebookLM é só CLI e sai do canário. t137u: Jev efetivo como item prioritário JEV-EF. Nenhum código destas propostas foi alterado; o stickman e o banco de fichas ficam como estão.
+
 ## [0.17.3] — 2026-10-27
 ### Alterado
 - Stickman passa a ser a identidade única (t133u). O bloco de cartum genérico sai do contrato vigente. `BlocoVisual` 2.0.0 exige a palavra stickman e recusa 3D.

@@ -14,6 +14,21 @@
 
 ---
 
+## Destaques pendentes (27/10/2026, t134u–t137u)
+
+Decisões da conversa paralela, juntadas em cima do stickman (t133u). Nenhuma está aplicada. O primeiro item é prioritário.
+
+- [ ] **JEV-EF** [PRIORITÁRIO] Efetivar o Jev: sair da teoria — Req: RNF-02, RF-18, RF-23, RF-42, RF-46 · Testes: TS-11 · Depende de: F3-01, JEV-01 · Portão José: chave OpenRouter (JEV-02) e reinício do worker
+  - Hoje: os contratos de saída existem; `decide()` **não existe** em `src/` nem em `scripts/`; `CorrecaoAutonomaWorkflow` levanta `EmConstrucao`; `TYPESAFE_API_KEY` está em `~/.pqbr/worker.env` e nenhum processo da PQBR a lê (t137u).
+  - Papel, sem agente novo: o código faz uma pergunta fechada, o Jev devolve um contrato Pydantic, o código valida e age. Verificação visual continua no juiz Gemini; a verificação estruturada de uma intervenção é do Jev (`VerificacaoCorrecao`, t356).
+  - Aceite: porta `src/pqbr/motores/decisao.py` + adaptador TypeSafe (`systemone`, `jev-latest`) por `config/motores.json`; limiar de confiança por contrato; cada chamada em `pqbr.consumo_modelos`; fixtures e teste sem rede; fallback OpenRouter com o mesmo esquema (JEV-02, chave pedida ao José ao ligar).
+  - Primeiros usos: `ClassificacaoPopupCamofox` no Flow; segundo nível do canário (o Camofox lista os elementos, o Jev escolhe o `ref` ou `abstain`); triagem e verificação da `CorrecaoAutonoma`; faixa de dúvida de tema repetido.
+  - Fora: Jev julgando imagem; Jev clicando sem o código conferir; `jev-ultrafast` no lugar do Camofox.
+- [ ] **F1-05** Ferramentas só leitura dos agentes PydanticAI (t134u) — Req: RNF-02 · Depende de: F1-01 · Portão José: nenhum para o código; sem efeito externo
+  - Aceite: `src/pqbr/agents/ferramentas.py`, filtrado por `config/politica_papeis.json`, ferramenta nativa do PydanticAI, sem escrita, limite de chamadas, testes com `TestModel`. Sem MCP interno.
+- [ ] **F6-02** Acompanhamento de mudanças, sem agente novo (t135u, t136u) — Req: RF-42, RF-37 · Depende de: F3-01 · Portão José: reinício do worker ao registrar
+  - Aceite, nesta ordem: vigia de fallbacks; `dev_diagnosticar` no fim de cada vigia, com aviso e sinal `aprovacao_jose`; deriva de contrato por fixture; canário de interface no Camofox (login Google e as surpresas do Flow; o NotebookLM fica fora, é CLI). O Dev entrega rascunho de diff do mapa. `CorrecaoAutonoma` só para sessão e fila.
+
 ## Concluído
 
 - [x] **R-000** Estrutura do repositório — 2026-10-09 — commit ade0ebb
@@ -414,7 +429,7 @@ Ordem: 0.5 ∥ 0 → 1 → 3 ∥ 4 → 5 → 6 → 7 → 8 → 9 → 10 → 11 �
 
 - [x] Drive PQBR criado (12/10): pasta + 7 subpastas, upload testado; IDs em `config/drive_pastas.json`.
 - [x] **JEV-01** Chave do Jev configurada (12/10): `TYPESAFE_API_KEY` em `~/.pqbr/worker.env` (600; o segredo no Paperclip é histórico); endpoint `api.typesafe.ai/v1/systemone`, `jev-latest`; teste ok. O `pqbr-temporal-worker` lê no próximo reinício.
-- [ ] **JEV-02** Chaves de fallback do `decide()` (OpenRouter; depois OpenAI, modelo em H7) — Portão: José (pendente).
+- [ ] **JEV-02** Chave OpenRouter do fallback do `decide()` (depois OpenAI, modelo em H7). Faz parte do **JEV-EF**: a chave é pedida ao José quando o `decide()` for ligado. Portão: José.
 - [x] **HS-01** Dono da manutenção do Hindsight (bank `pqbr`) — 12/10: decidido pelo José. Dev Corretor mantém (reindexação diária, poda, dedupe, sem segredos); Observador mede (hit rate/staleness nos relatórios). Aplicado em `company/agents/*/AGENTS.md`, nas instruções vivas do Paperclip (instructions-file:put, adapters mantidos) e em AGENTES.md.
 - [x] **CAT-01** Categoria YouTube = 27 Educação (12/10, José): `CATEGORIA_YOUTUBE` em `contratos`, usado no dry-run; SPEC RF-06 corrigida (`containsSyntheticMedia`=false).
 - [x] **NLM-EF-01** Cadernos efêmeros + pacote canônico (12/10, José; ADR-003): migração 0014, `workflows/pacote.py`, `nlm_caderno` por id do episódio, arquivamento e `ApagarCadernoWorkflow` D+2; playbook `nlm-cadernos`.
