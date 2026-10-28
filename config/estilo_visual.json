@@ -1,28 +1,28 @@
 {
-  "_nota": "Identidade única do canal (José 27/10, t133u; corpo fechado em t139u): stickman sem roupa. Lido por notebooklm.steering_short. Frente em banco-fichas/personagens/.",
+  "_nota": "Identidade stickman (t133u). O desenho sem roupa de t139u foi recusado em 28/10 (t140u). A roupa chapada ainda não tem cor. Não gerar o personagem até a folha nova.",
   "ativo": "stickman",
   "estilos": {
-    "stickman": "Stickman de tubos pretos grossos e arredondados, cabeça redonda grande branca com contorno preto, membros com ponta redonda, traço chapado, sem roupa, sem pele, sem dedos e sem pessoa de cartum. O acento é um só e já está na ficha, nunca numa peça de roupa. Fundo limpo e claro, poucos objetos, humor de comédia. O protagonista é o mesmo stickman em todas as cenas."
+    "stickman": "Stickman de cabeça redonda branca com contorno preto, membros finos de palito, traço chapado, uma roupa simples e fixa, cara com olho, sobrancelha e boca de reação. Sem dedos e sem pessoa de cartum. Fundo limpo e claro, poucos objetos, humor de comédia. O protagonista é o mesmo stickman em todas as cenas."
   },
   "elenco": {
-    "_nota": "t139u: sem roupa. Código par = PERS-M, ímpar = PERS-F. Sem nome falado ou escrito. Protagonista único no episódio; o outro pode contracenar com justificativa. A feminina é mais baixa, com a mesma cabeça.",
+    "_nota": "t140u: PNG sem roupa recusado. Código par = PERS-M, ímpar = PERS-F. Sem nome. A feminina é mais baixa. Roupa chapada ainda sem cor; não gerar até a folha nova.",
     "masculino": {
       "id": "PERS-M",
       "asset": "ASSET_personagem_masculino-v1",
       "ficha": "banco-fichas/personagens/PERS-M.md",
-      "imagem": "banco-fichas/personagens/PERS-M.png",
-      "trava": "Stickman de tubos pretos grossos, cabeça redonda branca, sem cabelo e sem roupa, óculos redondos vermelhos inteiros, mais alto, boca fechada, sem dedos",
+      "imagem": null,
+      "trava": "Stickman de cabeça redonda branca, membros de palito, óculos redondos vermelhos, mais alto, roupa chapada ainda sem cor, boca de reação, sem dedos",
       "personalidade": "caras e bocas de reação; nunca articula fala",
-      "acento": "óculos vermelhos; não há outra cor"
+      "acento": "óculos vermelhos; a cor da roupa espera a escolha do José"
     },
     "feminino": {
       "id": "PERS-F",
       "asset": "ASSET_personagem_feminino-v1",
       "ficha": "banco-fichas/personagens/PERS-F.md",
-      "imagem": "banco-fichas/personagens/PERS-F.png",
-      "trava": "Stickman de tubos pretos grossos, cabeça redonda branca, sem roupa, mais baixa, coque redondo, argola amarela e pinta preta do lado esquerdo de quem olha, sem óculos, boca fechada, sem dedos",
+      "imagem": null,
+      "trava": "Stickman de cabeça redonda branca, membros de palito, mais baixa, coque, argola e pinta, sem óculos, roupa chapada ainda sem cor, boca de reação, sem dedos",
       "personalidade": "caras e bocas de reação; nunca articula fala",
-      "acento": "argola amarela; a pinta é preta; a camiseta mostarda do teste de 27/10 não entrou"
+      "acento": "argola e pinta continuam; a cor da roupa espera a escolha do José"
     }
   }
 }

@@ -1,12 +1,12 @@
 # PERS-F
 
-Estado: `definido` (t139u). Imagem: `PERS-F.png` e `PERS-F.svg`, 1080×1920, sem letra. Asset: `ASSET_personagem_feminino-v1`.
+Estado: `recusado` (t140u, 28/10). O PNG de 27/10 fica no arquivo e não é referência. Asset `ASSET_personagem_feminino-v1` não está travado.
 
 Elenco do código ímpar. Sem nome no vídeo.
 
 ## Trava
 
-Stickman de tubos pretos grossos, cabeça redonda branca, sem roupa, mais baixa que o PERS-M, coque redondo, argola amarela e pinta preta do lado esquerdo de quem olha, sem óculos, boca fechada, sem dedos, sem pessoa de cartum.
+Stickman de cabeça redonda branca, membros finos de palito, mais baixa que o PERS-M, coque, argola e pinta, sem óculos, uma roupa chapada ainda sem cor, boca de reação, sem dedos, sem pessoa de cartum. O desenho sem roupa foi recusado.
 
 ## O que está fechado
 

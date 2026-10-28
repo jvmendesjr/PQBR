@@ -30,14 +30,14 @@ Os pacotes `pacote-c913c002c9be` e `pacote-17b4cf4f727f` continuam como estavam:
 
 Tentativa 1 feita em 27/10, seguindo o fluxo (manifesto antes, bloco único sem número e sem fala, rótulo só no arquivo, Lite escolhido no menu, exemplos humanos da tela não usados). A imagem saiu pessoa com volume, 1376×768, mãos com dedos. Não é a frente. Não virou asset. O mesmo prompt não se repete. Detalhe no DECISOES-LOG t138u. A aba Personagens foi aberta; a imagem não foi concluída como personagem.
 
-1. A frente não se pede de novo ao Flow. O desenho fechado em t139u é a referência.
-2. A aba Personagens foi aberta em 27/10 (t138u) e a tentativa 1 não serve. Esses PNG ainda não foram colocados lá.
-3. O José olha `PERS-M.png`, `PERS-F.png` e `ELENCO-frente.png`. Se o traço não servir, muda o script. A regra (sem roupa, um acento) fica.
+1. A frente não se pede de novo ao Flow enquanto a roupa não tiver cor. O desenho de t139u está recusado.
+2. A aba Personagens foi aberta em 27/10 (t138u). A tentativa 1 e os PNG de t139u não servem.
+3. A próxima folha só nasce depois que o José apontar a roupa. Aí sim: frente, lado e três expressões, e ele olha de novo.
 4. Expressões e objetos vêm depois. Não gerar a folha inteira antes.
 
 Leitura de canais grandes em 27/10: `docs/pesquisas/canais-que-repetem-o-desenho-20261027.md`. O que se copia é um corpo preso e um Short de uma situação. Não se copia tom adulto, choque, nem luta.
 
-Fechado em t139u, no desenho do repositório, não numa nova geração do Flow. Sem roupa. Tubo preto, cabeça branca. PERS-M: óculos vermelhos, sem cabelo, mais alto. PERS-F: mais baixa, coque, argola amarela e pinta do lado esquerdo de quem olha. Arquivos: `banco-fichas/personagens/PERS-M.png`, `PERS-F.png` e `ELENCO-frente.png`. O script que regrava é `scripts/visual/frente_stickman.py`. A aba Personagens do Flow não recebeu esses arquivos. Expressões continuam para depois.
+Recusado em 28/10 (t140u). José comparou com a busca e com tutoriais de stickman e não quis o tubo sem roupa. Os PNG ficam no disco e não são referência. A próxima folha, depois da cor da roupa, é frente, lado e expressões. Análise em `docs/pesquisas/referencias-stickman-20261028.md`.
 
 ## Fase 4 — Vídeos que já existem no Drive
 

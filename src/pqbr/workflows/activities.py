@@ -35,7 +35,7 @@ async def gerar_roteiro(inp: EpisodioInput) -> RoteiroShort:
              "A explicação é mais lógica do que parece, e a gente repete isso todo santo dia sem perceber.",
              "No fim, é só mais uma mania nossa que tem história, e a história é boa demais.", CTA]
     bloco = BlocoVisual(estilo=ESTILO_PADRAO_STICKMAN,
-                        personagem="stickman de tubos pretos, sem roupa, óculos redondos vermelhos, boca fechada (demonstração)",
+                        personagem="stickman de cabeça branca, membros de palito, óculos vermelhos, boca de reação (demonstração)",
                         cenas=[CenaVisual(fala=f, acao="personagem reage", enquadramento="plano médio",
                                           ambiente="sala brasileira") for f in falas[:2]])
     return RoteiroShort(episodio_id=inp.episodio_id, titulo=f"Porquê: {inp.tema}"[:100], falas=falas,

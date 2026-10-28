@@ -32,11 +32,11 @@ class CenaVisual(Contrato):
 # CONTRATO-EDITORIAL §19 [ESTILO], José 27/10/2026 (t133u). Identidade única: stickman.
 # O nome ESTILO_PADRAO_2D permanece só como apelido do texto vigente, para import antigo.
 ESTILO_PADRAO_STICKMAN = (
-    "Stickman de tubos pretos grossos e arredondados, cabeça redonda grande branca com contorno preto, "
-    "membros com ponta redonda, traço chapado, sem roupa, sem pele, sem dedos desenhados e sem pessoa de cartum. "
-    "O acento é um só e já está na ficha, nunca numa peça de roupa. "
+    "Stickman de cabeça redonda branca com contorno preto, membros finos de palito, traço chapado, "
+    "uma roupa simples e fixa, cara com olho, sobrancelha e boca de reação. "
+    "Sem dedos desenhados, sem pessoa de cartum e sem volume. "
     "Fundo limpo e claro, no máximo 3 a 5 objetos, humor de comédia leve. Personagem grande no quadro, "
-    "cabeça inteira visível, agindo, expressão simples e exagerada, boca fechada. "
+    "cabeça inteira visível, agindo, expressão simples e exagerada. "
     "Proibido: pessoa desenhada, fotorrealismo, volume 3D, rosto de pessoa real ou celebridade, marca ou logo real, "
     "texto escrito dentro da imagem. Formato vertical 9:16, faixas de cima e de baixo livres."
 )

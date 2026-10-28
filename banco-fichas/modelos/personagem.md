@@ -2,7 +2,7 @@
 
 Id estável. Sem nome falado ou escrito no vídeo.
 
-Preencher só o que estiver decidido. O elenco vigente não tem roupa. Um acento só.
+Preencher só o que estiver decidido. A roupa do cotidiano é uma só e chapada. A cor entra quando o José escolher.
 
 ## Trava
 

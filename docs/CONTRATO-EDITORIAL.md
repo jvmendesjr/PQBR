@@ -340,16 +340,16 @@ O bloco que começava com "Ilustração plana de cartum" deixou de ser o padrão
 ## 19. Stickman único (José, 27/10/2026, t133u), regra
 Fecha a identidade. Prevalece sobre o visual do §16, sobre o §16.7 antigo e sobre o que no §17 ainda dizia que a ficha estava só prometida.
 
-1. **Só stickman.** Cabeça redonda grande, corpo e membros de tubos grossos com ponta redonda, traço chapado, sem dedos, sem pessoa de cartum, sem volume. Comédia de costumes brasileiros, leve e com respeito. Folclore é tema eventual, não o estilo do canal.
+1. **Só stickman.** Cabeça redonda branca, contorno preto, membros finos de palito, traço chapado, uma roupa simples e fixa, cara com olho, sobrancelha e boca de reação. Sem dedos, sem pessoa de cartum, sem volume. Comédia de costumes brasileiros, leve e com respeito. Folclore é tema eventual, não o estilo do canal. O desenho de tubos sem roupa (t139u) foi recusado em 28/10 (t140u).
 2. **3D descartado.** Não se pede volume, fotorrealismo nem desenho 3D. Vídeo de teste 3D, se for localizado, vai para o Drive em `99_Arquivo/desenvolvimento-3d`, sem apagar o original. Em 27/10 essa pasta de teste não foi encontrada. Ver `docs/fases/stickman.md`.
-3. **Fichas.** Texto em `banco-fichas/` (personagem, ambiente, objeto). A frente do elenco está desenhada em `banco-fichas/personagens/` (t139u), sem letra dentro do arquivo. O Flow cita essa imagem e não redesenha o corpo. Ambiente e objeto seguem sem imagem.
-4. **Elenco.** Sem roupa. Tubo preto, cabeça branca, a mesma cabeça nos dois. `PERS-M`: óculos redondos vermelhos, sem cabelo, mais alto. `PERS-F`: mais baixa, coque redondo, argola amarela e pinta preta do lado esquerdo de quem olha, sem óculos. Nomes da bíblia de 08/10 não voltam.
+3. **Fichas.** Texto em `banco-fichas/` (personagem, ambiente, objeto). Os PNG de 27/10 estão recusados e não entram no Flow. A próxima folha é frente, lado e expressões, no modelo das referências de 28/10. Ambiente e objeto seguem sem imagem.
+4. **Elenco.** `PERS-M`: óculos redondos vermelhos, mais alto. `PERS-F`: mais baixa, coque, argola e pinta. A roupa chapada dos dois ainda não tem cor. Nomes da bíblia de 08/10 não voltam. Não gerar a frente só com texto.
 5. **Estilo no código.** `ESTILO_PADRAO_STICKMAN` (`BlocoVisual` 2.0.0). O roteiro e o storyboard recebem esse texto. Pedido com 3D é recusado. O pacote do caderno ainda guarda o bloco no slot `bloco_visual_16_7`; o texto é este:
 
 ```
-[ESTILO] Stickman de tubos pretos grossos e arredondados, cabeça redonda grande branca com contorno preto, membros com ponta redonda, traço chapado, sem roupa, sem pele, sem dedos desenhados e sem pessoa de cartum. O acento é um só e já está na ficha, nunca numa peça de roupa. Fundo limpo e claro, no máximo 3 a 5 objetos, humor de comédia leve. Personagem grande no quadro, cabeça inteira visível, agindo, expressão simples e exagerada, boca fechada. Proibido: pessoa desenhada, fotorrealismo, volume 3D, rosto de pessoa real ou celebridade, marca ou logo real, texto escrito dentro da imagem. Formato vertical 9:16, faixas de cima e de baixo livres.
+[ESTILO] Stickman de cabeça redonda branca com contorno preto, membros finos de palito, traço chapado, uma roupa simples e fixa, cara com olho, sobrancelha e boca de reação. Sem dedos desenhados, sem pessoa de cartum e sem volume. Fundo limpo e claro, no máximo 3 a 5 objetos, humor de comédia leve. Personagem grande no quadro, cabeça inteira visível, agindo, expressão simples e exagerada. Proibido: pessoa desenhada, fotorrealismo, volume 3D, rosto de pessoa real ou celebridade, marca ou logo real, texto escrito dentro da imagem. Formato vertical 9:16, faixas de cima e de baixo livres.
 
-[PERSONAGEM] Um stickman sem roupa, a frase-trava da ficha do episódio (PERS-M ou PERS-F), sem nome. A mesma frase em todas as cenas. Não inventar cor de roupa: o acento único já está na ficha.
+[PERSONAGEM] Um stickman, a frase-trava da ficha do episódio (PERS-M ou PERS-F), sem nome. A mesma roupa e a mesma cabeça em todas as cenas. A cor da roupa só entra depois de escolhida. Boca de reação, sem fala.
 
 [AMBIENTE] Cena <n>: <lugar>, <época: hoje / passado>, objetos-âncora: <3 a 5>, luz <hora>.
 

@@ -5,6 +5,10 @@ Versionamento SemVer (MAJOR.MINOR.PATCH) a partir de t510. Versão do pacote can
 
 
 
+## [0.17.7] — 2026-10-28
+### Alterado
+- José recusou o stickman sem roupa (t140u). Os PNG de 27/10 deixam de ser referência. O estilo passa a cabeça branca, membros de palito, uma roupa chapada fixa e cara de reação. A cor da roupa continua em aberto. Não gerar o personagem até a folha nova.
+
 ## [0.17.6] — 2026-10-27
 ### Alterado
 - Corpo do elenco fechado (t139u). Sem roupa. Tubo preto, cabeça branca. PERS-M: óculos vermelhos, sem cabelo, mais alto. PERS-F: mais baixa, coque, argola amarela e pinta do lado esquerdo de quem olha. Desenho em `banco-fichas/personagens/`, regravado por `scripts/visual/frente_stickman.py`. Não é geração do Flow. A aba Personagens não recebeu esses arquivos.

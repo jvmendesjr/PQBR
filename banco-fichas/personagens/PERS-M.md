@@ -1,12 +1,12 @@
 # PERS-M
 
-Estado: `definido` (t139u). Imagem: `PERS-M.png` e `PERS-M.svg`, 1080×1920, sem letra. Asset: `ASSET_personagem_masculino-v1`.
+Estado: `recusado` (t140u, 28/10). O PNG de 27/10 fica no arquivo e não é referência. Asset `ASSET_personagem_masculino-v1` não está travado.
 
 Elenco do código par (`elenco_alternado`). Sem nome no vídeo.
 
 ## Trava
 
-Stickman de tubos pretos grossos, cabeça redonda branca, sem cabelo e sem roupa, óculos redondos vermelhos inteiros, mais alto que a PERS-F, boca fechada, sem dedos, sem pessoa de cartum.
+Stickman de cabeça redonda branca, membros finos de palito, óculos redondos vermelhos, mais alto que a PERS-F, uma roupa chapada ainda sem cor, boca de reação, sem dedos, sem pessoa de cartum. O desenho sem roupa foi recusado.
 
 ## O que está fechado
 
