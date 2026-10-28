@@ -6,6 +6,7 @@ from pathlib import Path
 
 RAIZ = Path(__file__).resolve().parents[3]
 LIMITE = 6000
+LIMITE_ESTADO = 8000  # o ESTADO-ATUAL inteiro: com 6000 o corte caía no meio da tabela de pendências (t143u)
 PROTOCOLO = """1. `onboarding` (este pacote).
 2. `buscar_memoria` sobre o assunto antes de agir; em conflito, vale o doc canônico.
 3. Implementar no checkout com commit local (sem push) e registrar a decisão em docs/DECISOES-LOG.md e a versão em CHANGELOG.md (SemVer).
@@ -29,7 +30,7 @@ def pacote() -> str:
     mapa = sorted(p.name for p in (RAIZ / "docs/mapa").glob("*.mmd"))
     partes = [
         "# PQBR — onboarding do agente (gerado; não editar à mão)",
-        _ler("docs/ESTADO-ATUAL.md").replace("# ESTADO ATUAL", "## ESTADO ATUAL", 1)[:LIMITE],
+        _ler("docs/ESTADO-ATUAL.md").replace("# ESTADO ATUAL", "## ESTADO ATUAL", 1)[:LIMITE_ESTADO],
         "Fontes canônicas: docs/ESTADO-ATUAL.md (onde estamos), docs/REGRAS.md, docs/DECISOES-LOG.md, docs/ROADMAP.md, "
         "docs/LACUNAS-fluxo.md, docs/ARQUITETURA.md, docs/AGENTES.md, docs/mapa/. Em conflito, vale o doc canônico. "
         "O briefing do YT-LLM está em docs/_obsoleto/BRIEFING-novo-agente-pqbr.md e não é procedimento.",

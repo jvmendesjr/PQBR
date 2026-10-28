@@ -2,7 +2,7 @@
 
 Fonte única de "onde estamos". Não repete o ROADMAP: aponta os itens por id. **Atualize este arquivo a cada correção ou pendência resolvida.** O hook pre-commit exige isso quando o commit toca ROADMAP, LACUNAS, DECISOES-LOG ou CHANGELOG, e o `registrar_alteracao` exige isso para `tipo` correcao ou pendencia_resolvida.
 
-Atualizado: 28/10/2026 (t142u: documentos, mapa e memória alinhados para retomar; JEV-EF segue no ROADMAP) · versão 0.17.9
+Atualizado: 28/10/2026 (t143u: porta `decide()` do Jev pronta e testada sem rede, sem uso ainda; JEV-EF segue aberto no ROADMAP) · versão 0.18.0
 
 ## Onde estamos
 - **Produção:** o lote do saldo está em `runtime/lote-saldo/` (um diretório por tema). O EP1002 olhos-da-cara foi reprovado e descartado (`runtime/lote-saldo/_descartado/`), e o tema voltou a `proposto`.
@@ -14,7 +14,7 @@ Atualizado: 28/10/2026 (t142u: documentos, mapa e memória alinhados para retoma
 - **Stickman (t133u, t141u):** identidade única. O desenho sem roupa foi recusado. A roupa chapada ainda não tem cor. O material de 28/10 inspira o desenho e o prompt; NotebookLM, Flow e o resto do fluxo ficam. 3D não se pede. Fases em `docs/fases/stickman.md`.
 
 ## Próximo passo
-Ponto para retomar: o José escolhe a cor da roupa chapada do PERS-M e da PERS-F. Sem essa cor, não há folha nova e não há geração no Flow. Arquitetura, NotebookLM, mapa e a cadeia Flow → Vids → Vibes estão alinhados (t142u). Nada está agendado no YouTube. O LOOP e o drop-in do Telegram ficam para depois.
+Prioritário (P15, JEV-EF): o Jev. A porta `decide()` está pronta e testada sem rede (t143u), sem chamada real e sem workflow que a use. Faltam o primeiro uso (proposta: em sombra), os limiares calibrados e o reinício do worker (a chave já está em worker.env). Em paralelo: a cor da roupa (P5).
 
 ## Pendências abertas
 | # | Pendência | Ref. ROADMAP | Dono | Bloqueio |
@@ -33,7 +33,7 @@ Ponto para retomar: o José escolhe a cor da roupa chapada do PERS-M e da PERS-F
 | P12 | ERR-01: revisar os erros aceitáveis | ERR-01 | agente | depois dos primeiros dias de produção |
 | P13 | Proposta não aplicada: ferramentas só leitura para os agentes PydanticAI, sem MCP interno | F1-05 · t134u | José | sem efeito externo |
 | P14 | Proposta não aplicada: acompanhamento de mudanças (vigia de fallbacks, canário, deriva de contrato, `dev_diagnosticar`). Sem agente novo. O NotebookLM não entra no canário | F6-02 · t135u/t136u | José | registro no worker exige reinício |
-| P15 | **Prioritário.** Efetivar o Jev (`decide()`), item JEV-EF. Chave OpenRouter (JEV-02) só na hora de ligar | RNF-02 · t137u | José | ligar exige reinício e a chave |
+| P15 | **Prioritário.** Jev (`decide()`, JEV-EF). Porta pronta e testada sem rede (t143u): adaptador TypeSafe, limiares provisórios, consumo por chamada. Sem chamada real e sem workflow que a use. Falta o primeiro uso, a calibração e o reinício do worker | RNF-02 · JEV-EF · t137u, t143u | José | o primeiro uso, a calibração e o reinício exigem OK; ligar o fallback exige a chave (JEV-02) |
 
 ## Painel
 Aba **Roadmap** no painel (:8088): Próximos passos, Falta e Feito gerados deste arquivo e do ROADMAP por `scripts/mapa/roadmap.py` (via `gerar_index.py`; o pre-commit regenera quando ROADMAP/ESTADO-ATUAL/mapa mudam). Itens com ☑ (feito) e ☐ (falta/próximos), só símbolo, nada clicável. Só leitura.

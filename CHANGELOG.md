@@ -5,6 +5,14 @@ Versionamento SemVer (MAJOR.MINOR.PATCH) a partir de t510. Versão do pacote can
 
 
 
+## [0.18.0] — 2026-10-28
+### Adicionado
+- Porta `decide()` do Jev (`src/pqbr/motores/decisao.py`): adaptador TypeSafe (`systemone`, `jev-latest`), fallback OpenRouter desligado, limiar de confiança por contrato e registro de cada chamada em `pqbr.consumo_modelos`. Sem uso em workflow ainda (JEV-EF, t143u).
+### Alterado
+- A activity `registrar_consumo` grava pela função compartilhada `storage/consumo.py`. O SQL é o mesmo.
+### Corrigido
+- O pacote de onboarding (AGENTS.md) cortava o ESTADO-ATUAL em 6000 caracteres e perdia as últimas pendências (P14 e P15). O limite do ESTADO passa a 8000, com teste de regressão (t143u).
+
 ## [0.17.9] — 2026-10-28
 ### Alterado
 - Documentos, mapa e memória alinhados para retomar depois (t142u). O mapa do elenco mostra o stickman e a roupa ainda sem cor. A memória do bloco visual deixa de mandar o cartum de 12/10.

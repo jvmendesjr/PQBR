@@ -16,7 +16,15 @@
  "gemini_mem_timeout_s": 600,
  "_doc_memoria": "t546: espera mínima entre abas do juiz (s) e só abre aba nova com o serviço pqbr-camofox abaixo de gemini_mem_abrir_mb; senão MemoriaAlta (falha fechada) após gemini_mem_timeout_s.",
  "gemini_loop_espera_s": 480,
- "gemini_juiz": {
+ "decisao": {
+  "_doc": "t143u (JEV-EF, REGRAS §7): porta decide() em src/pqbr/motores/decisao.py. Adaptador escolhido pelo nome (typesafe, openrouter). Limiares PROVISÓRIOS, não calibrados com casos reais: até calibrar, abaixo do limiar escala para LLM ou José. Fallback OpenRouter desligado: ligar exige a chave (JEV-02, pedida ao José) e reinício do worker. O modelo do OpenRouter veio do cliente jevkit e não foi testado aqui.",
+  "principal": {"adaptador": "typesafe", "endpoint": "https://api.typesafe.ai/v1/systemone", "modelo": "jev-latest", "chave_env": "TYPESAFE_API_KEY"},
+  "fallback": {"adaptador": "openrouter", "ativo": false, "endpoint": "https://openrouter.ai/api/alpha/decisions", "modelo": "~typesafe/jev-latest", "chave_env": "OPENROUTER_API_KEY"},
+  "timeout_s": 15,
+  "tentativas": 2,
+  "limiares": {"ClassificacaoPopupCamofox": 0.9, "ClassificacaoEmailYouTube": 0.9, "TriagemCorrecao": 0.9, "VerificacaoCorrecao": 0.9}
+},
+"gemini_juiz": {
   "versao": "1.0.0",
   "pre_producao": {
    "modelo": "3.8 Flash",

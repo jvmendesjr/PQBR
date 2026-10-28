@@ -791,3 +791,16 @@ NÃO CABE:
 - Mapa: `12-storyboard-elenco.mmd` mostra o stickman, a roupa ainda sem cor e o prompt de início com recorte. `07-cadeia-video.mmd` diz que o material não troca a cadeia. `09` deixa de citar só o elenco de t78u. A página `docs/mapa/index.html` foi regenerada. A regra de não editar o mapa sozinho cedeu porque o pedido foi explícito.
 - Memória-chave `memoria:bloco-visual` deixa de mandar o cartum 2D de 12/10 e passa a descrever o stickman de t141u. O indexador leva isso ao Hindsight. Documento antigo com o texto de 12/10, se ainda estiver no bank, não é a regra.
 - O que continua aberto, e só isso, para a próxima sessão: a cor da roupa chapada. Sem ela, não há folha e não há geração no Flow. Arquitetura, NotebookLM e `YOUTUBE_DRY_RUN` ficam como estão.
+
+## t143u (28/10/2026) — JEV-EF: porta decide() e adaptador TypeSafe, sem uso ainda [prioridade do José, t137u]
+- Feito: `src/pqbr/motores/decisao.py` (porta, adaptadores TypeSafe e OpenRouter, `DecisorJev`, `decide()`), `src/pqbr/storage/consumo.py` (escrita de `registrar_consumo`), bloco `decisao` em `config/motores.json` e 38 testes sem rede.
+- Não feito: nenhuma chamada real ao Jev ou ao OpenRouter, nenhum reinício, nenhum workflow que use `decide()`. O primeiro uso pede OK do José e reinício do worker (JEV-01). A OpenAI, segundo fallback da REGRAS §7, segue em HIPÓTESE.
+- Limiares 0,9 (ClassificacaoPopupCamofox, ClassificacaoEmailYouTube, TriagemCorrecao, VerificacaoCorrecao): PROVISÓRIOS, sem calibração com casos reais (REGRAS §7).
+- Honestidade (t126u): o teste da chave, em 12/10, deu certo (JEV-01), mas não mediu acerto. Proposta: o primeiro uso roda em sombra, registra sem agir, até medirmos.
+- Corrigido: o pacote de onboarding cortava o ESTADO-ATUAL em 6000 caracteres e perdia P14 e P15. O limite passa a 8000, com teste.
+- Testes: 459 passed, 3 skipped, 2 xfailed (antes, 420 passed). `tests/workflows` não rodou: exige o servidor de teste do Temporal, que não está em cache.
+- Limite: a porta não verifica PII; quem chama anonimiza (REGRAS §17).
+- Consumo: uma linha em `pqbr.consumo_modelos` por chamada enviada, com tokens, também em resposta malformada. Sem chave, nem chamada nem linha.
+- Confiança: a menor das respostas (no noul, a certeza do lado escolhido, max(p, 1-p)). Sem limiar, abaixo dele ou com contrato recusado, escala (`escalar=True`).
+- Protocolo: cliente `jevkit` (`/v1/systemone`, `jev-latest`). Toda resposta é checada contra a pergunta; o score exige `confidence` (o jevkit assume 1.0).
+- Fallback: OpenRouter desligado (`ativo: false`). Ligar pede a chave (JEV-02) e confirmar o modelo `~typesafe/jev-latest`, não testado aqui.

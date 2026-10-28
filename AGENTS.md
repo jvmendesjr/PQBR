@@ -4,7 +4,7 @@
 
 Fonte única de "onde estamos". Não repete o ROADMAP: aponta os itens por id. **Atualize este arquivo a cada correção ou pendência resolvida.** O hook pre-commit exige isso quando o commit toca ROADMAP, LACUNAS, DECISOES-LOG ou CHANGELOG, e o `registrar_alteracao` exige isso para `tipo` correcao ou pendencia_resolvida.
 
-Atualizado: 28/10/2026 (t142u: documentos, mapa e memória alinhados para retomar; JEV-EF segue no ROADMAP) · versão 0.17.9
+Atualizado: 28/10/2026 (t143u: porta `decide()` do Jev pronta e testada sem rede, sem uso ainda; JEV-EF segue aberto no ROADMAP) · versão 0.18.0
 
 ## Onde estamos
 - **Produção:** o lote do saldo está em `runtime/lote-saldo/` (um diretório por tema). O EP1002 olhos-da-cara foi reprovado e descartado (`runtime/lote-saldo/_descartado/`), e o tema voltou a `proposto`.
@@ -16,7 +16,7 @@ Atualizado: 28/10/2026 (t142u: documentos, mapa e memória alinhados para retoma
 - **Stickman (t133u, t141u):** identidade única. O desenho sem roupa foi recusado. A roupa chapada ainda não tem cor. O material de 28/10 inspira o desenho e o prompt; NotebookLM, Flow e o resto do fluxo ficam. 3D não se pede. Fases em `docs/fases/stickman.md`.
 
 ## Próximo passo
-Ponto para retomar: o José escolhe a cor da roupa chapada do PERS-M e da PERS-F. Sem essa cor, não há folha nova e não há geração no Flow. Arquitetura, NotebookLM, mapa e a cadeia Flow → Vids → Vibes estão alinhados (t142u). Nada está agendado no YouTube. O LOOP e o drop-in do Telegram ficam para depois.
+Prioritário (P15, JEV-EF): o Jev. A porta `decide()` está pronta e testada sem rede (t143u), sem chamada real e sem workflow que a use. Faltam o primeiro uso (proposta: em sombra), os limiares calibrados e o reinício do worker (a chave já está em worker.env). Em paralelo: a cor da roupa (P5).
 
 ## Pendências abertas
 | # | Pendência | Ref. ROADMAP | Dono | Bloqueio |
@@ -35,7 +35,17 @@ Ponto para retomar: o José escolhe a cor da roupa chapada do PERS-M e da PERS-F
 | P12 | ERR-01: revisar os erros aceitáveis | ERR-01 | agente | depois dos primeiros dias de produção |
 | P13 | Proposta não aplicada: ferramentas só leitura para os agentes PydanticAI, sem MCP interno | F1-05 · t134u | José | sem efeito externo |
 | P14 | Proposta não aplicada: acompanhamento de mudanças (vigia de fallbacks, canário, deriva de contrato, `dev_diagnosticar`). Sem agente novo. O NotebookLM não entra no canário | F6-02 · t135u/t136u | José | registro no worker exige reinício |
-| P15 | **Prioritário.** Efetivar o Jev (`decide()`), item JEV-EF. Chave OpenRouter (JEV-02) só na hora de 
+| P15 | **Prioritário.** Jev (`decide()`, JEV-EF). Porta pronta e testada sem rede (t143u): adaptador TypeSafe, limiares provisórios, consumo por chamada. Sem chamada real e sem workflow que a use. Falta o primeiro uso, a calibração e o reinício do worker | RNF-02 · JEV-EF · t137u, t143u | José | o primeiro uso, a calibração e o reinício exigem OK; ligar o fallback exige a chave (JEV-02) |
+
+## Painel
+Aba **Roadmap** no painel (:8088): Próximos passos, Falta e Feito gerados deste arquivo e do ROADMAP por `scripts/mapa/roadmap.py` (via `gerar_index.py`; o pre-commit regenera quando ROADMAP/ESTADO-ATUAL/mapa mudam). Itens com ☑ (feito) e ☐ (falta/próximos), só símbolo, nada clicável. Só leitura.
+
+## Operacional e persistência (verificado 26/10/2026 18:21 -03)
+pqbr-mcp 0.4.0 (user unit, enabled, Restart=on-failure, linger=yes), hindsight-api (enabled, Restart=always), Docker DB/Temporal (`unless-stopped`), worker enabled. Comando de checagem e detalhes: `docs/operacao/onboarding-agente-externo.md` § Operacional e persistência.
+
+## Como atualizar
+Resolveu ou corrigiu algo: tire a linha da tabela (ou mude o bloqueio), ajuste "Próximo passo" e a data acima, faça o commit junto com o DECISOES-LOG/CHANGELOG e chame `registrar_alteracao` com `tipo` igual a `pendencia_resolvida` ou `correcao`.
+
 
 Fontes canônicas: docs/ESTADO-ATUAL.md (onde estamos), docs/REGRAS.md, docs/DECISOES-LOG.md, docs/ROADMAP.md, docs/LACUNAS-fluxo.md, docs/ARQUITETURA.md, docs/AGENTES.md, docs/mapa/. Em conflito, vale o doc canônico. O briefing do YT-LLM está em docs/_obsoleto/BRIEFING-novo-agente-pqbr.md e não é procedimento.
 
@@ -126,14 +136,6 @@ Histórico, fora do procedimento: docs/_obsoleto/BRIEFING-novo-agente-pqbr.md (h
 
 ## Decisões recentes
 
-## t137u (27/10/2026) — Jev: oráculo, e item prioritário no ROADMAP [APROVADO José]
-- Varredura: `decide()` não existe em `src/` nem em `scripts/`. Os contratos de saída existem. `CorrecaoAutonomaWorkflow` levanta `EmConstrucao`. `TYPESAFE_API_KEY` está em `~/.pqbr/worker.env` e nenhum processo da PQBR a lê. A CLI `jev` 0.19.0, fora da PQBR, responde.
-- Nenhum documento contradiz o papel de oráculo. REGRAS §7 é esse papel. A frase "o Jev decide refazer/trocar/chamar José" entrega `DecisaoPublicacao` e quem age é o código. Verificação visual é do juiz Gemini; verificação estruturada de uma intervenção é do Jev (`VerificacaoCorrecao`, t356).
-- José [APROVADO]: efetivar o Jev. Item prioritário **JEV-EF** no ROADMAP, junto com F1-05 (t134u) e F6-02 (t135u/t136u). A chave OpenRouter (JEV-02) entra no JEV-EF e só é pedida ao ligar.
-- No canário, o Jev escolhe um `ref` da lista que o Camofox observou, ou `abstain`. Não escreve seletor nem vê imagem.
-- Junção: estas quatro entradas foram escritas na branch `cursor/proposta-ferramentas-agentes-b9f6` e reaplicadas em cima de `57f8b97` (stickman, t133u). O stickman, o `banco-fichas/` e o código desse commit não foram alterados.
-
-
 ## t139u (27/10/2026) — Corpo do stickman definido
 - José pediu para continuar a leitura dos canais e definir de vez. A cor de roupa, que t133u tinha deixado aberta, fecha: não há roupa.
 - Corpo igual nos dois: tubo preto grosso, ponta redonda, cabeça branca com o mesmo tamanho, boca fechada, sem pele, sem dedo, sem letra na imagem. PERS-M é mais alto porque a perna é mais longa. Não tem cabelo. O único acento é o óculos redondo vermelho. PERS-F é mais baixa. O coque é um círculo do mesmo tubo, no alto, do lado direito de quem olha. O único acento é a argola amarela, do lado esquerdo de quem olha. A pinta é preta, pequena, ao lado da boca, nesse mesmo lado.
@@ -161,6 +163,17 @@ Histórico, fora do procedimento: docs/_obsoleto/BRIEFING-novo-agente-pqbr.md (h
 - Memória-chave `memoria:bloco-visual` deixa de mandar o cartum 2D de 12/10 e passa a descrever o stickman de t141u. O indexador leva isso ao Hindsight. Documento antigo com o texto de 12/10, se ainda estiver no bank, não é a regra.
 - O que continua aberto, e só isso, para a próxima sessão: a cor da roupa chapada. Sem ela, não há folha e não há geração no Flow. Arquitetura, NotebookLM e `YOUTUBE_DRY_RUN` ficam como estão.
 
+
+## t143u (28/10/2026) — JEV-EF: porta decide() e adaptador TypeSafe, sem uso ainda [prioridade do José, t137u]
+- Feito: `src/pqbr/motores/decisao.py` (porta, adaptadores TypeSafe e OpenRouter, `DecisorJev`, `decide()`), `src/pqbr/storage/consumo.py` (escrita de `registrar_consumo`), bloco `decisao` em `config/motores.json` e 38 testes sem rede.
+- Não feito: nenhuma chamada real ao Jev ou ao OpenRouter, nenhum reinício, nenhum workflow que use `decide()`. O primeiro uso pede OK do José e reinício do worker (JEV-01). A OpenAI, segundo fallback da REGRAS §7, segue em HIPÓTESE.
+- Limiares 0,9 (ClassificacaoPopupCamofox, ClassificacaoEmailYouTube, TriagemCorrecao, VerificacaoCorrecao): PROVISÓRIOS, sem calibração com casos reais (REGRAS §7).
+- Honestidade (t126u): o teste da chave, em 12/10, deu certo (JEV-01), mas não mediu acerto. Proposta: o primeiro uso roda em sombra, registra sem agir, até medirmos.
+- Corrigido: o pacote de onboarding cortava o ESTADO-ATUAL em 6000 caracteres e perdia P14 e P15. O limite passa a 8000, com teste.
+- Testes: 459 passed, 3 skipped, 2 xfailed (antes, 420 passed). `tests/workflows` não rodou: exige o servidor de teste do Temporal, que não está em cache.
+- Limite: a porta não verifica PII; quem chama anonimiza (REGRAS §17).
+- Consumo: uma linha em `pqbr.consumo_modelos` por chamada enviada, com tokens, também em resposta malformada. Sem chave, nem chamada nem linha.
+- Confiança: a menor das respostas (no noul, a certeza do lado escolhido, max(p, 1-
 
 ## Fase atual do ROADMAP
 

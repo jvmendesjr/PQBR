@@ -1,6 +1,6 @@
 """t98u/t99u: ESTADO-ATUAL obrigatório (hook) e handoff no registrar_alteracao."""
 import pytest
-from pqbr.governanca.estado_atual import ESTADO, exige_estado, proximo_passo
+from pqbr.governanca.estado_atual import ESTADO, RAIZ, exige_estado, proximo_passo
 from pqbr.mcp.escrita import registrar
 from pqbr.mcp import onboarding
 
@@ -59,3 +59,10 @@ def test_onboarding_comeca_pelo_estado():
     p = onboarding.pacote()
     assert p.index("ESTADO ATUAL") < p.index("## BRIEFING")
     assert "Atualizar docs/ESTADO-ATUAL.md a cada correção" in p
+
+
+def test_onboarding_inclui_a_tabela_de_pendencias_inteira():
+    # o pacote corta o ESTADO-ATUAL; uma linha cortada some para o agente externo (P14 e P15 sumiram em t143u)
+    p = onboarding.pacote()
+    linhas = [ln for ln in (RAIZ / ESTADO).read_text(encoding="utf-8").splitlines() if ln.startswith("| P")]
+    assert linhas and all(ln in p for ln in linhas)
