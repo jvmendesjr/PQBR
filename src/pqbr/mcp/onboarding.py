@@ -6,7 +6,7 @@ from pathlib import Path
 
 RAIZ = Path(__file__).resolve().parents[3]
 LIMITE = 6000
-LIMITE_ESTADO = 8000  # o ESTADO-ATUAL inteiro: com 6000 o corte caía no meio da tabela de pendências (t143u)
+LIMITE_ESTADO = 12000  # o ESTADO-ATUAL inteiro: 6000 e 8000 cortavam a tabela de pendências (t143u, t145u)
 PROTOCOLO = """1. `onboarding` (este pacote).
 2. `buscar_memoria` sobre o assunto antes de agir; em conflito, vale o doc canônico.
 3. Implementar no checkout com commit local (sem push) e registrar a decisão em docs/DECISOES-LOG.md e a versão em CHANGELOG.md (SemVer).

@@ -1,0 +1,29 @@
+# Biblioteca do motion: faça e não faça (REGRAS §26, t145u)
+
+A biblioteca é o lugar das peças aprovadas. O papel `motion` só usa o que está no catálogo
+(`../catalogo/indice.json` + um `.js` por modelo). Peça nova entra aqui antes de ir ao vídeo:
+um HTML de prova, um vídeo curto, um quadro de referência e a linha no índice.
+
+## Faça
+- Uma ideia por tela. Texto grande, alinhado à esquerda, dentro da zona segura (topo 14%, base 20%, direita 12%).
+- Entrada por mola fechada (passa um pouco do alvo e assenta). Saída por corte ou pela cortina padrão.
+- Cores só do elenco e da marca (`catalogo.PALETA`). Fundo neutro claro `#f6f1e7`. Cartões brancos.
+- Texto na tela só do bloco de números travados do storyboard. O que não está no bloco não aparece.
+- Teste a 360 px de largura antes de aprovar: se não se lê no celular, aumenta a letra ou tira texto.
+- Folha de contato (1 quadro/s), nota de 1 a 10, corrigir os três piores pontos, repetir até ≥ 8.
+- Quadro = função pura do tempo. Nada de `setTimeout`, `requestAnimationFrame`, transição CSS ou `Math.random`.
+
+## Não faça
+- Título centralizado em gradiente, fade puro, brilho, partículas, glitch, crossfade, rótulos de canto.
+- Música. SFX só por ação, indicado no roteiro.
+- Pedir clique, curtida, inscrição ou comentário (t263). "Interatividade passiva": movimento, não pedido.
+- Mapa geográfico "de cabeça": o modelo `origem-pino` usa cartão e pino, não contorno de país.
+- Bloco de tela cheia como última cena (o loop volta ao vídeo) ou cobrindo o gancho e o CTA falado.
+- Cobrir marca ou proveniência do provedor de vídeo.
+- Copiar código de kit sem licença. O motor é próprio; ideia é livre, código não.
+
+## Como provar uma peça nova
+1. Escreva `catalogo/<slug>.js` registrando no `PQBRMotion` e a entrada em `indice.json`.
+2. Rode `tests/unit/test_motion_motor.py` (slug, parâmetros e zona segura) e `test_motion_contrato.py`.
+3. Renderize um plano mínimo com `render.py` e gere a folha de contato com `compor.folha_contato`.
+4. Guarde aqui `<slug>.png` (quadro de referência) e a nota da autocrítica no `historico.md`.

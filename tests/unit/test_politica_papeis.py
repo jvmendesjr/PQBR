@@ -92,7 +92,7 @@ def test_mantenedor_ve_repo_todo_e_escreve_manutencao():
 
 
 @pytest.mark.parametrize("papel", ["diretor", "lider-editorial", "pesquisador-origem", "auditor",
-                                   "lider-compliance", "guardiao-seguranca", "observador", "dev"])
+                                   "lider-compliance", "guardiao-seguranca", "observador", "dev", "motion"])
 def test_papeis_internos_continuam_restritos(papel):
     assert set(P.papeis[papel].leitura) < set(P.papeis["mantenedor"].leitura)
     fora = sorted(set(P.papeis["indexador"].escrita) - set(P.papeis[papel].leitura))[0]

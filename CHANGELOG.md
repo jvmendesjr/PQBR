@@ -5,6 +5,18 @@ Versionamento SemVer (MAJOR.MINOR.PATCH) a partir de t510. Versão do pacote can
 
 
 
+## [0.21.0] — 2026-10-28
+### Adicionado
+- Motion graphics no pós (REGRAS §26, t145u): `src/pqbr/pos/motion/` com `motor.js` (quadro = função pura do tempo, molas fechadas, ruído com semente, zona segura 9:16), catálogo inicial de 8 modelos (`transicao-cortina`, `titulo-expressao`, `linha-tempo`, `origem-pino`, `versus`, `recorte-aponta`, `barra-progresso`, `imagem-cena`), `render.py` (Playwright + Chrome do sistema, PNG por quadro, checagem de determinismo e de zona), `compor.py` (FFmpeg troca o trecho do porquê, aplica a camada sobre, copia a narração; folha de contato e teste a 360 px), `cli.py` e `biblioteca/regras.md`.
+- Contrato `PlanoMotion` 1.0.0 (`src/pqbr/contratos/motion.py`): texto na tela só do bloco de números travados, cores só da paleta do elenco e da marca, bloco nunca na última cena nem sobre o gancho, transição padrão obrigatória, peças presas ao catálogo.
+- Nono papel-agente `motion` (`company/agents/motion/AGENTS.md`, `REGISTRO`, `modelos_9router.json` → `core-alto`, `politica_papeis.json` 1.5.0, `mcp_kit.PAPEIS`). Sem activity no worker ainda.
+- Testes `tests/unit/test_motion_contrato.py`, `test_motion_motor.py` (Node) e `test_motion_render.py` (Chrome, curto).
+- `playwright==1.64.1` no venv, sem baixar Chromium.
+- Coletânea de referências de motion (t147u): `banco-fichas/referencias-motion/` (README, `indice.json` 0.1.0, ficha REF-MG-00 "Papel e nanquim do canal", `aguardando_ok_jose`) e `docs/fases/motion-graphics.md` (base visual, variáveis de lista fechada, escolha determinística por categoria + semente do episódio, fases de trabalho e riscos). Documentadas as três fontes de referências: a biblioteca do próprio canal (âncora), o material de estudo de t145u e a pesquisa externa de MG-02 com OK do José por referência.
+### Alterado
+- CONTRATO-EDITORIAL §16.4 (substitui t435: o pós pode colocar motion graphics) e §12 (partitura com bloco de motion). BLUEPRINT §10 ganha o bloco na montagem. `docs/AGENTES.md`, `docs/ARQUITETURA.md`, `docs/README.md` e REGRAS §0/§3.x passam de 8 para 9 papéis.
+- Piloto em `runtime/piloto-motion/cafe-fraco/` (fora do git): bloco 14,87–33,5 s sobre o EP1003, original intacto, áudio idêntico. O José reprovou o visual (t147u: vídeo base obsoleto, cartum 2D aposentado) e manteve a ideia; o piloto passa a valer só como prova da mecânica.
+- Direção visual do motion (t147u, REGRAS §26): o bloco é desenhado na mesma folha do stickman (papel creme `#f5f0e4`, nanquim, hachura, tipografia manuscrita única OFL a escolher); um padrão fixo com variações sutis de lista fechada, por tipo de conteúdo e semente do episódio. ROADMAP ganha a Fase MG (MG-01 a MG-08: coletânea, referências externas, catálogo v2 no traço do canal, variação determinística, piloto 2 com cenas do Flow, bloco de números no storyboard, activity `pos_motion` no worker, finalização e entrada do logotipo — propostas A/B/C aguardando a escolha do José).
 ## [0.20.0] — 2026-10-28
 ### Adicionado
 - Referências reais do canal Porquê BR preservadas em `banco-fichas/referencias-canal/` (`ref-01..05` + `ref-canal-composta-sem-texto.png`) e ficha permanente do stickman clássico sem óculos (`PERS-M-classico.png`, `PERS-M-classico-folha.png`, `PERS-M-classico.md`) (t146u).

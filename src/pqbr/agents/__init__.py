@@ -25,6 +25,7 @@ class Papel:
 
 
 # t512: 8 papéis. Roteirista, SEO e Caçador viraram etapas de workflow que chamam o MotorIntelectual; Comunidade adiada.
+# t145u: 9º papel, motion (monta o bloco de motion graphics a partir do catálogo; não julga).
 REGISTRO: dict[str, Papel] = {
     "diretor": Papel("diretor"),
     "lider-editorial": Papel("lider-editorial", fallback=("core-baixo",)),   # monta pedidos ao motor e valida respostas
@@ -34,6 +35,7 @@ REGISTRO: dict[str, Papel] = {
     "guardiao-seguranca": Papel("guardiao-seguranca"),
     "observador": Papel("observador"),
     "dev": Papel("dev", fallback=("core-revisao",), temperatura=0.1),        # só diagnostica e propõe; nunca aplica
+    "motion": Papel("motion", fallback=("core-medio",), temperatura=0.2),    # preso ao catálogo; texto só do bloco de números travados
 }
 
 

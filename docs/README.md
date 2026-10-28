@@ -12,7 +12,7 @@ Siga a ordem definida em `REGRAS.md` §0:
 4. `TESTES.md` — critérios e evidências de validação.
 5. `ROADMAP.md` — tarefas, estado atual, dependências e gates do projeto.
 
-A `AGENTS.md` da raiz é gerada do onboarding. `company/agents/<slug>/AGENTS.md` guarda a persona de cada papel. `docs/AGENTES.md` é o roster vigente (8 papéis). `RASTREABILIDADE.md` liga requisito → desenho → tarefa → teste. `LACUNAS-fluxo.md` lista só o que ainda falta no código. `CONTRATO-EDITORIAL.md` é o contrato editorial oficial (v2, t473).
+A `AGENTS.md` da raiz é gerada do onboarding. `company/agents/<slug>/AGENTS.md` guarda a persona de cada papel. `docs/AGENTES.md` é o roster vigente (9 papéis). `RASTREABILIDADE.md` liga requisito → desenho → tarefa → teste. `LACUNAS-fluxo.md` lista só o que ainda falta no código. `CONTRATO-EDITORIAL.md` é o contrato editorial oficial (v2, t473).
 
 ## Os dois roadmaps não são intercambiáveis
 

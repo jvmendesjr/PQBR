@@ -1,0 +1,77 @@
+{
+  "_doc": "Catálogo do papel motion (REGRAS §26, t145u). O JS de cada modelo registra o mesmo slug. tipo texto/textos com travado=true só aceita item do bloco de números travados. camada: tela_cheia (dentro do bloco), sobre (por cima do vídeo), ambas.",
+  "versao": "1.0.0",
+  "modelos": {
+    "transicao-cortina": {
+      "descricao": "Transição padrão: cortina na cor do elenco cobre (antes do corte) ou revela (depois do corte). Dura 0,3 a 0,6 s.",
+      "camada": "ambas",
+      "parametros": {
+        "fase": {"tipo": "opcao", "opcoes": ["cobre", "revela"], "obrigatorio": true},
+        "cor": {"tipo": "cor", "obrigatorio": false}
+      }
+    },
+    "titulo-expressao": {
+      "descricao": "A expressão em letra grande, à esquerda, uma linha por vez.",
+      "camada": "tela_cheia",
+      "parametros": {
+        "texto": {"tipo": "texto", "travado": true, "obrigatorio": true},
+        "rotulo": {"tipo": "texto", "travado": true, "obrigatorio": false},
+        "tamanho": {"tipo": "numero", "obrigatorio": false}
+      }
+    },
+    "linha-tempo": {
+      "descricao": "Passagem de tempo: marcos aparecem de cima para baixo.",
+      "camada": "tela_cheia",
+      "parametros": {
+        "marcos": {"tipo": "textos", "travado": true, "obrigatorio": true, "min": 2, "max": 5},
+        "rotulo": {"tipo": "texto", "travado": true, "obrigatorio": false}
+      }
+    },
+    "origem-pino": {
+      "descricao": "Cartão de origem com pino que cai e quica. Sem mapa geográfico.",
+      "camada": "tela_cheia",
+      "parametros": {
+        "lugar": {"tipo": "texto", "travado": true, "obrigatorio": true},
+        "detalhe": {"tipo": "texto", "travado": true, "obrigatorio": false}
+      }
+    },
+    "versus": {
+      "descricao": "Versão mais aceita × tem quem diga: dois cartões empilhados; o segundo entra em entrada_b segundos.",
+      "camada": "tela_cheia",
+      "parametros": {
+        "titulo_a": {"tipo": "texto", "travado": true, "obrigatorio": true},
+        "texto_a": {"tipo": "texto", "travado": true, "obrigatorio": true},
+        "titulo_b": {"tipo": "texto", "travado": true, "obrigatorio": true},
+        "texto_b": {"tipo": "texto", "travado": true, "obrigatorio": true},
+        "imagem_a": {"tipo": "imagem", "obrigatorio": false},
+        "imagem_b": {"tipo": "imagem", "obrigatorio": false},
+        "entrada_b": {"tipo": "numero", "obrigatorio": false}
+      }
+    },
+    "recorte-aponta": {
+      "descricao": "Recorte do stickman entra de baixo e aponta para uma caixa de texto.",
+      "camada": "tela_cheia",
+      "parametros": {
+        "imagem": {"tipo": "imagem", "obrigatorio": true},
+        "texto": {"tipo": "texto", "travado": true, "obrigatorio": true},
+        "lado": {"tipo": "opcao", "opcoes": ["esq", "dir"], "obrigatorio": false}
+      }
+    },
+    "barra-progresso": {
+      "descricao": "Barra fina de progresso do vídeo inteiro, na borda de baixo da zona segura.",
+      "camada": "sobre",
+      "parametros": {
+        "cor": {"tipo": "cor", "obrigatorio": false},
+        "espessura": {"tipo": "numero", "obrigatorio": false}
+      }
+    },
+    "imagem-cena": {
+      "descricao": "Imagem ou quadro de vídeo dentro do gráfico, com moldura e legenda travada.",
+      "camada": "tela_cheia",
+      "parametros": {
+        "imagem": {"tipo": "imagem", "obrigatorio": true},
+        "legenda": {"tipo": "texto", "travado": true, "obrigatorio": false}
+      }
+    }
+  }
+}

@@ -95,7 +95,7 @@
   1. **Temporal = sistema nervoso** (t514): a peça mais rígida; trocável em tese, mas a última a mudar, pela consistência. Toda decisão que exigiria um humano e roda sozinha é **determinística e passa pelo Temporal** (durável, registrada, reexecutável/replay, com retentativas e sinais). O Temporal **não** é escondido atrás de camadas extras: workflows e activities usam o SDK direto.
   2. **NotebookLM = centro nervoso editorial e motor do canal** (t512): decisões, temas, roteiros e direção do canal; a produção segue os caminhos que ele norteia. A **geração de vídeo saiu do NotebookLM** por determinismo (Flow é a rota primária).
   3. **Sistema modular** (t513): cada motor é peça trocável atrás de um contrato (interface Pydantic + adaptador), escolhida por config (`config/motores.json`; portas em `src/pqbr/motores/`): `MotorIntelectual` (hoje NotebookLM), `GeradorVideo` (hoje Flow; cadeia Flow (primário) → Google Vids pelo navegador → Meta Vibes quando os dois falham ou esgotam a cota; tudo pelo navegador nas cotas já pagas, **sem APIs** (t517); NotebookLM vídeo só como alternativa). Agentes e motores giram em volta do Temporal.
-  4. **8 papéis-agente** (t512): Diretor, Líder Editorial (monta pedidos ao motor e valida respostas), Pesquisador de Origem, Auditor, Compliance, Guardião, Observador, Dev (diagnostica e propõe; nunca aplica; José aplica com agentes externos). Roteirista, SEO e Caçador Sazonal viram etapas de workflow que chamam o MotorIntelectual; Comunidade adiada.
+  4. **9 papéis-agente** (t512, t145u): Diretor, Líder Editorial (monta pedidos ao motor e valida respostas), Pesquisador de Origem, Auditor, Compliance, Guardião, Observador, Dev (diagnostica e propõe; nunca aplica; José aplica com agentes externos), Motion (monta o bloco de motion graphics do catálogo; não julga). Roteirista, SEO e Caçador Sazonal viram etapas de workflow que chamam o MotorIntelectual; Comunidade adiada.
   5. **Contratos Pydantic v2 = peça central do determinismo, junto com o Temporal** (t515): todo dado que cruza agente, motor ou serviço web passa por contrato. Ficam **num lugar só** (`src/pqbr/contratos/`, inclusive os das portas de motor), cada um **versionado em SemVer** (`contratos.VERSOES`; MAJOR = quebra, MINOR = campo opcional/regra mais frouxa, PATCH = doc; teste obriga). **Revisão contínua**, porque regras e fluxos dos serviços web mudam: testes de contrato por adaptador (respostas reais gravadas como fixtures), canários periódicos por adaptador web em Schedule do Temporal que detectam deriva, e Observador/Dev sinalizando quebras (proposta, não aplicada, em `docs/_obsoleto/sdd/PROPOSTA-papeis-skills.md` §Revisão de contratos).
 
 ### ADR-012: Camofox — uma instalação, uma instância por conta crítica, atrás de `NavegadorIdentidade` [APROVADO José 24/10/2026; NÃO implementado]
@@ -146,7 +146,7 @@
 
 ## 3. Papéis
 
-> **Equipe vigente (t512, t129u):** 8 papéis em `docs/AGENTES.md`. O mapa de 14 agentes e o `@prod-*` estão em `docs/_obsoleto/agentes-equipe-14-t395.md`. O "só propõe, José aprova" foi relaxado (REGRAS §0).
+> **Equipe vigente (t512, t129u, t145u):** 9 papéis em `docs/AGENTES.md`. O mapa de 14 agentes e o `@prod-*` estão em `docs/_obsoleto/agentes-equipe-14-t395.md`. O "só propõe, José aprova" foi relaxado (REGRAS §0).
 
 > t363, histórico: o `pqbr` falava com o Paperclip de teste. Isso não é o canal atual. Canal e painel estão no bloco seguinte.
 

@@ -1,8 +1,9 @@
 {
- "_doc": "t512/t513 (José): 8 papéis-agente + etapas de workflow. Papéis: diretor, lider-editorial, pesquisador-origem, auditor, lider-compliance, guardiao-seguranca, observador, dev. Etapas (não são agentes; reserva 9router quando o MotorIntelectual falha): roteirista, especialista-seo, cacador-sazonal. Canal: pqbr-assistente. Segunda opinião: revisao.",
+ "_doc": "t512/t513 (José): 9 papéis-agente + etapas de workflow. Papéis: diretor, lider-editorial, pesquisador-origem, auditor, lider-compliance, guardiao-seguranca, observador, dev, motion (t145u). Etapas (não são agentes; reserva 9router quando o MotorIntelectual falha): roteirista, especialista-seo, cacador-sazonal. Canal: pqbr-assistente. Segunda opinião: revisao.",
  "diretor": "core-alto",
  "auditor": "core-alto",
  "dev": "core-alto",
+ "motion": "core-alto",
  "pesquisador-origem": "core-medio",
  "lider-editorial": "core-medio",
  "lider-compliance": "core-medio",

@@ -29,9 +29,9 @@ def test_vigiadas_e_versoes():
     assert {"FerramentaVigiada", "ItemAtualizacao", "RelatorioAtualizacoes"} <= set(VERSOES)
 
 
-def test_mcp_kit_8_papeis():
+def test_mcp_kit_9_papeis():
     assert set(PAPEIS) == {"diretor", "lider-editorial", "pesquisador-origem", "auditor", "lider-compliance",
-                           "guardiao-seguranca", "observador", "dev"}
+                           "guardiao-seguranca", "observador", "dev", "motion"}   # t145u: motion
 
 
 def test_cadeia_video_t517():
