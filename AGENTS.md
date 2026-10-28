@@ -4,7 +4,7 @@
 
 Fonte única de "onde estamos". Não repete o ROADMAP: aponta os itens por id. **Atualize este arquivo a cada correção ou pendência resolvida.** O hook pre-commit exige isso quando o commit toca ROADMAP, LACUNAS, DECISOES-LOG ou CHANGELOG, e o `registrar_alteracao` exige isso para `tipo` correcao ou pendencia_resolvida.
 
-Atualizado: 28/10/2026 (t141u: material de stickman é inspiração; fluxo e NotebookLM ficam; JEV-EF segue no ROADMAP) · versão 0.17.8
+Atualizado: 28/10/2026 (t142u: documentos, mapa e memória alinhados para retomar; JEV-EF segue no ROADMAP) · versão 0.17.9
 
 ## Onde estamos
 - **Produção:** o lote do saldo está em `runtime/lote-saldo/` (um diretório por tema). O EP1002 olhos-da-cara foi reprovado e descartado (`runtime/lote-saldo/_descartado/`), e o tema voltou a `proposto`.
@@ -16,7 +16,7 @@ Atualizado: 28/10/2026 (t141u: material de stickman é inspiração; fluxo e Not
 - **Stickman (t133u, t141u):** identidade única. O desenho sem roupa foi recusado. A roupa chapada ainda não tem cor. O material de 28/10 inspira o desenho e o prompt; NotebookLM, Flow e o resto do fluxo ficam. 3D não se pede. Fases em `docs/fases/stickman.md`.
 
 ## Próximo passo
-O José escolhe a roupa chapada do PERS-M e da PERS-F. Sem essa cor, não há folha nova e não há geração no Flow. Arquitetura, NotebookLM e a cadeia Flow → Vids → Vibes ficam como estão (t141u). Nada está agendado no YouTube. O LOOP e o drop-in do Telegram ficam para depois.
+Ponto para retomar: o José escolhe a cor da roupa chapada do PERS-M e da PERS-F. Sem essa cor, não há folha nova e não há geração no Flow. Arquitetura, NotebookLM, mapa e a cadeia Flow → Vids → Vibes estão alinhados (t142u). Nada está agendado no YouTube. O LOOP e o drop-in do Telegram ficam para depois.
 
 ## Pendências abertas
 | # | Pendência | Ref. ROADMAP | Dono | Bloqueio |
@@ -35,7 +35,7 @@ O José escolhe a roupa chapada do PERS-M e da PERS-F. Sem essa cor, não há fo
 | P12 | ERR-01: revisar os erros aceitáveis | ERR-01 | agente | depois dos primeiros dias de produção |
 | P13 | Proposta não aplicada: ferramentas só leitura para os agentes PydanticAI, sem MCP interno | F1-05 · t134u | José | sem efeito externo |
 | P14 | Proposta não aplicada: acompanhamento de mudanças (vigia de fallbacks, canário, deriva de contrato, `dev_diagnosticar`). Sem agente novo. O NotebookLM não entra no canário | F6-02 · t135u/t136u | José | registro no worker exige reinício |
-| P15 | **Prioritário.** Efetivar o Jev (`decide()`), item JEV-EF. Chave OpenRouter (JEV-02) só na hora de ligar | RNF-02 · t137u
+| P15 | **Prioritário.** Efetivar o Jev (`decide()`), item JEV-EF. Chave OpenRouter (JEV-02) só na hora de 
 
 Fontes canônicas: docs/ESTADO-ATUAL.md (onde estamos), docs/REGRAS.md, docs/DECISOES-LOG.md, docs/ROADMAP.md, docs/LACUNAS-fluxo.md, docs/ARQUITETURA.md, docs/AGENTES.md, docs/mapa/. Em conflito, vale o doc canônico. O briefing do YT-LLM está em docs/_obsoleto/BRIEFING-novo-agente-pqbr.md e não é procedimento.
 
@@ -126,11 +126,6 @@ Histórico, fora do procedimento: docs/_obsoleto/BRIEFING-novo-agente-pqbr.md (h
 
 ## Decisões recentes
 
-## t136u (27/10/2026) — Sem agente novo [APROVADO]; NotebookLM só pela CLI
-- José [APROVADO]: não entra agente novo para acompanhar mudanças.
-- Nenhum documento vigente nem o código usa o NotebookLM pela web. É a CLI `notebooklm-py`, com a sessão Google do Camofox. O NotebookLM sai do canário de interface e fica na deriva de contrato.
-
-
 ## t137u (27/10/2026) — Jev: oráculo, e item prioritário no ROADMAP [APROVADO José]
 - Varredura: `decide()` não existe em `src/` nem em `scripts/`. Os contratos de saída existem. `CorrecaoAutonomaWorkflow` levanta `EmConstrucao`. `TYPESAFE_API_KEY` está em `~/.pqbr/worker.env` e nenhum processo da PQBR a lê. A CLI `jev` 0.19.0, fora da PQBR, responde.
 - Nenhum documento contradiz o papel de oráculo. REGRAS §7 é esse papel. A frase "o Jev decide refazer/trocar/chamar José" entrega `DecisaoPublicacao` e quem age é o código. Verificação visual é do juiz Gemini; verificação estruturada de uma intervenção é do Jev (`VerificacaoCorrecao`, t356).
@@ -158,6 +153,13 @@ Histórico, fora do procedimento: docs/_obsoleto/BRIEFING-novo-agente-pqbr.md (h
 - Não entra ferramenta nova. Claude não escreve o roteiro. Vsub, CapCut e várias contas Gmail ficam de fora. Imagem segue Nano Banana 2 Lite, 9:16, uma por vez, com manifesto. Vídeo segue a cadeia já definida, e o episódio continua parando no storyboard.
 - O reajuste cabe no que já existe. O caderno (`templates/notebooklm/comandos-pqbr.md`) passa a pedir, no JSON do storyboard, o frame de início como prompt de imagem, a frase-trava da ficha, e a animação como movimento do corpo até o fim, com "lips closed". A cena usa o recorte de um boneco, não a folha inteira. O contrato §19 item 7 registra isso.
 - A cor da roupa continua sem escolha. Sem ela, a folha nova não se desenha.
+
+
+## t142u (28/10/2026) — Documentos, mapa e memória alinhados para retomar
+- José pediu para atualizar os documentos, o mapa visual exposto e as memórias, e parar num ponto em que dá para continuar depois.
+- Mapa: `12-storyboard-elenco.mmd` mostra o stickman, a roupa ainda sem cor e o prompt de início com recorte. `07-cadeia-video.mmd` diz que o material não troca a cadeia. `09` deixa de citar só o elenco de t78u. A página `docs/mapa/index.html` foi regenerada. A regra de não editar o mapa sozinho cedeu porque o pedido foi explícito.
+- Memória-chave `memoria:bloco-visual` deixa de mandar o cartum 2D de 12/10 e passa a descrever o stickman de t141u. O indexador leva isso ao Hindsight. Documento antigo com o texto de 12/10, se ainda estiver no bank, não é a regra.
+- O que continua aberto, e só isso, para a próxima sessão: a cor da roupa chapada. Sem ela, não há folha e não há geração no Flow. Arquitetura, NotebookLM e `YOUTUBE_DRY_RUN` ficam como estão.
 
 
 ## Fase atual do ROADMAP

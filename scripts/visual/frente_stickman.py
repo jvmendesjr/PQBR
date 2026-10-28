@@ -1,4 +1,6 @@
-"""Frente travada do elenco (t139u). Desenho nosso, não geração do Flow.
+"""Desenho recusado em 28/10 (t140u). Não é referência e não vai para o Flow.
+
+Foi a frente de tubos sem roupa (t139u). Regravar este arquivo não reabre a ficha.
 
 Roda a partir da raiz do repositório e regrava os PNG e os SVG em banco-fichas/personagens/.
 Sem texto dentro da imagem: o modelo copia letra se a referência tiver letra.

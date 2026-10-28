@@ -65,4 +65,4 @@ O que cabe no nosso contrato, sem inventar canal:
 - Essa imagem é a referência. O Flow passa a variar pose e cena, não a inventar a pessoa.
 - Uma piada por Short. O desenho simples não pede mais objeto nem mais fala.
 
-Fechado na sequência, t139u. Sem roupa. O acento do PERS-M é o óculos vermelho. O da PERS-F é a argola amarela. O desenho está em `banco-fichas/personagens/`. Não foi outra geração do Flow.
+O fechamento sem roupa de t139u foi recusado em 28/10 (t140u). O desenho vigente não é esse. Ver `docs/pesquisas/referencias-stickman-20261028.md` e o ESTADO.

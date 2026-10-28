@@ -2,7 +2,7 @@
 
 Fonte única de "onde estamos". Não repete o ROADMAP: aponta os itens por id. **Atualize este arquivo a cada correção ou pendência resolvida.** O hook pre-commit exige isso quando o commit toca ROADMAP, LACUNAS, DECISOES-LOG ou CHANGELOG, e o `registrar_alteracao` exige isso para `tipo` correcao ou pendencia_resolvida.
 
-Atualizado: 28/10/2026 (t141u: material de stickman é inspiração; fluxo e NotebookLM ficam; JEV-EF segue no ROADMAP) · versão 0.17.8
+Atualizado: 28/10/2026 (t142u: documentos, mapa e memória alinhados para retomar; JEV-EF segue no ROADMAP) · versão 0.17.9
 
 ## Onde estamos
 - **Produção:** o lote do saldo está em `runtime/lote-saldo/` (um diretório por tema). O EP1002 olhos-da-cara foi reprovado e descartado (`runtime/lote-saldo/_descartado/`), e o tema voltou a `proposto`.
@@ -14,7 +14,7 @@ Atualizado: 28/10/2026 (t141u: material de stickman é inspiração; fluxo e Not
 - **Stickman (t133u, t141u):** identidade única. O desenho sem roupa foi recusado. A roupa chapada ainda não tem cor. O material de 28/10 inspira o desenho e o prompt; NotebookLM, Flow e o resto do fluxo ficam. 3D não se pede. Fases em `docs/fases/stickman.md`.
 
 ## Próximo passo
-O José escolhe a roupa chapada do PERS-M e da PERS-F. Sem essa cor, não há folha nova e não há geração no Flow. Arquitetura, NotebookLM e a cadeia Flow → Vids → Vibes ficam como estão (t141u). Nada está agendado no YouTube. O LOOP e o drop-in do Telegram ficam para depois.
+Ponto para retomar: o José escolhe a cor da roupa chapada do PERS-M e da PERS-F. Sem essa cor, não há folha nova e não há geração no Flow. Arquitetura, NotebookLM, mapa e a cadeia Flow → Vids → Vibes estão alinhados (t142u). Nada está agendado no YouTube. O LOOP e o drop-in do Telegram ficam para depois.
 
 ## Pendências abertas
 | # | Pendência | Ref. ROADMAP | Dono | Bloqueio |

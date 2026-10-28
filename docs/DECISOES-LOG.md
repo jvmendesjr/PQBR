@@ -785,3 +785,9 @@ NÃO CABE:
 - Não entra ferramenta nova. Claude não escreve o roteiro. Vsub, CapCut e várias contas Gmail ficam de fora. Imagem segue Nano Banana 2 Lite, 9:16, uma por vez, com manifesto. Vídeo segue a cadeia já definida, e o episódio continua parando no storyboard.
 - O reajuste cabe no que já existe. O caderno (`templates/notebooklm/comandos-pqbr.md`) passa a pedir, no JSON do storyboard, o frame de início como prompt de imagem, a frase-trava da ficha, e a animação como movimento do corpo até o fim, com "lips closed". A cena usa o recorte de um boneco, não a folha inteira. O contrato §19 item 7 registra isso.
 - A cor da roupa continua sem escolha. Sem ela, a folha nova não se desenha.
+
+## t142u (28/10/2026) — Documentos, mapa e memória alinhados para retomar
+- José pediu para atualizar os documentos, o mapa visual exposto e as memórias, e parar num ponto em que dá para continuar depois.
+- Mapa: `12-storyboard-elenco.mmd` mostra o stickman, a roupa ainda sem cor e o prompt de início com recorte. `07-cadeia-video.mmd` diz que o material não troca a cadeia. `09` deixa de citar só o elenco de t78u. A página `docs/mapa/index.html` foi regenerada. A regra de não editar o mapa sozinho cedeu porque o pedido foi explícito.
+- Memória-chave `memoria:bloco-visual` deixa de mandar o cartum 2D de 12/10 e passa a descrever o stickman de t141u. O indexador leva isso ao Hindsight. Documento antigo com o texto de 12/10, se ainda estiver no bank, não é a regra.
+- O que continua aberto, e só isso, para a próxima sessão: a cor da roupa chapada. Sem ela, não há folha e não há geração no Flow. Arquitetura, NotebookLM e `YOUTUBE_DRY_RUN` ficam como estão.

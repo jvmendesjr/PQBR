@@ -21,4 +21,4 @@ Pessoa de cartum, dedos desenhados, volume, marca, texto, óculos ou cabeça cor
 
 ## Estado
 
-`rascunho_texto` enquanto não houver arquivo. `definido` quando o desenho da ficha estiver no banco, como em t139u. Ajuste de traço troca o arquivo e mantém a regra. Não reabre roupa.
+`rascunho_texto` enquanto não houver arquivo aceito. `recusado` é o caso dos PNG de 27/10 (t140u): ficam no disco e não são referência. `definido` só quando o José aceitar a folha nova. A roupa chapada tem uma cor só, e essa cor ainda não foi escolhida.
