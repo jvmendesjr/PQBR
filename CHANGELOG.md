@@ -5,6 +5,10 @@ Versionamento SemVer (MAJOR.MINOR.PATCH) a partir de t510. Versão do pacote can
 
 
 
+## [0.17.8] — 2026-10-28
+### Alterado
+- O material de stickman fica como inspiração do desenho e do prompt (t141u). NotebookLM, Flow e o resto da arquitetura permanecem. O comando do storyboard pede o frame de início, a frase-trava e o movimento do corpo. A cor da roupa continua em aberto.
+
 ## [0.17.7] — 2026-10-28
 ### Alterado
 - José recusou o stickman sem roupa (t140u). Os PNG de 27/10 deixam de ser referência. O estilo passa a cabeça branca, membros de palito, uma roupa chapada fixa e cara de reação. A cor da roupa continua em aberto. Não gerar o personagem até a folha nova.

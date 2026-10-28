@@ -41,4 +41,8 @@ O número 58 milhões está desenhado dentro de uma miniatura, ao lado das palav
 
 ## O que a PQBR faz com isso
 
-O alvo fica: cabeça branca, palito, uma roupa chapada, cara de reação, 9:16. A cor da roupa o José ainda não disse. Sem essa cor, a folha não se desenha e o Flow não gera o personagem. Os PNG recusados continuam no repositório.
+José, em 28/10 (t141u): a arquitetura e o fluxo ficam. O NotebookLM continua. Este material não substitui ferramenta nenhuma. Serve de inspiração do desenho e de modelo de prompt para o storyboard que o caderno já devolve.
+
+O alvo do desenho: cabeça branca, palito, uma roupa chapada, cara de reação, 9:16. A cor da roupa o José ainda não disse. Sem essa cor, a folha não se desenha e o Flow não gera o personagem. Os PNG recusados continuam no repositório.
+
+O que o fluxo já tinha e estes textos confirmam: frame de início, uma ação, boca sem fala, referência por imagem, frase igual em toda cena. O que falta para o desenho das miniaturas é a folha aceita, e então o Flow recebe o recorte, no Lite, em 9:16, uma imagem por vez.

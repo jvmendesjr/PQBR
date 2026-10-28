@@ -37,7 +37,7 @@ Tentativa 1 feita em 27/10, seguindo o fluxo (manifesto antes, bloco único sem 
 
 Leitura de canais grandes em 27/10: `docs/pesquisas/canais-que-repetem-o-desenho-20261027.md`. O que se copia é um corpo preso e um Short de uma situação. Não se copia tom adulto, choque, nem luta.
 
-Recusado em 28/10 (t140u). José comparou com a busca e com tutoriais de stickman e não quis o tubo sem roupa. Os PNG ficam no disco e não são referência. A próxima folha, depois da cor da roupa, é frente, lado e expressões. Análise em `docs/pesquisas/referencias-stickman-20261028.md`.
+Recusado em 28/10 (t140u). José comparou com a busca e com tutoriais de stickman e não quis o tubo sem roupa. Os PNG ficam no disco e não são referência. Em t141u ele fechou: a arquitetura e o NotebookLM ficam; o material inspira o desenho e o prompt do storyboard que já existe. A próxima folha, depois da cor da roupa, é frente, lado e expressões. Análise em `docs/pesquisas/referencias-stickman-20261028.md`.
 
 ## Fase 4 — Vídeos que já existem no Drive
 

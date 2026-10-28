@@ -2,7 +2,7 @@
 
 Fonte única de "onde estamos". Não repete o ROADMAP: aponta os itens por id. **Atualize este arquivo a cada correção ou pendência resolvida.** O hook pre-commit exige isso quando o commit toca ROADMAP, LACUNAS, DECISOES-LOG ou CHANGELOG, e o `registrar_alteracao` exige isso para `tipo` correcao ou pendencia_resolvida.
 
-Atualizado: 28/10/2026 (t140u: José recusou o stickman sem roupa; JEV-EF segue no ROADMAP) · versão 0.17.7
+Atualizado: 28/10/2026 (t141u: material de stickman é inspiração; fluxo e NotebookLM ficam; JEV-EF segue no ROADMAP) · versão 0.17.8
 
 ## Onde estamos
 - **Produção:** o lote do saldo está em `runtime/lote-saldo/` (um diretório por tema). O EP1002 olhos-da-cara foi reprovado e descartado (`runtime/lote-saldo/_descartado/`), e o tema voltou a `proposto`.
@@ -11,10 +11,10 @@ Atualizado: 28/10/2026 (t140u: José recusou o stickman sem roupa; JEV-EF segue 
 - **Documentos (t129u):** `docs/LACUNAS-fluxo.md` só lista o que ainda falta no código. O roster vigente está em `docs/AGENTES.md`. Briefing, checklist pré-E2E, rascunho de SOUL e propostas não aplicadas foram para `docs/_obsoleto/`. As provas do F3-05 continuam em `docs/sdd/` porque o item segue aberto no ROADMAP.
 - **Fluxo (t130u):** o episódio para no storyboard. O NotebookLM entrega roteiro, compliance e SEO, e não gera vídeo. `YOUTUBE_DRY_RUN=true`. Os vídeos de `runtime/lote-saldo/` ficam parados até a etapa de publicação.
 - **Paperclip (t130u):** `paperclipai.service` parado e desabilitado em 27/10. Sem desinstalar e sem apagar dados. `config/paperclip.json` está `parado_proposital`.
-- **Stickman (t133u, t140u):** identidade única. O desenho sem roupa foi recusado. A roupa chapada ainda não tem cor. 3D não se pede. Fases em `docs/fases/stickman.md`.
+- **Stickman (t133u, t141u):** identidade única. O desenho sem roupa foi recusado. A roupa chapada ainda não tem cor. O material de 28/10 inspira o desenho e o prompt; NotebookLM, Flow e o resto do fluxo ficam. 3D não se pede. Fases em `docs/fases/stickman.md`.
 
 ## Próximo passo
-O José escolhe a roupa chapada do PERS-M e da PERS-F. Sem essa cor, não há folha nova e não há geração no Flow. A leitura das referências está em `docs/pesquisas/referencias-stickman-20261028.md`. Nada está agendado no YouTube. O LOOP e o drop-in do Telegram ficam para depois.
+O José escolhe a roupa chapada do PERS-M e da PERS-F. Sem essa cor, não há folha nova e não há geração no Flow. Arquitetura, NotebookLM e a cadeia Flow → Vids → Vibes ficam como estão (t141u). Nada está agendado no YouTube. O LOOP e o drop-in do Telegram ficam para depois.
 
 ## Pendências abertas
 | # | Pendência | Ref. ROADMAP | Dono | Bloqueio |

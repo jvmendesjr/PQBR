@@ -4,7 +4,7 @@
 
 Fonte única de "onde estamos". Não repete o ROADMAP: aponta os itens por id. **Atualize este arquivo a cada correção ou pendência resolvida.** O hook pre-commit exige isso quando o commit toca ROADMAP, LACUNAS, DECISOES-LOG ou CHANGELOG, e o `registrar_alteracao` exige isso para `tipo` correcao ou pendencia_resolvida.
 
-Atualizado: 28/10/2026 (t140u: José recusou o stickman sem roupa; JEV-EF segue no ROADMAP) · versão 0.17.7
+Atualizado: 28/10/2026 (t141u: material de stickman é inspiração; fluxo e NotebookLM ficam; JEV-EF segue no ROADMAP) · versão 0.17.8
 
 ## Onde estamos
 - **Produção:** o lote do saldo está em `runtime/lote-saldo/` (um diretório por tema). O EP1002 olhos-da-cara foi reprovado e descartado (`runtime/lote-saldo/_descartado/`), e o tema voltou a `proposto`.
@@ -13,10 +13,10 @@ Atualizado: 28/10/2026 (t140u: José recusou o stickman sem roupa; JEV-EF segue 
 - **Documentos (t129u):** `docs/LACUNAS-fluxo.md` só lista o que ainda falta no código. O roster vigente está em `docs/AGENTES.md`. Briefing, checklist pré-E2E, rascunho de SOUL e propostas não aplicadas foram para `docs/_obsoleto/`. As provas do F3-05 continuam em `docs/sdd/` porque o item segue aberto no ROADMAP.
 - **Fluxo (t130u):** o episódio para no storyboard. O NotebookLM entrega roteiro, compliance e SEO, e não gera vídeo. `YOUTUBE_DRY_RUN=true`. Os vídeos de `runtime/lote-saldo/` ficam parados até a etapa de publicação.
 - **Paperclip (t130u):** `paperclipai.service` parado e desabilitado em 27/10. Sem desinstalar e sem apagar dados. `config/paperclip.json` está `parado_proposital`.
-- **Stickman (t133u, t140u):** identidade única. O desenho sem roupa foi recusado. A roupa chapada ainda não tem cor. 3D não se pede. Fases em `docs/fases/stickman.md`.
+- **Stickman (t133u, t141u):** identidade única. O desenho sem roupa foi recusado. A roupa chapada ainda não tem cor. O material de 28/10 inspira o desenho e o prompt; NotebookLM, Flow e o resto do fluxo ficam. 3D não se pede. Fases em `docs/fases/stickman.md`.
 
 ## Próximo passo
-O José escolhe a roupa chapada do PERS-M e da PERS-F. Sem essa cor, não há folha nova e não há geração no Flow. A leitura das referências está em `docs/pesquisas/referencias-stickman-20261028.md`. Nada está agendado no YouTube. O LOOP e o drop-in do Telegram ficam para depois.
+O José escolhe a roupa chapada do PERS-M e da PERS-F. Sem essa cor, não há folha nova e não há geração no Flow. Arquitetura, NotebookLM e a cadeia Flow → Vids → Vibes ficam como estão (t141u). Nada está agendado no YouTube. O LOOP e o drop-in do Telegram ficam para depois.
 
 ## Pendências abertas
 | # | Pendência | Ref. ROADMAP | Dono | Bloqueio |
@@ -35,10 +35,7 @@ O José escolhe a roupa chapada do PERS-M e da PERS-F. Sem essa cor, não há fo
 | P12 | ERR-01: revisar os erros aceitáveis | ERR-01 | agente | depois dos primeiros dias de produção |
 | P13 | Proposta não aplicada: ferramentas só leitura para os agentes PydanticAI, sem MCP interno | F1-05 · t134u | José | sem efeito externo |
 | P14 | Proposta não aplicada: acompanhamento de mudanças (vigia de fallbacks, canário, deriva de contrato, `dev_diagnosticar`). Sem agente novo. O NotebookLM não entra no canário | F6-02 · t135u/t136u | José | registro no worker exige reinício |
-| P15 | **Prioritário.** Efetivar o Jev (`decide()`), item JEV-EF. Chave OpenRouter (JEV-02) só na hora de ligar | RNF-02 · t137u | José | ligar exige reinício e a chave |
-
-## Painel
-Aba **Roadmap** no painel (:8088): Próximos passos, Falta e F
+| P15 | **Prioritário.** Efetivar o Jev (`decide()`), item JEV-EF. Chave OpenRouter (JEV-02) só na hora de ligar | RNF-02 · t137u
 
 Fontes canônicas: docs/ESTADO-ATUAL.md (onde estamos), docs/REGRAS.md, docs/DECISOES-LOG.md, docs/ROADMAP.md, docs/LACUNAS-fluxo.md, docs/ARQUITETURA.md, docs/AGENTES.md, docs/mapa/. Em conflito, vale o doc canônico. O briefing do YT-LLM está em docs/_obsoleto/BRIEFING-novo-agente-pqbr.md e não é procedimento.
 
@@ -129,12 +126,6 @@ Histórico, fora do procedimento: docs/_obsoleto/BRIEFING-novo-agente-pqbr.md (h
 
 ## Decisões recentes
 
-## t135u (27/10/2026) — Acompanhamento de mudanças [PROPOSTA; NÃO aplicada]
-- Levantamento ao vivo em 27/10 ~11:50 (-03): `VigiaAtualizacoesWorkflow` agendado sexta 08:00, 0 execuções (primeira prevista 30/10); `AcessosWorkflow` de hora em hora cobre queda de sessão, não mudança de tela; `CorrecaoAutonomaWorkflow` com 0 execuções; `verificar_mapa.py` acusa diagrama desatualizado. Não há detecção de mudança de interface, de degradação de fallback nem de deriva de contrato.
-- Sem agente novo. Observador mede, Dev propõe, José aplica. Itens, nesta ordem: vigia de fallbacks; `dev_diagnosticar` no fim dos vigias, com aviso e `aprovacao_jose`; deriva de contrato por fixture (t515); canário de interface no Camofox sobre o `mapa_cliques.json`; rascunho de diff do mapa pelo Dev; `CorrecaoAutonoma` só para sessão e fila.
-- Fora: `pip install` automático, seletor ou diagrama editado por agente, MCP nesta camada. Nada aplicado.
-
-
 ## t136u (27/10/2026) — Sem agente novo [APROVADO]; NotebookLM só pela CLI
 - José [APROVADO]: não entra agente novo para acompanhar mudanças.
 - Nenhum documento vigente nem o código usa o NotebookLM pela web. É a CLI `notebooklm-py`, com a sessão Google do Camofox. O NotebookLM sai do canário de interface e fica na deriva de contrato.
@@ -161,6 +152,13 @@ Histórico, fora do procedimento: docs/_obsoleto/BRIEFING-novo-agente-pqbr.md (h
 - O que essas imagens têm em comum, e o nosso tubo não tem: cabeça redonda branca, contorno preto, membros finos, uma roupa chapada, cara com olho, sobrancelha e boca de reação, personagem agindo. Uma das folhas de modelo usa cabeça cor de pele, camiseta branca e bermuda azul. Os quadros de Pompeia usam cabelo, lenço amarelo, camisa e calça.
 - O que não entra: o estilo 1 do pipeline (roupa 3D, cabelo com volume, cenário de cinema) e o estilo 5 (corpo de pessoa, não palito). O tutorial pede 16:9 e Nano Banana Pro; o Short da PQBR é 9:16 e a imagem autorizada é o Nano Banana 2 Lite. O mesmo vídeo sugere várias contas Gmail para passar do teto diário do Flow e empurra o site Vsub. Isso não se faz. O número "58M" está desenhado na miniatura; não é uma medição.
 - O que se aproveita: um personagem só, enviado ao Flow como imagem ("add to prompt"), e o prompt muda pose, expressão, objeto e lugar. Folha com frente, lado e expressões; na cena, um recorte de um boneco só, porque a folha inteira confunde o modelo. Narração fora. Sem
+
+## t141u (28/10/2026) — O material é inspiração; o fluxo não muda
+- José: manter a arquitetura e o fluxo, tudo o que está aparelhado. O material entrou para ver o processo e os prompts que dá para usar. Continua o NotebookLM. Tudo o mais permanece. O que muda é a inspiração da identidade visual e o reajuste do que o fluxo precisa para chegar nesse desenho.
+- Não entra ferramenta nova. Claude não escreve o roteiro. Vsub, CapCut e várias contas Gmail ficam de fora. Imagem segue Nano Banana 2 Lite, 9:16, uma por vez, com manifesto. Vídeo segue a cadeia já definida, e o episódio continua parando no storyboard.
+- O reajuste cabe no que já existe. O caderno (`templates/notebooklm/comandos-pqbr.md`) passa a pedir, no JSON do storyboard, o frame de início como prompt de imagem, a frase-trava da ficha, e a animação como movimento do corpo até o fim, com "lips closed". A cena usa o recorte de um boneco, não a folha inteira. O contrato §19 item 7 registra isso.
+- A cor da roupa continua sem escolha. Sem ela, a folha nova não se desenha.
+
 
 ## Fase atual do ROADMAP
 

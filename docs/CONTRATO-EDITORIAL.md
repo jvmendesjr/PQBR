@@ -358,4 +358,5 @@ Fecha a identidade. Prevalece sobre o visual do §16, sobre o §16.7 antigo e so
 N. Fala: "<frase final>" → Ação: retoma a imagem da cena 1 → Plano: o mesmo da cena 1.
 ```
 6. **Drive.** Ferramenta da mesma conta Google, já em uso. Estrutura `PQBR/` na REGRAS §21. O banco em texto espelha em `00_Biblia_Visual/banco-fichas`. Isso não cria o catálogo no banco do app.
+7. **Materiais de stickman de 28/10 (t141u).** São inspiração do desenho e do jeito do prompt. Não trocam a arquitetura. O NotebookLM continua no roteiro, na compliance, no SEO e no JSON do storyboard. A imagem continua no Flow, Nano Banana 2 Lite, 9:16, uma por vez. Não entram Claude como autor, Vsub, CapCut, 16:9, Nano Banana Pro, nem várias contas Gmail. O prompt de imagem descreve o frame de início, com a frase-trava da ficha. O prompt de animação descreve o corpo indo do início ao fim, com "lips closed". A folha inteira não vai na cena: vai um recorte do boneco. A cor da roupa ainda não foi escolhida, e sem ela a folha não se gera.
 
