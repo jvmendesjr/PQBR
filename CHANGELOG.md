@@ -5,6 +5,15 @@ Versionamento SemVer (MAJOR.MINOR.PATCH) a partir de t510. Versão do pacote can
 
 
 
+## [0.27.0] — 2026-10-28
+### Adicionado
+- Motion, seis peças novas (MG-10 parcial, t153u): `frase-troca`, `marca-texto`, `numero-conta`, `leque`, `elo-causa` e `transicao-pincelada` em `src/pqbr/pos/motion/catalogo/`; catálogo `indice.json` 1.2.0 com parâmetros travados e `fragmento_de` no `destaque`; `contratos/motion.py` passou a validar que o `destaque` é trecho literal de `texto`.
+- Coletânea de referências: REF-MG-02 a REF-MG-07 em `banco-fichas/referencias-motion/` (link, data, medida, gramática observada, o que entra e o que fica de fora), README com a tabela referência → peças e `indice.json` 0.3.0 com o campo `delegacao_escolha`; prova em `provas/mg10-pecas.png`.
+- Testes: casos novos em `tests/unit/test_motion_contrato.py` (catálogo novo e destaque-trecho) e `tests/unit/test_motion_motor.py` (zona segura e desenho das seis peças). Suíte: 672 passed, 73 skipped, 2 xfailed.
+### Alterado
+- REGRAS §26: "Quem escolhe o movimento" (delegação do José em t153u, o OK dele é sobre a regra e as fichas), estado do vocabulário (seis peças no catálogo, riscado como candidato) e a coletânea com a escolha determinística por episódio.
+- `docs/fases/motion-graphics.md` (Fase 2d com método, peças e recusas), ROADMAP (MG-02, MG-04, MG-10 e o portão da Fase MG), `biblioteca/regras.md`, `biblioteca/historico.md` (autocrítica 7 → 8,5), persona `motion` (regras 10 e 11) e ESTADO-ATUAL (0.27.0).
+
 ## [0.26.0] — 2026-10-28
 ### Removido
 - `runtime/piloto-motion/cafe-fraco/` (327 MB, fora do git): piloto de t145u com o visual reprovado, deletado por ordem do José (t152u). Originais do EP1003 intactos em `runtime/lote-saldo/cafe-fraco/`. Referências vivas nos docs ajustadas.

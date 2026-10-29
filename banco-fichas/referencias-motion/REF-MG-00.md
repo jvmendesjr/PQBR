@@ -3,7 +3,7 @@
 - **Origem:** interna. Âncora da coletânea: a identidade visual do próprio canal, o conjunto definitivo de `banco-fichas/` (t148u; estilo nas palavras do José em t150u: "cartoon 2D, flat, colorido, com personagens stickman").
 - **Estado:** `aguardando_ok_jose` (28/10/2026, t147u; re-basiada em t150u).
 - **Histórico:** a ficha nasceu em t147u no nanquim de t146u (papel creme `#f5f0e4`, hachura, cores de `PERS-M`/`PERS-F`), que o José reprovou e mandou descartar (t148u). Em t150u foi reescrita no padrão flat colorido. O OK que ela espera é sobre esta versão.
-- **Prova renderizada:** pendente — sai do catálogo v2 (MG-03) e vai para `provas/REF-MG-00.png`.
+- **Prova renderizada:** `provas/mg10-pecas.png` (12 quadros com a paleta flat, a Fredoka e o layout do bloco, sem violação de zona segura). O desenho do cartão v2 está em `runtime/piloto-motion/mg03/folha-cartoes-v2.png`, aprovado pelo José em 28/10 (t152u).
 
 ## Gramática (o que o motion copia daqui)
 

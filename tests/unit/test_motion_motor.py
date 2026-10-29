@@ -135,6 +135,36 @@ def test_personagem_na_moldura_respeita_a_zona_e_acusa_quando_cobre_outra_peca()
     assert r["recorte"] == 1                            # uma imagem recortada da folha no quadro assentado
 
 
+PLANO_NOVO_JS = """
+const plano = {elenco: "masculino", duracao_video_s: 40, bloco: {inicio: 10, fim: 30}, pecas: [
+  {modelo: "transicao-cortina", inicio: 9.6, fim: 10, parametros: {fase: "cobre"}},
+  {modelo: "transicao-cortina", inicio: 10, fim: 10.4, parametros: {fase: "revela"}},
+  {modelo: "frase-troca", inicio: 10.4, fim: 14, parametros: {frases: ["A versão mais aceita", "Tem quem diga", "Chá de bico de chaleira"], rotulo: "Três versões"}},
+  {modelo: "marca-texto", inicio: 14, fim: 18, parametros: {texto: "Reaproveitar o mesmo pó no filtro até sair só líquido claro", destaque: "mesmo pó", rotulo: "A ideia"}},
+  {modelo: "numero-conta", inicio: 18, fim: 22, parametros: {texto: "73%", rotulo: "dos brasileiros", selo: "2024"}},
+  {modelo: "leque", inicio: 22, fim: 26, parametros: {centro: "Café", itens: ["Borra", "Água quente", "Filtro de pano"]}},
+  {modelo: "elo-causa", inicio: 26, fim: 30, parametros: {causa: "Água quente no bico da chaleira", efeito: "Café mais fraco", conector: "porque"}},
+  {modelo: "transicao-pincelada", inicio: 17.8, fim: 18.2, parametros: {fase: "cobre"}},
+  {modelo: "transicao-cortina", inicio: 29.6, fim: 30, parametros: {fase: "cobre"}},
+  {modelo: "transicao-cortina", inicio: 30, fim: 30.4, parametros: {fase: "revela"}}
+]};
+const recursos = {};
+"""
+
+
+def test_pecas_do_dossie_respeitam_a_zona_e_desenham():
+    r = rodar(PLANO_NOVO_JS + """
+      const M = PQBRMotion;
+      const tempos = [12.9, 16.5, 20.5, 24.5, 28.5];
+      const q = tempos.map(t => { const r = M.desenharQuadro(ctxFalso([]), t, plano, "tela_cheia", recursos); return {t: t, ativas: r.ativas, v: r.violacoes}; });
+      const p = M.desenharQuadro(ctxFalso([]), 18.0, plano, "tela_cheia", recursos);
+      console.log(JSON.stringify({q: q, pincelada: p.ativas}))""")
+    for x in r["q"]:
+        assert x["v"] == [], (x["t"], x["v"])
+        assert x["ativas"], x["t"]
+    assert "transicao-pincelada" in r["pincelada"]
+
+
 def test_catalogo_nao_pede_peso_acima_do_que_a_fonte_do_canal_tem():
     import re
     from pqbr.pos.motion import fontes

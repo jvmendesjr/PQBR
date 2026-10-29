@@ -3,7 +3,7 @@
 - **Origem:** externa, só como **gramática de movimento**. Nada de conteúdo, paleta, personagem, texto, música ou frame de terceiros entra no canal.
 - **Estado:** `aguardando_ok_jose` (28/10/2026, t150u).
 - **Pedido do José (t150u):** "adaptar a paleta, o visual e os gráficos mantendo só os movimentos gráficos".
-- **Prova renderizada:** pendente — sai das peças do MG-10 e vai para `provas/REF-MG-01.png`.
+- **Prova renderizada:** `provas/mg10-pecas.png` (as seis peças que materializam o vocabulário, em 12 quadros). O vocabulário detalhado das seis referências novas de t153u está nas fichas REF-MG-02 a REF-MG-07.
 
 ## Fontes consultadas (link e data)
 

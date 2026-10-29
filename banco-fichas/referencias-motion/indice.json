@@ -1,6 +1,6 @@
 {
-  "versao": "0.2.0",
-  "decisao": "t150u",
+  "versao": "0.3.0",
+  "decisao": "t153u",
   "atualizado": "2026-10-28",
   "regra": "REGRAS §26 (t145u/t147u/t150u): padrao fixo (cartoon 2D flat colorido de banco-fichas/, fundo creme claro, cor do elenco como acento, Fredoka como fonte unica, molas, cortina padrao, zonas seguras, bloco de numeros travados) com variacao sutil de lista fechada, escolhida pelo tipo de conteudo e por semente do episodio, sem repetir a variante do episodio anterior. Referencia externa entra so como gramatica (paleta, tipografia, textura, ritmo, movimento); nunca conteudo, personagem, logo, texto ou musica; nenhum frame de terceiro e guardado. Referencia nova so vira aprovada com OK do Jose. Desenho em docs/fases/motion-graphics.md.",
   "padrao_fixo": {
@@ -45,9 +45,105 @@
       "origem": "externa, so gramatica de movimento",
       "fonte": "https://whatships.com/videos/minimax-h3-max-motion/",
       "ficha": "REF-MG-01.md",
-      "prova": null,
+      "prova": "provas/mg10-pecas.png",
       "estado": "aguardando_ok_jose",
       "consulta": "2026-10-28"
+    },
+    {
+      "id": "REF-MG-02",
+      "nome": "Bitrig — cartões encadeados e match cut",
+      "origem": "externa, so gramatica de movimento",
+      "fonte": "https://whatships.com/videos/bitrig-custom-agents/",
+      "ficha": "REF-MG-02.md",
+      "prova": "provas/mg10-pecas.png",
+      "estado": "aguardando_ok_jose",
+      "consulta": "2026-10-28",
+      "pecas": [
+        "elo-causa",
+        "frase-troca",
+        "transicao-pincelada"
+      ],
+      "observacao": "sequência de cartões com linhas em stagger, um objeto vira o seguinte (match cut); 1280x720, 60 fps, 9,96 s"
+    },
+    {
+      "id": "REF-MG-03",
+      "nome": "HorizonX — palavra que troca no lugar",
+      "origem": "externa, so gramatica de movimento",
+      "fonte": "https://whatships.com/videos/horizonx/",
+      "ficha": "REF-MG-03.md",
+      "prova": "provas/mg10-pecas.png",
+      "estado": "aguardando_ok_jose",
+      "consulta": "2026-10-28",
+      "pecas": [
+        "frase-troca",
+        "marca-texto"
+      ],
+      "observacao": "troca rápida de palavra com o resto da frase parado, cartões com tipografia grande; 1920x1080, 30 fps, 24,38 s"
+    },
+    {
+      "id": "REF-MG-04",
+      "nome": "OmaPhoto — a pincelada que revela",
+      "origem": "externa, so gramatica de movimento",
+      "fonte": "https://whatships.com/videos/omaphoto/",
+      "ficha": "REF-MG-04.md",
+      "prova": "provas/mg10-pecas.png",
+      "estado": "aguardando_ok_jose",
+      "consulta": "2026-10-28",
+      "pecas": [
+        "transicao-pincelada"
+      ],
+      "observacao": "pincelada cobre e revela com borda irregular, íris e luz radial; 1920x1080, 60 fps, 30,06 s"
+    },
+    {
+      "id": "REF-MG-05",
+      "nome": "Vovy — palavra destacada e número que conta",
+      "origem": "externa, so gramatica de movimento",
+      "fonte": "https://whatships.com/videos/vovy/",
+      "ficha": "REF-MG-05.md",
+      "prova": "provas/mg10-pecas.png",
+      "estado": "aguardando_ok_jose",
+      "consulta": "2026-10-28",
+      "pecas": [
+        "marca-texto",
+        "numero-conta",
+        "frase-troca"
+      ],
+      "observacao": "recoloração de palavra, prompt que digita, abas que contam, ícones no lugar de palavras; 1920x1080, 24 fps, 46,03 s"
+    },
+    {
+      "id": "REF-MG-06",
+      "nome": "Raylight 2 — tipografia cinética",
+      "origem": "externa, so gramatica de movimento",
+      "fonte": "https://whatships.com/videos/raylight-2/",
+      "ficha": "REF-MG-06.md",
+      "prova": "provas/mg10-pecas.png",
+      "estado": "aguardando_ok_jose",
+      "consulta": "2026-10-28",
+      "pecas": [
+        "frase-troca"
+      ],
+      "observacao": "tipografia cinética, palavras que se movem com o sentido; 1920x1080, 60 fps, 52,76 s"
+    },
+    {
+      "id": "REF-MG-07",
+      "nome": "Valendata — o dado explicado",
+      "origem": "externa, so gramatica de movimento",
+      "fonte": "https://whatships.com/videos/valendata/",
+      "ficha": "REF-MG-07.md",
+      "prova": "provas/mg10-pecas.png",
+      "estado": "aguardando_ok_jose",
+      "consulta": "2026-10-28",
+      "pecas": [
+        "marca-texto",
+        "numero-conta",
+        "leque",
+        "elo-causa"
+      ],
+      "observacao": "destaque e riscado de palavra, cursor de leitura, contador, grafo radial e grafo de 2 nós; 1920x1080, 30 fps, 90,09 s"
     }
-  ]
+  ],
+  "delegacao_escolha": {
+    "t153u": "O José delegou a escolha técnica do movimento: ele não escolhe movimento a movimento. A manutenção analisa as referências, decide o que aproveitar e registra a decisão nas fichas e nas peças. O OK dele é sobre a regra (como se escolhe) e sobre a ficha, não sobre cada peça. A escolha por episódio é determinística: tipo de conteúdo + semente do código (MG-04), sem repetir a variante do episódio anterior."
+  },
+  "prova_conjunta": "provas/mg10-pecas.png"
 }

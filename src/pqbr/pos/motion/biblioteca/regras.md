@@ -10,6 +10,8 @@ um HTML de prova, um vídeo curto, um quadro de referência e a linha no índice
 - Cores só do elenco e da marca (`catalogo.PALETA`, padrão flat colorido de t150u: masculino azul-aço, feminino rosa). Letra colorida sobre fundo claro usa o tom `texto` do elenco, nunca o rosa ou o azul chapado (2,3:1 e 3,6:1 no creme). Fundo neutro claro `#f6f1e7`. Cartões brancos.
 - Personagem presente (t150u): `personagem-moldura` põe uma ficha `PERS-*` do catálogo num quadradinho num canto do layout do bloco, com uma pose (nome do recorte da ficha: `giro-*`, `exp-*`). Troque a pose em peças seguidas; use o coadjuvante quando a cena pede outro ponto de vista; `espelhar` faz o personagem olhar para o conteúdo.
 - Varie o lado e o eixo entre blocos: centralizar tudo é o vício de motion feito por IA.
+- Peças de t153u no catálogo (1.2.0): `frase-troca` (2–4 frases no mesmo lugar, troca seca), `marca-texto` (o `destaque` é **trecho de `texto`**; o contrato confere), `numero-conta` (contador pt-BR), `leque` (2–4 satélites), `elo-causa` (causa → conector → efeito) e `transicao-pincelada` (`cobre`/`revela`). A pincelada é uso **interno** do bloco; a entrada e a saída continuam na cortina padrão. Use os parâmetros travados do `indice.json`.
+- Quem escolhe o movimento é a regra determinística (tipo de conteúdo + semente do código, MG-04), não o José movimento a movimento (t153u). Registre a razão na `justificativa` da peça.
 - Texto na tela só do bloco de números travados do storyboard. O que não está no bloco não aparece.
 - Teste a 360 px de largura antes de aprovar: se não se lê no celular, aumenta a letra ou tira texto.
 - Folha de contato (1 quadro/s), nota de 1 a 10, corrigir os três piores pontos, repetir até ≥ 8.

@@ -96,10 +96,38 @@ def test_barra_de_progresso_pode_cobrir_o_video_inteiro_sem_bloco():
 def test_catalogo_tem_os_modelos_iniciais_com_camada():
     cat = carregar_catalogo()
     assert {"transicao-cortina", "titulo-expressao", "linha-tempo", "origem-pino", "versus", "recorte-aponta", "barra-progresso", "imagem-cena",
-            "personagem-moldura"} <= set(cat)
+            "personagem-moldura", "frase-troca", "marca-texto", "numero-conta", "leque", "elo-causa", "transicao-pincelada"} <= set(cat)
     assert cat["barra-progresso"].camada == "sobre" and cat["transicao-cortina"].camada == "ambas"
+    assert cat["transicao-pincelada"].camada == "ambas" and cat["marca-texto"].parametros["destaque"]["fragmento_de"] == "texto"
     for m in cat.values():
         assert m.arquivo_js.is_file(), m.slug
+
+
+ITENS_NOVOS = ITENS + ["73%", "dos brasileiros", "dado de 2024", "Café", "Borra", "Água quente", "Filtro de pano", "porque"]
+
+
+def test_pecas_do_dossie_so_usam_texto_travado_e_destaque_que_e_trecho():
+    b = FaixaBloco(inicio=14.9, fim=33.5)
+
+    def com(modelo, **parametros):
+        return plano(bloco_numeros=BlocoNumeros(itens=ITENS_NOVOS),
+                     pecas=transicao_padrao(b) + [PecaMotion(modelo=modelo, inicio=15.3, fim=20, parametros=parametros)])
+
+    assert com("frase-troca", frases=[ITENS[0], ITENS[2], ITENS[4]], rotulo=ITENS[3]).pecas[-1].modelo == "frase-troca"
+    assert com("marca-texto", texto=ITENS[1], destaque="mesmo pó").pecas[-1].parametros["destaque"] == "mesmo pó"
+    assert com("numero-conta", texto="73%", rotulo="dos brasileiros", selo="dado de 2024").pecas[-1].modelo == "numero-conta"
+    assert com("leque", centro="Café", itens=["Borra", "Água quente", "Filtro de pano"]).pecas[-1].modelo == "leque"
+    assert com("elo-causa", causa=ITENS[3], efeito=ITENS[1], conector="porque").pecas[-1].modelo == "elo-causa"
+    assert com("transicao-pincelada", fase="revela", cor="#0f766e").pecas[-1].modelo == "transicao-pincelada"
+
+    with pytest.raises(ValidationError, match="não é trecho"):
+        com("marca-texto", texto=ITENS[1], destaque="borra de café")
+    with pytest.raises(ValidationError, match="bloco de números travados"):
+        com("frase-troca", frases=[ITENS[0], "Inventada em 1850"])
+    with pytest.raises(ValidationError, match="quantidade fora de 2–4"):
+        com("leque", centro="Café", itens=["Borra", "Água quente", "Filtro de pano", "Café", "73%"])
+    with pytest.raises(ValidationError, match="falta parâmetro texto"):
+        com("numero-conta", rotulo="dos brasileiros")
 
 
 def test_fonte_padrao_do_canal_e_so_fonte_aprovada(tmp_path, monkeypatch):

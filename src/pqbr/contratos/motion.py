@@ -138,6 +138,13 @@ class PlanoMotion(Contrato):
                     try: poses = ficha(quem).recortes
                     except ValueError as e: raise ValueError(f"{p.modelo}.{nome}: pose exige `{spec['de']}` válido ({e})") from None
                     if val not in poses: raise ValueError(f"{p.modelo}.{nome}: {quem} não tem a pose {val!r} (tem: {', '.join(poses)})")
+            # Texto que recorta outro texto (marca-texto): não inventa conteúdo, só aponta um trecho do que já está travado.
+            for nome, val in p.parametros.items():
+                base = m.parametros[nome].get("fragmento_de")
+                if base:
+                    alvo = p.parametros.get(base)
+                    if not isinstance(alvo, str) or not isinstance(val, str) or val not in alvo:
+                        raise ValueError(f"{p.modelo}.{nome}: {val!r} não é trecho de {base}")
             if m.camada == "tela_cheia":
                 if self.bloco is None: raise ValueError(f"peça de tela cheia ({p.modelo}) sem bloco definido")
                 if p.inicio < self.bloco.inicio - 1e-6 or p.fim > self.bloco.fim + 1e-6: raise ValueError(f"peça {p.modelo} fora do bloco de tela cheia")

@@ -1,6 +1,6 @@
 {
   "_doc": "Catálogo do papel motion (REGRAS §26, t145u). O JS de cada modelo registra o mesmo slug. tipo texto/textos com travado=true só aceita item do bloco de números travados. tipo personagem = id de ficha PERS-* do banco-fichas/ com imagem local; tipo pose = nome de recorte dessa ficha (parâmetro `de` aponta o parâmetro do personagem). numero aceita min e max. camada: tela_cheia (dentro do bloco), sobre (por cima do vídeo), ambas.",
-  "versao": "1.1.0",
+  "versao": "1.2.0",
   "modelos": {
     "transicao-cortina": {
       "descricao": "Transição padrão: cortina na cor do elenco cobre (antes do corte) ou revela (depois do corte). Dura 0,3 a 0,6 s.",
@@ -82,6 +82,57 @@
         "canto": {"tipo": "opcao", "opcoes": ["inf-dir", "inf-esq", "sup-dir", "sup-esq"], "obrigatorio": false},
         "tamanho": {"tipo": "numero", "min": 220, "max": 460, "obrigatorio": false},
         "espelhar": {"tipo": "opcao", "opcoes": ["nao", "sim"], "obrigatorio": false}
+      }
+    },
+    "frase-troca": {
+      "descricao": "Duas a quatro frases curtas se substituem no mesmo lugar, com troca seca (sem fade) e uma marca que carimba a cada troca. Gramática do dossiê (t153u): a sequência de afirmações curtas do Valendata e a troca de palavra do HorizonX.",
+      "camada": "tela_cheia",
+      "parametros": {
+        "frases": {"tipo": "textos", "travado": true, "obrigatorio": true, "min": 2, "max": 4},
+        "rotulo": {"tipo": "texto", "travado": true, "obrigatorio": false}
+      }
+    },
+    "marca-texto": {
+      "descricao": "A frase do bloco é lida palavra por palavra por um cursor e um marca-texto chapado assenta na palavra-chave. Gramática do dossiê (t153u): o destaque de palavra do Valendata e do Raylight e a leitura progressiva do Vovy.",
+      "camada": "tela_cheia",
+      "parametros": {
+        "texto": {"tipo": "texto", "travado": true, "obrigatorio": true},
+        "destaque": {"tipo": "texto", "obrigatorio": true, "fragmento_de": "texto"},
+        "rotulo": {"tipo": "texto", "travado": true, "obrigatorio": false}
+      }
+    },
+    "numero-conta": {
+      "descricao": "O número do bloco conta até o valor, com rótulo em cima e selo que carimba no fim. Gramática do dossiê (t153u): o 100% com selo do Valendata e a contagem de abas do Vovy.",
+      "camada": "tela_cheia",
+      "parametros": {
+        "texto": {"tipo": "texto", "travado": true, "obrigatorio": true},
+        "rotulo": {"tipo": "texto", "travado": true, "obrigatorio": false},
+        "selo": {"tipo": "texto", "travado": true, "obrigatorio": false}
+      }
+    },
+    "leque": {
+      "descricao": "Nó central e dois a quatro itens em leque, com as linhas saindo do centro uma a uma. Gramática do dossiê (t153u): o diagrama radial do Valendata, adaptado ao 9:16.",
+      "camada": "tela_cheia",
+      "parametros": {
+        "centro": {"tipo": "texto", "travado": true, "obrigatorio": true},
+        "itens": {"tipo": "textos", "travado": true, "obrigatorio": true, "min": 2, "max": 4}
+      }
+    },
+    "elo-causa": {
+      "descricao": "Causa e efeito em dois cartões ligados por um traço que cresce, com o conector carimbado no meio. Gramática do dossiê (t153u): o grafo de dois nós do Valendata, adaptado ao 9:16.",
+      "camada": "tela_cheia",
+      "parametros": {
+        "causa": {"tipo": "texto", "travado": true, "obrigatorio": true},
+        "efeito": {"tipo": "texto", "travado": true, "obrigatorio": true},
+        "conector": {"tipo": "texto", "travado": true, "obrigatorio": false}
+      }
+    },
+    "transicao-pincelada": {
+      "descricao": "Pincelada chapada atravessa a tela para cobrir ou revelar, com a borda na cor de acento. Gramática do dossiê (t153u): a pincelada do OmaPhoto. Usa dentro do bloco; a transição padrão de entrada e saída continua sendo a cortina.",
+      "camada": "ambas",
+      "parametros": {
+        "fase": {"tipo": "opcao", "opcoes": ["cobre", "revela"], "obrigatorio": true},
+        "cor": {"tipo": "cor", "obrigatorio": false}
       }
     }
   }

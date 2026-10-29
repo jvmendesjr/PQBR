@@ -55,6 +55,16 @@ O José trouxe três fontes de movimento: a galeria whatships.com, o artigo do 0
 - **Vocabulário candidato (peças novas do catálogo, MG-10):** carimbo (título que cai e assenta), tarja de redação (barra que cobre e revela), zoom que atravessa o texto, recorte-colagem, match cut (um elemento vira o próximo) e tipografia cinética. Cada peça é repintada no padrão flat colorido, com a Fredoka e as cores do elenco; o texto vem só do bloco de números travado e é escrito pelo nosso motor (REGRAS §26 proíbe reaproveitar texto de vídeo gerado por IA). A lição "pare de centralizar tudo" vira regra de composição: alternar lado e eixo entre blocos.
 - **Como entra:** ficha `REF-MG-01` (texto, link, data), sem frame de terceiro. Cada peça nova passa pela mesma disciplina do catálogo e nasce `aguardando_ok_jose`; a prova é renderizada pelo nosso motor. Sem música. Imagens e vídeos do Flow podem entrar dentro das peças; o personagem presente (Fase 2b) casa com o vocabulário. O modelo MiniMax não entra na cadeia.
 
+## Fase 2d — As seis referências de t153u e as peças entregues (feito no código)
+
+O José entregou seis vídeos da galeria whatships (bitrig, horizonx, omaphoto, vovy, raylight-2, valendata) e pediu que a manutenção fizesse a análise técnica e decidisse o que aproveitar, respeitando a identidade visual do canal. Ele **não quer escolher movimento a movimento** (delegação registrada em REGRAS §26, "Quem escolhe o movimento").
+
+- **Método:** as páginas têm o mp4 no JSON embutido; o download foi feito só em `/tmp` (o CDN recusa Referer) e a análise foi por **folha de contato 5×5** (um quadro a cada ~0,4–3,6 s, conforme a duração), sem playback completo. Nenhum frame de terceiro entrou no repositório; os mp4 e as folhas foram apagados no fim.
+- **Fichas:** REF-MG-02 a REF-MG-07, cada uma com link, data, medida (resolução/fps/duração), gramática observada, o que entra, o que fica de fora e os quadros da prova. `indice.json` 0.3.0. As seis seguem `aguardando_ok_jose`; o OK é sobre a ficha e a regra.
+- **Peças novas no catálogo (MG-10 parcial, `indice.json` 1.2.0):** `frase-troca` (frases trocadas no mesmo lugar, troca seca, marca do elenco, pontinhos de passo), `marca-texto` (layout por palavra, cursor de leitura e barra chapada atrás do `destaque`, que é **trecho de `texto`** — o contrato confere), `numero-conta` (contador pt-BR, sufixo, rótulo e selo), `leque` (nó central e 2–4 satélites na diagonal do 9:16), `elo-causa` (dois cartões, conector carimbado e traço com seta) e `transicao-pincelada` (fase `cobre`/`revela`, borda ondulada e diagonal, traço de acento; uso interno do bloco, a cortina padrão continua na entrada e na saída).
+- **Prova:** `banco-fichas/referencias-motion/provas/mg10-pecas.png`, 12 quadros de um plano de demonstração (PQBR-EP1003, bloco 10–30 s, elenco masculino), todos sem violação de zona segura. Autocrítica 7 → 8,5 em `biblioteca/historico.md` (contraste do marca-texto, base do sufixo, pincelada vertical → diagonal, ordem do terceiro braço no leque).
+- **O que ficou de fora, e por quê:** a interface de produto das referências (Bitrig, Vovy, Valendata), o texto e a marca delas, a estética dark/noir, o movimento contínuo de palavras (Raylight), a digitação como cena, ícones substituindo palavras e a íris de câmera. O **riscado** (palavra substituída) é o candidato mais forte para o próximo lote.
+
 ## Fase 3 — Trabalho (itens do ROADMAP, Fase MG)
 
 - **MG-01** Regra e documentos (esta entrega, t147u). Aguarda OK do José na coletânea.
@@ -66,7 +76,7 @@ O José trouxe três fontes de movimento: a galeria whatships.com, o artigo do 0
 - **MG-07** Activity `pos_motion` no worker (reinício exige OK) e checagem automática tela × bloco no Auditor.
 - **MG-08** Finalização e entrada do logotipo (proposta neste documento; o José escolhe o desenho antes do código).
 - **MG-09** Personagem presente no layout (t150u, feito no código: peça `personagem-moldura`, `PlanoMotion` 1.2.0). Falta ver num vídeo de episódio real (MG-05).
-- **MG-10** Peças do vocabulário do dossiê: carimbo, tarja de redação, zoom que atravessa o texto, recorte-colagem, match cut e tipografia cinética (Fase 2c). Depende de MG-03; cada peça nova nasce `aguardando_ok_jose`.
+- **MG-10** Peças do vocabulário do dossiê: carimbo, tarja de redação, zoom que atravessa o texto, recorte-colagem, match cut e tipografia cinética (Fase 2c). Depende de MG-03; cada peça nova nasce `aguardando_ok_jose`. **Feito em t153u (parcial):** seis peças a partir das referências REF-MG-02..07 (Fase 2d), com contrato e prova; carimbo, tarja, zoom, recorte-colagem e match cut seguem como candidatos.
 
 ## Finalização e entrada do logotipo (proposta, MG-08) — EM CONSTRUÇÃO, aguardando o ajuste do José
 
