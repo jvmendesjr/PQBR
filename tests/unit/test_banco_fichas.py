@@ -1,4 +1,4 @@
-"""t148u/t150u: o banco de fichas real (`banco-fichas/`) é consistente: índice 3.0.0, arquivos, recortes, referências e protagonistas."""
+"""t148u/t150u: o banco de fichas real (`banco-fichas/`) é consistente: índice 3.1.0, arquivos, recortes, referências e protagonistas."""
 import json
 import struct
 from pathlib import Path
@@ -25,9 +25,9 @@ def _png(caminho: Path) -> tuple[int, int]:
     return struct.unpack(">II", dados[16:24])
 
 
-def test_indice_3_0_0_traz_o_estilo_e_a_regra_do_catalogo_aberto():
+def test_indice_3_1_0_traz_o_estilo_e_a_regra_do_catalogo_aberto():
     idx = _indice()
-    assert idx["versao"] == "3.0.0" and idx["decisao"] == "t150u"
+    assert idx["versao"] == "3.1.0" and idx["decisao"] == "t131u"
     assert "cartoon 2D" in idx["estilo"] and "flat" in idx["estilo"] and "stickman" in idx["estilo"]
     assert "Catálogo aberto" in idx["regra_catalogo_aberto"] and "2 MB" in idx["regra_catalogo_aberto"]
     assert isinstance(idx["descartadas"], list)

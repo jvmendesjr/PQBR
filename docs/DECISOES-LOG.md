@@ -927,3 +927,24 @@ NÃO CABE:
 - **O que não muda:** contrato `RegistroAlteracaoEntrada` 1.1.0, barreira de segredos, tags por papel, exigência de commit existente e de `ESTADO-ATUAL` em correção/pendência. A escrita segue sendo a única ação do MCP.
 - **Operação:** `pqbr-mcp` reiniciado para carregar a versão nova e validado com `registrar_alteracao` real deste commit (retorno imediato, sem timeout). O registro duplicado da t153u fica no bank (o MCP não apaga); a reconsolidação junta os semelhantes.
 - **Testes:** `tests/unit/test_mcp_escrita.py` ganhou `test_operacao_id_deterministico_vira_async` e `test_alteracao_reenviada_repete_o_operation_id`; o caso de `reter` sem `operacao_id` confirma que o caminho síncrono antigo não mudou.
+
+
+## t155u (29/10/2026) — Fichas aprovadas; instruções do Flow no flat; espelho no Drive (P17/P16)
+- **José (sessão t131u):** todas as fichas que ele adicionou e estavam `aguardando_ok_jose` estão aprovadas; integrar, classificar e rotular no padrão do projeto. Piloto de motion (MG-05) só depois de fechar a produção no Flow; o primeiro vídeo piloto usa mídias do Flow + edição em motion.
+- **Catálogo visual (`banco-fichas/indice.json` 3.1.0):** 30 fichas `aguardando_ok_jose` → `permanente` via `pipeline/banco_fichas.aprovar` (6 PERS derivadas, 12 OBJ, 12 ANIM). 11 `SIT-*` seguem `sugestao` (sem mídia). Contrato `FichaCatalogo` valida as 62 fichas.
+- **Referências de motion (`referencias-motion/indice.json` 0.4.0):** REF-MG-00..07 `aguardando_ok_jose` → `aprovada` (regra e fichas; escolha de movimento continua delegada desde t153u).
+- **Flow:** `Instruções para o agente` regravadas no projeto `e2dacb70-b9d0-4dc7-8b93-e6ac1688a454` — título e descrição no estilo cartoon 2D flat colorido (saiu o nanquim de t146u). Camofox PQBR `127.0.0.1:9387`.
+- **Drive:** espelho `00_Biblia_Visual/banco-fichas` (`1JcDUFDEdiQmDtHX_4c57lgLFcM6-yoT4`): 111 arquivos enviados (md/json/png/ttf), 0 erros; inclui animais, situações, referencias-motion e o `indice.json` 3.1.0.
+- **Ordem:** fechar produção no Flow → MG-05 (piloto 1 episódio) → José assiste → lote de refação (t156u).
+
+## t156u (29/10/2026) — Higgsfield descartado; vídeos do lote de saldo obsoletos; lote de refação
+- **José (sessão t132u/t133u):** o Higgsfield está **DESCARTADO** do PQBR e não será mais usado. Os vídeos em cartoon 2D feitos nele (e o lote de saldo em `runtime/lote-saldo/`) estão **obsoletos** e não servem. Não apagar mídia sem OK; docs específicos de Higgsfield vão para `docs/_obsoleto/`.
+- **Refação do zero:** os temas desses episódios serão refeitos com a cadeia Flow + identidade flat + edição em motion. Ordem: fechar produção no Flow → piloto MG-05 (1 desses episódios) → José assiste → lote dos demais.
+- **Episódios afetados (`runtime/lote-saldo` + `docs/pesquisas/lote-2510`):** EP1002 olhos-da-cara (já em `_descartado/`), EP1003 cafe-fraco, EP1004 formiga, EP1005 liquidificador, EP1006 fechadura, EP1007 brigadeiro, EP1008 nao-e-bem-assim, EP1009 garrafa, EP1010 crostinha. Item **MG-11** no ROADMAP.
+- **Quem faz motion:** papel `motion` monta o `PlanoMotion` e o motor próprio (`src/pqbr/pos/motion/`) renderiza; até o MG-07 (activity `pos_motion`) a manutenção opera.
+
+## t157u (29/10/2026) — Combo `core-ultra` (Opus 5.5) para o papel `motion` [APROVADO como proposta; NÃO aplicado]
+- **José (sessão t135u/t136u):** vai criar no 9router o combo `core-ultra` com Opus 5.5 à frente. Proposta aprovada para concretizar em seguida (sem alterar `config/modelos_9router.json` nesta entrega).
+- **Papel `motion`:** passa de `core-alto` para `core-ultra`, com três camadas para minimizar tokens: (1) código determinístico (semente MG-04, rotina fixa, não repetir variante, zona segura); (2) Jev `decide()` para escolhas fechadas (peça do catálogo por tipo de bloco, cabe personagem, texto no limite), escalando abaixo do limiar; (3) Opus só para composição/ritmo criativo, casos escalados pelo Jev e peça nova.
+- **Economia:** catálogo resumido no prompt, cache do prompt fixo, 1 chamada por episódio, medir custo em `pqbr.consumo_modelos` no piloto.
+- **Pendência / portão:** José cria `core-ultra` no 9router; trocar o combo + reinício do worker exigem OK. Item **MG-12** no ROADMAP.

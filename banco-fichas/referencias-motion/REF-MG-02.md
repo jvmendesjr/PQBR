@@ -4,7 +4,7 @@
 - **Link:** https://whatships.com/videos/bitrig-custom-agents/ · **Consulta:** 28/10/2026.
 - **Medida:** 1280×720, 60 fps, 9,96 s.
 - **Método:** folha de contato 5×5, um quadro a cada ~0,4 s. Não foi playback completo: aceleração, som e micro-movimento entre quadros não são afirmados aqui.
-- **Estado:** `aguardando_ok_jose` (28/10/2026, t153u).
+- **Estado:** `aprovada` (29/10/2026, t131u — José aprovou a regra e as fichas).
 - **Prova renderizada:** `provas/mg10-pecas.png`, quadros 9–10 (`elo-causa`) e 1–2 (`frase-troca`).
 
 ## Gramática observada

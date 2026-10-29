@@ -1,7 +1,7 @@
 {
-  "versao": "3.0.0",
-  "decisao": "t150u",
-  "atualizado": "2026-10-28",
+  "versao": "3.1.0",
+  "decisao": "t131u",
+  "atualizado": "2026-10-29",
   "estilo": "cartoon 2D, flat, colorido, com personagens stickman: cabeça redonda branca grande com contorno preto, dois olhos pretos sempre visíveis, boca simples de reação, corpo e membros em traço preto fino, roupa chapada colorida fixa por personagem, fundo claro em tom creme, paleta suave, sombra leve chapada no chão; sem texto, sem marca, sem volume 3D, sem fotorrealismo",
   "regra_modelo_fichas": "Para personagens, objetos e locais permanentes, usar fichas permanentes geradas a partir do modelo mais potente de geracao de imagens (t146u). Em t148u o proprio Jose entregou o conjunto definitivo no Drive (Fontes/Imagens) e mandou descartar as fichas nanquim de t146u; ficha nova que faltar nasce ancorada neste conjunto.",
   "regra_catalogo_aberto": "Catálogo aberto (José, t150u): tudo aqui é referência e sugestão, não lista fechada. O agente pode inserir personagens, figuras, animais, objetos, ambientes e situações novos (pipeline/banco_fichas.py: registrar, anexar_midia, aprovar, descartar), sempre no estilo cartoon 2D flat colorido com personagens stickman e variando o elenco. Antes de criar, busca; reaproveitar vem antes. Ficha nova nasce aguardando_ok_jose (com mídia, já usável) ou sugestao (sem mídia); só o José aprova ou manda descartar; ficha permanente só muda por ordem dele. Imagem nova entra no repositório até 2 MB; acima disso, e todo vídeo, vão para o Drive.",
@@ -50,6 +50,11 @@
   },
   "historico": [
     {
+      "decisao": "t131u",
+      "estado": "aprovacao em massa",
+      "nota": "José aprovou as 30 fichas aguardando_ok_jose (6 PERS derivadas, 12 OBJ, 12 ANIM) e as REF-MG-00..07; passaram a permanente/aprovada. Situações SIT-* seguem sugestao (sem mídia). Ordem: piloto motion (MG-05) só depois de fechar a produção no Flow."
+    },
+    {
       "decisao": "t146u",
       "estado": "descartado em t148u a pedido do Jose",
       "nota": "12 fichas em nanquim preto sobre papel creme geradas no Flow (Nano Banana Pro), ancoradas nos frames reais do canal; conteudo preservado no historico do git (commit ad1b689)"
@@ -82,18 +87,78 @@
       ],
       "imagem": "personagens/ELENCO-catalogo.png",
       "recortes": {
-        "num-01": [0.0871, 0.0174, 0.166, 0.2958],
-        "num-02": [0.3148, 0.0236, 0.4207, 0.2986],
-        "num-03": [0.5902, 0.0118, 0.6523, 0.2979],
-        "num-04": [0.8328, 0.0285, 0.9109, 0.2972],
-        "num-05": [0.0824, 0.3451, 0.1738, 0.6271],
-        "num-06": [0.3312, 0.3458, 0.4262, 0.6257],
-        "num-07": [0.5684, 0.3486, 0.6715, 0.6264],
-        "num-08": [0.8309, 0.3535, 0.909, 0.6278],
-        "num-09": [0.0949, 0.675, 0.159, 0.9458],
-        "num-10": [0.3375, 0.7007, 0.409, 0.9465],
-        "num-11": [0.575, 0.6715, 0.6543, 0.9465],
-        "num-12": [0.8324, 0.691, 0.9164, 0.9465]
+        "num-01": [
+          0.0871,
+          0.0174,
+          0.166,
+          0.2958
+        ],
+        "num-02": [
+          0.3148,
+          0.0236,
+          0.4207,
+          0.2986
+        ],
+        "num-03": [
+          0.5902,
+          0.0118,
+          0.6523,
+          0.2979
+        ],
+        "num-04": [
+          0.8328,
+          0.0285,
+          0.9109,
+          0.2972
+        ],
+        "num-05": [
+          0.0824,
+          0.3451,
+          0.1738,
+          0.6271
+        ],
+        "num-06": [
+          0.3312,
+          0.3458,
+          0.4262,
+          0.6257
+        ],
+        "num-07": [
+          0.5684,
+          0.3486,
+          0.6715,
+          0.6264
+        ],
+        "num-08": [
+          0.8309,
+          0.3535,
+          0.909,
+          0.6278
+        ],
+        "num-09": [
+          0.0949,
+          0.675,
+          0.159,
+          0.9458
+        ],
+        "num-10": [
+          0.3375,
+          0.7007,
+          0.409,
+          0.9465
+        ],
+        "num-11": [
+          0.575,
+          0.6715,
+          0.6543,
+          0.9465
+        ],
+        "num-12": [
+          0.8324,
+          0.691,
+          0.9164,
+          0.9465
+        ]
       }
     },
     {
@@ -115,30 +180,150 @@
       ],
       "imagem": "personagens/PERS-menina-rosa-folha.png",
       "recortes": {
-        "giro-frente": [0.1051, 0.0271, 0.2047, 0.3035],
-        "giro-tres-quartos": [0.2824, 0.0264, 0.3695, 0.3035],
-        "giro-perfil": [0.4445, 0.0299, 0.5309, 0.3028],
-        "giro-costas-tres-quartos": [0.5938, 0.0285, 0.6801, 0.3042],
-        "giro-costas": [0.7855, 0.0264, 0.8684, 0.3028],
-        "exp-feliz": [0.0199, 0.3396, 0.1191, 0.5097],
-        "exp-risada": [0.1266, 0.3403, 0.2238, 0.5097],
-        "exp-triste": [0.2258, 0.3438, 0.3203, 0.509],
-        "exp-bravo": [0.3301, 0.341, 0.4277, 0.509],
-        "exp-surpreso": [0.4355, 0.3424, 0.5336, 0.5083],
-        "exp-preocupado": [0.5461, 0.3438, 0.6426, 0.509],
-        "exp-desconfiado": [0.657, 0.3431, 0.7531, 0.5104],
-        "exp-maroto": [0.7605, 0.3431, 0.857, 0.5097],
-        "exp-timido": [0.8691, 0.3431, 0.9664, 0.5104],
-        "pose-base": [0.0391, 0.5347, 0.118, 0.7438],
-        "pose-andando": [0.1828, 0.5368, 0.2602, 0.741],
-        "pose-correndo": [0.325, 0.5396, 0.4078, 0.7396],
-        "pose-apontando": [0.4652, 0.5361, 0.5574, 0.7431],
-        "pose-explicando": [0.5941, 0.5354, 0.6797, 0.7438],
-        "pose-duvida": [0.7219, 0.5424, 0.7988, 0.7444],
-        "pose-bracos-cruzados": [0.8594, 0.5375, 0.9262, 0.7444],
-        "pose-pensando": [0.3004, 0.7618, 0.3703, 0.9674],
-        "pose-comemorando": [0.4195, 0.7569, 0.502, 0.9681],
-        "pose-desanimado": [0.5687, 0.7715, 0.6324, 0.9681]
+        "giro-frente": [
+          0.1051,
+          0.0271,
+          0.2047,
+          0.3035
+        ],
+        "giro-tres-quartos": [
+          0.2824,
+          0.0264,
+          0.3695,
+          0.3035
+        ],
+        "giro-perfil": [
+          0.4445,
+          0.0299,
+          0.5309,
+          0.3028
+        ],
+        "giro-costas-tres-quartos": [
+          0.5938,
+          0.0285,
+          0.6801,
+          0.3042
+        ],
+        "giro-costas": [
+          0.7855,
+          0.0264,
+          0.8684,
+          0.3028
+        ],
+        "exp-feliz": [
+          0.0199,
+          0.3396,
+          0.1191,
+          0.5097
+        ],
+        "exp-risada": [
+          0.1266,
+          0.3403,
+          0.2238,
+          0.5097
+        ],
+        "exp-triste": [
+          0.2258,
+          0.3438,
+          0.3203,
+          0.509
+        ],
+        "exp-bravo": [
+          0.3301,
+          0.341,
+          0.4277,
+          0.509
+        ],
+        "exp-surpreso": [
+          0.4355,
+          0.3424,
+          0.5336,
+          0.5083
+        ],
+        "exp-preocupado": [
+          0.5461,
+          0.3438,
+          0.6426,
+          0.509
+        ],
+        "exp-desconfiado": [
+          0.657,
+          0.3431,
+          0.7531,
+          0.5104
+        ],
+        "exp-maroto": [
+          0.7605,
+          0.3431,
+          0.857,
+          0.5097
+        ],
+        "exp-timido": [
+          0.8691,
+          0.3431,
+          0.9664,
+          0.5104
+        ],
+        "pose-base": [
+          0.0391,
+          0.5347,
+          0.118,
+          0.7438
+        ],
+        "pose-andando": [
+          0.1828,
+          0.5368,
+          0.2602,
+          0.741
+        ],
+        "pose-correndo": [
+          0.325,
+          0.5396,
+          0.4078,
+          0.7396
+        ],
+        "pose-apontando": [
+          0.4652,
+          0.5361,
+          0.5574,
+          0.7431
+        ],
+        "pose-explicando": [
+          0.5941,
+          0.5354,
+          0.6797,
+          0.7438
+        ],
+        "pose-duvida": [
+          0.7219,
+          0.5424,
+          0.7988,
+          0.7444
+        ],
+        "pose-bracos-cruzados": [
+          0.8594,
+          0.5375,
+          0.9262,
+          0.7444
+        ],
+        "pose-pensando": [
+          0.3004,
+          0.7618,
+          0.3703,
+          0.9674
+        ],
+        "pose-comemorando": [
+          0.4195,
+          0.7569,
+          0.502,
+          0.9681
+        ],
+        "pose-desanimado": [
+          0.5687,
+          0.7715,
+          0.6324,
+          0.9681
+        ]
       },
       "acento": "vestido rosa",
       "elenco_num": 2,
@@ -162,30 +347,150 @@
       ],
       "imagem": "personagens/PERS-cacheada-folha.png",
       "recortes": {
-        "giro-frente": [0.0871, 0.0194, 0.1773, 0.2931],
-        "giro-tres-quartos": [0.2672, 0.0215, 0.3504, 0.2951],
-        "giro-perfil": [0.4496, 0.0229, 0.5246, 0.2951],
-        "giro-costas-tres-quartos": [0.6211, 0.0208, 0.6996, 0.2951],
-        "giro-costas": [0.8051, 0.0229, 0.8922, 0.2965],
-        "exp-feliz": [0.0418, 0.3319, 0.1363, 0.4944],
-        "exp-risada": [0.1516, 0.334, 0.243, 0.4944],
-        "exp-triste": [0.2578, 0.3312, 0.3477, 0.4951],
-        "exp-bravo": [0.3586, 0.3319, 0.45, 0.4944],
-        "exp-surpreso": [0.4633, 0.3306, 0.5555, 0.4951],
-        "exp-preocupado": [0.5707, 0.334, 0.6598, 0.4951],
-        "exp-desconfiado": [0.6727, 0.3354, 0.7617, 0.4951],
-        "exp-maroto": [0.7715, 0.334, 0.8605, 0.4958],
-        "exp-timido": [0.8703, 0.3333, 0.9594, 0.4965],
-        "pose-base": [0.0715, 0.5229, 0.143, 0.7264],
-        "pose-andando": [0.2504, 0.5257, 0.3187, 0.7264],
-        "pose-correndo": [0.4266, 0.5243, 0.5141, 0.7257],
-        "pose-apontando": [0.6164, 0.5208, 0.7098, 0.7271],
-        "pose-explicando": [0.8012, 0.5229, 0.8953, 0.7271],
-        "pose-duvida": [0.0484, 0.7361, 0.1527, 0.9569],
-        "pose-bracos-cruzados": [0.2398, 0.7403, 0.3039, 0.9583],
-        "pose-pensando": [0.434, 0.7451, 0.5008, 0.9576],
-        "pose-comemorando": [0.5887, 0.7424, 0.6922, 0.9576],
-        "pose-desanimado": [0.8125, 0.7458, 0.884, 0.9604]
+        "giro-frente": [
+          0.0871,
+          0.0194,
+          0.1773,
+          0.2931
+        ],
+        "giro-tres-quartos": [
+          0.2672,
+          0.0215,
+          0.3504,
+          0.2951
+        ],
+        "giro-perfil": [
+          0.4496,
+          0.0229,
+          0.5246,
+          0.2951
+        ],
+        "giro-costas-tres-quartos": [
+          0.6211,
+          0.0208,
+          0.6996,
+          0.2951
+        ],
+        "giro-costas": [
+          0.8051,
+          0.0229,
+          0.8922,
+          0.2965
+        ],
+        "exp-feliz": [
+          0.0418,
+          0.3319,
+          0.1363,
+          0.4944
+        ],
+        "exp-risada": [
+          0.1516,
+          0.334,
+          0.243,
+          0.4944
+        ],
+        "exp-triste": [
+          0.2578,
+          0.3312,
+          0.3477,
+          0.4951
+        ],
+        "exp-bravo": [
+          0.3586,
+          0.3319,
+          0.45,
+          0.4944
+        ],
+        "exp-surpreso": [
+          0.4633,
+          0.3306,
+          0.5555,
+          0.4951
+        ],
+        "exp-preocupado": [
+          0.5707,
+          0.334,
+          0.6598,
+          0.4951
+        ],
+        "exp-desconfiado": [
+          0.6727,
+          0.3354,
+          0.7617,
+          0.4951
+        ],
+        "exp-maroto": [
+          0.7715,
+          0.334,
+          0.8605,
+          0.4958
+        ],
+        "exp-timido": [
+          0.8703,
+          0.3333,
+          0.9594,
+          0.4965
+        ],
+        "pose-base": [
+          0.0715,
+          0.5229,
+          0.143,
+          0.7264
+        ],
+        "pose-andando": [
+          0.2504,
+          0.5257,
+          0.3187,
+          0.7264
+        ],
+        "pose-correndo": [
+          0.4266,
+          0.5243,
+          0.5141,
+          0.7257
+        ],
+        "pose-apontando": [
+          0.6164,
+          0.5208,
+          0.7098,
+          0.7271
+        ],
+        "pose-explicando": [
+          0.8012,
+          0.5229,
+          0.8953,
+          0.7271
+        ],
+        "pose-duvida": [
+          0.0484,
+          0.7361,
+          0.1527,
+          0.9569
+        ],
+        "pose-bracos-cruzados": [
+          0.2398,
+          0.7403,
+          0.3039,
+          0.9583
+        ],
+        "pose-pensando": [
+          0.434,
+          0.7451,
+          0.5008,
+          0.9576
+        ],
+        "pose-comemorando": [
+          0.5887,
+          0.7424,
+          0.6922,
+          0.9576
+        ],
+        "pose-desanimado": [
+          0.8125,
+          0.7458,
+          0.884,
+          0.9604
+        ]
       },
       "acento": "camiseta amarela",
       "elenco_num": 5,
@@ -210,30 +515,150 @@
       ],
       "imagem": "personagens/PERS-bone-verde-folha.png",
       "recortes": {
-        "giro-frente": [0.0996, 0.0444, 0.1828, 0.3403],
-        "giro-tres-quartos": [0.2832, 0.0451, 0.3648, 0.3403],
-        "giro-perfil": [0.4457, 0.0444, 0.5281, 0.3396],
-        "giro-costas-tres-quartos": [0.6262, 0.0458, 0.7051, 0.3396],
-        "giro-costas": [0.8113, 0.0444, 0.8758, 0.3396],
-        "exp-feliz": [0.0305, 0.409, 0.1129, 0.5535],
-        "exp-risada": [0.1461, 0.4097, 0.2285, 0.5542],
-        "exp-triste": [0.2508, 0.4083, 0.3332, 0.5535],
-        "exp-bravo": [0.3547, 0.4097, 0.4359, 0.5535],
-        "exp-surpreso": [0.459, 0.4111, 0.5402, 0.5542],
-        "exp-preocupado": [0.5641, 0.4111, 0.6465, 0.5549],
-        "exp-desconfiado": [0.6668, 0.4146, 0.7492, 0.5556],
-        "exp-maroto": [0.7699, 0.4111, 0.852, 0.5556],
-        "exp-timido": [0.8844, 0.4153, 0.966, 0.5556],
-        "pose-base": [0.0258, 0.6326, 0.0965, 0.8896],
-        "pose-andando": [0.1215, 0.6319, 0.1922, 0.8889],
-        "pose-correndo": [0.2059, 0.6375, 0.2953, 0.8854],
-        "pose-apontando": [0.3285, 0.6333, 0.4215, 0.8903],
-        "pose-explicando": [0.4398, 0.6333, 0.5258, 0.8903],
-        "pose-duvida": [0.5289, 0.6347, 0.6246, 0.8903],
-        "pose-bracos-cruzados": [0.6391, 0.6354, 0.7078, 0.891],
-        "pose-pensando": [0.7273, 0.6569, 0.8066, 0.891],
-        "pose-comemorando": [0.8027, 0.6326, 0.8988, 0.8896],
-        "pose-desanimado": [0.9008, 0.6479, 0.9762, 0.8903]
+        "giro-frente": [
+          0.0996,
+          0.0444,
+          0.1828,
+          0.3403
+        ],
+        "giro-tres-quartos": [
+          0.2832,
+          0.0451,
+          0.3648,
+          0.3403
+        ],
+        "giro-perfil": [
+          0.4457,
+          0.0444,
+          0.5281,
+          0.3396
+        ],
+        "giro-costas-tres-quartos": [
+          0.6262,
+          0.0458,
+          0.7051,
+          0.3396
+        ],
+        "giro-costas": [
+          0.8113,
+          0.0444,
+          0.8758,
+          0.3396
+        ],
+        "exp-feliz": [
+          0.0305,
+          0.409,
+          0.1129,
+          0.5535
+        ],
+        "exp-risada": [
+          0.1461,
+          0.4097,
+          0.2285,
+          0.5542
+        ],
+        "exp-triste": [
+          0.2508,
+          0.4083,
+          0.3332,
+          0.5535
+        ],
+        "exp-bravo": [
+          0.3547,
+          0.4097,
+          0.4359,
+          0.5535
+        ],
+        "exp-surpreso": [
+          0.459,
+          0.4111,
+          0.5402,
+          0.5542
+        ],
+        "exp-preocupado": [
+          0.5641,
+          0.4111,
+          0.6465,
+          0.5549
+        ],
+        "exp-desconfiado": [
+          0.6668,
+          0.4146,
+          0.7492,
+          0.5556
+        ],
+        "exp-maroto": [
+          0.7699,
+          0.4111,
+          0.852,
+          0.5556
+        ],
+        "exp-timido": [
+          0.8844,
+          0.4153,
+          0.966,
+          0.5556
+        ],
+        "pose-base": [
+          0.0258,
+          0.6326,
+          0.0965,
+          0.8896
+        ],
+        "pose-andando": [
+          0.1215,
+          0.6319,
+          0.1922,
+          0.8889
+        ],
+        "pose-correndo": [
+          0.2059,
+          0.6375,
+          0.2953,
+          0.8854
+        ],
+        "pose-apontando": [
+          0.3285,
+          0.6333,
+          0.4215,
+          0.8903
+        ],
+        "pose-explicando": [
+          0.4398,
+          0.6333,
+          0.5258,
+          0.8903
+        ],
+        "pose-duvida": [
+          0.5289,
+          0.6347,
+          0.6246,
+          0.8903
+        ],
+        "pose-bracos-cruzados": [
+          0.6391,
+          0.6354,
+          0.7078,
+          0.891
+        ],
+        "pose-pensando": [
+          0.7273,
+          0.6569,
+          0.8066,
+          0.891
+        ],
+        "pose-comemorando": [
+          0.8027,
+          0.6326,
+          0.8988,
+          0.8896
+        ],
+        "pose-desanimado": [
+          0.9008,
+          0.6479,
+          0.9762,
+          0.8903
+        ]
       },
       "acento": "boné verde",
       "elenco_num": 8,
@@ -258,30 +683,150 @@
       ],
       "imagem": "personagens/PERS-gravata-azul-folha.png",
       "recortes": {
-        "giro-frente": [0.1059, 0.0285, 0.1785, 0.3312],
-        "giro-tres-quartos": [0.2738, 0.0354, 0.3434, 0.3326],
-        "giro-perfil": [0.4531, 0.034, 0.523, 0.334],
-        "giro-costas-tres-quartos": [0.6277, 0.0396, 0.6961, 0.334],
-        "giro-costas": [0.8063, 0.0417, 0.8762, 0.3333],
-        "exp-feliz": [0.0437, 0.3833, 0.1172, 0.5701],
-        "exp-risada": [0.1473, 0.3847, 0.2211, 0.5701],
-        "exp-triste": [0.2527, 0.3882, 0.3262, 0.5715],
-        "exp-bravo": [0.3598, 0.3896, 0.4328, 0.5715],
-        "exp-surpreso": [0.4637, 0.3854, 0.5363, 0.5722],
-        "exp-preocupado": [0.5672, 0.3882, 0.6406, 0.5729],
-        "exp-desconfiado": [0.6746, 0.3889, 0.748, 0.5736],
-        "exp-maroto": [0.7793, 0.391, 0.8531, 0.5743],
-        "exp-timido": [0.8828, 0.391, 0.9559, 0.5743],
-        "pose-base": [0.0387, 0.6271, 0.1055, 0.9],
-        "pose-andando": [0.1328, 0.6326, 0.2051, 0.8979],
-        "pose-correndo": [0.2199, 0.6382, 0.3145, 0.8924],
-        "pose-apontando": [0.3406, 0.634, 0.432, 0.9007],
-        "pose-explicando": [0.4512, 0.6368, 0.5352, 0.9],
-        "pose-duvida": [0.5426, 0.6319, 0.6359, 0.8986],
-        "pose-bracos-cruzados": [0.6516, 0.6389, 0.709, 0.9],
-        "pose-pensando": [0.7262, 0.6743, 0.7988, 0.9007],
-        "pose-comemorando": [0.7965, 0.6319, 0.8918, 0.8993],
-        "pose-desanimado": [0.909, 0.6646, 0.9695, 0.9021]
+        "giro-frente": [
+          0.1059,
+          0.0285,
+          0.1785,
+          0.3312
+        ],
+        "giro-tres-quartos": [
+          0.2738,
+          0.0354,
+          0.3434,
+          0.3326
+        ],
+        "giro-perfil": [
+          0.4531,
+          0.034,
+          0.523,
+          0.334
+        ],
+        "giro-costas-tres-quartos": [
+          0.6277,
+          0.0396,
+          0.6961,
+          0.334
+        ],
+        "giro-costas": [
+          0.8063,
+          0.0417,
+          0.8762,
+          0.3333
+        ],
+        "exp-feliz": [
+          0.0437,
+          0.3833,
+          0.1172,
+          0.5701
+        ],
+        "exp-risada": [
+          0.1473,
+          0.3847,
+          0.2211,
+          0.5701
+        ],
+        "exp-triste": [
+          0.2527,
+          0.3882,
+          0.3262,
+          0.5715
+        ],
+        "exp-bravo": [
+          0.3598,
+          0.3896,
+          0.4328,
+          0.5715
+        ],
+        "exp-surpreso": [
+          0.4637,
+          0.3854,
+          0.5363,
+          0.5722
+        ],
+        "exp-preocupado": [
+          0.5672,
+          0.3882,
+          0.6406,
+          0.5729
+        ],
+        "exp-desconfiado": [
+          0.6746,
+          0.3889,
+          0.748,
+          0.5736
+        ],
+        "exp-maroto": [
+          0.7793,
+          0.391,
+          0.8531,
+          0.5743
+        ],
+        "exp-timido": [
+          0.8828,
+          0.391,
+          0.9559,
+          0.5743
+        ],
+        "pose-base": [
+          0.0387,
+          0.6271,
+          0.1055,
+          0.9
+        ],
+        "pose-andando": [
+          0.1328,
+          0.6326,
+          0.2051,
+          0.8979
+        ],
+        "pose-correndo": [
+          0.2199,
+          0.6382,
+          0.3145,
+          0.8924
+        ],
+        "pose-apontando": [
+          0.3406,
+          0.634,
+          0.432,
+          0.9007
+        ],
+        "pose-explicando": [
+          0.4512,
+          0.6368,
+          0.5352,
+          0.9
+        ],
+        "pose-duvida": [
+          0.5426,
+          0.6319,
+          0.6359,
+          0.8986
+        ],
+        "pose-bracos-cruzados": [
+          0.6516,
+          0.6389,
+          0.709,
+          0.9
+        ],
+        "pose-pensando": [
+          0.7262,
+          0.6743,
+          0.7988,
+          0.9007
+        ],
+        "pose-comemorando": [
+          0.7965,
+          0.6319,
+          0.8918,
+          0.8993
+        ],
+        "pose-desanimado": [
+          0.909,
+          0.6646,
+          0.9695,
+          0.9021
+        ]
       },
       "acento": "gravata azul",
       "elenco_num": 9,
@@ -306,30 +851,150 @@
       ],
       "imagem": "personagens/PERS-roxo-ansioso-folha.png",
       "recortes": {
-        "giro-frente": [0.0977, 0.0174, 0.1871, 0.2833],
-        "giro-tres-quartos": [0.2801, 0.0181, 0.366, 0.2847],
-        "giro-perfil": [0.4699, 0.0215, 0.5359, 0.2868],
-        "giro-costas-tres-quartos": [0.6328, 0.0194, 0.7191, 0.2847],
-        "giro-costas": [0.8148, 0.0215, 0.882, 0.2833],
-        "exp-ansioso": [0.0324, 0.3222, 0.118, 0.4931],
-        "exp-feliz": [0.15, 0.325, 0.2195, 0.4924],
-        "exp-risada": [0.2629, 0.3236, 0.3316, 0.4931],
-        "exp-triste": [0.368, 0.3264, 0.4363, 0.4931],
-        "exp-bravo": [0.4707, 0.3271, 0.5391, 0.4931],
-        "exp-surpreso": [0.5641, 0.3243, 0.6605, 0.4938],
-        "exp-desconfiado": [0.6813, 0.3278, 0.7469, 0.4931],
-        "exp-maroto": [0.7891, 0.3285, 0.8578, 0.4938],
-        "exp-timido": [0.891, 0.3292, 0.9766, 0.4944],
-        "pose-base": [0.0645, 0.5194, 0.1383, 0.7319],
-        "pose-andando": [0.2191, 0.5229, 0.2863, 0.7299],
-        "pose-correndo": [0.3473, 0.516, 0.4441, 0.7264],
-        "pose-apontando": [0.5473, 0.5243, 0.6285, 0.7319],
-        "pose-explicando": [0.7004, 0.5264, 0.7816, 0.7347],
-        "pose-duvida": [0.8504, 0.5306, 0.9395, 0.7347],
-        "pose-bracos-cruzados": [0.1078, 0.7562, 0.1633, 0.9674],
-        "pose-pensando": [0.3285, 0.7611, 0.4102, 0.9674],
-        "pose-comemorando": [0.5594, 0.7444, 0.6508, 0.966],
-        "pose-desanimado": [0.8, 0.7736, 0.8617, 0.9688]
+        "giro-frente": [
+          0.0977,
+          0.0174,
+          0.1871,
+          0.2833
+        ],
+        "giro-tres-quartos": [
+          0.2801,
+          0.0181,
+          0.366,
+          0.2847
+        ],
+        "giro-perfil": [
+          0.4699,
+          0.0215,
+          0.5359,
+          0.2868
+        ],
+        "giro-costas-tres-quartos": [
+          0.6328,
+          0.0194,
+          0.7191,
+          0.2847
+        ],
+        "giro-costas": [
+          0.8148,
+          0.0215,
+          0.882,
+          0.2833
+        ],
+        "exp-ansioso": [
+          0.0324,
+          0.3222,
+          0.118,
+          0.4931
+        ],
+        "exp-feliz": [
+          0.15,
+          0.325,
+          0.2195,
+          0.4924
+        ],
+        "exp-risada": [
+          0.2629,
+          0.3236,
+          0.3316,
+          0.4931
+        ],
+        "exp-triste": [
+          0.368,
+          0.3264,
+          0.4363,
+          0.4931
+        ],
+        "exp-bravo": [
+          0.4707,
+          0.3271,
+          0.5391,
+          0.4931
+        ],
+        "exp-surpreso": [
+          0.5641,
+          0.3243,
+          0.6605,
+          0.4938
+        ],
+        "exp-desconfiado": [
+          0.6813,
+          0.3278,
+          0.7469,
+          0.4931
+        ],
+        "exp-maroto": [
+          0.7891,
+          0.3285,
+          0.8578,
+          0.4938
+        ],
+        "exp-timido": [
+          0.891,
+          0.3292,
+          0.9766,
+          0.4944
+        ],
+        "pose-base": [
+          0.0645,
+          0.5194,
+          0.1383,
+          0.7319
+        ],
+        "pose-andando": [
+          0.2191,
+          0.5229,
+          0.2863,
+          0.7299
+        ],
+        "pose-correndo": [
+          0.3473,
+          0.516,
+          0.4441,
+          0.7264
+        ],
+        "pose-apontando": [
+          0.5473,
+          0.5243,
+          0.6285,
+          0.7319
+        ],
+        "pose-explicando": [
+          0.7004,
+          0.5264,
+          0.7816,
+          0.7347
+        ],
+        "pose-duvida": [
+          0.8504,
+          0.5306,
+          0.9395,
+          0.7347
+        ],
+        "pose-bracos-cruzados": [
+          0.1078,
+          0.7562,
+          0.1633,
+          0.9674
+        ],
+        "pose-pensando": [
+          0.3285,
+          0.7611,
+          0.4102,
+          0.9674
+        ],
+        "pose-comemorando": [
+          0.5594,
+          0.7444,
+          0.6508,
+          0.966
+        ],
+        "pose-desanimado": [
+          0.8,
+          0.7736,
+          0.8617,
+          0.9688
+        ]
       },
       "acento": "moletom roxo",
       "elenco_num": 12,
@@ -354,30 +1019,150 @@
       ],
       "imagem": "personagens/PERS-bob-oculos-folha.png",
       "recortes": {
-        "giro-frente": [0.1363, 0.0292, 0.2156, 0.3139],
-        "giro-tres-quartos": [0.3008, 0.0306, 0.3781, 0.3153],
-        "giro-perfil": [0.4641, 0.0306, 0.5383, 0.3153],
-        "giro-costas-tres-quartos": [0.6152, 0.0292, 0.6922, 0.3146],
-        "giro-costas": [0.784, 0.0312, 0.8586, 0.3153],
-        "exp-feliz": [0.0348, 0.3542, 0.1242, 0.5333],
-        "exp-risada": [0.1469, 0.3549, 0.2352, 0.5333],
-        "exp-triste": [0.2594, 0.3583, 0.3457, 0.534],
-        "exp-bravo": [0.366, 0.3563, 0.4543, 0.534],
-        "exp-surpreso": [0.4734, 0.3569, 0.5605, 0.534],
-        "exp-preocupado": [0.5762, 0.3576, 0.6629, 0.534],
-        "exp-desconfiado": [0.6777, 0.3604, 0.7625, 0.534],
-        "exp-maroto": [0.7797, 0.3583, 0.8648, 0.5347],
-        "exp-timido": [0.8773, 0.3597, 0.9637, 0.5347],
-        "pose-base": [0.1031, 0.5563, 0.1676, 0.759],
-        "pose-andando": [0.2527, 0.559, 0.3195, 0.7618],
-        "pose-correndo": [0.4242, 0.5597, 0.5234, 0.7604],
-        "pose-apontando": [0.6215, 0.5556, 0.7137, 0.7604],
-        "pose-explicando": [0.7902, 0.5576, 0.8664, 0.7611],
-        "pose-duvida": [0.1117, 0.7771, 0.2012, 0.975],
-        "pose-bracos-cruzados": [0.2785, 0.7764, 0.3359, 0.9757],
-        "pose-pensando": [0.4199, 0.7819, 0.4793, 0.9757],
-        "pose-comemorando": [0.5855, 0.7743, 0.6793, 0.9778],
-        "pose-desanimado": [0.7562, 0.7882, 0.8203, 0.9778]
+        "giro-frente": [
+          0.1363,
+          0.0292,
+          0.2156,
+          0.3139
+        ],
+        "giro-tres-quartos": [
+          0.3008,
+          0.0306,
+          0.3781,
+          0.3153
+        ],
+        "giro-perfil": [
+          0.4641,
+          0.0306,
+          0.5383,
+          0.3153
+        ],
+        "giro-costas-tres-quartos": [
+          0.6152,
+          0.0292,
+          0.6922,
+          0.3146
+        ],
+        "giro-costas": [
+          0.784,
+          0.0312,
+          0.8586,
+          0.3153
+        ],
+        "exp-feliz": [
+          0.0348,
+          0.3542,
+          0.1242,
+          0.5333
+        ],
+        "exp-risada": [
+          0.1469,
+          0.3549,
+          0.2352,
+          0.5333
+        ],
+        "exp-triste": [
+          0.2594,
+          0.3583,
+          0.3457,
+          0.534
+        ],
+        "exp-bravo": [
+          0.366,
+          0.3563,
+          0.4543,
+          0.534
+        ],
+        "exp-surpreso": [
+          0.4734,
+          0.3569,
+          0.5605,
+          0.534
+        ],
+        "exp-preocupado": [
+          0.5762,
+          0.3576,
+          0.6629,
+          0.534
+        ],
+        "exp-desconfiado": [
+          0.6777,
+          0.3604,
+          0.7625,
+          0.534
+        ],
+        "exp-maroto": [
+          0.7797,
+          0.3583,
+          0.8648,
+          0.5347
+        ],
+        "exp-timido": [
+          0.8773,
+          0.3597,
+          0.9637,
+          0.5347
+        ],
+        "pose-base": [
+          0.1031,
+          0.5563,
+          0.1676,
+          0.759
+        ],
+        "pose-andando": [
+          0.2527,
+          0.559,
+          0.3195,
+          0.7618
+        ],
+        "pose-correndo": [
+          0.4242,
+          0.5597,
+          0.5234,
+          0.7604
+        ],
+        "pose-apontando": [
+          0.6215,
+          0.5556,
+          0.7137,
+          0.7604
+        ],
+        "pose-explicando": [
+          0.7902,
+          0.5576,
+          0.8664,
+          0.7611
+        ],
+        "pose-duvida": [
+          0.1117,
+          0.7771,
+          0.2012,
+          0.975
+        ],
+        "pose-bracos-cruzados": [
+          0.2785,
+          0.7764,
+          0.3359,
+          0.9757
+        ],
+        "pose-pensando": [
+          0.4199,
+          0.7819,
+          0.4793,
+          0.9757
+        ],
+        "pose-comemorando": [
+          0.5855,
+          0.7743,
+          0.6793,
+          0.9778
+        ],
+        "pose-desanimado": [
+          0.7562,
+          0.7882,
+          0.8203,
+          0.9778
+        ]
       },
       "acento": "óculos redondos",
       "elenco_num": 13,
@@ -616,18 +1401,78 @@
       ],
       "imagem": "objetos/OBJ-catalogo.png",
       "recortes": {
-        "cadeira": [0.082, 0.0431, 0.1875, 0.2951],
-        "laptop": [0.3113, 0.05, 0.4629, 0.2833],
-        "caneca": [0.5742, 0.0312, 0.6836, 0.2729],
-        "skate": [0.7871, 0.0736, 0.9547, 0.2764],
-        "luminaria": [0.0836, 0.3514, 0.1695, 0.6035],
-        "microfone": [0.3328, 0.3556, 0.4082, 0.6083],
-        "mochila": [0.5641, 0.3542, 0.677, 0.5958],
-        "planta": [0.8117, 0.3451, 0.9316, 0.6028],
-        "camera": [0.0832, 0.6806, 0.1656, 0.934],
-        "trofeu": [0.3277, 0.6882, 0.4289, 0.9139],
-        "smartphone": [0.575, 0.6806, 0.6629, 0.9111],
-        "bau": [0.8141, 0.7201, 0.9379, 0.9111]
+        "cadeira": [
+          0.082,
+          0.0431,
+          0.1875,
+          0.2951
+        ],
+        "laptop": [
+          0.3113,
+          0.05,
+          0.4629,
+          0.2833
+        ],
+        "caneca": [
+          0.5742,
+          0.0312,
+          0.6836,
+          0.2729
+        ],
+        "skate": [
+          0.7871,
+          0.0736,
+          0.9547,
+          0.2764
+        ],
+        "luminaria": [
+          0.0836,
+          0.3514,
+          0.1695,
+          0.6035
+        ],
+        "microfone": [
+          0.3328,
+          0.3556,
+          0.4082,
+          0.6083
+        ],
+        "mochila": [
+          0.5641,
+          0.3542,
+          0.677,
+          0.5958
+        ],
+        "planta": [
+          0.8117,
+          0.3451,
+          0.9316,
+          0.6028
+        ],
+        "camera": [
+          0.0832,
+          0.6806,
+          0.1656,
+          0.934
+        ],
+        "trofeu": [
+          0.3277,
+          0.6882,
+          0.4289,
+          0.9139
+        ],
+        "smartphone": [
+          0.575,
+          0.6806,
+          0.6629,
+          0.9111
+        ],
+        "bau": [
+          0.8141,
+          0.7201,
+          0.9379,
+          0.9111
+        ]
       }
     },
     {
@@ -647,18 +1492,78 @@
       ],
       "imagem": "animais/ANIM-catalogo.png",
       "recortes": {
-        "cachorro": [0.0617, 0.0194, 0.2184, 0.3139],
-        "gato": [0.2922, 0.0306, 0.4484, 0.3125],
-        "periquito": [0.5348, 0.0222, 0.691, 0.3111],
-        "coelho": [0.7906, 0.0208, 0.9324, 0.3174],
-        "porquinho-da-india": [0.0527, 0.3868, 0.2141, 0.6021],
-        "hamster": [0.3098, 0.3535, 0.425, 0.6222],
-        "peixe-dourado": [0.5266, 0.3528, 0.6949, 0.6306],
-        "tartaruga": [0.7684, 0.3653, 0.9574, 0.6153],
-        "galo": [0.066, 0.6667, 0.2133, 0.9674],
-        "porco": [0.2766, 0.6778, 0.4527, 0.9479],
-        "ovelha": [0.5242, 0.6743, 0.7035, 0.9535],
-        "cavalo": [0.7898, 0.6667, 0.9418, 0.9646]
+        "cachorro": [
+          0.0617,
+          0.0194,
+          0.2184,
+          0.3139
+        ],
+        "gato": [
+          0.2922,
+          0.0306,
+          0.4484,
+          0.3125
+        ],
+        "periquito": [
+          0.5348,
+          0.0222,
+          0.691,
+          0.3111
+        ],
+        "coelho": [
+          0.7906,
+          0.0208,
+          0.9324,
+          0.3174
+        ],
+        "porquinho-da-india": [
+          0.0527,
+          0.3868,
+          0.2141,
+          0.6021
+        ],
+        "hamster": [
+          0.3098,
+          0.3535,
+          0.425,
+          0.6222
+        ],
+        "peixe-dourado": [
+          0.5266,
+          0.3528,
+          0.6949,
+          0.6306
+        ],
+        "tartaruga": [
+          0.7684,
+          0.3653,
+          0.9574,
+          0.6153
+        ],
+        "galo": [
+          0.066,
+          0.6667,
+          0.2133,
+          0.9674
+        ],
+        "porco": [
+          0.2766,
+          0.6778,
+          0.4527,
+          0.9479
+        ],
+        "ovelha": [
+          0.5242,
+          0.6743,
+          0.7035,
+          0.9535
+        ],
+        "cavalo": [
+          0.7898,
+          0.6667,
+          0.9418,
+          0.9646
+        ]
       }
     },
     {
@@ -680,7 +1585,12 @@
       ],
       "imagem": "personagens/ELENCO-catalogo.png",
       "recortes": {
-        "num-01": [0.0871, 0.0174, 0.166, 0.2958]
+        "num-01": [
+          0.0871,
+          0.0174,
+          0.166,
+          0.2958
+        ]
       },
       "acento": "camiseta azul",
       "elenco_num": 1,
@@ -692,10 +1602,12 @@
       "titulo": "Senhor de óculos quadrados e cachecol cinza",
       "trava": "Stickman 2D flat colorido do canal Porquê BR: senhor de três fios de cabelo, óculos quadrados de armação preta grossa, cachecol cinza com franja e colete verde chapado. Cabeça redonda branca grande com contorno preto, dois olhos pretos sempre visíveis, boca de reação (nunca articula fala), corpo e membros em traço preto fino, fundo claro em tom creme, sem texto e sem marca na imagem.",
       "proibido": "boca aberta articulando fala (boca_articula_fala), corte da cabeça no topo (corte_oculos_cabeca), dedos realistas, pele humana",
-      "estado": "aguardando_ok_jose",
+      "estado": "permanente",
       "origem": "mantenedor",
       "criado_em": "2026-10-28",
       "autor": "droid",
+      "aprovado_por": "Jose",
+      "aprovado_em": "2026-10-29",
       "tags": [
         "masculino",
         "senhor",
@@ -704,7 +1616,12 @@
       ],
       "imagem": "personagens/ELENCO-catalogo.png",
       "recortes": {
-        "num-03": [0.5902, 0.0118, 0.6523, 0.2979]
+        "num-03": [
+          0.5902,
+          0.0118,
+          0.6523,
+          0.2979
+        ]
       },
       "acento": "cachecol cinza",
       "elenco_num": 3,
@@ -716,10 +1633,12 @@
       "titulo": "Punk de moicano azul e camiseta preta de caveira",
       "trava": "Stickman 2D flat colorido do canal Porquê BR: punk de moicano azul em pé, sobrancelhas bravas e sorriso de canto, camiseta regata preta larga com caveira branca, shorts azul, braços cruzados. Cabeça redonda branca grande com contorno preto, dois olhos pretos sempre visíveis, boca de reação (nunca articula fala), corpo e membros em traço preto fino, fundo claro em tom creme, sem texto e sem marca na imagem.",
       "proibido": "boca aberta articulando fala (boca_articula_fala), corte da cabeça no topo (corte_oculos_cabeca), dedos realistas, pele humana",
-      "estado": "aguardando_ok_jose",
+      "estado": "permanente",
       "origem": "mantenedor",
       "criado_em": "2026-10-28",
       "autor": "droid",
+      "aprovado_por": "Jose",
+      "aprovado_em": "2026-10-29",
       "tags": [
         "masculino",
         "punk",
@@ -728,7 +1647,12 @@
       ],
       "imagem": "personagens/ELENCO-catalogo.png",
       "recortes": {
-        "num-04": [0.8328, 0.0285, 0.9109, 0.2972]
+        "num-04": [
+          0.8328,
+          0.0285,
+          0.9109,
+          0.2972
+        ]
       },
       "acento": "moicano azul",
       "elenco_num": 4,
@@ -740,10 +1664,12 @@
       "titulo": "Careca sonolento de pijama azul",
       "trava": "Stickman 2D flat colorido do canal Porquê BR: careca de cabeça lisa, sobrancelhas caídas e olhar de sono, pijama azul de mangas e calças compridas, mãos nos bolsos. Cabeça redonda branca grande com contorno preto, dois olhos pretos sempre visíveis, boca de reação (nunca articula fala), corpo e membros em traço preto fino, fundo claro em tom creme, sem texto e sem marca na imagem.",
       "proibido": "boca aberta articulando fala (boca_articula_fala), corte da cabeça no topo (corte_oculos_cabeca), dedos realistas, pele humana",
-      "estado": "aguardando_ok_jose",
+      "estado": "permanente",
       "origem": "mantenedor",
       "criado_em": "2026-10-28",
       "autor": "droid",
+      "aprovado_por": "Jose",
+      "aprovado_em": "2026-10-29",
       "tags": [
         "masculino",
         "sonolento",
@@ -752,7 +1678,12 @@
       ],
       "imagem": "personagens/ELENCO-catalogo.png",
       "recortes": {
-        "num-06": [0.3312, 0.3458, 0.4262, 0.6257]
+        "num-06": [
+          0.3312,
+          0.3458,
+          0.4262,
+          0.6257
+        ]
       },
       "acento": "pijama azul",
       "elenco_num": 6,
@@ -764,10 +1695,12 @@
       "titulo": "Rapaz de moletom vermelho e fones de ouvido grandes",
       "trava": "Stickman 2D flat colorido do canal Porquê BR: rapaz de fones de ouvido grandes pretos, moletom vermelho chapado de mangas curtas, boca em 'o' de surpresa, riscos de som ao redor da cabeça. Cabeça redonda branca grande com contorno preto, dois olhos pretos sempre visíveis, boca de reação (nunca articula fala), corpo e membros em traço preto fino, fundo claro em tom creme, sem texto e sem marca na imagem.",
       "proibido": "boca aberta articulando fala (boca_articula_fala), corte da cabeça no topo (corte_oculos_cabeca), dedos realistas, pele humana",
-      "estado": "aguardando_ok_jose",
+      "estado": "permanente",
       "origem": "mantenedor",
       "criado_em": "2026-10-28",
       "autor": "droid",
+      "aprovado_por": "Jose",
+      "aprovado_em": "2026-10-29",
       "tags": [
         "masculino",
         "fones",
@@ -776,7 +1709,12 @@
       ],
       "imagem": "personagens/ELENCO-catalogo.png",
       "recortes": {
-        "num-07": [0.5684, 0.3486, 0.6715, 0.6264]
+        "num-07": [
+          0.5684,
+          0.3486,
+          0.6715,
+          0.6264
+        ]
       },
       "acento": "moletom vermelho",
       "elenco_num": 7,
@@ -788,10 +1726,12 @@
       "titulo": "Nerd de óculos redondos, laço vermelho e suspensório",
       "trava": "Stickman 2D flat colorido do canal Porquê BR: nerd de cabelo preto cacheado curto, óculos redondos grandes de armação preta, camisa branca com laço vermelho, suspensório preto e calça escura, mãos na cintura. Cabeça redonda branca grande com contorno preto, dois olhos pretos sempre visíveis, boca de reação (nunca articula fala), corpo e membros em traço preto fino, fundo claro em tom creme, sem texto e sem marca na imagem.",
       "proibido": "boca aberta articulando fala (boca_articula_fala), corte da cabeça no topo (corte_oculos_cabeca), dedos realistas, pele humana",
-      "estado": "aguardando_ok_jose",
+      "estado": "permanente",
       "origem": "mantenedor",
       "criado_em": "2026-10-28",
       "autor": "droid",
+      "aprovado_por": "Jose",
+      "aprovado_em": "2026-10-29",
       "tags": [
         "masculino",
         "nerd",
@@ -800,7 +1740,12 @@
       ],
       "imagem": "personagens/ELENCO-catalogo.png",
       "recortes": {
-        "num-10": [0.3375, 0.7007, 0.409, 0.9465]
+        "num-10": [
+          0.3375,
+          0.7007,
+          0.409,
+          0.9465
+        ]
       },
       "acento": "laço vermelho",
       "elenco_num": 10,
@@ -812,10 +1757,12 @@
       "titulo": "Rei de coroa dourada e capa vermelha",
       "trava": "Stickman 2D flat colorido do canal Porquê BR: rei de coroa dourada de três pontas, camiseta branca e capa vermelha com fecho dourado, mãos na cintura. Cabeça redonda branca grande com contorno preto, dois olhos pretos sempre visíveis, boca de reação (nunca articula fala), corpo e membros em traço preto fino, fundo claro em tom creme, sem texto e sem marca na imagem.",
       "proibido": "boca aberta articulando fala (boca_articula_fala), corte da cabeça no topo (corte_oculos_cabeca), dedos realistas, pele humana",
-      "estado": "aguardando_ok_jose",
+      "estado": "permanente",
       "origem": "mantenedor",
       "criado_em": "2026-10-28",
       "autor": "droid",
+      "aprovado_por": "Jose",
+      "aprovado_em": "2026-10-29",
       "tags": [
         "masculino",
         "rei",
@@ -824,7 +1771,12 @@
       ],
       "imagem": "personagens/ELENCO-catalogo.png",
       "recortes": {
-        "num-11": [0.575, 0.6715, 0.6543, 0.9465]
+        "num-11": [
+          0.575,
+          0.6715,
+          0.6543,
+          0.9465
+        ]
       },
       "acento": "capa vermelha",
       "elenco_num": 11,
@@ -835,10 +1787,12 @@
       "tipo": "objeto",
       "titulo": "Cadeira de madeira",
       "trava": "Cadeira de madeira simples: assento e encosto de ripas em marrom claro, quatro pernas finas com ponteiras; contorno preto e cores chapadas suaves em cartoon 2D flat, sem texto e sem marca.",
-      "estado": "aguardando_ok_jose",
+      "estado": "permanente",
       "origem": "mantenedor",
       "criado_em": "2026-10-28",
       "autor": "droid",
+      "aprovado_por": "Jose",
+      "aprovado_em": "2026-10-29",
       "tags": [
         "cadeira",
         "madeira",
@@ -846,7 +1800,12 @@
       ],
       "imagem": "objetos/OBJ-catalogo.png",
       "recortes": {
-        "item": [0.082, 0.0431, 0.1875, 0.2951]
+        "item": [
+          0.082,
+          0.0431,
+          0.1875,
+          0.2951
+        ]
       }
     },
     {
@@ -854,10 +1813,12 @@
       "tipo": "objeto",
       "titulo": "Laptop",
       "trava": "Laptop aberto em cinza chapado, tela com uma janela azul genérica sem texto, teclado visível; contorno preto e cores chapadas suaves em cartoon 2D flat, sem texto e sem marca.",
-      "estado": "aguardando_ok_jose",
+      "estado": "permanente",
       "origem": "mantenedor",
       "criado_em": "2026-10-28",
       "autor": "droid",
+      "aprovado_por": "Jose",
+      "aprovado_em": "2026-10-29",
       "tags": [
         "laptop",
         "computador",
@@ -865,7 +1826,12 @@
       ],
       "imagem": "objetos/OBJ-catalogo.png",
       "recortes": {
-        "item": [0.3113, 0.05, 0.4629, 0.2833]
+        "item": [
+          0.3113,
+          0.05,
+          0.4629,
+          0.2833
+        ]
       }
     },
     {
@@ -873,10 +1839,12 @@
       "tipo": "objeto",
       "titulo": "Caneca fumegante",
       "trava": "Caneca branca com café escuro e três fios de vapor subindo; contorno preto e cores chapadas suaves em cartoon 2D flat, sem texto e sem marca.",
-      "estado": "aguardando_ok_jose",
+      "estado": "permanente",
       "origem": "mantenedor",
       "criado_em": "2026-10-28",
       "autor": "droid",
+      "aprovado_por": "Jose",
+      "aprovado_em": "2026-10-29",
       "tags": [
         "caneca",
         "cafe",
@@ -884,7 +1852,12 @@
       ],
       "imagem": "objetos/OBJ-catalogo.png",
       "recortes": {
-        "item": [0.5742, 0.0312, 0.6836, 0.2729]
+        "item": [
+          0.5742,
+          0.0312,
+          0.6836,
+          0.2729
+        ]
       }
     },
     {
@@ -892,10 +1865,12 @@
       "tipo": "objeto",
       "titulo": "Skateboard",
       "trava": "Skateboard de shape preto com rodas azuis e eixos claros, visto em diagonal; contorno preto e cores chapadas suaves em cartoon 2D flat, sem texto e sem marca.",
-      "estado": "aguardando_ok_jose",
+      "estado": "permanente",
       "origem": "mantenedor",
       "criado_em": "2026-10-28",
       "autor": "droid",
+      "aprovado_por": "Jose",
+      "aprovado_em": "2026-10-29",
       "tags": [
         "skate",
         "esporte",
@@ -903,7 +1878,12 @@
       ],
       "imagem": "objetos/OBJ-catalogo.png",
       "recortes": {
-        "item": [0.7871, 0.0736, 0.9547, 0.2764]
+        "item": [
+          0.7871,
+          0.0736,
+          0.9547,
+          0.2764
+        ]
       }
     },
     {
@@ -911,10 +1891,12 @@
       "tipo": "objeto",
       "titulo": "Luminária de mesa amarela",
       "trava": "Luminária de mesa com cúpula amarela, haste fina cinza e base redonda, com um cordãozinho; contorno preto e cores chapadas suaves em cartoon 2D flat, sem texto e sem marca.",
-      "estado": "aguardando_ok_jose",
+      "estado": "permanente",
       "origem": "mantenedor",
       "criado_em": "2026-10-28",
       "autor": "droid",
+      "aprovado_por": "Jose",
+      "aprovado_em": "2026-10-29",
       "tags": [
         "luminaria",
         "luz",
@@ -922,7 +1904,12 @@
       ],
       "imagem": "objetos/OBJ-catalogo.png",
       "recortes": {
-        "item": [0.0836, 0.3514, 0.1695, 0.6035]
+        "item": [
+          0.0836,
+          0.3514,
+          0.1695,
+          0.6035
+        ]
       }
     },
     {
@@ -930,10 +1917,12 @@
       "tipo": "objeto",
       "titulo": "Microfone com pedestal",
       "trava": "Microfone preto de tela quadriculada num pedestal fino com base redonda e cabo enrolado; contorno preto e cores chapadas suaves em cartoon 2D flat, sem texto e sem marca.",
-      "estado": "aguardando_ok_jose",
+      "estado": "permanente",
       "origem": "mantenedor",
       "criado_em": "2026-10-28",
       "autor": "droid",
+      "aprovado_por": "Jose",
+      "aprovado_em": "2026-10-29",
       "tags": [
         "microfone",
         "voz",
@@ -941,7 +1930,12 @@
       ],
       "imagem": "objetos/OBJ-catalogo.png",
       "recortes": {
-        "item": [0.3328, 0.3556, 0.4082, 0.6083]
+        "item": [
+          0.3328,
+          0.3556,
+          0.4082,
+          0.6083
+        ]
       }
     },
     {
@@ -949,10 +1943,12 @@
       "tipo": "objeto",
       "titulo": "Mochila azul",
       "trava": "Mochila azul chapada com bolso frontal de zíper e alças em azul mais escuro; contorno preto e cores chapadas suaves em cartoon 2D flat, sem texto e sem marca.",
-      "estado": "aguardando_ok_jose",
+      "estado": "permanente",
       "origem": "mantenedor",
       "criado_em": "2026-10-28",
       "autor": "droid",
+      "aprovado_por": "Jose",
+      "aprovado_em": "2026-10-29",
       "tags": [
         "mochila",
         "escola",
@@ -960,7 +1956,12 @@
       ],
       "imagem": "objetos/OBJ-catalogo.png",
       "recortes": {
-        "item": [0.5641, 0.3542, 0.677, 0.5958]
+        "item": [
+          0.5641,
+          0.3542,
+          0.677,
+          0.5958
+        ]
       }
     },
     {
@@ -968,10 +1969,12 @@
       "tipo": "objeto",
       "titulo": "Planta em vaso",
       "trava": "Planta de folhas verdes largas num vaso de barro laranja; contorno preto e cores chapadas suaves em cartoon 2D flat, sem texto e sem marca.",
-      "estado": "aguardando_ok_jose",
+      "estado": "permanente",
       "origem": "mantenedor",
       "criado_em": "2026-10-28",
       "autor": "droid",
+      "aprovado_por": "Jose",
+      "aprovado_em": "2026-10-29",
       "tags": [
         "planta",
         "vaso",
@@ -979,7 +1982,12 @@
       ],
       "imagem": "objetos/OBJ-catalogo.png",
       "recortes": {
-        "item": [0.8117, 0.3451, 0.9316, 0.6028]
+        "item": [
+          0.8117,
+          0.3451,
+          0.9316,
+          0.6028
+        ]
       }
     },
     {
@@ -987,10 +1995,12 @@
       "tipo": "objeto",
       "titulo": "Câmera no tripé",
       "trava": "Câmera fotográfica preta de lente azulada sobre um tripé de três pernas finas; contorno preto e cores chapadas suaves em cartoon 2D flat, sem texto e sem marca.",
-      "estado": "aguardando_ok_jose",
+      "estado": "permanente",
       "origem": "mantenedor",
       "criado_em": "2026-10-28",
       "autor": "droid",
+      "aprovado_por": "Jose",
+      "aprovado_em": "2026-10-29",
       "tags": [
         "camera",
         "foto",
@@ -998,7 +2008,12 @@
       ],
       "imagem": "objetos/OBJ-catalogo.png",
       "recortes": {
-        "item": [0.0832, 0.6806, 0.1656, 0.934]
+        "item": [
+          0.0832,
+          0.6806,
+          0.1656,
+          0.934
+        ]
       }
     },
     {
@@ -1006,10 +2021,12 @@
       "tipo": "objeto",
       "titulo": "Troféu dourado",
       "trava": "Troféu dourado de duas alças com uma estrela no centro, sobre base preta; contorno preto e cores chapadas suaves em cartoon 2D flat, sem texto e sem marca.",
-      "estado": "aguardando_ok_jose",
+      "estado": "permanente",
       "origem": "mantenedor",
       "criado_em": "2026-10-28",
       "autor": "droid",
+      "aprovado_por": "Jose",
+      "aprovado_em": "2026-10-29",
       "tags": [
         "trofeu",
         "premio",
@@ -1017,7 +2034,12 @@
       ],
       "imagem": "objetos/OBJ-catalogo.png",
       "recortes": {
-        "item": [0.3277, 0.6882, 0.4289, 0.9139]
+        "item": [
+          0.3277,
+          0.6882,
+          0.4289,
+          0.9139
+        ]
       }
     },
     {
@@ -1025,10 +2047,12 @@
       "tipo": "objeto",
       "titulo": "Smartphone",
       "trava": "Smartphone preto de tela clara com uma janela azul genérica sem texto, em pé e levemente inclinado; contorno preto e cores chapadas suaves em cartoon 2D flat, sem texto e sem marca.",
-      "estado": "aguardando_ok_jose",
+      "estado": "permanente",
       "origem": "mantenedor",
       "criado_em": "2026-10-28",
       "autor": "droid",
+      "aprovado_por": "Jose",
+      "aprovado_em": "2026-10-29",
       "tags": [
         "smartphone",
         "celular",
@@ -1036,7 +2060,12 @@
       ],
       "imagem": "objetos/OBJ-catalogo.png",
       "recortes": {
-        "item": [0.575, 0.6806, 0.6629, 0.9111]
+        "item": [
+          0.575,
+          0.6806,
+          0.6629,
+          0.9111
+        ]
       }
     },
     {
@@ -1044,10 +2073,12 @@
       "tipo": "objeto",
       "titulo": "Baú do tesouro",
       "trava": "Baú do tesouro de madeira marrom com cantoneiras e fecho dourados, fechado; contorno preto e cores chapadas suaves em cartoon 2D flat, sem texto e sem marca.",
-      "estado": "aguardando_ok_jose",
+      "estado": "permanente",
       "origem": "mantenedor",
       "criado_em": "2026-10-28",
       "autor": "droid",
+      "aprovado_por": "Jose",
+      "aprovado_em": "2026-10-29",
       "tags": [
         "bau",
         "tesouro",
@@ -1055,7 +2086,12 @@
       ],
       "imagem": "objetos/OBJ-catalogo.png",
       "recortes": {
-        "item": [0.8141, 0.7201, 0.9379, 0.9111]
+        "item": [
+          0.8141,
+          0.7201,
+          0.9379,
+          0.9111
+        ]
       }
     },
     {
@@ -1063,10 +2099,12 @@
       "tipo": "animal",
       "titulo": "Cachorro",
       "trava": "Cachorro sentado de pelo dourado e longo, língua rosa para fora e olhos pretos grandes; contorno preto e cores chapadas suaves em cartoon 2D flat, sem texto e sem marca.",
-      "estado": "aguardando_ok_jose",
+      "estado": "permanente",
       "origem": "mantenedor",
       "criado_em": "2026-10-28",
       "autor": "droid",
+      "aprovado_por": "Jose",
+      "aprovado_em": "2026-10-29",
       "tags": [
         "cachorro",
         "pet",
@@ -1074,7 +2112,12 @@
       ],
       "imagem": "animais/ANIM-catalogo.png",
       "recortes": {
-        "item": [0.0617, 0.0194, 0.2184, 0.3139]
+        "item": [
+          0.0617,
+          0.0194,
+          0.2184,
+          0.3139
+        ]
       }
     },
     {
@@ -1082,10 +2125,12 @@
       "tipo": "animal",
       "titulo": "Gato",
       "trava": "Gato cinza e marrom listrado sentado, peito branco, cauda longa curvada e bigodes finos; contorno preto e cores chapadas suaves em cartoon 2D flat, sem texto e sem marca.",
-      "estado": "aguardando_ok_jose",
+      "estado": "permanente",
       "origem": "mantenedor",
       "criado_em": "2026-10-28",
       "autor": "droid",
+      "aprovado_por": "Jose",
+      "aprovado_em": "2026-10-29",
       "tags": [
         "gato",
         "pet",
@@ -1093,7 +2138,12 @@
       ],
       "imagem": "animais/ANIM-catalogo.png",
       "recortes": {
-        "item": [0.2922, 0.0306, 0.4484, 0.3125]
+        "item": [
+          0.2922,
+          0.0306,
+          0.4484,
+          0.3125
+        ]
       }
     },
     {
@@ -1101,10 +2151,12 @@
       "tipo": "animal",
       "titulo": "Periquito verde",
       "trava": "Periquito verde e amarelo empoleirado num galho fino, bico curto e asas listradas; contorno preto e cores chapadas suaves em cartoon 2D flat, sem texto e sem marca.",
-      "estado": "aguardando_ok_jose",
+      "estado": "permanente",
       "origem": "mantenedor",
       "criado_em": "2026-10-28",
       "autor": "droid",
+      "aprovado_por": "Jose",
+      "aprovado_em": "2026-10-29",
       "tags": [
         "periquito",
         "ave",
@@ -1112,7 +2164,12 @@
       ],
       "imagem": "animais/ANIM-catalogo.png",
       "recortes": {
-        "item": [0.5348, 0.0222, 0.691, 0.3111]
+        "item": [
+          0.5348,
+          0.0222,
+          0.691,
+          0.3111
+        ]
       }
     },
     {
@@ -1120,10 +2177,12 @@
       "tipo": "animal",
       "titulo": "Coelho",
       "trava": "Coelho branco sentado de orelhas altas com o interior rosa e focinho rosa; contorno preto e cores chapadas suaves em cartoon 2D flat, sem texto e sem marca.",
-      "estado": "aguardando_ok_jose",
+      "estado": "permanente",
       "origem": "mantenedor",
       "criado_em": "2026-10-28",
       "autor": "droid",
+      "aprovado_por": "Jose",
+      "aprovado_em": "2026-10-29",
       "tags": [
         "coelho",
         "pet",
@@ -1131,7 +2190,12 @@
       ],
       "imagem": "animais/ANIM-catalogo.png",
       "recortes": {
-        "item": [0.7906, 0.0208, 0.9324, 0.3174]
+        "item": [
+          0.7906,
+          0.0208,
+          0.9324,
+          0.3174
+        ]
       }
     },
     {
@@ -1139,10 +2203,12 @@
       "tipo": "animal",
       "titulo": "Porquinho-da-índia",
       "trava": "Porquinho-da-índia marrom e branco de corpo redondo e orelhas pequenas caídas; contorno preto e cores chapadas suaves em cartoon 2D flat, sem texto e sem marca.",
-      "estado": "aguardando_ok_jose",
+      "estado": "permanente",
       "origem": "mantenedor",
       "criado_em": "2026-10-28",
       "autor": "droid",
+      "aprovado_por": "Jose",
+      "aprovado_em": "2026-10-29",
       "tags": [
         "porquinho-da-india",
         "pet",
@@ -1150,7 +2216,12 @@
       ],
       "imagem": "animais/ANIM-catalogo.png",
       "recortes": {
-        "item": [0.0527, 0.3868, 0.2141, 0.6021]
+        "item": [
+          0.0527,
+          0.3868,
+          0.2141,
+          0.6021
+        ]
       }
     },
     {
@@ -1158,10 +2229,12 @@
       "tipo": "animal",
       "titulo": "Hamster",
       "trava": "Hamster laranja e creme em pé segurando uma semente de girassol com as duas patinhas; contorno preto e cores chapadas suaves em cartoon 2D flat, sem texto e sem marca.",
-      "estado": "aguardando_ok_jose",
+      "estado": "permanente",
       "origem": "mantenedor",
       "criado_em": "2026-10-28",
       "autor": "droid",
+      "aprovado_por": "Jose",
+      "aprovado_em": "2026-10-29",
       "tags": [
         "hamster",
         "pet",
@@ -1169,7 +2242,12 @@
       ],
       "imagem": "animais/ANIM-catalogo.png",
       "recortes": {
-        "item": [0.3098, 0.3535, 0.425, 0.6222]
+        "item": [
+          0.3098,
+          0.3535,
+          0.425,
+          0.6222
+        ]
       }
     },
     {
@@ -1177,10 +2255,12 @@
       "tipo": "animal",
       "titulo": "Peixe dourado no aquário",
       "trava": "Peixe dourado laranja dentro de um aquário redondo de vidro azul claro com pedrinhas e uma alga; contorno preto e cores chapadas suaves em cartoon 2D flat, sem texto e sem marca.",
-      "estado": "aguardando_ok_jose",
+      "estado": "permanente",
       "origem": "mantenedor",
       "criado_em": "2026-10-28",
       "autor": "droid",
+      "aprovado_por": "Jose",
+      "aprovado_em": "2026-10-29",
       "tags": [
         "peixe",
         "aquario",
@@ -1188,7 +2268,12 @@
       ],
       "imagem": "animais/ANIM-catalogo.png",
       "recortes": {
-        "item": [0.5266, 0.3528, 0.6949, 0.6306]
+        "item": [
+          0.5266,
+          0.3528,
+          0.6949,
+          0.6306
+        ]
       }
     },
     {
@@ -1196,10 +2281,12 @@
       "tipo": "animal",
       "titulo": "Tartaruga",
       "trava": "Tartaruga verde de casco verde-escuro em gomos, sorriso tranquilo, vista de lado; contorno preto e cores chapadas suaves em cartoon 2D flat, sem texto e sem marca.",
-      "estado": "aguardando_ok_jose",
+      "estado": "permanente",
       "origem": "mantenedor",
       "criado_em": "2026-10-28",
       "autor": "droid",
+      "aprovado_por": "Jose",
+      "aprovado_em": "2026-10-29",
       "tags": [
         "tartaruga",
         "pet",
@@ -1207,7 +2294,12 @@
       ],
       "imagem": "animais/ANIM-catalogo.png",
       "recortes": {
-        "item": [0.7684, 0.3653, 0.9574, 0.6153]
+        "item": [
+          0.7684,
+          0.3653,
+          0.9574,
+          0.6153
+        ]
       }
     },
     {
@@ -1215,10 +2307,12 @@
       "tipo": "animal",
       "titulo": "Galo",
       "trava": "Galo de crista vermelha, corpo marrom-alaranjado e cauda azul-esverdeada, de pé; contorno preto e cores chapadas suaves em cartoon 2D flat, sem texto e sem marca.",
-      "estado": "aguardando_ok_jose",
+      "estado": "permanente",
       "origem": "mantenedor",
       "criado_em": "2026-10-28",
       "autor": "droid",
+      "aprovado_por": "Jose",
+      "aprovado_em": "2026-10-29",
       "tags": [
         "galo",
         "ave",
@@ -1226,7 +2320,12 @@
       ],
       "imagem": "animais/ANIM-catalogo.png",
       "recortes": {
-        "item": [0.066, 0.6667, 0.2133, 0.9674]
+        "item": [
+          0.066,
+          0.6667,
+          0.2133,
+          0.9674
+        ]
       }
     },
     {
@@ -1234,10 +2333,12 @@
       "tipo": "animal",
       "titulo": "Porco",
       "trava": "Porco rosa de focinho largo, orelhas dobradas e rabinho enrolado, de lado; contorno preto e cores chapadas suaves em cartoon 2D flat, sem texto e sem marca.",
-      "estado": "aguardando_ok_jose",
+      "estado": "permanente",
       "origem": "mantenedor",
       "criado_em": "2026-10-28",
       "autor": "droid",
+      "aprovado_por": "Jose",
+      "aprovado_em": "2026-10-29",
       "tags": [
         "porco",
         "fazenda",
@@ -1245,7 +2346,12 @@
       ],
       "imagem": "animais/ANIM-catalogo.png",
       "recortes": {
-        "item": [0.2766, 0.6778, 0.4527, 0.9479]
+        "item": [
+          0.2766,
+          0.6778,
+          0.4527,
+          0.9479
+        ]
       }
     },
     {
@@ -1253,10 +2359,12 @@
       "tipo": "animal",
       "titulo": "Ovelha",
       "trava": "Ovelha de lã branca fofa e rosto cinza-escuro, quatro patas escuras; contorno preto e cores chapadas suaves em cartoon 2D flat, sem texto e sem marca.",
-      "estado": "aguardando_ok_jose",
+      "estado": "permanente",
       "origem": "mantenedor",
       "criado_em": "2026-10-28",
       "autor": "droid",
+      "aprovado_por": "Jose",
+      "aprovado_em": "2026-10-29",
       "tags": [
         "ovelha",
         "fazenda",
@@ -1264,7 +2372,12 @@
       ],
       "imagem": "animais/ANIM-catalogo.png",
       "recortes": {
-        "item": [0.5242, 0.6743, 0.7035, 0.9535]
+        "item": [
+          0.5242,
+          0.6743,
+          0.7035,
+          0.9535
+        ]
       }
     },
     {
@@ -1272,10 +2385,12 @@
       "tipo": "animal",
       "titulo": "Cavalo",
       "trava": "Cabeça e pescoço de cavalo marrom com a testa branca e crina castanha; contorno preto e cores chapadas suaves em cartoon 2D flat, sem texto e sem marca.",
-      "estado": "aguardando_ok_jose",
+      "estado": "permanente",
       "origem": "mantenedor",
       "criado_em": "2026-10-28",
       "autor": "droid",
+      "aprovado_por": "Jose",
+      "aprovado_em": "2026-10-29",
       "tags": [
         "cavalo",
         "fazenda",
@@ -1283,7 +2398,12 @@
       ],
       "imagem": "animais/ANIM-catalogo.png",
       "recortes": {
-        "item": [0.7898, 0.6667, 0.9418, 0.9646]
+        "item": [
+          0.7898,
+          0.6667,
+          0.9418,
+          0.9646
+        ]
       }
     },
     {

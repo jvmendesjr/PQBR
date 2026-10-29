@@ -1,8 +1,10 @@
 <!-- gerado por pipeline/banco_fichas.py (t150u) -->
 # PERS-senhor-cachecol — Senhor de óculos quadrados e cachecol cinza
 
-Estado: `aguardando_ok_jose` — inserida pelo agente e já usável; o José aprova (`aprovar`) ou manda descartar.
+Estado: `permanente` — aprovada pelo José.
 Origem: escrita pelo mantenedor; criada em 2026-10-28 por droid.
+
+Aprovada por Jose em 2026-10-29.
 
 - **Imagem:** `banco-fichas/personagens/ELENCO-catalogo.png` (recortes: num-03)
 - **Acento:** cachecol cinza

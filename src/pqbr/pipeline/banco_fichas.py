@@ -1,6 +1,6 @@
 """Banco de fichas, catálogo visual aberto (t150u, REGRAS §6): listar, buscar, registrar, anexar mídia, aprovar e descartar.
 
-`banco-fichas/indice.json` (3.0.0) é a fonte para as máquinas; o `.md` de cada ficha é a leitura humana. A semente (t148u)
+`banco-fichas/indice.json` (3.1.0) é a fonte para as máquinas; o `.md` de cada ficha é a leitura humana. A semente (t148u)
 é do José; o agente acrescenta fichas novas para reaproveitar. Regras que este módulo faz cumprir:
 - ficha nova nunca sobrescreve outra, nem repete o título de uma do mesmo tipo (reaproveitar vem antes de criar);
 - ficha nova do agente nasce `aguardando_ok_jose` (usável desde já) ou `sugestao` (sem mídia); só o José aprova ou manda descartar;
@@ -15,7 +15,7 @@ from ..contratos.catalogo_visual import (EXT_IMAGEM, PASTA, PREFIXO, PROIBIDO_PA
                                          FichaCatalogo, VideoCatalogo)
 
 RAIZ_PADRAO = Path(__file__).resolve().parents[3] / "banco-fichas"
-VERSAO_INDICE = "3.0.0"
+VERSAO_INDICE = "3.1.0"
 MARCA_MD = "<!-- gerado por pipeline/banco_fichas.py (t150u) -->"
 _ORDEM_ESTADO = {"permanente": 0, "aguardando_ok_jose": 1, "sugestao": 2}
 _MAGIA = {".png": (b"\x89PNG\r\n\x1a\n",), ".jpg": (b"\xff\xd8\xff",), ".jpeg": (b"\xff\xd8\xff",), ".webp": (b"RIFF",)}

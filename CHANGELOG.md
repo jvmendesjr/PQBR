@@ -5,6 +5,15 @@ Versionamento SemVer (MAJOR.MINOR.PATCH) a partir de t510. Versão do pacote can
 
 
 
+## [0.28.0] — 2026-10-29
+### Adicionado
+- Aprovação em massa das fichas do catálogo visual e das REF-MG (t155u): `banco-fichas/indice.json` 3.1.0 (30 fichas → `permanente`; 11 SIT-* seguem `sugestao`); `referencias-motion/indice.json` 0.4.0 (REF-MG-00..07 → `aprovada`).
+- ROADMAP MG-11 (lote de refação EP1002–EP1010 sem Higgsfield) e MG-12 (`core-ultra` / Opus 5.5 para o papel `motion`, proposta).
+### Alterado
+- P17: `Instruções para o agente` no Google Flow regravadas no estilo cartoon 2D flat colorido; espelho Drive `00_Biblia_Visual/banco-fichas` com 111 arquivos (t155u).
+- Higgsfield marcado como descartado (t156u); vídeos do `runtime/lote-saldo/` obsoletos para publicação; ordem Flow → MG-05 → lote de refação.
+- ESTADO-ATUAL / REGRAS / fases: P16 regra e fichas aprovadas; P17 parcialmente concluída (faltam folha do nº 1, mídia das SIT-*, OK reinício worker storyboard 1.3.0).
+
 ## [0.27.1] — 2026-10-28
 ### Corrigido
 - Escrita do `pqbr-mcp` no Hindsight deixou de estourar timeout e de duplicar memória (t154u): `storage/hindsight.reter` aceita `operacao_id` e envia `async: true` + `operation_id` determinístico (`id_da_operacao`, `uuid5` de cliente + commit + conteúdo), então reenviar a mesma alteração devolve a operação original; `mcp/escrita.py` usa ids próprios para o conteúdo e para o handoff e traduz `TimeoutError` em mensagem com orientação de retry; o timeout do POST virou `PQBR_HINDSIGHT_TIMEOUT` (padrão 120 s, antes 30 s fixos).

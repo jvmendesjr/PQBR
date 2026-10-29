@@ -4,7 +4,7 @@
 - **Link:** https://whatships.com/videos/horizonx/ · **Consulta:** 28/10/2026.
 - **Medida:** 1920×1080, 30 fps, 24,38 s.
 - **Método:** folha de contato 5×5, um quadro a cada ~1,0 s. Não foi playback completo.
-- **Estado:** `aguardando_ok_jose` (28/10/2026, t153u).
+- **Estado:** `aprovada` (29/10/2026, t131u — José aprovou a regra e as fichas).
 - **Prova renderizada:** `provas/mg10-pecas.png`, quadros 1–2 (`frase-troca`) e 3–4 (`marca-texto`).
 
 ## Gramática observada
