@@ -5,6 +5,12 @@ Versionamento SemVer (MAJOR.MINOR.PATCH) a partir de t510. Versão do pacote can
 
 
 
+## [0.26.0] — 2026-10-28
+### Removido
+- `runtime/piloto-motion/cafe-fraco/` (327 MB, fora do git): piloto de t145u com o visual reprovado, deletado por ordem do José (t152u). Originais do EP1003 intactos em `runtime/lote-saldo/cafe-fraco/`. Referências vivas nos docs ajustadas.
+### Alterado
+- Cartão do MG-03 aprovado pelo José (`runtime/piloto-motion/mg03/folha-cartoes-v2.png`) como ponto de partida; piloto 2 (MG-05) aguarda o Flow em operação regular.
+
 ## [0.25.0] — 2026-10-28
 ### Alterado
 - MG-03 (t151u): cartões do catálogo de motion no traço do stickman (`g.cartao`: contorno preto e sombra chapada) em `versus`, `origem-pino`, `recorte-aponta` e `imagem-cena`; peso 800 → 700 em `titulo-expressao`, `origem-pino` e `versus` (teto da Fredoka). Custo medido: 35–43 ms por quadro.

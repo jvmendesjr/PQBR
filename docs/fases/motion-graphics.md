@@ -8,7 +8,7 @@ As fases abaixo separam decisão, direção visual, coletânea e trabalho, como 
 
 - Regra: REGRAS §26. O pós aceita motion graphics sobre o vídeo da cadeia Flow/Vids/Vibes. Ambiente limpo, bom senso, rotina fixa com transição padrão, bloco de números travados.
 - Motor e catálogo v1 em `src/pqbr/pos/motion/`: quadro como função pura do tempo, molas fechadas, ruído com semente, Chrome headless quadro a quadro, FFmpeg junta e preserva a narração. Contrato `PlanoMotion` 1.0.0. Papel `motion` (nono, híbrido, preso ao catálogo, sem activity no worker).
-- Piloto em `runtime/piloto-motion/cafe-fraco/` (fora do git): bloco do porquê 14,87–33,5 s sobre o EP1003, original intacto, áudio idêntico, render determinístico, autocrítica 6,5 → 8 (`biblioteca/historico.md`).
+- Piloto de t145u (EP1003, cartum 2D): visual reprovado em t147u e pasta deletada em t152u (originais em `runtime/lote-saldo/cafe-fraco/`); a autocrítica 6,5 → 8 segue em `biblioteca/historico.md`. O padrão de cartão vigente (MG-03, `runtime/piloto-motion/mg03/folha-cartoes-v2.png`) foi aprovado pelo José em 28/10. O piloto 2 (MG-05) usa o layout padrão do canal com cenas reais do Flow, quando o Flow estiver em operação regular.
 
 ## Fase 1 — Avaliação do piloto e direção visual (t147u, feito)
 

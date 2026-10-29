@@ -900,3 +900,9 @@ NÃO CABE:
 - **Medido:** bloco de 24 s a 30 fps, 720 quadros de tela cheia, 25–31 s de render, 35–43 ms por quadro. Antes e depois do cartão novo, sem diferença relevante.
 - **Verificado a olho:** quatro quadros (título, linha do tempo, origem, versus) com a Fredoka. Não verificado: leitura a 360 px, nem o encaixe com cenas reais do Flow (MG-05).
 
+## t152u (28/10/2026) — Piloto cafe-fraco deletado, cartão aprovado e piloto 2 só com o Flow em operação
+- **Ordem do José:** deletar `runtime/piloto-motion/cafe-fraco/` (estilo errado desde o início); aprovou `folha-cartoes-v2.png` como ponto de partida; sanear o que for descartável; o piloto 2 será criado com a layoutica padrão do canal quando o Flow estiver em operação regular.
+- **Feito:** pasta de 327 MB deletada (movida para `/tmp` e apagada lá; não tinha nada versionado). Os originais do EP1003 estão em `runtime/lote-saldo/cafe-fraco/` (conferido: 32 arquivos). Sanado também o lixo temporário desta sessão em `/tmp`. Referências vivas ajustadas em ESTADO-ATUAL, `docs/fases/motion-graphics.md` e `biblioteca/historico.md`; CHANGELOG e este log mantêm o histórico.
+- **Não tocado:** `attachments/` e `pasta-temporario-deletar-depois/` (não são desta sessão; só o José diz se saem).
+- **Referências do whatships:** entram como ficha de texto (REF-MG-NN, `aguardando_ok_jose`) com link, data e gramática; nunca vídeo ou quadro de terceiro. O José manda o link da página de cada vídeo e uma frase do que gostou.
+
