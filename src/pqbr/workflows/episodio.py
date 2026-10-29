@@ -15,7 +15,7 @@ from temporalio.common import RetryPolicy
 with workflow.unsafe.imports_passed_through():
     from .notebooklm import NotebookLMWorkflow, PedidoNotebookLM, FILA_NOTEBOOKLM, nlm_perguntar
     from .storyboard import PROMPT_STORYBOARD, storyboard_criar
-    from ..contratos.storyboard import elenco_alternado
+    from ..contratos.storyboard import elenco_alternado, protagonista_ref
     from .pacote import ATIVIDADES_REGISTRO, pacote_garantir, registro_buscar_caderno
     from ..contratos import CATEGORIA_YOUTUBE
 
@@ -163,9 +163,8 @@ class EpisodioWorkflow:
             return ResultadoEpisodioE2E(etapa="roteiro", ok=False, detalhes=nlm.model_dump())
         self._criativo = nlm.criativo
         elenco = elenco_alternado(p.codigo)
-        outro = "masculino" if elenco == "feminino" else "feminino"
         roteiro = (nlm.criativo.get("markdown") or p.roteiro_texto)[:6000]
-        base_prompt = PROMPT_STORYBOARD.format(codigo=p.codigo, elenco=elenco, outro=outro, roteiro=roteiro)
+        base_prompt = PROMPT_STORYBOARD.format(codigo=p.codigo, elenco=elenco, protagonista=protagonista_ref(elenco), roteiro=roteiro)
         uma = dict(start_to_close_timeout=timedelta(minutes=12), retry_policy=RetryPolicy(maximum_attempts=1))
         erro, sb = "", None
         for _ in range(2):

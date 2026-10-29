@@ -1,12 +1,14 @@
 {
-  "versao": "0.1.0",
-  "decisao": "t147u",
+  "versao": "0.2.0",
+  "decisao": "t150u",
   "atualizado": "2026-10-28",
-  "regra": "REGRAS §26 (t145u/t147u): padrao fixo (papel creme #f5f0e4, nanquim, hachura, tipografia manuscrita unica, molas, cortina padrao, zonas seguras, bloco de numeros travados) com variacao sutil de lista fechada, escolhida pelo tipo de conteudo e por semente do episodio, sem repetir a variante do episodio anterior. Referencia externa entra so como gramatica (paleta, tipografia, textura, ritmo); nunca conteudo, personagem, logo ou musica; nenhum frame de terceiro e guardado. Referencia nova so vira aprovada com OK do Jose. Desenho em docs/fases/motion-graphics.md.",
+  "regra": "REGRAS §26 (t145u/t147u/t150u): padrao fixo (cartoon 2D flat colorido de banco-fichas/, fundo creme claro, cor do elenco como acento, Fredoka como fonte unica, molas, cortina padrao, zonas seguras, bloco de numeros travados) com variacao sutil de lista fechada, escolhida pelo tipo de conteudo e por semente do episodio, sem repetir a variante do episodio anterior. Referencia externa entra so como gramatica (paleta, tipografia, textura, ritmo, movimento); nunca conteudo, personagem, logo, texto ou musica; nenhum frame de terceiro e guardado. Referencia nova so vira aprovada com OK do Jose. Desenho em docs/fases/motion-graphics.md.",
   "padrao_fixo": {
-    "fundo": "papel creme #f5f0e4 com textura",
-    "traco": "nanquim preto com hachura",
-    "tipografia": "manuscrita unica, licenca OFL, acentos pt-BR (a escolher em MG-03)",
+    "fundo": "creme claro chapado (#f6f1e7 na tela, #f7f7f2 no cartao)",
+    "traco": "contorno preto fino, cor chapada, sem hachura e sem brilho",
+    "cores": "pqbr.pos.motion.catalogo.PALETA (masculino azul-aco, feminino rosa, apoio amarelo, marca verde, tinta)",
+    "tipografia": "Fredoka, fonte unica do canal (t149u), sempre por arquivo local",
+    "personagem": "ficha PERS-* do catalogo em moldura num canto da zona segura (peca personagem-moldura), recorte estatico, boca de reacao",
     "movimento": "molas fechadas e ruido com semente (motor.js)",
     "transicao": "cortina padrao (transicao-cortina)",
     "zonas_seguras": "9:16 — topo 14%, base 20%, direita 12%",
@@ -14,7 +16,7 @@
   },
   "variaveis_lista_fechada": [
     "acento_cor_elenco",
-    "densidade_hachura",
+    "textura_fundo",
     "forma_cartao",
     "idioma_entrada",
     "ornamento_tema",
@@ -29,10 +31,20 @@
   "referencias": [
     {
       "id": "REF-MG-00",
-      "nome": "Papel e nanquim do canal",
+      "nome": "Padrão flat colorido do canal",
       "origem": "interna",
-      "fonte": "frames reais do canal de t146u (descartados em t149u; a âncora vigente é o conjunto de banco-fichas/)",
+      "fonte": "conjunto definitivo de banco-fichas/ (t148u); estilo nas palavras do José em t150u",
       "ficha": "REF-MG-00.md",
+      "prova": null,
+      "estado": "aguardando_ok_jose",
+      "consulta": "2026-10-28"
+    },
+    {
+      "id": "REF-MG-01",
+      "nome": "Vocabulário de movimento do dossiê (whatships, MiniMax H3 MAX, 0xMovez)",
+      "origem": "externa, so gramatica de movimento",
+      "fonte": "https://whatships.com/videos/minimax-h3-max-motion/",
+      "ficha": "REF-MG-01.md",
       "prova": null,
       "estado": "aguardando_ok_jose",
       "consulta": "2026-10-28"

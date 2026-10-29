@@ -1,6 +1,6 @@
 {
-  "_doc": "Catálogo do papel motion (REGRAS §26, t145u). O JS de cada modelo registra o mesmo slug. tipo texto/textos com travado=true só aceita item do bloco de números travados. camada: tela_cheia (dentro do bloco), sobre (por cima do vídeo), ambas.",
-  "versao": "1.0.0",
+  "_doc": "Catálogo do papel motion (REGRAS §26, t145u). O JS de cada modelo registra o mesmo slug. tipo texto/textos com travado=true só aceita item do bloco de números travados. tipo personagem = id de ficha PERS-* do banco-fichas/ com imagem local; tipo pose = nome de recorte dessa ficha (parâmetro `de` aponta o parâmetro do personagem). numero aceita min e max. camada: tela_cheia (dentro do bloco), sobre (por cima do vídeo), ambas.",
+  "versao": "1.1.0",
   "modelos": {
     "transicao-cortina": {
       "descricao": "Transição padrão: cortina na cor do elenco cobre (antes do corte) ou revela (depois do corte). Dura 0,3 a 0,6 s.",
@@ -71,6 +71,17 @@
       "parametros": {
         "imagem": {"tipo": "imagem", "obrigatorio": true},
         "legenda": {"tipo": "texto", "travado": true, "obrigatorio": false}
+      }
+    },
+    "personagem-moldura": {
+      "descricao": "Personagem do catálogo presente no layout do bloco: recorte da ficha num quadradinho num canto da zona segura, com entrada em mola, respiração leve e saída encolhendo. Troque a pose com peças em sequência. Não cobre texto nem cartão das outras peças (o render reprova).",
+      "camada": "tela_cheia",
+      "parametros": {
+        "personagem": {"tipo": "personagem", "obrigatorio": true},
+        "pose": {"tipo": "pose", "de": "personagem", "obrigatorio": false},
+        "canto": {"tipo": "opcao", "opcoes": ["inf-dir", "inf-esq", "sup-dir", "sup-esq"], "obrigatorio": false},
+        "tamanho": {"tipo": "numero", "min": 220, "max": 460, "obrigatorio": false},
+        "espelhar": {"tipo": "opcao", "opcoes": ["nao", "sim"], "obrigatorio": false}
       }
     }
   }

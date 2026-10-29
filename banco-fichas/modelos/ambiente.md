@@ -17,4 +17,4 @@ Multidão, letreiro, logo, objeto a mais "para enfeitar". Objeto que a cena usa 
 
 ## Estado
 
-`permanente` quando selecionada pelo José (conjunto de t148u). `aguardando_ok_jose` para ficha nova gerada pelo agente.
+`permanente` quando o José aprova (conjunto de t148u). Catálogo aberto (t150u): o agente pode inserir lugar novo (`registrar`), depois de buscar; a ficha nasce `aguardando_ok_jose` (com imagem) ou `sugestao` (sem imagem). Ambiente que traz personagens do elenco em cena guarda os ids em `personagens` e marca `com_elenco`.

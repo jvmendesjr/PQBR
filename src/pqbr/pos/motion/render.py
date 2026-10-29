@@ -9,6 +9,7 @@ from dataclasses import dataclass, field, asdict
 from pathlib import Path
 from .catalogo import arquivos_js
 from ...contratos.motion import PlanoMotion
+from ...pipeline import banco_fichas
 from . import fontes as banco_fontes
 
 CHROME = os.environ.get("PQBR_CHROME", "/usr/bin/google-chrome")
@@ -65,9 +66,15 @@ class ResultadoRender:
 def _snap(t: float, fps: int) -> float: return round(round(t * fps) / fps, 6)
 
 
+def _fichas_usadas(plano: PlanoMotion) -> list:
+    return [banco_fichas.obter(pid) for pid in plano.personagens_usados()]
+
+
 def montar_pagina(plano: PlanoMotion) -> str:
     scripts = "\n".join(f'<script src="file://{p}"></script>' for p in arquivos_js())
     dados = plano.model_dump(mode="json")
+    # A folha do personagem sai do banco-fichas/, não de `recursos`; as poses são os recortes da ficha (retângulos normalizados).
+    dados["personagens"] = {f.id: {"recurso": f"pers:{f.id}", "poses": f.recortes} for f in _fichas_usadas(plano)}
     familia = banco_fontes.familia_css(plano.fonte)
     # Fonte só por arquivo local do banco (nunca CDN); o genérico atrás é rede de segurança de layout, não escolha estética.
     pilha = f'"{familia}", "Liberation Sans", Arial, sans-serif'
@@ -78,24 +85,49 @@ def montar_pagina(plano: PlanoMotion) -> str:
 def _png(data_url: str) -> bytes: return base64.b64decode(data_url.split(",", 1)[1])
 
 
+def _abrir(pw, plano: PlanoMotion, pasta: Path, chrome: str):
+    """Abre a página do plano no Chrome, com a fonte e as imagens (recursos e folhas dos personagens) já carregadas."""
+    (pasta / "pagina.html").write_text(montar_pagina(plano), encoding="utf-8")
+    nav = pw.chromium.launch(executable_path=chrome, headless=True, args=["--allow-file-access-from-files", "--disable-gpu", "--font-render-hinting=none"])
+    pag = nav.new_page(viewport={"width": W, "height": H}, device_scale_factor=1)
+    pag.goto((pasta / "pagina.html").as_uri())
+    pag.wait_for_function("window.pronto === true")
+    pesos = banco_fontes.obter(plano.fonte)["pesos"]
+    pag.evaluate("([f, p]) => window.carregarFonte(f, p)", [banco_fontes.familia_css(plano.fonte), sorted({str(pesos[0]), "700" if pesos[0] <= 700 <= pesos[1] else str(pesos[1])})])
+    recursos = {k: Path(v).resolve().as_uri() for k, v in plano.recursos.items()}
+    for k, v in plano.recursos.items():
+        if not Path(v).is_file(): raise FileNotFoundError(f"recurso {k}: {v}")
+    for f in _fichas_usadas(plano):
+        arq = banco_fichas.caminho_imagem(f)
+        if arq is None or not arq.is_file(): raise FileNotFoundError(f"imagem do personagem {f.id}: {arq}")
+        recursos[f"pers:{f.id}"] = arq.resolve().as_uri()
+    pag.evaluate("m => window.carregarRecursos(m)", recursos)
+    return nav, pag
+
+
+def quadros(plano: PlanoMotion, tempos: list[float], pasta: Path, camada: str = "tela_cheia", chrome: str = CHROME) -> list[dict]:
+    """Prévia: só os quadros pedidos (t em segundos do vídeo final), sem gravar sequência nem compor. Serve à autocrítica
+    do papel motion e aos testes; cada item traz `png` (bytes), `violacoes` e `ativas`."""
+    from playwright.sync_api import sync_playwright
+    pasta = Path(pasta).resolve(); pasta.mkdir(parents=True, exist_ok=True)
+    saida = []
+    with sync_playwright() as pw:
+        nav, pag = _abrir(pw, plano, pasta, chrome)
+        for t in tempos:
+            r = pag.evaluate("([t, c]) => window.seek(t, c)", [_snap(t, plano.fps), camada])
+            saida.append({"t": t, "camada": camada, "png": _png(r["png"]), "violacoes": r["violacoes"], "ativas": r["ativas"]})
+        nav.close()
+    return saida
+
+
 def renderizar(plano: PlanoMotion, pasta: Path, chrome: str = CHROME, tela_cheia: bool = True, sobre: bool = True,
                conferir_determinismo: bool = True) -> ResultadoRender:
     from playwright.sync_api import sync_playwright
     pasta = Path(pasta).resolve(); pasta.mkdir(parents=True, exist_ok=True)
-    (pasta / "pagina.html").write_text(montar_pagina(plano), encoding="utf-8")
     fps = plano.fps
     res = ResultadoRender(pasta=str(pasta), fps=fps)
     with sync_playwright() as pw:
-        nav = pw.chromium.launch(executable_path=chrome, headless=True, args=["--allow-file-access-from-files", "--disable-gpu", "--font-render-hinting=none"])
-        pag = nav.new_page(viewport={"width": W, "height": H}, device_scale_factor=1)
-        pag.goto((pasta / "pagina.html").as_uri())
-        pag.wait_for_function("window.pronto === true")
-        pesos = banco_fontes.obter(plano.fonte)["pesos"]
-        pag.evaluate("([f, p]) => window.carregarFonte(f, p)", [banco_fontes.familia_css(plano.fonte), sorted({str(pesos[0]), "700" if pesos[0] <= 700 <= pesos[1] else str(pesos[1])})])
-        recursos = {k: Path(v).resolve().as_uri() for k, v in plano.recursos.items()}
-        for k, v in plano.recursos.items():
-            if not Path(v).is_file(): raise FileNotFoundError(f"recurso {k}: {v}")
-        pag.evaluate("m => window.carregarRecursos(m)", recursos)
+        nav, pag = _abrir(pw, plano, pasta, chrome)
 
         def quadro(t: float, camada: str) -> tuple[bytes, list[dict], list[str]]:
             r = pag.evaluate("([t, c]) => window.seek(t, c)", [t, camada])

@@ -42,7 +42,7 @@ Recusado em 28/10 (t140u). José comparou com a busca e com tutoriais de stickma
 Atualizado em 28/10 (t146u — regra canônica do José + geração real no Google Flow com `🍌 Nano Banana Pro`):
 - José enviou 5 recortes reais tirados de vídeos do próprio canal Porquê BR (`banco-fichas/referencias-canal/`) e reprovou os desenhos programáticos anteriores (inclusive um erro grotesco de um olho só na pose de perfil).
 - **Regra canônica fixada (t146u):** para **personagens, objetos e locais permanentes** (`banco-fichas/`), usar **fichas permanentes geradas no Google Flow com o modelo mais potente de geração de imagens (atualmente `🍌 Nano Banana Pro`, 0 créditos)**, ancoradas nas 5 imagens reais do canal.
-- **12 fichas permanentes geradas no Google Flow com `🍌 Nano Banana Pro` e inspecionadas visualmente (`permanente_aguardando_ok_jose`) — descartadas em t148u, ver o bloco abaixo:**
+- **Histórico (descartado em t148u, ver o bloco abaixo): 12 fichas permanentes geradas no Google Flow com `🍌 Nano Banana Pro` e inspecionadas visualmente (`permanente_aguardando_ok_jose`). Os IDs `PERS-M`, `PERS-F` e `PERS-M-classico` abaixo não existem mais:**
   - `PERS-M.png` (`768×1376`, 9:16) e `PERS-M-folha.png` (`1376×768`, 16:9, 3 poses de corpo inteiro com 2 olhos sempre visíveis): stickman 2D em nanquim preto sobre papel creme (`#f5f0e4`) com hachura na bochecha, óculos redondos vermelhos (`#e23b2f`), luvas brancas e pés pretos ovais.
   - `PERS-F.png` (`768×1376`, 9:16) e `PERS-F-folha.png` (`1376×768`, 16:9, 3 poses de corpo inteiro com 2 olhos sempre visíveis): stickman feminina no mesmo traço, com coque preto no topo e argola amarela (`#e6b325`) à esquerda.
   - `PERS-M-classico.png` (`768×1376`, 9:16) e `PERS-M-classico-folha.png` (`1376×768`, 16:9): stickman clássico do canal sem óculos.
@@ -52,8 +52,17 @@ Atualizado em 28/10 (t146u — regra canônica do José + geração real no Goog
 
 Atualizado em 28/10 (t148u — o conjunto definitivo veio pronto do José):
 - José reprovou as 12 fichas nanquim de t146u ("não estavam num bom nível"), mandou descartá-las e tirá-las do diretório, e entregou no Drive (`Fontes/Imagens`) 20 imagens no estilo que quer, declarado **o padrão definitivo do canal**. Elas viraram o `banco-fichas/` novo: catálogo dos 12 personagens + 6 folhas individuais multi-pose, 11 ambientes, catálogos de 12 objetos e de 12 animais (`indice.json` 2.0.0).
-- O gerador programático de t144u foi aposentado (`scripts/aposentado/frente_stickman.py`) e os IDs `PERS-M`/`PERS-F`/`PERS-M-classico` morreram com as fichas antigas. Os protagonistas por gênero da alternância par/ímpar aguardam o José (P17).
-- Pendem: regravar as `Instruções para o agente` no Flow com o traço t148u e espelhar o banco novo em `00_Biblia_Visual/banco-fichas` (P17).
+- O gerador programático de t144u foi aposentado (`scripts/aposentado/frente_stickman.py`) e os IDs `PERS-M`/`PERS-F`/`PERS-M-classico` morreram com as fichas antigas.
+- Pendiam: apontar os protagonistas (resolvido em t150u, abaixo), regravar as `Instruções para o agente` no Flow com o traço t148u e espelhar o banco novo em `00_Biblia_Visual/banco-fichas` (P17).
+
+Atualizado em 28/10 (t150u — catálogo aberto, protagonistas e situações):
+- **Estilo nas palavras do José:** cartoon 2D, flat, colorido, com personagens stickman (REGRAS §5/§6, `config/estilo_visual.json`, `ESTILO_PADRAO_STICKMAN`).
+- **Protagonistas definidos:** o nº 1 do catálogo (`PERS-menino-azul`: cabelo espetado preto, camiseta azul, boca aberta sorrindo) é o masculino; o nº 2 (`PERS-menina-rosa`) é a feminina. A alternância par/ímpar do storyboard segue. `PERS-bob-oculos` entra como nº 13 (13 personagens).
+- **Catálogo aberto (`indice.json` 3.0.0, 62 fichas):** tudo em `banco-fichas/` é referência. O agente insere personagens, figuras, animais, objetos, lugares e **situações** (categoria nova, `situacoes/`) pelo mecanismo `pipeline/banco_fichas.py` (contrato `FichaCatalogo`, modelos em `banco-fichas/modelos/`, testes). Ficha do agente nasce `aguardando_ok_jose` (usável) ou `sugestao` (ideia sem mídia); só o José aprova ou descarta.
+- **Fichas novas nesta rodada:** `PERS-menino-azul` (permanente, derivada do nº 1) e seis derivadas `aguardando_ok_jose` do elenco (`PERS-senhor-cachecol` nº 3, `PERS-punk-azul`, `PERS-pijama-sono`, `PERS-fones-vermelho`, `PERS-nerd-laco`, `PERS-rei-coroa`); uma ficha `.md` por objeto (12) e por animal (12), todas `aguardando_ok_jose`; 11 situações em `sugestao`, sem mídia.
+- **Peso no repositório:** as imagens da semente têm 2,5–6 MB (`banco-fichas` ≈ 93 MB). Imagem nova entra com até 2 MB; acima disso e todo vídeo ficam no Drive, citados por `imagem_drive_id`/`drive_id` (`TAMANHO_MAX_IMAGEM`).
+- **Storyboard 1.3.0 e pacote:** a cena cita o catálogo em `refs` e o pacote canônico do NotebookLM leva o resumo do catálogo (`catalogo_visual`); ficha nova muda o hash do pacote sozinha.
+- **Ainda pendem (P17):** regravar as `Instruções para o agente` no Flow, espelhar `banco-fichas/` em `00_Biblia_Visual/banco-fichas`, gerar a folha individual do nº 1 e a mídia das 11 situações, e o José aprovar ou descartar as fichas `aguardando_ok_jose`.
 
 ## Fase 4 — Vídeos que já existem no Drive
 

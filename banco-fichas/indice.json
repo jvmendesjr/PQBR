@@ -1,8 +1,10 @@
 {
-  "versao": "2.0.0",
-  "decisao": "t148u",
+  "versao": "3.0.0",
+  "decisao": "t150u",
   "atualizado": "2026-10-28",
+  "estilo": "cartoon 2D, flat, colorido, com personagens stickman: cabeça redonda branca grande com contorno preto, dois olhos pretos sempre visíveis, boca simples de reação, corpo e membros em traço preto fino, roupa chapada colorida fixa por personagem, fundo claro em tom creme, paleta suave, sombra leve chapada no chão; sem texto, sem marca, sem volume 3D, sem fotorrealismo",
   "regra_modelo_fichas": "Para personagens, objetos e locais permanentes, usar fichas permanentes geradas a partir do modelo mais potente de geracao de imagens (t146u). Em t148u o proprio Jose entregou o conjunto definitivo no Drive (Fontes/Imagens) e mandou descartar as fichas nanquim de t146u; ficha nova que faltar nasce ancorada neste conjunto.",
+  "regra_catalogo_aberto": "Catálogo aberto (José, t150u): tudo aqui é referência e sugestão, não lista fechada. O agente pode inserir personagens, figuras, animais, objetos, ambientes e situações novos (pipeline/banco_fichas.py: registrar, anexar_midia, aprovar, descartar), sempre no estilo cartoon 2D flat colorido com personagens stickman e variando o elenco. Antes de criar, busca; reaproveitar vem antes. Ficha nova nasce aguardando_ok_jose (com mídia, já usável) ou sugestao (sem mídia); só o José aprova ou manda descartar; ficha permanente só muda por ordem dele. Imagem nova entra no repositório até 2 MB; acima disso, e todo vídeo, vão para o Drive.",
   "origem": {
     "drive_pasta": "Fontes/Imagens",
     "drive_id": "1ziYivEewPQIvlgt6Z7v7R8wXPerPLvLd",
@@ -10,8 +12,42 @@
     "data": "2026-10-28",
     "obs": "20 imagens entregues prontas (nomes originais 'Agent Image - *'), renomeadas para o padrao PQBR. Modelo gerador nao verificado no Flow; a selecao do Jose vale como aprovacao (padrao definitivo)."
   },
-  "estilo": "cartum 2D flat colorido: stickman de cabeca redonda branca grande com contorno preto, dois olhos pretos sempre visíveis, boca simples de reacao, corpo e membros em traco preto fino, roupa chapada colorida fixa por personagem, fundo claro em tom creme, paleta suave, sombra leve chapada no chao; sem texto, sem marca, sem volume 3D, sem fotorrealismo",
-  "estado": "permanente (padrao definitivo do canal, selecionado pelo Jose em t148u)",
+  "protagonistas": {
+    "masculino": "PERS-menino-azul",
+    "feminino": "PERS-menina-rosa"
+  },
+  "categorias": {
+    "personagem": {
+      "pasta": "personagens",
+      "prefixo": "PERS",
+      "o_que_e": "stickman do elenco, com acento (peça ou cor chapada) e folha ou recorte"
+    },
+    "figura": {
+      "pasta": "figuras",
+      "prefixo": "FIG",
+      "o_que_e": "ente de apoio fora do elenco de stickmen e dos animais domésticos (robô, fantasma, criatura, mascote)"
+    },
+    "animal": {
+      "pasta": "animais",
+      "prefixo": "ANIM",
+      "o_que_e": "animal, no mesmo traço flat"
+    },
+    "objeto": {
+      "pasta": "objetos",
+      "prefixo": "OBJ",
+      "o_que_e": "objeto do cotidiano ou do tema, sem marca e sem texto"
+    },
+    "ambiente": {
+      "pasta": "ambientes",
+      "prefixo": "AMB",
+      "o_que_e": "lugar reaproveitável, com luz fixa e 3 a 5 objetos-âncora"
+    },
+    "situacao": {
+      "pasta": "situacoes",
+      "prefixo": "SIT",
+      "o_que_e": "pose ou movimento corriqueiro de personagem; imagem e vídeo (vídeo no Drive)"
+    }
+  },
   "historico": [
     {
       "decisao": "t146u",
@@ -27,185 +63,1414 @@
   "referencias_canal": {
     "estado": "descartado (t149u, ordem do José): os 5 frames reais e a composta eram só referência e foram removidos do repositório; o histórico fica no git"
   },
+  "descartadas": [],
   "fichas": [
     {
       "id": "ELENCO-catalogo",
       "tipo": "personagem",
-      "papel": "catalogo_elenco",
-      "permanente": true,
+      "papel": "colecao",
+      "titulo": "Elenco do canal: grade dos 12 personagens",
+      "trava": "Grade 4×3 com os 12 personagens numerados do elenco, em cartoon 2D flat colorido com stickmen; referência de elenco e de escala, nunca a imagem única para animar vídeo.",
       "estado": "permanente",
-      "arquivo": "personagens/ELENCO-catalogo.md",
-      "imagem": "personagens/ELENCO-catalogo.png"
+      "origem": "jose",
+      "criado_em": "2026-10-28",
+      "aprovado_por": "Jose",
+      "aprovado_em": "2026-10-28",
+      "tags": [
+        "elenco",
+        "grade"
+      ],
+      "imagem": "personagens/ELENCO-catalogo.png",
+      "recortes": {
+        "num-01": [0.0871, 0.0174, 0.166, 0.2958],
+        "num-02": [0.3148, 0.0236, 0.4207, 0.2986],
+        "num-03": [0.5902, 0.0118, 0.6523, 0.2979],
+        "num-04": [0.8328, 0.0285, 0.9109, 0.2972],
+        "num-05": [0.0824, 0.3451, 0.1738, 0.6271],
+        "num-06": [0.3312, 0.3458, 0.4262, 0.6257],
+        "num-07": [0.5684, 0.3486, 0.6715, 0.6264],
+        "num-08": [0.8309, 0.3535, 0.909, 0.6278],
+        "num-09": [0.0949, 0.675, 0.159, 0.9458],
+        "num-10": [0.3375, 0.7007, 0.409, 0.9465],
+        "num-11": [0.575, 0.6715, 0.6543, 0.9465],
+        "num-12": [0.8324, 0.691, 0.9164, 0.9465]
+      }
     },
     {
       "id": "PERS-menina-rosa",
       "tipo": "personagem",
-      "permanente": true,
+      "titulo": "Menina de rabo de cavalo e vestido rosa",
+      "trava": "Stickman 2D flat colorido do canal Porquê BR: menina de cabelo preto preso em rabo de cavalo lateral com prendedor rosa, vestido rosa chapado sem mangas e sapatos brancos ovais de contorno preto. Cabeça redonda branca grande com contorno preto, dois olhos pretos sempre visíveis, boca de reação (nunca articula fala), corpo e membros em traço preto fino, fundo claro em tom creme, sem texto e sem marca na imagem.",
+      "proibido": "boca aberta articulando fala (boca_articula_fala), corte da cabeça no topo (corte_oculos_cabeca), dedos realistas, pele humana",
       "estado": "permanente",
-      "arquivo": "personagens/PERS-menina-rosa.md",
+      "origem": "jose",
+      "criado_em": "2026-10-28",
+      "aprovado_por": "Jose",
+      "aprovado_em": "2026-10-28",
+      "tags": [
+        "feminino",
+        "protagonista",
+        "rosa",
+        "rabo-de-cavalo"
+      ],
       "imagem": "personagens/PERS-menina-rosa-folha.png",
+      "recortes": {
+        "giro-frente": [0.1051, 0.0271, 0.2047, 0.3035],
+        "giro-tres-quartos": [0.2824, 0.0264, 0.3695, 0.3035],
+        "giro-perfil": [0.4445, 0.0299, 0.5309, 0.3028],
+        "giro-costas-tres-quartos": [0.5938, 0.0285, 0.6801, 0.3042],
+        "giro-costas": [0.7855, 0.0264, 0.8684, 0.3028],
+        "exp-feliz": [0.0199, 0.3396, 0.1191, 0.5097],
+        "exp-risada": [0.1266, 0.3403, 0.2238, 0.5097],
+        "exp-triste": [0.2258, 0.3438, 0.3203, 0.509],
+        "exp-bravo": [0.3301, 0.341, 0.4277, 0.509],
+        "exp-surpreso": [0.4355, 0.3424, 0.5336, 0.5083],
+        "exp-preocupado": [0.5461, 0.3438, 0.6426, 0.509],
+        "exp-desconfiado": [0.657, 0.3431, 0.7531, 0.5104],
+        "exp-maroto": [0.7605, 0.3431, 0.857, 0.5097],
+        "exp-timido": [0.8691, 0.3431, 0.9664, 0.5104],
+        "pose-base": [0.0391, 0.5347, 0.118, 0.7438],
+        "pose-andando": [0.1828, 0.5368, 0.2602, 0.741],
+        "pose-correndo": [0.325, 0.5396, 0.4078, 0.7396],
+        "pose-apontando": [0.4652, 0.5361, 0.5574, 0.7431],
+        "pose-explicando": [0.5941, 0.5354, 0.6797, 0.7438],
+        "pose-duvida": [0.7219, 0.5424, 0.7988, 0.7444],
+        "pose-bracos-cruzados": [0.8594, 0.5375, 0.9262, 0.7444],
+        "pose-pensando": [0.3004, 0.7618, 0.3703, 0.9674],
+        "pose-comemorando": [0.4195, 0.7569, 0.502, 0.9681],
+        "pose-desanimado": [0.5687, 0.7715, 0.6324, 0.9681]
+      },
+      "acento": "vestido rosa",
       "elenco_num": 2,
-      "acento": "vestido rosa"
+      "folha_individual": true
     },
     {
       "id": "PERS-cacheada",
       "tipo": "personagem",
-      "permanente": true,
+      "titulo": "Menina cacheada de camiseta amarela",
+      "trava": "Stickman 2D flat colorido do canal Porquê BR: menina de cabelo cacheado volumoso preto e camiseta amarela chapada. Cabeça redonda branca grande com contorno preto, dois olhos pretos sempre visíveis, boca de reação (nunca articula fala), corpo e membros em traço preto fino, fundo claro em tom creme, sem texto e sem marca na imagem.",
+      "proibido": "boca aberta articulando fala (boca_articula_fala), corte da cabeça no topo (corte_oculos_cabeca), dedos realistas, pele humana",
       "estado": "permanente",
-      "arquivo": "personagens/PERS-cacheada.md",
+      "origem": "jose",
+      "criado_em": "2026-10-28",
+      "aprovado_por": "Jose",
+      "aprovado_em": "2026-10-28",
+      "tags": [
+        "feminino",
+        "cacheada",
+        "amarelo"
+      ],
       "imagem": "personagens/PERS-cacheada-folha.png",
+      "recortes": {
+        "giro-frente": [0.0871, 0.0194, 0.1773, 0.2931],
+        "giro-tres-quartos": [0.2672, 0.0215, 0.3504, 0.2951],
+        "giro-perfil": [0.4496, 0.0229, 0.5246, 0.2951],
+        "giro-costas-tres-quartos": [0.6211, 0.0208, 0.6996, 0.2951],
+        "giro-costas": [0.8051, 0.0229, 0.8922, 0.2965],
+        "exp-feliz": [0.0418, 0.3319, 0.1363, 0.4944],
+        "exp-risada": [0.1516, 0.334, 0.243, 0.4944],
+        "exp-triste": [0.2578, 0.3312, 0.3477, 0.4951],
+        "exp-bravo": [0.3586, 0.3319, 0.45, 0.4944],
+        "exp-surpreso": [0.4633, 0.3306, 0.5555, 0.4951],
+        "exp-preocupado": [0.5707, 0.334, 0.6598, 0.4951],
+        "exp-desconfiado": [0.6727, 0.3354, 0.7617, 0.4951],
+        "exp-maroto": [0.7715, 0.334, 0.8605, 0.4958],
+        "exp-timido": [0.8703, 0.3333, 0.9594, 0.4965],
+        "pose-base": [0.0715, 0.5229, 0.143, 0.7264],
+        "pose-andando": [0.2504, 0.5257, 0.3187, 0.7264],
+        "pose-correndo": [0.4266, 0.5243, 0.5141, 0.7257],
+        "pose-apontando": [0.6164, 0.5208, 0.7098, 0.7271],
+        "pose-explicando": [0.8012, 0.5229, 0.8953, 0.7271],
+        "pose-duvida": [0.0484, 0.7361, 0.1527, 0.9569],
+        "pose-bracos-cruzados": [0.2398, 0.7403, 0.3039, 0.9583],
+        "pose-pensando": [0.434, 0.7451, 0.5008, 0.9576],
+        "pose-comemorando": [0.5887, 0.7424, 0.6922, 0.9576],
+        "pose-desanimado": [0.8125, 0.7458, 0.884, 0.9604]
+      },
+      "acento": "camiseta amarela",
       "elenco_num": 5,
-      "acento": "camiseta amarela"
+      "folha_individual": true
     },
     {
       "id": "PERS-bone-verde",
       "tipo": "personagem",
-      "permanente": true,
+      "titulo": "Menino de boné verde e mochila preta",
+      "trava": "Stickman 2D flat colorido do canal Porquê BR: menino de boné verde, camiseta branca, bermuda caqui e mochila preta. Cabeça redonda branca grande com contorno preto, dois olhos pretos sempre visíveis, boca de reação (nunca articula fala), corpo e membros em traço preto fino, fundo claro em tom creme, sem texto e sem marca na imagem.",
+      "proibido": "boca aberta articulando fala (boca_articula_fala), corte da cabeça no topo (corte_oculos_cabeca), dedos realistas, pele humana",
       "estado": "permanente",
-      "arquivo": "personagens/PERS-bone-verde.md",
+      "origem": "jose",
+      "criado_em": "2026-10-28",
+      "aprovado_por": "Jose",
+      "aprovado_em": "2026-10-28",
+      "tags": [
+        "masculino",
+        "bone",
+        "mochila",
+        "verde"
+      ],
       "imagem": "personagens/PERS-bone-verde-folha.png",
+      "recortes": {
+        "giro-frente": [0.0996, 0.0444, 0.1828, 0.3403],
+        "giro-tres-quartos": [0.2832, 0.0451, 0.3648, 0.3403],
+        "giro-perfil": [0.4457, 0.0444, 0.5281, 0.3396],
+        "giro-costas-tres-quartos": [0.6262, 0.0458, 0.7051, 0.3396],
+        "giro-costas": [0.8113, 0.0444, 0.8758, 0.3396],
+        "exp-feliz": [0.0305, 0.409, 0.1129, 0.5535],
+        "exp-risada": [0.1461, 0.4097, 0.2285, 0.5542],
+        "exp-triste": [0.2508, 0.4083, 0.3332, 0.5535],
+        "exp-bravo": [0.3547, 0.4097, 0.4359, 0.5535],
+        "exp-surpreso": [0.459, 0.4111, 0.5402, 0.5542],
+        "exp-preocupado": [0.5641, 0.4111, 0.6465, 0.5549],
+        "exp-desconfiado": [0.6668, 0.4146, 0.7492, 0.5556],
+        "exp-maroto": [0.7699, 0.4111, 0.852, 0.5556],
+        "exp-timido": [0.8844, 0.4153, 0.966, 0.5556],
+        "pose-base": [0.0258, 0.6326, 0.0965, 0.8896],
+        "pose-andando": [0.1215, 0.6319, 0.1922, 0.8889],
+        "pose-correndo": [0.2059, 0.6375, 0.2953, 0.8854],
+        "pose-apontando": [0.3285, 0.6333, 0.4215, 0.8903],
+        "pose-explicando": [0.4398, 0.6333, 0.5258, 0.8903],
+        "pose-duvida": [0.5289, 0.6347, 0.6246, 0.8903],
+        "pose-bracos-cruzados": [0.6391, 0.6354, 0.7078, 0.891],
+        "pose-pensando": [0.7273, 0.6569, 0.8066, 0.891],
+        "pose-comemorando": [0.8027, 0.6326, 0.8988, 0.8896],
+        "pose-desanimado": [0.9008, 0.6479, 0.9762, 0.8903]
+      },
+      "acento": "boné verde",
       "elenco_num": 8,
-      "acento": "boné verde"
+      "folha_individual": true
     },
     {
       "id": "PERS-gravata-azul",
       "tipo": "personagem",
-      "permanente": true,
+      "titulo": "Stickman clássico de camisa branca e gravata azul",
+      "trava": "Stickman 2D flat colorido do canal Porquê BR: stickman clássico de poucos fios de cabelo, camisa social branca de manga comprida e gravata azul chapada. Cabeça redonda branca grande com contorno preto, dois olhos pretos sempre visíveis, boca de reação (nunca articula fala), corpo e membros em traço preto fino, fundo claro em tom creme, sem texto e sem marca na imagem.",
+      "proibido": "boca aberta articulando fala (boca_articula_fala), corte da cabeça no topo (corte_oculos_cabeca), dedos realistas, pele humana",
       "estado": "permanente",
-      "arquivo": "personagens/PERS-gravata-azul.md",
+      "origem": "jose",
+      "criado_em": "2026-10-28",
+      "aprovado_por": "Jose",
+      "aprovado_em": "2026-10-28",
+      "tags": [
+        "masculino",
+        "classico",
+        "gravata",
+        "azul"
+      ],
       "imagem": "personagens/PERS-gravata-azul-folha.png",
+      "recortes": {
+        "giro-frente": [0.1059, 0.0285, 0.1785, 0.3312],
+        "giro-tres-quartos": [0.2738, 0.0354, 0.3434, 0.3326],
+        "giro-perfil": [0.4531, 0.034, 0.523, 0.334],
+        "giro-costas-tres-quartos": [0.6277, 0.0396, 0.6961, 0.334],
+        "giro-costas": [0.8063, 0.0417, 0.8762, 0.3333],
+        "exp-feliz": [0.0437, 0.3833, 0.1172, 0.5701],
+        "exp-risada": [0.1473, 0.3847, 0.2211, 0.5701],
+        "exp-triste": [0.2527, 0.3882, 0.3262, 0.5715],
+        "exp-bravo": [0.3598, 0.3896, 0.4328, 0.5715],
+        "exp-surpreso": [0.4637, 0.3854, 0.5363, 0.5722],
+        "exp-preocupado": [0.5672, 0.3882, 0.6406, 0.5729],
+        "exp-desconfiado": [0.6746, 0.3889, 0.748, 0.5736],
+        "exp-maroto": [0.7793, 0.391, 0.8531, 0.5743],
+        "exp-timido": [0.8828, 0.391, 0.9559, 0.5743],
+        "pose-base": [0.0387, 0.6271, 0.1055, 0.9],
+        "pose-andando": [0.1328, 0.6326, 0.2051, 0.8979],
+        "pose-correndo": [0.2199, 0.6382, 0.3145, 0.8924],
+        "pose-apontando": [0.3406, 0.634, 0.432, 0.9007],
+        "pose-explicando": [0.4512, 0.6368, 0.5352, 0.9],
+        "pose-duvida": [0.5426, 0.6319, 0.6359, 0.8986],
+        "pose-bracos-cruzados": [0.6516, 0.6389, 0.709, 0.9],
+        "pose-pensando": [0.7262, 0.6743, 0.7988, 0.9007],
+        "pose-comemorando": [0.7965, 0.6319, 0.8918, 0.8993],
+        "pose-desanimado": [0.909, 0.6646, 0.9695, 0.9021]
+      },
+      "acento": "gravata azul",
       "elenco_num": 9,
-      "acento": "gravata azul"
+      "folha_individual": true
     },
     {
       "id": "PERS-roxo-ansioso",
       "tipo": "personagem",
-      "permanente": true,
+      "titulo": "Rapaz ansioso de moletom roxo",
+      "trava": "Stickman 2D flat colorido do canal Porquê BR: rapaz de cabelo preto espetado e moletom roxo com capuz, com expressão ansiosa e gotas de suor na ficha. Cabeça redonda branca grande com contorno preto, dois olhos pretos sempre visíveis, boca de reação (nunca articula fala), corpo e membros em traço preto fino, fundo claro em tom creme, sem texto e sem marca na imagem.",
+      "proibido": "boca aberta articulando fala (boca_articula_fala), corte da cabeça no topo (corte_oculos_cabeca), dedos realistas, pele humana",
       "estado": "permanente",
-      "arquivo": "personagens/PERS-roxo-ansioso.md",
+      "origem": "jose",
+      "criado_em": "2026-10-28",
+      "aprovado_por": "Jose",
+      "aprovado_em": "2026-10-28",
+      "tags": [
+        "masculino",
+        "ansioso",
+        "roxo",
+        "moletom"
+      ],
       "imagem": "personagens/PERS-roxo-ansioso-folha.png",
+      "recortes": {
+        "giro-frente": [0.0977, 0.0174, 0.1871, 0.2833],
+        "giro-tres-quartos": [0.2801, 0.0181, 0.366, 0.2847],
+        "giro-perfil": [0.4699, 0.0215, 0.5359, 0.2868],
+        "giro-costas-tres-quartos": [0.6328, 0.0194, 0.7191, 0.2847],
+        "giro-costas": [0.8148, 0.0215, 0.882, 0.2833],
+        "exp-ansioso": [0.0324, 0.3222, 0.118, 0.4931],
+        "exp-feliz": [0.15, 0.325, 0.2195, 0.4924],
+        "exp-risada": [0.2629, 0.3236, 0.3316, 0.4931],
+        "exp-triste": [0.368, 0.3264, 0.4363, 0.4931],
+        "exp-bravo": [0.4707, 0.3271, 0.5391, 0.4931],
+        "exp-surpreso": [0.5641, 0.3243, 0.6605, 0.4938],
+        "exp-desconfiado": [0.6813, 0.3278, 0.7469, 0.4931],
+        "exp-maroto": [0.7891, 0.3285, 0.8578, 0.4938],
+        "exp-timido": [0.891, 0.3292, 0.9766, 0.4944],
+        "pose-base": [0.0645, 0.5194, 0.1383, 0.7319],
+        "pose-andando": [0.2191, 0.5229, 0.2863, 0.7299],
+        "pose-correndo": [0.3473, 0.516, 0.4441, 0.7264],
+        "pose-apontando": [0.5473, 0.5243, 0.6285, 0.7319],
+        "pose-explicando": [0.7004, 0.5264, 0.7816, 0.7347],
+        "pose-duvida": [0.8504, 0.5306, 0.9395, 0.7347],
+        "pose-bracos-cruzados": [0.1078, 0.7562, 0.1633, 0.9674],
+        "pose-pensando": [0.3285, 0.7611, 0.4102, 0.9674],
+        "pose-comemorando": [0.5594, 0.7444, 0.6508, 0.966],
+        "pose-desanimado": [0.8, 0.7736, 0.8617, 0.9688]
+      },
+      "acento": "moletom roxo",
       "elenco_num": 12,
-      "acento": "moletom roxo"
+      "folha_individual": true
     },
     {
       "id": "PERS-bob-oculos",
       "tipo": "personagem",
-      "permanente": true,
+      "titulo": "Moça de cabelo bob e óculos redondos",
+      "trava": "Stickman 2D flat colorido do canal Porquê BR: menina de cabelo preto curtinho (bob) na altura do rosto, óculos redondos pretos, blusa lilás e saia preta. Cabeça redonda branca grande com contorno preto, dois olhos pretos sempre visíveis, boca de reação (nunca articula fala), corpo e membros em traço preto fino, fundo claro em tom creme, sem texto e sem marca na imagem.",
+      "proibido": "boca aberta articulando fala (boca_articula_fala), corte da cabeça no topo (corte_oculos_cabeca), dedos realistas, pele humana",
       "estado": "permanente",
-      "arquivo": "personagens/PERS-bob-oculos.md",
+      "origem": "jose",
+      "criado_em": "2026-10-28",
+      "aprovado_por": "Jose",
+      "aprovado_em": "2026-10-28",
+      "tags": [
+        "feminino",
+        "oculos",
+        "bob",
+        "lilas"
+      ],
       "imagem": "personagens/PERS-bob-oculos-folha.png",
-      "elenco_num": null,
-      "obs": "fora do catalogo dos 12",
-      "acento": "óculos redondos"
+      "recortes": {
+        "giro-frente": [0.1363, 0.0292, 0.2156, 0.3139],
+        "giro-tres-quartos": [0.3008, 0.0306, 0.3781, 0.3153],
+        "giro-perfil": [0.4641, 0.0306, 0.5383, 0.3153],
+        "giro-costas-tres-quartos": [0.6152, 0.0292, 0.6922, 0.3146],
+        "giro-costas": [0.784, 0.0312, 0.8586, 0.3153],
+        "exp-feliz": [0.0348, 0.3542, 0.1242, 0.5333],
+        "exp-risada": [0.1469, 0.3549, 0.2352, 0.5333],
+        "exp-triste": [0.2594, 0.3583, 0.3457, 0.534],
+        "exp-bravo": [0.366, 0.3563, 0.4543, 0.534],
+        "exp-surpreso": [0.4734, 0.3569, 0.5605, 0.534],
+        "exp-preocupado": [0.5762, 0.3576, 0.6629, 0.534],
+        "exp-desconfiado": [0.6777, 0.3604, 0.7625, 0.534],
+        "exp-maroto": [0.7797, 0.3583, 0.8648, 0.5347],
+        "exp-timido": [0.8773, 0.3597, 0.9637, 0.5347],
+        "pose-base": [0.1031, 0.5563, 0.1676, 0.759],
+        "pose-andando": [0.2527, 0.559, 0.3195, 0.7618],
+        "pose-correndo": [0.4242, 0.5597, 0.5234, 0.7604],
+        "pose-apontando": [0.6215, 0.5556, 0.7137, 0.7604],
+        "pose-explicando": [0.7902, 0.5576, 0.8664, 0.7611],
+        "pose-duvida": [0.1117, 0.7771, 0.2012, 0.975],
+        "pose-bracos-cruzados": [0.2785, 0.7764, 0.3359, 0.9757],
+        "pose-pensando": [0.4199, 0.7819, 0.4793, 0.9757],
+        "pose-comemorando": [0.5855, 0.7743, 0.6793, 0.9778],
+        "pose-desanimado": [0.7562, 0.7882, 0.8203, 0.9778]
+      },
+      "acento": "óculos redondos",
+      "elenco_num": 13,
+      "folha_individual": true
     },
     {
       "id": "AMB-praca",
       "tipo": "ambiente",
-      "permanente": true,
+      "titulo": "Praça de bairro",
+      "trava": "Praça de bairro, hoje, luz de dia. Objetos-âncora: chafariz central, bancos, bicicleta apoiada, postes de luz, prédios de telhado terracota ao fundo, árvores. Estilo: cartum 2D flat colorido: stickman de cabeça redonda branca grande com contorno preto, dois olhos pretos sempre visíveis, boca simples de reação, corpo e membros em traço preto fino, roupa chapada colorida fixa por personagem, fundo claro em tom creme, paleta suave, sombra leve chapada no chão; sem texto, sem marca, sem volume 3D, sem fotorrealismo.",
+      "proibido": "multidão, letreiro, logo, mudar a luz ou os objetos-âncora entre cenas do mesmo lugar",
       "estado": "permanente",
-      "arquivo": "ambientes/AMB-praca.md",
+      "origem": "jose",
+      "criado_em": "2026-10-28",
+      "aprovado_por": "Jose",
+      "aprovado_em": "2026-10-28",
+      "tags": [
+        "praca",
+        "bairro",
+        "externo"
+      ],
       "imagem": "ambientes/AMB-praca.png"
     },
     {
       "id": "AMB-calcadao-mar",
       "tipo": "ambiente",
-      "permanente": true,
+      "titulo": "Calçadão à beira-mar",
+      "trava": "Calçadão à beira-mar, hoje, luz de dia. Objetos-âncora: palmeiras, quiosque, banco, tripé com câmera, corrimão, areia e mar ao fundo. Estilo: cartum 2D flat colorido: stickman de cabeça redonda branca grande com contorno preto, dois olhos pretos sempre visíveis, boca simples de reação, corpo e membros em traço preto fino, roupa chapada colorida fixa por personagem, fundo claro em tom creme, paleta suave, sombra leve chapada no chão; sem texto, sem marca, sem volume 3D, sem fotorrealismo.",
+      "proibido": "multidão, letreiro, logo, mudar a luz ou os objetos-âncora entre cenas do mesmo lugar",
       "estado": "permanente",
-      "arquivo": "ambientes/AMB-calcadao-mar.md",
+      "origem": "jose",
+      "criado_em": "2026-10-28",
+      "aprovado_por": "Jose",
+      "aprovado_em": "2026-10-28",
+      "tags": [
+        "calcadao",
+        "mar",
+        "externo"
+      ],
       "imagem": "ambientes/AMB-calcadao-mar.png"
     },
     {
       "id": "AMB-pista-skate",
       "tipo": "ambiente",
-      "permanente": true,
+      "titulo": "Pista de skate ao ar livre",
+      "trava": "Pista de skate ao ar livre, hoje, luz de dia. Objetos-âncora: half-pipe, bowl, corrimão, banco com mochila, skate, árvores e cerca. Estilo: cartum 2D flat colorido: stickman de cabeça redonda branca grande com contorno preto, dois olhos pretos sempre visíveis, boca simples de reação, corpo e membros em traço preto fino, roupa chapada colorida fixa por personagem, fundo claro em tom creme, paleta suave, sombra leve chapada no chão; sem texto, sem marca, sem volume 3D, sem fotorrealismo.",
+      "proibido": "multidão, letreiro, logo, mudar a luz ou os objetos-âncora entre cenas do mesmo lugar",
       "estado": "permanente",
-      "arquivo": "ambientes/AMB-pista-skate.md",
+      "origem": "jose",
+      "criado_em": "2026-10-28",
+      "aprovado_por": "Jose",
+      "aprovado_em": "2026-10-28",
+      "tags": [
+        "skate",
+        "pista",
+        "externo"
+      ],
       "imagem": "ambientes/AMB-pista-skate.png"
     },
     {
       "id": "AMB-jardim",
       "tipo": "ambiente",
-      "permanente": true,
+      "titulo": "Jardim tranquilo",
+      "trava": "Jardim tranquilo, hoje, luz de dia. Objetos-âncora: pérgola de madeira com trepadeiras, banco, caminho de pedras, canteiros de flores, cerca de madeira, vasos. Estilo: cartum 2D flat colorido: stickman de cabeça redonda branca grande com contorno preto, dois olhos pretos sempre visíveis, boca simples de reação, corpo e membros em traço preto fino, roupa chapada colorida fixa por personagem, fundo claro em tom creme, paleta suave, sombra leve chapada no chão; sem texto, sem marca, sem volume 3D, sem fotorrealismo.",
+      "proibido": "multidão, letreiro, logo, mudar a luz ou os objetos-âncora entre cenas do mesmo lugar",
       "estado": "permanente",
-      "arquivo": "ambientes/AMB-jardim.md",
+      "origem": "jose",
+      "criado_em": "2026-10-28",
+      "aprovado_por": "Jose",
+      "aprovado_em": "2026-10-28",
+      "tags": [
+        "jardim",
+        "externo",
+        "plantas"
+      ],
       "imagem": "ambientes/AMB-jardim.png"
     },
     {
       "id": "AMB-sala-estar",
       "tipo": "ambiente",
-      "permanente": true,
+      "titulo": "Sala de estar aconchegante",
+      "trava": "Sala de estar aconchegante, hoje, luz de dia. Objetos-âncora: sofá azul, poltrona amarela, mesa de centro com caneca e telefone, estante com livros, luminária, plantas, janela com vista do bairro. Estilo: cartum 2D flat colorido: stickman de cabeça redonda branca grande com contorno preto, dois olhos pretos sempre visíveis, boca simples de reação, corpo e membros em traço preto fino, roupa chapada colorida fixa por personagem, fundo claro em tom creme, paleta suave, sombra leve chapada no chão; sem texto, sem marca, sem volume 3D, sem fotorrealismo.",
+      "proibido": "multidão, letreiro, logo, mudar a luz ou os objetos-âncora entre cenas do mesmo lugar",
       "estado": "permanente",
-      "arquivo": "ambientes/AMB-sala-estar.md",
+      "origem": "jose",
+      "criado_em": "2026-10-28",
+      "aprovado_por": "Jose",
+      "aprovado_em": "2026-10-28",
+      "tags": [
+        "sala",
+        "casa",
+        "interno"
+      ],
       "imagem": "ambientes/AMB-sala-estar.png"
     },
     {
       "id": "AMB-escritorio",
       "tipo": "ambiente",
-      "permanente": true,
+      "titulo": "Escritório em casa",
+      "trava": "Escritório em casa (home office), hoje, luz de dia. Objetos-âncora: mesa com laptop, caneca e luminária, cadeira, estante com livros, caixas e plantas, prateleira, mochila azul, janela. Estilo: cartum 2D flat colorido: stickman de cabeça redonda branca grande com contorno preto, dois olhos pretos sempre visíveis, boca simples de reação, corpo e membros em traço preto fino, roupa chapada colorida fixa por personagem, fundo claro em tom creme, paleta suave, sombra leve chapada no chão; sem texto, sem marca, sem volume 3D, sem fotorrealismo.",
+      "proibido": "multidão, letreiro, logo, mudar a luz ou os objetos-âncora entre cenas do mesmo lugar",
       "estado": "permanente",
-      "arquivo": "ambientes/AMB-escritorio.md",
+      "origem": "jose",
+      "criado_em": "2026-10-28",
+      "aprovado_por": "Jose",
+      "aprovado_em": "2026-10-28",
+      "tags": [
+        "escritorio",
+        "home-office",
+        "interno"
+      ],
       "imagem": "ambientes/AMB-escritorio.png"
     },
     {
       "id": "AMB-estudio-foto",
       "tipo": "ambiente",
-      "permanente": true,
+      "titulo": "Estúdio fotográfico",
+      "trava": "Estúdio fotográfico, hoje, luz de dia. Objetos-âncora: fundo infinito azul em rolo, banqueta, dois softboxes, câmera no tripé, armário com bolsa de câmera, plantas. Estilo: cartum 2D flat colorido: stickman de cabeça redonda branca grande com contorno preto, dois olhos pretos sempre visíveis, boca simples de reação, corpo e membros em traço preto fino, roupa chapada colorida fixa por personagem, fundo claro em tom creme, paleta suave, sombra leve chapada no chão; sem texto, sem marca, sem volume 3D, sem fotorrealismo.",
+      "proibido": "multidão, letreiro, logo, mudar a luz ou os objetos-âncora entre cenas do mesmo lugar",
       "estado": "permanente",
-      "arquivo": "ambientes/AMB-estudio-foto.md",
+      "origem": "jose",
+      "criado_em": "2026-10-28",
+      "aprovado_por": "Jose",
+      "aprovado_em": "2026-10-28",
+      "tags": [
+        "estudio",
+        "fotografia",
+        "interno"
+      ],
       "imagem": "ambientes/AMB-estudio-foto.png"
     },
     {
       "id": "AMB-cafe",
       "tipo": "ambiente",
-      "permanente": true,
+      "titulo": "Café de bairro",
+      "trava": "Café de bairro pequeno, hoje, luz de dia. Objetos-âncora: balcão de madeira, máquina de espresso, moedor, vitrine de doces, luminárias pendentes, mesas redondas com cadeiras, banco azul, plantas. Estilo: cartum 2D flat colorido: stickman de cabeça redonda branca grande com contorno preto, dois olhos pretos sempre visíveis, boca simples de reação, corpo e membros em traço preto fino, roupa chapada colorida fixa por personagem, fundo claro em tom creme, paleta suave, sombra leve chapada no chão; sem texto, sem marca, sem volume 3D, sem fotorrealismo.",
+      "proibido": "multidão, letreiro, logo, mudar a luz ou os objetos-âncora entre cenas do mesmo lugar",
       "estado": "permanente",
-      "arquivo": "ambientes/AMB-cafe.md",
+      "origem": "jose",
+      "criado_em": "2026-10-28",
+      "aprovado_por": "Jose",
+      "aprovado_em": "2026-10-28",
+      "tags": [
+        "cafe",
+        "bairro",
+        "interno"
+      ],
       "imagem": "ambientes/AMB-cafe.png"
     },
     {
       "id": "AMB-metro",
       "tipo": "ambiente",
-      "permanente": true,
+      "titulo": "Plataforma de estação de metrô",
+      "trava": "Plataforma de estação de metrô, hoje, luz de dia. Objetos-âncora: trem com faixa azul, pôster de mapa, banco, piso tátil. Estilo: cartum 2D flat colorido: stickman de cabeça redonda branca grande com contorno preto, dois olhos pretos sempre visíveis, boca simples de reação, corpo e membros em traço preto fino, roupa chapada colorida fixa por personagem, fundo claro em tom creme, paleta suave, sombra leve chapada no chão; sem texto, sem marca, sem volume 3D, sem fotorrealismo.",
+      "proibido": "multidão, letreiro, logo, mudar a luz ou os objetos-âncora entre cenas do mesmo lugar",
       "estado": "permanente",
-      "arquivo": "ambientes/AMB-metro.md",
+      "origem": "jose",
+      "criado_em": "2026-10-28",
+      "aprovado_por": "Jose",
+      "aprovado_em": "2026-10-28",
+      "tags": [
+        "metro",
+        "transporte",
+        "interno"
+      ],
       "imagem": "ambientes/AMB-metro.png",
+      "personagens": [
+        "PERS-gravata-azul",
+        "PERS-nerd-laco",
+        "PERS-pijama-sono"
+      ],
       "com_elenco": true
     },
     {
       "id": "AMB-skate-urbano",
       "tipo": "ambiente",
-      "permanente": true,
+      "titulo": "Skatepark urbano",
+      "trava": "Skatepark urbano, hoje, luz de dia. Objetos-âncora: bowl, rampa, corrimão, skyline da cidade ao fundo. Estilo: cartum 2D flat colorido: stickman de cabeça redonda branca grande com contorno preto, dois olhos pretos sempre visíveis, boca simples de reação, corpo e membros em traço preto fino, roupa chapada colorida fixa por personagem, fundo claro em tom creme, paleta suave, sombra leve chapada no chão; sem texto, sem marca, sem volume 3D, sem fotorrealismo.",
+      "proibido": "multidão, letreiro, logo, mudar a luz ou os objetos-âncora entre cenas do mesmo lugar",
       "estado": "permanente",
-      "arquivo": "ambientes/AMB-skate-urbano.md",
+      "origem": "jose",
+      "criado_em": "2026-10-28",
+      "aprovado_por": "Jose",
+      "aprovado_em": "2026-10-28",
+      "tags": [
+        "skate",
+        "urbano",
+        "externo"
+      ],
       "imagem": "ambientes/AMB-skate-urbano.png",
+      "personagens": [
+        "PERS-punk-azul",
+        "PERS-fones-vermelho",
+        "PERS-bone-verde"
+      ],
       "com_elenco": true
     },
     {
       "id": "AMB-calcada-compras",
       "tipo": "ambiente",
-      "permanente": true,
+      "titulo": "Rua de pedestres de compras",
+      "trava": "Rua de pedestres de compras, hoje, luz de dia. Objetos-âncora: fachadas de lojas com toldos (listrado vermelho, azul e verde), poste, árvores em vasos. Estilo: cartum 2D flat colorido: stickman de cabeça redonda branca grande com contorno preto, dois olhos pretos sempre visíveis, boca simples de reação, corpo e membros em traço preto fino, roupa chapada colorida fixa por personagem, fundo claro em tom creme, paleta suave, sombra leve chapada no chão; sem texto, sem marca, sem volume 3D, sem fotorrealismo.",
+      "proibido": "multidão, letreiro, logo, mudar a luz ou os objetos-âncora entre cenas do mesmo lugar",
       "estado": "permanente",
-      "arquivo": "ambientes/AMB-calcada-compras.md",
+      "origem": "jose",
+      "criado_em": "2026-10-28",
+      "aprovado_por": "Jose",
+      "aprovado_em": "2026-10-28",
+      "tags": [
+        "rua",
+        "compras",
+        "externo"
+      ],
       "imagem": "ambientes/AMB-calcada-compras.png",
+      "personagens": [
+        "PERS-menino-azul",
+        "PERS-menina-rosa",
+        "PERS-senhor-cachecol"
+      ],
       "com_elenco": true
     },
     {
       "id": "OBJ-catalogo",
       "tipo": "objeto",
-      "papel": "catalogo_objetos",
-      "permanente": true,
+      "papel": "colecao",
+      "titulo": "Objetos do canal: grade dos 12 objetos",
+      "trava": "Grade 4×3 com 12 objetos do cotidiano em cartoon 2D flat colorido: cadeira de madeira, laptop, caneca fumegante, skateboard, luminária de mesa amarela, microfone com pedestal, mochila azul, planta em vaso, câmera no tripé, troféu dourado, smartphone e baú do tesouro.",
       "estado": "permanente",
-      "arquivo": "objetos/OBJ-catalogo.md",
-      "imagem": "objetos/OBJ-catalogo.png"
+      "origem": "jose",
+      "criado_em": "2026-10-28",
+      "aprovado_por": "Jose",
+      "aprovado_em": "2026-10-28",
+      "tags": [
+        "objetos",
+        "grade"
+      ],
+      "imagem": "objetos/OBJ-catalogo.png",
+      "recortes": {
+        "cadeira": [0.082, 0.0431, 0.1875, 0.2951],
+        "laptop": [0.3113, 0.05, 0.4629, 0.2833],
+        "caneca": [0.5742, 0.0312, 0.6836, 0.2729],
+        "skate": [0.7871, 0.0736, 0.9547, 0.2764],
+        "luminaria": [0.0836, 0.3514, 0.1695, 0.6035],
+        "microfone": [0.3328, 0.3556, 0.4082, 0.6083],
+        "mochila": [0.5641, 0.3542, 0.677, 0.5958],
+        "planta": [0.8117, 0.3451, 0.9316, 0.6028],
+        "camera": [0.0832, 0.6806, 0.1656, 0.934],
+        "trofeu": [0.3277, 0.6882, 0.4289, 0.9139],
+        "smartphone": [0.575, 0.6806, 0.6629, 0.9111],
+        "bau": [0.8141, 0.7201, 0.9379, 0.9111]
+      }
     },
     {
       "id": "ANIM-catalogo",
       "tipo": "animal",
-      "papel": "catalogo_animais",
-      "permanente": true,
+      "papel": "colecao",
+      "titulo": "Animais do canal: grade dos 12 animais domésticos",
+      "trava": "Grade 4×3 com 12 animais domésticos em cartoon 2D flat colorido: cachorro, gato, periquito verde, coelho, porquinho-da-índia, hamster, peixe dourado, tartaruga, galo, porco, ovelha e cavalo.",
       "estado": "permanente",
-      "arquivo": "animais/ANIM-catalogo.md",
-      "imagem": "animais/ANIM-catalogo.png"
+      "origem": "jose",
+      "criado_em": "2026-10-28",
+      "aprovado_por": "Jose",
+      "aprovado_em": "2026-10-28",
+      "tags": [
+        "animais",
+        "grade"
+      ],
+      "imagem": "animais/ANIM-catalogo.png",
+      "recortes": {
+        "cachorro": [0.0617, 0.0194, 0.2184, 0.3139],
+        "gato": [0.2922, 0.0306, 0.4484, 0.3125],
+        "periquito": [0.5348, 0.0222, 0.691, 0.3111],
+        "coelho": [0.7906, 0.0208, 0.9324, 0.3174],
+        "porquinho-da-india": [0.0527, 0.3868, 0.2141, 0.6021],
+        "hamster": [0.3098, 0.3535, 0.425, 0.6222],
+        "peixe-dourado": [0.5266, 0.3528, 0.6949, 0.6306],
+        "tartaruga": [0.7684, 0.3653, 0.9574, 0.6153],
+        "galo": [0.066, 0.6667, 0.2133, 0.9674],
+        "porco": [0.2766, 0.6778, 0.4527, 0.9479],
+        "ovelha": [0.5242, 0.6743, 0.7035, 0.9535],
+        "cavalo": [0.7898, 0.6667, 0.9418, 0.9646]
+      }
+    },
+    {
+      "id": "PERS-menino-azul",
+      "tipo": "personagem",
+      "titulo": "Menino de cabelo espetado e camiseta azul",
+      "trava": "Stickman 2D flat colorido do canal Porquê BR: menino de cabelo preto espetado, camiseta azul chapada de mangas curtas, mãos na cintura, sapatos brancos ovais de contorno preto. Cabeça redonda branca grande com contorno preto, dois olhos pretos sempre visíveis, boca de reação (nunca articula fala), corpo e membros em traço preto fino, fundo claro em tom creme, sem texto e sem marca na imagem.",
+      "proibido": "boca aberta articulando fala (boca_articula_fala), corte da cabeça no topo (corte_oculos_cabeca), dedos realistas, pele humana; a boca aberta sorrindo da imagem é só de reação breve: ao animar, boca fechada (lips closed)",
+      "estado": "permanente",
+      "origem": "jose",
+      "criado_em": "2026-10-28",
+      "aprovado_por": "Jose",
+      "aprovado_em": "2026-10-28",
+      "tags": [
+        "masculino",
+        "protagonista",
+        "azul",
+        "sorrindo"
+      ],
+      "imagem": "personagens/ELENCO-catalogo.png",
+      "recortes": {
+        "num-01": [0.0871, 0.0174, 0.166, 0.2958]
+      },
+      "acento": "camiseta azul",
+      "elenco_num": 1,
+      "folha_individual": false
+    },
+    {
+      "id": "PERS-senhor-cachecol",
+      "tipo": "personagem",
+      "titulo": "Senhor de óculos quadrados e cachecol cinza",
+      "trava": "Stickman 2D flat colorido do canal Porquê BR: senhor de três fios de cabelo, óculos quadrados de armação preta grossa, cachecol cinza com franja e colete verde chapado. Cabeça redonda branca grande com contorno preto, dois olhos pretos sempre visíveis, boca de reação (nunca articula fala), corpo e membros em traço preto fino, fundo claro em tom creme, sem texto e sem marca na imagem.",
+      "proibido": "boca aberta articulando fala (boca_articula_fala), corte da cabeça no topo (corte_oculos_cabeca), dedos realistas, pele humana",
+      "estado": "aguardando_ok_jose",
+      "origem": "mantenedor",
+      "criado_em": "2026-10-28",
+      "autor": "droid",
+      "tags": [
+        "masculino",
+        "senhor",
+        "oculos",
+        "cachecol"
+      ],
+      "imagem": "personagens/ELENCO-catalogo.png",
+      "recortes": {
+        "num-03": [0.5902, 0.0118, 0.6523, 0.2979]
+      },
+      "acento": "cachecol cinza",
+      "elenco_num": 3,
+      "folha_individual": false
+    },
+    {
+      "id": "PERS-punk-azul",
+      "tipo": "personagem",
+      "titulo": "Punk de moicano azul e camiseta preta de caveira",
+      "trava": "Stickman 2D flat colorido do canal Porquê BR: punk de moicano azul em pé, sobrancelhas bravas e sorriso de canto, camiseta regata preta larga com caveira branca, shorts azul, braços cruzados. Cabeça redonda branca grande com contorno preto, dois olhos pretos sempre visíveis, boca de reação (nunca articula fala), corpo e membros em traço preto fino, fundo claro em tom creme, sem texto e sem marca na imagem.",
+      "proibido": "boca aberta articulando fala (boca_articula_fala), corte da cabeça no topo (corte_oculos_cabeca), dedos realistas, pele humana",
+      "estado": "aguardando_ok_jose",
+      "origem": "mantenedor",
+      "criado_em": "2026-10-28",
+      "autor": "droid",
+      "tags": [
+        "masculino",
+        "punk",
+        "moicano",
+        "azul"
+      ],
+      "imagem": "personagens/ELENCO-catalogo.png",
+      "recortes": {
+        "num-04": [0.8328, 0.0285, 0.9109, 0.2972]
+      },
+      "acento": "moicano azul",
+      "elenco_num": 4,
+      "folha_individual": false
+    },
+    {
+      "id": "PERS-pijama-sono",
+      "tipo": "personagem",
+      "titulo": "Careca sonolento de pijama azul",
+      "trava": "Stickman 2D flat colorido do canal Porquê BR: careca de cabeça lisa, sobrancelhas caídas e olhar de sono, pijama azul de mangas e calças compridas, mãos nos bolsos. Cabeça redonda branca grande com contorno preto, dois olhos pretos sempre visíveis, boca de reação (nunca articula fala), corpo e membros em traço preto fino, fundo claro em tom creme, sem texto e sem marca na imagem.",
+      "proibido": "boca aberta articulando fala (boca_articula_fala), corte da cabeça no topo (corte_oculos_cabeca), dedos realistas, pele humana",
+      "estado": "aguardando_ok_jose",
+      "origem": "mantenedor",
+      "criado_em": "2026-10-28",
+      "autor": "droid",
+      "tags": [
+        "masculino",
+        "sonolento",
+        "careca",
+        "pijama"
+      ],
+      "imagem": "personagens/ELENCO-catalogo.png",
+      "recortes": {
+        "num-06": [0.3312, 0.3458, 0.4262, 0.6257]
+      },
+      "acento": "pijama azul",
+      "elenco_num": 6,
+      "folha_individual": false
+    },
+    {
+      "id": "PERS-fones-vermelho",
+      "tipo": "personagem",
+      "titulo": "Rapaz de moletom vermelho e fones de ouvido grandes",
+      "trava": "Stickman 2D flat colorido do canal Porquê BR: rapaz de fones de ouvido grandes pretos, moletom vermelho chapado de mangas curtas, boca em 'o' de surpresa, riscos de som ao redor da cabeça. Cabeça redonda branca grande com contorno preto, dois olhos pretos sempre visíveis, boca de reação (nunca articula fala), corpo e membros em traço preto fino, fundo claro em tom creme, sem texto e sem marca na imagem.",
+      "proibido": "boca aberta articulando fala (boca_articula_fala), corte da cabeça no topo (corte_oculos_cabeca), dedos realistas, pele humana",
+      "estado": "aguardando_ok_jose",
+      "origem": "mantenedor",
+      "criado_em": "2026-10-28",
+      "autor": "droid",
+      "tags": [
+        "masculino",
+        "fones",
+        "musica",
+        "vermelho"
+      ],
+      "imagem": "personagens/ELENCO-catalogo.png",
+      "recortes": {
+        "num-07": [0.5684, 0.3486, 0.6715, 0.6264]
+      },
+      "acento": "moletom vermelho",
+      "elenco_num": 7,
+      "folha_individual": false
+    },
+    {
+      "id": "PERS-nerd-laco",
+      "tipo": "personagem",
+      "titulo": "Nerd de óculos redondos, laço vermelho e suspensório",
+      "trava": "Stickman 2D flat colorido do canal Porquê BR: nerd de cabelo preto cacheado curto, óculos redondos grandes de armação preta, camisa branca com laço vermelho, suspensório preto e calça escura, mãos na cintura. Cabeça redonda branca grande com contorno preto, dois olhos pretos sempre visíveis, boca de reação (nunca articula fala), corpo e membros em traço preto fino, fundo claro em tom creme, sem texto e sem marca na imagem.",
+      "proibido": "boca aberta articulando fala (boca_articula_fala), corte da cabeça no topo (corte_oculos_cabeca), dedos realistas, pele humana",
+      "estado": "aguardando_ok_jose",
+      "origem": "mantenedor",
+      "criado_em": "2026-10-28",
+      "autor": "droid",
+      "tags": [
+        "masculino",
+        "nerd",
+        "oculos",
+        "laco"
+      ],
+      "imagem": "personagens/ELENCO-catalogo.png",
+      "recortes": {
+        "num-10": [0.3375, 0.7007, 0.409, 0.9465]
+      },
+      "acento": "laço vermelho",
+      "elenco_num": 10,
+      "folha_individual": false
+    },
+    {
+      "id": "PERS-rei-coroa",
+      "tipo": "personagem",
+      "titulo": "Rei de coroa dourada e capa vermelha",
+      "trava": "Stickman 2D flat colorido do canal Porquê BR: rei de coroa dourada de três pontas, camiseta branca e capa vermelha com fecho dourado, mãos na cintura. Cabeça redonda branca grande com contorno preto, dois olhos pretos sempre visíveis, boca de reação (nunca articula fala), corpo e membros em traço preto fino, fundo claro em tom creme, sem texto e sem marca na imagem.",
+      "proibido": "boca aberta articulando fala (boca_articula_fala), corte da cabeça no topo (corte_oculos_cabeca), dedos realistas, pele humana",
+      "estado": "aguardando_ok_jose",
+      "origem": "mantenedor",
+      "criado_em": "2026-10-28",
+      "autor": "droid",
+      "tags": [
+        "masculino",
+        "rei",
+        "coroa",
+        "capa"
+      ],
+      "imagem": "personagens/ELENCO-catalogo.png",
+      "recortes": {
+        "num-11": [0.575, 0.6715, 0.6543, 0.9465]
+      },
+      "acento": "capa vermelha",
+      "elenco_num": 11,
+      "folha_individual": false
+    },
+    {
+      "id": "OBJ-cadeira",
+      "tipo": "objeto",
+      "titulo": "Cadeira de madeira",
+      "trava": "Cadeira de madeira simples: assento e encosto de ripas em marrom claro, quatro pernas finas com ponteiras; contorno preto e cores chapadas suaves em cartoon 2D flat, sem texto e sem marca.",
+      "estado": "aguardando_ok_jose",
+      "origem": "mantenedor",
+      "criado_em": "2026-10-28",
+      "autor": "droid",
+      "tags": [
+        "cadeira",
+        "madeira",
+        "sentar"
+      ],
+      "imagem": "objetos/OBJ-catalogo.png",
+      "recortes": {
+        "item": [0.082, 0.0431, 0.1875, 0.2951]
+      }
+    },
+    {
+      "id": "OBJ-laptop",
+      "tipo": "objeto",
+      "titulo": "Laptop",
+      "trava": "Laptop aberto em cinza chapado, tela com uma janela azul genérica sem texto, teclado visível; contorno preto e cores chapadas suaves em cartoon 2D flat, sem texto e sem marca.",
+      "estado": "aguardando_ok_jose",
+      "origem": "mantenedor",
+      "criado_em": "2026-10-28",
+      "autor": "droid",
+      "tags": [
+        "laptop",
+        "computador",
+        "trabalho"
+      ],
+      "imagem": "objetos/OBJ-catalogo.png",
+      "recortes": {
+        "item": [0.3113, 0.05, 0.4629, 0.2833]
+      }
+    },
+    {
+      "id": "OBJ-caneca",
+      "tipo": "objeto",
+      "titulo": "Caneca fumegante",
+      "trava": "Caneca branca com café escuro e três fios de vapor subindo; contorno preto e cores chapadas suaves em cartoon 2D flat, sem texto e sem marca.",
+      "estado": "aguardando_ok_jose",
+      "origem": "mantenedor",
+      "criado_em": "2026-10-28",
+      "autor": "droid",
+      "tags": [
+        "caneca",
+        "cafe",
+        "bebida"
+      ],
+      "imagem": "objetos/OBJ-catalogo.png",
+      "recortes": {
+        "item": [0.5742, 0.0312, 0.6836, 0.2729]
+      }
+    },
+    {
+      "id": "OBJ-skate",
+      "tipo": "objeto",
+      "titulo": "Skateboard",
+      "trava": "Skateboard de shape preto com rodas azuis e eixos claros, visto em diagonal; contorno preto e cores chapadas suaves em cartoon 2D flat, sem texto e sem marca.",
+      "estado": "aguardando_ok_jose",
+      "origem": "mantenedor",
+      "criado_em": "2026-10-28",
+      "autor": "droid",
+      "tags": [
+        "skate",
+        "esporte",
+        "rua"
+      ],
+      "imagem": "objetos/OBJ-catalogo.png",
+      "recortes": {
+        "item": [0.7871, 0.0736, 0.9547, 0.2764]
+      }
+    },
+    {
+      "id": "OBJ-luminaria",
+      "tipo": "objeto",
+      "titulo": "Luminária de mesa amarela",
+      "trava": "Luminária de mesa com cúpula amarela, haste fina cinza e base redonda, com um cordãozinho; contorno preto e cores chapadas suaves em cartoon 2D flat, sem texto e sem marca.",
+      "estado": "aguardando_ok_jose",
+      "origem": "mantenedor",
+      "criado_em": "2026-10-28",
+      "autor": "droid",
+      "tags": [
+        "luminaria",
+        "luz",
+        "mesa"
+      ],
+      "imagem": "objetos/OBJ-catalogo.png",
+      "recortes": {
+        "item": [0.0836, 0.3514, 0.1695, 0.6035]
+      }
+    },
+    {
+      "id": "OBJ-microfone",
+      "tipo": "objeto",
+      "titulo": "Microfone com pedestal",
+      "trava": "Microfone preto de tela quadriculada num pedestal fino com base redonda e cabo enrolado; contorno preto e cores chapadas suaves em cartoon 2D flat, sem texto e sem marca.",
+      "estado": "aguardando_ok_jose",
+      "origem": "mantenedor",
+      "criado_em": "2026-10-28",
+      "autor": "droid",
+      "tags": [
+        "microfone",
+        "voz",
+        "audio"
+      ],
+      "imagem": "objetos/OBJ-catalogo.png",
+      "recortes": {
+        "item": [0.3328, 0.3556, 0.4082, 0.6083]
+      }
+    },
+    {
+      "id": "OBJ-mochila",
+      "tipo": "objeto",
+      "titulo": "Mochila azul",
+      "trava": "Mochila azul chapada com bolso frontal de zíper e alças em azul mais escuro; contorno preto e cores chapadas suaves em cartoon 2D flat, sem texto e sem marca.",
+      "estado": "aguardando_ok_jose",
+      "origem": "mantenedor",
+      "criado_em": "2026-10-28",
+      "autor": "droid",
+      "tags": [
+        "mochila",
+        "escola",
+        "viagem"
+      ],
+      "imagem": "objetos/OBJ-catalogo.png",
+      "recortes": {
+        "item": [0.5641, 0.3542, 0.677, 0.5958]
+      }
+    },
+    {
+      "id": "OBJ-planta",
+      "tipo": "objeto",
+      "titulo": "Planta em vaso",
+      "trava": "Planta de folhas verdes largas num vaso de barro laranja; contorno preto e cores chapadas suaves em cartoon 2D flat, sem texto e sem marca.",
+      "estado": "aguardando_ok_jose",
+      "origem": "mantenedor",
+      "criado_em": "2026-10-28",
+      "autor": "droid",
+      "tags": [
+        "planta",
+        "vaso",
+        "folhas"
+      ],
+      "imagem": "objetos/OBJ-catalogo.png",
+      "recortes": {
+        "item": [0.8117, 0.3451, 0.9316, 0.6028]
+      }
+    },
+    {
+      "id": "OBJ-camera",
+      "tipo": "objeto",
+      "titulo": "Câmera no tripé",
+      "trava": "Câmera fotográfica preta de lente azulada sobre um tripé de três pernas finas; contorno preto e cores chapadas suaves em cartoon 2D flat, sem texto e sem marca.",
+      "estado": "aguardando_ok_jose",
+      "origem": "mantenedor",
+      "criado_em": "2026-10-28",
+      "autor": "droid",
+      "tags": [
+        "camera",
+        "foto",
+        "tripe"
+      ],
+      "imagem": "objetos/OBJ-catalogo.png",
+      "recortes": {
+        "item": [0.0832, 0.6806, 0.1656, 0.934]
+      }
+    },
+    {
+      "id": "OBJ-trofeu",
+      "tipo": "objeto",
+      "titulo": "Troféu dourado",
+      "trava": "Troféu dourado de duas alças com uma estrela no centro, sobre base preta; contorno preto e cores chapadas suaves em cartoon 2D flat, sem texto e sem marca.",
+      "estado": "aguardando_ok_jose",
+      "origem": "mantenedor",
+      "criado_em": "2026-10-28",
+      "autor": "droid",
+      "tags": [
+        "trofeu",
+        "premio",
+        "vitoria"
+      ],
+      "imagem": "objetos/OBJ-catalogo.png",
+      "recortes": {
+        "item": [0.3277, 0.6882, 0.4289, 0.9139]
+      }
+    },
+    {
+      "id": "OBJ-smartphone",
+      "tipo": "objeto",
+      "titulo": "Smartphone",
+      "trava": "Smartphone preto de tela clara com uma janela azul genérica sem texto, em pé e levemente inclinado; contorno preto e cores chapadas suaves em cartoon 2D flat, sem texto e sem marca.",
+      "estado": "aguardando_ok_jose",
+      "origem": "mantenedor",
+      "criado_em": "2026-10-28",
+      "autor": "droid",
+      "tags": [
+        "smartphone",
+        "celular",
+        "tela"
+      ],
+      "imagem": "objetos/OBJ-catalogo.png",
+      "recortes": {
+        "item": [0.575, 0.6806, 0.6629, 0.9111]
+      }
+    },
+    {
+      "id": "OBJ-bau",
+      "tipo": "objeto",
+      "titulo": "Baú do tesouro",
+      "trava": "Baú do tesouro de madeira marrom com cantoneiras e fecho dourados, fechado; contorno preto e cores chapadas suaves em cartoon 2D flat, sem texto e sem marca.",
+      "estado": "aguardando_ok_jose",
+      "origem": "mantenedor",
+      "criado_em": "2026-10-28",
+      "autor": "droid",
+      "tags": [
+        "bau",
+        "tesouro",
+        "aventura"
+      ],
+      "imagem": "objetos/OBJ-catalogo.png",
+      "recortes": {
+        "item": [0.8141, 0.7201, 0.9379, 0.9111]
+      }
+    },
+    {
+      "id": "ANIM-cachorro",
+      "tipo": "animal",
+      "titulo": "Cachorro",
+      "trava": "Cachorro sentado de pelo dourado e longo, língua rosa para fora e olhos pretos grandes; contorno preto e cores chapadas suaves em cartoon 2D flat, sem texto e sem marca.",
+      "estado": "aguardando_ok_jose",
+      "origem": "mantenedor",
+      "criado_em": "2026-10-28",
+      "autor": "droid",
+      "tags": [
+        "cachorro",
+        "pet",
+        "pelo-dourado"
+      ],
+      "imagem": "animais/ANIM-catalogo.png",
+      "recortes": {
+        "item": [0.0617, 0.0194, 0.2184, 0.3139]
+      }
+    },
+    {
+      "id": "ANIM-gato",
+      "tipo": "animal",
+      "titulo": "Gato",
+      "trava": "Gato cinza e marrom listrado sentado, peito branco, cauda longa curvada e bigodes finos; contorno preto e cores chapadas suaves em cartoon 2D flat, sem texto e sem marca.",
+      "estado": "aguardando_ok_jose",
+      "origem": "mantenedor",
+      "criado_em": "2026-10-28",
+      "autor": "droid",
+      "tags": [
+        "gato",
+        "pet",
+        "listrado"
+      ],
+      "imagem": "animais/ANIM-catalogo.png",
+      "recortes": {
+        "item": [0.2922, 0.0306, 0.4484, 0.3125]
+      }
+    },
+    {
+      "id": "ANIM-periquito",
+      "tipo": "animal",
+      "titulo": "Periquito verde",
+      "trava": "Periquito verde e amarelo empoleirado num galho fino, bico curto e asas listradas; contorno preto e cores chapadas suaves em cartoon 2D flat, sem texto e sem marca.",
+      "estado": "aguardando_ok_jose",
+      "origem": "mantenedor",
+      "criado_em": "2026-10-28",
+      "autor": "droid",
+      "tags": [
+        "periquito",
+        "ave",
+        "verde"
+      ],
+      "imagem": "animais/ANIM-catalogo.png",
+      "recortes": {
+        "item": [0.5348, 0.0222, 0.691, 0.3111]
+      }
+    },
+    {
+      "id": "ANIM-coelho",
+      "tipo": "animal",
+      "titulo": "Coelho",
+      "trava": "Coelho branco sentado de orelhas altas com o interior rosa e focinho rosa; contorno preto e cores chapadas suaves em cartoon 2D flat, sem texto e sem marca.",
+      "estado": "aguardando_ok_jose",
+      "origem": "mantenedor",
+      "criado_em": "2026-10-28",
+      "autor": "droid",
+      "tags": [
+        "coelho",
+        "pet",
+        "branco"
+      ],
+      "imagem": "animais/ANIM-catalogo.png",
+      "recortes": {
+        "item": [0.7906, 0.0208, 0.9324, 0.3174]
+      }
+    },
+    {
+      "id": "ANIM-porquinho-da-india",
+      "tipo": "animal",
+      "titulo": "Porquinho-da-índia",
+      "trava": "Porquinho-da-índia marrom e branco de corpo redondo e orelhas pequenas caídas; contorno preto e cores chapadas suaves em cartoon 2D flat, sem texto e sem marca.",
+      "estado": "aguardando_ok_jose",
+      "origem": "mantenedor",
+      "criado_em": "2026-10-28",
+      "autor": "droid",
+      "tags": [
+        "porquinho-da-india",
+        "pet",
+        "roedor"
+      ],
+      "imagem": "animais/ANIM-catalogo.png",
+      "recortes": {
+        "item": [0.0527, 0.3868, 0.2141, 0.6021]
+      }
+    },
+    {
+      "id": "ANIM-hamster",
+      "tipo": "animal",
+      "titulo": "Hamster",
+      "trava": "Hamster laranja e creme em pé segurando uma semente de girassol com as duas patinhas; contorno preto e cores chapadas suaves em cartoon 2D flat, sem texto e sem marca.",
+      "estado": "aguardando_ok_jose",
+      "origem": "mantenedor",
+      "criado_em": "2026-10-28",
+      "autor": "droid",
+      "tags": [
+        "hamster",
+        "pet",
+        "roedor"
+      ],
+      "imagem": "animais/ANIM-catalogo.png",
+      "recortes": {
+        "item": [0.3098, 0.3535, 0.425, 0.6222]
+      }
+    },
+    {
+      "id": "ANIM-peixe-dourado",
+      "tipo": "animal",
+      "titulo": "Peixe dourado no aquário",
+      "trava": "Peixe dourado laranja dentro de um aquário redondo de vidro azul claro com pedrinhas e uma alga; contorno preto e cores chapadas suaves em cartoon 2D flat, sem texto e sem marca.",
+      "estado": "aguardando_ok_jose",
+      "origem": "mantenedor",
+      "criado_em": "2026-10-28",
+      "autor": "droid",
+      "tags": [
+        "peixe",
+        "aquario",
+        "laranja"
+      ],
+      "imagem": "animais/ANIM-catalogo.png",
+      "recortes": {
+        "item": [0.5266, 0.3528, 0.6949, 0.6306]
+      }
+    },
+    {
+      "id": "ANIM-tartaruga",
+      "tipo": "animal",
+      "titulo": "Tartaruga",
+      "trava": "Tartaruga verde de casco verde-escuro em gomos, sorriso tranquilo, vista de lado; contorno preto e cores chapadas suaves em cartoon 2D flat, sem texto e sem marca.",
+      "estado": "aguardando_ok_jose",
+      "origem": "mantenedor",
+      "criado_em": "2026-10-28",
+      "autor": "droid",
+      "tags": [
+        "tartaruga",
+        "pet",
+        "verde"
+      ],
+      "imagem": "animais/ANIM-catalogo.png",
+      "recortes": {
+        "item": [0.7684, 0.3653, 0.9574, 0.6153]
+      }
+    },
+    {
+      "id": "ANIM-galo",
+      "tipo": "animal",
+      "titulo": "Galo",
+      "trava": "Galo de crista vermelha, corpo marrom-alaranjado e cauda azul-esverdeada, de pé; contorno preto e cores chapadas suaves em cartoon 2D flat, sem texto e sem marca.",
+      "estado": "aguardando_ok_jose",
+      "origem": "mantenedor",
+      "criado_em": "2026-10-28",
+      "autor": "droid",
+      "tags": [
+        "galo",
+        "ave",
+        "fazenda"
+      ],
+      "imagem": "animais/ANIM-catalogo.png",
+      "recortes": {
+        "item": [0.066, 0.6667, 0.2133, 0.9674]
+      }
+    },
+    {
+      "id": "ANIM-porco",
+      "tipo": "animal",
+      "titulo": "Porco",
+      "trava": "Porco rosa de focinho largo, orelhas dobradas e rabinho enrolado, de lado; contorno preto e cores chapadas suaves em cartoon 2D flat, sem texto e sem marca.",
+      "estado": "aguardando_ok_jose",
+      "origem": "mantenedor",
+      "criado_em": "2026-10-28",
+      "autor": "droid",
+      "tags": [
+        "porco",
+        "fazenda",
+        "rosa"
+      ],
+      "imagem": "animais/ANIM-catalogo.png",
+      "recortes": {
+        "item": [0.2766, 0.6778, 0.4527, 0.9479]
+      }
+    },
+    {
+      "id": "ANIM-ovelha",
+      "tipo": "animal",
+      "titulo": "Ovelha",
+      "trava": "Ovelha de lã branca fofa e rosto cinza-escuro, quatro patas escuras; contorno preto e cores chapadas suaves em cartoon 2D flat, sem texto e sem marca.",
+      "estado": "aguardando_ok_jose",
+      "origem": "mantenedor",
+      "criado_em": "2026-10-28",
+      "autor": "droid",
+      "tags": [
+        "ovelha",
+        "fazenda",
+        "la"
+      ],
+      "imagem": "animais/ANIM-catalogo.png",
+      "recortes": {
+        "item": [0.5242, 0.6743, 0.7035, 0.9535]
+      }
+    },
+    {
+      "id": "ANIM-cavalo",
+      "tipo": "animal",
+      "titulo": "Cavalo",
+      "trava": "Cabeça e pescoço de cavalo marrom com a testa branca e crina castanha; contorno preto e cores chapadas suaves em cartoon 2D flat, sem texto e sem marca.",
+      "estado": "aguardando_ok_jose",
+      "origem": "mantenedor",
+      "criado_em": "2026-10-28",
+      "autor": "droid",
+      "tags": [
+        "cavalo",
+        "fazenda",
+        "marrom"
+      ],
+      "imagem": "animais/ANIM-catalogo.png",
+      "recortes": {
+        "item": [0.7898, 0.6667, 0.9418, 0.9646]
+      }
+    },
+    {
+      "id": "SIT-acenando",
+      "tipo": "situacao",
+      "titulo": "Acenando para cumprimentar",
+      "trava": "Corpo inteiro de frente, uma mão aberta no alto balançando em cumprimento, sorriso de reação, peso nos dois pés, nada nas mãos.",
+      "estado": "sugestao",
+      "origem": "mantenedor",
+      "criado_em": "2026-10-28",
+      "autor": "droid",
+      "tags": [
+        "cumprimento",
+        "gesto",
+        "entrada"
+      ],
+      "acao": "Em pé, de frente, levanta uma mão aberta e balança de leve para cumprimentar; a outra mão fica solta ao lado do corpo."
+    },
+    {
+      "id": "SIT-apontando-ao-lado",
+      "tipo": "situacao",
+      "titulo": "Apontando para algo ao lado",
+      "trava": "Corpo inteiro em três quartos, um braço esticado apontando para fora do quadro, olhar seguindo o dedo, a outra mão na cintura.",
+      "estado": "sugestao",
+      "origem": "mantenedor",
+      "criado_em": "2026-10-28",
+      "autor": "droid",
+      "tags": [
+        "apontar",
+        "explicar",
+        "gesto"
+      ],
+      "acao": "Corpo de três quartos, braço esticado apontando para o lado do quadro, olhar na mesma direção; a outra mão na cintura."
+    },
+    {
+      "id": "SIT-pensando",
+      "tipo": "situacao",
+      "titulo": "Pensando com a mão no queixo",
+      "trava": "Corpo inteiro de frente, uma mão no queixo, cabeça levemente inclinada, olhar para o alto, sobrancelha levantada.",
+      "estado": "sugestao",
+      "origem": "mantenedor",
+      "criado_em": "2026-10-28",
+      "autor": "droid",
+      "tags": [
+        "pensar",
+        "duvida",
+        "reflexao"
+      ],
+      "acao": "De frente, mão no queixo e olhar para o alto, com uma sobrancelha levantada, pensando antes de responder."
+    },
+    {
+      "id": "SIT-surpreso-recuando",
+      "tipo": "situacao",
+      "titulo": "Surpreso, recuando um passo",
+      "trava": "Corpo inteiro de lado, um passo para trás, ombros altos, mãos abertas à frente, olhos bem abertos e boca em 'o'.",
+      "estado": "sugestao",
+      "origem": "mantenedor",
+      "criado_em": "2026-10-28",
+      "autor": "droid",
+      "tags": [
+        "surpresa",
+        "susto",
+        "reacao"
+      ],
+      "acao": "Dá um passo para trás de susto, ombros subindo, mãos abertas à frente do corpo e boca em 'o'."
+    },
+    {
+      "id": "SIT-correndo-com-pressa",
+      "tipo": "situacao",
+      "titulo": "Correndo com pressa",
+      "trava": "Corpo inteiro de lado correndo para a direita, tronco inclinado, braços dobrados, uma perna no ar, expressão de aflição.",
+      "estado": "sugestao",
+      "origem": "mantenedor",
+      "criado_em": "2026-10-28",
+      "autor": "droid",
+      "tags": [
+        "correr",
+        "pressa",
+        "movimento"
+      ],
+      "acao": "Corre para a direita com pressa: tronco inclinado, braços dobrados balançando, uma perna no ar."
+    },
+    {
+      "id": "SIT-lendo-no-celular",
+      "tipo": "situacao",
+      "titulo": "Lendo no celular",
+      "trava": "Corpo inteiro de frente, smartphone nas duas mãos na altura do peito, cabeça baixa olhando a tela, ombros curvados.",
+      "estado": "sugestao",
+      "origem": "mantenedor",
+      "criado_em": "2026-10-28",
+      "autor": "droid",
+      "tags": [
+        "celular",
+        "tela",
+        "leitura"
+      ],
+      "objetos": [
+        "OBJ-smartphone"
+      ],
+      "acao": "Parado, segura o smartphone com as duas mãos na altura do peito e olha para a tela, ombros um pouco curvados."
+    },
+    {
+      "id": "SIT-tomando-cafe",
+      "tipo": "situacao",
+      "titulo": "Tomando café",
+      "trava": "Corpo inteiro de frente, caneca fumegante nas duas mãos junto ao rosto, olhos meio fechados, vapor subindo.",
+      "estado": "sugestao",
+      "origem": "mantenedor",
+      "criado_em": "2026-10-28",
+      "autor": "droid",
+      "tags": [
+        "cafe",
+        "caneca",
+        "pausa"
+      ],
+      "objetos": [
+        "OBJ-caneca"
+      ],
+      "acao": "Segura a caneca fumegante com as duas mãos junto ao rosto e assopra o vapor, de olhos meio fechados."
+    },
+    {
+      "id": "SIT-digitando",
+      "tipo": "situacao",
+      "titulo": "Digitando no laptop",
+      "trava": "Corpo inteiro de lado sentado numa cadeira, laptop à frente, mãos no teclado, cabeça baixa e concentrada.",
+      "estado": "sugestao",
+      "origem": "mantenedor",
+      "criado_em": "2026-10-28",
+      "autor": "droid",
+      "tags": [
+        "laptop",
+        "trabalho",
+        "sentado"
+      ],
+      "objetos": [
+        "OBJ-laptop",
+        "OBJ-cadeira"
+      ],
+      "acao": "Sentado numa cadeira diante do laptop, mãos no teclado e cabeça baixa, concentrado."
+    },
+    {
+      "id": "SIT-esperando",
+      "tipo": "situacao",
+      "titulo": "Esperando impaciente",
+      "trava": "Corpo inteiro em três quartos, braços cruzados, um pé batendo no chão, olhar de lado impaciente.",
+      "estado": "sugestao",
+      "origem": "mantenedor",
+      "criado_em": "2026-10-28",
+      "autor": "droid",
+      "tags": [
+        "espera",
+        "impaciencia",
+        "pausa"
+      ],
+      "acao": "Em pé, braços cruzados, batendo o pé no chão e olhando para o lado à espera de alguém."
+    },
+    {
+      "id": "SIT-comemorando",
+      "tipo": "situacao",
+      "titulo": "Comemorando com os braços erguidos",
+      "trava": "Corpo inteiro de frente, os dois braços erguidos, os pés fora do chão, sorriso grande de alegria.",
+      "estado": "sugestao",
+      "origem": "mantenedor",
+      "criado_em": "2026-10-28",
+      "autor": "droid",
+      "tags": [
+        "comemorar",
+        "alegria",
+        "salto"
+      ],
+      "acao": "Pula com os dois braços erguidos e boca de alegria, os pés fora do chão."
+    },
+    {
+      "id": "SIT-conversando-em-dupla",
+      "tipo": "situacao",
+      "titulo": "Conversando em dupla",
+      "trava": "Dois personagens de perfil, frente a frente: um com a mão aberta explicando, o outro de braços cruzados ouvindo.",
+      "estado": "sugestao",
+      "origem": "mantenedor",
+      "criado_em": "2026-10-28",
+      "autor": "droid",
+      "tags": [
+        "conversa",
+        "dupla",
+        "explicar"
+      ],
+      "acao": "Dois personagens frente a frente: um gesticula explicando, o outro escuta de braços cruzados e balança a cabeça."
     }
   ]
 }

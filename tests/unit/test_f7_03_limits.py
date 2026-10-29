@@ -20,7 +20,7 @@ def roteiro_valido():
         "tipo_cta": "fallback",
         "entidades_cena": ["sofá", "TV"],
         "bloco_visual": {
-            "estilo": "stickman de tubos grossos, traço chapado, cabeça redonda, sem pessoa de cartum",
+            "estilo": "cartoon 2D flat colorido com personagens stickman, contorno preto, cabeça redonda, sem pessoa realista",
             "personagem": "homem de ~40 anos, magro, cabelo grisalho curto, camiseta verde, bigode, expressão curiosa",
             "cenas": [
                 {

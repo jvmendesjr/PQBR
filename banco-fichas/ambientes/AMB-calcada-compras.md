@@ -5,7 +5,7 @@ Origem: Drive da conta PQBR, pasta `Fontes/Imagens` (id `1ziYivEewPQIvlgt6Z7v7R8
 
 - **Imagem (16:9):** `banco-fichas/ambientes/AMB-calcada-compras.png`
 
-- **Com elenco:** a ficha inclui 3 personagens do elenco em cena: menino de camiseta azul (nº 1) acenando, menina de vestido rosa (nº 2) andando e senhor careca de cachecol verde (nº 3). Servem de prova de escala e convivência; em cena de episódio o elenco entra pela ficha própria de cada personagem.
+- **Com elenco:** a ficha inclui 3 personagens do elenco em cena: menino de camiseta azul (nº 1) acenando, menina de vestido rosa (nº 2) andando e senhor de cachecol cinza (nº 3). Servem de prova de escala e convivência; em cena de episódio o elenco entra pela ficha própria de cada personagem (`PERS-menino-azul`, `PERS-menina-rosa`, `PERS-senhor-cachecol`).
 
 ## Trava
 

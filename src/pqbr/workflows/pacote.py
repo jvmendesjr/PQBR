@@ -37,18 +37,27 @@ def bloco_visual_16_7(contrato: str) -> str:
     return m.group(1).strip()
 
 
+def catalogo_visual(raiz: Path = RAIZ) -> str:
+    """Item do pacote (t150u): os ids do catálogo visual aberto que o storyboard pode citar em `refs` (`banco-fichas/indice.json`).
+    Ficha nova ou descartada muda o texto e, por isso, o hash: o pacote ganha versão nova sozinho."""
+    from ..pipeline.banco_fichas import resumo_para_prompt
+    return resumo_para_prompt(raiz / "banco-fichas")
+
+
 def montar_pacote(raiz: Path = RAIZ) -> dict:
     """Itens + hash sha256 do JSON canônico (ordem de chaves fixa). Determinístico."""
     itens = {k: (raiz / v).read_text(encoding="utf-8") for k, v in FONTES_PACOTE.items()}
     itens["bloco_visual_16_7"] = bloco_visual_16_7(itens["contrato_editorial"])
+    itens["catalogo_visual"] = catalogo_visual(raiz)
     h = hashlib.sha256(json.dumps(itens, ensure_ascii=False, sort_keys=True).encode()).hexdigest()
-    return {"hash": h, "itens": itens, "origem": {**FONTES_PACOTE, "bloco_visual_16_7": "docs/CONTRATO-EDITORIAL.md §19"}}
+    return {"hash": h, "itens": itens, "origem": {**FONTES_PACOTE, "bloco_visual_16_7": "docs/CONTRATO-EDITORIAL.md §19",
+                                                  "catalogo_visual": "banco-fichas/indice.json (pipeline/banco_fichas.resumo_para_prompt)"}}
 
 
 def texto_fonte_pacote(p: dict) -> str:
     """Uma única fonte para o caderno (menos fontes = menos ruído no NotebookLM)."""
     partes = [f"# PQBR — pacote canônico {p['hash'][:12]}\n"]
-    for k in ("persona", "comandos_prompts", "bloco_visual_16_7", "contrato_editorial"):
+    for k in ("persona", "comandos_prompts", "bloco_visual_16_7", "catalogo_visual", "contrato_editorial"):
         partes.append(f"\n\n## {k}\n\n{p['itens'][k]}")
     return "".join(partes)
 

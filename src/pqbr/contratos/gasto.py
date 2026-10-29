@@ -40,7 +40,7 @@ GASTO_STORYBOARD = AutorizacaoGasto(
     modelo="notebooklm-chat",
     pode_gastar=True,
     meio="chat_caderno",
-    deterministico="Storyboard 1.2.0 reprova JSON inválido; imagens_revisadas fica false; sem imagem e sem vídeo",
+    deterministico="Storyboard 1.3.0 reprova JSON inválido; imagens_revisadas fica false; sem imagem e sem vídeo",
     agente="o ask devolve o JSON das fichas; não gera imagem nem vídeo",
 )
 

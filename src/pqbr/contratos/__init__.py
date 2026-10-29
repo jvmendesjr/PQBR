@@ -30,10 +30,11 @@ class CenaVisual(Contrato):
 
 
 # CONTRATO-EDITORIAL §19 [ESTILO], José 27/10/2026 (t133u), texto do padrão definitivo de t148u
-# (conjunto flat colorido entregue pelo José no Drive Fontes/Imagens; nanquim de t146u descartado).
+# (conjunto flat colorido entregue pelo José no Drive Fontes/Imagens; nanquim de t146u descartado)
+# e, em t150u, a frase do José: cartoon 2D, flat, colorido, com personagens stickman.
 # O nome ESTILO_PADRAO_2D permanece só como apelido do texto vigente, para import antigo.
 ESTILO_PADRAO_STICKMAN = (
-    "Stickman flat colorido do canal Porquê BR (padrão definitivo t148u, banco-fichas/): cartum 2D de contorno preto "
+    "Cartoon 2D flat colorido com personagens stickman do canal Porquê BR (padrão definitivo, banco-fichas/): contorno preto "
     "e cores chapadas suaves, cabeça redonda branca grande, dois olhos pretos sempre visíveis, boca simples de reação, "
     "corpo e membros em traço preto fino, roupa chapada colorida fixa por personagem, cabelo preto simples quando houver, "
     "fundo limpo em tom creme. Personagem grande no quadro, cabeça inteira visível, agindo, expressão simples e exagerada. "

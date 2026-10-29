@@ -5,7 +5,7 @@ Origem: Drive da conta PQBR, pasta `Fontes/Imagens` (id `1ziYivEewPQIvlgt6Z7v7R8
 
 - **Imagem (16:9):** `banco-fichas/ambientes/AMB-metro.png`
 
-- **Com elenco:** a ficha inclui 3 personagens do elenco em cena: stickman de gravata azul (nº 9) em pé, nerd de laço vermelho (nº 10) e o careca sonolento de azul (nº 6) no banco. Servem de prova de escala e convivência; em cena de episódio o elenco entra pela ficha própria de cada personagem.
+- **Com elenco:** a ficha inclui 3 personagens do elenco em cena: stickman de gravata azul (nº 9) em pé, nerd de laço vermelho (nº 10) e o careca sonolento de azul (nº 6) no banco. Servem de prova de escala e convivência; em cena de episódio o elenco entra pela ficha própria de cada personagem (`PERS-gravata-azul`, `PERS-nerd-laco`, `PERS-pijama-sono`).
 
 ## Trava
 

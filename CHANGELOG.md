@@ -5,6 +5,19 @@ Versionamento SemVer (MAJOR.MINOR.PATCH) a partir de t510. Versão do pacote can
 
 
 
+## [0.24.0] — 2026-10-28
+### Adicionado
+- Catálogo visual aberto (t150u): contrato `FichaCatalogo` 1.0.0 (`src/pqbr/contratos/catalogo_visual.py`, com `PROTAGONISTAS` e `TAMANHO_MAX_IMAGEM` de 2 MB) e `src/pqbr/pipeline/banco_fichas.py` (buscar, registrar, anexar mídia, adicionar recorte, aprovar, descartar, gerar o `.md`, resumo para prompt, CLI). `banco-fichas/indice.json` 3.0.0 (62 fichas): categoria nova de situações (`SIT-*`, 11 sugestões sem mídia), `PERS-menino-azul` (nº 1, protagonista masculino) e 6 derivadas do elenco (`aguardando_ok_jose`), uma ficha por objeto (12) e por animal (12), modelos `figura`, `animal` e `situacao`.
+- Motion, personagem presente no layout (MG-09): peça `catalogo/personagem-moldura.js`, `PlanoMotion` 1.2.0 (`elenco` `masculino`/`feminino`, tipos de parâmetro `personagem` e `pose`, faixa numérica), `render.quadros()` (prévia sem compor) e `catalogo/indice.json` 1.1.0. O render acusa o personagem que cobre texto ou cartão.
+- Coletânea de motion: `REF-MG-01` (vocabulário de movimento do dossiê whatships, MiniMax H3 MAX e 0xMovez, `aguardando_ok_jose`) e `referencias-motion/indice.json` 0.2.0. Fase MG do ROADMAP ganha MG-09 (feito no código) e MG-10 (peças do dossiê).
+- Testes: `tests/unit/test_catalogo_visual.py`, `tests/unit/test_banco_fichas_pipeline.py` e casos novos nos de banco-fichas, motion (incluindo render real), storyboard e pacote. Suíte: 668 passed, 73 skipped, 2 xfailed.
+### Alterado
+- Estilo nas palavras do José: cartoon 2D, flat, colorido, com personagens stickman (REGRAS §5/§6/§25/§26, CONTRATO-EDITORIAL §18/§19, `config/estilo_visual.json`, `ESTILO_PADRAO_STICKMAN`).
+- Protagonistas definidos (nº 1 masculino, nº 2 feminina) e `PERS-bob-oculos` como nº 13. Correções nas fichas: sapato da `PERS-menina-rosa` (brancos ovais, não vermelhos) e cachecol do nº 3 (cinza, poucos fios de cabelo).
+- Storyboard 1.3.0 (`refs` com ids do catálogo, coadjuvante qualquer `PERS-*`), pacote canônico com o item `catalogo_visual`, `templates/notebooklm/*` e `templates/auditor/VISUAL_2D.txt`. O prompt novo só vale no episódio depois do reinício do `pqbr-episodio-worker`, que exige OK do José (não feito).
+- Motion: `catalogo.PALETA` e `CORES` do motor re-basiadas no flat colorido (masculino azul-aço, feminino rosa, fundo creme claro); `titulo-expressao` e `versus` usam o tom escuro para letra colorida; persona `motion` com as regras 9 e 10; REF-MG-00 e README da coletânea re-basiados.
+- Docs: `docs/fases/stickman.md` e `docs/fases/motion-graphics.md` (personagem presente, vocabulário do dossiê), ROADMAP (MG-03 parcial, MG-09, MG-10), LACUNAS (item 5), mapa (`12-storyboard-elenco`, `01-episodio`, `07-cadeia-video` e README, sem consulta específica ao José, como em t148u) e ESTADO-ATUAL (P5, P6, P16, P17).
+
 ## [0.23.0] — 2026-10-28
 ### Adicionado
 - Banco de fontes do motion (t149u): `src/pqbr/pos/motion/fontes.py` (leitor sfnt em Python puro, cobertura pt-BR, registro com licença livre e índice atômico, CLI) e `banco-fichas/referencias-motion/fontes/` com `baloo-2`, `fredoka`, `shantell-sans` e `short-stack` (OFL-1.1, nomes canônicos `<id>/<id>.ttf` e `LICENSE.txt`), todas aprovadas pelo José em 28/10/2026. Patrick Hand ficou de fora (licença traz e-mail pessoal do autor).

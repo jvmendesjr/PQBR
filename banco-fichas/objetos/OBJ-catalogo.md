@@ -10,6 +10,10 @@ Origem: Drive da conta PQBR, pasta `Fontes/Imagens` (id `1ziYivEewPQIvlgt6Z7v7R8
 
 cadeira de madeira · laptop · caneca fumegante · skateboard · luminária de mesa amarela · microfone com pedestal · mochila azul · planta em vaso · câmera no tripé · troféu dourado · smartphone · baú do tesouro
 
+## Fichas individuais
+
+Cada objeto da grade tem ficha própria (`OBJ-cadeira`, `OBJ-laptop`, `OBJ-caneca`, `OBJ-skate`, `OBJ-luminaria`, `OBJ-microfone`, `OBJ-mochila`, `OBJ-planta`, `OBJ-camera`, `OBJ-trofeu`, `OBJ-smartphone`, `OBJ-bau`), com o recorte `item` desta imagem. Escritas pelo mantenedor, aguardam o OK do José. Objeto novo entra pelo catálogo aberto (`pipeline/banco_fichas.py`).
+
 ## Regras
 
 - Objeto que aparece de perto ou segura a piada usa esta grade como referência; se voltar em outro roteiro, pode ganhar ficha individual própria (mesma disciplina das fichas de personagem).

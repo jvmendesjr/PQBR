@@ -3,7 +3,7 @@
 Estado: `permanente` — padrão definitivo do canal, selecionado pelo José em 28/10/2026 (t148u).
 Origem: Drive da conta PQBR, pasta `Fontes/Imagens` (id `1ziYivEewPQIvlgt6Z7v7R8wXPerPLvLd`), entregue pelo José em 28/10/2026 (t148u); arquivos originais `Agent Image - *` renomeados para o padrão PQBR. É o nº 5 do catálogo do elenco (`ELENCO-catalogo.png`).
 
-- **Imagem (folha multi-pose 16:9):** `banco-fichas/personagens/PERS-cacheada-folha.png` — turnarounds (frente, três quartos, perfil, costas), 9 expressões e ~13 poses de corpo inteiro.
+- **Imagem (folha multi-pose 16:9):** `banco-fichas/personagens/PERS-cacheada-folha.png` — 5 giros (frente, três quartos, perfil, três quartos de costas e costas), 9 expressões e 10 poses de corpo inteiro. O `indice.json` guarda um recorte normalizado de cada um (`giro-*`, `exp-*`, `pose-*`), para o Flow e o motion usarem uma pose sem a folha inteira.
 - **Acento:** camiseta amarela.
 
 ## Trava (frase-trava para o prompt e para o Agente do Flow)

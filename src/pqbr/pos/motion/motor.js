@@ -8,12 +8,13 @@
   // Zonas seguras 9:16: topo 14%, base 20%, direita 12%.
   const ZONA = { x: 0, y: Math.round(H * 0.14), w: Math.round(W * 0.88), h: Math.round(H * (1 - 0.14 - 0.20)) };
   const MARGEM = 72;
-  // Paleta do elenco de t144u, aposentada em t148u: a base passa a ser o conjunto flat colorido de
-  // banco-fichas/ (indice.json 2.0.0) e a paleta é re-basixada no MG-03. Não usar como referência nova.
+  // Paleta do padrão flat colorido (t148u/t150u): o mesmo conjunto de PALETA em catalogo.py, que um teste confere.
+  // `texto` é o tom escuro do principal, só para letra sobre fundo claro (o rosa chapado dá 2,3:1 no creme).
+  // `apoio` só entra como `cor` de peça (cortina, barra); nenhuma peça o desenha por conta própria.
   const CORES = {
-    fundo: "#f6f1e7", tinta: "#1f2328", tintaClara: "#6b7280", branco: "#ffffff", marca: "#0f766e",
-    "PERS-M": { principal: "#2b6cb0", acento: "#e23b2f", escuro: "#334155" },
-    "PERS-F": { principal: "#d96b43", acento: "#e6b325", escuro: "#1e3a5f" },
+    fundo: "#f6f1e7", fichaFundo: "#f7f7f2", tinta: "#1f2328", tintaClara: "#6b7280", branco: "#ffffff", marca: "#0f766e", apoio: "#f6c956",
+    masculino: { principal: "#4b83ba", acento: "#e03837", texto: "#2c5f93" },
+    feminino: { principal: "#ee7e91", acento: "#826caf", texto: "#b83a5d" },
   };
   const FONTE = '"Liberation Sans", "DejaVu Sans", Arial, sans-serif';
 
@@ -65,15 +66,42 @@
     return linhas;
   }
 
+  // Média da cor da folha nos quatro cantos do recorte. A moldura do personagem usa essa cor de fundo, senão cada
+  // folha (papel de tom próprio) apareceria como um retângulo de outro tom em volta do desenho. Sem DOM (Node), usa o padrão.
+  const _amostras = new WeakMap();
+  function fundoDoRecorte(img, r) {
+    if (typeof document === "undefined" || !img || !r || !img.width) return CORES.fichaFundo;
+    const chave = r.join(","), cache = _amostras.get(img) || {};
+    _amostras.set(img, cache);
+    if (!cache[chave]) {
+      const c = document.createElement("canvas"); c.width = c.height = 1;
+      const k = c.getContext("2d", { willReadFrequently: true }), soma = [0, 0, 0];
+      for (const x of [r[0] * img.width + 3, r[2] * img.width - 4]) for (const y of [r[1] * img.height + 3, r[3] * img.height - 4]) {
+        k.clearRect(0, 0, 1, 1); k.drawImage(img, Math.round(x), Math.round(y), 1, 1, 0, 0, 1, 1);
+        const d = k.getImageData(0, 0, 1, 1).data; soma[0] += d[0]; soma[1] += d[1]; soma[2] += d[2];
+      }
+      cache[chave] = "rgb(" + soma.map((v) => Math.round(v / 4)).join(",") + ")";
+    }
+    return cache[chave];
+  }
+
   // Desenho com registro: tudo o que é "importante" tem o retângulo conferido contra a ZONA.
   function criarGrafico(ctx) {
     // g.conferir = false enquanto o elemento ainda está entrando (fora da tela de propósito); a zona só vale assentado.
-    const g = { violacoes: [], ctx, conferir: true };
+    const g = { violacoes: [], ocupados: [], ctx, conferir: true };
     function registrar(nome, x, y, w, h) {
       if (g.conferir === false) return;
       const dentro = x >= ZONA.x - 0.5 && y >= ZONA.y - 0.5 && x + w <= ZONA.x + ZONA.w + 0.5 && y + h <= ZONA.y + ZONA.h + 0.5;
       if (!dentro) g.violacoes.push({ nome, x: Math.round(x), y: Math.round(y), w: Math.round(w), h: Math.round(h) });
+      g.ocupados.push({ nome, x, y, w, h });
     }
+    // Peça que se encaixa no layout (personagem na moldura) confere que não cobre o que as peças anteriores já
+    // desenharam; por isso fica por último na ordem. Só vale assentado, como a zona segura.
+    g.semSobreposicao = function (nome, x, y, w, h) {
+      if (g.conferir === false) return;
+      const o = g.ocupados.find((r) => x < r.x + r.w && x + w > r.x && y < r.y + r.h && y + h > r.y);
+      if (o) g.violacoes.push({ nome: nome + " cobre " + o.nome, x: Math.round(x), y: Math.round(y), w: Math.round(w), h: Math.round(h) });
+    };
     g.fundo = function (cor) {
       if (!cor) { ctx.clearRect(0, 0, W, H); return; }
       ctx.fillStyle = cor; ctx.fillRect(0, 0, W, H);
@@ -119,6 +147,16 @@
       ctx.drawImage(img, x, y, w, h); ctx.globalAlpha = a;
       registrar("imagem", x, y, w, h);
     };
+    // Recorte [x0, y0, x1, y1] (normalizado) de uma folha, ajustado dentro de (x, y, w, h) sem deformar e apoiado
+    // na borda de baixo. espelhar vira o desenho no eixo vertical, para o personagem olhar para o conteúdo.
+    g.recorte = function (img, r, x, y, w, h, espelhar) {
+      if (!img || !r) return;
+      const sx = r[0] * img.width, sy = r[1] * img.height, sw = (r[2] - r[0]) * img.width, sh = (r[3] - r[1]) * img.height;
+      const esc = Math.min(w / sw, h / sh), dw = sw * esc, dh = sh * esc, dx = x + (w - dw) / 2, dy = y + h - dh;
+      if (espelhar) { ctx.save(); ctx.translate(dx + dw, 0); ctx.scale(-1, 1); ctx.drawImage(img, sx, sy, sw, sh, 0, dy, dw, dh); ctx.restore(); }
+      else ctx.drawImage(img, sx, sy, sw, sh, dx, dy, dw, dh);
+      registrar("recorte", dx, dy, dw, dh);
+    };
     return g;
   }
 
@@ -141,14 +179,14 @@
       .sort((a, b) => (a.m.ordem || 1) - (b.m.ordem || 1));
     for (const { p, m } of ativas) {
       ctx.save(); g.conferir = true;
-      m.desenhar(g, t - p.inicio, p.fim - p.inicio, p.parametros || {}, { recursos: recursos || {}, elenco: plano.elenco || "PERS-M", t, plano });
+      m.desenhar(g, t - p.inicio, p.fim - p.inicio, p.parametros || {}, { recursos: recursos || {}, elenco: plano.elenco || "masculino", t, plano });
       ctx.restore(); g.conferir = true;
     }
     return { violacoes: g.violacoes, ativas: ativas.map((x) => x.p.modelo) };
   }
 
-  function corElenco(elenco) { return CORES[elenco] || CORES["PERS-M"]; }
+  function corElenco(elenco) { return CORES[elenco] || CORES.masculino; }
 
   raiz.PQBRMotion = { W, H, ZONA, MARGEM, CORES, FONTE, clamp, lerp, suave, faixa, mola, ruido, mulberry32,
-    quebrarLinhas, criarGrafico, registrar, CATALOGO, desenharQuadro, corElenco };
+    quebrarLinhas, criarGrafico, registrar, CATALOGO, desenharQuadro, corElenco, fundoDoRecorte };
 })(typeof window !== "undefined" ? window : globalThis);

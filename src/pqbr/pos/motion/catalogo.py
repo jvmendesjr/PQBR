@@ -9,12 +9,14 @@ RAIZ = Path(__file__).resolve().parent
 INDICE = RAIZ / "catalogo" / "indice.json"
 MOTOR_JS = RAIZ / "motor.js"
 
-# Cores do elenco de t144u — aposentadas em t148u (conjunto flat colorido de banco-fichas/, indice.json 2.0.0);
-# a paleta é re-basiada no MG-03. O contrato segue aceitando só o que está aqui até o re-base.
+# Cores do elenco e da marca, amostradas do padrão flat colorido de banco-fichas/ (nº 1, nº 2 e nº 5 do catálogo).
+# Os tons escuros (#2c5f93, #b83a5d) existem para letra sobre fundo claro: o rosa chapado dá só 2,3:1 no creme.
+# CORES em motor.js tem exatamente este conjunto (um teste confere).
 PALETA = {
-    "#2b6cb0", "#e23b2f", "#334155",   # PERS-M: camiseta, óculos, bermuda
-    "#d96b43", "#e6b325", "#1e3a5f",   # PERS-F: camiseta, argola, bermuda
-    "#0f766e", "#1f2328", "#6b7280", "#f6f1e7", "#ffffff",   # marca, tinta, tinta clara, fundo, branco
+    "#4b83ba", "#2c5f93", "#e03837",   # masculino: camiseta, texto, acento
+    "#ee7e91", "#b83a5d", "#826caf",   # feminino: camiseta, texto, acento
+    "#f6c956",                         # amarelo de apoio
+    "#0f766e", "#1f2328", "#6b7280", "#f6f1e7", "#f7f7f2", "#ffffff",   # marca, tinta, tinta clara, fundo, fundo da ficha, branco
 }
 ZONA_SEGURA = {"topo": 0.14, "base": 0.20, "direita": 0.12}
 

@@ -25,7 +25,7 @@
       const kA = M.mola(t, { omega: 12, zeta: 0.8 });
       const tB = p.entrada_b == null ? dur * 0.45 : p.entrada_b;
       const kB = M.mola(t, { omega: 12, zeta: 0.8, atraso: tB });
-      cartao(g, ctx, p.titulo_a, p.texto_a, r[p.imagem_a], x, yA, w, h, kA, cor.principal, "esq");
+      cartao(g, ctx, p.titulo_a, p.texto_a, r[p.imagem_a], x, yA, w, h, kA, cor.texto, "esq");
       const kx = M.mola(t, { omega: 10, zeta: 0.6, atraso: tB - 0.15 });
       g.conferir = kx > 0.97;
       if (kx > 0.01) g.texto("×", Z.x + Z.w / 2, yA + h + gap / 2 - 60, { tamanho: Math.max(8, 120 * Math.min(1, kx)), peso: "800", alinh: "centro", cor: cor.acento, semQuebra: true });

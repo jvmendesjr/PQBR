@@ -1,20 +1,27 @@
 """Storyboard 'fábrica em série' (t75u/t76u/t77u): uma FichaCena numerada por cena, com prompt catalogado e rotulado,
-referência identificada, norte, início e fim. Obrigatório antes de gerar imagem ou vídeo. Base: docs/pesquisas/flow-storyboard-por-cena.md."""
+referência identificada, norte, início e fim. Obrigatório antes de gerar imagem ou vídeo. Base: docs/pesquisas/flow-storyboard-por-cena.md.
+
+1.3.0 (t150u): `refs` aceitam os ids do catálogo visual aberto (`banco-fichas/`: PERS, FIG, ANIM, OBJ, AMB, SIT), até 6 por cena,
+e o coadjuvante pode ser qualquer personagem do catálogo (o elenco varia). Os storyboards 1.0.0 a 1.2.0 continuam válidos."""
 from __future__ import annotations
 import re
 from typing import Literal
 from pydantic import Field, model_validator
 from . import Contrato
+from .catalogo_visual import PROTAGONISTAS
 
-VERSAO = "1.2.0"
+VERSAO = "1.3.0"
 ROTULO = re.compile(r"^PQBR-EP\d{4,}_c\d{2}$")          # ex.: PQBR-EP1003_c04
-REF = re.compile(r"^ASSET_[a-z]+_[a-z0-9-]+-v\d+$")     # ex.: ASSET_personagem_pqbr-v1
+REF_ASSET = r"ASSET_[a-z]+_[a-z0-9-]+-v\d+"             # legado (1.0.0 a 1.2.0), ex.: ASSET_personagem_pqbr-v1
+REF_CATALOGO = r"(?:PERS|FIG|ANIM|OBJ|AMB|SIT)-[a-z0-9]+(?:-[a-z0-9]+)*"   # ex.: PERS-menina-rosa, SIT-pensando
+REF = re.compile(rf"^(?:{REF_ASSET}|{REF_CATALOGO})$")
+COADJUVANTE = r"^(?:masculino|feminino|PERS-[a-z0-9]+(?:-[a-z0-9]+)*)$"   # gênero do elenco (legado) ou id de personagem do catálogo
 PROIBIDO_FRAMING = re.compile(r"from the (chest|waist) up|do peito para cima|da cintura para cima", re.I)
 FALA_NO_PROMPT = re.compile(r"[\"“”].{3,}[\"“”]|\b(speaks|says|talking|narrates|fala|diz|narra)\b", re.I)
 
 
 class FichaCena(Contrato):
-    versao: Literal["1.0.0", "1.1.0", "1.2.0"] = VERSAO
+    versao: Literal["1.0.0", "1.1.0", "1.2.0", "1.3.0"] = VERSAO
     numero: int = Field(ge=1, le=60)
     rotulo: str = Field(pattern=ROTULO.pattern)
     fala: str = Field(min_length=3, max_length=400)               # narração em off; nunca vai no prompt
@@ -25,7 +32,7 @@ class FichaCena(Contrato):
     enquadramento: Literal["plano_geral", "plano_medio", "plano_medio_curto", "close"]
     prompt_imagem: str = Field(min_length=20, max_length=2000)     # bloco de estilo completo + ação
     prompt_animacao: str = Field(min_length=10, max_length=1000)
-    refs: list[str] = Field(min_length=1, max_length=4)            # imagem de referência identificada
+    refs: list[str] = Field(min_length=1, max_length=6)            # ids do catálogo visual (protagonista, coadjuvante, ambiente, objeto, situação); ASSET_* só no legado
     epoca: Literal["presente", "passado"] = "presente"
     # t78u: participa ⇒ figurino da época/local. t133u: atual_variavel é o visual cotidiano travado da ficha, não roupa nova a cada vídeo.
     papel_personagem: Literal["observa", "participa"]
@@ -33,8 +40,9 @@ class FichaCena(Contrato):
     caracterizacao: str | None = Field(default=None, max_length=400)   # roupa/traços da época ou local, ou a roupa atual escolhida
     expressao: str = Field(min_length=5, max_length=300)           # caras e bocas ligadas à situação; reação, nunca articulação de fala
     cenario_encaixe: str = Field(min_length=10, max_length=400)    # onde e como o personagem está no cenário (escondido, ao fundo, no meio)
-    # t79u: o outro membro do elenco pode contracenar com o protagonista quando o roteiro pedir (com justificativa)
-    coadjuvante: Literal["masculino", "feminino"] | None = None
+    # t79u: outro personagem pode contracenar com o protagonista quando o roteiro pedir (com justificativa).
+    # t150u: pode ser qualquer personagem do catálogo (PERS-*), não só o outro gênero do elenco; o elenco varia.
+    coadjuvante: str | None = Field(default=None, pattern=COADJUVANTE)
     coadjuvante_justificativa: str | None = Field(default=None, max_length=300)
 
     @model_validator(mode="after")
@@ -67,8 +75,13 @@ def elenco_alternado(codigo: str) -> str:
     return ELENCO[int(codigo.rsplit("EP", 1)[1]) % 2]
 
 
+def protagonista_ref(elenco: str) -> str:
+    """t150u: id do catálogo do protagonista do episódio (José: nº 1 = masculino, nº 2 = feminino)."""
+    return PROTAGONISTAS[elenco]
+
+
 class Storyboard(Contrato):
-    versao: Literal["1.0.0", "1.1.0", "1.2.0"] = VERSAO
+    versao: Literal["1.0.0", "1.1.0", "1.2.0", "1.3.0"] = VERSAO
     codigo: str = Field(pattern=r"^PQBR-EP\d{4,}$")
     norte_geral: str = Field(min_length=20, max_length=600)
     bloco_estilo: str = Field(min_length=20, max_length=1500)
@@ -83,8 +96,8 @@ class Storyboard(Contrato):
         if [c.numero for c in self.cenas] != list(range(1, len(self.cenas) + 1)): raise ValueError("cenas fora de ordem")
         if self.elenco != elenco_alternado(self.codigo) and not self.elenco_excecao:
             raise ValueError(f"alternância: {self.codigo} pede elenco {elenco_alternado(self.codigo)} (ou elenco_excecao)")
-        if any(c.coadjuvante == self.elenco for c in self.cenas):
-            raise ValueError("protagonista é único e constante; coadjuvante deve ser o outro membro do elenco")
+        if any(c.coadjuvante in (self.elenco, protagonista_ref(self.elenco)) for c in self.cenas):
+            raise ValueError("protagonista é único e constante; coadjuvante deve ser outro personagem do catálogo")
         if any(not c.rotulo.startswith(self.codigo + "_") for c in self.cenas): raise ValueError("rótulo de outro episódio")
         return self
 

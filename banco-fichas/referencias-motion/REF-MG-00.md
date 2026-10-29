@@ -1,18 +1,19 @@
-# REF-MG-00 — Papel e nanquim do canal
+# REF-MG-00 — Padrão flat colorido do canal
 
-- **Origem:** interna. Âncora da coletânea: a identidade visual do próprio canal, fixada em t146u a partir de frames reais do canal (descartados em t149u por ordem do José; a âncora vigente é o conjunto de `banco-fichas/`, t148u).
-- **Estado:** `aguardando_ok_jose` (28/10/2026, t147u).
-- **Nota t148u:** esta ficha nasceu no nanquim de t146u, que o José reprovou e mandou descartar. A âncora visual passou a ser o conjunto flat colorido de `banco-fichas/` (`indice.json` 2.0.0) e esta ficha é re-basixada nele no MG-03 — inclusive a paleta de acento, que hoje lista as cores dos personagens `PERS-M`/`PERS-F` aposentados.
+- **Origem:** interna. Âncora da coletânea: a identidade visual do próprio canal, o conjunto definitivo de `banco-fichas/` (t148u; estilo nas palavras do José em t150u: "cartoon 2D, flat, colorido, com personagens stickman").
+- **Estado:** `aguardando_ok_jose` (28/10/2026, t147u; re-basiada em t150u).
+- **Histórico:** a ficha nasceu em t147u no nanquim de t146u (papel creme `#f5f0e4`, hachura, cores de `PERS-M`/`PERS-F`), que o José reprovou e mandou descartar (t148u). Em t150u foi reescrita no padrão flat colorido. O OK que ela espera é sobre esta versão.
 - **Prova renderizada:** pendente — sai do catálogo v2 (MG-03) e vai para `provas/REF-MG-00.png`.
 
 ## Gramática (o que o motion copia daqui)
 
-- **Fundo:** papel creme `#f5f0e4` com textura sutil de papel; nunca branco chapado nem gradiente.
-- **Traço:** nanquim preto, contorno de caneta, hachura (cross-hatching) para sombra e volume; sem brilho, sem sombra projetada de software.
-- **Cor de acento:** só as cores do elenco e da marca (`config/estilo_visual.json`): azul `#2b6cb0` e vermelho `#e23b2f` do PERS-M, laranja `#d96b43` e amarelo `#e6b325` da PERS-F, verde da marca `#0f766e`, tinta `#1f2328`.
-- **Tipografia:** uma manuscrita única (licença OFL, acentos do pt-BR; a escolher em MG-03). Nada de fonte de interface.
+- **Fundo:** creme claro, chapado (`#f6f1e7` na tela e `#f7f7f2` no cartão, na paleta do motor); nunca branco puro como fundo da tela nem gradiente.
+- **Traço:** contorno preto fino, cor chapada, sem hachura, sem brilho, sem sombra projetada de software.
+- **Cor de acento:** só a paleta do motor (`pqbr.pos.motion.catalogo.PALETA`), que vem do elenco e da marca: protagonista masculino em azul-aço (`#4b83ba`, escuro `#2c5f93`, acento `#e03837`), feminina em rosa (`#ee7e91`, escuro `#b83a5d`, acento `#826caf`), apoio amarelo `#f6c956`, verde da marca `#0f766e`, tinta `#1f2328`, cinza `#6b7280`. Letra colorida sobre fundo claro usa o tom escuro (o rosa chapado dá só 2,3:1 no creme).
+- **Tipografia:** uma fonte só, a Fredoka (OFL, definida pelo José em t149u, por arquivo local). Nada de fonte de interface.
+- **Personagem:** quando aparece, vem de uma ficha `PERS-*` do catálogo, num quadradinho num canto da zona segura (peça `personagem-moldura`), com recorte estático e boca de reação.
 - **Ritmo:** molas fechadas (o elemento assenta com um leve excesso e volta), entrada por idioma (surgir, riscar, datilografar), nunca fade puro.
-- **Texto:** só o bloco de números travados do roteiro, escrito como quem anota na folha.
+- **Texto:** só o bloco de números travados do roteiro.
 
 ## Por que ela existe
 

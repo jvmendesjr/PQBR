@@ -3,12 +3,13 @@
 Estado: `permanente` — padrão definitivo do canal, selecionado pelo José em 28/10/2026 (t148u).
 Origem: Drive da conta PQBR, pasta `Fontes/Imagens` (id `1ziYivEewPQIvlgt6Z7v7R8wXPerPLvLd`), entregue pelo José em 28/10/2026 (t148u); arquivos originais `Agent Image - *` renomeados para o padrão PQBR. É o nº 2 do catálogo do elenco (`ELENCO-catalogo.png`).
 
-- **Imagem (folha multi-pose 16:9):** `banco-fichas/personagens/PERS-menina-rosa-folha.png` — turnarounds (frente, três quartos, perfil, costas), 9 expressões e ~13 poses de corpo inteiro.
+- **Imagem (folha multi-pose 16:9):** `banco-fichas/personagens/PERS-menina-rosa-folha.png` — 5 giros (frente, três quartos, perfil, três quartos de costas e costas), 9 expressões e 10 poses de corpo inteiro. O `indice.json` guarda um recorte normalizado de cada um (`giro-*`, `exp-*`, `pose-*`), para o Flow e o motion usarem uma pose sem a folha inteira.
 - **Acento:** vestido rosa.
+- **Protagonista feminino (José, t150u):** é a protagonista dos episódios de código ímpar (alternância do storyboard); o nº 2 do catálogo do elenco.
 
 ## Trava (frase-trava para o prompt e para o Agente do Flow)
 
-Stickman 2D flat colorido do canal Porquê BR: menina de cabelo preto preso em rabo de cavalo lateral com prendedor rosa, vestido rosa chapado sem mangas e sapatos vermelhos. Cabeça redonda branca grande com contorno preto, dois olhos pretos sempre visíveis, boca de reação (nunca articula fala), corpo e membros em traço preto fino, fundo claro em tom creme, sem texto e sem marca na imagem.
+Stickman 2D flat colorido do canal Porquê BR: menina de cabelo preto preso em rabo de cavalo lateral com prendedor rosa, vestido rosa chapado sem mangas e sapatos brancos ovais de contorno preto. Cabeça redonda branca grande com contorno preto, dois olhos pretos sempre visíveis, boca de reação (nunca articula fala), corpo e membros em traço preto fino, fundo claro em tom creme, sem texto e sem marca na imagem.
 
 ## O que está fechado
 

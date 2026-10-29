@@ -1,6 +1,6 @@
 %% Cadeia de vídeo (t517 + t529; config/motores.json, src/pqbr/motores). Decisões registradas; adaptadores ainda NÃO extraídos (ROADMAP Fase 4V).
 flowchart LR
-  P(["Roteiro aprovado<br/>(RoteiroShort)"]) --> STB["storyboard_criar (t130u)<br/>Storyboard 1.2.0 · chat do NotebookLM<br/>norte geral · bloco de estilo · elenco alternado<br/>FichaCena: rótulo ep_cNN · norte/início/fim · plano · refs ASSET_*<br/>imagens_revisadas false · pode_gerar_video false"] --> SB["Prompts por cena já na ficha<br/>ManifestoSerie e nomes de arquivo: ainda não ligados<br/>ordem da extensão, sem instalar extensão"]
+  P(["Roteiro aprovado<br/>(RoteiroShort)"]) --> STB["storyboard_criar (t130u)<br/>Storyboard 1.3.0 · chat do NotebookLM<br/>norte geral · bloco de estilo · elenco alternado<br/>FichaCena: rótulo ep_cNN · norte/início/fim · plano · refs do catálogo (PERS/AMB/OBJ/SIT…)<br/>imagens_revisadas false · pode_gerar_video false"] --> SB["Prompts por cena já na ficha<br/>ManifestoSerie e nomes de arquivo: ainda não ligados<br/>ordem da extensão, sem instalar extensão"]
   SB --> F["1 · Flow · Camofox<br/>t132u: imagem vista = Nano Banana 2 Lite, 9:16<br/>vídeo não gerado; a tela mostrava Omni 1.1 Flash como padrão<br/>adaptador ainda fora do código"]
   F --> RV{"imagens revisadas?<br/>(antes do vídeo, t75u)"}
   RV -- não --> STB

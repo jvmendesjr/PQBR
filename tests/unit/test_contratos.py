@@ -5,7 +5,7 @@ from pydantic import ValidationError
 from pqbr.contratos import (RoteiroShort, DecisaoRepeticao, PontuacaoPolemica, VereditoAuditor,
     PropostaAgente, TicketManutencao, Falha, GradeDiaria, ItemGrade, RegistroConsumo, CTA)
 
-BLOCO = dict(estilo="stickman de tubos grossos, traço chapado, cabeça redonda, sem pessoa de cartum",
+BLOCO = dict(estilo="cartoon 2D flat colorido com personagens stickman, contorno preto, cabeça redonda, sem pessoa realista",
              personagem="homem de ~40 anos, magro, cabelo grisalho curto, camiseta verde, bigode, expressão curiosa",
              cenas=[dict(fala="Por que a gente fala isso?", acao="ele olha a TV desligada", enquadramento="plano médio", ambiente="sala brasileira, sofá, TV de tubo, noite"),
                     dict(fala="Comenta aí", acao="ele volta ao sofá", enquadramento="plano aberto", ambiente="mesma sala, noite")])
@@ -131,7 +131,7 @@ class ContratosT436(unittest.TestCase):
 
 
 class ContratosT437(unittest.TestCase):
-    CANON = ("Stickman de tubos grossos, traço chapado, cabeça redonda. Proibido: fotorrealismo, 3D, "
+    CANON = ("Cartoon 2D flat colorido com personagens stickman, cabeça redonda. Proibido: fotorrealismo, 3D, "
              "rosto de pessoa real, texto escrito dentro das imagens. Formato vertical 9:16.")
 
     def _bv(self, estilo, **kw):

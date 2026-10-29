@@ -10,6 +10,10 @@ Origem: Drive da conta PQBR, pasta `Fontes/Imagens` (id `1ziYivEewPQIvlgt6Z7v7R8
 
 cachorro · gato · periquito verde · coelho · porquinho-da-índia · hamster · peixe dourado · tartaruga · galo · porco · ovelha · cavalo
 
+## Fichas individuais
+
+Cada animal da grade tem ficha própria (`ANIM-cachorro`, `ANIM-gato`, `ANIM-periquito`, `ANIM-coelho`, `ANIM-porquinho-da-india`, `ANIM-hamster`, `ANIM-peixe-dourado`, `ANIM-tartaruga`, `ANIM-galo`, `ANIM-porco`, `ANIM-ovelha`, `ANIM-cavalo`), com o recorte `item` desta imagem. Escritas pelo mantenedor, aguardam o OK do José. Animal novo entra pelo catálogo aberto (`pipeline/banco_fichas.py`).
+
 ## Regras
 
 - Animal entra em cena pela ficha desta grade, no mesmo traço do elenco; recorrente pode ganhar ficha própria.

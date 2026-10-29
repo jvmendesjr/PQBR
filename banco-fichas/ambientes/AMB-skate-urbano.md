@@ -5,7 +5,7 @@ Origem: Drive da conta PQBR, pasta `Fontes/Imagens` (id `1ziYivEewPQIvlgt6Z7v7R8
 
 - **Imagem (16:9):** `banco-fichas/ambientes/AMB-skate-urbano.png`
 
-- **Com elenco:** a ficha inclui 3 personagens do elenco em cena: punk de moicano azul (nº 4) andando de skate, rapaz de moletom vermelho com fones (nº 7) no banco e menino de boné verde (nº 8). Servem de prova de escala e convivência; em cena de episódio o elenco entra pela ficha própria de cada personagem.
+- **Com elenco:** a ficha inclui 3 personagens do elenco em cena: punk de moicano azul (nº 4) andando de skate, rapaz de moletom vermelho com fones (nº 7) no banco e menino de boné verde (nº 8). Servem de prova de escala e convivência; em cena de episódio o elenco entra pela ficha própria de cada personagem (`PERS-punk-azul`, `PERS-fones-vermelho`, `PERS-bone-verde`).
 
 ## Trava
 

@@ -39,6 +39,40 @@ def test_coadjuvante_com_justificativa():
     assert FichaCena(**ficha(coadjuvante="masculino", coadjuvante_justificativa="roteiro pede a reação de outra pessoa ao café"))
     with pytest.raises(ValidationError): FichaCena(**ficha(coadjuvante="masculino"))
 
+def test_refs_do_catalogo_sao_ate_seis_e_o_legado_continua_valido():
+    assert FichaCena(**ficha(refs=["PERS-menina-rosa", "AMB-metro", "OBJ-caneca", "ANIM-gato", "FIG-robo", "SIT-pensando"]))
+    assert FichaCena(**ficha(refs=["ASSET_personagem_pqbr-v1", "AMB-metro"]))
+    with pytest.raises(ValidationError): FichaCena(**ficha(refs=["PERS-menina-rosa"] * 7))
+    for ruim in ("ELENCO-catalogo", "pers-menina-rosa", "PERS-", "PERS_menina-rosa", "XYZ-abc", "PERS-menina rosa"):
+        with pytest.raises(ValidationError): FichaCena(**ficha(refs=[ruim]))
+
+
+def test_versao_1_3_0_e_as_antigas_seguem_aceitas():
+    from pqbr.contratos.storyboard import VERSAO
+    assert VERSAO == "1.3.0" and FichaCena(**ficha()).versao == "1.3.0"
+    for v in ("1.0.0", "1.1.0", "1.2.0", "1.3.0"):
+        assert FichaCena(**ficha(versao=v)).versao == v
+    with pytest.raises(ValidationError): FichaCena(**ficha(versao="1.4.0"))
+
+
+def test_coadjuvante_pode_ser_qualquer_personagem_do_catalogo():
+    just = "o roteiro pede a reação de outra pessoa ao café"
+    assert FichaCena(**ficha(coadjuvante="PERS-punk-azul", coadjuvante_justificativa=just)).coadjuvante == "PERS-punk-azul"
+    for ruim in ("AMB-metro", "PERS-", "outro", "Masculino"):
+        with pytest.raises(ValidationError): FichaCena(**ficha(coadjuvante=ruim, coadjuvante_justificativa=just))
+
+
+def test_protagonista_do_jose_por_genero_e_nao_vira_coadjuvante_pelo_id():
+    from pqbr.contratos.storyboard import protagonista_ref
+    assert protagonista_ref("masculino") == "PERS-menino-azul" and protagonista_ref("feminino") == "PERS-menina-rosa"
+    just = "dupla no balcão, roteiro cena 3"
+    cenas = [FichaCena(**ficha(i)) for i in (1, 2)] + [FichaCena(**ficha(3, coadjuvante="PERS-menina-rosa", coadjuvante_justificativa=just))]
+    with pytest.raises(ValidationError, match="coadjuvante"):
+        Storyboard(codigo="PQBR-EP1003", norte_geral="x" * 25, bloco_estilo="y" * 25, ficha_personagem="z" * 25, cenas=cenas, elenco="feminino")
+    cenas[2] = FichaCena(**ficha(3, coadjuvante="PERS-menino-azul", coadjuvante_justificativa=just))
+    assert Storyboard(codigo="PQBR-EP1003", norte_geral="x" * 25, bloco_estilo="y" * 25, ficha_personagem="z" * 25, cenas=cenas, elenco="feminino")
+
+
 def test_protagonista_unico():
     cenas = [FichaCena(**ficha(i)) for i in (1, 2)] + [FichaCena(**ficha(3, coadjuvante="feminino", coadjuvante_justificativa="dupla no balcão, roteiro cena 3"))]
     with pytest.raises(ValidationError):

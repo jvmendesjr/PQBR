@@ -13,4 +13,4 @@ Nome comum do objeto, cor chapada, material visto de longe (pano, metal, plásti
 
 ## Estado
 
-`permanente` quando selecionada pelo José (conjunto de t148u). Objeto que não voltou em outro roteiro não ganha ficha individual.
+`permanente` quando o José aprova (conjunto de t148u). Catálogo aberto (t150u): o agente pode inserir objeto novo (`registrar`), depois de buscar; a ficha nasce `aguardando_ok_jose` (com imagem) ou `sugestao` (sem imagem). Objeto que não voltou em outro roteiro não ganha ficha individual.

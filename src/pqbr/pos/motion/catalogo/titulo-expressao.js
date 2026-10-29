@@ -14,7 +14,7 @@
       if (p.rotulo) {
         const k = M.mola(t, { omega: 12, zeta: 0.9 });
         g.conferir = k > 0.97;
-        y += g.texto(p.rotulo, MG, y + (1 - k) * 30, { tamanho: tamRot, peso: "600", cor: cor.principal }) + 28;
+        y += g.texto(p.rotulo, MG, y + (1 - k) * 30, { tamanho: tamRot, peso: "600", cor: cor.texto }) + 28;
       }
       linhas.forEach((l, i) => {
         const k = M.mola(t, { omega: 13, zeta: 0.8, atraso: 0.1 + i * 0.09 });
