@@ -15,6 +15,12 @@ Versionamento SemVer (MAJOR.MINOR.PATCH) a partir de t510. Versão do pacote can
 - Playbook Flow: receita de upload Angular ajustada (click + `input[type=file]`).
 - Docs: REGRAS, DECISOES-LOG, ESTADO-ATUAL, LACUNAS, PLANO-CENAS EP1003.
 
+## [0.29.3] — 2026-10-29 (t163u)
+### Flow EP1003 v2
+- Novo projeto `PQBR-EP1003-cafe-fraco-v2` (`3a9ca558-…`); antigo `025dcfef-…` intacto.
+- Agent Confirm=Sempre, 9:16, Nano Banana Pro; Character `@PERS-menina-rosa`; Collections Referencias/Storyboard/Cenas/Finais.
+- Storyboard conciso c01..c08 enviado 1× (0 créditos) → resposta Agente OK; `storyboard_ok=true`. STOP sem stills/clipes.
+
 ## [0.29.0] — 2026-10-29
 ### Adicionado
 - Processo canônico de criação (t160u / José t149u): `docs/processos/CRIACAO-README.md` v1.0.0, playbook `flow.md`, stubs Vids/Vibes (`a descobrir`).

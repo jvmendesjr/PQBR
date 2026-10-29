@@ -986,3 +986,11 @@ NÃO CABE:
 - **Storyboard:** pedido enviado ao Agente (formato 9:16, 8 painéis c01..c08, refs `@PERS-menina-rosa` + AMB/OBJ, SUBJECT/ACTION/CAMERA/ATMOSPHERE do storyboard 1.3.0, modelo sugerido). Sessão *Weak Coffee Storyboard Planning* → **Falha ao renderizar a resposta**. Sem grade visual, sem stills, sem clipes. Nenhum Confirmar com custo >0 (política 0 créditos respeitada). `storyboard_ok=false`.
 - **Evidência:** `/workspace/flow-check/ep1003-storyboard.png`.
 - **Sem:** stills/clipes, gasto de crédito confirmado, reinício worker, merge main, delete projeto testes.
+
+## t163u (29/10/2026) — EP1003 Flow v2: novo projeto + storyboard Agente OK
+- **José t151u:** continuar em **novo** projeto `PQBR-EP1003-cafe-fraco-v2` (Camofox PQBR; humanizado; nunca logar; nada apagado). Projeto anterior `025dcfef-…` permanece como está. Processo canônico `docs/processos/flow.md` (`git pull --rebase` primeiro). Agent on, Confirm=Sempre, 9:16 Nano Banana Pro, instruções, fichas PERS/OBJ/AMB, Character nomeado, Collections; storyboard **uma vez** mais conciso (c01..c08, @Nome); só 0 créditos; se Falha→wait/reload ≤1 extra; STOP após storyboard; apontar `flow_projetos.json`; log/commit/MCP; screenshot `ep1003-v2-storyboard.png`.
+- **Feito:** criado projeto Flow `3a9ca558-4c85-4502-8c19-7a8f42fa41dd` (`PQBR-EP1003-cafe-fraco-v2`). Settings Agent: Confirm **Sempre**, **9:16**, **Nano Banana Pro**; instruções flat; uploads Envios PERS/OBJ/AMB; Character **PERS-menina-rosa** (sem unnamed); Collections **Referencias / Storyboard / Cenas / Finais**.
+- **Storyboard:** prompt conciso 8 painéis enviado **1×** via Agente (0 créditos). Resposta OK — sessão *Comedic Cafe Coffee Storyboard* com grade c01..c08 (@PERS-menina-rosa + AMB/OBJ). Sem stills/clipes. Sem Falha ao renderizar nesta rodada. `storyboard_ok=true`.
+- **Config:** `config/flow_projetos.json` EP1003 → v2; `projeto_anterior_hold` = 025dcfef… intacto.
+- **Evidência:** `/workspace/flow-check/ep1003-v2-storyboard.png`.
+- **Sem:** stills/clipes, delete do projeto antigo, custo >0, login.

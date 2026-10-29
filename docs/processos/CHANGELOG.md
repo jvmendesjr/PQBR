@@ -1,5 +1,9 @@
 # CHANGELOG — docs/processos
 
+## [1.0.0] — 2026-10-29 (t163u operacional v2)
+### Operação EP1003 v2
+- Novo projeto Flow `PQBR-EP1003-cafe-fraco-v2`; setup canônico + storyboard Agente **OK** (grade c01..c08). Projeto `025dcfef-…` mantido (HOLD t162u).
+
 ## [1.0.0] — 2026-10-29 (t162u operacional)
 ### Operação EP1003
 - Aplicado `flow.md` no projeto `PQBR-EP1003-cafe-fraco`: Agent Confirm=Sempre, 9:16, Nano Banana Pro; Character `@PERS-menina-rosa`; Collections Referencias/Storyboard/Cenas/Finais.

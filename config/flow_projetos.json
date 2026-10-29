@@ -11,9 +11,9 @@
     "EP1003": {
       "codigo": "PQBR-EP1003",
       "slug": "cafe-fraco",
-      "titulo": "PQBR-EP1003-cafe-fraco",
-      "id": "025dcfef-7eef-4551-b60c-5106812508db",
-      "url": "https://flow.google.com/project/025dcfef-7eef-4551-b60c-5106812508db",
+      "titulo": "PQBR-EP1003-cafe-fraco-v2",
+      "id": "3a9ca558-4c85-4502-8c19-7a8f42fa41dd",
+      "url": "https://flow.google.com/project/3a9ca558-4c85-4502-8c19-7a8f42fa41dd",
       "conta": "camofox-pqbr-pro",
       "fichas_entregues": [
         "PERS-menina-rosa",
@@ -21,12 +21,11 @@
         "AMB-cafe"
       ],
       "fichas_ok": true,
-      "storyboard_ok": false,
-      "storyboard_request": "SENT_AGENT_RENDER_FAIL",
-      "motivo_hold_storyboard": "t162u: pedido enviado ao Agente (sessão Weak Coffee Storyboard Planning; prompt SUBJECT/ACTION/CAMERA/ATMOSPHERE 9:16 c01..c08, refs @PERS-menina-rosa). UI: Falha ao renderizar a resposta. Sem grade/stills/clipes. 0 créditos confirmados. Settings OK: Confirm=Sempre, 9:16, Nano Banana Pro. Character PERS-menina-rosa nativo + Collections Referencias/Storyboard/Cenas/Finais.",
+      "storyboard_ok": true,
+      "storyboard_request": "SENT_AGENT_OK_V2",
       "imagens_revisadas": false,
       "criado_em": "2026-10-29",
-      "decisao": "t162u",
+      "decisao": "t163u",
       "agent_settings": {
         "confirm": "Sempre",
         "image": "9:16 x1 Nano Banana Pro",
@@ -37,7 +36,14 @@
           "Cenas",
           "Finais"
         ]
-      }
+      },
+      "projeto_anterior_hold": {
+        "id": "025dcfef-7eef-4551-b60c-5106812508db",
+        "titulo": "PQBR-EP1003-cafe-fraco",
+        "url": "https://flow.google.com/project/025dcfef-7eef-4551-b60c-5106812508db",
+        "motivo": "t162u HOLD Falha ao renderizar; mantido intacto (nada apagado) — José t151u / t163u v2"
+      },
+      "nota_v2": "t163u: novo projeto Flow PQBR-EP1003-cafe-fraco-v2 (3a9ca558-…). Agent Confirm=Sempre, 9:16, Nano Banana Pro; fichas; Character PERS-menina-rosa; Collections Referencias/Storyboard/Cenas/Finais; storyboard conciso 8 painéis c01..c08 enviado 1× (0 créditos); resposta Agente OK (sessão Comedic Cafe Coffee Storyboard). STOP após storyboard — sem stills/clipes. Projeto antigo 025dcfef… intacto."
     }
   }
 }
