@@ -994,3 +994,11 @@ NÃO CABE:
 - **Config:** `config/flow_projetos.json` EP1003 → v2; `projeto_anterior_hold` = 025dcfef… intacto.
 - **Evidência:** `/workspace/flow-check/ep1003-v2-storyboard.png`.
 - **Sem:** stills/clipes, delete do projeto antigo, custo >0, login.
+
+## t164u (29/10/2026) — Handoff EP1003 v2 para outros agentes (José t152u)
+- **José (sessão t152u):** salvar onde estamos no ESTADO, ROADMAP, memórias e site de visualização (:8088) para continuar com **outros agentes**. Sem ações no Flow nesta entrega.
+- **Estado congelado:** projeto ativo `PQBR-EP1003-cafe-fraco-v2` (`3a9ca558-…`); storyboard texto Agente OK (`storyboard_ok=true`, t163u); antigo `025dcfef-…` HOLD intacto; sem stills/clipes no v2.
+- **Docs:** seção **Onde paramos / handoff (t164u)** no ESTADO-ATUAL com instruções explícitas ao novo agente (BRIEFING, processos, flow_projetos, Camofox PQBR, gates). ROADMAP ganha subseção **Piloto EP1003** com checkboxes (feito / pendente). CHANGELOG 0.29.4. Aba Roadmap do mapa regenerada.
+- **Pendências explícitas para o próximo agente:** capa Character PERS-menina-rosa (mostra café); coleção Cenas; 8 stills 0 créditos; revisão José; clipes; MG-05/11/12; JEV-02; merge main; ImportError MCP `estado` se reaparecer.
+- **Sem:** Flow UI, stills, clipes, login, delete, reinício worker, merge, gasto de crédito.
+

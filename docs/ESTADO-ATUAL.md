@@ -2,7 +2,23 @@
 
 Fonte única de "onde estamos". Não repete o ROADMAP: aponta os itens por id. **Atualize este arquivo a cada correção ou pendência resolvida.** O hook pre-commit exige isso quando o commit toca ROADMAP, LACUNAS, DECISOES-LOG ou CHANGELOG, e o `registrar_alteracao` exige isso para `tipo` correcao ou pendencia_resolvida.
 
-Atualizado: 29/10/2026 (t163u: EP1003 Flow v2 storyboard Agente OK (3a9ca558-…). Antes t162u HOLD) · versão 0.29.3
+Atualizado: 29/10/2026 (t164u: handoff EP1003 v2 — storyboard texto OK; stills/clipes pendentes) · versão 0.29.4
+
+## Onde paramos / handoff (t164u)
+
+**Para o próximo agente (leia antes de qualquer ação):**
+
+1. `docs/BRIEFING.md` → contexto do canal.
+2. `docs/processos/CRIACAO-README.md` + `docs/processos/flow.md` → processo canônico (obrigatório antes de tocar Flow).
+3. `config/flow_projetos.json` → EP1003 aponta para o projeto **v2** ativo.
+4. Camofox **só** PQBR (`127.0.0.1:9387`, `userId=pqbr`); humanizado; **nunca logar**; **nada apagar** (projeto antigo `025dcfef-…` HOLD intacto).
+5. Gates: `fichas_ok` / `storyboard_ok` / 0 créditos (parar se custo >0); stills só após storyboard texto OK; clipes só após revisão José das stills; reinício worker / MG-12 / merge main **só com OK José**.
+
+**Onde paramos (29/10/2026, America/Fortaleza):**
+- Projeto ativo: `PQBR-EP1003-cafe-fraco-v2` · id `3a9ca558-4c85-4502-8c19-7a8f42fa41dd` · https://flow.google.com/project/3a9ca558-4c85-4502-8c19-7a8f42fa41dd
+- Feito: processo canônico; projeto v2; Agent Confirm=Sempre / 9:16 / Nano Banana Pro; Character `@PERS-menina-rosa`; Collections (Referencias/Storyboard/Cenas/Finais criadas na sessão); fichas PERS/OBJ/AMB; **storyboard texto Agente OK** (c01..c08, 0 créditos). Evidência: `/workspace/flow-check/ep1003-v2-storyboard.png`. Commit t163u `bc4101b`.
+- **Não feito (próximo):** corrigir capa do Character PERS-menina-rosa (UI mostra imagem do café); confirmar/recriar coleção **Cenas** se ausente; gerar **8 stills** S01..S08 via Agente Flow (0 créditos); revisão José; clipes; MG-05 motion; MG-11 lote; MG-12 `core-ultra`+reinício (OK José); JEV-02; merge → main (OK José); investigar ImportError residual na tool MCP `estado` se voltar a falhar.
+- Branch: `cursor/t132u-flow-imagem-849c`. Sem stills/clipes nesta handoff. Sem ações Flow em t164u.
 
 ## Onde estamos
 - **Produção:** o lote do saldo em `runtime/lote-saldo/` (e o cartum 2D do Higgsfield) está **obsoleto** para publicação (t156u): o Higgsfield foi **DESCARTADO** do PQBR. Não apagar mídia sem OK. Os temas EP1002–EP1010 serão refeitos com Flow + flat + motion (**MG-11**). O EP1002 olhos-da-cara já está em `_descartado/` e o tema voltou a `proposto`. Ordem: fechar Flow → MG-05 (piloto 1) → José assiste → lote dos demais.
@@ -16,7 +32,7 @@ Atualizado: 29/10/2026 (t163u: EP1003 Flow v2 storyboard Agente OK (3a9ca558-…
 - **Motion graphics (t145u, t147u, t149u, t150u, t153u):** REGRAS §26 aceita motion no pós (ambiente limpo, bom senso, rotina fixa gancho → conflito → cortina → bloco do porquê em motion → cortina → reconhecimento → CTA + loop). Motor próprio em `src/pqbr/pos/motion/` (seek(t), Chrome headless, FFmpeg), **catálogo de 15 modelos**, contrato `PlanoMotion` 1.2.0, papel `motion` (9º, hoje `core-alto`; proposta **MG-12** passa para `core-ultra`/Opus 5.5 com 3 camadas — código determinístico → Jev `decide()` → Opus; ainda sem alterar `config/modelos_9router.json`), preso ao catálogo, sem activity no worker até MG-07. Até o MG-07 a manutenção opera o `PlanoMotion` e o motor próprio renderiza. O piloto de t145u (EP1003 em cartum 2D) teve o **visual** reprovado (t147u) e a **ideia** mantida; a pasta `runtime/piloto-motion/cafe-fraco/` foi deletada em t152u por ordem do José (os originais do EP1003 seguem em `runtime/lote-saldo/cafe-fraco/`). A prova visual vigente do cartão é `runtime/piloto-motion/mg03/folha-cartoes-v2.png`, aprovada pelo José como ponto de partida. **Base visual vigente:** o mesmo flat colorido do stickman, com a **Fredoka** (t149u) e paleta do motor re-basiada em t150u (azul-aço masculino, rosa feminino, fundo creme claro; o papel creme e o nanquim de t146u saíram). **Personagem presente (t150u):** a peça `personagem-moldura` põe um personagem `PERS-*` num quadradinho no canto da zona segura, com a pose escolhida entre os recortes da ficha e criatividade liberada ao papel `motion`; o render acusa sobreposição. **Dossiê de movimento (t150u):** o motor segue próprio; whatships.com, o artigo do 0xMovez e o estudo do MiniMax H3 MAX entram só como gramática de movimento (REF-MG-01), sem frame nem texto de terceiros. **t153u — seis referências, seis peças e a delegação:** o José entregou bitrig, horizonx, omaphoto, vovy, raylight-2 e valendata e delegou a escolha técnica (ele não escolhe movimento a movimento). A análise foi por folha de contato (sem playback completo e sem frame de terceiro no repo), as fichas REF-MG-00..07 estão em `banco-fichas/referencias-motion/` (`indice.json` 0.4.0, **aprovada** desde t155u) e as peças novas são `frase-troca`, `marca-texto` (o `destaque` é trecho de `texto`, conferido pelo contrato), `numero-conta`, `leque`, `elo-causa` e `transicao-pincelada` (uso interno; a cortina padrão continua na entrada e na saída). Prova em `provas/mg10-pecas.png` (12 quadros, sem violação de zona segura; autocrítica 8,5 em `biblioteca/historico.md`). O **riscado** (palavra substituída) é o candidato mais forte do próximo lote. A escolha por episódio é determinística (tipo + semente, MG-04) e o OK do José é sobre a regra e as fichas. Coletânea e desenho em `docs/fases/motion-graphics.md` (Fase 2d), tarefas na Fase MG do ROADMAP (MG-01..MG-12). Nada publicado; `gemini_juiz` ainda não rodou. Falta ver o personagem num vídeo de episódio (MG-05) e o lote de refação sem Higgsfield (MG-11).
 
 ## Próximo passo
-**EP1003:** projeto v2 `PQBR-EP1003-cafe-fraco-v2` (`3a9ca558-…`) com Agent/Character/Collections + **storyboard Agente OK** (t163u, `storyboard_ok=true`). Próximo canônico: stills S01..S08 → revisão → vídeo (`docs/processos/flow.md`). Projeto antigo `025dcfef-…` HOLD intacto. Reinício worker / MG-12 só com OK José.
+**Handoff t164u → novo agente:** ler BRIEFING + `processos/CRIACAO-README` + `flow.md` + `config/flow_projetos.json`. Continuar no projeto v2 `3a9ca558-…` (Camofox PQBR): (1) corrigir capa Character PERS-menina-rosa; (2) garantir coleção Cenas; (3) pedir **8 stills** S01..S08 ao Agente (0 créditos); (4) parar para revisão José. Depois: clipes → MG-05 → José assiste → MG-11. MG-12 / reinício worker / merge main **só com OK José**. Projeto `025dcfef-…` HOLD intacto. Sem apagar nada.
 
 
 
@@ -37,9 +53,9 @@ Atualizado: 29/10/2026 (t163u: EP1003 Flow v2 storyboard Agente OK (3a9ca558-…
 | P12 | ERR-01: revisar os erros aceitáveis | ERR-01 | agente | depois dos primeiros dias de produção |
 | P13 | Proposta não aplicada: ferramentas só leitura para os agentes PydanticAI, sem MCP interno | F1-05 · t134u | José | sem efeito externo |
 | P14 | Proposta não aplicada: acompanhamento de mudanças (vigia de fallbacks, canário, deriva de contrato, `dev_diagnosticar`). Sem agente novo. O NotebookLM não entra no canário | F6-02 · t135u/t136u | José | registro no worker exige reinício |
-| P16 | Motion/piloto Flow EP1003: Agent+Character+Collections OK (t162u). Storyboard v2 **OK** (`storyboard_ok=true`, t163u); antigo 025dcfef HOLD intacto. Seguem MG-04..08, MG-11, MG-12 | t145u–t162u · Fase MG | José e agente | recuperar/reenviar storyboard Agente; OK MG-12 |
+| P16 | Piloto EP1003 v2: storyboard texto OK (t163u). Falta capa Character, coleção Cenas, 8 stills, revisão José, clipes, MG-05/11/12. Antigo 025dcfef HOLD | t145u–t164u · Fase MG / 4V | José e agente | stills→revisão→clipes; OK MG-12 |
 | P15 | **Feito (t143u/t144u).** Jev (`decide()`, JEV-EF) ligado aos fluxos (`CorrecaoAutonomaWorkflow`, canário, pop-up Flow, e-mail YouTube, repetição R10), limiares calibrados na API real TypeSafe (12 casos, 100% de acerto) e workers reiniciados com `TYPESAFE_API_KEY` ativa. Resta apenas JEV-02 (chave OpenRouter do fallback) | RNF-02 · JEV-EF · t144u | concluído | JEV-02 (fallback OpenRouter) quando José fornecer chave |
-| P17 | Processo canônico APROVADO (t160u). EP1003 setup Flow OK (t162u); storyboard Agente v2 **OK** (t163u); HOLD só no projeto antigo. **Do José:** recuperar storyboard; folha nº 1; SIT-*; OK reinício worker | t148u–t162u | José | storyboard render; folha nº 1; SIT-*; OK reinício |
+| P17 | Processo canônico APROVADO (t160u). EP1003 v2 storyboard texto OK (t163u). **Do José:** revisão stills; folha nº 1; SIT-*; OK reinício worker / MG-12 / merge | t148u–t164u | José | stills+revisão; folha nº 1; SIT-*; OK reinício |
 | P18 | Combo `core-ultra` **criado e testado** (t158u: HTTP 200, `claude-opus-5-5-medium`). **Falta:** OK José para trocar `motion` `core-alto`→`core-ultra` em `config/modelos_9router.json` + reinício. Medir custo real em `pqbr.consumo_modelos` no piloto | t157u/t158u · MG-12 | José | OK troca+reinício |
 
 ## Painel

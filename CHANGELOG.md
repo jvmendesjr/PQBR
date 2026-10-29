@@ -15,6 +15,12 @@ Versionamento SemVer (MAJOR.MINOR.PATCH) a partir de t510. Versão do pacote can
 - Playbook Flow: receita de upload Angular ajustada (click + `input[type=file]`).
 - Docs: REGRAS, DECISOES-LOG, ESTADO-ATUAL, LACUNAS, PLANO-CENAS EP1003.
 
+## [0.29.4] — 2026-10-29 (t164u)
+### Handoff
+- ESTADO-ATUAL: seção **Onde paramos / handoff (t164u)** com instruções ao novo agente (BRIEFING, processos/flow, flow_projetos, Camofox PQBR, gates).
+- ROADMAP: subseção Piloto EP1003 (checkboxes feito/pendente: stills, capa Character, Cenas, MG-05/11/12, JEV-02, merge, MCP estado).
+- Mapa :8088 (aba Roadmap) regenerado. Sem ações Flow.
+
 ## [0.29.3] — 2026-10-29 (t163u)
 ### Flow EP1003 v2
 - Novo projeto `PQBR-EP1003-cafe-fraco-v2` (`3a9ca558-…`); antigo `025dcfef-…` intacto.
