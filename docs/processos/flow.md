@@ -1,7 +1,7 @@
 # Playbook — Google Flow
 
 - **versão:** 1.0.0
-- **status:** [APROVADO] José t149u · decisão t160u
+- **status:** [APROVADO] José t149u · decisão t160u · ajuste upload t161u
 - **núcleo:** [`CRIACAO-README.md`](CRIACAO-README.md) (consultar primeiro)
 - **origem:** `docs/pesquisas/flow-processo-comunidade-20261029.md` + Help Google Flow Agent
 - **conta / sessão:** só Camofox PQBR `127.0.0.1:9387` (REGRAS §11). Nunca outro browser.
@@ -32,11 +32,11 @@
 ## Sequência operacional (Flow)
 
 1. Conferir núcleo canônico (`processo_criacao_conferir` com plataforma `flow`).
-2. Projeto novo `PQBR-EPxxxx-slug`.
+2. Projeto novo `PQBR-EPxxxx-slug` (nunca o de testes `e2dacb70-…`); gravar id em `config/flow_projetos.json`.
 3. Agente on + Confirm=Sempre + defaults acima.
-4. Entregar fichas existentes do banco (Character/Element). Upload Angular: ver receita em `docs/pesquisas/flow-agente-e-nano-banana-pro-20261028.md` (`.sidebar-upload-btn`).
+4. Entregar fichas existentes do banco (Character/Element). Registrar em `config/flow_projetos.json` (`fichas_ok`). **Upload Angular (t161u, estável):** abrir `Adicionar elementos` → aba **Envios** → **clicar** `.sidebar-upload-btn` (instancia o `input[type=file]`) → `POST /tabs/{id}/upload` com `selector=input[type=file]` e caminho absoluto no host Camofox → esperar `Enviando <arquivo> Imagem` e o `group` na grade. O atalho `focus→click` no botão (pesquisa 2026-10-28) ficou intermitente após o 1º arquivo; preferir o clique direto + `direct_input`. Menu topo `Enviar arquivos` sem input prévio → timeout do filechooser.
 5. Pedir ao Agente as refs faltantes (só stills Nano Banana Pro). Registrar no catálogo PQBR.
-6. Pedir storyboard com refs pinadas + prompts SUBJECT/ACTION/CAMERA/ATMOSPHERE.
+6. Pedir storyboard **só pelo Agente** com refs pinadas + prompts SUBJECT/ACTION/CAMERA/ATMOSPHERE (padrão de prompt da pesquisa; 0 créditos). Sem `storyboard_ok` no config, `flow_projeto.exigir_antes_cenas` bloqueia.
 7. Gerar stills S01..S0N (9:16); Collections; **parar** para revisão (`imagens_revisadas`).
 8. Só então 1 clipe contínuo por cena (`Single continuous shot, no cuts, lips closed`).
 9. Baixar para repo/Drive; seguir motion (MG-05+).

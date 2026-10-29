@@ -5,6 +5,12 @@ Versionamento SemVer (MAJOR.MINOR.PATCH) a partir de t510. Versão do pacote can
 
 
 
+## 0.29.1 — 2026-10-29 (t161u)
+- Projeto Google Flow `PQBR-EP1003-cafe-fraco` (`025dcfef-…`) + fichas PERS/OBJ/AMB entregues; storyboard **não** enviado (HOLD prompt-padrão).
+- `config/flow_projetos.json` + gate `src/pqbr/pipeline/flow_projeto.py` (fail-closed antes de cenas).
+- Playbook Flow: receita de upload Angular ajustada (click + `input[type=file]`).
+- Docs: REGRAS, DECISOES-LOG, ESTADO-ATUAL, LACUNAS, PLANO-CENAS EP1003.
+
 ## [0.29.0] — 2026-10-29
 ### Adicionado
 - Processo canônico de criação (t160u / José t149u): `docs/processos/CRIACAO-README.md` v1.0.0, playbook `flow.md`, stubs Vids/Vibes (`a descobrir`).

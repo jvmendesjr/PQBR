@@ -1,0 +1,32 @@
+{
+  "versao": "1.0.0",
+  "atualizado": "2026-10-29",
+  "regra": "Um projeto Google Flow por episódio, nome PQBR-EP<nnnn>-<slug>. Projeto de testes e2dacb70… fica só para testes; nunca deletar sem OK José.",
+  "projeto_testes": {
+    "id": "e2dacb70-b9d0-4dc7-8b93-e6ac1688a454",
+    "titulo": "out. 27 - 17:09",
+    "uso": "testes_apenas"
+  },
+  "projetos": {
+    "EP1003": {
+      "codigo": "PQBR-EP1003",
+      "slug": "cafe-fraco",
+      "titulo": "PQBR-EP1003-cafe-fraco",
+      "id": "025dcfef-7eef-4551-b60c-5106812508db",
+      "url": "https://flow.google.com/project/025dcfef-7eef-4551-b60c-5106812508db",
+      "conta": "camofox-pqbr-pro",
+      "fichas_entregues": [
+        "PERS-menina-rosa",
+        "OBJ-caneca",
+        "AMB-cafe"
+      ],
+      "fichas_ok": true,
+      "storyboard_ok": false,
+      "storyboard_request": "NOT_SENT",
+      "motivo_hold_storyboard": "t148u José / t161u: aguardar padrão de prompt baseado na pesquisa (modelo, formato, detalhes completos)",
+      "imagens_revisadas": false,
+      "criado_em": "2026-10-29",
+      "decisao": "t161u"
+    }
+  }
+}
