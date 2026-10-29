@@ -8,7 +8,7 @@
       const cx = Z.x + Z.w / 2, w = Z.w - 2 * MG, h = Math.min(Z.h * 0.5, 820), y = Z.y + (Z.h - h) / 2 - 60;
       const kc = M.mola(t, { omega: 12, zeta: 0.85 });
       g.conferir = kc > 0.97;
-      g.caixa(cx - w / 2, y + (1 - kc) * 60, w, h, M.CORES.branco, 40);
+      g.cartao(cx - w / 2, y + (1 - kc) * 60, w, h, M.CORES.branco, 40);
       const kp = M.mola(t, { omega: 11, zeta: 0.45, atraso: 0.2 });
       const py = y + h * 0.42 - (1 - kp) * 500;
       g.conferir = kp > 0.97;
@@ -21,7 +21,7 @@
       const kt = M.mola(t, { omega: 12, zeta: 0.9, atraso: 0.5 });
       if (kt > 0.02) {
         g.conferir = kt > 0.97;
-        const alt = g.texto(p.lugar, cx, py + 110 + (1 - kt) * 30, { tamanho: 76, peso: "800", alinh: "centro", maxLargura: w - 2 * MG });
+        const alt = g.texto(p.lugar, cx, py + 110 + (1 - kt) * 30, { tamanho: 76, peso: "700", alinh: "centro", maxLargura: w - 2 * MG });
         if (p.detalhe) g.texto(p.detalhe, cx, py + 130 + alt, { tamanho: 44, peso: "500", alinh: "centro", maxLargura: w - 2 * MG, cor: M.CORES.tintaClara });
       }
     },

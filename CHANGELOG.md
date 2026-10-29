@@ -5,6 +5,11 @@ Versionamento SemVer (MAJOR.MINOR.PATCH) a partir de t510. Versão do pacote can
 
 
 
+## [0.25.0] — 2026-10-28
+### Alterado
+- MG-03 (t151u): cartões do catálogo de motion no traço do stickman (`g.cartao`: contorno preto e sombra chapada) em `versus`, `origem-pino`, `recorte-aponta` e `imagem-cena`; peso 800 → 700 em `titulo-expressao`, `origem-pino` e `versus` (teto da Fredoka). Custo medido: 35–43 ms por quadro.
+- Testes: `test_motion_motor.py` confere o teto de peso do catálogo e o uso do cartão.
+
 ## [0.24.0] — 2026-10-28
 ### Adicionado
 - Catálogo visual aberto (t150u): contrato `FichaCatalogo` 1.0.0 (`src/pqbr/contratos/catalogo_visual.py`, com `PROTAGONISTAS` e `TAMANHO_MAX_IMAGEM` de 2 MB) e `src/pqbr/pipeline/banco_fichas.py` (buscar, registrar, anexar mídia, adicionar recorte, aprovar, descartar, gerar o `.md`, resumo para prompt, CLI). `banco-fichas/indice.json` 3.0.0 (62 fichas): categoria nova de situações (`SIT-*`, 11 sugestões sem mídia), `PERS-menino-azul` (nº 1, protagonista masculino) e 6 derivadas do elenco (`aguardando_ok_jose`), uma ficha por objeto (12) e por animal (12), modelos `figura`, `animal` e `situacao`.

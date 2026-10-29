@@ -115,6 +115,19 @@
       ctx.arcTo(x, y + h, x, y, r); ctx.arcTo(x, y, x + w, y, r); ctx.closePath(); ctx.fill();
       if (importante !== false) registrar("caixa", x, y, w, h);
     };
+    // Cartão no traço do stickman: contorno preto e sombra chapada deslocada, sem desfoque (cartum 2D flat).
+    g.cartao = function (x, y, w, h, cor, raio) {
+      const r = Math.min(raio == null ? 32 : raio, w / 2, h / 2), esp = 5, desl = 10;
+      const caminho = (dx, dy) => {
+        ctx.beginPath(); ctx.moveTo(x + dx + r, y + dy); ctx.arcTo(x + dx + w, y + dy, x + dx + w, y + dy + h, r);
+        ctx.arcTo(x + dx + w, y + dy + h, x + dx, y + dy + h, r); ctx.arcTo(x + dx, y + dy + h, x + dx, y + dy, r);
+        ctx.arcTo(x + dx, y + dy, x + dx + w, y + dy, r); ctx.closePath();
+      };
+      ctx.fillStyle = CORES.tinta; caminho(0, desl); ctx.fill();
+      ctx.fillStyle = cor; caminho(0, 0); ctx.fill();
+      ctx.strokeStyle = CORES.tinta; ctx.lineWidth = esp; ctx.lineJoin = "round"; ctx.stroke();
+      registrar("cartao", x, y, w, h + desl);
+    };
     g.linha = function (x1, y1, x2, y2, cor, esp) {
       ctx.strokeStyle = cor; ctx.lineWidth = esp || 6; ctx.lineCap = "round";
       ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke();

@@ -893,3 +893,10 @@ NÃO CABE:
 - **Limites do que foi verificado (honestidade t126u):** o estudo do MiniMax foi lido pela descrição da página; o vídeo não foi baixado nem assistido quadro a quadro. O personagem presente passou nos testes e num render real no Chrome, mas não foi visto num vídeo de episódio (MG-05). O desenho dos cartões do catálogo v1 ainda é o do piloto (MG-03) e o peso 800 de três peças antigas segue por ajustar para 700 (a Fredoka vai a 700). Nada foi gerado no Flow nem enviado ao Drive.
 - **Mapa:** `12-storyboard-elenco.mmd`, `01-episodio.mmd`, `07-cadeia-video.mmd` e o README do mapa foram ajustados (Storyboard 1.3.0, protagonistas definidos, catálogo aberto) sem consulta específica ao José, por analogia com t148u; reverter se ele discordar.
 - **Testes:** 668 passed, 73 skipped, 2 xfailed (`PYTHONPATH=src .venv/bin/pytest tests`; eram 605/73/2 antes do t150u). Novos: `test_catalogo_visual.py` (15), `test_banco_fichas_pipeline.py` (19) e casos novos em `test_banco_fichas.py`, `test_motion_contrato.py`, `test_motion_motor.py`, `test_motion_render.py` (render real no Chrome), `test_storyboard*.py` e `test_pacote.py`. `tests/workflows` segue fora do cômputo.
+
+## t151u (28/10/2026) — MG-03: cartões no traço do stickman, peso 700 e custo de render
+- **Ordem do José:** protagonistas e `PERS-bob-oculos` já definidos em t150u; o catálogo é aberto (o agente pode criar personagens novos seguindo a identidade e avisando o José). Fazer commit e push, depois seguir o roadmap.
+- **Feito:** `g.cartao` no motor (contorno preto de 5 px, sombra chapada deslocada de 10 px, sem desfoque) nos quatro modelos de cartão; peso 800 → 700 nos modelos que o usavam. Sem textura de papel (o conjunto t148u é flat colorido; a textura só aumentaria o custo).
+- **Medido:** bloco de 24 s a 30 fps, 720 quadros de tela cheia, 25–31 s de render, 35–43 ms por quadro. Antes e depois do cartão novo, sem diferença relevante.
+- **Verificado a olho:** quatro quadros (título, linha do tempo, origem, versus) com a Fredoka. Não verificado: leitura a 360 px, nem o encaixe com cenas reais do Flow (MG-05).
+

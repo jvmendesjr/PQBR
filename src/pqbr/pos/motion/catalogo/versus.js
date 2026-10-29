@@ -4,7 +4,7 @@
   function cartao(g, ctx, titulo, texto, img, x, y, w, h, k, corTitulo, deLado) {
     const dx = (1 - k) * (deLado === "esq" ? -w : w);
     g.conferir = k > 0.97;
-    g.caixa(x + dx, y, w, h, M.CORES.branco, 40);
+    g.cartao(x + dx, y, w, h, M.CORES.branco, 40);
     const pad = 44;
     let ty = y + pad;
     let larg = w - 2 * pad, tx = x + dx + pad;
@@ -28,7 +28,7 @@
       cartao(g, ctx, p.titulo_a, p.texto_a, r[p.imagem_a], x, yA, w, h, kA, cor.texto, "esq");
       const kx = M.mola(t, { omega: 10, zeta: 0.6, atraso: tB - 0.15 });
       g.conferir = kx > 0.97;
-      if (kx > 0.01) g.texto("×", Z.x + Z.w / 2, yA + h + gap / 2 - 60, { tamanho: Math.max(8, 120 * Math.min(1, kx)), peso: "800", alinh: "centro", cor: cor.acento, semQuebra: true });
+      if (kx > 0.01) g.texto("×", Z.x + Z.w / 2, yA + h + gap / 2 - 60, { tamanho: Math.max(8, 120 * Math.min(1, kx)), peso: "700", alinh: "centro", cor: cor.acento, semQuebra: true });
       if (kB > 0.001) cartao(g, ctx, p.titulo_b, p.texto_b, r[p.imagem_b], x, yB, w, h, kB, cor.acento, "dir");
     },
   });

@@ -11,7 +11,7 @@
       if (ih > maxH - 40) { ih = maxH - 40; iw = img ? ih * (img.width / img.height) : ih / 1.2; }
       const x = Z.x + Z.w / 2 - (iw + 40) / 2, y = Z.y + MG + (1 - k) * 40;
       g.conferir = k > 0.97;
-      g.caixa(x, y, iw + 40, ih + 40, M.CORES.branco, 36);
+      g.cartao(x, y, iw + 40, ih + 40, M.CORES.branco, 36);
       if (img) g.imagem(img, x + 20, y + 20, iw, ih);
       g.caixa(x, y + ih + 40 - 12, iw + 40, 12, cor.principal, 6, false);
       if (p.legenda) {

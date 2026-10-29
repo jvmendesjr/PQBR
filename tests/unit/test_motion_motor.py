@@ -133,3 +133,20 @@ def test_personagem_na_moldura_respeita_a_zona_e_acusa_quando_cobre_outra_peca()
     assert r["entrando"] == []                          # entrando (mola ainda longe do alvo) a conferência não vale, como a zona segura
     assert r["semFicha"]["v"] == []                     # ficha ausente no plano: desenha a moldura vazia, sem quebrar
     assert r["recorte"] == 1                            # uma imagem recortada da folha no quadro assentado
+
+
+def test_catalogo_nao_pede_peso_acima_do_que_a_fonte_do_canal_tem():
+    import re
+    from pqbr.pos.motion import fontes
+    from pqbr.pos.motion.catalogo import RAIZ
+    maximo = fontes.obter("fredoka")["pesos"][1]
+    for js in (RAIZ / "catalogo").glob("*.js"):
+        pesos = [int(p) for p in re.findall(r'peso: "(\d+)"', js.read_text(encoding="utf-8"))] + \
+                [int(p) for p in re.findall(r'font = "(\d+) ', js.read_text(encoding="utf-8"))]
+        assert all(p <= maximo for p in pesos), (js.name, pesos)
+
+
+def test_cartoes_do_catalogo_usam_o_cartao_com_contorno():
+    from pqbr.pos.motion.catalogo import RAIZ
+    for slug in ("versus", "origem-pino", "recorte-aponta", "imagem-cena"):
+        assert "g.cartao(" in (RAIZ / "catalogo" / f"{slug}.js").read_text(encoding="utf-8"), slug

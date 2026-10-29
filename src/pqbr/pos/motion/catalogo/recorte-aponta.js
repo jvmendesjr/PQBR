@@ -20,7 +20,7 @@
         g.ctx.font = "700 50px " + M.FONTE;
         const linhas = M.quebrarLinhas(g.ctx, p.texto, cw - 80);
         const ch = linhas.length * 50 * 1.2 + 80;
-        g.caixa(cx, cy + (1 - kt) * 30, cw, ch, M.CORES.branco, 32);
+        g.cartao(cx, cy + (1 - kt) * 30, cw, ch, M.CORES.branco, 32);
         g.texto(p.texto, cx + 40, cy + 40 + (1 - kt) * 30, { tamanho: 50, peso: "700", maxLargura: cw - 80, cor: M.CORES.tinta, entrelinha: 1.2 });
         g.caixa(cx, cy + (1 - kt) * 30, 14, ch, cor.principal, 7, false);
       }
