@@ -68,6 +68,25 @@ def test_reter_adiciona_autor():
     hindsight.reter("conteúdo limpo de teste", "", papel="mantenedor", tags=["licao"], autor="mantenedor-externo",
                     transporte=lambda u, c: vist.append(c) or {})
     assert vist[0]["items"][0]["tags"] == ["licao", "papel:mantenedor", "autor:mantenedor-externo"]
+    assert "async" not in vist[0] and "operation_id" not in vist[0]
+
+
+def test_operacao_id_deterministico_vira_async():
+    vist = []
+    op = hindsight.id_da_operacao("mantenedor-externo", "abc1234", "conteúdo")
+    assert op == hindsight.id_da_operacao("mantenedor-externo", "abc1234", "conteúdo")
+    assert op != hindsight.id_da_operacao("mantenedor-externo", "abc1234", "outro conteúdo")
+    hindsight.reter("conteúdo", "", papel="mantenedor", tags=["licao"], autor="mantenedor-externo",
+                    operacao_id=op, transporte=lambda u, c: vist.append(c) or {})
+    assert vist[0]["async"] is True and vist[0]["operation_id"] == op
+
+
+def test_alteracao_reenviada_repete_o_operation_id():
+    args = {"conteudo": "Registro repetido depois de um timeout.", "commit": "abc1234"}
+    _call("registrar_alteracao", args)
+    _call("registrar_alteracao", args)
+    assert GRAV[0][2]["operacao_id"] == GRAV[2][2]["operacao_id"]      # conteúdo igual, mesmo id
+    assert GRAV[0][2]["operacao_id"] != GRAV[1][2]["operacao_id"]      # handoff tem id próprio
 
 
 def test_cliente_do_token(tmp_path):

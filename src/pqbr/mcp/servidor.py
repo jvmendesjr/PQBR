@@ -145,7 +145,7 @@ def tratar(msg: dict, papel: str, impl: dict | None = None, cliente: str = "") -
         except ValueError as e:  # inclui ValidationError do contrato
             texto, erro = f"inválido: {str(e)[:500]}", True
         except Exception as e:
-            texto, erro = f"erro: {type(e).__name__}", True
+            texto, erro = f"erro: {type(e).__name__}: {str(e)[:300]}", True
         from ..seguranca.barreira import exigir_limpo
         try:
             exigir_limpo(texto, "log")

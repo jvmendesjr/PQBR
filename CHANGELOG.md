@@ -5,6 +5,12 @@ Versionamento SemVer (MAJOR.MINOR.PATCH) a partir de t510. Versão do pacote can
 
 
 
+## [0.27.1] — 2026-10-28
+### Corrigido
+- Escrita do `pqbr-mcp` no Hindsight deixou de estourar timeout e de duplicar memória (t154u): `storage/hindsight.reter` aceita `operacao_id` e envia `async: true` + `operation_id` determinístico (`id_da_operacao`, `uuid5` de cliente + commit + conteúdo), então reenviar a mesma alteração devolve a operação original; `mcp/escrita.py` usa ids próprios para o conteúdo e para o handoff e traduz `TimeoutError` em mensagem com orientação de retry; o timeout do POST virou `PQBR_HINDSIGHT_TIMEOUT` (padrão 120 s, antes 30 s fixos).
+- `mcp/servidor.py`: o erro genérico de ferramenta passou a incluir a mensagem (`erro: Tipo: mensagem`), não só o nome do tipo.
+- Testes: `tests/unit/test_mcp_escrita.py` cobre o id determinístico, o payload assíncrono e o reenvio sem duplicar; o caminho síncrono sem `operacao_id` continua igual.
+
 ## [0.27.0] — 2026-10-28
 ### Adicionado
 - Motion, seis peças novas (MG-10 parcial, t153u): `frase-troca`, `marca-texto`, `numero-conta`, `leque`, `elo-causa` e `transicao-pincelada` em `src/pqbr/pos/motion/catalogo/`; catálogo `indice.json` 1.2.0 com parâmetros travados e `fragmento_de` no `destaque`; `contratos/motion.py` passou a validar que o `destaque` é trecho literal de `texto`.

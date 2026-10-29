@@ -20,6 +20,9 @@ Vale para qualquer cliente MCP (Cursor, Claude, opencode, Codex, script próprio
 ## Protocolo obrigatório
 `onboarding` → `buscar_memoria` antes de agir → commit local + `docs/DECISOES-LOG.md`/`CHANGELOG.md` (SemVer) → `docs/ESTADO-ATUAL.md` (o pre-commit exige) → `registrar_alteracao` (com o commit) ou `registrar_memoria`.
 
+## Escrita de memória: assíncrona e idempotente (t154u)
+O `registrar_alteracao` e o `registrar_memoria` gravam no Hindsight em modo **assíncrono**, com `operation_id` determinístico (cliente + commit + conteúdo): o retorno é imediato e a indexação acontece em segundos. Reenviar a mesma alteração (mesmo commit e mesmo texto) **não duplica**: o Hindsight devolve a operação original. Se a chamada acusar timeout, **repita a mesma chamada**, sem mudar o texto nem o commit; conferir depois com `buscar_memoria`. O POST ao Hindsight usa `PQBR_HINDSIGHT_TIMEOUT` (padrão 120 s; antes eram 30 s fixos, e o retain síncrono estourava antes de responder, embora gravasse).
+
 ## Construir e ligar um módulo novo (t113u)
 1. **Contrato:** Pydantic v2 versionado em `src/pqbr/contratos/` (herda `Contrato`, campo/constante de versão SemVer); mudança incompatível sobe MAJOR.
 2. **Porta/adaptador por config:** porta em `src/pqbr/motores/` ou `integrations/`, adaptador escolhido por `config/*.json` (ex.: `config/motores.json`). Nada de nome de modelo/combo fixo no código (`config/modelos_9router.json`).
