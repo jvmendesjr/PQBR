@@ -5,6 +5,15 @@ Versionamento SemVer (MAJOR.MINOR.PATCH) a partir de t510. Versão do pacote can
 
 
 
+## [0.28.1] — 2026-10-29
+### Adicionado
+- Registro do teste do combo `core-ultra` no 9router (t158u): HTTP 200 (~3,4 s), modelo `claude-opus-5-5-medium`; `core-ulta` → 404; stream sem pedido; uso estimado ~2035 tokens de entrada (`estimated: true`).
+- Storyboard 1.3.0 offline do piloto EP1003 cafe-fraco (MG-05), fora do worker (`runtime/piloto-flow/EP1003/`).
+- Produção Flow EP1003: elementos anexados; **S01..S08** geradas (Nano Banana Pro, 0 créditos) via Camofox PQBR; `imagens_revisadas` ainda false; sem vídeo Omni/Veo.
+### Alterado
+- MG-12: combo `core-ultra` **criado e testado**; troca de `motion` em `config/modelos_9router.json` + reinício do worker continuam no portão do José (não feitos).
+- ESTADO-ATUAL P18/próximo passo: pendência restante = OK José para troca+reinício; produção Flow do EP1003: S01..S08 geradas (elenco feminino / menina-rosa); falta revisão José + vídeo/motion.
+
 ## [0.28.0] — 2026-10-29
 ### Adicionado
 - Aprovação em massa das fichas do catálogo visual e das REF-MG (t155u): `banco-fichas/indice.json` 3.1.0 (30 fichas → `permanente`; 11 SIT-* seguem `sugestao`); `referencias-motion/indice.json` 0.4.0 (REF-MG-00..07 → `aprovada`).
