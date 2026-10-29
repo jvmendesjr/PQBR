@@ -1,3 +1,7 @@
+
+## 0.29.2 — 2026-10-29 (t162u)
+- Flow EP1003: Agent/Character/Collections conforme `docs/processos/flow.md`; storyboard pedido ao Agente com HOLD por falha de render da UI.
+
 # CHANGELOG — PQBR
 
 Versionamento SemVer (MAJOR.MINOR.PATCH) a partir de t510. Versão do pacote canônico/contrato segue o próprio hash.

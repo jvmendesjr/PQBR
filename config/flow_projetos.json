@@ -22,11 +22,22 @@
       ],
       "fichas_ok": true,
       "storyboard_ok": false,
-      "storyboard_request": "NOT_SENT",
-      "motivo_hold_storyboard": "t148u José / t161u: aguardar padrão de prompt baseado na pesquisa (modelo, formato, detalhes completos)",
+      "storyboard_request": "SENT_AGENT_RENDER_FAIL",
+      "motivo_hold_storyboard": "t162u: pedido enviado ao Agente (sessão Weak Coffee Storyboard Planning; prompt SUBJECT/ACTION/CAMERA/ATMOSPHERE 9:16 c01..c08, refs @PERS-menina-rosa). UI: Falha ao renderizar a resposta. Sem grade/stills/clipes. 0 créditos confirmados. Settings OK: Confirm=Sempre, 9:16, Nano Banana Pro. Character PERS-menina-rosa nativo + Collections Referencias/Storyboard/Cenas/Finais.",
       "imagens_revisadas": false,
       "criado_em": "2026-10-29",
-      "decisao": "t161u"
+      "decisao": "t162u",
+      "agent_settings": {
+        "confirm": "Sempre",
+        "image": "9:16 x1 Nano Banana Pro",
+        "character": "PERS-menina-rosa",
+        "collections": [
+          "Referencias",
+          "Storyboard",
+          "Cenas",
+          "Finais"
+        ]
+      }
     }
   }
 }

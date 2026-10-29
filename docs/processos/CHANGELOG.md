@@ -1,5 +1,10 @@
 # CHANGELOG — docs/processos
 
+## [1.0.0] — 2026-10-29 (t162u operacional)
+### Operação EP1003
+- Aplicado `flow.md` no projeto `PQBR-EP1003-cafe-fraco`: Agent Confirm=Sempre, 9:16, Nano Banana Pro; Character `@PERS-menina-rosa`; Collections Referencias/Storyboard/Cenas/Finais.
+- Pedido de storyboard ao Agente **enviado**; Flow retornou *Falha ao renderizar a resposta* → HOLD (`storyboard_ok=false`). Sem stills/clipes; 0 créditos confirmados.
+
 ## [1.0.0] — 2026-10-29
 ### Adicionado
 - `CRIACAO-README.md` v1.0.0 — núcleo agnóstico (José t149u / decisão t160u) [APROVADO].
