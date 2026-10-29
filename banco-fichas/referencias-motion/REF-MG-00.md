@@ -1,6 +1,6 @@
 # REF-MG-00 — Papel e nanquim do canal
 
-- **Origem:** interna. Âncora da coletânea: a identidade visual do próprio canal, fixada em t146u a partir dos frames reais de `banco-fichas/referencias-canal/` (`ref-01..05` e `ref-canal-composta-sem-texto.png`).
+- **Origem:** interna. Âncora da coletânea: a identidade visual do próprio canal, fixada em t146u a partir de frames reais do canal (descartados em t149u por ordem do José; a âncora vigente é o conjunto de `banco-fichas/`, t148u).
 - **Estado:** `aguardando_ok_jose` (28/10/2026, t147u).
 - **Nota t148u:** esta ficha nasceu no nanquim de t146u, que o José reprovou e mandou descartar. A âncora visual passou a ser o conjunto flat colorido de `banco-fichas/` (`indice.json` 2.0.0) e esta ficha é re-basixada nele no MG-03 — inclusive a paleta de acento, que hoje lista as cores dos personagens `PERS-M`/`PERS-F` aposentados.
 - **Prova renderizada:** pendente — sai do catálogo v2 (MG-03) e vai para `provas/REF-MG-00.png`.

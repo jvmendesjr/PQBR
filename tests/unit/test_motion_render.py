@@ -47,3 +47,24 @@ def test_render_curto_e_deterministico_sem_violacao(tmp_path):
     assert (tmp_path / "r" / "tela_cheia" / "q00000.png").stat().st_size > 1000
     assert (tmp_path / "r" / "relatorio-render.json").exists()
     assert r.hashes["tela_cheia@4.5"] != r.hashes["tela_cheia@7.0"]   # entrando × assentado; assentado repete o mesmo quadro
+
+
+def test_pagina_usa_a_fonte_do_plano_por_arquivo_local():
+    html = render.montar_pagina(plano())
+    assert 'font-family:"PQBR-fredoka"' in html and "src:url(\"file:///" in html and "fredoka.ttf" in html
+    assert "http://" not in html.replace("http://www.w3.org", "") and "fonts.googleapis" not in html
+    assert 'PQBRMotion.FONTE = "\\"PQBR-fredoka\\"' in html
+
+
+@pytest.mark.skipif(not Path(CHROME).exists(), reason="sem Chrome")
+def test_fonte_do_plano_carrega_de_verdade_no_chrome(tmp_path):
+    sync = pytest.importorskip("playwright.sync_api")
+    (tmp_path / "p.html").write_text(render.montar_pagina(plano()), encoding="utf-8")
+    with sync.sync_playwright() as pw:
+        nav = pw.chromium.launch(executable_path=CHROME, headless=True, args=["--allow-file-access-from-files"])
+        pag = nav.new_page()
+        pag.goto((tmp_path / "p.html").as_uri())
+        pag.wait_for_function("window.pronto === true")
+        assert pag.evaluate("() => window.carregarFonte('PQBR-fredoka', ['700'])") is True
+        assert pag.evaluate("() => PQBRMotion.FONTE").startswith('"PQBR-fredoka"')
+        nav.close()

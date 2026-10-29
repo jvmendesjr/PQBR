@@ -16,7 +16,7 @@ Coletânea de referências visuais do bloco de motion (REGRAS §26, t145u/t147u)
 
 Três fontes, nesta ordem de autoridade:
 
-1. **A biblioteca do próprio canal** (âncora, REF-MG-00): os frames reais de `banco-fichas/referencias-canal/` e as fichas permanentes de t146u. É a referência que ninguém copia; toda variação mede distância dela.
+1. **A biblioteca do próprio canal** (âncora, REF-MG-00): o conjunto definitivo de `banco-fichas/` (t148u). Os frames antigos do canal foram descartados em t149u. É a referência que ninguém copia; toda variação mede distância dela.
 2. **O material de estudo que o José trouxe em t145u** (`pasta-temporario-deletar-depois/Motion Graphics VIDEO/`, fora do git): o manual "Stickman & Motion Studio", o artigo do 0xMovez, o "Motion Graphics.pdf" e os kits `motion-graphics-studio` e `motion-reel-kit`. Deles já saíram a técnica (quadro = função do tempo, molas, autocrítica) e a regra "name a look, feed a frame". Valem como gramática de processo. O docx "Paperclip Arquitetura…" está marcado pelo próprio José como chat trocado e **não** é referência.
 3. **Pesquisa nova de referências externas (MG-02):** o mantenedor prepara propostas (ficha em texto + link + data + prova renderizada pelo nosso motor, nunca frame de terceiro) e o José aprova uma a uma antes de virarem `aprovada`.
 
@@ -25,4 +25,4 @@ Nenhuma referência entra sem passar por essas regras; nenhuma vira `aprovada` s
 
 | id | nome | origem | estado |
 |---|---|---|---|
-| REF-MG-00 | Papel e nanquim do canal | interna (`banco-fichas/referencias-canal/`, t146u) | aguardando_ok_jose |
+| REF-MG-00 | Papel e nanquim do canal | interna (conjunto de `banco-fichas/`, t148u) | aguardando_ok_jose |

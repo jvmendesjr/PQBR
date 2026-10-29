@@ -25,15 +25,7 @@
     }
   ],
   "referencias_canal": {
-    "estado": "historico (ancoras do conjunto descartado de t146u; frames reais do canal preservados)",
-    "arquivos": [
-      "referencias-canal/ref-01-close-expressao-picole.jpeg",
-      "referencias-canal/ref-02-duplo-susto-calmo.png",
-      "referencias-canal/ref-03-apontando-mapa-brasil.png",
-      "referencias-canal/ref-04-corpo-inteiro-hachura-escudo.png",
-      "referencias-canal/ref-05-corpo-inteiro-olhos-fechados.png",
-      "referencias-canal/ref-canal-composta-sem-texto.png"
-    ]
+    "estado": "descartado (t149u, ordem do José): os 5 frames reais e a composta eram só referência e foram removidos do repositório; o histórico fica no git"
   },
   "fichas": [
     {

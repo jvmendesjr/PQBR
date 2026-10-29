@@ -32,9 +32,9 @@ def test_contagens_por_tipo_e_referencias_historicas():
     for item in idx["fichas"]:
         tipos[item["tipo"]] = tipos.get(item["tipo"], 0) + 1
     assert tipos == {"personagem": 7, "ambiente": 11, "objeto": 1, "animal": 1}
-    assert idx["referencias_canal"]["estado"].startswith("historico")
-    for ref in idx["referencias_canal"]["arquivos"]:
-        assert (FICHAS / ref).is_file()
+    assert idx["referencias_canal"]["estado"].startswith("descartado")
+    assert "arquivos" not in idx["referencias_canal"]
+    assert not (FICHAS / "referencias-canal").exists()
 
 
 def test_fichas_nanquim_de_t146u_foram_descartadas():

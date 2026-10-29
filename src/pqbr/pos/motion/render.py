@@ -9,17 +9,27 @@ from dataclasses import dataclass, field, asdict
 from pathlib import Path
 from .catalogo import arquivos_js
 from ...contratos.motion import PlanoMotion
+from . import fontes as banco_fontes
 
 CHROME = os.environ.get("PQBR_CHROME", "/usr/bin/google-chrome")
 W, H = 1080, 1920
 
 PAGINA = """<!doctype html><html><head><meta charset="utf-8">
-<style>html,body{margin:0;background:transparent}canvas{display:block}</style></head>
+<style>html,body{margin:0;background:transparent}canvas{display:block}
+%(face)s</style></head>
 <body><canvas id="c" width="%(w)d" height="%(h)d"></canvas>
 %(scripts)s
 <script>
 const PLANO = %(plano)s;
 const RECURSOS = {};
+PQBRMotion.FONTE = %(fonte)s;
+window.carregarFonte = async function (familia, pesos) {
+  const spec = p => p + " 48px '" + familia + "'";
+  for (const p of pesos) await document.fonts.load(spec(p), "Aáçãõ0123456789");
+  const faltou = pesos.filter(p => !document.fonts.check(spec(p)));
+  if (faltou.length) throw new Error("fonte não carregou: " + familia);
+  return true;
+};
 window.carregarRecursos = async function (mapa) {
   for (const [k, url] of Object.entries(mapa)) {
     const img = new Image();
@@ -58,7 +68,11 @@ def _snap(t: float, fps: int) -> float: return round(round(t * fps) / fps, 6)
 def montar_pagina(plano: PlanoMotion) -> str:
     scripts = "\n".join(f'<script src="file://{p}"></script>' for p in arquivos_js())
     dados = plano.model_dump(mode="json")
-    return PAGINA % {"w": W, "h": H, "scripts": scripts, "plano": json.dumps(dados, ensure_ascii=False)}
+    familia = banco_fontes.familia_css(plano.fonte)
+    # Fonte só por arquivo local do banco (nunca CDN); o genérico atrás é rede de segurança de layout, não escolha estética.
+    pilha = f'"{familia}", "Liberation Sans", Arial, sans-serif'
+    return PAGINA % {"w": W, "h": H, "scripts": scripts, "plano": json.dumps(dados, ensure_ascii=False),
+                     "face": banco_fontes.fonte_css(plano.fonte), "fonte": json.dumps(pilha)}
 
 
 def _png(data_url: str) -> bytes: return base64.b64decode(data_url.split(",", 1)[1])
@@ -76,6 +90,8 @@ def renderizar(plano: PlanoMotion, pasta: Path, chrome: str = CHROME, tela_cheia
         pag = nav.new_page(viewport={"width": W, "height": H}, device_scale_factor=1)
         pag.goto((pasta / "pagina.html").as_uri())
         pag.wait_for_function("window.pronto === true")
+        pesos = banco_fontes.obter(plano.fonte)["pesos"]
+        pag.evaluate("([f, p]) => window.carregarFonte(f, p)", [banco_fontes.familia_css(plano.fonte), sorted({str(pesos[0]), "700" if pesos[0] <= 700 <= pesos[1] else str(pesos[1])})])
         recursos = {k: Path(v).resolve().as_uri() for k, v in plano.recursos.items()}
         for k, v in plano.recursos.items():
             if not Path(v).is_file(): raise FileNotFoundError(f"recurso {k}: {v}")

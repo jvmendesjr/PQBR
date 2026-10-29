@@ -9,8 +9,10 @@ from typing import Literal
 from pydantic import Field, model_validator
 from . import Contrato, _PEDE_COMENTARIO
 from ..pos.motion.catalogo import carregar_catalogo, PALETA
+from ..pos.motion import fontes as banco_fontes
 
-VERSAO = "1.0.0"
+VERSAO = "1.1.0"
+FONTE_PADRAO = "fredoka"   # fonte do padrão do canal, aprovada pelo José em 28/10/2026 (t149u)
 EPISODIO = re.compile(r"^PQBR-EP\d{4,}$")
 # §26: nunca pedir clique, curtida, inscrição ou comentário na tela (t263).
 _PEDE_ACAO = re.compile(r"(?i)\b(clica|clique|curte|curta|inscreva|inscreve|compartilha|segue a[íi])\b")
@@ -53,11 +55,12 @@ class FaixaBloco(Contrato):
 
 
 class PlanoMotion(Contrato):
-    versao: Literal["1.0.0"] = VERSAO
+    versao: Literal["1.0.0", "1.1.0"] = VERSAO
     episodio: str = Field(pattern=EPISODIO.pattern)
     duracao_video_s: float = Field(gt=0, le=180)
     fps: int = Field(default=30, ge=24, le=60)
     elenco: Literal["PERS-M", "PERS-F"]   # IDs aposentados em t148u; o conjunto novo de banco-fichas/ entra no re-base do MG-03
+    fonte: str = Field(default=FONTE_PADRAO, pattern=r"^[a-z0-9]+(-[a-z0-9]+)*$")   # id no banco de fontes (pos/motion/fontes.py); só fonte aprovada
     bloco_numeros: BlocoNumeros
     bloco: FaixaBloco | None = None              # trecho cortado para tela cheia (o porquê)
     pecas: list[PecaMotion] = Field(min_length=1, max_length=40)
@@ -66,6 +69,10 @@ class PlanoMotion(Contrato):
 
     @model_validator(mode="after")
     def _regras(self):
+        try:
+            if banco_fontes.obter(self.fonte)["estado"] != "aprovada": raise ValueError(f"fonte {self.fonte} ainda não foi aprovada pelo José")
+        except KeyError:
+            raise ValueError(f"fonte fora do banco de fontes: {self.fonte}") from None
         cat = carregar_catalogo()
         itens = set(self.bloco_numeros.itens)
         for p in self.pecas:

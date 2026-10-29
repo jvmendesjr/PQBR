@@ -100,7 +100,7 @@
     g.texto = function (txt, x, y, opt) {
       const o = opt || {}, tam = o.tamanho || 64, peso = o.peso || "700", alinh = o.alinh || "esq";
       const maxL = o.maxLargura || (ZONA.x + ZONA.w - MARGEM - x), entre = o.entrelinha || 1.15;
-      ctx.font = peso + " " + tam + "px " + FONTE; ctx.fillStyle = o.cor || CORES.tinta;
+      ctx.font = peso + " " + tam + "px " + raiz.PQBRMotion.FONTE; ctx.fillStyle = o.cor || CORES.tinta;
       ctx.textBaseline = "top"; ctx.textAlign = alinh === "centro" ? "center" : alinh === "dir" ? "right" : "left";
       const linhas = o.semQuebra ? [String(txt)] : quebrarLinhas(ctx, txt, maxL);
       let maior = 0;

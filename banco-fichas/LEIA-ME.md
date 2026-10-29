@@ -24,7 +24,7 @@ A folha do personagem entra como referência (`Elemento`), citada pelo id curto.
 
 - As fichas em nanquim de t146u (descartadas pelo José em t148u).
 - A bíblia de 08/10 (Zé, Lia, Valdemar, Sandra) fica histórica. Nome não entra no vídeo.
-- Os 5 frames reais do canal em `referencias-canal/` ficam como histórico das âncoras de t146u; a âncora vigente é este conjunto.
+- Os frames antigos do canal (`referencias-canal/`) foram descartados em t149u por ordem do José; a âncora vigente é este conjunto.
 
 ## Protagonistas
 

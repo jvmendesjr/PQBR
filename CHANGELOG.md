@@ -5,6 +5,14 @@ Versionamento SemVer (MAJOR.MINOR.PATCH) a partir de t510. Versão do pacote can
 
 
 
+## [0.23.0] — 2026-10-28
+### Adicionado
+- Banco de fontes do motion (t149u): `src/pqbr/pos/motion/fontes.py` (leitor sfnt em Python puro, cobertura pt-BR, registro com licença livre e índice atômico, CLI) e `banco-fichas/referencias-motion/fontes/` com `baloo-2`, `fredoka`, `shantell-sans` e `short-stack` (OFL-1.1, nomes canônicos `<id>/<id>.ttf` e `LICENSE.txt`), todas aprovadas pelo José em 28/10/2026. Patrick Hand ficou de fora (licença traz e-mail pessoal do autor).
+- `PlanoMotion` 1.1.0: campo `fonte` (id do banco, só fonte aprovada; padrão `fredoka`, fonte do padrão do canal por decisão do José). `render.py` injeta o `@font-face` por arquivo local (`file://`, nunca CDN) e confere que a fonte carregou antes de desenhar; `motor.js` usa `PQBRMotion.FONTE`.
+- Testes: `tests/unit/test_motion_fontes.py` e casos novos em `test_motion_contrato.py` e `test_motion_render.py`.
+### Removido
+- `banco-fichas/referencias-canal/` (frames antigos do canal, obsoletos por ordem do José).
+
 ## [0.22.0] — 2026-10-28
 ### Adicionado
 - Padrão visual definitivo do canal (t148u): conjunto de 20 imagens selecionadas pelo José no Drive (`Fontes/Imagens`) versionado em `banco-fichas/` — catálogo do elenco com 12 personagens (`personagens/ELENCO-catalogo.png`), 6 folhas individuais multi-pose (`PERS-menina-rosa`, `PERS-cacheada`, `PERS-bone-verde`, `PERS-gravata-azul`, `PERS-roxo-ansioso`, `PERS-bob-oculos`), 11 ambientes 16:9 (`ambientes/AMB-*.png`), catálogo de 12 objetos (`objetos/OBJ-catalogo.png`) e de 12 animais domésticos (`animais/ANIM-catalogo.png`, pasta nova). 20 fichas Markdown novas e `banco-fichas/indice.json` 2.0.0 (estado `permanente`, decisão t148u, origem Drive; `referencias-canal/` marcada como histórico).

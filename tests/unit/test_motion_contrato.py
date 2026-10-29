@@ -97,3 +97,18 @@ def test_catalogo_tem_os_modelos_iniciais_com_camada():
     assert cat["barra-progresso"].camada == "sobre" and cat["transicao-cortina"].camada == "ambas"
     for m in cat.values():
         assert m.arquivo_js.is_file(), m.slug
+
+
+def test_fonte_padrao_do_canal_e_so_fonte_aprovada(tmp_path, monkeypatch):
+    assert plano().fonte == "fredoka" and plano().versao == "1.1.0"
+    assert plano(fonte="baloo-2").fonte == "baloo-2"
+    with pytest.raises(ValidationError, match="fora do banco de fontes"):
+        plano(fonte="nao-existe")
+    from pqbr.pos.motion import fontes
+    raiz = tmp_path / "banco"
+    base = fontes.RAIZ_FONTES
+    fontes.registrar(base / "fredoka" / "fredoka.ttf", id="candidata", origem_url="https://exemplo.org/f", licenca="OFL-1.1",
+                     arquivo_licenca=base / "fredoka" / "LICENSE.txt", raiz=raiz)
+    monkeypatch.setenv("PQBR_FONTES_DIR", str(raiz))
+    with pytest.raises(ValidationError, match="ainda não foi aprovada"):
+        plano(fonte="candidata")

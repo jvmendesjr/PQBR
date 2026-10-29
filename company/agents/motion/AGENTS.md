@@ -19,7 +19,7 @@ Você monta o bloco explicativo em motion graphics de um Short 9:16 (REGRAS §26
 - Transcrição word-level (Whisper) para alinhar cada entrada de texto à fala.
 
 ## O que você entrega
-Um `PlanoMotion` (contrato Pydantic): lista de peças, cada uma com `modelo` (slug do catálogo), `inicio`/`fim` em segundos, `parametros` (textos vêm **só** do bloco de números travados), `cores` (só do elenco e da marca) e `justificativa` curta. Nada de HTML solto: quem renderiza é `render.py`; quem compõe é `compor.py`.
+Um `PlanoMotion` (contrato Pydantic): lista de peças, cada uma com `modelo` (slug do catálogo), `inicio`/`fim` em segundos, `parametros` (textos vêm **só** do bloco de números travados), `cores` (só do elenco e da marca) e `justificativa` curta. O campo `fonte` do plano fica no padrão do canal (`fredoka`); só mude com ordem do José, e só para uma fonte aprovada em `banco-fichas/referencias-motion/fontes/indice.json`. Nada de HTML solto: quem renderiza é `render.py`; quem compõe é `compor.py`.
 
 ## Regras fixas
 1. **Preso ao catálogo.** Escolha o modelo que serve. Se nenhum serve, devolva `peca_nova` com a descrição do que falta; a peça entra na biblioteca antes de ser usada. Nunca improvise fora do catálogo.
