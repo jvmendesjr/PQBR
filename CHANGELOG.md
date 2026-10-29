@@ -5,6 +5,16 @@ Versionamento SemVer (MAJOR.MINOR.PATCH) a partir de t510. Versão do pacote can
 
 
 
+## [0.29.0] — 2026-10-29
+### Adicionado
+- Processo canônico de criação (t160u / José t149u): `docs/processos/CRIACAO-README.md` v1.0.0, playbook `flow.md`, stubs Vids/Vibes (`a descobrir`).
+- Pré-condição Temporal fail-closed: `processo_criacao_conferir` + `src/pqbr/pipeline/processo_criacao.py` (versão pinada + hash); testes unitários.
+### Alterado
+- REGRAS §6: processo de produção por episódio **APROVADO** (deixa de ser PROPOSTA t159u); ponteiros em ARQUITETURA e personas.
+- ESTADO-ATUAL / ROADMAP / LACUNAS / mapa (`01-episodio`, `07-cadeia-video`).
+### Notas
+- Reinício do `pqbr-episodio-worker` **não** feito (ativação da activity em runtime pendente de OK do José).
+
 ## [0.28.1] — 2026-10-29
 ### Adicionado
 - Registro do teste do combo `core-ultra` no 9router (t158u): HTTP 200 (~3,4 s), modelo `claude-opus-5-5-medium`; `core-ulta` → 404; stream sem pedido; uso estimado ~2035 tokens de entrada (`estimated: true`).

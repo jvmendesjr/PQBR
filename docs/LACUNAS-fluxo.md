@@ -4,6 +4,8 @@ A tabela de 12/10 que bloqueava o fluxo no login da CLI do Paperclip foi para `d
 
 ## Abertas
 
+0. **Ativação `processo_criacao_conferir` (t160u).** Activity e testes no repo; o `EpisodioWorkflow` já chama no início. **Falta reinício** do `pqbr-episodio-worker` (OK José) para valer em runtime. Docs: `docs/processos/`.
+
 1. **Auditor no episódio.** `EpisodioWorkflow` para na ficha e não espera `veredito_auditor` (t130u). O sinal continua registrado e não é chamado. Não chama `auditor_gemini` nem `auditor_loop_gemini`. A activity `auditor_gemini` está no worker da fila `camofox-pqbr`. O script `scripts/e2e/auditor_gemini_ep.py` ainda existe. Os critérios `boca_articula_fala`, `corte_oculos_cabeca` e `grotesco` já reprovam sozinhos (t108u); isso não falta.
 2. **Fechado (t130u).** `tipo=short` não gera vídeo. `nlm_gerar_short` recusa antes do CLI. O episódio segue para roteiro, SEO e `storyboard_criar`.
 3. **Códigos do lote 2510.** Os prontos em `docs/pesquisas/lote-2510/` não têm `PQBR-EP`. Sem código não há `drive_enviar` nem episódio no Postgres. Quem define os códigos é o José.

@@ -29,3 +29,6 @@ Roteirista, SEO e Caçador Sazonal são etapas de workflow que chamam o Notebook
 ## O que não é operação
 
 Não abrir organização, issue ou agente no Paperclip. Não tratar login da CLI do Paperclip como pendência. O código antigo dessa ponte permanece no repositório até o corte do F05-09 e não se altera sem OK do José.
+
+## Processo de criação (t160u)
+Antes de produzir imagem/vídeo: ler `docs/processos/CRIACAO-README.md` + playbook da plataforma. Temporal: `processo_criacao_conferir`.

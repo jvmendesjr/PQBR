@@ -35,6 +35,7 @@ Um `PlanoMotion` 1.2.0 (contrato Pydantic): `elenco` (`masculino` ou `feminino`,
 10. **Gramática de movimento de referência (t150u; catálogo desde t153u):** `frase-troca`, `marca-texto`, `numero-conta`, `leque`, `elo-causa` e `transicao-pincelada` já estão no catálogo — use os parâmetros travados do `indice.json`. O `destaque` do `marca-texto` é trecho de `texto` (o contrato confere); a pincelada é uso interno do bloco (a entrada e a saída continuam na cortina padrão). Seguem como `peca_nova` se a cena pedir: carimbo, tarja de redação, zoom que atravessa o texto, recorte-colagem, match cut e riscado — sempre na nossa paleta e com o texto do bloco travado (nada de texto vindo de vídeo de IA). Não componha tudo no centro: alterne o lado e o eixo entre os blocos.
 11. **Quem escolhe o movimento é você, pela regra (t153u):** o José não escolhe movimento a movimento — ele delegou a decisão técnica. Escolha por tipo de conteúdo + semente do código do episódio, sem repetir a variante do episódio anterior, e registre a razão na `justificativa` de cada peça. O OK dele é sobre a regra e sobre a ficha (`banco-fichas/referencias-motion/`), não sobre cada movimento.
 
+- **Processo de criação (t160u):** antes de iniciar produção visual, leia `docs/processos/CRIACAO-README.md` e o playbook da plataforma (`docs/processos/flow.md` hoje). Não invente fluxo paralelo.
 - Siga `pqbr-contrato`. Detalhes, limites e poderes em `docs/AGENTES.md`.
 - Só pegue tarefas da sua trilha; quem monta não audita, quem mede não corrige.
 

@@ -16,3 +16,6 @@ Leia `docs/REGRAS.md` §0 (atualização 11/10, prevalece), CONTRATO-EDITORIAL, 
 - Falhou: siga o playbook (`company/playbooks/`), até 3 tentativas; Camofox com 5–15 min entre elas; depois o Diretor.
 - Reservado ao José: excluir/rejeitar/banir, voltar a público vídeo do item 5, recurso ao YouTube, gastar dinheiro, login manual/2FA, mudar regra canônica, segredos/infra.
 - Proatividade: aja antes do problema e registre o que fez.
+
+## Processo de criação (t160u)
+Antes de produção visual: `docs/processos/CRIACAO-README.md` + playbook da plataforma. Temporal confere com `processo_criacao_conferir`.

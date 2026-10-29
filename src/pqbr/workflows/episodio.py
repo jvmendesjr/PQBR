@@ -121,6 +121,19 @@ async def publicacao_dryrun(p: dict) -> dict:
     return {"payload": str(f), "privacidade": "private", "agendado": False, "enviado": False}
 
 
+
+@activity.defn
+async def processo_criacao_conferir(plataforma: str = "flow") -> dict:
+    """Fail-closed: confere docs/processos canônico (versão pinada + hash + playbook).
+    Só vale em runtime após reinício do pqbr-episodio-worker (OK do José)."""
+    from ..pipeline import processo_criacao as pc
+    if plataforma not in pc.PLATAFORMAS:
+        raise RuntimeError(f"plataforma desconhecida: {plataforma}")
+    operavel = plataforma == "flow"
+    r = pc.exigir(plataforma, exigir_playbook_operavel=operavel)
+    return r.model_dump()
+
+
 @workflow.defn
 class PublicacaoWorkflow:
     @workflow.run
@@ -151,6 +164,7 @@ class EpisodioWorkflow:
     async def run(self, p: PedidoEpisodioE2E) -> ResultadoEpisodioE2E:
         curto = dict(start_to_close_timeout=timedelta(minutes=20), retry_policy=RetryPolicy(maximum_attempts=2))
         base = str(TRAB / p.slug)
+        await workflow.execute_activity(processo_criacao_conferir, args=["flow"], start_to_close_timeout=timedelta(minutes=1), retry_policy=RetryPolicy(maximum_attempts=1))
         pac = await workflow.execute_activity(pacote_garantir, **curto)               # t459: versão do pacote (hash)
         reg = await workflow.execute_activity(registro_buscar_caderno, p.codigo, **curto)
         nlm = await workflow.execute_child_workflow(
@@ -189,4 +203,4 @@ class EpisodioWorkflow:
 
 
 from .criativo import validar_roteiro, validar_seo, seo_9router, compliance_roteiro, ordenar_fontes, capa_conferir
-ATIVIDADES_EPISODIO = [storyboard_criar, capa_conferir, validar_roteiro, validar_seo, seo_9router, compliance_roteiro, ordenar_fontes, pos_produzir, extrair_quadros, capa_a9, drive_enviar, publicacao_dryrun, *ATIVIDADES_REGISTRO]
+ATIVIDADES_EPISODIO = [processo_criacao_conferir, storyboard_criar, capa_conferir, validar_roteiro, validar_seo, seo_9router, compliance_roteiro, ordenar_fontes, pos_produzir, extrair_quadros, capa_a9, drive_enviar, publicacao_dryrun, *ATIVIDADES_REGISTRO]

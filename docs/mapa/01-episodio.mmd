@@ -1,6 +1,7 @@
-%% EpisodioWorkflow (src/pqbr/workflows/episodio.py) — fila episodio-pqbr. t130u: para no storyboard.
+%% EpisodioWorkflow (src/pqbr/workflows/episodio.py) — fila episodio-pqbr. t130u: para no storyboard. t160u: processo canônico.
 flowchart TD
-  S(["PedidoEpisodioE2E"]) --> A1["pacote_garantir<br/>(hash do pacote canônico)"]
+  S(["PedidoEpisodioE2E"]) --> PC["processo_criacao_conferir<br/>docs/processos v1.0.0 + hash<br/>fail-closed"]
+  PC --> A1["pacote_garantir<br/>(hash do pacote canônico)"]
   A1 --> A2["registro_buscar_caderno"]
   A2 --> W1[["filho NotebookLMWorkflow<br/>fila notebooklm-pqbr<br/>roteiro, compliance e SEO<br/>sem vídeo"]]
   W1 --> D1{"nlm.ok e caderno?"}
@@ -11,6 +12,6 @@ flowchart TD
   D2 -- não --> F2(["fim: storyboard inválido<br/>pode_gerar_video false"])
   D2 -- sim --> F3(["fim: ficha gravada<br/>sem imagem, sem vídeo, sem publicação"])
   PUB["publicacao_dryrun<br/>registrada, não roda neste fluxo"]
-  N>"t130u: o NotebookLM não gera vídeo. Pós, quadros, Drive e publicação ficam no worker e só entram quando a cadeia Flow → Vids → Vibes existir. Vídeos do saldo não são mexidos. YOUTUBE_DRY_RUN segue true."]
+  N>"t130u: o NotebookLM não gera vídeo. Pós, quadros, Drive e publicação ficam no worker e só entram quando a cadeia Flow → Vids → Vibes existir. Vídeos do saldo não são mexidos. YOUTUBE_DRY_RUN segue true. t160u: reinício do worker pendente para ativar processo_criacao_conferir em runtime."]
   CV[["cadeia de vídeo 07: ainda não ligada<br/>mapa de cliques vazio até a tela ser usada"]]
   F3 -.-> CV

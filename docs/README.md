@@ -4,7 +4,8 @@ Atualizado em 27/10/2026 (t129u). Este índice distingue os documentos normativo
 
 ## Ordem de autoridade
 
-Siga a ordem definida em `REGRAS.md` §0:
+Siga a ordem definida em `REGRAS.md`
+- **Processo de criação (t160u):** [`processos/CRIACAO-README.md`](processos/CRIACAO-README.md) — consultar antes de cada produção; playbooks por plataforma em `processos/` §0:
 
 1. `REGRAS.md` — regras de negócio e governança.
 2. `SPEC.md` — requisitos.

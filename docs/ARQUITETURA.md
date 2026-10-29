@@ -8,6 +8,13 @@
 
 ## 1. Decisões de arquitetura (ADRs)
 
+### ADR-013: processo canônico de criação por plataforma [APROVADO t160u / José t149u]
+- **Documento:** `docs/processos/CRIACAO-README.md` (v1.0.0) + `flow.md` / stubs Vids·Vibes.
+- **Ordem:** projeto por episódio → fichas do `banco-fichas/` → refs faltantes pelo agente da plataforma → storyboard → stills → revisão → 1 clipe/cena → HOLD se cota/esgotamento.
+- **Temporal:** activity `processo_criacao_conferir` no `EpisodioWorkflow` (versão+hash fail-closed). Ativação em runtime exige reinício do `pqbr-episodio-worker` (OK José).
+- **Cadeia:** `CADEIA_VIDEO` = flow → google_vids → meta_vibes → HOLD.
+
+
 ### ADR-001: motor de orquestração (Temporal primeiro, DBOS como plano B)
 - **Resultado [APROVADO t374, 10/10]:** o **Temporal** foi aprovado no teste (TZ-01..TZ-04 e TZ-07; soak de 122 execuções em ~20 h, sem falha, perda ou duplicata, pico de 340 MiB). **Motor = Temporal; DBOS dispensado.**
 - **Decisão [APROVADO t283]:** a espinha do fluxo é **código + motor de workflow durável**, numa arquitetura híbrida pensada para vários canais. O **Temporal** é testado primeiro; o **DBOS** é o plano B.

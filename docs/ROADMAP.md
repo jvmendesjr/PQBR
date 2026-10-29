@@ -235,6 +235,7 @@ Ref.: `docs/pesquisas/PESQUISA-extensoes-geracao-em-serie.md` (leitura liberada,
 - [ ] **R3 · Adaptador Flow** (`GeradorVideo` sobre `NavegadorIdentidade`): storyboard de imagens em série → vídeo por cena (start frame/chain); concorrência 1, ritmo humano, falha rápida no drift. Piloto de 1 cena antes de 5 a 7.
 - [ ] **R4 · Adaptador Google Vids** (rota 2), mapeado do zero (não há extensão de referência).
 - [ ] **R5 · Adaptador Meta Vibes** (rota 3, obrigatória como fallback).
+- [x] **PROC-01 · Processo canônico de criação** (`docs/processos/`, activity `processo_criacao_conferir`, testes) — **OK José t149u / t160u** — Obs: playbooks Vids/Vibes ainda `a descobrir`; **reinício worker pendente** para ativar a activity em runtime.
 - [ ] **R6 · Ligar a cadeia no episódio:** o `EpisodioWorkflow` já não baixa vídeo do NotebookLM (t130u; essa geração foi descartada, não é alternativa). Falta ligar `CADEIA_VIDEO` com escolha explícita e registrada.
 - [ ] **R7 · HOLD final**: as 3 rotas falharam → estado HOLD + pedido de decisão (Telegram) + sinal do Temporal `decisao_video` (tentar de novo, rota, cancelar); testes com mocks.
 - [ ] **Logo, mapa do Brasil (t532, ajustado t131u):** não bloqueia gerar nem subir. Antes de tornar público, avisar o José para ele olhar `branding/overlay/logo-corner-br.png`, `logo-sting.png` e `logo-bug.png`. A correção do desenho pode ficar para depois.

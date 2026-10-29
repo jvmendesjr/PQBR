@@ -963,3 +963,11 @@ NÃO CABE:
 - **Lacunas a acrescentar (proposta):** Instruções do Agente; Characters `@Nome`; Confirm=Sempre; stills → revisão → vídeo; 1 ação/clipe; sem grade multi-painel no vídeo; ≤3 ingredients limpos; Collections/naming; scene matrix; 2 variantes still; Frames/Ingredients-to-Video depois do OK.
 - **REGRAS:** seção **PROPOSTA** em §6 (aguarda OK do José para virar canônica). Não trocou combo, não reiniciou worker, não gerou mídia nova no Flow nesta entrega.
 - **Agent Reach:** v1.5.0 no `pc`; update v1.6.0 disponível (não aplicado).
+
+## t160u (29/10/2026) — Processo canônico de criação por plataforma [APROVADO]
+- **José (sessão t149u):** tornar canônico o processo de criação; documento consultado antes de cada produção; cada plataforma com fluxo adaptado (componentes/navegação); ligar ao Temporal e aos agentes.
+- **Docs:** `docs/processos/CRIACAO-README.md` v1.0.0 (núcleo); `flow.md` v1.0.0; stubs `google-vids.md` / `meta-vibes.md` (`a descobrir`). Cadeia flow→vids→vibes→HOLD.
+- **REGRAS §6:** proposta t159u → **APROVADO** (este id). ARQUITETURA + personas apontam o doc.
+- **Código:** `src/pqbr/pipeline/processo_criacao.py` + activity `processo_criacao_conferir` no `EpisodioWorkflow` (versão pinada `1.0.0` + SHA-256 fail-closed). Testes `tests/unit/test_processo_criacao.py`.
+- **Ativação:** muda o workflow no código; **runtime só após reinício** do `pqbr-episodio-worker` (exige OK do José). Não reiniciado nesta entrega.
+- **Mapa:** `07-cadeia-video.mmd` / `01-episodio.mmd` + `gerar_index.py`.
