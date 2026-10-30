@@ -2,7 +2,7 @@
 
 Fonte única de "onde estamos". Não repete o ROADMAP: aponta os itens por id. **Atualize este arquivo a cada correção ou pendência resolvida.** O hook pre-commit exige isso quando o commit toca ROADMAP, LACUNAS, DECISOES-LOG ou CHANGELOG, e o `registrar_alteracao` exige isso para `tipo` correcao ou pendencia_resolvida.
 
-Atualizado: 29/10/2026 (sincronização 0.29.8: docs vivos sem storyboard como etapa, modelo de imagem Nano Banana 2.1, papéis dos agentes agente-primeiro; migração para codebase-memory-mcp, OK José, versão 0.29.5; t164u handoff EP1003 v2 segue pendente de imagens de início de cena/clipes) · versão 0.29.8
+Atualizado: 30/10/2026 (EP1003 v3: 8 imagens de início + movimentos registrados, revisão pendente; sincronização 0.29.8: docs vivos sem storyboard como etapa, modelo de imagem Nano Banana 2.1, papéis dos agentes agente-primeiro; migração para codebase-memory-mcp, OK José, versão 0.29.5; t164u handoff EP1003 v2 segue pendente de imagens de início de cena/clipes) · versão 0.29.8
 
 ## Storyboard removido definitivamente (29/10/2026, versão 0.29.7, ordem do José)
 
@@ -25,15 +25,15 @@ Atualizado: 29/10/2026 (sincronização 0.29.8: docs vivos sem storyboard como e
 
 1. `docs/BRIEFING.md` → contexto do canal.
 2. `docs/processos/CRIACAO-README.md` + `docs/processos/flow.md` → processo canônico (obrigatório antes de tocar Flow).
-3. `config/flow_projetos.json` → EP1003 aponta para o projeto **v2** ativo.
+3. `config/flow_projetos.json` → EP1003 aponta para o projeto **v3** ativo (v2 superado, não apagado).
 4. Camofox **só** PQBR (`127.0.0.1:9387`, `userId=pqbr`); humanizado; **nunca logar**; **nada apagar** (projeto antigo `025dcfef-…` HOLD intacto).
 5. Gates: `fichas_ok` / 0 créditos (parar se custo >0); imagens de início de cena só após fichas; clipes só após revisão (piloto: José; depois: automática); MG-12 / merge main **só com OK José**. Storyboard removido 29/10/2026 — não é mais gate.
 
 **Onde paramos (29/10/2026, America/Fortaleza):**
-- Projeto ativo: `PQBR-EP1003-cafe-fraco-v2` · id `3a9ca558-4c85-4502-8c19-7a8f42fa41dd` · https://flow.google.com/project/3a9ca558-4c85-4502-8c19-7a8f42fa41dd
-- Feito: processo canônico; projeto v2; Agent Confirm=Sempre / 9:16 / Nano Banana 2.1 (a partir de 29/10/2026; antes Nano Banana Pro); Character `@PERS-menina-rosa`; Collections (Referencias/Cenas/Finais; Storyboard removida 29/10/2026); fichas PERS/OBJ/AMB. **Histórico t163u:** storyboard texto Agente OK (c01..c08, 0 créditos) — feito na época, hoje só histórico, não é etapa nem gate. Evidência: `/workspace/flow-check/ep1003-v2-storyboard.png`. Commit t163u `bc4101b`.
-- **Não feito (próximo):** corrigir capa do Character PERS-menina-rosa (UI mostra imagem do café); confirmar/recriar coleção **Cenas** se ausente; gerar **8 imagens de início de cena** S01..S08 via Agente Flow (Nano Banana 2.1, 0 créditos); revisão (piloto: José; depois: automática); clipes; MG-05 motion (segurado, definição pendente); MG-11 lote; MG-12 `core-ultra`+reinício (OK José); JEV-02; merge → main (OK José); investigar ImportError residual na tool MCP `estado` se voltar a falhar.
-- Branch: `cursor/t132u-flow-imagem-849c`. Sem stills/clipes nesta handoff. Sem ações Flow em t164u.
+- Projeto ativo: `PQBR-EP1003-cafe-fraco-v3` · id `9c4ad934-32d5-4fe3-a342-f6ea77068ae7` · https://flow.google.com/project/9c4ad934-32d5-4fe3-a342-f6ea77068ae7
+- Feito (30/10/2026): projeto v3; Agent Confirm=Sempre / 9:16 x1 Nano Banana 2.1 / vídeo 9:16 x1 Omni 1.1 Flash; instrução do Agente salva; fichas PERS/OBJ/AMB entregues (recortes verificados); coleção Referencias (3 itens, id `cf6d735d-…`); **8 imagens de início S01..S08** (Girl holding coffee in kitchen; Girl pointing at coffee cup; Girl observing coffee strainer; Girl observing kettle in kitchen; Girl pouring water into kettle; Girl holding coffee in cafe; Girl walking with cup; Girl waving in cafe kitchen) e **8 prompts de movimento registrados** no Flow, sem vídeo gerado. **Histórico:** v2 (`3a9ca558-…`) ainda existe no Flow, nada apagado nele; storyboard texto t163u só histórico. Item da capa do Character v2 ficou superado pela recriação do v3; objeto Character não criado no v3 (Agente: só via seção Personagens da UI), cenas usam o Element PERS.
+- **Não feito (próximo):** revisão das 8 imagens (`imagens_revisadas`, piloto: José; depois: automática); clipes só após revisão; coleções Cenas/Finais (não aceitam ser criadas vazias no Flow, formam-se com as mídias); MG-05 motion (segurado, definição pendente); MG-11 lote; MG-12 `core-ultra`+reinício (OK José); JEV-02; merge → main (OK José); investigar ImportError residual na tool MCP `estado` se voltar a falhar.
+- Branch: `cursor/t132u-flow-imagem-849c`. Sem clipes/vídeos nesta handoff.
 
 ## Onde estamos
 - **Produção:** o lote do saldo em `runtime/lote-saldo/` (e o cartum 2D do Higgsfield) está **obsoleto** para publicação (t156u): o Higgsfield foi **DESCARTADO** do PQBR. Não apagar mídia sem OK. Os temas EP1002–EP1010 serão refeitos com Flow + flat + motion (**MG-11**). O EP1002 olhos-da-cara já está em `_descartado/` e o tema voltou a `proposto`. Ordem: fechar Flow → MG-05 (piloto 1) → José assiste → lote dos demais.
@@ -68,9 +68,9 @@ Atualizado: 29/10/2026 (sincronização 0.29.8: docs vivos sem storyboard como e
 | P12 | ERR-01: revisar os erros aceitáveis | ERR-01 | agente | depois dos primeiros dias de produção |
 | P13 | Proposta não aplicada: ferramentas só leitura para os agentes PydanticAI, sem MCP interno | F1-05 · t134u | José | sem efeito externo |
 | P14 | Proposta não aplicada: acompanhamento de mudanças (vigia de fallbacks, canário, deriva de contrato, `dev_diagnosticar`). Sem agente novo. O NotebookLM não entra no canário | F6-02 · t135u/t136u | José | registro no worker exige reinício |
-| P16 | Piloto EP1003 v2: storyboard texto OK em t163u (só histórico). Falta capa Character, coleção Cenas, 8 imagens de início de cena, revisão (piloto: José; depois: automática), clipes, MG-05 (segurado)/11/12. Antigo 025dcfef HOLD | t145u–t164u · Fase MG / 4V | José e agente | cenas→revisão→clipes; OK MG-12 |
+| P16 | Piloto EP1003 v3: 8 imagens de início S01..S08 geradas 30/10/2026 + movimentos registrados, sem vídeo. Falta revisão (piloto: José; depois: automática), clipes, MG-05 (segurado)/11/12. v2 superado (não apagado); antigo 025dcfef HOLD | t145u–t164u · Fase MG / 4V | José e agente | cenas→revisão→clipes; OK MG-12 |
 | P15 | **Feito (t143u/t144u).** Jev (`decide()`, JEV-EF) ligado aos fluxos (`CorrecaoAutonomaWorkflow`, canário, pop-up Flow, e-mail YouTube, repetição R10), limiares calibrados na API real TypeSafe (12 casos, 100% de acerto) e workers reiniciados com `TYPESAFE_API_KEY` ativa. Resta apenas JEV-02 (chave OpenRouter do fallback) | RNF-02 · JEV-EF · t144u | concluído | JEV-02 (fallback OpenRouter) quando José fornecer chave |
-| P17 | Processo canônico APROVADO (t160u, núcleo 1.1.0 ativo desde reinício 29/10/2026 23:14). EP1003 v2 storyboard texto OK em t163u (só histórico). **Do José:** revisão das imagens de início (piloto); folha nº 1; SIT-*; OK MG-12 / merge | t148u–t164u | José | cenas+revisão; folha nº 1; SIT-*; OK MG-12/merge |
+| P17 | Processo canônico APROVADO (t160u, núcleo 1.1.0 ativo desde reinício 29/10/2026 23:14). EP1003 v3: 8 imagens de início S01..S08 + movimentos registrados 30/10/2026, sem vídeo. **Do José:** revisão das imagens de início (piloto); folha nº 1; SIT-*; OK MG-12 / merge | t148u–t164u | José | cenas+revisão; folha nº 1; SIT-*; OK MG-12/merge |
 | P18 | Combo `core-ultra` **criado e testado** (t158u: HTTP 200, `claude-opus-5-5-medium`). **Falta:** OK José para trocar `motion` `core-alto`→`core-ultra` em `config/modelos_9router.json` + reinício. Medir custo real em `pqbr.consumo_modelos` no piloto | t157u/t158u · MG-12 | José | OK troca+reinício |
 
 ## Painel

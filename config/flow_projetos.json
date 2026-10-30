@@ -1,6 +1,6 @@
 {
   "versao": "1.0.0",
-  "atualizado": "2026-10-29",
+  "atualizado": "2026-10-30",
   "regra": "Um projeto Google Flow por episódio, nome PQBR-EP<nnnn>-<slug>. Projeto de testes e2dacb70… fica só para testes; nunca deletar sem OK José.",
   "projeto_testes": {
     "id": "e2dacb70-b9d0-4dc7-8b93-e6ac1688a454",
@@ -11,9 +11,9 @@
     "EP1003": {
       "codigo": "PQBR-EP1003",
       "slug": "cafe-fraco",
-      "titulo": "PQBR-EP1003-cafe-fraco-v2",
-      "id": "3a9ca558-4c85-4502-8c19-7a8f42fa41dd",
-      "url": "https://flow.google.com/project/3a9ca558-4c85-4502-8c19-7a8f42fa41dd",
+      "titulo": "PQBR-EP1003-cafe-fraco-v3",
+      "id": "9c4ad934-32d5-4fe3-a342-f6ea77068ae7",
+      "url": "https://flow.google.com/project/9c4ad934-32d5-4fe3-a342-f6ea77068ae7",
       "conta": "camofox-pqbr-pro",
       "fichas_entregues": [
         "PERS-menina-rosa",
@@ -22,7 +22,7 @@
       ],
       "fichas_ok": true,
       "imagens_revisadas": false,
-      "criado_em": "2026-10-29",
+      "criado_em": "2026-10-30",
       "decisao": "t163u",
       "agent_settings": {
         "confirm": "Sempre",
@@ -32,7 +32,8 @@
           "Referencias",
           "Cenas",
           "Finais"
-        ]
+        ],
+        "video": "9:16 x1 Omni 1.1 Flash"
       },
       "projeto_anterior_hold": {
         "id": "025dcfef-7eef-4551-b60c-5106812508db",
@@ -41,7 +42,29 @@
         "motivo": "t162u HOLD Falha ao renderizar; mantido intacto (nada apagado) — José t151u / t163u v2"
       },
       "nota_v2": "t163u: novo projeto Flow PQBR-EP1003-cafe-fraco-v2 (3a9ca558-…). Agent Confirm=Sempre, 9:16, Nano Banana 2.1 (a partir de 29/10/2026, ordem do José; antes Nano Banana Pro); fichas; Character PERS-menina-rosa; Collections Referencias/Cenas/Finais (Storyboard removida 29/10/2026); storyboard de 8 painéis feito em t163u fica só como histórico, não é mais etapa nem gate. Projeto antigo 025dcfef… intacto.",
-      "cenas_individuais": true
+      "cenas_individuais": true,
+      "projeto_v2_superado": {
+        "id": "3a9ca558-4c85-4502-8c19-7a8f42fa41dd",
+        "titulo": "PQBR-EP1003-cafe-fraco-v2",
+        "url": "https://flow.google.com/project/3a9ca558-4c85-4502-8c19-7a8f42fa41dd",
+        "nota": "Ainda existe no Flow em 30/10/2026 (Character, imagens, coleção Storyboard, sessão antiga); nada foi apagado nele. O v3 começa limpo, por ordem do José de 30/10/2026 (Flow zerado, recriar do zero)."
+      },
+      "imagens_inicio": [
+        "S01 Girl holding coffee in kitchen",
+        "S02 Girl pointing at coffee cup",
+        "S03 Girl observing coffee strainer",
+        "S04 Girl observing kettle in kitchen",
+        "S05 Girl pouring water into kettle",
+        "S06 Girl holding coffee in cafe",
+        "S07 Girl walking with cup",
+        "S08 Girl waving in cafe kitchen"
+      ],
+      "imagens_geradas": true,
+      "movimento_registrado": true,
+      "videos": [],
+      "colecao_referencias_id": "cf6d735d-edc1-43a7-9cf7-dd4c25ca8d86",
+      "character_nota": "Objeto Character não criado no v3: o Agente do Flow disse que não é possível criar personagem pelo chat, só na seção Personagens da UI (rota não encontrada nesta sessão). As cenas usam o Element PERS-menina-rosa-frente (recorte giro-frente da folha) + AMB-cafe + OBJ-caneca, e a instrução do Agente pinada no projeto.",
+      "nota_v3": "2026-10-30: projeto v3 criado via Camofox (acesso livre, conta PRO José Vieira). Settings verificados: Confirm=Sempre, imagem 9:16 x1 Nano Banana 2.1, vídeo 9:16 x1 Omni 1.1 Flash. Instrução do Agente PQBR EP1003 - estilo e regras salva. 8 imagens de início S01..S08 geradas (Nano Banana 2.1, 9:16, 0 créditos por still) e 8 prompts de movimento registrados no Flow, sem vídeo gerado (portão de revisão do piloto pendente: José). Motion slots definidos no plano v3 (elo-causa após c03, transicao-pincelada entre c07 e c08), execução segurada em MG-05. Plano validado em runtime/piloto-flow/EP1003/PLANO-CENAS-v3.md/.json."
     }
   }
 }

@@ -21,7 +21,7 @@ def test_ep1003_fichas_ok_sem_storyboard():
     assert r.ok is True
     assert r.fichas_ok is True
     assert r.pode_gerar_cenas is True
-    assert r.project_id == "3a9ca558-4c85-4502-8c19-7a8f42fa41dd"
+    assert r.project_id == "9c4ad934-32d5-4fe3-a342-f6ea77068ae7"
 
 
 def test_exigir_antes_cenas_libera_com_fichas():

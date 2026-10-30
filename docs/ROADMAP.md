@@ -241,13 +241,13 @@ Ref.: `docs/pesquisas/PESQUISA-extensoes-geracao-em-serie.md` (leitura liberada,
 - [ ] **Logo, mapa do Brasil (t532, ajustado t131u):** não bloqueia gerar nem subir. Antes de tornar público, avisar o José para ele olhar `branding/overlay/logo-corner-br.png`, `logo-sting.png` e `logo-bug.png`. A correção do desenho pode ficar para depois.
 
 ### Piloto EP1003 cafe-fraco (Flow · handoff t164u)
-Projeto ativo: `PQBR-EP1003-cafe-fraco-v2` (`3a9ca558-4c85-4502-8c19-7a8f42fa41dd`). Antigo `025dcfef-…` HOLD intacto. Camofox PQBR only; 0 créditos; nunca logar; nada apagar. Próximo agente: BRIEFING + `processos/CRIACAO-README` + `flow.md` + `config/flow_projetos.json`.
+Projeto ativo: `PQBR-EP1003-cafe-fraco-v3` (`9c4ad934-32d5-4fe3-a342-f6ea77068ae7`). v2 (`3a9ca558-…`) superado, não apagado. Antigo `025dcfef-…` HOLD intacto. Camofox PQBR only; 0 créditos; nunca logar; nada apagar. Próximo agente: BRIEFING + `processos/CRIACAO-README` + `flow.md` + `config/flow_projetos.json`.
 - [x] Processo canônico de criação (`docs/processos/`, PROC-01 / t160u) — 2026-10-29 — commit t160u
 - [x] Projeto Flow v2 `PQBR-EP1003-cafe-fraco-v2` + Agent/Character/Collections + fichas PERS/OBJ/AMB — 2026-10-29 — commit t163u `bc4101b`
 - [x] Storyboard **texto** Agente OK (8 painéis c01..c08, 0 créditos) — 2026-10-29 — commit t163u — **só histórico; removido do fluxo em 29/10/2026 (0.29.7)**
-- [ ] Corrigir capa do Character `PERS-menina-rosa` (UI mostra imagem do café / AMB)
-- [ ] Garantir coleção **Cenas** no projeto v2 (recriar se ausente; não apagar outras)
-- [ ] 8 imagens de início de cena S01..S08 via Flow Agente (Nano Banana 2.1, 0 créditos; parar se custo >0)
+- [x] Projeto Flow v3 `PQBR-EP1003-cafe-fraco-v3` + Agent/instruções/Referencias + fichas PERS/OBJ/AMB — 2026-10-30 (capa do Character v2 superada pela recriação; Character como objeto não criado no v3, Element PERS usado)
+- [x] 8 imagens de início de cena S01..S08 via Flow Agente (Nano Banana 2.1, 9:16, 0 créditos por still) + 8 prompts de movimento registrados, sem vídeo — 2026-10-30
+- [ ] Garantir coleções **Cenas/Finais** (não aceitam ser criadas vazias no Flow; formam-se com as mídias)
 - [ ] Revisão das imagens de início (`imagens_revisadas`) — piloto: José; depois: automática
 - [ ] Clipes / vídeo por cena (só após revisão das imagens de início)
 - [ ] MG-05 — edição motion no piloto + `gemini_juiz`

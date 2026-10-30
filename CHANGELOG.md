@@ -1,3 +1,9 @@
+## Não lançado — 2026-10-30 — EP1003 v3: 8 imagens de início + movimentos (sem vídeo)
+
+- Projeto Flow novo `PQBR-EP1003-cafe-fraco-v3` (`9c4ad934-…`), criado via Camofox com acesso livre (conta PRO José Vieira): settings verificados Confirm=Sempre, imagem 9:16 x1 Nano Banana 2.1, vídeo 9:16 x1 Omni 1.1 Flash; instrução do Agente salva; fichas PERS/OBJ/AMB entregues; coleção Referencias com 3 itens.
+- 8 imagens de início S01..S08 geradas (Nano Banana 2.1, 9:16) e 8 prompts de movimento registrados no Flow, sem vídeo gerado — portão de revisão do piloto pendente (José). Correção: o v2 (`3a9ca558-…`) ainda existe no Flow e nada foi apagado nele; o v3 começa limpo. Objeto Character não criado no v3 (Agente: só via seção Personagens da UI); cenas usam o Element PERS. Plano validado em `runtime/piloto-flow/EP1003/PLANO-CENAS-v3.md/.json` (gitignored).
+- Núcleo de criação continua 1.1.0, sem mudança de versão do projeto e sem reinício de worker.
+
 
 ## 0.29.8 — 2026-10-29 — Sincronização dos documentos vivos (ordem do José)
 
