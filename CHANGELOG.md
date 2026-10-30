@@ -1,3 +1,17 @@
+# CHANGELOG — PQBR
+
+## [0.29.9] — 2026-10-30 (passo 1 direção NLM → CenaIndividual; José pt161u)
+### Adicionado
+- Passo 1 pós-roteiro no `EpisodioWorkflow`: activity `direcao_cenas_nlm` (porta `DiretorCenas`, adaptador NotebookLM via notebooklm-py + adaptador falso para testes).
+- Contrato versionado `DirecaoCenas` 1.0.0 (`src/pqbr/contratos/direcao_cenas.py`): lista de `CenaIndividual` + estilo + `proximo=flow_cenas_individuais_pendente`.
+- Validação fail-closed (`pipeline/validar_direcao_cenas.py`): refs no catálogo, trava stickman, persona adulta quando a ficha diz adulta, nada de `girl`/`menina`-idade para PERS-menina-rosa.
+- Gates após a direção: `flow_projeto_exigir_antes_cenas` + `processo_criacao_conferir`. Passo 2 (adaptador Flow) permanece pendente.
+- Testes com adaptador falso (sem rede): `tests/unit/test_direcao_cenas.py`.
+- Ficha `PERS-menina-rosa` no `indice.json` alinhada ao MD (mulher jovem adulta, tag `adulta`).
+- Handoffs: `docs/HANDOFF-EP1003-20261030.md`, `docs/PROMPT-CORRECAO-BLOQUEIO-EP1003.md`.
+### Não feito (de propósito)
+- Reinício de worker; geração Flow/NLM; merge em main; alteração em `docs/mapa/` (falta OK José — `test_mapa` aponta as duas activities novas).
+
 ## Não lançado — 2026-10-30 — EP1003 v3: 8 imagens de início + movimentos (sem vídeo)
 - Regeneração 30/10/2026 (revisão do piloto, José): novas versões de S03, S04, S05 e S07 com a correção adulta — mulher jovem adulta, em pé no chão, sem banquinho, sem braços realistas extras (ficha PERS-menina-rosa e playbook atualizados, commit ea449f4). S07 precisou de 3 tentativas (falha de política, pergunta de confirmação não respondida, geração com movimento registrado). Versões antigas com problema permanecem na biblioteca, não apagadas. Nenhum vídeo gerado; revisão do piloto ainda pendente.
 
@@ -25,7 +39,6 @@
 ## 0.29.2 — 2026-10-29 (t162u)
 - Flow EP1003: Agent/Character/Collections conforme `docs/processos/flow.md`; storyboard pedido ao Agente com HOLD por falha de render da UI.
 
-# CHANGELOG — PQBR
 ## [0.29.7] — 2026-10-29 (storyboard removido definitivamente; cenas individuais; agente primeiro)
 ### Removido
 - Storyboard do fluxo ativo, por ordem definitiva do José: board geral, `storyboard_criar`, `PROMPT_STORYBOARD`, gate `storyboard_ok` e etapa de storyboard no `EpisodioWorkflow` e nos playbooks. Motivo: um encarte só com muitas cenas facilita o erro do agente; cenas individuais com movimento bem definido no prompt são mais determinísticas. Código antigo preservado em `scripts/_obsoleto/` com índice em `docs/_obsoleto/INDICE-storyboard-removido.md`; nada foi apagado.

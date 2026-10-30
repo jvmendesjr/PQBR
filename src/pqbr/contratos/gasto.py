@@ -71,3 +71,13 @@ GASTO_FLOW_VIDEO = AutorizacaoGasto(
     deterministico="gasta o saldo que houver no Flow; acabou, Google Vids; depois Meta Vibes",
     agente="lê a tela no Camofox e segue; não inventa seletor",
 )
+
+
+GASTO_DIRECAO_CENAS = AutorizacaoGasto(
+    etapa="direcao_cenas",
+    modelo="notebooklm-chat",
+    pode_gastar=True,
+    meio="chat_caderno",
+    deterministico="JSON vira DirecaoCenas 1.0.0 + validacao fail-closed; sem imagem/video",
+    agente="o ask devolve o JSON; nao escolhe modelo",
+)

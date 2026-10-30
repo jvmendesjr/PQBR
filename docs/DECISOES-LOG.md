@@ -1033,3 +1033,9 @@ NÃO CABE:
   (ROADMAP 26/10, CHANGELOG/DECISOES, _obsoleto/) e nunca é reescrita como se não tivesse existido.
 - Verificação: AGENTS.md regenerado, mapa regenerado e verificado, suíte canônica e processo_criacao_conferir
   conferidos, estado registrado no Hindsight via registrar_alteracao.
+
+## 30/10/2026 ~19:23 — passo 1 direção NLM→CenaIndividual (José pt161u)
+- **José:** deixar o código do passo 1 pronto; não reiniciar worker; não gerar no Flow nem NotebookLM; não merge em main; não apagar; não mexer no mapa sem OK; commit com CHANGELOG/ROADMAP/LACUNAS/DECISOES-LOG + handoffs pendentes; depois sumário das etapas de produção.
+- **Aplicado:** porta `DiretorCenas` + adaptador NotebookLM (`notebooklm-py`) + adaptador falso; contrato `DirecaoCenas` 1.0.0; validação fail-closed (refs, stickman, adulta, sem girl para PERS-menina-rosa); `EpisodioWorkflow` chama direção + `exigir_antes_cenas` + `processo_criacao` e para com `proximo=flow_cenas_individuais_pendente` (passo 2 pendente).
+- **Pendente de OK José:** atualizar `docs/mapa/01-episodio.mmd` (activities novas); reinício do worker para carregar as activities em runtime; passo 2 adaptador Flow.
+

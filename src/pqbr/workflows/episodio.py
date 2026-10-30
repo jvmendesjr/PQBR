@@ -1,7 +1,8 @@
 """EpisodioWorkflow + PublicacaoWorkflow (dry-run) — fila `episodio-pqbr` (t427, t130u; storyboard removido 29/10/2026, ordem do José).
 Ordem vigente: NotebookLM intelectual (roteiro, compliance, SEO; sem vídeo) → cenas individuais no Google Flow.
-O workflow para no roteiro aprovado: as cenas são criadas uma por vez pelo Agente do Flow (imagem de início
-+ movimento definido no prompt), sem board. Não há mais etapa de storyboard neste workflow.
+Após o roteiro: activity de direção (NotebookLM → lista CenaIndividual, fail-closed), gates
+flow_projeto.exigir_antes_cenas + processo_criacao; passo 2 (adaptador Flow) permanece pendente.
+Não há mais etapa de storyboard neste workflow.
 Pós, quadros, Drive e publicação dry-run continuam registrados e não rodam neste fluxo.
 Nada torna público. Os vídeos já prontos do saldo não entram aqui."""
 from __future__ import annotations
@@ -121,6 +122,38 @@ async def publicacao_dryrun(p: dict) -> dict:
 
 
 
+
+@activity.defn
+async def flow_projeto_exigir_antes_cenas(codigo_ep: str) -> dict:
+    """Fail-closed: projeto Flow do episódio com fichas_ok antes das cenas."""
+    from ..pipeline import flow_projeto as fp
+    return fp.exigir_antes_cenas(codigo_ep).model_dump()
+
+
+@activity.defn
+async def direcao_cenas_nlm(pedido: dict) -> dict:
+    """Passo 1 pós-roteiro: NotebookLM devolve direção/prompts; valida CenaIndividual fail-closed.
+    pedido.adaptador=falso só para testes (sem rede). Default = notebooklm."""
+    from ..motores.direcao_cenas import AdaptadorFalsoDirecao, AdaptadorNotebookLMDirecao, GASTO_DIRECAO_CENAS
+    from ..contratos import ESTILO_PADRAO_STICKMAN
+    if not GASTO_DIRECAO_CENAS.pode_gastar:
+        raise RuntimeError("gasto direção cenas bloqueado")
+    adaptador = (pedido.get("adaptador") or "notebooklm").lower()
+    if adaptador == "falso":
+        motor = AdaptadorFalsoDirecao(pedido.get("cenas_falsas"))
+    elif adaptador == "notebooklm":
+        motor = AdaptadorNotebookLMDirecao()
+    else:
+        raise RuntimeError(f"adaptador direção desconhecido: {adaptador}")
+    r = motor.direcionar(
+        codigo=pedido["codigo"],
+        slug=pedido["slug"],
+        caderno=pedido["caderno"],
+        n_cenas=int(pedido["n_cenas"]),
+        estilo=pedido.get("estilo") or ESTILO_PADRAO_STICKMAN,
+    )
+    return r.model_dump(mode="json")
+
 @activity.defn
 async def processo_criacao_conferir(plataforma: str = "flow") -> dict:
     """Fail-closed: confere docs/processos canônico (versão pinada + hash + playbook).
@@ -175,12 +208,27 @@ class EpisodioWorkflow:
         if not nlm.ok or not nlm.caderno:
             return ResultadoEpisodioE2E(etapa="roteiro", ok=False, detalhes=nlm.model_dump())
         self._criativo = nlm.criativo
+        # Passo 1: direção NLM → CenaIndividual (fail-closed). Adaptador Flow = passo 2, ainda pendente.
+        uma = dict(start_to_close_timeout=timedelta(minutes=25), retry_policy=RetryPolicy(maximum_attempts=1))
+        direcao = await workflow.execute_activity(
+            direcao_cenas_nlm,
+            {"codigo": p.codigo, "slug": p.slug, "caderno": nlm.caderno, "n_cenas": p.n_cenas, "adaptador": "notebooklm"},
+            **uma)
+        await workflow.execute_activity(
+            flow_projeto_exigir_antes_cenas, args=[p.codigo],
+            start_to_close_timeout=timedelta(minutes=1), retry_policy=RetryPolicy(maximum_attempts=1))
+        await workflow.execute_activity(
+            processo_criacao_conferir, args=["flow"],
+            start_to_close_timeout=timedelta(minutes=1), retry_policy=RetryPolicy(maximum_attempts=1))
+        # Passo 2 (adaptador Flow / cenas individuais) NÃO implementado — permanece pendente.
         return ResultadoEpisodioE2E(
-            etapa="roteiro", ok=True,
+            etapa="direcao_cenas", ok=True,
             detalhes={"caderno": nlm.caderno,
                       "criativo": {k: v for k, v in nlm.criativo.items() if k != "markdown"},
-                      "proximo": "cenas_individuais_flow"})
+                      "direcao": {k: v for k, v in direcao.items() if k != "cenas"} | {"n_cenas": len(direcao.get("cenas") or [])},
+                      "cenas": direcao.get("cenas"),
+                      "proximo": "flow_cenas_individuais_pendente"})
 
 
 from .criativo import validar_roteiro, validar_seo, seo_9router, compliance_roteiro, ordenar_fontes, capa_conferir
-ATIVIDADES_EPISODIO = [processo_criacao_conferir, capa_conferir, validar_roteiro, validar_seo, seo_9router, compliance_roteiro, ordenar_fontes, pos_produzir, extrair_quadros, capa_a9, drive_enviar, publicacao_dryrun, *ATIVIDADES_REGISTRO]
+ATIVIDADES_EPISODIO = [processo_criacao_conferir, flow_projeto_exigir_antes_cenas, direcao_cenas_nlm, capa_conferir, validar_roteiro, validar_seo, seo_9router, compliance_roteiro, ordenar_fontes, pos_produzir, extrair_quadros, capa_a9, drive_enviar, publicacao_dryrun, *ATIVIDADES_REGISTRO]

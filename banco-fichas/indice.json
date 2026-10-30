@@ -164,8 +164,8 @@
     {
       "id": "PERS-menina-rosa",
       "tipo": "personagem",
-      "titulo": "Menina de rabo de cavalo e vestido rosa",
-      "trava": "Stickman 2D flat colorido do canal Porquê BR: menina de cabelo preto preso em rabo de cavalo lateral com prendedor rosa, vestido rosa chapado sem mangas e sapatos brancos ovais de contorno preto. Cabeça redonda branca grande com contorno preto, dois olhos pretos sempre visíveis, boca de reação (nunca articula fala), corpo e membros em traço preto fino, fundo claro em tom creme, sem texto e sem marca na imagem.",
+      "titulo": "Mulher jovem adulta de rabo de cavalo e vestido rosa",
+      "trava": "Stickman 2D flat colorido do canal Porquê BR: mulher jovem adulta de cabelo preto preso em rabo de cavalo lateral com prendedor rosa, vestido rosa chapado sem mangas e sapatos brancos ovais de contorno preto. Cabeça redonda branca grande com contorno preto, dois olhos pretos sempre visíveis, boca de reação (nunca articula fala), corpo e membros em traço preto fino, fundo claro em tom creme, sem texto e sem marca na imagem.",
       "proibido": "boca aberta articulando fala (boca_articula_fala), corte da cabeça no topo (corte_oculos_cabeca), dedos realistas, pele humana",
       "estado": "permanente",
       "origem": "jose",
@@ -176,7 +176,8 @@
         "feminino",
         "protagonista",
         "rosa",
-        "rabo-de-cavalo"
+        "rabo-de-cavalo",
+        "adulta"
       ],
       "imagem": "personagens/PERS-menina-rosa-folha.png",
       "recortes": {
