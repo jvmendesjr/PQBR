@@ -64,7 +64,28 @@
       "videos": [],
       "colecao_referencias_id": "cf6d735d-edc1-43a7-9cf7-dd4c25ca8d86",
       "character_nota": "Objeto Character não criado no v3: o Agente do Flow disse que não é possível criar personagem pelo chat, só na seção Personagens da UI (rota não encontrada nesta sessão). As cenas usam o Element PERS-menina-rosa-frente (recorte giro-frente da folha) + AMB-cafe + OBJ-caneca, e a instrução do Agente pinada no projeto.",
-      "nota_v3": "2026-10-30: projeto v3 criado via Camofox (acesso livre, conta PRO José Vieira). Settings verificados: Confirm=Sempre, imagem 9:16 x1 Nano Banana 2.1, vídeo 9:16 x1 Omni 1.1 Flash. Instrução do Agente PQBR EP1003 - estilo e regras salva. 8 imagens de início S01..S08 geradas (Nano Banana 2.1, 9:16, 0 créditos por still) e 8 prompts de movimento registrados no Flow, sem vídeo gerado (portão de revisão do piloto pendente: José). Motion slots definidos no plano v3 (elo-causa após c03, transicao-pincelada entre c07 e c08), execução segurada em MG-05. Plano validado em runtime/piloto-flow/EP1003/PLANO-CENAS-v3.md/.json."
+      "nota_v3": "2026-10-30: projeto v3 criado via Camofox (acesso livre, conta PRO José Vieira). Settings verificados: Confirm=Sempre, imagem 9:16 x1 Nano Banana 2.1, vídeo 9:16 x1 Omni 1.1 Flash. Instrução do Agente PQBR EP1003 - estilo e regras salva. 8 imagens de início S01..S08 geradas (Nano Banana 2.1, 9:16, 0 créditos por still) e 8 prompts de movimento registrados no Flow, sem vídeo gerado (portão de revisão do piloto pendente: José). Motion slots definidos no plano v3 (elo-causa após c03, transicao-pincelada entre c07 e c08), execução segurada em MG-05. Plano validado em runtime/piloto-flow/EP1003/PLANO-CENAS-v3.md/.json.",
+      "imagens_regeneradas_20261030": {
+        "S03": {
+          "titulo_novo": "Nova versão de S03: Menina observando coador de pano sobre suporte de madeira em cozinha antiga",
+          "id": "5a472695-d196-4389-b411-d360a891ce96",
+          "movimento": "registrado (sessão Vintage Kitchen; verificador procurava guardado e o Agente responde Guardei)"
+        },
+        "S04": {
+          "titulo_novo": "Nova versão de S04: Menina observando bule de alumínio amassado soltando fumaça",
+          "movimento": "registrado na sessão Vintage Kitchen (mesmo padrão da S05)"
+        },
+        "S05": {
+          "titulo_novo": "Nova versão de S05: Menina observando água quente sendo despejada no bico de um bule",
+          "id": "cbdfcdd9-e851-41e1-693e-3f98e1bbc1f6",
+          "movimento": "registrado e confirmado pelo Agente: Anotado! Guardei o prompt de movimento da cena S05"
+        },
+        "S07": {
+          "titulo_novo": "Nova versão de S07 gerada em sessão posterior (após falha de política na primeira tentativa e pergunta de confirmação não respondida na segunda)",
+          "movimento": "registrado e confirmado pelo Agente: O prompt de movimento foi registrado e guardado junto à nova imagem da Cena S07"
+        }
+      },
+      "imagens_antigas_com_problema": "Versões originais de S03, S04, S05 e S07 permanecem na biblioteca, não apagadas; as novas versões são as vigentes para revisão. S05 original tinha braços realistas e personagem em banquinho; S07 original e nova versão em plano geral ainda deixam a personagem pequena no quadro por perspectiva."
     }
   }
 }
