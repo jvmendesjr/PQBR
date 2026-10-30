@@ -21,7 +21,7 @@
         "AMB-cafe"
       ],
       "fichas_ok": true,
-      "imagens_revisadas": false,
+      "imagens_revisadas": true,
       "criado_em": "2026-10-30",
       "decisao": "t163u",
       "agent_settings": {
@@ -85,7 +85,8 @@
           "movimento": "registrado e confirmado pelo Agente: O prompt de movimento foi registrado e guardado junto à nova imagem da Cena S07"
         }
       },
-      "imagens_antigas_com_problema": "Versões originais de S03, S04, S05 e S07 permanecem na biblioteca, não apagadas; as novas versões são as vigentes para revisão. S05 original tinha braços realistas e personagem em banquinho; S07 original e nova versão em plano geral ainda deixam a personagem pequena no quadro por perspectiva."
+      "imagens_antigas_com_problema": "Versões originais de S03, S04, S05 e S07 permanecem na biblioteca, não apagadas; as novas versões são as vigentes para revisão. S05 original tinha braços realistas e personagem em banquinho; S07 original e nova versão em plano geral ainda deixam a personagem pequena no quadro por perspectiva.",
+      "aprovacao_piloto": "2026-10-30: José aprovou as imagens (incluindo as novas versões de S03, S04, S05 e S07) e autorizou o vídeo piloto do tema café (EP1003) segundo os contratos: 1 clipe contínuo por cena, a partir das imagens aprovadas, com os prompts de movimento registrados. Montagem/motion (MG-05) seguem segurados e fora deste passo."
     }
   }
 }
