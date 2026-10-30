@@ -36,3 +36,5 @@ Página servida só na tailnet: http://<IP tailnet do pc>:8088/ (serviço de usu
 Regenerar a página: `python scripts/mapa/gerar_index.py` (t78u).
 
 **Aba Roadmap (t120u):** gerada de `docs/ROADMAP.md` + `docs/ESTADO-ATUAL.md` por `scripts/mapa/roadmap.py` a cada `gerar_index.py` (e no pre-commit). Só leitura; editar as fontes, nunca o HTML.
+
+- Aba **Produção de episódios**: dados em `producao-episodios.json`, gerador `scripts/mapa/producao.py`, âncora `#producao` (José pt162u).

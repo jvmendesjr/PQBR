@@ -1,6 +1,6 @@
 # Processo canônico de criação — núcleo (agnóstico de plataforma)
 
-- **versão:** 1.1.0
+- **versão:** 1.2.0
 - **status:** [APROVADO] José t149u (sessão 29/10/2026) · decisão t160u · **remoção do storyboard aprovada por José em 29/10/2026 (definitiva)**
 - **autoridade:** abaixo de `docs/REGRAS.md`; acima dos playbooks de plataforma em `docs/processos/*.md`
 - **consulta obrigatória:** antes de **qualquer** produção nova (imagem ou vídeo). O Temporal confere versão+hash fail-closed (`processo_criacao_conferir`).
@@ -18,7 +18,7 @@ O fluxo é automático, agente primeiro. "Manual" em qualquer processo significa
 
 **Piloto e automático:** a visualização que vai para aprovação do José é a do episódio piloto. Depois do piloto aprovado, o fluxo fica automático e o José monitora independentemente. Se ele verificar alteração, aperta o botão de emergência do Telegram ou pede ao agente para interromper as operações. Operação interrompida só volta ao público por ordem do José, comandando o agente externamente junto com os agentes da operação.
 
-**Centro criativo:** o NotebookLM (pai, via `notebooklm-py`) cria os roteiros, a personalidade, o caderno, as informações e a pesquisa. O agente compila os prompts do Flow a partir do roteiro, do catálogo, do formato e do registro de modelos, em contratos Pydantic v2 no Temporal.
+**Centro criativo:** o NotebookLM (pai, via `notebooklm-py`) cria os roteiros, a personalidade, o caderno, as informações, a pesquisa **e a direção das cenas** (`DirecaoCenas` 1.0.0: prompts de imagem/animação por cena, refs do catálogo). Os agentes **não inventam** esses prompts: só **operam o Flow** (UI/Camofox) aplicando a direção já validada no Temporal. Contratos Pydantic v2.
 
 ## Núcleo (todos os episódios)
 
@@ -38,7 +38,8 @@ O fluxo é automático, agente primeiro. "Manual" em qualquer processo significa
 | Conferir processo canônico | `processo_criacao_conferir` (no `EpisodioWorkflow` e antes de qualquer geração visual) | — (falha = aborta) | todos (leitura); Dev mantém versão |
 | Pacote / caderno | `pacote_garantir`, `registro_buscar_caderno` | — | Guardião (sessão), Dev |
 | Roteiro / SEO / compliance | `NotebookLMWorkflow`, `nlm_perguntar`, `validar_roteiro`, `seo_9router`, `compliance_roteiro` | — | Líder Editorial, Pesquisador de Origem, Compliance |
-| Cenas individuais (contrato) | `CenaIndividual` (`contratos/cena.py`) | — | NotebookLM (roteiro) + validação determinística por cena |
+| Direção de cenas (passo 1) | `direcao_cenas_nlm` → `DirecaoCenas` 1.0.0 / `CenaIndividual` 1.0.0 | — | NotebookLM (porta `DiretorCenas`); validação fail-closed |
+| Cenas no Flow (passo 2) | adaptador Flow *(pendente)* | — | Agentes só operam a UI Flow com a direção já pronta |
 | Abrir projeto na plataforma | *(a ligar)* activity do adaptador (`flow_*` / vids / vibes) | pedido sessão → `pedir_jose` | Guardião; Diretor escala |
 | Entregar / criar fichas | `banco_fichas` + agente da plataforma | aprovação ficha → Telegram / `aprovacao_jose` | Diretor (escala); José aprova permanente |
 | Imagens de início de cena S01..S0N | adaptador plataforma (imagem) | **HOLD** até revisão | produção via Camofox |
@@ -52,7 +53,7 @@ O fluxo é automático, agente primeiro. "Manual" em qualquer processo significa
 ## Papéis (consulta antes de produzir)
 
 - **Diretor (agente):** garante que a produção citou este doc; escala HOLD e portões ao José; não pede ao José para clicar, baixar ou olhar — pede decisão, nunca execução manual.
-- **Líder Editorial / Pesquisador:** roteiro e prompts de cena alinhados ao catálogo (`refs`).
+- **Líder Editorial / Pesquisador:** roteiro alinhado ao catálogo; direção/prompts de cena vêm do NotebookLM (`DirecaoCenas`), não do agente.
 - **Guardião (agente):** sessão Camofox PQBR; não troca de conta; mapa de cliques; opera o navegador pelo agente, nunca por mão humana.
 - **Auditor (agente, não humano):** juiz Gemini + Jev + checagens automáticas conferem `imagens_revisadas` e boca/corte/grotesco; não libera vídeo sem revisão. No piloto, a revisão vai ao José; depois do piloto aprovado, a revisão é automática e o José só monitora (emergência pelo Telegram).
 - **Compliance:** tom e gabarito (não navega Flow).
@@ -69,7 +70,7 @@ O fluxo é automático, agente primeiro. "Manual" em qualquer processo significa
 
 ## Ativação no worker
 
-A activity `processo_criacao_conferir` entra no `EpisodioWorkflow`. **Versão 1.1.0 ativa em runtime desde o reinício do `pqbr-episodio-worker` em 29/10/2026 às 23:14 (OK do José).**
+A activity `processo_criacao_conferir` entra no `EpisodioWorkflow` **oficial** (`src/pqbr/workflows/episodio.py`, fila `episodio-pqbr`). O `EpisodioWorkflow` em `workflows.py` (fila `pqbr-episodio`) é **legado** (demo soak) e não é o caminho de produção. **Versão 1.2.0 pinada no código; runtime do worker ainda na 1.1.0 até reinício com OK do José.**
 
 ## Versionamento
 

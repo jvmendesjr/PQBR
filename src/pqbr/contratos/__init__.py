@@ -535,6 +535,8 @@ class SaudeNavegador(Contrato):
     motivo: str = ""
 
 
+from .pedidos_producao import PedidoEpisodioE2E, PedidoNotebookLM  # noqa: E402  pt162u
+
 VERSOES: dict[str, str] = {
     "InstanciaNavegador": "1.0.0",
     "SaudeNavegador": "1.0.0",
@@ -574,4 +576,6 @@ VERSOES: dict[str, str] = {
     "RespostaMotor": "1.0.0",
     "PedidoVideo": "1.0.0",
     "ResultadoVideo": "1.0.0",
+    "PedidoEpisodioE2E": "1.0.0",
+    "PedidoNotebookLM": "1.0.0",
 }

@@ -1,4 +1,8 @@
-"""EpisodioWorkflow de demonstração: retries, timer durável, sinal de aprovação, outbox."""
+"""LEGADO (demo soak F05) — NÃO é o caminho oficial de produção.
+
+Oficial: `src/pqbr/workflows/episodio.py` → EpisodioWorkflow na fila `episodio-pqbr`.
+Este módulo permanece registrado no worker da fila `pqbr-episodio` só para testes/soak históricos.
+Não remover o registro do worker sem OK do José. pt162u."""
 from __future__ import annotations
 from datetime import timedelta
 from temporalio import workflow
@@ -17,7 +21,7 @@ RETRY = RetryPolicy(initial_interval=timedelta(seconds=1), backoff_coefficient=2
 
 
 @workflow.defn
-class EpisodioWorkflow:
+class EpisodioWorkflow:  # LEGADO — oficial em episodio.py
     def __init__(self) -> None:
         self._e: dict = {}
         self._aprovacao: AprovacaoJose | None = None

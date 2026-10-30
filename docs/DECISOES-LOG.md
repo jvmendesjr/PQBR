@@ -1039,3 +1039,9 @@ NÃO CABE:
 - **Aplicado:** porta `DiretorCenas` + adaptador NotebookLM (`notebooklm-py`) + adaptador falso; contrato `DirecaoCenas` 1.0.0; validação fail-closed (refs, stickman, adulta, sem girl para PERS-menina-rosa); `EpisodioWorkflow` chama direção + `exigir_antes_cenas` + `processo_criacao` e para com `proximo=flow_cenas_individuais_pendente` (passo 2 pendente).
 - **Pendente de OK José:** atualizar `docs/mapa/01-episodio.mmd` (activities novas); reinício do worker para carregar as activities em runtime; passo 2 adaptador Flow.
 
+## 30/10/2026 ~20:01 — aba Produção + correção de divergências (José pt162u)
+- **José:** OK para mexer no painel/mapa; criar aba com o sumário tema→publicação; corrigir divergências.
+- **Aplicado:** aba `#producao` gerada de `docs/mapa/producao-episodios.json`; `01-episodio.mmd` com `direcao_cenas_nlm` + `flow_projeto_exigir_antes_cenas`; CRIACAO/flow 1.2.0 (direção NLM; agentes só operam Flow); `EpisodioWorkflow` em `workflows.py` marcado **legado** (oficial = `episodio.py`); `PedidoEpisodioE2E`/`PedidoNotebookLM` em VERSOES 1.0.0.
+- **Registro:** EP1003 piloto passou **fora do Temporal** (manual Flow); piloto manual **não** é o caminho oficial.
+- **Sem:** reinício de worker; push/merge; apagar arquivos (só histórico para `_obsoleto` se necessário).
+

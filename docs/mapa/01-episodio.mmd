@@ -1,17 +1,18 @@
-%% EpisodioWorkflow (src/pqbr/workflows/episodio.py) — fila episodio-pqbr. t130u: para no roteiro (storyboard removido 29/10/2026). t160u: processo canônico.
+%% EpisodioWorkflow OFICIAL (src/pqbr/workflows/episodio.py) — fila episodio-pqbr.
+%% Passo 1 direção NLM (pt161u/pt162u): direcao_cenas_nlm + flow_projeto_exigir_antes_cenas.
+%% Storyboard removido 29/10/2026. O EpisodioWorkflow em workflows.py é LEGADO (demo soak), não este.
 flowchart TD
-  S(["PedidoEpisodioE2E"]) --> PC["processo_criacao_conferir<br/>docs/processos v1.0.0 + hash<br/>fail-closed"]
+  S(["PedidoEpisodioE2E 1.0.0"]) --> PC["processo_criacao_conferir<br/>docs/processos v1.2.0 + hash<br/>fail-closed"]
   PC --> A1["pacote_garantir<br/>(hash do pacote canônico)"]
   A1 --> A2["registro_buscar_caderno"]
-  A2 --> W1[["filho NotebookLMWorkflow<br/>fila notebooklm-pqbr<br/>roteiro, compliance e SEO<br/>sem vídeo"]]
+  A2 --> W1[["filho NotebookLMWorkflow<br/>fila notebooklm-pqbr<br/>roteiro, compliance e SEO<br/>PedidoNotebookLM 1.0.0<br/>sem vídeo"]]
   W1 --> D1{"nlm.ok e caderno?"}
   D1 -- não --> F1(["fim: falha do roteiro"])
-  D1 -- sim --> A3["nlm_perguntar (notebooklm-pqbr)<br/>JSON das fichas, chat já pago"]
-  A3 --> A4["roteiro aprovado<br/>NotebookLM<br/>próximo: cenas individuais no Flow"]
-  A4 --> D2{"ficha válida?"}
-  D2 -- não --> F2(["fim: roteiro inválido"])
-  D2 -- sim --> F3(["fim: ficha gravada<br/>sem imagem, sem vídeo, sem publicação"])
+  D1 -- sim --> DIR["direcao_cenas_nlm<br/>NotebookLM → DirecaoCenas 1.0.0<br/>list CenaIndividual fail-closed"]
+  DIR --> FP["flow_projeto_exigir_antes_cenas<br/>só fichas_ok"]
+  FP --> PC2["processo_criacao_conferir"]
+  PC2 --> FIM(["fim: etapa direcao_cenas<br/>proximo=flow_cenas_individuais_pendente<br/>passo 2 Flow ainda não existe"])
   PUB["publicacao_dryrun<br/>registrada, não roda neste fluxo"]
-  N>"t130u: o NotebookLM não gera vídeo. Pós, quadros, Drive e publicação ficam no worker e só entram quando a cadeia Flow → Vids → Vibes existir. Vídeos do saldo não são mexidos. YOUTUBE_DRY_RUN segue true. t160u: reinício do worker pendente para ativar processo_criacao_conferir em runtime."]
-  CV[["cadeia de vídeo 07: ainda não ligada<br/>mapa de cliques vazio até a tela ser usada"]]
-  F3 -.-> CV
+  N>"Oficial = episodio.py na fila episodio-pqbr. Legado = workflows.py na fila pqbr-episodio (demo). Passo 2 adaptador Flow pendente. YOUTUBE_DRY_RUN=true. Reinício do worker pendente para carregar direcao_cenas_nlm."]
+  CV[["cadeia de vídeo 07: ainda não ligada"]]
+  FIM -.-> CV

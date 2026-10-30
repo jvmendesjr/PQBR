@@ -6,6 +6,7 @@ from pathlib import Path
 import sys
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import roadmap  # noqa: E402  (t120u: aba Roadmap)
+import producao  # noqa: E402  (pt162u: aba Produção)
 
 MAPA = Path(__file__).resolve().parents[2] / "docs/mapa"
 TITULOS = {"00": "Visão geral", "01": "Episódio", "02": "Reposição de temas", "03": "Acessos / Camofox", "04": "Descarte",
@@ -29,7 +30,7 @@ def gerar() -> str:
         secoes.append(f'<section id="d{n}"><h2>{t}</h2><p class="nota">{html.escape(notas)} <span class="arq">{f.name}</span></p>'
                       f'<div class="wrap"><pre class="mermaid">\n{html.escape(corpo)}\n</pre></div></section>')
     return (cabeca + f'<header><h1>PQBR — mapa do sistema</h1><p>Regenerado de docs/mapa/*.mmd em {agora} · ⚠ = não confirmado no código / pendente</p></header>'
-            + "<nav>" + "".join(nav) + '<a href="#roadmap">Roadmap</a></nav><main>' + regra + roadmap.secao() + "".join(secoes) + pe)
+            + "<nav>" + "".join(nav) + '<a href="#producao">Produção de episódios</a><a href="#roadmap">Roadmap</a></nav><main>' + regra + producao.secao() + roadmap.secao() + "".join(secoes) + pe)
 
 
 if __name__ == "__main__":

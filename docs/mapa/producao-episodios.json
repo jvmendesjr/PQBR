@@ -1,0 +1,37 @@
+{
+  "versao": "1.0.0",
+  "atualizado": "2026-10-30",
+  "titulo": "Produção de episódios (tema → publicação)",
+  "nota": "Fonte: docs/mapa/producao-episodios.json (José OK pt162u). Status conferido no código + Temporal ns=pqbr; worker episodio ainda sem reinício após 0.29.9.",
+  "etapas": [
+    {"n": 1, "nome": "Tema / grade", "objetivo": "Manter ≥7 dias de temas abertos; anti-repetição", "wf_activity": "ReposicaoTemasWorkflow", "fila": "pqbr-episodio", "responsavel": "Líder Editorial", "contratos": "TemaPendente 1.0.0, TemaProposto 1.0.0, PropostaTemas 1.0.0", "status": "ativo"},
+    {"n": 2, "nome": "Grade diária (coleta)", "objetivo": "Coletar candidatos e gravar GradeDiaria", "wf_activity": "GradeDiariaWorkflow", "fila": "pqbr-episodio", "responsavel": "Líder Editorial / Dev", "contratos": "GradeDiaria 1.0.0, PedidoGrade", "status": "desligado_pausado"},
+    {"n": 3, "nome": "Pedido de episódio", "objetivo": "Abrir PedidoEpisodioE2E no Temporal", "wf_activity": "EpisodioWorkflow.run (oficial: episodio.py)", "fila": "episodio-pqbr", "responsavel": "Diretor / Dev", "contratos": "PedidoEpisodioE2E 1.0.0 → ResultadoEpisodioE2E", "status": "codigo_falta_reinicio"},
+    {"n": 4, "nome": "Gate playbook", "objetivo": "Conferir docs/processos fail-closed", "wf_activity": "processo_criacao_conferir", "fila": "episodio-pqbr", "responsavel": "Guardião / Compliance", "contratos": "ResultadoProcessoCriacao (pin 1.2.0)", "status": "codigo_falta_reinicio"},
+    {"n": 5, "nome": "Pacote + caderno", "objetivo": "Hash do pacote e caderno do episódio", "wf_activity": "pacote_garantir, registro_buscar_caderno", "fila": "episodio-pqbr", "responsavel": "Dev / Observador", "contratos": "hash pacote canônico", "status": "ativo"},
+    {"n": 6, "nome": "Roteiro / SEO / compliance", "objetivo": "NotebookLM escreve e valida roteiro (sem vídeo)", "wf_activity": "NotebookLMWorkflow (child)", "fila": "notebooklm-pqbr", "responsavel": "NotebookLM, Pesquisador de Origem, Compliance, Líder Editorial", "contratos": "PedidoNotebookLM 1.0.0, RoteiroShort 1.0.0, PacoteSEO 1.0.0", "status": "ativo"},
+    {"n": 7, "nome": "Direção de cenas (passo 1)", "objetivo": "NLM → lista CenaIndividual fail-closed", "wf_activity": "direcao_cenas_nlm", "fila": "episodio-pqbr", "responsavel": "NotebookLM (porta DiretorCenas)", "contratos": "DirecaoCenas 1.0.0, CenaIndividual 1.0.0", "status": "codigo_falta_reinicio"},
+    {"n": 8, "nome": "Gates pré-cenas", "objetivo": "Exigir fichas_ok + playbook antes do Flow", "wf_activity": "flow_projeto_exigir_antes_cenas + processo_criacao_conferir", "fila": "episodio-pqbr", "responsavel": "Guardião", "contratos": "ResultadoFlowProjeto, ResultadoProcessoCriacao", "status": "codigo_falta_reinicio"},
+    {"n": 9, "nome": "Cenas no Flow (passo 2)", "objetivo": "Stills/clipes por cena via adaptador Flow", "wf_activity": "(ausente) proximo=flow_cenas_individuais_pendente", "fila": "—", "responsavel": "Dev (adaptador); agentes só operam UI Flow", "contratos": "CenaIndividual 1.0.0 (entrada)", "status": "nao_existe"},
+    {"n": 10, "nome": "Auditoria / veredito", "objetivo": "Aprovar ou reprovar o episódio", "wf_activity": "sinal veredito_auditor / auditar (legado produção)", "fila": "episodio-pqbr / camofox-pqbr", "responsavel": "Auditor", "contratos": "VereditoAuditor 1.0.0", "status": "codigo_falta_reinicio"},
+    {"n": 11, "nome": "Pós-vídeo", "objetivo": "FFmpeg, quadros, capa A9, Drive", "wf_activity": "pos_produzir, extrair_quadros, capa_a9, drive_enviar", "fila": "episodio-pqbr", "responsavel": "Dev / Observador", "contratos": "artefatos locais", "status": "codigo_falta_reinicio"},
+    {"n": 12, "nome": "Publicação", "objetivo": "Upload privado → janela → público (dry-run)", "wf_activity": "PublicacaoAgendadaWorkflow / PublicacaoWorkflow", "fila": "episodio-pqbr", "responsavel": "Compliance / Guardião / Observador", "contratos": "PedidoPublicacao, DecisaoPublicacao 1.0.0", "status": "desligado_pausado"}
+  ],
+  "outros_workflows": [
+    {"nome": "AcessosWorkflow", "fila": "pqbr-episodio", "funcao": "Conferir logins Google/NLM/Paperclip", "status": "ativo"},
+    {"nome": "CamofoxSaudeWorkflow", "fila": "camofox-pqbr", "funcao": "Saúde do browser Camofox", "status": "ativo"},
+    {"nome": "ReposicaoTemasWorkflow", "fila": "pqbr-episodio", "funcao": "Reposição da grade de temas", "status": "ativo"},
+    {"nome": "RetencaoConsumoWorkflow", "fila": "pqbr-episodio", "funcao": "Retenção de consumo de modelos", "status": "ativo"},
+    {"nome": "VigiaAtualizacoesWorkflow", "fila": "pqbr-episodio", "funcao": "Vigia de ferramentas (sex 08:00)", "status": "ativo"},
+    {"nome": "NotebookLMWorkflow", "fila": "notebooklm-pqbr", "funcao": "Caderno, roteiro, SEO, compliance", "status": "ativo"},
+    {"nome": "EpisodioWorkflow (episodio.py) OFICIAL", "fila": "episodio-pqbr", "funcao": "E2E até direção de cenas", "status": "codigo_falta_reinicio"},
+    {"nome": "EpisodioWorkflow (workflows.py) LEGADO", "fila": "pqbr-episodio", "funcao": "Demo soak/aprovação (não é o caminho de produção)", "status": "ativo"},
+    {"nome": "EpisodioProducaoWorkflow", "fila": "pqbr-episodio", "funcao": "Lote roteiro→agendar", "status": "desligado_pausado"},
+    {"nome": "GradeDiariaWorkflow", "fila": "pqbr-episodio", "funcao": "Coleta diária de temas", "status": "desligado_pausado"},
+    {"nome": "PublicacaoAgendadaWorkflow / ControlePublicacaoWorkflow / PublicacaoWorkflow", "fila": "episodio-pqbr", "funcao": "Publicação + emergência", "status": "desligado_pausado"},
+    {"nome": "ApagarCadernoWorkflow / DescartarCadernoTesteWorkflow", "fila": "episodio-pqbr", "funcao": "Limpeza de cadernos", "status": "ativo"},
+    {"nome": "CorrecaoAutonomaWorkflow / candidatos", "fila": "pqbr-episodio", "funcao": "Correção autônoma", "status": "ativo"},
+    {"nome": "PonteTemporalPaperclipWorkflow", "fila": "pqbr-episodio", "funcao": "Ponte Paperclip (histórico)", "status": "ativo"}
+  ],
+  "mermaid": "flowchart LR\n  T[1 Tema] --> G[2 Grade]\n  G --> P[3 Pedido E2E]\n  P --> PC[4 processo_criacao]\n  PC --> PAC[5 pacote/caderno]\n  PAC --> NLM[6 NotebookLM roteiro]\n  NLM --> DIR[7 direcao_cenas_nlm]\n  DIR --> GATE[8 gates Flow/processo]\n  GATE --> FLOW[9 Flow cenas - pendente]\n  FLOW --> AUD[10 Auditor]\n  AUD --> POS[11 pós FFmpeg/Drive]\n  POS --> PUB[12 Publicação]\n  style FLOW fill:#fdecea,stroke:#c62828\n  style DIR fill:#fff3e0,stroke:#ef6c00\n  style GATE fill:#fff3e0,stroke:#ef6c00\n"
+}

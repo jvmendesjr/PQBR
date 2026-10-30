@@ -1,5 +1,18 @@
 # CHANGELOG — PQBR
 
+## [0.30.0] — 2026-10-30 (aba Produção + divergências; José pt162u)
+### Adicionado
+- Aba do painel **Produção de episódios (tema → publicação)** (`#producao`), gerada de `docs/mapa/producao-episodios.json` via `scripts/mapa/producao.py`.
+- Contratos `PedidoEpisodioE2E` e `PedidoNotebookLM` 1.0.0 em `VERSOES` (`contratos/pedidos_producao.py`) + testes.
+### Alterado
+- Mapa `01-episodio.mmd`: `direcao_cenas_nlm` + `flow_projeto_exigir_antes_cenas`.
+- Núcleo/processo `CRIACAO-README` e `flow.md` → **1.2.0**: direção/prompts vêm do NotebookLM; agentes só operam o Flow; `VERSAO_ESPERADA` 1.2.0.
+- `EpisodioWorkflow` em `workflows.py` documentado como **legado**; oficial = `episodio.py` / fila `episodio-pqbr`.
+- LACUNAS/DECISOES: EP1003 manual fora do Temporal ≠ caminho oficial.
+### Não feito
+- Reinício de worker; push/merge.
+
+
 ## [0.29.9] — 2026-10-30 (passo 1 direção NLM → CenaIndividual; José pt161u)
 ### Adicionado
 - Passo 1 pós-roteiro no `EpisodioWorkflow`: activity `direcao_cenas_nlm` (porta `DiretorCenas`, adaptador NotebookLM via notebooklm-py + adaptador falso para testes).

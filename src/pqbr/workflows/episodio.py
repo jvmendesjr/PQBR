@@ -18,6 +18,7 @@ with workflow.unsafe.imports_passed_through():
     from .notebooklm import NotebookLMWorkflow, PedidoNotebookLM, FILA_NOTEBOOKLM, nlm_perguntar
     from .pacote import ATIVIDADES_REGISTRO, pacote_garantir, registro_buscar_caderno
     from ..contratos import CATEGORIA_YOUTUBE
+    from ..contratos.pedidos_producao import PedidoEpisodioE2E
 
 FILA_EPISODIO = "episodio-pqbr"
 RAIZ = Path("/home/pc/Workspace/PQBR")
@@ -26,21 +27,7 @@ DRYRUN = Path(os.environ.get("PQBR_DRYRUN_DIR", "/home/pc/.pqbr/publicacao-dryru
 CODIGO = re.compile(r"^PQBR-EP[0-9]{4,}$")
 
 
-class PedidoEpisodioE2E(BaseModel):
-    model_config = ConfigDict(extra="forbid", frozen=True)
-    slug: str = Field(pattern=r"^[a-z0-9][a-z0-9-]{1,60}$")
-    codigo: str = Field(pattern=CODIGO.pattern)
-    roteiro_texto: str = Field(min_length=50)          # roteiro completo com o bloco visual (vira a fonte do caderno)
-    n_cenas: int = Field(ge=2, le=60)
-    titulo: str | None = Field(default=None, min_length=5, max_length=100)        # t464: None → SEO do NotebookLM
-    descricao: str | None = Field(default=None, min_length=10, max_length=5000)
-    roteirizar: bool = False          # t464: roteiro_texto = briefing do tema; NotebookLM escreve roteiro/SEO/capa
-    tema: str | None = Field(default=None, max_length=300)
-    tema_id: int | None = None        # pqbr.temas_pendentes.id (vira temas_publicados na publicação; reposição automática)
-    tags: list[str] = Field(default_factory=list, max_length=15)
-    dry_run: bool = True                               # t426: teste nº 1 para antes do upload
-    steering: str | None = Field(default=None, max_length=4000)   # t462: bloco visual 2D do roteiro (reforços entram no nlm)
-    espera_veredito_h: float = Field(default=24, ge=0.01, le=72)
+# PedidoEpisodioE2E: contrato 1.0.0 em pqbr.contratos.pedidos_producao (pt162u)
 
 
 class VereditoAuditor(BaseModel):

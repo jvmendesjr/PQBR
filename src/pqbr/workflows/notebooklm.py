@@ -8,6 +8,7 @@ from datetime import date, timedelta
 from pathlib import Path
 from typing import Literal
 from pydantic import BaseModel, ConfigDict, Field
+from ..contratos.pedidos_producao import PedidoNotebookLM
 from temporalio import activity, workflow
 from temporalio.common import RetryPolicy
 from ..contratos.gasto import GASTO_SEO_FALLBACK, GASTO_SEO_NOTEBOOK, GASTO_VIDEO_NLM
@@ -43,22 +44,7 @@ class UsoDia(BaseModel):
     janelas: dict[str, float] = Field(default_factory=dict)
 
 
-class PedidoNotebookLM(BaseModel):
-    model_config = ConfigDict(extra="forbid", frozen=True)
-    tipo: Literal["pesquisa", "roteiro", "seo", "contexto", "short"]
-    slug: str = Field(pattern=SLUG.pattern)
-    fonte: str = Field(min_length=20, max_length=200_000)   # roteiro/briefing; vira a fonte do caderno
-    pergunta: str | None = Field(default=None, max_length=4000)  # pesquisa
-    perguntas: list[str] | None = Field(default=None, max_length=3)   # t430: até 3 chats no mesmo caderno
-    pesquisa_web: list[str] | None = Field(default=None, max_length=3)  # t430: add-research --mode fast antes dos chats
-    solicitante: str = "kit"
-    episodio: str | None = Field(default=None, pattern=CODIGO.pattern)   # t459: caderno casado pelo código do episódio
-    caderno_registrado: str | None = Field(default=None, pattern=UUID.pattern)
-    pacote_fonte: str | None = None                                      # arquivo do pacote canônico (workflows/pacote.py)
-    pacote_hash: str | None = Field(default=None, pattern=r"^[0-9a-f]{64}$")
-    steering: str | None = Field(default=None, max_length=4000)          # t462: direcionamento do Short (bloco 2D + reforços)
-    roteirizar: bool = False          # t464: o NotebookLM escreve roteiro/SEO/capa no caderno; `fonte` = briefing do tema
-    tema: str | None = Field(default=None, max_length=300)
+# PedidoNotebookLM: contrato 1.0.0 em pqbr.contratos.pedidos_producao (pt162u)
 
 
 class ResultadoNotebookLM(BaseModel):

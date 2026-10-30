@@ -4,13 +4,14 @@ A tabela de 12/10 que bloqueava o fluxo no login da CLI do Paperclip foi para `d
 
 ## Abertas
 
-0b. **Mapa 01-episodio (30/10/2026).** Código do passo 1 (`direcao_cenas_nlm`, `flow_projeto_exigir_antes_cenas`) pronto; `docs/mapa/01-episodio.mmd` ainda não cita as activities — atualização do mapa exige OK do José (`test_mapa` falha até lá).
+0b. **Fechado (30/10/2026, José pt162u).** Mapa `01-episodio.mmd` atualizado com `direcao_cenas_nlm` e `flow_projeto_exigir_antes_cenas`; aba Produção no painel.
 
+0c. **EP1003 fora do Temporal (30/10/2026).** O piloto EP1003 (v2/v3) rodou **manual no Flow via Camofox**, sem `EpisodioWorkflow` Temporal. Isso **não** é o caminho oficial. Oficial = `episodio.py` → NLM → `direcao_cenas_nlm` → gates → (passo 2 Flow ainda pendente). Piloto serve só para validar UI/fichas/créditos.
 
 0. **Ativação `processo_criacao_conferir` (t160u).** Activity e testes no repo; o `EpisodioWorkflow` já chama no início. **Falta reinício** do `pqbr-episodio-worker` (OK José) para valer em runtime. Docs: `docs/processos/`.
 
 1. **Auditor no episódio.** `EpisodioWorkflow` para na ficha e não espera `veredito_auditor` (t130u). O sinal continua registrado e não é chamado. Não chama `auditor_gemini` nem `auditor_loop_gemini`. A activity `auditor_gemini` está no worker da fila `camofox-pqbr`. O script `scripts/e2e/auditor_gemini_ep.py` ainda existe. Os critérios `boca_articula_fala`, `corte_oculos_cabeca` e `grotesco` já reprovam sozinhos (t108u); isso não falta.
-2. **Fechado (t130u, atualizado 29/10/2026).** `tipo=short` não gera vídeo. `nlm_gerar_short` recusa antes do CLI. O episódio segue para roteiro e SEO e para no roteiro aprovado (`storyboard_criar` removido 29/10/2026).
+2. **Fechado (t130u, atualizado 29/10/2026).** `tipo=short` não gera vídeo. `nlm_gerar_short` recusa antes do CLI. O episódio segue roteiro/SEO e depois `direcao_cenas_nlm` (passo 1); para com `proximo=flow_cenas_individuais_pendente` (`storyboard_criar` removido 29/10/2026).
 3. **Códigos do lote 2510.** Os prontos em `docs/pesquisas/lote-2510/` não têm `PQBR-EP`. Sem código não há `drive_enviar` nem episódio no Postgres. Quem define os códigos é o José.
 4. **Vídeo em série (Fase 4V).** Passo 1 (direção NLM→CenaIndividual) em código (30/10/2026); passo 2 adaptador Flow ainda fora do código. O episódio não baixa vídeo do NotebookLM (t130u). Vids e Vibes continuam fora. Em 27/10 o Flow foi aberto à mão (t132u): duas imagens, nenhum vídeo. HOLD das três rotas está decidido (t529) e não implementado. O mapa de cliques só tem as três surpresas dessa tela.
 5. **Projeto Flow EP1003 (t161u — parcial, atualizado 29/10/2026).** Projeto v2 `PQBR-EP1003-cafe-fraco-v2` (`3a9ca558-…`); antigo `025dcfef-…` HOLD intacto. Falta: imagens de início de cena, revisão, vídeo. Storyboard não é mais lacuna (removido). Gate: `src/pqbr/pipeline/flow_projeto.py` (exige só `fichas_ok`).
