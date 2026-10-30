@@ -3,6 +3,17 @@
 - Flow EP1003: Agent/Character/Collections conforme `docs/processos/flow.md`; storyboard pedido ao Agente com HOLD por falha de render da UI.
 
 # CHANGELOG — PQBR
+## [0.29.7] — 2026-10-29 (storyboard removido definitivamente; cenas individuais; agente primeiro)
+### Removido
+- Storyboard do fluxo ativo, por ordem definitiva do José: board geral, `storyboard_criar`, `PROMPT_STORYBOARD`, gate `storyboard_ok` e etapa de storyboard no `EpisodioWorkflow` e nos playbooks. Motivo: um encarte só com muitas cenas facilita o erro do agente; cenas individuais com movimento bem definido no prompt são mais determinísticas. Código antigo preservado em `scripts/_obsoleto/` com índice em `docs/_obsoleto/INDICE-storyboard-removido.md`; nada foi apagado.
+### Alterado
+- **Cenas individuais:** cada cena é criada, validada e animada sozinha, uma por vez, pelo Agente do Google Flow, a partir das fichas pinadas, no formato do projeto, com modelo de imagem atual **Nano Banana 2.1** (registrado, fail-closed se ausente na UI). Contrato novo `CenaIndividual` 1.0.0 (`contratos/cena.py`, derivado da antiga FichaCena); gate `exigir_antes_cenas` exige só `fichas_ok`.
+- **Regra suprema agente-primeiro** registrada no núcleo (`docs/processos/CRIACAO-README.md` 1.1.0): "manual" significa o agente faz; não há processo manual humano. **Piloto e automático:** a visualização que vai para aprovação do José é a do episódio piloto; depois do piloto aprovado, o fluxo fica automático e o José monitora independentemente; alteração → botão de emergência do Telegram ou pedido ao agente para interromper; operação interrompida só volta ao público por ordem do José.
+- **Centro criativo:** NotebookLM (pai, via `notebooklm-py`) cria roteiro, personalidade, caderno, informações e pesquisa; o agente compila os prompts do Flow a partir do roteiro, do catálogo, do formato e do registro de modelos, em contratos Pydantic v2 no Temporal.
+- Núcleo de criação 1.0.0 → 1.1.0 (`VERSAO_ESPERADA` atualizada); playbook Flow 1.0.0 → 1.1.0; mapa 12 renomeado para `12-cenas-elenco.mmd` e índice regenerado.
+### Não alterado
+- Motion graphic (MG-05): segurado, definição pendente. Google Vids / Meta Vibes: fallback. Publicação: dry-run; item 5 das REGRAS (voltar a público) intacto.
+
 ## [0.29.6] — 2026-10-29 (documentação em termos do MCP + ressalva)
 ### Alterado
 - Documentos vivos atualizados para termos do MCP: ARQUITETURA §12, ROADMAP (fase Conhecimento), ESTADO-ATUAL, onboarding do agente externo, mapa 09 e 13, nota da política e comentários dos scripts do MCP passam a falar em codebase-memory-mcp / ferramenta `codigo` / `codigo_consultar`, sem apresentar o backend anterior como ferramenta atual.

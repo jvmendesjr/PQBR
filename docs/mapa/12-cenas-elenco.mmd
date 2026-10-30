@@ -1,13 +1,13 @@
-%% Storyboard em série, personagem e elenco (t75u–t78u, 26/10/2026). Regra central do José: CONTRATO-EDITORIAL §18 e §19, REGRAS §25.
+%% Cenas individuais, personagem e elenco (t75u–t78u, 26/10/2026; storyboard removido 29/10/2026). Regra central do José: CONTRATO-EDITORIAL §18 e §19, REGRAS §25.
 %% t108u: juízes por etapa. t141u: stickman; o material externo não troca o fluxo.
 %% t148u: padrão definitivo = conjunto do Drive (Fontes/Imagens) em banco-fichas/; fichas nanquim de t146u descartadas.
-%% t150u: protagonistas definidos pelo José (nº 1 masculino, nº 2 feminina; bob-oculos = nº 13); catálogo aberto (indice 3.0.0) com categoria situações; Storyboard 1.3.0 cita o catálogo em refs.
-%% Contrato: src/pqbr/contratos/storyboard.py (FichaCena/Storyboard 1.3.0). Activity: storyboard_criar (t130u). Fichas: config/estilo_visual.json e banco-fichas/ (pipeline/banco_fichas.py).
+%% t150u: protagonistas definidos pelo José (nº 1 masculino, nº 2 feminina; bob-oculos = nº 13); catálogo aberto (indice 3.0.0) com categoria situações; cenas individuais citam o catálogo em refs.
+%% Contrato: src/pqbr/contratos/cena.py (CenaIndividual 1.0.0). Storyboard removido 29/10/2026; sem board, sem activity de board. Fichas: config/estilo_visual.json e banco-fichas/ (pipeline/banco_fichas.py).
 flowchart TD
   COD(["código PQBR-EPxxxx"]) --> ALT{"elenco_alternado<br/>par → masculino (nº 1 PERS-menino-azul) · ímpar → feminino (nº 2 PERS-menina-rosa)<br/>protagonistas definidos pelo José (t150u)"}
   ALT -->|ou elenco_excecao com motivo| VIS["cartoon 2D flat colorido, stickman (t148u/t150u)<br/>catálogo aberto banco-fichas/ (indice 3.0.0): 13 personagens<br/>figuras · animais · objetos · ambientes · situações<br/>o agente insere ficha nova: aguardando_ok_jose ou sugestão; o José aprova<br/>fichas nanquim de t146u descartadas"]
-  VIS --> SB["Storyboard 1.3.0<br/>norte_geral · bloco_estilo · ficha_personagem · elenco · protagonista_ref<br/>refs do catálogo (personagem, figura, animal, objeto, ambiente, situação)<br/>NotebookLM devolve o JSON · não gera vídeo"]
-  SB --> FC["FichaCena NN (rótulo ep_cNN)<br/>fala em off (fora do prompt) · norte · início · fim · movimento · plano<br/>prompt_imagem = frame de início + frase-trava<br/>prompt_animacao = corpo até o fim · lips closed<br/>refs = fichas do catálogo; recorte da folha do boneco, não a folha inteira"]
+  VIS --> SB["Cenas individuais (sem board)<br/>roteiro do NotebookLM · uma cena por vez · movimento definido no prompt<br/>refs do catálogo (personagem, figura, animal, objeto, ambiente, situação)<br/>cada cena validada sozinha · não gera vídeo"]
+  SB --> FC["CenaIndividual NN (rótulo ep_cNN)<br/>fala em off (fora do prompt) · norte · início · fim · movimento · plano<br/>prompt_imagem = frame de início + frase-trava<br/>prompt_animacao = corpo até o fim · lips closed<br/>refs = fichas do catálogo; recorte da folha do boneco, não a folha inteira"]
   FC --> PAP{"papel_personagem"}
   PAP -->|participa| EPO["figurino = epoca_local<br/>caracterização da época/local obrigatória"]
   PAP -->|observa| ATU["figurino = atual_variavel<br/>visual cotidiano travado da ficha (t133u)<br/>escondido, terceira pessoa, outros atuam"]
@@ -18,7 +18,7 @@ flowchart TD
   REV -- não --> FC
   REV -- sim --> VID["vídeo por cena (07-cadeia-video)"]
   %% t108u: juiz Gemini por etapa (config/motores.json → gemini_juiz, contrato juiz_gemini 1.0.0)
-  JPRE[["juiz pré-produção: 3.8 Flash<br/>roteiro · storyboard/fichas · imagens de referência"]] -.-> FC
+  JPRE[["juiz pré-produção: 3.8 Flash<br/>roteiro · fichas · imagens de referência"]] -.-> FC
   JPRE -.-> REV
   VID --> VIS{{"gate VISUAL + LOOP · juiz produção: 4 Argon (raciocínio Baixo)<br/>reprova sozinho: boca_articula_fala · corte_oculos_cabeca · grotesco<br/>2 rodadas concordando; divergiu → terceira_rodada"}}
   %% t79u: protagonista único + coadjuvante opcional

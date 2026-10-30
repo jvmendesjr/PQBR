@@ -10,7 +10,7 @@
 
 ### ADR-013: processo canônico de criação por plataforma [APROVADO t160u / José t149u]
 - **Documento:** `docs/processos/CRIACAO-README.md` (v1.0.0) + `flow.md` / stubs Vids·Vibes.
-- **Ordem:** projeto por episódio → fichas do `banco-fichas/` → refs faltantes pelo agente da plataforma → storyboard → stills → revisão → 1 clipe/cena → HOLD se cota/esgotamento.
+- **Ordem:** projeto por episódio → fichas do `banco-fichas/` → refs faltantes pelo agente da plataforma → **cenas individuais (sem storyboard, removido 29/10/2026)** → imagens de início → revisão → 1 clipe/cena → HOLD se cota/esgotamento.
 - **Temporal:** activity `processo_criacao_conferir` no `EpisodioWorkflow` (versão+hash fail-closed). Ativação em runtime exige reinício do `pqbr-episodio-worker` (OK José).
 - **Cadeia:** `CADEIA_VIDEO` = flow → google_vids → meta_vibes → HOLD.
 

@@ -29,7 +29,7 @@ ID_OBJETO = re.compile(r"^OBJ-[a-z0-9]+(?:-[a-z0-9]+)*$")
 EXT_IMAGEM = (".png", ".jpg", ".jpeg", ".webp")
 TAMANHO_MAX_IMAGEM = 2_000_000           # bytes; acima disso a imagem vai para o Drive (imagem_drive_id)
 
-# José, t150u: protagonista masculino = nº 1 do catálogo, feminino = nº 2 (alternância par/ímpar do storyboard).
+# José, t150u: protagonista masculino = nº 1 do catálogo, feminino = nº 2 (alternância par/ímpar do elenco).
 PROTAGONISTAS: dict[str, str] = {"masculino": "PERS-menino-azul", "feminino": "PERS-menina-rosa"}
 
 # Texto canônico que entra em toda ficha gerada (REGRAS §6, CONTRATO-EDITORIAL §19): vale para qualquer tipo.

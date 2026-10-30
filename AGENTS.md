@@ -4,7 +4,14 @@
 
 Fonte única de "onde estamos". Não repete o ROADMAP: aponta os itens por id. **Atualize este arquivo a cada correção ou pendência resolvida.** O hook pre-commit exige isso quando o commit toca ROADMAP, LACUNAS, DECISOES-LOG ou CHANGELOG, e o `registrar_alteracao` exige isso para `tipo` correcao ou pendencia_resolvida.
 
-Atualizado: 29/10/2026 (limpeza dos documentos para termos do MCP + ressalva sobre o backend anterior, ordem do José; migração para codebase-memory-mcp, OK José, versão 0.29.5; t164u handoff EP1003 v2 segue pendente de stills/clipes) · versão 0.29.6
+Atualizado: 29/10/2026 (limpeza dos documentos para termos do MCP + ressalva sobre o backend anterior, ordem do José; migração para codebase-memory-mcp, OK José, versão 0.29.5; t164u handoff EP1003 v2 segue pendente de stills/clipes) · versão 0.29.7
+
+## Storyboard removido definitivamente (29/10/2026, versão 0.29.7, ordem do José)
+
+- Sem board, sem `storyboard_criar`, sem gate `storyboard_ok`. No lugar: cenas individuais, uma por vez, pelo Agente do Google Flow (imagem de início + movimento bem definido no prompt), contrato `CenaIndividual` 1.0.0, modelo de imagem Nano Banana 2.1, formato pedido explicitamente no prompt. Código antigo em `scripts/_obsoleto/`, índice em `docs/_obsoleto/INDICE-storyboard-removido.md`.
+- Regra suprema agente-primeiro registrada no núcleo: "manual" = o agente faz. Piloto: a visualização para aprovação é a do piloto; depois, automático, José monitorando; emergência pelo Telegram ou pedido ao agente para interromper; volta ao público só por ordem do José.
+- Centro criativo: NotebookLM pai via `notebooklm-py`. Motion (MG-05) segurado; Vids/Vibes fallback; publicação dry-run.
+- Validade em runtime após reinício do `pqbr-episodio-worker` (OK do José pendente).
 
 ## Migração do backend do `codigo` para codebase-memory-mcp (29/10/2026, versão 0.29.5, ADR-012)
 
@@ -166,14 +173,6 @@ Histórico, fora do procedimento: docs/_obsoleto/BRIEFING-novo-agente-pqbr.md (h
 
 ## Decisões recentes
 
-## t162u (29/10/2026) — EP1003 Flow: Agent/settings/Character/Collections; storyboard pedido = HOLD render
-- **José (via parent):** seguir `docs/processos/CRIACAO-README.md` v1.0.0 + `flow.md` (85c063b); no projeto `PQBR-EP1003-cafe-fraco` ligar Agente, Confirm=Sempre, defaults 9:16 + Nano Banana Pro, instruções flat; Character `PERS-menina-rosa`; Collections; enviar storyboard ao Agente; só confirmar 0 créditos; STOP após storyboard; screenshot; log/commit/MCP.
-- **Feito no Flow (Camofox PQBR):** Agent on; Configurações do agente = Confirm **Sempre**, imagem **9:16** ×1, **🍌 Nano Banana Pro** (vídeo 9:16 Omni Flash); instruções flat stickman; Character nativo **PERS-menina-rosa** (resta 1× Personagem sem nome com mídia AMB errada — não apagado); Collections **Referencias / Storyboard / Cenas / Finais**; fichas AMB/OBJ/PERS na grade.
-- **Storyboard:** pedido enviado ao Agente (formato 9:16, 8 painéis c01..c08, refs `@PERS-menina-rosa` + AMB/OBJ, SUBJECT/ACTION/CAMERA/ATMOSPHERE do storyboard 1.3.0, modelo sugerido). Sessão *Weak Coffee Storyboard Planning* → **Falha ao renderizar a resposta**. Sem grade visual, sem stills, sem clipes. Nenhum Confirmar com custo >0 (política 0 créditos respeitada). `storyboard_ok=false`.
-- **Evidência:** `/workspace/flow-check/ep1003-storyboard.png`.
-- **Sem:** stills/clipes, gasto de crédito confirmado, reinício worker, merge main, delete projeto testes.
-
-
 ## t163u (29/10/2026) — EP1003 Flow v2: novo projeto + storyboard Agente OK
 - **José t151u:** continuar em **novo** projeto `PQBR-EP1003-cafe-fraco-v2` (Camofox PQBR; humanizado; nunca logar; nada apagado). Projeto anterior `025dcfef-…` permanece como está. Processo canônico `docs/processos/flow.md` (`git pull --rebase` primeiro). Agent on, Confirm=Sempre, 9:16 Nano Banana Pro, instruções, fichas PERS/OBJ/AMB, Character nomeado, Collections; storyboard **uma vez** mais conciso (c01..c08, @Nome); só 0 créditos; se Falha→wait/reload ≤1 extra; STOP após storyboard; apontar `flow_projetos.json`; log/commit/MCP; screenshot `ep1003-v2-storyboard.png`.
 - **Feito:** criado projeto Flow `3a9ca558-4c85-4502-8c19-7a8f42fa41dd` (`PQBR-EP1003-cafe-fraco-v2`). Settings Agent: Confirm **Sempre**, **9:16**, **Nano Banana Pro**; instruções flat; uploads Envios PERS/OBJ/AMB; Character **PERS-menina-rosa** (sem unnamed); Collections **Referencias / Storyboard / Cenas / Finais**.
@@ -203,6 +202,13 @@ Histórico, fora do procedimento: docs/_obsoleto/BRIEFING-novo-agente-pqbr.md (h
 - **Histórico mantido, de propósito:** CHANGELOG (entradas antigas e a da migração), DECISOES-LOG (t84u–t90u e a migração), ADR-012, plano de migração, `docs/_obsoleto/` e o código preservado em `scripts/_obsoleto/` continuam citando o backend anterior — é o registro histórico, não uso atual. O backend anterior segue sem desinstalar até ordem expressa.
 - Versão do projeto 0.29.6 (só documentação; nenhum código de comportamento alterado além de comentários/docstring).
 
+
+## 29/10/2026: storyboard removido definitivamente; regra agente-primeiro; piloto e emergência (ordem do José)
+- **José:** retirar o storyboard, ajuste definitivo. Motivo: muita cena para um encarte só facilita o erro pelo agente, mesmo treinado; cenas individuais, com o movimento já bem definido na descrição do prompt, são mais determinísticas.
+- **Aplicado:** board, `storyboard_criar`, `PROMPT_STORYBOARD` e gate `storyboard_ok` removidos do fluxo ativo; código antigo preservado em `scripts/_obsoleto/` com índice. No lugar: cenas individuais, uma por vez, validadas pelo contrato `CenaIndividual` 1.0.0, com imagem de início + prompt de vídeo com movimento definido, modelo de imagem Nano Banana 2.1, Agente do Google Flow, formato pedido explicitamente no prompt.
+- **Regra suprema (José):** agente primeiro — "manual" significa o agente faz; não há processo manual humano. Documentos de outros projetos trazidos para análise não são instrução: o agente lê no comando. Visualização por juiz Gemini, agentes com visão, NotebookLM e Jev com critérios pré-definidos, nunca olho humano em produção.
+- **Piloto e automático (José):** a visualização para aprovação é a do piloto; depois do piloto aprovado, automático, com o José monitorando independentemente; se verificar alteração, botão de emergência do Telegram ou pedido ao agente para interromper. Operação interrompida só volta ao público por ordem do José, comandando o agente externamente junto com os agentes da operação.
+- **Esclarecime
 
 ## Fase atual do ROADMAP
 
@@ -247,4 +253,4 @@ A tabela de 12/10 que bloqueava o fluxo no login da CLI do Paperclip foi para `d
 
 ## Mapa visual
 
-docs/mapa/index.html (servido em :8088) — diagramas: 00-visao-geral.mmd, 01-episodio.mmd, 02-reposicao-temas.mmd, 03-acessos.mmd, 04-descarte.mmd, 05-vigia-atualizacoes.mmd, 06-runs-presos.mmd, 07-cadeia-video.mmd, 08-identidade-camofox.mmd, 09-agentes-responsabilidades.mmd, 10-catalogo-erros.mmd, 11-publicacao.mmd, 12-storyboard-elenco.mmd, 13-memoria-mcp-handoff.mmd · aba Roadmap gerada de ROADMAP + ESTADO-ATUAL (scripts/mapa/roadmap.py; edite as fontes, nunca o HTML)
+docs/mapa/index.html (servido em :8088) — diagramas: 00-visao-geral.mmd, 01-episodio.mmd, 02-reposicao-temas.mmd, 03-acessos.mmd, 04-descarte.mmd, 05-vigia-atualizacoes.mmd, 06-runs-presos.mmd, 07-cadeia-video.mmd, 08-identidade-camofox.mmd, 09-agentes-responsabilidades.mmd, 10-catalogo-erros.mmd, 11-publicacao.mmd, 12-cenas-elenco.mmd, 13-memoria-mcp-handoff.mmd · aba Roadmap gerada de ROADMAP + ESTADO-ATUAL (scripts/mapa/roadmap.py; edite as fontes, nunca o HTML)

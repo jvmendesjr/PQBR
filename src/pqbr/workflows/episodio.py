@@ -1,6 +1,7 @@
-"""EpisodioWorkflow + PublicacaoWorkflow (dry-run) — fila `episodio-pqbr` (t427, t130u).
-Ordem vigente: NotebookLM intelectual (roteiro, compliance, SEO; sem vídeo) → storyboard_criar.
-Para com a ficha gravada, imagens_revisadas false e pode_gerar_video false.
+"""EpisodioWorkflow + PublicacaoWorkflow (dry-run) — fila `episodio-pqbr` (t427, t130u; storyboard removido 29/10/2026, ordem do José).
+Ordem vigente: NotebookLM intelectual (roteiro, compliance, SEO; sem vídeo) → cenas individuais no Google Flow.
+O workflow para no roteiro aprovado: as cenas são criadas uma por vez pelo Agente do Flow (imagem de início
++ movimento definido no prompt), sem board. Não há mais etapa de storyboard neste workflow.
 Pós, quadros, Drive e publicação dry-run continuam registrados e não rodam neste fluxo.
 Nada torna público. Os vídeos já prontos do saldo não entram aqui."""
 from __future__ import annotations
@@ -14,8 +15,6 @@ from temporalio.common import RetryPolicy
 
 with workflow.unsafe.imports_passed_through():
     from .notebooklm import NotebookLMWorkflow, PedidoNotebookLM, FILA_NOTEBOOKLM, nlm_perguntar
-    from .storyboard import PROMPT_STORYBOARD, storyboard_criar
-    from ..contratos.storyboard import elenco_alternado, protagonista_ref
     from .pacote import ATIVIDADES_REGISTRO, pacote_garantir, registro_buscar_caderno
     from ..contratos import CATEGORIA_YOUTUBE
 
@@ -176,31 +175,12 @@ class EpisodioWorkflow:
         if not nlm.ok or not nlm.caderno:
             return ResultadoEpisodioE2E(etapa="roteiro", ok=False, detalhes=nlm.model_dump())
         self._criativo = nlm.criativo
-        elenco = elenco_alternado(p.codigo)
-        roteiro = (nlm.criativo.get("markdown") or p.roteiro_texto)[:6000]
-        base_prompt = PROMPT_STORYBOARD.format(codigo=p.codigo, elenco=elenco, protagonista=protagonista_ref(elenco), roteiro=roteiro)
-        uma = dict(start_to_close_timeout=timedelta(minutes=12), retry_policy=RetryPolicy(maximum_attempts=1))
-        erro, sb = "", None
-        for _ in range(2):
-            txt = await workflow.execute_activity(
-                nlm_perguntar, args=[nlm.caderno, base_prompt + (f" A resposta anterior foi inválida: {erro}. Corrija." if erro else "")],
-                task_queue=FILA_NOTEBOOKLM, **uma)
-            try:
-                sb = await workflow.execute_activity(
-                    storyboard_criar, args=[txt, p.codigo, f"{base}/storyboard.json"],
-                    start_to_close_timeout=timedelta(minutes=2), retry_policy=RetryPolicy(maximum_attempts=1))
-                break
-            except Exception as e:  # noqa: BLE001
-                erro = str(getattr(e, "cause", e))[:300]
-                sb = None
-        if not sb:
-            return ResultadoEpisodioE2E(etapa="storyboard", ok=False, detalhes={"motivo": f"storyboard inválido: {erro}", "caderno": nlm.caderno})
         return ResultadoEpisodioE2E(
-            etapa="storyboard", ok=True,
-            detalhes={"storyboard": sb, "caderno": nlm.caderno,
+            etapa="roteiro", ok=True,
+            detalhes={"caderno": nlm.caderno,
                       "criativo": {k: v for k, v in nlm.criativo.items() if k != "markdown"},
-                      "pode_gerar_video": False})
+                      "proximo": "cenas_individuais_flow"})
 
 
 from .criativo import validar_roteiro, validar_seo, seo_9router, compliance_roteiro, ordenar_fontes, capa_conferir
-ATIVIDADES_EPISODIO = [processo_criacao_conferir, storyboard_criar, capa_conferir, validar_roteiro, validar_seo, seo_9router, compliance_roteiro, ordenar_fontes, pos_produzir, extrair_quadros, capa_a9, drive_enviar, publicacao_dryrun, *ATIVIDADES_REGISTRO]
+ATIVIDADES_EPISODIO = [processo_criacao_conferir, capa_conferir, validar_roteiro, validar_seo, seo_9router, compliance_roteiro, ordenar_fontes, pos_produzir, extrair_quadros, capa_a9, drive_enviar, publicacao_dryrun, *ATIVIDADES_REGISTRO]

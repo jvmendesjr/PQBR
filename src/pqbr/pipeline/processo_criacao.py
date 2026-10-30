@@ -18,7 +18,8 @@ DIR_PROCESSOS = RAIZ / "docs" / "processos"
 DOC_NUCLEO = DIR_PROCESSOS / "CRIACAO-README.md"
 
 # Pin: ao bump do doc canônico, atualizar aqui + testes + CHANGELOG (OK José se MAJOR).
-VERSAO_ESPERADA = "1.0.0"
+# 1.1.0 (29/10/2026, ordem do José): storyboard removido; cenas individuais no lugar.
+VERSAO_ESPERADA = "1.1.0"
 
 PLATAFORMAS = ("flow", "google_vids", "meta_vibes")
 PLAYBOOK = {

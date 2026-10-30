@@ -35,14 +35,6 @@ GASTO_SEO_FALLBACK = AutorizacaoGasto(
     agente="combo já definido em config/modelos_9router.json; o agente não troca o modelo",
 )
 
-GASTO_STORYBOARD = AutorizacaoGasto(
-    etapa="storyboard",
-    modelo="notebooklm-chat",
-    pode_gastar=True,
-    meio="chat_caderno",
-    deterministico="Storyboard 1.3.0 reprova JSON inválido; imagens_revisadas fica false; sem imagem e sem vídeo",
-    agente="o ask devolve o JSON das fichas; não gera imagem nem vídeo",
-)
 
 GASTO_VIDEO_NLM = AutorizacaoGasto(
     etapa="notebooklm_video",
@@ -67,7 +59,7 @@ GASTO_FLOW_IMAGEM = AutorizacaoGasto(
     modelo="google-flow",
     pode_gastar=True,
     meio="imagem",
-    deterministico="imagens do Flow são gratuitas (t131u). Em 27/10 a tela gerou com Nano Banana 2 Lite, 9:16, e a ficha não mostrou crédito (t132u). Sem teto para o storyboard",
+    deterministico="imagens do Flow são gratuitas (t131u). Em 27/10 a tela gerou com Nano Banana 2 Lite, 9:16, e a ficha não mostrou crédito (t132u). Sem teto para cenas individuais (board removido 29/10/2026)",
     agente="não troca para vídeo nem para 2K/4K Aprimorada; se sair pessoa em vez de stickman, não repete o mesmo texto",
 )
 

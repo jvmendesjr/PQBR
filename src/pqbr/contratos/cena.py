@@ -1,8 +1,11 @@
-"""Storyboard 'fábrica em série' (t75u/t76u/t77u): uma FichaCena numerada por cena, com prompt catalogado e rotulado,
-referência identificada, norte, início e fim. Obrigatório antes de gerar imagem ou vídeo. Base: docs/pesquisas/flow-storyboard-por-cena.md.
+"""Cena individual (29/10/2026, ordem do José: storyboard REMOVIDO definitivamente).
 
-1.3.0 (t150u): `refs` aceitam os ids do catálogo visual aberto (`banco-fichas/`: PERS, FIG, ANIM, OBJ, AMB, SIT), até 6 por cena,
-e o coadjuvante pode ser qualquer personagem do catálogo (o elenco varia). Os storyboards 1.0.0 a 1.2.0 continuam válidos."""
+Uma CenaIndividual numerada por cena, com prompt catalogado e rotulado, referência identificada,
+norte, início e fim, e movimento bem definido no prompt. NÃO existe mais board: cada cena é criada,
+validada e animada individualmente, uma por vez — um encarte só com muitas cenas facilitava o erro do agente.
+Obrigatório antes de gerar imagem ou vídeo daquela cena. Deriva da antiga FichaCena (Storyboard 1.3.0, t150u):
+`refs` aceitam os ids do catálogo visual aberto (`banco-fichas/`: PERS, FIG, ANIM, OBJ, AMB, SIT), até 6 por cena,
+e o coadjuvante pode ser qualquer personagem do catálogo (o elenco varia)."""
 from __future__ import annotations
 import re
 from typing import Literal
@@ -10,7 +13,7 @@ from pydantic import Field, model_validator
 from . import Contrato
 from .catalogo_visual import PROTAGONISTAS
 
-VERSAO = "1.3.0"
+VERSAO = "1.0.0"
 ROTULO = re.compile(r"^PQBR-EP\d{4,}_c\d{2}$")          # ex.: PQBR-EP1003_c04
 REF_ASSET = r"ASSET_[a-z]+_[a-z0-9-]+-v\d+"             # legado (1.0.0 a 1.2.0), ex.: ASSET_personagem_pqbr-v1
 REF_CATALOGO = r"(?:PERS|FIG|ANIM|OBJ|AMB|SIT)-[a-z0-9]+(?:-[a-z0-9]+)*"   # ex.: PERS-menina-rosa, SIT-pensando
@@ -20,8 +23,8 @@ PROIBIDO_FRAMING = re.compile(r"from the (chest|waist) up|do peito para cima|da 
 FALA_NO_PROMPT = re.compile(r"[\"“”].{3,}[\"“”]|\b(speaks|says|talking|narrates|fala|diz|narra)\b", re.I)
 
 
-class FichaCena(Contrato):
-    versao: Literal["1.0.0", "1.1.0", "1.2.0", "1.3.0"] = VERSAO
+class CenaIndividual(Contrato):
+    versao: Literal["1.0.0"] = VERSAO
     numero: int = Field(ge=1, le=60)
     rotulo: str = Field(pattern=ROTULO.pattern)
     fala: str = Field(min_length=3, max_length=400)               # narração em off; nunca vai no prompt
@@ -80,26 +83,3 @@ def protagonista_ref(elenco: str) -> str:
     return PROTAGONISTAS[elenco]
 
 
-class Storyboard(Contrato):
-    versao: Literal["1.0.0", "1.1.0", "1.2.0", "1.3.0"] = VERSAO
-    codigo: str = Field(pattern=r"^PQBR-EP\d{4,}$")
-    norte_geral: str = Field(min_length=20, max_length=600)
-    bloco_estilo: str = Field(min_length=20, max_length=1500)
-    ficha_personagem: str = Field(min_length=20, max_length=800)
-    cenas: list[FichaCena] = Field(min_length=3, max_length=60)
-    elenco: Literal["masculino", "feminino"]
-    elenco_excecao: str | None = Field(default=None, max_length=200)   # motivo, se quebrar a alternância
-    imagens_revisadas: bool = False                                # True só depois da revisão das imagens, antes do vídeo
-
-    @model_validator(mode="after")
-    def _ordem(self):
-        if [c.numero for c in self.cenas] != list(range(1, len(self.cenas) + 1)): raise ValueError("cenas fora de ordem")
-        if self.elenco != elenco_alternado(self.codigo) and not self.elenco_excecao:
-            raise ValueError(f"alternância: {self.codigo} pede elenco {elenco_alternado(self.codigo)} (ou elenco_excecao)")
-        if any(c.coadjuvante in (self.elenco, protagonista_ref(self.elenco)) for c in self.cenas):
-            raise ValueError("protagonista é único e constante; coadjuvante deve ser outro personagem do catálogo")
-        if any(not c.rotulo.startswith(self.codigo + "_") for c in self.cenas): raise ValueError("rótulo de outro episódio")
-        return self
-
-    def pode_gerar_video(self) -> bool:
-        return self.imagens_revisadas

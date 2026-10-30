@@ -311,7 +311,7 @@ def descartar(id: str, motivo: str, *, por: str = "agente", por_jose: bool = Fal
 
 
 def resumo_para_prompt(raiz: Path | str | None = None, limite: int = 4500) -> str:
-    """Lista curta do catálogo para o prompt do storyboard: um item por linha, com o id que vai em `refs`."""
+    """Lista curta do catálogo para o prompt das cenas individuais: um item por linha, com o id que vai em `refs`."""
     fs = fichas(raiz)
     prot = {v: k for k, v in (carregar(raiz).get("protagonistas") or PROTAGONISTAS).items()}
     nomes = {"personagem": "Personagens", "ambiente": "Ambientes", "objeto": "Objetos", "animal": "Animais", "figura": "Figuras", "situacao": "Situações (pose ou movimento corriqueiro)"}

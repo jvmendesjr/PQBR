@@ -2,7 +2,14 @@
 
 Fonte única de "onde estamos". Não repete o ROADMAP: aponta os itens por id. **Atualize este arquivo a cada correção ou pendência resolvida.** O hook pre-commit exige isso quando o commit toca ROADMAP, LACUNAS, DECISOES-LOG ou CHANGELOG, e o `registrar_alteracao` exige isso para `tipo` correcao ou pendencia_resolvida.
 
-Atualizado: 29/10/2026 (limpeza dos documentos para termos do MCP + ressalva sobre o backend anterior, ordem do José; migração para codebase-memory-mcp, OK José, versão 0.29.5; t164u handoff EP1003 v2 segue pendente de stills/clipes) · versão 0.29.6
+Atualizado: 29/10/2026 (limpeza dos documentos para termos do MCP + ressalva sobre o backend anterior, ordem do José; migração para codebase-memory-mcp, OK José, versão 0.29.5; t164u handoff EP1003 v2 segue pendente de stills/clipes) · versão 0.29.7
+
+## Storyboard removido definitivamente (29/10/2026, versão 0.29.7, ordem do José)
+
+- Sem board, sem `storyboard_criar`, sem gate `storyboard_ok`. No lugar: cenas individuais, uma por vez, pelo Agente do Google Flow (imagem de início + movimento bem definido no prompt), contrato `CenaIndividual` 1.0.0, modelo de imagem Nano Banana 2.1, formato pedido explicitamente no prompt. Código antigo em `scripts/_obsoleto/`, índice em `docs/_obsoleto/INDICE-storyboard-removido.md`.
+- Regra suprema agente-primeiro registrada no núcleo: "manual" = o agente faz. Piloto: a visualização para aprovação é a do piloto; depois, automático, José monitorando; emergência pelo Telegram ou pedido ao agente para interromper; volta ao público só por ordem do José.
+- Centro criativo: NotebookLM pai via `notebooklm-py`. Motion (MG-05) segurado; Vids/Vibes fallback; publicação dry-run.
+- Validade em runtime após reinício do `pqbr-episodio-worker` (OK do José pendente).
 
 ## Migração do backend do `codigo` para codebase-memory-mcp (29/10/2026, versão 0.29.5, ADR-012)
 

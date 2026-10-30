@@ -21,18 +21,15 @@
         "AMB-cafe"
       ],
       "fichas_ok": true,
-      "storyboard_ok": true,
-      "storyboard_request": "SENT_AGENT_OK_V2",
       "imagens_revisadas": false,
       "criado_em": "2026-10-29",
       "decisao": "t163u",
       "agent_settings": {
         "confirm": "Sempre",
-        "image": "9:16 x1 Nano Banana Pro",
+        "image": "9:16 x1 Nano Banana 2.1",
         "character": "PERS-menina-rosa",
         "collections": [
           "Referencias",
-          "Storyboard",
           "Cenas",
           "Finais"
         ]
@@ -43,7 +40,8 @@
         "url": "https://flow.google.com/project/025dcfef-7eef-4551-b60c-5106812508db",
         "motivo": "t162u HOLD Falha ao renderizar; mantido intacto (nada apagado) — José t151u / t163u v2"
       },
-      "nota_v2": "t163u: novo projeto Flow PQBR-EP1003-cafe-fraco-v2 (3a9ca558-…). Agent Confirm=Sempre, 9:16, Nano Banana Pro; fichas; Character PERS-menina-rosa; Collections Referencias/Storyboard/Cenas/Finais; storyboard conciso 8 painéis c01..c08 enviado 1× (0 créditos); resposta Agente OK (sessão Comedic Cafe Coffee Storyboard). STOP após storyboard — sem stills/clipes. Projeto antigo 025dcfef… intacto."
+      "nota_v2": "t163u: novo projeto Flow PQBR-EP1003-cafe-fraco-v2 (3a9ca558-…). Agent Confirm=Sempre, 9:16, Nano Banana 2.1 (a partir de 29/10/2026, ordem do José; antes Nano Banana Pro); fichas; Character PERS-menina-rosa; Collections Referencias/Cenas/Finais (Storyboard removida 29/10/2026); storyboard de 8 painéis feito em t163u fica só como histórico, não é mais etapa nem gate. Projeto antigo 025dcfef… intacto.",
+      "cenas_individuais": true
     }
   }
 }

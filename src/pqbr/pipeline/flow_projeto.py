@@ -1,8 +1,9 @@
-"""Gate fail-closed do projeto Google Flow por episódio (t161u).
+"""Gate fail-closed do projeto Google Flow por episódio (t161u; storyboard removido 29/10/2026, ordem do José).
 
 Um episódio = um projeto `PQBR-EP<nnnn>-<slug>` registrado em
 `config/flow_projetos.json`. Sem fichas entregues no projeto → bloqueia
-storyboard/cenas. Sem storyboard_ok → bloqueia geração de cenas/vídeo.
+cenas. NÃO há mais gate de storyboard: cenas individuais (uma por vez, com movimento
+definido no prompt) só exigem fichas_ok.
 O projeto de testes (`projeto_testes`) nunca é usado como destino de episódio.
 """
 from __future__ import annotations
@@ -27,8 +28,6 @@ class ResultadoFlowProjeto(BaseModel):
     titulo: str | None = None
     project_id: str | None = None
     fichas_ok: bool = False
-    storyboard_ok: bool = False
-    pode_pedir_storyboard: bool = False
     pode_gerar_cenas: bool = False
     motivos: list[str] = Field(default_factory=list)
 
@@ -59,10 +58,9 @@ def conferir_episodio(
     codigo_ep: str,
     *,
     exigir_fichas: bool = True,
-    exigir_storyboard: bool = False,
     cfg_path: Path | None = None,
 ) -> ResultadoFlowProjeto:
-    """Fail-closed: episódio sem projeto registrado / fichas / storyboard conforme flags."""
+    """Fail-closed: episódio sem projeto registrado / fichas conforme flags (sem gate de storyboard)."""
     motivos: list[str] = []
     data = _carregar(cfg_path)
     testes_id = (data.get("projeto_testes") or {}).get("id")
@@ -83,15 +81,11 @@ def conferir_episodio(
         motivos.append("projeto_testes_proibido_para_episodio")
 
     fichas_ok = bool(entry.get("fichas_ok"))
-    storyboard_ok = bool(entry.get("storyboard_ok"))
     if exigir_fichas and not fichas_ok:
         motivos.append("fichas_nao_entregues")
-    if exigir_storyboard and not storyboard_ok:
-        motivos.append("storyboard_ausente")
 
-    pode_sb = fichas_ok and not motivos
-    # pedir storyboard exige fichas; gerar cenas exige storyboard_ok explícito
-    pode_cenas = fichas_ok and storyboard_ok and not motivos
+    # cenas individuais exigem só fichas; storyboard foi removido (29/10/2026)
+    pode_cenas = fichas_ok and not motivos
 
     return ResultadoFlowProjeto(
         ok=not motivos,
@@ -99,8 +93,6 @@ def conferir_episodio(
         titulo=titulo,
         project_id=pid,
         fichas_ok=fichas_ok,
-        storyboard_ok=storyboard_ok,
-        pode_pedir_storyboard=pode_sb and not storyboard_ok,
         pode_gerar_cenas=pode_cenas,
         motivos=motivos,
     )
@@ -114,5 +106,5 @@ def exigir_episodio(codigo_ep: str, **kw) -> ResultadoFlowProjeto:
 
 
 def exigir_antes_cenas(codigo_ep: str, **kw) -> ResultadoFlowProjeto:
-    """Gate cenas/vídeo: fichas + storyboard_ok obrigatórios."""
-    return exigir_episodio(codigo_ep, exigir_fichas=True, exigir_storyboard=True, **kw)
+    """Gate cenas/vídeo: fichas obrigatórias; storyboard removido."""
+    return exigir_episodio(codigo_ep, exigir_fichas=True, **kw)

@@ -1,4 +1,4 @@
-"""t161u: gate fail-closed do projeto Flow por episódio."""
+"""t161u: gate fail-closed do projeto Flow por episódio (storyboard removido 29/10/2026)."""
 from __future__ import annotations
 
 import json
@@ -15,22 +15,19 @@ def test_titulo_canonico():
     assert not fp.validar_titulo("out. 27 - 17:09")
 
 
-def test_ep1003_fichas_ok_storyboard_hold():
-    r = fp.conferir_episodio("EP1003", exigir_fichas=True, exigir_storyboard=False)
+def test_ep1003_fichas_ok_sem_storyboard():
+    # Sem gate de storyboard: fichas_ok libera cenas individuais.
+    r = fp.conferir_episodio("EP1003", exigir_fichas=True)
     assert r.ok is True
     assert r.fichas_ok is True
-    assert r.storyboard_ok is False
-    assert r.pode_pedir_storyboard is True
-    assert r.pode_gerar_cenas is False
-    assert r.project_id == "025dcfef-7eef-4551-b60c-5106812508db"
+    assert r.pode_gerar_cenas is True
+    assert r.project_id == "3a9ca558-4c85-4502-8c19-7a8f42fa41dd"
 
 
-def test_cenas_bloqueadas_sem_storyboard():
-    r = fp.conferir_episodio("EP1003", exigir_fichas=True, exigir_storyboard=True)
-    assert r.ok is False
-    assert "storyboard_ausente" in r.motivos
-    with pytest.raises(RuntimeError, match="fail-closed"):
-        fp.exigir_antes_cenas("EP1003")
+def test_exigir_antes_cenas_libera_com_fichas():
+    r = fp.conferir_episodio("EP1003", exigir_fichas=True)
+    assert r.pode_gerar_cenas is True
+    assert fp.exigir_antes_cenas("EP1003").pode_gerar_cenas is True
 
 
 def test_episodio_ausente(tmp_path: Path):

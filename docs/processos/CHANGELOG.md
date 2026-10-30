@@ -1,3 +1,4 @@
+- **1.1.0 (29/10/2026, José):** storyboard removido definitivamente; cenas individuais no lugar (uma por vez, movimento definido no prompt); regra agente-primeiro, piloto e emergência; centro criativo NotebookLM; modelo de imagem Nano Banana 2.1.
 # CHANGELOG — docs/processos
 
 ## [1.0.0] — 2026-10-29 (t163u operacional v2)

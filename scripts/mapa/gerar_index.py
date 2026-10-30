@@ -10,7 +10,7 @@ import roadmap  # noqa: E402  (t120u: aba Roadmap)
 MAPA = Path(__file__).resolve().parents[2] / "docs/mapa"
 TITULOS = {"00": "Visão geral", "01": "Episódio", "02": "Reposição de temas", "03": "Acessos / Camofox", "04": "Descarte",
            "05": "Vigia de atualizações", "06": "Runs presos", "07": "Cadeia de vídeo", "08": "Identidade Camofox",
-           "09": "Agentes", "10": "Catálogo de erros", "11": "Publicação", "12": "Storyboard e elenco", "13": "Memória, MCP e handoff"}
+           "09": "Agentes", "10": "Catálogo de erros", "11": "Publicação", "12": "Cenas e elenco", "13": "Memória, MCP e handoff"}
 
 
 def gerar() -> str:

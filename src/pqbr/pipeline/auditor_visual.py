@@ -21,7 +21,7 @@ from pathlib import Path
 
 TEMPLATE = Path(__file__).resolve().parents[3] / "templates" / "auditor" / "VISUAL_2D.txt"
 SEGURANCA = ("parece_pessoa_real", "marca_real", "estereotipo_ofensivo", "texto_com_erro_de_sentido")
-# t108u (P7, REGRAS §25, FichaCena.expressao): reprovam como segurança (2 rodadas concordando)
+# t108u (P7, REGRAS §25, CenaIndividual.expressao): reprovam como segurança (2 rodadas concordando)
 BLOQUEIO_VISUAL = ("boca_articula_fala", "corte_oculos_cabeca", "grotesco")
 METRICAS = ("segue_estilo_declarado", "mesmo_personagem_do_bloco", "imagem_corresponde_a_fala",
             "legivel_no_celular", "ambiente_brasileiro")

@@ -1,7 +1,7 @@
 # Playbook — Google Flow
 
-- **versão:** 1.0.0
-- **status:** [APROVADO] José t149u · decisão t160u · ajuste upload t161u
+- **versão:** 1.1.0
+- **status:** [APROVADO] José t149u · decisão t160u · ajuste upload t161u · **storyboard removido definitivamente por José em 29/10/2026**
 - **núcleo:** [`CRIACAO-README.md`](CRIACAO-README.md) (consultar primeiro)
 - **origem:** `docs/pesquisas/flow-processo-comunidade-20261029.md` + Help Google Flow Agent
 - **conta / sessão:** só Camofox PQBR `127.0.0.1:9387` (REGRAS §11). Nunca outro browser.
@@ -11,23 +11,23 @@
 1. Abrir `https://flow.google.com/` (ou labs.google/fx/tools/flow) na sessão já logada.
 2. **Novo projeto** nomeado `PQBR-EPxxxx-slug` (nunca o projeto de testes compartilhado).
 3. No prompt box: ligar **Agente**.
-4. **Configurações do agente:** Confirm before generating = **Sempre**; imagem `9:16` + x1 + `🍌 Nano Banana Pro`; vídeo `9:16` + x1 + modelo barato padrão do projeto (hoje Omni Flash / o que a UI mostrar).
+4. **Configurações do agente:** Confirm before generating = **Sempre**; imagem `9:16` + x1 + `🍌 Nano Banana 2.1` (modelo atual registrado, 29/10/2026, ordem do José; procurar esse nome exato na UI, fail-closed se ausente, nunca substituir em silêncio); vídeo `9:16` + x1 + modelo barato padrão do projeto (hoje Omni Flash / o que a UI mostrar). O formato é parâmetro do projeto e tem de ser pedido explicitamente no prompt (9:16 para Shorts, 16:9 quando o projeto for horizontal) — consistência acima do formato.
 5. **Instruções para o agente:** estilo cartoon 2D flat colorido stickman; lips closed; sem texto/marca; elenco do episódio; naming `S0N_…`.
 6. **Characters:** criar/anexar `@Nome` a partir das fichas do `banco-fichas/` (recorte individual, fundo limpo).
-7. Collections: `Referencias` / `Storyboard` / `Cenas` / `Finais`.
+7. Collections: `Referencias` / `Cenas` / `Finais` (Storyboard removida 29/10/2026).
 
 ## Componentes que importam
 
 | Componente | Uso PQBR |
 |---|---|
-| Agente | Orquestra fichas, storyboard, stills e clipes; sugere modelo |
+| Agente | Orquestra fichas, cenas individuais, stills e clipes; sugere modelo |
 | Characters / `@Nome` | Identidade pinada (obrigatório; nome no texto sem Character = drift) |
 | Ingredients / Elements | ≤ **3** por geração; personagem + objeto/local + estilo |
-| Storyboard Studio / grade | Planejamento; **não** alimentar grade multi-painel no vídeo |
+| Cenas individuais | Uma cena por vez, sem board; **não** alimentar grade multi-painel no vídeo |
 | Frames to Video | Start frame aprovado → motion |
 | Ingredients to Video | Âncora de identidade no clipe |
 | Scenebuilder | Montar clipes **já** aprovados; Extend/Jump com parcimônia |
-| Nano Banana Pro | Default de still / ficha (conferir **0 créditos** antes de confirmar) |
+| Nano Banana 2.1 | Modelo atual de still / ficha (conferir **0 créditos** antes de confirmar; se a UI mostrar custo, HOLD + avisar José) |
 
 ## Sequência operacional (Flow)
 
@@ -36,8 +36,8 @@
 3. Agente on + Confirm=Sempre + defaults acima.
 4. Entregar fichas existentes do banco (Character/Element). Registrar em `config/flow_projetos.json` (`fichas_ok`). **Upload Angular (t161u, estável):** abrir `Adicionar elementos` → aba **Envios** → **clicar** `.sidebar-upload-btn` (instancia o `input[type=file]`) → `POST /tabs/{id}/upload` com `selector=input[type=file]` e caminho absoluto no host Camofox → esperar `Enviando <arquivo> Imagem` e o `group` na grade. O atalho `focus→click` no botão (pesquisa 2026-10-28) ficou intermitente após o 1º arquivo; preferir o clique direto + `direct_input`. Menu topo `Enviar arquivos` sem input prévio → timeout do filechooser.
 5. Pedir ao Agente as refs faltantes (só stills Nano Banana Pro). Registrar no catálogo PQBR.
-6. Pedir storyboard **só pelo Agente** com refs pinadas + prompts SUBJECT/ACTION/CAMERA/ATMOSPHERE (padrão de prompt da pesquisa; 0 créditos). Sem `storyboard_ok` no config, `flow_projeto.exigir_antes_cenas` bloqueia.
-7. Gerar stills S01..S0N (9:16); Collections; **parar** para revisão (`imagens_revisadas`).
+6. **Sem storyboard (removido definitivamente 29/10/2026).** Criar cenas individuais, uma por vez: para cada cena, imagem de início a partir das fichas pinadas + prompt de vídeo com o movimento já bem definido na descrição. Sem `storyboard_ok` — `flow_projeto.exigir_antes_cenas` exige só `fichas_ok`.
+7. Gerar imagens de início de cena S01..S0N (formato do projeto); Collections; **parar** para revisão (`imagens_revisadas`) — no piloto, revisão do José; depois do piloto aprovado, revisão automática pelos agentes (juiz Gemini, Jev, checagens) e o José só monitora.
 8. Só então 1 clipe contínuo por cena (`Single continuous shot, no cuts, lips closed`).
 9. Baixar para repo/Drive; seguir motion (MG-05+).
 
