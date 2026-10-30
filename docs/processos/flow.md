@@ -12,7 +12,7 @@
 2. **Novo projeto** nomeado `PQBR-EPxxxx-slug` (nunca o projeto de testes compartilhado).
 3. No prompt box: ligar **Agente**.
 4. **Configurações do agente:** Confirm before generating = **Sempre**; imagem `9:16` + x1 + `🍌 Nano Banana 2.1` (modelo atual registrado, 29/10/2026, ordem do José; procurar esse nome exato na UI, fail-closed se ausente, nunca substituir em silêncio); vídeo `9:16` + x1 + modelo barato padrão do projeto (hoje Omni Flash / o que a UI mostrar). O formato é parâmetro do projeto e tem de ser pedido explicitamente no prompt (9:16 para Shorts, 16:9 quando o projeto for horizontal) — consistência acima do formato.
-5. **Instruções para o agente:** estilo cartoon 2D flat colorido stickman; lips closed; sem texto/marca; elenco do episódio; naming `S0N_…`.
+5. **Instruções para o agente:** estilo cartoon 2D flat colorido stickman; lips closed; sem texto/marca; elenco do episódio; naming `S0N_…`; a protagonista é uma mulher jovem adulta (nunca escrever menina/girl no prompt, isso encolhe a personagem), proporções adultas, em pé no chão, balcão/mesas na altura da cintura, sem banquinho, sem braços ou mãos extras, todos os membros em traço fino preto de stickman (aprendizado 30/10/2026, ficha PERS-menina-rosa).
 6. **Characters:** criar/anexar `@Nome` a partir das fichas do `banco-fichas/` (recorte individual, fundo limpo).
 7. Collections: `Referencias` / `Cenas` / `Finais` (Storyboard removida 29/10/2026).
 

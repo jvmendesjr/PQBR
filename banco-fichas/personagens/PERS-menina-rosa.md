@@ -9,7 +9,7 @@ Origem: Drive da conta PQBR, pasta `Fontes/Imagens` (id `1ziYivEewPQIvlgt6Z7v7R8
 
 ## Trava (frase-trava para o prompt e para o Agente do Flow)
 
-Stickman 2D flat colorido do canal Porquê BR: menina de cabelo preto preso em rabo de cavalo lateral com prendedor rosa, vestido rosa chapado sem mangas e sapatos brancos ovais de contorno preto. Cabeça redonda branca grande com contorno preto, dois olhos pretos sempre visíveis, boca de reação (nunca articula fala), corpo e membros em traço preto fino, fundo claro em tom creme, sem texto e sem marca na imagem.
+Stickman 2D flat colorido do canal Porquê BR: mulher jovem adulta de cabelo preto preso em rabo de cavalo lateral com prendedor rosa, vestido rosa chapado sem mangas e sapatos brancos ovais de contorno preto. Cabeça redonda branca grande com contorno preto, dois olhos pretos sempre visíveis, boca de reação (nunca articula fala), corpo e membros em traço preto fino, fundo claro em tom creme, sem texto e sem marca na imagem.
 
 ## O que está fechado
 
@@ -19,3 +19,9 @@ Stickman 2D flat colorido do canal Porquê BR: menina de cabelo preto preso em r
 ## Proibido
 
 Um olho só (ciclope / `grotesco`), pele humana, volume 3D, fotorrealismo, dedos realistas, boca aberta articulando fala (`boca_articula_fala`), corte da cabeça no topo (`corte_oculos_cabeca`), texto ou marca na imagem.
+
+## Idade e proporção (aprendizado 30/10/2026, revisão do piloto EP1003 v3 — José)
+
+- **Ela é adulta, não criança.** É uma mulher jovem adulta. O nome PERS-menina-rosa é só o ID do catálogo; nos prompts do Flow e do Agente, escrever sempre **"mulher jovem adulta"** e nunca "menina/girl" — a palavra "menina/girl" fez o modelo encolher a personagem e renderizar o cenário em escala adulta, deixando-a com cara de criança, sobretudo em tomadas abertas (S07 caminhando no café, S03/S04 observando).
+- **Proporção adulta:** alta, corpo inteiro, em pé no chão, balcão e mesas na altura da cintura dela, cadeiras abaixo da cintura. Em tomada aberta, ela fica em primeiro plano, corpo inteiro, e o cenário vem em escala compatível com um adulto — nunca encolher a personagem para caber no cenário.
+- **Nunca banquinho ou cadeira para subir, nunca mãos ou braços extras, nunca outra pessoa despejando ou agindo por ela.** Todos os braços e pernas são traços finos pretos de stickman. Caso registrado: na S05 v3 o modelo inventou dois braços realistas com manga xadrez despejando as chaleiras e pôs a personagem em pé num banquinho — nada disso estava no prompt. Erro de geração, não pedido: regenerar, não aceitar.
