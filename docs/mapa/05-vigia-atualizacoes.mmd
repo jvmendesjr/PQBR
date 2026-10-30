@@ -1,7 +1,7 @@
-%% VigiaAtualizacoesWorkflow (src/pqbr/workflows/atualizacoes.py) — fila pqbr-episodio, Schedule sex 08:00. Gerado do código 24/10/2026.
+%% VigiaAtualizacoesWorkflow (src/pqbr/workflows/atualizacoes.py) — fila pqbr-episodio, Schedule sex 08:00. Gerado do código 29/10/2026.
 flowchart TD
-  S(["run(semana opcional → AAAAwSS)"]) --> L["para cada VIGIADAS:<br/>notebooklm-py · camoufox · temporalio SDK · temporal CLI · pydantic-ai-slim · pydantic · 9router"]
-  L --> A1["vigia_checar (só leitura)<br/>instalada: importlib.metadata · última: PyPI / GitHub releases"]
+  S(["run(semana opcional → AAAAwSS)"]) --> L["para cada VIGIADAS:<br/>notebooklm-py · camoufox · temporalio SDK · temporal CLI · pydantic-ai-slim · pydantic · 9router · codebase-memory-mcp"]
+  L --> A1["vigia_checar (só leitura)<br/>instalada: importlib.metadata (PyPI) ou --version do binário (CBM) · última: PyPI / GitHub releases"]
   A1 --> C{"classificar"}
   C --> K1["em_dia"] & K2["patch"] & K3["minor"] & K4["major"] & K5["desconhecido → conferir à mão"]
   K1 & K2 & K3 & K4 & K5 --> R["montar_relatorio → RelatorioAtualizacoes 1.0.0<br/>aplicado = False sempre"]

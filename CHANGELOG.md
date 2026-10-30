@@ -3,6 +3,23 @@
 - Flow EP1003: Agent/Character/Collections conforme `docs/processos/flow.md`; storyboard pedido ao Agente com HOLD por falha de render da UI.
 
 # CHANGELOG — PQBR
+## [0.29.5] — 2026-10-29 (migração GitNexus → codebase-memory-mcp, OK José)
+### Alterado
+- Backend do `codigo` do pqbr-mcp trocado do GitNexus 1.6.12 (PolyForm Noncommercial) para o codebase-memory-mcp **0.12.1** (MIT, release GitHub 2026-10-16, SHA-256 conferido). Interface do `codigo` inalterada (`query|context|impact`, filtrada pelo papel, fail-closed). Adaptador novo: `src/pqbr/integrations/codebase_memory.py`.
+- Política 1.5.0 → **1.6.0**: ferramenta `gitnexus_consultar` renomeada para `codigo_consultar` (dev e mantenedor). `query_graph`/`cypher` continuam bloqueados.
+- Contrato `FerramentaVigiada` 1.0.0 → **1.1.0** (campo opcional novo `binario`); vigia de sexta 08:00 passa a vigiar o codebase-memory-mcp (versão instalada via `--version`, última via GitHub releases, mesmo `classificar`; nunca aplica, nunca dispara o Schedule à mão).
+- Scripts: `scripts/codebase-memory/verificar.sh` (fail-closed, Lens desligada) e `hook-post-commit.sh` (reindex em segundo plano; o `auto_watch` do CBM só vale na sessão dona, por isso o post-commit é o mecanismo durável de frescor). `.githooks/post-commit` aponta para o novo hook.
+- Mapa: `05-vigia-atualizacoes` (entrada CBM + leitura por binário), `13-memoria-mcp-handoff` (subgrafo CBM) e `00-visao-geral` (nó K13) atualizados; `index.html` regenerado.
+### Preservado (nada apagado, sem desinstalar)
+- GitNexus: wrapper em `~/.local/bin/_obsoleto/gitnexus`, índice de 215 MB em `~/.local/share/_obsoleto/gitnexus-pqbr-1.6.12/.gitnexus/`, código em `scripts/_obsoleto/`, índice em `docs/_obsoleto/INDICE-migracao-cbm.md`. Pacote npm e registry global intactos. Desinstalação só com ordem expressa posterior.
+### Gaps documentados (ADR-012)
+- Saída não é byte-idêntica (comparação semântica no Passo 4); processos e classificação de risco do GitNexus sem equivalente (risco devolvido como `sem_equivalente`, sem escore emulado); `wiki` sem equivalente (não era usado); parse parcial de SQL no índice CBM (28 arquivos parciais, 6 inutilizáveis — ler o SQL direto); chamadas por string (ex.: atividades Temporal) não geram aresta em nenhum dos dois índices; `indexed_at` do CBM não atualiza em reindex em segundo plano (frescor se verifica buscando um símbolo novo).
+### Verificação (Passo 4)
+- Mesmas consultas nos dois lados (lado GitNexus = linha de base do Passo 1, pois o índice foi preservado fora do repo): `query`/`context`/`impact` para `vigia_checar` e `VigiaAtualizacoesWorkflow` equivalentes ou mais ricos no CBM (callees de `vigia_checar`: `_get_json`, `classificar` nos dois, mais `_versao_binario`, `ItemAtualizacao`, `_num`, `int` no CBM); `consultar` sem desambiguador devolve ambiguidade explícita nos dois lados (12 sugestões no CBM, incluindo o novo `codebase_memory.consultar`); papel `auditor`/desconhecido negado, `cypher`/`query_graph` bloqueados.
+- `detect_changes --base-branch HEAD`: exatamente os 17 arquivos da migração, nem mais nem menos.
+- Vigia: `vigia_checar` para o CBM devolve instalada `0.12.1`, última `v0.12.1`, `em_dia`.
+- Suíte completa: 686 passados, 2 falhas pré-existentes em `test_flow_projeto.py` (EP1003), reproduzidas no HEAD limpo sem a migração — não são regressão.
+
 
 Versionamento SemVer (MAJOR.MINOR.PATCH) a partir de t510. Versão do pacote canônico/contrato segue o próprio hash.
 

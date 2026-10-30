@@ -4,7 +4,7 @@ Vale para qualquer cliente MCP (Cursor, Claude, opencode, Codex, script próprio
 
 ## O que o mantenedor pode
 - **Lê:** todas as tags de conteúdo do Hindsight (bank `pqbr`): decisao, incidente, commit, licao, playbook, doc, editorial, pesquisa, publicacao, auditoria, compliance, seguranca, descarte, estado. Só `obsoleto_candidato` (marcação de descarte) fica fora.
-- **Código (GitNexus):** o repo todo (`codigo: [""]`).
+- **Código (codebase-memory-mcp):** o repo todo (`codigo: [""]`).
 - **Grava memória:** decisao, incidente, licao, playbook, doc, estado.
 - **Código/docs/mapa:** altera pelo git (branch de trabalho, nunca merge em main sem OK do José), seguindo o protocolo abaixo.
 - Política: `config/politica_papeis.json` 1.4.0.

@@ -11,9 +11,9 @@ flowchart LR
     HS[("memórias com tags + autor:cliente")]
     OBS["descarte t90s398: 231 obsoletas apagadas (backup)<br/>7 obsoleto_candidato em revisão (José)"]
   end
-  subgraph GN["GitNexus 1.6.12 GLOBAL do servidor"]
-    GNX["~/.local/bin/gitnexus · registry ~/.gitnexus<br/>licença PolyForm NC aceita (uso pessoal, t90u)"]
-    IDXG["instância PQBR: .gitnexus/ (fora do git)<br/>reindex no hook post-commit"]
+  subgraph GN["codebase-memory-mcp 0.12.1 (usuário, MIT) — backend do codigo desde 29/10/2026"]
+    GNX["~/.local/opt/codebase-memory-mcp/codebase-memory-mcp · índice ~/.cache/codebase-memory-mcp/<br/>Lens desligada, stdio; GitNexus 1.6.12 preservado em _obsoleto/, sem desinstalar"]
+    IDXG["instância PQBR: projeto PQBR, ready<br/>reindex no hook post-commit (auto_watch só vale na sessão dona)"]
   end
   subgraph MCPS["pqbr-mcp 0.4.0 · exclusivo mantenedor (na aplicação) · 127.0.0.1:8791 → tailscale serve (só tailnet)"]
     LEI["leitura: onboarding · buscar_memoria · codigo · estado"]

@@ -498,6 +498,7 @@ class FerramentaVigiada(Contrato):
     fonte: Literal["pypi", "github", "manual"]
     alvo: str = Field(min_length=2, max_length=200)
     python: str | None = None
+    binario: str | None = None  # caminho do binário; se presente, a versão instalada é lida via --version
     notas: str = ""
 
 
@@ -537,7 +538,7 @@ class SaudeNavegador(Contrato):
 VERSOES: dict[str, str] = {
     "InstanciaNavegador": "1.0.0",
     "SaudeNavegador": "1.0.0",
-    "FerramentaVigiada": "1.0.0",
+    "FerramentaVigiada": "1.1.0",
     "ItemAtualizacao": "1.0.0",
     "RelatorioAtualizacoes": "1.0.0",
     "CenaVisual": "1.0.0",

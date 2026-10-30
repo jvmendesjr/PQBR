@@ -2,7 +2,13 @@
 
 Fonte única de "onde estamos". Não repete o ROADMAP: aponta os itens por id. **Atualize este arquivo a cada correção ou pendência resolvida.** O hook pre-commit exige isso quando o commit toca ROADMAP, LACUNAS, DECISOES-LOG ou CHANGELOG, e o `registrar_alteracao` exige isso para `tipo` correcao ou pendencia_resolvida.
 
-Atualizado: 29/10/2026 (t164u: handoff EP1003 v2 — storyboard texto OK; stills/clipes pendentes) · versão 0.29.4
+Atualizado: 29/10/2026 (migração GitNexus → codebase-memory-mcp, OK José, versão 0.29.5; t164u handoff EP1003 v2 segue pendente de stills/clipes) · versão 0.29.5
+
+## Migração GitNexus → codebase-memory-mcp (29/10/2026, versão 0.29.5, ADR-012)
+- Backend do `codigo` agora é o codebase-memory-mcp 0.12.1 (MIT), em `~/.local/opt/codebase-memory-mcp/codebase-memory-mcp`, índice em `~/.cache/codebase-memory-mcp/` (projeto `PQBR`, ready). Interface do `codigo` inalterada; ferramenta da política agora é `codigo_consultar` (1.6.0).
+- GitNexus preservado, não desinstalado: índice em `~/.local/share/_obsoleto/gitnexus-pqbr-1.6.12/.gitnexus/`, wrapper e código em `_obsoleto/`, índice em `docs/_obsoleto/INDICE-migracao-cbm.md`. Rollback no §7 do plano.
+- Vigia de sexta 08:00 agora vigia o CBM (entrada `codebase-memory-mcp`, leitura por `--version`); validação em produção é o relatório da sexta seguinte — não disparar o Schedule à mão.
+- Pendentes: desinstalação do GitNexus (só com ordem expressa); 2 falhas pré-existentes em `test_flow_projeto.py` (EP1003).
 
 ## Onde paramos / handoff (t164u)
 

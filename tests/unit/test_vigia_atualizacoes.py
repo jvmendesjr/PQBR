@@ -1,7 +1,7 @@
 import pytest
 from pydantic import ValidationError
 from pqbr.contratos import ItemAtualizacao, RelatorioAtualizacoes, VERSOES
-from pqbr.workflows.atualizacoes import classificar, montar_relatorio, VIGIADAS, PROPOSTA
+from pqbr.workflows.atualizacoes import classificar, montar_relatorio, VIGIADAS, PROPOSTA, _versao_binario
 from pqbr.kit.mcp_kit import PAPEIS
 
 
@@ -24,9 +24,20 @@ def test_relatorio_nunca_aplica():
 
 def test_vigiadas_e_versoes():
     nomes = " ".join(v["nome"] for v in VIGIADAS)
-    for n in ("notebooklm-py", "camoufox", "temporal", "pydantic-ai", "9router"):
+    for n in ("notebooklm-py", "camoufox", "temporal", "pydantic-ai", "9router", "codebase-memory-mcp"):
         assert n in nomes
     assert {"FerramentaVigiada", "ItemAtualizacao", "RelatorioAtualizacoes"} <= set(VERSOES)
+
+
+def test_vigia_cbm_binario():
+    import os
+    binario = os.path.expanduser("~/.local/opt/codebase-memory-mcp/codebase-memory-mcp")
+    if not os.path.exists(binario):
+        pytest.skip("binário CBM não instalado neste ambiente")
+    assert _versao_binario(binario) == "0.12.1"
+    entrada = [v for v in VIGIADAS if v["nome"] == "codebase-memory-mcp"][0]
+    assert entrada["fonte"] == "github" and entrada["alvo"] == "DeusData/codebase-memory-mcp"
+    assert classificar(_versao_binario(binario), "v0.12.1") == "em_dia"
 
 
 def test_mcp_kit_9_papeis():
