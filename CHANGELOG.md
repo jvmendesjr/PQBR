@@ -1,4 +1,19 @@
 
+## 0.29.8 — 2026-10-29 — Sincronização dos documentos vivos (ordem do José)
+
+- Docs vivos limpos de storyboard como etapa: ESTADO-ATUAL (gates, onde paramos, fluxo, P6/P16/P17),
+  ROADMAP (Fase 4V, R2/R3, MG-05/MG-06, piloto EP1003), CONTRATO-EDITORIAL §18, CRIACAO-README e flow.md.
+- Modelo de imagem vigente uniformizado para Nano Banana 2.1 (antes Nano Banana Pro) em flow.md,
+  CONTRATO-EDITORIAL, ESTADO-ATUAL e ROADMAP; Pro fica só como histórico.
+- Papéis dos agentes no núcleo reescritos agente-primeiro (Diretor, Guardião, Auditor são agentes;
+  José só decide, nunca executa). Motion: bloco de números passa a ser do roteiro/cenas individuais.
+- Conteúdos obsoletos extraídos e indexados em `docs/_obsoleto/INDICE-sincronizacao-0.29.8.md` (nada apagado);
+  história deliberadamente mantida em ROADMAP "Estado em 26/10/2026", CHANGELOG/DECISOES e _obsoleto/.
+- `AGENTS.md` regenerado e site do mapa regenerado; estado novo registrado no Hindsight via pqbr-mcp.
+- Núcleo de criação continua 1.1.0 (sem mudança de versão, sem reinício de worker necessário: o worker lê
+  os docs do disco e a versão pinada não mudou). Pendentes: MG-05 (definição), folha nº 1, mídia SIT-*,
+  OK MG-12 / merge main.
+
 ## 0.29.2 — 2026-10-29 (t162u)
 - Flow EP1003: Agent/Character/Collections conforme `docs/processos/flow.md`; storyboard pedido ao Agente com HOLD por falha de render da UI.
 

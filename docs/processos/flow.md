@@ -35,7 +35,7 @@
 2. Projeto novo `PQBR-EPxxxx-slug` (nunca o de testes `e2dacb70-…`); gravar id em `config/flow_projetos.json`.
 3. Agente on + Confirm=Sempre + defaults acima.
 4. Entregar fichas existentes do banco (Character/Element). Registrar em `config/flow_projetos.json` (`fichas_ok`). **Upload Angular (t161u, estável):** abrir `Adicionar elementos` → aba **Envios** → **clicar** `.sidebar-upload-btn` (instancia o `input[type=file]`) → `POST /tabs/{id}/upload` com `selector=input[type=file]` e caminho absoluto no host Camofox → esperar `Enviando <arquivo> Imagem` e o `group` na grade. O atalho `focus→click` no botão (pesquisa 2026-10-28) ficou intermitente após o 1º arquivo; preferir o clique direto + `direct_input`. Menu topo `Enviar arquivos` sem input prévio → timeout do filechooser.
-5. Pedir ao Agente as refs faltantes (só stills Nano Banana Pro). Registrar no catálogo PQBR.
+5. Pedir ao Agente as refs faltantes (só stills Nano Banana 2.1). Registrar no catálogo PQBR.
 6. **Sem storyboard (removido definitivamente 29/10/2026).** Criar cenas individuais, uma por vez: para cada cena, imagem de início a partir das fichas pinadas + prompt de vídeo com o movimento já bem definido na descrição. Sem `storyboard_ok` — `flow_projeto.exigir_antes_cenas` exige só `fichas_ok`.
 7. Gerar imagens de início de cena S01..S0N (formato do projeto); Collections; **parar** para revisão (`imagens_revisadas`) — no piloto, revisão do José; depois do piloto aprovado, revisão automática pelos agentes (juiz Gemini, Jev, checagens) e o José só monitora.
 8. Só então 1 clipe contínuo por cena (`Single continuous shot, no cuts, lips closed`).
@@ -43,7 +43,7 @@
 
 ## Checagem de 0 créditos (imagem)
 
-Antes de confirmar geração de still/ficha: a UI deve indicar **0 créditos** para Nano Banana Pro no plano vigente. Se a UI mostrar gasto de crédito para still, **não confirmar** — HOLD + avisar José. Vídeo sempre gasta cota: só após revisão.
+Antes de confirmar geração de still/ficha: a UI deve indicar **0 créditos** para Nano Banana 2.1 no plano vigente. Se a UI mostrar gasto de crédito para still, **não confirmar** — HOLD + avisar José. Vídeo sempre gasta cota: só após revisão.
 
 ## Prompt (Flow)
 

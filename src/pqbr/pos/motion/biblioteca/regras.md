@@ -12,7 +12,7 @@ um HTML de prova, um vídeo curto, um quadro de referência e a linha no índice
 - Varie o lado e o eixo entre blocos: centralizar tudo é o vício de motion feito por IA.
 - Peças de t153u no catálogo (1.2.0): `frase-troca` (2–4 frases no mesmo lugar, troca seca), `marca-texto` (o `destaque` é **trecho de `texto`**; o contrato confere), `numero-conta` (contador pt-BR), `leque` (2–4 satélites), `elo-causa` (causa → conector → efeito) e `transicao-pincelada` (`cobre`/`revela`). A pincelada é uso **interno** do bloco; a entrada e a saída continuam na cortina padrão. Use os parâmetros travados do `indice.json`.
 - Quem escolhe o movimento é a regra determinística (tipo de conteúdo + semente do código, MG-04), não o José movimento a movimento (t153u). Registre a razão na `justificativa` da peça.
-- Texto na tela só do bloco de números travados do storyboard. O que não está no bloco não aparece.
+- Texto na tela só do bloco de números travados do roteiro/cenas individuais (storyboard removido 29/10/2026). O que não está no bloco não aparece.
 - Teste a 360 px de largura antes de aprovar: se não se lê no celular, aumenta a letra ou tira texto.
 - Folha de contato (1 quadro/s), nota de 1 a 10, corrigir os três piores pontos, repetir até ≥ 8.
 - Quadro = função pura do tempo. Nada de `setTimeout`, `requestAnimationFrame`, transição CSS ou `Math.random`.

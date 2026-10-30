@@ -35,5 +35,5 @@
    "raciocinio": "Baixo"
   }
  },
- "_doc_gemini_juiz": "t108u (José): juiz por etapa. pre_producao (roteiro, storyboard/fichas, imagens de referência antes do vídeo) = 3.8 Flash; producao (vídeo gerado, VISUAL/LOOP final) = 4 Argon com raciocínio Baixo. Contrato pqbr.contratos.juiz_gemini. gemini_modelo fica só para workers antigos (até o reinício). Override por execução: PQBR_GEMINI_MODELO/PQBR_GEMINI_RACIOCINIO."
+ "_doc_gemini_juiz": "t108u (José): juiz por etapa. pre_producao (roteiro, fichas, imagens de referência antes do vídeo) = 3.8 Flash; producao (vídeo gerado, VISUAL/LOOP final) = 4 Argon com raciocínio Baixo. Contrato pqbr.contratos.juiz_gemini. gemini_modelo fica só para workers antigos (até o reinício). Override por execução: PQBR_GEMINI_MODELO/PQBR_GEMINI_RACIOCINIO."
 }

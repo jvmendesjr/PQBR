@@ -5,7 +5,7 @@
     "stickman": "Cartoon 2D flat colorido com personagens stickman do canal Porquê BR (padrão definitivo t148u/t150u): contorno preto e cores chapadas suaves, cabeça redonda branca grande, dois olhos pretos sempre visíveis, boca simples de reação, corpo e membros em traço preto fino, roupa chapada colorida fixa por personagem, fundo limpo em tom creme. Sem dedos realistas, sem pessoa realista e sem volume 3D. Fundo com poucos objetos, humor de comédia leve. O protagonista é o mesmo stickman em todas as cenas; coadjuvantes variam entre os personagens do catálogo."
   },
   "elenco": {
-    "_nota": "t150u: elenco permanente em banco-fichas/personagens/ (catálogo dos 12 + bob-oculos como 13º + 6 folhas individuais), catálogo aberto para personagens novos. Os IDs antigos PERS-M/PERS-F/PERS-M-classico morreram com as fichas de t146u. Código par = masculino, ímpar = feminino (contrato storyboard).",
+    "_nota": "t150u: elenco permanente em banco-fichas/personagens/ (catálogo dos 12 + bob-oculos como 13º + 6 folhas individuais), catálogo aberto para personagens novos. Os IDs antigos PERS-M/PERS-F/PERS-M-classico morreram com as fichas de t146u. Código par = masculino, ímpar = feminino (contrato cena).",
     "catalogo": "banco-fichas/personagens/ELENCO-catalogo.png",
     "indice": "banco-fichas/indice.json",
     "protagonistas": {

@@ -38,7 +38,7 @@ def bloco_visual_16_7(contrato: str) -> str:
 
 
 def catalogo_visual(raiz: Path = RAIZ) -> str:
-    """Item do pacote (t150u): os ids do catálogo visual aberto que o storyboard pode citar em `refs` (`banco-fichas/indice.json`).
+    """Item do pacote (t150u): os ids do catálogo visual aberto que as cenas individuais podem citar em `refs` (`banco-fichas/indice.json`).
     Ficha nova ou descartada muda o texto e, por isso, o hash: o pacote ganha versão nova sozinho."""
     from ..pipeline.banco_fichas import resumo_para_prompt
     return resumo_para_prompt(raiz / "banco-fichas")

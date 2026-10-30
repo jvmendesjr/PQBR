@@ -1023,3 +1023,13 @@ NÃO CABE:
 - **Esclarecimento de "item 5":** nas REGRAS, item 5 é publicação (privado automático / voltar a público só por ordem do José) — não foi alterado. Motion graphic é MG-05 / `pos_motion`, segurado e fora deste commit. A montagem FFmpeg da análise anterior também fica para depois, como item a discutir.
 - **Centro criativo (José):** NotebookLM pai via `notebooklm-py` — roteiro, personalidade, caderno, informações e pesquisa; foi o que menos errou nos 40+ vídeos anteriores.
 - Versão do projeto 0.29.7; núcleo de criação 1.1.0. Validade em runtime após reinício do `pqbr-episodio-worker` (exige OK do José) — até lá, produção manual consulta os docs novos.
+
+## 2026-10-29 — Sincronização 0.29.8 (ordem do José)
+
+- Decisão: atualizar memórias, documentos, site de visualização e roadmap para que agentes externos novos
+  vejam o estado vigente (sem storyboard, Nano Banana 2.1, agente-primeiro), com conteúdos obsoletos
+  extraídos e indexados, não apagados.
+- Critério aplicado: documento vivo só carrega instrução vigente; história fica marcada como histórico
+  (ROADMAP 26/10, CHANGELOG/DECISOES, _obsoleto/) e nunca é reescrita como se não tivesse existido.
+- Verificação: AGENTS.md regenerado, mapa regenerado e verificado, suíte canônica e processo_criacao_conferir
+  conferidos, estado registrado no Hindsight via registrar_alteracao.

@@ -24,7 +24,7 @@ O fluxo é automático, agente primeiro. "Manual" em qualquer processo significa
 
 1. **Projeto por episódio** — um projeto/workspace na plataforma por `PQBR-EPxxxx-slug`. Nunca misturar episódios.
 2. **Consultar este documento + o playbook da plataforma ativa** (versão canônica).
-3. **Cruzar o roteiro/storyboard com `banco-fichas/`** — entregar fichas existentes (PERS/AMB/OBJ/ANIM/SIT; recorte individual limpo, não grade de catálogo).
+3. **Cruzar o roteiro com `banco-fichas/`** — entregar fichas existentes (PERS/AMB/OBJ/ANIM/SIT; recorte individual limpo, não grade de catálogo).
 4. **Refs que faltam** — o agente da plataforma cria stills de referência; o PQBR registra no catálogo (`aguardando_ok_jose` / `permanente` conforme REGRAS §6).
 5. **Cenas individuais pela plataforma (sem storyboard — removido definitivamente em 29/10/2026)** — uma cena por vez, sem encarte com muitas cenas (um encarte só facilita o erro do agente). Para cada cena: imagem de início (ainda) a partir das fichas pinadas, e prompt de vídeo com o movimento já bem definido na descrição. Cada cena é validada sozinha pelo contrato `CenaIndividual` (norte, início, fim, movimento, plano, prompt de imagem, prompt de animação, refs).
 6. **Stills → revisão → 1 clipe por cena** — sem grade multi-painel como input de vídeo; uma ação por geração.
@@ -51,10 +51,10 @@ O fluxo é automático, agente primeiro. "Manual" em qualquer processo significa
 
 ## Papéis (consulta antes de produzir)
 
-- **Diretor:** garante que a produção citou este doc; escala HOLD e portões ao José.
+- **Diretor (agente):** garante que a produção citou este doc; escala HOLD e portões ao José; não pede ao José para clicar, baixar ou olhar — pede decisão, nunca execução manual.
 - **Líder Editorial / Pesquisador:** roteiro e prompts de cena alinhados ao catálogo (`refs`).
-- **Guardião:** sessão Camofox PQBR; não troca de conta; mapa de cliques.
-- **Auditor:** ainda `imagens_revisadas` e boca/corte/grotesco; não libera vídeo sem revisão.
+- **Guardião (agente):** sessão Camofox PQBR; não troca de conta; mapa de cliques; opera o navegador pelo agente, nunca por mão humana.
+- **Auditor (agente, não humano):** juiz Gemini + Jev + checagens automáticas conferem `imagens_revisadas` e boca/corte/grotesco; não libera vídeo sem revisão. No piloto, a revisão vai ao José; depois do piloto aprovado, a revisão é automática e o José só monitora (emergência pelo Telegram).
 - **Compliance:** tom e gabarito (não navega Flow).
 - **Dev:** versiona docs/processos + constante `VERSAO_ESPERADA`; não reinicia worker sem OK.
 - **Motion:** só depois dos clipes Flow aprovados; preso ao catálogo de motion.
@@ -69,7 +69,7 @@ O fluxo é automático, agente primeiro. "Manual" em qualquer processo significa
 
 ## Ativação no worker
 
-A activity `processo_criacao_conferir` entra no `EpisodioWorkflow` nesta entrega. **Só passa a valer em runtime após reinício do `pqbr-episodio-worker` (exige OK do José).** Até lá, produção manual e manutenção consultam o doc mesmo assim.
+A activity `processo_criacao_conferir` entra no `EpisodioWorkflow`. **Versão 1.1.0 ativa em runtime desde o reinício do `pqbr-episodio-worker` em 29/10/2026 às 23:14 (OK do José).**
 
 ## Versionamento
 
