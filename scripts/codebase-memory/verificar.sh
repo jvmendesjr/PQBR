@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Pré-requisito codebase-memory-mcp (migração GitNexus -> CBM, 2026-10-29), mesmo padrão de scripts/gitnexus/verificar.sh. Fail-closed: sai != 0 se faltar algo.
+# Pré-requisito codebase-memory-mcp (migração para codebase-memory-mcp, 2026-10-29), mesmo padrão de scripts/_obsoleto/gitnexus/verificar.sh. Fail-closed: sai != 0 se faltar algo.
 # A instalação é do usuário no servidor (fora do repo): ~/.local/opt/codebase-memory-mcp/codebase-memory-mcp (0.12.1, MIT).
 # A PQBR só exige: binário, versão >= MIN, projeto PQBR registrado com índice ready e Lens desligada (ui_enabled=false). Nunca sobe MCP em --http, nunca abre a porta 9749.
 set -euo pipefail

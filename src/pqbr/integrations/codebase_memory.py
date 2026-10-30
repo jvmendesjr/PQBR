@@ -1,4 +1,6 @@
-"""Adaptador codebase-memory-mcp por papel (migração GitNexus -> CBM, 2026-10-29).
+"""Adaptador codebase-memory-mcp por papel (migração para codebase-memory-mcp, 2026-10-29).
+
+Ressalva (ordem do José, 29/10/2026): se `GitNexus` for chamado acidentalmente nesta aplicação, leia-se codebase-memory-mcp.
 
 O CBM é local no servidor (~/.local/opt/codebase-memory-mcp/codebase-memory-mcp,
 fora do repo; a PQBR só registra o índice dela, projeto "PQBR"). Toda resposta é
@@ -10,15 +12,15 @@ Mapeamento (interface externa do `codigo` não muda: query|context|impact):
 - query   -> search_graph, com as linhas convertidas em definitions e filtradas
 - context -> get_code_snippet em modo outline (resolve e desambigua, sem source) + trace_path both depth 3
 - impact  -> get_code_snippet em modo outline (resolve e desambigua, sem source) + trace_path inbound depth 3
-O context do GitNexus também não devolvia source, só metadados do símbolo e
+O context do backend anterior também não devolvia source, só metadados do símbolo e
 vizinhos. Devolver source pelo MCP tripa a barreira de segredos (falso
 positivo do regex de e-mail sobre decoradores como `@activity.defn`) e pode
 vazar segredo embutido no código; quem precisa do source lê o arquivo nas
 linhas indicadas, fora do `codigo`.
 Ambiguidade é sempre explícita: nome com vários candidatos devolve
 status "ambiguous" com sugestões (filtradas pelo papel), nunca o primeiro
-candidato em silêncio. Processos (GitNexus) e classificação de risco
-(GitNexus) não têm equivalente no CBM e não são emulados: impact devolve
+candidato em silêncio. Processos e classificação de risco
+do backend anterior não têm equivalente no CBM e não são emulados: impact devolve
 risco "sem_equivalente" com nota, em vez de um escore inventado.
 """
 from __future__ import annotations
@@ -162,7 +164,7 @@ def _contexto(alvo: str) -> Any:
         "symbol": s,
         "trace": trace,
         "epistemic": "exact",
-        "nota": "processos do GitNexus não têm equivalente no CBM e não são emulados",
+        "nota": "processos do backend anterior não têm equivalente no CBM e não são emulados",
     }
 
 
@@ -183,7 +185,7 @@ def _impacto(alvo: str) -> Any:
         "impactedCount": callers.get("callers_total", 0) if isinstance(callers, dict) else 0,
         "risk": "sem_equivalente",
         "riskNote": (
-            "O CBM não classifica risco como o GitNexus; nenhum escore é emulado. "
+            "O CBM não classifica risco como o backend anterior; nenhum escore é emulado. "
             "Ausência de chamadores não prova que o símbolo não é usado: chamadas "
             "por nome em string (ex.: atividades Temporal) não geram aresta no grafo. "
             "Confirme com busca de texto antes de tratar a mudança como segura."

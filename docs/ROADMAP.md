@@ -386,8 +386,10 @@ Ref.: REGRAS §26, `docs/fases/motion-graphics.md`, `banco-fichas/referencias-mo
 ---
 
 ## Fase: Conhecimento e agente externo agnóstico (t84u–t86u, 26/10/2026)
-- [x] **GitNexus [agora]:** global no servidor (1.6.12, fora do repo), índice da PQBR registrado, reindex no post-commit, pré-requisito fail-closed. ARQUITETURA §12. **Substituído pelo codebase-memory-mcp em 29/10/2026 (abaixo); GitNexus preservado em `_obsoleto/`, sem desinstalar.**
-- [x] **Política por papel [agora]:** `config/politica_papeis.json` + filtro no Hindsight e no adaptador GitNexus. **Adaptador agora é o codebase-memory-mcp; ferramenta renomeada para `codigo_consultar` (política 1.6.0).**
+
+> **Ressalva (29/10/2026, ordem do José):** se `GitNexus` for chamado acidentalmente nesta aplicação ou na documentação, leia-se **codebase-memory-mcp** — o backend atual da ferramenta `codigo` do pqbr-mcp. O GitNexus original (1.6.12) foi substituído em 29/10/2026 e permanece apenas no histórico e em `_obsoleto/`, sem desinstalar até ordem expressa.
+- [x] **Índice de código do MCP [agora]:** codebase-memory-mcp 0.12.1 (usuário, MIT, fora do repo), índice da PQBR registrado, reindex no post-commit, pré-requisito fail-closed. ARQUITETURA §12.
+- [x] **Política por papel [agora]:** `config/politica_papeis.json` + filtro no Hindsight e no adaptador do MCP (`codigo_consultar`, política 1.6.0).
 - [x] **Servidor MCP da PQBR só na tailnet (t89u, OK do José):** `pqbr-mcp`, 127.0.0.1:8791 + tailscale serve, só leitura, token por cliente.
 - [x] **AGENTS.md gerado (t89u)** do onboarding do MCP.
 - [x] Reclassificar com tags as memórias legadas sem tag (feito em t90u).
@@ -395,12 +397,12 @@ Ref.: REGRAS §26, `docs/fases/motion-graphics.md`, `banco-fichas/referencias-mo
 - [x] **ESTADO-ATUAL (t98u/t99u):** `docs/ESTADO-ATUAL.md` é a fonte única do handoff, a 1ª seção do onboarding/AGENTS.md; hook pre-commit e `registrar_alteracao` (tipo correcao/pendencia_resolvida) exigem a atualização; handoff no Hindsight (tag `estado`, todos os papéis).
 - [x] **Papel `mantenedor` externo (t112u–t117u):** política 1.4.0 (lê todas as tags, repo todo, constrói/liga módulos; reinício/migração com OK); pqbr-mcp 0.4.0 exclusivo do mantenedor (outro papel 401/403); reiniciado e validado ao vivo; persistência verificada. Doc: `docs/operacao/onboarding-agente-externo.md`.
 - [x] **Teste de agente do zero (t96u):** URL tailnet + token `mantenedor-externo` → onboarding → buscar_memoria → commit local `b63fa56` → registrar_alteracao → buscar_memoria retornou em ~10 s; indexador negado; sem token 401.
-- [x] Licença do GitNexus aceita (uso pessoal, sem revenda; t90u). **Supersedida pela migração: o motivo da troca foi justamente essa licença não servir para uso com fins lucrativos; o substituto é MIT.**
+- [x] **Licença do backend do MCP:** MIT (codebase-memory-mcp). A licença do backend anterior (aceita em t90u para uso pessoal) não servia para uso com fins lucrativos — motivo da migração (ADR-012).
 - [x] **Reclassificação do Hindsight por papel (t90u):** `scripts/hindsight/reclassificar.py`; 220 candidatas a descarte em `docs/operacao/hindsight-descarte-candidatos.md`.
 - [x] Descarte das candidatas (t90s398): 231 apagadas após a indexação; docs vigentes corrigidos; indexador com a regra única de tags.
 - [x] Revisar as 7 candidatas mantidas (sem substituta direta). Feito em t128u (27/10): as sete apagadas com OK do José; backup fora do git; bank 884 → 877.
 
-- [x] **Migração GitNexus → codebase-memory-mcp (29/10/2026, OK José com os recomendados):** CBM 0.12.1 (MIT, SHA-256 conferido, `--skip-config`, Lens desligada, stdio) como backend do `codigo`; adaptador `src/pqbr/integrations/codebase_memory.py`; política 1.6.0; vigia com entrada CBM + leitor de binário; scripts `scripts/codebase-memory/`; GitNexus preservado em `_obsoleto/` (índice fora do repo) sem desinstalar; Passo 4 verde (consultas lado a lado, `detect_changes` com exatamente os 17 arquivos da migração, vigia `em_dia`, suíte 686 passados + 2 falhas pré-existentes EP1003). ADR-012, CHANGELOG 0.29.5. Pendente: desinstalação do GitNexus (só com ordem expressa).
+- [x] **Migração do backend do `codigo` para codebase-memory-mcp (29/10/2026, OK José com os recomendados):** CBM 0.12.1 (MIT, SHA-256 conferido, `--skip-config`, Lens desligada, stdio) como backend do `codigo`; adaptador `src/pqbr/integrations/codebase_memory.py`; política 1.6.0; vigia com entrada CBM + leitor de binário; scripts `scripts/codebase-memory/`; backend anterior preservado em `_obsoleto/` (índice fora do repo) sem desinstalar; Passo 4 verde (consultas lado a lado, `detect_changes` com exatamente os arquivos da migração, vigia `em_dia`, suíte 686 passados + 2 falhas pré-existentes EP1003). ADR-012, CHANGELOG 0.29.5. Pendente: desinstalação do backend anterior (só com ordem expressa).
 
 ## Anexo: fases e portões (ex-PLANO.md, incorporado em 11/10, t394)
 ### PLANO da PQBR (fases, portões e rollback)

@@ -3,6 +3,11 @@
 - Flow EP1003: Agent/Character/Collections conforme `docs/processos/flow.md`; storyboard pedido ao Agente com HOLD por falha de render da UI.
 
 # CHANGELOG — PQBR
+## [0.29.6] — 2026-10-29 (documentação em termos do MCP + ressalva)
+### Alterado
+- Documentos vivos atualizados para termos do MCP: ARQUITETURA §12, ROADMAP (fase Conhecimento), ESTADO-ATUAL, onboarding do agente externo, mapa 09 e 13, nota da política e comentários dos scripts do MCP passam a falar em codebase-memory-mcp / ferramenta `codigo` / `codigo_consultar`, sem apresentar o backend anterior como ferramenta atual.
+- **Ressalva registrada (ordem do José):** se `GitNexus` for chamado acidentalmente nesta aplicação ou na documentação, leia-se **codebase-memory-mcp** (backend atual do `codigo` do pqbr-mcp). A ressalva está em ARQUITETURA §12, ROADMAP, ESTADO-ATUAL, onboarding do agente externo, mapa 13, nota da política (`gitnexus_consultar` → `codigo_consultar`) e docstring do adaptador. O backend anterior permanece apenas no histórico (CHANGELOG, DECISOES-LOG, ADR-012, plano) e em `_obsoleto/`, sem desinstalar até ordem expressa.
+
 ## [0.29.5] — 2026-10-29 (migração GitNexus → codebase-memory-mcp, OK José)
 ### Alterado
 - Backend do `codigo` do pqbr-mcp trocado do GitNexus 1.6.12 (PolyForm Noncommercial) para o codebase-memory-mcp **0.12.1** (MIT, release GitHub 2026-10-16, SHA-256 conferido). Interface do `codigo` inalterada (`query|context|impact`, filtrada pelo papel, fail-closed). Adaptador novo: `src/pqbr/integrations/codebase_memory.py`.

@@ -5,6 +5,8 @@ Vale para qualquer cliente MCP (Cursor, Claude, opencode, Codex, script próprio
 ## O que o mantenedor pode
 - **Lê:** todas as tags de conteúdo do Hindsight (bank `pqbr`): decisao, incidente, commit, licao, playbook, doc, editorial, pesquisa, publicacao, auditoria, compliance, seguranca, descarte, estado. Só `obsoleto_candidato` (marcação de descarte) fica fora.
 - **Código (codebase-memory-mcp):** o repo todo (`codigo: [""]`).
+
+> **Ressalva (29/10/2026, ordem do José):** se `GitNexus` for chamado acidentalmente nesta aplicação ou na documentação, leia-se **codebase-memory-mcp** — o backend atual da ferramenta `codigo` do pqbr-mcp. O GitNexus original (1.6.12) foi substituído em 29/10/2026 e permanece apenas no histórico e em `_obsoleto/`, sem desinstalar até ordem expressa.
 - **Grava memória:** decisao, incidente, licao, playbook, doc, estado.
 - **Código/docs/mapa:** altera pelo git (branch de trabalho, nunca merge em main sem OK do José), seguindo o protocolo abaixo.
 - Política: `config/politica_papeis.json` 1.4.0.
