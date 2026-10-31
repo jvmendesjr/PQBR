@@ -120,54 +120,32 @@ def dados(
 # o que ele já diz, para o card ficar legível sem abrir o documento.
 _PORTOES_TEXTO: dict[str, tuple[str, str]] = {
     "P1": (
-        "Lote do saldo continua parado: não apagar mídia e não publicar o "
-        "lote antigo. Refação (MG-11) só depois de Flow, depois MG-05, "
-        "depois o José assistir, e só então o lote.",
-        "Ordem no chat/Telegram: “Manter o lote do saldo parado, sem "
-        "publicar e sem apagar nada.”",
+        "Lote do saldo continua parado: não apagar mídia e não publicar o lote antigo. Refação (MG-11) só depois de Flow, depois MG-05, depois o José assistir, e só então o lote. Confirmado 31/10/2026.",
+        "Ordem no chat/Telegram: “Manter o lote do saldo parado, sem publicar e sem apagar nada.”",
     ),
     "P11": (
-        "Merge é decisão à parte, em PR/branch, nunca automático e nunca "
-        "nesta branch de proposta. Esta aba não faz merge.",
-        "Ordem no chat/Telegram: “OK para o merge da "
-        "feat/f8-01-publicacao-automatica na main.” Só então o merge.",
+        "Fechada 31/10/2026 como incorporada: a branch já era ancestral da main; nenhum merge novo foi feito. Esta aba não faz merge.",
+        "Nenhuma ordem nova: a P11 está fechada. Não mergear a branch de novo.",
     ),
     "P13": (
-        "Proposta não aplicada e sem efeito externo até decisão explícita. "
-        "Não há nada para o agente ligar sozinho.",
-        "Ordem no chat/Telegram: “Aplicar a proposta F1-05” ou “Descartar "
-        "a proposta F1-05.”",
+        "Implementada 31/10/2026 (F1-05): ferramentas só leitura em src/pqbr/agents/ferramentas.py, sem reinício, sem MCP interno.",
+        "Nenhuma ordem nova: a P13 está fechada. A ferramenta já está no código, sem efeito externo.",
     ),
     "P14": (
-        "Proposta não aplicada. Se a aplicação exigir registro no worker, "
-        "isso é reinício, e reinício exige ordem separada e explícita.",
-        "Ordem no chat/Telegram: “Aplicar a proposta F6-02.” Se exigir "
-        "worker, acrescentar em ordem separada: “OK para reiniciar o "
-        "worker.”",
+        "Implementada e testada 31/10/2026 (F6-02), sem reinício: vigia de fallbacks, dev_diagnosticar, deriva de contrato e canário Camofox. O registro no worker exige reinício, autorizado à parte e não feito.",
+        "Ordem separada, quando o José decidir: “OK para reiniciar o worker e registrar o acompanhamento.” Até lá, nada reinicia.",
     ),
     "P16": (
-        "Piloto: o próximo gate é o clipe, não nova revisão de stills "
-        "(ver o card do piloto). MG-05, MG-11 e MG-12 seguem segurados "
-        "ou pendentes. Nada do v2 nem do projeto antigo é apagado.",
-        "Ordem no chat/Telegram: a mesma do card do piloto (gerar os "
-        "clipes a partir das imagens aprovadas).",
+        "Em espera 31/10/2026: aguardar o painel ficar pronto, outras melhorias e testes (como os cadernos), antes de gerar os clipes. Nada do v2 nem do projeto antigo é apagado.",
+        "Ordem em espera: nenhum clipe agora. O próximo passo só depois que o painel e os testes estiverem prontos.",
     ),
     "P17": (
-        "Do José, um item por vez: folha nº 1, mídia das SIT-*, OK MG-12 "
-        "e merge. A revisão de stills do piloto já está registrada como "
-        "aprovada no arquivo do projeto (ver divergência no card do "
-        "piloto); o texto antigo de P16/P17 ainda diz “falta revisão”.",
-        "Ordem no chat/Telegram, um item por vez, por exemplo: “OK MG-12” "
-        "ou “Produzir a folha nº 1”. Nada em bloco e nada por clique.",
+        "Em espera 31/10/2026: o usuário ainda não decidiu os sub-itens, um por vez (folha nº 1, mídia das SIT-*, OK MG-12/merge). A revisão de stills do piloto já está registrada como aprovada no arquivo do projeto; o texto antigo de P16/P17 ainda diz “falta revisão”.",
+        "Ordem no chat/Telegram, um item por vez, por exemplo: “OK MG-12” ou “Produzir a folha nº 1”. Nada em bloco e nada por clique.",
     ),
     "P18": (
-        "Combo core-ultra já criado e testado (HTTP 200), mas a troca de "
-        "motion de core-alto para core-ultra mais o reinício só acontecem "
-        "com OK explícito do José. Até lá, motion segue core-alto. Medir "
-        "o custo real em pqbr.consumo_modelos no piloto.",
-        "Ordem no chat/Telegram: “OK MG-12: trocar motion de core-alto "
-        "para core-ultra em config/modelos_9router.json e reiniciar o "
-        "worker.” Troca e reinício na mesma ordem explícita.",
+        "Combo core-ultra já criado e testado (HTTP 200), mas a troca de motion de core-alto para core-ultra mais o reinício ficam para confirmação separada junto com o piloto. Não fazer agora. Até lá, motion segue core-alto. Medir o custo real em pqbr.consumo_modelos no piloto.",
+        "Ordem separada, junto com o piloto: “OK MG-12: trocar motion de core-alto para core-ultra em config/modelos_9router.json e reiniciar o worker.” Troca e reinício na mesma ordem explícita.",
     ),
 }
 _GENERICO = (
@@ -368,7 +346,7 @@ def secao(d: dict | None = None) -> str:
         '<p class="nota">Só leitura. Painel executivo de curadoria e desbloqueio, '
         "gerado de config/flow_projetos.json, banco-fichas/indice.json, "
         "banco-fichas/referencias-motion/indice.json e docs/ESTADO-ATUAL.md. "
-        "Nada nesta aba aprova, escreve, reinicia ou faz merge.</p>"
+        "Nada nesta aba aprova, escreve, reinicia ou faz merge.</p><p class='nota'><b>Decisões de 31/10/2026:</b> P11 incorporada, P13 implementada, P14 implementada sem reinício, P16/P17 em espera, P18 para confirmação separada junto com o piloto, AR Board adiado para decisão canônica. A aba continua só leitura.</p>"
         + CSS
         + '<div class="pt-aviso"><b>O que esta aba NÃO faz:</b> não envia sinal '
         "do Temporal, não escreve em banco, não aprova ficha, não reinicia "

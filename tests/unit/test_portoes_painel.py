@@ -104,3 +104,17 @@ def test_secao_escapa_html_das_fontes():
     html = m.secao(d)
     assert "<script>alert(1)</script>" not in html
     assert "&lt;script&gt;" in html
+
+
+def test_secao_decisoes_20261031():
+    m, d = _fixture()
+    d["portoes"] = [
+        {"id": "P14", "texto": "Acompanhamento", "dono": "José",
+         "bloqueio": "código pronto; reinício pendente", "aberta": True},
+    ]
+    html = m.secao(d)
+    assert "Decisões de 31/10/2026" in html
+    assert "AR Board adiado" in html
+    assert "reinício" in html
+    for proibido in ("<form", "<button", "fetch(", "POST /api", "onclick"):
+        assert proibido not in html

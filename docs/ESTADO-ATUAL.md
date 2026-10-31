@@ -4,6 +4,16 @@ Fonte única de "onde estamos". Não repete o ROADMAP: aponta os itens por id. *
 
 Atualizado: 31/10/2026 (t170u: mapa prioriza etapa dos CADERNOS NLM; publicação só rótulo; próximos: auditoria dos cadernos + José refs VISUAIS) · versão 0.31.1
 
+## Decisões de 31/10/2026 — Portões atualizados, P13/P14 implementados, AR Board adiado
+
+- **AR Board (painel interativo) NÃO entra agora:** ele aprovaria e gravaria no banco fora do Temporal e do Telegram, o que quebra a regra central. Se um dia for retomado, passa antes por uma decisão canônica. A aba `#portoes` continua só leitura.
+- **P1, confirmado:** lote do saldo parado, sem publicar e sem apagar.
+- **P11, fechada como incorporada:** a branch `feat/f8-01-publicacao-automatica` já era ancestral da `main` (verificado 31/10/2026); nenhum merge novo foi feito.
+- **P13 (F1-05), implementada e testada, sem reinício:** `src/pqbr/agents/ferramentas.py`, filtrado por `config/politica_papeis.json`, ferramenta nativa do PydanticAI, sem escrita, limite de chamadas, testes com `TestModel`, sem MCP interno.
+- **P14 (F6-02), implementada e testada, sem reinício:** `src/pqbr/workflows/acompanhamento.py` — vigia de fallbacks, `dev_diagnosticar`, deriva de contrato por fixture, canário Camofox (NotebookLM fora). O registro no worker exige reinício, autorizado à parte e NÃO feito aqui.
+- **P16 e P17, em espera:** P16 aguarda o painel ficar pronto, outras melhorias e testes (como os cadernos); P17 fica em espera porque o usuário ainda não decidiu seus sub-itens (folha nº 1, SIT-*, OK MG-12/merge, um por vez).
+- **P18 (MG-12), para confirmação separada junto com o piloto, não feito agora:** troca de `motion` de `core-alto` para `core-ultra` + reinício, com medição de custo no piloto.
+
 ## Aba Portões no painel :8088 — proposta em branch, só leitura (31/10/2026, autorização do José)
 
 - Autorização (José, chat de 31/10/2026): criar a aba `#portoes` no painel `:8088`, seguindo o padrão modular (`scripts/mapa/portoes.py` com `secao()`, como `producao.py` e `roadmap.py`). A aba é SOMENTE LEITURA: mantém o `python3 -m http.server` intacto, sem POST, sem trocar a unit `pqbr-mapa.service`, sem escrever em banco, sem usar a tabela de revisão humana, sem rename de "José" e sem novo contrato Pydantic (a aba não cria dado que cruze fronteira de agente/ferramenta; apenas apresenta fontes existentes).
@@ -96,10 +106,10 @@ Atualizado: 31/10/2026 (t170u: mapa prioriza etapa dos CADERNOS NLM; publicaçã
 | P8 | **Feito (t128u).** As 7 memórias `obsoleto_candidato` do roster antigo de `docs/AGENTES.md` foram apagadas em 27/10 ~08:57 (-03). Bank 884 → 877. Backup fora do git | `docs/operacao/hindsight-descarte-candidatos.md` | agente | concluído |
 | P9 | **Feito (t112u–t116u).** Papel `mantenedor` (política 1.4.0) lê todas as tags e o repo todo; pqbr-mcp 0.4.0 exclusivo do mantenedor; onboarding em `docs/operacao/onboarding-agente-externo.md`. Falta só entregar token por cliente novo (`scripts/mcp/novo_cliente.py <nome> mantenedor`) | Fase Conhecimento | agente | concluído |
 | P10 | Hindsight conferido 27/10 08:10 (São Paulo): API healthy, banco conectado. A reconsolidação segue automática | Fase Conhecimento | Hindsight (automático) | só conferir de novo se o bank acusar falha |
-| P11 | Merge da branch `feat/f8-01-publicacao-automatica` (já no GitHub) na main | — | José | merge/PR exige OK |
+| P11 | Feito (incorporada na main). A branch `feat/f8-01-publicacao-automatica` já era ancestral da main (verificado 31/10/2026); nenhum merge novo foi feito. | — | José | incorporada; sem merge novo |
 | P12 | ERR-01: revisar os erros aceitáveis | ERR-01 | agente | depois dos primeiros dias de produção |
-| P13 | Proposta não aplicada: ferramentas só leitura para os agentes PydanticAI, sem MCP interno | F1-05 · t134u | José | sem efeito externo |
-| P14 | Proposta não aplicada: acompanhamento de mudanças (vigia de fallbacks, canário, deriva de contrato, `dev_diagnosticar`). Sem agente novo. O NotebookLM não entra no canário | F6-02 · t135u/t136u | José | registro no worker exige reinício |
+| P13 | Feito (implementado 31/10/2026, sem reinício). Ferramentas só leitura dos agentes PydanticAI (F1-05): `src/pqbr/agents/ferramentas.py`, filtrado por `config/politica_papeis.json`, ferramenta nativa, sem escrita, limite de chamadas, testes com `TestModel`, sem MCP interno. | F1-05 · t134u | José | feito; sem reinício |
+| P14 | Implementado e testado 31/10/2026, sem reinício. Acompanhamento de mudanças (F6-02): `src/pqbr/workflows/acompanhamento.py` — vigia de fallbacks, `dev_diagnosticar`, deriva de contrato por fixture, canário Camofox (NotebookLM fora). Registro no worker exige reinício, autorizado à parte, não feito. | F6-02 · t135u/t136u | José | código pronto; reinício pendente de autorização separada |
 | P16 | Piloto EP1003 v3: 8 imagens de início S01..S08 geradas 30/10/2026 + movimentos registrados, sem vídeo. Falta revisão (piloto: José; depois: automática), clipes, MG-05 (segurado)/11/12. v2 superado (não apagado); antigo 025dcfef HOLD | t145u–t164u · Fase MG / 4V | José e agente | cenas→revisão→clipes; OK MG-12 |
 | P15 | **Feito (t143u/t144u).** Jev (`decide()`, JEV-EF) ligado aos fluxos (`CorrecaoAutonomaWorkflow`, canário, pop-up Flow, e-mail YouTube, repetição R10), limiares calibrados na API real TypeSafe (12 casos, 100% de acerto) e workers reiniciados com `TYPESAFE_API_KEY` ativa. Resta apenas JEV-02 (chave OpenRouter do fallback) | RNF-02 · JEV-EF · t144u | concluído | JEV-02 (fallback OpenRouter) quando José fornecer chave |
 | P17 | Processo canônico APROVADO (t160u, núcleo 1.1.0 ativo desde reinício 29/10/2026 23:14). EP1003 v3: 8 imagens de início S01..S08 + movimentos registrados 30/10/2026, sem vídeo. **Do José:** revisão das imagens de início (piloto); folha nº 1; SIT-*; OK MG-12 / merge | t148u–t164u | José | cenas+revisão; folha nº 1; SIT-*; OK MG-12/merge |

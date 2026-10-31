@@ -1084,3 +1084,13 @@ NÃO CABE:
 - **Aplicado (branch `proposta/portoes-painel-8088`, base main `856848d`, commit local sem push):** `scripts/mapa/portoes.py` (leitura de `config/flow_projetos.json`, `banco-fichas/indice.json`, `banco-fichas/referencias-motion/indice.json` e `docs/ESTADO-ATUAL.md`), navegação e seção em `scripts/mapa/gerar_index.py`, `docs/mapa/index.html` regenerado, testes `tests/unit/test_portoes_painel.py` (5 testes, incluindo a garantia de ausência de formulário, botão e chamada de rede na saída).
 - **Leitura registrada:** EP1003 `imagens_revisadas: true`, próximo gate clipes, MG-05 segurado; 0 fichas `aguardando_ok_jose`, 11 `SIT-*` em `sugestao`; referências de motion 8/8 aprovadas; portões abertos do José P1, P11, P13, P14, P16, P17, P18/MG-12.
 - **Sem:** merge em main, push, reinício de worker, geração de mídia, escrita em banco, sinal do Temporal, aprovação de ficha, troca de modelo, alteração em `docs/REGRAS.md`. A divergência entre P16/P17 ("falta revisão") e o arquivo do projeto (revisão aprovada, commit `03ec319`) fica anotada na aba e no ESTADO-ATUAL, sem correção silenciosa das linhas.
+
+## 31/10/2026 — Portões atualizados, P13/P14 implementados, AR Board adiado (José)
+
+- **José:** atualizar só a aba `#portoes` com as decisões, em modo só leitura. O painel interativo (AR Board) NÃO entra agora: ele aprovaria e gravaria no banco fora do Temporal e do Telegram, o que quebra a regra central. Se um dia for retomado, passa antes por uma decisão canônica.
+- **P11:** a branch já entrou na `main` (ancestral, verificado no git). Fechar no ESTADO como incorporada, sem fazer outro merge.
+- **P13 (F1-05):** implementar e testar, sem reiniciar. Aplicado: `src/pqbr/agents/ferramentas.py` + testes 6/6.
+- **P14 (F6-02):** implementar e testar, sem reiniciar o worker. O reinício é autorizado à parte. Aplicado: `src/pqbr/workflows/acompanhamento.py` + testes 5/5; registro no worker NÃO feito, sem reinício.
+- **P16 e P17:** em espera, como entendido: P16 aguarda painel pronto, outras melhorias e testes (como os cadernos); P17 aguarda decisão dos sub-itens, um por vez.
+- **P18 (MG-12):** troca de modelo e reinício ficam para confirmação separada, junto com o piloto. Não feito agora; `motion` segue `core-alto`.
+- **Sem:** merge em main, push, reinício de worker, troca de modelo, geração de mídia, escrita em banco fora do Temporal, uso da tabela de revisão humana, alteração em `docs/REGRAS.md`.

@@ -25,10 +25,11 @@ Decisões da conversa paralela, juntadas em cima do stickman (t133u). Nenhuma es
   - Primeiros usos: `ClassificacaoPopupCamofox` no Flow; segundo nível do canário (o Camofox lista os elementos, o Jev escolhe o `ref` ou `abstain`); triagem e verificação da `CorrecaoAutonoma`; faixa de dúvida de tema repetido.
   - Fora: Jev julgando imagem; Jev clicando sem o código conferir; `jev-ultrafast` no lugar do Camofox.
   - Obs (t143u/t144u): porta `decide()` em `src/pqbr/motores/decisao.py`, funções estruturadas (`classificar_popup_camofox`, `escolher_ref_canario`, `triagem_correcao_jev`, `verificar_correcao_jev`, `decidir_repeticao_jev`, `classificar_email_youtube`), ligada a `CorrecaoAutonomaWorkflow` e `checar_repeticao`; limiares calibrados com 12 casos reais na API TypeSafe (`jev-latest`, 100% de acerto, consumo gravado em `pqbr.consumo_modelos`); 43 testes unitários passando em `tests/unit/test_decisao_jev.py`; workers `pqbr-temporal-worker` e `pqbr-episodio-worker` reiniciados com `TYPESAFE_API_KEY` ativa. O fallback OpenRouter segue desligado até JEV-02.
-- [ ] **F1-05** Ferramentas só leitura dos agentes PydanticAI (t134u) — Req: RNF-02 · Depende de: F1-01 · Portão José: nenhum para o código; sem efeito externo
+- [x] **F1-05** Ferramentas só leitura dos agentes PydanticAI (t134u) — Req: RNF-02 · Depende de: F1-01 · Portão José: nenhum para o código; sem efeito externo — implementado 31/10/2026 (`src/pqbr/agents/ferramentas.py`, testes, sem reinício)
   - Aceite: `src/pqbr/agents/ferramentas.py`, filtrado por `config/politica_papeis.json`, ferramenta nativa do PydanticAI, sem escrita, limite de chamadas, testes com `TestModel`. Sem MCP interno.
 - [ ] **F6-02** Acompanhamento de mudanças, sem agente novo (t135u, t136u) — Req: RF-42, RF-37 · Depende de: F3-01 · Portão José: reinício do worker ao registrar
   - Aceite, nesta ordem: vigia de fallbacks; `dev_diagnosticar` no fim de cada vigia, com aviso e sinal `aprovacao_jose`; deriva de contrato por fixture; canário de interface no Camofox (login Google e as surpresas do Flow; o NotebookLM fica fora, é CLI). O Dev entrega rascunho de diff do mapa. `CorrecaoAutonoma` só para sessão e fila.
+  - Implementado 31/10/2026 em `src/pqbr/workflows/acompanhamento.py` (testes 5/5); registro no worker pendente de reinício autorizado à parte — não reiniciado.
 
 ## Concluído
 

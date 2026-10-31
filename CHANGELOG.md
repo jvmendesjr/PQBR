@@ -1,3 +1,16 @@
+## Não lançado — 2026-10-31 — Portões atualizados com as decisões + P13/P14 implementados (só leitura, sem reinício, sem merge)
+
+### Adicionado
+- P13 (F1-05) implementada: `src/pqbr/agents/ferramentas.py` — ferramentas só leitura dos agentes PydanticAI, filtradas por `config/politica_papeis.json`, ferramenta nativa (`tool_plain`), sem escrita, limite de chamadas, testes com `TestModel`, sem MCP interno. Testes `tests/unit/test_ferramentas_leitura.py` (6 testes).
+- P14 (F6-02) implementada: `src/pqbr/workflows/acompanhamento.py` — vigia de fallbacks, `dev_diagnosticar` (aviso + sinal `aprovacao_jose` como dado, rascunho de diff do mapa não aplicado), deriva de contrato por fixture e canário de interface no Camofox (NotebookLM fora). `CorrecaoAutonoma` só para sessão e fila. Testes `tests/unit/test_acompanhamento.py` (5 testes).
+- Aba `#portoes` atualizada com as decisões de 31/10/2026 (só leitura): nota de decisões no cabeçalho, textos de P1, P11, P13, P14, P16, P17 e P18 atualizados, `docs/mapa/index.html` regenerado.
+
+### Alterado
+- ESTADO-ATUAL: P11 fechada como incorporada (branch já ancestral da main, sem merge novo), P13 fechada como implementada sem reinício, P14 como implementada sem reinício com registro no worker pendente, P16/P17 em espera, P18 para confirmação separada junto com o piloto. ROADMAP: F1-05 marcada como feita, F6-02 com nota de implementação sem registro.
+
+### Sem
+- Bump de versão, contrato Pydantic novo, merge em main, push, reinício de worker, troca de modelo (P18), geração de clipes (P16), decisão dos sub-itens de P17, painel interativo AR Board (adiado para decisão canônica, porque aprovaria e gravaria no banco fora do Temporal e do Telegram), escrita em banco fora do Temporal, uso da tabela de revisão humana e alteração em `docs/REGRAS.md`.
+
 ## Não lançado — 2026-10-31 — Aba Portões no painel :8088 (proposta em branch, só leitura)
 
 ### Adicionado
