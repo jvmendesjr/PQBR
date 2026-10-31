@@ -78,6 +78,15 @@ GASTO_DIRECAO_CENAS = AutorizacaoGasto(
     modelo="notebooklm-chat",
     pode_gastar=True,
     meio="chat_caderno",
-    deterministico="JSON vira DirecaoCenas 1.0.0 + validacao fail-closed; sem imagem/video",
+    deterministico="JSON vira DirecaoCenas 2.0.0 + validacao fail-closed; sem imagem/video",
     agente="o ask devolve o JSON; nao escolhe modelo",
+)
+
+GASTO_BRIEFING_MESTRE = AutorizacaoGasto(
+    etapa="briefing_mestre",
+    modelo="notebooklm-chat",
+    pode_gastar=True,
+    meio="chat_caderno",
+    deterministico="JSON vira BriefingEfemerico 1.0.0; limpa chat do mestre; sem midia",
+    agente="o ask devolve o JSON; nao escolhe generate",
 )

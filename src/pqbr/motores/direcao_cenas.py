@@ -16,7 +16,7 @@ from pqbr.pipeline.validar_direcao_cenas import validar_lista
 
 LIPS = "lips closed, only blinking and breathing."
 _CONTRATO_VISUAL = (
-    "Contrato visual CenaIndividual 1.0.0: uma cena por item; fala e narração em off e NAO entra nos prompts; "
+    "Contrato visual CenaIndividual 2.0.0: uma cena por item; fala e narração em off e NAO entra nos prompts; "
     "prompt_animacao em ingles com a frase exata 'lips closed, only blinking and breathing'; "
     "enquadramento so plano_geral|plano_medio|plano_medio_curto|close; refs = ids do catalogo (PERS/AMB/OBJ/ANIM/FIG/SIT); "
     "personagem stickman; PERS-menina-rosa = mulher jovem adulta (nunca girl nem menina como idade)."
@@ -59,9 +59,9 @@ def parse_cenas(texto: str, codigo: str, n_cenas: int) -> list[CenaIndividual]:
         if not isinstance(c, dict):
             raise ValueError(f"cena {i} inválida")
         c = dict(c)
-        c["versao"] = "1.0.0"
+        c["versao"] = "2.0.0"
         c["numero"] = i
-        c["rotulo"] = f"{codigo}_c{i:02d}"
+        c["rotulo"] = f"{codigo}-S{i:02d}"
         anim = (c.get("prompt_animacao") or "").strip()
         if "lips closed" not in anim.lower():
             anim = f"{anim} {LIPS}".strip()
@@ -152,7 +152,7 @@ class AdaptadorFalsoDirecao:
         estilo: str = ESTILO_PADRAO_STICKMAN,
     ) -> DirecaoCenas:
         if self._cenas is not None:
-            cenas = [CenaIndividual.model_validate({**c, "versao": "1.0.0"}) for c in self._cenas]
+            cenas = [CenaIndividual.model_validate({**c, "versao": "2.0.0"}) for c in self._cenas]
         else:
             prot = protagonista_ref(elenco_alternado(codigo))
             adulta = prot == "PERS-menina-rosa"
@@ -164,7 +164,7 @@ class AdaptadorFalsoDirecao:
             cenas = []
             for i in range(1, n_cenas + 1):
                 cenas.append(CenaIndividual(
-                    numero=i, rotulo=f"{codigo}_c{i:02d}",
+                    numero=i, rotulo=f"{codigo}-S{i:02d}",
                     fala=f"Fala da cena {i} sobre o tema do café fraco no Brasil.",
                     norte=f"mostrar o ponto {i} do café fraco",
                     inicio="Personagem stickman em pé no café, xícara na mão, plano médio.",

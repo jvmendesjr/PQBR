@@ -1,4 +1,4 @@
-"""Passo 1 pós-roteiro: DirecaoCenas 1.0.0 + adaptador falso (sem rede)."""
+"""Passo 1 pós-roteiro: DirecaoCenas 2.0.0 + adaptador falso (sem rede)."""
 from __future__ import annotations
 import asyncio
 import pytest
@@ -15,7 +15,7 @@ ANIM = "Locked camera, slow push-in, lips closed, only blinking and breathing."
 
 def _cena(n=1, **kw):
     base = dict(
-        numero=n, rotulo=f"PQBR-EP1003_c{n:02d}",
+        numero=n, rotulo=f"PQBR-EP1003-S{n:02d}",
         fala="Café fraco vira chá de bico no Brasil contemporâneo.",
         norte="mostrar o café ralo na xícara",
         inicio="Mulher jovem adulta stickman em pé no café, xícara na mão.",
@@ -36,14 +36,14 @@ def _cena(n=1, **kw):
     return base
 
 
-def test_contrato_direcao_1_0_0():
+def test_contrato_direcao_2_0_0():
     cenas = [CenaIndividual(**_cena(1)), CenaIndividual(**_cena(2))]
     d = DirecaoCenas(
         codigo="PQBR-EP1003", slug="cafe-fraco", caderno="nb-abc12345",
         estilo_aplicado="Cartoon 2D flat colorido com personagens stickman do canal",
         cenas=cenas,
     )
-    assert d.versao == VERSAO == "1.0.0"
+    assert d.versao == VERSAO == "2.0.0"
     assert d.proximo == "flow_cenas_individuais_pendente"
 
 
@@ -51,9 +51,10 @@ def test_adaptador_falso_sem_rede():
     d = AdaptadorFalsoDirecao().direcionar(
         codigo="PQBR-EP1003", slug="cafe-fraco", caderno="nb-fake-12345678", n_cenas=3,
     )
-    assert d.versao == "1.0.0" and len(d.cenas) == 3
+    assert d.versao == "2.0.0" and len(d.cenas) == 3
     assert all("stickman" in c.prompt_imagem.lower() for c in d.cenas)
     assert "PERS-menina-rosa" in d.cenas[0].refs
+    assert d.cenas[0].rotulo == "PQBR-EP1003-S01"
 
 
 def test_fail_closed_ref_inexistente():
@@ -84,7 +85,7 @@ def test_parse_cenas_completa_lips_e_rotulo():
     corpo["cenas"][0]["prompt_animacao"] = "slow push-in"
     txt = "prefixo\n" + json.dumps(corpo) + "\nsufixo"
     cenas = parse_cenas(txt, "PQBR-EP1003", 2)
-    assert cenas[0].rotulo == "PQBR-EP1003_c01"
+    assert cenas[0].rotulo == "PQBR-EP1003-S01"
     assert "lips closed" in cenas[0].prompt_animacao.lower()
 
 
@@ -93,7 +94,7 @@ def test_activity_com_adaptador_falso():
         "codigo": "PQBR-EP1003", "slug": "cafe-fraco",
         "caderno": "nb-fake-12345678", "n_cenas": 2, "adaptador": "falso",
     }))
-    assert out["versao"] == "1.0.0"
+    assert out["versao"] == "2.0.0"
     assert len(out["cenas"]) == 2
     assert out["proximo"] == "flow_cenas_individuais_pendente"
 

@@ -1,4 +1,4 @@
-"""Pedidos versionados da produção E2E (pt162u): registrados em VERSOES 1.0.0.
+"""Pedidos versionados da produção E2E (pt162u; t168u briefing mestre).
 
 Oficial: EpisodioWorkflow (episodio.py) e NotebookLMWorkflow.
 O EpisodioWorkflow em workflows.py é legado e NÃO usa estes contratos.
@@ -9,7 +9,7 @@ from typing import Literal
 from pydantic import Field
 from . import Contrato
 
-VERSAO = "1.0.0"
+VERSAO = "1.1.0"
 CODIGO = re.compile(r"^PQBR-EP[0-9]{4,}$")
 SLUG = re.compile(r"^[a-z0-9][a-z0-9-]{1,60}$")
 UUID = re.compile(r"^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$", re.I)
@@ -17,7 +17,7 @@ UUID = re.compile(r"^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12
 
 class PedidoEpisodioE2E(Contrato):
     """Entrada do EpisodioWorkflow oficial (fila episodio-pqbr)."""
-    versao: Literal["1.0.0"] = VERSAO
+    versao: Literal["1.1.0"] = VERSAO
     slug: str = Field(pattern=SLUG.pattern)
     codigo: str = Field(pattern=CODIGO.pattern)
     roteiro_texto: str = Field(min_length=50)
@@ -31,12 +31,14 @@ class PedidoEpisodioE2E(Contrato):
     dry_run: bool = True
     steering: str | None = Field(default=None, max_length=4000)
     espera_veredito_h: float = Field(default=24, ge=0.01, le=72)
+    briefing_id: str | None = Field(default=None, max_length=80)
+    usar_mestre: bool = True
 
 
 class PedidoNotebookLM(Contrato):
     """Entrada do NotebookLMWorkflow (fila notebooklm-pqbr)."""
-    versao: Literal["1.0.0"] = VERSAO
-    tipo: Literal["pesquisa", "roteiro", "seo", "contexto", "short"]
+    versao: Literal["1.1.0"] = VERSAO
+    tipo: Literal["pesquisa", "roteiro", "seo", "contexto", "short", "briefing"]
     slug: str = Field(pattern=SLUG.pattern)
     fonte: str = Field(min_length=20, max_length=200_000)
     pergunta: str | None = Field(default=None, max_length=4000)
@@ -50,3 +52,6 @@ class PedidoNotebookLM(Contrato):
     steering: str | None = Field(default=None, max_length=4000)
     roteirizar: bool = False
     tema: str | None = Field(default=None, max_length=300)
+    papel: Literal["mestre", "efemero"] = "efemero"
+    caderno_mestre_id: str | None = Field(default=None, pattern=UUID.pattern)
+    briefing_id: str | None = Field(default=None, max_length=80)

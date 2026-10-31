@@ -536,6 +536,9 @@ class SaudeNavegador(Contrato):
 
 
 from .pedidos_producao import PedidoEpisodioE2E, PedidoNotebookLM  # noqa: E402  pt162u
+from .briefing_mestre import BriefingEfemerico, PedidoBriefingMestre  # noqa: E402  t168u
+from .cena import CenaIndividual  # noqa: E402  t168u
+from .direcao_cenas import DirecaoCenas  # noqa: E402  t168u
 
 VERSOES: dict[str, str] = {
     "InstanciaNavegador": "1.0.0",
@@ -576,6 +579,10 @@ VERSOES: dict[str, str] = {
     "RespostaMotor": "1.0.0",
     "PedidoVideo": "1.0.0",
     "ResultadoVideo": "1.0.0",
-    "PedidoEpisodioE2E": "1.0.0",
-    "PedidoNotebookLM": "1.0.0",
+    "PedidoEpisodioE2E": "1.1.0",
+    "PedidoNotebookLM": "1.1.0",
+    "CenaIndividual": "2.0.0",
+    "DirecaoCenas": "2.0.0",
+    "BriefingEfemerico": "1.0.0",
+    "PedidoBriefingMestre": "1.0.0",
 }
