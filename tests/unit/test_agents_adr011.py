@@ -64,9 +64,9 @@ def test_motor_falso_troca_sem_mudar_fluxo():
     assert isinstance(Falso(), MotorIntelectual) and parse_direto(r.texto).temas[0].tema.startswith("Por que")
 
 
-def test_oito_papeis_com_persona_e_combo():
+def test_nove_papeis_com_persona_e_combo():
     from pqbr.kit.router9 import combo
-    assert len(REGISTRO) == 8
+    assert len(REGISTRO) == 9   # t145u: motion
     for p in REGISTRO:
         assert persona(p) and combo(p).startswith("core-")
 

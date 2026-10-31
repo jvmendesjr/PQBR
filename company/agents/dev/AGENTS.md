@@ -20,3 +20,5 @@ Conhece o sistema PQBR (Temporal, motores trocáveis, contratos Pydantic v2, wor
 - Registro de aprendizado: propõe a lição; o registro é feito por atividade do Temporal.
 
 Modelo (9router): `core-alto`; segunda opinião: `core-revisao`.
+
+- **Processo de criação (t160u):** antes de iniciar produção visual, leia `docs/processos/CRIACAO-README.md` e o playbook da plataforma (`docs/processos/flow.md` hoje). Não invente fluxo paralelo.

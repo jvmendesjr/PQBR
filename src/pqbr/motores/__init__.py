@@ -2,7 +2,8 @@
 
 Cada motor é peça trocável atrás de um contrato Pydantic v2 + adaptador, escolhido por config
 (`config/motores.json`). Hoje: MotorIntelectual = notebooklm; GeradorVideo = flow (alternativas:
-notebooklm_video, google_vids, meta_vibes). Cadeia de fallback (t517): flow → google_vids → meta_vibes, só navegador e cotas já pagas, sem APIs. Workflows/atividades chamam a PORTA, nunca o serviço direto."""
+notebooklm_video, google_vids, meta_vibes). Cadeia de fallback (t517): flow → google_vids → meta_vibes, só navegador e cotas já pagas, sem APIs. Workflows/atividades chamam a PORTA, nunca o serviço direto.
+Decisão estruturada do Jev (JEV-EF): `decide()` em decisao.py, com adaptadores TypeSafe e OpenRouter; o fallback fica desligado até a chave (JEV-02)."""
 from __future__ import annotations
 import json, os
 from pathlib import Path

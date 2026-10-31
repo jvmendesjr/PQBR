@@ -14,6 +14,17 @@ from ..storage.hindsight_tags import TAG_OBS, tags_conteudo
 RAIZ = Path(__file__).resolve().parents[3]
 
 
+def _gravar(reter: Callable, texto: str, ctx: str, *, papel: str, tags: list[str], autor: str,
+            operacao: str) -> dict:
+    """Escrita idempotente: o `operation_id` é determinístico (cliente + commit + texto), então reenviar
+    depois de um timeout devolve a operação original em vez de criar memória nova (t154u)."""
+    try:
+        return reter(texto, ctx, papel=papel, tags=tags, autor=autor, operacao_id=operacao)
+    except TimeoutError as e:  # o retain pode ter sido aceito antes do socket estourar
+        raise RuntimeError("timeout na escrita do Hindsight; a memória pode ter sido aceita — "
+                           "reenviar a mesma alteração é seguro (operation_id determinístico)") from e
+
+
 def commit_existe(h: str) -> bool:
     r = subprocess.run(["git", "-C", str(RAIZ), "cat-file", "-e", f"{h}^{{commit}}"], capture_output=True)
     return r.returncode == 0
@@ -55,13 +66,16 @@ def registrar(papel: str, cliente: str, args: dict, *, exige_commit: bool = Fals
     if reter is None:
         from ..storage.hindsight import reter as reter_real
         reter = reter_real
-    reter(texto, ctx, papel=papel, tags=tags, autor=cliente)
+    from ..storage.hindsight import id_da_operacao
+    _gravar(reter, texto, ctx, papel=papel, tags=tags, autor=cliente,
+            operacao=id_da_operacao(cliente, str(e.commit or ""), texto))
     hand = False
     if exige_commit and "estado" in carregar().de(papel).escrita:  # handoff p/ o próximo agente, visível a todos
         resumo = " ".join((e.handoff or e.conteudo).split())[:1500]
-        reter(f"Handoff ({tipo}) de {cliente}, commit {e.commit}: {resumo}\nPróximo passo vigente: {proximo_passo(estado_txt)}"
-              f"\nContinue por {ESTADO}.", f"PQBR handoff — cliente {cliente} ({papel}) — commit {e.commit}",
-              papel=papel, tags=["estado"], autor=cliente)
+        _gravar(reter, f"Handoff ({tipo}) de {cliente}, commit {e.commit}: {resumo}\nPróximo passo vigente: {proximo_passo(estado_txt)}"
+                       f"\nContinue por {ESTADO}.", f"PQBR handoff — cliente {cliente} ({papel}) — commit {e.commit}",
+                papel=papel, tags=["estado"], autor=cliente,
+                operacao=id_da_operacao(cliente, str(e.commit or ""), "handoff", resumo))
         hand = True
     return RegistroMemoriaSaida(ok=True, autor=cliente, papel=papel, tags=tuple(tags), commit=e.commit,
                                 commit_verificado=ok_commit, handoff_registrado=hand)

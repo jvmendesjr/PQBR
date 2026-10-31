@@ -18,7 +18,7 @@ Regras de leitura:
 Chaves de cada cena, exatamente estas:
 - id
 - tem_personagem: há pessoa ou personagem desenhado na cena? sim ou nao
-- segue_estilo_declarado: o desenho segue o estilo declarado (por exemplo 2D plano, sem foto)? sim ou nao
+- segue_estilo_declarado: o desenho é cartoon 2D flat colorido com personagem stickman (cabeça redonda branca, contorno preto, cores chapadas), sem volume 3D e sem foto? sim ou nao
 - mesmo_personagem_do_bloco: o personagem principal bate com a descrição do personagem? "na" se não há personagem
 - imagem_corresponde_a_fala: a imagem ilustra a fala desta cena? sim ou nao; "na" se não foi enviada fala
 - legivel_no_celular: a cena é compreensível em tela de celular? Para CAPA, legível em ~120–200 px de largura. sim ou nao

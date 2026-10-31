@@ -1,9 +1,310 @@
 # CHANGELOG — PQBR
 
+## [0.32.0] — 2026-10-31 (Mestre de Auditoria + Efêmero de Auditoria; híbrido aprovado, t170u)
+### Adicionado
+- Mestre de Auditoria permanente `PQBR - Mestre de Auditoria`, ID `ce015620-7ce7-442c-aece-d9bece306ed1` (`config/caderno_mestre_auditoria.json`, persona `templates/notebooklm/persona-auditoria-mestre.txt`, script `scripts/notebooklm/criar_mestre_auditoria.py`, módulo `src/pqbr/config_caderno_mestre_auditoria.py`). Nunca mídia, nunca episódio.
+- Efêmero de Auditoria por episódio, título `Auditoria - PQBR-EP#### - <slug>` (`src/pqbr/auditoria_cadernos.py`: snapshot AUD-SNAP 1.0.0, checklist CenaAuditada, erros recorrentes EP1003, veredito estruturado), testes `tests/unit/test_auditoria_cadernos.py` 4/4.
+- Piloto EP1003: efêmero `Auditoria - PQBR-EP1003 - cafe-fraco`, ID `e82fc55e-9725-4bc8-bc44-60a4a4082b6d`. Teste: S05 original = reprova (banquinho, braços realistas, chaleira sem mão, reuso de rejeitado); S04 nova = aprova_com_ressalva (faltam stills/quadros-chave).
+- Playbook `nlm-cadernos.md` (seção Auditoria), ESTADO/ROADMAP/DECISOES-LOG e mapa `producao-episodios.json` 1.3.0 + `01-episodio.mmd` atualizados.
+### Corrigido
+- Bug do `--type text` com caminho (só ingere o caminho, fulltext 50-70 chars): script de auditoria corrigido para `--type file` + rename, verificação por fulltext. Achado registrado: mestre criativo (t168u) tem o mesmo padrão nas fontes texto — NÃO corrigido nesta entrega, sem tocar no mestre criativo.
+### Sem
+- Reinício de worker, push/merge em main, activity Temporal de auditoria, registro em banco do efêmero de auditoria, mudança no auditor Gemini Web, mudança no Flow v3, delete de qualquer caderno.
+
+## [0.31.1] — 2026-10-31 (docs/mapa/memórias do fluxo mestre; José t169u)
+### Alterado
+- Documentos vivos (REGRAS, ARQUITETURA, ESTADO, ROADMAP, LACUNAS, processos, CONTRATO-EDITORIAL) alinhados ao fluxo: mestre `00ce61ae` → `BriefingEfemerico` → efêmero → direção 2.0.0 → Flow pendente; papéis NLM/Temporal/agente explícitos.
+- Mapa `01-episodio.mmd` + `producao-episodios.json` 1.2.1 + `index.html` regenerado (:8088).
+### Adicionado
+- Próximos tópicos (só registro): (1) papel mestre/efêmero na validação e auditoria; (2) José ajusta refs **VISUAIS** (fichas de personagens, objetos, estilo).
+### Corrigido
+- `LIMITE_ESTADO` do onboarding 20k→28k (P18 cortada); AGENTS.md regenerado.
+### Alterado (correção José)
+- Mapa :8088 prioriza etapa dos **CADERNOS** (mestre+efêmero); publicação só rótulo/rastreabilidade.
+### Sem
+- Reinício worker, push/merge, implementação dos próximos tópicos, alteração de fichas.
+
+## [0.31.0] — 2026-10-31 (Caderno Mestre canônico + rótulo S##; José t168u)
+### Adicionado
+- Contrato `BriefingEfemerico` / `PedidoBriefingMestre` 1.0.0 (persona, prompts por etapa, pesquisa obrigatória + URLs, refs, modelo sugerido).
+- Activities `nlm_mestre_perguntar`, `nlm_mestre_limpar_chat`, `nlm_mestre_briefing`, `nlm_abrir_efemero_com_briefing` (adaptador falso para testes).
+- `config/caderno_mestre.json` + `templates/notebooklm/persona-mestre.txt` + scripts `criar_mestre_canonico.py` / `exportar_mestre_legado.py`.
+- Export read-only `docs/pesquisas/mestre-antigo-c35d7b24/`.
+### Alterado
+- `CenaIndividual` e `DirecaoCenas` **2.0.0**: rótulo canônico `PQBR-EP####-S##`; `validar_stem_rotulo(stem==rótulo)`.
+- `PedidoEpisodioE2E` / `PedidoNotebookLM` **1.1.0** (`usar_mestre`, `papel`, `briefing_id`).
+- `MESTRES_PROIBIDOS` só legado; mestre novo allowlist por ID em config; trava: mestre nunca gera mídia.
+### Removido / revertido
+- Decisão operacional de 12/10 que excluía mestre do pipeline (papel de norteador restaurado; mídia continua proibida no mestre).
+### Sem
+- Reinício de worker, push/merge, geração de mídia, delete do caderno legado.
+
+## [0.30.0] — 2026-10-30 (aba Produção + divergências; José pt162u)
+### Adicionado
+- Aba do painel **Produção de episódios (tema → publicação)** (`#producao`), gerada de `docs/mapa/producao-episodios.json` via `scripts/mapa/producao.py`.
+- Contratos `PedidoEpisodioE2E` e `PedidoNotebookLM` 1.0.0 em `VERSOES` (`contratos/pedidos_producao.py`) + testes.
+### Alterado
+- Mapa `01-episodio.mmd`: `direcao_cenas_nlm` + `flow_projeto_exigir_antes_cenas`.
+- Núcleo/processo `CRIACAO-README` e `flow.md` → **1.2.0**: direção/prompts vêm do NotebookLM; agentes só operam o Flow; `VERSAO_ESPERADA` 1.2.0.
+- `EpisodioWorkflow` em `workflows.py` documentado como **legado**; oficial = `episodio.py` / fila `episodio-pqbr`.
+- LACUNAS/DECISOES: EP1003 manual fora do Temporal ≠ caminho oficial.
+### Não feito
+- Reinício de worker; push/merge.
+
+
+## [0.29.9] — 2026-10-30 (passo 1 direção NLM → CenaIndividual; José pt161u)
+### Adicionado
+- Passo 1 pós-roteiro no `EpisodioWorkflow`: activity `direcao_cenas_nlm` (porta `DiretorCenas`, adaptador NotebookLM via notebooklm-py + adaptador falso para testes).
+- Contrato versionado `DirecaoCenas` 1.0.0 (`src/pqbr/contratos/direcao_cenas.py`): lista de `CenaIndividual` + estilo + `proximo=flow_cenas_individuais_pendente`.
+- Validação fail-closed (`pipeline/validar_direcao_cenas.py`): refs no catálogo, trava stickman, persona adulta quando a ficha diz adulta, nada de `girl`/`menina`-idade para PERS-menina-rosa.
+- Gates após a direção: `flow_projeto_exigir_antes_cenas` + `processo_criacao_conferir`. Passo 2 (adaptador Flow) permanece pendente.
+- Testes com adaptador falso (sem rede): `tests/unit/test_direcao_cenas.py`.
+- Ficha `PERS-menina-rosa` no `indice.json` alinhada ao MD (mulher jovem adulta, tag `adulta`).
+- Handoffs: `docs/HANDOFF-EP1003-20261030.md`, `docs/PROMPT-CORRECAO-BLOQUEIO-EP1003.md`.
+### Não feito (de propósito)
+- Reinício de worker; geração Flow/NLM; merge em main; alteração em `docs/mapa/` (falta OK José — `test_mapa` aponta as duas activities novas).
+
+## Não lançado — 2026-10-30 — EP1003 v3: 8 imagens de início + movimentos (sem vídeo)
+- Regeneração 30/10/2026 (revisão do piloto, José): novas versões de S03, S04, S05 e S07 com a correção adulta — mulher jovem adulta, em pé no chão, sem banquinho, sem braços realistas extras (ficha PERS-menina-rosa e playbook atualizados, commit ea449f4). S07 precisou de 3 tentativas (falha de política, pergunta de confirmação não respondida, geração com movimento registrado). Versões antigas com problema permanecem na biblioteca, não apagadas. Nenhum vídeo gerado; revisão do piloto ainda pendente.
+
+
+- Projeto Flow novo `PQBR-EP1003-cafe-fraco-v3` (`9c4ad934-…`), criado via Camofox com acesso livre (conta PRO José Vieira): settings verificados Confirm=Sempre, imagem 9:16 x1 Nano Banana 2.1, vídeo 9:16 x1 Omni 1.1 Flash; instrução do Agente salva; fichas PERS/OBJ/AMB entregues; coleção Referencias com 3 itens.
+- 8 imagens de início S01..S08 geradas (Nano Banana 2.1, 9:16) e 8 prompts de movimento registrados no Flow, sem vídeo gerado — portão de revisão do piloto pendente (José). Correção: o v2 (`3a9ca558-…`) ainda existe no Flow e nada foi apagado nele; o v3 começa limpo. Objeto Character não criado no v3 (Agente: só via seção Personagens da UI); cenas usam o Element PERS. Plano validado em `runtime/piloto-flow/EP1003/PLANO-CENAS-v3.md/.json` (gitignored).
+- Núcleo de criação continua 1.1.0, sem mudança de versão do projeto e sem reinício de worker.
+
+
+## 0.29.8 — 2026-10-29 — Sincronização dos documentos vivos (ordem do José)
+
+- Docs vivos limpos de storyboard como etapa: ESTADO-ATUAL (gates, onde paramos, fluxo, P6/P16/P17),
+  ROADMAP (Fase 4V, R2/R3, MG-05/MG-06, piloto EP1003), CONTRATO-EDITORIAL §18, CRIACAO-README e flow.md.
+- Modelo de imagem vigente uniformizado para Nano Banana 2.1 (antes Nano Banana Pro) em flow.md,
+  CONTRATO-EDITORIAL, ESTADO-ATUAL e ROADMAP; Pro fica só como histórico.
+- Papéis dos agentes no núcleo reescritos agente-primeiro (Diretor, Guardião, Auditor são agentes;
+  José só decide, nunca executa). Motion: bloco de números passa a ser do roteiro/cenas individuais.
+- Conteúdos obsoletos extraídos e indexados em `docs/_obsoleto/INDICE-sincronizacao-0.29.8.md` (nada apagado);
+  história deliberadamente mantida em ROADMAP "Estado em 26/10/2026", CHANGELOG/DECISOES e _obsoleto/.
+- `AGENTS.md` regenerado e site do mapa regenerado; estado novo registrado no Hindsight via pqbr-mcp.
+- Núcleo de criação continua 1.1.0 (sem mudança de versão, sem reinício de worker necessário: o worker lê
+  os docs do disco e a versão pinada não mudou). Pendentes: MG-05 (definição), folha nº 1, mídia SIT-*,
+  OK MG-12 / merge main.
+
+## 0.29.2 — 2026-10-29 (t162u)
+- Flow EP1003: Agent/Character/Collections conforme `docs/processos/flow.md`; storyboard pedido ao Agente com HOLD por falha de render da UI.
+
+## [0.29.7] — 2026-10-29 (storyboard removido definitivamente; cenas individuais; agente primeiro)
+### Removido
+- Storyboard do fluxo ativo, por ordem definitiva do José: board geral, `storyboard_criar`, `PROMPT_STORYBOARD`, gate `storyboard_ok` e etapa de storyboard no `EpisodioWorkflow` e nos playbooks. Motivo: um encarte só com muitas cenas facilita o erro do agente; cenas individuais com movimento bem definido no prompt são mais determinísticas. Código antigo preservado em `scripts/_obsoleto/` com índice em `docs/_obsoleto/INDICE-storyboard-removido.md`; nada foi apagado.
+### Alterado
+- **Cenas individuais:** cada cena é criada, validada e animada sozinha, uma por vez, pelo Agente do Google Flow, a partir das fichas pinadas, no formato do projeto, com modelo de imagem atual **Nano Banana 2.1** (registrado, fail-closed se ausente na UI). Contrato novo `CenaIndividual` 1.0.0 (`contratos/cena.py`, derivado da antiga FichaCena); gate `exigir_antes_cenas` exige só `fichas_ok`.
+- **Regra suprema agente-primeiro** registrada no núcleo (`docs/processos/CRIACAO-README.md` 1.1.0): "manual" significa o agente faz; não há processo manual humano. **Piloto e automático:** a visualização que vai para aprovação do José é a do episódio piloto; depois do piloto aprovado, o fluxo fica automático e o José monitora independentemente; alteração → botão de emergência do Telegram ou pedido ao agente para interromper; operação interrompida só volta ao público por ordem do José.
+- **Centro criativo:** NotebookLM (pai, via `notebooklm-py`) cria roteiro, personalidade, caderno, informações e pesquisa; o agente compila os prompts do Flow a partir do roteiro, do catálogo, do formato e do registro de modelos, em contratos Pydantic v2 no Temporal.
+- Núcleo de criação 1.0.0 → 1.1.0 (`VERSAO_ESPERADA` atualizada); playbook Flow 1.0.0 → 1.1.0; mapa 12 renomeado para `12-cenas-elenco.mmd` e índice regenerado.
+### Não alterado
+- Motion graphic (MG-05): segurado, definição pendente. Google Vids / Meta Vibes: fallback. Publicação: dry-run; item 5 das REGRAS (voltar a público) intacto.
+
+## [0.29.6] — 2026-10-29 (documentação em termos do MCP + ressalva)
+### Alterado
+- Documentos vivos atualizados para termos do MCP: ARQUITETURA §12, ROADMAP (fase Conhecimento), ESTADO-ATUAL, onboarding do agente externo, mapa 09 e 13, nota da política e comentários dos scripts do MCP passam a falar em codebase-memory-mcp / ferramenta `codigo` / `codigo_consultar`, sem apresentar o backend anterior como ferramenta atual.
+- **Ressalva registrada (ordem do José):** se `GitNexus` for chamado acidentalmente nesta aplicação ou na documentação, leia-se **codebase-memory-mcp** (backend atual do `codigo` do pqbr-mcp). A ressalva está em ARQUITETURA §12, ROADMAP, ESTADO-ATUAL, onboarding do agente externo, mapa 13, nota da política (`gitnexus_consultar` → `codigo_consultar`) e docstring do adaptador. O backend anterior permanece apenas no histórico (CHANGELOG, DECISOES-LOG, ADR-012, plano) e em `_obsoleto/`, sem desinstalar até ordem expressa.
+
+## [0.29.5] — 2026-10-29 (migração GitNexus → codebase-memory-mcp, OK José)
+### Alterado
+- Backend do `codigo` do pqbr-mcp trocado do GitNexus 1.6.12 (PolyForm Noncommercial) para o codebase-memory-mcp **0.12.1** (MIT, release GitHub 2026-10-16, SHA-256 conferido). Interface do `codigo` inalterada (`query|context|impact`, filtrada pelo papel, fail-closed). Adaptador novo: `src/pqbr/integrations/codebase_memory.py`.
+- Política 1.5.0 → **1.6.0**: ferramenta `gitnexus_consultar` renomeada para `codigo_consultar` (dev e mantenedor). `query_graph`/`cypher` continuam bloqueados.
+- Contrato `FerramentaVigiada` 1.0.0 → **1.1.0** (campo opcional novo `binario`); vigia de sexta 08:00 passa a vigiar o codebase-memory-mcp (versão instalada via `--version`, última via GitHub releases, mesmo `classificar`; nunca aplica, nunca dispara o Schedule à mão).
+- Scripts: `scripts/codebase-memory/verificar.sh` (fail-closed, Lens desligada) e `hook-post-commit.sh` (reindex em segundo plano; o `auto_watch` do CBM só vale na sessão dona, por isso o post-commit é o mecanismo durável de frescor). `.githooks/post-commit` aponta para o novo hook.
+- Mapa: `05-vigia-atualizacoes` (entrada CBM + leitura por binário), `13-memoria-mcp-handoff` (subgrafo CBM) e `00-visao-geral` (nó K13) atualizados; `index.html` regenerado.
+### Preservado (nada apagado, sem desinstalar)
+- GitNexus: wrapper em `~/.local/bin/_obsoleto/gitnexus`, índice de 215 MB em `~/.local/share/_obsoleto/gitnexus-pqbr-1.6.12/.gitnexus/`, código em `scripts/_obsoleto/`, índice em `docs/_obsoleto/INDICE-migracao-cbm.md`. Pacote npm e registry global intactos. Desinstalação só com ordem expressa posterior.
+### Gaps documentados (ADR-012)
+- Saída não é byte-idêntica (comparação semântica no Passo 4); processos e classificação de risco do GitNexus sem equivalente (risco devolvido como `sem_equivalente`, sem escore emulado); `wiki` sem equivalente (não era usado); parse parcial de SQL no índice CBM (28 arquivos parciais, 6 inutilizáveis — ler o SQL direto); chamadas por string (ex.: atividades Temporal) não geram aresta em nenhum dos dois índices; `indexed_at` do CBM não atualiza em reindex em segundo plano (frescor se verifica buscando um símbolo novo).
+### Verificação (Passo 4)
+- Mesmas consultas nos dois lados (lado GitNexus = linha de base do Passo 1, pois o índice foi preservado fora do repo): `query`/`context`/`impact` para `vigia_checar` e `VigiaAtualizacoesWorkflow` equivalentes ou mais ricos no CBM (callees de `vigia_checar`: `_get_json`, `classificar` nos dois, mais `_versao_binario`, `ItemAtualizacao`, `_num`, `int` no CBM); `consultar` sem desambiguador devolve ambiguidade explícita nos dois lados (12 sugestões no CBM, incluindo o novo `codebase_memory.consultar`); papel `auditor`/desconhecido negado, `cypher`/`query_graph` bloqueados.
+- `detect_changes --base-branch HEAD`: exatamente os 17 arquivos da migração, nem mais nem menos.
+- Vigia: `vigia_checar` para o CBM devolve instalada `0.12.1`, última `v0.12.1`, `em_dia`.
+- Suíte completa: 686 passados, 2 falhas pré-existentes em `test_flow_projeto.py` (EP1003), reproduzidas no HEAD limpo sem a migração — não são regressão.
+
+
 Versionamento SemVer (MAJOR.MINOR.PATCH) a partir de t510. Versão do pacote canônico/contrato segue o próprio hash.
 
 
 
+
+## 0.29.1 — 2026-10-29 (t161u)
+- Projeto Google Flow `PQBR-EP1003-cafe-fraco` (`025dcfef-…`) + fichas PERS/OBJ/AMB entregues; storyboard **não** enviado (HOLD prompt-padrão).
+- `config/flow_projetos.json` + gate `src/pqbr/pipeline/flow_projeto.py` (fail-closed antes de cenas).
+- Playbook Flow: receita de upload Angular ajustada (click + `input[type=file]`).
+- Docs: REGRAS, DECISOES-LOG, ESTADO-ATUAL, LACUNAS, PLANO-CENAS EP1003.
+
+## [0.29.4] — 2026-10-29 (t164u)
+### Handoff
+- ESTADO-ATUAL: seção **Onde paramos / handoff (t164u)** com instruções ao novo agente (BRIEFING, processos/flow, flow_projetos, Camofox PQBR, gates).
+- ROADMAP: subseção Piloto EP1003 (checkboxes feito/pendente: stills, capa Character, Cenas, MG-05/11/12, JEV-02, merge, MCP estado).
+- Mapa :8088 (aba Roadmap) regenerado. Sem ações Flow.
+
+## [0.29.3] — 2026-10-29 (t163u)
+### Flow EP1003 v2
+- Novo projeto `PQBR-EP1003-cafe-fraco-v2` (`3a9ca558-…`); antigo `025dcfef-…` intacto.
+- Agent Confirm=Sempre, 9:16, Nano Banana Pro; Character `@PERS-menina-rosa`; Collections Referencias/Storyboard/Cenas/Finais.
+- Storyboard conciso c01..c08 enviado 1× (0 créditos) → resposta Agente OK; `storyboard_ok=true`. STOP sem stills/clipes.
+
+## [0.29.0] — 2026-10-29
+### Adicionado
+- Processo canônico de criação (t160u / José t149u): `docs/processos/CRIACAO-README.md` v1.0.0, playbook `flow.md`, stubs Vids/Vibes (`a descobrir`).
+- Pré-condição Temporal fail-closed: `processo_criacao_conferir` + `src/pqbr/pipeline/processo_criacao.py` (versão pinada + hash); testes unitários.
+### Alterado
+- REGRAS §6: processo de produção por episódio **APROVADO** (deixa de ser PROPOSTA t159u); ponteiros em ARQUITETURA e personas.
+- ESTADO-ATUAL / ROADMAP / LACUNAS / mapa (`01-episodio`, `07-cadeia-video`).
+### Notas
+- Reinício do `pqbr-episodio-worker` **não** feito (ativação da activity em runtime pendente de OK do José).
+
+## [0.28.1] — 2026-10-29
+### Adicionado
+- Registro do teste do combo `core-ultra` no 9router (t158u): HTTP 200 (~3,4 s), modelo `claude-opus-5-5-medium`; `core-ulta` → 404; stream sem pedido; uso estimado ~2035 tokens de entrada (`estimated: true`).
+- Storyboard 1.3.0 offline do piloto EP1003 cafe-fraco (MG-05), fora do worker (`runtime/piloto-flow/EP1003/`).
+- Produção Flow EP1003: elementos anexados; **S01..S08** geradas (Nano Banana Pro, 0 créditos) via Camofox PQBR; `imagens_revisadas` ainda false; sem vídeo Omni/Veo.
+### Alterado
+- MG-12: combo `core-ultra` **criado e testado**; troca de `motion` em `config/modelos_9router.json` + reinício do worker continuam no portão do José (não feitos).
+- ESTADO-ATUAL P18/próximo passo: pendência restante = OK José para troca+reinício; produção Flow do EP1003: S01..S08 geradas (elenco feminino / menina-rosa); falta revisão José + vídeo/motion.
+
+## [0.28.0] — 2026-10-29
+### Adicionado
+- Aprovação em massa das fichas do catálogo visual e das REF-MG (t155u): `banco-fichas/indice.json` 3.1.0 (30 fichas → `permanente`; 11 SIT-* seguem `sugestao`); `referencias-motion/indice.json` 0.4.0 (REF-MG-00..07 → `aprovada`).
+- ROADMAP MG-11 (lote de refação EP1002–EP1010 sem Higgsfield) e MG-12 (`core-ultra` / Opus 5.5 para o papel `motion`, proposta).
+### Alterado
+- P17: `Instruções para o agente` no Google Flow regravadas no estilo cartoon 2D flat colorido; espelho Drive `00_Biblia_Visual/banco-fichas` com 111 arquivos (t155u).
+- Higgsfield marcado como descartado (t156u); vídeos do `runtime/lote-saldo/` obsoletos para publicação; ordem Flow → MG-05 → lote de refação.
+- ESTADO-ATUAL / REGRAS / fases: P16 regra e fichas aprovadas; P17 parcialmente concluída (faltam folha do nº 1, mídia das SIT-*, OK reinício worker storyboard 1.3.0).
+
+## [0.27.1] — 2026-10-28
+### Corrigido
+- Escrita do `pqbr-mcp` no Hindsight deixou de estourar timeout e de duplicar memória (t154u): `storage/hindsight.reter` aceita `operacao_id` e envia `async: true` + `operation_id` determinístico (`id_da_operacao`, `uuid5` de cliente + commit + conteúdo), então reenviar a mesma alteração devolve a operação original; `mcp/escrita.py` usa ids próprios para o conteúdo e para o handoff e traduz `TimeoutError` em mensagem com orientação de retry; o timeout do POST virou `PQBR_HINDSIGHT_TIMEOUT` (padrão 120 s, antes 30 s fixos).
+- `mcp/servidor.py`: o erro genérico de ferramenta passou a incluir a mensagem (`erro: Tipo: mensagem`), não só o nome do tipo.
+- Testes: `tests/unit/test_mcp_escrita.py` cobre o id determinístico, o payload assíncrono e o reenvio sem duplicar; o caminho síncrono sem `operacao_id` continua igual.
+
+## [0.27.0] — 2026-10-28
+### Adicionado
+- Motion, seis peças novas (MG-10 parcial, t153u): `frase-troca`, `marca-texto`, `numero-conta`, `leque`, `elo-causa` e `transicao-pincelada` em `src/pqbr/pos/motion/catalogo/`; catálogo `indice.json` 1.2.0 com parâmetros travados e `fragmento_de` no `destaque`; `contratos/motion.py` passou a validar que o `destaque` é trecho literal de `texto`.
+- Coletânea de referências: REF-MG-02 a REF-MG-07 em `banco-fichas/referencias-motion/` (link, data, medida, gramática observada, o que entra e o que fica de fora), README com a tabela referência → peças e `indice.json` 0.3.0 com o campo `delegacao_escolha`; prova em `provas/mg10-pecas.png`.
+- Testes: casos novos em `tests/unit/test_motion_contrato.py` (catálogo novo e destaque-trecho) e `tests/unit/test_motion_motor.py` (zona segura e desenho das seis peças). Suíte: 672 passed, 73 skipped, 2 xfailed.
+### Alterado
+- REGRAS §26: "Quem escolhe o movimento" (delegação do José em t153u, o OK dele é sobre a regra e as fichas), estado do vocabulário (seis peças no catálogo, riscado como candidato) e a coletânea com a escolha determinística por episódio.
+- `docs/fases/motion-graphics.md` (Fase 2d com método, peças e recusas), ROADMAP (MG-02, MG-04, MG-10 e o portão da Fase MG), `biblioteca/regras.md`, `biblioteca/historico.md` (autocrítica 7 → 8,5), persona `motion` (regras 10 e 11) e ESTADO-ATUAL (0.27.0).
+
+## [0.26.0] — 2026-10-28
+### Removido
+- `runtime/piloto-motion/cafe-fraco/` (327 MB, fora do git): piloto de t145u com o visual reprovado, deletado por ordem do José (t152u). Originais do EP1003 intactos em `runtime/lote-saldo/cafe-fraco/`. Referências vivas nos docs ajustadas.
+### Alterado
+- Cartão do MG-03 aprovado pelo José (`runtime/piloto-motion/mg03/folha-cartoes-v2.png`) como ponto de partida; piloto 2 (MG-05) aguarda o Flow em operação regular.
+
+## [0.25.0] — 2026-10-28
+### Alterado
+- MG-03 (t151u): cartões do catálogo de motion no traço do stickman (`g.cartao`: contorno preto e sombra chapada) em `versus`, `origem-pino`, `recorte-aponta` e `imagem-cena`; peso 800 → 700 em `titulo-expressao`, `origem-pino` e `versus` (teto da Fredoka). Custo medido: 35–43 ms por quadro.
+- Testes: `test_motion_motor.py` confere o teto de peso do catálogo e o uso do cartão.
+
+## [0.24.0] — 2026-10-28
+### Adicionado
+- Catálogo visual aberto (t150u): contrato `FichaCatalogo` 1.0.0 (`src/pqbr/contratos/catalogo_visual.py`, com `PROTAGONISTAS` e `TAMANHO_MAX_IMAGEM` de 2 MB) e `src/pqbr/pipeline/banco_fichas.py` (buscar, registrar, anexar mídia, adicionar recorte, aprovar, descartar, gerar o `.md`, resumo para prompt, CLI). `banco-fichas/indice.json` 3.0.0 (62 fichas): categoria nova de situações (`SIT-*`, 11 sugestões sem mídia), `PERS-menino-azul` (nº 1, protagonista masculino) e 6 derivadas do elenco (`aguardando_ok_jose`), uma ficha por objeto (12) e por animal (12), modelos `figura`, `animal` e `situacao`.
+- Motion, personagem presente no layout (MG-09): peça `catalogo/personagem-moldura.js`, `PlanoMotion` 1.2.0 (`elenco` `masculino`/`feminino`, tipos de parâmetro `personagem` e `pose`, faixa numérica), `render.quadros()` (prévia sem compor) e `catalogo/indice.json` 1.1.0. O render acusa o personagem que cobre texto ou cartão.
+- Coletânea de motion: `REF-MG-01` (vocabulário de movimento do dossiê whatships, MiniMax H3 MAX e 0xMovez, `aguardando_ok_jose`) e `referencias-motion/indice.json` 0.2.0. Fase MG do ROADMAP ganha MG-09 (feito no código) e MG-10 (peças do dossiê).
+- Testes: `tests/unit/test_catalogo_visual.py`, `tests/unit/test_banco_fichas_pipeline.py` e casos novos nos de banco-fichas, motion (incluindo render real), storyboard e pacote. Suíte: 668 passed, 73 skipped, 2 xfailed.
+### Alterado
+- Estilo nas palavras do José: cartoon 2D, flat, colorido, com personagens stickman (REGRAS §5/§6/§25/§26, CONTRATO-EDITORIAL §18/§19, `config/estilo_visual.json`, `ESTILO_PADRAO_STICKMAN`).
+- Protagonistas definidos (nº 1 masculino, nº 2 feminina) e `PERS-bob-oculos` como nº 13. Correções nas fichas: sapato da `PERS-menina-rosa` (brancos ovais, não vermelhos) e cachecol do nº 3 (cinza, poucos fios de cabelo).
+- Storyboard 1.3.0 (`refs` com ids do catálogo, coadjuvante qualquer `PERS-*`), pacote canônico com o item `catalogo_visual`, `templates/notebooklm/*` e `templates/auditor/VISUAL_2D.txt`. O prompt novo só vale no episódio depois do reinício do `pqbr-episodio-worker`, que exige OK do José (não feito).
+- Motion: `catalogo.PALETA` e `CORES` do motor re-basiadas no flat colorido (masculino azul-aço, feminino rosa, fundo creme claro); `titulo-expressao` e `versus` usam o tom escuro para letra colorida; persona `motion` com as regras 9 e 10; REF-MG-00 e README da coletânea re-basiados.
+- Docs: `docs/fases/stickman.md` e `docs/fases/motion-graphics.md` (personagem presente, vocabulário do dossiê), ROADMAP (MG-03 parcial, MG-09, MG-10), LACUNAS (item 5), mapa (`12-storyboard-elenco`, `01-episodio`, `07-cadeia-video` e README, sem consulta específica ao José, como em t148u) e ESTADO-ATUAL (P5, P6, P16, P17).
+
+## [0.23.0] — 2026-10-28
+### Adicionado
+- Banco de fontes do motion (t149u): `src/pqbr/pos/motion/fontes.py` (leitor sfnt em Python puro, cobertura pt-BR, registro com licença livre e índice atômico, CLI) e `banco-fichas/referencias-motion/fontes/` com `baloo-2`, `fredoka`, `shantell-sans` e `short-stack` (OFL-1.1, nomes canônicos `<id>/<id>.ttf` e `LICENSE.txt`), todas aprovadas pelo José em 28/10/2026. Patrick Hand ficou de fora (licença traz e-mail pessoal do autor).
+- `PlanoMotion` 1.1.0: campo `fonte` (id do banco, só fonte aprovada; padrão `fredoka`, fonte do padrão do canal por decisão do José). `render.py` injeta o `@font-face` por arquivo local (`file://`, nunca CDN) e confere que a fonte carregou antes de desenhar; `motor.js` usa `PQBRMotion.FONTE`.
+- Testes: `tests/unit/test_motion_fontes.py` e casos novos em `test_motion_contrato.py` e `test_motion_render.py`.
+### Removido
+- `banco-fichas/referencias-canal/` (frames antigos do canal, obsoletos por ordem do José).
+
+## [0.22.0] — 2026-10-28
+### Adicionado
+- Padrão visual definitivo do canal (t148u): conjunto de 20 imagens selecionadas pelo José no Drive (`Fontes/Imagens`) versionado em `banco-fichas/` — catálogo do elenco com 12 personagens (`personagens/ELENCO-catalogo.png`), 6 folhas individuais multi-pose (`PERS-menina-rosa`, `PERS-cacheada`, `PERS-bone-verde`, `PERS-gravata-azul`, `PERS-roxo-ansioso`, `PERS-bob-oculos`), 11 ambientes 16:9 (`ambientes/AMB-*.png`), catálogo de 12 objetos (`objetos/OBJ-catalogo.png`) e de 12 animais domésticos (`animais/ANIM-catalogo.png`, pasta nova). 20 fichas Markdown novas e `banco-fichas/indice.json` 2.0.0 (estado `permanente`, decisão t148u, origem Drive; `referencias-canal/` marcada como histórico).
+- Testes `tests/unit/test_banco_fichas.py` (índice × arquivos, contagens 7 pers/11 amb/1 obj/1 anim, ausência das fichas antigas e do gerador aposentado, folhas em paisagem).
+### Alterado
+- Estilo canônico reescrito para o cartum 2D flat colorido do conjunto t148u: `docs/REGRAS.md` §5/§6/§26, `docs/CONTRATO-EDITORIAL.md` §19, `config/estilo_visual.json`, `ESTILO_PADRAO_STICKMAN` e `BlocoVisual` 3.0.0 (`src/pqbr/contratos/__init__.py`), `docs/fases/stickman.md`, `docs/fases/motion-graphics.md`, `company/agents/motion/AGENTS.md` e mapa `docs/mapa/12-storyboard-elenco.mmd`.
+- Motion graphics: a âncora visual do catálogo v2 (MG-03) deixa de ser o nanquim de t146u e passa a ser o conjunto flat colorido t148u; paleta do motor, persona `motion` e `PlanoMotion.elenco` (PERS-M/PERS-F aposentados) entram no re-base do MG-03 (ROADMAP Fase MG).
+- Pacote de onboarding: `LIMITE_ESTADO` sobe de 12000 para 20000 caracteres (`src/pqbr/mcp/onboarding.py`) porque o `ESTADO-ATUAL` passou de 13,4k com a P17 e a linha P15 era cortada; `AGENTS.md` regenerado (`scripts/mcp/gerar_agents_md.py`).
+### Removido
+- As 12 fichas permanentes nanquim de t146u (reprovadas pelo José) e o `ELENCO-frente.*` saem do `banco-fichas/`; o gerador programático `scripts/visual/frente_stickman.py` é aposentado em `scripts/aposentado/` e `tests/unit/test_frente_stickman.py` removido. Os IDs `PERS-M`, `PERS-F` e `PERS-M-classico` deixam de existir; os protagonistas por gênero aguardam o José (P17).
+
+## [0.21.0] — 2026-10-28
+### Adicionado
+- Motion graphics no pós (REGRAS §26, t145u): `src/pqbr/pos/motion/` com `motor.js` (quadro = função pura do tempo, molas fechadas, ruído com semente, zona segura 9:16), catálogo inicial de 8 modelos (`transicao-cortina`, `titulo-expressao`, `linha-tempo`, `origem-pino`, `versus`, `recorte-aponta`, `barra-progresso`, `imagem-cena`), `render.py` (Playwright + Chrome do sistema, PNG por quadro, checagem de determinismo e de zona), `compor.py` (FFmpeg troca o trecho do porquê, aplica a camada sobre, copia a narração; folha de contato e teste a 360 px), `cli.py` e `biblioteca/regras.md`.
+- Contrato `PlanoMotion` 1.0.0 (`src/pqbr/contratos/motion.py`): texto na tela só do bloco de números travados, cores só da paleta do elenco e da marca, bloco nunca na última cena nem sobre o gancho, transição padrão obrigatória, peças presas ao catálogo.
+- Nono papel-agente `motion` (`company/agents/motion/AGENTS.md`, `REGISTRO`, `modelos_9router.json` → `core-alto`, `politica_papeis.json` 1.5.0, `mcp_kit.PAPEIS`). Sem activity no worker ainda.
+- Testes `tests/unit/test_motion_contrato.py`, `test_motion_motor.py` (Node) e `test_motion_render.py` (Chrome, curto).
+- `playwright==1.64.1` no venv, sem baixar Chromium.
+- Coletânea de referências de motion (t147u): `banco-fichas/referencias-motion/` (README, `indice.json` 0.1.0, ficha REF-MG-00 "Papel e nanquim do canal", `aguardando_ok_jose`) e `docs/fases/motion-graphics.md` (base visual, variáveis de lista fechada, escolha determinística por categoria + semente do episódio, fases de trabalho e riscos). Documentadas as três fontes de referências: a biblioteca do próprio canal (âncora), o material de estudo de t145u e a pesquisa externa de MG-02 com OK do José por referência.
+### Alterado
+- CONTRATO-EDITORIAL §16.4 (substitui t435: o pós pode colocar motion graphics) e §12 (partitura com bloco de motion). BLUEPRINT §10 ganha o bloco na montagem. `docs/AGENTES.md`, `docs/ARQUITETURA.md`, `docs/README.md` e REGRAS §0/§3.x passam de 8 para 9 papéis.
+- Piloto em `runtime/piloto-motion/cafe-fraco/` (fora do git): bloco 14,87–33,5 s sobre o EP1003, original intacto, áudio idêntico. O José reprovou o visual (t147u: vídeo base obsoleto, cartum 2D aposentado) e manteve a ideia; o piloto passa a valer só como prova da mecânica.
+- Direção visual do motion (t147u, REGRAS §26): o bloco é desenhado na mesma folha do stickman (papel creme `#f5f0e4`, nanquim, hachura, tipografia manuscrita única OFL a escolher); um padrão fixo com variações sutis de lista fechada, por tipo de conteúdo e semente do episódio. ROADMAP ganha a Fase MG (MG-01 a MG-08: coletânea, referências externas, catálogo v2 no traço do canal, variação determinística, piloto 2 com cenas do Flow, bloco de números no storyboard, activity `pos_motion` no worker, finalização e entrada do logotipo — propostas A/B/C aguardando a escolha do José).
+## [0.20.0] — 2026-10-28
+### Adicionado
+- Referências reais do canal Porquê BR preservadas em `banco-fichas/referencias-canal/` (`ref-01..05` + `ref-canal-composta-sem-texto.png`) e ficha permanente do stickman clássico sem óculos (`PERS-M-classico.png`, `PERS-M-classico-folha.png`, `PERS-M-classico.md`) (t146u).
+- Pesquisa e validação empírica em `docs/pesquisas/flow-agente-e-nano-banana-pro-20261028.md`: avaliação do Agente do Google Flow na produção de vídeo, configuração real do Agente (`Confirmar antes de gerar = Sempre`, `9:16`, `x1`, `🍌 Nano Banana Pro`, `Instruções para o agente`) e receita determinística para upload de imagens em Angular Material (`.sidebar-upload-btn`) via Camofox (t146u).
+### Alterado
+- **Regra canônica das fichas permanentes (`docs/REGRAS.md` §5/§6, `docs/CONTRATO-EDITORIAL.md` §19, `docs/fases/stickman.md`):** para personagens, objetos e locais permanentes (`banco-fichas/`), as fichas são permanentes e geradas no Google Flow com o modelo mais potente de geração de imagens (`🍌 Nano Banana Pro`, 0 créditos), padronizadas pelo traço real do canal (nanquim preto + hachura sobre papel creme `#f5f0e4`, dois olhos expressivos sempre visíveis, mãos estilo luva branca, pés pretos ovais) (t146u).
+- Todas as 12 fichas permanentes de `banco-fichas/` (`PERS-M`, `PERS-M-folha`, `PERS-F`, `PERS-F-folha`, `PERS-M-classico`, `PERS-M-classico-folha`, `AMB-cozinha`, `AMB-sala`, `OBJ-chaleira`, `OBJ-xicara`, `OBJ-filtro-pano`, `OBJ-controle-remoto`) regeneradas ao vivo no Google Flow com `🍌 Nano Banana Pro` e inspecionadas visualmente (`banco-fichas/indice.json` v1.0.0) (t146u).
+
+## [0.19.0] — 2026-10-28
+### Adicionado
+- Funções de decisão estruturada do Jev (`src/pqbr/motores/decisao.py`): `jev_disponivel`, `classificar_popup_camofox`, `escolher_ref_canario` (`EscolhaRefCanario`), `triagem_correcao_jev`, `verificar_correcao_jev`, `decidir_repeticao_jev` e `classificar_email_youtube` (t144u).
+- Ligação do Jev em `CorrecaoAutonomaWorkflow` (`triagem_jev` e `verificar_jev`, `src/pqbr/workflows/correcao.py`) e na checagem semântica de repetição R10 (`checar_repeticao`, `src/pqbr/pipeline/grade.py`).
+- Folhas completas de personagens (`PERS-M-folha.png`/`.svg`, `PERS-F-folha.png`/`.svg`, 1920×1080 com frente, perfil e 4 expressões de boca fechada), recortes 9:16 com roupa 2D chapada fixa (`PERS-M.png`, `PERS-F.png`), ambientes (`AMB-cozinha.png`, `AMB-sala.png`) e objetos (`OBJ-chaleira.png`, `OBJ-xicara.png`, `OBJ-filtro-pano.png`, `OBJ-controle-remoto.png`) gerados por `scripts/visual/frente_stickman.py` (t144u).
+### Alterado
+- Limiares de confiança calibrados empiricamente na API real TypeSafe (`jev-latest`, 12 casos canônicos, 100% de acerto) em `config/motores.json`: `0.9` para pop-up, canário e triagem; `0.85` para repetição; `0.8` para verificação e e-mail YouTube. Workers `pqbr-temporal-worker`, `pqbr-episodio-worker` e `pqbr-mcp` reiniciados com `TYPESAFE_API_KEY` ativa (t144u).
+- `banco-fichas/indice.json` (v0.4.0) e fichas Markdown atualizados para `aguardando_ok_jose` com as cores chapadas e caminhos dos PNG/SVG.
+
+## [0.18.0] — 2026-10-28
+### Adicionado
+- Porta `decide()` do Jev (`src/pqbr/motores/decisao.py`): adaptador TypeSafe (`systemone`, `jev-latest`), fallback OpenRouter desligado, limiar de confiança por contrato e registro de cada chamada em `pqbr.consumo_modelos`. Sem uso em workflow ainda (JEV-EF, t143u).
+### Alterado
+- A activity `registrar_consumo` grava pela função compartilhada `storage/consumo.py`. O SQL é o mesmo.
+### Corrigido
+- O pacote de onboarding (AGENTS.md) cortava o ESTADO-ATUAL em 6000 caracteres e perdia as últimas pendências (P14 e P15). O limite do ESTADO passa a 8000, com teste de regressão (t143u).
+
+## [0.17.9] — 2026-10-28
+### Alterado
+- Documentos, mapa e memória alinhados para retomar depois (t142u). O mapa do elenco mostra o stickman e a roupa ainda sem cor. A memória do bloco visual deixa de mandar o cartum de 12/10.
+
+## [0.17.8] — 2026-10-28
+### Alterado
+- O material de stickman fica como inspiração do desenho e do prompt (t141u). NotebookLM, Flow e o resto da arquitetura permanecem. O comando do storyboard pede o frame de início, a frase-trava e o movimento do corpo. A cor da roupa continua em aberto.
+
+## [0.17.7] — 2026-10-28
+### Alterado
+- José recusou o stickman sem roupa (t140u). Os PNG de 27/10 deixam de ser referência. O estilo passa a cabeça branca, membros de palito, uma roupa chapada fixa e cara de reação. A cor da roupa continua em aberto. Não gerar o personagem até a folha nova.
+
+## [0.17.6] — 2026-10-27
+### Alterado
+- Corpo do elenco fechado (t139u). Sem roupa. Tubo preto, cabeça branca. PERS-M: óculos vermelhos, sem cabelo, mais alto. PERS-F: mais baixa, coque, argola amarela e pinta do lado esquerdo de quem olha. Desenho em `banco-fichas/personagens/`, regravado por `scripts/visual/frente_stickman.py`. Não é geração do Flow. A aba Personagens não recebeu esses arquivos.
+
+## [0.17.5] — 2026-10-27
+### Operação
+- Frente do personagem masculino no Flow, pela aba Personagens, com manifesto gravado antes (t138u). A imagem saiu pessoa com volume, 1376×768. Não virou asset. O prompt não se repete.
+
+## [0.17.4] — 2026-10-27
+### Documentação
+- Juntada da conversa paralela, renumerada porque t133u/0.17.3 já são o stickman. t134u: ferramentas só leitura para os agentes, sem MCP interno. t135u: acompanhamento de mudanças sem agente novo. t136u: José aprovou sem agente novo; o NotebookLM é só CLI e sai do canário. t137u: Jev efetivo como item prioritário JEV-EF. Nenhum código destas propostas foi alterado; o stickman e o banco de fichas ficam como estão.
+
+## [0.17.3] — 2026-10-27
+### Alterado
+- Stickman passa a ser a identidade única (t133u). O bloco de cartum genérico sai do contrato vigente. `BlocoVisual` 2.0.0 exige a palavra stickman e recusa 3D.
+- Banco de fichas em texto: `banco-fichas/` (dois personagens, cozinha, sala, quatro objetos). Sem imagem. Espelho no Drive `00_Biblia_Visual/banco-fichas` (`config/drive_pastas.json`, chave `banco_fichas`).
+- O roteiro e o storyboard recebem o estilo stickman. Roupa nova por episódio fica pausada até a imagem de referência.
+
+## [0.17.2] — 2026-10-27
+### Operação
+- Duas imagens estáticas no Google Flow, pelo Camofox, modelo Nano Banana 2 Lite, 9:16 (t132u). A ficha não mostrou crédito. As duas saíram cartum de pessoa, não stickman. Vídeo não foi gerado. Baixado só o 1K original.
+- `config/mapa_cliques.json` ganhou três surpresas dessa tela: o diálogo "O que há de novo", o menu 2K/4K e a confirmação que não apareceu.
 
 ## [0.17.1] — 2026-10-27
 ### Alterado

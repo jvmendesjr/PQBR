@@ -1,0 +1,134 @@
+{
+  "versao": "1.0.0",
+  "decisao": "t149u",
+  "atualizado": "2026-10-28",
+  "regra": "Só fonte com licença livre (OFL-1.1, Apache-2.0, UFL-1.0), arquivo local TTF/OTF, nunca CDN; cobertura completa do pt-BR; nasce aguardando_ok_jose e só o José aprova; a fonte do padrão do canal é a Fredoka (decisão do José, 28/10/2026).",
+  "fontes": [
+    {
+      "id": "baloo-2",
+      "familia": "Baloo 2",
+      "arquivo": "baloo-2/baloo-2.ttf",
+      "arquivo_original": "Baloo2[wght].ttf",
+      "arquivo_licenca": "baloo-2/LICENSE.txt",
+      "licenca": "OFL-1.1",
+      "origem_url": "https://github.com/google/fonts/tree/main/ofl/baloo2",
+      "consulta": "2026-10-28",
+      "variavel": true,
+      "pesos": [
+        400,
+        800
+      ],
+      "eixos": {
+        "wght": [
+          400.0,
+          800.0
+        ]
+      },
+      "cobertura_ptbr": true,
+      "sha256": "d47a6852548059b1db49a1319d06d499d546c3fa2237cf9eee9c43c8abb025c2",
+      "tamanho": 683200,
+      "uso": "títulos e corpo; cartum arredondado",
+      "notas": "Lido do arquivo: versão 1.700, eixo wght 400-800, cobertura pt-BR completa. Licença: https://github.com/google/fonts/tree/main/ofl/baloo2/OFL.txt (OFL-1.1); copyright sem Reserved Font Name declarado.",
+      "estado": "aprovada",
+      "aprovada_por": "Jose",
+      "aprovada_em": "2026-10-28"
+    },
+    {
+      "id": "fredoka",
+      "familia": "Fredoka",
+      "arquivo": "fredoka/fredoka.ttf",
+      "arquivo_original": "Fredoka[wdth,wght].ttf",
+      "arquivo_licenca": "fredoka/LICENSE.txt",
+      "licenca": "OFL-1.1",
+      "origem_url": "https://github.com/google/fonts/tree/main/ofl/fredoka",
+      "consulta": "2026-10-28",
+      "variavel": true,
+      "pesos": [
+        300,
+        700
+      ],
+      "eixos": {
+        "wght": [
+          300.0,
+          700.0
+        ],
+        "wdth": [
+          75.0,
+          125.0
+        ]
+      },
+      "cobertura_ptbr": true,
+      "sha256": "2ba02e68b152868aef9ba28e24b3648c7d457fe6f25c761f2c2c53fb61a73fc8",
+      "tamanho": 159184,
+      "uso": "títulos curtos e números; arredondada gordinha",
+      "notas": "Lido do arquivo: versão 2.001, eixos wght 300-700 e wdth 75-125, cobertura pt-BR completa. Licença: https://github.com/google/fonts/tree/main/ofl/fredoka/OFL.txt (OFL-1.1); copyright sem Reserved Font Name declarado.",
+      "estado": "aprovada",
+      "aprovada_por": "Jose",
+      "aprovada_em": "2026-10-28"
+    },
+    {
+      "id": "shantell-sans",
+      "familia": "Shantell Sans",
+      "arquivo": "shantell-sans/shantell-sans.ttf",
+      "arquivo_original": "ShantellSans[BNCE,INFM,SPAC,wght].ttf",
+      "arquivo_licenca": "shantell-sans/LICENSE.txt",
+      "licenca": "OFL-1.1",
+      "origem_url": "https://github.com/google/fonts/tree/main/ofl/shantellsans",
+      "consulta": "2026-10-28",
+      "variavel": true,
+      "pesos": [
+        300,
+        800
+      ],
+      "eixos": {
+        "wght": [
+          300.0,
+          800.0
+        ],
+        "INFM": [
+          0.0,
+          100.0
+        ],
+        "BNCE": [
+          -100.0,
+          100.0
+        ],
+        "SPAC": [
+          0.0,
+          100.0
+        ]
+      },
+      "cobertura_ptbr": true,
+      "sha256": "d98a7913853f78d71aa0b86daf66b5eddb5a3266c07bfd51ef70632b88c41084",
+      "tamanho": 1284736,
+      "uso": "títulos e corpo; escrita à mão informal com eixos",
+      "notas": "Lido do arquivo: versão 1.011, eixos wght 300-800, BNCE, INFM, SPAC; 1,28 MB; cobertura pt-BR completa. Licença: https://github.com/google/fonts/tree/main/ofl/shantellsans/OFL.txt (OFL-1.1); copyright sem Reserved Font Name declarado.",
+      "estado": "aprovada",
+      "aprovada_por": "Jose",
+      "aprovada_em": "2026-10-28"
+    },
+    {
+      "id": "short-stack",
+      "familia": "Short Stack",
+      "arquivo": "short-stack/short-stack.ttf",
+      "arquivo_original": "ShortStack-Regular.ttf",
+      "arquivo_licenca": "short-stack/LICENSE.txt",
+      "licenca": "OFL-1.1",
+      "origem_url": "https://github.com/google/fonts/tree/main/ofl/shortstack",
+      "consulta": "2026-10-28",
+      "variavel": false,
+      "pesos": [
+        400,
+        400
+      ],
+      "cobertura_ptbr": true,
+      "sha256": "9f0e16e8683b2dce66edd7c3340362b554326739fbac594cabc1e9442cf5e8cc",
+      "tamanho": 68152,
+      "uso": "anotações e rótulos; manuscrita de marcador, traço grosso",
+      "notas": "Lido do arquivo: versão 1.002, peso único 400, cobertura pt-BR completa. Licença: https://github.com/google/fonts/tree/main/ofl/shortstack/OFL.txt (OFL-1.1). Substituiu a Patrick Hand, cuja licença traz e-mail pessoal e a barreira de segredos bloqueia.",
+      "estado": "aprovada",
+      "aprovada_por": "Jose",
+      "aprovada_em": "2026-10-28"
+    }
+  ]
+}

@@ -20,6 +20,7 @@ PAPEIS = {  # 8 papéis (t512/t516); legado Paperclip em retirada
     "guardiao-seguranca": COMUM + ["temporal_listar", "saude_servicos", "seguranca_varrer", "seguranca_varrer_logs", "segunda_opiniao"],
     "observador": COMUM + ["temporal_listar", "saude_servicos", "camofox_saude", "memoria_buscar", "memoria_registrar"],
     "dev": COMUM + ["temporal_listar", "memoria_buscar"],   # só diagnostica e propõe
+    "motion": COMUM + ["memoria_buscar"],   # t145u: monta o bloco de motion do catálogo
 }
 
 FERR = {

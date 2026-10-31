@@ -29,28 +29,40 @@ class CenaVisual(Contrato):
     ambiente: str = Field(min_length=3, max_length=400)       # lugar, época, 3–5 objetos-âncora, luz/horário
 
 
-# CONTRATO-EDITORIAL §16.7 [ESTILO], aprovado pelo José em 12/10/2026 (padrão de todo RoteiroShort)
-ESTILO_PADRAO_2D = 'Ilustração 2D plana de cartum, como animação de TV brasileira: traço preto nítido e uniforme, personagem em cores chapadas quentes (amarelo-mostarda, verde-bandeira, terracota) com alto contraste sobre fundo limpo em tom frio ou neutro (azul-céu, bege claro), sem degradê nem sombra realista, fundo minimalista com no máximo 3–5 objetos, humor carinhoso. Personagem sempre grande no quadro (ocupa ≥ 1/3 da altura), centralizado, agindo, com expressões faciais e corporais exageradas. Proibido: fotorrealismo, 3D, rosto de pessoa real ou celebridade, marca ou logo real, texto escrito dentro das imagens (a legenda do NotebookLM não conta). Formato vertical 9:16, deixar livres a faixa de cima e a de baixo da tela.'
+# CONTRATO-EDITORIAL §19 [ESTILO], José 27/10/2026 (t133u), texto do padrão definitivo de t148u
+# (conjunto flat colorido entregue pelo José no Drive Fontes/Imagens; nanquim de t146u descartado)
+# e, em t150u, a frase do José: cartoon 2D, flat, colorido, com personagens stickman.
+# O nome ESTILO_PADRAO_2D permanece só como apelido do texto vigente, para import antigo.
+ESTILO_PADRAO_STICKMAN = (
+    "Cartoon 2D flat colorido com personagens stickman do canal Porquê BR (padrão definitivo, banco-fichas/): contorno preto "
+    "e cores chapadas suaves, cabeça redonda branca grande, dois olhos pretos sempre visíveis, boca simples de reação, "
+    "corpo e membros em traço preto fino, roupa chapada colorida fixa por personagem, cabelo preto simples quando houver, "
+    "fundo limpo em tom creme. Personagem grande no quadro, cabeça inteira visível, agindo, expressão simples e exagerada. "
+    "Proibido: texto escrito dentro da imagem, marca ou logo real, pessoa realista ou fotorrealismo, "
+    "rosto de pessoa real ou celebridade, volume 3D, um olho só (ciclope). "
+    "Formato vertical 9:16, faixas de cima e de baixo livres."
+)
+ESTILO_PADRAO_2D = ESTILO_PADRAO_STICKMAN
 
 
 class BlocoVisual(Contrato):
-    estilo: str = Field(default=ESTILO_PADRAO_2D, min_length=20, max_length=900)        # [ESTILO] 2D + meio/tom/paleta/referência
-    personagem: str = Field(min_length=20, max_length=600)    # [PERSONAGEM] repetido palavra por palavra; sem nome
+    estilo: str = Field(default=ESTILO_PADRAO_STICKMAN, min_length=20, max_length=900)
+    personagem: str = Field(min_length=20, max_length=600)    # frase-trava do stickman; sem nome falado
     personagem_2: str | None = Field(default=None, max_length=600)   # máx. 2 (§11.1)
     cenas: list[CenaVisual] = Field(min_length=2, max_length=60)     # [CENAS] ~2–4 s; cena 1 literal; última retoma a 1ª
-    pedido_3d_ou_realista: bool = False   # t437: só true se o roteiro pedir 3D/realismo explicitamente
+    pedido_3d_ou_realista: bool = False   # t133u: o campo fica, mas true é recusado (3D descartado)
 
     @model_validator(mode="after")
     def _regras(self):
+        if self.pedido_3d_ou_realista:
+            raise ValueError("[ESTILO] 3D e realismo foram descartados (t133u)")
         e = self.estilo.lower()
-        # negativas ("sem fotorrealismo", "Proibido: …, 3D, …") não contam como pedido
         afirm = re.sub(r"proibid[oa]s?:?[^.]*", " ", e)
         afirm = re.sub(r"\b(sem|nada de|nunca|nem)\s+[^,.;]*", " ", afirm)
-        pede = bool(re.search(r"\b3d\b|fotorreal|realista|photoreal|hiper.?real", afirm))
-        if pede and not self.pedido_3d_ou_realista:
-            raise ValueError("[ESTILO] pede 3D/realismo sem pedido explícito do roteiro (pedido_3d_ou_realista)")
-        if not self.pedido_3d_ou_realista and not re.search(r"\b2d\b", e):
-            raise ValueError("[ESTILO] deve declarar 2D (padrão §16.4)")
+        if re.search(r"\b3d\b|fotorreal|realista|photoreal|hiper.?real", afirm):
+            raise ValueError("[ESTILO] pede 3D ou realismo; descartado (t133u)")
+        if "stickman" not in e:
+            raise ValueError("[ESTILO] a identidade é stickman (t133u)")
         return self
 
 
@@ -486,6 +498,7 @@ class FerramentaVigiada(Contrato):
     fonte: Literal["pypi", "github", "manual"]
     alvo: str = Field(min_length=2, max_length=200)
     python: str | None = None
+    binario: str | None = None  # caminho do binário; se presente, a versão instalada é lida via --version
     notas: str = ""
 
 
@@ -522,14 +535,19 @@ class SaudeNavegador(Contrato):
     motivo: str = ""
 
 
+from .pedidos_producao import PedidoEpisodioE2E, PedidoNotebookLM  # noqa: E402  pt162u
+from .briefing_mestre import BriefingEfemerico, PedidoBriefingMestre  # noqa: E402  t168u
+from .cena import CenaIndividual  # noqa: E402  t168u
+from .direcao_cenas import DirecaoCenas  # noqa: E402  t168u
+
 VERSOES: dict[str, str] = {
     "InstanciaNavegador": "1.0.0",
     "SaudeNavegador": "1.0.0",
-    "FerramentaVigiada": "1.0.0",
+    "FerramentaVigiada": "1.1.0",
     "ItemAtualizacao": "1.0.0",
     "RelatorioAtualizacoes": "1.0.0",
     "CenaVisual": "1.0.0",
-    "BlocoVisual": "1.0.0",
+    "BlocoVisual": "3.0.0",
     "RoteiroShort": "1.0.0",
     "DecisaoRepeticao": "1.0.0",
     "PontuacaoPolemica": "1.0.0",
@@ -561,4 +579,10 @@ VERSOES: dict[str, str] = {
     "RespostaMotor": "1.0.0",
     "PedidoVideo": "1.0.0",
     "ResultadoVideo": "1.0.0",
+    "PedidoEpisodioE2E": "1.1.0",
+    "PedidoNotebookLM": "1.1.0",
+    "CenaIndividual": "2.0.0",
+    "DirecaoCenas": "2.0.0",
+    "BriefingEfemerico": "1.0.0",
+    "PedidoBriefingMestre": "1.0.0",
 }

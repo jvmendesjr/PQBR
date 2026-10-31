@@ -23,7 +23,7 @@ PAPEL_EXTERNO = "mantenedor"
 FERR: dict[str, tuple[str, str | None, dict]] = {  # nome: (descrição, ferramenta exigida na política, parâmetros)
     "onboarding": ("Pacote de entrada no projeto (BRIEFING, REGRAS, DECISOES recentes, estado do ROADMAP, LACUNAS, mapa).", None, {}),
     "buscar_memoria": ("Busca no Hindsight (bank pqbr), só nas tags que o seu papel pode ler.", "memoria_buscar", {"consulta": "string"}),
-    "codigo": ("GitNexus query|context|impact, filtrado pelos caminhos do seu papel.", "gitnexus_consultar", {"comando": "string", "alvo": "string"}),
+    "codigo": ("codebase-memory-mcp query|context|impact, filtrado pelos caminhos do seu papel.", "codigo_consultar", {"comando": "string", "alvo": "string"}),
     "estado": ("Estado só leitura: serviços systemd, workflows recentes do Temporal, gates/temas.", "estado_ler", {}),
     "registrar_memoria": ("Grava uma memória no Hindsight (contrato RegistroMemoriaEntrada 1.0.0): conteudo, tags (opcional; "
                           "só as que seu papel escreve), arquivos e commit (opcionais). Autor = seu cliente MCP.",
@@ -106,7 +106,7 @@ def executar(papel: str, nome: str, a: dict, impl: dict[str, Callable[..., Any]]
         return json.dumps([{"texto": m.get("text"), "tags": m.get("tags"), "data": m.get("mentioned_at") or m.get("date")}
                            for m in r[:20]], ensure_ascii=False)
     if nome == "codigo":
-        from ..integrations.gitnexus import consultar
+        from ..integrations.codebase_memory import consultar
         return json.dumps((impl.get("codigo") or consultar)(papel, str(a.get("comando")), str(a.get("alvo", ""))[:200]),
                           ensure_ascii=False)[:30000]
     if nome == "estado":
@@ -145,7 +145,7 @@ def tratar(msg: dict, papel: str, impl: dict | None = None, cliente: str = "") -
         except ValueError as e:  # inclui ValidationError do contrato
             texto, erro = f"inválido: {str(e)[:500]}", True
         except Exception as e:
-            texto, erro = f"erro: {type(e).__name__}", True
+            texto, erro = f"erro: {type(e).__name__}: {str(e)[:300]}", True
         from ..seguranca.barreira import exigir_limpo
         try:
             exigir_limpo(texto, "log")

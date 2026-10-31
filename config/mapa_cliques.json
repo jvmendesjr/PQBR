@@ -1,6 +1,42 @@
 {
   "versao": "0.1.0",
   "atualizado": "2026-10-27",
-  "regra": "t131u: não é um catálogo para preencher antes. A tela aberta no Camofox é a fonte. Aqui só entra surpresa (pop-up, botão que mudou de lugar), com a data, e o fluxo segue. Lista vazia enquanto nada surpreendeu.",
-  "sitios": []
+  "regra": "t132u: não é um catálogo. A tela aberta no Camofox é a fonte. Aqui só entra surpresa (pop-up, botão que mudou, menu que cobra ou amplia), com a data, e o fluxo segue.",
+  "sitios": [
+    {
+      "sitio": "google-flow",
+      "elemento": "diálogo O que há de novo",
+      "onde": "botão Começar, ao abrir um projeto novo",
+      "observado_em": "2026-10-27",
+      "acao": "clicado; o projeto abriu"
+    },
+    {
+      "sitio": "google-flow",
+      "elemento": "Baixar mídia oferece 2K Aprimorada e 4K Aprimorada",
+      "onde": "menu do botão Baixar mídia, na imagem aberta; 4K vinha desabilitado",
+      "observado_em": "2026-10-27",
+      "acao": "clicado só 1K Tamanho original"
+    },
+    {
+      "sitio": "google-flow",
+      "elemento": "Confirmar antes de gerar ficou em Sempre e não apareceu diálogo",
+      "onde": "Configurações do agente, antes das duas imagens",
+      "observado_em": "2026-10-27",
+      "acao": "a imagem saiu sem um botão de confirmação na tela"
+    },
+    {
+      "sitio": "google-flow",
+      "elemento": "Novo personagem abre em Nano Banana 2.1; o menu tem Pro, Lite e 2.1",
+      "onde": "tela Personagens, botão Selecionar família de modelos",
+      "observado_em": "2026-10-27",
+      "acao": "Lite foi escolhido antes de gerar; depois da imagem o mesmo botão mostrava 2.1"
+    },
+    {
+      "sitio": "google-flow",
+      "elemento": "Novo personagem não mostra controle de proporção",
+      "onde": "tela Personagens; a imagem saiu 1376x768",
+      "observado_em": "2026-10-27",
+      "acao": "não houve botão 9:16 para clicar"
+    }
+  ]
 }

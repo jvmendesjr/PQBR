@@ -28,6 +28,9 @@ VIGIADAS: list[dict] = [
      "notas": "https://docs.pydantic.dev/latest/changelog/"},
     {"nome": "9router (modelos dos combos)", "fonte": "manual", "alvo": "config/modelos_9router.json",
      "notas": "conferir modelos mapeados por combo no painel do 9router"},
+    {"nome": "codebase-memory-mcp", "fonte": "github", "alvo": "DeusData/codebase-memory-mcp",
+     "binario": "~/.local/opt/codebase-memory-mcp/codebase-memory-mcp",
+     "notas": "https://github.com/DeusData/codebase-memory-mcp/releases"},
 ]
 
 
@@ -66,6 +69,15 @@ def montar_relatorio(itens: list[ItemAtualizacao], semana: str) -> RelatorioAtua
                                  resumo="\n".join(linhas) or "Tudo em dia.", aplicado=False)
 
 
+def _versao_binario(caminho: str) -> str:
+    """Versão instalada de um binário, via --version (só o primeiro número x.y.z)."""
+    import os
+    saida = subprocess.run([os.path.expanduser(caminho), "--version"],
+                           capture_output=True, text=True, timeout=30).stdout.strip()
+    m = re.search(r"\d+(?:\.\d+)+", saida)
+    return m.group(0) if m else saida
+
+
 def _get_json(url: str) -> dict:
     req = urllib.request.Request(url, headers={"User-Agent": "pqbr-vigia", "Accept": "application/json"})
     with urllib.request.urlopen(req, timeout=20) as r:
@@ -74,11 +86,13 @@ def _get_json(url: str) -> dict:
 
 @activity.defn
 async def vigia_checar(f: dict) -> dict:
-    """Só leitura: versão instalada (importlib.metadata no python indicado) e última publicada."""
+    """Só leitura: versão instalada (importlib.metadata no python indicado, ou --version do binário) e última publicada."""
     fv = FerramentaVigiada.model_validate(f)
     instalada = ultima = ""
     erro = None
     try:
+        if fv.binario:
+            instalada = _versao_binario(fv.binario)
         if fv.python and fv.fonte == "pypi":
             import os
             py = os.path.expanduser(fv.python)

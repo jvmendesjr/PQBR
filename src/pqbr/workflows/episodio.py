@@ -1,6 +1,8 @@
-"""EpisodioWorkflow + PublicacaoWorkflow (dry-run) — fila `episodio-pqbr` (t427, t130u).
-Ordem vigente: NotebookLM intelectual (roteiro, compliance, SEO; sem vídeo) → storyboard_criar.
-Para com a ficha gravada, imagens_revisadas false e pode_gerar_video false.
+"""EpisodioWorkflow + PublicacaoWorkflow (dry-run) — fila `episodio-pqbr` (t427, t130u; storyboard removido 29/10/2026, ordem do José).
+Ordem vigente: NotebookLM intelectual (roteiro, compliance, SEO; sem vídeo) → cenas individuais no Google Flow.
+Após o roteiro: activity de direção (NotebookLM → lista CenaIndividual, fail-closed), gates
+flow_projeto.exigir_antes_cenas + processo_criacao; passo 2 (adaptador Flow) permanece pendente.
+Não há mais etapa de storyboard neste workflow.
 Pós, quadros, Drive e publicação dry-run continuam registrados e não rodam neste fluxo.
 Nada torna público. Os vídeos já prontos do saldo não entram aqui."""
 from __future__ import annotations
@@ -14,10 +16,9 @@ from temporalio.common import RetryPolicy
 
 with workflow.unsafe.imports_passed_through():
     from .notebooklm import NotebookLMWorkflow, PedidoNotebookLM, FILA_NOTEBOOKLM, nlm_perguntar
-    from .storyboard import PROMPT_STORYBOARD, storyboard_criar
-    from ..contratos.storyboard import elenco_alternado
     from .pacote import ATIVIDADES_REGISTRO, pacote_garantir, registro_buscar_caderno
     from ..contratos import CATEGORIA_YOUTUBE
+    from ..contratos.pedidos_producao import PedidoEpisodioE2E
 
 FILA_EPISODIO = "episodio-pqbr"
 RAIZ = Path("/home/pc/Workspace/PQBR")
@@ -26,21 +27,7 @@ DRYRUN = Path(os.environ.get("PQBR_DRYRUN_DIR", "/home/pc/.pqbr/publicacao-dryru
 CODIGO = re.compile(r"^PQBR-EP[0-9]{4,}$")
 
 
-class PedidoEpisodioE2E(BaseModel):
-    model_config = ConfigDict(extra="forbid", frozen=True)
-    slug: str = Field(pattern=r"^[a-z0-9][a-z0-9-]{1,60}$")
-    codigo: str = Field(pattern=CODIGO.pattern)
-    roteiro_texto: str = Field(min_length=50)          # roteiro completo com o bloco visual (vira a fonte do caderno)
-    n_cenas: int = Field(ge=2, le=60)
-    titulo: str | None = Field(default=None, min_length=5, max_length=100)        # t464: None → SEO do NotebookLM
-    descricao: str | None = Field(default=None, min_length=10, max_length=5000)
-    roteirizar: bool = False          # t464: roteiro_texto = briefing do tema; NotebookLM escreve roteiro/SEO/capa
-    tema: str | None = Field(default=None, max_length=300)
-    tema_id: int | None = None        # pqbr.temas_pendentes.id (vira temas_publicados na publicação; reposição automática)
-    tags: list[str] = Field(default_factory=list, max_length=15)
-    dry_run: bool = True                               # t426: teste nº 1 para antes do upload
-    steering: str | None = Field(default=None, max_length=4000)   # t462: bloco visual 2D do roteiro (reforços entram no nlm)
-    espera_veredito_h: float = Field(default=24, ge=0.01, le=72)
+# PedidoEpisodioE2E: contrato 1.0.0 em pqbr.contratos.pedidos_producao (pt162u)
 
 
 class VereditoAuditor(BaseModel):
@@ -121,6 +108,51 @@ async def publicacao_dryrun(p: dict) -> dict:
     return {"payload": str(f), "privacidade": "private", "agendado": False, "enviado": False}
 
 
+
+
+@activity.defn
+async def flow_projeto_exigir_antes_cenas(codigo_ep: str) -> dict:
+    """Fail-closed: projeto Flow do episódio com fichas_ok antes das cenas."""
+    from ..pipeline import flow_projeto as fp
+    return fp.exigir_antes_cenas(codigo_ep).model_dump()
+
+
+@activity.defn
+async def direcao_cenas_nlm(pedido: dict) -> dict:
+    """Passo 1 pós-roteiro: NotebookLM devolve direção/prompts; valida CenaIndividual fail-closed.
+    pedido.adaptador=falso só para testes (sem rede). Default = notebooklm."""
+    from ..motores.direcao_cenas import AdaptadorFalsoDirecao, AdaptadorNotebookLMDirecao, GASTO_DIRECAO_CENAS
+    from ..contratos import ESTILO_PADRAO_STICKMAN
+    if not GASTO_DIRECAO_CENAS.pode_gastar:
+        raise RuntimeError("gasto direção cenas bloqueado")
+    adaptador = (pedido.get("adaptador") or "notebooklm").lower()
+    if adaptador == "falso":
+        motor = AdaptadorFalsoDirecao(pedido.get("cenas_falsas"))
+    elif adaptador == "notebooklm":
+        motor = AdaptadorNotebookLMDirecao()
+    else:
+        raise RuntimeError(f"adaptador direção desconhecido: {adaptador}")
+    r = motor.direcionar(
+        codigo=pedido["codigo"],
+        slug=pedido["slug"],
+        caderno=pedido["caderno"],
+        n_cenas=int(pedido["n_cenas"]),
+        estilo=pedido.get("estilo") or ESTILO_PADRAO_STICKMAN,
+    )
+    return r.model_dump(mode="json")
+
+@activity.defn
+async def processo_criacao_conferir(plataforma: str = "flow") -> dict:
+    """Fail-closed: confere docs/processos canônico (versão pinada + hash + playbook).
+    Só vale em runtime após reinício do pqbr-episodio-worker (OK do José)."""
+    from ..pipeline import processo_criacao as pc
+    if plataforma not in pc.PLATAFORMAS:
+        raise RuntimeError(f"plataforma desconhecida: {plataforma}")
+    operavel = plataforma == "flow"
+    r = pc.exigir(plataforma, exigir_playbook_operavel=operavel)
+    return r.model_dump()
+
+
 @workflow.defn
 class PublicacaoWorkflow:
     @workflow.run
@@ -151,8 +183,27 @@ class EpisodioWorkflow:
     async def run(self, p: PedidoEpisodioE2E) -> ResultadoEpisodioE2E:
         curto = dict(start_to_close_timeout=timedelta(minutes=20), retry_policy=RetryPolicy(maximum_attempts=2))
         base = str(TRAB / p.slug)
+        await workflow.execute_activity(processo_criacao_conferir, args=["flow"], start_to_close_timeout=timedelta(minutes=1), retry_policy=RetryPolicy(maximum_attempts=1))
         pac = await workflow.execute_activity(pacote_garantir, **curto)               # t459: versão do pacote (hash)
         reg = await workflow.execute_activity(registro_buscar_caderno, p.codigo, **curto)
+        briefing = None
+        if getattr(p, "usar_mestre", True):
+            briefing = await workflow.execute_activity(
+                "nlm_mestre_briefing",
+                {
+                    "tema": p.tema or p.slug,
+                    "codigo": p.codigo,
+                    "slug": p.slug,
+                    "n_cenas": p.n_cenas,
+                    "limpar_chat_apos": True,
+                    "salvar_nota": True,
+                    "adaptador": "notebooklm",
+                },
+                start_to_close_timeout=timedelta(minutes=20),
+                retry_policy=RetryPolicy(maximum_attempts=1),
+                task_queue="notebooklm-pqbr",
+            )
+            self._criativo["briefing"] = briefing
         nlm = await workflow.execute_child_workflow(
             NotebookLMWorkflow.run, PedidoNotebookLM(tipo="short", slug=p.slug, fonte=p.roteiro_texto, solicitante="episodio",
                                                      episodio=p.codigo, caderno_registrado=reg,
@@ -162,32 +213,27 @@ class EpisodioWorkflow:
         if not nlm.ok or not nlm.caderno:
             return ResultadoEpisodioE2E(etapa="roteiro", ok=False, detalhes=nlm.model_dump())
         self._criativo = nlm.criativo
-        elenco = elenco_alternado(p.codigo)
-        outro = "masculino" if elenco == "feminino" else "feminino"
-        roteiro = (nlm.criativo.get("markdown") or p.roteiro_texto)[:6000]
-        base_prompt = PROMPT_STORYBOARD.format(codigo=p.codigo, elenco=elenco, outro=outro, roteiro=roteiro)
-        uma = dict(start_to_close_timeout=timedelta(minutes=12), retry_policy=RetryPolicy(maximum_attempts=1))
-        erro, sb = "", None
-        for _ in range(2):
-            txt = await workflow.execute_activity(
-                nlm_perguntar, args=[nlm.caderno, base_prompt + (f" A resposta anterior foi inválida: {erro}. Corrija." if erro else "")],
-                task_queue=FILA_NOTEBOOKLM, **uma)
-            try:
-                sb = await workflow.execute_activity(
-                    storyboard_criar, args=[txt, p.codigo, f"{base}/storyboard.json"],
-                    start_to_close_timeout=timedelta(minutes=2), retry_policy=RetryPolicy(maximum_attempts=1))
-                break
-            except Exception as e:  # noqa: BLE001
-                erro = str(getattr(e, "cause", e))[:300]
-                sb = None
-        if not sb:
-            return ResultadoEpisodioE2E(etapa="storyboard", ok=False, detalhes={"motivo": f"storyboard inválido: {erro}", "caderno": nlm.caderno})
+        # Passo 1: direção NLM → CenaIndividual (fail-closed). Adaptador Flow = passo 2, ainda pendente.
+        uma = dict(start_to_close_timeout=timedelta(minutes=25), retry_policy=RetryPolicy(maximum_attempts=1))
+        direcao = await workflow.execute_activity(
+            direcao_cenas_nlm,
+            {"codigo": p.codigo, "slug": p.slug, "caderno": nlm.caderno, "n_cenas": p.n_cenas, "adaptador": "notebooklm"},
+            **uma)
+        await workflow.execute_activity(
+            flow_projeto_exigir_antes_cenas, args=[p.codigo],
+            start_to_close_timeout=timedelta(minutes=1), retry_policy=RetryPolicy(maximum_attempts=1))
+        await workflow.execute_activity(
+            processo_criacao_conferir, args=["flow"],
+            start_to_close_timeout=timedelta(minutes=1), retry_policy=RetryPolicy(maximum_attempts=1))
+        # Passo 2 (adaptador Flow / cenas individuais) NÃO implementado — permanece pendente.
         return ResultadoEpisodioE2E(
-            etapa="storyboard", ok=True,
-            detalhes={"storyboard": sb, "caderno": nlm.caderno,
+            etapa="direcao_cenas", ok=True,
+            detalhes={"caderno": nlm.caderno,
                       "criativo": {k: v for k, v in nlm.criativo.items() if k != "markdown"},
-                      "pode_gerar_video": False})
+                      "direcao": {k: v for k, v in direcao.items() if k != "cenas"} | {"n_cenas": len(direcao.get("cenas") or [])},
+                      "cenas": direcao.get("cenas"),
+                      "proximo": "flow_cenas_individuais_pendente"})
 
 
 from .criativo import validar_roteiro, validar_seo, seo_9router, compliance_roteiro, ordenar_fontes, capa_conferir
-ATIVIDADES_EPISODIO = [storyboard_criar, capa_conferir, validar_roteiro, validar_seo, seo_9router, compliance_roteiro, ordenar_fontes, pos_produzir, extrair_quadros, capa_a9, drive_enviar, publicacao_dryrun, *ATIVIDADES_REGISTRO]
+ATIVIDADES_EPISODIO = [processo_criacao_conferir, flow_projeto_exigir_antes_cenas, direcao_cenas_nlm, capa_conferir, validar_roteiro, validar_seo, seo_9router, compliance_roteiro, ordenar_fontes, pos_produzir, extrair_quadros, capa_a9, drive_enviar, publicacao_dryrun, *ATIVIDADES_REGISTRO]

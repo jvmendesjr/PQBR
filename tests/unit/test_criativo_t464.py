@@ -1,6 +1,6 @@
 import json, pytest
 from pqbr.workflows.criativo import roteiro_de_texto, steering_de_roteiro, roteiro_markdown
-from pqbr.contratos import CTA, ESTILO_PADRAO_2D
+from pqbr.contratos import CTA, ESTILO_PADRAO_STICKMAN
 from pqbr.kit.router9 import combo
 
 def _rot(n=8, fontes=2, tipo_cta="fallback", cta=CTA):
@@ -12,7 +12,7 @@ def _rot(n=8, fontes=2, tipo_cta="fallback", cta=CTA):
 
 def test_roteiro_nlm_valido_com_texto_em_volta():
     r, f = roteiro_de_texto("Aqui está:\n```json\n" + json.dumps(_rot()) + "\n```", "olhos-da-cara")
-    assert r["episodio_id"] == "olhos-da-cara" and r["bloco_visual"]["estilo"] == ESTILO_PADRAO_2D and len(f) == 2
+    assert r["episodio_id"] == "olhos-da-cara" and r["bloco_visual"]["estilo"] == ESTILO_PADRAO_STICKMAN and len(f) == 2
     assert r["tipo_cta"] == "fallback"
     assert "[PERSONAGEM]" in steering_de_roteiro(r) and "## Fontes" in roteiro_markdown(r, f)
 

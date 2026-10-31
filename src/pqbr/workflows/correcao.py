@@ -60,8 +60,16 @@ def _sim(p: PedidoCorrecao) -> Simulacao:
 async def triagem_jev(p: PedidoCorrecao) -> TriagemCorrecao:
     if any(s in p.passo.lower() for s in SENSIVEIS):
         return TriagemCorrecao(classe="sensivel", motivo=f"passo sensível: {p.passo}")  # trava dura, antes do Jev
-    s = _sim(p)
-    return TriagemCorrecao(classe=s.triagem, motivo="simulado")
+    if p.simulacao is not None:
+        return TriagemCorrecao(classe=p.simulacao.triagem, motivo="simulado")
+    import asyncio
+    from ..motores.decisao import jev_disponivel, triagem_correcao_jev
+    if not jev_disponivel():
+        _sim(p)
+    dec = await asyncio.to_thread(triagem_correcao_jev, p.passo, p.erro, p.ferramenta, activity="triagem_jev")
+    if dec.escalar or dec.valor is None:
+        return TriagemCorrecao(classe="sensivel", motivo=f"escalado pelo Jev: {dec.motivo}")
+    return dec.valor
 
 
 @activity.defn
@@ -75,8 +83,20 @@ async def intervir_agente(t: Tentativa) -> ResultadoIntervencao:
 
 @activity.defn
 async def verificar_jev(t: Tentativa) -> VerificacaoCorrecao:
-    s = _sim(t.pedido)
-    return VerificacaoCorrecao(ok=s.verificacoes[min(t.n - 1, len(s.verificacoes) - 1)])
+    if t.pedido.simulacao is not None:
+        s = t.pedido.simulacao
+        return VerificacaoCorrecao(ok=s.verificacoes[min(t.n - 1, len(s.verificacoes) - 1)])
+    import asyncio
+    from ..motores.decisao import jev_disponivel, verificar_correcao_jev
+    if not jev_disponivel():
+        _sim(t.pedido)
+    dec = await asyncio.to_thread(
+        verificar_correcao_jev, t.pedido.passo, t.pedido.erro,
+        f"tentativa {t.n} de {MAX_TENTATIVAS}", activity="verificar_jev"
+    )
+    if dec.escalar or dec.valor is None:
+        return VerificacaoCorrecao(ok=False, motivo=f"escalado pelo Jev: {dec.motivo}")
+    return dec.valor
 
 
 @activity.defn

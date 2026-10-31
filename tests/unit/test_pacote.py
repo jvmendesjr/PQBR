@@ -8,7 +8,29 @@ def test_pacote_hash_deterministico_e_bloco():
     a, b = pacote.montar_pacote(), pacote.montar_pacote()
     assert a["hash"] == b["hash"] and len(a["hash"]) == 64
     assert a["itens"]["bloco_visual_16_7"].startswith("[ESTILO]")
-    assert set(a["itens"]) == {"persona", "comandos_prompts", "contrato_editorial", "bloco_visual_16_7"}
+    assert set(a["itens"]) == {"persona", "comandos_prompts", "contrato_editorial", "bloco_visual_16_7", "catalogo_visual"}
+    assert set(a["origem"]) == set(a["itens"])
+
+
+def test_pacote_leva_o_catalogo_visual_e_muda_de_hash_com_ele(tmp_path):
+    a = pacote.montar_pacote()
+    cat = a["itens"]["catalogo_visual"]
+    assert "PERS-menino-azul [protagonista masculino]" in cat and "PERS-menina-rosa [protagonista feminino]" in cat and "SIT-" in cat
+    texto = pacote.texto_fonte_pacote(a)
+    assert "## catalogo_visual" in texto and texto.index("## bloco_visual_16_7") < texto.index("## catalogo_visual") < texto.index("## contrato_editorial")
+    # o mesmo repositório com uma ficha a mais gera outro pacote (versão nova sozinha)
+    import shutil
+    from pqbr.pipeline import banco_fichas as bf
+    raiz = tmp_path / "repo"
+    for rel in (*pacote.FONTES_PACOTE.values(), "banco-fichas/indice.json"):
+        (raiz / rel).parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy(pacote.RAIZ / rel, raiz / rel)
+    antes = pacote.montar_pacote(raiz)
+    assert antes["hash"] == a["hash"]
+    bf.registrar(tipo="objeto", slug="lupa-teste", titulo="Lupa de teste do pacote", raiz=raiz / "banco-fichas",
+                 trava="Lupa de cabo marrom em cartoon 2D flat colorido, contorno preto, sem texto e sem marca.")
+    depois = pacote.montar_pacote(raiz)
+    assert "OBJ-lupa-teste" in depois["itens"]["catalogo_visual"] and antes["hash"] != depois["hash"]
 
 
 def test_categoria_educacao_e_sem_midia_sintetica():

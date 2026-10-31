@@ -6,7 +6,7 @@ import asyncio, json, re
 from pathlib import Path
 from temporalio import activity
 from temporalio.exceptions import ApplicationError
-from ..contratos import RoteiroShort, PacoteSEO, ESTILO_PADRAO_2D, CTA, MARCA_LINK_QUEBRADO
+from ..contratos import RoteiroShort, PacoteSEO, ESTILO_PADRAO_STICKMAN, CTA, MARCA_LINK_QUEBRADO
 
 TOM_EDITORIAL = (   # José 12/10 17:13/17:17; contrato §17
     "Tom (contrato §17): a essência é a cultura brasileira (ditados, expressões, atitudes, gestos, comportamentos). "
@@ -47,10 +47,10 @@ def _obj(texto: str) -> dict:
 
 
 def roteiro_de_texto(texto: str, slug: str) -> tuple[dict, list[str]]:
-    """Valida o roteiro do NotebookLM no contrato RoteiroShort (estilo §16.7 forçado). Puro; testado."""
+    """Valida o roteiro do NotebookLM no contrato RoteiroShort (estilo stickman §19 forçado). Puro; testado."""
     d = _obj(texto)
     d["episodio_id"] = slug
-    d.setdefault("bloco_visual", {})["estilo"] = ESTILO_PADRAO_2D
+    d.setdefault("bloco_visual", {})["estilo"] = ESTILO_PADRAO_STICKMAN
     fontes = [str(f) for f in d.get("fontes", []) if str(f).strip()]
     r = RoteiroShort.model_validate({k: d.get(k) for k in ("episodio_id", "titulo", "falas", "tipo_cta", "entidades_cena", "bloco_visual")})
     if len(fontes) < 2: raise ValueError("roteiro precisa de ≥ 2 fontes (§16.5)")

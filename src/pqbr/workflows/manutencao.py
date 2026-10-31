@@ -32,12 +32,8 @@ class ResultadoRetencao(BaseModel):
 
 @activity.defn
 async def registrar_consumo(r: RegistroConsumo) -> None:
-    from ..storage.banco import conectar, escrever
-    d = r.model_dump()
-    cols = ", ".join(d)
-    with conectar("pqbr_app") as c:
-        escrever(c, f"insert into pqbr.consumo_modelos ({cols}) values ({', '.join(['%s'] * len(d))})", list(d.values()))
-        c.commit()
+    from ..storage.consumo import gravar
+    gravar(r)
 
 
 @activity.defn

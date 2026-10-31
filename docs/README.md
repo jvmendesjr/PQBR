@@ -4,7 +4,8 @@ Atualizado em 27/10/2026 (t129u). Este índice distingue os documentos normativo
 
 ## Ordem de autoridade
 
-Siga a ordem definida em `REGRAS.md` §0:
+Siga a ordem definida em `REGRAS.md`
+- **Processo de criação (t160u):** [`processos/CRIACAO-README.md`](processos/CRIACAO-README.md) — consultar antes de cada produção; playbooks por plataforma em `processos/` §0:
 
 1. `REGRAS.md` — regras de negócio e governança.
 2. `SPEC.md` — requisitos.
@@ -12,7 +13,7 @@ Siga a ordem definida em `REGRAS.md` §0:
 4. `TESTES.md` — critérios e evidências de validação.
 5. `ROADMAP.md` — tarefas, estado atual, dependências e gates do projeto.
 
-A `AGENTS.md` da raiz é gerada do onboarding. `company/agents/<slug>/AGENTS.md` guarda a persona de cada papel. `docs/AGENTES.md` é o roster vigente (8 papéis). `RASTREABILIDADE.md` liga requisito → desenho → tarefa → teste. `LACUNAS-fluxo.md` lista só o que ainda falta no código. `CONTRATO-EDITORIAL.md` é o contrato editorial oficial (v2, t473).
+A `AGENTS.md` da raiz é gerada do onboarding. `company/agents/<slug>/AGENTS.md` guarda a persona de cada papel. `docs/AGENTES.md` é o roster vigente (9 papéis). `RASTREABILIDADE.md` liga requisito → desenho → tarefa → teste. `LACUNAS-fluxo.md` lista só o que ainda falta no código. `CONTRATO-EDITORIAL.md` é o contrato editorial oficial (v2, t473).
 
 ## Os dois roadmaps não são intercambiáveis
 

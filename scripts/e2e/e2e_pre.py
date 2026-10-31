@@ -3,7 +3,7 @@ import json, re, sys, time, asyncio
 from datetime import date
 from pqbr.kit.router9 import chat, combo
 from pqbr.pipeline.grade import checar_repeticao, bloqueio_absoluto, normalizar
-from pqbr.contratos import RoteiroShort, PacoteSEO, TemaPendente, ESTILO_PADRAO_2D, CTA
+from pqbr.contratos import RoteiroShort, PacoteSEO, TemaPendente, ESTILO_PADRAO_STICKMAN, CTA
 from pqbr.seguranca.barreira import exigir_limpo
 from pqbr.workflows.pacote import _banco
 T = {}; LOG = {}
@@ -39,7 +39,7 @@ ag = open("docs/_obsoleto/company/agents/roteirista/AGENTS.md").read()
 contrato = open("docs/CONTRATO-EDITORIAL.md").read()
 i16 = contrato.find("## 16"); sec16 = contrato[i16:i16 + 9000] if i16 >= 0 else ""
 def val_rot(d):
-    d["bloco_visual"]["estilo"] = ESTILO_PADRAO_2D
+    d["bloco_visual"]["estilo"] = ESTILO_PADRAO_STICKMAN
     r = RoteiroShort.model_validate({k: d[k] for k in ("episodio_id", "titulo", "falas", "tipo_cta", "entidades_cena", "bloco_visual")})
     if len(r.bloco_visual.cenas) != len(r.falas) - 0 and len(r.bloco_visual.cenas) < 6: raise ValueError("poucas cenas")
     if len(d.get("fontes", [])) < 2: raise ValueError("≥ 2 fontes (URLs) obrigatórias")

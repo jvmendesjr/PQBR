@@ -16,7 +16,15 @@
  "gemini_mem_timeout_s": 600,
  "_doc_memoria": "t546: espera mínima entre abas do juiz (s) e só abre aba nova com o serviço pqbr-camofox abaixo de gemini_mem_abrir_mb; senão MemoriaAlta (falha fechada) após gemini_mem_timeout_s.",
  "gemini_loop_espera_s": 480,
- "gemini_juiz": {
+ "decisao": {
+  "_doc": "t143u/t144u (JEV-EF, REGRAS §7): porta decide() e funções estruturadas em src/pqbr/motores/decisao.py. Calibrado em 28/10 com 12 casos reais na API TypeSafe (jev-latest): choice isolado (popup, canário, triagem) ≥ 0,98 -> limiar 0,9; repetição R10 (noul+choice) 0,92–0,96 -> limiar 0,85; noul de verificação (0,85–0,96) e e-mail com 3 escolhas simultâneas (0,83–0,99) -> limiar 0,8. Fallback OpenRouter desligado até chave JEV-02.",
+  "principal": {"adaptador": "typesafe", "endpoint": "https://api.typesafe.ai/v1/systemone", "modelo": "jev-latest", "chave_env": "TYPESAFE_API_KEY"},
+  "fallback": {"adaptador": "openrouter", "ativo": false, "endpoint": "https://openrouter.ai/api/alpha/decisions", "modelo": "~typesafe/jev-latest", "chave_env": "OPENROUTER_API_KEY"},
+  "timeout_s": 15,
+  "tentativas": 2,
+  "limiares": {"ClassificacaoPopupCamofox": 0.9, "EscolhaRefCanario": 0.9, "TriagemCorrecao": 0.9, "DecisaoRepeticao": 0.85, "VerificacaoCorrecao": 0.8, "ClassificacaoEmailYouTube": 0.8}
+},
+"gemini_juiz": {
   "versao": "1.0.0",
   "pre_producao": {
    "modelo": "3.8 Flash",
@@ -27,5 +35,5 @@
    "raciocinio": "Baixo"
   }
  },
- "_doc_gemini_juiz": "t108u (José): juiz por etapa. pre_producao (roteiro, storyboard/fichas, imagens de referência antes do vídeo) = 3.8 Flash; producao (vídeo gerado, VISUAL/LOOP final) = 4 Argon com raciocínio Baixo. Contrato pqbr.contratos.juiz_gemini. gemini_modelo fica só para workers antigos (até o reinício). Override por execução: PQBR_GEMINI_MODELO/PQBR_GEMINI_RACIOCINIO."
+ "_doc_gemini_juiz": "t108u (José): juiz por etapa. pre_producao (roteiro, fichas, imagens de referência antes do vídeo) = 3.8 Flash; producao (vídeo gerado, VISUAL/LOOP final) = 4 Argon com raciocínio Baixo. Contrato pqbr.contratos.juiz_gemini. gemini_modelo fica só para workers antigos (até o reinício). Override por execução: PQBR_GEMINI_MODELO/PQBR_GEMINI_RACIOCINIO."
 }

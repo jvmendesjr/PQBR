@@ -26,3 +26,6 @@
 - Mudar persona/comandos/contrato/§16.7 gera hash novo automaticamente no próximo episódio.
 - O worker `episodio-pqbr` lê `~/.pqbr/worker.env` (drop-in `20-banco-pqbr.conf`) para o papel `pqbr_app`.
 - Testes: `tests/unit/test_pacote.py` (hash determinístico, §16.7, travas do apagamento); `db/test_migrations.sh`.
+
+> **Atualização 31/10/2026 (t168u):** mestre norteador permitido; mídia no mestre continua proibida. Ver REGRAS §9 e config/caderno_mestre.json.
+

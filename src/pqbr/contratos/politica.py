@@ -1,4 +1,4 @@
-"""Política por papel (t84u–t85u): um bank Hindsight (`pqbr`) e um índice GitNexus, com limites por papel.
+"""Política por papel (t84u–t85u): um bank Hindsight (`pqbr`) e um índice de código, com limites por papel.
 Fonte única: config/politica_papeis.json. Papel desconhecido, tag ou caminho fora da lista => negado (fail-closed)."""
 from __future__ import annotations
 import json
@@ -17,7 +17,7 @@ class AcessoNegado(PermissionError):
 class PoliticaPapel(Contrato):
     leitura: tuple[str, ...] = ()
     escrita: tuple[str, ...] = ()
-    codigo: tuple[str, ...] = ()        # prefixos de caminho visíveis no GitNexus ("" = repo todo)
+    codigo: tuple[str, ...] = ()        # prefixos de caminho visíveis no índice de código ("" = repo todo)
     ferramentas: tuple[str, ...] = ()
 
     @model_validator(mode="after")

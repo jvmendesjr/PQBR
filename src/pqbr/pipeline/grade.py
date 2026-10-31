@@ -66,17 +66,29 @@ def similaridade(a: str, b: str) -> float:
     return round(max(jacc, 0.85 * sobre), 3)
 
 
-def checar_repeticao(tema: str, usados: Iterable[str]) -> DecisaoRepeticao:
+def checar_repeticao(tema: str, usados: Iterable[str], *, usar_jev: bool = False,
+                     decisor: object | None = None) -> DecisaoRepeticao:
     n = normalizar(tema)
     melhor, parecido = 0.0, None
+    pares: list[tuple[float, str]] = []
     for u in usados:
         if normalizar(u) == n:
             return DecisaoRepeticao(repetido=True, barreira="exata", tema_parecido=u, confianca=1.0)
         s = similaridade(tema, u)
+        pares.append((s, u))
         if s > melhor:
             melhor, parecido = s, u
     if melhor >= LIMIAR_VARIACAO:
         return DecisaoRepeticao(repetido=True, barreira="variacao", tema_parecido=parecido, confianca=melhor)
+    if (usar_jev or decisor is not None) and pares:
+        from pqbr.motores.decisao import DecisorJev, decidir_repeticao_jev
+        ordenados = [u for _, u in sorted(pares, key=lambda x: x[0], reverse=True)[:25]]
+        dec = decidir_repeticao_jev(tema, ordenados, decisor=decisor if isinstance(decisor, DecisorJev) else None)
+        if not dec.escalar and dec.valor is not None:
+            if dec.valor.repetido:
+                return dec.valor
+            return DecisaoRepeticao(repetido=False, barreira="nenhuma",
+                                    tema_parecido=parecido or dec.valor.tema_parecido, confianca=dec.confianca)
     return DecisaoRepeticao(repetido=False, barreira="nenhuma", tema_parecido=parecido, confianca=round(1 - melhor, 3))
 
 

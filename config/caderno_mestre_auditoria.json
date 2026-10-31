@@ -1,0 +1,11 @@
+{
+  "_doc": "t170u (31/10/2026): Mestre de Auditoria permanente/canônico. Nunca gera mídia, nunca cria episódio, só audita contra as fontes. Efêmero de auditoria por episódio recebe cópia versionada destas regras (snapshot, não link: um caderno não pode usar outro como fonte). ID preenchido por scripts/notebooklm/criar_mestre_auditoria.py.",
+  "titulo": "PQBR - Mestre de Auditoria",
+  "caderno_mestre_auditoria_id": "ce015620-7ce7-442c-aece-d9bece306ed1",
+  "proibido_midia": true,
+  "proibido_gerar_episodio": true,
+  "versao_regras": "1.0.0",
+  "persona_path": "templates/notebooklm/persona-auditoria-mestre.txt",
+  "snapshot_prefixo": "AUD-SNAP",
+  "titulo_efemero_prefixo": "Auditoria - "
+}

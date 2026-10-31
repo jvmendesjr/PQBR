@@ -1,22 +1,25 @@
 {
-  "_nota": "Estilo ativo do steering do Short (José 12/10 17:13: estilo D em teste; o canônico §16.7 ainda não foi trocado). Lido por notebooklm.steering_short.",
-  "ativo": "D",
+  "_nota": "Padrão visual definitivo (t148u): conjunto entregue pelo José no Drive (Fontes/Imagens) e versionado em banco-fichas/. Estilo (José, t150u): cartoon 2D, flat, colorido, com personagens stickman. As fichas nanquim de t146u foram descartadas. Elenco sem nomes. O catálogo é aberto (banco-fichas/indice.json 3.0.0): tudo é referência e sugestão, o agente insere personagens, figuras, animais, objetos, ambientes e situações novos pelo pipeline/banco_fichas.py.",
+  "ativo": "stickman",
   "estilos": {
-    "D": "Estilo visual: stickman arredondado em 2D: bonequinhos de cabeça redonda grande e corpo de traços grossos e arredondados (não linhas finas), membros como tubos macios com pontas redondas, expressões simples e muito expressivas, cores chapadas com um acento de cor por personagem, fundo limpo e claro com poucos objetos, humor de cartum. O protagonista é sempre o mesmo stickman (mesma cabeça, mesma cor de acento, mesmo acessório)."
+    "stickman": "Cartoon 2D flat colorido com personagens stickman do canal Porquê BR (padrão definitivo t148u/t150u): contorno preto e cores chapadas suaves, cabeça redonda branca grande, dois olhos pretos sempre visíveis, boca simples de reação, corpo e membros em traço preto fino, roupa chapada colorida fixa por personagem, fundo limpo em tom creme. Sem dedos realistas, sem pessoa realista e sem volume 3D. Fundo com poucos objetos, humor de comédia leve. O protagonista é o mesmo stickman em todas as cenas; coadjuvantes variam entre os personagens do catálogo."
   },
   "elenco": {
-    "_nota": "t78u: consistência de rosto/traços, não de roupa. Alternância por episódio: código par = masculino, ímpar = feminino (contratos/storyboard.elenco_alternado). Sem nome falado/escrito. Imagem de referência ASSET_personagem_<id>-v1 ainda NÃO gerada (geração paga exige OK do José). t79u: protagonista único e constante no episódio; o outro membro do elenco pode contracenar quando o roteiro pedir (FichaCena.coadjuvante + justificativa). Proporção: a feminina é mais baixa que o masculino.",
-    "masculino": {
-      "asset": "ASSET_personagem_masculino-v1",
-      "rosto_tracos": "Homem brasileiro de uns 30 anos, pele morena clara, magro, cabelo preto curto e despenteado, sobrancelhas grossas e muito expressivas, óculos redondos vermelhos (sempre inteiros no quadro)",
-      "personalidade": "engraçado, de caras e bocas exageradas que reagem ao que vê ou vive; nunca articula fala",
-      "figurino": "varia por episódio; participa ⇒ época/local, observa ⇒ roupa atual"
+    "_nota": "t150u: elenco permanente em banco-fichas/personagens/ (catálogo dos 12 + bob-oculos como 13º + 6 folhas individuais), catálogo aberto para personagens novos. Os IDs antigos PERS-M/PERS-F/PERS-M-classico morreram com as fichas de t146u. Código par = masculino, ímpar = feminino (contrato cena).",
+    "catalogo": "banco-fichas/personagens/ELENCO-catalogo.png",
+    "indice": "banco-fichas/indice.json",
+    "protagonistas": {
+      "_nota": "José, t150u: nº 1 = masculino, nº 2 = feminino. Os demais são coadjuvantes e variedade.",
+      "masculino": "PERS-menino-azul",
+      "feminino": "PERS-menina-rosa"
     },
-    "feminino": {
-      "asset": "ASSET_personagem_feminino-v1",
-      "rosto_tracos": "Mulher brasileira de uns 30 anos, morena, cabelo LISO escuro com penteados variados por episódio (ex.: coque alto com fios soltos, rabo de cavalo, solto), rosto redondo, sobrancelhas expressivas, pinta pequena acima do lábio, brinco de argola dourada pequena; mais baixa que o personagem masculino",
-      "personalidade": "engraçada, de caras e bocas exageradas (olhar desconfiado de lado, boca torta de deboche, espanto de olhos arregalados sem deformar); reage, nunca articula fala",
-      "figurino": "varia por episódio; participa ⇒ época/local, observa ⇒ roupa atual (ex.: camiseta colorida e calça jeans, vestido de chita, moletom)"
+    "folhas": {
+      "PERS-menina-rosa": {"elenco_num": 2, "ficha": "banco-fichas/personagens/PERS-menina-rosa.md", "imagem": "banco-fichas/personagens/PERS-menina-rosa-folha.png", "acento": "vestido rosa"},
+      "PERS-cacheada": {"elenco_num": 5, "ficha": "banco-fichas/personagens/PERS-cacheada.md", "imagem": "banco-fichas/personagens/PERS-cacheada-folha.png", "acento": "camiseta amarela"},
+      "PERS-bone-verde": {"elenco_num": 8, "ficha": "banco-fichas/personagens/PERS-bone-verde.md", "imagem": "banco-fichas/personagens/PERS-bone-verde-folha.png", "acento": "boné verde"},
+      "PERS-gravata-azul": {"elenco_num": 9, "ficha": "banco-fichas/personagens/PERS-gravata-azul.md", "imagem": "banco-fichas/personagens/PERS-gravata-azul-folha.png", "acento": "gravata azul"},
+      "PERS-roxo-ansioso": {"elenco_num": 12, "ficha": "banco-fichas/personagens/PERS-roxo-ansioso.md", "imagem": "banco-fichas/personagens/PERS-roxo-ansioso-folha.png", "acento": "moletom roxo"},
+      "PERS-bob-oculos": {"elenco_num": 13, "obs": "fora da grade dos 12; entrou no catálogo como 13º por decisão do José (t150u)", "ficha": "banco-fichas/personagens/PERS-bob-oculos.md", "imagem": "banco-fichas/personagens/PERS-bob-oculos-folha.png", "acento": "óculos redondos"}
     }
   }
 }

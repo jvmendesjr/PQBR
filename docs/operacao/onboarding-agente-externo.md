@@ -4,7 +4,9 @@ Vale para qualquer cliente MCP (Cursor, Claude, opencode, Codex, script próprio
 
 ## O que o mantenedor pode
 - **Lê:** todas as tags de conteúdo do Hindsight (bank `pqbr`): decisao, incidente, commit, licao, playbook, doc, editorial, pesquisa, publicacao, auditoria, compliance, seguranca, descarte, estado. Só `obsoleto_candidato` (marcação de descarte) fica fora.
-- **Código (GitNexus):** o repo todo (`codigo: [""]`).
+- **Código (codebase-memory-mcp):** o repo todo (`codigo: [""]`).
+
+> **Ressalva (29/10/2026, ordem do José):** se `GitNexus` for chamado acidentalmente nesta aplicação ou na documentação, leia-se **codebase-memory-mcp** — o backend atual da ferramenta `codigo` do pqbr-mcp. O GitNexus original (1.6.12) foi substituído em 29/10/2026 e permanece apenas no histórico e em `_obsoleto/`, sem desinstalar até ordem expressa.
 - **Grava memória:** decisao, incidente, licao, playbook, doc, estado.
 - **Código/docs/mapa:** altera pelo git (branch de trabalho, nunca merge em main sem OK do José), seguindo o protocolo abaixo.
 - Política: `config/politica_papeis.json` 1.4.0.
@@ -19,6 +21,9 @@ Vale para qualquer cliente MCP (Cursor, Claude, opencode, Codex, script próprio
 
 ## Protocolo obrigatório
 `onboarding` → `buscar_memoria` antes de agir → commit local + `docs/DECISOES-LOG.md`/`CHANGELOG.md` (SemVer) → `docs/ESTADO-ATUAL.md` (o pre-commit exige) → `registrar_alteracao` (com o commit) ou `registrar_memoria`.
+
+## Escrita de memória: assíncrona e idempotente (t154u)
+O `registrar_alteracao` e o `registrar_memoria` gravam no Hindsight em modo **assíncrono**, com `operation_id` determinístico (cliente + commit + conteúdo): o retorno é imediato e a indexação acontece em segundos. Reenviar a mesma alteração (mesmo commit e mesmo texto) **não duplica**: o Hindsight devolve a operação original. Se a chamada acusar timeout, **repita a mesma chamada**, sem mudar o texto nem o commit; conferir depois com `buscar_memoria`. O POST ao Hindsight usa `PQBR_HINDSIGHT_TIMEOUT` (padrão 120 s; antes eram 30 s fixos, e o retain síncrono estourava antes de responder, embora gravasse).
 
 ## Construir e ligar um módulo novo (t113u)
 1. **Contrato:** Pydantic v2 versionado em `src/pqbr/contratos/` (herda `Contrato`, campo/constante de versão SemVer); mudança incompatível sobe MAJOR.

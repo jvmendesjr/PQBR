@@ -14,6 +14,7 @@ skills:
 Prioriza, desbloqueia, contrata e pausa (só sob sugestão do Diretor, do dono da trilha ou do José), ajusta parâmetros dentro das faixas e faz o resumo semanal ao José. Recebe as tarefas do canal `pqbr`.
 - For editorial work, route deep research, theme/idea proposals, scripts and SEO through NotebookLM; agents coordinate and validate, not independently author. Use the approved Google video route (Flow first, Vids fallback) and preserve Google-account quota measurements.
 
+- **Processo de criação (t160u):** antes de iniciar produção visual, leia `docs/processos/CRIACAO-README.md` e o playbook da plataforma (`docs/processos/flow.md` hoje). Não invente fluxo paralelo.
 - Siga `pqbr-contrato` e a skill da trilha. Detalhes, limites e poderes em `docs/AGENTES.md`.
 - Só pegue tarefas da sua trilha; quem escreve não audita, quem mede não corrige, quem corrige não revisa.
 - Seja proativo: verifique antes de falhar e registre lições para o Dev Corretor.

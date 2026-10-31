@@ -14,6 +14,22 @@
 
 ---
 
+## Destaques pendentes (27/10/2026, t134u–t137u)
+
+Decisões da conversa paralela, juntadas em cima do stickman (t133u). Nenhuma está aplicada. O primeiro item é prioritário.
+
+- [x] **JEV-EF** [PRIORITÁRIO] Efetivar o Jev: sair da teoria — Req: RNF-02, RF-18, RF-23, RF-42, RF-46 · Testes: TS-11 · Depende de: F3-01, JEV-01 · Portão José: chave OpenRouter (JEV-02) e reinício do worker — 2026-10-28 — commit t144u
+  - Hoje: os contratos de saída existem; `decide()` **não existe** em `src/` nem em `scripts/`; `CorrecaoAutonomaWorkflow` levanta `EmConstrucao`; `TYPESAFE_API_KEY` está em `~/.pqbr/worker.env` e nenhum processo da PQBR a lê (t137u).
+  - Papel, sem agente novo: o código faz uma pergunta fechada, o Jev devolve um contrato Pydantic, o código valida e age. Verificação visual continua no juiz Gemini; a verificação estruturada de uma intervenção é do Jev (`VerificacaoCorrecao`, t356).
+  - Aceite: porta `src/pqbr/motores/decisao.py` + adaptador TypeSafe (`systemone`, `jev-latest`) por `config/motores.json`; limiar de confiança por contrato; cada chamada em `pqbr.consumo_modelos`; fixtures e teste sem rede; fallback OpenRouter com o mesmo esquema (JEV-02, chave pedida ao José ao ligar).
+  - Primeiros usos: `ClassificacaoPopupCamofox` no Flow; segundo nível do canário (o Camofox lista os elementos, o Jev escolhe o `ref` ou `abstain`); triagem e verificação da `CorrecaoAutonoma`; faixa de dúvida de tema repetido.
+  - Fora: Jev julgando imagem; Jev clicando sem o código conferir; `jev-ultrafast` no lugar do Camofox.
+  - Obs (t143u/t144u): porta `decide()` em `src/pqbr/motores/decisao.py`, funções estruturadas (`classificar_popup_camofox`, `escolher_ref_canario`, `triagem_correcao_jev`, `verificar_correcao_jev`, `decidir_repeticao_jev`, `classificar_email_youtube`), ligada a `CorrecaoAutonomaWorkflow` e `checar_repeticao`; limiares calibrados com 12 casos reais na API TypeSafe (`jev-latest`, 100% de acerto, consumo gravado em `pqbr.consumo_modelos`); 43 testes unitários passando em `tests/unit/test_decisao_jev.py`; workers `pqbr-temporal-worker` e `pqbr-episodio-worker` reiniciados com `TYPESAFE_API_KEY` ativa. O fallback OpenRouter segue desligado até JEV-02.
+- [ ] **F1-05** Ferramentas só leitura dos agentes PydanticAI (t134u) — Req: RNF-02 · Depende de: F1-01 · Portão José: nenhum para o código; sem efeito externo
+  - Aceite: `src/pqbr/agents/ferramentas.py`, filtrado por `config/politica_papeis.json`, ferramenta nativa do PydanticAI, sem escrita, limite de chamadas, testes com `TestModel`. Sem MCP interno.
+- [ ] **F6-02** Acompanhamento de mudanças, sem agente novo (t135u, t136u) — Req: RF-42, RF-37 · Depende de: F3-01 · Portão José: reinício do worker ao registrar
+  - Aceite, nesta ordem: vigia de fallbacks; `dev_diagnosticar` no fim de cada vigia, com aviso e sinal `aprovacao_jose`; deriva de contrato por fixture; canário de interface no Camofox (login Google e as surpresas do Flow; o NotebookLM fica fora, é CLI). O Dev entrega rascunho de diff do mapa. `CorrecaoAutonoma` só para sessão e fila.
+
 ## Concluído
 
 - [x] **R-000** Estrutura do repositório — 2026-10-09 — commit ade0ebb
@@ -31,6 +47,13 @@
   - Obs: —
 
 ---
+
+
+## Próximos tópicos (José 31/10/2026, t169u — só registro)
+
+1. Papel dos cadernos (mestre + efêmero) na validação e auditoria — PILOTO t170u: Mestre de Auditoria ce015620 + Efêmero EP1003 e82fc55e, teste S05 reprova / S04 ressalva. Falta activity Temporal e registro em banco.
+2. José ajusta referências VISUAIS (fichas de personagens, objetos, estilo).
+Nota mapa: página :8088 prioriza a etapa dos **cadernos** NLM; publicação só rótulo/rastreabilidade.
 
 ## Fase 0.5: teste de 1 dia do Temporal (motor escolhido; ponte Paperclip histórica)
 > Histórico: ADR-011/t474–t476: Paperclip parado (histórico); canal = bot Telegram próprio via Temporal (t538). F05-04/F05-06/TZ-06 abaixo ficam como registro; o escopo vivo de aprovação está na ponte t538.
@@ -212,17 +235,53 @@ Plano. Variáveis: `C=/home/pc/.pqbr/camofox`, porta `9387`, unit `pqbr-camofox.
 
 Precisam do José: F4C-05, F4C-06, F4C-07. F4C-04 já foi feito (t405). F4C-01..03 só pedem o portão G4.
 
-## Fase 4V: geração de vídeo em série pelo navegador (t529) — storyboard → vídeo, sem extensões
-Ref.: `docs/pesquisas/PESQUISA-extensoes-geracao-em-serie.md` (leitura liberada, t530), ADR-012, t517 (cadeia), t529 (HOLD). Cada passo que abre Flow, Vids ou Vibes ou gasta cota tem portão do José.
-- [ ] **R1 · Estudar e mapear a UI** (Flow, Vids, Vibes): modais, ícones, campos, sequência de cliques e regras por modelo → `PlatformProfile` versionado (snapshots do Camofox, sem gerar). Obs: portão José para abrir as UIs.
-- [ ] **R2 · Contratos** `CenaStoryboard`, `ManifestoSerie`, `ResultadoCena`, `PedidoDecisaoVideo` (VERSOES 1.0.0) + regra de nome `<ep>_c<NN>_<tipo>_<modelo>_<v>` + testes.
-- [ ] **R3 · Adaptador Flow** (`GeradorVideo` sobre `NavegadorIdentidade`): storyboard de imagens em série → vídeo por cena (start frame/chain); concorrência 1, ritmo humano, falha rápida no drift. Piloto de 1 cena antes de 5 a 7.
+## Fase 4V: geração de vídeo em série pelo navegador (t529) — cenas individuais → vídeo, sem extensões (piloto EP1003: ver subseção t164u)
+Ref.: `docs/pesquisas/PESQUISA-extensoes-geracao-em-serie.md` (leitura liberada, t530), ADR-012, t517 (cadeia), t529 (HOLD). Cada passo que abre Flow, Vids ou Vibes ou gasta cota tem portão do José. t148u: as fichas permanentes de referência das cenas são o conjunto definitivo de `banco-fichas/` (flat colorido, vindo do Drive); as fichas nanquim de t146u foram descartadas e as `Instruções para o agente` no Flow serão regravadas (P17). t150u: o `banco-fichas/` virou **catálogo aberto** (`indice.json` 3.0.0, 62 fichas: personagens, figuras, animais, objetos, ambientes e situações); protagonistas definidos (nº 1 `PERS-menino-azul` masculino, nº 2 `PERS-menina-rosa` feminina, `PERS-bob-oculos` nº 13); as cenas individuais citam as fichas em `refs` e o pacote do NotebookLM leva o resumo do catálogo (storyboard 1.3.0 removido em 29/10/2026, só histórico). t155u: instruções do Flow regravadas no flat e espelho Drive com 111 arquivos; 30 fichas aprovadas (`indice.json` 3.1.0). Ainda faltam folha do nº 1 e mídia das SIT-*; o worker já foi reiniciado para o núcleo 1.1.0 em 29/10/2026 às 23:14 (P17 residual: MG-12 / merge).
+- [ ] **R1 · Estudar e mapear a UI** (Flow, Vids, Vibes): modais, ícones, campos, sequência de cliques e regras por modelo → `PlatformProfile` versionado (snapshots do Camofox). Obs: 27/10 (t132u) o Flow foi aberto e duas imagens saíram (Nano Banana 2 Lite, 9:16). Não há PlatformProfile. Vids e Vibes não foram abertos. O checkbox segue aberto.
+- [ ] **R2 · Contratos** `CenaIndividual` (1.0.0, já implementado — ex-FichaCena), `ManifestoSerie`, `ResultadoCena`, `PedidoDecisaoVideo` + regra de nome `<ep>_c<NN>_<tipo>_<modelo>_<v>` + testes. (Nome antigo `CenaStoryboard` superado com a remoção do storyboard.)
+- [x] **R2b+ · Aba Produção no painel + divergências (pt162u)** — 30/10/2026: `#producao`, mapa 01, processo 1.2.0, VERSOES pedidos, legado documentado.
+- [x] **R2b · Direção NLM → CenaIndividual (passo 1)** — 30/10/2026 (José pt161u): `direcao_cenas_nlm` + `DirecaoCenas` 1.0.0 + fail-closed + gates; testes com adaptador falso. Worker ainda não reiniciado. Mapa 01 atualizado (pt162u).
+- [ ] **R3 · Adaptador Flow** (`GeradorVideo` sobre `NavegadorIdentidade`): cenas individuais em série → vídeo por cena (start frame/chain); concorrência 1, ritmo humano, falha rápida no drift. Piloto de 1 cena antes de 5 a 7.
 - [ ] **R4 · Adaptador Google Vids** (rota 2), mapeado do zero (não há extensão de referência).
 - [ ] **R5 · Adaptador Meta Vibes** (rota 3, obrigatória como fallback).
+- [x] **PROC-01 · Processo canônico de criação** (`docs/processos/`, activity `processo_criacao_conferir`, testes) — **OK José t149u / t160u** — Obs: playbooks Vids/Vibes ainda `a descobrir`; **reinício worker pendente** para ativar a activity em runtime.
 - [ ] **R6 · Ligar a cadeia no episódio:** o `EpisodioWorkflow` já não baixa vídeo do NotebookLM (t130u; essa geração foi descartada, não é alternativa). Falta ligar `CADEIA_VIDEO` com escolha explícita e registrada.
 - [ ] **R7 · HOLD final**: as 3 rotas falharam → estado HOLD + pedido de decisão (Telegram) + sinal do Temporal `decisao_video` (tentar de novo, rota, cancelar); testes com mocks.
 - [ ] **Logo, mapa do Brasil (t532, ajustado t131u):** não bloqueia gerar nem subir. Antes de tornar público, avisar o José para ele olhar `branding/overlay/logo-corner-br.png`, `logo-sting.png` e `logo-bug.png`. A correção do desenho pode ficar para depois.
 
+### Piloto EP1003 cafe-fraco (Flow · handoff t164u)
+Projeto ativo: `PQBR-EP1003-cafe-fraco-v3` (`9c4ad934-32d5-4fe3-a342-f6ea77068ae7`). v2 (`3a9ca558-…`) superado, não apagado. Antigo `025dcfef-…` HOLD intacto. Camofox PQBR only; 0 créditos; nunca logar; nada apagar. Próximo agente: BRIEFING + `processos/CRIACAO-README` + `flow.md` + `config/flow_projetos.json`.
+- [x] Processo canônico de criação (`docs/processos/`, PROC-01 / t160u) — 2026-10-29 — commit t160u
+- [x] Projeto Flow v2 `PQBR-EP1003-cafe-fraco-v2` + Agent/Character/Collections + fichas PERS/OBJ/AMB — 2026-10-29 — commit t163u `bc4101b`
+- [x] Storyboard **texto** Agente OK (8 painéis c01..c08, 0 créditos) — 2026-10-29 — commit t163u — **só histórico; removido do fluxo em 29/10/2026 (0.29.7)**
+- [x] Projeto Flow v3 `PQBR-EP1003-cafe-fraco-v3` + Agent/instruções/Referencias + fichas PERS/OBJ/AMB — 2026-10-30 (capa do Character v2 superada pela recriação; Character como objeto não criado no v3, Element PERS usado)
+- [x] 8 imagens de início de cena S01..S08 via Flow Agente (Nano Banana 2.1, 9:16, 0 créditos por still) + 8 prompts de movimento registrados, sem vídeo — 2026-10-30
+- [ ] Garantir coleções **Cenas/Finais** (não aceitam ser criadas vazias no Flow; formam-se com as mídias)
+- [ ] Revisão das imagens de início (`imagens_revisadas`) — piloto: José; depois: automática
+- [ ] Clipes / vídeo por cena (só após revisão das imagens de início)
+- [ ] MG-05 — edição motion no piloto + `gemini_juiz`
+- [ ] MG-11 — lote refação EP1002–EP1010 (após José assistir piloto)
+- [ ] MG-12 — `core-ultra` no papel `motion` + reinício worker (**OK José**)
+- [ ] JEV-02 — chave OpenRouter do fallback `decide()` (**José**)
+- [ ] Merge branch `cursor/t132u-flow-imagem-849c` → main (**OK José**)
+- [ ] MCP tool `estado`: ImportError residual (investigar se voltar; em t164u a tool respondeu OK)
+
+
+## Fase MG: motion graphics no pós (t145u regra e motor; t147u base visual; t153u peças; t155u aprovações; t156u Higgsfield descartado; t157u `core-ultra` proposta)
+Ref.: REGRAS §26, `docs/fases/motion-graphics.md`, `banco-fichas/referencias-motion/`. O bloco do porquê do episódio vira motion no mesmo idioma do stickman; um padrão fixo com variações sutis de lista fechada, por tipo de conteúdo e semente do episódio. O piloto de t145u (EP1003, cartum 2D) prova só a mecânica: vídeo base obsoleto e visual fora do traço (t147u). **t156u: Higgsfield DESCARTADO**; vídeos de `runtime/lote-saldo/` obsoletos; refação = MG-11. t148u: idioma = flat colorido de `banco-fichas/`. t150u: paleta, persona e `PlanoMotion.elenco` re-basiados; personagem presente (MG-09) e vocabulário do dossiê (MG-10, REF-MG-01). t153u: seis referências + seis peças; escolha de movimento delegada. **t155u:** REF-MG-00..07 `aprovada` (`indice.json` 0.4.0). **t157u:** proposta `core-ultra` (Opus 5.5) para o papel `motion` (MG-12), ainda sem alterar `modelos_9router.json`.
+
+- [x] **MG-01** Regra e documentos da base visual e da coletânea (t147u) — **OK José (t155u)** — Req: RF-09 · Depende de: t145u · Portão José: OK na coletânea inicial (REF-MG-00) · Obs: REGRAS §26, `docs/fases/motion-graphics.md` e `banco-fichas/referencias-motion/` (README, `indice.json`, REF-MG-00) escritos em 28/10 e commitados na main local (`264bf8b`). t150u: README, `indice.json` 0.2.0 e REF-MG-00 re-basiados no flat colorido; entra a REF-MG-01 (dossiê de movimento). **t155u:** REF-MG-00 e REF-MG-01 → `aprovada` (`indice.json` 0.4.0). OK do José na regra e nas fichas (feito).
+- [x] **MG-02** Propostas de referências externas (gramática: paleta, tipografia, textura, ritmo, movimento) e coletânea inicial — Req: RF-09 · Depende de: MG-01 · Portão José: aprova cada ficha (`aguardando_ok_jose` → `aprovada`); desde t153u a escolha do movimento é delegada e o OK é sobre a regra/ficha, não movimento a movimento · Obs: só ficha em texto + link + data; frame de terceiro nunca é guardado; a prova é renderizada pelo nosso motor. t150u: o dossiê whatships/MiniMax/0xMovez virou a REF-MG-01. **t153u:** o José entregou seis vídeos (bitrig, horizonx, omaphoto, vovy, raylight-2, valendata); a manutenção analisou por folha de contato e escreveu REF-MG-02..07. **t155u:** REF-MG-02..07 → `aprovada` (`indice.json` 0.4.0); OK sobre a regra/ficha (feito). As listas `awesome-ai-motion`/`awesome-opus-5-5-videos` deixam de ser o caminho.
+- [x] **MG-03** Catálogo v2 no padrão flat colorido do canal (fundo creme claro, contorno preto, cores chapadas do elenco) + fonte do canal — Req: RF-09 · Testes: `tests/unit/test_motion_*` · Depende de: MG-01 · Portão José: escolha da fonte (feita: Fredoka, t149u); OK visual do cartão novo pendente · Obs: **feito (t149u–t151u):** Fredoka (`PlanoMotion.fonte`), paleta do motor, `PlanoMotion.elenco` (`masculino`/`feminino`), persona `motion`, peso 800 → 700 no catálogo (teste confere o teto da fonte), `g.cartao` no motor (contorno preto 5 px e sombra chapada deslocada, sem desfoque, como o traço do stickman) usado em versus, origem-pino, recorte-aponta e imagem-cena. **Custo medido** (Chrome headless, bloco de 24 s a 30 fps, 720 quadros de tela cheia): 25–31 s por render, 35–43 ms por quadro; um bloco de 20 s custa ~25 s. **Decisão:** sem textura de papel (o conjunto t148u é flat; a textura só somaria custo sem ganho verificado). Os 8 modelos seguem a mesma mecânica do v1; novos modelos vêm no MG-10.
+- [ ] **MG-04** Variação determinística no `PlanoMotion` (categoria do conteúdo + semente derivada do código do episódio, lista fechada, sem repetir a variante anterior) + registro do contrato em `VERSOES` — Req: RF-09 · Testes: `tests/unit/test_motion_contrato.py` · Depende de: MG-03 · Obs: escolha registrada no plano; o Auditor confere a aderência à ficha. **Peso novo (t153u):** com a delegação, esta é a **única** instância que escolhe movimento; até ela existir no código, a escolha é da manutenção ao montar o plano e fica na `justificativa` de cada peça.
+- [ ] **MG-05** Piloto 2 com cenas stickman reais do Flow + `gemini_juiz` sobre o piloto — Req: RF-09, RF-11 · Depende de: MG-03, Fase 4V (cenas geradas no Flow), P17 parcial (instruções flat já regravadas) · Portão José: assiste ao piloto · Obs: o EP1003 em cartum 2D / Higgsfield não serve mais de base (t147u/t156u). Ordem (t155u/t156u): fechar produção no Flow → piloto 1 episódio do lote obsoleto (mídias Flow + edição motion) → José assiste → MG-11 lote. Piloto escolhido t158u: **EP1003 cafe-fraco** (ímpar → feminino / menina-rosa). Flow v2 `3a9ca558-…`: storyboard texto OK em t163u (só histórico). **Imagens de início de cena S01..S08 ainda não geradas** no v2 (imagens antigas em e2dacb70… reprovadas). Falta imagens de início + revisão (piloto: José; depois: automática) + vídeo/motion. Medir custo do papel `motion` em `pqbr.consumo_modelos` (MG-12).
+- [ ] **MG-06** Campo do bloco de números no contrato da cena individual e no template do NotebookLM — Req: RF-07, RF-09 · Testes: contrato cena · Depende de: MG-01 · Obs: próximo passo já previsto na P16; texto na tela sai só desse bloco (REGRAS §26). (Nome antigo: contrato do storyboard, superado.)
+- [ ] **MG-07** Activity `pos_motion` no worker (reinício exige OK) + checagem automática tela × bloco no Auditor — Req: RF-09, RF-11 · Depende de: MG-05, MG-06, F5-05 · Portão José: reinício do worker · Obs: divergência que muda o sentido reprova (CONTRATO §16.6).
+- [ ] **MG-08** Finalização e entrada do logotipo (t147u, pedido do José) — Req: RF-09 · Depende de: MG-03 · Portão José: escolhe o desenho (A: sting em motion no loop; B: bug no bloco + sting; C: só o bug — propostas em `docs/fases/motion-graphics.md`) antes de qualquer código · Obs: o PNG oficial do logo (`branding/overlay/`) é recurso do `PlanoMotion`, nunca redesenhado pelo motor; mola padrão, sem clichês; a regra t532/t131u (mapa não bloqueia, avisar antes de público) segue.
+- [x] **MG-09** Personagem presente no layout (t150u, pedido do José) — Req: RF-09 · Testes: `tests/unit/test_motion_contrato.py`, `test_motion_motor.py`, `test_motion_render.py` (render real no Chrome) · Obs: peça `catalogo/personagem-moldura.js` (personagem `PERS-*`, pose = recorte da ficha, canto, tamanho, espelhar), `PlanoMotion` 1.2.0 e `render.quadros()`; o render acusa quando o personagem cobre texto ou cartão. O personagem sai da ficha do `banco-fichas/`, não de `recursos`. A validação visual num vídeo de episódio real fica no MG-05.
+- [ ] **MG-10** Peças do vocabulário de movimento do dossiê (REF-MG-01): carimbo, tarja de redação, zoom que atravessa o texto, recorte-colagem, match cut e tipografia cinética — Req: RF-09 · Testes: `tests/unit/test_motion_*` · Depende de: MG-03 · Portão José: OK nas peças (cada uma nasce `aguardando_ok_jose`) — desde t153u o OK é sobre o vocábulo/regra, não peça a peça · Obs: repintadas no padrão flat colorido e na Fredoka; texto só do bloco de números travado, escrito pelo nosso motor (nunca texto de vídeo de IA); composição que alterna lado e eixo entre blocos; sem música; o modelo MiniMax não entra na cadeia. **Parcial (t153u):** seis peças novas a partir das REF-MG-02..07 — `frase-troca`, `marca-texto`, `numero-conta`, `leque`, `elo-causa`, `transicao-pincelada` —, catálogo 1.2.0, `fragmento_de` no `destaque` e prova em `banco-fichas/referencias-motion/provas/mg10-pecas.png`. Seguem candidatos: carimbo, tarja, zoom, recorte-colagem, match cut e o **riscado**.
+- [ ] **MG-11** Lote de refação EP1002–EP1010 sem Higgsfield (temas do `runtime/lote-saldo/` e `docs/pesquisas/lote-2510`) — Req: RF-09 · Depende de: MG-05 · Portão José: assiste ao piloto antes do lote · Obs: **t156u:** Higgsfield **DESCARTADO**; vídeos do lote de saldo obsoletos (não apagar mídia sem OK). EP1002 já em `_descartado/`. Demais: EP1003 cafe-fraco, EP1004 formiga, EP1005 liquidificador, EP1006 fechadura, EP1007 brigadeiro, EP1008 nao-e-bem-assim, EP1009 garrafa, EP1010 crostinha. Cadeia: Flow + identidade flat + edição em motion. Ordem: Flow → MG-05 → José assiste → este lote.
+- [ ] **MG-12** Combo `core-ultra` (Opus 5.5) no papel `motion` — Req: RF-09 · Depende de: combo no 9router (**feito t158u**) · Portão José: OK para alterar `config/modelos_9router.json` e reiniciar o worker · Obs: **t158u:** teste real → HTTP 200 ~3,4 s, `claude-opus-5-5-medium`; `core-ulta` → 404; stream sem pedido; ~2035 tokens entrada `estimated: true` (medir real em `pqbr.consumo_modelos`). Três camadas código→Jev→Opus. **NÃO aplicado:** `motion` segue `core-alto` até o OK. Piloto de medição: EP1003.
 ## Fase 5: estabilidade e produção (D5)
 
 - [x] **F5-01** Grade, coleta, 3 barreiras, R10, polêmica — Req: RF-01..RF-05 · Testes: TS-01, V4 · Depende de: F3-01 · Aceite: teste do incidente de 08/10 passa · Portão: nenhum · Obs: Obs: 2026-10-10 (t376): `src/pqbr/pipeline/grade.py` — 3 barreiras (exata, variação por núcleo de palavras, índice do banco), R10 também para sugestão do José, bloqueio absoluto por categoria, polêmica por componentes (pesos e limiar **PROPOSTA**, recalibrar), mistura configurável (`fracao_perene`, t378). Teste do incidente de 08/10 passa; no histórico só os 2 repetidos legados são pegos. 7/7. **Depende de t378 (escopo editorial, EM CONSTRUÇÃO — discutir com José).**
@@ -237,7 +296,7 @@ Ref.: `docs/pesquisas/PESQUISA-extensoes-geracao-em-serie.md` (leitura liberada,
 
 ## Fase 7: editorial e auditor
 
-- [x] **F7-00** (t378 → decidido t399/t400) Escopo editorial ≥ 80% origem de expressões/curiosidades, sazonal só na janela; visual 2D genérico; fichas pausadas. Regra em CONTRATO §16. Afeta F5-01 (fração configurável: 0,8) e F7-01.
+- [x] **F7-00** (t378 → decidido t399/t400) Escopo editorial ≥ 80% origem de expressões/curiosidades, sazonal só na janela. O visual genérico e as fichas pausadas dessa data foram substituídos pelo stickman (t133u, CONTRATO §19). A fração 0,8 segue em F5-01.
 
 - [x] **F7-03** (t400) Modelo de roteiro com bloco visual (`[ESTILO]/[PERSONAGEM]/[AMBIENTE]/[CENAS]`, CONTRATO §16.4) no `RoteiroShort` (Pydantic) + limite diário de uso do NotebookLM por contagem própria · Depende de: F3-01 · Aceite: roteiro inválido sem o bloco; contador bloqueia acima do limite · Portão: **G7 FECHADO 2026-10-17**
   - 2026-10-17: retomado por pedido do proprietário. `RoteiroShort` já exige `bloco_visual`; `tests/unit/test_f7_03_limits.py` cobre rejeição sem o bloco, bloqueio dos contadores locais e separação de `usage --json` via mock; 25 testes focados passaram, suíte `tests/unit` 107/107, `compileall` e `git diff --check` limpos. Nenhum uso real ou quota do NotebookLM foi executado. F7-03/G7 fechado pela aprovação do proprietário em 2026-10-17.
@@ -336,19 +395,34 @@ Ref.: `docs/pesquisas/PESQUISA-extensoes-geracao-em-serie.md` (leitura liberada,
 ---
 
 ## Fase: Conhecimento e agente externo agnóstico (t84u–t86u, 26/10/2026)
-- [x] **GitNexus [agora]:** global no servidor (1.6.12, fora do repo), índice da PQBR registrado, reindex no post-commit, pré-requisito fail-closed. ARQUITETURA §12.
-- [x] **Política por papel [agora]:** `config/politica_papeis.json` + filtro no Hindsight e no adaptador GitNexus.
+
+> **Ressalva (29/10/2026, ordem do José):** se `GitNexus` for chamado acidentalmente nesta aplicação ou na documentação, leia-se **codebase-memory-mcp** — o backend atual da ferramenta `codigo` do pqbr-mcp. O GitNexus original (1.6.12) foi substituído em 29/10/2026 e permanece apenas no histórico e em `_obsoleto/`, sem desinstalar até ordem expressa.
+- [x] **Índice de código do MCP [agora]:** codebase-memory-mcp 0.12.1 (usuário, MIT, fora do repo), índice da PQBR registrado, reindex no post-commit, pré-requisito fail-closed. ARQUITETURA §12.
+- [x] **Política por papel [agora]:** `config/politica_papeis.json` + filtro no Hindsight e no adaptador do MCP (`codigo_consultar`, política 1.6.0).
 - [x] **Servidor MCP da PQBR só na tailnet (t89u, OK do José):** `pqbr-mcp`, 127.0.0.1:8791 + tailscale serve, só leitura, token por cliente.
 - [x] **AGENTS.md gerado (t89u)** do onboarding do MCP.
 - [x] Reclassificar com tags as memórias legadas sem tag (feito em t90u).
-- [x] **Escrita de memória pelo MCP (t95u/t96u):** `registrar_memoria`/`registrar_alteracao` (contrato 1.0.0), só papel com escrita na política, autor = cliente do token, referência a commit verificado e arquivos.
+- [x] **Escrita de memória pelo MCP (t95u/t96u):** `registrar_memoria`/`registrar_alteracao` (contrato 1.0.0), só papel com escrita na política, autor = cliente do token, referência a commit verificado e arquivos. **t154u:** a escrita virou **assíncrona e idempotente** (`async: true` + `operation_id` determinístico por cliente/commit/conteúdo); timeout do POST ao Hindsight configurável (`PQBR_HINDSIGHT_TIMEOUT`, padrão 120 s, antes 30 s fixos). Reenviar a mesma alteração não duplica.
 - [x] **ESTADO-ATUAL (t98u/t99u):** `docs/ESTADO-ATUAL.md` é a fonte única do handoff, a 1ª seção do onboarding/AGENTS.md; hook pre-commit e `registrar_alteracao` (tipo correcao/pendencia_resolvida) exigem a atualização; handoff no Hindsight (tag `estado`, todos os papéis).
 - [x] **Papel `mantenedor` externo (t112u–t117u):** política 1.4.0 (lê todas as tags, repo todo, constrói/liga módulos; reinício/migração com OK); pqbr-mcp 0.4.0 exclusivo do mantenedor (outro papel 401/403); reiniciado e validado ao vivo; persistência verificada. Doc: `docs/operacao/onboarding-agente-externo.md`.
 - [x] **Teste de agente do zero (t96u):** URL tailnet + token `mantenedor-externo` → onboarding → buscar_memoria → commit local `b63fa56` → registrar_alteracao → buscar_memoria retornou em ~10 s; indexador negado; sem token 401.
-- [x] Licença do GitNexus aceita (uso pessoal, sem revenda; t90u).
+- [x] **Licença do backend do MCP:** MIT (codebase-memory-mcp). A licença do backend anterior (aceita em t90u para uso pessoal) não servia para uso com fins lucrativos — motivo da migração (ADR-012).
 - [x] **Reclassificação do Hindsight por papel (t90u):** `scripts/hindsight/reclassificar.py`; 220 candidatas a descarte em `docs/operacao/hindsight-descarte-candidatos.md`.
 - [x] Descarte das candidatas (t90s398): 231 apagadas após a indexação; docs vigentes corrigidos; indexador com a regra única de tags.
 - [x] Revisar as 7 candidatas mantidas (sem substituta direta). Feito em t128u (27/10): as sete apagadas com OK do José; backup fora do git; bank 884 → 877.
+
+- [x] **Migração do backend do `codigo` para codebase-memory-mcp (29/10/2026, OK José com os recomendados):** CBM 0.12.1 (MIT, SHA-256 conferido, `--skip-config`, Lens desligada, stdio) como backend do `codigo`; adaptador `src/pqbr/integrations/codebase_memory.py`; política 1.6.0; vigia com entrada CBM + leitor de binário; scripts `scripts/codebase-memory/`; backend anterior preservado em `_obsoleto/` (índice fora do repo) sem desinstalar; Passo 4 verde (consultas lado a lado, `detect_changes` com exatamente os arquivos da migração, vigia `em_dia`, suíte 686 passados + 2 falhas pré-existentes EP1003). ADR-012, CHANGELOG 0.29.5. Pendente: desinstalação do backend anterior (só com ordem expressa).
+
+## Caderno Mestre e fluxo intelectual (t168u/t169u) — status 31/10/2026
+
+- [x] Contratos `BriefingEfemerico` 1.0.0; `CenaIndividual`/`DirecaoCenas` 2.0.0 (`PQBR-EP####-S##`); pedidos 1.1.0
+- [x] Caderno mestre canônico `00ce61ae-ab72-4f5a-a405-e1381377bc38` (norteador; nunca mídia); legado `c35d7b24` exportado e proibido
+- [x] Activities `nlm_mestre_*` + abrir efêmero com briefing (código; **falta reinício** do worker)
+- [ ] Runtime: reinício `pqbr-notebooklm-worker` / `pqbr-episodio-worker` (OK José)
+- [ ] Passo 2: adaptador Temporal → Flow (agente só UI)
+- [x] **Próximo tópico (José 31/10, piloto t170u):** papel do mestre e do efêmero no processo de **validação e auditoria** — mestre + efêmero de auditoria criados e testados no EP1003; activity Temporal e registro em banco pendentes
+- [ ] **Próximo tópico (José 31/10):** José ajusta as **referências VISUAIS** das imagens (fichas de personagens, objetos, estilo/`banco-fichas`) — fora do código até ele entregar
+
 
 ## Anexo: fases e portões (ex-PLANO.md, incorporado em 11/10, t394)
 ### PLANO da PQBR (fases, portões e rollback)
@@ -375,6 +449,7 @@ Ref.: `docs/pesquisas/PESQUISA-extensoes-geracao-em-serie.md` (leitura liberada,
 | 3 | Contratos Pydantic v2, migração base, scanner de segredos | **G3** | migrações com `down` |
 | 4 | Migração do notebooklm-py (runbook F4-00..F4-09) | **G4** a cada passo; José em F4-02/04/05/06/08/09 | voltar ao pipx 0.8.2 e ao crontab salvo |
 | 5 | Grade, barreiras, `EpisodioWorkflow`, Schedules, fichas, render | **G5** (paralelo) e **G5b** (corte do fluxo antigo + pausa do `rede`) | pausar Schedules; fluxo antigo segue até G5b |
+| MG | Motion graphics no pós: coletânea e fichas REF-MG aprovadas (t155u); catálogo v2 flat (t149u/t150u); seis peças (t153u); piloto 2 (MG-05); bloco de números; activity; logo; lote refação sem Higgsfield (MG-11); `core-ultra`/Opus 5.5 proposta (MG-12) | **OK José na regra/fichas (feito t155u); no piloto 2 (MG-05); no desenho do logo (MG-08); no reinício (MG-07); combo testado (t158u); OK troca+reinício (MG-12)** | desligar a activity; o catálogo v1 e o pós sem motion continuam |
 | 6 | Resiliência | **G6** | pausar o guardião |
 | 7 | Contrato v2 e auditor | **G7** | v1 e auditor v3 como referência |
 | 8 | Publicação, item 5, Drive, revisão humana | **G8** | pausar publicação; vídeos de teste privados |
@@ -414,7 +489,7 @@ Ordem: 0.5 ∥ 0 → 1 → 3 ∥ 4 → 5 → 6 → 7 → 8 → 9 → 10 → 11 �
 
 - [x] Drive PQBR criado (12/10): pasta + 7 subpastas, upload testado; IDs em `config/drive_pastas.json`.
 - [x] **JEV-01** Chave do Jev configurada (12/10): `TYPESAFE_API_KEY` em `~/.pqbr/worker.env` (600; o segredo no Paperclip é histórico); endpoint `api.typesafe.ai/v1/systemone`, `jev-latest`; teste ok. O `pqbr-temporal-worker` lê no próximo reinício.
-- [ ] **JEV-02** Chaves de fallback do `decide()` (OpenRouter; depois OpenAI, modelo em H7) — Portão: José (pendente).
+- [ ] **JEV-02** Chave OpenRouter do fallback do `decide()` (depois OpenAI, modelo em H7). Faz parte do **JEV-EF**: a chave é pedida ao José quando o `decide()` for ligado. Portão: José.
 - [x] **HS-01** Dono da manutenção do Hindsight (bank `pqbr`) — 12/10: decidido pelo José. Dev Corretor mantém (reindexação diária, poda, dedupe, sem segredos); Observador mede (hit rate/staleness nos relatórios). Aplicado em `company/agents/*/AGENTS.md`, nas instruções vivas do Paperclip (instructions-file:put, adapters mantidos) e em AGENTES.md.
 - [x] **CAT-01** Categoria YouTube = 27 Educação (12/10, José): `CATEGORIA_YOUTUBE` em `contratos`, usado no dry-run; SPEC RF-06 corrigida (`containsSyntheticMedia`=false).
 - [x] **NLM-EF-01** Cadernos efêmeros + pacote canônico (12/10, José; ADR-003): migração 0014, `workflows/pacote.py`, `nlm_caderno` por id do episódio, arquivamento e `ApagarCadernoWorkflow` D+2; playbook `nlm-cadernos`.

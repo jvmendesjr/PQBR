@@ -13,7 +13,7 @@ from temporalio.common import RetryPolicy
 from temporalio.exceptions import ApplicationError
 
 with workflow.unsafe.imports_passed_through():
-    from ..contratos import GradeDiaria, ItemGrade, VereditoAuditor, RoteiroShort, CTA, BlocoVisual, CenaVisual, ESTILO_PADRAO_2D, PUBLICAVEL, VereditoTipo
+    from ..contratos import GradeDiaria, ItemGrade, VereditoAuditor, RoteiroShort, CTA, BlocoVisual, CenaVisual, ESTILO_PADRAO_STICKMAN, PUBLICAVEL, VereditoTipo
     from ..pipeline.grade import Candidato, montar_grade
     from .narracao import gerar_narracao
 
@@ -77,8 +77,8 @@ async def gravar_grade(g: GradeDiaria) -> int:
 async def gerar_roteiro_nb(p: PedidoEpisodio) -> RoteiroShort:
     _sim(p.simulacao, "NotebookLM (conta de produção)")
     falas = [f"{p.item.tema}"] + ["E a explicação é mais lógica do que parece, e a gente nem percebe no dia a dia."] * 6 + [CTA]
-    bloco = BlocoVisual(estilo=ESTILO_PADRAO_2D,
-                        personagem="adulto de uns 35 anos, camiseta verde, bigode (simulado)",
+    bloco = BlocoVisual(estilo=ESTILO_PADRAO_STICKMAN,
+                        personagem="stickman de cabeça branca, membros de palito, óculos vermelhos, boca de reação (simulado)",
                         cenas=[CenaVisual(fala=f, acao="personagem reage", enquadramento="plano médio",
                                           ambiente="cozinha brasileira") for f in falas[:2]])
     return RoteiroShort(episodio_id=p.codigo.lower(), titulo=p.item.tema[:100], falas=falas, tipo_cta="fallback",

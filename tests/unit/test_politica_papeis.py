@@ -1,7 +1,7 @@
 import pytest
 from pqbr.contratos.politica import carregar, AcessoNegado, PoliticaPapeis
 from pqbr.storage import hindsight
-from pqbr.integrations import gitnexus
+from pqbr.integrations import codebase_memory
 
 P = carregar()
 
@@ -20,7 +20,7 @@ def test_papel_desconhecido_fail_closed():
     with pytest.raises(AcessoNegado):
         hindsight.recuperar("x", papel=None, transporte=lambda u, c: {})
     with pytest.raises(AcessoNegado):
-        gitnexus.consultar("intruso", "context", "X", executor=lambda a: {})
+        codebase_memory.consultar("intruso", "context", "X", executor=lambda a: {})
 
 
 def test_escrita_fora_das_tags_negada():
@@ -48,15 +48,20 @@ def test_indexador_nao_le():
         hindsight.recuperar("q", papel="indexador", transporte=lambda u, c: {})
 
 
-def test_gitnexus_filtra_caminhos_e_ferramenta():
+def test_codigo_filtra_caminhos_e_ferramenta():
     resp = {"symbol": {"filePath": "src/pqbr/workflows/publicacao.py"},
             "incoming": {"imports": [{"filePath": "src/pqbr/workflows/worker_episodio.py"}, {"filePath": "docs/x.md"}]}}
     with pytest.raises(AcessoNegado):
-        gitnexus.consultar("auditor", "context", "X", executor=lambda a: resp)   # sem a ferramenta
-    r = gitnexus.consultar("dev", "context", "X", executor=lambda a: resp)
+        codebase_memory.consultar("auditor", "context", "X", executor=lambda a: resp)   # sem a ferramenta
+    r = codebase_memory.consultar("dev", "context", "X", executor=lambda a: resp)
     assert len(r["incoming"]["imports"]) == 2
     with pytest.raises(ValueError):
-        gitnexus.consultar("dev", "cypher", "MATCH (n) DETACH DELETE n", executor=lambda a: resp)
+        codebase_memory.consultar("dev", "cypher", "MATCH (n) DETACH DELETE n", executor=lambda a: resp)
+    with pytest.raises(ValueError):
+        codebase_memory.consultar("dev", "query_graph", "MATCH (n) RETURN n", executor=lambda a: resp)
+    # ambiguidade filtrada pelo papel: dev ve src/, nao infra/; sem candidato visivel, vira negado, nao vazamento
+    amb = {"status": "ambiguous", "suggestions": [{"qualified_name": "PQBR.infra.mcp.x.f", "file_path": "infra/mcp/x.py"}]}
+    assert codebase_memory.consultar("dev", "context", "f", executor=lambda a: amb) == {"status": "negado", "motivo": "nenhum candidato visível para o papel"}
 
 
 def test_caminho_absoluto_ou_curinga_invalido():
@@ -92,7 +97,7 @@ def test_mantenedor_ve_repo_todo_e_escreve_manutencao():
 
 
 @pytest.mark.parametrize("papel", ["diretor", "lider-editorial", "pesquisador-origem", "auditor",
-                                   "lider-compliance", "guardiao-seguranca", "observador", "dev"])
+                                   "lider-compliance", "guardiao-seguranca", "observador", "dev", "motion"])
 def test_papeis_internos_continuam_restritos(papel):
     assert set(P.papeis[papel].leitura) < set(P.papeis["mantenedor"].leitura)
     fora = sorted(set(P.papeis["indexador"].escrita) - set(P.papeis[papel].leitura))[0]

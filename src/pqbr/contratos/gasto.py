@@ -35,14 +35,6 @@ GASTO_SEO_FALLBACK = AutorizacaoGasto(
     agente="combo já definido em config/modelos_9router.json; o agente não troca o modelo",
 )
 
-GASTO_STORYBOARD = AutorizacaoGasto(
-    etapa="storyboard",
-    modelo="notebooklm-chat",
-    pode_gastar=True,
-    meio="chat_caderno",
-    deterministico="Storyboard 1.2.0 reprova JSON inválido; imagens_revisadas fica false; sem imagem e sem vídeo",
-    agente="o ask devolve o JSON das fichas; não gera imagem nem vídeo",
-)
 
 GASTO_VIDEO_NLM = AutorizacaoGasto(
     etapa="notebooklm_video",
@@ -67,8 +59,8 @@ GASTO_FLOW_IMAGEM = AutorizacaoGasto(
     modelo="google-flow",
     pode_gastar=True,
     meio="imagem",
-    deterministico="imagens do Flow são gratuitas (t131u); sem teto de quantidade para o storyboard",
-    agente="gera as imagens das fichas; não troca para um modelo pago de imagem",
+    deterministico="imagens do Flow são gratuitas (t131u). Em 27/10 a tela gerou com Nano Banana 2 Lite, 9:16, e a ficha não mostrou crédito (t132u). Sem teto para cenas individuais (board removido 29/10/2026)",
+    agente="não troca para vídeo nem para 2K/4K Aprimorada; se sair pessoa em vez de stickman, não repete o mesmo texto",
 )
 
 GASTO_FLOW_VIDEO = AutorizacaoGasto(
@@ -78,4 +70,23 @@ GASTO_FLOW_VIDEO = AutorizacaoGasto(
     meio="video",
     deterministico="gasta o saldo que houver no Flow; acabou, Google Vids; depois Meta Vibes",
     agente="lê a tela no Camofox e segue; não inventa seletor",
+)
+
+
+GASTO_DIRECAO_CENAS = AutorizacaoGasto(
+    etapa="direcao_cenas",
+    modelo="notebooklm-chat",
+    pode_gastar=True,
+    meio="chat_caderno",
+    deterministico="JSON vira DirecaoCenas 2.0.0 + validacao fail-closed; sem imagem/video",
+    agente="o ask devolve o JSON; nao escolhe modelo",
+)
+
+GASTO_BRIEFING_MESTRE = AutorizacaoGasto(
+    etapa="briefing_mestre",
+    modelo="notebooklm-chat",
+    pode_gastar=True,
+    meio="chat_caderno",
+    deterministico="JSON vira BriefingEfemerico 1.0.0; limpa chat do mestre; sem midia",
+    agente="o ask devolve o JSON; nao escolhe generate",
 )
