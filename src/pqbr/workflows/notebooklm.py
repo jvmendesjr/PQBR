@@ -24,8 +24,34 @@ PERSONA = Path(os.environ.get("PQBR_NLM_PERSONA", "/home/pc/Workspace/PQBR/templ
 # Quota oficial é observada separadamente via `notebooklm usage --json`.
 LIMITES = {"chat": int(os.environ.get("PQBR_NLM_CHATS_DIA", "500")), "video": int(os.environ.get("PQBR_NLM_VIDEOS_DIA", "20"))}
 TETO_JANELA = 80.0
-MESTRES_PROIBIDOS = {"88246689", "c35d7b24-5d4f-4eee-afc4-7a0eadc860bf"}
+MESTRES_PROIBIDOS = {"88246689", "c35d7b24-5d4f-4eee-afc4-7a0eadc860bf"}  # legado; mestre novo NÃO entra aqui
 SLUG = re.compile(r"^[a-z0-9][a-z0-9-]{1,60}$")
+
+
+def _mestre_norteador_id() -> str | None:
+    try:
+        from pqbr.config_caderno_mestre import id_mestre
+        return id_mestre()
+    except Exception:  # noqa: BLE001
+        return None
+
+
+def _eh_proibido(caderno: str, *, permitir_norteador: bool = False) -> bool:
+    """Legado sempre proibido. Mestre novo (config) só é permitido quando permitir_norteador=True (chat/fonte)."""
+    if caderno in MESTRES_PROIBIDOS or caderno[:8] in MESTRES_PROIBIDOS:
+        return True
+    mid = _mestre_norteador_id()
+    if mid and caderno == mid and not permitir_norteador:
+        return True
+    return False
+
+
+def _recusar_midia_mestre(caderno: str) -> None:
+    from pqbr.config_caderno_mestre import recusar_midia_se_mestre
+    recusar_midia_se_mestre(caderno)
+    if caderno in MESTRES_PROIBIDOS or caderno[:8] in MESTRES_PROIBIDOS:
+        raise RuntimeError("caderno mestre proibido")
+
 UUID = re.compile(r"^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
 CODIGO = re.compile(r"^PQBR-EP[0-9]{4,}$")
 FILA_REGISTRO = "episodio-pqbr"   # atividades de banco/Drive do ciclo do caderno (workflows/pacote.py)
@@ -140,25 +166,26 @@ async def nlm_caderno(slug: str, codigo: str | None = None, existente: str | Non
     lst = list(_ids(_json(await asyncio.to_thread(_cli, "list", "--json", timeout=120))))
     if codigo:
         if existente:
-            if not UUID.match(existente) or existente in MESTRES_PROIBIDOS: raise RuntimeError("caderno registrado inválido")
+            if not UUID.match(existente) or _eh_proibido(existente): raise RuntimeError("caderno registrado inválido")
             if any(n["id"] == existente for n in lst): return existente
             raise RuntimeError(f"caderno registrado {existente} sumiu do NotebookLM (revisar antes de recriar)")
         titulo = titulo_caderno(codigo, slug)
     else:
         titulo = f"Short - {slug}"
         for n in lst:
-            if n.get("title") == titulo and n["id"] not in MESTRES_PROIBIDOS:
+            if n.get("title") == titulo and not _eh_proibido(n["id"]):
                 return n["id"]
     novo = next(_ids(_json(await asyncio.to_thread(_cli, "create", titulo, "--json", timeout=120))))["id"]
-    if novo in MESTRES_PROIBIDOS: raise RuntimeError("caderno mestre proibido")
+    if _eh_proibido(novo): raise RuntimeError("caderno mestre proibido")
     return novo
 
 
 @activity.defn
-async def nlm_persona(caderno: str) -> str:
-    """Regra canônica (t427): todo caderno recebe o preset de persona ANTES de qualquer atividade."""
-    if caderno in MESTRES_PROIBIDOS: raise RuntimeError("caderno mestre proibido")
-    texto = PERSONA.read_text(encoding="utf-8").strip()[:10000]
+async def nlm_persona(caderno: str, texto_persona: str | None = None) -> str:
+    """Regra canônica (t427): todo caderno recebe o preset de persona ANTES de qualquer atividade.
+    Mestre norteador permitido (t168u); legado continua proibido."""
+    if _eh_proibido(caderno, permitir_norteador=True): raise RuntimeError("caderno mestre proibido")
+    texto = (texto_persona or PERSONA.read_text(encoding="utf-8")).strip()[:10000]
     await asyncio.to_thread(_cli, "configure", "-n", caderno, "--persona", texto, timeout=120)
     return "persona ok"
 
@@ -169,13 +196,14 @@ class VideoNotebookLMDescartado(RuntimeError):
 
 @activity.defn
 async def nlm_baixar_video(caderno: str, artefato: str, destino: str) -> dict:
+    _recusar_midia_mestre(caderno)
     _ = (caderno, artefato, destino)
     raise VideoNotebookLMDescartado("NotebookLM não gera vídeo; download descartado (t130u)")
 
 
 @activity.defn
 async def nlm_fonte(caderno: str, slug: str, texto: str) -> str:
-    if caderno in MESTRES_PROIBIDOS: raise RuntimeError("caderno mestre proibido")
+    if _eh_proibido(caderno, permitir_norteador=True): raise RuntimeError("caderno mestre proibido")
     tmp = HOME / "tmp"; tmp.mkdir(exist_ok=True)
     f = tmp / f"{slug}.md"; f.write_text(texto, encoding="utf-8")
     try:
@@ -188,17 +216,19 @@ async def nlm_fonte(caderno: str, slug: str, texto: str) -> str:
 
 
 @activity.defn
-async def nlm_pesquisa_web(caderno: str, consulta: str) -> str:
-    if caderno in MESTRES_PROIBIDOS: raise RuntimeError("caderno mestre proibido")
-    out = await asyncio.to_thread(_cli, "source", "add-research", "-n", caderno, "--mode", "fast", "--import-all",
+async def nlm_pesquisa_web(caderno: str, consulta: str, modo: str = "fast") -> str:
+    if _eh_proibido(caderno, permitir_norteador=True): raise RuntimeError("caderno mestre proibido")
+    modo = modo if modo in ("fast", "deep") else "fast"
+    out = await asyncio.to_thread(_cli, "source", "add-research", "-n", caderno, "--mode", modo, "--import-all",
                                   "--timeout", "600", consulta[:1500], timeout=1300)
     return out[-500:]
 
 
 @activity.defn
 async def nlm_perguntar(caderno: str, pergunta: str) -> str:
+    if _eh_proibido(caderno, permitir_norteador=True): raise RuntimeError("caderno mestre proibido")
     _contador("chat")   # conta antes: chamada iniciada consome
-    out = await asyncio.to_thread(_cli, "ask", "-n", caderno, pergunta, "--json", timeout=600)  # nunca --new
+    out = await asyncio.to_thread(_cli, "ask", "-n", caderno, pergunta, "--json", timeout=600)  # nunca --new no efêmero
     try:
         j = _json(out); return str(j.get("answer") or j.get("text") or j)[:20000]
     except Exception:
@@ -207,6 +237,7 @@ async def nlm_perguntar(caderno: str, pergunta: str) -> str:
 
 @activity.defn
 async def nlm_artefatos_video(caderno: str) -> list[dict]:
+    _recusar_midia_mestre(caderno)
     j = _json(await asyncio.to_thread(_cli, "artifact", "list", "-n", caderno, "--type", "video", "--json", timeout=120))
     return [{"id": a["id"], "status": str(a.get("status", ""))} for a in _ids(j)]
 
@@ -241,6 +272,7 @@ def steering_short(bloco: str = "") -> str:
 
 @activity.defn
 async def nlm_gerar_short(caderno: str, steering: str = "") -> str:
+    _recusar_midia_mestre(caderno)
     _ = (caderno, steering)
     if GASTO_VIDEO_NLM.pode_gastar:
         raise RuntimeError("contrato de vídeo do NotebookLM não pode autorizar gasto")
@@ -370,7 +402,8 @@ async def nlm_fontes_urls(caderno: str, registradas: list[str]) -> list[dict]:
 @activity.defn
 async def nlm_gerar_capa(caderno: str, destino: str, prompt: str) -> dict:
     """t464: capa = infográfico retrato do próprio caderno (teste t460); falha → o episódio usa A9 num quadro."""
-    if caderno in MESTRES_PROIBIDOS: raise RuntimeError("caderno mestre proibido")
+    _recusar_midia_mestre(caderno)
+    if _eh_proibido(caderno): raise RuntimeError("caderno mestre proibido")
     Path(destino).parent.mkdir(parents=True, exist_ok=True)
     await asyncio.to_thread(_cli, "generate", "infographic", "-n", caderno, "--orientation", "portrait", "--detail", "concise",
                             "--language", "pt_BR", "--wait", "--timeout", "900", "--json", prompt, timeout=960)
@@ -380,4 +413,72 @@ async def nlm_gerar_capa(caderno: str, destino: str, prompt: str) -> dict:
     return {"arquivo": str(f), "bytes": f.stat().st_size}
 
 
-ATIVIDADES = [nlm_fontes_urls, nlm_fontes_ids, nlm_gerar_capa, nlm_checar_saldo, nlm_pesquisa_web, nlm_caderno, nlm_persona, nlm_baixar_video, nlm_fonte, nlm_perguntar, nlm_artefatos_video, nlm_gerar_short]
+
+
+# ---- Caderno mestre norteador (t168u): chat/fonte ok; mídia nunca; limpeza com ask --new ----
+
+@activity.defn
+async def nlm_mestre_perguntar(caderno: str, pergunta: str, salvar_nota: bool = True) -> str:
+    """Pergunta ao mestre norteador (allowlist por config). Opcionalmente salva a resposta como note."""
+    mid = _mestre_norteador_id()
+    if not mid or caderno != mid:
+        raise RuntimeError("só o caderno_mestre_id configurado pode usar nlm_mestre_perguntar")
+    if caderno in MESTRES_PROIBIDOS:
+        raise RuntimeError("caderno mestre legado proibido")
+    _contador("chat")
+    args = ["ask", "-n", caderno, pergunta, "--json"]
+    if salvar_nota:
+        args.extend(["--save-as-note", "--note-title", "briefing-efemero"])
+    out = await asyncio.to_thread(_cli, *args, timeout=600)
+    try:
+        j = _json(out)
+        return str(j.get("answer") or j.get("text") or j)[:20000]
+    except Exception:
+        return out[:20000]
+
+
+@activity.defn
+async def nlm_mestre_limpar_chat(caderno: str) -> str:
+    """Apaga a conversa server-side do mestre (ask --new -y). Não usar no efêmero de produção."""
+    mid = _mestre_norteador_id()
+    if not mid or caderno != mid:
+        raise RuntimeError("limpeza de chat só no caderno_mestre_id configurado")
+    # ask --new -y sem pergunta efetiva: a CLI exige pergunta; usamos marcador mínimo
+    await asyncio.to_thread(_cli, "ask", "-n", caderno, "--new", "-y", "ping-limpeza-contexto", "--json", timeout=180)
+    return "chat mestre limpo"
+
+
+@activity.defn
+async def nlm_mestre_briefing(pedido: dict) -> dict:
+    """Pede briefing ao mestre, valida BriefingEfemerico, limpa chat. Adaptador falso para testes."""
+    from pqbr.contratos.briefing_mestre import PedidoBriefingMestre
+    from pqbr.motores.briefing_mestre import AdaptadorFalsoBriefing, AdaptadorNotebookLMBriefing
+
+    dados = dict(pedido)
+    nome = dados.pop("adaptador", None) or "notebooklm"
+    p = PedidoBriefingMestre.model_validate(dados)
+    if nome == "falso":
+        b = AdaptadorFalsoBriefing(p.caderno_mestre_id or "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee").briefar(p)
+    else:
+        b = await AdaptadorNotebookLMBriefing().abriefar(p)
+    return b.model_dump()
+
+
+@activity.defn
+async def nlm_abrir_efemero_com_briefing(pedido: dict) -> dict:
+    """Cria/reusa efêmero, aplica persona e pesquisa do briefing; não gera mídia."""
+    from pqbr.contratos.briefing_mestre import BriefingEfemerico
+
+    b = BriefingEfemerico.model_validate(pedido["briefing"])
+    codigo = pedido.get("codigo") or b.codigo
+    slug = pedido.get("slug") or b.slug or "tema"
+    if not codigo:
+        raise RuntimeError("codigo obrigatório para abrir efêmero")
+    existente = pedido.get("caderno_registrado")
+    nb = await nlm_caderno(slug, codigo, existente)
+    await nlm_persona(nb, b.persona_efemero)
+    if b.pesquisa_obrigatoria:
+        await nlm_pesquisa_web(nb, b.prompt_pesquisa, modo=b.modo_pesquisa)
+    return {"caderno": nb, "codigo": codigo, "slug": slug, "pesquisa": b.prompt_pesquisa, "modo": b.modo_pesquisa}
+
+ATIVIDADES = [nlm_fontes_urls, nlm_fontes_ids, nlm_gerar_capa, nlm_checar_saldo, nlm_pesquisa_web, nlm_caderno, nlm_persona, nlm_baixar_video, nlm_fonte, nlm_perguntar, nlm_artefatos_video, nlm_gerar_short, nlm_mestre_perguntar, nlm_mestre_limpar_chat, nlm_mestre_briefing, nlm_abrir_efemero_com_briefing]

@@ -186,6 +186,24 @@ class EpisodioWorkflow:
         await workflow.execute_activity(processo_criacao_conferir, args=["flow"], start_to_close_timeout=timedelta(minutes=1), retry_policy=RetryPolicy(maximum_attempts=1))
         pac = await workflow.execute_activity(pacote_garantir, **curto)               # t459: versão do pacote (hash)
         reg = await workflow.execute_activity(registro_buscar_caderno, p.codigo, **curto)
+        briefing = None
+        if getattr(p, "usar_mestre", True):
+            briefing = await workflow.execute_activity(
+                "nlm_mestre_briefing",
+                {
+                    "tema": p.tema or p.slug,
+                    "codigo": p.codigo,
+                    "slug": p.slug,
+                    "n_cenas": p.n_cenas,
+                    "limpar_chat_apos": True,
+                    "salvar_nota": True,
+                    "adaptador": "notebooklm",
+                },
+                start_to_close_timeout=timedelta(minutes=20),
+                retry_policy=RetryPolicy(maximum_attempts=1),
+                task_queue="notebooklm-pqbr",
+            )
+            self._criativo["briefing"] = briefing
         nlm = await workflow.execute_child_workflow(
             NotebookLMWorkflow.run, PedidoNotebookLM(tipo="short", slug=p.slug, fonte=p.roteiro_texto, solicitante="episodio",
                                                      episodio=p.codigo, caderno_registrado=reg,
