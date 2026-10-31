@@ -12,7 +12,7 @@ import portoes  # noqa: E402  (31/10/2026: aba Portões, só leitura)
 MAPA = Path(__file__).resolve().parents[2] / "docs/mapa"
 TITULOS = {"00": "Visão geral", "01": "Episódio", "02": "Reposição de temas", "03": "Acessos / Camofox", "04": "Descarte",
            "05": "Vigia de atualizações", "06": "Runs presos", "07": "Cadeia de vídeo", "08": "Identidade Camofox",
-           "09": "Agentes", "10": "Catálogo de erros", "11": "Publicação", "12": "Cenas e elenco", "13": "Memória, MCP e handoff"}
+           "09": "Agentes", "10": "Catálogo de erros", "11": "Publicação", "12": "Cenas e elenco", "13": "Memória, MCP e handoff", "14": "Acompanhamento de mudanças"}
 
 
 def gerar() -> str:
