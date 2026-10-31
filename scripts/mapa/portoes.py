@@ -132,7 +132,7 @@ _PORTOES_TEXTO: dict[str, tuple[str, str]] = {
         "Nenhuma ordem nova: a P13 está fechada. A ferramenta já está no código, sem efeito externo.",
     ),
     "P14": (
-        "Registrado no código do worker principal (workflow + activity, sem agenda recorrente ainda). Canário: Camofox /health, não tela do Flow. Reinício e execução manual a confirmar nesta entrega.",
+        "Registrado no worker principal e executado manualmente em 31/10/2026 (fallbacks 0, deriva 0, canário Camofox ok). Sem agenda recorrente ainda. Canário: Camofox /health, não tela do Flow.",
         "Ordem separada, quando o José decidir a frequência: criar a agenda recorrente do acompanhamento. Até lá, execução manual.",
     ),
     "P16": (
