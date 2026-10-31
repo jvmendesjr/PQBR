@@ -13,6 +13,7 @@ from .producao import GradeDiariaWorkflow, EpisodioProducaoWorkflow, ATIVIDADES 
 from .temas import ReposicaoTemasWorkflow, ATIVIDADES_TEMAS
 from .acesso import AcessosWorkflow
 from .atualizacoes import VigiaAtualizacoesWorkflow, ATIVIDADES_VIGIA
+from .acompanhamento import AcompanhamentoMudancasWorkflow, ATIVIDADES_ACOMPANHAMENTO
 from .telegram_bot import ATIVIDADES_TELEGRAM
 from .ponte_atividades import ATIVIDADES_PONTE
 from .paperclip import (abrir_issue_paperclip, comentar_paperclip, ler_propostas_paperclip,
@@ -34,11 +35,11 @@ async def main() -> None:
     instalar_no_logging()
     c = await client()
     w = Worker(c, task_queue=FILA, workflows=[EpisodioWorkflow, PonteTemporalPaperclipWorkflow, CorrecaoAutonomaWorkflow, AcessosWorkflow,
-                          RetencaoConsumoWorkflow, GradeDiariaWorkflow, EpisodioProducaoWorkflow, ReposicaoTemasWorkflow, VigiaAtualizacoesWorkflow],
+                          RetencaoConsumoWorkflow, GradeDiariaWorkflow, EpisodioProducaoWorkflow, ReposicaoTemasWorkflow, VigiaAtualizacoesWorkflow, AcompanhamentoMudancasWorkflow],
                activities=[gerar_roteiro, gravar_outbox, aplicar_proposta_stub, abrir_issue_paperclip,
                            comentar_paperclip, ler_propostas_paperclip, concluir_issue_paperclip,
                            triagem_jev, intervir_agente, verificar_jev, registrar_correcao,
-                           reter_consumo, registrar_consumo, *ATIV_PRODUCAO, *ATIVIDADES_TEMAS, *ATIVIDADES_VIGIA, *ATIVIDADES_TELEGRAM, *ATIVIDADES_PONTE])
+                           reter_consumo, registrar_consumo, *ATIV_PRODUCAO, *ATIVIDADES_TEMAS, *ATIVIDADES_VIGIA, *ATIVIDADES_ACOMPANHAMENTO, *ATIVIDADES_TELEGRAM, *ATIVIDADES_PONTE])
     logging.getLogger(__name__).info(f"worker em {ADDR} ns={NS} fila={FILA}")
     await w.run()
 

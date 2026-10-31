@@ -63,8 +63,13 @@ def criar_agente(papel: str, output_type: Any, instrucoes_extra: str = "", model
         model = ms[0] if len(ms) == 1 else FallbackModel(*ms)
     mt = p.max_tokens
     instr = persona(papel) + ("\n\n" + instrucoes_extra if instrucoes_extra else "")
-    return Agent(model, output_type=output_type, instructions=instr, name=papel, retries=2,
-                 model_settings={"max_tokens": mt, "temperature": p.temperatura}), combos
+    ag = Agent(model, output_type=output_type, instructions=instr, name=papel, retries=2,
+               model_settings={"max_tokens": mt, "temperature": p.temperatura})
+    # F1-05: ferramentas de leitura anexadas por padrão, filtradas pela política.
+    # Papéis sem ferramenta nativa (ex.: lider-editorial, só memoria_buscar) não mudam.
+    from .ferramentas import anexar_ferramentas_leitura
+    anexar_ferramentas_leitura(ag, papel)
+    return ag, combos
 
 
 def _tokens(r) -> int | None:

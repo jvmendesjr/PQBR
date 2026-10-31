@@ -10,14 +10,23 @@ só para sessão e fila.
 Este módulo é puro e só leitura: não escreve no mapa, não escreve no
 banco, não envia sinal e não abre sessão Camofox por conta própria.
 O verificador do canário é injetado (adaptador real na produção,
-falso nos testes). Registrar este acompanhamento como workflow/atividade
-no worker exige reinício do worker, que NÃO foi feito nesta entrega:
-o código está pronto e testado, o registro fica para autorização à parte.
+falso nos testes). O workflow está registrado no worker principal
+(pqbr-temporal-worker, fila pqbr-episodio); a agenda recorrente ainda
+não existe — a execução é manual até o José escolher a frequência.
 """
 from __future__ import annotations
+import json, os, urllib.request
 from collections.abc import Callable
+from datetime import timedelta
+from pathlib import Path
+from temporalio import activity, workflow
 
-from ..contratos import VERSOES
+with workflow.unsafe.imports_passed_through():
+    from ..contratos import VERSOES
+
+RAIZ = Path(__file__).resolve().parents[3]
+SNAPSHOT = RAIZ / "config" / "contratos_versoes_snapshot.json"
+CAMOFOX_HEALTH = os.environ.get("PQBR_CAMOFOX_URL", "http://127.0.0.1:9387") + "/health"
 
 SINAL_APROVACAO = "aprovacao_jose"
 
@@ -90,3 +99,52 @@ def acompanhar(metas: list[dict], fixture_versoes: dict, verificador_canario: Ca
             **parcial, "diagnostico": dev_diagnosticar(parcial, mapa_mmd),
             "correcao_autonoma_escopo": "sessao_e_fila",
             "registrado_no_worker": False}
+
+
+def _carregar_snapshot() -> dict:
+    """Baseline de versões de contrato. Sem snapshot, a deriva lista tudo como ausente na fixture."""
+    if not SNAPSHOT.exists():
+        return {}
+    return json.loads(SNAPSHOT.read_text(encoding="utf-8"))
+
+
+def _verificador_camofox() -> dict:
+    """Canário de conectividade Camofox: GET /health (sem auth), ok + browserConnected.
+
+    Não é verificação de tela do Flow: login Google e surpresas de interface do Flow
+    exigem sessão interativa e ficam como próximo passo; aqui o sinal é só se o
+    navegador do Camofox está conectado. Se não estiver, o canário falha com motivo claro.
+    """
+    try:
+        with urllib.request.urlopen(urllib.request.Request(CAMOFOX_HEALTH), timeout=15) as r:
+            h = json.load(r)
+        ok = bool(h.get("ok"))
+        conectado = bool(h.get("browserConnected"))
+        return {"login_google": conectado,
+                "surpresas_flow": [] if (ok and conectado) else ["Camofox /health sem ok ou sem navegador conectado"]}
+    except Exception as e:  # noqa: BLE001 - canário registra, não derruba o workflow
+        return {"login_google": False, "surpresas_flow": [f"Camofox /health falhou: {type(e).__name__}"]}
+
+
+def _mapa_mmd() -> str:
+    try:
+        return (RAIZ / "docs" / "mapa" / "01-episodio.mmd").read_text(encoding="utf-8")
+    except OSError:
+        return ""
+
+
+@activity.defn
+async def acompanhamento_executar(metas: list[dict]) -> dict:
+    """Activity do workflow: roda acompanhar() com snapshot, canário Camofox e mapa. Só leitura."""
+    return acompanhar(metas or [], _carregar_snapshot(), _verificador_camofox, _mapa_mmd())
+
+
+@workflow.defn
+class AcompanhamentoMudancasWorkflow:
+    @workflow.run
+    async def run(self, metas: list[dict] | None = None) -> dict:
+        return await workflow.execute_activity(acompanhamento_executar, metas or [],
+                                               start_to_close_timeout=timedelta(minutes=2))
+
+
+ATIVIDADES_ACOMPANHAMENTO = [acompanhamento_executar]

@@ -1,0 +1,8 @@
+%% AcompanhamentoMudancasWorkflow (src/pqbr/workflows/acompanhamento.py) — fila pqbr-episodio, sem agenda recorrente ainda (execução manual). Gerado do código 31/10/2026.
+flowchart TD
+  S([run(metas opcional)]) --> A["acompanhamento_executar (só leitura)"]
+  A --> F["resumir_fallbacks: metas de agentes.rodar"]
+  A --> D["deriva_contratos: snapshot config/contratos_versoes_snapshot.json x contratos.VERSOES"]
+  A --> C["canario_interface: Camofox /health, ok + browserConnected; Flow UI não verificado aqui"]
+  F & D & C --> V["dev_diagnosticar: aviso + sinal aprovacao_jose como dado + rascunho de diff do mapa, não aplicado"]
+  V --> E(["CorrecaoAutonoma só para sessão e fila; nada aplica, nada reinicia, nada envia"])

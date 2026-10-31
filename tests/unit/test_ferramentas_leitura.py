@@ -69,3 +69,21 @@ def test_sem_import_mcp():
     src = inspect.getsource(f)
     imports = [l for l in src.splitlines() if l.startswith(("import ", "from "))]
     assert not any("mcp" in l.lower() for l in imports)
+
+
+def test_criar_agente_anexa_ferramentas_por_papel():
+    from pqbr.agents import criar_agente
+    ag, combos = criar_agente("dev", PropostaTemas, model=TestModel())
+    tools = ag._function_toolset.tools
+    assert "ler_estado" in tools and "consultar_codigo" in tools
+    assert combos[0] == "core-alto"
+    ag2, _ = criar_agente("lider-editorial", PropostaTemas, model=TestModel())
+    assert ag2._function_toolset.tools == {}  # só memoria_buscar, sem ferramenta nativa
+
+
+def test_rodar_dev_com_ferramentas_nao_quebra():
+    import asyncio
+    from pqbr.agents import rodar
+    tm = TestModel(custom_output_args={"temas": [{"categoria": "expressao", "tema": "Por que se diz pagar o pato?"}], "justificativa": "perenes"})
+    out, meta = asyncio.run(rodar("dev", PropostaTemas, "extraia", model=tm))
+    assert isinstance(out, PropostaTemas) and meta["combo"] == "core-alto"

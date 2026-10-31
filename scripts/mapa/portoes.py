@@ -132,8 +132,8 @@ _PORTOES_TEXTO: dict[str, tuple[str, str]] = {
         "Nenhuma ordem nova: a P13 está fechada. A ferramenta já está no código, sem efeito externo.",
     ),
     "P14": (
-        "Implementada e testada 31/10/2026 (F6-02), sem reinício: vigia de fallbacks, dev_diagnosticar, deriva de contrato e canário Camofox. O registro no worker exige reinício, autorizado à parte e não feito.",
-        "Ordem separada, quando o José decidir: “OK para reiniciar o worker e registrar o acompanhamento.” Até lá, nada reinicia.",
+        "Registrado no código do worker principal (workflow + activity, sem agenda recorrente ainda). Canário: Camofox /health, não tela do Flow. Reinício e execução manual a confirmar nesta entrega.",
+        "Ordem separada, quando o José decidir a frequência: criar a agenda recorrente do acompanhamento. Até lá, execução manual.",
     ),
     "P16": (
         "Em espera 31/10/2026: aguardar o painel ficar pronto, outras melhorias e testes (como os cadernos), antes de gerar os clipes. Nada do v2 nem do projeto antigo é apagado.",

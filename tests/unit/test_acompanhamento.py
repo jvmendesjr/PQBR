@@ -42,3 +42,19 @@ def test_acompanhar_ordem_e_escopo_correcao():
     assert r["correcao_autonoma_escopo"] == "sessao_e_fila"
     assert r["registrado_no_worker"] is False
     assert r["deriva"] == [] and r["diagnostico"]["aplicado"] is False
+
+
+def test_snapshot_bate_com_versoes_atuais():
+    import json
+    from pathlib import Path as _P
+    snap = json.loads((_P(__file__).resolve().parents[2] / "config" / "contratos_versoes_snapshot.json").read_text())
+    assert snap == dict(VERSOES)
+
+
+def test_workflow_registrado_no_worker():
+    import inspect
+    from pqbr.workflows import worker
+    src = inspect.getsource(worker)
+    assert "AcompanhamentoMudancasWorkflow" in src and "ATIVIDADES_ACOMPANHAMENTO" in src
+    from pqbr.workflows.acompanhamento import AcompanhamentoMudancasWorkflow, ATIVIDADES_ACOMPANHAMENTO
+    assert AcompanhamentoMudancasWorkflow is not None and len(ATIVIDADES_ACOMPANHAMENTO) == 1

@@ -93,10 +93,18 @@ def anexar_ferramentas_leitura(agente, papel: str, politica: PoliticaPapeis | No
         @agente.tool_plain
         def ler_estado() -> str:  # noqa: F811 - ferramenta nativa, nome intencional
             contador.contar("estado_ler")
-            return (RAIZ / "docs" / "ESTADO-ATUAL.md").read_text(encoding="utf-8")[:_MAX_TEXTO]
+            try:
+                return (RAIZ / "docs" / "ESTADO-ATUAL.md").read_text(encoding="utf-8")[:_MAX_TEXTO]
+            except OSError:
+                return "negado: ESTADO-ATUAL indisponível"
     if "codigo_consultar" in nomes:
         @agente.tool_plain
         def consultar_codigo(caminho: str) -> str:
             contador.contar("codigo_consultar")
-            return ler_arquivo_visivel(papel, caminho, pol)
+            # Ferramenta nativa não pode derrubar o run com exceção: caminho negado
+            # vira mensagem segura, sem detalhe do que existe fora do permitido.
+            try:
+                return ler_arquivo_visivel(papel, caminho, pol)
+            except (AcessoNegado, OSError):
+                return "negado: caminho fora do permitido para o papel" 
     return agente, contador

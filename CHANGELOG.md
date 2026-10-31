@@ -1,3 +1,12 @@
+## Não lançado — 2026-10-31 — P13 ligada e P14 como workflow (funcional, sem agenda recorrente ainda)
+
+### Adicionado
+- P13 ligada em `criar_agente`: ferramentas de leitura anexadas por padrão, filtradas pela política; `dev` ganha `ler_estado` + `consultar_codigo` (caminho negado vira mensagem segura, não exceção que derruba o run). Testes novos com `TestModel` para `dev` e `lider-editorial`.
+- P14 como workflow Temporal: `AcompanhamentoMudancasWorkflow` + `acompanhamento_executar`, registrados no worker principal (`pqbr-temporal-worker`, fila `pqbr-episodio`), baseline `config/contratos_versoes_snapshot.json` (44 contratos), canário Camofox `/health`. Mapa atualizado: `docs/mapa/06-acompanhamento-mudancas.mmd` + cobertura em `scripts/mapa/verificar_mapa.py`.
+
+### Sem
+- Agenda recorrente do acompanhamento (frequência a escolher), verificação de tela do Flow neste canário, merge em main, push, troca de modelo (P18), clipes do piloto (P16), decisão dos sub-itens de P17 e AR Board.
+
 ## Não lançado — 2026-10-31 — Portões atualizados com as decisões + P13/P14 implementados (só leitura, sem reinício, sem merge)
 
 ### Adicionado

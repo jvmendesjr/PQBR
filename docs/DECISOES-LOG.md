@@ -1094,3 +1094,9 @@ NÃO CABE:
 - **P16 e P17:** em espera, como entendido: P16 aguarda painel pronto, outras melhorias e testes (como os cadernos); P17 aguarda decisão dos sub-itens, um por vez.
 - **P18 (MG-12):** troca de modelo e reinício ficam para confirmação separada, junto com o piloto. Não feito agora; `motion` segue `core-alto`.
 - **Sem:** merge em main, push, reinício de worker, troca de modelo, geração de mídia, escrita em banco fora do Temporal, uso da tabela de revisão humana, alteração em `docs/REGRAS.md`.
+
+## 31/10/2026 — P13 ligada e P14 como workflow (funcional, sem agenda)
+
+- **José ("continue isso até ficar de fato funcional"):** ligar o que estava só em código. P13: `criar_agente` anexa ferramentas de leitura por padrão (só papéis com ferramenta nativa mudam). P14: workflow + activity registrados no worker principal, com snapshot de contratos e canário Camofox `/health`.
+- **Limite honesto do canário:** `/health` prova conectividade do Camofox (ok + browserConnected), não login Google nem surpresas de tela do Flow. A verificação de tela do Flow fica como próximo passo, sem ser disfarçada.
+- **Sem nesta etapa:** agenda recorrente (frequência a escolher), merge em main, push, P18/piloto, AR Board. O reinício do worker e a execução manual ficam registrados na próxima atualização deste estado, com o resultado da execução.
