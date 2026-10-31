@@ -76,3 +76,9 @@ A activity `processo_criacao_conferir` entra no `EpisodioWorkflow` **oficial** (
 
 SemVer no cabeçalho. Histórico: [`CHANGELOG.md`](CHANGELOG.md).
 
+## Papéis (t169u)
+
+- **NLM Mestre:** briefing norteador (nunca mídia).
+- **NLM Efêmero:** produção intelectual do episódio.
+- **Temporal:** orquestra activities/filas.
+- **Agente:** só UI Flow (Camofox).

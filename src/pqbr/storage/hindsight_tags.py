@@ -15,7 +15,7 @@ CONFLITOS: list[tuple[str, str]] = [
      "t538: ponte Telegram por bot próprio via Temporal (Hermes desconsiderado)"),
     (r"gemini[^.\n]{0,40}\b(1\.5|2\.0|2\.5|3\.0|3 pro|3\.5|flash[- ]lite)\b", "t544: juiz Gemini fixado no 3.8 Flash"),
     (r"olhos[- ]da[- ]cara|\bEP1002\b", "t75u–t77u: EP1002 olhos-da-cara reprovado e descartado (tema volta a proposto)"),
-    (r"caderno[- ]mestre", "t459/ADR-003: cadernos efêmeros por episódio (sem caderno mestre)"),
+    (r"caderno[- ]mestre[^\n]{0,80}(legado|c35d7b24|mestre[sS]_PROIBIDOS|sem caderno mestre)", "t168u: mestre canônico 00ce61ae norteador; legado c35d7b24/MESTRES_PROIBIDOS proibidos"),
 ]
 PALAVRAS: dict[str, str] = {
     "editorial": r"roteiro|editorial|\btemas?\b|narra|estilo|personage|storyboard|\bcapa\b|\bcta\b|elenco",

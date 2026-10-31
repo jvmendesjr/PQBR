@@ -48,6 +48,13 @@ Decisões da conversa paralela, juntadas em cima do stickman (t133u). Nenhuma es
 
 ---
 
+
+## Próximos tópicos (José 31/10/2026, t169u — só registro)
+
+1. Papel dos cadernos (mestre + efêmero) na validação e auditoria.
+2. José ajusta referências VISUAIS (fichas de personagens, objetos, estilo).
+Nota mapa: página :8088 prioriza a etapa dos **cadernos** NLM; publicação só rótulo/rastreabilidade.
+
 ## Fase 0.5: teste de 1 dia do Temporal (motor escolhido; ponte Paperclip histórica)
 > Histórico: ADR-011/t474–t476: Paperclip parado (histórico); canal = bot Telegram próprio via Temporal (t538). F05-04/F05-06/TZ-06 abaixo ficam como registro; o escopo vivo de aprovação está na ponte t538.
 
@@ -405,6 +412,17 @@ Ref.: REGRAS §26, `docs/fases/motion-graphics.md`, `banco-fichas/referencias-mo
 - [x] Revisar as 7 candidatas mantidas (sem substituta direta). Feito em t128u (27/10): as sete apagadas com OK do José; backup fora do git; bank 884 → 877.
 
 - [x] **Migração do backend do `codigo` para codebase-memory-mcp (29/10/2026, OK José com os recomendados):** CBM 0.12.1 (MIT, SHA-256 conferido, `--skip-config`, Lens desligada, stdio) como backend do `codigo`; adaptador `src/pqbr/integrations/codebase_memory.py`; política 1.6.0; vigia com entrada CBM + leitor de binário; scripts `scripts/codebase-memory/`; backend anterior preservado em `_obsoleto/` (índice fora do repo) sem desinstalar; Passo 4 verde (consultas lado a lado, `detect_changes` com exatamente os arquivos da migração, vigia `em_dia`, suíte 686 passados + 2 falhas pré-existentes EP1003). ADR-012, CHANGELOG 0.29.5. Pendente: desinstalação do backend anterior (só com ordem expressa).
+
+## Caderno Mestre e fluxo intelectual (t168u/t169u) — status 31/10/2026
+
+- [x] Contratos `BriefingEfemerico` 1.0.0; `CenaIndividual`/`DirecaoCenas` 2.0.0 (`PQBR-EP####-S##`); pedidos 1.1.0
+- [x] Caderno mestre canônico `00ce61ae-ab72-4f5a-a405-e1381377bc38` (norteador; nunca mídia); legado `c35d7b24` exportado e proibido
+- [x] Activities `nlm_mestre_*` + abrir efêmero com briefing (código; **falta reinício** do worker)
+- [ ] Runtime: reinício `pqbr-notebooklm-worker` / `pqbr-episodio-worker` (OK José)
+- [ ] Passo 2: adaptador Temporal → Flow (agente só UI)
+- [ ] **Próximo tópico (José 31/10):** papel do mestre e do efêmero no processo de **validação e auditoria** (definir; sem implementar nesta rodada)
+- [ ] **Próximo tópico (José 31/10):** José ajusta as **referências VISUAIS** das imagens (fichas de personagens, objetos, estilo/`banco-fichas`) — fora do código até ele entregar
+
 
 ## Anexo: fases e portões (ex-PLANO.md, incorporado em 11/10, t394)
 ### PLANO da PQBR (fases, portões e rollback)

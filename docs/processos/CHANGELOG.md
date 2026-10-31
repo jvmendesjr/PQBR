@@ -1,5 +1,7 @@
-## 1.3.0 — 2026-10-31 (t168u)
-- Caderno Mestre norteador + rótulo PQBR-EP####-S##; CenaIndividual/DirecaoCenas 2.0.0; BriefingEfemerico.
+## 1.2.0+notas (31/10/2026, t168u/t169u — **sem bump de pin**)
+- Docs/mapa: prioriza etapa dos **cadernos** (mestre+efêmero) na página :8088; publicação só rótulo/rastreabilidade.
+- Caderno Mestre norteador + rótulo PQBR-EP####-S##; DirecaoCenas 2.0.0; BriefingEfemerico.
+- `VERSAO_ESPERADA` permanece **1.2.0** (sem reinício worker).
 
 - **1.2.0 (30/10/2026, José pt162u):** direção e prompts de cena vêm do NotebookLM (`DirecaoCenas`); agentes só operam o Flow; `EpisodioWorkflow` oficial = `episodio.py`; `workflows.py` marcado legado; pin `VERSAO_ESPERADA` 1.2.0.
 - **1.1.0 (29/10/2026, José):** storyboard removido definitivamente; cenas individuais no lugar (uma por vez, movimento definido no prompt); regra agente-primeiro, piloto e emergência; centro criativo NotebookLM; modelo de imagem Nano Banana 2.1.

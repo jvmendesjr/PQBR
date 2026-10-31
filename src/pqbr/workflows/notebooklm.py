@@ -297,7 +297,7 @@ class NotebookLMWorkflow:
             await workflow.execute_activity("registro_caderno", args=[nb, p.episodio, p.slug, p.pacote_hash],
                                             task_queue=FILA_REGISTRO, **curto)
         await workflow.execute_activity(nlm_persona, nb, **curto)   # persona antes de tudo (t427)
-        if p.pacote_fonte and p.pacote_hash:   # t459: pacote canônico injetado (sem caderno mestre)
+        if p.pacote_fonte and p.pacote_hash:   # t459 pacote canônico; t168u mestre norteador separado (00ce61ae)
             pid = await workflow.execute_activity("nlm_injetar_pacote", args=[nb, p.pacote_fonte, p.pacote_hash], **curto)
             if p.episodio:
                 await workflow.execute_activity("registro_fonte", args=[nb, pid, "pacote", f"PQBR pacote {p.pacote_hash[:12]}"],

@@ -80,7 +80,7 @@
 
 | Ferramenta/regra | Correção autônoma permitida | Limites e travas |
 |---|---|---|
-| NotebookLM (§9–§10) | reexecutar a geração no caderno efêmero; reextrair a saída; ajustar o prompt dentro do contrato; trocar para o Gemini Web (reserva) | 3 tentativas; nunca no caderno raiz; respeita os 80% de consumo; login ou relogin = José |
+| NotebookLM (§9–§10) | reexecutar a geração no caderno efêmero; reextrair a saída; ajustar o prompt dentro do contrato; trocar para o Gemini Web (reserva) | 3 tentativas; nunca mídia no mestre; efêmero por episódio; respeita os 80% de consumo; login ou relogin = José |
 | Camofox (§11) | agente pela Activity: novo seletor, outro caminho na página, fechar diálogo informativo, repetir com ritmo humano | concorrência 1 por sessão; só a instância `pqbr-camofox`; sem login manual ou 2FA (reautenticação e cookies: §0 item 11, t395); sem tornar público ou excluir |
 | API do YouTube (§15, §19, §20) | repetir com backoff; renovar o token pelo fluxo OAuth já autorizado; conferir o estado pelo `list` antes de repetir | idempotência pelo código PQBR-EPxxxx; reautorização do OAuth = José |
 | Drive (§21) | repetir o upload; conferir tamanho e hash; recriar a pasta de destino que falta | nunca apaga; a limpeza só move para `99_Arquivo` |
@@ -193,8 +193,8 @@
 
 ## 9. NotebookLM e Gemini web
 _Origem do bloco: t184–t186._
-- Ideação, roteiro, SEO e pesquisa ficam com o **NotebookLM** (caderno **efêmero**, por roteiro); o **Gemini Web** é a reserva. NotebookLM conduz pesquisa profunda, propostas de temas, ideação, roteiro e SEO; prompts e comandos canônicos partem do NotebookLM. Os agentes só orquestram: entregam conhecimento, não fazem pesquisa independente, salvo complemento de relatório ou indisponibilidade documentada da ferramenta central, extraem a saída por código, validam com Pydantic, checam com o Jev e acompanham com observabilidade. [t184]
-- **Produção nunca no caderno raiz.** Limpar o chat do caderno raiz a cada troca de projeto ou produção. [07/10 guardrail] A geração de vídeo pelo NotebookLM está desativada: Flow primário, Vids fallback adicional, Gemini Web terceiro e Meta Vibes posterior, conforme blueprint. O caderno canônico é temporário e recriável após persistir fontes, resultados, referências, persona e decisões; cadernos de episódio são efêmeros e copiam persona-base. [t465]
+- Ideação, roteiro, SEO e pesquisa do episódio ficam com o **NotebookLM** no caderno **efêmero**; o **Gemini Web** é a reserva. O **Caderno Mestre canônico** (`00ce61ae…`, config `caderno_mestre.json`) é **norteador permanente**: emite `BriefingEfemerico` (persona, prompts, consulta de pesquisa, URLs/refs); **nunca gera mídia** (imagem/vídeo/infográfico). Após o briefing: salvar nota útil e limpar o chat do mestre (`ask --new -y`). A pesquisa do tema roda no **efêmero** com a consulta indicada pelo mestre. [t184; t168u José 31/10 — reverte ênfase anti-mestre de 12/10]
+- **Mídia e Studio nunca no mestre.** Legado `c35d7b24` e IDs curtos em `MESTRES_PROIBIDOS` continuam bloqueados. Geração de vídeo pelo NotebookLM permanece desativada (Flow primário). Cadernos de episódio são efêmeros; o Temporal valida Pydantic e orquestra; o agente só opera a UI do Flow. [t465; t168u/t169u]
 - Monitor de consumo desde o dia 1: `notebooklm usage --json` antes e depois de cada geração, gravado no banco do app; relatório diário; **acima de 80% numa janela, o agendador espaça as produções**. Sem custo por uso. [t186]
 - **Quotas:** usar apenas limites medidos na conta real por `usage --json` e confirmados na interface oficial; números históricos/estimados não são limites operacionais. O threshold de 80% só vale após confirmar a janela e o denominador. [t465]
 

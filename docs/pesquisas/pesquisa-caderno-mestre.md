@@ -1,3 +1,5 @@
+> ⚠ **Histórico 12/10/2026.** Superado em parte por José t168u (31/10): Caderno Mestre **norteador** restaurado (`00ce61ae…`); nunca mídia. Esta pesquisa permanece como evidência da época. Ver `docs/DECISOES-LOG.md` t168u/t169u e `config/caderno_mestre.json`.
+
 # PQBR — Caderno mestre vs. efêmeros e papel da persona (pesquisa 12/10/2026)
 Legenda: [OF]=oficial Google · [COM]=comunidade/blogs · [INF]=inferência
 

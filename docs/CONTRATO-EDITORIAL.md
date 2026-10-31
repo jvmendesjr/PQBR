@@ -1,5 +1,6 @@
 # Contrato editorial da PQBR (v2, oficial desde 23/10/2026)
 
+> **Rótulo de cena (31/10/2026, t168u):** único canônico `PQBR-EP####-S##` (ex. `PQBR-EP1003-S04`); stem do arquivo = rótulo. Contrato `CenaIndividual` 2.0.0.
 - **Status:** aprovado por José em 2026-10-16; gate G7 fechado; F7-01 concluído.
 - **Data:** 2026-10-16. Oficializado como `docs/CONTRATO-EDITORIAL.md` em 23/10/2026 (t473); o v1 foi para `docs/_obsoleto/CONTRATO-EDITORIAL-v1.md`. O anexo A traz, sem alteração, as seções do v1 que continuam canônicas (público, promessa, tom, categorias de sátira, gabarito, duração, diretrizes de roteiro/estilo, §15–§17, incluindo o bloco §16.7 usado pelo pacote canônico). Ficaram só no v1 arquivado: §9 (métricas sugeridas), §10 (divergências entre fontes), a nota de fonte do `rede`, §14 (superado) e as partes de inventário/próximo passo do §15.
 - **Uso:** contrato de processo editorial, runbook e SOP aprovados no G7; complementa REGRAS sem substituí-la e não autoriza produção/publicação.
@@ -10,7 +11,7 @@ Aplicar a precedência de `docs/REGRAS.md` §0 > `SPEC.md` > `ARQUITETURA.md` > 
 
 R1–R4/R6/R8/R9 foram aprovadas em t467 como diretrizes revisáveis, não gates automáticos; R5 é alerta não bloqueante. Não há decisão pendente sobre esses itens. Aplicar HOLD por risco material, regra realmente aberta ou bloqueio canônico, não pela falha automática de uma diretriz. R-005 permanece concluído.
 
-Este fluxo descreve gates documentais. Não autoriza geração de vídeo, upload, agendamento, publicação, uso de quota real, criação de issue ou alteração de serviços. O Auditor visual completo pertence a F7-02; o bloco visual e o contador do NotebookLM pertencem a F7-03; os gates de produção e de canal permanecem independentes.
+Este fluxo descreve gates documentais. Não autoriza geração de vídeo, upload, agendamento, publicação, uso de quota real, criação de issue ou alteração de serviços. O Auditor visual completo pertence a F7-02; o bloco visual e o contador do NotebookLM (mestre norteador → briefing; efêmero → episódio) pertencem a F7-03; os gates de produção e de canal permanecem independentes.
 
 ## 2. Regras já confirmadas que o processo deve preservar
 

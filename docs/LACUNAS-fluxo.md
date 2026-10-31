@@ -33,3 +33,9 @@ A tabela de 12/10 que bloqueava o fluxo no login da CLI do Paperclip foi para `d
 - **Fechado parcialmente:** exportação read-only do mestre legado `c35d7b24` em `docs/pesquisas/mestre-antigo-c35d7b24/` (legado continua em `MESTRES_PROIBIDOS`, não apagado).
 - **Mantido:** itens 0 (reinício processo_criacao), 4 (passo 2 Flow), 0c (piloto manual ≠ oficial).
 
+## Atualização 31/10/2026 (t169u — docs/mapa + próximos)
+
+- Mapa `01-episodio.mmd` e aba `#producao` (json 1.2.0) alinhados ao fluxo mestre→efêmero; papéis NLM/Temporal/agente explícitos.
+- **Aberto (só registro):** (1) papel dos cadernos mestre/efêmero na **validação e auditoria**; (2) José ajusta refs **VISUAIS** (fichas de personagens, objetos, estilo) — sem implementação de código nesta entrega.
+- Mantido: reinício worker; passo 2 Flow.
+

@@ -38,3 +38,6 @@ Regenerar a página: `python scripts/mapa/gerar_index.py` (t78u).
 **Aba Roadmap (t120u):** gerada de `docs/ROADMAP.md` + `docs/ESTADO-ATUAL.md` por `scripts/mapa/roadmap.py` a cada `gerar_index.py` (e no pre-commit). Só leitura; editar as fontes, nunca o HTML.
 
 - Aba **Produção de episódios**: dados em `producao-episodios.json`, gerador `scripts/mapa/producao.py`, âncora `#producao` (José pt162u).
+
+
+**Fluxo t169u:** mestre→briefing→efêmero→direção 2.0.0; ver `01-episodio.mmd` e `#producao` (json 1.2.0).

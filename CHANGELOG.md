@@ -1,5 +1,18 @@
 # CHANGELOG — PQBR
 
+## [0.31.1] — 2026-10-31 (docs/mapa/memórias do fluxo mestre; José t169u)
+### Alterado
+- Documentos vivos (REGRAS, ARQUITETURA, ESTADO, ROADMAP, LACUNAS, processos, CONTRATO-EDITORIAL) alinhados ao fluxo: mestre `00ce61ae` → `BriefingEfemerico` → efêmero → direção 2.0.0 → Flow pendente; papéis NLM/Temporal/agente explícitos.
+- Mapa `01-episodio.mmd` + `producao-episodios.json` 1.2.1 + `index.html` regenerado (:8088).
+### Adicionado
+- Próximos tópicos (só registro): (1) papel mestre/efêmero na validação e auditoria; (2) José ajusta refs **VISUAIS** (fichas de personagens, objetos, estilo).
+### Corrigido
+- `LIMITE_ESTADO` do onboarding 20k→28k (P18 cortada); AGENTS.md regenerado.
+### Alterado (correção José)
+- Mapa :8088 prioriza etapa dos **CADERNOS** (mestre+efêmero); publicação só rótulo/rastreabilidade.
+### Sem
+- Reinício worker, push/merge, implementação dos próximos tópicos, alteração de fichas.
+
 ## [0.31.0] — 2026-10-31 (Caderno Mestre canônico + rótulo S##; José t168u)
 ### Adicionado
 - Contrato `BriefingEfemerico` / `PedidoBriefingMestre` 1.0.0 (persona, prompts por etapa, pesquisa obrigatória + URLs, refs, modelo sugerido).

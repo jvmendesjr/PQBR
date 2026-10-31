@@ -7,6 +7,13 @@
 
 ---
 
+## t169u — 31/10/2026 — docs/mapa alinhados; prioridade = cadernos NLM
+
+- Docs, mapa :8088, memórias Hindsight e playbook `nlm-cadernos` alinhados ao fluxo mestre norteador → efêmero.
+- **Correção José:** na página visual/mapa, ajustar a etapa dos **CADERNOS** (mestre + efêmero), não a de publicação. Publicação: só rótulo/rastreabilidade.
+- Próximos (registro): (1) papel mestre/efêmero na validação/auditoria; (2) José ajusta refs VISUAIS (fichas/objetos/estilo).
+- Sem push/merge/reinício/workflow/mídia. Versão 0.31.1.
+
 ## 07/10/2026: decisões e ressalvas antes do blueprint (cópia que existia só no box; unificada em 09/10)
 
 - Nome da skill: recriar como `rotina-producao-porque-br` (corrigir o "e" que falta em `porqu-br`). Ressalva no blueprint.
@@ -1056,4 +1063,8 @@ NÃO CABE:
   - Export somente-leitura → `docs/pesquisas/mestre-antigo-c35d7b24/`.
   - Caderno novo título `PQBR - Mestre canônico`, ID `00ce61ae-ab72-4f5a-a405-e1381377bc38` (gravado em `config/caderno_mestre.json`).
 - **Sem:** reinício de worker, disparo de workflow, geração de mídia, push/merge, delete do legado.
+
+## 31/10/2026 — Docs/mapa do fluxo mestre + próximos tópicos (José t169u)
+- **José:** atualizar documentos, ROADMAP, memórias e página :8088 ao fluxo novo; registrar próximos sem implementar: (1) papel dos cadernos mestre/efêmero na **validação e auditoria**; (2) José ajusta as **referências VISUAIS** (fichas de personagens, objetos, estilo) — não fontes textuais do mestre nesta tarefa.
+- **Aplicado:** docs vivos + mapa 1.2.0; sem reinício; sem push.
 

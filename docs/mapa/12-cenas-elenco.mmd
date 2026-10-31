@@ -2,7 +2,7 @@
 %% t108u: juízes por etapa. t141u: stickman; o material externo não troca o fluxo.
 %% t148u: padrão definitivo = conjunto do Drive (Fontes/Imagens) em banco-fichas/; fichas nanquim de t146u descartadas.
 %% t150u: protagonistas definidos pelo José (nº 1 masculino, nº 2 feminina; bob-oculos = nº 13); catálogo aberto (indice 3.0.0) com categoria situações; cenas individuais citam o catálogo em refs.
-%% Contrato: src/pqbr/contratos/cena.py (CenaIndividual 2.0.0). Storyboard removido 29/10/2026; sem board, sem activity de board. Fichas: config/estilo_visual.json e banco-fichas/ (pipeline/banco_fichas.py).
+%% Rótulo canônico: PQBR-EP####-S## (stem==rótulo). %% Contrato: src/pqbr/contratos/cena.py (CenaIndividual 2.0.0). Storyboard removido 29/10/2026; sem board, sem activity de board. Fichas: config/estilo_visual.json e banco-fichas/ (pipeline/banco_fichas.py).
 flowchart TD
   COD(["código PQBR-EPxxxx"]) --> ALT{"elenco_alternado<br/>par → masculino (nº 1 PERS-menino-azul) · ímpar → feminino (nº 2 PERS-menina-rosa)<br/>protagonistas definidos pelo José (t150u)"}
   ALT -->|ou elenco_excecao com motivo| VIS["cartoon 2D flat colorido, stickman (t148u/t150u)<br/>catálogo aberto banco-fichas/ (indice 3.0.0): 13 personagens<br/>figuras · animais · objetos · ambientes · situações<br/>o agente insere ficha nova: aguardando_ok_jose ou sugestão; o José aprova<br/>fichas nanquim de t146u descartadas"]

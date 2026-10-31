@@ -1,19 +1,34 @@
 %% EpisodioWorkflow OFICIAL (src/pqbr/workflows/episodio.py) — fila episodio-pqbr.
-%% Passo 1 direção NLM (pt161u/pt162u): direcao_cenas_nlm + flow_projeto_exigir_antes_cenas.
-%% Storyboard removido 29/10/2026. O EpisodioWorkflow em workflows.py é LEGADO (demo soak), não este.
+%% Fluxo t168u/t169u: prioridade do mapa = etapa DOS CADERNOS (mestre + efêmero).
+%% Mestre 00ce61ae norteador → BriefingEfemerico → efêmero (persona+pesquisa) → roteiro/SEO → DirecaoCenas 2.0.0.
+%% Quem: Temporal orquestra; NLM mestre=briefing (nunca mídia); NLM efêmero=produção intelectual; agente=UI Flow (passo 2 pendente).
+%% Publicação: só coerência rótulo/rastreabilidade (dry-run); sem redesign nesta rodada.
+%% Storyboard removido 29/10/2026. workflows.py EpisodioWorkflow = LEGADO.
 flowchart TD
-  S(["PedidoEpisodioE2E 1.0.0"]) --> PC["processo_criacao_conferir<br/>docs/processos v1.2.0 + hash<br/>fail-closed"]
-  PC --> A1["pacote_garantir<br/>(hash do pacote canônico)"]
-  A1 --> A2["registro_buscar_caderno"]
-  A2 --> W1[["filho NotebookLMWorkflow<br/>fila notebooklm-pqbr<br/>roteiro, compliance e SEO<br/>PedidoNotebookLM 1.0.0<br/>sem vídeo"]]
+  S(["Temporal: PedidoEpisodioE2E 1.1.0"]) --> PC["Temporal: processo_criacao_conferir<br/>docs/processos + hash fail-closed"]
+  PC --> A1["Temporal: pacote_garantir<br/>hash pacote canônico Postgres"]
+  A1 --> A2["Temporal: registro_buscar_caderno"]
+  subgraph CAD["Cadernos NLM — prioridade do mapa"]
+    BR["NLM MESTRE 00ce61ae<br/>nlm_mestre_briefing<br/>BriefingEfemerico 1.0.0<br/>nota + limpar chat ask --new<br/>NUNCA mídia"]
+    EF["NLM EFÊMERO<br/>nlm_abrir_efemero_com_briefing<br/>persona + prompt_pesquisa do mestre<br/>add-research no efêmero"]
+    W1[["Temporal filho NotebookLMWorkflow<br/>fila notebooklm-pqbr<br/>roteiro + compliance + SEO<br/>PedidoNotebookLM 1.1.0<br/>sem vídeo"]]
+    DIR["NLM EFÊMERO via Temporal<br/>direcao_cenas_nlm<br/>DirecaoCenas 2.0.0<br/>rótulo PQBR-EP####-S##<br/>CenaIndividual fail-closed"]
+  end
+  A2 --> BR
+  BR --> EF
+  EF --> W1
   W1 --> D1{"nlm.ok e caderno?"}
   D1 -- não --> F1(["fim: falha do roteiro"])
-  D1 -- sim --> BR["nlm_mestre_briefing<br/>BriefingEfemerico 1.0.0<br/>pesquisa no efêmero"]
-  BR --> DIR["direcao_cenas_nlm<br/>NotebookLM → DirecaoCenas 2.0.0<br/>list CenaIndividual fail-closed"]
-  DIR --> FP["flow_projeto_exigir_antes_cenas<br/>só fichas_ok"]
-  FP --> PC2["processo_criacao_conferir"]
-  PC2 --> FIM(["fim: etapa direcao_cenas<br/>proximo=flow_cenas_individuais_pendente<br/>passo 2 Flow ainda não existe"])
-  PUB["publicacao_dryrun<br/>registrada, não roda neste fluxo"]
-  N>"Oficial = episodio.py na fila episodio-pqbr. Legado = workflows.py na fila pqbr-episodio (demo). Passo 2 adaptador Flow pendente. YOUTUBE_DRY_RUN=true. Reinício do worker pendente para carregar direcao_cenas_nlm."]
+  D1 -- sim --> DIR
+  DIR --> FP["Temporal: flow_projeto_exigir_antes_cenas<br/>só fichas_ok"]
+  FP --> PC2["Temporal: processo_criacao_conferir"]
+  PC2 --> FIM(["fim: proximo=flow_cenas_individuais_pendente<br/>passo 2 AGENTE no Flow ainda não existe"])
+  PUB["publicacao_dryrun<br/>só rótulo/rastreabilidade; registered, não redesign"]
+  N>"Mestre=norteador. Efêmero=produção intelectual. Agente=só UI Flow. Temporal=orquestra. Reinício worker pendente (OK José). YOUTUBE_DRY_RUN=true."]
   CV[["cadeia de vídeo 07: ainda não ligada"]]
   FIM -.-> CV
+  style BR fill:#bbdefb,stroke:#0d47a1,stroke-width:2px
+  style EF fill:#c8e6c9,stroke:#1b5e20,stroke-width:2px
+  style W1 fill:#e8f5e9,stroke:#2e7d32
+  style DIR fill:#fff3e0,stroke:#ef6c00
+  style PUB fill:#f5f5f5,stroke:#9e9e9e

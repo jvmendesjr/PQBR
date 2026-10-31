@@ -53,3 +53,10 @@ Ver templates em `CRIACAO-README.md` § núcleo item 7 e pesquisa 2026-10-29 §6
 
 - Google Vids / Meta Vibes → stubs respectivos.
 - Reinício de worker / troca de combo → OK explícito do José.
+
+
+Rótulo de cena: `PQBR-EP####-S##` (stem == rótulo).
+
+## Papéis (t169u)
+
+- **NLM Mestre:** briefing. **NLM Efêmero:** produção intelectual. **Temporal:** orquestra. **Agente:** UI Flow.
