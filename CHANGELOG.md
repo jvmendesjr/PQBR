@@ -1,5 +1,13 @@
 # CHANGELOG — PQBR
 
+## Não lançado — 2026-10-31 — Visualização Archify (proposta, branch feat/archify-visualizacao)
+### Adicionado
+- Painel interativo de arquitetura com Archify 3.2.0 em `docs/visualizacao/archify/` (`candidate.json` + processo em `README.md`; HTML gerado a partir do commit `82a5529` (v0.31.1) com fontes pinadas: fluxo canônico, contratos Pydantic v2, infra, EP1003 v3 e pendências — HTML não commitado nesta branch, ver README: a barreira de segredos sinaliza o JavaScript do visualizador do Archify e uma exceção exige OK do José).
+- Regra de atualização para agentes em `docs/visualizacao/archify/README.md`: ao mudar arquitetura, fluxos, contratos ou infra, regenerar o painel, atualizar o processo e o `ESTADO-ATUAL` e registrar no MCP.
+- Nota no `docs/ESTADO-ATUAL.md` sobre a proposta em branch e o painel servido só na tailnet (:8899).
+### Sem
+- Merge em main, decisão do José, alteração em `docs/REGRAS.md` / `docs/DECISOES-LOG.md`, alteração em `docs/mapa/` por decisão própria, reinício de worker, publicação ou geração de mídia.
+
 ## [0.31.1] — 2026-10-31 (docs/mapa/memórias do fluxo mestre; José t169u)
 ### Alterado
 - Documentos vivos (REGRAS, ARQUITETURA, ESTADO, ROADMAP, LACUNAS, processos, CONTRATO-EDITORIAL) alinhados ao fluxo: mestre `00ce61ae` → `BriefingEfemerico` → efêmero → direção 2.0.0 → Flow pendente; papéis NLM/Temporal/agente explícitos.

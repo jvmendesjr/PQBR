@@ -4,6 +4,10 @@ Fonte única de "onde estamos". Não repete o ROADMAP: aponta os itens por id. *
 
 Atualizado: 31/10/2026 (t169u: mapa prioriza etapa dos CADERNOS NLM; publicação só rótulo; próximos: auditoria dos cadernos + José refs VISUAIS) · versão 0.31.1
 
+## Visualização Archify — proposta em branch (31/10/2026, sem merge)
+- Branch `feat/archify-visualizacao`, worktree `~/.pqbr/archify-visualizacao`, base `82a5529` (v0.31.1). Painel em `docs/visualizacao/archify/` (`candidate.json` + processo em `README.md`; HTML gerado, não commitado — barreira de segredos sinaliza o JS do visualizador do Archify, exceção exige OK do José); ao vivo só na tailnet, porta 8899, serviço `pqbr-archify-panel.service` no `pc`.
+- **Regra para os agentes:** ao mudar arquitetura, fluxos, contratos ou infra, regenerar o painel, atualizar o processo e este estado e registrar no MCP (`registrar_alteracao`, tipo `alteracao`). Divergência painel × código deve ser sinalizada, não corrigida por palpite.
+- **Não feito / não decidido nesta branch:** merge em main, decisão do José, entrada em `REGRAS.md` / `DECISOES-LOG.md`, alteração em `docs/mapa/` por decisão própria (mapa só muda por proposta aprovada pelo José, t517). Virar processo canônico exige OK explícito do José.
 
 ## Caderno Mestre canônico (31/10/2026, t168u, versão 0.31.0)
 

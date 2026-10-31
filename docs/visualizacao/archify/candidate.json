@@ -1,0 +1,688 @@
+{
+  "cards": [
+    {
+      "dot": "cyan",
+      "items": [
+        "Mestre (nunca mídia) → BriefingEfemerico + nota + limpa chat → Efêmero (persona + prompt_pesquisa) → roteiro / SEO / compliance → DirecaoCenas 2.0.0, rótulo PQBR-EP####-S## → Flow (adapter pendente).",
+        "Temporal orquestra; agente só opera a UI do Flow. Storyboard removido em 29/10 — cenas individuais, uma por vez."
+      ],
+      "title": "Fluxo canônico hoje"
+    },
+    {
+      "dot": "emerald",
+      "items": [
+        "Projeto v3 PQBR-EP1003-cafe-fraco-v3, id 9c4ad934-32d5-4fe3-a342-f6ea77068ae7.",
+        "Agent: Confirm=Sempre, imagem 9:16 Nano Banana 2.1, vídeo 9:16 Omni 1.1 Flash; fichas PERS-menina-rosa, OBJ-caneca, AMB-cafe.",
+        "8 imagens de início S01..S08 + 8 prompts de movimento; vídeo piloto autorizado no flow_projetos; MG-05 motion segue segurado."
+      ],
+      "title": "EP1003 piloto — estado em 31/10"
+    },
+    {
+      "dot": "amber",
+      "items": [
+        "Tudo que cruza agente, motor ou web passa por Pydantic v2 em src/pqbr/contratos/, com SemVer em VERSOES e extra=forbid.",
+        "Exemplos: RoteiroShort, VereditoAuditor, DecisaoPublicacao, CenaIndividual, DirecaoCenas, FichaCatalogo, PlanoMotion.",
+        "Aprovação do José vira sinal do Temporal, fail-closed e idempotente; sem sinal, nada externo se aplica."
+      ],
+      "title": "Contratos e gates"
+    },
+    {
+      "dot": "violet",
+      "items": [
+        "Ativos: pqbr-camofox, pqbr-camofox-worker, pqbr-notebooklm-worker, pqbr-temporal-worker, 9router. Inativo: paperclipai.",
+        "Temporal: AcessosWorkflow horário completando; RetencaoConsumo e ReposicaoTemas também completaram em 31/10.",
+        "Dois Postgres separados: o do Temporal só guarda estado de workflow; o do app guarda negócio. Nunca consultar o do Temporal direto."
+      ],
+      "title": "Infra no servidor pc — MCP 31/10"
+    },
+    {
+      "dot": "rose",
+      "items": [
+        "Próximos (ESTADO-ATUAL 0.31.1): papel dos cadernos na validação/auditoria; José ajusta refs VISUAIS (fichas/objetos/estilo).",
+        "Runtime: falta reinício dos workers NotebookLM/episódio após t168u/t169u, com OK do José.",
+        "Publicação real desligada: YOUTUBE_DRY_RUN=true, nada enviado; vídeo aprovado fica privado até a produção ativa."
+      ],
+      "title": "Pendências registradas, não inventadas"
+    }
+  ],
+  "components": [
+    {
+      "id": "jose",
+      "label": "José Vieira",
+      "pos": [
+        40,
+        40
+      ],
+      "size": [
+        150,
+        60
+      ],
+      "sources": [
+        {
+          "end_line": 29,
+          "label": "Telegram e painel",
+          "line": 29,
+          "path": "README.md"
+        }
+      ],
+      "sublabel": "Aprovador do projeto",
+      "type": "external"
+    },
+    {
+      "id": "telegram",
+      "label": "Telegram / Hermes pqbr",
+      "pos": [
+        300,
+        40
+      ],
+      "size": [
+        150,
+        60
+      ],
+      "sources": [
+        {
+          "end_line": 46,
+          "label": "Canal do José",
+          "line": 46,
+          "path": "docs/ARQUITETURA.md"
+        }
+      ],
+      "sublabel": "Avisos e aprovações",
+      "type": "external"
+    },
+    {
+      "id": "temporal",
+      "label": "Temporal",
+      "pos": [
+        560,
+        40
+      ],
+      "size": [
+        150,
+        60
+      ],
+      "sources": [
+        {
+          "end_line": 20,
+          "label": "ADR-001 Temporal",
+          "line": 18,
+          "path": "docs/ARQUITETURA.md"
+        }
+      ],
+      "sublabel": "Motor de orquestração",
+      "type": "backend"
+    },
+    {
+      "id": "workers",
+      "label": "Workers Temporal",
+      "pos": [
+        820,
+        40
+      ],
+      "size": [
+        170,
+        60
+      ],
+      "sources": [
+        {
+          "end_line": 183,
+          "label": "EpisodioWorkflow",
+          "line": 165,
+          "path": "src/pqbr/workflows/episodio.py"
+        }
+      ],
+      "sublabel": "notebooklm · camofox · render",
+      "type": "backend"
+    },
+    {
+      "id": "nlm-mestre",
+      "label": "NotebookLM Mestre",
+      "pos": [
+        1100,
+        40
+      ],
+      "size": [
+        150,
+        60
+      ],
+      "sources": [
+        {
+          "end_line": 14,
+          "label": "Mestre canônico",
+          "line": 1,
+          "path": "config/caderno_mestre.json"
+        }
+      ],
+      "sublabel": "PQBR - Mestre canônico",
+      "type": "cloud"
+    },
+    {
+      "id": "nlm-efemero",
+      "label": "NotebookLM Efêmero",
+      "pos": [
+        1360,
+        40
+      ],
+      "size": [
+        150,
+        60
+      ],
+      "sources": [
+        {
+          "end_line": 91,
+          "label": "ADR-010 NotebookLM",
+          "line": 90,
+          "path": "docs/ARQUITETURA.md"
+        }
+      ],
+      "sublabel": "1 caderno por episódio",
+      "type": "cloud"
+    },
+    {
+      "id": "camofox",
+      "label": "Camofox PQBR",
+      "pos": [
+        40,
+        180
+      ],
+      "size": [
+        150,
+        60
+      ],
+      "sources": [
+        {
+          "end_line": 78,
+          "label": "ADR-008 Camofox",
+          "line": 71,
+          "path": "docs/ARQUITETURA.md"
+        }
+      ],
+      "sublabel": "Sessão Google única",
+      "type": "backend"
+    },
+    {
+      "id": "flow",
+      "label": "Google Flow",
+      "pos": [
+        300,
+        180
+      ],
+      "size": [
+        150,
+        60
+      ],
+      "sources": [
+        {
+          "end_line": 36,
+          "label": "EP1003 v3",
+          "line": 11,
+          "path": "config/flow_projetos.json"
+        }
+      ],
+      "sublabel": "EP1003 v3 · 9:16",
+      "type": "cloud"
+    },
+    {
+      "id": "juiz",
+      "label": "Auditor Gemini",
+      "pos": [
+        560,
+        180
+      ],
+      "size": [
+        150,
+        60
+      ],
+      "sources": [
+        {
+          "end_line": 98,
+          "label": "ADR-011 agentes",
+          "line": 95,
+          "path": "docs/ARQUITETURA.md"
+        }
+      ],
+      "sublabel": "gemini_juiz · Jev decide()",
+      "type": "backend"
+    },
+    {
+      "id": "publicacao",
+      "label": "Publicação",
+      "pos": [
+        820,
+        180
+      ],
+      "size": [
+        170,
+        60
+      ],
+      "sources": [
+        {
+          "end_line": 91,
+          "label": "dry-run",
+          "line": 89,
+          "path": "src/pqbr/workflows/episodio.py"
+        }
+      ],
+      "sublabel": "dry-run · vídeo privado",
+      "type": "backend"
+    },
+    {
+      "id": "youtube",
+      "label": "YouTube",
+      "pos": [
+        1100,
+        180
+      ],
+      "size": [
+        150,
+        60
+      ],
+      "sources": [
+        {
+          "end_line": 35,
+          "label": "Publicação",
+          "line": 35,
+          "path": "docs/ESTADO-ATUAL.md"
+        }
+      ],
+      "sublabel": "Shorts Porquê BR",
+      "type": "external"
+    },
+    {
+      "id": "contratos",
+      "label": "Contratos Pydantic v2",
+      "pos": [
+        40,
+        320
+      ],
+      "size": [
+        170,
+        60
+      ],
+      "sources": [
+        {
+          "end_line": 70,
+          "label": "RoteiroShort",
+          "line": 70,
+          "path": "src/pqbr/contratos/__init__.py"
+        },
+        {
+          "end_line": 543,
+          "label": "VERSOES",
+          "line": 543,
+          "path": "src/pqbr/contratos/__init__.py"
+        }
+      ],
+      "sublabel": "src/pqbr/contratos/ · SemVer",
+      "type": "backend"
+    },
+    {
+      "id": "fichas",
+      "label": "Banco de fichas",
+      "pos": [
+        300,
+        320
+      ],
+      "size": [
+        150,
+        60
+      ],
+      "sources": [
+        {
+          "end_line": 54,
+          "label": "Catálogo fichas",
+          "line": 54,
+          "path": "docs/ESTADO-ATUAL.md"
+        }
+      ],
+      "sublabel": "62 fichas · stickman 2D",
+      "type": "database"
+    },
+    {
+      "id": "motion",
+      "label": "Motion pós",
+      "pos": [
+        560,
+        320
+      ],
+      "size": [
+        150,
+        60
+      ],
+      "sources": [
+        {
+          "end_line": 74,
+          "label": "PlanoMotion",
+          "line": 74,
+          "path": "src/pqbr/contratos/motion.py"
+        }
+      ],
+      "sublabel": "PlanoMotion 1.2.0",
+      "tag": "MG-05 segurado",
+      "type": "backend"
+    },
+    {
+      "id": "temporal-db",
+      "label": "Postgres Temporal",
+      "pos": [
+        820,
+        320
+      ],
+      "size": [
+        150,
+        60
+      ],
+      "sources": [
+        {
+          "end_line": 30,
+          "label": "Postgres Temporal",
+          "line": 30,
+          "path": "docs/ARQUITETURA.md"
+        }
+      ],
+      "sublabel": "Só estado de workflows",
+      "type": "database"
+    },
+    {
+      "id": "app-db",
+      "label": "Postgres do app",
+      "pos": [
+        1100,
+        320
+      ],
+      "size": [
+        150,
+        60
+      ],
+      "sources": [
+        {
+          "end_line": 31,
+          "label": "Banco do app",
+          "line": 31,
+          "path": "docs/ARQUITETURA.md"
+        }
+      ],
+      "sublabel": "Temas · vídeos · métricas",
+      "type": "database"
+    },
+    {
+      "id": "hindsight",
+      "label": "Hindsight bank pqbr",
+      "pos": [
+        1360,
+        320
+      ],
+      "size": [
+        150,
+        60
+      ],
+      "sources": [
+        {
+          "end_line": 52,
+          "label": "ADR-004 Hindsight",
+          "line": 51,
+          "path": "docs/ARQUITETURA.md"
+        }
+      ],
+      "sublabel": "Memória de código",
+      "type": "database"
+    },
+    {
+      "id": "mcp",
+      "label": "pqbr-mcp",
+      "pos": [
+        40,
+        460
+      ],
+      "size": [
+        150,
+        60
+      ],
+      "sources": [
+        {
+          "end_line": 50,
+          "label": "MCP tailnet",
+          "line": 50,
+          "path": "docs/ESTADO-ATUAL.md"
+        }
+      ],
+      "sublabel": "Só pela tailnet · 0.4.0",
+      "type": "backend"
+    },
+    {
+      "id": "cbm",
+      "label": "codebase-memory-mcp",
+      "pos": [
+        300,
+        460
+      ],
+      "size": [
+        170,
+        60
+      ],
+      "sources": [
+        {
+          "end_line": 28,
+          "label": "Migração CBM",
+          "line": 23,
+          "path": "docs/ESTADO-ATUAL.md"
+        }
+      ],
+      "sublabel": "Backend do codigo · 0.12.1",
+      "type": "backend"
+    },
+    {
+      "id": "router9",
+      "label": "9router",
+      "pos": [
+        560,
+        460
+      ],
+      "size": [
+        150,
+        60
+      ],
+      "sources": [
+        {
+          "end_line": 98,
+          "label": "Modelos via 9router",
+          "line": 95,
+          "path": "docs/ARQUITETURA.md"
+        }
+      ],
+      "sublabel": "Combos de modelos",
+      "type": "backend"
+    },
+    {
+      "id": "painel",
+      "label": "Painéis PQBR",
+      "pos": [
+        820,
+        460
+      ],
+      "size": [
+        150,
+        60
+      ],
+      "sources": [
+        {
+          "end_line": 63,
+          "label": "Temporal UI 8233",
+          "line": 63,
+          "path": "infra/temporal/docker-compose.yml"
+        },
+        {
+          "end_line": 90,
+          "label": "Painel mapa",
+          "line": 90,
+          "path": "docs/ESTADO-ATUAL.md"
+        }
+      ],
+      "sublabel": "Temporal UI · mapa :8088",
+      "type": "frontend"
+    },
+    {
+      "id": "paperclip",
+      "label": "Paperclip",
+      "pos": [
+        1100,
+        460
+      ],
+      "size": [
+        150,
+        60
+      ],
+      "sources": [
+        {
+          "end_line": 53,
+          "label": "Paperclip parado",
+          "line": 53,
+          "path": "docs/ESTADO-ATUAL.md"
+        }
+      ],
+      "sublabel": "Parado propositalmente",
+      "tag": "em retirada",
+      "type": "backend"
+    }
+  ],
+  "connections": [
+    {
+      "from": "jose",
+      "id": "jose-telegram",
+      "label": "pede / aprova",
+      "to": "telegram"
+    },
+    {
+      "from": "telegram",
+      "id": "telegram-temporal",
+      "label": "aprovação",
+      "to": "temporal",
+      "variant": "security"
+    },
+    {
+      "from": "temporal",
+      "id": "temporal-workers",
+      "label": "dispara",
+      "to": "workers"
+    },
+    {
+      "from": "workers",
+      "id": "workers-mestre",
+      "label": "briefing",
+      "to": "nlm-mestre"
+    },
+    {
+      "from": "nlm-mestre",
+      "id": "mestre-efemero",
+      "label": "Briefing",
+      "to": "nlm-efemero"
+    },
+    {
+      "from": "nlm-efemero",
+      "id": "efemero-camofox",
+      "label": "DirecaoCenas",
+      "to": "camofox"
+    },
+    {
+      "from": "camofox",
+      "id": "camofox-flow",
+      "label": "opera UI",
+      "to": "flow"
+    },
+    {
+      "from": "flow",
+      "id": "flow-juiz",
+      "label": "auditar",
+      "to": "juiz"
+    },
+    {
+      "from": "juiz",
+      "id": "juiz-publicacao",
+      "label": "veredito",
+      "to": "publicacao"
+    },
+    {
+      "from": "publicacao",
+      "id": "publicacao-youtube",
+      "label": "privado",
+      "to": "youtube",
+      "variant": "dashed"
+    },
+    {
+      "from": "camofox",
+      "id": "camofox-mestre",
+      "label": "sessão",
+      "to": "nlm-mestre",
+      "variant": "dashed"
+    },
+    {
+      "from": "flow",
+      "id": "flow-fichas",
+      "label": "fichas",
+      "to": "fichas",
+      "variant": "dashed"
+    },
+    {
+      "from": "juiz",
+      "id": "juiz-motion",
+      "label": "MG-05",
+      "to": "motion",
+      "variant": "dashed"
+    },
+    {
+      "from": "temporal",
+      "id": "temporal-tdb",
+      "label": "estado",
+      "to": "temporal-db"
+    },
+    {
+      "from": "workers",
+      "id": "workers-appdb",
+      "label": "negócio",
+      "to": "app-db"
+    },
+    {
+      "from": "mcp",
+      "id": "mcp-cbm",
+      "label": "codigo",
+      "to": "cbm"
+    },
+    {
+      "from": "mcp",
+      "id": "mcp-hindsight",
+      "label": "memória",
+      "to": "hindsight"
+    },
+    {
+      "from": "workers",
+      "id": "workers-router",
+      "label": "modelos",
+      "to": "router9"
+    },
+    {
+      "from": "temporal",
+      "id": "temporal-painel",
+      "label": "UI / mapa",
+      "to": "painel"
+    },
+    {
+      "from": "contratos",
+      "id": "contratos-fichas",
+      "label": "valida",
+      "to": "fichas"
+    }
+  ],
+  "diagram_type": "architecture",
+  "meta": {
+    "output": "pqbr-arquitetura.html",
+    "quality_profile": "showcase",
+    "repository": {
+      "link_mode": "web",
+      "provider": "github",
+      "revision": "82a5529cb6f841e51276387e431491106e522b58",
+      "url": "https://github.com/jvmendesjr/PQBR.git"
+    },
+    "title": "PQBR — Arquitetura atual (v0.31.1)"
+  },
+  "schema_version": 1
+}
