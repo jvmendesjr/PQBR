@@ -18,7 +18,7 @@ O fluxo é automático, agente primeiro. "Manual" em qualquer processo significa
 
 **Piloto e automático:** a visualização que vai para aprovação do José é a do episódio piloto. Depois do piloto aprovado, o fluxo fica automático e o José monitora independentemente. Se ele verificar alteração, aperta o botão de emergência do Telegram ou pede ao agente para interromper as operações. Operação interrompida só volta ao público por ordem do José, comandando o agente externamente junto com os agentes da operação.
 
-**Centro criativo:** o NotebookLM (pai, via `notebooklm-py`) cria os roteiros, a personalidade, o caderno, as informações, a pesquisa **e a direção das cenas** (`DirecaoCenas` 1.0.0: prompts de imagem/animação por cena, refs do catálogo). Os agentes **não inventam** esses prompts: só **operam o Flow** (UI/Camofox) aplicando a direção já validada no Temporal. Contratos Pydantic v2.
+**Centro criativo:** o NotebookLM (pai, via `notebooklm-py`) cria os roteiros, a personalidade, o caderno, as informações, a pesquisa **e a direção das cenas** (`DirecaoCenas` 2.0.0: prompts de imagem/animação por cena, refs do catálogo). Os agentes **não inventam** esses prompts: só **operam o Flow** (UI/Camofox) aplicando a direção já validada no Temporal. Contratos Pydantic v2. Rótulo de cena canônico: `PQBR-EP####-S##` (stem do arquivo == rótulo). Caderno Mestre norteador emite `BriefingEfemerico` (pesquisa do tema roda no efêmero); mestre nunca gera mídia (t168u).
 
 ## Núcleo (todos os episódios)
 
@@ -38,7 +38,7 @@ O fluxo é automático, agente primeiro. "Manual" em qualquer processo significa
 | Conferir processo canônico | `processo_criacao_conferir` (no `EpisodioWorkflow` e antes de qualquer geração visual) | — (falha = aborta) | todos (leitura); Dev mantém versão |
 | Pacote / caderno | `pacote_garantir`, `registro_buscar_caderno` | — | Guardião (sessão), Dev |
 | Roteiro / SEO / compliance | `NotebookLMWorkflow`, `nlm_perguntar`, `validar_roteiro`, `seo_9router`, `compliance_roteiro` | — | Líder Editorial, Pesquisador de Origem, Compliance |
-| Direção de cenas (passo 1) | `direcao_cenas_nlm` → `DirecaoCenas` 1.0.0 / `CenaIndividual` 1.0.0 | — | NotebookLM (porta `DiretorCenas`); validação fail-closed |
+| Direção de cenas (passo 1) | `direcao_cenas_nlm` → `DirecaoCenas` 2.0.0 / `CenaIndividual` 2.0.0 | — | NotebookLM (porta `DiretorCenas`); validação fail-closed |
 | Cenas no Flow (passo 2) | adaptador Flow *(pendente)* | — | Agentes só operam a UI Flow com a direção já pronta |
 | Abrir projeto na plataforma | *(a ligar)* activity do adaptador (`flow_*` / vids / vibes) | pedido sessão → `pedir_jose` | Guardião; Diretor escala |
 | Entregar / criar fichas | `banco_fichas` + agente da plataforma | aprovação ficha → Telegram / `aprovacao_jose` | Diretor (escala); José aprova permanente |

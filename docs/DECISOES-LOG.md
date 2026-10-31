@@ -1045,3 +1045,15 @@ NÃO CABE:
 - **Registro:** EP1003 piloto passou **fora do Temporal** (manual Flow); piloto manual **não** é o caminho oficial.
 - **Sem:** reinício de worker; push/merge; apagar arquivos (só histórico para `_obsoleto` se necessário).
 
+## 31/10/2026 — Caderno Mestre canônico restaurado (José t168u; reverte 12/10)
+
+- **José (chat t168, 31/10/2026):** aprovou (1) criar caderno mestre **NOVO**; (2) rótulo unificado `PQBR-EP####-S##`; (3) pesquisa do tema no efêmero com consulta indicada pelo mestre; (4) exportar fontes do mestre antigo `c35d7b24` antes de abandoná-lo; (5) implementar contratos/etapas **sem reiniciar worker**.
+- **Reversão:** a decisão de 12/10/2026 que desencorajava mestre como peça de produção (pesquisa `docs/pesquisas/pesquisa-caderno-mestre.md`) fica **superada** para o papel de **norteador/briefing**. Mestre **nunca** gera mídia; efêmero continua a executar pesquisa/roteiro/SEO/direção.
+- **Aplicado no código (branch atual, commits locais sem push/merge):**
+  - `CenaIndividual` / `DirecaoCenas` **2.0.0** com rótulo `PQBR-EP####-S##` e `validar_stem_rotulo` (stem==rótulo).
+  - Contrato `BriefingEfemerico` / `PedidoBriefingMestre` 1.0.0; `PedidoEpisodioE2E`/`PedidoNotebookLM` 1.1.0; VERSOES atualizado.
+  - Activities `nlm_mestre_*` + `nlm_abrir_efemero_com_briefing`; legado permanece em `MESTRES_PROIBIDOS`; mestre novo só via `config/caderno_mestre.json`.
+  - Export somente-leitura → `docs/pesquisas/mestre-antigo-c35d7b24/`.
+  - Caderno novo título `PQBR - Mestre canônico`, ID `00ce61ae-ab72-4f5a-a405-e1381377bc38` (gravado em `config/caderno_mestre.json`).
+- **Sem:** reinício de worker, disparo de workflow, geração de mídia, push/merge, delete do legado.
+

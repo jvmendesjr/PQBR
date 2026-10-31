@@ -32,7 +32,7 @@ Diagramas Mermaid **gerados a partir do código real** (workflows, activities, f
 
 ## Acesso
 Página servida só na tailnet: http://<IP tailnet do pc>:8088/ (serviço de usuário `pqbr-mapa.service`, `python3 -m http.server` com bind no IP Tailscale; sem Funnel, sem 0.0.0.0 — t519).
-| `12-cenas-elenco.mmd` | Cenas individuais (CenaIndividual 1.0.0; storyboard removido 29/10/2026), stickman flat colorido, catálogo aberto de fichas, papel observa/participa, figurino, caras e bocas sem fala, elenco alternado com protagonistas definidos (t150u) | `contratos/cena.py`, `config/estilo_visual.json`, CONTRATO-EDITORIAL §18 e §19 |
+| `12-cenas-elenco.mmd` | Cenas individuais (CenaIndividual 2.0.0; storyboard removido 29/10/2026), stickman flat colorido, catálogo aberto de fichas, papel observa/participa, figurino, caras e bocas sem fala, elenco alternado com protagonistas definidos (t150u) | `contratos/cena.py`, `config/estilo_visual.json`, CONTRATO-EDITORIAL §18 e §19 |
 Regenerar a página: `python scripts/mapa/gerar_index.py` (t78u).
 
 **Aba Roadmap (t120u):** gerada de `docs/ROADMAP.md` + `docs/ESTADO-ATUAL.md` por `scripts/mapa/roadmap.py` a cada `gerar_index.py` (e no pre-commit). Só leitura; editar as fontes, nunca o HTML.

@@ -1,5 +1,20 @@
 # CHANGELOG — PQBR
 
+## [0.31.0] — 2026-10-31 (Caderno Mestre canônico + rótulo S##; José t168u)
+### Adicionado
+- Contrato `BriefingEfemerico` / `PedidoBriefingMestre` 1.0.0 (persona, prompts por etapa, pesquisa obrigatória + URLs, refs, modelo sugerido).
+- Activities `nlm_mestre_perguntar`, `nlm_mestre_limpar_chat`, `nlm_mestre_briefing`, `nlm_abrir_efemero_com_briefing` (adaptador falso para testes).
+- `config/caderno_mestre.json` + `templates/notebooklm/persona-mestre.txt` + scripts `criar_mestre_canonico.py` / `exportar_mestre_legado.py`.
+- Export read-only `docs/pesquisas/mestre-antigo-c35d7b24/`.
+### Alterado
+- `CenaIndividual` e `DirecaoCenas` **2.0.0**: rótulo canônico `PQBR-EP####-S##`; `validar_stem_rotulo(stem==rótulo)`.
+- `PedidoEpisodioE2E` / `PedidoNotebookLM` **1.1.0** (`usar_mestre`, `papel`, `briefing_id`).
+- `MESTRES_PROIBIDOS` só legado; mestre novo allowlist por ID em config; trava: mestre nunca gera mídia.
+### Removido / revertido
+- Decisão operacional de 12/10 que excluía mestre do pipeline (papel de norteador restaurado; mídia continua proibida no mestre).
+### Sem
+- Reinício de worker, push/merge, geração de mídia, delete do caderno legado.
+
 ## [0.30.0] — 2026-10-30 (aba Produção + divergências; José pt162u)
 ### Adicionado
 - Aba do painel **Produção de episódios (tema → publicação)** (`#producao`), gerada de `docs/mapa/producao-episodios.json` via `scripts/mapa/producao.py`.

@@ -8,7 +8,8 @@ flowchart TD
   A2 --> W1[["filho NotebookLMWorkflow<br/>fila notebooklm-pqbr<br/>roteiro, compliance e SEO<br/>PedidoNotebookLM 1.0.0<br/>sem vídeo"]]
   W1 --> D1{"nlm.ok e caderno?"}
   D1 -- não --> F1(["fim: falha do roteiro"])
-  D1 -- sim --> DIR["direcao_cenas_nlm<br/>NotebookLM → DirecaoCenas 1.0.0<br/>list CenaIndividual fail-closed"]
+  D1 -- sim --> BR["nlm_mestre_briefing<br/>BriefingEfemerico 1.0.0<br/>pesquisa no efêmero"]
+  BR --> DIR["direcao_cenas_nlm<br/>NotebookLM → DirecaoCenas 2.0.0<br/>list CenaIndividual fail-closed"]
   DIR --> FP["flow_projeto_exigir_antes_cenas<br/>só fichas_ok"]
   FP --> PC2["processo_criacao_conferir"]
   PC2 --> FIM(["fim: etapa direcao_cenas<br/>proximo=flow_cenas_individuais_pendente<br/>passo 2 Flow ainda não existe"])
