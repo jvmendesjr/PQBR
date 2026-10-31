@@ -1,0 +1,31 @@
+%% Agentes e responsabilidades (t533–t535, José 24/10/2026). Decisão registrada; não é gerado do código.
+flowchart LR
+  J(["José (gestor)<br/>Telegram · aprovações = sinais Temporal"])
+  subgraph BOX["Grok Bot (box)"]
+    JR["jr — generalista<br/>infra do pc, rede/Tailscale (com OK)<br/>Camofox global 9377, outros projetos"]
+    AG["Agente PQBR (0ade9874)<br/>dedicado ao projeto e ao sistema no pc<br/>repo PQBR, Temporal, contratos, mapa, docs"]
+    YT["YT-LLM (018f2ef8) — EM DESCONTINUAÇÃO<br/>keepalive PAUSADO · binário notebooklm em _obsoleto<br/>docs = legado só leitura"]
+  end
+  subgraph PC["Servidor pc"]
+    REPO["Repo jvmendesjr/PQBR"]
+    TMP["Temporal + 8 papéis PydanticAI"]
+    CF["Camofox PQBR 9387<br/>(sessão Google única)"]
+    YTA["Acesso YouTube (token 600 + adaptador)<br/>PLANEJADO — BRIEFING §g, não migrado"]
+  end
+  J <--> AG
+  J <--> JR
+  AG --> REPO & TMP
+  TMP -->|activities| CF
+  AG -. "pede infra/rede" .-> JR
+  YT -. "herança: briefing, skills, branding" .-> AG
+  YT -. "token OAuth + MCP youtube-shorts (migração planejada)" .-> YTA
+  P1{{"Pré-requisito do 1º vídeo: ajustar silhueta do mapa no logo (ROADMAP 4V)"}}
+  P2{{"Skill de produção: PROPOSTA em docs/sdd/PROPOSTA-skill-producao-short-pqbr.md (José grava)"}}
+  AG --- P1 & P2
+  %% t73u–t78u (26/10/2026)
+  P3{{"Bloqueio: Cloud Console exige 2SV na conta do canal → sem OAuth do YouTube no worker (José ativa a 2SV)"}}
+  P4{{"Regra central t78u e t141u: stickman · elenco alternado · caras e bocas sem fala<br/>roupa chapada ainda sem cor · PNG sem roupa recusado · fluxo e NotebookLM permanecem"}}
+  AG --- P3 & P4
+  %% t84u–t101u (26/10/2026): memória, MCP e handoff detalhados no diagrama 13 (sem repetir aqui)
+  MEM13[["13 · memória por papel, MCP e ESTADO-ATUAL<br/>agente externo = mantenedor (lê tudo, constrói módulos)<br/>internos não entram pelo MCP"]]
+  AG --> MEM13

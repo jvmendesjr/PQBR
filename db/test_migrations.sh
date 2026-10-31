@@ -1,0 +1,71 @@
+#!/bin/sh
+# Testa as migrações num Postgres 17 descartável (sem rede, sem porta, 256 MB). Não toca no Supabase.
+# Uso (na raiz do repo): sh db/test_migrations.sh
+set -eu
+R="$(cd "$(dirname "$0")/.." && pwd)"; N=pqbr-migtest-$$
+docker run -d --rm --name $N --network none -m 256m -e POSTGRES_PASSWORD=teste-local -v "$R":/repo:ro -w /repo postgres:17-alpine >/dev/null
+trap 'docker rm -f $N >/dev/null 2>&1' EXIT
+for i in $(seq 1 30); do docker exec $N pg_isready -U postgres -q && break; sleep 1; done; sleep 2
+Q() { docker exec -i $N psql -U postgres -v ON_ERROR_STOP=1 -qAt "$@"; }
+Q -c "create role anon nologin; create role authenticated nologin; create role service_role nologin bypassrls;"
+up() { for f in "$R"/db/migrations/[0-9][0-9][0-9][0-9]_*.sql; do Q -f "/repo/${f#$R/}" >/dev/null; done; }
+down() { for f in $(ls "$R"/db/migrations/rollback/*_down.sql | sort -r); do Q -f "/repo/${f#$R/}" >/dev/null; done; }
+up; Q -c "insert into pqbr.plataformas (id, nome) values ('outra', 'Plataforma de teste')"
+echo "plataformas no seed: $(Q -c "select string_agg(id, ',') from pqbr.plataformas where id <> 'outra'")"
+echo "UP ok: $(Q -c "select count(*) from pg_tables where schemaname='pqbr'") tabelas, $(Q -c "select count(*) from pqbr.temas") temas carregados"
+echo "RLS ligado+forçado em todas: $(Q -c "select bool_and(relrowsecurity and relforcerowsecurity) from pg_class c join pg_namespace n on n.oid=c.relnamespace where n.nspname='pqbr' and c.relkind='r'")"
+echo "canal_id nas tabelas de negócio: $(Q -c "select count(distinct table_name) from information_schema.columns where table_schema='pqbr' and column_name='canal_id'")"
+F() { if Q -c "$2" >/dev/null 2>&1; then echo "FALHOU (aceitou): $1"; exit 1; else echo "ok (recusou): $1"; fi; }
+T=$(Q -c "select tema_normalizado from pqbr.temas limit 1")
+F "R10 tema repetido" "insert into pqbr.temas (tema, tema_normalizado, origem) values ('x repetido', '$T', 'jose')"
+F "código fora do padrão" "insert into pqbr.episodios (codigo, tema_id) values ('EP-1', 1)"
+E=$(Q -c "insert into pqbr.episodios (codigo, tema_id, estado) values ('PQBR-EP0001', 1, 'aprovado') returning id")
+F "publicação enviada sem external_id" "insert into pqbr.publicacoes (episodio_id, plataforma_id, estado) values ($E, 'youtube', 'enviado')"
+Q -c "insert into pqbr.publicacoes (episodio_id, plataforma_id, estado, external_id) values ($E, 'youtube', 'enviado', 'AbCdEfGhIj0'), ($E, 'outra', 'aprovado', null)"
+F "2ª publicação do mesmo episódio na mesma plataforma" "insert into pqbr.publicacoes (episodio_id, plataforma_id) values ($E, 'youtube')"
+F "plataforma inexistente" "insert into pqbr.publicacoes (episodio_id, plataforma_id) values ($E, 'orkut')"
+F "janela fora da grade" "insert into pqbr.grade (data, janela, tema_id, polemica, fonte) values ('2026-10-10','10:00',1,50,'perene')"
+F "revisão decidida sem determinação" "insert into pqbr.revisao_humana (item_tipo, item_ref, status) values ('tema','x','decidido')"
+F "ticket merge sem aprovação 1" "insert into pqbr.tickets (titulo, localizacao, falha, aprovacao_2_em) values ('t','l','f',now())"
+F "autor sem hash" "insert into pqbr.comentarios (external_id, post_external_id, autor_hash, publicado_em) values ('c0','x8Rmv-Tkso4','joao@x.com',now())"
+F "anon lê temas" "set role anon; select * from pqbr.temas"
+F "authenticated lê temas" "set role authenticated; select * from pqbr.temas"
+echo "pqbr_app escreve: $(Q -c "begin; set local role pqbr_app; insert into pqbr.acoes (tipo, alvo, motivo, ator) values ('teste','x','teste','temporal'); rollback; select 'sim'" | tail -1)"
+echo "consumo por modelo grava e agrega: $(Q -c "begin; set local role pqbr_app; insert into pqbr.consumo_modelos (provedor, modelo, tipo_acao, tokens_entrada, tokens_saida, sucesso) values ('openrouter','m','jev_triagem',10,2,true),('openrouter','m','jev_triagem',5,1,false); select chamadas||'/'||falhas||'/'||tokens_entrada from pqbr.consumo_diario; rollback" | tail -1)"
+F "tipo de ação inválido no consumo" "insert into pqbr.consumo_modelos (provedor, modelo, tipo_acao, sucesso) values ('x','m','qualquer',true)"
+F "pqbr_app apaga consumo" "set role pqbr_app; delete from pqbr.consumo_modelos"
+F "pqbr_app apaga histórico de ações" "set role pqbr_app; delete from pqbr.acoes"
+echo "service_role lê temas: $(Q -c "set role service_role; select count(*) from pqbr.temas")"
+H=$(printf '%064d' 0)
+Q -c "insert into pqbr.frases (texto, aprovada) values ('Boa pergunta.', true);
+      insert into pqbr.comentarios (external_id, post_external_id, autor_hash, publicado_em, texto_bruto) values ('c1','x8Rmv-Tkso4','$H',now(),'texto'), ('c2','x8Rmv-Tkso4','$H',now(),null);
+      insert into pqbr.respostas (comentario_id, frase_id, plataforma_id, post_external_id, autor_hash) select id,1,'youtube','x8Rmv-Tkso4','$H' from pqbr.comentarios where external_id='c1';"
+F "2ª resposta à mesma pessoa no mesmo vídeo" "insert into pqbr.respostas (comentario_id, frase_id, plataforma_id, post_external_id, autor_hash) select id,1,'youtube','x8Rmv-Tkso4','$H' from pqbr.comentarios where external_id='c2'"
+echo "mesma pessoa em outra plataforma pode: $(Q -c "insert into pqbr.comentarios (plataforma_id, external_id, post_external_id, autor_hash, publicado_em) values ('outra','t1','p1','$H',now()); insert into pqbr.respostas (comentario_id, frase_id, plataforma_id, post_external_id, autor_hash) select id,1,'outra','p1','$H' from pqbr.comentarios where external_id='t1'; select 'sim'")"
+echo "só-leitura lê temas: $(Q -c "set role pqbr_leitura; select count(*) from pqbr.temas")"
+F "só-leitura escreve" "set role pqbr_leitura; insert into pqbr.acoes (tipo, alvo, motivo, ator) values ('x','x','x','agente')"
+F "só-leitura lê texto bruto" "set role pqbr_leitura; select texto_bruto from pqbr.comentarios"
+echo "só-leitura lê comentários sem texto: $(Q -c "set role pqbr_leitura; select count(*) from pqbr.comentarios")"
+Q -c "insert into pqbr.outbox_aplicados (chave_idempotencia, tabela, workflow_id) values ('wf:run:passo1','episodios','wf') on conflict do nothing;
+      insert into pqbr.outbox_aplicados (chave_idempotencia, tabela, workflow_id) values ('wf:run:passo1','episodios','wf') on conflict do nothing;"
+echo "outbox repetido gravou: $(Q -c "select count(*) from pqbr.outbox_aplicados") (esperado 1)"
+Q -c "update pqbr.comentarios set texto_bruto='oi', texto_expira_em=now()-interval '1 day' where external_id='c1'"
+echo "expirar textos: $(Q -c "select pqbr.expirar_textos_comentarios()") (esperado 1)"
+echo "FKs sem índice: $(Q -c "select count(*) from pg_constraint c join pg_namespace n on n.oid=c.connamespace where n.nspname='pqbr' and c.contype='f' and not exists (select 1 from pg_index i where i.indrelid=c.conrelid and i.indkey[0]=c.conkey[1])")"
+# 0011 retenção (t358/t369): 3 linhas velhas (100 dias) e 1 nova; resumo antigo de 26 meses
+Q -c "insert into pqbr.consumo_modelos (em, provedor, modelo, tipo_acao, tokens_entrada, chamadas, sucesso) values
+      (now()-interval '100 days','g','m','roteiro',10,1,true),(now()-interval '100 days','g','m','roteiro',5,2,false),
+      (now()-interval '100 days','g','m','seo',1,1,true),(now()-interval '1 day','g','m','roteiro',7,1,true);
+      insert into pqbr.consumo_resumo_diario (dia, provedor, modelo, tipo_acao, linhas, chamadas, falhas) values (current_date - interval '26 months','g','m','seo',1,1,0)"
+F "pqbr_app executa a retenção" "set role pqbr_app; select pqbr.reter_consumo(current_date)"
+F "pqbr_manutencao apaga ações" "set role pqbr_manutencao; delete from pqbr.acoes"
+echo "retenção 1ª: $(Q -c "set role pqbr_manutencao; select pqbr.reter_consumo(current_date)::text" | tail -1)"
+echo "resumo roteiro (linhas/chamadas/falhas/tokens): $(Q -c "select linhas||'/'||chamadas||'/'||falhas||'/'||tokens_entrada from pqbr.consumo_resumo_diario where tipo_acao='roteiro'") (esperado 2/3/1/15)"
+echo "bruto restante: $(Q -c "select count(*) from pqbr.consumo_modelos") (esperado 1)"
+echo "retenção 2ª (idempotente): $(Q -c "set role pqbr_manutencao; select pqbr.reter_consumo(current_date)::text" | tail -1)"
+echo "resumo após 2ª: $(Q -c "select count(*)||' grupos, roteiro '||(select chamadas from pqbr.consumo_resumo_diario where tipo_acao='roteiro') from pqbr.consumo_resumo_diario") (esperado 2 grupos, roteiro 3)"
+echo "registro em acoes: $(Q -c "select count(*) from pqbr.acoes where tipo='retencao_consumo'") (esperado 2)"
+Q -c "truncate pqbr.consumo_modelos, pqbr.consumo_resumo_diario, pqbr.acoes restart identity"
+Q -c "truncate pqbr.respostas, pqbr.comentarios, pqbr.publicacoes, pqbr.episodio_estados, pqbr.episodios, pqbr.frases, pqbr.outbox_aplicados restart identity cascade"  # limpa dados de teste
+down; echo "DOWN ok: esquema pqbr existe? $(Q -c "select count(*) from pg_namespace where nspname='pqbr'")"
+up; down; echo "ciclo UP/DOWN repetido ok"

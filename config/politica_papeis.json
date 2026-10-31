@@ -1,0 +1,275 @@
+{
+  "versao": "1.6.0",
+  "bank": "pqbr",
+  "nota": "t84u-t85u: um bank só; cada papel lê/escreve só suas tags e vê só seus caminhos no índice do MCP. Papel ausente => negado (fail-closed). t90u: indexador escreve as tags de conteúdo da regra única (storage.hindsight_tags). t98u: tag `estado` (ESTADO-ATUAL e handoffs) lida por todos os papéis. t112u/t113u: `mantenedor` (agente externo de manutenção e construção de módulos) lê TODAS as tags de conteúdo (as que o indexador grava; obsoleto_candidato fica de fora por ser marcação de descarte) e vê o repo todo; escreve decisao, incidente, licao, playbook, doc e estado. Papéis internos inalterados. t145u: `motion` (monta o bloco de motion graphics do catálogo) lê editorial, licao, auditoria e estado; escreve licao e estado; vê só o pós e as fontes do bloco. t-migracao-cbm: ferramenta do MCP é codigo_consultar (backend codebase-memory-mcp 0.12.1, MIT); interface do codigo inalterada. Ressalva: referências antigas a gitnexus_consultar referem-se a codigo_consultar.",
+  "papeis": {
+    "diretor": {
+      "leitura": [
+        "decisao",
+        "incidente",
+        "editorial",
+        "publicacao",
+        "licao",
+        "pesquisa",
+        "estado"
+      ],
+      "escrita": [
+        "decisao",
+        "licao",
+        "estado"
+      ],
+      "codigo": [
+        "docs/",
+        "company/",
+        "config/"
+      ],
+      "ferramentas": [
+        "memoria_buscar",
+        "memoria_registrar",
+        "estado_ler"
+      ]
+    },
+    "lider-editorial": {
+      "leitura": [
+        "editorial",
+        "decisao",
+        "licao",
+        "pesquisa",
+        "estado"
+      ],
+      "escrita": [
+        "editorial",
+        "licao",
+        "estado"
+      ],
+      "codigo": [
+        "docs/CONTRATO-EDITORIAL.md",
+        "docs/REGRAS.md",
+        "src/pqbr/contratos/",
+        "config/estilo_visual.json"
+      ],
+      "ferramentas": [
+        "memoria_buscar",
+        "memoria_registrar",
+        "segunda_opiniao"
+      ]
+    },
+    "pesquisador-origem": {
+      "leitura": [
+        "pesquisa",
+        "editorial",
+        "estado"
+      ],
+      "escrita": [
+        "pesquisa",
+        "estado"
+      ],
+      "codigo": [
+        "docs/pesquisas/"
+      ],
+      "ferramentas": [
+        "memoria_buscar",
+        "memoria_registrar"
+      ]
+    },
+    "auditor": {
+      "leitura": [
+        "editorial",
+        "licao",
+        "incidente",
+        "auditoria",
+        "estado"
+      ],
+      "escrita": [
+        "auditoria",
+        "licao",
+        "estado"
+      ],
+      "codigo": [
+        "src/pqbr/contratos/",
+        "src/pqbr/pipeline/",
+        "docs/CONTRATO-EDITORIAL.md",
+        "docs/REGRAS.md"
+      ],
+      "ferramentas": [
+        "memoria_buscar",
+        "memoria_registrar",
+        "segunda_opiniao"
+      ]
+    },
+    "lider-compliance": {
+      "leitura": [
+        "compliance",
+        "editorial",
+        "decisao",
+        "incidente",
+        "estado"
+      ],
+      "escrita": [
+        "compliance",
+        "estado"
+      ],
+      "codigo": [
+        "docs/",
+        "src/pqbr/contratos/"
+      ],
+      "ferramentas": [
+        "memoria_buscar",
+        "memoria_registrar"
+      ]
+    },
+    "guardiao-seguranca": {
+      "leitura": [
+        "seguranca",
+        "incidente",
+        "decisao",
+        "estado"
+      ],
+      "escrita": [
+        "seguranca",
+        "incidente",
+        "estado"
+      ],
+      "codigo": [
+        "src/pqbr/seguranca/",
+        "src/pqbr/guardian/",
+        "scripts/",
+        "config/"
+      ],
+      "ferramentas": [
+        "memoria_buscar",
+        "memoria_registrar",
+        "estado_ler"
+      ]
+    },
+    "observador": {
+      "leitura": [
+        "incidente",
+        "publicacao",
+        "commit",
+        "estado"
+      ],
+      "escrita": [
+        "incidente",
+        "estado"
+      ],
+      "codigo": [
+        "src/pqbr/workflows/",
+        "docs/mapa/"
+      ],
+      "ferramentas": [
+        "memoria_buscar",
+        "memoria_registrar",
+        "estado_ler"
+      ]
+    },
+    "dev": {
+      "leitura": [
+        "decisao",
+        "incidente",
+        "commit",
+        "licao",
+        "playbook",
+        "doc",
+        "estado"
+      ],
+      "escrita": [
+        "licao",
+        "estado"
+      ],
+      "codigo": [
+        "src/",
+        "tests/",
+        "scripts/",
+        "config/",
+        "docs/"
+      ],
+      "ferramentas": [
+        "memoria_buscar",
+        "memoria_registrar",
+        "codigo_consultar",
+        "estado_ler"
+      ]
+    },
+    "motion": {
+      "leitura": [
+        "editorial",
+        "licao",
+        "auditoria",
+        "estado"
+      ],
+      "escrita": [
+        "licao",
+        "estado"
+      ],
+      "codigo": [
+        "src/pqbr/pos/motion/",
+        "src/pqbr/contratos/storyboard.py",
+        "banco-fichas/",
+        "config/estilo_visual.json",
+        "docs/CONTRATO-EDITORIAL.md",
+        "docs/REGRAS.md"
+      ],
+      "ferramentas": [
+        "memoria_buscar",
+        "memoria_registrar"
+      ]
+    },
+    "mantenedor": {
+      "leitura": [
+        "auditoria",
+        "commit",
+        "compliance",
+        "decisao",
+        "descarte",
+        "doc",
+        "editorial",
+        "estado",
+        "incidente",
+        "licao",
+        "pesquisa",
+        "playbook",
+        "publicacao",
+        "seguranca"
+      ],
+      "escrita": [
+        "decisao",
+        "incidente",
+        "licao",
+        "playbook",
+        "doc",
+        "estado"
+      ],
+      "codigo": [
+        ""
+      ],
+      "ferramentas": [
+        "memoria_buscar",
+        "memoria_registrar",
+        "codigo_consultar",
+        "estado_ler"
+      ]
+    },
+    "indexador": {
+      "leitura": [],
+      "escrita": [
+        "decisao",
+        "incidente",
+        "commit",
+        "playbook",
+        "doc",
+        "descarte",
+        "editorial",
+        "publicacao",
+        "seguranca",
+        "compliance",
+        "auditoria",
+        "pesquisa",
+        "licao",
+        "estado"
+      ],
+      "codigo": [],
+      "ferramentas": []
+    }
+  }
+}

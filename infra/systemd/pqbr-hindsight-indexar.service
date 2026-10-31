@@ -1,0 +1,6 @@
+[Unit]
+Description=PQBR indexa decisões, commits, incidentes e playbooks no Hindsight (bank pqbr)
+[Service]
+Type=oneshot
+Environment=PYTHONPATH=/home/pc/Workspace/PQBR/src
+ExecStart=/home/pc/Workspace/PQBR/.venv/bin/python /home/pc/Workspace/PQBR/scripts/hindsight/indexar.py

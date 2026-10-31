@@ -1,0 +1,53 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "provider": {
+    "9router": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "9router (PQBR)",
+      "options": {
+        "baseURL": "http://127.0.0.1:20130/v1",
+        "apiKey": "{env:NINEROUTER_API_KEY}"
+      },
+      "models": {
+        "core-alto": {},
+        "core-medio": {},
+        "core-baixo": {},
+        "ag/gemini-3.8-flash-medium": {},
+        "ag/gpt-oss-120b-medium": {},
+        "ag/claude-sonnet-4-6": {},
+        "core-revisao": {
+          "name": "core-revisao"
+        }
+      }
+    }
+  },
+  "small_model": "9router/core-baixo",
+  "permission": {
+    "bash": "deny",
+    "edit": "deny",
+    "webfetch": "deny",
+    "external_directory": "deny"
+  },
+  "share": "disabled",
+  "autoupdate": false,
+  "mcp": {
+    "pqbr-kit": {
+      "type": "local",
+      "command": [
+        "/home/pc/Workspace/PQBR/.venv/bin/python",
+        "-m",
+        "pqbr.kit.mcp_kit"
+      ],
+      "environment": {
+        "PYTHONPATH": "/home/pc/Workspace/PQBR/src",
+        "PQBR_KIT_PAPEL": "{env:PQBR_KIT_PAPEL}",
+        "PAPERCLIP_API_KEY": "{env:PAPERCLIP_API_KEY}",
+        "PAPERCLIP_RUN_ID": "{env:PAPERCLIP_RUN_ID}",
+        "PQBR_PAPERCLIP_API": "{env:PQBR_PAPERCLIP_API}",
+        "NINEROUTER_API_KEY": "{env:NINEROUTER_API_KEY}"
+      },
+      "enabled": true,
+      "timeout": 900000
+    }
+  }
+}

@@ -1,0 +1,18 @@
+
+==================================== ERRORS ====================================
+______________________ ERROR collecting tests/test_kit.py ______________________
+tests/test_kit.py:3: in <module>
+    from pqbr.kit.agente_texto import _json, _slug
+src/pqbr/kit/agente_texto.py:8: in <module>
+    from . import paperclip_api as pc, router9
+src/pqbr/kit/paperclip_api.py:16: in <module>
+    BASE = _base().rstrip("/")
+           ^^^^^^^
+src/pqbr/kit/paperclip_api.py:11: in _base
+    ctx = json.load(open(os.path.expanduser("~/.paperclip/context.json"), encoding="utf-8"))
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   FileNotFoundError: [Errno 2] No such file or directory: '/tmp/.paperclip/context.json'
+=========================== short test summary info ============================
+ERROR tests/test_kit.py - FileNotFoundError: [Errno 2] No such file or direct...
+!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
+1 error in 0.99s

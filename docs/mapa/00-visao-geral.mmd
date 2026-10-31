@@ -1,0 +1,38 @@
+%% Mapa PQBR — Visão geral. Gerado do código em 24/10/2026 (commit base c752abc). Só muda por proposta aprovada pelo José.
+flowchart TB
+  JOSE(["José"])
+  TG["Telegram (Hermes pqbr)<br/>cron pqbr-pedidos-jose lê pqbr.revisao_humana"]
+  subgraph T["TEMPORAL — sistema nervoso (127.0.0.1:7233, ns pqbr)"]
+    SCH["Schedules (Fortaleza)<br/>retencao-consumo 04:15 · reposicao-temas 00:30<br/>acessos hh:10 · vigia-atualizacoes sex 08:00<br/>grade-diaria 01:00 PAUSADO · lote-producao 05:00 PAUSADO"]
+    Q1[["fila pqbr-episodio<br/>pqbr-temporal-worker"]]
+    Q2[["fila episodio-pqbr<br/>pqbr-episodio-worker"]]
+    Q3[["fila notebooklm-pqbr<br/>pqbr-notebooklm-worker · concorrência 1"]]
+    Q4[["fila camofox-pqbr<br/>pqbr-camofox-worker"]]
+    SIG{{"Sinais/aprovações<br/>veredito_auditor (EpisodioWorkflow)"}}
+  end
+  subgraph M["Motores trocáveis (config/motores.json)"]
+    MI["MotorIntelectual = notebooklm<br/>(notebooklm-py 0.8.5, perfil pqbr)"]
+    GV["GeradorVideo = flow<br/>fallback google_vids → meta_vibes<br/>⚠ adaptador ainda não extraído"]
+  end
+  subgraph A["8 papéis (PydanticAI dentro de activities, 9router)"]
+    R1["Diretor"] --- R2["Líder Editorial"] --- R3["Pesquisador de Origem"] --- R4["Auditor"]
+    R5["Compliance"] --- R6["Guardião"] --- R7["Observador"] --- R8["Dev (só propõe)"]
+  end
+  C[("Contratos Pydantic v2<br/>src/pqbr/contratos · SemVer VERSOES")]
+  PG[("Postgres local<br/>schema pqbr")]
+  CF["Camofox 9387<br/>identidade Google única"]
+  SCH --> Q1
+  Q1 --> Q3 & Q2 & Q4
+  Q3 --> MI --> CF
+  Q4 --> CF
+  GV -.-> CF
+  A -. "saídas validadas" .-> C
+  Q1 & Q2 --> PG
+  PG -- "pedidos ao José" --> TG --> JOSE
+  JOSE -- "aprovação / login" --> SIG
+  C -. "todo dado entre peças" .- T
+  %% t84u–t101u (26/10/2026)
+  K13[["Conhecimento: Hindsight por papel · codebase-memory-mcp 0.12.1 · pqbr-mcp 0.4.0 (tailnet, só mantenedor)<br/>ESTADO-ATUAL + handoff — ver diagrama 13"]]
+  A -. "memória filtrada pela política" .-> K13
+  classDef core fill:#eef3f7,stroke:#33506b;
+  class T core;

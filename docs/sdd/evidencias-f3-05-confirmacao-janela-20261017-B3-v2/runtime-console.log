@@ -1,0 +1,6 @@
+GATE DE ISOLAMENTO APROVADO; iniciando somente recursos descartáveis.
+Traceback (most recent call last):
+  File "/home/pc/Workspace/PQBR/docs/sdd/evidencias-f3-05-confirmacao-janela-20261017-B3-v2/run_pqbr121.py", line 474, in <module>
+    operational_after = snapshot_resources()['operational_states']
+                        ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+KeyError: 'operational_states'

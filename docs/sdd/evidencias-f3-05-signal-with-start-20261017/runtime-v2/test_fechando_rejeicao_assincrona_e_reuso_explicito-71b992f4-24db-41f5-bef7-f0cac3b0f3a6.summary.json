@@ -1,0 +1,26 @@
+{
+  "teste": "test_fechando_rejeicao_assincrona_e_reuso_explicito",
+  "workflow_id": "prototipo-signal-start-v1-07aa137bd2dc362b90b33958e3ed6b335ab8385dedfb7454998d1219cf0e9f50",
+  "run_id": "71b992f4-24db-41f5-bef7-f0cac3b0f3a6",
+  "estado": "COMPLETED",
+  "replay": "ok",
+  "pending_activities": 0,
+  "atividades_agendadas": 1,
+  "signals": 4,
+  "calls": [
+    {
+      "pedido": {
+        "falhar": false,
+        "id": "id-1",
+        "sessao": "sessao-A"
+      },
+      "inicio": 405412.619341046,
+      "fim": 405412.725526848,
+      "attempt": 1
+    }
+  ],
+  "max_global": 1,
+  "max_sessao": {
+    "sessao-A": 1
+  }
+}

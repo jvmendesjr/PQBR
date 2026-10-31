@@ -1,0 +1,36 @@
+{
+  "workflow_id": "teste-f3-05-candidato-sessao-ed610c73428dbf3ac1b4b4881b3c853e9e07425e61a8174c5871f95e2b18e39f-op-ee236c1e64da4f8c073cfaa2b73150d3c1103b83b867aff8639ef3b5483f16d6",
+  "run_id": "01a14acf-8892-7e12-88bb-8dd33d15bcd6",
+  "eventos": 31,
+  "replay": "ok",
+  "activities": [
+    {
+      "nome": "triagem_jev",
+      "fila": "teste-f3-05-candidato-wf-test_replay_versao_anterior_sem_patch_e_nova_com_patch",
+      "max_tentativas": 3,
+      "id": "1",
+      "timeout_s": 120
+    },
+    {
+      "nome": "intervir_agente",
+      "fila": "teste-f3-05-candidato-camofox-test_replay_versao_anterior_sem_patch_e_nova_com_patch",
+      "max_tentativas": 1,
+      "id": "intervencao-1",
+      "timeout_s": 560
+    },
+    {
+      "nome": "verificar_jev",
+      "fila": "teste-f3-05-candidato-wf-test_replay_versao_anterior_sem_patch_e_nova_com_patch",
+      "max_tentativas": 3,
+      "id": "3",
+      "timeout_s": 120
+    },
+    {
+      "nome": "registrar_correcao",
+      "fila": "teste-f3-05-candidato-wf-test_replay_versao_anterior_sem_patch_e_nova_com_patch",
+      "max_tentativas": 3,
+      "id": "4",
+      "timeout_s": 60
+    }
+  ]
+}

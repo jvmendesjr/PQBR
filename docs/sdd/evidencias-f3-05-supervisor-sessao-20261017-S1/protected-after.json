@@ -1,0 +1,61 @@
+{
+  "hashes": {
+    "/home/pc/Workspace/PQBR/src/pqbr/workflows/candidato_sessao.py": "77080d21abee2e635e2f4590487ba0843f8fe57721e43bc261a948e4d59dc953",
+    "/home/pc/Workspace/PQBR/src/pqbr/workflows/correcao.py": "3b008464681691e50b0bfa76c1ce327b1debc4b3738cdf4e852f54891bc2f2e9",
+    "/home/pc/Workspace/PQBR/tests/workflows/prototipo_recuperacao_pendentes.py": "18fef23055f84ca1db35e5d367609d09c2cad4f1f258eef159a7169f74040135",
+    "/home/pc/Workspace/PQBR/src/pqbr/workflows/worker.py": "5e0417622a598c74e8361451f83151da90a3d0b2a6cb2de129ec1bfe898175b4",
+    "/home/pc/Workspace/PQBR/src/pqbr/workflows/worker_camofox.py": "cca9233560feecff7958204a418ecad9c267ce32c176513fe921c5a4b627f89d",
+    "/home/pc/Workspace/PQBR/src/pqbr/workflows/worker_episodio.py": "4142556904b8f25e36030c34476c4a43040bf1055ce5dfd485394c36feee81d7",
+    "/home/pc/Workspace/PQBR/src/pqbr/workflows/worker_notebooklm.py": "bbb8d5f823fae9c8e1a0a6a11860e3519d8d00ec64a5e7102c856d7edf98cfeb",
+    "/home/pc/Workspace/PQBR/docs/REGRAS.md": "1a94d6ab9f83587ba428250dd69af8bfe7e151660cf92203f60d2ad3daad5a88",
+    "/home/pc/Workspace/PQBR/docs/SPEC.md": "312ee48b3ce511b99c08dad4c7697be43311fca6ad942842698501ab3d43547b",
+    "/home/pc/Workspace/PQBR/docs/ARQUITETURA.md": "67a83f2391590c0f31f3bd270b8a6e0d1facedcf52469cc6ab5aa607e217fabf",
+    "/home/pc/Workspace/PQBR/docs/TESTES.md": "5eedb0ec9c2f108a3c920062551c512508149f63754694597fea23b91a8342c7",
+    "/home/pc/.config/systemd/user/pqbr-temporal-worker.service": "7a4b69e3dfd4e448bad79d3252520acd34ec570bcba1bdcd36ea138f8ff990ed",
+    "/home/pc/.config/systemd/user/pqbr-camofox-worker.service": "dfd82b0ea10faaabca9a1bbdf9e0938466cf9671be7636a9e472062ce8303599",
+    "/home/pc/.config/systemd/user/pqbr-notebooklm-worker.service": "9078fa88f9a8d3357e7cca029faea87670abc9b5d898d1973ccc0c5226b54d80",
+    "/home/pc/.config/systemd/user/pqbr-episodio-worker.service": "f40ce559da41011bbb55c89ff3018400fae3eb5539753a92d4906240fa87f549"
+  },
+  "services": {
+    "pqbr-temporal-worker.service": {
+      "Restart": "always",
+      "MainPID": "6984",
+      "NRestarts": "3",
+      "ExecMainStartTimestamp": "Mon 2026-10-12 19:36:44 -03",
+      "Id": "pqbr-temporal-worker.service",
+      "ActiveState": "active",
+      "SubState": "running",
+      "FragmentPath": "/home/pc/.config/systemd/user/pqbr-temporal-worker.service"
+    },
+    "pqbr-camofox-worker.service": {
+      "Restart": "always",
+      "MainPID": "6867",
+      "NRestarts": "1",
+      "ExecMainStartTimestamp": "Mon 2026-10-12 19:36:43 -03",
+      "Id": "pqbr-camofox-worker.service",
+      "ActiveState": "active",
+      "SubState": "running",
+      "FragmentPath": "/home/pc/.config/systemd/user/pqbr-camofox-worker.service"
+    },
+    "pqbr-notebooklm-worker.service": {
+      "Restart": "always",
+      "MainPID": "6869",
+      "NRestarts": "1",
+      "ExecMainStartTimestamp": "Mon 2026-10-12 19:36:43 -03",
+      "Id": "pqbr-notebooklm-worker.service",
+      "ActiveState": "active",
+      "SubState": "running",
+      "FragmentPath": "/home/pc/.config/systemd/user/pqbr-notebooklm-worker.service"
+    },
+    "pqbr-episodio-worker.service": {
+      "Restart": "always",
+      "MainPID": "6868",
+      "NRestarts": "1",
+      "ExecMainStartTimestamp": "Mon 2026-10-12 19:36:43 -03",
+      "Id": "pqbr-episodio-worker.service",
+      "ActiveState": "active",
+      "SubState": "running",
+      "FragmentPath": "/home/pc/.config/systemd/user/pqbr-episodio-worker.service"
+    }
+  }
+}

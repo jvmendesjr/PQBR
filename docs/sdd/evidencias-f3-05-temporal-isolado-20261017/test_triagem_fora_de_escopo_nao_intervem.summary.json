@@ -1,0 +1,36 @@
+{
+  "teste": "test_triagem_fora_de_escopo_nao_intervem",
+  "workflow_id": "f3-05-teste-7cbdfa8e07e2407b8ed9e4bb5ec17a7c",
+  "replay": "ok",
+  "eventos": 17,
+  "atividades": [
+    {
+      "activity": "triagem_jev",
+      "attempt": 1,
+      "n": null
+    },
+    {
+      "activity": "registrar_correcao",
+      "attempt": 1,
+      "n": null
+    }
+  ],
+  "registros": [
+    {
+      "resultado": "sensivel",
+      "tentativas": 0,
+      "motivo": "fora_de_escopo: simulado",
+      "proposta_script": null,
+      "chamar_jose": true
+    }
+  ],
+  "resultado": {
+    "resultado": "sensivel",
+    "tentativas": 0,
+    "motivo": "fora_de_escopo: simulado",
+    "proposta_script": null,
+    "chamar_jose": true
+  },
+  "falha": null,
+  "timers": 0
+}

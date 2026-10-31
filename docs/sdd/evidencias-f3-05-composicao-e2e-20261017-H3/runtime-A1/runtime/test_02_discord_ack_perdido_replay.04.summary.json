@@ -1,0 +1,28 @@
+{
+  "workflow_id": "teste-f3-05-supervisor-a82005a074110ba00527905ec8fb88db6223bab5d00f2440290632a110bd9738-op-903862a065445b96fb86886c8c68c119e0fdaaa7d0172be264d350d12e0b0fd1",
+  "run_id": "01a14b82-adaf-7e8f-8a1e-329201a7d9bc",
+  "eventos": 31,
+  "replay": "ok",
+  "activities": [
+    {
+      "nome": "triagem_jev",
+      "fila": "teste-f3-05-candidato-wf-FAKE-H3-test_02_discord_ack_perdido_replay-supervisor",
+      "max_tentativas": 3
+    },
+    {
+      "nome": "intervir_agente",
+      "fila": "teste-f3-05-candidato-camofox-FAKE-H3-test_02_discord_ack_perdido_replay-supervisor",
+      "max_tentativas": 1
+    },
+    {
+      "nome": "verificar_jev",
+      "fila": "teste-f3-05-candidato-wf-FAKE-H3-test_02_discord_ack_perdido_replay-supervisor",
+      "max_tentativas": 3
+    },
+    {
+      "nome": "registrar_correcao",
+      "fila": "teste-f3-05-candidato-wf-FAKE-H3-test_02_discord_ack_perdido_replay-supervisor",
+      "max_tentativas": 3
+    }
+  ]
+}

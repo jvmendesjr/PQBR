@@ -1,0 +1,35 @@
+{
+ "veredito": "terceira_rodada",
+ "motivos": [
+  "r2:S01:ausente",
+  "r2:S02:ausente",
+  "r2:S03:ausente",
+  "r2:S04:ausente",
+  "r2:S05:ausente",
+  "texto não enviado; imagem×fala/loop não avaliados",
+  "título não enviado; correspondência da capa não avaliada"
+ ],
+ "rodadas": 2,
+ "erros_aceitaveis": 0,
+ "persistido": false,
+ "texto_enviado": false,
+ "conversas": [
+  "https://gemini.google.com/app/fd0e89c47bc62fa2",
+  "https://gemini.google.com/app/4039927ed0b946d3",
+  "https://gemini.google.com/app/7918da1ecc31ff09"
+ ],
+ "bruto": {
+  "metricas": {
+   "segue_estilo_declarado": null,
+   "mesmo_personagem_do_bloco": null,
+   "imagem_corresponde_a_fala": null,
+   "legivel_no_celular": 1.0,
+   "ambiente_brasileiro": 1.0,
+   "foco_unico_zona_segura": 1.0,
+   "corresponde_ao_titulo": null,
+   "legenda_cobre_foco": 1.0,
+   "tem_texto_na_tela": 1.0
+  },
+  "rodada_unica": false
+ }
+}

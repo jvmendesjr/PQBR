@@ -1,0 +1,19 @@
+{
+  "count": 12,
+  "independent_runtimes": 12,
+  "independent_service_clients": 12,
+  "identities": [
+    "isolado-stress-client-000",
+    "isolado-stress-client-001",
+    "isolado-stress-client-002",
+    "isolado-stress-client-003",
+    "isolado-stress-client-004",
+    "isolado-stress-client-005",
+    "isolado-stress-client-006",
+    "isolado-stress-client-007",
+    "isolado-stress-client-008",
+    "isolado-stress-client-009",
+    "isolado-stress-client-010",
+    "isolado-stress-client-011"
+  ]
+}

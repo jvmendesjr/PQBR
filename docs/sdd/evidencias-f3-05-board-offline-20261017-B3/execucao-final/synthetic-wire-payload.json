@@ -1,0 +1,8 @@
+{
+  "issueId": "issue-synthetic-B3",
+  "interactionId": "interaction-synthetic-B3",
+  "scopeId": "scope-synthetic-B3-once",
+  "sessionId": "session-synthetic-B3",
+  "operationId": "second-synthetic-accepted",
+  "idempotencyKey": "idempotency-synthetic-B3-once"
+}

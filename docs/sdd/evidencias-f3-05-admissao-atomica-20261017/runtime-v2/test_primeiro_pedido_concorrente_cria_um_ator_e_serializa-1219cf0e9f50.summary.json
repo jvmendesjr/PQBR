@@ -1,0 +1,161 @@
+{
+  "teste": "test_primeiro_pedido_concorrente_cria_um_ator_e_serializa",
+  "workflow_id": "prototipo-ator-sessao-atomico-v1-07aa137bd2dc362b90b33958e3ed6b335ab8385dedfb7454998d1219cf0e9f50",
+  "run_id": "6ec9b6ae-4c1c-4b89-ad66-b2cc2f9657da",
+  "estado": "COMPLETED",
+  "pending_activities": 0,
+  "replay": "ok",
+  "atividades_agendadas": 12,
+  "fila_explicita": "teste-camofox-ator-edb4581cda6648f59af017b47a2dcd78",
+  "calls": [
+    {
+      "pedido": {
+        "falhar": false,
+        "id": "p0",
+        "sessao": "sessao-A"
+      },
+      "inicio": 404981.963379919,
+      "fim": 404982.079432335,
+      "fila": "teste-camofox-ator-edb4581cda6648f59af017b47a2dcd78",
+      "workflow_id": "prototipo-ator-sessao-atomico-v1-07aa137bd2dc362b90b33958e3ed6b335ab8385dedfb7454998d1219cf0e9f50",
+      "attempt": 1
+    },
+    {
+      "pedido": {
+        "falhar": false,
+        "id": "p1",
+        "sessao": "sessao-A"
+      },
+      "inicio": 404982.173737911,
+      "fim": 404982.173753574,
+      "fila": "teste-camofox-ator-edb4581cda6648f59af017b47a2dcd78",
+      "workflow_id": "prototipo-ator-sessao-atomico-v1-07aa137bd2dc362b90b33958e3ed6b335ab8385dedfb7454998d1219cf0e9f50",
+      "attempt": 1
+    },
+    {
+      "pedido": {
+        "falhar": false,
+        "id": "p2",
+        "sessao": "sessao-A"
+      },
+      "inicio": 404982.231289939,
+      "fim": 404982.231305336,
+      "fila": "teste-camofox-ator-edb4581cda6648f59af017b47a2dcd78",
+      "workflow_id": "prototipo-ator-sessao-atomico-v1-07aa137bd2dc362b90b33958e3ed6b335ab8385dedfb7454998d1219cf0e9f50",
+      "attempt": 1
+    },
+    {
+      "pedido": {
+        "falhar": false,
+        "id": "p3",
+        "sessao": "sessao-A"
+      },
+      "inicio": 404982.293272553,
+      "fim": 404982.293288797,
+      "fila": "teste-camofox-ator-edb4581cda6648f59af017b47a2dcd78",
+      "workflow_id": "prototipo-ator-sessao-atomico-v1-07aa137bd2dc362b90b33958e3ed6b335ab8385dedfb7454998d1219cf0e9f50",
+      "attempt": 1
+    },
+    {
+      "pedido": {
+        "falhar": false,
+        "id": "p4",
+        "sessao": "sessao-A"
+      },
+      "inicio": 404982.364488193,
+      "fim": 404982.364504719,
+      "fila": "teste-camofox-ator-edb4581cda6648f59af017b47a2dcd78",
+      "workflow_id": "prototipo-ator-sessao-atomico-v1-07aa137bd2dc362b90b33958e3ed6b335ab8385dedfb7454998d1219cf0e9f50",
+      "attempt": 1
+    },
+    {
+      "pedido": {
+        "falhar": false,
+        "id": "p5",
+        "sessao": "sessao-A"
+      },
+      "inicio": 404982.442103833,
+      "fim": 404982.442119651,
+      "fila": "teste-camofox-ator-edb4581cda6648f59af017b47a2dcd78",
+      "workflow_id": "prototipo-ator-sessao-atomico-v1-07aa137bd2dc362b90b33958e3ed6b335ab8385dedfb7454998d1219cf0e9f50",
+      "attempt": 1
+    },
+    {
+      "pedido": {
+        "falhar": false,
+        "id": "p6",
+        "sessao": "sessao-A"
+      },
+      "inicio": 404982.524399299,
+      "fim": 404982.524421907,
+      "fila": "teste-camofox-ator-edb4581cda6648f59af017b47a2dcd78",
+      "workflow_id": "prototipo-ator-sessao-atomico-v1-07aa137bd2dc362b90b33958e3ed6b335ab8385dedfb7454998d1219cf0e9f50",
+      "attempt": 1
+    },
+    {
+      "pedido": {
+        "falhar": false,
+        "id": "p7",
+        "sessao": "sessao-A"
+      },
+      "inicio": 404982.609481581,
+      "fim": 404982.609496328,
+      "fila": "teste-camofox-ator-edb4581cda6648f59af017b47a2dcd78",
+      "workflow_id": "prototipo-ator-sessao-atomico-v1-07aa137bd2dc362b90b33958e3ed6b335ab8385dedfb7454998d1219cf0e9f50",
+      "attempt": 1
+    },
+    {
+      "pedido": {
+        "falhar": false,
+        "id": "p8",
+        "sessao": "sessao-A"
+      },
+      "inicio": 404982.698512487,
+      "fim": 404982.698527779,
+      "fila": "teste-camofox-ator-edb4581cda6648f59af017b47a2dcd78",
+      "workflow_id": "prototipo-ator-sessao-atomico-v1-07aa137bd2dc362b90b33958e3ed6b335ab8385dedfb7454998d1219cf0e9f50",
+      "attempt": 1
+    },
+    {
+      "pedido": {
+        "falhar": false,
+        "id": "p9",
+        "sessao": "sessao-A"
+      },
+      "inicio": 404982.798518977,
+      "fim": 404982.798533443,
+      "fila": "teste-camofox-ator-edb4581cda6648f59af017b47a2dcd78",
+      "workflow_id": "prototipo-ator-sessao-atomico-v1-07aa137bd2dc362b90b33958e3ed6b335ab8385dedfb7454998d1219cf0e9f50",
+      "attempt": 1
+    },
+    {
+      "pedido": {
+        "falhar": false,
+        "id": "p10",
+        "sessao": "sessao-A"
+      },
+      "inicio": 404982.904370405,
+      "fim": 404982.904396985,
+      "fila": "teste-camofox-ator-edb4581cda6648f59af017b47a2dcd78",
+      "workflow_id": "prototipo-ator-sessao-atomico-v1-07aa137bd2dc362b90b33958e3ed6b335ab8385dedfb7454998d1219cf0e9f50",
+      "attempt": 1
+    },
+    {
+      "pedido": {
+        "falhar": false,
+        "id": "p11",
+        "sessao": "sessao-A"
+      },
+      "inicio": 404983.022264131,
+      "fim": 404983.022282535,
+      "fila": "teste-camofox-ator-edb4581cda6648f59af017b47a2dcd78",
+      "workflow_id": "prototipo-ator-sessao-atomico-v1-07aa137bd2dc362b90b33958e3ed6b335ab8385dedfb7454998d1219cf0e9f50",
+      "attempt": 1
+    }
+  ],
+  "max_global": 1,
+  "max_por_sessao": {
+    "sessao-A": 1
+  },
+  "erro": null
+}

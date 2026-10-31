@@ -1,0 +1,52 @@
+{
+  "teste": "test_outra_ferramenta_tres_tentativas_sem_espera",
+  "workflow_id": "f3-05-teste-ac62d4b07b8e45999f36638e8e052d0e",
+  "replay": "ok",
+  "eventos": 35,
+  "atividades": [
+    {
+      "activity": "triagem_jev",
+      "attempt": 1,
+      "n": null
+    },
+    {
+      "activity": "intervir_agente",
+      "attempt": 1,
+      "n": 1
+    },
+    {
+      "activity": "intervir_agente",
+      "attempt": 1,
+      "n": 2
+    },
+    {
+      "activity": "intervir_agente",
+      "attempt": 1,
+      "n": 3
+    },
+    {
+      "activity": "registrar_correcao",
+      "attempt": 1,
+      "n": null
+    }
+  ],
+  "registros": [
+    {
+      "resultado": "esgotado",
+      "tentativas": 3,
+      "motivo": "3 tentativas sem sucesso",
+      "proposta_script": null,
+      "chamar_jose": true
+    }
+  ],
+  "resultado": {
+    "resultado": "esgotado",
+    "tentativas": 3,
+    "motivo": "3 tentativas sem sucesso",
+    "proposta_script": null,
+    "chamar_jose": true
+  },
+  "falha": null,
+  "timers": 0,
+  "esperas": []
+}

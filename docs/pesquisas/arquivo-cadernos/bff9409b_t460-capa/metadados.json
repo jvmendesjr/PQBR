@@ -1,0 +1,16 @@
+{
+  "id": "bff9409b-ee47-4280-96b5-4c94ce1c2a63",
+  "title": "Teste - t460-capa",
+  "created_at": "2026-10-12T15:33:42+00:00",
+  "last_viewed_at": "2026-10-12T15:58:34+00:00",
+  "modified_at": "2026-10-12T15:58:34+00:00",
+  "is_owner": true,
+  "role": "owner",
+  "sources": [
+    {
+      "type": "markdown",
+      "title": "roteiro.md",
+      "url": null
+    }
+  ]
+}

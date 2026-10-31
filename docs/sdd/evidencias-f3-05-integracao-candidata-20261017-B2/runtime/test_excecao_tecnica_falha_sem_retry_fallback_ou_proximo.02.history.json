@@ -1,0 +1,419 @@
+{
+  "events": [
+    {
+      "eventId": "1",
+      "eventTime": "2026-10-17T16:18:03.159128563Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_EXECUTION_STARTED",
+      "taskId": "1048672",
+      "workflowExecutionStartedEventAttributes": {
+        "workflowType": {
+          "name": "PQBRCorrecaoCandidata"
+        },
+        "parentWorkflowNamespace": "f3-05-candidate",
+        "parentWorkflowExecution": {
+          "workflowId": "teste-f3-05-candidato-sessao-12f8bdf97ec05bbc1f4e3c4d095420b583c516a153e0bf7ad007084ecc5dd46c",
+          "runId": "89dc5ad8-c219-4390-9306-c3ec8f010518"
+        },
+        "parentInitiatedEventId": "7",
+        "taskQueue": {
+          "name": "teste-f3-05-candidato-wf-test_excecao_tecnica_falha_sem_retry_fallback_ou_proximo",
+          "kind": "TASK_QUEUE_KIND_NORMAL"
+        },
+        "input": {
+          "payloads": [
+            {
+              "metadata": {
+                "encoding": "anNvbi9wbGFpbg=="
+              },
+              "data": "eyJ2ZXJzYW8iOjEsImNvbmZpZyI6eyJzZXNzYW8iOiJ0ZXN0X2V4Y2VjYW9fdGVjbmljYV9mYWxoYV9zZW1fcmV0cnlfZmFsbGJhY2tfb3VfcHJveGltbyIsImZpbGFfd29ya2Zsb3ciOiJ0ZXN0ZS1mMy0wNS1jYW5kaWRhdG8td2YtdGVzdF9leGNlY2FvX3RlY25pY2FfZmFsaGFfc2VtX3JldHJ5X2ZhbGxiYWNrX291X3Byb3hpbW8iLCJmaWxhX2NhbW9mb3giOiJ0ZXN0ZS1mMy0wNS1jYW5kaWRhdG8tY2Ftb2ZveC10ZXN0X2V4Y2VjYW9fdGVjbmljYV9mYWxoYV9zZW1fcmV0cnlfZmFsbGJhY2tfb3VfcHJveGltbyJ9LCJwZWRpZG8iOnsiZmVycmFtZW50YSI6ImNhbW9mb3giLCJzZXNzYW8iOiJ0ZXN0X2V4Y2VjYW9fdGVjbmljYV9mYWxoYV9zZW1fcmV0cnlfZmFsbGJhY2tfb3VfcHJveGltbyIsInBhc3NvIjoiYWNhby1mYWxoYSIsImVycm8iOiJmYWxoYS10ZWNuaWNhIiwiZXBpc29kaW8iOm51bGwsInNpbXVsYWNhbyI6eyJ0cmlhZ2VtIjoiY29ycmlnaXZlbCIsImludGVydmVuY29lcyI6W3RydWVdLCJ2ZXJpZmljYWNvZXMiOlt0cnVlXSwiY29udGFfY29uZmVyZSI6dHJ1ZX19fQ=="
+            }
+          ]
+        },
+        "workflowRunTimeout": "0s",
+        "workflowTaskTimeout": "10s",
+        "originalExecutionRunId": "01a14aa7-f317-71f2-9573-623f1dcec6fb",
+        "firstExecutionRunId": "01a14aa7-f317-71f2-9573-623f1dcec6fb",
+        "retryPolicy": {
+          "initialInterval": "1s",
+          "backoffCoefficient": 2.0,
+          "maximumInterval": "100s",
+          "maximumAttempts": 1
+        },
+        "attempt": 1,
+        "firstWorkflowTaskBackoff": "0s",
+        "header": {},
+        "parentWorkflowNamespaceId": "293a0e9b-cf3f-49a7-a5a5-10569fc567d3",
+        "workflowId": "teste-f3-05-candidato-sessao-12f8bdf97ec05bbc1f4e3c4d095420b583c516a153e0bf7ad007084ecc5dd46c-op-0e07b8daee992d1e972944d343e9e34e5bf6511ec0f0f55add331c52c0fff33d",
+        "rootWorkflowExecution": {
+          "workflowId": "teste-f3-05-candidato-sessao-12f8bdf97ec05bbc1f4e3c4d095420b583c516a153e0bf7ad007084ecc5dd46c",
+          "runId": "89dc5ad8-c219-4390-9306-c3ec8f010518"
+        },
+        "priority": {}
+      }
+    },
+    {
+      "eventId": "2",
+      "eventTime": "2026-10-17T16:18:03.170693230Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_TASK_SCHEDULED",
+      "taskId": "1048681",
+      "workflowTaskScheduledEventAttributes": {
+        "taskQueue": {
+          "name": "teste-f3-05-candidato-wf-test_excecao_tecnica_falha_sem_retry_fallback_ou_proximo",
+          "kind": "TASK_QUEUE_KIND_NORMAL"
+        },
+        "startToCloseTimeout": "10s",
+        "attempt": 1
+      }
+    },
+    {
+      "eventId": "3",
+      "eventTime": "2026-10-17T16:18:03.183969759Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_TASK_STARTED",
+      "taskId": "1048688",
+      "workflowTaskStartedEventAttributes": {
+        "scheduledEventId": "2",
+        "identity": "3862446@pc",
+        "requestId": "ea9e871d-5a83-4c70-8f09-c82ba511ba2f",
+        "historySizeBytes": "1462",
+        "workerVersion": {
+          "buildId": "b4da0da6caaec499dc85a630bb98c8d1"
+        }
+      }
+    },
+    {
+      "eventId": "4",
+      "eventTime": "2026-10-17T16:18:03.241515674Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_TASK_COMPLETED",
+      "taskId": "1048695",
+      "workflowTaskCompletedEventAttributes": {
+        "scheduledEventId": "2",
+        "startedEventId": "3",
+        "identity": "3862446@pc",
+        "workerVersion": {
+          "buildId": "b4da0da6caaec499dc85a630bb98c8d1"
+        },
+        "sdkMetadata": {
+          "coreUsedFlags": [
+            2,
+            3,
+            1
+          ],
+          "sdkName": "temporal-python",
+          "sdkVersion": "1.34.0"
+        },
+        "meteringMetadata": {}
+      }
+    },
+    {
+      "eventId": "5",
+      "eventTime": "2026-10-17T16:18:03.241587950Z",
+      "eventType": "EVENT_TYPE_ACTIVITY_TASK_SCHEDULED",
+      "taskId": "1048696",
+      "activityTaskScheduledEventAttributes": {
+        "activityId": "1",
+        "activityType": {
+          "name": "triagem_jev"
+        },
+        "taskQueue": {
+          "name": "teste-f3-05-candidato-wf-test_excecao_tecnica_falha_sem_retry_fallback_ou_proximo",
+          "kind": "TASK_QUEUE_KIND_NORMAL"
+        },
+        "header": {},
+        "input": {
+          "payloads": [
+            {
+              "metadata": {
+                "encoding": "anNvbi9wbGFpbg=="
+              },
+              "data": "eyJmZXJyYW1lbnRhIjoiY2Ftb2ZveCIsInNlc3NhbyI6InRlc3RfZXhjZWNhb190ZWNuaWNhX2ZhbGhhX3NlbV9yZXRyeV9mYWxsYmFja19vdV9wcm94aW1vIiwicGFzc28iOiJhY2FvLWZhbGhhIiwiZXJybyI6ImZhbGhhLXRlY25pY2EiLCJlcGlzb2RpbyI6bnVsbCwic2ltdWxhY2FvIjp7InRyaWFnZW0iOiJjb3JyaWdpdmVsIiwiaW50ZXJ2ZW5jb2VzIjpbdHJ1ZV0sInZlcmlmaWNhY29lcyI6W3RydWVdLCJjb250YV9jb25mZXJlIjp0cnVlfX0="
+            }
+          ]
+        },
+        "scheduleToCloseTimeout": "0s",
+        "scheduleToStartTimeout": "0s",
+        "startToCloseTimeout": "120s",
+        "heartbeatTimeout": "0s",
+        "workflowTaskCompletedEventId": "4",
+        "retryPolicy": {
+          "initialInterval": "1s",
+          "backoffCoefficient": 2.0,
+          "maximumInterval": "100s",
+          "maximumAttempts": 3
+        },
+        "useWorkflowBuildId": true,
+        "priority": {}
+      }
+    },
+    {
+      "eventId": "6",
+      "eventTime": "2026-10-17T16:18:03.241618330Z",
+      "eventType": "EVENT_TYPE_ACTIVITY_TASK_STARTED",
+      "taskId": "1048700",
+      "activityTaskStartedEventAttributes": {
+        "scheduledEventId": "5",
+        "identity": "3862446@pc",
+        "requestId": "ace25e54-634e-4965-96d6-65dafcbaef52",
+        "attempt": 1,
+        "workerVersion": {
+          "buildId": "b4da0da6caaec499dc85a630bb98c8d1"
+        }
+      }
+    },
+    {
+      "eventId": "7",
+      "eventTime": "2026-10-17T16:18:03.253414986Z",
+      "eventType": "EVENT_TYPE_ACTIVITY_TASK_COMPLETED",
+      "taskId": "1048701",
+      "activityTaskCompletedEventAttributes": {
+        "result": {
+          "payloads": [
+            {
+              "metadata": {
+                "encoding": "anNvbi9wbGFpbg=="
+              },
+              "data": "eyJjbGFzc2UiOiJjb3JyaWdpdmVsIiwibW90aXZvIjoic2ltdWxhZG8ifQ=="
+            }
+          ]
+        },
+        "scheduledEventId": "5",
+        "startedEventId": "6",
+        "identity": "3862446@pc"
+      }
+    },
+    {
+      "eventId": "8",
+      "eventTime": "2026-10-17T16:18:03.253440986Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_TASK_SCHEDULED",
+      "taskId": "1048702",
+      "workflowTaskScheduledEventAttributes": {
+        "taskQueue": {
+          "name": "teste-f3-05-candidato-wf-test_excecao_tecnica_falha_sem_retry_fallback_ou_proximo",
+          "kind": "TASK_QUEUE_KIND_NORMAL"
+        },
+        "startToCloseTimeout": "10s",
+        "attempt": 1
+      }
+    },
+    {
+      "eventId": "9",
+      "eventTime": "2026-10-17T16:18:03.259592626Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_TASK_STARTED",
+      "taskId": "1048705",
+      "workflowTaskStartedEventAttributes": {
+        "scheduledEventId": "8",
+        "identity": "3862446@pc",
+        "requestId": "916c8922-cf5c-4770-98b6-7c6d37df32ac",
+        "historySizeBytes": "2496",
+        "workerVersion": {
+          "buildId": "b4da0da6caaec499dc85a630bb98c8d1"
+        }
+      }
+    },
+    {
+      "eventId": "10",
+      "eventTime": "2026-10-17T16:18:03.287701858Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_TASK_COMPLETED",
+      "taskId": "1048709",
+      "workflowTaskCompletedEventAttributes": {
+        "scheduledEventId": "8",
+        "startedEventId": "9",
+        "identity": "3862446@pc",
+        "workerVersion": {
+          "buildId": "b4da0da6caaec499dc85a630bb98c8d1"
+        },
+        "sdkMetadata": {},
+        "meteringMetadata": {}
+      }
+    },
+    {
+      "eventId": "11",
+      "eventTime": "2026-10-17T16:18:03.287794827Z",
+      "eventType": "EVENT_TYPE_MARKER_RECORDED",
+      "taskId": "1048710",
+      "markerRecordedEventAttributes": {
+        "markerName": "core_patch",
+        "details": {
+          "patch-data": {
+            "payloads": [
+              {
+                "metadata": {
+                  "encoding": "anNvbi9wbGFpbg=="
+                },
+                "data": "eyJpZCI6ImYzLTA1LWNhbmRpZGF0by1pbnRlcnZlbmNhby1pZC12MiIsImRlcHJlY2F0ZWQiOmZhbHNlfQ=="
+              }
+            ]
+          }
+        },
+        "workflowTaskCompletedEventId": "10"
+      }
+    },
+    {
+      "eventId": "12",
+      "eventTime": "2026-10-17T16:18:03.287899417Z",
+      "eventType": "EVENT_TYPE_UPSERT_WORKFLOW_SEARCH_ATTRIBUTES",
+      "taskId": "1048711",
+      "upsertWorkflowSearchAttributesEventAttributes": {
+        "workflowTaskCompletedEventId": "10",
+        "searchAttributes": {
+          "indexedFields": {
+            "TemporalChangeVersion": {
+              "metadata": {
+                "type": "S2V5d29yZExpc3Q=",
+                "encoding": "anNvbi9wbGFpbg=="
+              },
+              "data": "WyJmMy0wNS1jYW5kaWRhdG8taW50ZXJ2ZW5jYW8taWQtdjIiXQ=="
+            }
+          }
+        }
+      }
+    },
+    {
+      "eventId": "13",
+      "eventTime": "2026-10-17T16:18:03.287986904Z",
+      "eventType": "EVENT_TYPE_ACTIVITY_TASK_SCHEDULED",
+      "taskId": "1048712",
+      "activityTaskScheduledEventAttributes": {
+        "activityId": "intervencao-1",
+        "activityType": {
+          "name": "intervir_agente"
+        },
+        "taskQueue": {
+          "name": "teste-f3-05-candidato-camofox-test_excecao_tecnica_falha_sem_retry_fallback_ou_proximo",
+          "kind": "TASK_QUEUE_KIND_NORMAL"
+        },
+        "header": {},
+        "input": {
+          "payloads": [
+            {
+              "metadata": {
+                "encoding": "anNvbi9wbGFpbg=="
+              },
+              "data": "eyJwZWRpZG8iOnsiZmVycmFtZW50YSI6ImNhbW9mb3giLCJzZXNzYW8iOiJ0ZXN0X2V4Y2VjYW9fdGVjbmljYV9mYWxoYV9zZW1fcmV0cnlfZmFsbGJhY2tfb3VfcHJveGltbyIsInBhc3NvIjoiYWNhby1mYWxoYSIsImVycm8iOiJmYWxoYS10ZWNuaWNhIiwiZXBpc29kaW8iOm51bGwsInNpbXVsYWNhbyI6eyJ0cmlhZ2VtIjoiY29ycmlnaXZlbCIsImludGVydmVuY29lcyI6W3RydWVdLCJ2ZXJpZmljYWNvZXMiOlt0cnVlXSwiY29udGFfY29uZmVyZSI6dHJ1ZX19LCJuIjoxfQ=="
+            }
+          ]
+        },
+        "scheduleToCloseTimeout": "0s",
+        "scheduleToStartTimeout": "0s",
+        "startToCloseTimeout": "669s",
+        "heartbeatTimeout": "0s",
+        "workflowTaskCompletedEventId": "10",
+        "retryPolicy": {
+          "initialInterval": "1s",
+          "backoffCoefficient": 2.0,
+          "maximumInterval": "100s",
+          "maximumAttempts": 1
+        },
+        "priority": {}
+      }
+    },
+    {
+      "eventId": "14",
+      "eventTime": "2026-10-17T16:18:03.297119955Z",
+      "eventType": "EVENT_TYPE_ACTIVITY_TASK_STARTED",
+      "taskId": "1048719",
+      "activityTaskStartedEventAttributes": {
+        "scheduledEventId": "13",
+        "identity": "3862446@pc",
+        "requestId": "1e706ac3-7804-48e3-982c-7695dee7ad92",
+        "attempt": 1,
+        "workerVersion": {
+          "buildId": "b4da0da6caaec499dc85a630bb98c8d1"
+        }
+      }
+    },
+    {
+      "eventId": "15",
+      "eventTime": "2026-10-17T16:18:03.353589920Z",
+      "eventType": "EVENT_TYPE_ACTIVITY_TASK_FAILED",
+      "taskId": "1048720",
+      "activityTaskFailedEventAttributes": {
+        "failure": {
+          "message": "falha t\u00e9cnica falsa",
+          "stackTrace": "  File \"/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_activity.py\", line 351, in _handle_start_activity_task\n    result = await self._execute_activity(\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\n  File \"/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_activity.py\", line 681, in _execute_activity\n    return await impl.execute_activity(input)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\n  File \"/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_activity.py\", line 889, in execute_activity\n    return await input.fn(*input.args)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\n  File \"/home/pc/Workspace/PQBR/tests/workflows/composicao_candidata.py\", line 59, in intervir\n    raise ApplicationError('falha t\u00e9cnica falsa', type='FalhaTecnicaFalsa')\n",
+          "applicationFailureInfo": {
+            "type": "FalhaTecnicaFalsa"
+          }
+        },
+        "scheduledEventId": "13",
+        "startedEventId": "14",
+        "identity": "3862446@pc",
+        "retryState": "RETRY_STATE_MAXIMUM_ATTEMPTS_REACHED"
+      }
+    },
+    {
+      "eventId": "16",
+      "eventTime": "2026-10-17T16:18:03.353743407Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_TASK_SCHEDULED",
+      "taskId": "1048721",
+      "workflowTaskScheduledEventAttributes": {
+        "taskQueue": {
+          "name": "teste-f3-05-candidato-wf-test_excecao_tecnica_falha_sem_retry_fallback_ou_proximo",
+          "kind": "TASK_QUEUE_KIND_NORMAL"
+        },
+        "startToCloseTimeout": "10s",
+        "attempt": 1
+      }
+    },
+    {
+      "eventId": "17",
+      "eventTime": "2026-10-17T16:18:03.362847533Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_TASK_STARTED",
+      "taskId": "1048724",
+      "workflowTaskStartedEventAttributes": {
+        "scheduledEventId": "16",
+        "identity": "3862446@pc",
+        "requestId": "7932468a-d945-4a4f-9159-7c8adb522b60",
+        "historySizeBytes": "4645",
+        "workerVersion": {
+          "buildId": "b4da0da6caaec499dc85a630bb98c8d1"
+        }
+      }
+    },
+    {
+      "eventId": "18",
+      "eventTime": "2026-10-17T16:18:03.415288492Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_TASK_COMPLETED",
+      "taskId": "1048728",
+      "workflowTaskCompletedEventAttributes": {
+        "scheduledEventId": "16",
+        "startedEventId": "17",
+        "identity": "3862446@pc",
+        "workerVersion": {
+          "buildId": "b4da0da6caaec499dc85a630bb98c8d1"
+        },
+        "sdkMetadata": {},
+        "meteringMetadata": {}
+      }
+    },
+    {
+      "eventId": "19",
+      "eventTime": "2026-10-17T16:18:03.415360608Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_EXECUTION_FAILED",
+      "taskId": "1048729",
+      "workflowExecutionFailedEventAttributes": {
+        "failure": {
+          "message": "Activity task failed",
+          "cause": {
+            "message": "falha t\u00e9cnica falsa",
+            "stackTrace": "  File \"/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_activity.py\", line 351, in _handle_start_activity_task\n    result = await self._execute_activity(\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\n  File \"/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_activity.py\", line 681, in _execute_activity\n    return await impl.execute_activity(input)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\n  File \"/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_activity.py\", line 889, in execute_activity\n    return await input.fn(*input.args)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\n  File \"/home/pc/Workspace/PQBR/tests/workflows/composicao_candidata.py\", line 59, in intervir\n    raise ApplicationError('falha t\u00e9cnica falsa', type='FalhaTecnicaFalsa')\n",
+            "applicationFailureInfo": {
+              "type": "FalhaTecnicaFalsa"
+            }
+          },
+          "activityFailureInfo": {
+            "scheduledEventId": "13",
+            "startedEventId": "14",
+            "identity": "3862446@pc",
+            "activityType": {
+              "name": "intervir_agente"
+            },
+            "activityId": "intervencao-1",
+            "retryState": "RETRY_STATE_MAXIMUM_ATTEMPTS_REACHED"
+          }
+        },
+        "retryState": "RETRY_STATE_MAXIMUM_ATTEMPTS_REACHED",
+        "workflowTaskCompletedEventId": "18"
+      }
+    }
+  ]
+}

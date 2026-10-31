@@ -1,0 +1,96 @@
+{
+ "roteiro": {
+  "episodio_id": "a-gente-fala-que-algo-custa-os-olhos-da-cara",
+  "titulo": "Por que a gente fala que algo custa 'os olhos da cara'?",
+  "falas": [
+   "Olhou a etiqueta e sentiu as pupilas pulando pra fora? A gente jura que o boleto custa os olhos da cara.",
+   "O brasileiro ama um drama financeiro, mas esse exagero começou bem longe daqui.",
+   "Conta a tradição que no século dezesseis um explorador espanhol teria perdido a visão em batalha.",
+   "Ao prestar contas, ele teria dito ao rei que servir à Coroa lhe custara um olho da cara.",
+   "O desabafo virou meme da época e atravessou os séculos até desembarcar nas nossas faturas.",
+   "Mas tem quem diga que a história é bem mais antiga e tétrica.",
+   "Na Mesopotâmia antiga, arrancavam os olhos dos prisioneiros como punição.",
+   "Seja em batalha ou na fatura do cartão, o choro do bolso é o mesmo.",
+   "Fica de olho e segue o Porquê BR."
+  ],
+  "tipo_cta": "trocadilho_tema",
+  "entidades_cena": [
+   "Personagem 2D de camiseta amarela",
+   "Etiqueta de preço absurdo",
+   "Olhos de cartum saltando do rosto",
+   "Globo terrestre decorativo",
+   "Explorador espanhol genérico com tapa-olho",
+   "Rei genérico em salão de trono",
+   "Soldados espanhóis genéricos em fogueira",
+   "Guerreiros assírios em relevo de pedra",
+   "Carteira de couro vazia"
+  ],
+  "bloco_visual": {
+   "estilo": "Ilustração 2D plana de cartum, como animação de TV brasileira: traço preto nítido e uniforme, personagem em cores chapadas quentes (amarelo-mostarda, verde-bandeira, terracota) com alto contraste sobre fundo limpo em tom frio ou neutro (azul-céu, bege claro), sem degradê nem sombra realista, fundo minimalista com no máximo 3–5 objetos, humor carinhoso. Personagem sempre grande no quadro (ocupa ≥ 1/3 da altura), centralizado, agindo, com expressões faciais e corporais exageradas. Proibido: fotorrealismo, 3D, rosto de pessoa real ou celebridade, marca ou logo real, texto escrito dentro das imagens (a legenda do NotebookLM não conta). Formato vertical 9:16, deixar livres a faixa de cima e a de baixo da tela.",
+   "personagem": "Homem de 30 anos, magro, cabelo preto curto e despenteado, camiseta amarela, calça jeans azul, óculos redondos vermelhos contáveis, expressão-base exagerada de espanto. Sem nome.",
+   "personagem_2": null,
+   "cenas": [
+    {
+     "fala": "Olhou a etiqueta e sentiu as pupilas pulando pra fora? A gente jura que o boleto custa os olhos da cara.",
+     "acao": "O personagem de camiseta amarela segura uma etiqueta de preço gigante e vê dois olhos de cartum saltarem do seu rosto de puro espanto.",
+     "enquadramento": "Plano médio",
+     "ambiente": "Loja de departamento brasileira moderna, hoje, objetos-âncora: vitrine iluminada, arara de roupas, caixa registradora, lâmpadas de LED."
+    },
+    {
+     "fala": "O brasileiro ama um drama financeiro, mas esse exagero começou bem longe daqui.",
+     "acao": "O personagem de camiseta amarela faz um gesto dramático com a mão no peito e aponta para um globo terrestre que gira rápido na mesa.",
+     "enquadramento": "Plano médio",
+     "ambiente": "Sala de estar brasileira do dia a dia, hoje, objetos-âncora: sofá estampado, filtro de barro na mesa, ventilador de pé, luz da janela."
+    },
+    {
+     "fala": "Conta a tradição que no século dezesseis um explorador espanhol teria perdido a visão em batalha.",
+     "acao": "O personagem de camiseta amarela observa à distância a silhueta de um explorador espanhol genérico com tapa-olho e sem rosto identificável em meio à fumaça.",
+     "enquadramento": "Plano aberto",
+     "ambiente": "Fortaleza de pedra nas montanhas, século XVI, objetos-âncora: muralha de pedra, estandarte real, elmo de ferro, luz de sol da tarde."
+    },
+    {
+     "fala": "Ao prestar contas, ele teria dito ao rei que servir à Coroa lhe custara um olho da cara.",
+     "acao": "O personagem de camiseta amarela espia o explorador no salão nobre conversando com o rei sem rostos identificáveis e apontando para o próprio olho.",
+     "enquadramento": "Plano médio",
+     "ambiente": "Salão real de tribunal antigo, século XVI, objetos-âncora: trono de ouro, cortinas vermelhas de veludo, coroa reluzente, luz de grandes janelas."
+    },
+    {
+     "fala": "O desabafo virou meme da época e atravessou os séculos até desembarcar nas nossas faturas.",
+     "acao": "O personagem de camiseta amarela vê soldados espanhóis genéricos rindo e repetindo o gesto do olho ao redor de uma fogueira.",
+     "enquadramento": "Plano aberto",
+     "ambiente": "Acampamento militar antigo, século XVI, objetos-âncora: tendas de lona, fogueira de acampamento, barris de madeira, luz de entardecer."
+    },
+    {
+     "fala": "Mas tem quem diga que a história é bem mais antiga e tétrica.",
+     "acao": "O personagem de camiseta amarela folheia um livro antigo de história enquanto uma sombra misteriosa surge ao fundo.",
+     "enquadramento": "Plano fechado",
+     "ambiente": "Biblioteca antiga com estantes de madeira, hoje, objetos-âncora: livros velhos encadernados, luminária de mesa, ampulheta, luz suave."
+    },
+    {
+     "fala": "Na Mesopotâmia antiga, arrancavam os olhos dos prisioneiros como punição.",
+     "acao": "O personagem de camiseta amarela olha assustado para entalhes de pedra mostrando guerreiros assírios genéricos em um templo antigo.",
+     "enquadramento": "Plano aberto",
+     "ambiente": "Templo de pedra da Mesopotâmia Antiga, Antiguidade, objetos-âncora: entalhes em alto-relevo na pedra, tochas acesas, vasilhas de barro, luz de fogo."
+    },
+    {
+     "fala": "Seja em batalha ou na fatura do cartão, o choro do bolso é o mesmo.",
+     "acao": "O personagem de camiseta amarela abre a carteira vazia de onde sai uma nuvenzinha de fumaça e balança a cabeça resignado.",
+     "enquadramento": "Plano médio",
+     "ambiente": "Corredor de mercado brasileiro, hoje, objetos-âncora: prateleiras com produtos, carrinho de compras, cartaz de promoção, luz fluorescente."
+    },
+    {
+     "fala": "Fica de olho e segue o Porquê BR.",
+     "acao": "O personagem de camiseta amarela volta para a loja de departamento, encarando a etiqueta de preço absurda no mesmo plano e enjeito assustado da cena 1.",
+     "enquadramento": "Plano médio",
+     "ambiente": "Loja de departamento brasileira moderna, hoje, objetos-âncora: vitrine iluminada, arara de roupas, caixa registradora, lâmpadas de LED."
+    }
+   ],
+   "pedido_3d_ou_realista": false
+  }
+ },
+ "fontes": [
+  "Descubra a tétrica origem da expressão “Custar os olhos da cara” - Aventuras na História",
+  "Este es el origen bélico de la expresión “costar un ojo de la cara”, que se usa desde el siglo XVI - Clarin.com",
+  "Custar os olhos da cara: A história da expressão popular - Escreva.ai"
+ ]
+}

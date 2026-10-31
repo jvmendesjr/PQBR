@@ -1,0 +1,41 @@
+{
+ "postgres": {
+  "temas_pendentes_id": 2,
+  "linhas": 1
+ },
+ "drive": {
+  "pasta": "1H2J4OAplcI0Dmz_760X5EfGHYAZsarzW",
+  "arquivos": {
+   "seo.json": {
+    "id": "1wzA_C84Rw9k-qiBQc5L2d5lO3e5HfpQx",
+    "md5": "1a7638d7f9ff9839d6d5e3d76c9b4dfd",
+    "bytes": 3979,
+    "reaproveitado": false
+   },
+   "roteiro.json": {
+    "id": "1O7QCWip9rqrQ53b1LpajlwFQaLbQdljq",
+    "md5": "eb911a0d4b86117d6cb1c403abb9a0ae",
+    "bytes": 6878,
+    "reaproveitado": false
+   },
+   "gate-pronto.json": {
+    "id": "1MSLDeXfUk4ZROZyMX8Nnr6g1aSDo5aLX",
+    "md5": "0dc928b6f1d8d6bdee0300a618503489",
+    "bytes": 1513,
+    "reaproveitado": false
+   },
+   "juiz-gemini.json": {
+    "id": "19mSHcGUVJufVGcoDsFNDyfPtLkrzZAtg",
+    "md5": "3707563317da2df4b04c8aebaf563989",
+    "bytes": 862,
+    "reaproveitado": false
+   },
+   "olhos-da-cara-pronto-v2.mp4": {
+    "id": "1a6_7UaN1GKMzhHmr-0j3u4gax9oOq1oM",
+    "md5": "ed1cf379c0bfbd6151bd224e48afa22b",
+    "bytes": 32709275,
+    "reaproveitado": false
+   }
+  }
+ }
+}

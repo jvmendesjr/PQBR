@@ -1,0 +1,60 @@
+{
+  "teste": "test_camofox_herda_principal_mesmo_com_worker_sessao_disponivel",
+  "workflow_id": "roteamento-b8abdb78597e4f6bbc7a53616f52a7ef",
+  "principal": "teste-pqbr-episodio-56e5456c7ac1408dafc603479a32c46a",
+  "sessao": "teste-camofox-pqbr-56e5456c7ac1408dafc603479a32c46a",
+  "fila_intervencao": [
+    "teste-pqbr-episodio-56e5456c7ac1408dafc603479a32c46a"
+  ],
+  "main_calls": [
+    {
+      "activity": "triagem_jev",
+      "attempt": 1,
+      "n": null,
+      "task_queue": "teste-pqbr-episodio-56e5456c7ac1408dafc603479a32c46a",
+      "workflow_id": "roteamento-b8abdb78597e4f6bbc7a53616f52a7ef"
+    },
+    {
+      "activity": "intervir_agente",
+      "attempt": 1,
+      "n": 1,
+      "task_queue": "teste-pqbr-episodio-56e5456c7ac1408dafc603479a32c46a",
+      "workflow_id": "roteamento-b8abdb78597e4f6bbc7a53616f52a7ef"
+    },
+    {
+      "activity": "verificar_jev",
+      "attempt": 1,
+      "n": 1,
+      "task_queue": "teste-pqbr-episodio-56e5456c7ac1408dafc603479a32c46a",
+      "workflow_id": "roteamento-b8abdb78597e4f6bbc7a53616f52a7ef"
+    },
+    {
+      "activity": "registrar_correcao",
+      "attempt": 1,
+      "n": null,
+      "task_queue": "teste-pqbr-episodio-56e5456c7ac1408dafc603479a32c46a",
+      "workflow_id": "roteamento-b8abdb78597e4f6bbc7a53616f52a7ef"
+    }
+  ],
+  "session_calls": [],
+  "main_records": [
+    {
+      "resultado": "corrigido",
+      "tentativas": 1,
+      "motivo": "",
+      "proposta_script": "trocar seletor X por Y",
+      "chamar_jose": false
+    }
+  ],
+  "session_records": [],
+  "resultado": {
+    "resultado": "corrigido",
+    "tentativas": 1,
+    "motivo": "",
+    "proposta_script": "trocar seletor X por Y",
+    "chamar_jose": false
+  },
+  "falha": null,
+  "replay": "ok",
+  "eventos": 29
+}

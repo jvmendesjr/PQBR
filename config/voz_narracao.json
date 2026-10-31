@@ -1,0 +1,25 @@
+{
+  "_nota": "Padrão de voz escolhido pelo proprietário para narração futura. Esta configuração não ativa produção nem autoriza novas sínteses, uploads ou publicação.",
+  "status": "selected",
+  "runtime_integrated": true,
+  "generation_authorized": false,
+  "publication_authorized": false,
+  "selected_date": "2026-10-17",
+  "provider": "elevenlabs",
+  "voice": {
+    "name": "Larissa - Vibrant and Playful",
+    "voice_id": "xcNJswC7UcxsIiCuih19",
+    "language": "pt-BR"
+  },
+  "tts": {
+    "model_id": "eleven_v3",
+    "seed": 42,
+    "voice_settings": {
+      "stability": 0.5,
+      "similarity_boost": 0.75,
+      "style": 0,
+      "use_speaker_boost": true,
+      "speed": 1.0
+    }
+  }
+}

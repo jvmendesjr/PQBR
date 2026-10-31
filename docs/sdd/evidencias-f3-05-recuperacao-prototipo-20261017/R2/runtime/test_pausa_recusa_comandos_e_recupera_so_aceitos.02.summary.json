@@ -1,0 +1,22 @@
+{
+  "workflow_id": "teste-f3-05-recuperacao-475c9c6724e3a79c3e8aad89ff83e37a15b2262eee50a9d1955ea0f1bd8c83fc-op-38e55e2c50e69560265c4b1886ab446e1ade639a9b30a3395fa4ae2f1f0ae4f2",
+  "run_id": "01a14ad1-b91c-7021-a4c4-2e4ee781cb87",
+  "eventos": 19,
+  "replay": "ok",
+  "activities": [
+    {
+      "nome": "triagem_jev",
+      "fila": "teste-f3-05-candidato-wf-test_pausa_recusa_comandos_e_recupera_so_aceitos-recuperacao",
+      "max_tentativas": 3,
+      "id": "1",
+      "timeout_s": 120
+    },
+    {
+      "nome": "intervir_agente",
+      "fila": "teste-f3-05-candidato-camofox-test_pausa_recusa_comandos_e_recupera_so_aceitos-recuperacao",
+      "max_tentativas": 1,
+      "id": "intervencao-1",
+      "timeout_s": 621
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "versao": "2.0.0",
+  "saida": "telegram_bot",
+  "saida_alternativas": ["telegram_bot"],
+  "entrada": "telegram_long_polling",
+  "entrada_alternativas": ["telegram_long_polling"],
+  "offset_arquivo": "~/.pqbr/state/telegram-offset",
+  "long_polling_timeout_s": 50,
+  "obs": "t538: bot próprio do PQBR (token e ID só no .env, 600); ligar só com OK do José"
+}

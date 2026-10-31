@@ -1,0 +1,39 @@
+{
+ "_doc": "t513 (José): motores trocáveis por config; porta + contrato em src/pqbr/motores. intelectual: notebooklm. t130u: notebooklm não gera vídeo. t131u: imagem no Flow é gratuita; vídeo gasta o saldo do Flow, depois google_vids, depois meta_vibes. Só navegador, sem APIs.",
+ "intelectual": "notebooklm",
+ "video": "flow",
+ "video_fallback": [
+  "google_vids",
+  "meta_vibes"
+ ],
+ "gemini_modelo": "3.8 Flash",
+ "_doc_gemini": "t544 (José 22:52): modelo do juiz Gemini web (LOOP e VISUAL), escolhido no seletor antes de cada envio; falha fechada se não confirmar.",
+ "gemini_prancha_px": 300,
+ "gemini_pranchas_por_pedido": 2,
+ "_doc_pranchas": "t545: largura de cada quadro rotulado e nº de pranchas compostas por pedido (memória do Camofox).",
+ "gemini_espera_s": 90,
+ "gemini_mem_abrir_mb": 1800,
+ "gemini_mem_timeout_s": 600,
+ "_doc_memoria": "t546: espera mínima entre abas do juiz (s) e só abre aba nova com o serviço pqbr-camofox abaixo de gemini_mem_abrir_mb; senão MemoriaAlta (falha fechada) após gemini_mem_timeout_s.",
+ "gemini_loop_espera_s": 480,
+ "decisao": {
+  "_doc": "t143u/t144u (JEV-EF, REGRAS §7): porta decide() e funções estruturadas em src/pqbr/motores/decisao.py. Calibrado em 28/10 com 12 casos reais na API TypeSafe (jev-latest): choice isolado (popup, canário, triagem) ≥ 0,98 -> limiar 0,9; repetição R10 (noul+choice) 0,92–0,96 -> limiar 0,85; noul de verificação (0,85–0,96) e e-mail com 3 escolhas simultâneas (0,83–0,99) -> limiar 0,8. Fallback OpenRouter desligado até chave JEV-02.",
+  "principal": {"adaptador": "typesafe", "endpoint": "https://api.typesafe.ai/v1/systemone", "modelo": "jev-latest", "chave_env": "TYPESAFE_API_KEY"},
+  "fallback": {"adaptador": "openrouter", "ativo": false, "endpoint": "https://openrouter.ai/api/alpha/decisions", "modelo": "~typesafe/jev-latest", "chave_env": "OPENROUTER_API_KEY"},
+  "timeout_s": 15,
+  "tentativas": 2,
+  "limiares": {"ClassificacaoPopupCamofox": 0.9, "EscolhaRefCanario": 0.9, "TriagemCorrecao": 0.9, "DecisaoRepeticao": 0.85, "VerificacaoCorrecao": 0.8, "ClassificacaoEmailYouTube": 0.8}
+},
+"gemini_juiz": {
+  "versao": "1.0.0",
+  "pre_producao": {
+   "modelo": "3.8 Flash",
+   "raciocinio": null
+  },
+  "producao": {
+   "modelo": "4 Argon",
+   "raciocinio": "Baixo"
+  }
+ },
+ "_doc_gemini_juiz": "t108u (José): juiz por etapa. pre_producao (roteiro, fichas, imagens de referência antes do vídeo) = 3.8 Flash; producao (vídeo gerado, VISUAL/LOOP final) = 4 Argon com raciocínio Baixo. Contrato pqbr.contratos.juiz_gemini. gemini_modelo fica só para workers antigos (até o reinício). Override por execução: PQBR_GEMINI_MODELO/PQBR_GEMINI_RACIOCINIO."
+}

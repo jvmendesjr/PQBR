@@ -1,0 +1,298 @@
+{
+  "events": [
+    {
+      "eventId": "1",
+      "eventTime": "2026-10-17T15:41:26.225Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_EXECUTION_STARTED",
+      "workflowExecutionStartedEventAttributes": {
+        "workflowType": {
+          "name": "AtorSignalSintetico"
+        },
+        "taskQueue": {
+          "name": "teste-sws-wf-stress-optin-v1-sem-worker"
+        },
+        "input": {
+          "payloads": [
+            {
+              "metadata": {
+                "encoding": "anNvbi9wbGFpbg=="
+              },
+              "data": "eyJjb25maWciOnsiZmlsYV9hY3Rpdml0eSI6InRlc3RlLXN3cy1hY3Qtc3RyZXNzLW9wdGluLXYxIiwiZmlsYV93b3JrZmxvdyI6InRlc3RlLXN3cy13Zi1zdHJlc3Mtb3B0aW4tdjEtc2VtLXdvcmtlciIsInByYXpvX3MiOjMwLCJzZXNzYW8iOiJzdHJlc3MtdjEtcmF3LW5vLXdvcmtlci1jb2xkLWMxMi1pMDAwMCJ9fQ=="
+            }
+          ]
+        },
+        "workflowExecutionTimeout": "120s",
+        "workflowRunTimeout": "120s",
+        "workflowTaskTimeout": "10s",
+        "originalExecutionRunId": "eb7b9e79-4ce0-4951-bb9b-45034e93ca5e",
+        "identity": "isolado-stress-client-000",
+        "firstExecutionRunId": "eb7b9e79-4ce0-4951-bb9b-45034e93ca5e",
+        "retryPolicy": {
+          "initialInterval": "1s",
+          "backoffCoefficient": 2.0,
+          "maximumAttempts": 1
+        },
+        "attempt": 1,
+        "firstWorkflowTaskBackoff": "0s"
+      }
+    },
+    {
+      "eventId": "2",
+      "eventTime": "2026-10-17T15:41:26.225Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_TASK_SCHEDULED",
+      "workflowTaskScheduledEventAttributes": {
+        "taskQueue": {
+          "name": "teste-sws-wf-stress-optin-v1-sem-worker"
+        },
+        "startToCloseTimeout": "10s",
+        "attempt": 1
+      }
+    },
+    {
+      "eventId": "3",
+      "eventTime": "2026-10-17T15:41:26.225Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_EXECUTION_SIGNALED",
+      "workflowExecutionSignaledEventAttributes": {
+        "signalName": "solicitar",
+        "input": {
+          "payloads": [
+            {
+              "metadata": {
+                "encoding": "anNvbi9wbGFpbg=="
+              },
+              "data": "eyJjb25maWciOnsiZmlsYV9hY3Rpdml0eSI6InRlc3RlLXN3cy1hY3Qtc3RyZXNzLW9wdGluLXYxIiwiZmlsYV93b3JrZmxvdyI6InRlc3RlLXN3cy13Zi1zdHJlc3Mtb3B0aW4tdjEtc2VtLXdvcmtlciIsInByYXpvX3MiOjMwLCJzZXNzYW8iOiJzdHJlc3MtdjEtcmF3LW5vLXdvcmtlci1jb2xkLWMxMi1pMDAwMCJ9LCJwZWRpZG8iOnsiZmFsaGFyIjpmYWxzZSwiaWQiOiJwMDAwMCIsInNlc3NhbyI6InN0cmVzcy12MS1yYXctbm8td29ya2VyLWNvbGQtYzEyLWkwMDAwIn19"
+            }
+          ]
+        },
+        "identity": "isolado-stress-client-000"
+      }
+    },
+    {
+      "eventId": "4",
+      "eventTime": "2026-10-17T15:41:26.225Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_EXECUTION_SIGNALED",
+      "workflowExecutionSignaledEventAttributes": {
+        "signalName": "solicitar",
+        "input": {
+          "payloads": [
+            {
+              "metadata": {
+                "encoding": "anNvbi9wbGFpbg=="
+              },
+              "data": "eyJjb25maWciOnsiZmlsYV9hY3Rpdml0eSI6InRlc3RlLXN3cy1hY3Qtc3RyZXNzLW9wdGluLXYxIiwiZmlsYV93b3JrZmxvdyI6InRlc3RlLXN3cy13Zi1zdHJlc3Mtb3B0aW4tdjEtc2VtLXdvcmtlciIsInByYXpvX3MiOjMwLCJzZXNzYW8iOiJzdHJlc3MtdjEtcmF3LW5vLXdvcmtlci1jb2xkLWMxMi1pMDAwMCJ9LCJwZWRpZG8iOnsiZmFsaGFyIjpmYWxzZSwiaWQiOiJwMDAwMSIsInNlc3NhbyI6InN0cmVzcy12MS1yYXctbm8td29ya2VyLWNvbGQtYzEyLWkwMDAwIn19"
+            }
+          ]
+        },
+        "identity": "isolado-stress-client-001"
+      }
+    },
+    {
+      "eventId": "5",
+      "eventTime": "2026-10-17T15:41:26.226Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_EXECUTION_SIGNALED",
+      "workflowExecutionSignaledEventAttributes": {
+        "signalName": "solicitar",
+        "input": {
+          "payloads": [
+            {
+              "metadata": {
+                "encoding": "anNvbi9wbGFpbg=="
+              },
+              "data": "eyJjb25maWciOnsiZmlsYV9hY3Rpdml0eSI6InRlc3RlLXN3cy1hY3Qtc3RyZXNzLW9wdGluLXYxIiwiZmlsYV93b3JrZmxvdyI6InRlc3RlLXN3cy13Zi1zdHJlc3Mtb3B0aW4tdjEtc2VtLXdvcmtlciIsInByYXpvX3MiOjMwLCJzZXNzYW8iOiJzdHJlc3MtdjEtcmF3LW5vLXdvcmtlci1jb2xkLWMxMi1pMDAwMCJ9LCJwZWRpZG8iOnsiZmFsaGFyIjpmYWxzZSwiaWQiOiJwMDAwMiIsInNlc3NhbyI6InN0cmVzcy12MS1yYXctbm8td29ya2VyLWNvbGQtYzEyLWkwMDAwIn19"
+            }
+          ]
+        },
+        "identity": "isolado-stress-client-002"
+      }
+    },
+    {
+      "eventId": "6",
+      "eventTime": "2026-10-17T15:41:26.226Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_EXECUTION_SIGNALED",
+      "workflowExecutionSignaledEventAttributes": {
+        "signalName": "solicitar",
+        "input": {
+          "payloads": [
+            {
+              "metadata": {
+                "encoding": "anNvbi9wbGFpbg=="
+              },
+              "data": "eyJjb25maWciOnsiZmlsYV9hY3Rpdml0eSI6InRlc3RlLXN3cy1hY3Qtc3RyZXNzLW9wdGluLXYxIiwiZmlsYV93b3JrZmxvdyI6InRlc3RlLXN3cy13Zi1zdHJlc3Mtb3B0aW4tdjEtc2VtLXdvcmtlciIsInByYXpvX3MiOjMwLCJzZXNzYW8iOiJzdHJlc3MtdjEtcmF3LW5vLXdvcmtlci1jb2xkLWMxMi1pMDAwMCJ9LCJwZWRpZG8iOnsiZmFsaGFyIjpmYWxzZSwiaWQiOiJwMDAwMyIsInNlc3NhbyI6InN0cmVzcy12MS1yYXctbm8td29ya2VyLWNvbGQtYzEyLWkwMDAwIn19"
+            }
+          ]
+        },
+        "identity": "isolado-stress-client-003"
+      }
+    },
+    {
+      "eventId": "7",
+      "eventTime": "2026-10-17T15:41:26.227Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_EXECUTION_SIGNALED",
+      "workflowExecutionSignaledEventAttributes": {
+        "signalName": "solicitar",
+        "input": {
+          "payloads": [
+            {
+              "metadata": {
+                "encoding": "anNvbi9wbGFpbg=="
+              },
+              "data": "eyJjb25maWciOnsiZmlsYV9hY3Rpdml0eSI6InRlc3RlLXN3cy1hY3Qtc3RyZXNzLW9wdGluLXYxIiwiZmlsYV93b3JrZmxvdyI6InRlc3RlLXN3cy13Zi1zdHJlc3Mtb3B0aW4tdjEtc2VtLXdvcmtlciIsInByYXpvX3MiOjMwLCJzZXNzYW8iOiJzdHJlc3MtdjEtcmF3LW5vLXdvcmtlci1jb2xkLWMxMi1pMDAwMCJ9LCJwZWRpZG8iOnsiZmFsaGFyIjpmYWxzZSwiaWQiOiJwMDAwNCIsInNlc3NhbyI6InN0cmVzcy12MS1yYXctbm8td29ya2VyLWNvbGQtYzEyLWkwMDAwIn19"
+            }
+          ]
+        },
+        "identity": "isolado-stress-client-004"
+      }
+    },
+    {
+      "eventId": "8",
+      "eventTime": "2026-10-17T15:41:26.227Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_EXECUTION_SIGNALED",
+      "workflowExecutionSignaledEventAttributes": {
+        "signalName": "solicitar",
+        "input": {
+          "payloads": [
+            {
+              "metadata": {
+                "encoding": "anNvbi9wbGFpbg=="
+              },
+              "data": "eyJjb25maWciOnsiZmlsYV9hY3Rpdml0eSI6InRlc3RlLXN3cy1hY3Qtc3RyZXNzLW9wdGluLXYxIiwiZmlsYV93b3JrZmxvdyI6InRlc3RlLXN3cy13Zi1zdHJlc3Mtb3B0aW4tdjEtc2VtLXdvcmtlciIsInByYXpvX3MiOjMwLCJzZXNzYW8iOiJzdHJlc3MtdjEtcmF3LW5vLXdvcmtlci1jb2xkLWMxMi1pMDAwMCJ9LCJwZWRpZG8iOnsiZmFsaGFyIjpmYWxzZSwiaWQiOiJwMDAwNSIsInNlc3NhbyI6InN0cmVzcy12MS1yYXctbm8td29ya2VyLWNvbGQtYzEyLWkwMDAwIn19"
+            }
+          ]
+        },
+        "identity": "isolado-stress-client-005"
+      }
+    },
+    {
+      "eventId": "9",
+      "eventTime": "2026-10-17T15:41:26.228Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_EXECUTION_SIGNALED",
+      "workflowExecutionSignaledEventAttributes": {
+        "signalName": "solicitar",
+        "input": {
+          "payloads": [
+            {
+              "metadata": {
+                "encoding": "anNvbi9wbGFpbg=="
+              },
+              "data": "eyJjb25maWciOnsiZmlsYV9hY3Rpdml0eSI6InRlc3RlLXN3cy1hY3Qtc3RyZXNzLW9wdGluLXYxIiwiZmlsYV93b3JrZmxvdyI6InRlc3RlLXN3cy13Zi1zdHJlc3Mtb3B0aW4tdjEtc2VtLXdvcmtlciIsInByYXpvX3MiOjMwLCJzZXNzYW8iOiJzdHJlc3MtdjEtcmF3LW5vLXdvcmtlci1jb2xkLWMxMi1pMDAwMCJ9LCJwZWRpZG8iOnsiZmFsaGFyIjpmYWxzZSwiaWQiOiJwMDAwNiIsInNlc3NhbyI6InN0cmVzcy12MS1yYXctbm8td29ya2VyLWNvbGQtYzEyLWkwMDAwIn19"
+            }
+          ]
+        },
+        "identity": "isolado-stress-client-006"
+      }
+    },
+    {
+      "eventId": "10",
+      "eventTime": "2026-10-17T15:41:26.228Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_EXECUTION_SIGNALED",
+      "workflowExecutionSignaledEventAttributes": {
+        "signalName": "solicitar",
+        "input": {
+          "payloads": [
+            {
+              "metadata": {
+                "encoding": "anNvbi9wbGFpbg=="
+              },
+              "data": "eyJjb25maWciOnsiZmlsYV9hY3Rpdml0eSI6InRlc3RlLXN3cy1hY3Qtc3RyZXNzLW9wdGluLXYxIiwiZmlsYV93b3JrZmxvdyI6InRlc3RlLXN3cy13Zi1zdHJlc3Mtb3B0aW4tdjEtc2VtLXdvcmtlciIsInByYXpvX3MiOjMwLCJzZXNzYW8iOiJzdHJlc3MtdjEtcmF3LW5vLXdvcmtlci1jb2xkLWMxMi1pMDAwMCJ9LCJwZWRpZG8iOnsiZmFsaGFyIjpmYWxzZSwiaWQiOiJwMDAwNyIsInNlc3NhbyI6InN0cmVzcy12MS1yYXctbm8td29ya2VyLWNvbGQtYzEyLWkwMDAwIn19"
+            }
+          ]
+        },
+        "identity": "isolado-stress-client-007"
+      }
+    },
+    {
+      "eventId": "11",
+      "eventTime": "2026-10-17T15:41:26.229Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_EXECUTION_SIGNALED",
+      "workflowExecutionSignaledEventAttributes": {
+        "signalName": "solicitar",
+        "input": {
+          "payloads": [
+            {
+              "metadata": {
+                "encoding": "anNvbi9wbGFpbg=="
+              },
+              "data": "eyJjb25maWciOnsiZmlsYV9hY3Rpdml0eSI6InRlc3RlLXN3cy1hY3Qtc3RyZXNzLW9wdGluLXYxIiwiZmlsYV93b3JrZmxvdyI6InRlc3RlLXN3cy13Zi1zdHJlc3Mtb3B0aW4tdjEtc2VtLXdvcmtlciIsInByYXpvX3MiOjMwLCJzZXNzYW8iOiJzdHJlc3MtdjEtcmF3LW5vLXdvcmtlci1jb2xkLWMxMi1pMDAwMCJ9LCJwZWRpZG8iOnsiZmFsaGFyIjpmYWxzZSwiaWQiOiJwMDAwOCIsInNlc3NhbyI6InN0cmVzcy12MS1yYXctbm8td29ya2VyLWNvbGQtYzEyLWkwMDAwIn19"
+            }
+          ]
+        },
+        "identity": "isolado-stress-client-008"
+      }
+    },
+    {
+      "eventId": "12",
+      "eventTime": "2026-10-17T15:41:26.229Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_EXECUTION_SIGNALED",
+      "workflowExecutionSignaledEventAttributes": {
+        "signalName": "solicitar",
+        "input": {
+          "payloads": [
+            {
+              "metadata": {
+                "encoding": "anNvbi9wbGFpbg=="
+              },
+              "data": "eyJjb25maWciOnsiZmlsYV9hY3Rpdml0eSI6InRlc3RlLXN3cy1hY3Qtc3RyZXNzLW9wdGluLXYxIiwiZmlsYV93b3JrZmxvdyI6InRlc3RlLXN3cy13Zi1zdHJlc3Mtb3B0aW4tdjEtc2VtLXdvcmtlciIsInByYXpvX3MiOjMwLCJzZXNzYW8iOiJzdHJlc3MtdjEtcmF3LW5vLXdvcmtlci1jb2xkLWMxMi1pMDAwMCJ9LCJwZWRpZG8iOnsiZmFsaGFyIjpmYWxzZSwiaWQiOiJwMDAwOSIsInNlc3NhbyI6InN0cmVzcy12MS1yYXctbm8td29ya2VyLWNvbGQtYzEyLWkwMDAwIn19"
+            }
+          ]
+        },
+        "identity": "isolado-stress-client-009"
+      }
+    },
+    {
+      "eventId": "13",
+      "eventTime": "2026-10-17T15:41:26.230Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_EXECUTION_SIGNALED",
+      "workflowExecutionSignaledEventAttributes": {
+        "signalName": "solicitar",
+        "input": {
+          "payloads": [
+            {
+              "metadata": {
+                "encoding": "anNvbi9wbGFpbg=="
+              },
+              "data": "eyJjb25maWciOnsiZmlsYV9hY3Rpdml0eSI6InRlc3RlLXN3cy1hY3Qtc3RyZXNzLW9wdGluLXYxIiwiZmlsYV93b3JrZmxvdyI6InRlc3RlLXN3cy13Zi1zdHJlc3Mtb3B0aW4tdjEtc2VtLXdvcmtlciIsInByYXpvX3MiOjMwLCJzZXNzYW8iOiJzdHJlc3MtdjEtcmF3LW5vLXdvcmtlci1jb2xkLWMxMi1pMDAwMCJ9LCJwZWRpZG8iOnsiZmFsaGFyIjpmYWxzZSwiaWQiOiJwMDAxMCIsInNlc3NhbyI6InN0cmVzcy12MS1yYXctbm8td29ya2VyLWNvbGQtYzEyLWkwMDAwIn19"
+            }
+          ]
+        },
+        "identity": "isolado-stress-client-010"
+      }
+    },
+    {
+      "eventId": "14",
+      "eventTime": "2026-10-17T15:41:26.230Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_EXECUTION_SIGNALED",
+      "workflowExecutionSignaledEventAttributes": {
+        "signalName": "solicitar",
+        "input": {
+          "payloads": [
+            {
+              "metadata": {
+                "encoding": "anNvbi9wbGFpbg=="
+              },
+              "data": "eyJjb25maWciOnsiZmlsYV9hY3Rpdml0eSI6InRlc3RlLXN3cy1hY3Qtc3RyZXNzLW9wdGluLXYxIiwiZmlsYV93b3JrZmxvdyI6InRlc3RlLXN3cy13Zi1zdHJlc3Mtb3B0aW4tdjEtc2VtLXdvcmtlciIsInByYXpvX3MiOjMwLCJzZXNzYW8iOiJzdHJlc3MtdjEtcmF3LW5vLXdvcmtlci1jb2xkLWMxMi1pMDAwMCJ9LCJwZWRpZG8iOnsiZmFsaGFyIjpmYWxzZSwiaWQiOiJwMDAxMSIsInNlc3NhbyI6InN0cmVzcy12MS1yYXctbm8td29ya2VyLWNvbGQtYzEyLWkwMDAwIn19"
+            }
+          ]
+        },
+        "identity": "isolado-stress-client-011"
+      }
+    },
+    {
+      "eventId": "15",
+      "eventTime": "2026-10-17T15:41:26.235Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_EXECUTION_TERMINATED",
+      "workflowExecutionTerminatedEventAttributes": {
+        "details": {
+          "payloads": [
+            {
+              "metadata": {
+                "encoding": "anNvbi9wbGFpbg=="
+              },
+              "data": "ImNsZWFudXAgZXhwZXJpbWVudG8gc2VtIHdvcmtlciI="
+            }
+          ]
+        },
+        "identity": "isolado-stress-client-000"
+      }
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "status": "preparing_confirmation",
+  "auth": {
+    "profile": "default",
+    "persona": "Board",
+    "userId": "eHIQgWDGucnmgW8xT19VvSsypXRdbTr7",
+    "name": "tutibom",
+    "source": "board_key"
+  },
+  "duplicates": {
+    "valid_until_matches": 0,
+    "idempotency_matches": 0
+  },
+  "checked_at": "2026-10-17T22:45:40.619034+00:00",
+  "companyId": "be3980d6-51ae-4cee-b85f-923b4568188c",
+  "projectId": "12127c71-6745-4039-b4be-e4b4c281319f"
+}

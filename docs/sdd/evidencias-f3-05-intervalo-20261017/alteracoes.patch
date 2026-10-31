@@ -1,0 +1,411 @@
+--- antes/src/pqbr/workflows/correcao.py
++++ depois/src/pqbr/workflows/correcao.py
+@@ -3,6 +3,8 @@
+ Jev faz a triagem → agente com LLM intervém (até 3 tentativas; 5–15 min sorteados no Camofox;
+ confere conta/sessão antes de agir) → Jev verifica → registra (banco via Temporal) e aprende
+ (Hindsight, sanitizado) → propõe ajuste de script (ticket, 2 aprovações do José).
++No Camofox, há também espera sorteada de 5–15 min entre intervenções (REGRAS §0, item 8),
++independente do timeout da Activity; timer e sorteio pertencem ao workflow Temporal.
+ Resultado: corrigido | esgotado | sensivel; só os dois últimos chamam o José.
+ 
+ Backends reais (Jev, agente no Paperclip) ainda não estão ligados: sem `simulacao`, as Activities
+@@ -96,6 +98,12 @@
+             r = ResultadoCorrecao(resultado="sensivel", tentativas=0, motivo=f"{tri.classe}: {tri.motivo}", chamar_jose=True)
+             await self._registrar(r); return r
+         for n in range(1, MAX_TENTATIVAS + 1):
++            # Sem espera antes da primeira nem após a última/saídas antecipadas.
++            # O patch preserva comandos e sorteios dos históricos sem esse timer.
++            if (p.ferramenta == "camofox" and n > 1
++                    and workflow.patched("f3-05-camofox-intervalo-v1")):
++                espera = workflow.random().randint(CAMOFOX_MIN_S, CAMOFOX_MAX_S)
++                await workflow.sleep(timedelta(seconds=espera))
+             limite = (timedelta(seconds=workflow.random().randint(CAMOFOX_MIN_S, CAMOFOX_MAX_S))
+                       if p.ferramenta == "camofox" else timedelta(minutes=10))
+             t = Tentativa(pedido=p, n=n)
+--- antes/tests/unit/test_f3_05_local.py
++++ depois/tests/unit/test_f3_05_local.py
+@@ -42,10 +42,17 @@
+     calls = []
+     records = []
+     samples = []
+-    values = iter((300, 600, 900))
++    sleeps = []
++    patched_values = {"f3-05-camofox-intervalo-v1": True}
++    # timeout da atividade e espera antes das tentativas seguintes, intercalados
++    values = None
+ 
+     class RandomLocal:
+         def randint(self, lower, upper):
++            nonlocal values
++            if values is None:
++                values = iter((300, 450, 600, 750, 900)
++                              if patched_values["f3-05-camofox-intervalo-v1"] else (300, 600, 900))
+             value = next(values)
+             assert (lower, upper) == (300, 900)
+             assert lower <= value <= upper
+@@ -59,12 +66,22 @@
+             return None
+         return await fn(arg)
+ 
++    async def sleep(duration):
++        sleeps.append(duration)
++
++    def patched(key):
++        return patched_values.get(key, False)
++
+     monkeypatch.setattr(C.workflow, "execute_activity", executar)
+     monkeypatch.setattr(C.workflow, "random", lambda: RandomLocal())
++    monkeypatch.setattr(C.workflow, "sleep", sleep)
++    monkeypatch.setattr(C.workflow, "patched", patched)
+     return SimpleNamespace(
+         calls=calls,
+         records=records,
+         samples=samples,
++        sleeps=sleeps,
++        patched_values=patched_values,
+         of=lambda fn: [call for call in calls if call[0] is fn],
+     )
+ 
+@@ -107,6 +124,7 @@
+     assert runtime_local.of(C.intervir_agente) == []
+     assert runtime_local.of(C.verificar_jev) == []
+     assert runtime_local.samples == []
++    assert runtime_local.sleeps == []
+     assert runtime_local.records == [result]
+ 
+ 
+@@ -117,6 +135,7 @@
+     assert result.chamar_jose is True
+     assert runtime_local.of(C.intervir_agente) == []
+     assert runtime_local.of(C.verificar_jev) == []
++    assert runtime_local.sleeps == []
+     assert runtime_local.records == [result]
+ 
+ 
+@@ -130,10 +149,12 @@
+     agent_options = runtime_local.of(C.intervir_agente)[0][2]
+     assert agent_options["retry_policy"].maximum_attempts == 1
+     assert agent_options["start_to_close_timeout"] == timedelta(minutes=5)
++    assert runtime_local.samples == [300]
++    assert runtime_local.sleeps == []
+     assert runtime_local.records == [result]
+ 
+ 
+-def test_sucesso_na_terceira_preserva_teto_e_timeouts_sorteados(runtime_local):
++def test_sucesso_na_terceira_preserva_teto_timeouts_e_esperas(runtime_local):
+     result = executar(pedido(simulacao=C.Simulacao(intervencoes=[False, False, True])))
+     calls = runtime_local.of(C.intervir_agente)
+     assert (result.resultado, result.tentativas) == ("corrigido", 3)
+@@ -141,6 +162,8 @@
+     assert [call[2]["start_to_close_timeout"] for call in calls] == [
+         timedelta(seconds=300), timedelta(seconds=600), timedelta(seconds=900)
+     ]
++    assert runtime_local.samples == [300, 450, 600, 750, 900]
++    assert runtime_local.sleeps == [timedelta(seconds=450), timedelta(seconds=750)]
+     assert all(call[2]["retry_policy"].maximum_attempts == 1 for call in calls)
+     assert len(runtime_local.of(C.verificar_jev)) == 1
+     assert runtime_local.records == [result]
+@@ -150,6 +173,7 @@
+     result = executar(pedido(simulacao=C.Simulacao(intervencoes=[False])))
+     assert (result.resultado, result.tentativas, result.chamar_jose) == ("esgotado", 3, True)
+     assert len(runtime_local.of(C.intervir_agente)) == 3
++    assert runtime_local.sleeps == [timedelta(seconds=450), timedelta(seconds=750)]
+     assert runtime_local.of(C.verificar_jev) == []
+     assert runtime_local.records == [result]
+ 
+@@ -159,6 +183,7 @@
+     assert (result.resultado, result.tentativas) == ("esgotado", 3)
+     assert len(runtime_local.of(C.intervir_agente)) == 3
+     assert len(runtime_local.of(C.verificar_jev)) == 3
++    assert runtime_local.sleeps == [timedelta(seconds=450), timedelta(seconds=750)]
+     assert result.chamar_jose is True
+     assert runtime_local.records == [result]
+ 
+@@ -167,23 +192,92 @@
+     result = executar(pedido(simulacao=C.Simulacao(conta_confere=False)))
+     assert (result.resultado, result.tentativas, result.chamar_jose) == ("sensivel", 1, True)
+     assert len(runtime_local.of(C.intervir_agente)) == 1
++    assert runtime_local.sleeps == []
+     assert runtime_local.of(C.verificar_jev) == []
+     assert runtime_local.records == [result]
+ 
+ 
+-def test_ferramenta_sem_camofox_nao_usa_sorteio(runtime_local):
++def test_ferramenta_sem_camofox_nao_usa_sorteio_ou_espera(runtime_local):
+     result = executar(pedido(ferramenta="drive"))
+     assert result.resultado == "corrigido"
++    assert result.tentativas == 1
+     assert runtime_local.samples == []
++    assert runtime_local.sleeps == []
+     assert runtime_local.of(C.intervir_agente)[0][2]["start_to_close_timeout"] == timedelta(minutes=10)
+ 
+ 
++def test_segunda_tentativa_tem_uma_espera_sem_espera_final(runtime_local):
++    result = executar(pedido(simulacao=C.Simulacao(intervencoes=[False, True])))
++    assert (result.resultado, result.tentativas) == ("corrigido", 2)
++    assert runtime_local.sleeps == [timedelta(seconds=450)]
++    assert runtime_local.samples == [300, 450, 600]
++
++
++def test_outra_ferramenta_nao_espera_entre_tres_tentativas(runtime_local):
++    result = executar(pedido(ferramenta="drive", simulacao=C.Simulacao(intervencoes=[False])))
++    assert (result.resultado, result.tentativas) == ("esgotado", 3)
++    assert len(runtime_local.of(C.intervir_agente)) == 3
++    assert runtime_local.samples == []
++    assert runtime_local.sleeps == []
++
++
++def test_intervalo_camofox_usa_limite_sorteado(runtime_local, monkeypatch):
++    for limite in (300, 900):
++        runtime_local.samples.clear()
++        runtime_local.sleeps.clear()
++        values = iter((300, limite, 300))
++
++        class RandomLimite:
++            def randint(self, lower, upper):
++                assert (lower, upper) == (300, 900)
++                value = next(values)
++                runtime_local.samples.append(value)
++                return value
++
++        monkeypatch.setattr(C.workflow, "random", lambda: RandomLimite())
++        # Execute cada limite em um workflow com sucesso na segunda intervenção.
++        executar(pedido(simulacao=C.Simulacao(intervencoes=[False, True])))
++        assert runtime_local.sleeps == [timedelta(seconds=limite)]
++        assert runtime_local.samples == [300, limite, 300]
++        # Isola cada execução removendo apenas o estado registrado, mantendo fixture.
++        runtime_local.calls.clear()
++        runtime_local.records.clear()
++
++
++def test_patch_false_preserva_sorteios_originais_sem_espera(runtime_local):
++    runtime_local.patched_values["f3-05-camofox-intervalo-v1"] = False
++    result = executar(pedido(simulacao=C.Simulacao(intervencoes=[False, False, True])))
++    assert result.tentativas == 3
++    assert runtime_local.samples == [300, 600, 900]
++    assert runtime_local.sleeps == []
++
++
++def test_excecao_tecnica_propaga_sem_esperas_extras_ou_registro(runtime_local, monkeypatch):
++    erro = RuntimeError("falha técnica")
++
++    async def falhar(fn, arg, **options):
++        if fn is C.intervir_agente:
++            raise erro
++        if fn is C.registrar_correcao:
++            runtime_local.records.append(arg)
++            return None
++        return await fn(arg)
++
++    monkeypatch.setattr(C.workflow, "execute_activity", falhar)
++    with pytest.raises(RuntimeError) as exc:
++        executar(pedido())
++    assert exc.value is erro
++    assert runtime_local.sleeps == []
++    assert runtime_local.records == []
++
++
+ def test_workflow_sem_backend_nao_intervem_nem_registra(runtime_local):
+     with pytest.raises(ApplicationError) as exc:
+         executar(pedido(simulacao=None))
+     assert exc.value.type == "EmConstrucao"
+     assert runtime_local.of(C.intervir_agente) == []
+     assert runtime_local.of(C.verificar_jev) == []
++    assert runtime_local.sleeps == []
+     assert runtime_local.records == []
+ 
+ 
+--- antes/tests/workflows/test_f3_05_temporal_isolado.py
++++ depois/tests/workflows/test_f3_05_temporal_isolado.py
+@@ -6,6 +6,7 @@
+ import asyncio
+ from collections import Counter
+ from datetime import timedelta
++import hashlib
+ import json
+ import os
+ from pathlib import Path
+@@ -83,6 +84,7 @@
+         self.assertTrue(self.out.is_dir())
+         self.fake = ActivitiesFalsas()
+         self.fila = "f3-05-isolado-" + uuid.uuid4().hex
++        self.ferramenta = "camofox"
+         self.env = await WorkflowEnvironment.start_time_skipping(
+             data_converter=pydantic_data_converter,
+             test_server_existing_path=str(SERVER),
+@@ -107,10 +109,11 @@
+         return C.PedidoCorrecao(**fields)
+ 
+     async def iniciar(self, pedido):
++        self.ferramenta = pedido.ferramenta
+         return await self.env.client.start_workflow(
+             C.CorrecaoAutonomaWorkflow.run, pedido,
+             id="f3-05-teste-" + uuid.uuid4().hex, task_queue=self.fila,
+-            execution_timeout=timedelta(minutes=30),
++            execution_timeout=timedelta(hours=2),
+         )
+ 
+     async def concluir(self, handle, falha=False):
+@@ -130,6 +133,12 @@
+         await Replayer(
+             workflows=[C.CorrecaoAutonomaWorkflow], data_converter=pydantic_data_converter,
+         ).replay_workflow(replay_history, raise_on_replay_failure=True)
++        timers = [e for e in history.events if e.HasField("timer_started_event_attributes")]
++        # Em execuções terminadas normalmente há uma espera por nova intervenção,
++        # e nenhuma antes da primeira, após a última ou nas outras ferramentas.
++        if not error:
++            quantidade = max(0, len(self.chamadas("intervir_agente")) - 1)
++            self.validar_esperas(history, quantidade if self.ferramenta == "camofox" else 0)
+         summary = dict(
+             teste=stem, workflow_id=handle.id, replay="ok", eventos=len(history.events),
+             atividades=self.fake.calls,
+@@ -137,6 +146,9 @@
+             resultado=result.model_dump(mode="json") if result is not None else None,
+             falha=type(error).__name__ if error else None,
+             timers=sum(e.event_type == EventType.EVENT_TYPE_TIMER_STARTED for e in history.events),
++            esperas=[dict(event_id=e.event_id,
++                          segundos=e.timer_started_event_attributes.start_to_fire_timeout.ToTimedelta().total_seconds(),
++                          inicio=e.event_time.ToDatetime().isoformat()) for e in timers],
+         )
+         with (self.out / (stem + ".summary.json")).open("x") as f:
+             json.dump(summary, f, ensure_ascii=False, indent=2)
+@@ -162,6 +174,34 @@
+                 if e.HasField("activity_task_scheduled_event_attributes")
+                 and e.activity_task_scheduled_event_attributes.activity_type.name == name]
+ 
++    def validar_esperas(self, history, quantidade):
++        timers = [e for e in history.events if e.HasField("timer_started_event_attributes")]
++        fired = [e for e in history.events if e.HasField("timer_fired_event_attributes")]
++        intervencoes = [e for e in history.events if e.HasField("activity_task_scheduled_event_attributes")
++                        and e.activity_task_scheduled_event_attributes.activity_type.name == "intervir_agente"]
++        self.assertEqual(len(timers), quantidade)
++        self.assertEqual(len(fired), quantidade)
++        for anterior, proxima, timer in zip(intervencoes, intervencoes[1:], timers):
++            segundos = timer.timer_started_event_attributes.start_to_fire_timeout.ToTimedelta().total_seconds()
++            self.assertTrue(300 <= segundos <= 900)
++            conclusao = next(e for e in history.events if e.HasField("activity_task_completed_event_attributes")
++                             and e.activity_task_completed_event_attributes.scheduled_event_id == anterior.event_id)
++            disparo = next(e for e in fired
++                           if e.timer_fired_event_attributes.started_event_id == timer.event_id)
++            self.assertLess(conclusao.event_id, timer.event_id)
++            self.assertLess(timer.event_id, disparo.event_id)
++            self.assertLess(disparo.event_id, proxima.event_id)
++            self.assertGreaterEqual((disparo.event_time.ToDatetime() - timer.event_time.ToDatetime()).total_seconds(), segundos)
++            self.assertGreaterEqual((proxima.event_time.ToDatetime() - conclusao.event_time.ToDatetime()).total_seconds(), segundos)
++            # Se houve verificação, a espera só começa depois da sua conclusão.
++            verificacoes = [e for e in history.events if e.HasField("activity_task_scheduled_event_attributes")
++                            and e.activity_task_scheduled_event_attributes.activity_type.name == "verificar_jev"
++                            and anterior.event_id < e.event_id < proxima.event_id]
++            for verificacao in verificacoes:
++                fim = next(e for e in history.events if e.HasField("activity_task_completed_event_attributes")
++                           and e.activity_task_completed_event_attributes.scheduled_event_id == verificacao.event_id)
++                self.assertLess(fim.event_id, timer.event_id)
++
+     async def test_corrige_na_primeira_e_serializa_resultado(self):
+         r, h = await self.executar()
+         self.assertEqual((r.resultado, r.tentativas, r.chamar_jose), ("corrigido", 1, False))
+@@ -170,7 +210,7 @@
+                          ["triagem_jev", "intervir_agente", "verificar_jev", "registrar_correcao"])
+         self.assertEqual(len(self.agendadas(h, "registrar_correcao")), 1)
+ 
+-    async def test_terceira_tentativa_tem_limite_e_sem_timer_de_espera(self):
++    async def test_terceira_tentativa_tem_duas_esperas_e_timeouts_separados(self):
+         r, h = await self.executar(self.pedido(simulacao=C.Simulacao(intervencoes=[False, False, True])))
+         self.assertEqual((r.resultado, r.tentativas), ("corrigido", 3))
+         self.assertEqual([c["n"] for c in self.chamadas("intervir_agente")], [1, 2, 3])
+@@ -180,12 +220,19 @@
+         for attrs in scheduled:
+             self.assertEqual(attrs.retry_policy.maximum_attempts, 1)
+             self.assertTrue(300 <= attrs.start_to_close_timeout.ToTimedelta().total_seconds() <= 900)
+-        # Caracteriza lacuna; NÃO é aceite da exigência de intervalo de 5–15 min.
+-        self.assertFalse(any(e.event_type == EventType.EVENT_TYPE_TIMER_STARTED for e in h.events))
+-        starts = [e.event_time.ToDatetime() for e in h.events
+-                  if e.HasField("activity_task_scheduled_event_attributes")
+-                  and e.activity_task_scheduled_event_attributes.activity_type.name == "intervir_agente"]
+-        self.assertLess((starts[-1] - starts[0]).total_seconds(), 300)
++        self.validar_esperas(h, 2)
++
++    async def test_corrige_na_segunda_com_uma_espera(self):
++        r, h = await self.executar(self.pedido(simulacao=C.Simulacao(intervencoes=[False, True])))
++        self.assertEqual((r.resultado, r.tentativas), ("corrigido", 2))
++        self.validar_esperas(h, 1)
++
++    async def test_outra_ferramenta_tres_tentativas_sem_espera(self):
++        r, h = await self.executar(self.pedido(ferramenta="drive", simulacao=C.Simulacao(intervencoes=[False])))
++        self.assertEqual((r.resultado, r.tentativas), ("esgotado", 3))
++        self.validar_esperas(h, 0)
++        self.assertTrue(all(a.start_to_close_timeout.ToTimedelta() == timedelta(minutes=10)
++                            for a in self.agendadas(h, "intervir_agente")))
+ 
+     async def test_tres_intervencoes_negativas_esgotam(self):
+         r, _ = await self.executar(self.pedido(simulacao=C.Simulacao(intervencoes=[False])))
+@@ -252,7 +299,9 @@
+ 
+     async def test_excecao_na_intervencao_nao_repete_activity(self):
+         self.fake.falhas["intervir_agente"] = 5
+-        _, _ = await self.executar(falha=True)
++        error, h = await self.executar(falha=True)
++        self.assertEqual(error.cause.cause.type, "FalhaSintetica")
++        self.validar_esperas(h, 0)
+         self.assertEqual([c["attempt"] for c in self.chamadas("intervir_agente")], [1])
+         self.assertEqual(self.chamadas("verificar_jev"), [])
+         self.assertEqual(self.fake.registros, [])
+@@ -276,6 +325,58 @@
+             "triagem_jev": 1, "intervir_agente": 1, "verificar_jev": 1, "registrar_correcao": 1,
+         })
+ 
++    async def aguardar_timer_pendente(self, handle):
++        # Não aguarda result(): time skipping ainda não é habilitado.
++        for _ in range(200):
++            history = await handle.fetch_history()
++            if any(e.HasField("timer_started_event_attributes") for e in history.events):
++                self.assertFalse(any(e.HasField("timer_fired_event_attributes") for e in history.events))
++                self.assertEqual([c["n"] for c in self.chamadas("intervir_agente")], [1])
++                return history
++            await asyncio.sleep(0.025)
++        self.fail("workflow não agendou timer no prazo local")
++
++    async def test_cancelamento_durante_espera_nao_intervem_novamente(self):
++        async with self.worker():
++            handle = await self.iniciar(self.pedido(simulacao=C.Simulacao(intervencoes=[False])))
++            await self.aguardar_timer_pendente(handle)
++            await handle.cancel()
++            error, h = await self.concluir(handle, falha=True)
++        self.assertEqual(type(error.cause).__name__, "CancelledError")
++        self.assertEqual([c["n"] for c in self.chamadas("intervir_agente")], [1])
++        self.assertEqual(self.fake.registros, [])
++        self.assertEqual(sum(e.HasField("timer_canceled_event_attributes") for e in h.events), 1)
++        self.assertEqual(sum(e.HasField("timer_fired_event_attributes") for e in h.events), 0)
++        self.assertEqual(h.events[-1].event_type, EventType.EVENT_TYPE_WORKFLOW_EXECUTION_CANCELED)
++
++    async def test_novo_worker_retoma_timer_sem_duplicar_intervencao(self):
++        async with self.worker():
++            handle = await self.iniciar(self.pedido(simulacao=C.Simulacao(intervencoes=[False, True])))
++            antes = await self.aguardar_timer_pendente(handle)
++            timer_id = next(e.event_id for e in antes.events if e.HasField("timer_started_event_attributes"))
++        async with self.worker():
++            r, h = await self.concluir(handle)
++        self.assertEqual((r.resultado, r.tentativas), ("corrigido", 2))
++        self.assertEqual([c["n"] for c in self.chamadas("intervir_agente")], [1, 2])
++        self.validar_esperas(h, 1)
++        self.assertEqual(next(e.event_id for e in h.events if e.HasField("timer_started_event_attributes")), timer_id)
++
++    async def test_replay_dos_14_historicos_anteriores_sem_timer(self):
++        anteriores = Path(__file__).resolve().parents[2] / "docs/sdd/evidencias-f3-05-temporal-isolado-20261017"
++        arquivos = sorted(anteriores.glob("*.history.json"))
++        self.assertEqual(len(arquivos), 14)
++        resultados = []
++        for arquivo in arquivos:
++            text = arquivo.read_text()
++            history = WorkflowHistory.from_json("legado-" + arquivo.stem, text)
++            await Replayer(
++                workflows=[C.CorrecaoAutonomaWorkflow], data_converter=pydantic_data_converter,
++            ).replay_workflow(history, raise_on_replay_failure=True)
++            resultados.append(dict(arquivo=arquivo.name, replay="ok", sha256=hashlib.sha256(text.encode()).hexdigest()))
++        with (self.out / "replay-legado.summary.json").open("x") as f:
++            json.dump(resultados, f, ensure_ascii=False, indent=2)
++            f.write("\n")
++
+ 
+ if __name__ == "__main__":
+     unittest.main()

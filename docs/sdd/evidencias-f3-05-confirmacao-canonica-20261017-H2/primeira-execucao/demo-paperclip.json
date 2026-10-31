@@ -1,0 +1,169 @@
+{
+  "aviso": "SINTETICO: todas as portas são fakes; não enviado a serviço algum",
+  "canal": "paperclip",
+  "antes": {
+    "ticket_existente": "FAKE-ticket-existente",
+    "interacao": {
+      "kind": "request_confirmation",
+      "idempotencyKey": "pqbr-f3-05:cff8e1b5049d346c15a8f41a209edae956c303a8a01929825b1f662ae1685540",
+      "addresseeUserId": "FAKE-paperclip-owner",
+      "addresseeAgentId": null,
+      "continuationPolicy": "none",
+      "title": "Autorizar somente pendentes já aceitos",
+      "payload": {
+        "version": 1,
+        "prompt": "Autoriza retomar somente os pendentes desta revisão, sem repetir a operação terminal?",
+        "acceptLabel": "Autorizar pendentes",
+        "rejectLabel": "Não autorizar",
+        "supersedeOnUserComment": false,
+        "detailsMarkdown": "PQBR-F3-05/v1\n{\"criadoEm\":1800000000,\"escopo\":{\"falha_id\":\"FAKE-terminal\",\"filho_run_id\":\"FAKE-filho-run\",\"pendentes\":[\"FAKE-pendente-1\",\"FAKE-pendente-2\"],\"registro_falha_receipt\":\"FAKE-registro-falha\",\"revisao\":7,\"supervisor_id\":\"FAKE-supervisor\",\"supervisor_run_id\":\"FAKE-supervisor-run\"},\"expiraEm\":1800000600,\"issueId\":\"FAKE-ticket-existente\",\"version\":1}"
+      },
+      "id": "FAKE-interaction-1",
+      "issueId": "FAKE-ticket-existente",
+      "status": "pending",
+      "requestedResolverPolicy": "human_only",
+      "effectiveResolverPolicy": "human_only",
+      "resolvedByUserId": null,
+      "resolvedByAgentId": null,
+      "resolvedByRunId": null,
+      "resolvedAt": null,
+      "result": null,
+      "createdAt": "2027-01-15T08:00:00Z",
+      "updatedAt": "2027-01-15T08:00:00Z"
+    },
+    "pendentes": [
+      "FAKE-pendente-1",
+      "FAKE-pendente-2"
+    ],
+    "operacao_terminal": "FAKE-terminal"
+  },
+  "registro_canonico_fake": {
+    "kind": "request_confirmation",
+    "idempotencyKey": "pqbr-f3-05:cff8e1b5049d346c15a8f41a209edae956c303a8a01929825b1f662ae1685540",
+    "addresseeUserId": "FAKE-paperclip-owner",
+    "addresseeAgentId": null,
+    "continuationPolicy": "none",
+    "title": "Autorizar somente pendentes já aceitos",
+    "payload": {
+      "version": 1,
+      "prompt": "Autoriza retomar somente os pendentes desta revisão, sem repetir a operação terminal?",
+      "acceptLabel": "Autorizar pendentes",
+      "rejectLabel": "Não autorizar",
+      "supersedeOnUserComment": false,
+      "detailsMarkdown": "PQBR-F3-05/v1\n{\"criadoEm\":1800000000,\"escopo\":{\"falha_id\":\"FAKE-terminal\",\"filho_run_id\":\"FAKE-filho-run\",\"pendentes\":[\"FAKE-pendente-1\",\"FAKE-pendente-2\"],\"registro_falha_receipt\":\"FAKE-registro-falha\",\"revisao\":7,\"supervisor_id\":\"FAKE-supervisor\",\"supervisor_run_id\":\"FAKE-supervisor-run\"},\"expiraEm\":1800000600,\"issueId\":\"FAKE-ticket-existente\",\"version\":1}"
+    },
+    "id": "FAKE-interaction-1",
+    "issueId": "FAKE-ticket-existente",
+    "status": "accepted",
+    "requestedResolverPolicy": "human_only",
+    "effectiveResolverPolicy": "human_only",
+    "resolvedByUserId": "FAKE-paperclip-owner",
+    "resolvedByAgentId": null,
+    "resolvedByRunId": null,
+    "resolvedAt": "2027-01-15T08:00:00Z",
+    "result": {
+      "version": 1,
+      "outcome": "accepted"
+    },
+    "createdAt": "2027-01-15T08:00:00Z",
+    "updatedAt": "2027-01-15T08:00:00Z"
+  },
+  "receipt_local_fake_consumido": {
+    "issue_id": "FAKE-ticket-existente",
+    "interaction_id": "FAKE-interaction-1",
+    "autor": "FAKE-paperclip-owner",
+    "decisao": "accepted",
+    "timestamp": "2027-01-15T08:00:00Z",
+    "revisao": 7,
+    "escopo": {
+      "supervisor_id": "FAKE-supervisor",
+      "supervisor_run_id": "FAKE-supervisor-run",
+      "revisao": 7,
+      "falha_id": "FAKE-terminal",
+      "filho_run_id": "FAKE-filho-run",
+      "registro_falha_receipt": "FAKE-registro-falha",
+      "pendentes": [
+        "FAKE-pendente-1",
+        "FAKE-pendente-2"
+      ]
+    },
+    "registro_hash": "FAKE-SNAPSHOT:6abad9704fea6467dd6f932d0035081b971fb55903e09cbf4f916b26f24d1996",
+    "confirmacao_key": "pqbr-f3-05:cff8e1b5049d346c15a8f41a209edae956c303a8a01929825b1f662ae1685540"
+  },
+  "primeiro": "retomada_confirmada",
+  "duplicata": "retomada_ja_confirmada",
+  "executados_fake": [
+    "FAKE-pendente-1",
+    "FAKE-pendente-2"
+  ],
+  "terminal_nao_reexecutado": true,
+  "total_interacoes": 1,
+  "trilha": [
+    [
+      "paperclip:criar"
+    ],
+    [
+      "interacao_persistida",
+      "FAKE-ticket-existente",
+      "FAKE-interaction-1"
+    ],
+    [
+      "paperclip:ler"
+    ],
+    [
+      "registro_relido",
+      "FAKE-ticket-existente"
+    ],
+    [
+      "paperclip:resolver"
+    ],
+    [
+      "decisao_persistida",
+      "FAKE-ticket-existente",
+      "FAKE-interaction-1",
+      "accepted"
+    ],
+    [
+      "paperclip:ler"
+    ],
+    [
+      "registro_relido",
+      "FAKE-ticket-existente"
+    ],
+    [
+      "receptor_fake_chamado",
+      "FAKE-interaction-1"
+    ],
+    [
+      "paperclip:ler"
+    ],
+    [
+      "registro_relido",
+      "FAKE-ticket-existente"
+    ],
+    [
+      "pendentes_executados_fake",
+      "FAKE-pendente-1",
+      "FAKE-pendente-2"
+    ],
+    [
+      "paperclip:ler"
+    ],
+    [
+      "registro_relido",
+      "FAKE-ticket-existente"
+    ],
+    [
+      "receptor_fake_chamado",
+      "FAKE-interaction-1"
+    ],
+    [
+      "paperclip:ler"
+    ],
+    [
+      "registro_relido",
+      "FAKE-ticket-existente"
+    ]
+  ],
+  "limite": "locks/CAS/dedup apenas memória, sem crash safety ou durabilidade real"
+}

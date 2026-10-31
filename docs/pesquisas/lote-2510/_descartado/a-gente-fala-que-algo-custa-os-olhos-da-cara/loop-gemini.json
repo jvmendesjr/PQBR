@@ -1,0 +1,37 @@
+{
+ "versao": "1.1.0",
+ "modelo": "3.8 Flash",
+ "codigo": "PQBR-EP1002",
+ "imagem_fala": "aprova",
+ "capa_titulo": "aprova",
+ "loop_texto": "terceira_rodada",
+ "veredito": "terceira_rodada",
+ "motivos": [
+  "sem ressalvas",
+  "loop:resposta_invalida:ValueError",
+  "loop:ultima_fala_nao_emenda_na_primeira",
+  "loop:divergencia"
+ ],
+ "conversas": [
+  "",
+  "https://gemini.google.com/app/bd9147d9a3e61353",
+  "",
+  "https://gemini.google.com/app/1790c3ee22d7e928",
+  "",
+  "https://gemini.google.com/app/0260433187e1f9c4"
+ ],
+ "visual_bruto": {
+  "metricas": {
+   "segue_estilo_declarado": 1.0,
+   "mesmo_personagem_do_bloco": 1.0,
+   "imagem_corresponde_a_fala": 1.0,
+   "legivel_no_celular": 1.0,
+   "ambiente_brasileiro": 1.0,
+   "foco_unico_zona_segura": 1.0,
+   "corresponde_ao_titulo": 1.0,
+   "legenda_cobre_foco": 1.0,
+   "tem_texto_na_tela": 1.0
+  },
+  "rodada_unica": false
+ }
+}

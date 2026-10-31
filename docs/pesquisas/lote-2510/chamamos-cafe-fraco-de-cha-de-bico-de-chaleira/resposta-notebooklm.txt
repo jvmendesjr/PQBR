@@ -1,0 +1,80 @@
+{
+  "episodio_id": "chamamos-cafe-fraco-de-cha-de-bico-de-chaleira",
+  "titulo": "Por que chamamos café fraco de 'chá de bico de chaleira'?",
+  "falas": [
+    "Olhar pra uma xícara de café transparente dá desespero. Por que a gente chama café fraco de 'chá de bico de chaleira'?",
+    "Até hoje, quando o café sai parecendo água de batata, o brasileiro solta esse deboche sem dó.",
+    "A versão mais aceita diz que a expressão nasceu ao reaproveitar o mesmo pó no filtro até sair só líquido claro.",
+    "Saindo direto da chaleira, o café ficava tão ralo que parecia um chá fraco.",
+    "Mas tem quem diga que a ideia era jogar água quente no bico da chaleira pra aproveitar a borra no fundo.",
+    "Essa fofoca virou a piada perfeita praquele café triste que não acorda ninguém.",
+    "E pra entender as manias do nosso dia a dia...",
+    "Segue o Porquê BR"
+  ],
+  "tipo_cta": "fallback",
+  "entidades_cena": [
+    "chaleira de alumínio",
+    "xícara de café",
+    "filtro de pano",
+    "garrafa térmica vermelha",
+    "fogão a lenha"
+  ],
+  "bloco_visual": {
+    "personagem": "Um só: 30 anos, tipo físico magro, cabelo castanho curto, camiseta amarela, calça jeans azul, óculos redondos vermelhos, expressão-base exagerada curiosa. Sem nome. Esta frase se repete idêntica em todas as cenas.",
+    "cenas": [
+      {
+        "fala": "Olhar pra uma xícara de café transparente dá desespero. Por que a gente chama café fraco de 'chá de bico de chaleira'?",
+        "acao": "O personagem segura uma xícara e derrama uma água amarelada e translúcida direto do bico de uma chaleira de alumínio gigante, com olhar de desespero cômico.",
+        "enquadramento": "Plano médio",
+        "ambiente": "Cena 1: cozinha de casa brasileira, hoje, objetos-âncora: chaleira de alumínio, filtro de pano, mesa de madeira, garrafa térmica vermelha, luz da manhã vinda da janela."
+      },
+      {
+        "fala": "Até hoje, quando o café sai parecendo água de batata, o brasileiro solta esse deboche sem dó.",
+        "acao": "O personagem aponta com ironia para a xícara de café translúcido na mesa, fazendo cara de deboche exagerada.",
+        "enquadramento": "Close-up",
+        "ambiente": "Cena 2: cozinha de casa brasileira, hoje, objetos-âncora: xícara de porcelana branca, garrafa térmica vermelha, toalha de mesa xadrez, luz da manhã vinda da janela."
+      },
+      {
+        "fala": "A versão mais aceita diz que a expressão nasceu ao reaproveitar o mesmo pó no filtro até sair só líquido claro.",
+        "acao": "O personagem despeja água pela terceira vez sobre um coador de pano esbranquiçado, observando sair apenas um pingo transparente.",
+        "enquadramento": "Plano médio",
+        "ambiente": "Cena 3: cozinha antiga, anos 80, objetos-âncora: suporte de filtro de pano, bule de café, lata de pó de café vintage, filtro de barro, luz suave de tarde."
+      },
+      {
+        "fala": "Saindo direto da chaleira, o café ficava tão ralo que parecia um chá fraco.",
+        "acao": "O personagem segura a chaleira fumegante e analisa o fluxo fino e claro saindo do bico com expressão de decepção.",
+        "enquadramento": "Plano médio",
+        "ambiente": "Cena 4: cozinha antiga, anos 80, objetos-âncora: chaleira de alumínio amassada, xícara de vidro, suporte de madeira, luz suave de tarde."
+      },
+      {
+        "fala": "Mas tem quem diga que a ideia era jogar água quente no bico da chaleira pra aproveitar a borra no fundo.",
+        "acao": "O personagem chacoalha uma chaleira de ferro sobre o fogão a lenha, tentando extrair a última gota de sabor da borra impregnada.",
+        "enquadramento": "Close-up",
+        "ambiente": "Cena 5: cozinha caipira, Brasil colonial/antigo, objetos-âncora: fogão a lenha, chaleira de ferro preto, colher de pau, xícara de ágata, luz de fogo de lenha."
+      },
+      {
+        "fala": "Essa fofoca virou a piada perfeita praquele café triste que não acorda ninguém.",
+        "acao": "O personagem toma um gole da bebida rala, boceja de forma hilária e encosta a cabeça na mesa totalmente sem energia.",
+        "enquadramento": "Plano médio",
+        "ambiente": "Cena 6: escritório brasileiro, hoje, objetos-âncora: copo de plástico, garrafa térmica preta, computador de mesa, bloco de notas, luz fluorescente."
+      },
+      {
+        "fala": "E pra entender as manias do nosso dia a dia...",
+        "acao": "O personagem sorri calorosamente para a câmera e faz um gesto de convite amigável com a mão.",
+        "enquadramento": "Plano médio",
+        "ambiente": "Cena 7: cozinha de casa brasileira, hoje, objetos-âncora: garrafa térmica vermelha, filtro de pano, xícara branca, luz da manhã."
+      },
+      {
+        "fala": "Segue o Porquê BR",
+        "acao": "O personagem retoma exatamente a pose da cena 1, segurando a chaleira de alumínio e derramando o líquido transparente na xícara.",
+        "enquadramento": "Plano médio",
+        "ambiente": "Cena 8: cozinha de casa brasileira, hoje, objetos-âncora: chaleira de alumínio, filtro de pano, mesa de madeira, garrafa térmica vermelha, luz da manhã vinda da janela."
+      }
+    ]
+  },
+  "fontes": [
+    "Tudo o que você precisa saber sobre o café fraco",
+    "Café Forte ou Café Fraco? O Que São os “Chafés” e o Que Realmente está por Trás dos Cafés Fortes - Coffee & Joy",
+    "As expressões famosas inspiradas no chá - Mexido de Ideias"
+  ]
+}

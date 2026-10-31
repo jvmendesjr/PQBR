@@ -1,0 +1,14 @@
+{
+  "_doc": "t168u (José 31/10/2026): caderno mestre permanente norteador. Nunca gera mídia. Antigos em MESTRES_PROIBIDOS continuam bloqueados.",
+  "titulo": "PQBR - Mestre canônico",
+  "caderno_mestre_id": "00ce61ae-ab72-4f5a-a405-e1381377bc38",
+  "proibido_midia": true,
+  "mestres_legado_proibidos": [
+    "88246689",
+    "c35d7b24-5d4f-4eee-afc4-7a0eadc860bf"
+  ],
+  "persona_path": "templates/notebooklm/persona-mestre.txt",
+  "persona_efemero_base_path": "templates/notebooklm/persona-pqbr.txt",
+  "limpar_chat_apos_briefing": true,
+  "salvar_nota_apos_briefing": true
+}

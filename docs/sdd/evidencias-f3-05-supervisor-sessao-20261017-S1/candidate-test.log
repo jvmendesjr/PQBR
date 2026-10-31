@@ -1,0 +1,65 @@
+test_duas_operacoes_falha_terminal_e_retomada_explicita (tests.workflows.test_f3_05_supervisor_runtime.SupervisorRuntime.test_duas_operacoes_falha_terminal_e_retomada_explicita) ... Executing <Task pending name='Task-2' coro=<SupervisorRuntime.test_duas_operacoes_falha_terminal_e_retomada_explicita() running at /home/pc/Workspace/PQBR/tests/workflows/test_f3_05_supervisor_runtime.py:162> wait_for=<Future pending cb=[<builtins.PyDoneCallback object at 0x7fec4e2c6830>(), Task.task_wakeup()] created at /home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py:448> cb=[_run_until_complete_cb() at /home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py:181] created at /home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/runners.py:100> took 0.106 seconds
+Completing activity as failed ({'activity_id': 'intervencao-1', 'activity_type': 'intervir_agente', 'attempt': 1, 'namespace': 'f3-05-supervisor', 'task_queue': 'teste-f3-05-candidato-camofox-test_duas_operacoes_falha_terminal_e_retomada_explicita-supervisor', 'workflow_id': 'teste-f3-05-supervisor-60ffed94209811c799c265cbc5267132aac703fa02b9848318772373fb78d166-op-f555b80ad08f501adb396a95c78948ce18f204b3cf2c93b0b1930a006540a06e', 'workflow_run_id': '01a14b13-cf5a-7bb6-91c5-fb56c2f15c18', 'workflow_type': 'PQBRCorrecaoCandidata'})
+Traceback (most recent call last):
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 351, in _handle_start_activity_task
+    result = await self._execute_activity(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 681, in _execute_activity
+    return await impl.execute_activity(input)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 889, in execute_activity
+    return await input.fn(*input.args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/tests/workflows/composicao_candidata.py", line 59, in intervir
+    raise ApplicationError('falha técnica falsa', type='FalhaTecnicaFalsa')
+temporalio.exceptions.ApplicationError: FalhaTecnicaFalsa: falha técnica falsa
+ok
+test_falha_registro_nao_repete_nem_libera_segunda (tests.workflows.test_f3_05_supervisor_runtime.SupervisorRuntime.test_falha_registro_nao_repete_nem_libera_segunda) ... Completing activity as failed ({'activity_id': 'intervencao-1', 'activity_type': 'intervir_agente', 'attempt': 1, 'namespace': 'f3-05-supervisor', 'task_queue': 'teste-f3-05-candidato-camofox-test_falha_registro_nao_repete_nem_libera_segunda-supervisor', 'workflow_id': 'teste-f3-05-supervisor-58a316dad4a9cff2861ca38da3cafd8444895f3f38dda3e7824c167ed760af4c-op-f555b80ad08f501adb396a95c78948ce18f204b3cf2c93b0b1930a006540a06e', 'workflow_run_id': '01a14b13-d6ca-7166-bf07-8cb5378acf29', 'workflow_type': 'PQBRCorrecaoCandidata'})
+Traceback (most recent call last):
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 351, in _handle_start_activity_task
+    result = await self._execute_activity(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 681, in _execute_activity
+    return await impl.execute_activity(input)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 889, in execute_activity
+    return await input.fn(*input.args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/tests/workflows/composicao_candidata.py", line 59, in intervir
+    raise ApplicationError('falha técnica falsa', type='FalhaTecnicaFalsa')
+temporalio.exceptions.ApplicationError: FalhaTecnicaFalsa: falha técnica falsa
+Completing activity as failed ({'activity_id': 'registro-falha-1', 'activity_type': 'registrar_falha_supervisor_falsa', 'attempt': 1, 'namespace': 'f3-05-supervisor', 'task_queue': 'teste-f3-05-candidato-wf-test_falha_registro_nao_repete_nem_libera_segunda-supervisor', 'workflow_id': 'teste-f3-05-supervisor-58a316dad4a9cff2861ca38da3cafd8444895f3f38dda3e7824c167ed760af4c', 'workflow_run_id': '1cf55ca1-44c3-426b-95be-b2f127797631', 'workflow_type': 'PQBRPrototipoSupervisorSessao'})
+Traceback (most recent call last):
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 351, in _handle_start_activity_task
+    result = await self._execute_activity(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 681, in _execute_activity
+    return await impl.execute_activity(input)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 889, in execute_activity
+    return await input.fn(*input.args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_supervisor_runtime.py", line 33, in registrar_falha
+    raise ApplicationError('registro falso indisponível', type='FalhaRegistroFalsa')
+temporalio.exceptions.ApplicationError: FalhaRegistroFalsa: registro falso indisponível
+ok
+test_recibo_invalido_nao_libera_segunda (tests.workflows.test_f3_05_supervisor_runtime.SupervisorRuntime.test_recibo_invalido_nao_libera_segunda) ... Completing activity as failed ({'activity_id': 'intervencao-1', 'activity_type': 'intervir_agente', 'attempt': 1, 'namespace': 'f3-05-supervisor', 'task_queue': 'teste-f3-05-candidato-camofox-test_recibo_invalido_nao_libera_segunda-supervisor', 'workflow_id': 'teste-f3-05-supervisor-6dd8455bc8b0b2579d321e886a3e5012157fa3bdf1bf1939679e614dc720f7bf-op-f555b80ad08f501adb396a95c78948ce18f204b3cf2c93b0b1930a006540a06e', 'workflow_run_id': '01a14b13-da45-74f0-b701-079fd7b66b9f', 'workflow_type': 'PQBRCorrecaoCandidata'})
+Traceback (most recent call last):
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 351, in _handle_start_activity_task
+    result = await self._execute_activity(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 681, in _execute_activity
+    return await impl.execute_activity(input)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 889, in execute_activity
+    return await input.fn(*input.args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/tests/workflows/composicao_candidata.py", line 59, in intervir
+    raise ApplicationError('falha técnica falsa', type='FalhaTecnicaFalsa')
+temporalio.exceptions.ApplicationError: FalhaTecnicaFalsa: falha técnica falsa
+ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 3.822s
+
+OK

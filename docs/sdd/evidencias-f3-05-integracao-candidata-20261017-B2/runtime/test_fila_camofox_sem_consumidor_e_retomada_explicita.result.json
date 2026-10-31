@@ -1,0 +1,28 @@
+{
+  "fila_pendente_sem_consumidor": true,
+  "consumidor_tardio_executou": true,
+  "calls": [
+    {
+      "sessao": "test_fila_camofox_sem_consumidor_e_retomada_explicita",
+      "passo": "acao",
+      "inicio": 409301.783361844,
+      "fim": 409301.824607927,
+      "fila": "teste-f3-05-candidato-camofox-test_fila_camofox_sem_consumidor_e_retomada_explicita",
+      "tentativa": 1,
+      "workflow_id": "teste-f3-05-candidato-sessao-979f5f81d772bf4ae7c0657196c234f17aa7591fd046a3f8f99390d0ee4851f7-op-15e8900c9977db61a162bedd13fac114a7b5c06e20d347d9875239f8515b173d"
+    }
+  ],
+  "max_sessao": {
+    "test_fila_camofox_sem_consumidor_e_retomada_explicita": 1
+  },
+  "max_global": 1,
+  "registros": [
+    {
+      "resultado": "corrigido",
+      "tentativas": 1,
+      "motivo": "",
+      "proposta_script": "proposta falsa",
+      "chamar_jose": false
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "teste": "test_config_divergente_na_reutilizacao_nao_enfileira",
+  "workflow_id": "prototipo-ator-sessao-atomico-v1-07aa137bd2dc362b90b33958e3ed6b335ab8385dedfb7454998d1219cf0e9f50",
+  "run_id": "fc459254-ad1f-49c4-baad-bbad81c17d7f",
+  "estado": "COMPLETED",
+  "pending_activities": 0,
+  "replay": "ok",
+  "atividades_agendadas": 1,
+  "fila_explicita": "teste-camofox-ator-4b0405798e704867a0c97bc61e4300e1",
+  "calls": [
+    {
+      "pedido": {
+        "falhar": false,
+        "id": "a1",
+        "sessao": "sessao-A"
+      },
+      "inicio": 404980.569939566,
+      "fim": 404980.699253645,
+      "fila": "teste-camofox-ator-4b0405798e704867a0c97bc61e4300e1",
+      "workflow_id": "prototipo-ator-sessao-atomico-v1-07aa137bd2dc362b90b33958e3ed6b335ab8385dedfb7454998d1219cf0e9f50",
+      "attempt": 1
+    }
+  ],
+  "max_global": 1,
+  "max_por_sessao": {
+    "sessao-A": 1
+  },
+  "erro": null
+}

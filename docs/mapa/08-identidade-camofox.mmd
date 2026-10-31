@@ -1,0 +1,29 @@
+%% Identidade/navegador (ADR-012, José 24/10/2026). t526: PQBR segue individual em 9387; migração na próxima integração; kit pronto, nada instalado.
+flowchart TB
+  subgraph HOJE["Hoje (24/10) — PQBR segue individual até a próxima integração"]
+    G["camofox-browser.service · porta 9377 · escuta em todas as interfaces ⚠<br/>app ~/camofox-browser v1.18.1 (atualizado 24/10)<br/>Camoufox ~/.cache/camoufox 152.0.4-beta.30 · perfis ~/.camofox/profiles (15)"]
+    P["pqbr-camofox.service · 127.0.0.1:9387 · userId pqbr · MAX_SESSIONS=1<br/>app ~/.pqbr/camofox/app v1.15.0 (CLONE do global = instalação duplicada)<br/>Camoufox ~/.pqbr/camofox/cache (CÓPIA, 1,3 GB) · MemoryMax 2200M"]
+    K["pqbr-camofox-keepalive.service (keepalive.sh)<br/>renovador da 9387"]
+    S["nlm-sync.sh (NOTEBOOKLM_REFRESH_CMD)<br/>sincroniza sessão Camofox → notebooklm-py"]
+    K --> P
+    P --> S
+  end
+  subgraph KIT["Preparado t526 (no repo, NÃO instalado)"]
+    T["deploy/camofox/camofox@.service + instancia.env.exemplo + criar_instancia.sh"]
+    J["config/camofox_instancias.json<br/>pqbr 9387 individual · proxima 9397 RESERVADA (0 memória)"]
+    RB["docs/RUNBOOK-nova-instancia-camofox.md<br/>criar · migrar · rollback · riscos"]
+  end
+  subgraph ALVO["Alvo (ADR-012): 1 instalação, 1 instância por conta crítica (até 3)"]
+    I[("1 instalação Camofox + 1 Camoufox<br/>versão travada (pin)")]
+    I --> C1["camofox@pqbr<br/>porta 9387 · mesmo perfil"]
+    I --> C2["camofox@proxima<br/>porta 9397 (reservada)"]
+    I --> C3["camofox@conta3"]
+    C1 & C2 & C3 --> R["1 renovador por instância (único)"]
+    C1 & C2 & C3 --> B["backup diário do perfil + teste de restauração"]
+    C1 & C2 & C3 --> CN["canário diário (Temporal Schedule)"]
+    AD{{"adaptador NavegadorIdentidade<br/>motores/navegador.py · contratos 1.0.0 (não ligado)"}}
+    AD --> C1 & C2 & C3
+  end
+  P -. "migração na PRÓXIMA INTEGRAÇÃO (runbook §3)" .-> C1
+  KIT -.-> ALVO
+  N>"Regras: uma identidade Google por instância; juniormoedavirtual só em camofox@pqbr; login só pelo José; sem re-login headless"]

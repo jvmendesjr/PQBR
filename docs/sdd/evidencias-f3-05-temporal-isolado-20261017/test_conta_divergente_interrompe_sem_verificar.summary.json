@@ -1,0 +1,41 @@
+{
+  "teste": "test_conta_divergente_interrompe_sem_verificar",
+  "workflow_id": "f3-05-teste-40a21bd1694143fb953c07857f56972e",
+  "replay": "ok",
+  "eventos": 23,
+  "atividades": [
+    {
+      "activity": "triagem_jev",
+      "attempt": 1,
+      "n": null
+    },
+    {
+      "activity": "intervir_agente",
+      "attempt": 1,
+      "n": 1
+    },
+    {
+      "activity": "registrar_correcao",
+      "attempt": 1,
+      "n": null
+    }
+  ],
+  "registros": [
+    {
+      "resultado": "sensivel",
+      "tentativas": 1,
+      "motivo": "conta/sessão divergente",
+      "proposta_script": null,
+      "chamar_jose": true
+    }
+  ],
+  "resultado": {
+    "resultado": "sensivel",
+    "tentativas": 1,
+    "motivo": "conta/sessão divergente",
+    "proposta_script": null,
+    "chamar_jose": true
+  },
+  "falha": null,
+  "timers": 0
+}

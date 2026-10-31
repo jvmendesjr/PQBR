@@ -1,0 +1,5 @@
+[Unit]
+Description=PQBR backup diário do Postgres local (t343)
+[Service]
+Type=oneshot
+ExecStart=/bin/sh %h/Workspace/PQBR/infra/pqbr-db/backup.sh

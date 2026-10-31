@@ -1,0 +1,24 @@
+{
+  "titulo": "Por que as formigas andam em fila reta até o açúcar?",
+  "descricao": "Você já reparou como as formigas formam uma linha perfeita direto para o pote de açúcar? Entenda como a comunicação por feromônios e a busca por energia rápida organizam essa marcha na sua cozinha. Descubra a ciência por trás desse hábito do nosso dia a dia!\n\nFontes:\n- Por que as formigas andam em fila? Ciência explica a eficiência por trás do comportamento\n- Como as formigas conseguem detectar doce? - Fatos Desconhecidos\n- Por que as formigas gostam tanto de açúcar? - Portal Agricultura A a Z\n\n#shorts #porquebr #curiosidades #formigas #ciencia",
+  "tags": [
+    "formigas",
+    "formiga em fila",
+    "por que formigas andam em fila",
+    "formiga no acucar",
+    "feromonios",
+    "curiosidades",
+    "ciencia",
+    "porque br",
+    "biologia",
+    "insetos",
+    "comportamento animal"
+  ],
+  "hashtags": [
+    "#shorts",
+    "#porquebr",
+    "#curiosidades",
+    "#formigas",
+    "#ciencia"
+  ]
+}

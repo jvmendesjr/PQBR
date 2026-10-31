@@ -1,0 +1,8 @@
+# Dependências diretas do venv do worker (.venv, uv). Instalar: uv pip install --python .venv/bin/python -r requirements.txt
+# ADR-011 (t510): pydantic-ai-slim[openai] para os agentes; lock completo em requirements.lock
+temporalio==1.34.0
+pydantic==2.14.0
+pydantic-ai-slim[openai]==2.60.0
+psycopg[binary]==3.2.13
+# t145u: motion graphics do pós (Chrome do sistema em /usr/bin/google-chrome; não baixar Chromium do Playwright)
+playwright==1.64.1

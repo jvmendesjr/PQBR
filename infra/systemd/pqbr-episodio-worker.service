@@ -1,0 +1,17 @@
+[Unit]
+Description=PQBR worker Temporal da fila episodio-pqbr (pós FFmpeg, capa A9, Drive, publicação dry-run)
+After=network-online.target
+StartLimitIntervalSec=0
+[Service]
+WorkingDirectory=/home/pc/Workspace/PQBR
+Environment=PYTHONPATH=/home/pc/Workspace/PQBR/src
+Environment=PYTHONUNBUFFERED=1
+Environment=YOUTUBE_DRY_RUN=true
+Environment=PQBR_DRIVE_CRED_ARQ=/home/pc/.pqbr/secrets/google_drive_token.json
+EnvironmentFile=-/home/pc/.pqbr/secrets/episodio.env
+ExecStart=/home/pc/Workspace/PQBR/.venv/bin/python -m pqbr.workflows.worker_episodio
+Restart=always
+RestartSec=10
+MemoryMax=600M
+[Install]
+WantedBy=default.target

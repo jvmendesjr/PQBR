@@ -1,0 +1,84 @@
+# Matriz de rastreabilidade
+
+> Requisito → regra → desenho → tarefa → teste. Gerada a partir da mesma lista de `docs/SPEC.md`; ao mudar um ID, atualize os cinco documentos no mesmo commit.
+
+| Requisito | REGRAS | ARQUITETURA | ROADMAP | TESTES |
+|---|---|---|---|---|
+| RF-01 | §3, §4 | §9 GradeDiariaWorkflow | F5-01 | TS-01 |
+| RF-02 | §4 | §8 temas; §11 DecisaoRepeticao | F3-01, F5-01 | TS-01, V4 |
+| RF-03 | §4 | §9 GradeDiariaWorkflow | F5-01 | TS-01 |
+| RF-04 | §4 | §9 GradeDiariaWorkflow | F5-01 | TS-01 |
+| RF-05 | §4 | §11 PontuacaoPolemica | F5-01 | TS-01 |
+| RF-06 | §4, §9 | §3 Papéis; ADR-010 | F5-02 | TS-02, TZ-11 |
+| RF-07 | §5 | §11 RoteiroShort | F3-01, F7-01 | TS-02, V1 |
+| RF-08 | §6 | ADR-010; §8 visual_assets | módulo vídeo (identidade aprovada; implementação pendente) | TS-02, V2, V6, TZ-11 |
+| RF-09 | §5, §9 | ADR-010; §9 EpisodioWorkflow (Activity render) | F5-05; módulo vídeo | TS-02, TZ-11 |
+| RF-10 | §9, §10 | §2 NotebookLM; §9 fila notebooklm | F4-01..F4-05, F4-07 | TS-02, V7, TZ-11 |
+| RF-11 | §8 | §9 EpisodioWorkflow (Activity auditor) | F7-02 | TS-03, V3 |
+| RF-12 | §7, §8 | §11 VereditoAuditor | F7-02 | TS-03, V3 |
+| RF-13 | §5, §8 | §11 VereditoAuditor | F7-02 | TS-03, V3 |
+| RF-14 | §7, §8 | §11 VereditoAuditor | F7-02 | TS-03 |
+| RF-15 | §15 | §9 PublicacaoWorkflow | F8-01 | TS-04, V4 |
+| RF-16 | §15 | §9 PublicacaoWorkflow; §8 episodios | F8-01 | TS-04, V4 |
+| RF-17 | §15 | §9 Schedules | F5-02, F8-01 | TS-04, V4 |
+| RF-18 | §7, §15 | §11 DecisaoPublicacao | F8-01 | TS-04 |
+| RF-19 | §16 | §9 Item5Workflow | F8-01, F05-08, F05-09 | TS-05, V5, TZ-09, TZ-10 |
+| RF-20 | §16 | §9 Item5Workflow; §8 acoes | F8-01 | TS-05, V5 |
+| RF-21 | §16 | §11 SinalItem5 | F8-01, F10-03 | TS-05 |
+| RF-22 | §19 | §9 ComentariosWorkflow | F10-03 | TS-06 |
+| RF-23 | §19 | §11 ClassificacaoComentario | F10-03 | TS-06 |
+| RF-24 | §19 | §9 ComentariosWorkflow; §8 frases | F10-01, F10-03 | TS-06 |
+| RF-25 | §19 | §9 ComentariosWorkflow (fila camofox) | F10-03 | TS-06 |
+| RF-26 | §19 | §9 sinal pausar_respostas | F10-03 | TS-06 |
+| RF-27 | §19 | §9 ComentariosWorkflow | F10-03 | TS-06 |
+| RF-28 | §13 | §9 ComplianceWorkflow | F9-02, F05-08, F05-09 | TS-07, TZ-09, TZ-10 |
+| RF-29 | §13 | §10 | F9-02 | TS-07 |
+| RF-30 | §20 | §9 AnalistaWorkflow | F9-03 | TS-08 |
+| RF-31 | §19, §20, §22 | §9 RelatorioDiarioWorkflow | F9-01, F05-08, F05-09 | TS-08, TZ-09, TZ-10 |
+| RF-32 | §22 | §8 consumo | F9-01 | TS-08 |
+| RF-33 | §3 | §10; §11 PropostaAgente | F05-04, F1-01 | TS-09, TZ-04 |
+| RF-44 | §3.1 | §2 Correção autônoma | F3-05 | TS-11 |
+| RF-45 | §11 | §2 Camofox; Correção autônoma | F4C-08 | TS-11 |
+| RF-46 | §3.1, §7 | §2 Correção autônoma (etapas) | F3-05 | TS-11 |
+| RF-47 | §22, §3.1 | §2 Consumo por modelo; migração 0010 | F3-06 | TS-08, TS-DB |
+| RF-48 | §2, ADR-009 | ADR-009; §10 | F05-06, F05-08, F05-09 | TS-09, TZ-08, TZ-09, TZ-10 |
+| RF-49 | §22 | §8 Retenção do consumo | F3-07 | TS-12, TS-DB, TS-08 |
+| RF-34 | §0, §2, ADR-009 | ADR-009; §10 | F05-06, F05-09 | TS-09, TZ-06, TZ-08, TZ-10 |
+| RF-35 | §24 | ADR-004; §11 TicketManutencao | F1-04 | TS-09 |
+| RF-36 | §5 | §8 revisao_humana; §9 sinal determinacao_revisao | F8-03 | TS-09 |
+| RF-37 | §11 | §9 GuardiaoSessaoWorkflow | F6-01 | TS-10 |
+| RF-38 | §18 | §9 RetryPolicy | F6-01 | TS-10 |
+| RF-39 | §18 | ADR-001; §8 outbox | F05-03, F6-01 | TS-10, TZ-03 |
+| RF-40 | §21 | §9 EpisodioWorkflow (Activity drive) | F8-02 | TS-ARM, V6 |
+| RF-41 | §21 | §9 LimpezaDriveWorkflow | F8-02 | TS-ARM |
+| RF-42 | §12 | §9 MonitorAtualizacoesWorkflow | F9-01 | TS-MON |
+| RF-43 | §2, §6 | ADR-002; §10 | F05-04, F1-02 | TS-13, TZ-04 |
+| RNF-01 | §3 | ADR-001 | F00-01 | TS-REPLAY |
+| RNF-02 | §7 | §11 decide() | F3-01, F6-01 | TS-03, TS-10 |
+| RNF-03 | §17 | §11; D14 | F3-02 | TS-SEC |
+| RNF-04 | §3.1, §11 | ADR-008; §2 Correção autônoma; §9 fila camofox | F3-05, F6-01 | TS-11, TS-10 |
+| RNF-05 | §3, §18 | ADR-001 | F05-02 | TZ-02, TS-REPLAY |
+| RNF-06 | §18 | ADR-001 | F05-03, F05-04 | TZ-03, TZ-04 |
+| RNF-07 | §12 | §5 | F9-01 | TS-MON |
+| RNF-08 | §17 | §8 visual_assets | F5-04 | TS-SEC, V6 |
+| RNF-09 | §21 | ADR-001 | F05-01 | TZ-01 |
+| RNF-10 | §15 | §2 Data API | F5-02 | TS-04 |
+| RNF-11 | §1 | ADR-001; §6 Governança transversal | F00-01 | TS-GOV-01 (revisão documental; aceite pendente) |
+| RNF-12 | §0 | §6 Governança transversal | F00-01, F1-01 (suspenso) | TS-09, TS-GOV-01; TS-GOV-02 se houver controle técnico testável (não executado) |
+| RNF-13 | §23 | ADR-002 | F05-05, F1-02 | TZ-05 |
+
+**Precisão de 17/10/2026:** TS-11 = correção autônoma; TS-12 = retenção; TS-ARM = armazenamento; TS-MON = monitores. RNF-11/12 têm aceite documental transversal e RNF-12 admite caso negativo técnico somente onde verificável com segurança. Os vínculos indicam cobertura planejada, não teste executado ou barreira implementada; F00-01/G0 continua aberto.
+
+## Gate transversal de validação (não é requisito RF/RNF)
+
+| Gate | REGRAS | TESTES | ROADMAP |
+|---|---|---|---|
+| V1 — contrato editorial | §14 | TESTES.md §3/V1 | F7-01 |
+| V2 — consistência visual | §14 | TESTES.md §3/V2 | F5-04, F11-01 |
+| V3 — auditor com defeitos conhecidos | §14 | TESTES.md §3/V3 | F7-02 |
+| V4 — publicação sem duplicidade | §14 | TESTES.md §3/V4 | F8-01 |
+| V5 — correção pós-publicação | §14 | TESTES.md §3/V5 | F8-01 |
+| V6 — procedência e proteção | §14 | TESTES.md §3/V6 | F5-04, F3-02, F8-02 |
+| V7 — premissas técnicas | §14 | TESTES.md §3/V7 | todos os gates de validação aplicáveis |
+
+A seção 14 é um gate transversal de liberação: os sete itens precisam ser aprovados antes da produção; não cria RF/RNF independente. O detalhamento e os critérios de aceite estão em `docs/TESTES.md` §3.

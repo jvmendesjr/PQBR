@@ -1,0 +1,7 @@
+%% runs_presos (scripts/temporal/runs_presos.py) — systemd pqbr-runs-presos.timer (de hora em hora). Gerado do código 24/10/2026.
+flowchart TD
+  T(["timer horário"]) --> L["list_workflows ExecutionStatus=Running"]
+  L --> D{"há mais de PQBR_PRESO_HORAS (6 h)<br/>e tipo fora de ISENTOS?"}
+  D -- sim --> W["journal WARNING RUN PRESO … · exit 1"]
+  D -- não --> O["journal INFO nenhum run preso · exit 0"]
+  N>"Fora do Temporal (timer systemd); sem Telegram ainda"]

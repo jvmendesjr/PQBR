@@ -1,0 +1,36 @@
+{
+  "workflow_id": "teste-f3-05-recuperacao-475c9c6724e3a79c3e8aad89ff83e37a15b2262eee50a9d1955ea0f1bd8c83fc-op-2ecbf9a42dcf11c1b9fdb05fc53f8fe67085c4853642cdb9a21ae6e2e128ce32",
+  "run_id": "01a14ad1-bca6-713c-ae97-28be900897d9",
+  "eventos": 31,
+  "replay": "ok",
+  "activities": [
+    {
+      "nome": "triagem_jev",
+      "fila": "teste-f3-05-candidato-wf-test_pausa_recusa_comandos_e_recupera_so_aceitos-recuperacao",
+      "max_tentativas": 3,
+      "id": "1",
+      "timeout_s": 120
+    },
+    {
+      "nome": "intervir_agente",
+      "fila": "teste-f3-05-candidato-camofox-test_pausa_recusa_comandos_e_recupera_so_aceitos-recuperacao",
+      "max_tentativas": 1,
+      "id": "intervencao-1",
+      "timeout_s": 811
+    },
+    {
+      "nome": "verificar_jev",
+      "fila": "teste-f3-05-candidato-wf-test_pausa_recusa_comandos_e_recupera_so_aceitos-recuperacao",
+      "max_tentativas": 3,
+      "id": "3",
+      "timeout_s": 120
+    },
+    {
+      "nome": "registrar_correcao",
+      "fila": "teste-f3-05-candidato-wf-test_pausa_recusa_comandos_e_recupera_so_aceitos-recuperacao",
+      "max_tentativas": 3,
+      "id": "4",
+      "timeout_s": 60
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "answer": "Gerei a ilustração da **Cena 1** para a capa do Short no formato vertical 9:16 [1].\n\nA imagem segue estritamente as especificações do roteiro:\n- **Estilo:** Ilustração 2D plana de cartum com traços pretos marcantes, cores quentes e fundo azul-céu [1].\n- **Personagem:** Homem de 45 anos, barrigudo, de cabelo e bigode grisalhos, vestindo terno verde-bandeira e gravata mostarda, com uma expressão exagerada de espanto [1].\n- **Cena 1:** O personagem acomodado em seu trono de moedas de ouro, cercado por frutas mofadas e moscas, segurando a banana preta [1].\n\nVocê pode conferir a capa gerada diretamente no seu painel Studio.\n\n💡 Quer que eu prepare o bloco completo de SEO (título, código da descrição e hashtags) para o lançamento deste episódio?",
+  "conversation_id": "d85c58a9-537b-473b-9b22-e17e6e04cea3",
+  "turn_number": 1,
+  "is_follow_up": true,
+  "references": [
+    {
+      "source_id": "cfd7e2f8-161b-43ce-933f-6b097de42e2b",
+      "citation_number": 1,
+      "cited_text": "Podre de rico — roteiro de teste (capa)Por que a gente fala \"podre de rico\"? A versão mais aceita: no Brasil colonial, quem tinha muito dinheiro guardava frutas e comida até estragar, sinal de fartura. [ESTILO] Ilustração 2D plana de cartum, traço preto nítido, personagem em cores quentes sobre fundo azul-céu limpo, fundo com 3 objetos, sem texto dentro da imagem, vertical 9:16. [PERSONAGEM] Homem de 45 anos, barrigudo, cabelo grisalho curto, terno verde-bandeira, gravata mostarda, bigode grosso, expressão espantada exagerada. [CENA 1] O personagem sentado num trono de moedas de ouro cercado de frutas mofadas com moscas, segurando uma banana preta.",
+      "start_char": 0,
+      "end_char": 656,
+      "chunk_id": "e2d494a2-f372-40c8-8ab9-2e9ca11d3ea0",
+      "passage_id": null,
+      "answer_start_char": 0,
+      "answer_end_char": 656,
+      "score": 1.0,
+      "fragment_start_char": 0,
+      "fragment_end_char": 656,
+      "answer_anchor_start": 29,
+      "answer_anchor_end": 74
+    }
+  ],
+  "turn_key": {
+    "session_id": "d85c58a9-537b-473b-9b22-e17e6e04cea3",
+    "turn_id": "29115bff-2361-4947-849e-bf356012f05d",
+    "turn_code": 3020257512
+  },
+  "next_steps": [
+    {
+      "question": "Sim, prepare o SEO do episódio",
+      "type_code": 9
+    },
+    {
+      "question": "Vamos revisar a cena 2",
+      "type_code": 9
+    },
+    {
+      "question": "Gerar imagem para a próxima cena",
+      "type_code": 9
+    }
+  ]
+}

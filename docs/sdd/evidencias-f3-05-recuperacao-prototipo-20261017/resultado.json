@@ -1,0 +1,201 @@
+{
+  "runtime_testes": 18,
+  "runtime_novos": 8,
+  "runtime_anteriores": 10,
+  "runtime_duracao_s": 34.253,
+  "regressao_memoria": 93,
+  "unitarios_novos": 12,
+  "histories": {
+    "capturas": 72,
+    "runs_distintos": 66,
+    "capturas_recuperacao": 32,
+    "runs_recuperacao": 28,
+    "replays_ok": 72
+  },
+  "resultados_sinteticos": [
+    "test_confirmacao_antecipada_nao_autoriza_falha_futura.result.json",
+    "test_continue_as_new_preserva_ids_e_resultados.result.json",
+    "test_continue_as_new_transfere_pausa_fila_e_dedup.result.json",
+    "test_dedup_payload_config_e_versao.result.json",
+    "test_duas_falhas_recusam_recuperacao_obsoleta.result.json",
+    "test_erro_desconhecido_propaga_sem_recuperacao.result.json",
+    "test_excecao_tecnica_falha_sem_retry_fallback_ou_proximo.result.json",
+    "test_fila_camofox_sem_consumidor_e_retomada_explicita.result.json",
+    "test_ingresso_invalido_nao_despacha.result.json",
+    "test_mesma_sessao_concorrente_sem_sobreposicao.result.json",
+    "test_pausa_recusa_comandos_e_recupera_so_aceitos.result.json",
+    "test_replay_versao_anterior_sem_patch_e_nova_com_patch.result.json",
+    "test_restart_durante_pausa_e_apos_recuperacao.result.json",
+    "test_restart_worker_reconstroi_dedup_do_historico.result.json",
+    "test_resultado_anterior_preservado_apos_falha.result.json",
+    "test_sem_worker_workflow_rpc_nao_processa_e_retoma.result.json",
+    "test_sessoes_diferentes_em_paralelo.result.json",
+    "test_trava_sensivel_e_conta_divergente.result.json"
+  ],
+  "tentativa_R1": "Reprovada: Replayer usou ReplayNamespace e acionou guarda do protótipo. Correção apenas no harness: namespace=f3-05-recovery. Os 52 históricos R1 passaram no replay offline com namespace correto.",
+  "preservacao": {
+    "arquivos_preexistentes_alterados": [],
+    "servicos_inalterados": true,
+    "servicos_antes": {
+      "pqbr-camofox-worker.service": {
+        "Restart": "always",
+        "MainPID": "6867",
+        "NRestarts": "1",
+        "ExecMainStartTimestampMonotonic": "20967002",
+        "Id": "pqbr-camofox-worker.service",
+        "ActiveState": "active",
+        "SubState": "running",
+        "FragmentPath": "/home/pc/.config/systemd/user/pqbr-camofox-worker.service",
+        "unit_sha256": "dfd82b0ea10faaabca9a1bbdf9e0938466cf9671be7636a9e472062ce8303599"
+      },
+      "pqbr-episodio-worker.service": {
+        "Restart": "always",
+        "MainPID": "6868",
+        "NRestarts": "1",
+        "ExecMainStartTimestampMonotonic": "20968726",
+        "Id": "pqbr-episodio-worker.service",
+        "ActiveState": "active",
+        "SubState": "running",
+        "FragmentPath": "/home/pc/.config/systemd/user/pqbr-episodio-worker.service",
+        "unit_sha256": "f40ce559da41011bbb55c89ff3018400fae3eb5539753a92d4906240fa87f549"
+      },
+      "pqbr-notebooklm-worker.service": {
+        "Restart": "always",
+        "MainPID": "6869",
+        "NRestarts": "1",
+        "ExecMainStartTimestampMonotonic": "20970300",
+        "Id": "pqbr-notebooklm-worker.service",
+        "ActiveState": "active",
+        "SubState": "running",
+        "FragmentPath": "/home/pc/.config/systemd/user/pqbr-notebooklm-worker.service",
+        "unit_sha256": "9078fa88f9a8d3357e7cca029faea87670abc9b5d898d1973ccc0c5226b54d80"
+      },
+      "pqbr-temporal-worker.service": {
+        "Restart": "always",
+        "MainPID": "6984",
+        "NRestarts": "3",
+        "ExecMainStartTimestampMonotonic": "21990379",
+        "Id": "pqbr-temporal-worker.service",
+        "ActiveState": "active",
+        "SubState": "running",
+        "FragmentPath": "/home/pc/.config/systemd/user/pqbr-temporal-worker.service",
+        "unit_sha256": "7a4b69e3dfd4e448bad79d3252520acd34ec570bcba1bdcd36ea138f8ff990ed"
+      },
+      "pqbr-camofox.service": {
+        "Restart": "always",
+        "MainPID": "1417",
+        "NRestarts": "0",
+        "ExecMainStartTimestampMonotonic": "9046692",
+        "Id": "pqbr-camofox.service",
+        "ActiveState": "active",
+        "SubState": "running",
+        "FragmentPath": "/home/pc/.config/systemd/user/pqbr-camofox.service",
+        "unit_sha256": "1ce4f312187d55b39005ac707fa8f00c900fb68a1b7a4d657e3857cee1a809c5"
+      }
+    },
+    "servicos_depois": {
+      "pqbr-camofox-worker.service": {
+        "Restart": "always",
+        "MainPID": "6867",
+        "NRestarts": "1",
+        "ExecMainStartTimestampMonotonic": "20967002",
+        "Id": "pqbr-camofox-worker.service",
+        "ActiveState": "active",
+        "SubState": "running",
+        "FragmentPath": "/home/pc/.config/systemd/user/pqbr-camofox-worker.service",
+        "unit_sha256": "dfd82b0ea10faaabca9a1bbdf9e0938466cf9671be7636a9e472062ce8303599"
+      },
+      "pqbr-episodio-worker.service": {
+        "Restart": "always",
+        "MainPID": "6868",
+        "NRestarts": "1",
+        "ExecMainStartTimestampMonotonic": "20968726",
+        "Id": "pqbr-episodio-worker.service",
+        "ActiveState": "active",
+        "SubState": "running",
+        "FragmentPath": "/home/pc/.config/systemd/user/pqbr-episodio-worker.service",
+        "unit_sha256": "f40ce559da41011bbb55c89ff3018400fae3eb5539753a92d4906240fa87f549"
+      },
+      "pqbr-notebooklm-worker.service": {
+        "Restart": "always",
+        "MainPID": "6869",
+        "NRestarts": "1",
+        "ExecMainStartTimestampMonotonic": "20970300",
+        "Id": "pqbr-notebooklm-worker.service",
+        "ActiveState": "active",
+        "SubState": "running",
+        "FragmentPath": "/home/pc/.config/systemd/user/pqbr-notebooklm-worker.service",
+        "unit_sha256": "9078fa88f9a8d3357e7cca029faea87670abc9b5d898d1973ccc0c5226b54d80"
+      },
+      "pqbr-temporal-worker.service": {
+        "Restart": "always",
+        "MainPID": "6984",
+        "NRestarts": "3",
+        "ExecMainStartTimestampMonotonic": "21990379",
+        "Id": "pqbr-temporal-worker.service",
+        "ActiveState": "active",
+        "SubState": "running",
+        "FragmentPath": "/home/pc/.config/systemd/user/pqbr-temporal-worker.service",
+        "unit_sha256": "7a4b69e3dfd4e448bad79d3252520acd34ec570bcba1bdcd36ea138f8ff990ed"
+      },
+      "pqbr-camofox.service": {
+        "Restart": "always",
+        "MainPID": "1417",
+        "NRestarts": "0",
+        "ExecMainStartTimestampMonotonic": "9046692",
+        "Id": "pqbr-camofox.service",
+        "ActiveState": "active",
+        "SubState": "running",
+        "FragmentPath": "/home/pc/.config/systemd/user/pqbr-camofox.service",
+        "unit_sha256": "1ce4f312187d55b39005ac707fa8f00c900fb68a1b7a4d657e3857cee1a809c5"
+      }
+    },
+    "git_status_depois": " M config/.env.example\n M config/README.md\n M docs/ARQUITETURA.md\n M docs/CONTRATO-EDITORIAL.md\n M docs/DECISOES-LOG.md\n M docs/REFERENCIA-sessao-google.md\n M docs/REGRAS.md\n M docs/ROADMAP.md\n M docs/SPEC.md\n M docs/TESTES.md\n M docs/blueprints/modulo-producao-video/ROADMAP.md\n M docs/operacao/GUIA-ACESSO-PC-PAPERCLIP-CLI.md\n M docs/sdd/gate-a9.md\n M scripts/e2e/e2e_pre.py\n M scripts/hindsight/indexar.py\n M src/pqbr/contratos/__init__.py\n M src/pqbr/kit/agente_texto.py\n M src/pqbr/kit/mcp_kit.py\n M src/pqbr/kit/paperclip_api.py\n M src/pqbr/pipeline/auditor_visual.py\n M src/pqbr/pipeline/capa.py\n M src/pqbr/seguranca/barreira.py\n M src/pqbr/seguranca/segredos.py\n M src/pqbr/storage/banco.py\n M src/pqbr/workflows/activities.py\n M src/pqbr/workflows/auditor_gemini.py\n M src/pqbr/workflows/correcao.py\n M src/pqbr/workflows/criativo.py\n M src/pqbr/workflows/notebooklm.py\n M src/pqbr/workflows/paperclip.py\n M src/pqbr/workflows/producao.py\n M src/pqbr/workflows/worker.py\n M src/pqbr/workflows/worker_camofox.py\n M src/pqbr/workflows/worker_episodio.py\n M src/pqbr/workflows/worker_notebooklm.py\n M templates/auditor/VISUAL_2D.txt\n M tests/unit/test_auditor_visual.py\n M tests/unit/test_barreira.py\n M tests/unit/test_contratos.py\n M tests/unit/test_criativo_t464.py\n M tests/workflows/test_producao.py\n?? config/voz_narracao.json\n?? docs/CONTRATO-EDITORIAL-v2-CANDIDATO.md\n?? docs/pesquisas/arquivo-cadernos/f757e751_ep1001-descartado/\n?? docs/sdd/evidencias-f3-05-admissao-atomica-20261017/\n?? docs/sdd/evidencias-f3-05-ator-sessao-20261017/\n?? docs/sdd/evidencias-f3-05-integracao-candidata-20261017-B2/\n?? docs/sdd/evidencias-f3-05-integracao-candidata-20261017-C3/\n?? docs/sdd/evidencias-f3-05-integracao-candidata-20261017/\n?? docs/sdd/evidencias-f3-05-intervalo-20261017/\n?? docs/sdd/evidencias-f3-05-roteamento-offline-20261017/\n?? docs/sdd/evidencias-f3-05-roteamento-temporal-20261017/\n?? docs/sdd/evidencias-f3-05-signal-with-start-20261017/\n?? docs/sdd/evidencias-f3-05-sws-stress-20261017/\n?? docs/sdd/evidencias-f3-05-temporal-isolado-20261017/\n?? docs/sdd/f3-02-ts-sec-20261017.md\n?? docs/sdd/f3-04-preparo-offline-20261017.md\n?? docs/sdd/f3-05-admissao-atomica-20261017.md\n?? docs/sdd/f3-05-ator-sessao-20261017.md\n?? docs/sdd/f3-05-integracao-candidata-20261017.md\n?? docs/sdd/f3-05-intervalo-deterministico-20261017.md\n?? docs/sdd/f3-05-local-20261017.md\n?? docs/sdd/f3-05-roteamento-offline-20261017.md\n?? docs/sdd/f3-05-roteamento-temporal-20261017.md\n?? docs/sdd/f3-05-sdk-offline-20261017.md\n?? docs/sdd/f3-05-signal-with-start-20261017.md\n?? docs/sdd/f3-05-sws-stress-20261017.md\n?? docs/sdd/f3-05-temporal-isolado-20261017.md\n?? docs/sdd/f7-01-dryrun-20261016.md\n?? scripts/backup_offsite/\n?? src/pqbr/integrations/elevenlabs.py\n?? src/pqbr/pipeline/auditor_texto.py\n?? src/pqbr/workflows/candidato_sessao.py\n?? src/pqbr/workflows/narracao.py\n?? templates/auditor/LOOP.txt\n?? tests/seguranca/test_f3_02_escritores.py\n?? tests/seguranca/test_f3_02_saidas.py\n?? tests/unit/test_auditor_gemini.py\n?? tests/unit/test_auditor_texto.py\n?? tests/unit/test_capa_a9.py\n?? tests/unit/test_elevenlabs.py\n?? tests/unit/test_f3_04_offline.py\n?? tests/unit/test_f3_05_candidate_unit.py\n?? tests/unit/test_f3_05_local.py\n?? tests/unit/test_f3_05_recuperacao_unit.py\n?? tests/unit/test_f3_05_roteamento_offline.py\n?? tests/unit/test_f3_05_sdk_offline.py\n?? tests/unit/test_f7_03_limits.py\n?? tests/unit/test_narracao.py\n?? tests/workflows/composicao_candidata.py\n?? tests/workflows/f3_05_candidate_bootstrap.py\n?? tests/workflows/f3_05_recuperacao_bootstrap.py\n?? tests/workflows/prototipo_admissao_atomica.py\n?? tests/workflows/prototipo_ator_sessao.py\n?? tests/workflows/prototipo_recuperacao_pendentes.py\n?? tests/workflows/prototipo_signal_with_start.py\n?? tests/workflows/run_f3_05_admissao_atomica_isolado.sh\n?? tests/workflows/run_f3_05_ator_sessao_isolado.sh\n?? tests/workflows/run_f3_05_candidate_container.py\n?? tests/workflows/run_f3_05_isolado.sh\n?? tests/workflows/run_f3_05_recuperacao_container.py\n?? tests/workflows/run_f3_05_roteamento_isolado.sh\n?? tests/workflows/run_f3_05_signal_with_start_isolado.sh\n?? tests/workflows/run_sws_stress_optin.sh\n?? tests/workflows/stress_signal_with_start_optin.py\n?? tests/workflows/test_f3_05_admissao_atomica_isolado.py\n?? tests/workflows/test_f3_05_ator_sessao_isolado.py\n?? tests/workflows/test_f3_05_candidate_runtime.py\n?? tests/workflows/test_f3_05_recuperacao_runtime.py\n?? tests/workflows/test_f3_05_roteamento_temporal_isolado.py\n?? tests/workflows/test_f3_05_signal_with_start_isolado.py\n?? tests/workflows/test_f3_05_temporal_isolado.py\n"
+  },
+  "limpeza_R2": {
+    "cleanup": [
+      {
+        "container": "1d3cfa18906efca7d8227c5656f37cb8153b7f7573b807184dcad5c753ba8229",
+        "removed": true
+      },
+      {
+        "container": "623898a4a427857a315e271ac59b5cb86c0249dfbf33f6d065f61e824b0b39fb",
+        "removed": true
+      },
+      {
+        "container": "5ad90cb58b24087753646248fb436bcfb17061c8e8420635ca12c6b94995089f",
+        "removed": true
+      },
+      {
+        "network": "71577b6af89b88d7ef86dca90e2848a19ba68e8b840da37d00038fc076e433e4",
+        "removed": true
+      }
+    ],
+    "processos_restantes_no_namespace_de_teste": [],
+    "pids_de_containers_descartaveis_restantes": [],
+    "inventario": {
+      "containers": {
+        "novos": [],
+        "ausentes": []
+      },
+      "networks": {
+        "novos": [],
+        "ausentes": []
+      },
+      "volumes": {
+        "novos": [],
+        "ausentes": []
+      }
+    },
+    "teste_exit_code": 0
+  },
+  "limites": [
+    "Não reabre ator candidato já terminal; tipo novo mantém pai pausado após filho falhar.",
+    "Não repete operação falha; somente drena pendentes já aceitos após comando explícito sintético.",
+    "Comando correlacionado por revisão/falha/run não autentica usuário.",
+    "Sem reconciliação, exactly-once ou fencing de efeitos reais.",
+    "Restart cobre recriação de Workers efêmeros, não queda de máquina/servidor.",
+    "Não testa retention, migração, Reset ou todas as corridas de fechamento."
+  ],
+  "gates": "F3-05/G4 aberto; F7-02/G7 e PQBR-114 pausados; F05-06 no-arm"
+}

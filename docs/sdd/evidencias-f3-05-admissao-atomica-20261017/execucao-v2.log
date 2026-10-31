@@ -1,0 +1,55 @@
+Evidencias: /home/pc/Workspace/PQBR/docs/sdd/evidencias-f3-05-admissao-atomica-20261017/runtime-v2
+Namespace original: net:[4026531840]
+19defb9f7318c7cf249518b3642a735efb79876c2b6918afe312336476b796a5  /tmp/temporal-test-server-sdk-python-1.34.0
+Namespace isolado: net:[4026533133]
+lo               UNKNOWN        127.0.0.1/8 ::1/128 
+test_config_concorrente_primeiro_start_fixa_contrato (tests.workflows.test_f3_05_admissao_atomica_isolado.AdmissaoAtomicaTemporalIsolada.test_config_concorrente_primeiro_start_fixa_contrato) ... [2m2026-10-17T15:06:02.362533Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+[2m2026-10-17T15:06:02.363013Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+ok
+test_config_divergente_na_reutilizacao_nao_enfileira (tests.workflows.test_f3_05_admissao_atomica_isolado.AdmissaoAtomicaTemporalIsolada.test_config_divergente_na_reutilizacao_nao_enfileira) ... [2m2026-10-17T15:06:02.754013Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+[2m2026-10-17T15:06:02.754183Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+ok
+test_excecao_tecnica_sem_retry_sem_proximo (tests.workflows.test_f3_05_admissao_atomica_isolado.AdmissaoAtomicaTemporalIsolada.test_excecao_tecnica_sem_retry_sem_proximo) ... [2m2026-10-17T15:06:03.244614Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+[2m2026-10-17T15:06:03.244949Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+Completing activity as failed ({'activity_id': '1', 'activity_type': 'intervir_camofox_sintetico_v1', 'attempt': 1, 'namespace': 'default', 'task_queue': 'teste-camofox-ator-649d540b35bb4429ae04a38832281877', 'workflow_id': 'prototipo-ator-sessao-atomico-v1-07aa137bd2dc362b90b33958e3ed6b335ab8385dedfb7454998d1219cf0e9f50', 'workflow_run_id': '0ec95de2-390c-431c-8f26-dea39d998dfb', 'workflow_type': 'AtorSessaoAtomicoSintetico'})
+Traceback (most recent call last):
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 351, in _handle_start_activity_task
+    result = await self._execute_activity(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 681, in _execute_activity
+    return await impl.execute_activity(input)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 889, in execute_activity
+    return await input.fn(*input.args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_admissao_atomica_isolado.py", line 50, in intervir
+    raise ApplicationError("falha tecnica sintetica", type="FalhaTecnicaSintetica")
+temporalio.exceptions.ApplicationError: FalhaTecnicaSintetica: falha tecnica sintetica
+ok
+test_fechamento_drena_rejeita_novo_e_nao_reabre (tests.workflows.test_f3_05_admissao_atomica_isolado.AdmissaoAtomicaTemporalIsolada.test_fechamento_drena_rejeita_novo_e_nao_reabre) ... [2m2026-10-17T15:06:03.595884Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+[2m2026-10-17T15:06:03.596010Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+ok
+test_primeiro_pedido_concorrente_cria_um_ator_e_serializa (tests.workflows.test_f3_05_admissao_atomica_isolado.AdmissaoAtomicaTemporalIsolada.test_primeiro_pedido_concorrente_cria_um_ator_e_serializa) ... [2m2026-10-17T15:06:04.129455Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+[2m2026-10-17T15:06:04.129601Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+ok
+test_primeiro_update_invalido_nao_reverte_start (tests.workflows.test_f3_05_admissao_atomica_isolado.AdmissaoAtomicaTemporalIsolada.test_primeiro_update_invalido_nao_reverte_start) ... [2m2026-10-17T15:06:05.688540Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+[2m2026-10-17T15:06:05.688744Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+ok
+test_reenvio_resposta_descartada_e_colisao_payload (tests.workflows.test_f3_05_admissao_atomica_isolado.AdmissaoAtomicaTemporalIsolada.test_reenvio_resposta_descartada_e_colisao_payload) ... [2m2026-10-17T15:06:06.051994Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+[2m2026-10-17T15:06:06.052143Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+ok
+test_sem_consumidor_timeout_terminal_sem_execucao_tardia (tests.workflows.test_f3_05_admissao_atomica_isolado.AdmissaoAtomicaTemporalIsolada.test_sem_consumidor_timeout_terminal_sem_execucao_tardia) ... [2m2026-10-17T15:06:08.655841Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+[2m2026-10-17T15:06:08.656069Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+ok
+test_sem_worker_admissao_pendente_e_reenvio_mesmo_ator (tests.workflows.test_f3_05_admissao_atomica_isolado.AdmissaoAtomicaTemporalIsolada.test_sem_worker_admissao_pendente_e_reenvio_mesmo_ator) ... [2m2026-10-17T15:06:09.312922Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+[2m2026-10-17T15:06:09.313402Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+ok
+test_sessoes_distintas_em_paralelo (tests.workflows.test_f3_05_admissao_atomica_isolado.AdmissaoAtomicaTemporalIsolada.test_sessoes_distintas_em_paralelo) ... [2m2026-10-17T15:06:09.631675Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+[2m2026-10-17T15:06:09.631824Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 7.752s
+
+OK
+Servidor e namespace encerrados; evidencias preservadas em /home/pc/Workspace/PQBR/docs/sdd/evidencias-f3-05-admissao-atomica-20261017/runtime-v2

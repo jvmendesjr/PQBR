@@ -1,0 +1,22 @@
+{
+  "workflow_id": "teste-f3-05-candidato-sessao-12f8bdf97ec05bbc1f4e3c4d095420b583c516a153e0bf7ad007084ecc5dd46c-op-0e07b8daee992d1e972944d343e9e34e5bf6511ec0f0f55add331c52c0fff33d",
+  "run_id": "01a14ad1-55c3-7b88-a45f-9c6eae8b0dd1",
+  "eventos": 19,
+  "replay": "ok",
+  "activities": [
+    {
+      "nome": "triagem_jev",
+      "fila": "teste-f3-05-candidato-wf-test_excecao_tecnica_falha_sem_retry_fallback_ou_proximo",
+      "max_tentativas": 3,
+      "id": "1",
+      "timeout_s": 120
+    },
+    {
+      "nome": "intervir_agente",
+      "fila": "teste-f3-05-candidato-camofox-test_excecao_tecnica_falha_sem_retry_fallback_ou_proximo",
+      "max_tentativas": 1,
+      "id": "intervencao-1",
+      "timeout_s": 862
+    }
+  ]
+}

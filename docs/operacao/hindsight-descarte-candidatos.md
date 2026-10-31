@@ -1,0 +1,531 @@
+# Hindsight: candidatas a descarte (t90u, 26/10/2026)
+
+Gerado por `scripts/hindsight/reclassificar.py` (relatório completo em `~/.pqbr/hindsight/reclass-verif.json`, fora do git). **Nada foi apagado.** Cada documento listado recebeu a tag `obsoleto_candidato` (reversível). Apagar exige OK do José.
+
+Backup antes da alteração: `~/.pqbr/hindsight/backup/pqbr-bank-20261026.zip` (transfer export) e `pre-reclass-20261026.json` (600).
+
+Total: **220 documentos** (1303 unidades de memória). Com versão vigente da mesma seção já no bank: 166.
+
+Critérios: (1) versão superada: o texto não existe mais na fonte vigente (doc canônico, DECISOES-LOG, playbook, memorias.json); (2) cita decisão revogada sem fonte vigente que a sustente; (3) memória de teste.
+
+| id | contexto | resumo | motivo | decisão que conflita | substituta no bank |
+|---|---|---|---|---|---|
+| `001ee2d4-b378-4716-9d3a-4bf3fcb96fa0` | PQBR arquivo de caderno de teste — ep1001-descartado | Caderno de teste descartado f757e751-8b9f-4e6b-bcd0-a853c4811e1f (ep1001-descartado). Motivo: EP1001 reclassif | cita decisão revogada sem fonte vigente | t75u–t77u: EP1002 olhos-da-cara reprovado e descartado (tema volta a proposto) | não |
+| `a7a926ef-43d7-4a8c-8761-20a308ebf513` | PQBR arquivo de caderno de teste — ep1001-descartado | Caderno de teste descartado f757e751-8b9f-4e6b-bcd0-a853c4811e1f (ep1001-descartado). Motivo: EP1001 reclassif | cita decisão revogada sem fonte vigente | t75u–t77u: EP1002 olhos-da-cara reprovado e descartado (tema volta a proposto) | não |
+| `5e1219b3-ebdc-4024-ab95-c03de557b25d` | PQBR arquivo de caderno de teste — ep1001-descartado | Caderno de teste descartado f757e751-8b9f-4e6b-bcd0-a853c4811e1f (ep1001-descartado). Motivo: EP1001 reclassif | cita decisão revogada sem fonte vigente | t75u–t77u: EP1002 olhos-da-cara reprovado e descartado (tema volta a proposto) | não |
+| `f18eaf55-22f0-4904-aeba-11e5a8811972` | PQBR decisao — DECISOES-LOG: t476 (24/10/2026) — NotebookLM motor, sistema modular, Tempor | ## t476 (24/10/2026) — NotebookLM motor, sistema modular, Temporal sistema nervoso, 8 papéis (t512–t514) - **t | versão superada: texto não existe mais em docs/DECISOES-LOG.md | — | sim |
+| `d6ed70ed-5e27-4dc1-bb60-58b99347b97e` | PQBR decisao — DECISOES-LOG: t476 (24/10/2026) — NotebookLM motor, sistema modular, Tempor | .cadernos_episodio` (classe `pesquisa`) na criação. (3) Mapa do sistema em `docs/mapa/` (Mermaid, gerado do có | versão superada: texto não existe mais em docs/DECISOES-LOG.md | — | sim |
+| `346094c9-b256-4b7b-83ae-babd90f6648f` | PQBR decisao — DECISOES-LOG: t476 (24/10/2026) — NotebookLM motor, sistema modular, Tempor | .cadernos_episodio` (classe `pesquisa`) na criação. (3) Mapa do sistema em `docs/mapa/` (Mermaid, gerado do có | versão superada: texto não existe mais em docs/DECISOES-LOG.md | — | sim |
+| `3483cfb8-1f39-4013-8d85-40793307de63` | PQBR decisao — DECISOES-LOG: t476 (24/10/2026) — NotebookLM motor, sistema modular, Tempor | .cadernos_episodio` (classe `pesquisa`) na criação. (3) Mapa do sistema em `docs/mapa/` (Mermaid, gerado do có | versão superada: texto não existe mais em docs/DECISOES-LOG.md | — | sim |
+| `1e68d743-3df3-4573-a54d-dc4c57d3faef` | PQBR decisao — DECISOES-LOG: t476 (24/10/2026) — NotebookLM motor, sistema modular, Tempor | .cadernos_episodio` (classe `pesquisa`) na criação. (3) Mapa do sistema em `docs/mapa/` (Mermaid, gerado do có | versão superada: texto não existe mais em docs/DECISOES-LOG.md | — | sim |
+| `13003c09-91d8-413d-967e-70ff435d7d56` | PQBR doc canônico — docs/AGENTES.md: 10. Alinhamento com o Paperclip (docs oficiais, 11/10 | ## 10. Alinhamento com o Paperclip (docs oficiais, 11/10) / Ponto / Como fica / Doc / /---/---/---/ / Organogr | versão superada: texto não existe mais em docs/AGENTES.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado | não |
+| `eaafed4b-4fb0-4eb2-a657-2ff9b2ae9ab1` | PQBR doc canônico — docs/AGENTES.md: 10. Alinhamento com o Paperclip (docs oficiais, 11/10 | ## 10. Alinhamento com o Paperclip (docs oficiais, 11/10) / Ponto / Como fica / Doc / /---/---/---/ / Organogr | versão superada: texto não existe mais em docs/AGENTES.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado; t474: revogada a t464 (sem canal Discord) | não |
+| `ed1cf068-a7f6-4af7-b805-53ce5dea4f25` | PQBR doc canônico — docs/AGENTES.md: 10. Alinhamento com o Paperclip (docs oficiais, 11/10 | ## 10. Alinhamento com o Paperclip (docs oficiais, 11/10) / Ponto / Como fica / Doc / /---/---/---/ / Organogr | versão superada: texto não existe mais em docs/AGENTES.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado; t538: ponte Telegram por bot próprio via Temporal (Hermes desconsiderado) | não |
+| `24caf857-d545-4474-a0e3-2765e5ec01be` | PQBR doc canônico — docs/AGENTES.md: 11. Mapa @prod-* (papéis antigos) → 14 agentes (t395) | ## 11. Mapa @prod-* (papéis antigos) → 14 agentes (t395) / Papel antigo / Agora / Natureza / /---/---/---/ / @ | versão superada: texto não existe mais em docs/AGENTES.md | — | sim |
+| `6fe3501a-2f38-442f-8b79-bbef378fc929` | PQBR doc canônico — docs/AGENTES.md: 11. Mapa @prod-* (papéis antigos) → 14 agentes (t395) | ## 11. Mapa @prod-* (papéis antigos) → 14 agentes (t395) / Papel antigo / Agora / Natureza / /---/---/---/ / @ | versão superada: texto não existe mais em docs/AGENTES.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado; t474: revogada a t464 (sem canal Discord) | sim |
+| `5fa7b579-dfc2-41aa-abf3-43705b8742f4` | PQBR doc canônico — docs/AGENTES.md: 2. Equipe final (14 agentes, todos contratados na cri | ## 2. Equipe final (14 agentes, todos contratados na criação) ``` José (board, ausente por padrão) └─ Diretor  | versão superada: texto não existe mais em docs/AGENTES.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado; t538: ponte Telegram por bot próprio via Temporal (Hermes desconsiderado) | sim |
+| `dd5db19a-a841-4a09-8780-d3715391afd5` | PQBR doc canônico — docs/AGENTES.md: 2. Equipe final (14 agentes, todos contratados na cri | ## 2. Equipe final (14 agentes, todos contratados na criação) ``` José (board, ausente por padrão) └─ Diretor  | versão superada: texto não existe mais em docs/AGENTES.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado; t474: revogada a t464 (sem canal Discord); t538: ponte Telegram por bot próprio via Temporal (Hermes desconsiderado) | sim |
+| `e42d6f07-70f8-4e99-9f52-69ce3a47afbd` | PQBR doc canônico — docs/AGENTES.md: 2. Equipe final (14 agentes, todos contratados na cri | ## 2. Equipe final (14 agentes, todos contratados na criação) ``` José (board, ausente por padrão) └─ Diretor  | versão superada: texto não existe mais em docs/AGENTES.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado; t474: revogada a t464 (sem canal Discord); t538: ponte Telegram por bot próprio via Temporal (Hermes desconsiderado) | sim |
+| `6fe59a1e-fa83-4242-bd73-d1a234c7d2f7` | PQBR doc canônico — docs/AGENTES.md: 2. Equipe final (14 agentes, todos contratados na cri | ## 2. Equipe final (14 agentes, todos contratados na criação) ``` José (board, ausente por padrão) └─ Diretor  | versão superada: texto não existe mais em docs/AGENTES.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado; t538: ponte Telegram por bot próprio via Temporal (Hermes desconsiderado) | sim |
+| `5ce3ec2b-149e-45bc-9bf3-6d13097650af` | PQBR doc canônico — docs/AGENTES.md: 2.1 Guardião de Segurança (separado do Observador) | ### 2.1 Guardião de Segurança (separado do Observador) Observador mede saúde/custo/resultado; Guardião protege | versão superada: texto não existe mais em docs/AGENTES.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado | sim |
+| `2d9d376e-20de-4c53-a6ee-3ab1d2bb65d7` | PQBR doc canônico — docs/AGENTES.md: 2.1 Guardião de Segurança (separado do Observador) | ### 2.1 Guardião de Segurança (separado do Observador) Observador mede saúde/custo/resultado; Guardião protege | versão superada: texto não existe mais em docs/AGENTES.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado; t474: revogada a t464 (sem canal Discord) | sim |
+| `fc70a0a0-f583-47cf-bacf-b62ddb16502e` | PQBR doc canônico — docs/AGENTES.md: 2.2 Observador de risco da conta (spec existente, inc | ### 2.2 Observador de risco da conta (spec existente, incorporado sem mudança) Fontes: `prep/decisoes-jose-202 | versão superada: texto não existe mais em docs/AGENTES.md | — | sim |
+| `7f5b6212-c417-49ec-abf6-d55c7c784bf8` | PQBR doc canônico — docs/AGENTES.md: 2.2 Observador de risco da conta (spec existente, inc | ### 2.2 Observador de risco da conta (spec existente, incorporado sem mudança) Fontes: `prep/decisoes-jose-202 | versão superada: texto não existe mais em docs/AGENTES.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado; t474: revogada a t464 (sem canal Discord) | sim |
+| `10ad98e1-4b8e-4cab-8e85-829841ead87c` | PQBR doc canônico — docs/AGENTES.md: 3. Regras de autonomia | ## 3. Regras de autonomia **Contratação:** `requireBoardApprovalForNewAgents = desligado` após a criação (cont | versão superada: texto não existe mais em docs/AGENTES.md | — | sim |
+| `bfc4daa2-7db1-4e13-a27a-b6bc2756576a` | PQBR doc canônico — docs/AGENTES.md: 3. Regras de autonomia | ## 3. Regras de autonomia **Contratação:** `requireBoardApprovalForNewAgents = desligado` após a criação (cont | versão superada: texto não existe mais em docs/AGENTES.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado; t474: revogada a t464 (sem canal Discord) | sim |
+| `164c8a80-ebb3-4fde-950a-0b0af98d4d9b` | PQBR doc canônico — docs/AGENTES.md: 4. Regras anteriores recalibradas | ## 4. Regras anteriores recalibradas / Regra anterior / Fonte / Agora (v3) / /---/---/---/ / Agentes pensantes | versão superada: texto não existe mais em docs/AGENTES.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado | sim |
+| `fcb05a96-fc1e-4c70-ac3e-2950d574e48c` | PQBR doc canônico — docs/AGENTES.md: 4. Regras anteriores recalibradas | ## 4. Regras anteriores recalibradas / Regra anterior / Fonte / Agora (v3) / /---/---/---/ / Agentes pensantes | versão superada: texto não existe mais em docs/AGENTES.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado; t474: revogada a t464 (sem canal Discord) | sim |
+| `e44de5e4-9c5e-4325-90d6-0c8bd489fd2c` | PQBR doc canônico — docs/AGENTES.md: 7. Runtime (v4.2: 9router, sem perfis Hermes) | ## 7. Runtime (v4.2: 9router, sem perfis Hermes) Princípio: agente = instruções (`instructionsBundle`) + model | versão superada: texto não existe mais em docs/AGENTES.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado | não |
+| `5aba5399-557c-402a-85cd-027858692219` | PQBR doc canônico — docs/AGENTES.md: 7. Runtime (v4.2: 9router, sem perfis Hermes) | retor em `core-alto` (Gemini primário), Revisor em `core-revisao` (Claude). Ressalvas: `core-alto` tem Opus co | versão superada: texto não existe mais em docs/AGENTES.md | — | não |
+| `2c1c2a28-b9db-4a3b-b521-66524de55f0c` | PQBR doc canônico — docs/AGENTES.md: 7. Runtime (v4.2: 9router, sem perfis Hermes) | ## 7. Runtime (v4.2: 9router, sem perfis Hermes) Princípio: agente = instruções (`instructionsBundle`) + model | versão superada: texto não existe mais em docs/AGENTES.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado | não |
+| `359eb0a5-b2ea-4b49-9c7b-2bc735515cd0` | PQBR doc canônico — docs/AGENTES.md: AGENTES da PQBR no Paperclip (canônico; origem: PROPO | # AGENTES da PQBR no Paperclip (canônico; origem: PROPOSTA v4.3, t384–t394) **v4.3 (t393):** incorporado, sem  | versão superada: texto não existe mais em docs/AGENTES.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado | não |
+| `504ee5da-5e8e-47ad-b6d2-1b223b305244` | PQBR doc canônico — docs/AGENTES.md: AGENTES da PQBR no Paperclip (canônico; origem: PROPO | # AGENTES da PQBR no Paperclip (canônico; origem: PROPOSTA v4.3, t384–t394) **v4.3 (t393):** incorporado, sem  | versão superada: texto não existe mais em docs/AGENTES.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado; t474: revogada a t464 (sem canal Discord); t538: ponte Telegram por bot próprio via Temporal (Hermes desconsiderado) | não |
+| `5c5e5a9c-2e18-4b30-bc66-8d796057f4c0` | PQBR doc canônico — docs/AGENTES.md: AGENTES da PQBR no Paperclip (canônico; origem: PROPO | # AGENTES da PQBR no Paperclip (canônico; origem: PROPOSTA v4.3, t384–t394) **v4.3 (t393):** incorporado, sem  | versão superada: texto não existe mais em docs/AGENTES.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado; t474: revogada a t464 (sem canal Discord); t538: ponte Telegram por bot próprio via Temporal (Hermes desconsiderado) | não |
+| `e5463353-8ec0-47e4-9bf4-af8e1c5d58f8` | PQBR doc canônico — docs/AGENTES.md: AGENTES da PQBR no Paperclip (canônico; origem: PROPO | # AGENTES da PQBR no Paperclip (canônico; origem: PROPOSTA v4.3, t384–t394) **v4.3 (t393):** incorporado, sem  | versão superada: texto não existe mais em docs/AGENTES.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado; t474: revogada a t464 (sem canal Discord); t538: ponte Telegram por bot próprio via Temporal (Hermes desconsiderado) | não |
+| `867dc04f-116b-45a7-8375-eae778ec702c` | PQBR doc canônico — docs/ARQUITETURA.md: 10. Agentes PydanticAI no Temporal (ADR-011, t510 | ## 10. Agentes PydanticAI no Temporal (ADR-011, t510) - **Padrão:** agente = persona (`company/agents/<papel>/ | versão superada: texto não existe mais em docs/ARQUITETURA.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado; t538: ponte Telegram por bot próprio via Temporal (Hermes desconsiderado) | sim |
+| `be089315-befd-4941-bca3-f1508c52fba1` | PQBR doc canônico — docs/ARQUITETURA.md: 10. Integração com o Paperclip [HISTÓRICO; Paperc | ## 10. Integração com o Paperclip [HISTÓRICO; Paperclip em retirada pela ADR-011] | versão superada: texto não existe mais em docs/ARQUITETURA.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado | não |
+| `ea687d65-8234-4dfb-a99b-36d47f090849` | PQBR doc canônico — docs/ARQUITETURA.md: 11. Interfaces: contratos Pydantic v2 [PROPOSTA;  | ## 11. Interfaces: contratos Pydantic v2 [PROPOSTA; fixados em F3-01] / Modelo / Campos principais / Usado em  | versão superada: texto não existe mais em docs/ARQUITETURA.md | — | sim |
+| `8bded156-81f6-4f91-ae44-78cc48479b76` | PQBR doc canônico — docs/ARQUITETURA.md: 2. Componentes | ## 2. Componentes / Componente / Papel / Status / /---/---/---/ / **NotebookLM** (notebooklm-py) / Primário pa | versão superada: texto não existe mais em docs/ARQUITETURA.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado; t538: ponte Telegram por bot próprio via Temporal (Hermes desconsiderado) | sim |
+| `280bf517-54b3-43b4-ac24-a5b12a0de542` | PQBR doc canônico — docs/ARQUITETURA.md: 2. Componentes | ## 2. Componentes / Componente / Papel / Status / /---/---/---/ / **NotebookLM** (notebooklm-py) / Primário pa | versão superada: texto não existe mais em docs/ARQUITETURA.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado; t459/ADR-003: cadernos efêmeros por episódio (sem caderno mestre); t538: ponte Telegram por bot próprio via Temporal (Hermes desconsiderado) | sim |
+| `aa8b7379-ab5c-4f8d-a089-370786512f7a` | PQBR doc canônico — docs/ARQUITETURA.md: 2. Componentes | ADO t282, t327] / / **Hindsight** (local, armazenamento próprio: Postgres embutido pg0; t349–t350) / Aprendiza | versão superada: texto não existe mais em docs/ARQUITETURA.md | — | sim |
+| `8d4b138e-274b-4d70-aa71-850a45a00f74` | PQBR doc canônico — docs/ARQUITETURA.md: 2. Componentes | ## 2. Componentes / Componente / Papel / Status / /---/---/---/ / **NotebookLM** (notebooklm-py) / Primário pa | versão superada: texto não existe mais em docs/ARQUITETURA.md | t459/ADR-003: cadernos efêmeros por episódio (sem caderno mestre); t538: ponte Telegram por bot próprio via Temporal (Hermes desconsiderado) | sim |
+| `c5aba225-9953-4ff1-8f41-d07664f17708` | PQBR doc canônico — docs/ARQUITETURA.md: 2. Componentes | ntes do gate] / / **Discord nativo Paperclip** / Canal de José conectado diretamente ao Diretor ativo; convers | versão superada: texto não existe mais em docs/ARQUITETURA.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado; t474: revogada a t464 (sem canal Discord) | sim |
+| `f02e5674-bda2-4d7a-8b31-ff80683a73ee` | PQBR doc canônico — docs/ARQUITETURA.md: 2. Componentes | motivo/quem/quando), consumo, kill switch, relatórios. Plano Pro não confirmado (H13). / [APROVADO] / / **Goog | versão superada: texto não existe mais em docs/ARQUITETURA.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado; t474: revogada a t464 (sem canal Discord); t538: ponte Telegram por bot próprio via Temporal (Hermes desconsiderado) | sim |
+| `b66f5729-5f7e-4460-8c1e-4b28b6e12517` | PQBR doc canônico — docs/ARQUITETURA.md: 5. Ambiente (nomes lógicos; valores reais só na c | ## 5. Ambiente (nomes lógicos; valores reais só na config local) - Servidor `pc` (casa, acessado pela tailnet) | versão superada: texto não existe mais em docs/ARQUITETURA.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado | sim |
+| `55860e06-8cf8-47f0-a3e4-b0368883be52` | PQBR doc canônico — docs/ARQUITETURA.md: 5. Ambiente (nomes lógicos; valores reais só na c | ## 5. Ambiente (nomes lógicos; valores reais só na config local) - Servidor `pc` (casa, acessado pela tailnet) | versão superada: texto não existe mais em docs/ARQUITETURA.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado; t474: revogada a t464 (sem canal Discord) | sim |
+| `9e5a4452-c836-4023-9a4c-e21d1c4fd124` | PQBR doc canônico — docs/ARQUITETURA.md: 5. Ambiente (nomes lógicos; valores reais só na c | ## 5. Ambiente (nomes lógicos; valores reais só na config local) - Servidor `pc` (casa, acessado pela tailnet) | versão superada: texto não existe mais em docs/ARQUITETURA.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado; t474: revogada a t464 (sem canal Discord) | sim |
+| `18d293af-9bf9-4c8b-b910-c9b221f72b37` | PQBR doc canônico — docs/ARQUITETURA.md: 7. Hipóteses | ## 7. Hipóteses Nada que depende de uma hipótese é construído antes de ela virar VERIFICADO (REGRAS §14). Dono | versão superada: texto não existe mais em docs/ARQUITETURA.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado | sim |
+| `ea176abd-db9d-4a98-a4dc-e037f7524d35` | PQBR doc canônico — docs/ARQUITETURA.md: 7. Hipóteses | ## 7. Hipóteses Nada que depende de uma hipótese é construído antes de ela virar VERIFICADO (REGRAS §14). Dono | versão superada: texto não existe mais em docs/ARQUITETURA.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado | sim |
+| `87c19a27-b08a-4dd4-8bf7-ad27f2f22b0c` | PQBR doc canônico — docs/ARQUITETURA.md: 9. Workflows do Temporal [PROPOSTA; validados a p | ## 9. Workflows do Temporal [PROPOSTA; validados a partir da Fase 0.5] / Workflow / Disparo / Passos / Req / / | versão superada: texto não existe mais em docs/ARQUITETURA.md | — | sim |
+| `2ee25fb9-5790-4ab7-9605-72362fe3e988` | PQBR doc canônico — docs/ARQUITETURA.md: 9. Workflows do Temporal [PROPOSTA; validados a p | ## 9. Workflows do Temporal [PROPOSTA; validados a partir da Fase 0.5] / Workflow / Disparo / Passos / Req / / | versão superada: texto não existe mais em docs/ARQUITETURA.md | — | sim |
+| `159d384a-156c-42c4-92ee-3f4f24a28c7c` | PQBR doc canônico — docs/ARQUITETURA.md: 9. Workflows do Temporal [PROPOSTA; validados a p | ## 9. Workflows do Temporal [PROPOSTA; validados a partir da Fase 0.5] / Workflow / Disparo / Passos / Req / / | versão superada: texto não existe mais em docs/ARQUITETURA.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado; t474: revogada a t464 (sem canal Discord) | sim |
+| `c13d9f78-f65b-4a35-9b08-853d729ad0f8` | PQBR doc canônico — docs/ARQUITETURA.md: 9. Workflows do Temporal [PROPOSTA; validados a p | ## 9. Workflows do Temporal [PROPOSTA; validados a partir da Fase 0.5] / Workflow / Disparo / Passos / Req / / | versão superada: texto não existe mais em docs/ARQUITETURA.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado; t474: revogada a t464 (sem canal Discord) | sim |
+| `443b7749-2a87-42c4-90e0-5c66750944c3` | PQBR doc canônico — docs/ARQUITETURA.md: @pqbr-assistente (Hermes `pqbr`) — especificação  | ### @pqbr-assistente (Hermes `pqbr`) — especificação [t357] - **Papel:** assistente do José; entende a alma do | versão superada: texto não existe mais em docs/ARQUITETURA.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado | não |
+| `acf484e1-16b8-467a-861a-3c48b3d3a416` | PQBR doc canônico — docs/ARQUITETURA.md: @pqbr-assistente (Hermes `pqbr`) — especificação  | ão / / @prod-comunidade [APROVADO t245] / Rotina fixa + Jev executam; agente faz resumo e propõe (Pydantic v2) | versão superada: texto não existe mais em docs/ARQUITETURA.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado | não |
+| `c36201c6-728b-4cbb-9ade-fdc64426bd03` | PQBR doc canônico — docs/ARQUITETURA.md: ADR-001: motor de orquestração (Temporal primeiro | ### ADR-001: motor de orquestração (Temporal primeiro, DBOS como plano B) - **Resultado [APROVADO t374, 10/10] | versão superada: texto não existe mais em docs/ARQUITETURA.md | — | sim |
+| `67f96f8f-9f5e-466a-aaa3-3748c7c4fbfe` | PQBR doc canônico — docs/ARQUITETURA.md: ADR-001: motor de orquestração (Temporal primeiro | ### ADR-001: motor de orquestração (Temporal primeiro, DBOS como plano B) - **Resultado [APROVADO t374, 10/10] | versão superada: texto não existe mais em docs/ARQUITETURA.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado; t474: revogada a t464 (sem canal Discord) | sim |
+| `dd42ef84-f2e8-43e8-825c-d8fd8b141df5` | PQBR doc canônico — docs/ARQUITETURA.md: ADR-002: Paperclip = camada de agentes + painel,  | ### ADR-002: Paperclip = camada de agentes + painel, ligado ao Temporal - **Decisão [APROVADO t282, t327]:** o | versão superada: texto não existe mais em docs/ARQUITETURA.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado | não |
+| `3261f2e0-67f1-46ec-97a1-e7fa32cdd71b` | PQBR doc canônico — docs/ARQUITETURA.md: ADR-002: Paperclip = camada de agentes + painel,  | ### ADR-002: Paperclip = camada de agentes + painel, ligado ao Temporal - **Decisão [APROVADO t282, t327]:** o | versão superada: texto não existe mais em docs/ARQUITETURA.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado; t474: revogada a t464 (sem canal Discord) | não |
+| `5ef10e85-6a03-4e23-8e7c-3bd6736fbfc4` | PQBR doc canônico — docs/ARQUITETURA.md: ADR-003: Telegram com o Hermes `pqbr` | ### ADR-003: Telegram com o Hermes `pqbr` - **Decisão [APROVADO t281]:** o Telegram fica com o perfil Hermes ` | versão superada: texto não existe mais em docs/ARQUITETURA.md | t538: ponte Telegram por bot próprio via Temporal (Hermes desconsiderado) | não |
+| `07a3e36f-5819-4e0b-a0b6-9ed2e3a2af1b` | PQBR doc canônico — docs/ARQUITETURA.md: ADR-003: Telegram com o Hermes `pqbr` [LEGADO; su | ### ADR-003: Telegram com o Hermes `pqbr` [LEGADO; substituída por ADR-009/t464] - **Decisão histórica [t281,  | versão superada: texto não existe mais em docs/ARQUITETURA.md | t474: revogada a t464 (sem canal Discord); t538: ponte Telegram por bot próprio via Temporal (Hermes desconsiderado) | não |
+| `feae6a14-0430-4e97-96ac-9e76a22e59ba` | PQBR doc canônico — docs/ARQUITETURA.md: ADR-008: Camofox PQBR 24/7 com reautenticação aut | ### ADR-008: Camofox PQBR 24/7 com reautenticação autônoma [APROVADO t395] > Referência viva da sessão Google: | versão superada: texto não existe mais em docs/ARQUITETURA.md | — | sim |
+| `1793a7cf-4b15-4785-9d39-8ead62fc6518` | PQBR doc canônico — docs/ARQUITETURA.md: ADR-008: Camofox PQBR 24/7 com reautenticação aut | ### ADR-008: Camofox PQBR 24/7 com reautenticação autônoma [APROVADO t395] > Categoria YouTube: **27 Educação* | versão superada: texto não existe mais em docs/ARQUITETURA.md | — | sim |
+| `20f100e0-a270-4019-8856-5cf27715b7b9` | PQBR doc canônico — docs/ARQUITETURA.md: ADR-008: Camofox PQBR 24/7 com reautenticação aut | ### ADR-008: Camofox PQBR 24/7 com reautenticação autônoma [APROVADO t395] > Categoria YouTube: **27 Educação* | versão superada: texto não existe mais em docs/ARQUITETURA.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado; t474: revogada a t464 (sem canal Discord) | sim |
+| `1aa4ac74-5eb6-44f8-b0bf-2209912e9c01` | PQBR doc canônico — docs/ARQUITETURA.md: ADR-008: Camofox PQBR 24/7 com reautenticação aut | ### ADR-008: Camofox PQBR 24/7 com reautenticação autônoma [APROVADO t395] > Categoria YouTube: **27 Educação* | versão superada: texto não existe mais em docs/ARQUITETURA.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado; t474: revogada a t464 (sem canal Discord) | sim |
+| `9988b31d-f98a-49cd-9ebe-8b47bb0e0357` | PQBR doc canônico — docs/ARQUITETURA.md: ADR-008: Camofox PQBR 24/7 com reautenticação aut | ### ADR-008: Camofox PQBR 24/7 com reautenticação autônoma [APROVADO t395] > Categoria YouTube: **27 Educação* | versão superada: texto não existe mais em docs/ARQUITETURA.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado; t474: revogada a t464 (sem canal Discord) | sim |
+| `b040c2f6-372d-42b9-abb6-205f8748ada5` | PQBR doc canônico — docs/ARQUITETURA.md: ADR-009: Discord nativo do Paperclip como canal P | ### ADR-009: Discord nativo do Paperclip como canal PQBR [APROVADO t464; corte condicionado] - Conectar o cone | versão superada: texto não existe mais em docs/ARQUITETURA.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado; t474: revogada a t464 (sem canal Discord); t538: ponte Telegram por bot próprio via Temporal (Hermes desconsiderado) | não |
+| `7d088892-862b-4127-ba9f-046b04d1dc96` | PQBR doc canônico — docs/ARQUITETURA.md: ADR-009: Discord nativo do Paperclip como canal P | ### ADR-009: Discord nativo do Paperclip como canal PQBR [APROVADO t464; corte condicionado] - Conectar o cone | versão superada: texto não existe mais em docs/ARQUITETURA.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado; t474: revogada a t464 (sem canal Discord); t538: ponte Telegram por bot próprio via Temporal (Hermes desconsiderado) | não |
+| `8bdeb8f4-b717-44fb-bc29-f12cf5217276` | PQBR doc canônico — docs/ARQUITETURA.md: ADR-010: NotebookLM como fonte intelectual; prove | ### ADR-010: NotebookLM como fonte intelectual; provedores Google para vídeo [APROVADO t465] - NotebookLM cond | versão superada: texto não existe mais em docs/ARQUITETURA.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado | sim |
+| `7693f98e-341c-498d-b8b0-bc70f4c351bd` | PQBR doc canônico — docs/ARQUITETURA.md: ADR-010: NotebookLM como fonte intelectual; prove | ### ADR-010: NotebookLM como fonte intelectual; provedores Google para vídeo [APROVADO t465] - NotebookLM cond | versão superada: texto não existe mais em docs/ARQUITETURA.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado | sim |
+| `bd6407c8-7811-471f-90b6-db0f7cfdf74d` | PQBR doc canônico — docs/ARQUITETURA.md: ADR-011: agentes PydanticAI em activities do Temp | ### ADR-011: agentes PydanticAI em activities do Temporal [APROVADO t474, 23/10/2026; substitui ADR-002] - **D | versão superada: texto não existe mais em docs/ARQUITETURA.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado; t538: ponte Telegram por bot próprio via Temporal (Hermes desconsiderado) | sim |
+| `ffae4d0b-ce47-4a7e-881e-0c027fa03c63` | PQBR doc canônico — docs/ARQUITETURA.md: ARQUITETURA da PQBR | # ARQUITETURA da PQBR > Autoridade: abaixo de `docs/REGRAS.md` e `docs/SPEC.md`; acima de `docs/TESTES.md`, `d | versão superada: texto não existe mais em docs/ARQUITETURA.md | — | sim |
+| `44737b9b-b18a-47a3-af32-40d7f2e151c0` | PQBR doc canônico — docs/ARQUITETURA.md: ARQUITETURA da PQBR | # ARQUITETURA da PQBR > Autoridade: abaixo de `docs/REGRAS.md` e `docs/SPEC.md`; acima de `docs/TESTES.md`, `d | versão superada: texto não existe mais em docs/ARQUITETURA.md | — | sim |
+| `2288f967-0d8e-40bb-b2bc-79262450d254` | PQBR doc canônico — docs/ARQUITETURA.md: ARQUITETURA da PQBR | # ARQUITETURA da PQBR > Autoridade: abaixo de `docs/REGRAS.md` e `docs/SPEC.md`; acima de `docs/TESTES.md`, `d | versão superada: texto não existe mais em docs/ARQUITETURA.md | — | sim |
+| `dbea8772-7361-4ec4-a580-b016bb80d90b` | PQBR doc canônico — docs/ARQUITETURA.md: Canal do José: Discord/Paperclip direto ao Direto | ### Canal do José: Discord/Paperclip direto ao Diretor; Hermes transitório até o corte [t464] - **Papel:** o c | versão superada: texto não existe mais em docs/ARQUITETURA.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado; t474: revogada a t464 (sem canal Discord) | não |
+| `c2b870cf-b95a-41a7-aa35-5dd14d453bb4` | PQBR doc canônico — docs/ARQUITETURA.md: Canal do José: Discord/Paperclip direto ao Direto | D; rascunho de recurso / Nunca recorre, apaga ou altera sem dupla confirmação / / @prod-comunidade [APROVADO t | versão superada: texto não existe mais em docs/ARQUITETURA.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado; t474: revogada a t464 (sem canal Discord) | não |
+| `bf69cbe8-3b32-459e-a230-42b02128d8cf` | PQBR doc canônico — docs/ARQUITETURA.md: Canal do José: Discord/Paperclip direto ao Direto | ### Canal do José: Discord/Paperclip direto ao Diretor; Hermes transitório até o corte [t464] - **Papel:** o c | versão superada: texto não existe mais em docs/ARQUITETURA.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado; t474: revogada a t464 (sem canal Discord) | não |
+| `e24ec0a5-5b68-45fb-b261-115a8f1716f7` | PQBR doc canônico — docs/ARQUITETURA.md: Canal do José: Discord/Paperclip direto ao Direto | os.insert` com agendamento; confere ID e código; executa o item 5 em código / Não decide sozinho; não reenvia  | versão superada: texto não existe mais em docs/ARQUITETURA.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado; t474: revogada a t464 (sem canal Discord) | não |
+| `aea81190-2ab7-460b-ab2c-463450529ebb` | PQBR doc canônico — docs/ARQUITETURA.md: Correção autônoma mediada pelo Temporal [t355; PR | ### Correção autônoma mediada pelo Temporal [t355; PROPOSTA] - Quando um passo de script falha com erro corrig | versão superada: texto não existe mais em docs/ARQUITETURA.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado | sim |
+| `f6184b5b-f697-43df-a07c-36a69e8fd9f6` | PQBR doc canônico — docs/ARQUITETURA.md: Hermes `pqbr` ↔ Paperclip [HISTÓRICO, t474; t363; | ### Hermes `pqbr` ↔ Paperclip [HISTÓRICO, t474; t363; - **Identidade:** agente `pqbr-assistente` (`7d18350e…`) | versão superada: texto não existe mais em docs/ARQUITETURA.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado; t538: ponte Telegram por bot próprio via Temporal (Hermes desconsiderado) | não |
+| `601c614a-6fab-427e-bc2d-4d9cf0b5ac01` | PQBR doc canônico — docs/ARQUITETURA.md: Hermes `pqbr` ↔ Paperclip [HISTÓRICO, t474; t363; | até a liberação; nenhum agente com `--yolo` (H-SDD1). | versão superada: texto não existe mais em docs/ARQUITETURA.md | — | não |
+| `3cef6b2a-62dc-46c4-bdef-319231d541df` | PQBR doc canônico — docs/ARQUITETURA.md: Hermes `pqbr` ↔ Paperclip [legado/fallback até t4 | ### Hermes `pqbr` ↔ Paperclip [legado/fallback até t464; t363; - **Identidade:** agente `pqbr-assistente` (`7d | versão superada: texto não existe mais em docs/ARQUITETURA.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado; t474: revogada a t464 (sem canal Discord) | não |
+| `dc143718-e648-45f3-9e1a-a6d42d385d97` | PQBR doc canônico — docs/ARQUITETURA.md: Hermes `pqbr` ↔ Paperclip [legado/fallback até t4 | inculada, tarefa e estado, e falha fechada. - Heartbeats desligados até a liberação; nenhum agente com `--yolo | versão superada: texto não existe mais em docs/ARQUITETURA.md | — | não |
+| `7e391c48-dc0e-4fbf-b8ee-092c7ddf901d` | PQBR doc canônico — docs/ARQUITETURA.md: Hermes `pqbr` ↔ Paperclip [t363; conectado na emp | ### Hermes `pqbr` ↔ Paperclip [t363; conectado na empresa de teste] - **Identidade:** agente `pqbr-assistente` | versão superada: texto não existe mais em docs/ARQUITETURA.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado; t538: ponte Telegram por bot próprio via Temporal (Hermes desconsiderado) | não |
+| `9fc82c46-125d-48f2-a252-a67bb3eb37e7` | PQBR doc canônico — docs/ARQUITETURA.md: Hermes `pqbr` ↔ Paperclip [t363; conectado na emp | gente com `--yolo` (H-SDD1). | versão superada: texto não existe mais em docs/ARQUITETURA.md | — | não |
+| `20d18052-b9d6-4efd-bb1b-bb70b9bacded` | PQBR doc canônico — docs/ARQUITETURA.md: Hermes `pqbr` ↔ Paperclip [t363; conectado na emp | ### Hermes `pqbr` ↔ Paperclip [t363; conectado na empresa de teste] - **Identidade:** agente `pqbr-assistente` | versão superada: texto não existe mais em docs/ARQUITETURA.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado; t538: ponte Telegram por bot próprio via Temporal (Hermes desconsiderado) | não |
+| `58e748b0-9bc1-4350-89ab-4eb93322b626` | PQBR doc canônico — docs/ARQUITETURA.md: Hermes `pqbr` ↔ Paperclip [t363; conectado na emp | ### Hermes `pqbr` ↔ Paperclip [t363; conectado na empresa de teste] - **Identidade:** agente `pqbr-assistente` | versão superada: texto não existe mais em docs/ARQUITETURA.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado; t538: ponte Telegram por bot próprio via Temporal (Hermes desconsiderado) | não |
+| `8a8b2b40-1e95-476b-8982-723ec330024d` | PQBR doc canônico — docs/ARQUITETURA.md: Hermes `pqbr` ↔ Paperclip [t363; conectado na emp | ### Hermes `pqbr` ↔ Paperclip [t363; conectado na empresa de teste] - **Identidade:** agente `pqbr-assistente` | versão superada: texto não existe mais em docs/ARQUITETURA.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado; t538: ponte Telegram por bot próprio via Temporal (Hermes desconsiderado) | não |
+| `3984b91a-b57b-4a63-bbdd-c9cbac45419a` | PQBR doc canônico — docs/ARQUITETURA.md: Hermes `pqbr` ↔ Paperclip [t363; conectado na emp | ### Hermes `pqbr` ↔ Paperclip [t363; conectado na empresa de teste] - **Identidade:** agente `pqbr-assistente` | versão superada: texto não existe mais em docs/ARQUITETURA.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado; t538: ponte Telegram por bot próprio via Temporal (Hermes desconsiderado) | não |
+| `c9d41896-42fc-4b46-abb3-16153869a497` | PQBR doc canônico — docs/CONTRATO-EDITORIAL.md: 10. Divergências entre as fontes (conferir | ## 10. Divergências entre as fontes (conferir antes de fechar) 1. **Total de Shorts:** o relatório principal f | versão superada: texto não existe mais em docs/CONTRATO-EDITORIAL.md | — | não |
+| `cf7a0801-8e64-4e57-abf7-244a42a9e53b` | PQBR doc canônico — docs/CONTRATO-EDITORIAL.md: 11.1 CTA e encerramento (t214, José, 08/10 | ### 11.1 CTA e encerramento (t214, José, 08/10/2026), regra > ⚠️ **SUPERADO** por t262/t263: a última fala é a | versão superada: texto não existe mais em docs/CONTRATO-EDITORIAL.md | — | sim |
+| `0b48a794-45c1-4cb6-b33c-bda7c7b9441f` | PQBR doc canônico — docs/CONTRATO-EDITORIAL.md: 12. Guia de estilo (a partir dos vídeos ma | ## 12. Guia de estilo (a partir dos vídeos mais fortes) > **Limite da evidência:** os roteiros e transcrições  | versão superada: texto não existe mais em docs/CONTRATO-EDITORIAL.md | — | sim |
+| `9cae3dcb-363a-4eda-a691-9e52dae1a925` | PQBR doc canônico — docs/CONTRATO-EDITORIAL.md: 14. Tolerância de identidade do personagem | ## 14. Tolerância de identidade do personagem (t222) — **SUPERADO pela §16 (t399/t400)**; a regra de que estil | versão superada: texto não existe mais em docs/CONTRATO-EDITORIAL.md | — | não |
+| `d8606d1f-31e2-499b-8b60-6f94f31ebd55` | PQBR doc canônico — docs/CONTRATO-EDITORIAL.md: 16. Visual 2D genérico e linha editorial 8 | ## 16. Visual 2D genérico e linha editorial 80/20 (t399–t402, 11/10/2026), regra **Fontes:** decisões t399/t40 | versão superada: texto não existe mais em docs/CONTRATO-EDITORIAL.md | — | sim |
+| `5e3c856e-fc92-411a-a196-0c89c87daa3b` | PQBR doc canônico — docs/CONTRATO-EDITORIAL.md: 16. Visual 2D genérico e linha editorial 8 | ## 16. Visual 2D genérico e linha editorial 80/20 (t399–t402, 11/10/2026), regra **Fontes:** decisões t399/t40 | versão superada: texto não existe mais em docs/CONTRATO-EDITORIAL.md | — | sim |
+| `cca39271-0ce8-47b0-b92d-c6b21c364f45` | PQBR doc canônico — docs/CONTRATO-EDITORIAL.md: 18. Storyboard em série, personagem, cenár | ## 18. Storyboard em série, personagem, cenário e elenco (t75u–t78u, 26/10/2026), regra central autorizada pel | versão superada: texto não existe mais em docs/CONTRATO-EDITORIAL.md | — | não |
+| `1a123250-72c3-482d-8aa5-a964437bd6be` | PQBR doc canônico — docs/CONTRATO-EDITORIAL.md: 2. Regras já confirmadas que o processo de | ## 2. Regras já confirmadas que o processo deve preservar - Tom de “nós, brasileiros”: humor predominante, sát | versão superada: texto não existe mais em docs/CONTRATO-EDITORIAL.md | — | sim |
+| `930b5c3c-7518-400c-82ee-a864403938b2` | PQBR doc canônico — docs/CONTRATO-EDITORIAL.md: 5. O que funcionou e o que falhou, transfo | ## 5. O que funcionou e o que falhou, transformado em regras / Evidência / Regra editorial / /---/---/ / "Chef | versão superada: texto não existe mais em docs/CONTRATO-EDITORIAL.md | — | sim |
+| `c580e1f2-70fe-40f9-b32d-bb7f2d34ca46` | PQBR doc canônico — docs/CONTRATO-EDITORIAL.md: 9. Métricas de sucesso do piloto (sugestão | ## 9. Métricas de sucesso do piloto (sugestão) **Linha de base do aditivo (46 Shorts):** / Métrica / Quartil i | versão superada: texto não existe mais em docs/CONTRATO-EDITORIAL.md | — | não |
+| `eff77fa2-3a16-4506-9ee5-47faef1474c5` | PQBR doc canônico — docs/CONTRATO-EDITORIAL.md: Contrato editorial da PQBR (rascunho v1 +  | # Contrato editorial da PQBR (rascunho v1 + aditivo de 09/10) > ⛔ **RASCUNHO: AGENTES NÃO CONSULTAM SEM APROVA | versão superada: texto não existe mais em docs/CONTRATO-EDITORIAL.md | — | não |
+| `22e64416-be42-4eea-b1ee-0a756a36237b` | PQBR doc canônico — docs/CONTRATO-EDITORIAL.md: Divergência a decidir (CTA) | ### Divergência a decidir (CTA) > ⚠️ **SUPERADO**: **resolvida por t262/t263**. CTA = só "Segue o Porquê BR";  | versão superada: texto não existe mais em docs/CONTRATO-EDITORIAL.md | — | não |
+| `fb82b87b-c7ab-45b2-870d-794bff7e1916` | PQBR doc canônico — docs/CONTRATO-EDITORIAL.md: Fonte | ### Fonte - `docs/pesquisas/REF-roteiros-4-videos.md` (TV, sinal amarelo, controle remoto, tomada do chuveiro) | versão superada: texto não existe mais em docs/CONTRATO-EDITORIAL.md | — | não |
+| `d4c5263d-1ff8-45be-af66-c3196b6a8f9d` | PQBR doc canônico — docs/CONTRATO-EDITORIAL.md: Inventário (para o blueprint, não para o t | ### Inventário (para o blueprint, não para o tom) - Levantamento: 60 vídeos únicos no canal. - Nenhuma transcr | versão superada: texto não existe mais em docs/CONTRATO-EDITORIAL.md | — | não |
+| `18332a0d-8142-45f8-aa31-1fc6ad3b964b` | PQBR doc canônico — docs/CONTRATO-EDITORIAL.md: Nota de fonte (t211, resposta do rede) | ## Nota de fonte (t211, resposta do rede) - Métricas de desempenho e números por vídeo: usar SOMENTE o aditivo | versão superada: texto não existe mais em docs/CONTRATO-EDITORIAL.md | — | não |
+| `ec0986ee-e726-4078-8150-651da13d8a35` | PQBR doc canônico — docs/CONTRATO-EDITORIAL.md: Próximo passo sugerido | ### Próximo passo sugerido > ⚠️ **SUPERADO**: o item 1 foi decidido (t262/t263). O item 2 segue como tarefa D1 | versão superada: texto não existe mais em docs/CONTRATO-EDITORIAL.md | — | não |
+| `bed36a91-2350-4409-8f98-438115f81283` | PQBR doc canônico — docs/CONTRATO-EDITORIAL.md: Próximo passo sugerido | ### Próximo passo sugerido > ⚠️ **SUPERADO**: o item 1 foi decidido (t262/t263). O item 2 segue como tarefa D1 | versão superada: texto não existe mais em docs/CONTRATO-EDITORIAL.md | — | não |
+| `c836b987-6af6-4795-aed0-787ef4ae9b77` | PQBR doc canônico — docs/ROADMAP.md: 0. Premissas | ## 0. Premissas - Quem constrói: agentes de desenvolvimento, sem core-eng (t284). O José aprova cada portão e  | versão superada: texto não existe mais em docs/ROADMAP.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado; t538: ponte Telegram por bot próprio via Temporal (Hermes desconsiderado) | sim |
+| `52851248-2a09-427d-8cc7-6d42206faa96` | PQBR doc canônico — docs/ROADMAP.md: 2. Pendências do José | ## 2. Pendências do José - **EM CONSTRUÇÃO — aguardando José:** regras de roteiro R1–R6, R8, R9 (contrato v2). | versão superada: texto não existe mais em docs/ROADMAP.md | — | sim |
+| `26439fc5-6ba6-43eb-8b38-778bbb2e7b0a` | PQBR doc canônico — docs/ROADMAP.md: Concluído | ## Concluído - [x] **R-000** Estrutura do repositório — 2026-10-09 — commit ade0ebb - Obs: `/home/pc/Workspace | versão superada: texto não existe mais em docs/ROADMAP.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado | sim |
+| `6460d4cd-ad34-4eb8-ade6-230736c7b226` | PQBR doc canônico — docs/ROADMAP.md: Fase 0.5: teste de 1 dia do Temporal ligado ao Paperc | ## Fase 0.5: teste de 1 dia do Temporal ligado ao Paperclip ← PRIMEIRO PASSO ABERTO - [x] **F05-01** Subir o T | versão superada: texto não existe mais em docs/ROADMAP.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado; t538: ponte Telegram por bot próprio via Temporal (Hermes desconsiderado) | sim |
+| `91878ecd-d089-43bc-8acc-64b3ad335705` | PQBR doc canônico — docs/ROADMAP.md: Fase 0.5: teste de 1 dia do Temporal ligado ao Paperc | 6-10-10 (t374): Soak encerrado em 10/10 11:57 (t374, sem esperar as 24 h): **122 execuções em ~20 h** (a cada  | versão superada: texto não existe mais em docs/ROADMAP.md | — | sim |
+| `eaeec3eb-1e7f-4c6b-b56a-1386084a6d5e` | PQBR doc canônico — docs/ROADMAP.md: Fase 0.5: teste de 1 dia do Temporal ligado ao Paperc | ## Fase 0.5: teste de 1 dia do Temporal ligado ao Paperclip ← PRIMEIRO PASSO ABERTO - [x] **F05-01** Subir o T | versão superada: texto não existe mais em docs/ROADMAP.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado; t538: ponte Telegram por bot próprio via Temporal (Hermes desconsiderado) | sim |
+| `3e01de4d-579c-43b5-97fa-3e8a66b0a7da` | PQBR doc canônico — docs/ROADMAP.md: Fase 0.5: teste de 1 dia do Temporal ligado ao Paperc | ## Fase 0.5: teste de 1 dia do Temporal ligado ao Paperclip ← PRIMEIRO PASSO ABERTO - [x] **F05-01** Subir o T | versão superada: texto não existe mais em docs/ROADMAP.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado; t474: revogada a t464 (sem canal Discord) | sim |
+| `6b5f8eaa-ea05-4ac4-a7ec-1662160dfe80` | PQBR doc canônico — docs/ROADMAP.md: Fase 0.5: teste de 1 dia do Temporal ligado ao Paperc | restrito; menção raiz cria tarefa para o Diretor; aprovar/negar chega ao Temporal por metadado autenticado, es | versão superada: texto não existe mais em docs/ROADMAP.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado; t474: revogada a t464 (sem canal Discord); t538: ponte Telegram por bot próprio via Temporal (Hermes desconsiderado) | sim |
+| `5aad7d80-20d3-4600-b943-84679f4ecb9d` | PQBR doc canônico — docs/ROADMAP.md: Fase 0.5: teste de 1 dia do Temporal ligado ao Paperc | restrito; menção raiz cria tarefa para o Diretor; aprovar/negar chega ao Temporal por metadado autenticado, es | versão superada: texto não existe mais em docs/ROADMAP.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado; t474: revogada a t464 (sem canal Discord); t538: ponte Telegram por bot próprio via Temporal (Hermes desconsiderado) | sim |
+| `899ec6de-3d87-44ed-8945-73427ecdff87` | PQBR doc canônico — docs/ROADMAP.md: Fase 0.5: teste de 1 dia do Temporal ligado ao Paperc | restrito; menção raiz cria tarefa para o Diretor; aprovar/negar chega ao Temporal por metadado autenticado, es | versão superada: texto não existe mais em docs/ROADMAP.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado; t474: revogada a t464 (sem canal Discord); t538: ponte Telegram por bot próprio via Temporal (Hermes desconsiderado) | sim |
+| `af24e2d6-0e1a-455e-bf67-5f123d66d022` | PQBR doc canônico — docs/ROADMAP.md: Fase 0.5: teste de 1 dia do Temporal ligado ao Paperc | restrito; menção raiz cria tarefa para o Diretor; aprovar/negar chega ao Temporal por metadado autenticado, es | versão superada: texto não existe mais em docs/ROADMAP.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado; t474: revogada a t464 (sem canal Discord); t538: ponte Telegram por bot próprio via Temporal (Hermes desconsiderado) | sim |
+| `5c02790b-33da-40b6-b908-5199546f5a53` | PQBR doc canônico — docs/ROADMAP.md: Fase 0.5: teste de 1 dia do Temporal ligado ao Paperc | restrito; menção raiz cria tarefa para o Diretor; aprovar/negar chega ao Temporal por metadado autenticado, es | versão superada: texto não existe mais em docs/ROADMAP.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado; t474: revogada a t464 (sem canal Discord); t538: ponte Telegram por bot próprio via Temporal (Hermes desconsiderado) | sim |
+| `9821899d-0270-4f5b-84aa-754e78d54927` | PQBR doc canônico — docs/ROADMAP.md: Fase 0.5: teste de 1 dia do Temporal ligado ao Paperc | restrito; menção raiz cria tarefa para o Diretor; aprovar/negar chega ao Temporal por metadado autenticado, es | versão superada: texto não existe mais em docs/ROADMAP.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado; t474: revogada a t464 (sem canal Discord); t538: ponte Telegram por bot próprio via Temporal (Hermes desconsiderado) | sim |
+| `c95e766b-a32f-4432-a045-39ff43d3c60e` | PQBR doc canônico — docs/ROADMAP.md: Fase 0.5: teste de 1 dia do Temporal ligado ao Paperc | restrito; menção raiz cria tarefa para o Diretor; aprovar/negar chega ao Temporal por metadado autenticado, es | versão superada: texto não existe mais em docs/ROADMAP.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado; t474: revogada a t464 (sem canal Discord); t538: ponte Telegram por bot próprio via Temporal (Hermes desconsiderado) | sim |
+| `3b79dccd-1364-4f17-8733-d9865695f6fe` | PQBR doc canônico — docs/ROADMAP.md: Fase 0.5: teste de 1 dia do Temporal ligado ao Paperc | tilhado, afetar outros perfis ou apagar configurações/histórico. - Portão José: t464 aprova o corte somente de | versão superada: texto não existe mais em docs/ROADMAP.md | — | sim |
+| `3a5a35d8-0b45-474b-8a48-b96b9f42d5e1` | PQBR doc canônico — docs/ROADMAP.md: Fase 0.5: teste de 1 dia do Temporal ligado ao Paperc | restrito; menção raiz cria tarefa para o Diretor; aprovar/negar chega ao Temporal por metadado autenticado, es | versão superada: texto não existe mais em docs/ROADMAP.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado; t474: revogada a t464 (sem canal Discord) | sim |
+| `6ad39a76-b07a-4757-a18f-ab85438c020f` | PQBR doc canônico — docs/ROADMAP.md: Fase 0.5: teste de 1 dia do Temporal ligado ao Paperc | ro rotas; F05-08/TZ-09 permanece aberto. - Aceite: inventariar emissores, crons, workflows, playbooks e pedido | versão superada: texto não existe mais em docs/ROADMAP.md | t538: ponte Telegram por bot próprio via Temporal (Hermes desconsiderado) | sim |
+| `f7fb8c72-9a45-4e23-b401-bf44b6b7cae4` | PQBR doc canônico — docs/ROADMAP.md: Fase 0.5: teste de 1 dia do Temporal ligado ao Paperc | restrito; menção raiz cria tarefa para o Diretor; aprovar/negar chega ao Temporal por metadado autenticado, es | versão superada: texto não existe mais em docs/ROADMAP.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado; t474: revogada a t464 (sem canal Discord) | sim |
+| `2ff2f853-7dc8-4e18-8e39-f0b7b480e5de` | PQBR doc canônico — docs/ROADMAP.md: Fase 0.5: teste de 1 dia do Temporal ligado ao Paperc | . - Aceite: inventariar emissores, crons, workflows, playbooks e pedidos Telegram; comprovar entrega proativa  | versão superada: texto não existe mais em docs/ROADMAP.md | t538: ponte Telegram por bot próprio via Temporal (Hermes desconsiderado) | sim |
+| `c76cfeaa-a0a1-4f96-bc8b-c4397487dbf8` | PQBR doc canônico — docs/ROADMAP.md: Fase 0.5: teste de 1 dia do Temporal ligado ao Paperc | restrito; menção raiz cria tarefa para o Diretor; aprovar/negar chega ao Temporal por metadado autenticado, es | versão superada: texto não existe mais em docs/ROADMAP.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado; t474: revogada a t464 (sem canal Discord) | sim |
+| `875ec8a2-a1b9-464f-91e7-48467441683c` | PQBR doc canônico — docs/ROADMAP.md: Fase 0.5: teste de 1 dia do Temporal ligado ao Paperc | 24 encontrou bypass pela injeção de `rows`, removido em r25. Auditoria r25 apontou bloqueio da facade para rec | versão superada: texto não existe mais em docs/ROADMAP.md | t474: revogada a t464 (sem canal Discord); t538: ponte Telegram por bot próprio via Temporal (Hermes desconsiderado) | sim |
+| `31ec53c0-4fd6-4549-84a1-4f3656f8e6a1` | PQBR doc canônico — docs/ROADMAP.md: Fase 0.5: teste de 1 dia do Temporal ligado ao Paperc | restrito; menção raiz cria tarefa para o Diretor; aprovar/negar chega ao Temporal por metadado autenticado, es | versão superada: texto não existe mais em docs/ROADMAP.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado; t474: revogada a t464 (sem canal Discord) | sim |
+| `75168f46-0d84-4859-9c28-663f7f2e5e58` | PQBR doc canônico — docs/ROADMAP.md: Fase 0.5: teste de 1 dia do Temporal ligado ao Paperc | os/notificações operacionais PQBR para Discord/Paperclip - Req: RF-19, RF-28, RF-31, RF-43 · Testes: TZ-09 · D | versão superada: texto não existe mais em docs/ROADMAP.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado; t474: revogada a t464 (sem canal Discord); t538: ponte Telegram por bot próprio via Temporal (Hermes desconsiderado) | sim |
+| `c8c1b2b1-519b-4998-a189-1f8b056fc4f8` | PQBR doc canônico — docs/ROADMAP.md: Fase 0.5: teste de 1 dia do Temporal ligado ao Paperc | restrito; menção raiz cria tarefa para o Diretor; aprovar/negar chega ao Temporal por metadado autenticado, es | versão superada: texto não existe mais em docs/ROADMAP.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado; t474: revogada a t464 (sem canal Discord) | sim |
+| `759b113e-e323-4c25-ac2a-bc2e47a9c42d` | PQBR doc canônico — docs/ROADMAP.md: Fase 0.5: teste de 1 dia do Temporal ligado ao Paperc | canônica persistida e relida, correlacionada à interação, e histórico demonstrando ausência de retomada/sinal. | versão superada: texto não existe mais em docs/ROADMAP.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado; t474: revogada a t464 (sem canal Discord) | sim |
+| `52f49979-283f-4e71-90ef-62eb17cd8c79` | PQBR doc canônico — docs/ROADMAP.md: Fase 0.5: teste de 1 dia do Temporal ligado ao Paperc | ace limpos. Migration/rollback não mudaram desde parser PostgreSQL aprovado na r24 e seguem não aplicados. F05 | versão superada: texto não existe mais em docs/ROADMAP.md | t474: revogada a t464 (sem canal Discord); t538: ponte Telegram por bot próprio via Temporal (Hermes desconsiderado) | sim |
+| `b35ecbaf-6321-43cd-8dd2-25d00b86f380` | PQBR doc canônico — docs/ROADMAP.md: Fase 0.5: teste de 1 dia do Temporal ligado ao Paperc | restrito; menção raiz cria tarefa para o Diretor; aprovar/negar chega ao Temporal por metadado autenticado, es | versão superada: texto não existe mais em docs/ROADMAP.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado; t474: revogada a t464 (sem canal Discord) | sim |
+| `432c35ee-477a-4ee5-9ae8-c66af7b200e3` | PQBR doc canônico — docs/ROADMAP.md: Fase 0.5: teste de 1 dia do Temporal ligado ao Paperc | ## Fase 0.5: teste de 1 dia do Temporal ligado ao Paperclip ← PRIMEIRO PASSO ABERTO - [x] **F05-01** Subir o T | versão superada: texto não existe mais em docs/ROADMAP.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado; t474: revogada a t464 (sem canal Discord); t538: ponte Telegram por bot próprio via Temporal (Hermes desconsiderado) | sim |
+| `a82f135a-0756-4936-9c6e-2b599b458810` | PQBR doc canônico — docs/ROADMAP.md: Fase 0.5: teste de 1 dia do Temporal ligado ao Paperc | estes: TZ-06, TZ-08 · Depende de: F05-04, F05-05 - Aceite: conector experimental restrito; menção raiz cria ta | versão superada: texto não existe mais em docs/ROADMAP.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado; t474: revogada a t464 (sem canal Discord) | sim |
+| `69b9ba5f-80d4-4773-81c6-79cf5735ae9b` | PQBR doc canônico — docs/ROADMAP.md: Fase 0.5: teste de 1 dia do Temporal ligado ao Paperc | / / Recusa válida / Decisão persistida, sem retomada e sem sinal de aprovação. / Decisão canônica persistida e | versão superada: texto não existe mais em docs/ROADMAP.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado; t474: revogada a t464 (sem canal Discord); t538: ponte Telegram por bot próprio via Temporal (Hermes desconsiderado) | sim |
+| `39088716-b7ef-4827-a3a5-06c72d3578c8` | PQBR doc canônico — docs/ROADMAP.md: Fase 0.5: teste de 1 dia do Temporal ligado ao Paperc | s em r26 na candidata isolada. Validação r26: 91/91 testes no worktree e 111/111 em snapshot limpo de aae4895; | versão superada: texto não existe mais em docs/ROADMAP.md | t474: revogada a t464 (sem canal Discord); t538: ponte Telegram por bot próprio via Temporal (Hermes desconsiderado) | sim |
+| `de2725f4-2f74-413c-adae-f4afd91e11c6` | PQBR doc canônico — docs/ROADMAP.md: Fase 0.5: teste de 1 dia do Temporal ligado ao Paperc | ## Fase 0.5: teste de 1 dia do Temporal ligado ao Paperclip ← PRIMEIRO PASSO ABERTO - [x] **F05-01** Subir o T | versão superada: texto não existe mais em docs/ROADMAP.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado; t474: revogada a t464 (sem canal Discord); t538: ponte Telegram por bot próprio via Temporal (Hermes desconsiderado) | sim |
+| `112ae8d2-1eda-4be1-b46c-e8e669ef18d7` | PQBR doc canônico — docs/ROADMAP.md: Fase 0.5: teste de 1 dia do Temporal ligado ao Paperc | ):** activity de pedido de aprovação → mensagem Telegram pelo Hermes `pqbr` → sinal `aprovacao_jose` no workfl | versão superada: texto não existe mais em docs/ROADMAP.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado; t474: revogada a t464 (sem canal Discord); t538: ponte Telegram por bot próprio via Temporal (Hermes desconsiderado) | sim |
+| `929544de-2d9f-43bd-b748-7a092abcd69e` | PQBR doc canônico — docs/ROADMAP.md: Fase 0.5: teste de 1 dia do Temporal ligado ao Paperc | tivities do Temporal para o Telegram `pqbr` (deduplicados por chave no Postgres). Primeiro emissor: `scripts/t | versão superada: texto não existe mais em docs/ROADMAP.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado; t474: revogada a t464 (sem canal Discord); t538: ponte Telegram por bot próprio via Temporal (Hermes desconsiderado) | sim |
+| `f125a54e-cc03-470c-bb4e-842ef6a38225` | PQBR doc canônico — docs/ROADMAP.md: Fase 0.5: teste de 1 dia do Temporal ligado ao Paperc | ):** activity de pedido de aprovação → mensagem Telegram pelo Hermes `pqbr` → sinal `aprovacao_jose` no workfl | versão superada: texto não existe mais em docs/ROADMAP.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado; t474: revogada a t464 (sem canal Discord); t538: ponte Telegram por bot próprio via Temporal (Hermes desconsiderado) | sim |
+| `33c06f42-fb18-4b82-8736-88158f7c4d0d` | PQBR doc canônico — docs/ROADMAP.md: Fase 0.5: teste de 1 dia do Temporal ligado ao Paperc | it não instalada). - **Ideia futura (backlog, não implementar agora, José 25/10/2026):** o bot próprio pode ga | versão superada: texto não existe mais em docs/ROADMAP.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado | sim |
+| `b654dc7e-7711-4875-8081-8c775bc2e3d4` | PQBR doc canônico — docs/ROADMAP.md: Fase 0: revisão da especificação (paralela à 0.5) | ## Fase 0: revisão da especificação (paralela à 0.5) - [ ] **F00-01** Revisar SPEC, TESTES e RASTREABILIDADE c | versão superada: texto não existe mais em docs/ROADMAP.md | — | sim |
+| `40eca9ac-028d-4e86-8c29-bd6510b6acbd` | PQBR doc canônico — docs/ROADMAP.md: Fase 0: revisão da especificação (paralela à 0.5) | ## Fase 0: revisão da especificação (paralela à 0.5) - [ ] **F00-01** Revisar SPEC, TESTES e RASTREABILIDADE c | versão superada: texto não existe mais em docs/ROADMAP.md | — | sim |
+| `b359f5ae-85cd-4c27-927f-cc59539ca9f7` | PQBR doc canônico — docs/ROADMAP.md: Fase 0: revisão da especificação (paralela à 0.5) | ## Fase 0: revisão da especificação (paralela à 0.5) - [ ] **F00-01** Revisar SPEC, TESTES e RASTREABILIDADE c | versão superada: texto não existe mais em docs/ROADMAP.md | — | sim |
+| `34f9018d-609d-40c6-85e5-69e2dcd3509b` | PQBR doc canônico — docs/ROADMAP.md: Fase 0: revisão da especificação (paralela à 0.5) | ## Fase 0: revisão da especificação (paralela à 0.5) - [ ] **F00-01** Revisar SPEC, TESTES e RASTREABILIDADE c | versão superada: texto não existe mais em docs/ROADMAP.md | — | sim |
+| `0013e58f-24f9-43f1-9517-540e53336614` | PQBR doc canônico — docs/ROADMAP.md: Fase 1: org PQBR no Paperclip (agentes pausados) | ## Fase 1: org PQBR no Paperclip (agentes pausados) - [ ] **F1-01** Pacote `company/` (agentcompanies/v1) - Re | versão superada: texto não existe mais em docs/ROADMAP.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado | sim |
+| `b74367ba-77cb-4b95-ab4f-9a0e4266b48f` | PQBR doc canônico — docs/ROADMAP.md: Fase 1: org PQBR no Paperclip (agentes pausados) | ## Fase 1: org PQBR no Paperclip (agentes pausados) - [ ] **F1-01** Pacote `company/` (agentcompanies/v1) - Re | versão superada: texto não existe mais em docs/ROADMAP.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado | sim |
+| `e48923e2-41b9-4bc6-b54b-f33360bd5a35` | PQBR doc canônico — docs/ROADMAP.md: Fase 1: org PQBR no Paperclip (agentes pausados) | ## Fase 1: org PQBR no Paperclip (agentes pausados) - [ ] **F1-01** Pacote `company/` (agentcompanies/v1) - Re | versão superada: texto não existe mais em docs/ROADMAP.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado | sim |
+| `7ff89c85-7e21-4265-8ac0-3a8c59781122` | PQBR doc canônico — docs/ROADMAP.md: Fase 1: org PQBR no Paperclip (agentes pausados) | ## Fase 1: org PQBR no Paperclip (agentes pausados) - [ ] **F1-01** Pacote `company/` (agentcompanies/v1) - Re | versão superada: texto não existe mais em docs/ROADMAP.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado; t474: revogada a t464 (sem canal Discord) | sim |
+| `f7cafc5b-79a1-4bff-84c7-491883013045` | PQBR doc canônico — docs/ROADMAP.md: Fase 1: org PQBR no Paperclip (agentes pausados) | troca de senha sai das pendências. O risco do DATABASE_URL vazado acaba com o L-01 + desligamento/exclusão do  | versão superada: texto não existe mais em docs/ROADMAP.md | — | sim |
+| `b22b52da-76d3-4c8b-a290-b0932ce83cd6` | PQBR doc canônico — docs/ROADMAP.md: Fase 1: org PQBR no Paperclip (agentes pausados) | ## Fase 1: org PQBR no Paperclip (agentes pausados) - [ ] **F1-01** Pacote `company/` (agentcompanies/v1) - Re | versão superada: texto não existe mais em docs/ROADMAP.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado; t474: revogada a t464 (sem canal Discord) | sim |
+| `2c8528b1-97c8-42f3-909d-5b6a2715ffb5` | PQBR doc canônico — docs/ROADMAP.md: Fase 1: org PQBR no Paperclip (agentes pausados) | inua válida (não foi exposta, t372). **[SUPERADO t412: o Supabase não é mais usado; a troca de senha sai das p | versão superada: texto não existe mais em docs/ROADMAP.md | — | sim |
+| `9b06c6aa-5e9f-4153-962d-ce8edeabe84a` | PQBR doc canônico — docs/ROADMAP.md: Fase 1: org PQBR no Paperclip (agentes pausados) | ## Fase 1: org PQBR no Paperclip (agentes pausados) > Reconciliação 2026-10-15: a organização PQBR atual já es | versão superada: texto não existe mais em docs/ROADMAP.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado; t474: revogada a t464 (sem canal Discord) | sim |
+| `496a420b-4411-4a26-855b-6e1616f1c915` | PQBR doc canônico — docs/ROADMAP.md: Fase 1: org PQBR no Paperclip (agentes pausados) | al (F1-02); leitura de `docs/` por MCP se o José quiser. - [~] **AÇÃO MANUAL PENDENTE — José (t373):** trocar  | versão superada: texto não existe mais em docs/ROADMAP.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado | sim |
+| `6e88faf8-966f-41f6-8ded-454093db4604` | PQBR doc canônico — docs/ROADMAP.md: Fase 3: fundações | ## Fase 3: fundações - [ ] **F3-01** (D3) Contratos Pydantic v2 e migração base - Req: RF-02, RF-07, RNF-02 ·  | versão superada: texto não existe mais em docs/ROADMAP.md | — | sim |
+| `1df6f240-8339-46fb-990e-a3ffbd13c772` | PQBR doc canônico — docs/ROADMAP.md: Fase 3: fundações | oncorrência 1 por sessão; limites (t357: 3 tentativas; 5–15 min sorteados no Camofox; conferir conta e sessão  | versão superada: texto não existe mais em docs/ROADMAP.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado | sim |
+| `895fdf7a-d294-4907-9346-51cd559a0bf2` | PQBR doc canônico — docs/ROADMAP.md: Fase 3: fundações | ## Fase 3: fundações - [ ] **F3-01** (D3) Contratos Pydantic v2 e migração base - Req: RF-02, RF-07, RNF-02 ·  | versão superada: texto não existe mais em docs/ROADMAP.md | — | sim |
+| `78d40691-2db8-43b5-8852-578c0d61a3ea` | PQBR doc canônico — docs/ROADMAP.md: Fase 3: fundações | ## Fase 3: fundações - [ ] **F3-01** (D3) Contratos Pydantic v2 e migração base - Req: RF-02, RF-07, RNF-02 ·  | versão superada: texto não existe mais em docs/ROADMAP.md | — | sim |
+| `98a5c30e-1147-4c53-b664-8d19fbb01f7d` | PQBR doc canônico — docs/ROADMAP.md: Fase 3: fundações | ## Fase 3: fundações - [x] **F3-01** (D3) Contratos Pydantic v2 e migração base - Req: RF-02, RF-07, RNF-02 ·  | versão superada: texto não existe mais em docs/ROADMAP.md | — | sim |
+| `c83b09cd-06a0-4b32-822d-f1b50e896393` | PQBR doc canônico — docs/ROADMAP.md: Fase 3: fundações | s do banco do app e do Hindsight depois das 03:30; retenção no Drive definida; nenhum token no git. - Portão J | versão superada: texto não existe mais em docs/ROADMAP.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado | sim |
+| `51eff297-c178-4959-aed8-0ec8f5ed18b9` | PQBR doc canônico — docs/ROADMAP.md: Fase 3: fundações | ackup.timer` às 03:45 (+até 5 min; app às 03:30); 7 dumps em `~/Backups/hindsight` (chmod 600). 1º dump 420 KB | versão superada: texto não existe mais em docs/ROADMAP.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado | sim |
+| `467b738e-92e0-4b28-86d9-932051554702` | PQBR doc canônico — docs/ROADMAP.md: Fase 3: fundações | ackup.timer` às 03:45 (+até 5 min; app às 03:30); 7 dumps em `~/Backups/hindsight` (chmod 600). 1º dump 420 KB | versão superada: texto não existe mais em docs/ROADMAP.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado | sim |
+| `2395722f-0240-4532-89d6-af9a39b14e74` | PQBR doc canônico — docs/ROADMAP.md: Fase 3: fundações | elo consumidor tardio na janela observada. Protótipo e testes separados, **sem alteração de Workers persistent | versão superada: texto não existe mais em docs/ROADMAP.md | — | sim |
+| `16a3c07d-02cc-44db-9e52-d188bd7d8bcc` | PQBR doc canônico — docs/ROADMAP.md: Fase 3: fundações | elo consumidor tardio na janela observada. Protótipo e testes separados, **sem alteração de Workers persistent | versão superada: texto não existe mais em docs/ROADMAP.md | — | sim |
+| `d846fc17-2d96-42d7-8418-146ad85944c7` | PQBR doc canônico — docs/ROADMAP.md: Fase 3: fundações | somente em testes. **10/10 cenários em Temporal Server 1.32.1 descartável**, **81/81 testes em memória (21 nov | versão superada: texto não existe mais em docs/ROADMAP.md | — | sim |
+| `660a63b6-dc83-4af1-bfcf-ed574208ea41` | PQBR doc canônico — docs/ROADMAP.md: Fase 3: fundações | somente em testes. **10/10 cenários em Temporal Server 1.32.1 descartável**, **81/81 testes em memória (21 nov | versão superada: texto não existe mais em docs/ROADMAP.md | — | sim |
+| `df811a31-cbd6-47dc-bd83-2eace54a0fe3` | PQBR doc canônico — docs/ROADMAP.md: Fase 3: fundações | ket como registro canônico; despacho autenticado sintético por painel ou Discord com allowlist configurável po | versão superada: texto não existe mais em docs/ROADMAP.md | t474: revogada a t464 (sem canal Discord) | sim |
+| `eb16d2c4-73d1-4d4b-af27-826531cc0bbc` | PQBR doc canônico — docs/ROADMAP.md: Fase 3: fundações | ket como registro canônico; despacho autenticado sintético por painel ou Discord com allowlist configurável po | versão superada: texto não existe mais em docs/ROADMAP.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado; t474: revogada a t464 (sem canal Discord) | sim |
+| `957c2b31-3e87-4a02-9733-e54a5ac4e1cb` | PQBR doc canônico — docs/ROADMAP.md: Fase 3: fundações | Temporal; somente a segunda pendente executa uma vez. Painel/Discord fake convergem; negativa, identidade não  | versão superada: texto não existe mais em docs/ROADMAP.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado; t474: revogada a t464 (sem canal Discord) | sim |
+| `e569b311-3e91-4865-af4e-120c1cf3aaf1` | PQBR doc canônico — docs/ROADMAP.md: Fase 3: fundações | rio humano esperado), `human_only`, `continuationPolicy=none`, sem agente/run. Escopo canônico: somente regist | versão superada: texto não existe mais em docs/ROADMAP.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado; t474: revogada a t464 (sem canal Discord) | sim |
+| `99b988f5-35bf-43d4-ac40-251a1767514b` | PQBR doc canônico — docs/ROADMAP.md: Fase 3: fundações | ackup.timer` às 03:45 (+até 5 min; app às 03:30); 7 dumps em `~/Backups/hindsight` (chmod 600). 1º dump 420 KB | versão superada: texto não existe mais em docs/ROADMAP.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado | sim |
+| `70c4046c-e4dc-43f0-8121-62c37cd66342` | PQBR doc canônico — docs/ROADMAP.md: Fase 3: fundações | art durante a prova. Sem efeitos externos do ensaio, Discord, produção/deploy, alteração de política ou commit | versão superada: texto não existe mais em docs/ROADMAP.md | t474: revogada a t464 (sem canal Discord) | sim |
+| `5686c043-dc72-4ca1-926c-460fabb8e9a6` | PQBR doc canônico — docs/ROADMAP.md: Fase 4V: geração de vídeo em série pelo navegador (t5 | ## Fase 4V: geração de vídeo em série pelo navegador (t529) — storyboard → vídeo, sem extensões Ref.: `docs/pe | versão superada: texto não existe mais em docs/ROADMAP.md | — | sim |
+| `2af8e03e-7d5f-46a7-aaa2-25b2b7bf4f66` | PQBR doc canônico — docs/ROADMAP.md: Fase 7: editorial e auditor | ## Fase 7: editorial e auditor - [x] **F7-00** (t378 → decidido t399/t400) Escopo editorial ≥ 80% origem de ex | versão superada: texto não existe mais em docs/ROADMAP.md | — | sim |
+| `02e229a4-0b9d-4df7-a100-bd8123571071` | PQBR doc canônico — docs/ROADMAP.md: Fase 7: editorial e auditor | ## Fase 7: editorial e auditor - [x] **F7-00** (t378 → decidido t399/t400) Escopo editorial ≥ 80% origem de ex | versão superada: texto não existe mais em docs/ROADMAP.md | — | sim |
+| `f59a2446-f996-4945-89f3-b4c2cfafa96b` | PQBR doc canônico — docs/ROADMAP.md: Fase 7: editorial e auditor | ## Fase 7: editorial e auditor - [x] **F7-00** (t378 → decidido t399/t400) Escopo editorial ≥ 80% origem de ex | versão superada: texto não existe mais em docs/ROADMAP.md | — | sim |
+| `0834cef5-200b-450d-a643-63ad75230478` | PQBR doc canônico — docs/ROADMAP.md: Fase 7: editorial e auditor | o avaliados e ressalva no resultado. Os testes confirmam também o padrão persistente legado. Nenhuma Activity  | versão superada: texto não existe mais em docs/ROADMAP.md | — | sim |
+| `9ade9ad7-e4c9-46bf-ad55-efbf9f40cfb0` | PQBR doc canônico — docs/ROADMAP.md: Fase 7: editorial e auditor | ## Fase 7: editorial e auditor - [x] **F7-00** (t378 → decidido t399/t400) Escopo editorial ≥ 80% origem de ex | versão superada: texto não existe mais em docs/ROADMAP.md | — | sim |
+| `9ee4f354-39d3-481e-a6b5-e8d4fe98e59b` | PQBR doc canônico — docs/ROADMAP.md: Fase 7: editorial e auditor | de `roteiro.md` do Drive, que não correspondiam às legendas/quadros do vídeo; o `reprova` dessa tentativa foi  | versão superada: texto não existe mais em docs/ROADMAP.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado | sim |
+| `6dc56228-b632-45a6-84c1-27d61537e96f` | PQBR doc canônico — docs/ROADMAP.md: Fase 7: editorial e auditor | ## Fase 7: editorial e auditor - [x] **F7-00** (t378 → decidido t399/t400) Escopo editorial ≥ 80% origem de ex | versão superada: texto não existe mais em docs/ROADMAP.md | — | sim |
+| `f3e7a5c8-8a20-40c9-81a5-cc8e07b73569` | PQBR doc canônico — docs/ROADMAP.md: Fase 8: publicação, armazenamento e revisão humana | ## Fase 8: publicação, armazenamento e revisão humana - [ ] **F8-01** (D7) `PublicacaoWorkflow` + `Item5Workfl | versão superada: texto não existe mais em docs/ROADMAP.md | — | sim |
+| `e0438863-a5b7-423a-9246-b7857e9af9c6` | PQBR doc canônico — docs/ROADMAP.md: Fase 8: publicação, armazenamento e revisão humana | ## Fase 8: publicação, armazenamento e revisão humana - [ ] **F8-01** (D7) `PublicacaoWorkflow` + `Item5Workfl | versão superada: texto não existe mais em docs/ROADMAP.md | — | sim |
+| `ca751757-0cc9-4b61-94cd-673ebe587b12` | PQBR doc canônico — docs/ROADMAP.md: Fase 9: monitores, compliance e analista | ## Fase 9: monitores, compliance e analista - [ ] **F9-01** (D12) Monitor de atualizações, consumo, levantamen | versão superada: texto não existe mais em docs/ROADMAP.md | — | sim |
+| `d5ea44c5-4b09-495b-9b32-0bc95c7e0738` | PQBR doc canônico — docs/ROADMAP.md: Fase 9: monitores, compliance e analista | ## Fase 9: monitores, compliance e analista - [ ] **F9-01** (D12) Monitor de atualizações, consumo, levantamen | versão superada: texto não existe mais em docs/ROADMAP.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado; t474: revogada a t464 (sem canal Discord) | sim |
+| `11e751cf-1b6c-41e9-82b0-7f3c4a964527` | PQBR doc canônico — docs/ROADMAP.md: Fase 9: monitores, compliance e analista | ## Fase 9: monitores, compliance e analista - [ ] **F9-01** (D12) Monitor de atualizações, consumo, levantamen | versão superada: texto não existe mais em docs/ROADMAP.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado; t474: revogada a t464 (sem canal Discord) | sim |
+| `1cc5f72a-d43b-4bd6-bb3c-6770b2bf6f1e` | PQBR doc canônico — docs/ROADMAP.md: Fase: Conhecimento e agente externo agnóstico (t84u–t | ## Fase: Conhecimento e agente externo agnóstico (t84u–t86u, 26/10/2026) - [x] **GitNexus [agora]:** global no | versão superada: texto não existe mais em docs/ROADMAP.md | — | não |
+| `80f29208-6d08-44ce-84ec-c37032398987` | PQBR doc canônico — docs/ROADMAP.md: ROADMAP canônico da PQBR — fases gerais, tarefas e ga | # ROADMAP canônico da PQBR — fases gerais, tarefas e gates ativos > t465: NotebookLM-first, a hierarquia de pr | versão superada: texto não existe mais em docs/ROADMAP.md | — | sim |
+| `873b9b12-b6c0-493c-909c-539c49635033` | PQBR doc canônico — docs/ROADMAP.md: ROADMAP canônico da PQBR — fases gerais, tarefas e ga | # ROADMAP canônico da PQBR — fases gerais, tarefas e gates ativos > t465: NotebookLM-first, a hierarquia de pr | versão superada: texto não existe mais em docs/ROADMAP.md | — | sim |
+| `1590bc61-5b35-4c36-9319-503c24d40dd8` | PQBR doc canônico — docs/ROADMAP.md: ROADMAP canônico da PQBR — fases gerais, tarefas e ga | # ROADMAP canônico da PQBR — fases gerais, tarefas e gates ativos > t465: NotebookLM-first, a hierarquia de pr | versão superada: texto não existe mais em docs/ROADMAP.md | — | sim |
+| `53d30642-bb88-4b8c-bb8e-23661256ddaf` | PQBR doc canônico — docs/ROADMAP.md: ROADMAP canônico da PQBR — fases gerais, tarefas e ga | # ROADMAP canônico da PQBR — fases gerais, tarefas e gates ativos > t465: NotebookLM-first, a hierarquia de pr | versão superada: texto não existe mais em docs/ROADMAP.md | — | sim |
+| `b1e06397-953f-45da-825e-9263083beaa3` | PQBR doc canônico — docs/ROADMAP.md: ROADMAP da PQBR (tarefas granulares, para qualquer ag | # ROADMAP da PQBR (tarefas granulares, para qualquer agente retomar) > **Como retomar (qualquer agente, qualqu | versão superada: texto não existe mais em docs/ROADMAP.md | — | não |
+| `14cf4ac9-a74b-4f1f-9a0b-e3cc0e857ae8` | PQBR doc canônico — docs/ROADMAP.md: ROADMAP da PQBR (tarefas granulares, para qualquer ag | # ROADMAP da PQBR (tarefas granulares, para qualquer agente retomar) > t465: NotebookLM-first, a hierarquia de | versão superada: texto não existe mais em docs/ROADMAP.md | — | não |
+| `12efd588-bb93-4874-935e-a987fa9ede59` | PQBR doc canônico — docs/ROADMAP.md: Segundo momento (fora do caminho crítico) | ## Segundo momento (fora do caminho crítico) - [x] **L-01 — PRIORIDADE (t412)** Migrar o banco do Paperclip do | versão superada: texto não existe mais em docs/ROADMAP.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado | sim |
+| `13f49bda-841c-4f72-a892-d98ebd43d8d3` | PQBR doc canônico — docs/ROADMAP.md: Segundo momento (fora do caminho crítico) | ## Segundo momento (fora do caminho crítico) - [x] **L-01 — PRIORIDADE (t412)** Migrar o banco do Paperclip do | versão superada: texto não existe mais em docs/ROADMAP.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado | sim |
+| `782a6437-aabf-431b-9866-5c9f51122dfd` | PQBR doc canônico — docs/SPEC.md: 2. Requisitos não funcionais | ## 2. Requisitos não funcionais / ID / Requisito / REGRAS / /---/---/---/ / RNF-01 / Determinismo antes de LLM | versão superada: texto não existe mais em docs/SPEC.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado | sim |
+| `827ecbb1-c727-4372-bc61-77b0059310d3` | PQBR doc canônico — docs/SPEC.md: 3. Lacunas (não inventar; levar ao José) | ## 3. Lacunas (não inventar; levar ao José) - [RESOLVIDO t369] retenção do consumo: brutos 90 dias, resumo diá | versão superada: texto não existe mais em docs/SPEC.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado | sim |
+| `9e8c5557-b712-420e-85cd-19ba9d4e1acc` | PQBR doc canônico — docs/SPEC.md: F02. Roteiro e produção | ### F02. Roteiro e produção **História:** Como José, quero roteiros no tom do canal e vídeos prontos de manhã, | versão superada: texto não existe mais em docs/SPEC.md | — | sim |
+| `e1f2d95d-61c0-4758-b428-43230fac040c` | PQBR doc canônico — docs/SPEC.md: F02. Roteiro e produção | ### F02. Roteiro e produção **História:** Como José, quero roteiros no tom do canal e vídeos prontos de manhã, | versão superada: texto não existe mais em docs/SPEC.md | — | sim |
+| `40591df4-ad67-444e-902d-3c61f52dd023` | PQBR doc canônico — docs/SPEC.md: F02. Roteiro e produção | ### F02. Roteiro e produção **História:** Como José, quero roteiros no tom do canal e vídeos prontos de manhã, | versão superada: texto não existe mais em docs/SPEC.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado; t474: revogada a t464 (sem canal Discord) | sim |
+| `eed83977-6980-4964-a17e-e2f9dab0614b` | PQBR doc canônico — docs/SPEC.md: F02. Roteiro e produção | ### F02. Roteiro e produção **História:** Como José, quero roteiros no tom do canal e vídeos prontos de manhã, | versão superada: texto não existe mais em docs/SPEC.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado; t474: revogada a t464 (sem canal Discord) | sim |
+| `52a7e8e9-aa00-4b8e-924c-5d139fadbcc2` | PQBR doc canônico — docs/SPEC.md: F02. Roteiro e produção | ### F02. Roteiro e produção **História:** Como José, quero roteiros no tom do canal e vídeos prontos de manhã, | versão superada: texto não existe mais em docs/SPEC.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado; t474: revogada a t464 (sem canal Discord) | sim |
+| `8d5ae055-6411-42bb-aa55-f4641a0c01d7` | PQBR doc canônico — docs/SPEC.md: F02. Roteiro e produção | ### F02. Roteiro e produção **História:** Como José, quero roteiros no tom do canal e vídeos prontos de manhã, | versão superada: texto não existe mais em docs/SPEC.md | t538: ponte Telegram por bot próprio via Temporal (Hermes desconsiderado) | sim |
+| `eac42035-6427-4ca8-8b89-c8768f5007c2` | PQBR doc canônico — docs/SPEC.md: F03. Auditor | ### F03. Auditor **História:** Como José, quero que só vídeos dentro das travas sejam publicados, com motivo c | versão superada: texto não existe mais em docs/SPEC.md | — | sim |
+| `eb7fc4a2-8139-4146-9abc-5ff9c3c3834f` | PQBR doc canônico — docs/SPEC.md: F05. Correção pós-publicação (item 5) | ### F05. Correção pós-publicação (item 5) **História:** Como José, quero que qualquer problema torne o vídeo p | versão superada: texto não existe mais em docs/SPEC.md | — | sim |
+| `d5316328-09a3-4338-bbef-f5636c7bbb64` | PQBR doc canônico — docs/SPEC.md: F05. Correção pós-publicação (item 5) | ### F05. Correção pós-publicação (item 5) **História:** Como José, quero que qualquer problema torne o vídeo p | versão superada: texto não existe mais em docs/SPEC.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado; t474: revogada a t464 (sem canal Discord) | sim |
+| `bc5d514b-8515-4214-bd0e-f3550733dc27` | PQBR doc canônico — docs/SPEC.md: F07. Conformidade | ### F07. Conformidade **História:** Como José, quero saber de avisos do YouTube e ter a fila parada em caso cr | versão superada: texto não existe mais em docs/SPEC.md | — | sim |
+| `5245aa2c-6dbb-4baa-bb5c-8b0d17c72735` | PQBR doc canônico — docs/SPEC.md: F07. Conformidade | ### F07. Conformidade **História:** Como José, quero saber de avisos do YouTube e ter a fila parada em caso cr | versão superada: texto não existe mais em docs/SPEC.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado; t474: revogada a t464 (sem canal Discord) | sim |
+| `4295423a-5c90-4dde-861a-ec6904826f6f` | PQBR doc canônico — docs/SPEC.md: F08. Analista e relatórios | ### F08. Analista e relatórios **História:** Como José, quero um relatório diário confiável, com custos e com  | versão superada: texto não existe mais em docs/SPEC.md | — | sim |
+| `3498ede4-4aa8-4c26-86be-72fa9aff400e` | PQBR doc canônico — docs/SPEC.md: F08. Analista e relatórios | ### F08. Analista e relatórios **História:** Como José, quero um relatório diário confiável, com custos e com  | versão superada: texto não existe mais em docs/SPEC.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado; t474: revogada a t464 (sem canal Discord) | sim |
+| `875a5986-6b22-4e47-8f50-efc70b0a6b88` | PQBR doc canônico — docs/SPEC.md: F09. Agentes, interação e manutenção | ### F09. Agentes, interação e manutenção > Atualizado t384–t395: autonomia, contratação, runtime 9router, Guar | versão superada: texto não existe mais em docs/SPEC.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado; t538: ponte Telegram por bot próprio via Temporal (Hermes desconsiderado) | sim |
+| `86f987af-13d7-423d-af7b-a8d753b9e3c7` | PQBR doc canônico — docs/SPEC.md: F09. Agentes, interação e manutenção | ### F09. Agentes, interação e manutenção > Atualizado t384–t395: autonomia, contratação, runtime 9router, Guar | versão superada: texto não existe mais em docs/SPEC.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado; t474: revogada a t464 (sem canal Discord); t538: ponte Telegram por bot próprio via Temporal (Hermes desconsiderado) | sim |
+| `37f4fec1-dc30-40c6-bfd1-6f9dba7cfb1b` | PQBR doc canônico — docs/SPEC.md: F09. Agentes, interação e manutenção | ### F09. Agentes, interação e manutenção > Atualizado t384–t395: autonomia, contratação, runtime 9router, Guar | versão superada: texto não existe mais em docs/SPEC.md | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado; t474: revogada a t464 (sem canal Discord); t538: ponte Telegram por bot próprio via Temporal (Hermes desconsiderado) | sim |
+| `7fc9ee7f-489d-4790-94c2-e532a0acadf7` | PQBR doc canônico — docs/SPEC.md: F10. Sessão e resiliência | ### F10. Sessão e resiliência **História:** Como José, quero que quedas de sessão, rede ou banco não percam na | versão superada: texto não existe mais em docs/SPEC.md | — | sim |
+| `445ef539-abfd-4abe-8a5e-778411c7bfbe` | PQBR doc canônico — docs/pesquisas/cadernos-inventario-20261012.md: Inventário de cadernos | # Inventário de cadernos NotebookLM (perfil pqbr) — 12/10/2026 (t459) Somente leitura; **nada apagado**. Apaga | versão superada: texto não existe mais em docs/pesquisas/cadernos-inventario-20261012.md | — | sim |
+| `7b67e591-3a95-4c8b-ae51-7f87bccbd65f` | PQBR doc canônico — docs/pesquisas/cadernos-inventario-20261012.md: Inventário de cadernos | 1 / `388030bf-b4b7-4d88-bf06-6b205b83f733` / B1 — Porquê BR / Produção / 2026-09-16 / / B1 / `ae56f006-1ecf-46 | versão superada: texto não existe mais em docs/pesquisas/cadernos-inventario-20261012.md | — | sim |
+| `0338bfcb-4c42-4412-91cb-1832c57927b8` | PQBR doc canônico — docs/sdd/gate-a9.md: Gate A9 — capa/frame do Short (proposta t427, par | # Gate A9 — capa/frame do Short (proposta t427, para aprovação do José) **Referências:** skill `yt-thumbnail-b | versão superada: texto não existe mais em docs/sdd/gate-a9.md | — | não |
+| `d686f26f-be01-4e9f-8010-4f2e37ebccc5` | PQBR lição registrada por dev-corretor | F05-05/F05-06: hermes_local bloqueado por --yolo incondicional → superado por arquitetura ADR-006/ADR-007 (pro | cita decisão revogada sem fonte vigente | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado; t538: ponte Telegram por bot próprio via Temporal (Hermes desconsiderado) | não |
+| `cf6a4855-21e0-4a73-87dd-d9a45076fc6a` | PQBR playbook/lição — README | # Playbooks de correção da PQBR (REGRAS §0 item 8, §3.1) Cada falha conhecida tem passos ordenados. O agente e | versão superada: texto não existe mais em company/playbooks/README.md | — | sim |
+| `ee16fbd5-8b23-44ec-8751-f4f125987eea` | PQBR playbook/lição — README | # Playbooks de correção da PQBR (REGRAS §0 item 8, §3.1) Cada falha conhecida tem passos ordenados. O agente e | versão superada: texto não existe mais em company/playbooks/README.md | — | sim |
+| `2c427c97-ac34-42c8-8fc8-f865bc316f06` | PQBR playbook/lição — camofox-sessao | # Sessão do Camofox caiu (ADR-008, t395: reautenticação autônoma por qualquer meio) Fila `camofox-pqbr`, conco | versão superada: texto não existe mais em company/playbooks/camofox-sessao.md | t538: ponte Telegram por bot próprio via Temporal (Hermes desconsiderado) | sim |
+| `a00962fb-d095-4ae4-8528-5ca45e2ac9fd` | PQBR playbook/lição — lock-preso | # 409 persistente no checkout (Paperclip #6007/#3819) 1. Conferir `issue active-run`: run vivo → aguardar o fi | fonte company/playbooks/lock-preso.md ausente/movida | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado | não |
+| `fb4dee1e-fe2f-46bc-a8d9-bea5a15d0582` | teste diag | # Testes t460 (capa) e t461 (persona) — 12/10/2026 Arquivo completo (verificado): Drive `00_Biblia_Visual/pesq | memória de teste de diagnóstico | — | não |
+
+## Conflitos em fontes vigentes (sem tag; revisar o doc, não a memória)
+
+216 documentos de fontes ainda vigentes citam termos de decisões revogadas (em geral como histórico). Seções:
+
+| fonte | seção | decisão | docs |
+|---|---|---|---|
+| docs/REFERENCIA-sessao-google.md | 8. Fontes | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado | 59 |
+| DECISOES-LOG | t459 (12/10/2026) — categoria, cadernos efêmeros, limpeza | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado | 16 |
+| docs/ROADMAP.md | Fase 3: fundações | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado | 12 |
+| docs/ROADMAP.md | Fase 0.5: teste de 1 dia do Temporal ligado ao Paperclip ← PRIMEIRO PA | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado | 8 |
+| docs/AGENTES.md | 2. Equipe final (14 agentes, todos contratados na criação) | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado | 4 |
+| DECISOES-LOG | t459 (12/10/2026) — categoria, cadernos efêmeros, limpeza | t459/ADR-003: cadernos efêmeros por episódio (sem caderno mestre) | 4 |
+| docs/ROADMAP.md | 3. Riscos | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado | 3 |
+| PQBR decisão-chave (memória) |  | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado | 3 |
+| DECISOES-LOG | t476 (24/10/2026) — NotebookLM motor, sistema modular, Temporal sistem | t538: ponte Telegram por bot próprio via Temporal (Hermes desconsiderado) | 3 |
+| DECISOES-LOG | t476 (24/10/2026) — NotebookLM motor, sistema modular, Temporal sistem | t75u–t77u: EP1002 olhos-da-cara reprovado e descartado (tema volta a proposto) | 3 |
+| DECISOES-LOG | t427–t429 (12/10/2026) — peças pré-teste E2E | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado | 2 |
+| docs/ARQUITETURA.md | 8. Modelo de dados (banco do app) [APROVADO t343; aplicado 09/10] | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado | 2 |
+| PQBR decisão-chave (memória) |  | t459/ADR-003: cadernos efêmeros por episódio (sem caderno mestre) | 2 |
+| PQBR playbook/lição — nlm-cadernos |  | t459/ADR-003: cadernos efêmeros por episódio (sem caderno mestre) | 2 |
+| docs/ARQUITETURA.md | Modelos 9router por papel (José 12/10 14:02) | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado | 2 |
+| docs/ROADMAP.md | Fase 7: editorial e auditor | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado | 2 |
+| docs/ARQUITETURA.md | 7. Hipóteses | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado | 2 |
+| DECISOES-LOG | t474 (23/10/2026) — Revogação da t464 (Discord) e ADR-011 | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado | 2 |
+| docs/ARQUITETURA.md | ADR-011: agentes PydanticAI em activities do Temporal [APROVADO t474,  | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado | 2 |
+| docs/AGENTES.md | Equipe anterior (14 agentes; histórico) | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado | 2 |
+| docs/SPEC.md | F02. Roteiro e produção | t538: ponte Telegram por bot próprio via Temporal (Hermes desconsiderado) | 2 |
+| DECISOES-LOG | 07/10/2026: decisões e ressalvas antes do blueprint (cópia que existia | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado | 1 |
+| DECISOES-LOG | 08/10/2026 e 09/10/2026 (registro original do servidor) | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado | 1 |
+| DECISOES-LOG | Pauta pendente (registrada pelo José em 08/10, encaixar sem repetir) | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado | 1 |
+| DECISOES-LOG | INSTALAÇÃO EXCLUSIVA DO NOTEBOOKLM-PY PARA A PQBR (t187–t188, 08/10/20 | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado | 1 |
+| DECISOES-LOG | SESSÃO DO YOUTUBE STUDIO E MONITOR DE ATUALIZAÇÕES AMPLIADO (t194–t196 | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado | 1 |
+| DECISOES-LOG | REVISÃO DA TOLERÂNCIA DE IDENTIDADE (t264, 09/10 09:56) | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado | 1 |
+| DECISOES-LOG | 09/10/2026, tarde: novos rumos (t281–t287 e t323) | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado | 1 |
+| DECISOES-LOG | 09/10/2026, ~14:47: pendências resolvidas (t324–t326) | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado | 1 |
+| DECISOES-LOG | 09/10/2026, ~14:57: decisões t327 e t328 | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado | 1 |
+| DECISOES-LOG | 09/10/2026, ~15:25: autorização t333 | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado | 1 |
+| DECISOES-LOG | 09/10/2026, ~15:47: autorização t334 | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado | 1 |
+| DECISOES-LOG | 09/10/2026, ~17:05: t334 (complemento), t335, t336 | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado | 1 |
+| DECISOES-LOG | 09/10/2026, ~17:21: t337–t338 | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado | 1 |
+| DECISOES-LOG | 09/10/2026, ~17:44: t339–t342 | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado | 1 |
+| DECISOES-LOG | t357 — 09/10/2026 (respostas às dúvidas a–h do §3.1) | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado | 1 |
+| DECISOES-LOG | t363 — 09/10/2026 (por voz) | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado | 1 |
+| DECISOES-LOG | t367 — 09/10/2026 | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado | 1 |
+| DECISOES-LOG | t372 — 09/10/2026 | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado | 1 |
+| DECISOES-LOG | t373 — 09/10/2026 | ADR-011/t474–t476: Paperclip em retirada, parado e desabilitado | 1 |
+
+## Descarte executado (t90s398, 26/10/2026)
+
+Aprovado pelo José (card t90s398) após a indexação de 26/10 (todas as seções vigentes conferidas no bank: 0 faltando). Backup antes: `~/.pqbr/hindsight/backup/pqbr-bank-pre-delete-20261026.zip`. Apagados **231 documentos** (220 da lista original + 11 versões antigas geradas pelas correções de hoje, todas com versão vigente no bank). Erros: 0.
+
+Mantidos com `obsoleto_candidato` para revisão (7; sem substituta direta, conteúdo movido para `docs/_obsoleto/` ou seção renomeada):
+
+- `63216109-cb5f-4e65-be60-9661768f61e9` — PQBR doc canônico — docs/AGENTES.md: 2. Equipe final (14 agentes, todos contratados na criação)
+- `f79594b0-6621-4571-8ebc-97d4c30fc1ef` — PQBR doc canônico — docs/AGENTES.md: 2. Equipe final (14 agentes, todos contratados na criação)
+- `e5d87fcf-ff25-447b-9bf3-466451415880` — PQBR doc canônico — docs/AGENTES.md: 2. Equipe final (14 agentes, todos contratados na criação)
+- `1560a320-2648-4096-b4dc-a3ec7a7c7d0a` — PQBR doc canônico — docs/AGENTES.md: 2. Equipe final (14 agentes, todos contratados na criação)
+- `b3ea2149-5e02-453a-aea1-33de29f71d40` — PQBR doc canônico — docs/AGENTES.md: 11. Mapa @prod-* (papéis antigos) → 14 agentes (t395)
+- `5363bfb7-c5d6-4618-88c3-14ca471aa3a9` — PQBR doc canônico — docs/AGENTES.md: Equipe anterior (14 agentes; histórico)
+- `15f4a772-24f4-46de-a145-235de432fe13` — PQBR doc canônico — docs/AGENTES.md: Equipe anterior (14 agentes; histórico)
+
+Revisão de 27/10/2026: as sete são o roster antigo de `docs/AGENTES.md` (equipe de 14 e o mapa `@prod-*`). A fonte vigente é a ADR-011 (agentes no Temporal; Paperclip em retirada). Apagadas no mesmo dia, ~08:57 (-03), com OK do José (t128u). Cada uma foi lida antes: tag `obsoleto_candidato` e contexto nesse arquivo. Backup: `~/.pqbr/hindsight/backup/pqbr-7-obsoletos-20261027.json` e `pqbr-bank-pre-delete-20261027.zip`. Conferência: as sete respondem 404; o bank foi de 884 para 877. Nenhuma outra foi apagada.
+
+IDs apagados:
+
+```
+cf6a4855-21e0-4a73-87dd-d9a45076fc6a
+a00962fb-d095-4ae4-8528-5ca45e2ac9fd
+eff77fa2-3a16-4506-9ee5-47faef1474c5
+930b5c3c-7518-400c-82ee-a864403938b2
+c580e1f2-70fe-40f9-b32d-bb7f2d34ca46
+c9d41896-42fc-4b46-abb3-16153869a497
+18332a0d-8142-45f8-aa31-1fc6ad3b964b
+0b48a794-45c1-4cb6-b33c-bda7c7b9441f
+cf7a0801-8e64-4e57-abf7-244a42a9e53b
+9cae3dcb-363a-4eda-a691-9e52dae1a925
+fb82b87b-c7ab-45b2-870d-794bff7e1916
+22e64416-be42-4eea-b1ee-0a756a36237b
+d4c5263d-1ff8-45be-af66-c3196b6a8f9d
+ec0986ee-e726-4078-8150-651da13d8a35
+d8606d1f-31e2-499b-8b60-6f94f31ebd55
+ffae4d0b-ce47-4a7e-881e-0c027fa03c63
+c36201c6-728b-4cbb-9ade-fdc64426bd03
+dd42ef84-f2e8-43e8-825c-d8fd8b141df5
+5ef10e85-6a03-4e23-8e7c-3bd6736fbfc4
+feae6a14-0430-4e97-96ac-9e76a22e59ba
+8bded156-81f6-4f91-ae44-78cc48479b76
+aea81190-2ab7-460b-ab2c-463450529ebb
+443b7749-2a87-42c4-90e0-5c66750944c3
+acf484e1-16b8-467a-861a-3c48b3d3a416
+b66f5729-5f7e-4460-8c1e-4b28b6e12517
+18d293af-9bf9-4c8b-b910-c9b221f72b37
+87c19a27-b08a-4dd4-8bf7-ad27f2f22b0c
+7e391c48-dc0e-4fbf-b8ee-092c7ddf901d
+9fc82c46-125d-48f2-a252-a67bb3eb37e7
+ea687d65-8234-4dfb-a99b-36d47f090849
+6460d4cd-ad34-4eb8-ade6-230736c7b226
+91878ecd-d089-43bc-8acc-64b3ad335705
+b654dc7e-7711-4875-8081-8c775bc2e3d4
+0013e58f-24f9-43f1-9517-540e53336614
+6e88faf8-966f-41f6-8ded-454093db4604
+1df6f240-8339-46fb-990e-a3ffbd13c772
+2af8e03e-7d5f-46a7-aaa2-25b2b7bf4f66
+f3e7a5c8-8a20-40c9-81a5-cc8e07b73569
+ca751757-0cc9-4b61-94cd-673ebe587b12
+12efd588-bb93-4874-935e-a987fa9ede59
+c836b987-6af6-4795-aed0-787ef4ae9b77
+52851248-2a09-427d-8cc7-6d42206faa96
+9e8c5557-b712-420e-85cd-19ba9d4e1acc
+eac42035-6427-4ca8-8b89-c8768f5007c2
+eb7fc4a2-8139-4146-9abc-5ff9c3c3834f
+bc5d514b-8515-4214-bd0e-f3550733dc27
+4295423a-5c90-4dde-861a-ec6904826f6f
+875a5986-6b22-4e47-8f50-efc70b0a6b88
+7fc9ee7f-489d-4790-94c2-e532a0acadf7
+782a6437-aabf-431b-9866-5c9f51122dfd
+827ecbb1-c727-4372-bc61-77b0059310d3
+359eb0a5-b2ea-4b49-9c7b-2bc735515cd0
+5fa7b579-dfc2-41aa-abf3-43705b8742f4
+5ce3ec2b-149e-45bc-9bf3-6d13097650af
+fc70a0a0-f583-47cf-bacf-b62ddb16502e
+10ad98e1-4b8e-4cab-8e85-829841ead87c
+164c8a80-ebb3-4fde-950a-0b0af98d4d9b
+e44de5e4-9c5e-4325-90d6-0c8bd489fd2c
+5aba5399-557c-402a-85cd-027858692219
+13003c09-91d8-413d-967e-70ff435d7d56
+24caf857-d545-4474-a0e3-2765e5ec01be
+0338bfcb-4c42-4412-91cb-1832c57927b8
+ee16fbd5-8b23-44ec-8751-f4f125987eea
+280bf517-54b3-43b4-ac24-a5b12a0de542
+2ee25fb9-5790-4ab7-9605-72362fe3e988
+20d18052-b9d6-4efd-bb1b-bb70b9bacded
+b1e06397-953f-45da-825e-9263083beaa3
+26439fc5-6ba6-43eb-8b38-778bbb2e7b0a
+b74367ba-77cb-4b95-ab4f-9a0e4266b48f
+895fdf7a-d294-4907-9346-51cd559a0bf2
+2c1c2a28-b9db-4a3b-b521-66524de55f0c
+445ef539-abfd-4abe-8a5e-778411c7bfbe
+7b67e591-3a95-4c8b-ae51-7f87bccbd65f
+1793a7cf-4b15-4785-9d39-8ead62fc6518
+aa8b7379-ab5c-4f8d-a089-370786512f7a
+58e748b0-9bc1-4350-89ab-4eb93322b626
+e48923e2-41b9-4bc6-b54b-f33360bd5a35
+78d40691-2db8-43b5-8852-578c0d61a3ea
+e1f2d95d-61c0-4758-b428-43230fac040c
+8a8b2b40-1e95-476b-8982-723ec330024d
+fb4dee1e-fe2f-46bc-a8d9-bea5a15d0582
+3984b91a-b57b-4a63-bbdd-c9cbac45419a
+2c427c97-ac34-42c8-8fc8-f865bc316f06
+001ee2d4-b378-4716-9d3a-4bf3fcb96fa0
+a7a926ef-43d7-4a8c-8761-20a308ebf513
+5e1219b3-ebdc-4024-ab95-c03de557b25d
+d686f26f-be01-4e9f-8010-4f2e37ebccc5
+eaeec3eb-1e7f-4c6b-b56a-1386084a6d5e
+67f96f8f-9f5e-466a-aaa3-3748c7c4fbfe
+3261f2e0-67f1-46ec-97a1-e7fa32cdd71b
+07a3e36f-5819-4e0b-a0b6-9ed2e3a2af1b
+20f100e0-a270-4019-8856-5cf27715b7b9
+b040c2f6-372d-42b9-abb6-205f8748ada5
+8d4b138e-274b-4d70-aa71-850a45a00f74
+c5aba225-9953-4ff1-8f41-d07664f17708
+dbea8772-7361-4ec4-a580-b016bb80d90b
+c2b870cf-b95a-41a7-aa35-5dd14d453bb4
+55860e06-8cf8-47f0-a3e4-b0368883be52
+159d384a-156c-42c4-92ee-3f4f24a28c7c
+3cef6b2a-62dc-46c4-bdef-319231d541df
+dc143718-e648-45f3-9e1a-a6d42d385d97
+3e01de4d-579c-43b5-97fa-3e8a66b0a7da
+6b5f8eaa-ea05-4ac4-a7ec-1662160dfe80
+7ff89c85-7e21-4265-8ac0-3a8c59781122
+f7cafc5b-79a1-4bff-84c7-491883013045
+d5ea44c5-4b09-495b-9b32-0bc95c7e0738
+13f49bda-841c-4f72-a892-d98ebd43d8d3
+40591df4-ad67-444e-902d-3c61f52dd023
+d5316328-09a3-4338-bbef-f5636c7bbb64
+5245aa2c-6dbb-4baa-bb5c-8b0d17c72735
+3498ede4-4aa8-4c26-86be-72fa9aff400e
+86f987af-13d7-423d-af7b-a8d753b9e3c7
+504ee5da-5e8e-47ad-b6d2-1b223b305244
+dd5db19a-a841-4a09-8780-d3715391afd5
+2d9d376e-20de-4c53-a6ee-3ab1d2bb65d7
+7f5b6212-c417-49ec-abf6-d55c7c784bf8
+bfc4daa2-7db1-4e13-a27a-b6bc2756576a
+fcb05a96-fc1e-4c70-ac3e-2950d574e48c
+eaafed4b-4fb0-4eb2-a657-2ff9b2ae9ab1
+6fe3501a-2f38-442f-8b79-bbef378fc929
+5aad7d80-20d3-4600-b943-84679f4ecb9d
+40eca9ac-028d-4e86-8c29-bd6510b6acbd
+b22b52da-76d3-4c8b-a290-b0932ce83cd6
+2c8528b1-97c8-42f3-909d-5b6a2715ffb5
+899ec6de-3d87-44ed-8945-73427ecdff87
+af24e2d6-0e1a-455e-bf67-5f123d66d022
+bed36a91-2350-4409-8f98-438115f81283
+5e3c856e-fc92-411a-a196-0c89c87daa3b
+7d088892-862b-4127-ba9f-046b04d1dc96
+8bdeb8f4-b717-44fb-bc29-f12cf5217276
+bf69cbe8-3b32-459e-a230-42b02128d8cf
+e24ec0a5-5b68-45fb-b261-115a8f1716f7
+ea176abd-db9d-4a98-a4dc-e037f7524d35
+14cf4ac9-a74b-4f1f-9a0b-e3cc0e857ae8
+eed83977-6980-4964-a17e-e2f9dab0614b
+5c5e5a9c-2e18-4b30-bc66-8d796057f4c0
+e42d6f07-70f8-4e99-9f52-69ce3a47afbd
+5c02790b-33da-40b6-b908-5199546f5a53
+9821899d-0270-4f5b-84aa-754e78d54927
+c95e766b-a32f-4432-a045-39ff43d3c60e
+3b79dccd-1364-4f17-8733-d9865695f6fe
+3a5a35d8-0b45-474b-8a48-b96b9f42d5e1
+6ad39a76-b07a-4757-a18f-ab85438c020f
+f7fb8c72-9a45-4e23-b401-bf44b6b7cae4
+2ff2f853-7dc8-4e18-8e39-f0b7b480e5de
+c76cfeaa-a0a1-4f96-bc8b-c4397487dbf8
+875ec8a2-a1b9-464f-91e7-48467441683c
+31ec53c0-4fd6-4549-84a1-4f3656f8e6a1
+75168f46-0d84-4859-9c28-663f7f2e5e58
+b359f5ae-85cd-4c27-927f-cc59539ca9f7
+9b06c6aa-5e9f-4153-962d-ce8edeabe84a
+496a420b-4411-4a26-855b-6e1616f1c915
+44737b9b-b18a-47a3-af32-40d7f2e151c0
+9e5a4452-c836-4023-9a4c-e21d1c4fd124
+80f29208-6d08-44ce-84ec-c37032398987
+02e229a4-0b9d-4df7-a100-bd8123571071
+52a7e8e9-aa00-4b8e-924c-5d139fadbcc2
+98a5c30e-1147-4c53-b664-8d19fbb01f7d
+c83b09cd-06a0-4b32-822d-f1b50e896393
+f59a2446-f996-4945-89f3-b4c2cfafa96b
+0834cef5-200b-450d-a643-63ad75230478
+e0438863-a5b7-423a-9246-b7857e9af9c6
+9ade9ad7-e4c9-46bf-ad55-efbf9f40cfb0
+9ee4f354-39d3-481e-a6b5-e8d4fe98e59b
+6dc56228-b632-45a6-84c1-27d61537e96f
+51eff297-c178-4959-aed8-0ec8f5ed18b9
+467b738e-92e0-4b28-86d9-932051554702
+2395722f-0240-4532-89d6-af9a39b14e74
+16a3c07d-02cc-44db-9e52-d188bd7d8bcc
+d846fc17-2d96-42d7-8418-146ad85944c7
+660a63b6-dc83-4af1-bfcf-ed574208ea41
+df811a31-cbd6-47dc-bd83-2eace54a0fe3
+eb16d2c4-73d1-4d4b-af27-826531cc0bbc
+957c2b31-3e87-4a02-9733-e54a5ac4e1cb
+e569b311-3e91-4865-af4e-120c1cf3aaf1
+99b988f5-35bf-43d4-ac40-251a1767514b
+70c4046c-e4dc-43f0-8121-62c37cd66342
+1aa4ac74-5eb6-44f8-b0bf-2209912e9c01
+f02e5674-bda2-4d7a-8b31-ff80683a73ee
+c13d9f78-f65b-4a35-9b08-853d729ad0f8
+34f9018d-609d-40c6-85e5-69e2dcd3509b
+11e751cf-1b6c-41e9-82b0-7f3c4a964527
+37f4fec1-dc30-40c6-bfd1-6f9dba7cfb1b
+9988b31d-f98a-49cd-9ebe-8b47bb0e0357
+873b9b12-b6c0-493c-909c-539c49635033
+c8c1b2b1-519b-4998-a189-1f8b056fc4f8
+759b113e-e323-4c25-ac2a-bc2e47a9c42d
+52f49979-283f-4e71-90ef-62eb17cd8c79
+b35ecbaf-6321-43cd-8dd2-25d00b86f380
+1a123250-72c3-482d-8aa5-a964437bd6be
+be089315-befd-4941-bca3-f1508c52fba1
+f6184b5b-f697-43df-a07c-36a69e8fd9f6
+601c614a-6fab-427e-bc2d-4d9cf0b5ac01
+1590bc61-5b35-4c36-9319-503c24d40dd8
+432c35ee-477a-4ee5-9ae8-c66af7b200e3
+a82f135a-0756-4936-9c6e-2b599b458810
+69b9ba5f-80d4-4773-81c6-79cf5735ae9b
+39088716-b7ef-4827-a3a5-06c72d3578c8
+e5463353-8ec0-47e4-9bf4-af8e1c5d58f8
+6fe59a1e-fa83-4242-bd73-d1a234c7d2f7
+ed1cf068-a7f6-4af7-b805-53ce5dea4f25
+867dc04f-116b-45a7-8375-eae778ec702c
+de2725f4-2f74-413c-adae-f4afd91e11c6
+112ae8d2-1eda-4be1-b46c-e8e669ef18d7
+929544de-2d9f-43bd-b748-7a092abcd69e
+8d5ae055-6411-42bb-aa55-f4641a0c01d7
+f18eaf55-22f0-4904-aeba-11e5a8811972
+7693f98e-341c-498d-b8b0-bc70f4c351bd
+bd6407c8-7811-471f-90b6-db0f7cfdf74d
+d6ed70ed-5e27-4dc1-bb60-58b99347b97e
+346094c9-b256-4b7b-83ae-babd90f6648f
+3483cfb8-1f39-4013-8d85-40793307de63
+5686c043-dc72-4ca1-926c-460fabb8e9a6
+1e68d743-3df3-4573-a54d-dc4c57d3faef
+2288f967-0d8e-40bb-b2bc-79262450d254
+53d30642-bb88-4b8c-bb8e-23661256ddaf
+f125a54e-cc03-470c-bb4e-842ef6a38225
+33c06f42-fb18-4b82-8736-88158f7c4d0d
+cca39271-0ce8-47b0-b92d-c6b21c364f45
+1cc5f72a-d43b-4bd6-bb3c-6770b2bf6f1e
+75d13099-4bb9-4ebd-9f50-a6a977ed252d
+e3f74b90-51f9-44b0-a469-22544e0bbade
+cbf95842-0362-4bc7-83a1-17c6630b56af
+8a4b6c1e-c27c-4a32-afdd-80b3b741bb01
+005cdcc1-9a46-43da-b4b7-6c1930da74cc
+8d60ea7b-c58b-4306-b7b4-c170e5fc0598
+723cbd12-3afd-4b52-8c10-2bafb15917a1
+e560b159-3eeb-477e-9f02-6504f33eb296
+2e1dbc3b-2eb7-4a4b-a101-34808d2c7e26
+d8eeefde-84c9-41d7-9846-e71dcca680dc
+92135fcb-cd73-4fec-920d-3e81393bae9b
+```

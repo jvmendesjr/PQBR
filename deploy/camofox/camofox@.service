@@ -1,0 +1,18 @@
+# Template ADR-012 (t526). NÃO instalado. Uma instância por conta crítica sobre a instalação ÚNICA do Camofox.
+# Instalar só pelo runbook docs/RUNBOOK-nova-instancia-camofox.md, com OK do José.
+[Unit]
+Description=Camofox instância %i (ADR-012; porta/perfil em ~/.camofox-instancias/%i.env)
+After=network-online.target
+StartLimitIntervalSec=0
+
+[Service]
+EnvironmentFile=%h/.camofox-instancias/%i.env
+WorkingDirectory=%h/camofox-browser
+ExecStart=%h/.local/bin/node server.js
+Restart=always
+RestartSec=10
+MemoryMax=2200M
+MemorySwapMax=400M
+
+[Install]
+WantedBy=default.target

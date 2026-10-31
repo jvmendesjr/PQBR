@@ -1,0 +1,168 @@
+{
+  "versao": "1.3.0",
+  "atualizado": "2026-10-31",
+  "titulo": "Produção de episódios (tema → publicação)",
+  "nota": "Fluxo t170u: cadernos de auditoria (Mestre ce015620 + Efêmero por episódio, piloto EP1003 e82fc55e) fundamentam a etapa 11; veredito final continua fora do caderno, validado por contrato. Sem reinício de worker, sem merge.",
+  "etapas": [
+    {
+      "n": 1,
+      "nome": "Tema / grade",
+      "objetivo": "Manter ≥7 dias de temas; anti-repetição",
+      "wf_activity": "ReposicaoTemasWorkflow",
+      "fila": "pqbr-episodio",
+      "responsavel": "Temporal + NLM efêmero (grade)",
+      "contratos": "TemaPendente 1.0.0, TemaProposto 1.0.0, PropostaTemas 1.0.0",
+      "status": "ativo"
+    },
+    {
+      "n": 2,
+      "nome": "Grade diária (coleta)",
+      "objetivo": "Coletar candidatos e gravar GradeDiaria",
+      "wf_activity": "GradeDiariaWorkflow",
+      "fila": "pqbr-episodio",
+      "responsavel": "Temporal",
+      "contratos": "GradeDiaria 1.0.0, PedidoGrade",
+      "status": "desligado_pausado"
+    },
+    {
+      "n": 3,
+      "nome": "Pedido de episódio",
+      "objetivo": "Abrir PedidoEpisodioE2E no Temporal",
+      "wf_activity": "EpisodioWorkflow.run (oficial: episodio.py)",
+      "fila": "episodio-pqbr",
+      "responsavel": "Temporal",
+      "contratos": "PedidoEpisodioE2E 1.1.0 → ResultadoEpisodioE2E",
+      "status": "codigo_falta_reinicio"
+    },
+    {
+      "n": 4,
+      "nome": "Gate playbook",
+      "objetivo": "Conferir docs/processos fail-closed",
+      "wf_activity": "processo_criacao_conferir",
+      "fila": "episodio-pqbr",
+      "responsavel": "Temporal (Guardião)",
+      "contratos": "ResultadoProcessoCriacao (pin processo)",
+      "status": "codigo_falta_reinicio"
+    },
+    {
+      "n": 5,
+      "nome": "Briefing do Mestre",
+      "objetivo": "Etapa central dos CADERNOS: pedir BriefingEfemerico ao mestre canônico 00ce61ae-ab72-4f5a-a405-e1381377bc38; gravar nota no mestre; limpar chat (ask --new -y). NUNCA generate/download de mídia. Legado c35d7b24 e MESTRES_PROIBIDOS bloqueados. Auditoria tem mestre próprio (t170u), separado deste.",
+      "wf_activity": "nlm_mestre_briefing",
+      "fila": "notebooklm-pqbr",
+      "responsavel": "NLM MESTRE (Temporal activity)",
+      "contratos": "BriefingEfemerico 1.0.0, PedidoBriefingMestre 1.0.0",
+      "status": "codigo_falta_reinicio",
+      "detalhe": "Quem: activity Temporal nlm_mestre_briefing na fila notebooklm-pqbr. Saída: BriefingEfemerico 1.0.0 (persona, prompt_pesquisa, restrições). Config: config/caderno_mestre.json."
+    },
+    {
+      "n": 6,
+      "nome": "Abrir efêmero + pesquisa",
+      "objetivo": "Etapa central dos CADERNOS: criar/reusar caderno efêmero do episódio; injetar persona + prompt_pesquisa vindos do briefing do mestre; add-research no efêmero; casar UUID em pqbr.cadernos_episodio.",
+      "wf_activity": "nlm_abrir_efemero_com_briefing + pacote_garantir",
+      "fila": "notebooklm-pqbr / episodio-pqbr",
+      "responsavel": "NLM EFÊMERO (Temporal)",
+      "contratos": "BriefingEfemerico → caderno UUID",
+      "status": "codigo_falta_reinicio",
+      "detalhe": "Quem: nlm_abrir_efemero_com_briefing + pacote_garantir. O mestre não produz o episódio — só norteia; o efêmero executa a pesquisa."
+    },
+    {
+      "n": 7,
+      "nome": "Roteiro / SEO / compliance",
+      "objetivo": "Produção intelectual no EFÊMERO (caderno do episódio): roteiro + SEO + compliance. Sem vídeo/mídia no NotebookLM.",
+      "wf_activity": "NotebookLMWorkflow (filho)",
+      "fila": "notebooklm-pqbr",
+      "responsavel": "NLM EFÊMERO (Temporal orquestra)",
+      "contratos": "PedidoNotebookLM 1.1.0, RoteiroShort 1.0.0, PacoteSEO 1.0.0",
+      "status": "codigo_falta_reinicio"
+    },
+    {
+      "n": 8,
+      "nome": "Direção de cenas (passo 1)",
+      "objetivo": "No EFÊMERO: JSON DirecaoCenas/CenaIndividual 2.0.0; rótulo PQBR-EP####-S## (stem == rótulo) para rastreabilidade até o Flow/publicação.",
+      "wf_activity": "direcao_cenas_nlm",
+      "fila": "episodio-pqbr → notebooklm-pqbr",
+      "responsavel": "NLM EFÊMERO via porta DiretorCenas (Temporal)",
+      "contratos": "DirecaoCenas 2.0.0, CenaIndividual 2.0.0",
+      "status": "codigo_falta_reinicio"
+    },
+    {
+      "n": 9,
+      "nome": "Gates pré-cenas",
+      "objetivo": "fichas_ok + playbook antes do Flow",
+      "wf_activity": "flow_projeto_exigir_antes_cenas + processo_criacao_conferir",
+      "fila": "episodio-pqbr",
+      "responsavel": "Temporal",
+      "contratos": "ResultadoFlowProjeto, ResultadoProcessoCriacao",
+      "status": "codigo_falta_reinicio"
+    },
+    {
+      "n": 10,
+      "nome": "Cenas no Flow (passo 2)",
+      "objetivo": "Stills/clipes por cena; agente só opera UI",
+      "wf_activity": "(ausente) proximo=flow_cenas_individuais_pendente",
+      "fila": "—",
+      "responsavel": "AGENTE (Camofox/Flow UI); adaptador Temporal pendente",
+      "contratos": "CenaIndividual 2.0.0 (entrada)",
+      "status": "nao_existe"
+    },
+    {
+      "n": 11,
+      "nome": "Auditoria / veredito",
+      "objetivo": "Auditoria fundamentada em caderno: Mestre de Auditoria ce015620 (regras) + Efêmero de Auditoria por episódio (AUD-SNAP 1.0.0 + stills/descrições, sem vídeo bruto). Veredito final fora do caderno, validado por contrato. Piloto EP1003: S05 reprova, S04 aprova_com_ressalva.",
+      "wf_activity": "auditor_* (parcial) + cadernos auditoria (piloto, sem activity Temporal)",
+      "fila": "camofox-pqbr",
+      "responsavel": "Temporal + Gemini Web (agente/Camofox)",
+      "contratos": "VereditoAuditor 1.0.0",
+      "status": "piloto_sem_reinicio"
+    },
+    {
+      "n": 12,
+      "nome": "Pós-vídeo",
+      "objetivo": "FFmpeg / Drive / artefatos",
+      "wf_activity": "pos_produzir / drive_enviar",
+      "fila": "episodio-pqbr",
+      "responsavel": "Temporal (sem LLM)",
+      "contratos": "artefatos locais",
+      "status": "codigo_falta_reinicio"
+    },
+    {
+      "n": 13,
+      "nome": "Publicação",
+      "objetivo": "Upload privado + agenda; público só OK José. Coerência: manter rótulo/rastreabilidade PQBR-EP#### (e cenas S##) no registro — sem redesign desta etapa nesta rodada.",
+      "wf_activity": "PublicacaoAgendadaWorkflow",
+      "fila": "publicacao-pqbr",
+      "responsavel": "Temporal",
+      "contratos": "PedidoPublicacao, DecisaoPublicacao 1.0.0",
+      "status": "desligado_pausado",
+      "detalhe": "YOUTUBE_DRY_RUN=true. Não alterar fluxo de publicação além da rastreabilidade do rótulo proveniente dos cadernos/direção."
+    }
+  ],
+  "outros_workflows": [
+    {
+      "nome": "ApagarCadernoWorkflow",
+      "fila": "episodio-pqbr",
+      "funcao": "Apaga efêmero D+2 por UUID; nunca mestre 00ce61ae nem legado c35d7b24",
+      "status": "ativo"
+    },
+    {
+      "nome": "DescartarCadernoTesteWorkflow",
+      "fila": "episodio-pqbr",
+      "funcao": "Arquiva teste 3 cópias",
+      "status": "ativo"
+    },
+    {
+      "nome": "ReposicaoTemasWorkflow",
+      "fila": "pqbr-episodio",
+      "funcao": "Temas via NLM efêmero semanal",
+      "status": "ativo"
+    },
+    {
+      "nome": "VigiaAtualizacoesWorkflow",
+      "fila": "pqbr-episodio",
+      "funcao": "Só leitura; não aplica",
+      "status": "ativo"
+    }
+  ],
+  "mermaid": "flowchart LR\n  T[1 Tema] --> G[2 Grade]\n  G --> P[3 Pedido Temporal]\n  P --> PC[4 Gate playbook]\n  PC --> M[5 NLM Mestre briefing]\n  M --> E[6 NLM Efêmero + pesquisa]\n  E --> NLM[7 Roteiro SEO compliance]\n  NLM --> DIR[8 DirecaoCenas 2.0.0]\n  DIR --> GATE[9 Gates]\n  GATE --> FLOW[10 Flow agente - pendente]\n  FLOW --> AUD[11 Auditor + Cadernos Auditoria t170u]\n  AUD --> POS[12 Pós]\n  POS --> PUB[13 Publicação rótulo]\n  subgraph CAD[Cadernos NLM — prioridade do mapa]\n    M\n    E\n    NLM\n    DIR\n  end\n  style M fill:#bbdefb,stroke:#0d47a1,stroke-width:2px\n  style E fill:#c8e6c9,stroke:#1b5e20,stroke-width:2px\n  style NLM fill:#e8f5e9,stroke:#2e7d32\n  style DIR fill:#fff3e0,stroke:#ef6c00\n  style FLOW fill:#fdecea,stroke:#c62828\n  style GATE fill:#fff8e1,stroke:#f9a825\n  style PUB fill:#f5f5f5,stroke:#9e9e9e\n"
+}

@@ -1,0 +1,191 @@
+{
+  "estado_final": {
+    "versao": 1,
+    "aceitos": {
+      "falha": {
+        "ferramenta": "camofox",
+        "sessao": "test_continue_as_new_transfere_pausa_fila_e_dedup",
+        "passo": "falha",
+        "erro": "falha-tecnica",
+        "episodio": null,
+        "simulacao": {
+          "triagem": "corrigivel",
+          "intervencoes": [
+            true
+          ],
+          "verificacoes": [
+            true
+          ],
+          "conta_confere": true
+        }
+      },
+      "seguinte-a": {
+        "ferramenta": "camofox",
+        "sessao": "test_continue_as_new_transfere_pausa_fila_e_dedup",
+        "passo": "seguinte-a",
+        "erro": "falha falsa",
+        "episodio": null,
+        "simulacao": {
+          "triagem": "corrigivel",
+          "intervencoes": [
+            true
+          ],
+          "verificacoes": [
+            true
+          ],
+          "conta_confere": true
+        }
+      },
+      "seguinte-b": {
+        "ferramenta": "camofox",
+        "sessao": "test_continue_as_new_transfere_pausa_fila_e_dedup",
+        "passo": "seguinte-b",
+        "erro": "falha falsa",
+        "episodio": null,
+        "simulacao": {
+          "triagem": "corrigivel",
+          "intervencoes": [
+            true
+          ],
+          "verificacoes": [
+            true
+          ],
+          "conta_confere": true
+        }
+      }
+    },
+    "resultados": {
+      "seguinte-a": {
+        "resultado": "corrigido",
+        "tentativas": 1,
+        "motivo": "",
+        "proposta_script": "proposta falsa",
+        "chamar_jose": false
+      },
+      "seguinte-b": {
+        "resultado": "corrigido",
+        "tentativas": 1,
+        "motivo": "",
+        "proposta_script": "proposta falsa",
+        "chamar_jose": false
+      }
+    },
+    "falhas": {
+      "falha": {
+        "operacao_id": "falha",
+        "filho_id": "teste-f3-05-recuperacao-9dbbec2dbc1ada6e293ed7748be7eef0be878850ec52ed8de2ce9300f19c23eb-op-38e55e2c50e69560265c4b1886ab446e1ade639a9b30a3395fa4ae2f1f0ae4f2",
+        "filho_run_id": "01a14ad1-9c25-76a6-8743-456697fbc9fa",
+        "revisao": 1,
+        "estado": "falha_tecnica_sintetica",
+        "resultado_efeito": "nao_reconciliado"
+      }
+    },
+    "pendentes": [],
+    "ativo": null,
+    "bloqueio": null,
+    "revisao": 1,
+    "recuperacoes": [
+      {
+        "versao": 1,
+        "decisao": "retomar_somente_pendentes",
+        "revisao": 1,
+        "falha_id": "falha",
+        "filho_run_id": "01a14ad1-9c25-76a6-8743-456697fbc9fa",
+        "pendentes": [
+          "seguinte-a",
+          "seguinte-b"
+        ]
+      }
+    ],
+    "observacoes": [
+      {
+        "id": "falha",
+        "estado": "aceito"
+      },
+      {
+        "id": "seguinte-a",
+        "estado": "aceito"
+      },
+      {
+        "id": "seguinte-b",
+        "estado": "aceito"
+      },
+      {
+        "id": "falha",
+        "estado": "pausado_apos_falha"
+      },
+      {
+        "id": "falha",
+        "estado": "duplicado"
+      },
+      {
+        "id": "seguinte-a",
+        "estado": "duplicado"
+      },
+      {
+        "id": "intrusa",
+        "estado": "admissao_fechada"
+      },
+      {
+        "estado": "recuperacao_aceita"
+      },
+      {
+        "id": "seguinte-b",
+        "estado": "duplicado"
+      }
+    ],
+    "admissao_fechada": true,
+    "fechando": true,
+    "geracao": 2
+  },
+  "duas_geracoes_preservadas": true,
+  "calls": [
+    {
+      "sessao": "test_continue_as_new_transfere_pausa_fila_e_dedup",
+      "passo": "falha",
+      "inicio": 412031.370842716,
+      "fim": 412031.412568634,
+      "fila": "teste-f3-05-candidato-camofox-test_continue_as_new_transfere_pausa_fila_e_dedup-recuperacao",
+      "tentativa": 1,
+      "workflow_id": "teste-f3-05-recuperacao-9dbbec2dbc1ada6e293ed7748be7eef0be878850ec52ed8de2ce9300f19c23eb-op-38e55e2c50e69560265c4b1886ab446e1ade639a9b30a3395fa4ae2f1f0ae4f2"
+    },
+    {
+      "sessao": "test_continue_as_new_transfere_pausa_fila_e_dedup",
+      "passo": "seguinte-a",
+      "inicio": 412033.16553024,
+      "fim": 412033.20689413,
+      "fila": "teste-f3-05-candidato-camofox-test_continue_as_new_transfere_pausa_fila_e_dedup-recuperacao",
+      "tentativa": 1,
+      "workflow_id": "teste-f3-05-recuperacao-9dbbec2dbc1ada6e293ed7748be7eef0be878850ec52ed8de2ce9300f19c23eb-op-2ecbf9a42dcf11c1b9fdb05fc53f8fe67085c4853642cdb9a21ae6e2e128ce32"
+    },
+    {
+      "sessao": "test_continue_as_new_transfere_pausa_fila_e_dedup",
+      "passo": "seguinte-b",
+      "inicio": 412033.900110649,
+      "fim": 412033.941980032,
+      "fila": "teste-f3-05-candidato-camofox-test_continue_as_new_transfere_pausa_fila_e_dedup-recuperacao",
+      "tentativa": 1,
+      "workflow_id": "teste-f3-05-recuperacao-9dbbec2dbc1ada6e293ed7748be7eef0be878850ec52ed8de2ce9300f19c23eb-op-9044b2869ea942140abdf0c11921e75e449d8f76bcdd845198e3d6c5991eab05"
+    }
+  ],
+  "registros": [
+    {
+      "resultado": "corrigido",
+      "tentativas": 1,
+      "motivo": "",
+      "proposta_script": "proposta falsa",
+      "chamar_jose": false
+    },
+    {
+      "resultado": "corrigido",
+      "tentativas": 1,
+      "motivo": "",
+      "proposta_script": "proposta falsa",
+      "chamar_jose": false
+    }
+  ],
+  "max_sessao": {
+    "test_continue_as_new_transfere_pausa_fila_e_dedup": 1
+  },
+  "max_global": 1
+}

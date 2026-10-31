@@ -1,0 +1,12 @@
+[Unit]
+Description=PQBR relay de saída dos Devs (rede pqbr-dev-int -> só 9router/Temporal/Paperclip)
+After=docker.service
+StartLimitIntervalSec=0
+[Service]
+ExecStartPre=/bin/sh -c 'docker network inspect pqbr-dev-int >/dev/null 2>&1 || docker network create --internal --subnet 172.31.250.0/24 -o com.docker.network.bridge.name=pqbrdev0 pqbr-dev-int'
+ExecStart=/usr/bin/python3 /home/pc/Workspace/PQBR/scripts/dev/egress_dev.py
+Restart=always
+RestartSec=5
+MemoryMax=64M
+[Install]
+WantedBy=default.target

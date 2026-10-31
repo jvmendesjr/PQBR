@@ -1,0 +1,85 @@
+{
+ "roteiro": {
+  "episodio_id": "botijao-de-gas-no-brasil-e-sempre-azul-ou-cinza",
+  "titulo": "Por que o botijão de gás no Brasil é sempre azul ou cinza?",
+  "falas": [
+   "Por que o botijão de gás no Brasil é sempre azul ou cinza?",
+   "Você passa o olho no quintal e nota que só dá essas duas cores.",
+   "Mas tem quem diga que o azul dura mais e o cinza esquenta o fogo mais rápido!",
+   "Só que a versão mais aceita e oficial revela o segredo.",
+   "O gás de cozinha é o GLP, padronizado no país inteiro pela Petrobras.",
+   "Então a cor funciona como um uniforme da distribuidora pra organizar os vasilhames.",
+   "A Ultragaz usa o azul e a Liquigás usa o cinza, todos fiscalizados pela ANP.",
+   "No fundo, a chama é a mesma! Segue o Porquê BR pra não ficar sem gás e entender..."
+  ],
+  "tipo_cta": "trocadilho_tema",
+  "entidades_cena": [
+   "botijão de gás azul",
+   "botijão de gás cinza",
+   "fogão a gás",
+   "filtro de barro",
+   "caminhão de gás"
+  ],
+  "bloco_visual": {
+   "estilo": "Ilustração 2D plana de cartum, como animação de TV brasileira: traço preto nítido e uniforme, personagem em cores chapadas quentes (amarelo-mostarda, verde-bandeira, terracota) com alto contraste sobre fundo limpo em tom frio ou neutro (azul-céu, bege claro), sem degradê nem sombra realista, fundo minimalista com no máximo 3–5 objetos, humor carinhoso. Personagem sempre grande no quadro (ocupa ≥ 1/3 da altura), centralizado, agindo, com expressões faciais e corporais exageradas. Proibido: fotorrealismo, 3D, rosto de pessoa real ou celebridade, marca ou logo real, texto escrito dentro das imagens (a legenda do NotebookLM não conta). Formato vertical 9:16, deixar livres a faixa de cima e a de baixo da tela.",
+   "personagem": "Homem de cerca de 30 anos, magro, cabelo castanho curto, camiseta amarela, bermuda verde, óculos redondos vermelhos, expressão-base exagerada curiosa. Sem nome.",
+   "personagem_2": null,
+   "cenas": [
+    {
+     "fala": "Por que o botijão de gás no Brasil é sempre azul ou cinza?",
+     "acao": "O personagem segura dois botijões gigantes, um azul e um cinza, um em cada braço, tentando equilibrá-los com rosto espantado.",
+     "enquadramento": "Plano médio, centralizado",
+     "ambiente": "Cozinha brasileira simples, hoje, objetos-âncora: fogão a gás, filtro de barro, armário de madeira, luz da manhã vinda da janela"
+    },
+    {
+     "fala": "Você passa o olho no quintal e nota que só dá essas duas cores.",
+     "acao": "O personagem olha pela janela do quintal fazendo viseira com a mão, observando vários botijões alinhados.",
+     "enquadramento": "Plano aberto",
+     "ambiente": "Quintal de casa brasileira, hoje, objetos-âncora: tanque de lavar roupa, varal com roupas, muro de tijolos, luz do sol forte"
+    },
+    {
+     "fala": "Mas tem quem diga que o azul dura mais e o cinza esquenta o fogo mais rápido!",
+     "acao": "O personagem aponta para a cabeça com ar conspiratório e sorriso de canto de boca, como se contasse uma teoria mirabolante.",
+     "enquadramento": "Plano médio",
+     "ambiente": "Cozinha brasileira simples, hoje, objetos-âncora: fogão a gás, mesa de fórmica, toalha xadrez, luz vespertina"
+    },
+    {
+     "fala": "Só que a versão mais aceita e oficial revela o segredo.",
+     "acao": "O personagem desenrola um grande pergaminho amarelado com ar solene de revelação.",
+     "enquadramento": "Close-up no personagem",
+     "ambiente": "Cozinha brasileira simples, hoje, objetos-âncora: fogão a gás, filtro de barro, luz suave de teto"
+    },
+    {
+     "fala": "O gás de cozinha é o GLP, padronizado no país inteiro pela Petrobras.",
+     "acao": "O personagem faz sinal de aprovação com os dois polegares e concorda com a cabeça sorrindo.",
+     "enquadramento": "Plano médio",
+     "ambiente": "Área externa industrial limpa, hoje, objetos-âncora: caminhão de gás amarelo, tanques redondos ao fundo, luz do dia"
+    },
+    {
+     "fala": "Então a cor funciona como um uniforme da distribuidora pra organizar os vasilhames.",
+     "acao": "O personagem veste uma camiseta azul por cima de uma cinza, mostrando a troca de marcas de forma cômica.",
+     "enquadramento": "Plano médio",
+     "ambiente": "Pátio de distribuidora de gás, hoje, objetos-âncora: pilhas de botijões coloridos, cerca de proteção, luz da tarde"
+    },
+    {
+     "fala": "A Ultragaz usa o azul e a Liquigás usa o cinza, todos fiscalizados pela ANP.",
+     "acao": "O personagem carimba um botijão com um carimbo gigante em gesto de fiscalização divertida.",
+     "enquadramento": "Plano médio",
+     "ambiente": "Cozinha brasileira simples, hoje, objetos-âncora: fogão a gás, filtro de barro, bule de café, luz do dia"
+    },
+    {
+     "fala": "No fundo, a chama é a mesma! Segue o Porquê BR pra não ficar sem gás e entender...",
+     "acao": "O personagem segura dois botijões gigantes, um azul e um cinza, um em cada braço, tentando equilibrá-los com rosto espantado.",
+     "enquadramento": "Plano médio, centralizado",
+     "ambiente": "Cozinha brasileira simples, hoje, objetos-âncora: fogão a gás, filtro de barro, armário de madeira, luz da manhã vinda da janela"
+    }
+   ],
+   "pedido_3d_ou_realista": false
+  }
+ },
+ "fontes": [
+  "As Diferentes Cores do Botijão de Gás: Um Guia Completo",
+  "Marcas de gás: Tem diferença a cor do botijão? - Blog da Appgas",
+  "O que significa cada cor do botijão de gás no Brasil - Aprenda Essa Receita"
+ ]
+}

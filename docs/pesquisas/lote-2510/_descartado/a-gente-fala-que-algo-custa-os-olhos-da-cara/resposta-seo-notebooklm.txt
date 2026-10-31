@@ -1,0 +1,22 @@
+{
+  "titulo": "Por que a gente fala que algo custa 'os olhos da cara'?",
+  "descricao": "Você já se perguntou por que dizemos que um preço absurdo 'custa os olhos da cara'? A explicação passa por uma tradição do século XVI e até pela antiga Mesopotâmia! Código: PQBR-EP1002.\n\nFontes: Aventuras na História, Clarin.com e Escreva.ai.",
+  "tags": [
+    "custar os olhos da cara",
+    "por que a gente fala",
+    "porque br",
+    "origem das expressoes",
+    "ditados populares",
+    "curiosidades historicas",
+    "etimologia",
+    "cultura brasileira",
+    "historia",
+    "shorts"
+  ],
+  "hashtags": [
+    "#PorqueBR",
+    "#Curiosidades",
+    "#OrigemDasExpressoes",
+    "#Shorts"
+  ]
+}

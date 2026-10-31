@@ -1,0 +1,29 @@
+{
+  "pid": 210973,
+  "args": [
+    "sudo",
+    "-n",
+    "nsenter",
+    "-t",
+    "210713",
+    "-n",
+    "/usr/bin/setpriv",
+    "--reuid=1000",
+    "--regid=1000",
+    "--clear-groups",
+    "/usr/bin/env",
+    "-i",
+    "PYTHONPATH=/home/pc/Workspace/PQBR/docs/sdd/evidencias-f3-05-composicao-e2e-20261017-H3:/home/pc/Workspace/PQBR/docs/sdd/evidencias-f3-05-confirmacao-canonica-20261017-H2:/home/pc/Workspace/PQBR/src:/home/pc/Workspace/PQBR",
+    "PYTHONDONTWRITEBYTECODE=1",
+    "PQBR_CANDIDATE_ISOLATED=1",
+    "PQBR_SUPERVISOR_ISOLATED=1",
+    "PQBR_H3_ISOLATED=1",
+    "PQBR_CANDIDATE_OUT=/home/pc/Workspace/PQBR/docs/sdd/evidencias-f3-05-composicao-e2e-20261017-H3/runtime-A1/runtime",
+    "/home/pc/Workspace/PQBR/.venv/bin/python",
+    "-m",
+    "unittest",
+    "-v",
+    "test_e2e_h3"
+  ],
+  "expected_netns": "net:[4026534544]"
+}

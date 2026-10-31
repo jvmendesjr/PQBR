@@ -1,0 +1,52 @@
+{
+  "observacoes": [
+    {
+      "id": "acao",
+      "estado": "aceito"
+    },
+    {
+      "id": "acao",
+      "estado": "duplicado"
+    },
+    {
+      "id": "acao",
+      "estado": "payload_divergente"
+    },
+    {
+      "id": "versao",
+      "estado": "versao_incompativel"
+    },
+    {
+      "id": "config",
+      "estado": "configuracao_divergente"
+    },
+    {
+      "id": "acao",
+      "estado": "duplicado"
+    }
+  ],
+  "calls": [
+    {
+      "sessao": "test_dedup_payload_config_e_versao",
+      "passo": "acao",
+      "inicio": 409300.070014238,
+      "fim": 409300.111927451,
+      "fila": "teste-f3-05-candidato-camofox-test_dedup_payload_config_e_versao",
+      "tentativa": 1,
+      "workflow_id": "teste-f3-05-candidato-sessao-ce8b9a2aa511565f97537924d9bb71b60e6dd3a1e2ef374b720ac3db719b3d02-op-15e8900c9977db61a162bedd13fac114a7b5c06e20d347d9875239f8515b173d"
+    }
+  ],
+  "max_sessao": {
+    "test_dedup_payload_config_e_versao": 1
+  },
+  "max_global": 1,
+  "registros": [
+    {
+      "resultado": "corrigido",
+      "tentativas": 1,
+      "motivo": "",
+      "proposta_script": "proposta falsa",
+      "chamar_jose": false
+    }
+  ]
+}

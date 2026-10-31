@@ -1,0 +1,193 @@
+{
+  "tests": 44,
+  "passed": 44,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "success": true,
+  "python": "3.13.5",
+  "sqlite": "3.46.1",
+  "outcomes": [
+    {
+      "test": "test_duravel_d1.DurabilityTests.test_01_kill_decision_before_commit",
+      "status": "passed"
+    },
+    {
+      "test": "test_duravel_d1.DurabilityTests.test_02_kill_decision_after_commit_restart_pending",
+      "status": "passed"
+    },
+    {
+      "test": "test_duravel_d1.DurabilityTests.test_03_kill_consume_before_commit",
+      "status": "passed"
+    },
+    {
+      "test": "test_duravel_d1.DurabilityTests.test_04_kill_consume_after_commit_before_resume",
+      "status": "passed"
+    },
+    {
+      "test": "test_duravel_d1.DurabilityTests.test_05_kill_receiver_before_commit",
+      "status": "passed"
+    },
+    {
+      "test": "test_duravel_d1.DurabilityTests.test_06_kill_receiver_after_commit_before_reply",
+      "status": "passed"
+    },
+    {
+      "test": "test_duravel_d1.DurabilityTests.test_07_kill_after_accept_before_storing_ack",
+      "status": "passed"
+    },
+    {
+      "test": "test_duravel_d1.DurabilityTests.test_08_kill_after_ack_restart",
+      "status": "passed"
+    },
+    {
+      "test": "test_duravel_d1.DurabilityTests.test_09_sequential_replay_after_full_process_restart",
+      "status": "passed"
+    },
+    {
+      "test": "test_duravel_d1.DurabilityTests.test_10_concurrent_decision_and_consumption_unique",
+      "status": "passed"
+    },
+    {
+      "test": "test_duravel_d1.DurabilityTests.test_11_concurrent_receiver_persistent_dedup",
+      "status": "passed"
+    },
+    {
+      "test": "test_duravel_d1.DurabilityTests.test_12_concurrent_dispatch",
+      "status": "passed"
+    },
+    {
+      "test": "test_duravel_d1.DurabilityTests.test_13_same_decision_key_conflicting_payload",
+      "status": "passed"
+    },
+    {
+      "test": "test_duravel_d1.DurabilityTests.test_14_same_receipt_conflicting_payload_after_accept",
+      "status": "passed"
+    },
+    {
+      "test": "test_duravel_d1.DurabilityTests.test_15_same_scope_new_receipt_conflict",
+      "status": "passed"
+    },
+    {
+      "test": "test_duravel_d1.DurabilityTests.test_16_stale_unknown_receipt",
+      "status": "passed"
+    },
+    {
+      "test": "test_duravel_d1.DurabilityTests.test_17_stale_ticket",
+      "status": "passed"
+    },
+    {
+      "test": "test_duravel_d1.DurabilityTests.test_18_stale_revision",
+      "status": "passed"
+    },
+    {
+      "test": "test_duravel_d1.DurabilityTests.test_19_stale_pending_extra_missing_reordered_terminal",
+      "status": "passed"
+    },
+    {
+      "test": "test_duravel_d1.DurabilityTests.test_20_stale_receiver_after_consumption",
+      "status": "passed"
+    },
+    {
+      "test": "test_duravel_d1.DurabilityTests.test_21_workflow_agent_token_never_human",
+      "status": "passed"
+    },
+    {
+      "test": "test_duravel_d1.DurabilityTests.test_22_discord_existing_link_fake",
+      "status": "passed"
+    },
+    {
+      "test": "test_duravel_d1.DurabilityTests.test_23_human_only_bound_recipient_and_no_continuation",
+      "status": "passed"
+    },
+    {
+      "test": "test_duravel_d1.DurabilityTests.test_24_rejection_does_not_resume",
+      "status": "passed"
+    },
+    {
+      "test": "test_duravel_d1.DurabilityTests.test_25_expiration_blocks_first_delivery",
+      "status": "passed"
+    },
+    {
+      "test": "test_duravel_d1.DurabilityTests.test_26_expired_already_delivered_duplicate_only_ack",
+      "status": "passed"
+    },
+    {
+      "test": "test_duravel_d1.DurabilityTests.test_27_readonly_decision_storage_failure",
+      "status": "passed"
+    },
+    {
+      "test": "test_duravel_d1.DurabilityTests.test_28_readonly_consume_storage_failure",
+      "status": "passed"
+    },
+    {
+      "test": "test_duravel_d1.DurabilityTests.test_29_outbox_failure_rolls_back_cas",
+      "status": "passed"
+    },
+    {
+      "test": "test_duravel_d1.DurabilityTests.test_30_receiver_readonly_storage_failure",
+      "status": "passed"
+    },
+    {
+      "test": "test_duravel_d1.DurabilityTests.test_31_source_busy_real_lock",
+      "status": "passed"
+    },
+    {
+      "test": "test_duravel_d1.DurabilityTests.test_32_receiver_busy_real_lock",
+      "status": "passed"
+    },
+    {
+      "test": "test_duravel_d1.DurabilityTests.test_33_immutable_manifest_and_monotonic_state",
+      "status": "passed"
+    },
+    {
+      "test": "test_duravel_d1.DurabilityTests.test_34_receipt_without_consumption_not_authorization",
+      "status": "passed"
+    },
+    {
+      "test": "test_duravel_d1.DurabilityTests.test_35_tampered_command_binding",
+      "status": "passed"
+    },
+    {
+      "test": "test_duravel_d1.DurabilityTests.test_36_expected_scope_stale",
+      "status": "passed"
+    },
+    {
+      "test": "test_duravel_d1.DurabilityTests.test_37_unlisted_new_operation_blocks",
+      "status": "passed"
+    },
+    {
+      "test": "test_duravel_d1.DurabilityTests.test_38_receiver_constraint_failure_rolls_back_dedup_and_effect",
+      "status": "passed"
+    },
+    {
+      "test": "test_duravel_d1.DurabilityTests.test_39_ack_storage_failure_after_receiver_commit",
+      "status": "passed"
+    },
+    {
+      "test": "test_duravel_d1.DurabilityTests.test_40_sqlite_full_after_cas_rolls_back",
+      "status": "passed"
+    },
+    {
+      "test": "test_duravel_d1.DurabilityTests.test_41_stale_supervisor_failure_and_interaction",
+      "status": "passed"
+    },
+    {
+      "test": "test_duravel_d1.DurabilityTests.test_42_expired_authorization_before_consume",
+      "status": "passed"
+    },
+    {
+      "test": "test_duravel_d1.DurabilityTests.test_43_first_delivery_conflicting_pending_payload",
+      "status": "passed"
+    },
+    {
+      "test": "test_duravel_d1.DurabilityTests.test_44_compound_key_unambiguous",
+      "status": "passed"
+    }
+  ],
+  "subprocesses": 409,
+  "killed_subprocesses": 9,
+  "network": "audit hook sem sockets; nao isolamento de kernel",
+  "synthetic_only": true,
+  "temporal_server": false
+}

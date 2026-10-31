@@ -1,0 +1,20 @@
+%% Catálogo de erros de produção (migração 0019; José 25/10/2026 14:09). Agentes internos só leem; o agente externo cadastra.
+flowchart LR
+  J(["José<br/>aprova o que entra"])
+  EXT["Agente externo PQBR (Grok Bot)<br/>registra erros vistos na produção<br/>seed: db/seeds/seed_catalogo_erros_lote2510.sql"]
+  subgraph PG["Postgres pqbr (pc)"]
+    T[("pqbr.catalogo_erros<br/>codigo · categoria · descricao · exemplo<br/>prevencao · severidade · papeis_interessados · ativo<br/>RLS: pqbr_app grava · pqbr_leitura lê · sem delete")]
+  end
+  subgraph LEIT["Leitura antes de gerar (só leitura, READ ONLY)"]
+    F["catalogo_erros_para_papel(papel)<br/>activity catalogo_erros_consultar<br/>contrato ErroCatalogo v1.0.0"]
+  end
+  LE["lider-editorial<br/>prompts de roteiro e cenas"]
+  AU["auditor<br/>checagem de cenas e montagem"]
+  LC["lider-compliance<br/>CTA, pessoa real, marca, comentário"]
+  DV["dev<br/>montagem e modelos"]
+  J -. "OK" .-> EXT
+  EXT -->|insert/update via pqbr_app| T
+  T --> F
+  F --> LE & AU & LC & DV
+  N>"⚠ activity ainda não registrada em worker nem chamada por workflow (só função + activity prontas)"]
+  F --- N

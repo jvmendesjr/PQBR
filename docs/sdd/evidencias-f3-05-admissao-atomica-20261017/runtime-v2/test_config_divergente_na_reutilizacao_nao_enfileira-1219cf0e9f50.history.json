@@ -1,0 +1,549 @@
+{
+  "events": [
+    {
+      "eventId": "1",
+      "eventTime": "2026-10-17T15:06:02.762Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_EXECUTION_STARTED",
+      "workflowExecutionStartedEventAttributes": {
+        "workflowType": {
+          "name": "AtorSessaoAtomicoSintetico"
+        },
+        "taskQueue": {
+          "name": "teste-ator-workflow-4b0405798e704867a0c97bc61e4300e1"
+        },
+        "input": {
+          "payloads": [
+            {
+              "metadata": {
+                "encoding": "anNvbi9wbGFpbg=="
+              },
+              "data": "eyJmaWxhX2NhbW9mb3giOiJ0ZXN0ZS1jYW1vZm94LWF0b3ItNGIwNDA1Nzk4ZTcwNDg2N2EwYzk3YmM2MWU0MzAwZTEiLCJmaWxhX3dvcmtmbG93IjoidGVzdGUtYXRvci13b3JrZmxvdy00YjA0MDU3OThlNzA0ODY3YTBjOTdiYzYxZTQzMDBlMSIsInByYXpvX3MiOjEwLCJzZXNzYW8iOiJzZXNzYW8tQSJ9"
+            }
+          ]
+        },
+        "workflowExecutionTimeout": "120s",
+        "workflowRunTimeout": "120s",
+        "workflowTaskTimeout": "10s",
+        "originalExecutionRunId": "fc459254-ad1f-49c4-baad-bbad81c17d7f",
+        "identity": "1@pc",
+        "firstExecutionRunId": "fc459254-ad1f-49c4-baad-bbad81c17d7f",
+        "retryPolicy": {
+          "initialInterval": "1s",
+          "backoffCoefficient": 2.0,
+          "maximumInterval": "100s",
+          "maximumAttempts": 1
+        },
+        "attempt": 1,
+        "firstWorkflowTaskBackoff": "0s",
+        "priority": {}
+      }
+    },
+    {
+      "eventId": "2",
+      "eventTime": "2026-10-17T15:06:02.762Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_TASK_SCHEDULED",
+      "workflowTaskScheduledEventAttributes": {
+        "taskQueue": {
+          "name": "teste-ator-workflow-4b0405798e704867a0c97bc61e4300e1"
+        },
+        "startToCloseTimeout": "10s",
+        "attempt": 1
+      }
+    },
+    {
+      "eventId": "3",
+      "eventTime": "2026-10-17T15:06:02.762Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_TASK_STARTED",
+      "workflowTaskStartedEventAttributes": {
+        "scheduledEventId": "2",
+        "identity": "1@pc",
+        "historySizeBytes": "522"
+      }
+    },
+    {
+      "eventId": "4",
+      "eventTime": "2026-10-17T15:06:02.792Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_TASK_COMPLETED",
+      "workflowTaskCompletedEventAttributes": {
+        "scheduledEventId": "2",
+        "identity": "1@pc",
+        "binaryChecksum": "d806024b82db4faa441876d9e2d552d0",
+        "sdkMetadata": {
+          "coreUsedFlags": [
+            3,
+            1,
+            2
+          ],
+          "sdkName": "temporal-python",
+          "sdkVersion": "1.34.0"
+        },
+        "meteringMetadata": {}
+      }
+    },
+    {
+      "eventId": "5",
+      "eventTime": "2026-10-17T15:06:02.792Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_EXECUTION_UPDATE_ACCEPTED",
+      "workflowExecutionUpdateAcceptedEventAttributes": {
+        "protocolInstanceId": "admissao-v1-3478cc1899c12f75d0d1d2e0dff936e93bca54c82e62943eee232ca750909e08",
+        "acceptedRequestMessageId": "admissao-v1-3478cc1899c12f75d0d1d2e0dff936e93bca54c82e62943eee232ca750909e08/request",
+        "acceptedRequestSequencingEventId": "2",
+        "acceptedRequest": {
+          "meta": {
+            "updateId": "admissao-v1-3478cc1899c12f75d0d1d2e0dff936e93bca54c82e62943eee232ca750909e08",
+            "identity": "1@pc"
+          },
+          "input": {
+            "name": "solicitar",
+            "args": {
+              "payloads": [
+                {
+                  "metadata": {
+                    "encoding": "anNvbi9wbGFpbg=="
+                  },
+                  "data": "eyJjb25maWciOnsiZmlsYV9jYW1vZm94IjoidGVzdGUtY2Ftb2ZveC1hdG9yLTRiMDQwNTc5OGU3MDQ4NjdhMGM5N2JjNjFlNDMwMGUxIiwiZmlsYV93b3JrZmxvdyI6InRlc3RlLWF0b3Itd29ya2Zsb3ctNGIwNDA1Nzk4ZTcwNDg2N2EwYzk3YmM2MWU0MzAwZTEiLCJwcmF6b19zIjoxMCwic2Vzc2FvIjoic2Vzc2FvLUEifSwicGVkaWRvIjp7ImZhbGhhciI6ZmFsc2UsImlkIjoiYTEiLCJzZXNzYW8iOiJzZXNzYW8tQSJ9fQ=="
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "eventId": "6",
+      "eventTime": "2026-10-17T15:06:02.792Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_EXECUTION_UPDATE_COMPLETED",
+      "workflowExecutionUpdateCompletedEventAttributes": {
+        "meta": {
+          "updateId": "admissao-v1-3478cc1899c12f75d0d1d2e0dff936e93bca54c82e62943eee232ca750909e08",
+          "identity": "1@pc"
+        },
+        "outcome": {
+          "success": {
+            "payloads": [
+              {
+                "metadata": {
+                  "encoding": "anNvbi9wbGFpbg=="
+                },
+                "data": "ImFjZWl0byI="
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "eventId": "7",
+      "eventTime": "2026-10-17T15:06:02.792Z",
+      "eventType": "EVENT_TYPE_ACTIVITY_TASK_SCHEDULED",
+      "activityTaskScheduledEventAttributes": {
+        "activityId": "1",
+        "activityType": {
+          "name": "intervir_camofox_sintetico_v1"
+        },
+        "taskQueue": {
+          "name": "teste-camofox-ator-4b0405798e704867a0c97bc61e4300e1",
+          "kind": "TASK_QUEUE_KIND_NORMAL"
+        },
+        "header": {},
+        "input": {
+          "payloads": [
+            {
+              "metadata": {
+                "encoding": "anNvbi9wbGFpbg=="
+              },
+              "data": "eyJmYWxoYXIiOmZhbHNlLCJpZCI6ImExIiwic2Vzc2FvIjoic2Vzc2FvLUEifQ=="
+            }
+          ]
+        },
+        "scheduleToCloseTimeout": "10s",
+        "scheduleToStartTimeout": "10s",
+        "startToCloseTimeout": "10s",
+        "heartbeatTimeout": "0s",
+        "workflowTaskCompletedEventId": "3",
+        "retryPolicy": {
+          "initialInterval": "1s",
+          "backoffCoefficient": 2.0,
+          "maximumInterval": "100s",
+          "maximumAttempts": 1
+        },
+        "priority": {}
+      }
+    },
+    {
+      "eventId": "8",
+      "eventTime": "2026-10-17T15:06:02.795Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_TASK_SCHEDULED",
+      "workflowTaskScheduledEventAttributes": {
+        "taskQueue": {
+          "name": "teste-ator-workflow-4b0405798e704867a0c97bc61e4300e1"
+        },
+        "startToCloseTimeout": "10s",
+        "attempt": 1
+      }
+    },
+    {
+      "eventId": "9",
+      "eventTime": "2026-10-17T15:06:02.795Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_TASK_STARTED",
+      "workflowTaskStartedEventAttributes": {
+        "scheduledEventId": "8",
+        "identity": "1@pc",
+        "historySizeBytes": "1674"
+      }
+    },
+    {
+      "eventId": "10",
+      "eventTime": "2026-10-17T15:06:02.817Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_TASK_COMPLETED",
+      "workflowTaskCompletedEventAttributes": {
+        "scheduledEventId": "8",
+        "identity": "1@pc",
+        "binaryChecksum": "d806024b82db4faa441876d9e2d552d0",
+        "sdkMetadata": {},
+        "meteringMetadata": {}
+      }
+    },
+    {
+      "eventId": "11",
+      "eventTime": "2026-10-17T15:06:02.817Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_EXECUTION_UPDATE_ACCEPTED",
+      "workflowExecutionUpdateAcceptedEventAttributes": {
+        "protocolInstanceId": "admissao-v1-ac1c6cbd6852906944a9e3af3274c8b2b843741440029c30ea4bf1e1efc94274",
+        "acceptedRequestMessageId": "admissao-v1-ac1c6cbd6852906944a9e3af3274c8b2b843741440029c30ea4bf1e1efc94274/request",
+        "acceptedRequestSequencingEventId": "8",
+        "acceptedRequest": {
+          "meta": {
+            "updateId": "admissao-v1-ac1c6cbd6852906944a9e3af3274c8b2b843741440029c30ea4bf1e1efc94274",
+            "identity": "1@pc"
+          },
+          "input": {
+            "name": "solicitar",
+            "args": {
+              "payloads": [
+                {
+                  "metadata": {
+                    "encoding": "anNvbi9wbGFpbg=="
+                  },
+                  "data": "eyJjb25maWciOnsiZmlsYV9jYW1vZm94IjoidGVzdGUtY2Ftb2ZveC1hdG9yLTRiMDQwNTc5OGU3MDQ4NjdhMGM5N2JjNjFlNDMwMGUxIiwiZmlsYV93b3JrZmxvdyI6InRlc3RlLWF0b3Itd29ya2Zsb3ctNGIwNDA1Nzk4ZTcwNDg2N2EwYzk3YmM2MWU0MzAwZTEiLCJwcmF6b19zIjoxMSwic2Vzc2FvIjoic2Vzc2FvLUEifSwicGVkaWRvIjp7ImZhbGhhciI6ZmFsc2UsImlkIjoicmVqZWl0YWRvIiwic2Vzc2FvIjoic2Vzc2FvLUEifX0="
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "eventId": "12",
+      "eventTime": "2026-10-17T15:06:02.817Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_EXECUTION_UPDATE_COMPLETED",
+      "workflowExecutionUpdateCompletedEventAttributes": {
+        "meta": {
+          "updateId": "admissao-v1-ac1c6cbd6852906944a9e3af3274c8b2b843741440029c30ea4bf1e1efc94274",
+          "identity": "1@pc"
+        },
+        "outcome": {
+          "failure": {
+            "message": "configuracao divergente",
+            "stackTrace": "  File \"/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_workflow_instance.py\", line 734, in run_update\n    success = await self._inbound.handle_update_handler(handler_input)\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\n  File \"/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_workflow_instance.py\", line 3273, in handle_update_handler\n    return handler(*input.args)\n           ^^^^^^^^^^^^^^^^^^^^\n\n  File \"/home/pc/Workspace/PQBR/tests/workflows/prototipo_admissao_atomica.py\", line 35, in solicitar\n    raise ApplicationError(\"configuracao divergente\", type=\"ConfigDivergente\")\n",
+            "applicationFailureInfo": {
+              "type": "ConfigDivergente"
+            }
+          }
+        }
+      }
+    },
+    {
+      "eventId": "13",
+      "eventTime": "2026-10-17T15:06:02.821Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_TASK_SCHEDULED",
+      "workflowTaskScheduledEventAttributes": {
+        "taskQueue": {
+          "name": "teste-ator-workflow-4b0405798e704867a0c97bc61e4300e1"
+        },
+        "startToCloseTimeout": "10s",
+        "attempt": 1
+      }
+    },
+    {
+      "eventId": "14",
+      "eventTime": "2026-10-17T15:06:02.821Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_TASK_STARTED",
+      "workflowTaskStartedEventAttributes": {
+        "scheduledEventId": "13",
+        "identity": "1@pc",
+        "historySizeBytes": "3254"
+      }
+    },
+    {
+      "eventId": "15",
+      "eventTime": "2026-10-17T15:06:02.846Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_TASK_COMPLETED",
+      "workflowTaskCompletedEventAttributes": {
+        "scheduledEventId": "13",
+        "identity": "1@pc",
+        "binaryChecksum": "d806024b82db4faa441876d9e2d552d0",
+        "sdkMetadata": {},
+        "meteringMetadata": {}
+      }
+    },
+    {
+      "eventId": "16",
+      "eventTime": "2026-10-17T15:06:02.846Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_EXECUTION_UPDATE_ACCEPTED",
+      "workflowExecutionUpdateAcceptedEventAttributes": {
+        "protocolInstanceId": "admissao-v1-d5466f04da3fd08c41066ee560c02bb837bc7c2356919fcbe2cbf8b841848ca6",
+        "acceptedRequestMessageId": "admissao-v1-d5466f04da3fd08c41066ee560c02bb837bc7c2356919fcbe2cbf8b841848ca6/request",
+        "acceptedRequestSequencingEventId": "13",
+        "acceptedRequest": {
+          "meta": {
+            "updateId": "admissao-v1-d5466f04da3fd08c41066ee560c02bb837bc7c2356919fcbe2cbf8b841848ca6",
+            "identity": "1@pc"
+          },
+          "input": {
+            "name": "solicitar",
+            "args": {
+              "payloads": [
+                {
+                  "metadata": {
+                    "encoding": "anNvbi9wbGFpbg=="
+                  },
+                  "data": "eyJjb25maWciOnsiZmlsYV9jYW1vZm94IjoidGVzdGUtY2Ftb2ZveC1hdG9yLTRiMDQwNTc5OGU3MDQ4NjdhMGM5N2JjNjFlNDMwMGUxLW91dHJhIiwiZmlsYV93b3JrZmxvdyI6InRlc3RlLWF0b3Itd29ya2Zsb3ctNGIwNDA1Nzk4ZTcwNDg2N2EwYzk3YmM2MWU0MzAwZTEiLCJwcmF6b19zIjoxMCwic2Vzc2FvIjoic2Vzc2FvLUEifSwicGVkaWRvIjp7ImZhbGhhciI6ZmFsc2UsImlkIjoicmVqZWl0YWRvIiwic2Vzc2FvIjoic2Vzc2FvLUEifX0="
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "eventId": "17",
+      "eventTime": "2026-10-17T15:06:02.846Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_EXECUTION_UPDATE_COMPLETED",
+      "workflowExecutionUpdateCompletedEventAttributes": {
+        "meta": {
+          "updateId": "admissao-v1-d5466f04da3fd08c41066ee560c02bb837bc7c2356919fcbe2cbf8b841848ca6",
+          "identity": "1@pc"
+        },
+        "outcome": {
+          "failure": {
+            "message": "configuracao divergente",
+            "stackTrace": "  File \"/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_workflow_instance.py\", line 734, in run_update\n    success = await self._inbound.handle_update_handler(handler_input)\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\n  File \"/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_workflow_instance.py\", line 3273, in handle_update_handler\n    return handler(*input.args)\n           ^^^^^^^^^^^^^^^^^^^^\n\n  File \"/home/pc/Workspace/PQBR/tests/workflows/prototipo_admissao_atomica.py\", line 35, in solicitar\n    raise ApplicationError(\"configuracao divergente\", type=\"ConfigDivergente\")\n",
+            "applicationFailureInfo": {
+              "type": "ConfigDivergente"
+            }
+          }
+        }
+      }
+    },
+    {
+      "eventId": "18",
+      "eventTime": "2026-10-17T15:06:02.850Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_TASK_SCHEDULED",
+      "workflowTaskScheduledEventAttributes": {
+        "taskQueue": {
+          "name": "teste-ator-workflow-4b0405798e704867a0c97bc61e4300e1"
+        },
+        "startToCloseTimeout": "10s",
+        "attempt": 1
+      }
+    },
+    {
+      "eventId": "19",
+      "eventTime": "2026-10-17T15:06:02.850Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_TASK_STARTED",
+      "workflowTaskStartedEventAttributes": {
+        "scheduledEventId": "18",
+        "identity": "1@pc",
+        "historySizeBytes": "4840"
+      }
+    },
+    {
+      "eventId": "20",
+      "eventTime": "2026-10-17T15:06:02.881Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_TASK_COMPLETED",
+      "workflowTaskCompletedEventAttributes": {
+        "scheduledEventId": "18",
+        "identity": "1@pc",
+        "binaryChecksum": "d806024b82db4faa441876d9e2d552d0",
+        "sdkMetadata": {},
+        "meteringMetadata": {}
+      }
+    },
+    {
+      "eventId": "21",
+      "eventTime": "2026-10-17T15:06:02.881Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_EXECUTION_UPDATE_ACCEPTED",
+      "workflowExecutionUpdateAcceptedEventAttributes": {
+        "protocolInstanceId": "admissao-v1-1f18cb6d4c9c485a5ab9a31da9e95d9a553240e2f6205ae54666b744169ddf07",
+        "acceptedRequestMessageId": "admissao-v1-1f18cb6d4c9c485a5ab9a31da9e95d9a553240e2f6205ae54666b744169ddf07/request",
+        "acceptedRequestSequencingEventId": "18",
+        "acceptedRequest": {
+          "meta": {
+            "updateId": "admissao-v1-1f18cb6d4c9c485a5ab9a31da9e95d9a553240e2f6205ae54666b744169ddf07",
+            "identity": "1@pc"
+          },
+          "input": {
+            "name": "solicitar",
+            "args": {
+              "payloads": [
+                {
+                  "metadata": {
+                    "encoding": "anNvbi9wbGFpbg=="
+                  },
+                  "data": "eyJjb25maWciOnsiZmlsYV9jYW1vZm94IjoidGVzdGUtY2Ftb2ZveC1hdG9yLTRiMDQwNTc5OGU3MDQ4NjdhMGM5N2JjNjFlNDMwMGUxIiwiZmlsYV93b3JrZmxvdyI6InRlc3RlLWF0b3Itd29ya2Zsb3ctNGIwNDA1Nzk4ZTcwNDg2N2EwYzk3YmM2MWU0MzAwZTEtb3V0cmEiLCJwcmF6b19zIjoxMCwic2Vzc2FvIjoic2Vzc2FvLUEifSwicGVkaWRvIjp7ImZhbGhhciI6ZmFsc2UsImlkIjoicmVqZWl0YWRvIiwic2Vzc2FvIjoic2Vzc2FvLUEifX0="
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "eventId": "22",
+      "eventTime": "2026-10-17T15:06:02.881Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_EXECUTION_UPDATE_COMPLETED",
+      "workflowExecutionUpdateCompletedEventAttributes": {
+        "meta": {
+          "updateId": "admissao-v1-1f18cb6d4c9c485a5ab9a31da9e95d9a553240e2f6205ae54666b744169ddf07",
+          "identity": "1@pc"
+        },
+        "outcome": {
+          "failure": {
+            "message": "configuracao divergente",
+            "stackTrace": "  File \"/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_workflow_instance.py\", line 734, in run_update\n    success = await self._inbound.handle_update_handler(handler_input)\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\n  File \"/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_workflow_instance.py\", line 3273, in handle_update_handler\n    return handler(*input.args)\n           ^^^^^^^^^^^^^^^^^^^^\n\n  File \"/home/pc/Workspace/PQBR/tests/workflows/prototipo_admissao_atomica.py\", line 35, in solicitar\n    raise ApplicationError(\"configuracao divergente\", type=\"ConfigDivergente\")\n",
+            "applicationFailureInfo": {
+              "type": "ConfigDivergente"
+            }
+          }
+        }
+      }
+    },
+    {
+      "eventId": "23",
+      "eventTime": "2026-10-17T15:06:02.925Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_EXECUTION_SIGNALED",
+      "workflowExecutionSignaledEventAttributes": {
+        "signalName": "fechar",
+        "input": {},
+        "identity": "1@pc"
+      }
+    },
+    {
+      "eventId": "24",
+      "eventTime": "2026-10-17T15:06:02.925Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_TASK_SCHEDULED",
+      "workflowTaskScheduledEventAttributes": {
+        "taskQueue": {
+          "name": "teste-ator-workflow-4b0405798e704867a0c97bc61e4300e1"
+        },
+        "startToCloseTimeout": "10s",
+        "attempt": 1
+      }
+    },
+    {
+      "eventId": "25",
+      "eventTime": "2026-10-17T15:06:02.925Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_TASK_STARTED",
+      "workflowTaskStartedEventAttributes": {
+        "scheduledEventId": "24",
+        "identity": "1@pc",
+        "historySizeBytes": "6463"
+      }
+    },
+    {
+      "eventId": "26",
+      "eventTime": "2026-10-17T15:06:02.963Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_TASK_COMPLETED",
+      "workflowTaskCompletedEventAttributes": {
+        "scheduledEventId": "24",
+        "identity": "1@pc",
+        "binaryChecksum": "d806024b82db4faa441876d9e2d552d0",
+        "sdkMetadata": {},
+        "meteringMetadata": {}
+      }
+    },
+    {
+      "eventId": "27",
+      "eventTime": "2026-10-17T15:06:02.792Z",
+      "eventType": "EVENT_TYPE_ACTIVITY_TASK_STARTED",
+      "activityTaskStartedEventAttributes": {
+        "scheduledEventId": "7",
+        "identity": "1@pc",
+        "attempt": 1
+      }
+    },
+    {
+      "eventId": "28",
+      "eventTime": "2026-10-17T15:06:02.963Z",
+      "eventType": "EVENT_TYPE_ACTIVITY_TASK_COMPLETED",
+      "activityTaskCompletedEventAttributes": {
+        "result": {
+          "payloads": [
+            {
+              "metadata": {
+                "encoding": "anNvbi9wbGFpbg=="
+              },
+              "data": "eyJzaW50ZXRpY28iOnRydWV9"
+            }
+          ]
+        },
+        "scheduledEventId": "7",
+        "startedEventId": "26",
+        "identity": "1@pc"
+      }
+    },
+    {
+      "eventId": "29",
+      "eventTime": "2026-10-17T15:06:02.963Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_TASK_SCHEDULED",
+      "workflowTaskScheduledEventAttributes": {
+        "taskQueue": {
+          "name": "teste-ator-workflow-4b0405798e704867a0c97bc61e4300e1"
+        },
+        "startToCloseTimeout": "10s",
+        "attempt": 2
+      }
+    },
+    {
+      "eventId": "30",
+      "eventTime": "2026-10-17T15:06:02.963Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_TASK_STARTED",
+      "workflowTaskStartedEventAttributes": {
+        "scheduledEventId": "29",
+        "identity": "1@pc",
+        "historySizeBytes": "6752"
+      }
+    },
+    {
+      "eventId": "31",
+      "eventTime": "2026-10-17T15:06:03.006Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_TASK_COMPLETED",
+      "workflowTaskCompletedEventAttributes": {
+        "scheduledEventId": "29",
+        "identity": "1@pc",
+        "binaryChecksum": "d806024b82db4faa441876d9e2d552d0",
+        "sdkMetadata": {},
+        "meteringMetadata": {}
+      }
+    },
+    {
+      "eventId": "32",
+      "eventTime": "2026-10-17T15:06:03.006Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_EXECUTION_COMPLETED",
+      "workflowExecutionCompletedEventAttributes": {
+        "result": {
+          "payloads": [
+            {
+              "metadata": {
+                "encoding": "anNvbi9wbGFpbg=="
+              },
+              "data": "eyJhY2VpdG9zIjpbImExIl0sImF0aXZvIjpudWxsLCJjb25jbHVpZG9zIjpbImExIl0sImZlY2hhbmRvIjp0cnVlLCJwZW5kZW50ZXMiOltdLCJzZXNzYW8iOiJzZXNzYW8tQSJ9"
+            }
+          ]
+        },
+        "workflowTaskCompletedEventId": "30"
+      }
+    }
+  ]
+}

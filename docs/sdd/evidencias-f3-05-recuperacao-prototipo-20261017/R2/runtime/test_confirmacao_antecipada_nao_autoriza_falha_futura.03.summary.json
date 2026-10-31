@@ -1,0 +1,36 @@
+{
+  "workflow_id": "teste-f3-05-recuperacao-4d487d946f8bba8ed4573e111e96ec1f246e0ba476a4785c546bd74a029990ff-op-739edf885e87448d156ac297dce4c2d419aad8afce10930777cff6b4c4ea4e35",
+  "run_id": "01a14ad1-9943-7324-bce5-a3f7ab578e66",
+  "eventos": 31,
+  "replay": "ok",
+  "activities": [
+    {
+      "nome": "triagem_jev",
+      "fila": "teste-f3-05-candidato-wf-test_confirmacao_antecipada_nao_autoriza_falha_futura-recuperacao",
+      "max_tentativas": 3,
+      "id": "1",
+      "timeout_s": 120
+    },
+    {
+      "nome": "intervir_agente",
+      "fila": "teste-f3-05-candidato-camofox-test_confirmacao_antecipada_nao_autoriza_falha_futura-recuperacao",
+      "max_tentativas": 1,
+      "id": "intervencao-1",
+      "timeout_s": 399
+    },
+    {
+      "nome": "verificar_jev",
+      "fila": "teste-f3-05-candidato-wf-test_confirmacao_antecipada_nao_autoriza_falha_futura-recuperacao",
+      "max_tentativas": 3,
+      "id": "3",
+      "timeout_s": 120
+    },
+    {
+      "nome": "registrar_correcao",
+      "fila": "teste-f3-05-candidato-wf-test_confirmacao_antecipada_nao_autoriza_falha_futura-recuperacao",
+      "max_tentativas": 3,
+      "id": "4",
+      "timeout_s": 60
+    }
+  ]
+}

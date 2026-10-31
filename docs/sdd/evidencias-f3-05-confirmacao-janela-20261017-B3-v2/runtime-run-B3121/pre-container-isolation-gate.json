@@ -1,0 +1,29 @@
+{
+  "passed": true,
+  "internal": true,
+  "ipv4Gateway": "isolated",
+  "ipv6Gateway": "isolated",
+  "ipv6": false,
+  "bridgeHostAddresses": [
+    {
+      "ifindex": 43,
+      "ifname": "pqbrfcb3121",
+      "flags": [
+        "NO-CARRIER",
+        "BROADCAST",
+        "MULTICAST",
+        "UP"
+      ],
+      "mtu": 1500,
+      "qdisc": "noqueue",
+      "operstate": "DOWN",
+      "group": "default",
+      "link_type": "ether",
+      "address": "fa:b3:1f:76:51:4a",
+      "broadcast": "ff:ff:ff:ff:ff:ff",
+      "addr_info": []
+    }
+  ],
+  "containersStarted": 0,
+  "localImagesOnly": true
+}

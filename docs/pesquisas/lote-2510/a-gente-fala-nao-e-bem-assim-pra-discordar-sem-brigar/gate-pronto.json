@@ -1,0 +1,37 @@
+{
+  "tema": "nao-e-bem-assim",
+  "id_lote": "lote-2510/nao-e-bem-assim",
+  "pronto": "runtime/lote-saldo/nao-e-bem-assim/nao-e-bem-assim-pronto.mp4",
+  "sha256": "64eac5f4b1926261697394208021a5b392246846ec3472d33a4cc7c2413ca956",
+  "duracao_s": 39.78,
+  "pos": "scripts/pos/post-short.sh (trim protegido silencedetect, logo bug sup. dir., canto inf. dir., sting final)",
+  "gate": {
+    "A1_A3_tecnico": "PASS",
+    "A9_local": "PASS (frames 0.5/1.5/2.5 s: personagem 2D central, legivel, sem rosto real/marca, sem end-card NotebookLM)",
+    "A4_A8_juiz_gemini": "PENDENTE (LOOP não rodado)",
+    "B1_B10_editorial": "PASS (NotebookLM SEO validado PacoteSEO; 10 fontes web; GenAI: cartum 2D nao realista) ressalvas: codigo PQBR-EP fora da descricao (entra no payload)"
+  },
+  "status": "P1_HOLD",
+  "publicado": false,
+  "drive": "1giIaQF792V7vz91mh_3k7IxGjUVKCWVs",
+  "postgres": {
+    "temas_pendentes_id": 27,
+    "linhas": 1
+  },
+  "pronto_v2": {
+    "arquivo": "runtime/lote-saldo/nao-e-bem-assim/nao-e-bem-assim-pronto-v2.mp4",
+    "sha256": "509bfda78d1fccecd45339a14db80e5cf142f7a8748fe8ab48f90adfe1d02900",
+    "duracao_s": 43.08,
+    "cta": "Segue o Porquê BR, porque na hora de discordar, não é bem assim que se perde o amigo!",
+    "cta_audio": "runtime/lote-saldo/nao-e-bem-assim/cta-tema.mp3",
+    "elevenlabs_generation_id": "RT3Y4F2JoftuEg0BTe6p",
+    "creditos": 95.99,
+    "legenda_alinhamento": "125/125",
+    "motivo": "ERR-MON-02: CTA personalizado do roteiro restaurado (pronto v1 tinha CTA genérico B)",
+    "pos": "scripts/pos/post-short.sh"
+  },
+  "pronto_vigente": "runtime/lote-saldo/nao-e-bem-assim/nao-e-bem-assim-pronto-v2.mp4",
+  "codigo": "PQBR-EP1008",
+  "motivo_hold": "loop_gemini_ausente",
+  "ressalvas_gate": []
+}

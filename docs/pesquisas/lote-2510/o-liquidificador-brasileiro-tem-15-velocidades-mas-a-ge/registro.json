@@ -1,0 +1,41 @@
+{
+ "postgres": {
+  "temas_pendentes_id": 15,
+  "linhas": 1
+ },
+ "drive": {
+  "pasta": "1Ad-XrEuMdla-xYoJGUDH_i5Zc22S7-Xu",
+  "arquivos": {
+   "seo.json": {
+    "id": "15t2EkCOMyiT_-T-ZR8Tpq3vTit0Ck92G",
+    "md5": "4f7195bcc4e41e652a81c95bede40062",
+    "bytes": 4451,
+    "reaproveitado": false
+   },
+   "roteiro.json": {
+    "id": "1YzVIVOoogDOSyqgB7Iu1YHgjrxdeIVw1",
+    "md5": "51abda5e8b2b73bc0b531267866b8d40",
+    "bytes": 5609,
+    "reaproveitado": false
+   },
+   "gate-pronto.json": {
+    "id": "1R4B_tWjn5y3D3_siYbHJvZH0h6D6wX_i",
+    "md5": "5b922e8ecb3a82cd00b597cfc88cacbb",
+    "bytes": 1056,
+    "reaproveitado": false
+   },
+   "juiz-gemini.json": {
+    "id": "1KQdQLv3J_NWrqxMHvmgd2ujJlYUNa-Y9",
+    "md5": "fdcd9487eec6e0ec81a13001db732c08",
+    "bytes": 747,
+    "reaproveitado": false
+   },
+   "liquidificador-pronto.mp4": {
+    "id": "1sKkq5IDJfekD69m33J353KP4WzOH2WA5",
+    "md5": "154ce5b8fc8872be1db47bf28108c0a6",
+    "bytes": 44891657,
+    "reaproveitado": false
+   }
+  }
+ }
+}

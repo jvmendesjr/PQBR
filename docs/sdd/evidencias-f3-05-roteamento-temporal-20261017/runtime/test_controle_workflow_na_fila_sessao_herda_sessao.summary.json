@@ -1,0 +1,60 @@
+{
+  "teste": "test_controle_workflow_na_fila_sessao_herda_sessao",
+  "workflow_id": "roteamento-f3f594704872445faa574926fcbf997d",
+  "principal": "teste-pqbr-episodio-c6df36702f85494bafce0cc3b2caee9d",
+  "sessao": "teste-camofox-pqbr-c6df36702f85494bafce0cc3b2caee9d",
+  "fila_intervencao": [
+    "teste-camofox-pqbr-c6df36702f85494bafce0cc3b2caee9d"
+  ],
+  "main_calls": [],
+  "session_calls": [
+    {
+      "activity": "triagem_jev",
+      "attempt": 1,
+      "n": null,
+      "task_queue": "teste-camofox-pqbr-c6df36702f85494bafce0cc3b2caee9d",
+      "workflow_id": "roteamento-f3f594704872445faa574926fcbf997d"
+    },
+    {
+      "activity": "intervir_agente",
+      "attempt": 1,
+      "n": 1,
+      "task_queue": "teste-camofox-pqbr-c6df36702f85494bafce0cc3b2caee9d",
+      "workflow_id": "roteamento-f3f594704872445faa574926fcbf997d"
+    },
+    {
+      "activity": "verificar_jev",
+      "attempt": 1,
+      "n": 1,
+      "task_queue": "teste-camofox-pqbr-c6df36702f85494bafce0cc3b2caee9d",
+      "workflow_id": "roteamento-f3f594704872445faa574926fcbf997d"
+    },
+    {
+      "activity": "registrar_correcao",
+      "attempt": 1,
+      "n": null,
+      "task_queue": "teste-camofox-pqbr-c6df36702f85494bafce0cc3b2caee9d",
+      "workflow_id": "roteamento-f3f594704872445faa574926fcbf997d"
+    }
+  ],
+  "main_records": [],
+  "session_records": [
+    {
+      "resultado": "corrigido",
+      "tentativas": 1,
+      "motivo": "",
+      "proposta_script": "trocar seletor X por Y",
+      "chamar_jose": false
+    }
+  ],
+  "resultado": {
+    "resultado": "corrigido",
+    "tentativas": 1,
+    "motivo": "",
+    "proposta_script": "trocar seletor X por Y",
+    "chamar_jose": false
+  },
+  "falha": null,
+  "replay": "ok",
+  "eventos": 29
+}

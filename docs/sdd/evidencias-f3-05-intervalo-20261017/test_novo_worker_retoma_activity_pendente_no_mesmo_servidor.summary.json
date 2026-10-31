@@ -1,0 +1,47 @@
+{
+  "teste": "test_novo_worker_retoma_activity_pendente_no_mesmo_servidor",
+  "workflow_id": "f3-05-teste-07090ee6487047c4b0288e54723cf322",
+  "replay": "ok",
+  "eventos": 29,
+  "atividades": [
+    {
+      "activity": "triagem_jev",
+      "attempt": 1,
+      "n": null
+    },
+    {
+      "activity": "intervir_agente",
+      "attempt": 1,
+      "n": 1
+    },
+    {
+      "activity": "verificar_jev",
+      "attempt": 1,
+      "n": 1
+    },
+    {
+      "activity": "registrar_correcao",
+      "attempt": 1,
+      "n": null
+    }
+  ],
+  "registros": [
+    {
+      "resultado": "corrigido",
+      "tentativas": 1,
+      "motivo": "",
+      "proposta_script": "trocar seletor X por Y",
+      "chamar_jose": false
+    }
+  ],
+  "resultado": {
+    "resultado": "corrigido",
+    "tentativas": 1,
+    "motivo": "",
+    "proposta_script": "trocar seletor X por Y",
+    "chamar_jose": false
+  },
+  "falha": null,
+  "timers": 0,
+  "esperas": []
+}

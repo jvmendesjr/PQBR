@@ -1,0 +1,58 @@
+[
+  {
+    "path": "docs/sdd/evidencias-f3-05-recibo-duravel-20261017-D1/manifesto-final.json",
+    "sha256": "7e8c7d1adb4a2d03bd70d5cd1b78b6858d070746e20d80c5f60f6677f15ad43d"
+  },
+  {
+    "path": "docs/sdd/evidencias-f3-05-supervisor-sessao-20261017-S1/manifest-sha256.json",
+    "sha256": "a8ecce701b0cac196962bd7aef173a5183d91f21a807d82ece219ed9fcb7daa4"
+  },
+  {
+    "path": "docs/sdd/evidencias-f3-05-composicao-e2e-20261017-H3/manifesto-final.json",
+    "sha256": "73ca1fd6ea2781d5de8a55608e42aeb0cfeb040b5976ad0663e2acd8b0dea06d"
+  },
+  {
+    "path": "docs/sdd/evidencias-f3-05-confirmacao-canonica-20261017-H2/manifesto-final.json",
+    "sha256": "fdd3dbb2ac870f3fa3895fd865251a92651d38126b96cd1e0eb352b638dcfcf2"
+  },
+  {
+    "path": "docs/sdd/evidencias-f3-05-board-offline-20261017-B3/execucao-final-validada/synthetic-manifest.json",
+    "sha256": "81bfbd22d1ffe75fc6206f39a6110146989b116dc766eb2981fbcd738ad2d79c",
+    "issue_id": "issue-synthetic-B3",
+    "interaction_id": "interaction-synthetic-B3",
+    "ticket": "SYNTHETIC-B3",
+    "scope_id": "scope-synthetic-B3-once",
+    "valid_from": 1792274280,
+    "valid_until": 1792275000
+  },
+  {
+    "path": "docs/sdd/evidencias-f3-05-board-offline-20261017-B3/execucao-final/synthetic-manifest.json",
+    "sha256": "3b008d3373b7c72d48916a8f972560a858e7590c36cbc961336690ae0a0c576c",
+    "issue_id": "issue-synthetic-B3",
+    "interaction_id": "interaction-synthetic-B3",
+    "ticket": "SYNTHETIC-B3",
+    "scope_id": "scope-synthetic-B3-once",
+    "valid_from": 1792274280,
+    "valid_until": 1792275000
+  },
+  {
+    "path": "docs/sdd/evidencias-f3-05-board-offline-20261017-B3/execucao-01/synthetic-manifest.json",
+    "sha256": "3b008d3373b7c72d48916a8f972560a858e7590c36cbc961336690ae0a0c576c",
+    "issue_id": "issue-synthetic-B3",
+    "interaction_id": "interaction-synthetic-B3",
+    "ticket": "SYNTHETIC-B3",
+    "scope_id": "scope-synthetic-B3-once",
+    "valid_from": 1792274280,
+    "valid_until": 1792275000
+  },
+  {
+    "path": "docs/sdd/evidencias-f3-05-board-offline-20261017-B3/execucao-02/synthetic-manifest.json",
+    "sha256": "3b008d3373b7c72d48916a8f972560a858e7590c36cbc961336690ae0a0c576c",
+    "issue_id": "issue-synthetic-B3",
+    "interaction_id": "interaction-synthetic-B3",
+    "ticket": "SYNTHETIC-B3",
+    "scope_id": "scope-synthetic-B3-once",
+    "valid_from": 1792274280,
+    "valid_until": 1792275000
+  }
+]

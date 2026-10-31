@@ -1,0 +1,18 @@
+{
+  "workflow_id": "teste-f3-05-supervisor-dc11d675e20f084b269ed08067183b0561c26527b20b941b7e5457391417ecb8-op-f555b80ad08f501adb396a95c78948ce18f204b3cf2c93b0b1930a006540a06e",
+  "run_id": "01a14b82-b867-7a81-b8ee-93034bab8ca7",
+  "eventos": 19,
+  "replay": "ok",
+  "activities": [
+    {
+      "nome": "triagem_jev",
+      "fila": "teste-f3-05-candidato-wf-FAKE-H3-test_04_identidade_nao_autorizada-supervisor",
+      "max_tentativas": 3
+    },
+    {
+      "nome": "intervir_agente",
+      "fila": "teste-f3-05-candidato-camofox-FAKE-H3-test_04_identidade_nao_autorizada-supervisor",
+      "max_tentativas": 1
+    }
+  ]
+}

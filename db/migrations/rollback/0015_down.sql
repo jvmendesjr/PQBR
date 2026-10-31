@@ -1,0 +1,13 @@
+begin;
+drop table if exists pqbr.fontes_caderno;
+delete from pqbr.arquivo_caderno where tipo in ('resumo', 'nota', 'relatorio');
+alter table pqbr.arquivo_caderno drop constraint arquivo_caderno_tipo_check;
+alter table pqbr.arquivo_caderno add constraint arquivo_caderno_tipo_check check (tipo in ('fonte', 'resposta', 'video', 'metadados'));
+alter table pqbr.cadernos_episodio drop constraint cadernos_episodio_apagar_verificado;
+alter table pqbr.cadernos_episodio drop constraint cadernos_episodio_codigo_ep;
+delete from pqbr.arquivo_caderno where caderno_id in (select caderno_id from pqbr.cadernos_episodio where classe = 'pesquisa');
+delete from pqbr.cadernos_episodio where classe = 'pesquisa';
+alter table pqbr.cadernos_episodio drop column copias, drop column verificado_em, drop column classe;
+alter table pqbr.cadernos_episodio alter column episodio_codigo set not null;
+alter table pqbr.cadernos_episodio add constraint cadernos_episodio_check check (apagado_em is null or (arquivado_em is not null and publicado_em is not null and apagado_em >= publicado_em + interval '48 hours'));
+commit;

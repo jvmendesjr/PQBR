@@ -1,0 +1,1666 @@
+{
+  "events": [
+    {
+      "eventId": "1",
+      "eventTime": "2026-10-17T15:19:31.713Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_EXECUTION_STARTED",
+      "workflowExecutionStartedEventAttributes": {
+        "workflowType": {
+          "name": "AtorSignalSintetico"
+        },
+        "taskQueue": {
+          "name": "teste-sws-wf-stress-optin-v1"
+        },
+        "input": {
+          "payloads": [
+            {
+              "metadata": {
+                "encoding": "anNvbi9wbGFpbg=="
+              },
+              "data": "eyJjb25maWciOnsiZmlsYV9hY3Rpdml0eSI6InRlc3RlLXN3cy1hY3Qtc3RyZXNzLW9wdGluLXYxIiwiZmlsYV93b3JrZmxvdyI6InRlc3RlLXN3cy13Zi1zdHJlc3Mtb3B0aW4tdjEiLCJwcmF6b19zIjozMCwic2Vzc2FvIjoic3RyZXNzLXYxLXByb3RvdHlwZS13b3JrZXJzLWNvbGQtYzEyLWkwMDAwIn19"
+            }
+          ]
+        },
+        "workflowExecutionTimeout": "120s",
+        "workflowRunTimeout": "120s",
+        "workflowTaskTimeout": "10s",
+        "originalExecutionRunId": "bd0e7886-0c68-4c99-a54b-1c0f47516394",
+        "identity": "isolado-stress-client-000",
+        "firstExecutionRunId": "bd0e7886-0c68-4c99-a54b-1c0f47516394",
+        "retryPolicy": {
+          "initialInterval": "1s",
+          "backoffCoefficient": 2.0,
+          "maximumInterval": "100s",
+          "maximumAttempts": 1
+        },
+        "attempt": 1,
+        "firstWorkflowTaskBackoff": "0s",
+        "priority": {}
+      }
+    },
+    {
+      "eventId": "2",
+      "eventTime": "2026-10-17T15:19:31.713Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_TASK_SCHEDULED",
+      "workflowTaskScheduledEventAttributes": {
+        "taskQueue": {
+          "name": "teste-sws-wf-stress-optin-v1"
+        },
+        "startToCloseTimeout": "10s",
+        "attempt": 1
+      }
+    },
+    {
+      "eventId": "3",
+      "eventTime": "2026-10-17T15:19:31.713Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_EXECUTION_SIGNALED",
+      "workflowExecutionSignaledEventAttributes": {
+        "signalName": "solicitar",
+        "input": {
+          "payloads": [
+            {
+              "metadata": {
+                "encoding": "anNvbi9wbGFpbg=="
+              },
+              "data": "eyJjb25maWciOnsiZmlsYV9hY3Rpdml0eSI6InRlc3RlLXN3cy1hY3Qtc3RyZXNzLW9wdGluLXYxIiwiZmlsYV93b3JrZmxvdyI6InRlc3RlLXN3cy13Zi1zdHJlc3Mtb3B0aW4tdjEiLCJwcmF6b19zIjozMCwic2Vzc2FvIjoic3RyZXNzLXYxLXByb3RvdHlwZS13b3JrZXJzLWNvbGQtYzEyLWkwMDAwIn0sInBlZGlkbyI6eyJmYWxoYXIiOmZhbHNlLCJpZCI6InAwMDAwIiwic2Vzc2FvIjoic3RyZXNzLXYxLXByb3RvdHlwZS13b3JrZXJzLWNvbGQtYzEyLWkwMDAwIn19"
+            }
+          ]
+        },
+        "identity": "isolado-stress-client-000"
+      }
+    },
+    {
+      "eventId": "4",
+      "eventTime": "2026-10-17T15:19:31.713Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_TASK_STARTED",
+      "workflowTaskStartedEventAttributes": {
+        "scheduledEventId": "2",
+        "identity": "isolado-stress-client-000",
+        "historySizeBytes": "848"
+      }
+    },
+    {
+      "eventId": "5",
+      "eventTime": "2026-10-17T15:19:31.738Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_TASK_COMPLETED",
+      "workflowTaskCompletedEventAttributes": {
+        "scheduledEventId": "2",
+        "identity": "isolado-stress-client-000",
+        "binaryChecksum": "bb8ed7348b363df7c5b0b19b9ae3ad55",
+        "sdkMetadata": {
+          "coreUsedFlags": [
+            2,
+            3,
+            1
+          ],
+          "sdkName": "temporal-python",
+          "sdkVersion": "1.34.0"
+        },
+        "meteringMetadata": {}
+      }
+    },
+    {
+      "eventId": "6",
+      "eventTime": "2026-10-17T15:19:31.738Z",
+      "eventType": "EVENT_TYPE_ACTIVITY_TASK_SCHEDULED",
+      "activityTaskScheduledEventAttributes": {
+        "activityId": "1",
+        "activityType": {
+          "name": "efeito_signal_sintetico_v1"
+        },
+        "taskQueue": {
+          "name": "teste-sws-act-stress-optin-v1",
+          "kind": "TASK_QUEUE_KIND_NORMAL"
+        },
+        "header": {},
+        "input": {
+          "payloads": [
+            {
+              "metadata": {
+                "encoding": "anNvbi9wbGFpbg=="
+              },
+              "data": "eyJmYWxoYXIiOmZhbHNlLCJpZCI6InAwMDAwIiwic2Vzc2FvIjoic3RyZXNzLXYxLXByb3RvdHlwZS13b3JrZXJzLWNvbGQtYzEyLWkwMDAwIn0="
+            }
+          ]
+        },
+        "scheduleToCloseTimeout": "30s",
+        "scheduleToStartTimeout": "30s",
+        "startToCloseTimeout": "30s",
+        "heartbeatTimeout": "0s",
+        "workflowTaskCompletedEventId": "4",
+        "retryPolicy": {
+          "initialInterval": "1s",
+          "backoffCoefficient": 2.0,
+          "maximumInterval": "100s",
+          "maximumAttempts": 1
+        },
+        "priority": {}
+      }
+    },
+    {
+      "eventId": "7",
+      "eventTime": "2026-10-17T15:19:31.738Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_EXECUTION_SIGNALED",
+      "workflowExecutionSignaledEventAttributes": {
+        "signalName": "solicitar",
+        "input": {
+          "payloads": [
+            {
+              "metadata": {
+                "encoding": "anNvbi9wbGFpbg=="
+              },
+              "data": "eyJjb25maWciOnsiZmlsYV9hY3Rpdml0eSI6InRlc3RlLXN3cy1hY3Qtc3RyZXNzLW9wdGluLXYxIiwiZmlsYV93b3JrZmxvdyI6InRlc3RlLXN3cy13Zi1zdHJlc3Mtb3B0aW4tdjEiLCJwcmF6b19zIjozMCwic2Vzc2FvIjoic3RyZXNzLXYxLXByb3RvdHlwZS13b3JrZXJzLWNvbGQtYzEyLWkwMDAwIn0sInBlZGlkbyI6eyJmYWxoYXIiOmZhbHNlLCJpZCI6InAwMDAxIiwic2Vzc2FvIjoic3RyZXNzLXYxLXByb3RvdHlwZS13b3JrZXJzLWNvbGQtYzEyLWkwMDAwIn19"
+            }
+          ]
+        },
+        "identity": "isolado-stress-client-001"
+      }
+    },
+    {
+      "eventId": "8",
+      "eventTime": "2026-10-17T15:19:31.738Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_EXECUTION_SIGNALED",
+      "workflowExecutionSignaledEventAttributes": {
+        "signalName": "solicitar",
+        "input": {
+          "payloads": [
+            {
+              "metadata": {
+                "encoding": "anNvbi9wbGFpbg=="
+              },
+              "data": "eyJjb25maWciOnsiZmlsYV9hY3Rpdml0eSI6InRlc3RlLXN3cy1hY3Qtc3RyZXNzLW9wdGluLXYxIiwiZmlsYV93b3JrZmxvdyI6InRlc3RlLXN3cy13Zi1zdHJlc3Mtb3B0aW4tdjEiLCJwcmF6b19zIjozMCwic2Vzc2FvIjoic3RyZXNzLXYxLXByb3RvdHlwZS13b3JrZXJzLWNvbGQtYzEyLWkwMDAwIn0sInBlZGlkbyI6eyJmYWxoYXIiOmZhbHNlLCJpZCI6InAwMDAyIiwic2Vzc2FvIjoic3RyZXNzLXYxLXByb3RvdHlwZS13b3JrZXJzLWNvbGQtYzEyLWkwMDAwIn19"
+            }
+          ]
+        },
+        "identity": "isolado-stress-client-002"
+      }
+    },
+    {
+      "eventId": "9",
+      "eventTime": "2026-10-17T15:19:31.738Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_EXECUTION_SIGNALED",
+      "workflowExecutionSignaledEventAttributes": {
+        "signalName": "solicitar",
+        "input": {
+          "payloads": [
+            {
+              "metadata": {
+                "encoding": "anNvbi9wbGFpbg=="
+              },
+              "data": "eyJjb25maWciOnsiZmlsYV9hY3Rpdml0eSI6InRlc3RlLXN3cy1hY3Qtc3RyZXNzLW9wdGluLXYxIiwiZmlsYV93b3JrZmxvdyI6InRlc3RlLXN3cy13Zi1zdHJlc3Mtb3B0aW4tdjEiLCJwcmF6b19zIjozMCwic2Vzc2FvIjoic3RyZXNzLXYxLXByb3RvdHlwZS13b3JrZXJzLWNvbGQtYzEyLWkwMDAwIn0sInBlZGlkbyI6eyJmYWxoYXIiOmZhbHNlLCJpZCI6InAwMDAzIiwic2Vzc2FvIjoic3RyZXNzLXYxLXByb3RvdHlwZS13b3JrZXJzLWNvbGQtYzEyLWkwMDAwIn19"
+            }
+          ]
+        },
+        "identity": "isolado-stress-client-003"
+      }
+    },
+    {
+      "eventId": "10",
+      "eventTime": "2026-10-17T15:19:31.738Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_EXECUTION_SIGNALED",
+      "workflowExecutionSignaledEventAttributes": {
+        "signalName": "solicitar",
+        "input": {
+          "payloads": [
+            {
+              "metadata": {
+                "encoding": "anNvbi9wbGFpbg=="
+              },
+              "data": "eyJjb25maWciOnsiZmlsYV9hY3Rpdml0eSI6InRlc3RlLXN3cy1hY3Qtc3RyZXNzLW9wdGluLXYxIiwiZmlsYV93b3JrZmxvdyI6InRlc3RlLXN3cy13Zi1zdHJlc3Mtb3B0aW4tdjEiLCJwcmF6b19zIjozMCwic2Vzc2FvIjoic3RyZXNzLXYxLXByb3RvdHlwZS13b3JrZXJzLWNvbGQtYzEyLWkwMDAwIn0sInBlZGlkbyI6eyJmYWxoYXIiOmZhbHNlLCJpZCI6InAwMDA0Iiwic2Vzc2FvIjoic3RyZXNzLXYxLXByb3RvdHlwZS13b3JrZXJzLWNvbGQtYzEyLWkwMDAwIn19"
+            }
+          ]
+        },
+        "identity": "isolado-stress-client-004"
+      }
+    },
+    {
+      "eventId": "11",
+      "eventTime": "2026-10-17T15:19:31.738Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_EXECUTION_SIGNALED",
+      "workflowExecutionSignaledEventAttributes": {
+        "signalName": "solicitar",
+        "input": {
+          "payloads": [
+            {
+              "metadata": {
+                "encoding": "anNvbi9wbGFpbg=="
+              },
+              "data": "eyJjb25maWciOnsiZmlsYV9hY3Rpdml0eSI6InRlc3RlLXN3cy1hY3Qtc3RyZXNzLW9wdGluLXYxIiwiZmlsYV93b3JrZmxvdyI6InRlc3RlLXN3cy13Zi1zdHJlc3Mtb3B0aW4tdjEiLCJwcmF6b19zIjozMCwic2Vzc2FvIjoic3RyZXNzLXYxLXByb3RvdHlwZS13b3JrZXJzLWNvbGQtYzEyLWkwMDAwIn0sInBlZGlkbyI6eyJmYWxoYXIiOmZhbHNlLCJpZCI6InAwMDA1Iiwic2Vzc2FvIjoic3RyZXNzLXYxLXByb3RvdHlwZS13b3JrZXJzLWNvbGQtYzEyLWkwMDAwIn19"
+            }
+          ]
+        },
+        "identity": "isolado-stress-client-005"
+      }
+    },
+    {
+      "eventId": "12",
+      "eventTime": "2026-10-17T15:19:31.738Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_EXECUTION_SIGNALED",
+      "workflowExecutionSignaledEventAttributes": {
+        "signalName": "solicitar",
+        "input": {
+          "payloads": [
+            {
+              "metadata": {
+                "encoding": "anNvbi9wbGFpbg=="
+              },
+              "data": "eyJjb25maWciOnsiZmlsYV9hY3Rpdml0eSI6InRlc3RlLXN3cy1hY3Qtc3RyZXNzLW9wdGluLXYxIiwiZmlsYV93b3JrZmxvdyI6InRlc3RlLXN3cy13Zi1zdHJlc3Mtb3B0aW4tdjEiLCJwcmF6b19zIjozMCwic2Vzc2FvIjoic3RyZXNzLXYxLXByb3RvdHlwZS13b3JrZXJzLWNvbGQtYzEyLWkwMDAwIn0sInBlZGlkbyI6eyJmYWxoYXIiOmZhbHNlLCJpZCI6InAwMDA2Iiwic2Vzc2FvIjoic3RyZXNzLXYxLXByb3RvdHlwZS13b3JrZXJzLWNvbGQtYzEyLWkwMDAwIn19"
+            }
+          ]
+        },
+        "identity": "isolado-stress-client-006"
+      }
+    },
+    {
+      "eventId": "13",
+      "eventTime": "2026-10-17T15:19:31.738Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_EXECUTION_SIGNALED",
+      "workflowExecutionSignaledEventAttributes": {
+        "signalName": "solicitar",
+        "input": {
+          "payloads": [
+            {
+              "metadata": {
+                "encoding": "anNvbi9wbGFpbg=="
+              },
+              "data": "eyJjb25maWciOnsiZmlsYV9hY3Rpdml0eSI6InRlc3RlLXN3cy1hY3Qtc3RyZXNzLW9wdGluLXYxIiwiZmlsYV93b3JrZmxvdyI6InRlc3RlLXN3cy13Zi1zdHJlc3Mtb3B0aW4tdjEiLCJwcmF6b19zIjozMCwic2Vzc2FvIjoic3RyZXNzLXYxLXByb3RvdHlwZS13b3JrZXJzLWNvbGQtYzEyLWkwMDAwIn0sInBlZGlkbyI6eyJmYWxoYXIiOmZhbHNlLCJpZCI6InAwMDA3Iiwic2Vzc2FvIjoic3RyZXNzLXYxLXByb3RvdHlwZS13b3JrZXJzLWNvbGQtYzEyLWkwMDAwIn19"
+            }
+          ]
+        },
+        "identity": "isolado-stress-client-007"
+      }
+    },
+    {
+      "eventId": "14",
+      "eventTime": "2026-10-17T15:19:31.738Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_EXECUTION_SIGNALED",
+      "workflowExecutionSignaledEventAttributes": {
+        "signalName": "solicitar",
+        "input": {
+          "payloads": [
+            {
+              "metadata": {
+                "encoding": "anNvbi9wbGFpbg=="
+              },
+              "data": "eyJjb25maWciOnsiZmlsYV9hY3Rpdml0eSI6InRlc3RlLXN3cy1hY3Qtc3RyZXNzLW9wdGluLXYxIiwiZmlsYV93b3JrZmxvdyI6InRlc3RlLXN3cy13Zi1zdHJlc3Mtb3B0aW4tdjEiLCJwcmF6b19zIjozMCwic2Vzc2FvIjoic3RyZXNzLXYxLXByb3RvdHlwZS13b3JrZXJzLWNvbGQtYzEyLWkwMDAwIn0sInBlZGlkbyI6eyJmYWxoYXIiOmZhbHNlLCJpZCI6InAwMDA4Iiwic2Vzc2FvIjoic3RyZXNzLXYxLXByb3RvdHlwZS13b3JrZXJzLWNvbGQtYzEyLWkwMDAwIn19"
+            }
+          ]
+        },
+        "identity": "isolado-stress-client-008"
+      }
+    },
+    {
+      "eventId": "15",
+      "eventTime": "2026-10-17T15:19:31.738Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_EXECUTION_SIGNALED",
+      "workflowExecutionSignaledEventAttributes": {
+        "signalName": "solicitar",
+        "input": {
+          "payloads": [
+            {
+              "metadata": {
+                "encoding": "anNvbi9wbGFpbg=="
+              },
+              "data": "eyJjb25maWciOnsiZmlsYV9hY3Rpdml0eSI6InRlc3RlLXN3cy1hY3Qtc3RyZXNzLW9wdGluLXYxIiwiZmlsYV93b3JrZmxvdyI6InRlc3RlLXN3cy13Zi1zdHJlc3Mtb3B0aW4tdjEiLCJwcmF6b19zIjozMCwic2Vzc2FvIjoic3RyZXNzLXYxLXByb3RvdHlwZS13b3JrZXJzLWNvbGQtYzEyLWkwMDAwIn0sInBlZGlkbyI6eyJmYWxoYXIiOmZhbHNlLCJpZCI6InAwMDA5Iiwic2Vzc2FvIjoic3RyZXNzLXYxLXByb3RvdHlwZS13b3JrZXJzLWNvbGQtYzEyLWkwMDAwIn19"
+            }
+          ]
+        },
+        "identity": "isolado-stress-client-009"
+      }
+    },
+    {
+      "eventId": "16",
+      "eventTime": "2026-10-17T15:19:31.738Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_EXECUTION_SIGNALED",
+      "workflowExecutionSignaledEventAttributes": {
+        "signalName": "solicitar",
+        "input": {
+          "payloads": [
+            {
+              "metadata": {
+                "encoding": "anNvbi9wbGFpbg=="
+              },
+              "data": "eyJjb25maWciOnsiZmlsYV9hY3Rpdml0eSI6InRlc3RlLXN3cy1hY3Qtc3RyZXNzLW9wdGluLXYxIiwiZmlsYV93b3JrZmxvdyI6InRlc3RlLXN3cy13Zi1zdHJlc3Mtb3B0aW4tdjEiLCJwcmF6b19zIjozMCwic2Vzc2FvIjoic3RyZXNzLXYxLXByb3RvdHlwZS13b3JrZXJzLWNvbGQtYzEyLWkwMDAwIn0sInBlZGlkbyI6eyJmYWxoYXIiOmZhbHNlLCJpZCI6InAwMDEwIiwic2Vzc2FvIjoic3RyZXNzLXYxLXByb3RvdHlwZS13b3JrZXJzLWNvbGQtYzEyLWkwMDAwIn19"
+            }
+          ]
+        },
+        "identity": "isolado-stress-client-010"
+      }
+    },
+    {
+      "eventId": "17",
+      "eventTime": "2026-10-17T15:19:31.738Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_EXECUTION_SIGNALED",
+      "workflowExecutionSignaledEventAttributes": {
+        "signalName": "solicitar",
+        "input": {
+          "payloads": [
+            {
+              "metadata": {
+                "encoding": "anNvbi9wbGFpbg=="
+              },
+              "data": "eyJjb25maWciOnsiZmlsYV9hY3Rpdml0eSI6InRlc3RlLXN3cy1hY3Qtc3RyZXNzLW9wdGluLXYxIiwiZmlsYV93b3JrZmxvdyI6InRlc3RlLXN3cy13Zi1zdHJlc3Mtb3B0aW4tdjEiLCJwcmF6b19zIjozMCwic2Vzc2FvIjoic3RyZXNzLXYxLXByb3RvdHlwZS13b3JrZXJzLWNvbGQtYzEyLWkwMDAwIn0sInBlZGlkbyI6eyJmYWxoYXIiOmZhbHNlLCJpZCI6InAwMDExIiwic2Vzc2FvIjoic3RyZXNzLXYxLXByb3RvdHlwZS13b3JrZXJzLWNvbGQtYzEyLWkwMDAwIn19"
+            }
+          ]
+        },
+        "identity": "isolado-stress-client-011"
+      }
+    },
+    {
+      "eventId": "18",
+      "eventTime": "2026-10-17T15:19:31.738Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_TASK_SCHEDULED",
+      "workflowTaskScheduledEventAttributes": {
+        "taskQueue": {
+          "name": "teste-sws-wf-stress-optin-v1"
+        },
+        "startToCloseTimeout": "10s",
+        "attempt": 2
+      }
+    },
+    {
+      "eventId": "19",
+      "eventTime": "2026-10-17T15:19:31.739Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_TASK_STARTED",
+      "workflowTaskStartedEventAttributes": {
+        "scheduledEventId": "18",
+        "identity": "isolado-stress-client-000",
+        "historySizeBytes": "5278"
+      }
+    },
+    {
+      "eventId": "20",
+      "eventTime": "2026-10-17T15:19:31.767Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_TASK_COMPLETED",
+      "workflowTaskCompletedEventAttributes": {
+        "scheduledEventId": "18",
+        "identity": "isolado-stress-client-000",
+        "binaryChecksum": "bb8ed7348b363df7c5b0b19b9ae3ad55",
+        "sdkMetadata": {},
+        "meteringMetadata": {}
+      }
+    },
+    {
+      "eventId": "21",
+      "eventTime": "2026-10-17T15:19:31.767Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_TASK_SCHEDULED",
+      "workflowTaskScheduledEventAttributes": {
+        "taskQueue": {
+          "name": "teste-sws-wf-stress-optin-v1"
+        },
+        "startToCloseTimeout": "10s",
+        "attempt": 1
+      }
+    },
+    {
+      "eventId": "22",
+      "eventTime": "2026-10-17T15:19:31.767Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_TASK_STARTED",
+      "workflowTaskStartedEventAttributes": {
+        "scheduledEventId": "21",
+        "identity": "isolado-stress-client-000",
+        "historySizeBytes": "5475"
+      }
+    },
+    {
+      "eventId": "23",
+      "eventTime": "2026-10-17T15:19:31.787Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_TASK_COMPLETED",
+      "workflowTaskCompletedEventAttributes": {
+        "scheduledEventId": "21",
+        "identity": "isolado-stress-client-000",
+        "binaryChecksum": "bb8ed7348b363df7c5b0b19b9ae3ad55",
+        "sdkMetadata": {},
+        "meteringMetadata": {}
+      }
+    },
+    {
+      "eventId": "24",
+      "eventTime": "2026-10-17T15:19:31.788Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_EXECUTION_SIGNALED",
+      "workflowExecutionSignaledEventAttributes": {
+        "signalName": "fechar",
+        "input": {},
+        "identity": "isolado-stress-client-000"
+      }
+    },
+    {
+      "eventId": "25",
+      "eventTime": "2026-10-17T15:19:31.788Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_TASK_SCHEDULED",
+      "workflowTaskScheduledEventAttributes": {
+        "taskQueue": {
+          "name": "teste-sws-wf-stress-optin-v1"
+        },
+        "startToCloseTimeout": "10s",
+        "attempt": 1
+      }
+    },
+    {
+      "eventId": "26",
+      "eventTime": "2026-10-17T15:19:31.788Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_TASK_STARTED",
+      "workflowTaskStartedEventAttributes": {
+        "scheduledEventId": "25",
+        "identity": "isolado-stress-client-000",
+        "historySizeBytes": "5730"
+      }
+    },
+    {
+      "eventId": "27",
+      "eventTime": "2026-10-17T15:19:31.808Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_TASK_COMPLETED",
+      "workflowTaskCompletedEventAttributes": {
+        "scheduledEventId": "25",
+        "identity": "isolado-stress-client-000",
+        "binaryChecksum": "bb8ed7348b363df7c5b0b19b9ae3ad55",
+        "sdkMetadata": {},
+        "meteringMetadata": {}
+      }
+    },
+    {
+      "eventId": "28",
+      "eventTime": "2026-10-17T15:19:31.738Z",
+      "eventType": "EVENT_TYPE_ACTIVITY_TASK_STARTED",
+      "activityTaskStartedEventAttributes": {
+        "scheduledEventId": "6",
+        "identity": "isolado-stress-client-000",
+        "attempt": 1
+      }
+    },
+    {
+      "eventId": "29",
+      "eventTime": "2026-10-17T15:19:31.808Z",
+      "eventType": "EVENT_TYPE_ACTIVITY_TASK_COMPLETED",
+      "activityTaskCompletedEventAttributes": {
+        "result": {
+          "payloads": [
+            {
+              "metadata": {
+                "encoding": "anNvbi9wbGFpbg=="
+              },
+              "data": "eyJzaW50ZXRpY28iOnRydWV9"
+            }
+          ]
+        },
+        "scheduledEventId": "6",
+        "startedEventId": "27",
+        "identity": "isolado-stress-client-000"
+      }
+    },
+    {
+      "eventId": "30",
+      "eventTime": "2026-10-17T15:19:31.808Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_TASK_SCHEDULED",
+      "workflowTaskScheduledEventAttributes": {
+        "taskQueue": {
+          "name": "teste-sws-wf-stress-optin-v1"
+        },
+        "startToCloseTimeout": "10s",
+        "attempt": 2
+      }
+    },
+    {
+      "eventId": "31",
+      "eventTime": "2026-10-17T15:19:31.808Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_TASK_STARTED",
+      "workflowTaskStartedEventAttributes": {
+        "scheduledEventId": "30",
+        "identity": "isolado-stress-client-000",
+        "historySizeBytes": "6079"
+      }
+    },
+    {
+      "eventId": "32",
+      "eventTime": "2026-10-17T15:19:31.831Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_TASK_COMPLETED",
+      "workflowTaskCompletedEventAttributes": {
+        "scheduledEventId": "30",
+        "identity": "isolado-stress-client-000",
+        "binaryChecksum": "bb8ed7348b363df7c5b0b19b9ae3ad55",
+        "sdkMetadata": {},
+        "meteringMetadata": {}
+      }
+    },
+    {
+      "eventId": "33",
+      "eventTime": "2026-10-17T15:19:31.831Z",
+      "eventType": "EVENT_TYPE_ACTIVITY_TASK_SCHEDULED",
+      "activityTaskScheduledEventAttributes": {
+        "activityId": "2",
+        "activityType": {
+          "name": "efeito_signal_sintetico_v1"
+        },
+        "taskQueue": {
+          "name": "teste-sws-act-stress-optin-v1",
+          "kind": "TASK_QUEUE_KIND_NORMAL"
+        },
+        "header": {},
+        "input": {
+          "payloads": [
+            {
+              "metadata": {
+                "encoding": "anNvbi9wbGFpbg=="
+              },
+              "data": "eyJmYWxoYXIiOmZhbHNlLCJpZCI6InAwMDAxIiwic2Vzc2FvIjoic3RyZXNzLXYxLXByb3RvdHlwZS13b3JrZXJzLWNvbGQtYzEyLWkwMDAwIn0="
+            }
+          ]
+        },
+        "scheduleToCloseTimeout": "30s",
+        "scheduleToStartTimeout": "30s",
+        "startToCloseTimeout": "30s",
+        "heartbeatTimeout": "0s",
+        "workflowTaskCompletedEventId": "31",
+        "retryPolicy": {
+          "initialInterval": "1s",
+          "backoffCoefficient": 2.0,
+          "maximumInterval": "100s",
+          "maximumAttempts": 1
+        },
+        "priority": {}
+      }
+    },
+    {
+      "eventId": "34",
+      "eventTime": "2026-10-17T15:19:31.832Z",
+      "eventType": "EVENT_TYPE_ACTIVITY_TASK_STARTED",
+      "activityTaskStartedEventAttributes": {
+        "scheduledEventId": "33",
+        "identity": "isolado-stress-client-000",
+        "attempt": 1
+      }
+    },
+    {
+      "eventId": "35",
+      "eventTime": "2026-10-17T15:19:31.834Z",
+      "eventType": "EVENT_TYPE_ACTIVITY_TASK_COMPLETED",
+      "activityTaskCompletedEventAttributes": {
+        "result": {
+          "payloads": [
+            {
+              "metadata": {
+                "encoding": "anNvbi9wbGFpbg=="
+              },
+              "data": "eyJzaW50ZXRpY28iOnRydWV9"
+            }
+          ]
+        },
+        "scheduledEventId": "33",
+        "startedEventId": "34",
+        "identity": "isolado-stress-client-000"
+      }
+    },
+    {
+      "eventId": "36",
+      "eventTime": "2026-10-17T15:19:31.834Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_TASK_SCHEDULED",
+      "workflowTaskScheduledEventAttributes": {
+        "taskQueue": {
+          "name": "teste-sws-wf-stress-optin-v1"
+        },
+        "startToCloseTimeout": "10s",
+        "attempt": 1
+      }
+    },
+    {
+      "eventId": "37",
+      "eventTime": "2026-10-17T15:19:31.834Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_TASK_STARTED",
+      "workflowTaskStartedEventAttributes": {
+        "scheduledEventId": "36",
+        "identity": "isolado-stress-client-000",
+        "historySizeBytes": "6671"
+      }
+    },
+    {
+      "eventId": "38",
+      "eventTime": "2026-10-17T15:19:31.864Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_TASK_COMPLETED",
+      "workflowTaskCompletedEventAttributes": {
+        "scheduledEventId": "36",
+        "identity": "isolado-stress-client-000",
+        "binaryChecksum": "bb8ed7348b363df7c5b0b19b9ae3ad55",
+        "sdkMetadata": {},
+        "meteringMetadata": {}
+      }
+    },
+    {
+      "eventId": "39",
+      "eventTime": "2026-10-17T15:19:31.864Z",
+      "eventType": "EVENT_TYPE_ACTIVITY_TASK_SCHEDULED",
+      "activityTaskScheduledEventAttributes": {
+        "activityId": "3",
+        "activityType": {
+          "name": "efeito_signal_sintetico_v1"
+        },
+        "taskQueue": {
+          "name": "teste-sws-act-stress-optin-v1",
+          "kind": "TASK_QUEUE_KIND_NORMAL"
+        },
+        "header": {},
+        "input": {
+          "payloads": [
+            {
+              "metadata": {
+                "encoding": "anNvbi9wbGFpbg=="
+              },
+              "data": "eyJmYWxoYXIiOmZhbHNlLCJpZCI6InAwMDAyIiwic2Vzc2FvIjoic3RyZXNzLXYxLXByb3RvdHlwZS13b3JrZXJzLWNvbGQtYzEyLWkwMDAwIn0="
+            }
+          ]
+        },
+        "scheduleToCloseTimeout": "30s",
+        "scheduleToStartTimeout": "30s",
+        "startToCloseTimeout": "30s",
+        "heartbeatTimeout": "0s",
+        "workflowTaskCompletedEventId": "37",
+        "retryPolicy": {
+          "initialInterval": "1s",
+          "backoffCoefficient": 2.0,
+          "maximumInterval": "100s",
+          "maximumAttempts": 1
+        },
+        "priority": {}
+      }
+    },
+    {
+      "eventId": "40",
+      "eventTime": "2026-10-17T15:19:31.864Z",
+      "eventType": "EVENT_TYPE_ACTIVITY_TASK_STARTED",
+      "activityTaskStartedEventAttributes": {
+        "scheduledEventId": "39",
+        "identity": "isolado-stress-client-000",
+        "attempt": 1
+      }
+    },
+    {
+      "eventId": "41",
+      "eventTime": "2026-10-17T15:19:31.866Z",
+      "eventType": "EVENT_TYPE_ACTIVITY_TASK_COMPLETED",
+      "activityTaskCompletedEventAttributes": {
+        "result": {
+          "payloads": [
+            {
+              "metadata": {
+                "encoding": "anNvbi9wbGFpbg=="
+              },
+              "data": "eyJzaW50ZXRpY28iOnRydWV9"
+            }
+          ]
+        },
+        "scheduledEventId": "39",
+        "startedEventId": "40",
+        "identity": "isolado-stress-client-000"
+      }
+    },
+    {
+      "eventId": "42",
+      "eventTime": "2026-10-17T15:19:31.866Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_TASK_SCHEDULED",
+      "workflowTaskScheduledEventAttributes": {
+        "taskQueue": {
+          "name": "teste-sws-wf-stress-optin-v1"
+        },
+        "startToCloseTimeout": "10s",
+        "attempt": 1
+      }
+    },
+    {
+      "eventId": "43",
+      "eventTime": "2026-10-17T15:19:31.866Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_TASK_STARTED",
+      "workflowTaskStartedEventAttributes": {
+        "scheduledEventId": "42",
+        "identity": "isolado-stress-client-000",
+        "historySizeBytes": "7263"
+      }
+    },
+    {
+      "eventId": "44",
+      "eventTime": "2026-10-17T15:19:31.899Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_TASK_COMPLETED",
+      "workflowTaskCompletedEventAttributes": {
+        "scheduledEventId": "42",
+        "identity": "isolado-stress-client-000",
+        "binaryChecksum": "bb8ed7348b363df7c5b0b19b9ae3ad55",
+        "sdkMetadata": {},
+        "meteringMetadata": {}
+      }
+    },
+    {
+      "eventId": "45",
+      "eventTime": "2026-10-17T15:19:31.899Z",
+      "eventType": "EVENT_TYPE_ACTIVITY_TASK_SCHEDULED",
+      "activityTaskScheduledEventAttributes": {
+        "activityId": "4",
+        "activityType": {
+          "name": "efeito_signal_sintetico_v1"
+        },
+        "taskQueue": {
+          "name": "teste-sws-act-stress-optin-v1",
+          "kind": "TASK_QUEUE_KIND_NORMAL"
+        },
+        "header": {},
+        "input": {
+          "payloads": [
+            {
+              "metadata": {
+                "encoding": "anNvbi9wbGFpbg=="
+              },
+              "data": "eyJmYWxoYXIiOmZhbHNlLCJpZCI6InAwMDAzIiwic2Vzc2FvIjoic3RyZXNzLXYxLXByb3RvdHlwZS13b3JrZXJzLWNvbGQtYzEyLWkwMDAwIn0="
+            }
+          ]
+        },
+        "scheduleToCloseTimeout": "30s",
+        "scheduleToStartTimeout": "30s",
+        "startToCloseTimeout": "30s",
+        "heartbeatTimeout": "0s",
+        "workflowTaskCompletedEventId": "43",
+        "retryPolicy": {
+          "initialInterval": "1s",
+          "backoffCoefficient": 2.0,
+          "maximumInterval": "100s",
+          "maximumAttempts": 1
+        },
+        "priority": {}
+      }
+    },
+    {
+      "eventId": "46",
+      "eventTime": "2026-10-17T15:19:31.899Z",
+      "eventType": "EVENT_TYPE_ACTIVITY_TASK_STARTED",
+      "activityTaskStartedEventAttributes": {
+        "scheduledEventId": "45",
+        "identity": "isolado-stress-client-000",
+        "attempt": 1
+      }
+    },
+    {
+      "eventId": "47",
+      "eventTime": "2026-10-17T15:19:31.902Z",
+      "eventType": "EVENT_TYPE_ACTIVITY_TASK_COMPLETED",
+      "activityTaskCompletedEventAttributes": {
+        "result": {
+          "payloads": [
+            {
+              "metadata": {
+                "encoding": "anNvbi9wbGFpbg=="
+              },
+              "data": "eyJzaW50ZXRpY28iOnRydWV9"
+            }
+          ]
+        },
+        "scheduledEventId": "45",
+        "startedEventId": "46",
+        "identity": "isolado-stress-client-000"
+      }
+    },
+    {
+      "eventId": "48",
+      "eventTime": "2026-10-17T15:19:31.902Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_TASK_SCHEDULED",
+      "workflowTaskScheduledEventAttributes": {
+        "taskQueue": {
+          "name": "teste-sws-wf-stress-optin-v1"
+        },
+        "startToCloseTimeout": "10s",
+        "attempt": 1
+      }
+    },
+    {
+      "eventId": "49",
+      "eventTime": "2026-10-17T15:19:31.902Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_TASK_STARTED",
+      "workflowTaskStartedEventAttributes": {
+        "scheduledEventId": "48",
+        "identity": "isolado-stress-client-000",
+        "historySizeBytes": "7855"
+      }
+    },
+    {
+      "eventId": "50",
+      "eventTime": "2026-10-17T15:19:31.948Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_TASK_COMPLETED",
+      "workflowTaskCompletedEventAttributes": {
+        "scheduledEventId": "48",
+        "identity": "isolado-stress-client-000",
+        "binaryChecksum": "bb8ed7348b363df7c5b0b19b9ae3ad55",
+        "sdkMetadata": {},
+        "meteringMetadata": {}
+      }
+    },
+    {
+      "eventId": "51",
+      "eventTime": "2026-10-17T15:19:31.948Z",
+      "eventType": "EVENT_TYPE_ACTIVITY_TASK_SCHEDULED",
+      "activityTaskScheduledEventAttributes": {
+        "activityId": "5",
+        "activityType": {
+          "name": "efeito_signal_sintetico_v1"
+        },
+        "taskQueue": {
+          "name": "teste-sws-act-stress-optin-v1",
+          "kind": "TASK_QUEUE_KIND_NORMAL"
+        },
+        "header": {},
+        "input": {
+          "payloads": [
+            {
+              "metadata": {
+                "encoding": "anNvbi9wbGFpbg=="
+              },
+              "data": "eyJmYWxoYXIiOmZhbHNlLCJpZCI6InAwMDA0Iiwic2Vzc2FvIjoic3RyZXNzLXYxLXByb3RvdHlwZS13b3JrZXJzLWNvbGQtYzEyLWkwMDAwIn0="
+            }
+          ]
+        },
+        "scheduleToCloseTimeout": "30s",
+        "scheduleToStartTimeout": "30s",
+        "startToCloseTimeout": "30s",
+        "heartbeatTimeout": "0s",
+        "workflowTaskCompletedEventId": "49",
+        "retryPolicy": {
+          "initialInterval": "1s",
+          "backoffCoefficient": 2.0,
+          "maximumInterval": "100s",
+          "maximumAttempts": 1
+        },
+        "priority": {}
+      }
+    },
+    {
+      "eventId": "52",
+      "eventTime": "2026-10-17T15:19:31.948Z",
+      "eventType": "EVENT_TYPE_ACTIVITY_TASK_STARTED",
+      "activityTaskStartedEventAttributes": {
+        "scheduledEventId": "51",
+        "identity": "isolado-stress-client-000",
+        "attempt": 1
+      }
+    },
+    {
+      "eventId": "53",
+      "eventTime": "2026-10-17T15:19:31.950Z",
+      "eventType": "EVENT_TYPE_ACTIVITY_TASK_COMPLETED",
+      "activityTaskCompletedEventAttributes": {
+        "result": {
+          "payloads": [
+            {
+              "metadata": {
+                "encoding": "anNvbi9wbGFpbg=="
+              },
+              "data": "eyJzaW50ZXRpY28iOnRydWV9"
+            }
+          ]
+        },
+        "scheduledEventId": "51",
+        "startedEventId": "52",
+        "identity": "isolado-stress-client-000"
+      }
+    },
+    {
+      "eventId": "54",
+      "eventTime": "2026-10-17T15:19:31.950Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_TASK_SCHEDULED",
+      "workflowTaskScheduledEventAttributes": {
+        "taskQueue": {
+          "name": "teste-sws-wf-stress-optin-v1"
+        },
+        "startToCloseTimeout": "10s",
+        "attempt": 1
+      }
+    },
+    {
+      "eventId": "55",
+      "eventTime": "2026-10-17T15:19:31.950Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_TASK_STARTED",
+      "workflowTaskStartedEventAttributes": {
+        "scheduledEventId": "54",
+        "identity": "isolado-stress-client-000",
+        "historySizeBytes": "8447"
+      }
+    },
+    {
+      "eventId": "56",
+      "eventTime": "2026-10-17T15:19:31.977Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_TASK_COMPLETED",
+      "workflowTaskCompletedEventAttributes": {
+        "scheduledEventId": "54",
+        "identity": "isolado-stress-client-000",
+        "binaryChecksum": "bb8ed7348b363df7c5b0b19b9ae3ad55",
+        "sdkMetadata": {},
+        "meteringMetadata": {}
+      }
+    },
+    {
+      "eventId": "57",
+      "eventTime": "2026-10-17T15:19:31.977Z",
+      "eventType": "EVENT_TYPE_ACTIVITY_TASK_SCHEDULED",
+      "activityTaskScheduledEventAttributes": {
+        "activityId": "6",
+        "activityType": {
+          "name": "efeito_signal_sintetico_v1"
+        },
+        "taskQueue": {
+          "name": "teste-sws-act-stress-optin-v1",
+          "kind": "TASK_QUEUE_KIND_NORMAL"
+        },
+        "header": {},
+        "input": {
+          "payloads": [
+            {
+              "metadata": {
+                "encoding": "anNvbi9wbGFpbg=="
+              },
+              "data": "eyJmYWxoYXIiOmZhbHNlLCJpZCI6InAwMDA1Iiwic2Vzc2FvIjoic3RyZXNzLXYxLXByb3RvdHlwZS13b3JrZXJzLWNvbGQtYzEyLWkwMDAwIn0="
+            }
+          ]
+        },
+        "scheduleToCloseTimeout": "30s",
+        "scheduleToStartTimeout": "30s",
+        "startToCloseTimeout": "30s",
+        "heartbeatTimeout": "0s",
+        "workflowTaskCompletedEventId": "55",
+        "retryPolicy": {
+          "initialInterval": "1s",
+          "backoffCoefficient": 2.0,
+          "maximumInterval": "100s",
+          "maximumAttempts": 1
+        },
+        "priority": {}
+      }
+    },
+    {
+      "eventId": "58",
+      "eventTime": "2026-10-17T15:19:31.978Z",
+      "eventType": "EVENT_TYPE_ACTIVITY_TASK_STARTED",
+      "activityTaskStartedEventAttributes": {
+        "scheduledEventId": "57",
+        "identity": "isolado-stress-client-000",
+        "attempt": 1
+      }
+    },
+    {
+      "eventId": "59",
+      "eventTime": "2026-10-17T15:19:31.980Z",
+      "eventType": "EVENT_TYPE_ACTIVITY_TASK_COMPLETED",
+      "activityTaskCompletedEventAttributes": {
+        "result": {
+          "payloads": [
+            {
+              "metadata": {
+                "encoding": "anNvbi9wbGFpbg=="
+              },
+              "data": "eyJzaW50ZXRpY28iOnRydWV9"
+            }
+          ]
+        },
+        "scheduledEventId": "57",
+        "startedEventId": "58",
+        "identity": "isolado-stress-client-000"
+      }
+    },
+    {
+      "eventId": "60",
+      "eventTime": "2026-10-17T15:19:31.980Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_TASK_SCHEDULED",
+      "workflowTaskScheduledEventAttributes": {
+        "taskQueue": {
+          "name": "teste-sws-wf-stress-optin-v1"
+        },
+        "startToCloseTimeout": "10s",
+        "attempt": 1
+      }
+    },
+    {
+      "eventId": "61",
+      "eventTime": "2026-10-17T15:19:31.980Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_TASK_STARTED",
+      "workflowTaskStartedEventAttributes": {
+        "scheduledEventId": "60",
+        "identity": "isolado-stress-client-000",
+        "historySizeBytes": "9039"
+      }
+    },
+    {
+      "eventId": "62",
+      "eventTime": "2026-10-17T15:19:32.011Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_TASK_COMPLETED",
+      "workflowTaskCompletedEventAttributes": {
+        "scheduledEventId": "60",
+        "identity": "isolado-stress-client-000",
+        "binaryChecksum": "bb8ed7348b363df7c5b0b19b9ae3ad55",
+        "sdkMetadata": {},
+        "meteringMetadata": {}
+      }
+    },
+    {
+      "eventId": "63",
+      "eventTime": "2026-10-17T15:19:32.011Z",
+      "eventType": "EVENT_TYPE_ACTIVITY_TASK_SCHEDULED",
+      "activityTaskScheduledEventAttributes": {
+        "activityId": "7",
+        "activityType": {
+          "name": "efeito_signal_sintetico_v1"
+        },
+        "taskQueue": {
+          "name": "teste-sws-act-stress-optin-v1",
+          "kind": "TASK_QUEUE_KIND_NORMAL"
+        },
+        "header": {},
+        "input": {
+          "payloads": [
+            {
+              "metadata": {
+                "encoding": "anNvbi9wbGFpbg=="
+              },
+              "data": "eyJmYWxoYXIiOmZhbHNlLCJpZCI6InAwMDA2Iiwic2Vzc2FvIjoic3RyZXNzLXYxLXByb3RvdHlwZS13b3JrZXJzLWNvbGQtYzEyLWkwMDAwIn0="
+            }
+          ]
+        },
+        "scheduleToCloseTimeout": "30s",
+        "scheduleToStartTimeout": "30s",
+        "startToCloseTimeout": "30s",
+        "heartbeatTimeout": "0s",
+        "workflowTaskCompletedEventId": "61",
+        "retryPolicy": {
+          "initialInterval": "1s",
+          "backoffCoefficient": 2.0,
+          "maximumInterval": "100s",
+          "maximumAttempts": 1
+        },
+        "priority": {}
+      }
+    },
+    {
+      "eventId": "64",
+      "eventTime": "2026-10-17T15:19:32.011Z",
+      "eventType": "EVENT_TYPE_ACTIVITY_TASK_STARTED",
+      "activityTaskStartedEventAttributes": {
+        "scheduledEventId": "63",
+        "identity": "isolado-stress-client-000",
+        "attempt": 1
+      }
+    },
+    {
+      "eventId": "65",
+      "eventTime": "2026-10-17T15:19:32.013Z",
+      "eventType": "EVENT_TYPE_ACTIVITY_TASK_COMPLETED",
+      "activityTaskCompletedEventAttributes": {
+        "result": {
+          "payloads": [
+            {
+              "metadata": {
+                "encoding": "anNvbi9wbGFpbg=="
+              },
+              "data": "eyJzaW50ZXRpY28iOnRydWV9"
+            }
+          ]
+        },
+        "scheduledEventId": "63",
+        "startedEventId": "64",
+        "identity": "isolado-stress-client-000"
+      }
+    },
+    {
+      "eventId": "66",
+      "eventTime": "2026-10-17T15:19:32.013Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_TASK_SCHEDULED",
+      "workflowTaskScheduledEventAttributes": {
+        "taskQueue": {
+          "name": "teste-sws-wf-stress-optin-v1"
+        },
+        "startToCloseTimeout": "10s",
+        "attempt": 1
+      }
+    },
+    {
+      "eventId": "67",
+      "eventTime": "2026-10-17T15:19:32.013Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_TASK_STARTED",
+      "workflowTaskStartedEventAttributes": {
+        "scheduledEventId": "66",
+        "identity": "isolado-stress-client-000",
+        "historySizeBytes": "9626"
+      }
+    },
+    {
+      "eventId": "68",
+      "eventTime": "2026-10-17T15:19:32.045Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_TASK_COMPLETED",
+      "workflowTaskCompletedEventAttributes": {
+        "scheduledEventId": "66",
+        "identity": "isolado-stress-client-000",
+        "binaryChecksum": "bb8ed7348b363df7c5b0b19b9ae3ad55",
+        "sdkMetadata": {},
+        "meteringMetadata": {}
+      }
+    },
+    {
+      "eventId": "69",
+      "eventTime": "2026-10-17T15:19:32.045Z",
+      "eventType": "EVENT_TYPE_ACTIVITY_TASK_SCHEDULED",
+      "activityTaskScheduledEventAttributes": {
+        "activityId": "8",
+        "activityType": {
+          "name": "efeito_signal_sintetico_v1"
+        },
+        "taskQueue": {
+          "name": "teste-sws-act-stress-optin-v1",
+          "kind": "TASK_QUEUE_KIND_NORMAL"
+        },
+        "header": {},
+        "input": {
+          "payloads": [
+            {
+              "metadata": {
+                "encoding": "anNvbi9wbGFpbg=="
+              },
+              "data": "eyJmYWxoYXIiOmZhbHNlLCJpZCI6InAwMDA3Iiwic2Vzc2FvIjoic3RyZXNzLXYxLXByb3RvdHlwZS13b3JrZXJzLWNvbGQtYzEyLWkwMDAwIn0="
+            }
+          ]
+        },
+        "scheduleToCloseTimeout": "30s",
+        "scheduleToStartTimeout": "30s",
+        "startToCloseTimeout": "30s",
+        "heartbeatTimeout": "0s",
+        "workflowTaskCompletedEventId": "67",
+        "retryPolicy": {
+          "initialInterval": "1s",
+          "backoffCoefficient": 2.0,
+          "maximumInterval": "100s",
+          "maximumAttempts": 1
+        },
+        "priority": {}
+      }
+    },
+    {
+      "eventId": "70",
+      "eventTime": "2026-10-17T15:19:32.045Z",
+      "eventType": "EVENT_TYPE_ACTIVITY_TASK_STARTED",
+      "activityTaskStartedEventAttributes": {
+        "scheduledEventId": "69",
+        "identity": "isolado-stress-client-000",
+        "attempt": 1
+      }
+    },
+    {
+      "eventId": "71",
+      "eventTime": "2026-10-17T15:19:32.048Z",
+      "eventType": "EVENT_TYPE_ACTIVITY_TASK_COMPLETED",
+      "activityTaskCompletedEventAttributes": {
+        "result": {
+          "payloads": [
+            {
+              "metadata": {
+                "encoding": "anNvbi9wbGFpbg=="
+              },
+              "data": "eyJzaW50ZXRpY28iOnRydWV9"
+            }
+          ]
+        },
+        "scheduledEventId": "69",
+        "startedEventId": "70",
+        "identity": "isolado-stress-client-000"
+      }
+    },
+    {
+      "eventId": "72",
+      "eventTime": "2026-10-17T15:19:32.048Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_TASK_SCHEDULED",
+      "workflowTaskScheduledEventAttributes": {
+        "taskQueue": {
+          "name": "teste-sws-wf-stress-optin-v1"
+        },
+        "startToCloseTimeout": "10s",
+        "attempt": 1
+      }
+    },
+    {
+      "eventId": "73",
+      "eventTime": "2026-10-17T15:19:32.048Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_TASK_STARTED",
+      "workflowTaskStartedEventAttributes": {
+        "scheduledEventId": "72",
+        "identity": "isolado-stress-client-000",
+        "historySizeBytes": "10212"
+      }
+    },
+    {
+      "eventId": "74",
+      "eventTime": "2026-10-17T15:19:32.083Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_TASK_COMPLETED",
+      "workflowTaskCompletedEventAttributes": {
+        "scheduledEventId": "72",
+        "identity": "isolado-stress-client-000",
+        "binaryChecksum": "bb8ed7348b363df7c5b0b19b9ae3ad55",
+        "sdkMetadata": {},
+        "meteringMetadata": {}
+      }
+    },
+    {
+      "eventId": "75",
+      "eventTime": "2026-10-17T15:19:32.083Z",
+      "eventType": "EVENT_TYPE_ACTIVITY_TASK_SCHEDULED",
+      "activityTaskScheduledEventAttributes": {
+        "activityId": "9",
+        "activityType": {
+          "name": "efeito_signal_sintetico_v1"
+        },
+        "taskQueue": {
+          "name": "teste-sws-act-stress-optin-v1",
+          "kind": "TASK_QUEUE_KIND_NORMAL"
+        },
+        "header": {},
+        "input": {
+          "payloads": [
+            {
+              "metadata": {
+                "encoding": "anNvbi9wbGFpbg=="
+              },
+              "data": "eyJmYWxoYXIiOmZhbHNlLCJpZCI6InAwMDA4Iiwic2Vzc2FvIjoic3RyZXNzLXYxLXByb3RvdHlwZS13b3JrZXJzLWNvbGQtYzEyLWkwMDAwIn0="
+            }
+          ]
+        },
+        "scheduleToCloseTimeout": "30s",
+        "scheduleToStartTimeout": "30s",
+        "startToCloseTimeout": "30s",
+        "heartbeatTimeout": "0s",
+        "workflowTaskCompletedEventId": "73",
+        "retryPolicy": {
+          "initialInterval": "1s",
+          "backoffCoefficient": 2.0,
+          "maximumInterval": "100s",
+          "maximumAttempts": 1
+        },
+        "priority": {}
+      }
+    },
+    {
+      "eventId": "76",
+      "eventTime": "2026-10-17T15:19:32.083Z",
+      "eventType": "EVENT_TYPE_ACTIVITY_TASK_STARTED",
+      "activityTaskStartedEventAttributes": {
+        "scheduledEventId": "75",
+        "identity": "isolado-stress-client-000",
+        "attempt": 1
+      }
+    },
+    {
+      "eventId": "77",
+      "eventTime": "2026-10-17T15:19:32.085Z",
+      "eventType": "EVENT_TYPE_ACTIVITY_TASK_COMPLETED",
+      "activityTaskCompletedEventAttributes": {
+        "result": {
+          "payloads": [
+            {
+              "metadata": {
+                "encoding": "anNvbi9wbGFpbg=="
+              },
+              "data": "eyJzaW50ZXRpY28iOnRydWV9"
+            }
+          ]
+        },
+        "scheduledEventId": "75",
+        "startedEventId": "76",
+        "identity": "isolado-stress-client-000"
+      }
+    },
+    {
+      "eventId": "78",
+      "eventTime": "2026-10-17T15:19:32.085Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_TASK_SCHEDULED",
+      "workflowTaskScheduledEventAttributes": {
+        "taskQueue": {
+          "name": "teste-sws-wf-stress-optin-v1"
+        },
+        "startToCloseTimeout": "10s",
+        "attempt": 1
+      }
+    },
+    {
+      "eventId": "79",
+      "eventTime": "2026-10-17T15:19:32.085Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_TASK_STARTED",
+      "workflowTaskStartedEventAttributes": {
+        "scheduledEventId": "78",
+        "identity": "isolado-stress-client-000",
+        "historySizeBytes": "10798"
+      }
+    },
+    {
+      "eventId": "80",
+      "eventTime": "2026-10-17T15:19:32.124Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_TASK_COMPLETED",
+      "workflowTaskCompletedEventAttributes": {
+        "scheduledEventId": "78",
+        "identity": "isolado-stress-client-000",
+        "binaryChecksum": "bb8ed7348b363df7c5b0b19b9ae3ad55",
+        "sdkMetadata": {},
+        "meteringMetadata": {}
+      }
+    },
+    {
+      "eventId": "81",
+      "eventTime": "2026-10-17T15:19:32.124Z",
+      "eventType": "EVENT_TYPE_ACTIVITY_TASK_SCHEDULED",
+      "activityTaskScheduledEventAttributes": {
+        "activityId": "10",
+        "activityType": {
+          "name": "efeito_signal_sintetico_v1"
+        },
+        "taskQueue": {
+          "name": "teste-sws-act-stress-optin-v1",
+          "kind": "TASK_QUEUE_KIND_NORMAL"
+        },
+        "header": {},
+        "input": {
+          "payloads": [
+            {
+              "metadata": {
+                "encoding": "anNvbi9wbGFpbg=="
+              },
+              "data": "eyJmYWxoYXIiOmZhbHNlLCJpZCI6InAwMDA5Iiwic2Vzc2FvIjoic3RyZXNzLXYxLXByb3RvdHlwZS13b3JrZXJzLWNvbGQtYzEyLWkwMDAwIn0="
+            }
+          ]
+        },
+        "scheduleToCloseTimeout": "30s",
+        "scheduleToStartTimeout": "30s",
+        "startToCloseTimeout": "30s",
+        "heartbeatTimeout": "0s",
+        "workflowTaskCompletedEventId": "79",
+        "retryPolicy": {
+          "initialInterval": "1s",
+          "backoffCoefficient": 2.0,
+          "maximumInterval": "100s",
+          "maximumAttempts": 1
+        },
+        "priority": {}
+      }
+    },
+    {
+      "eventId": "82",
+      "eventTime": "2026-10-17T15:19:32.124Z",
+      "eventType": "EVENT_TYPE_ACTIVITY_TASK_STARTED",
+      "activityTaskStartedEventAttributes": {
+        "scheduledEventId": "81",
+        "identity": "isolado-stress-client-000",
+        "attempt": 1
+      }
+    },
+    {
+      "eventId": "83",
+      "eventTime": "2026-10-17T15:19:32.126Z",
+      "eventType": "EVENT_TYPE_ACTIVITY_TASK_COMPLETED",
+      "activityTaskCompletedEventAttributes": {
+        "result": {
+          "payloads": [
+            {
+              "metadata": {
+                "encoding": "anNvbi9wbGFpbg=="
+              },
+              "data": "eyJzaW50ZXRpY28iOnRydWV9"
+            }
+          ]
+        },
+        "scheduledEventId": "81",
+        "startedEventId": "82",
+        "identity": "isolado-stress-client-000"
+      }
+    },
+    {
+      "eventId": "84",
+      "eventTime": "2026-10-17T15:19:32.126Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_TASK_SCHEDULED",
+      "workflowTaskScheduledEventAttributes": {
+        "taskQueue": {
+          "name": "teste-sws-wf-stress-optin-v1"
+        },
+        "startToCloseTimeout": "10s",
+        "attempt": 1
+      }
+    },
+    {
+      "eventId": "85",
+      "eventTime": "2026-10-17T15:19:32.127Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_TASK_STARTED",
+      "workflowTaskStartedEventAttributes": {
+        "scheduledEventId": "84",
+        "identity": "isolado-stress-client-000",
+        "historySizeBytes": "11385"
+      }
+    },
+    {
+      "eventId": "86",
+      "eventTime": "2026-10-17T15:19:32.170Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_TASK_COMPLETED",
+      "workflowTaskCompletedEventAttributes": {
+        "scheduledEventId": "84",
+        "identity": "isolado-stress-client-000",
+        "binaryChecksum": "bb8ed7348b363df7c5b0b19b9ae3ad55",
+        "sdkMetadata": {},
+        "meteringMetadata": {}
+      }
+    },
+    {
+      "eventId": "87",
+      "eventTime": "2026-10-17T15:19:32.170Z",
+      "eventType": "EVENT_TYPE_ACTIVITY_TASK_SCHEDULED",
+      "activityTaskScheduledEventAttributes": {
+        "activityId": "11",
+        "activityType": {
+          "name": "efeito_signal_sintetico_v1"
+        },
+        "taskQueue": {
+          "name": "teste-sws-act-stress-optin-v1",
+          "kind": "TASK_QUEUE_KIND_NORMAL"
+        },
+        "header": {},
+        "input": {
+          "payloads": [
+            {
+              "metadata": {
+                "encoding": "anNvbi9wbGFpbg=="
+              },
+              "data": "eyJmYWxoYXIiOmZhbHNlLCJpZCI6InAwMDEwIiwic2Vzc2FvIjoic3RyZXNzLXYxLXByb3RvdHlwZS13b3JrZXJzLWNvbGQtYzEyLWkwMDAwIn0="
+            }
+          ]
+        },
+        "scheduleToCloseTimeout": "30s",
+        "scheduleToStartTimeout": "30s",
+        "startToCloseTimeout": "30s",
+        "heartbeatTimeout": "0s",
+        "workflowTaskCompletedEventId": "85",
+        "retryPolicy": {
+          "initialInterval": "1s",
+          "backoffCoefficient": 2.0,
+          "maximumInterval": "100s",
+          "maximumAttempts": 1
+        },
+        "priority": {}
+      }
+    },
+    {
+      "eventId": "88",
+      "eventTime": "2026-10-17T15:19:32.170Z",
+      "eventType": "EVENT_TYPE_ACTIVITY_TASK_STARTED",
+      "activityTaskStartedEventAttributes": {
+        "scheduledEventId": "87",
+        "identity": "isolado-stress-client-000",
+        "attempt": 1
+      }
+    },
+    {
+      "eventId": "89",
+      "eventTime": "2026-10-17T15:19:32.173Z",
+      "eventType": "EVENT_TYPE_ACTIVITY_TASK_COMPLETED",
+      "activityTaskCompletedEventAttributes": {
+        "result": {
+          "payloads": [
+            {
+              "metadata": {
+                "encoding": "anNvbi9wbGFpbg=="
+              },
+              "data": "eyJzaW50ZXRpY28iOnRydWV9"
+            }
+          ]
+        },
+        "scheduledEventId": "87",
+        "startedEventId": "88",
+        "identity": "isolado-stress-client-000"
+      }
+    },
+    {
+      "eventId": "90",
+      "eventTime": "2026-10-17T15:19:32.173Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_TASK_SCHEDULED",
+      "workflowTaskScheduledEventAttributes": {
+        "taskQueue": {
+          "name": "teste-sws-wf-stress-optin-v1"
+        },
+        "startToCloseTimeout": "10s",
+        "attempt": 1
+      }
+    },
+    {
+      "eventId": "91",
+      "eventTime": "2026-10-17T15:19:32.173Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_TASK_STARTED",
+      "workflowTaskStartedEventAttributes": {
+        "scheduledEventId": "90",
+        "identity": "isolado-stress-client-000",
+        "historySizeBytes": "11972"
+      }
+    },
+    {
+      "eventId": "92",
+      "eventTime": "2026-10-17T15:19:32.221Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_TASK_COMPLETED",
+      "workflowTaskCompletedEventAttributes": {
+        "scheduledEventId": "90",
+        "identity": "isolado-stress-client-000",
+        "binaryChecksum": "bb8ed7348b363df7c5b0b19b9ae3ad55",
+        "sdkMetadata": {},
+        "meteringMetadata": {}
+      }
+    },
+    {
+      "eventId": "93",
+      "eventTime": "2026-10-17T15:19:32.221Z",
+      "eventType": "EVENT_TYPE_ACTIVITY_TASK_SCHEDULED",
+      "activityTaskScheduledEventAttributes": {
+        "activityId": "12",
+        "activityType": {
+          "name": "efeito_signal_sintetico_v1"
+        },
+        "taskQueue": {
+          "name": "teste-sws-act-stress-optin-v1",
+          "kind": "TASK_QUEUE_KIND_NORMAL"
+        },
+        "header": {},
+        "input": {
+          "payloads": [
+            {
+              "metadata": {
+                "encoding": "anNvbi9wbGFpbg=="
+              },
+              "data": "eyJmYWxoYXIiOmZhbHNlLCJpZCI6InAwMDExIiwic2Vzc2FvIjoic3RyZXNzLXYxLXByb3RvdHlwZS13b3JrZXJzLWNvbGQtYzEyLWkwMDAwIn0="
+            }
+          ]
+        },
+        "scheduleToCloseTimeout": "30s",
+        "scheduleToStartTimeout": "30s",
+        "startToCloseTimeout": "30s",
+        "heartbeatTimeout": "0s",
+        "workflowTaskCompletedEventId": "91",
+        "retryPolicy": {
+          "initialInterval": "1s",
+          "backoffCoefficient": 2.0,
+          "maximumInterval": "100s",
+          "maximumAttempts": 1
+        },
+        "priority": {}
+      }
+    },
+    {
+      "eventId": "94",
+      "eventTime": "2026-10-17T15:19:32.221Z",
+      "eventType": "EVENT_TYPE_ACTIVITY_TASK_STARTED",
+      "activityTaskStartedEventAttributes": {
+        "scheduledEventId": "93",
+        "identity": "isolado-stress-client-000",
+        "attempt": 1
+      }
+    },
+    {
+      "eventId": "95",
+      "eventTime": "2026-10-17T15:19:32.224Z",
+      "eventType": "EVENT_TYPE_ACTIVITY_TASK_COMPLETED",
+      "activityTaskCompletedEventAttributes": {
+        "result": {
+          "payloads": [
+            {
+              "metadata": {
+                "encoding": "anNvbi9wbGFpbg=="
+              },
+              "data": "eyJzaW50ZXRpY28iOnRydWV9"
+            }
+          ]
+        },
+        "scheduledEventId": "93",
+        "startedEventId": "94",
+        "identity": "isolado-stress-client-000"
+      }
+    },
+    {
+      "eventId": "96",
+      "eventTime": "2026-10-17T15:19:32.224Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_TASK_SCHEDULED",
+      "workflowTaskScheduledEventAttributes": {
+        "taskQueue": {
+          "name": "teste-sws-wf-stress-optin-v1"
+        },
+        "startToCloseTimeout": "10s",
+        "attempt": 1
+      }
+    },
+    {
+      "eventId": "97",
+      "eventTime": "2026-10-17T15:19:32.224Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_TASK_STARTED",
+      "workflowTaskStartedEventAttributes": {
+        "scheduledEventId": "96",
+        "identity": "isolado-stress-client-000",
+        "historySizeBytes": "12559"
+      }
+    },
+    {
+      "eventId": "98",
+      "eventTime": "2026-10-17T15:19:32.277Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_TASK_COMPLETED",
+      "workflowTaskCompletedEventAttributes": {
+        "scheduledEventId": "96",
+        "identity": "isolado-stress-client-000",
+        "binaryChecksum": "bb8ed7348b363df7c5b0b19b9ae3ad55",
+        "sdkMetadata": {},
+        "meteringMetadata": {}
+      }
+    },
+    {
+      "eventId": "99",
+      "eventTime": "2026-10-17T15:19:32.277Z",
+      "eventType": "EVENT_TYPE_WORKFLOW_EXECUTION_COMPLETED",
+      "workflowExecutionCompletedEventAttributes": {
+        "result": {
+          "payloads": [
+            {
+              "metadata": {
+                "encoding": "anNvbi9wbGFpbg=="
+              },
+              "data": "eyJhY2VpdG9zIjpbInAwMDAwIiwicDAwMDEiLCJwMDAwMiIsInAwMDAzIiwicDAwMDQiLCJwMDAwNSIsInAwMDA2IiwicDAwMDciLCJwMDAwOCIsInAwMDA5IiwicDAwMTAiLCJwMDAxMSJdLCJhdGl2byI6bnVsbCwiY29uY2x1aWRvcyI6WyJwMDAwMCIsInAwMDAxIiwicDAwMDIiLCJwMDAwMyIsInAwMDA0IiwicDAwMDUiLCJwMDAwNiIsInAwMDA3IiwicDAwMDgiLCJwMDAwOSIsInAwMDEwIiwicDAwMTEiXSwiZmVjaGFuZG8iOnRydWUsImdlcmFjYW8iOjAsIm9ic2VydmFjb2VzIjpbeyJlc3RhZG8iOiJhY2VpdG8iLCJpZCI6InAwMDAwIn0seyJlc3RhZG8iOiJhY2VpdG8iLCJpZCI6InAwMDAxIn0seyJlc3RhZG8iOiJhY2VpdG8iLCJpZCI6InAwMDAyIn0seyJlc3RhZG8iOiJhY2VpdG8iLCJpZCI6InAwMDAzIn0seyJlc3RhZG8iOiJhY2VpdG8iLCJpZCI6InAwMDA0In0seyJlc3RhZG8iOiJhY2VpdG8iLCJpZCI6InAwMDA1In0seyJlc3RhZG8iOiJhY2VpdG8iLCJpZCI6InAwMDA2In0seyJlc3RhZG8iOiJhY2VpdG8iLCJpZCI6InAwMDA3In0seyJlc3RhZG8iOiJhY2VpdG8iLCJpZCI6InAwMDA4In0seyJlc3RhZG8iOiJhY2VpdG8iLCJpZCI6InAwMDA5In0seyJlc3RhZG8iOiJhY2VpdG8iLCJpZCI6InAwMDEwIn0seyJlc3RhZG8iOiJhY2VpdG8iLCJpZCI6InAwMDExIn1dLCJwZW5kZW50ZXMiOltdfQ=="
+            }
+          ]
+        },
+        "workflowTaskCompletedEventId": "97"
+      }
+    }
+  ]
+}

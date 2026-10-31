@@ -1,0 +1,51 @@
+Evidencias: /tmp/pqbr-f3-05-roteamento-temporal-20261017/runtime
+Namespace original: net:[4026531840]
+19defb9f7318c7cf249518b3642a735efb79876c2b6918afe312336476b796a5  /tmp/temporal-test-server-sdk-python-1.34.0
+Namespace isolado: net:[4026533133]
+lo               UNKNOWN        127.0.0.1/8 ::1/128 
+test_camofox_herda_principal_mesmo_com_worker_sessao_disponivel (tests.workflows.test_f3_05_roteamento_temporal_isolado.RoteamentoTemporalIsolado.test_camofox_herda_principal_mesmo_com_worker_sessao_disponivel) ... Executing <Task pending name='Task-2' coro=<RoteamentoTemporalIsolado.test_camofox_herda_principal_mesmo_com_worker_sessao_disponivel() running at /home/pc/Workspace/PQBR/tests/workflows/test_f3_05_roteamento_temporal_isolado.py:107> wait_for=<Future pending cb=[<builtins.PyDoneCallback object at 0x7f354726bfb0>(), Task.task_wakeup()] created at /home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py:448> cb=[_run_until_complete_cb() at /home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py:181] created at /home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/runners.py:100> took 0.116 seconds
+[2m2026-10-17T14:50:03.419611Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+[2m2026-10-17T14:50:03.419609Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+ok
+test_controle_workflow_na_fila_sessao_herda_sessao (tests.workflows.test_f3_05_roteamento_temporal_isolado.RoteamentoTemporalIsolado.test_controle_workflow_na_fila_sessao_herda_sessao) ... [2m2026-10-17T14:50:04.025767Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+[2m2026-10-17T14:50:04.026457Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+ok
+test_excecao_tecnica_mantem_uma_execucao_sem_registro (tests.workflows.test_f3_05_roteamento_temporal_isolado.RoteamentoTemporalIsolado.test_excecao_tecnica_mantem_uma_execucao_sem_registro) ... [2m2026-10-17T14:50:04.579705Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+[2m2026-10-17T14:50:04.580026Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+Completing activity as failed ({'activity_id': '2', 'activity_type': 'intervir_agente', 'attempt': 1, 'namespace': 'default', 'task_queue': 'teste-pqbr-episodio-2fe5aca8203d451c828e792a43c55287', 'workflow_id': 'roteamento-a5918ab446ac401eb6d05ece3cbd2735', 'workflow_run_id': '19648fcd-0634-4d38-81a3-d6f6b1744172', 'workflow_type': 'CorrecaoAutonomaWorkflow'})
+Traceback (most recent call last):
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 351, in _handle_start_activity_task
+    result = await self._execute_activity(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 681, in _execute_activity
+    return await impl.execute_activity(input)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 889, in execute_activity
+    return await input.fn(*input.args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_temporal_isolado.py", line 55, in intervir
+    self.observar("intervir_agente", t.n)
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_roteamento_temporal_isolado.py", line 29, in observar
+    super().observar(nome, n)
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_temporal_isolado.py", line 46, in observar
+    raise ApplicationError("falha sintetica transitoria", type="FalhaSintetica")
+temporalio.exceptions.ApplicationError: FalhaSintetica: falha sintetica transitoria
+ok
+test_replay_32_historicos_existentes (tests.workflows.test_f3_05_roteamento_temporal_isolado.RoteamentoTemporalIsolado.test_replay_32_historicos_existentes) ... ok
+test_sem_registro_na_principal_sessao_nao_resgata_activity (tests.workflows.test_f3_05_roteamento_temporal_isolado.RoteamentoTemporalIsolado.test_sem_registro_na_principal_sessao_nao_resgata_activity) ... [2m2026-10-17T14:50:07.698299Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+[2m2026-10-17T14:50:07.698434Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+Completing activity as failed
+Traceback (most recent call last):
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 351, in _handle_start_activity_task
+    result = await self._execute_activity(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 509, in _execute_activity
+    raise temporalio.exceptions.ApplicationError(
+temporalio.exceptions.ApplicationError: NotFoundError: Activity function intervir_agente for workflow roteamento-dfd8f600d52d485aacff52818d6502b7 is not registered on this worker, available activities: registrar_correcao, triagem_jev, verificar_jev
+ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 4.784s
+
+OK
+Servidor e namespace encerrados; evidencias preservadas em /tmp/pqbr-f3-05-roteamento-temporal-20261017/runtime

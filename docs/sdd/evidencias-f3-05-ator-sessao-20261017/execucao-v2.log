@@ -1,0 +1,128 @@
+Evidencias: /home/pc/Workspace/PQBR/docs/sdd/evidencias-f3-05-ator-sessao-20261017/runtime-v2
+Namespace original: net:[4026531840]
+19defb9f7318c7cf249518b3642a735efb79876c2b6918afe312336476b796a5  /tmp/temporal-test-server-sdk-python-1.34.0
+Namespace isolado: net:[4026533133]
+lo               UNKNOWN        127.0.0.1/8 ::1/128 
+test_admissao_rejeita_outra_sessao_e_fechamento_drena (tests.workflows.test_f3_05_ator_sessao_isolado.AtorSessaoTemporalIsolado.test_admissao_rejeita_outra_sessao_e_fechamento_drena) ... [2m2026-10-17T14:58:08.589098Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+[2m2026-10-17T14:58:08.589542Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+ok
+test_excecao_tecnica_propaga_sem_retry_nem_proximo_pedido (tests.workflows.test_f3_05_ator_sessao_isolado.AtorSessaoTemporalIsolado.test_excecao_tecnica_propaga_sem_retry_nem_proximo_pedido) ... [2m2026-10-17T14:58:09.174853Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+[2m2026-10-17T14:58:09.174976Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+ERROR
+test_mesma_sessao_serial_deduplicada_multiplos_workers (tests.workflows.test_f3_05_ator_sessao_isolado.AtorSessaoTemporalIsolado.test_mesma_sessao_serial_deduplicada_multiplos_workers) ... [2m2026-10-17T14:58:09.389077Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+[2m2026-10-17T14:58:09.389220Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+ERROR
+test_sem_consumidor_timeout_terminal_sem_tarefa_orfa (tests.workflows.test_f3_05_ator_sessao_isolado.AtorSessaoTemporalIsolado.test_sem_consumidor_timeout_terminal_sem_tarefa_orfa) ... ERROR
+test_sessoes_distintas_progridem_em_paralelo (tests.workflows.test_f3_05_ator_sessao_isolado.AtorSessaoTemporalIsolado.test_sessoes_distintas_progridem_em_paralelo) ... [2m2026-10-17T14:58:09.866312Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+[2m2026-10-17T14:58:09.866803Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker[0m[2m:[0m Temporal Server 1.16.0 or newer is required to guarantee that the latest heartbeat details are preserved when an activity fails; the server did not advertise the activity_failure_include_heartbeat capability, so heartbeat details may be lost on failure
+ERROR
+
+======================================================================
+ERROR: test_excecao_tecnica_propaga_sem_retry_nem_proximo_pedido (tests.workflows.test_f3_05_ator_sessao_isolado.AtorSessaoTemporalIsolado.test_excecao_tecnica_propaga_sem_retry_nem_proximo_pedido)
+----------------------------------------------------------------------
+temporalio.exceptions.ApplicationError: AdmissaoInvalida: sessao divergente
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_ator_sessao_isolado.py", line 196, in test_excecao_tecnica_propaga_sem_retry_nem_proximo_pedido
+    await self.pedir(h, "a1", falhar=True)
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_ator_sessao_isolado.py", line 102, in pedir
+    return await h.execute_update(AtorSessaoSintetico.solicitar,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/client/_workflow.py", line 846, in execute_update
+    return await handle.result()
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/client/_workflow.py", line 1922, in result
+    raise WorkflowUpdateFailedError(
+temporalio.client._exceptions.WorkflowUpdateFailedError: Workflow update failed
+
+======================================================================
+ERROR: test_mesma_sessao_serial_deduplicada_multiplos_workers (tests.workflows.test_f3_05_ator_sessao_isolado.AtorSessaoTemporalIsolado.test_mesma_sessao_serial_deduplicada_multiplos_workers)
+----------------------------------------------------------------------
+temporalio.exceptions.ApplicationError: AdmissaoInvalida: sessao divergente
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_ator_sessao_isolado.py", line 139, in test_mesma_sessao_serial_deduplicada_multiplos_workers
+    self.assertEqual(await self.pedir(a, "a1"), "aceito")
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_ator_sessao_isolado.py", line 102, in pedir
+    return await h.execute_update(AtorSessaoSintetico.solicitar,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/client/_workflow.py", line 846, in execute_update
+    return await handle.result()
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/client/_workflow.py", line 1922, in result
+    raise WorkflowUpdateFailedError(
+temporalio.client._exceptions.WorkflowUpdateFailedError: Workflow update failed
+
+======================================================================
+ERROR: test_sem_consumidor_timeout_terminal_sem_tarefa_orfa (tests.workflows.test_f3_05_ator_sessao_isolado.AtorSessaoTemporalIsolado.test_sem_consumidor_timeout_terminal_sem_tarefa_orfa)
+----------------------------------------------------------------------
+temporalio.exceptions.ApplicationError: AdmissaoInvalida: sessao divergente
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_ator_sessao_isolado.py", line 176, in test_sem_consumidor_timeout_terminal_sem_tarefa_orfa
+    await self.pedir(h, "a1")
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_ator_sessao_isolado.py", line 102, in pedir
+    return await h.execute_update(AtorSessaoSintetico.solicitar,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/client/_workflow.py", line 846, in execute_update
+    return await handle.result()
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/client/_workflow.py", line 1922, in result
+    raise WorkflowUpdateFailedError(
+temporalio.client._exceptions.WorkflowUpdateFailedError: Workflow update failed
+
+======================================================================
+ERROR: test_sessoes_distintas_progridem_em_paralelo (tests.workflows.test_f3_05_ator_sessao_isolado.AtorSessaoTemporalIsolado.test_sessoes_distintas_progridem_em_paralelo)
+----------------------------------------------------------------------
+temporalio.exceptions.ApplicationError: AdmissaoInvalida: sessao divergente
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_ator_sessao_isolado.py", line 162, in test_sessoes_distintas_progridem_em_paralelo
+    await asyncio.gather(self.pedir(a, "a1"), self.pedir(b, "b1", "sessao-B"))
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_ator_sessao_isolado.py", line 102, in pedir
+    return await h.execute_update(AtorSessaoSintetico.solicitar,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/client/_workflow.py", line 846, in execute_update
+    return await handle.result()
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/client/_workflow.py", line 1922, in result
+    raise WorkflowUpdateFailedError(
+temporalio.client._exceptions.WorkflowUpdateFailedError: Workflow update failed
+
+----------------------------------------------------------------------
+Ran 5 tests in 1.627s
+
+FAILED (errors=4)

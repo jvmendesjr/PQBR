@@ -1,0 +1,44 @@
+{
+  "paralelismo_observado": true,
+  "calls": [
+    {
+      "sessao": "test_sessoes_diferentes_em_paralelo",
+      "passo": "acao-a",
+      "inicio": 409315.317108056,
+      "fim": 409315.399279032,
+      "fila": "teste-f3-05-candidato-camofox-test_sessoes_diferentes_em_paralelo",
+      "tentativa": 1,
+      "workflow_id": "teste-f3-05-candidato-sessao-d58169d6858c7d92dde4bdb0c92fc4c71dee91e60eee0f58cde4faeda680e8d8-op-5cfe6daca261fcbb71a4721a6a46d58374bbb1318a50d9f789442fea40abd14c"
+    },
+    {
+      "sessao": "test_sessoes_diferentes_em_paralelo-b",
+      "passo": "acao-b",
+      "inicio": 409315.340044137,
+      "fim": 409315.400106216,
+      "fila": "teste-f3-05-candidato-camofox-test_sessoes_diferentes_em_paralelo",
+      "tentativa": 1,
+      "workflow_id": "teste-f3-05-candidato-sessao-4b9f817b2e2315a578d911b1dc4619916828414003f4024636fb8638868f8cc5-op-2208506dbb9169b81fba7e4ab855eb6e5430b6d97796a4006038cfb5465a404c"
+    }
+  ],
+  "max_sessao": {
+    "test_sessoes_diferentes_em_paralelo": 1,
+    "test_sessoes_diferentes_em_paralelo-b": 1
+  },
+  "max_global": 2,
+  "registros": [
+    {
+      "resultado": "corrigido",
+      "tentativas": 1,
+      "motivo": "",
+      "proposta_script": "proposta falsa",
+      "chamar_jose": false
+    },
+    {
+      "resultado": "corrigido",
+      "tentativas": 1,
+      "motivo": "",
+      "proposta_script": "proposta falsa",
+      "chamar_jose": false
+    }
+  ]
+}

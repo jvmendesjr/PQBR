@@ -1,0 +1,136 @@
+{
+  "teste": "test_concorrencia_start_signal_mesma_sessao",
+  "workflow_id": "prototipo-signal-start-v1-07aa137bd2dc362b90b33958e3ed6b335ab8385dedfb7454998d1219cf0e9f50",
+  "run_id": "b5d00cf4-2ecb-4ec8-8a41-d890fc84139e",
+  "estado": "COMPLETED",
+  "replay": "ok",
+  "pending_activities": 0,
+  "atividades_agendadas": 12,
+  "signals": 13,
+  "calls": [
+    {
+      "pedido": {
+        "falhar": false,
+        "id": "p0",
+        "sessao": "sessao-A"
+      },
+      "inicio": 405409.189008381,
+      "fim": 405409.217567698,
+      "attempt": 1
+    },
+    {
+      "pedido": {
+        "falhar": false,
+        "id": "p2",
+        "sessao": "sessao-A"
+      },
+      "inicio": 405409.274857047,
+      "fim": 405409.274876091,
+      "attempt": 1
+    },
+    {
+      "pedido": {
+        "falhar": false,
+        "id": "p1",
+        "sessao": "sessao-A"
+      },
+      "inicio": 405409.31157961,
+      "fim": 405409.311599168,
+      "attempt": 1
+    },
+    {
+      "pedido": {
+        "falhar": false,
+        "id": "p3",
+        "sessao": "sessao-A"
+      },
+      "inicio": 405409.365581914,
+      "fim": 405409.365601016,
+      "attempt": 1
+    },
+    {
+      "pedido": {
+        "falhar": false,
+        "id": "p4",
+        "sessao": "sessao-A"
+      },
+      "inicio": 405409.416020869,
+      "fim": 405409.416040453,
+      "attempt": 1
+    },
+    {
+      "pedido": {
+        "falhar": false,
+        "id": "p6",
+        "sessao": "sessao-A"
+      },
+      "inicio": 405409.482489366,
+      "fim": 405409.482506093,
+      "attempt": 1
+    },
+    {
+      "pedido": {
+        "falhar": false,
+        "id": "p7",
+        "sessao": "sessao-A"
+      },
+      "inicio": 405409.546331832,
+      "fim": 405409.546365552,
+      "attempt": 1
+    },
+    {
+      "pedido": {
+        "falhar": false,
+        "id": "p5",
+        "sessao": "sessao-A"
+      },
+      "inicio": 405409.621712654,
+      "fim": 405409.621730826,
+      "attempt": 1
+    },
+    {
+      "pedido": {
+        "falhar": false,
+        "id": "p10",
+        "sessao": "sessao-A"
+      },
+      "inicio": 405409.694986765,
+      "fim": 405409.69500643,
+      "attempt": 1
+    },
+    {
+      "pedido": {
+        "falhar": false,
+        "id": "p8",
+        "sessao": "sessao-A"
+      },
+      "inicio": 405409.778519045,
+      "fim": 405409.778537802,
+      "attempt": 1
+    },
+    {
+      "pedido": {
+        "falhar": false,
+        "id": "p9",
+        "sessao": "sessao-A"
+      },
+      "inicio": 405409.870572291,
+      "fim": 405409.870591349,
+      "attempt": 1
+    },
+    {
+      "pedido": {
+        "falhar": false,
+        "id": "p11",
+        "sessao": "sessao-A"
+      },
+      "inicio": 405409.99148627,
+      "fim": 405409.991504203,
+      "attempt": 1
+    }
+  ],
+  "max_global": 1,
+  "max_sessao": {
+    "sessao-A": 1
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "continue_as_new_preserva_dedup": true,
+  "calls": [
+    {
+      "sessao": "test_continue_as_new_preserva_ids_e_resultados",
+      "passo": "acao",
+      "inicio": 409379.439850573,
+      "fim": 409379.481073296,
+      "fila": "teste-f3-05-candidato-camofox-test_continue_as_new_preserva_ids_e_resultados",
+      "tentativa": 1,
+      "workflow_id": "teste-f3-05-candidato-sessao-06bd3b2a04eac8a953aed77c50d90f2745cbbbd1c45f0b5e8d90d7f5287cc9ee-op-15e8900c9977db61a162bedd13fac114a7b5c06e20d347d9875239f8515b173d"
+    }
+  ],
+  "max_sessao": {
+    "test_continue_as_new_preserva_ids_e_resultados": 1
+  },
+  "max_global": 1,
+  "registros": [
+    {
+      "resultado": "corrigido",
+      "tentativas": 1,
+      "motivo": "",
+      "proposta_script": "proposta falsa",
+      "chamar_jose": false
+    }
+  ]
+}

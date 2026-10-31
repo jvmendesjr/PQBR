@@ -1,0 +1,131 @@
+{
+  "estado_pausado": {
+    "versao": 1,
+    "aceitos": {
+      "primeira": {
+        "ferramenta": "camofox",
+        "sessao": "test_recibo_invalido_nao_libera_segunda",
+        "passo": "primeira",
+        "erro": "falha-tecnica",
+        "episodio": null,
+        "simulacao": {
+          "triagem": "corrigivel",
+          "intervencoes": [
+            true
+          ],
+          "verificacoes": [
+            true
+          ],
+          "conta_confere": true
+        }
+      },
+      "segunda": {
+        "ferramenta": "camofox",
+        "sessao": "test_recibo_invalido_nao_libera_segunda",
+        "passo": "segunda",
+        "erro": "falha falsa",
+        "episodio": null,
+        "simulacao": {
+          "triagem": "corrigivel",
+          "intervencoes": [
+            true
+          ],
+          "verificacoes": [
+            true
+          ],
+          "conta_confere": true
+        }
+      }
+    },
+    "pendentes": [
+      "segunda"
+    ],
+    "resultados": {},
+    "falhas": {
+      "primeira": {
+        "operacao_id": "primeira",
+        "filho_id": "teste-f3-05-supervisor-6dd8455bc8b0b2579d321e886a3e5012157fa3bdf1bf1939679e614dc720f7bf-op-f555b80ad08f501adb396a95c78948ce18f204b3cf2c93b0b1930a006540a06e",
+        "filho_run_id": "01a14b13-da45-74f0-b701-079fd7b66b9f",
+        "revisao": 1,
+        "estado": "falha_tecnica_terminal",
+        "resultado_efeito": "nao_reconciliado",
+        "registro": "recibo_invalido",
+        "registro_id": "teste-f3-05-supervisor-6dd8455bc8b0b2579d321e886a3e5012157fa3bdf1bf1939679e614dc720f7bf:01a14b13-da45-74f0-b701-079fd7b66b9f:primeira"
+      }
+    },
+    "bloqueio": {
+      "operacao_id": "primeira",
+      "filho_id": "teste-f3-05-supervisor-6dd8455bc8b0b2579d321e886a3e5012157fa3bdf1bf1939679e614dc720f7bf-op-f555b80ad08f501adb396a95c78948ce18f204b3cf2c93b0b1930a006540a06e",
+      "filho_run_id": "01a14b13-da45-74f0-b701-079fd7b66b9f",
+      "revisao": 1,
+      "estado": "falha_tecnica_terminal",
+      "resultado_efeito": "nao_reconciliado",
+      "registro": "recibo_invalido",
+      "registro_id": "teste-f3-05-supervisor-6dd8455bc8b0b2579d321e886a3e5012157fa3bdf1bf1939679e614dc720f7bf:01a14b13-da45-74f0-b701-079fd7b66b9f:primeira"
+    },
+    "ativo": null,
+    "revisao": 1,
+    "retomadas": [],
+    "observacoes": [
+      {
+        "id": "primeira",
+        "estado": "aceito"
+      },
+      {
+        "id": "segunda",
+        "estado": "aceito"
+      },
+      {
+        "id": "primeira",
+        "estado": "pausado_apos_falha"
+      },
+      {
+        "estado": "retomada_recusada"
+      }
+    ],
+    "admissao_fechada": true,
+    "fechando": false
+  },
+  "recibo_invalido_fail_closed": true,
+  "chamadas": [
+    {
+      "sessao": "test_recibo_invalido_nao_libera_segunda",
+      "passo": "primeira",
+      "inicio": 416372.689902807,
+      "fim": 416372.730535509,
+      "fila": "teste-f3-05-candidato-camofox-test_recibo_invalido_nao_libera_segunda-supervisor",
+      "tentativa": 1,
+      "workflow_id": "teste-f3-05-supervisor-6dd8455bc8b0b2579d321e886a3e5012157fa3bdf1bf1939679e614dc720f7bf-op-f555b80ad08f501adb396a95c78948ce18f204b3cf2c93b0b1930a006540a06e"
+    }
+  ],
+  "registros_sucesso": [],
+  "eventos_falha": [
+    {
+      "versao": 1,
+      "registro_id": "teste-f3-05-supervisor-6dd8455bc8b0b2579d321e886a3e5012157fa3bdf1bf1939679e614dc720f7bf:01a14b13-da45-74f0-b701-079fd7b66b9f:primeira",
+      "sessao": "test_recibo_invalido_nao_libera_segunda",
+      "operacao_id": "primeira",
+      "filho_id": "teste-f3-05-supervisor-6dd8455bc8b0b2579d321e886a3e5012157fa3bdf1bf1939679e614dc720f7bf-op-f555b80ad08f501adb396a95c78948ce18f204b3cf2c93b0b1930a006540a06e",
+      "filho_run_id": "01a14b13-da45-74f0-b701-079fd7b66b9f",
+      "estado": "falha_tecnica_terminal",
+      "tipo": "FalhaTecnicaFalsa",
+      "resultado_efeito": "nao_reconciliado"
+    }
+  ],
+  "tentativas_registro": [
+    {
+      "evento": {
+        "versao": 1,
+        "registro_id": "teste-f3-05-supervisor-6dd8455bc8b0b2579d321e886a3e5012157fa3bdf1bf1939679e614dc720f7bf:01a14b13-da45-74f0-b701-079fd7b66b9f:primeira",
+        "sessao": "test_recibo_invalido_nao_libera_segunda",
+        "operacao_id": "primeira",
+        "filho_id": "teste-f3-05-supervisor-6dd8455bc8b0b2579d321e886a3e5012157fa3bdf1bf1939679e614dc720f7bf-op-f555b80ad08f501adb396a95c78948ce18f204b3cf2c93b0b1930a006540a06e",
+        "filho_run_id": "01a14b13-da45-74f0-b701-079fd7b66b9f",
+        "estado": "falha_tecnica_terminal",
+        "tipo": "FalhaTecnicaFalsa",
+        "resultado_efeito": "nao_reconciliado"
+      },
+      "tentativa": 1
+    }
+  ]
+}

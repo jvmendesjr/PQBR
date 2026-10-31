@@ -1,0 +1,30 @@
+{
+ "veredito": "reprova",
+ "motivos": [
+  "S02:parece_pessoa_real",
+  "texto não enviado; imagem×fala/loop não avaliados",
+  "título não enviado; correspondência da capa não avaliada"
+ ],
+ "rodadas": 2,
+ "erros_aceitaveis": 0,
+ "persistido": false,
+ "texto_enviado": false,
+ "conversas": [
+  "https://gemini.google.com/app/6f7bcd82587e7106",
+  "https://gemini.google.com/app/96c28ee430558893"
+ ],
+ "bruto": {
+  "metricas": {
+   "segue_estilo_declarado": null,
+   "mesmo_personagem_do_bloco": null,
+   "imagem_corresponde_a_fala": null,
+   "legivel_no_celular": 1.0,
+   "ambiente_brasileiro": 1.0,
+   "foco_unico_zona_segura": 1.0,
+   "corresponde_ao_titulo": null,
+   "legenda_cobre_foco": 1.0,
+   "tem_texto_na_tela": 1.0
+  },
+  "rodada_unica": false
+ }
+}

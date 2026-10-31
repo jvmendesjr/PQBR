@@ -1,0 +1,37 @@
+{
+  "tema": "crostinha",
+  "id_lote": "lote-2510/crostinha",
+  "pronto": "runtime/lote-saldo/crostinha/crostinha-pronto.mp4",
+  "sha256": "adc0a131d3214d940e79881c5c9ba2ce7c463815b285d40d1509579a87b297a6",
+  "duracao_s": 33.9,
+  "pos": "scripts/pos/post-short.sh (trim protegido silencedetect, logo bug sup. dir., canto inf. dir., sting final)",
+  "gate": {
+    "A1_A3_tecnico": "PASS",
+    "A9_local": "PASS (frames 0.5/1.5/2.5 s: personagem 2D central, legivel, sem rosto real/marca, sem end-card NotebookLM)",
+    "A4_A8_juiz_gemini": "PENDENTE (LOOP não rodado)",
+    "B1_B10_editorial": "PASS (NotebookLM SEO validado PacoteSEO; 10 fontes web; GenAI: cartum 2D nao realista) ressalvas: codigo PQBR-EP fora da descricao (entra no payload)"
+  },
+  "status": "P1_HOLD",
+  "publicado": false,
+  "drive": "1WmTPKURzo76y3e3zbRr4-1Ronfupbu5i",
+  "postgres": {
+    "temas_pendentes_id": 29,
+    "linhas": 1
+  },
+  "pronto_v2": {
+    "arquivo": "runtime/lote-saldo/crostinha/crostinha-pronto-v2.mp4",
+    "sha256": "62fe719432e0cdaaa1bcc4d60600008f382f86cd07b7ee047943b8e4496b8d40",
+    "duracao_s": 38.5,
+    "cta": "Segue o Porquê BR pra não ficar na rapa do conhecimento... e corre antes que raspem a panela!",
+    "cta_audio": "runtime/lote-saldo/crostinha/cta-tema.mp3",
+    "elevenlabs_generation_id": "gcWkDR9rWSv5pMwHOlcc",
+    "creditos": 103.99,
+    "legenda_alinhamento": "108/114",
+    "motivo": "ERR-MON-02: CTA personalizado do roteiro restaurado (pronto v1 tinha CTA genérico B)",
+    "pos": "scripts/pos/post-short.sh"
+  },
+  "pronto_vigente": "runtime/lote-saldo/crostinha/crostinha-pronto-v2.mp4",
+  "codigo": "PQBR-EP1010",
+  "motivo_hold": "loop_gemini_ausente",
+  "ressalvas_gate": []
+}

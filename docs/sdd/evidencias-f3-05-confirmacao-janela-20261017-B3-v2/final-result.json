@@ -1,0 +1,55 @@
+{
+  "authorizationValidated": true,
+  "canonicalStatus": "accepted",
+  "resultOutcome": "accepted",
+  "resultDecisionRequired": false,
+  "runtimeResult": "PASS",
+  "roundCount": 1,
+  "orchestratorResult": "FAILED_FINAL_VERIFIER",
+  "orchestratorExitCode": 1,
+  "originalError": "KeyError: operational_states",
+  "secondExecutionAttempted": false,
+  "postCleanupSupplementalVerification": "PASS",
+  "cleanupComplete": true,
+  "persistentWorkersUnchanged": true,
+  "protectedFileCount": 1664,
+  "scope": {
+    "issueId": "730f420b-4d74-48be-894c-a79b13c035f2",
+    "interactionId": "ee39501d-3787-470a-b871-7800669759b9",
+    "scopeId": "scope-B3-next-once-v1",
+    "sessionId": "session-B3-next-disposable-v1",
+    "operationId": "second-B3-next-accepted-v1",
+    "idempotencyKey": "pqbr-f3-05-B3-next-single-proof-v2"
+  },
+  "runtimeCounters": {
+    "firstStatus": "FAILED",
+    "firstAttemptCount": 1,
+    "firstRerunCount": 0,
+    "secondAttemptCount": 1,
+    "secondFakeEffectCount": 1,
+    "resumeCount": 1,
+    "receiptDeliveries": 2,
+    "duplicateReceiptNoEffectCount": 1,
+    "externalRealEffectCount": 0
+  },
+  "durableLocal": {
+    "receiptCount": 1,
+    "outboxCount": 1,
+    "effectCount": 1,
+    "receiptStates": [
+      [
+        "CONSUMED",
+        1
+      ]
+    ],
+    "outboxStates": [
+      [
+        "ACKED",
+        2
+      ]
+    ]
+  },
+  "replayHistoryCount": 3,
+  "g4": "OPEN",
+  "finalizedAtUtc": "2026-10-17T22:51:24.430144+00:00"
+}

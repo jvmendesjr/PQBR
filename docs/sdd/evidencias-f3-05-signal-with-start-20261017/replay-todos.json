@@ -1,0 +1,129 @@
+{
+  "total": 31,
+  "resultados": [
+    {
+      "arquivo": "concorrencia-repeticao-1/test_concorrencia_start_signal_mesma_sessao-a7d8707e-d04c-498d-9080-55e8d1b81477.history.json",
+      "replay": "ok"
+    },
+    {
+      "arquivo": "concorrencia-repeticao-2/test_concorrencia_start_signal_mesma_sessao-ecec11cd-0adb-4410-ae6c-b38c3f7952c8.history.json",
+      "replay": "ok"
+    },
+    {
+      "arquivo": "concorrencia-repeticao-3/test_concorrencia_start_signal_mesma_sessao-9f2ee9d5-d35f-4cde-a894-bbe78f30a8b1.history.json",
+      "replay": "ok"
+    },
+    {
+      "arquivo": "diagnostico-concorrencia/test_concorrencia_start_signal_mesma_sessao-23b30bba-f84e-4817-8b18-bde1d0844da6.history.json",
+      "replay": "ok"
+    },
+    {
+      "arquivo": "runtime-v1/sem-worker-antes.history.json",
+      "replay": "ok"
+    },
+    {
+      "arquivo": "runtime-v1/test_duas_sessoes_paralelas-7c3b30fa-a7e2-415c-9e00-3d7460011fa7.history.json",
+      "replay": "ok"
+    },
+    {
+      "arquivo": "runtime-v1/test_duas_sessoes_paralelas-e67636e1-e59f-4fa8-b55c-4e9b1fd2fe12.history.json",
+      "replay": "ok"
+    },
+    {
+      "arquivo": "runtime-v1/test_duplicado_payload_divergente_e_config-e83d08de-74fd-4f17-b9fc-80383d30aa23.history.json",
+      "replay": "ok"
+    },
+    {
+      "arquivo": "runtime-v1/test_falha_tecnica_sem_retry_dedup_nao_cruza_reuso-fbf1a6f1-b032-4a59-aa19-1f449d9df4c0.history.json",
+      "replay": "ok"
+    },
+    {
+      "arquivo": "runtime-v1/test_falha_tecnica_sem_retry_dedup_nao_cruza_reuso-fda7d134-805d-4fdc-a8f4-df1093eabdad.history.json",
+      "replay": "ok"
+    },
+    {
+      "arquivo": "runtime-v1/test_fechando_rejeicao_assincrona_e_reuso_explicito-6291fb5b-873b-4ea4-9a4c-075774b3fd26.history.json",
+      "replay": "ok"
+    },
+    {
+      "arquivo": "runtime-v1/test_fechando_rejeicao_assincrona_e_reuso_explicito-cf9a7257-3075-4295-8d86-1212b6186209.history.json",
+      "replay": "ok"
+    },
+    {
+      "arquivo": "runtime-v1/test_registro_removido_nao_simula_tempo_de_retention-aaa3abeb-3852-4630-87d2-9dbef14f7823.history.json",
+      "replay": "ok"
+    },
+    {
+      "arquivo": "runtime-v1/test_sem_worker_rpc_retorna_signal_duravel_retomada-687b5642-eaaa-40c6-b3e6-56f22949b91f.history.json",
+      "replay": "ok"
+    },
+    {
+      "arquivo": "runtime-v1/test_worker_recriado_reconstroi_dedup_do_historico-6dbbbd75-3055-4a49-b726-43de762396e6.history.json",
+      "replay": "ok"
+    },
+    {
+      "arquivo": "runtime-v2/sem-worker-antes.history.json",
+      "replay": "ok"
+    },
+    {
+      "arquivo": "runtime-v2/test_concorrencia_start_signal_mesma_sessao-b5d00cf4-2ecb-4ec8-8a41-d890fc84139e.history.json",
+      "replay": "ok"
+    },
+    {
+      "arquivo": "runtime-v2/test_continue_as_new_preservando_dedup-68a0426f-271f-41d5-8522-007f91d1920a.history.json",
+      "replay": "ok"
+    },
+    {
+      "arquivo": "runtime-v2/test_continue_as_new_preservando_dedup-e30439e4-9397-425c-b8d7-806af2e2c738.history.json",
+      "replay": "ok"
+    },
+    {
+      "arquivo": "runtime-v2/test_continue_as_new_sem_estado_repete_efeito-29619d04-971b-4a23-b4e6-34d213f61fe0.history.json",
+      "replay": "ok"
+    },
+    {
+      "arquivo": "runtime-v2/test_continue_as_new_sem_estado_repete_efeito-8009e42d-4f59-40f5-9f14-7248ebe8025d.history.json",
+      "replay": "ok"
+    },
+    {
+      "arquivo": "runtime-v2/test_duas_sessoes_paralelas-81687487-d87d-4f8a-b935-9df8320d8608.history.json",
+      "replay": "ok"
+    },
+    {
+      "arquivo": "runtime-v2/test_duas_sessoes_paralelas-8f3b71e4-6884-43c1-9fed-f2e2a007a6c1.history.json",
+      "replay": "ok"
+    },
+    {
+      "arquivo": "runtime-v2/test_duplicado_payload_divergente_e_config-17deb2e8-46d5-4193-9caa-475144966bb8.history.json",
+      "replay": "ok"
+    },
+    {
+      "arquivo": "runtime-v2/test_falha_tecnica_sem_retry_dedup_nao_cruza_reuso-212c72d2-8a98-41ff-9ec2-b664d8688fd5.history.json",
+      "replay": "ok"
+    },
+    {
+      "arquivo": "runtime-v2/test_falha_tecnica_sem_retry_dedup_nao_cruza_reuso-498a2556-1bd8-473d-9dfc-41d771bd0c63.history.json",
+      "replay": "ok"
+    },
+    {
+      "arquivo": "runtime-v2/test_fechando_rejeicao_assincrona_e_reuso_explicito-2b14fec3-931b-47e5-b174-cbb095828b60.history.json",
+      "replay": "ok"
+    },
+    {
+      "arquivo": "runtime-v2/test_fechando_rejeicao_assincrona_e_reuso_explicito-71b992f4-24db-41f5-bef7-f0cac3b0f3a6.history.json",
+      "replay": "ok"
+    },
+    {
+      "arquivo": "runtime-v2/test_registro_removido_nao_simula_tempo_de_retention-15617595-2a66-4cef-b195-8f93d29ecdae.history.json",
+      "replay": "ok"
+    },
+    {
+      "arquivo": "runtime-v2/test_sem_worker_rpc_retorna_signal_duravel_retomada-b3e8648d-f225-42b1-a106-aa5c27315d24.history.json",
+      "replay": "ok"
+    },
+    {
+      "arquivo": "runtime-v2/test_worker_recriado_reconstroi_dedup_do_historico-e479da51-b0c3-439b-9954-a6f7d7a7753b.history.json",
+      "replay": "ok"
+    }
+  ]
+}

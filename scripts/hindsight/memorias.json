@@ -1,0 +1,110 @@
+[
+ [
+  "memoria:jev",
+  "Jev (TypeSafe) na PQBR: endpoint POST https://api.typesafe.ai/v1/systemone, modelo jev-latest (jev-1.13.0). Chave só como TYPESAFE_API_KEY em ~/.pqbr/worker.env (600, fora do git), lida pelos workers do Temporal; o antigo segredo no Paperclip é histórico (Paperclip parado, ADR-011). Teste de classificação ok em 12/10. Fallbacks OpenRouter/OpenAI sem chave."
+ ],
+ [
+  "memoria:drive",
+  "Drive: pasta principal PQBR (id 1RKEE2kn2WDrH6SK__1SA5QkFkxwpqzya, privada) com 00_Biblia_Visual…99_Arquivo; IDs em config/drive_pastas.json. Pasta antiga 'Porquê BR' do perfil rede só tem vídeos stickman e auditorias; migração/limpeza na semana de 19/10, só apagar com OK do José (docs/pesquisas/mapa-drive-rede.md)."
+ ],
+ [
+  "memoria:legendas",
+  "Legenda do Short do NotebookLM é obrigatória (não desliga). Não há legenda extra no pós. Erros de legenda/texto/estilo sem mudança de sentido vão para a tabela pqbr.erros_aceitaveis; Auditor anota e não reprova; reprova só segurança ou mudança de sentido. Revisar a tabela após os primeiros dias; se muitos erros, avaliar sobrepor legenda (t435)."
+ ],
+ [
+  "memoria:pydantic",
+  "Contratos Pydantic v2 (src/pqbr/contratos) verificados em 12/10: 64 testes passam; vereditos do Auditor alinhados; modelos de temas (pendentes/publicados), erros_aceitaveis, SEO (categoria Educação padrão, mídia sintética desligada para 2D), esquemas Jev, NotebookLM extra=forbid, BlocoVisual barra fotorrealismo/3D."
+ ],
+ [
+  "memoria:hindsight-dono",
+  "Hindsight (bank pqbr): Dev Corretor mantém (reindexa, deduplica, remove obsoletos e segredos; apagar em massa só após backup do dia; memórias de código ligadas ao ticket/commit). Observador mede qualidade e abre ticket se a manutenção do dia não rodar (HS-01, José 12/10)."
+ ],
+ [
+  "memoria:sessao-google",
+  "Sessão Google: Camofox (userId=pqbr, perfil fixo, persistence+indexedDB) é a única fonte e o único renovador (keepalive 15 min). notebooklm-py só lê via NOTEBOOKLM_REFRESH_CMD=nlm-sync.sh; sem auth refresh, sem Chromium, sem cópia do Chrome. Login só no Camofox pelo VNC. Ver docs/REFERENCIA-sessao-google.md (commits 0206a36, c8a3335)."
+ ],
+ [
+  "memoria:humano",
+  "Regra canônica (REGRAS §157, José 12/10): toda automação de navegador simula humano: Camoufox humanize (mouse), clicar só via /click, texto curto digitado com cadência variável, texto longo colado após clique, pausas sorteadas, keepalive com jitter. Código: src/pqbr/workflows/camofox_humano.py."
+ ],
+ [
+  "memoria:bloco-visual",
+  "O bloco de cartum 2D de 12/10 não é mais o estilo. Identidade vigente em 28/10 (t133u, t140u, t141u): stickman de cabeça redonda branca, contorno preto, membros finos de palito, uma roupa chapada fixa e cara de reação. A cor da roupa ainda não foi escolhida. Os PNG sem roupa de 27/10 foram recusados e não são referência. NotebookLM continua no roteiro, na compliance, no SEO e no JSON do storyboard. Imagem no Flow, Nano Banana 2 Lite, 9:16, uma por vez. O prompt de imagem é o frame de início com a frase-trava; a animação descreve o corpo até o fim, com lips closed; a cena usa o recorte de um boneco. Sem a cor da roupa, não gerar a folha. Arquitetura e cadeia Flow, Vids e Vibes permanecem. 3D não se pede. Fonte: docs/ESTADO-ATUAL.md."
+ ],
+ [
+  "memoria:categoria-youtube-27",
+  "Categoria YouTube da PQBR = 27 Educação (José 12/10/2026); containsSyntheticMedia=false (cartum 2D não realista). Constante CATEGORIA_YOUTUBE em src/pqbr/contratos; SPEC RF-06."
+ ],
+ [
+  "memoria:cadernos-efemeros",
+  "Sem caderno mestre no NotebookLM (José 12/10, ADR-003): pacote canônico (persona, comandos/prompts, contrato, bloco §16.7) versionado por sha256 em pqbr.pacote_canonico (Postgres, fonte de verdade) + espelho Drive 00_Biblia_Visual/pacote-<hash12>; caderno por episódio casado pelo id em pqbr.cadernos_episodio; arquiva fontes/respostas/vídeo (Drive + pqbr.arquivo_caderno); ApagarCadernoWorkflow apaga pelo UUID completo em D+2 após publicação, com allowlist e MESTRES_PROIBIDOS; nunca por título. Cadernos antigos só com aprovação do José."
+ ],
+ [
+  "memoria:apagar-48h",
+  "Caderno do episódio é apagado 48 h após a publicação (ApagarCadernoWorkflow), pelo UUID completo registrado; nunca por título; dry-run nunca apaga (José 12/10)."
+ ],
+ [
+  "memoria:arquivar-verificar",
+  "Regra permanente (José 12/10): arquivar (fontes com URL+texto, relatórios, respostas, notas, metadados + resumo) em Drive + repo + pqbr.arquivo_caderno e VERIFICAR as 3 cópias (verificar_arquivo, verificado_em) antes de apagar qualquer caderno. Export falhou = não apaga."
+ ],
+ [
+  "memoria:sem-contaminacao",
+  "Sem contaminação cruzada entre cadernos (José 12/10): produção usa só o id registrado; só pacote + fontes do episódio, registradas em pqbr.fontes_caderno; nlm_conferir_fontes bloqueia (ContaminacaoCaderno) fonte estranha antes de gerar."
+ ],
+ [
+  "memoria:limpeza-cadernos",
+  "Limpeza total aprovada (José 12/10 12:20): todos os cadernos do inventário 20261012 apagados exceto mestre c35d7b24 e reserva 23f71f2f; pesquisas arquivadas antes em Drive 00_Biblia_Visual/pesquisas, repo docs/pesquisas/arquivo-cadernos e Postgres."
+ ],
+ [
+  "memoria:capa",
+  "Capa do Short (José 12/10): caderno do episódio gera (generate infographic portrait, 1536x2752, sem marca visível, C2PA Google), Gemini Web audita, script determinístico insere como 1º quadro e carimba, Diretor de Arte escreve o pedido, Auditor audita."
+ ],
+ [
+  "memoria:templates-9router",
+  "Sem caderno mestre (José 12/10 12:41): personas, steering, comandos e pedidos ao Gemini Web vêm de templates via 9router (core-medio gera, core-revisao revisa), contrato Pydantic, cache por tema+versão do pacote, registro no Postgres; persona é texto fixo no pacote."
+ ],
+ [
+  "memoria:gemini-notebook",
+  "12/10: Google rebatizou NotebookLM como Gemini Notebook (notebooklm.google.com → notebook.google.com). Erro 'CSRF token not found' = cópia de sessão velha; nlm-sync.sh resolve; _cli trata."
+ ],
+ [
+  "memoria:logout-global",
+  "12/10 13:27 (José): conta juniormoedavirtual só na PQBR (Camofox 9387 userId pqbr + notebooklm-py PQBR). Desligados: crons keepalive-session-guardian.py e notebooklm auth refresh (comentados), storage do userId porquebr no Camofox global 9377, ~/.notebooklm default, MP32 juniormoedavirtual, Chrome perfil PorqueBR, tudo em ~/Backups (600). Skills do rede com porquebr/9377 sem sessão; proibido ligar rede à PQBR (sem fila, sem 9387, sem adaptador), José 13:29. Reativar exige OK do José."
+ ],
+ [
+  "memoria:licoes-pre-e2e",
+  "Checklist pré-E2E (docs/LICOES-pre-E2E.md), em ordem: 1 identidade única por conta; 2 pausar rotinas legadas; 3 segredos disponíveis para quem executa; 4 pontes e portas vivas; 5 mapa papel→modelo; 6 dados de entrada com reposição; 7 quem faz o criativo (NotebookLM-first); 8 etapas aprovadas existem no código; 9 isolamento e arquivamento; 10 dry-run real."
+ ],
+ [
+  "memoria:notebooklm-first",
+  "José 12/10 14:00: o NotebookLM faz roteiro, SEO e capa no caderno efêmero do episódio; modelos só orquestram e validam (Pydantic); reserva 9router. Temas: Líder Editorial mantém 7 dias abertos em temas_pendentes, reposição automática ao publicar."
+ ],
+ [
+  "memoria:combos-9router",
+  "Combos 9router por papel em config/modelos_9router.json (router9.combo): core-alto Diretor/Roteirista/Auditor/Devs; core-medio Pesquisador/Líder Editorial/Compliance/Guardião; core-baixo Observador/SEO/Caçador/Comunidade/Diretor de Arte/pqbr; core-revisao revisões."
+ ],
+ [
+  "memoria:e2e-dryrun-1",
+  "E2E dry-run nº1 OK em 12/10 15:20 (e2e-PQBR-EP1002, sem upload): NotebookLM-first fez roteiro, SEO (cat. 27) e capa; Short em ~5 min; Drive 1H2J4OAplcI0Dmz_760X5EfGHYAZsarzW. Bugs corrigidos: id de artefato vs tarefa no generate, drive.TOKEN, destino da barreira. Pendentes: [suspicious link removed] no SEO, capa em painéis, Gemini Web, login board do CLI na 3101."
+ ],
+ [
+  "memoria:queda-sessao-psidts",
+  "Queda da sessão Google do Camofox PQBR (12/10 ~16:15): o PSIDTS foi rotacionado pela CLI notebooklm-py sem DISABLE_KEEPALIVE_POKE, como segundo cliente. Não foi logout global, revogação nem perfil novo. Guarda: .pth no venv força poke=0."
+ ],
+ [
+  "memoria:regra-sem-manual",
+  "Regra José 17:17: nenhuma etapa de fluxo à mão; fluxo inativo = parar, registrar, consertar o fluxo. José só usa Telegram PQBR e painel Paperclip."
+ ],
+ [
+  "memoria:tom-editorial-17",
+  "Tom editorial §17: cultura brasileira, o brasileiro usa a expressão hoje (mesmo nascida fora), comédia leve com palavras fáceis, ironia e sátira brasileiras, nunca aula."
+ ],
+ [
+  "memoria:acessos-workflow",
+  "AcessosWorkflow/pqbr-acessos (de hora em hora): confere Google/Camofox, NotebookLM e Paperclip; pede ao José via revisao_humana (Telegram/painel); nunca faz login."
+ ],
+ [
+  "memoria:sequencia-sessao-google",
+  "Sequência canônica da sessão Google (José 12/10 17:26): 1) confirmar perfil fixo 66e05767/userId pqbr; 2) restaurar a MESMA sessão do notebooklm-py para o Camofox (mesmo SID; AcessosWorkflow.restaurar_sessao_camofox); 3) se falhar, VNC (vnc-mostrar.sh) + pedido de login ao José; 4) aviso Telegram (cron Hermes pqbr-pedidos-jose) e painel. Regra: nenhum script fora do repo/contratos em produção."
+ ]
+]

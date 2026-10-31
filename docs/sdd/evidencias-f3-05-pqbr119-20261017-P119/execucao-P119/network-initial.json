@@ -1,0 +1,44 @@
+{
+  "Name": "pqbr-f305-P119-net",
+  "Id": "42b788276a4def56829d2016957edaed91dec677d57198f092421c8e37ca55a0",
+  "Created": "2026-10-17T18:56:10.766406169-03:00",
+  "Scope": "local",
+  "Driver": "bridge",
+  "EnableIPv4": true,
+  "EnableIPv6": false,
+  "IPAM": {
+    "Driver": "default",
+    "Options": {},
+    "Config": [
+      {
+        "Subnet": "172.29.0.0/16"
+      }
+    ]
+  },
+  "Internal": true,
+  "Attachable": false,
+  "Ingress": false,
+  "ConfigFrom": {
+    "Network": ""
+  },
+  "ConfigOnly": false,
+  "Options": {
+    "com.docker.network.bridge.gateway_mode_ipv4": "isolated",
+    "com.docker.network.bridge.gateway_mode_ipv6": "isolated",
+    "com.docker.network.bridge.name": "pqbrfcp119"
+  },
+  "Labels": {
+    "pqbr.candidate.run": "f305-p119-P119"
+  },
+  "Containers": {},
+  "Status": {
+    "IPAM": {
+      "Subnets": {
+        "172.29.0.0/16": {
+          "IPsInUse": 2,
+          "DynamicIPsAvailable": 65534
+        }
+      }
+    }
+  }
+}

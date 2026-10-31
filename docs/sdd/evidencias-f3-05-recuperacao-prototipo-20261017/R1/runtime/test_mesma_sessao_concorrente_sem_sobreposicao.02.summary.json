@@ -1,0 +1,36 @@
+{
+  "workflow_id": "teste-f3-05-candidato-sessao-d29a4c97e61f4e96b02a6b16a148552de51b7d1f48bc019120b953bef38d765b-op-8b55ab46852a67bfb83480cc112e86a77321bb7392c36777652398234b7cee55",
+  "run_id": "01a14acf-60a0-7493-8dc7-b379658d1be1",
+  "eventos": 31,
+  "replay": "ok",
+  "activities": [
+    {
+      "nome": "triagem_jev",
+      "fila": "teste-f3-05-candidato-wf-test_mesma_sessao_concorrente_sem_sobreposicao",
+      "max_tentativas": 3,
+      "id": "1",
+      "timeout_s": 120
+    },
+    {
+      "nome": "intervir_agente",
+      "fila": "teste-f3-05-candidato-camofox-test_mesma_sessao_concorrente_sem_sobreposicao",
+      "max_tentativas": 1,
+      "id": "intervencao-1",
+      "timeout_s": 620
+    },
+    {
+      "nome": "verificar_jev",
+      "fila": "teste-f3-05-candidato-wf-test_mesma_sessao_concorrente_sem_sobreposicao",
+      "max_tentativas": 3,
+      "id": "3",
+      "timeout_s": 120
+    },
+    {
+      "nome": "registrar_correcao",
+      "fila": "teste-f3-05-candidato-wf-test_mesma_sessao_concorrente_sem_sobreposicao",
+      "max_tentativas": 3,
+      "id": "4",
+      "timeout_s": 60
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+[Unit]
+Description=PQBR servidor MCP (só leitura; 127.0.0.1:8791, exposto só na tailnet via tailscale serve) — t89u
+After=network-online.target hindsight-api.service
+
+[Service]
+WorkingDirectory=%h/Workspace/PQBR
+Environment=PYTHONPATH=%h/Workspace/PQBR/src
+ExecStart=%h/Workspace/PQBR/.venv/bin/python -m pqbr.mcp.servidor
+Restart=on-failure
+RestartSec=5
+MemoryMax=512M
+NoNewPrivileges=yes
+
+[Install]
+WantedBy=default.target

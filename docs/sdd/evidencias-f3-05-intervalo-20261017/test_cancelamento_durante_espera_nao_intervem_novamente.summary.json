@@ -1,0 +1,29 @@
+{
+  "teste": "test_cancelamento_durante_espera_nao_intervem_novamente",
+  "workflow_id": "f3-05-teste-2c0549b171a34685a74836e3c13b7759",
+  "replay": "ok",
+  "eventos": 25,
+  "atividades": [
+    {
+      "activity": "triagem_jev",
+      "attempt": 1,
+      "n": null
+    },
+    {
+      "activity": "intervir_agente",
+      "attempt": 1,
+      "n": 1
+    }
+  ],
+  "registros": [],
+  "resultado": null,
+  "falha": "WorkflowFailureError",
+  "timers": 1,
+  "esperas": [
+    {
+      "event_id": 19,
+      "segundos": 380.0,
+      "inicio": "2026-10-17T13:26:33.675000"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+%% DescartarCadernoTesteWorkflow + ApagarCadernoWorkflow (descarte.py, pacote.py) — fila episodio-pqbr. Gerado do código 24/10/2026.
+flowchart TD
+  S(["PedidoDescarteTeste (caderno UUID, rótulo, motivo)"]) --> A1["registro_reclassificar_teste<br/>classe=pesquisa; recusa mestre/publicado/não registrado"]
+  A1 --> A2["nlm_exportar_caderno (notebooklm-pqbr)"]
+  A2 --> A3["arquivar_teste_3copias<br/>Drive Bíblia + repo + Postgres (+ Hindsight)"]
+  A3 --> A4["verificar_teste_3copias"]
+  A4 --> D1{"3 cópias completas?"}
+  D1 -- não --> F(["exceção: NÃO apaga"])
+  D1 -- sim --> W[["ApagarCadernoWorkflow(teste=True)"]]
+  W --> B1["registro_autorizar_apagar_teste"] --> B2["nlm_apagar_caderno (notebooklm-pqbr)<br/>confere título/dono"] --> B3["registro_apagado"]
+  subgraph EP["Ramo episódio (publicado)"]
+    E1["registro_publicado (D+2)"] --> E2["verificar_arquivo"] --> E3["registro_autorizar_apagar"] --> E4["nlm_apagar_caderno"] --> E5["registro_apagado"]
+  end
+  N>"⚠ Como o caderno semanal de temas entra aqui (quem dispara e quando) ainda não está automatizado"]

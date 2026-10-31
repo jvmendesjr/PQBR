@@ -1,0 +1,37 @@
+{
+  "tema": "formiga",
+  "id_lote": "lote-2510/formiga",
+  "pronto": "runtime/lote-saldo/formiga/formiga-pronto.mp4",
+  "sha256": "ac25a942f9d6aa5f498cada1abf0f1aa74f5ffe0ecafdf98bed0c358f287cceb",
+  "duracao_s": 42.7,
+  "pos": "scripts/pos/post-short.sh (trim protegido silencedetect, logo bug sup. dir., canto inf. dir., sting final)",
+  "gate": {
+    "A1_A3_tecnico": "PASS",
+    "A9_local": "PASS (frames 0.5/1.5/2.5 s: personagem 2D central, legivel, sem rosto real/marca, sem end-card NotebookLM)",
+    "A4_A8_juiz_gemini": "PENDENTE (LOOP não rodado)",
+    "B1_B10_editorial": "PASS (NotebookLM SEO validado PacoteSEO; 10 fontes web; GenAI: cartum 2D nao realista) ressalvas: codigo PQBR-EP fora da descricao (entra no payload)"
+  },
+  "status": "P1_HOLD",
+  "publicado": false,
+  "drive": "19eFrprW8ZFnspGtM6ofQgxu1SgPhFIGA",
+  "postgres": {
+    "temas_pendentes_id": 6,
+    "linhas": 1
+  },
+  "pronto_v2": {
+    "arquivo": "runtime/lote-saldo/formiga/formiga-pronto-v2.mp4",
+    "sha256": "917784c539df005da6fd481964a4cdac9e2640a82b079e22adadec3e980b96d9",
+    "duracao_s": 47.44,
+    "cta": "Segue o Porquê BR pra essa fila de curiosidades ficar mais doce antes que fechem o pote de açúcar!",
+    "cta_audio": "runtime/lote-saldo/formiga/cta-tema.mp3",
+    "elevenlabs_generation_id": "Ke58jCngvbqwbfc4am3Y",
+    "creditos": 108.99,
+    "legenda_alinhamento": "125/127",
+    "motivo": "ERR-MON-02: CTA personalizado do roteiro restaurado (pronto v1 tinha CTA genérico B)",
+    "pos": "scripts/pos/post-short.sh"
+  },
+  "pronto_vigente": "runtime/lote-saldo/formiga/formiga-pronto-v2.mp4",
+  "codigo": "PQBR-EP1004",
+  "motivo_hold": "loop_gemini_ausente",
+  "ressalvas_gate": []
+}

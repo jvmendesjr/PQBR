@@ -1,0 +1,18 @@
+{
+  "workflow_id": "teste-f3-05-supervisor-be18263b65513bde91a1fde0b7e011ad58863f4811bf68c8f3803f85d86e60b3",
+  "run_id": "e2848dcd-e580-4dde-875e-a9ba2b629709",
+  "eventos": 49,
+  "replay": "ok",
+  "activities": [
+    {
+      "nome": "registrar_falha_supervisor_falsa",
+      "fila": "teste-f3-05-candidato-wf-FAKE-H3-test_unica_rodada-supervisor",
+      "max_tentativas": 1
+    },
+    {
+      "nome": "reler_confirmacao_canonica_falsa",
+      "fila": "teste-f3-05-candidato-wf-FAKE-H3-test_unica_rodada-supervisor",
+      "max_tentativas": 1
+    }
+  ]
+}

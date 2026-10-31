@@ -1,0 +1,3 @@
+name: pqbr-ponte
+version: 0.1.0
+description: "PQBR (t537): repassa callbacks Telegram com prefixo pq: ao recebedor local da PQBR (socket Unix). NÃO INSTALADO."

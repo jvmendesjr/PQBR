@@ -1,0 +1,24 @@
+{
+  "titulo": "Por que o liquidificador tem 15 velocidades se usamos só 2?",
+  "descricao": "Já reparou que o liquidificador brasileiro tem quinze velocidades, mas a gente só usa a dois e o pulsar? Descubra a estratégia das marcas de eletrodomésticos por trás de tantas opções na bancada. PQBR-EP0015\n\nFontes: Blog Le biscuit e Conheça as principais estratégias para venda de Eletrodomésticos!\n\n#porquebr #curiosidades #eletrodomesticos #cozinha #shorts",
+  "tags": [
+    "liquidificador",
+    "15 velocidades",
+    "por que br",
+    "curiosidades",
+    "eletrodomesticos",
+    "cozinha brasileira",
+    "habitos brasileiros",
+    "humor",
+    "potencia liquidificador",
+    "utilidades domesticas",
+    "shorts"
+  ],
+  "hashtags": [
+    "#porquebr",
+    "#curiosidades",
+    "#eletrodomesticos",
+    "#cozinha",
+    "#shorts"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "id": "c753867a-98fa-4651-9498-78513532f215",
+  "title": "Teste - t461-persona-com",
+  "created_at": "2026-10-12T15:42:40+00:00",
+  "last_viewed_at": "2026-10-12T15:59:06+00:00",
+  "modified_at": "2026-10-12T15:59:06+00:00",
+  "is_owner": true,
+  "role": "owner",
+  "sources": [
+    {
+      "type": "markdown",
+      "title": "roteiro.md",
+      "url": null
+    }
+  ]
+}

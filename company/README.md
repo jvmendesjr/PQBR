@@ -1,3 +1,22 @@
-# company
+# company — pacote Paperclip da PQBR (agentcompanies/v1, v4.3 / t396)
 
-Pacote Paperclip da organização PQBR: COMPANY.md, teams/, agents/<slug>/AGENTS.md, .paperclip.yaml.
+15 agentes: os 14 de `docs/AGENTES.md` + `pqbr-assistente` (identidade do canal Hermes `pqbr`).
+- `agents/<slug>/AGENTS.md`: instruções (versionadas no git; o bundle do Paperclip não tem histórico).
+- `skills/`: `pqbr-contrato` (comum) + skills das trilhas.
+- `projects/`: trilhas (labels `lane:<slug>`). `tasks/`: rotinas (`recurring`), com cron em `.paperclip.yaml` (America/Fortaleza).
+- `.paperclip.yaml`: adapters `process` (texto; stub até o script do kit) e `opencode_local` (`/home/pc/.opencode/bin/opencode`, modelo `9router/...`, `dangerouslySkipPermissions: false`).
+- `opencode-config/`: XDG_CONFIG_HOME só da PQBR (provider 9router, permissões negadas). A chave vem por `NINEROUTER_API_KEY` (secret_ref, criado pelo José). Não toca no config do José.
+- Orçamento: 2000 c/mês por agente, **warn-only** (`hardStopEnabled: false`, 80%).
+- Todos nascem pausados até o MCP `pqbr-kit` e os scripts do kit existirem.
+
+## Estado (t396, 11/10)
+- Segredo `NINEROUTER_API_KEY` na empresa (secret_ref em todos os agentes); nunca no git.
+- Kit: `scripts/paperclip/agente_texto.sh` → `pqbr.kit.agente_texto` (checkout → 9router → `PropostaAgente` → comentário/status); MCP `pqbr-kit` (`pqbr.kit.mcp_kit`, lista fechada por `PQBR_KIT_PAPEL`). Playbooks em `playbooks/`.
+- Smoke ok e **ativos:** Especialista SEO (PQBA-5) e Observador (PQBA-2). Demais pausados; rotinas pausadas.
+- Atenção: o import troca `process` por `claude_local`; depois de importar, reaplicar o adapter `process`.
+
+## Estado (t397, 11/10)
+- Canal José: agente `Canal José (pqbr)` (fora das trilhas, reporta ao Diretor); a chave do perfil `pqbr` foi trocada e a da PQBR-TESTE revogada.
+- Ativos após smoke: Diretor, Observador, Especialista SEO, Líder Editorial, Roteirista, Caçador Sazonal, Auditor, Líder Compliance, Comunidade. Rotinas ativas só para esses.
+- Modelos `cu/*` (Cursor) do 9router quebram no OpenCode ("unsupported IDE tool"): usar `core-*`/`ag/*`. Guardião → `ag/gemini-3.8-flash-medium` (smoke pendente); Devs → `ag/gpt-oss-120b-medium` / `ag/claude-sonnet-4-6`.
+- Reautenticação: `scripts/camofox/sync_cookies_chrome.py` (só o perfil Chrome `PorqueBR`; dry-run ok, 86 cookies).

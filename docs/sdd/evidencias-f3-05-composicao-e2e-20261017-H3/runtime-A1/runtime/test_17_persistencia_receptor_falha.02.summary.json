@@ -1,0 +1,18 @@
+{
+  "workflow_id": "teste-f3-05-supervisor-b5fabf451a2027c559c71b55f05cbeb0473bbd7d0fdf20449b4744dbb9f1a3dd-op-f555b80ad08f501adb396a95c78948ce18f204b3cf2c93b0b1930a006540a06e",
+  "run_id": "01a14b82-f00e-7e3d-a485-c1c4efc251bf",
+  "eventos": 19,
+  "replay": "ok",
+  "activities": [
+    {
+      "nome": "triagem_jev",
+      "fila": "teste-f3-05-candidato-wf-FAKE-H3-test_17_persistencia_receptor_falha-supervisor",
+      "max_tentativas": 3
+    },
+    {
+      "nome": "intervir_agente",
+      "fila": "teste-f3-05-candidato-camofox-FAKE-H3-test_17_persistencia_receptor_falha-supervisor",
+      "max_tentativas": 1
+    }
+  ]
+}

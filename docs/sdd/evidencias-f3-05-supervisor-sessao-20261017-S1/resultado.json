@@ -1,0 +1,31 @@
+{
+  "status": "prototipo_sintetico_aprovado",
+  "testes": 3,
+  "aprovados": 3,
+  "duracao_testes_s": 3.822,
+  "capturas_replay": 11,
+  "runs_distintos": 7,
+  "namespace": "f3-05-supervisor",
+  "isolamento_aprovado": true,
+  "imagens_locais_sem_pull": true,
+  "candidata_e_workers_inalterados": true,
+  "recursos_descartaveis_removidos": true,
+  "evidencia_primaria": "runtime/test_duas_operacoes_falha_terminal_e_retomada_explicita.result.json",
+  "primeira": "FAILED_terminal_uma_intervencao_um_registro_falso",
+  "segunda": "pendente_ate_retomada_explicita_depois_concluida_uma_vez",
+  "limites": [
+    "registro_falso_sem_banco_real",
+    "sem_autenticacao_de_principal",
+    "sem_reconciliacao_efeito_externo",
+    "sem_exactly_once_ou_fencing",
+    "nao_reabre_ator_terminal",
+    "registro_inconclusivo_mantem_bloqueio_sem_retry"
+  ],
+  "gates": {
+    "F3_05_G4": "aberto",
+    "F7_02_G7": "pausado",
+    "PQBR_114": "pausado",
+    "F05_06": "no-arm"
+  },
+  "commit_push": false
+}

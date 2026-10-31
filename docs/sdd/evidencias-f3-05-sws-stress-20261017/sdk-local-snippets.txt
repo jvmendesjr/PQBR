@@ -1,0 +1,155 @@
+--- SDK request e traducao de erro ---
+
+class _ClientImpl(OutboundInterceptor):  # pyright: ignore[reportUnusedClass]
+    def __init__(self, client: Client) -> None:  # type: ignore
+        # We are intentionally not calling the base class's __init__ here
+        self._client = client
+
+    ### Workflow calls
+
+    async def start_workflow(
+        self, input: StartWorkflowInput
+    ) -> WorkflowHandle[Any, Any]:
+        req: (
+            temporalio.api.workflowservice.v1.StartWorkflowExecutionRequest
+            | temporalio.api.workflowservice.v1.SignalWithStartWorkflowExecutionRequest
+        )
+        if input.start_signal is not None:
+            req = await self._build_signal_with_start_workflow_execution_request(input)
+        else:
+            req = await self._build_start_workflow_execution_request(input)
+
+        resp: (
+            temporalio.api.workflowservice.v1.StartWorkflowExecutionResponse
+            | temporalio.api.workflowservice.v1.SignalWithStartWorkflowExecutionResponse
+        )
+        first_execution_run_id = None
+        eagerly_started = False
+        try:
+            if isinstance(
+                req,
+                temporalio.api.workflowservice.v1.SignalWithStartWorkflowExecutionRequest,
+            ):
+                resp = await self._client.workflow_service.signal_with_start_workflow_execution(
+                    req,
+                    retry=True,
+                    metadata=input.rpc_metadata,
+                    timeout=input.rpc_timeout,
+                )
+                first_execution_run_id = resp.first_execution_run_id or (
+                    resp.run_id if resp.started else None
+                )
+            else:
+                resp = await self._client.workflow_service.start_workflow_execution(
+                    req,
+                    retry=True,
+                    metadata=input.rpc_metadata,
+                    timeout=input.rpc_timeout,
+                )
+                first_execution_run_id = resp.first_execution_run_id or resp.run_id
+                eagerly_started = resp.HasField("eager_workflow_task")
+        except RPCError as err:
+            # If the status is ALREADY_EXISTS and the details can be extracted
+            # as already started, use a different exception
+            if err.status == RPCStatusCode.ALREADY_EXISTS and err.grpc_status.details:
+                details = temporalio.api.errordetails.v1.WorkflowExecutionAlreadyStartedFailure()
+                if err.grpc_status.details[0].Unpack(details):
+                    raise temporalio.exceptions.WorkflowAlreadyStartedError(
+                        input.id,
+                        input.workflow,
+                        run_id=details.run_id,
+                        first_run_id=details.first_execution_run_id or None,
+                    )
+            raise
+        handle: WorkflowHandle[Any, Any] = WorkflowHandle(
+            self._client,
+            req.workflow_id,
+            result_run_id=resp.run_id,
+            first_execution_run_id=first_execution_run_id,
+    async def _build_signal_with_start_workflow_execution_request(
+        self, input: StartWorkflowInput
+    ) -> temporalio.api.workflowservice.v1.SignalWithStartWorkflowExecutionRequest:
+        assert input.start_signal
+        data_converter = self._client.data_converter._with_contexts(
+            WorkflowSerializationContext(
+                namespace=self._client.namespace,
+                workflow_id=input.id,
+            ),
+            StorageDriverStoreContext(
+                target=StorageDriverWorkflowInfo(
+                    id=input.id, type=input.workflow, namespace=self._client.namespace
+                ),
+            ),
+        )
+        req = temporalio.api.workflowservice.v1.SignalWithStartWorkflowExecutionRequest(
+            signal_name=input.start_signal
+        )
+        if input.start_signal_args:
+            req.signal_input.payloads.extend(
+                await data_converter.encode(input.start_signal_args)
+            )
+        await self._populate_start_workflow_execution_request(req, input)
+        temporalio.nexus._operation_context._apply_nexus_context_to_signal_with_start_workflow_request(
+            req
+        )
+        return req
+        req.namespace = self._client.namespace
+        req.workflow_id = input.id
+        req.workflow_type.name = input.workflow
+        req.task_queue.name = input.task_queue
+        if input.args:
+            req.input.payloads.extend(await data_converter.encode(input.args))
+        if input.execution_timeout is not None:
+            req.workflow_execution_timeout.FromTimedelta(input.execution_timeout)
+        if input.run_timeout is not None:
+            req.workflow_run_timeout.FromTimedelta(input.run_timeout)
+        if input.task_timeout is not None:
+            req.workflow_task_timeout.FromTimedelta(input.task_timeout)
+        req.identity = self._client.identity
+        req.request_id = str(uuid.uuid4())
+        req.workflow_id_reuse_policy = cast(
+            "temporalio.api.enums.v1.WorkflowIdReusePolicy.ValueType",
+            int(input.id_reuse_policy),
+        )
+        req.workflow_id_conflict_policy = cast(
+            "temporalio.api.enums.v1.WorkflowIdConflictPolicy.ValueType",
+            int(input.id_conflict_policy),
+        )
+
+        if input.retry_policy is not None:
+            input.retry_policy.apply_to_proto(req.retry_policy)
+        req.cron_schedule = input.cron_schedule
+        if input.memo is not None:
+            await data_converter._encode_memo_existing(input.memo, req.memo)
+
+--- SDK RetryConfig ---
+@dataclass
+class RetryConfig:
+    """Retry configuration for server calls."""
+
+    initial_interval_millis: int = 100
+    """Initial backoff interval."""
+    randomization_factor: float = 0.2
+    """Randomization jitter to add."""
+    multiplier: float = 1.5
+    """Backoff multiplier."""
+    max_interval_millis: int = 5000
+    """Maximum backoff interval."""
+    max_elapsed_time_millis: int | None = 10000
+    """Maximum total time."""
+    max_retries: int = 10
+    """Maximum number of retries."""
+
+    def _to_bridge_config(self) -> temporalio.bridge.client.ClientRetryConfig:
+        return temporalio.bridge.client.ClientRetryConfig(
+            initial_interval_millis=self.initial_interval_millis,
+            randomization_factor=self.randomization_factor,
+            multiplier=self.multiplier,
+            max_interval_millis=self.max_interval_millis,
+            max_elapsed_time_millis=self.max_elapsed_time_millis,
+            max_retries=self.max_retries,
+        )
+
+
+@dataclass(frozen=True)
+class KeepAliveConfig:

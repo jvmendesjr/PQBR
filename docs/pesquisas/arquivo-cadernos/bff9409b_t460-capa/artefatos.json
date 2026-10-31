@@ -1,0 +1,27 @@
+{
+  "notebook_id": "bff9409b-ee47-4280-96b5-4c94ce1c2a63",
+  "notebook_title": "Teste - t460-capa",
+  "artifacts": [
+    {
+      "index": 1,
+      "id": "8ed8c835-470c-4736-9776-7e0413e51ecb",
+      "title": "capa_cena1_podre_de_rico.jpg",
+      "type": "File",
+      "type_id": "file",
+      "status": "completed",
+      "status_id": 3,
+      "created_at": "2026-10-12T15:35:53+00:00"
+    },
+    {
+      "index": 2,
+      "id": "a77b3190-b24b-4670-8545-2fe55c13f844",
+      "title": "Homem em meio ao desperdício",
+      "type": "Infographic",
+      "type_id": "infographic",
+      "status": "completed",
+      "status_id": 3,
+      "created_at": "2026-10-12T15:34:07+00:00"
+    }
+  ],
+  "count": 2
+}

@@ -1,0 +1,26 @@
+{
+  "teste": "test_continue_as_new_preservando_dedup",
+  "workflow_id": "prototipo-signal-start-v1-07aa137bd2dc362b90b33958e3ed6b335ab8385dedfb7454998d1219cf0e9f50",
+  "run_id": "e30439e4-9397-425c-b8d7-806af2e2c738",
+  "estado": "CONTINUED_AS_NEW",
+  "replay": "ok",
+  "pending_activities": 0,
+  "atividades_agendadas": 1,
+  "signals": 2,
+  "calls": [
+    {
+      "pedido": {
+        "falhar": false,
+        "id": "id-1",
+        "sessao": "sessao-A"
+      },
+      "inicio": 405410.493151005,
+      "fim": 405410.493168546,
+      "attempt": 1
+    }
+  ],
+  "max_global": 1,
+  "max_sessao": {
+    "sessao-A": 1
+  }
+}

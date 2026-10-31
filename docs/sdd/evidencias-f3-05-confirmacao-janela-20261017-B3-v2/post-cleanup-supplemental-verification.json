@@ -1,0 +1,118 @@
+{
+  "verificationOnly": true,
+  "noRuntimeRerun": true,
+  "originalOrchestratorExitCode": 1,
+  "originalVerifierError": "KeyError: operational_states",
+  "originalArtifactsPreserved": true,
+  "protectedFilesCompared": 1664,
+  "protectedHashesUnchanged": true,
+  "persistentWorkersUnchanged": true,
+  "workers": {
+    "pqbr-temporal-worker.service": {
+      "Restart": "always",
+      "MainPID": "6541",
+      "NRestarts": "2",
+      "ExecMainStartTimestamp": "Sat 2026-10-17 17:39:06 -03",
+      "Id": "pqbr-temporal-worker.service",
+      "ActiveState": "active",
+      "SubState": "running",
+      "FragmentPath": "/home/pc/.config/systemd/user/pqbr-temporal-worker.service"
+    },
+    "pqbr-camofox-worker.service": {
+      "Restart": "always",
+      "MainPID": "6842",
+      "NRestarts": "1",
+      "ExecMainStartTimestamp": "Sat 2026-10-17 17:39:09 -03",
+      "Id": "pqbr-camofox-worker.service",
+      "ActiveState": "active",
+      "SubState": "running",
+      "FragmentPath": "/home/pc/.config/systemd/user/pqbr-camofox-worker.service"
+    },
+    "pqbr-notebooklm-worker.service": {
+      "Restart": "always",
+      "MainPID": "6847",
+      "NRestarts": "1",
+      "ExecMainStartTimestamp": "Sat 2026-10-17 17:39:09 -03",
+      "Id": "pqbr-notebooklm-worker.service",
+      "ActiveState": "active",
+      "SubState": "running",
+      "FragmentPath": "/home/pc/.config/systemd/user/pqbr-notebooklm-worker.service"
+    },
+    "pqbr-episodio-worker.service": {
+      "Restart": "always",
+      "MainPID": "6845",
+      "NRestarts": "1",
+      "ExecMainStartTimestamp": "Sat 2026-10-17 17:39:09 -03",
+      "Id": "pqbr-episodio-worker.service",
+      "ActiveState": "active",
+      "SubState": "running",
+      "FragmentPath": "/home/pc/.config/systemd/user/pqbr-episodio-worker.service"
+    }
+  },
+  "inventory": {
+    "containers": {
+      "new": [],
+      "missing": []
+    },
+    "networks": {
+      "new": [],
+      "missing": []
+    },
+    "volumes": {
+      "new": [],
+      "missing": []
+    }
+  },
+  "labeledResourcesRemaining": {
+    "containers": [],
+    "networks": []
+  },
+  "operationalTemporalCurrentProjection": [
+    {
+      "id": "5149fb508ea5",
+      "name": "/pqbr-temporal-temporal-ui-1",
+      "status": "running",
+      "pid": 5128,
+      "startedAt": "2026-10-17T20:39:04.526802475Z",
+      "startPredatesSingleAttempt": true
+    },
+    {
+      "id": "3ace020aa8c6",
+      "name": "/pqbr-temporal-temporal-create-namespace-1",
+      "status": "exited",
+      "pid": 0,
+      "startedAt": "2026-10-09T18:26:53.166717169Z",
+      "startPredatesSingleAttempt": true
+    },
+    {
+      "id": "467e7b71c0c9",
+      "name": "/pqbr-temporal-temporal-1",
+      "status": "running",
+      "pid": 6404,
+      "startedAt": "2026-10-17T20:39:06.1409194Z",
+      "startPredatesSingleAttempt": true
+    },
+    {
+      "id": "29c917869106",
+      "name": "/pqbr-temporal-temporal-admin-tools-1",
+      "status": "exited",
+      "pid": 0,
+      "startedAt": "2026-10-09T18:26:45.024046217Z",
+      "startPredatesSingleAttempt": true
+    },
+    {
+      "id": "fd01ffd89b74",
+      "name": "/pqbr-temporal-postgresql-1",
+      "status": "running",
+      "pid": 5190,
+      "startedAt": "2026-10-17T20:39:04.530886687Z",
+      "startPredatesSingleAttempt": true
+    }
+  ],
+  "operationalTemporalStartPredatesAttempt": true,
+  "noProcessesInTestNetns": true,
+  "noTestContainerPids": true,
+  "temporarySqliteRemoved": true,
+  "checked_at_utc": "2026-10-17T22:50:50.726843+00:00",
+  "supplementalVerificationPassed": true
+}

@@ -1,0 +1,10 @@
+[Unit]
+Description=PQBR Camofox keepalive 24/7 (sessao permanente, t395)
+After=pqbr-camofox.service
+[Service]
+EnvironmentFile=%h/.pqbr/camofox/.env
+ExecStart=%h/.pqbr/camofox/keepalive.sh
+Restart=always
+RestartSec=15
+[Install]
+WantedBy=default.target

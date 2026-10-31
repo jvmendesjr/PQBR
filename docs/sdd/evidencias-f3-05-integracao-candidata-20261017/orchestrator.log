@@ -1,0 +1,14 @@
+GATE DE ISOLAMENTO APROVADO; iniciando somente recursos descartáveis.
+Traceback (most recent call last):
+  File "/home/pc/Workspace/PQBR/tests/workflows/run_f3_05_candidate_container.py", line 196, in <module>
+    docker('exec', postgres, 'psql', '-U', 'temporal', '-d', 'temporal', '-v', 'ON_ERROR_STOP=1',
+    ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           '-c', 'CREATE DATABASE temporal_visibility;')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/tests/workflows/run_f3_05_candidate_container.py", line 44, in docker
+    return run(['docker', *args], **kwargs)
+  File "/home/pc/Workspace/PQBR/tests/workflows/run_f3_05_candidate_container.py", line 39, in run
+    raise RuntimeError(f'Falha {result.returncode}: {args}: {result.stderr} {result.stdout}')
+RuntimeError: Falha 2: ['docker', 'exec', 'e8e0633211e917d218d9a2038a30eb69cf44fe051e679d47b0e9b7da70ec1123', 'psql', '-U', 'temporal', '-d', 'temporal', '-v', 'ON_ERROR_STOP=1', '-c', 'CREATE DATABASE temporal_visibility;']: psql: error: connection to server on socket "/var/run/postgresql/.s.PGSQL.5432" failed: FATAL:  database "temporal" does not exist
+ 
+Inventário e verificação final: {"containers": {"novos": [], "ausentes": []}, "networks": {"novos": [], "ausentes": []}, "volumes": {"novos": [], "ausentes": []}}

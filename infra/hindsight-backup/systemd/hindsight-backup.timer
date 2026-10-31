@@ -1,0 +1,8 @@
+[Unit]
+Description=PQBR backup diário do Hindsight, 03:45 (Fortaleza; 15 min depois do banco do app)
+[Timer]
+OnCalendar=*-*-* 03:45:00
+RandomizedDelaySec=5min
+Persistent=true
+[Install]
+WantedBy=timers.target

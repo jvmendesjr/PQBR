@@ -1,0 +1,26 @@
+test_config_divergente (tests.unit.test_f3_05_candidate_unit.ContratoAtor.test_config_divergente) ... ok
+test_dedup_normaliza_defaults (tests.unit.test_f3_05_candidate_unit.ContratoAtor.test_dedup_normaliza_defaults) ... ok
+test_envelope_v1_sem_versao_compativel (tests.unit.test_f3_05_candidate_unit.ContratoAtor.test_envelope_v1_sem_versao_compativel) ... ok
+test_ferramenta_divergente_recusada (tests.unit.test_f3_05_candidate_unit.ContratoAtor.test_ferramenta_divergente_recusada) ... ok
+test_filas_operacionais_bloqueadas (tests.unit.test_f3_05_candidate_unit.ContratoAtor.test_filas_operacionais_bloqueadas) ... ok
+test_handler_sem_efeito_e_fechamento_recusa_novos (tests.unit.test_f3_05_candidate_unit.ContratoAtor.test_handler_sem_efeito_e_fechamento_recusa_novos) ... ok
+test_limite_nao_descarta_ids_existentes (tests.unit.test_f3_05_candidate_unit.ContratoAtor.test_limite_nao_descarta_ids_existentes) ... ok
+test_mesmo_id_mesma_sessao (tests.unit.test_f3_05_candidate_unit.ContratoAtor.test_mesmo_id_mesma_sessao) ... ok
+test_operacao_invalida (tests.unit.test_f3_05_candidate_unit.ContratoAtor.test_operacao_invalida) ... ok
+test_payload_divergente_nao_substitui_original (tests.unit.test_f3_05_candidate_unit.ContratoAtor.test_payload_divergente_nao_substitui_original) ... ok
+test_registro_sem_optin_bloqueado (tests.unit.test_f3_05_candidate_unit.ContratoAtor.test_registro_sem_optin_bloqueado) ... ok
+test_sessao_divergente_recusada (tests.unit.test_f3_05_candidate_unit.ContratoAtor.test_sessao_divergente_recusada) ... ok
+test_versao_incompativel (tests.unit.test_f3_05_candidate_unit.ContratoAtor.test_versao_incompativel) ... ok
+test_conta_divergente_nao_verifica (tests.unit.test_f3_05_candidate_unit.PoliticaCandidata.test_conta_divergente_nao_verifica) ... ok
+test_erro_rpc_propaga_sem_reenvio (tests.unit.test_f3_05_candidate_unit.PoliticaCandidata.test_erro_rpc_propaga_sem_reenvio) ... ok
+test_excecao_tecnica_sem_registro_retry_ou_escada (tests.unit.test_f3_05_candidate_unit.PoliticaCandidata.test_excecao_tecnica_sem_registro_retry_ou_escada) ... ok
+test_patch_novo_adiciona_id_estavel (tests.unit.test_f3_05_candidate_unit.PoliticaCandidata.test_patch_novo_adiciona_id_estavel) ... ok
+test_patch_preserva_comando_v1 (tests.unit.test_f3_05_candidate_unit.PoliticaCandidata.test_patch_preserva_comando_v1) ... ok
+test_roteamento_e_retries_por_activity (tests.unit.test_f3_05_candidate_unit.PoliticaCandidata.test_roteamento_e_retries_por_activity) ... ok
+test_signal_with_start_so_retorna_handle (tests.unit.test_f3_05_candidate_unit.PoliticaCandidata.test_signal_with_start_so_retorna_handle) ... ok
+test_tres_negativas_tem_duas_esperas_sorteadas (tests.unit.test_f3_05_candidate_unit.PoliticaCandidata.test_tres_negativas_tem_duas_esperas_sorteadas) ... ok
+
+----------------------------------------------------------------------
+Ran 21 tests in 0.025s
+
+OK

@@ -1,0 +1,145 @@
+{
+  "titulo": "Por que o panetone já aparece no mercado em outubro?",
+  "gancho": "Ainda nem chegou o Halloween e já tem panetone brilhando na gôndola do mercado! Por que a gente vê essa lenda natalina tão cedo?",
+  "falas": [
+    "Ainda nem chegou o Halloween e já tem panetone brilhando na gôndola do mercado! Por que a gente vê essa lenda natalina tão cedo?",
+    "Tem quem diga que é estoque encalhado do Natal passado! Mas isso é puro mito: as fábricas vendem tudo e assam lotes novinhos a partir de julho.",
+    "A razão real é pura estratégia de varejo. Quanto antes a marca ocupa a prateleira, mais espaço ela domina e mais a gente compra pra comer no lanche.",
+    "Além disso, a logística pra abastecer o país inteiro demora meses. Essa primeira fornada vende o sabor do produto sem nem precisar acender as luzes de Natal.",
+    "Se você também é do time dos apaixonados que devoram panetone antes de dezembro, segue o Porquê BR!"
+  ],
+  "cta_final": "Se você também é do time dos apaixonados que devoram panetone antes de dezembro, segue o Porquê BR!",
+  "palavras": 124,
+  "duracao_estimada_s": 54,
+  "cenas": [
+    {
+      "n": 1,
+      "fala": "Ainda nem chegou o Halloween e já tem panetone brilhando na gôndola do mercado! Por que a gente vê essa lenda natalina tão cedo?",
+      "duracao_s": 10,
+      "cenario": "Supermercado decorado com abóboras de Halloween e gôndolas de panetones",
+      "clipes": [
+        {
+          "id": "c1a",
+          "duracao_s": 5,
+          "prompt_imagem_en": "flat 2D cartoon illustration, thick black lines, solid warm colors, 9:16 vertical aspect ratio. Medium shot of a 32-year-old thin Brazilian man with short brown hair, wearing a forest green t-shirt, dark blue jeans, red round glasses, no beard, standing in a cozy supermarket aisle in October. Orange pumpkin decorations hang nearby while a shelf displays glowing panettone boxes. No text, no letters, no numbers, no brand logos.",
+          "movimento_en": "The camera slowly zooms in on the character as he widens his eyes in surprise and points toward the panettone shelf."
+        },
+        {
+          "id": "c1b",
+          "duracao_s": 5,
+          "prompt_imagem_en": "flat 2D cartoon illustration, thick black lines, solid warm colors, 9:16 vertical aspect ratio. Close-up shot of a 32-year-old thin Brazilian man with short brown hair, wearing a forest green t-shirt, dark blue jeans, red round glasses, no beard, scratching his chin thoughtfully in front of a golden panettone package. No text, no letters, no numbers, no brand logos.",
+          "movimento_en": "The character tilts his head curiously while golden sparkles drift around the panettone box, smooth camera pan."
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "fala": "Tem quem diga que é estoque encalhado do Natal passado! Mas isso é puro mito: as fábricas vendem tudo e assam lotes novinhos a partir de julho.",
+      "duracao_s": 15,
+      "cenario": "Mito do estoque antigo versus fábrica moderna de panetones",
+      "clipes": [
+        {
+          "id": "c2a",
+          "duracao_s": 5,
+          "prompt_imagem_en": "flat 2D cartoon illustration, thick black lines, solid warm colors, 9:16 vertical aspect ratio. Wide shot of a 32-year-old thin Brazilian man with short brown hair, wearing a forest green t-shirt, dark blue jeans, red round glasses, no beard, standing in a dusty dark warehouse, looking suspiciously at a cobweb-covered box with a comic question mark above his head. No text, no letters, no numbers, no brand logos.",
+          "movimento_en": "The character waves his hand to clear a cobweb, camera tilts up slightly."
+        },
+        {
+          "id": "c2b",
+          "duracao_s": 5,
+          "prompt_imagem_en": "flat 2D cartoon illustration, thick black lines, solid warm colors, 9:16 vertical aspect ratio. Medium shot of a 32-year-old thin Brazilian man with short brown hair, wearing a forest green t-shirt, dark blue jeans, red round glasses, no beard, standing in a bright modern bakery factory, making an X gesture with his arms to reject the myth. No text, no letters, no numbers, no brand logos.",
+          "movimento_en": "The character shakes his head side to side in a playful denial, camera zooms in slowly."
+        },
+        {
+          "id": "c2c",
+          "duracao_s": 5,
+          "prompt_imagem_en": "flat 2D cartoon illustration, thick black lines, solid warm colors, 9:16 vertical aspect ratio. Close-up shot of fresh golden panettones rising inside a large industrial baking oven with warm steam, with a 32-year-old thin Brazilian man with short brown hair, wearing a forest green t-shirt, dark blue jeans, red round glasses, no beard, watching happily from the side. No text, no letters, no numbers, no brand logos.",
+          "movimento_en": "Steam rises gently from the golden panettones while the conveyor belt moves forward smoothly."
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "fala": "A razão real é pura estratégia de varejo. Quanto antes a marca ocupa a prateleira, mais espaço ela domina e mais a gente compra pra comer no lanche.",
+      "duracao_s": 15,
+      "cenario": "Estratégia de varejo e conquista de espaço na gôndola de supermercado",
+      "clipes": [
+        {
+          "id": "c3a",
+          "duracao_s": 5,
+          "prompt_imagem_en": "flat 2D cartoon illustration, thick black lines, solid warm colors, 9:16 vertical aspect ratio. Wide shot of a 32-year-old thin Brazilian man with short brown hair, wearing a forest green t-shirt, dark blue jeans, red round glasses, no beard, watching two friendly cartoon supermarket workers filling prime shelf space at eye level with colorful panettone boxes. No text, no letters, no numbers, no brand logos.",
+          "movimento_en": "The workers quickly stack panettone boxes onto the shelf as the camera pans horizontally."
+        },
+        {
+          "id": "c3b",
+          "duracao_s": 5,
+          "prompt_imagem_en": "flat 2D cartoon illustration, thick black lines, solid warm colors, 9:16 vertical aspect ratio. Medium shot of a 32-year-old thin Brazilian man with short brown hair, wearing a forest green t-shirt, dark blue jeans, red round glasses, no beard, standing next to a massive eye-level shelf display packed with panettones, pointing enthusiastically at the prime spot. No text, no letters, no numbers, no brand logos.",
+          "movimento_en": "Gleaming light effects pulse around the panettone display while the character nods approvingly."
+        },
+        {
+          "id": "c3c",
+          "duracao_s": 5,
+          "prompt_imagem_en": "flat 2D cartoon illustration, thick black lines, solid warm colors, 9:16 vertical aspect ratio. Close-up shot of a 32-year-old thin Brazilian man with short brown hair, wearing a forest green t-shirt, dark blue jeans, red round glasses, no beard, happily placing a panettone box into his supermarket shopping cart alongside coffee and milk. No text, no letters, no numbers, no brand logos.",
+          "movimento_en": "The character pushes the shopping cart forward smoothly towards the viewer."
+        }
+      ]
+    },
+    {
+      "n": 4,
+      "fala": "Além disso, a logística pra abastecer o país inteiro demora meses. Essa primeira fornada vende o sabor do produto sem nem precisar acender as luzes de Natal.",
+      "duracao_s": 15,
+      "cenario": "Logística de transporte pelo Brasil e consumo de primavera",
+      "clipes": [
+        {
+          "id": "c4a",
+          "duracao_s": 5,
+          "prompt_imagem_en": "flat 2D cartoon illustration, thick black lines, solid warm colors, 9:16 vertical aspect ratio. Wide shot of a stylized delivery truck driving on a highway across a cartoon map of Brazil under a bright sunny sky, with a 32-year-old thin Brazilian man with short brown hair, wearing a forest green t-shirt, dark blue jeans, red round glasses, no beard, waving from the driver side window. No text, no letters, no numbers, no brand logos.",
+          "movimento_en": "The delivery truck moves smoothly along the highway from left to right."
+        },
+        {
+          "id": "c4b",
+          "duracao_s": 5,
+          "prompt_imagem_en": "flat 2D cartoon illustration, thick black lines, solid warm colors, 9:16 vertical aspect ratio. Medium shot of a 32-year-old thin Brazilian man with short brown hair, wearing a forest green t-shirt, dark blue jeans, red round glasses, no beard, holding a slice of panettone on a sunny spring afternoon outdoors with flowers and trees. No text, no letters, no numbers, no brand logos.",
+          "movimento_en": "A gentle spring breeze sways the trees in the background while the character smiles warmly."
+        },
+        {
+          "id": "c4c",
+          "duracao_s": 5,
+          "prompt_imagem_en": "flat 2D cartoon illustration, thick black lines, solid warm colors, 9:16 vertical aspect ratio. Close-up shot of a panettone slice with raisins resting on a plate next to a steaming cup of coffee, with a 32-year-old thin Brazilian man with short brown hair, wearing a forest green t-shirt, dark blue jeans, red round glasses, no beard, seated at the table. No text, no letters, no numbers, no brand logos.",
+          "movimento_en": "Steam rises delicately from the coffee cup as the character brings a fork towards the panettone."
+        }
+      ]
+    },
+    {
+      "n": 5,
+      "fala": "Se você também é do time dos apaixonados que devoram panetone antes de dezembro, segue o Porquê BR!",
+      "duracao_s": 10,
+      "cenario": "Mesa de café aconchegante com panetone e encerramento em loop",
+      "clipes": [
+        {
+          "id": "c5a",
+          "duracao_s": 5,
+          "prompt_imagem_en": "flat 2D cartoon illustration, thick black lines, solid warm colors, 9:16 vertical aspect ratio. Medium shot of a 32-year-old thin Brazilian man with short brown hair, wearing a forest green t-shirt, dark blue jeans, red round glasses, no beard, sitting at a dining table taking a delicious bite of panettone and giving a big enthusiastic thumbs-up. No text, no letters, no numbers, no brand logos.",
+          "movimento_en": "The character gives a confident thumbs-up to the camera while smiling, camera zooms in slowly."
+        },
+        {
+          "id": "c5b",
+          "duracao_s": 5,
+          "prompt_imagem_en": "flat 2D cartoon illustration, thick black lines, solid warm colors, 9:16 vertical aspect ratio. Wide shot of a 32-year-old thin Brazilian man with short brown hair, wearing a forest green t-shirt, dark blue jeans, red round glasses, no beard, walking back towards a supermarket shelf filled with panetones in October, seamlessly looping back to the opening scene. No text, no letters, no numbers, no brand logos.",
+          "movimento_en": "The camera pans horizontally following the character as he walks back to the panettone aisle, connecting back to scene 1."
+        }
+      ]
+    }
+  ],
+  "fontes": [
+    "A corrida do panetone: como as marcas antecipam o Natal - Meio e Mensagem",
+    "Então é Natal? Marcas antecipam vendas e panetone já está no varejo - InfoMoney",
+    "Quando os panetones começam a ser produzidos? - Bom Gourmet",
+    "Panetones chegam cedo aos supermercados e antecipam Natal - SuperHiper"
+  ],
+  "riscos": [
+    "ERR-PER-01: Manter rigorosamente a mesma ficha de personagem palavra por palavra em todos os prompts visual em inglês.",
+    "ERR-TXT-01: Evitar qualquer tipo de texto, letras, números, símbolos ou marcas reais nas imagens geradas.",
+    "ERR-MON-02 / ERR-CMP-01: Garantir que a fala final termine exatamente com 'segue o Porquê BR!' sem pedir comentários (ERR-CMP-04)."
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "teste": "test_config_concorrente_primeiro_start_fixa_contrato",
+  "workflow_id": "prototipo-ator-sessao-atomico-v1-07aa137bd2dc362b90b33958e3ed6b335ab8385dedfb7454998d1219cf0e9f50",
+  "run_id": "bb2bc40f-74c1-4649-8aa5-393c526ff373",
+  "estado": "COMPLETED",
+  "pending_activities": 0,
+  "replay": "ok",
+  "atividades_agendadas": 1,
+  "fila_explicita": "teste-camofox-ator-4e69573a3d21454bacd0708a8d764f15",
+  "calls": [
+    {
+      "pedido": {
+        "falhar": false,
+        "id": "prazo10",
+        "sessao": "sessao-A"
+      },
+      "inicio": 404980.187457221,
+      "fim": 404980.210938739,
+      "fila": "teste-camofox-ator-4e69573a3d21454bacd0708a8d764f15",
+      "workflow_id": "prototipo-ator-sessao-atomico-v1-07aa137bd2dc362b90b33958e3ed6b335ab8385dedfb7454998d1219cf0e9f50",
+      "attempt": 1
+    }
+  ],
+  "max_global": 1,
+  "max_por_sessao": {
+    "sessao-A": 1
+  },
+  "erro": null
+}

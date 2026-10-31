@@ -1,0 +1,37 @@
+{
+  "tema": "fechadura",
+  "id_lote": "lote-2510/fechadura",
+  "pronto": "runtime/lote-saldo/fechadura/fechadura-pronto.mp4",
+  "sha256": "f627dfdc8e212173f51dc5b74ba7da11589281f41a25fb061cf266ac1ad59282",
+  "duracao_s": 40.16,
+  "pos": "scripts/pos/post-short.sh (trim protegido silencedetect, logo bug sup. dir., canto inf. dir., sting final)",
+  "gate": {
+    "A1_A3_tecnico": "PASS",
+    "A9_local": "PASS (frames 0.5/1.5/2.5 s: personagem 2D central, legivel, sem rosto real/marca, sem end-card NotebookLM)",
+    "A4_A8_juiz_gemini": "PENDENTE (LOOP não rodado)",
+    "B1_B10_editorial": "PASS (NotebookLM SEO validado PacoteSEO; 10 fontes web; GenAI: cartum 2D nao realista) ressalvas: codigo PQBR-EP fora da descricao (entra no payload)"
+  },
+  "status": "P1_HOLD",
+  "publicado": false,
+  "drive": "1_aPZu5-oENaMKzk5E4mxX3wVWADhKCVc",
+  "postgres": {
+    "temas_pendentes_id": 20,
+    "linhas": 1
+  },
+  "pronto_v2": {
+    "arquivo": "runtime/lote-saldo/fechadura/fechadura-pronto-v2.mp4",
+    "sha256": "d89e6428ad05e3def5e0d7b388e60fbd47e35c685052c5600355092798b9f577",
+    "duracao_s": 41.98,
+    "cta": "Tranca essa ansiedade na chave e segue o Porquê BR!",
+    "cta_audio": "runtime/lote-saldo/fechadura/cta-tema.mp3",
+    "elevenlabs_generation_id": "QHzKySiZe3VyJoaDgEie",
+    "creditos": 61.99,
+    "legenda_alinhamento": "111/112",
+    "motivo": "ERR-MON-02: CTA personalizado do roteiro restaurado (pronto v1 tinha CTA genérico B)",
+    "pos": "scripts/pos/post-short.sh"
+  },
+  "pronto_vigente": "runtime/lote-saldo/fechadura/fechadura-pronto-v2.mp4",
+  "codigo": "PQBR-EP1006",
+  "motivo_hold": "loop_gemini_ausente",
+  "ressalvas_gate": []
+}

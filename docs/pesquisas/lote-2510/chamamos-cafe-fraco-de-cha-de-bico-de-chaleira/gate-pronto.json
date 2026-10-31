@@ -1,0 +1,26 @@
+{
+  "tema": "cafe-fraco",
+  "id_lote": "lote-2510/cafe-fraco",
+  "pronto": "runtime/lote-saldo/cafe-fraco/cafe-fraco-pronto.mp4",
+  "sha256": "d80a932c413d445a1ec8ee79d043fba152523857542c5918e59a38ebe3dd9d25",
+  "duracao_s": 43.48,
+  "pos": "scripts/pos/post-short.sh (trim protegido silencedetect, logo bug sup. dir., canto inf. dir., sting final)",
+  "gate": {
+    "A1_A3_tecnico": "PASS",
+    "A9_local": "PASS (frames 0.5/1.5/2.5 s: personagem 2D central, legivel, sem rosto real/marca, sem end-card NotebookLM)",
+    "A4_A8_juiz_gemini": "PENDENTE (LOOP não rodado)",
+    "B1_B10_editorial": "PASS (NotebookLM SEO validado PacoteSEO; 10 fontes web; GenAI: cartum 2D nao realista) ressalvas: codigo PQBR-EP fora da descricao (entra no payload)"
+  },
+  "status": "P1_HOLD",
+  "publicado": false,
+  "drive": "1GbcjapV5kQe29jedS03lOAlBLwtI1hu8",
+  "postgres": {
+    "temas_pendentes_id": 5,
+    "linhas": 1
+  },
+  "cta_check": "OK: CTA original do roteiro já é o fallback literal 'Segue o Porquê BR'; pronto v1 vigente, sem v2",
+  "pronto_vigente": "runtime/lote-saldo/cafe-fraco/cafe-fraco-pronto.mp4",
+  "codigo": "PQBR-EP1003",
+  "motivo_hold": "loop_gemini_ausente",
+  "ressalvas_gate": []
+}

@@ -1,0 +1,32 @@
+test_continue_as_new_preserva_ids_e_resultados (tests.workflows.test_f3_05_candidate_runtime.CandidataRuntime.test_continue_as_new_preserva_ids_e_resultados) ... Executing <Task pending name='Task-2' coro=<CandidataRuntime.test_continue_as_new_preserva_ids_e_resultados() running at /home/pc/Workspace/PQBR/tests/workflows/test_f3_05_candidate_runtime.py:266> wait_for=<Future pending cb=[<builtins.PyDoneCallback object at 0x7f7e496bb110>(), Task.task_wakeup()] created at /home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py:448> cb=[_run_until_complete_cb() at /home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py:181] created at /home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/runners.py:100> took 0.121 seconds
+ok
+test_dedup_payload_config_e_versao (tests.workflows.test_f3_05_candidate_runtime.CandidataRuntime.test_dedup_payload_config_e_versao) ... ok
+test_excecao_tecnica_falha_sem_retry_fallback_ou_proximo (tests.workflows.test_f3_05_candidate_runtime.CandidataRuntime.test_excecao_tecnica_falha_sem_retry_fallback_ou_proximo) ... Completing activity as failed ({'activity_id': 'intervencao-1', 'activity_type': 'intervir_agente', 'attempt': 1, 'namespace': 'f3-05-candidate', 'task_queue': 'teste-f3-05-candidato-camofox-test_excecao_tecnica_falha_sem_retry_fallback_ou_proximo', 'workflow_id': 'teste-f3-05-candidato-sessao-12f8bdf97ec05bbc1f4e3c4d095420b583c516a153e0bf7ad007084ecc5dd46c-op-0e07b8daee992d1e972944d343e9e34e5bf6511ec0f0f55add331c52c0fff33d', 'workflow_run_id': '01a14aa9-2d63-72f4-8eb7-feebb855ffae', 'workflow_type': 'PQBRCorrecaoCandidata'})
+Traceback (most recent call last):
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 351, in _handle_start_activity_task
+    result = await self._execute_activity(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 681, in _execute_activity
+    return await impl.execute_activity(input)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 889, in execute_activity
+    return await input.fn(*input.args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/tests/workflows/composicao_candidata.py", line 59, in intervir
+    raise ApplicationError('falha técnica falsa', type='FalhaTecnicaFalsa')
+temporalio.exceptions.ApplicationError: FalhaTecnicaFalsa: falha técnica falsa
+ok
+test_fila_camofox_sem_consumidor_e_retomada_explicita (tests.workflows.test_f3_05_candidate_runtime.CandidataRuntime.test_fila_camofox_sem_consumidor_e_retomada_explicita) ... ok
+test_mesma_sessao_concorrente_sem_sobreposicao (tests.workflows.test_f3_05_candidate_runtime.CandidataRuntime.test_mesma_sessao_concorrente_sem_sobreposicao) ... ok
+test_replay_versao_anterior_sem_patch_e_nova_com_patch (tests.workflows.test_f3_05_candidate_runtime.CandidataRuntime.test_replay_versao_anterior_sem_patch_e_nova_com_patch) ... Executing <Task pending name='Task-3715' coro=<CandidataRuntime.test_replay_versao_anterior_sem_patch_e_nova_com_patch() running at /home/pc/Workspace/PQBR/tests/workflows/test_f3_05_candidate_runtime.py:286> wait_for=<Future pending cb=[<builtins.PyDoneCallback object at 0x7f7e42070fb0>(), Task.task_wakeup()] created at /home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py:448> cb=[_run_until_complete_cb() at /home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py:181] created at /home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/runners.py:100> took 0.102 seconds
+Executing <Task pending name='Task-3758' coro=<_WorkflowWorker._handle_activation() running at /home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_workflow.py:416> wait_for=<Future pending cb=[_chain_future.<locals>._call_check_cancel() at /home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/futures.py:389, Task.task_wakeup()] created at /home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py:448> created at /home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/tasks.py:420> took 0.115 seconds
+ok
+test_restart_worker_reconstroi_dedup_do_historico (tests.workflows.test_f3_05_candidate_runtime.CandidataRuntime.test_restart_worker_reconstroi_dedup_do_historico) ... ok
+test_sem_worker_workflow_rpc_nao_processa_e_retoma (tests.workflows.test_f3_05_candidate_runtime.CandidataRuntime.test_sem_worker_workflow_rpc_nao_processa_e_retoma) ... ok
+test_sessoes_diferentes_em_paralelo (tests.workflows.test_f3_05_candidate_runtime.CandidataRuntime.test_sessoes_diferentes_em_paralelo) ... ok
+test_trava_sensivel_e_conta_divergente (tests.workflows.test_f3_05_candidate_runtime.CandidataRuntime.test_trava_sensivel_e_conta_divergente) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 18.597s
+
+OK

@@ -1,0 +1,48 @@
+{
+  "replay_legado_sem_patch": true,
+  "nova_execucao_com_patch": true,
+  "patch_ids": [
+    "f3-05-candidato-intervencao-id-v2"
+  ],
+  "calls": [
+    {
+      "sessao": "test_replay_versao_anterior_sem_patch_e_nova_com_patch",
+      "passo": "acao-legado",
+      "inicio": 409392.488424633,
+      "fim": 409392.529403815,
+      "fila": "teste-f3-05-candidato-camofox-test_replay_versao_anterior_sem_patch_e_nova_com_patch",
+      "tentativa": 1,
+      "workflow_id": "teste-f3-05-candidato-sessao-cb4e2cb590e5ab5606c7249f5cce55a738f57efb7cea60edef483dc7d43f8c42-op-910878b4d5ba5c05a54fcbd81053453ef3cc19d322f561456f19868b05fe8203"
+    },
+    {
+      "sessao": "test_replay_versao_anterior_sem_patch_e_nova_com_patch-nova",
+      "passo": "acao-nova",
+      "inicio": 409393.265984975,
+      "fim": 409393.307115336,
+      "fila": "teste-f3-05-candidato-camofox-test_replay_versao_anterior_sem_patch_e_nova_com_patch",
+      "tentativa": 1,
+      "workflow_id": "teste-f3-05-candidato-sessao-ed610c73428dbf3ac1b4b4881b3c853e9e07425e61a8174c5871f95e2b18e39f-op-ee236c1e64da4f8c073cfaa2b73150d3c1103b83b867aff8639ef3b5483f16d6"
+    }
+  ],
+  "max_sessao": {
+    "test_replay_versao_anterior_sem_patch_e_nova_com_patch": 1,
+    "test_replay_versao_anterior_sem_patch_e_nova_com_patch-nova": 1
+  },
+  "max_global": 1,
+  "registros": [
+    {
+      "resultado": "corrigido",
+      "tentativas": 1,
+      "motivo": "",
+      "proposta_script": "proposta falsa",
+      "chamar_jose": false
+    },
+    {
+      "resultado": "corrigido",
+      "tentativas": 1,
+      "motivo": "",
+      "proposta_script": "proposta falsa",
+      "chamar_jose": false
+    }
+  ]
+}

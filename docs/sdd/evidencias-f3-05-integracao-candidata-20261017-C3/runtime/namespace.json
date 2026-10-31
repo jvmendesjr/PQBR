@@ -1,0 +1,39 @@
+{
+  "namespaceInfo": {
+    "name": "f3-05-candidate",
+    "state": "NAMESPACE_STATE_REGISTERED",
+    "description": "TESTE CANDIDATO DESCARTAVEL; somente dados sinteticos",
+    "id": "31586c3c-4c63-4423-9d97-163e6e26359a",
+    "capabilities": {
+      "eagerWorkflowStart": true,
+      "syncUpdate": true,
+      "asyncUpdate": true,
+      "workerHeartbeats": true,
+      "reportedProblemsSearchAttribute": true,
+      "standaloneActivities": true,
+      "pollerAutoscaling": true,
+      "standaloneActivityStartDelay": true
+    },
+    "limits": {
+      "blobSizeLimitError": "2097152",
+      "memoSizeLimitError": "2097152",
+      "workflowTaskCompletionSizeLimitError": "41943040"
+    },
+    "supportsSchedules": true
+  },
+  "config": {
+    "workflowExecutionRetentionTtl": "86400s",
+    "badBinaries": {},
+    "historyArchivalState": "ARCHIVAL_STATE_DISABLED",
+    "visibilityArchivalState": "ARCHIVAL_STATE_DISABLED"
+  },
+  "replicationConfig": {
+    "activeClusterName": "active",
+    "clusters": [
+      {
+        "clusterName": "active"
+      }
+    ],
+    "state": "REPLICATION_STATE_NORMAL"
+  }
+}

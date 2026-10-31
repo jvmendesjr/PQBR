@@ -1,0 +1,139 @@
+{
+  "_doc": "Catálogo do papel motion (REGRAS §26, t145u). O JS de cada modelo registra o mesmo slug. tipo texto/textos com travado=true só aceita item do bloco de números travados. tipo personagem = id de ficha PERS-* do banco-fichas/ com imagem local; tipo pose = nome de recorte dessa ficha (parâmetro `de` aponta o parâmetro do personagem). numero aceita min e max. camada: tela_cheia (dentro do bloco), sobre (por cima do vídeo), ambas.",
+  "versao": "1.2.0",
+  "modelos": {
+    "transicao-cortina": {
+      "descricao": "Transição padrão: cortina na cor do elenco cobre (antes do corte) ou revela (depois do corte). Dura 0,3 a 0,6 s.",
+      "camada": "ambas",
+      "parametros": {
+        "fase": {"tipo": "opcao", "opcoes": ["cobre", "revela"], "obrigatorio": true},
+        "cor": {"tipo": "cor", "obrigatorio": false}
+      }
+    },
+    "titulo-expressao": {
+      "descricao": "A expressão em letra grande, à esquerda, uma linha por vez.",
+      "camada": "tela_cheia",
+      "parametros": {
+        "texto": {"tipo": "texto", "travado": true, "obrigatorio": true},
+        "rotulo": {"tipo": "texto", "travado": true, "obrigatorio": false},
+        "tamanho": {"tipo": "numero", "obrigatorio": false}
+      }
+    },
+    "linha-tempo": {
+      "descricao": "Passagem de tempo: marcos aparecem de cima para baixo.",
+      "camada": "tela_cheia",
+      "parametros": {
+        "marcos": {"tipo": "textos", "travado": true, "obrigatorio": true, "min": 2, "max": 5},
+        "rotulo": {"tipo": "texto", "travado": true, "obrigatorio": false}
+      }
+    },
+    "origem-pino": {
+      "descricao": "Cartão de origem com pino que cai e quica. Sem mapa geográfico.",
+      "camada": "tela_cheia",
+      "parametros": {
+        "lugar": {"tipo": "texto", "travado": true, "obrigatorio": true},
+        "detalhe": {"tipo": "texto", "travado": true, "obrigatorio": false}
+      }
+    },
+    "versus": {
+      "descricao": "Versão mais aceita × tem quem diga: dois cartões empilhados; o segundo entra em entrada_b segundos.",
+      "camada": "tela_cheia",
+      "parametros": {
+        "titulo_a": {"tipo": "texto", "travado": true, "obrigatorio": true},
+        "texto_a": {"tipo": "texto", "travado": true, "obrigatorio": true},
+        "titulo_b": {"tipo": "texto", "travado": true, "obrigatorio": true},
+        "texto_b": {"tipo": "texto", "travado": true, "obrigatorio": true},
+        "imagem_a": {"tipo": "imagem", "obrigatorio": false},
+        "imagem_b": {"tipo": "imagem", "obrigatorio": false},
+        "entrada_b": {"tipo": "numero", "obrigatorio": false}
+      }
+    },
+    "recorte-aponta": {
+      "descricao": "Recorte do stickman entra de baixo e aponta para uma caixa de texto.",
+      "camada": "tela_cheia",
+      "parametros": {
+        "imagem": {"tipo": "imagem", "obrigatorio": true},
+        "texto": {"tipo": "texto", "travado": true, "obrigatorio": true},
+        "lado": {"tipo": "opcao", "opcoes": ["esq", "dir"], "obrigatorio": false}
+      }
+    },
+    "barra-progresso": {
+      "descricao": "Barra fina de progresso do vídeo inteiro, na borda de baixo da zona segura.",
+      "camada": "sobre",
+      "parametros": {
+        "cor": {"tipo": "cor", "obrigatorio": false},
+        "espessura": {"tipo": "numero", "obrigatorio": false}
+      }
+    },
+    "imagem-cena": {
+      "descricao": "Imagem ou quadro de vídeo dentro do gráfico, com moldura e legenda travada.",
+      "camada": "tela_cheia",
+      "parametros": {
+        "imagem": {"tipo": "imagem", "obrigatorio": true},
+        "legenda": {"tipo": "texto", "travado": true, "obrigatorio": false}
+      }
+    },
+    "personagem-moldura": {
+      "descricao": "Personagem do catálogo presente no layout do bloco: recorte da ficha num quadradinho num canto da zona segura, com entrada em mola, respiração leve e saída encolhendo. Troque a pose com peças em sequência. Não cobre texto nem cartão das outras peças (o render reprova).",
+      "camada": "tela_cheia",
+      "parametros": {
+        "personagem": {"tipo": "personagem", "obrigatorio": true},
+        "pose": {"tipo": "pose", "de": "personagem", "obrigatorio": false},
+        "canto": {"tipo": "opcao", "opcoes": ["inf-dir", "inf-esq", "sup-dir", "sup-esq"], "obrigatorio": false},
+        "tamanho": {"tipo": "numero", "min": 220, "max": 460, "obrigatorio": false},
+        "espelhar": {"tipo": "opcao", "opcoes": ["nao", "sim"], "obrigatorio": false}
+      }
+    },
+    "frase-troca": {
+      "descricao": "Duas a quatro frases curtas se substituem no mesmo lugar, com troca seca (sem fade) e uma marca que carimba a cada troca. Gramática do dossiê (t153u): a sequência de afirmações curtas do Valendata e a troca de palavra do HorizonX.",
+      "camada": "tela_cheia",
+      "parametros": {
+        "frases": {"tipo": "textos", "travado": true, "obrigatorio": true, "min": 2, "max": 4},
+        "rotulo": {"tipo": "texto", "travado": true, "obrigatorio": false}
+      }
+    },
+    "marca-texto": {
+      "descricao": "A frase do bloco é lida palavra por palavra por um cursor e um marca-texto chapado assenta na palavra-chave. Gramática do dossiê (t153u): o destaque de palavra do Valendata e do Raylight e a leitura progressiva do Vovy.",
+      "camada": "tela_cheia",
+      "parametros": {
+        "texto": {"tipo": "texto", "travado": true, "obrigatorio": true},
+        "destaque": {"tipo": "texto", "obrigatorio": true, "fragmento_de": "texto"},
+        "rotulo": {"tipo": "texto", "travado": true, "obrigatorio": false}
+      }
+    },
+    "numero-conta": {
+      "descricao": "O número do bloco conta até o valor, com rótulo em cima e selo que carimba no fim. Gramática do dossiê (t153u): o 100% com selo do Valendata e a contagem de abas do Vovy.",
+      "camada": "tela_cheia",
+      "parametros": {
+        "texto": {"tipo": "texto", "travado": true, "obrigatorio": true},
+        "rotulo": {"tipo": "texto", "travado": true, "obrigatorio": false},
+        "selo": {"tipo": "texto", "travado": true, "obrigatorio": false}
+      }
+    },
+    "leque": {
+      "descricao": "Nó central e dois a quatro itens em leque, com as linhas saindo do centro uma a uma. Gramática do dossiê (t153u): o diagrama radial do Valendata, adaptado ao 9:16.",
+      "camada": "tela_cheia",
+      "parametros": {
+        "centro": {"tipo": "texto", "travado": true, "obrigatorio": true},
+        "itens": {"tipo": "textos", "travado": true, "obrigatorio": true, "min": 2, "max": 4}
+      }
+    },
+    "elo-causa": {
+      "descricao": "Causa e efeito em dois cartões ligados por um traço que cresce, com o conector carimbado no meio. Gramática do dossiê (t153u): o grafo de dois nós do Valendata, adaptado ao 9:16.",
+      "camada": "tela_cheia",
+      "parametros": {
+        "causa": {"tipo": "texto", "travado": true, "obrigatorio": true},
+        "efeito": {"tipo": "texto", "travado": true, "obrigatorio": true},
+        "conector": {"tipo": "texto", "travado": true, "obrigatorio": false}
+      }
+    },
+    "transicao-pincelada": {
+      "descricao": "Pincelada chapada atravessa a tela para cobrir ou revelar, com a borda na cor de acento. Gramática do dossiê (t153u): a pincelada do OmaPhoto. Usa dentro do bloco; a transição padrão de entrada e saída continua sendo a cortina.",
+      "camada": "ambas",
+      "parametros": {
+        "fase": {"tipo": "opcao", "opcoes": ["cobre", "revela"], "obrigatorio": true},
+        "cor": {"tipo": "cor", "obrigatorio": false}
+      }
+    }
+  }
+}

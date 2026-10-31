@@ -1,0 +1,219 @@
+{
+  "estado_final": {
+    "versao": 1,
+    "aceitos": {
+      "falha": {
+        "ferramenta": "camofox",
+        "sessao": "test_pausa_recusa_comandos_e_recupera_so_aceitos",
+        "passo": "falha",
+        "erro": "falha-tecnica",
+        "episodio": null,
+        "simulacao": {
+          "triagem": "corrigivel",
+          "intervencoes": [
+            true
+          ],
+          "verificacoes": [
+            true
+          ],
+          "conta_confere": true
+        }
+      },
+      "seguinte-a": {
+        "ferramenta": "camofox",
+        "sessao": "test_pausa_recusa_comandos_e_recupera_so_aceitos",
+        "passo": "seguinte-a",
+        "erro": "falha falsa",
+        "episodio": null,
+        "simulacao": {
+          "triagem": "corrigivel",
+          "intervencoes": [
+            true
+          ],
+          "verificacoes": [
+            true
+          ],
+          "conta_confere": true
+        }
+      },
+      "seguinte-b": {
+        "ferramenta": "camofox",
+        "sessao": "test_pausa_recusa_comandos_e_recupera_so_aceitos",
+        "passo": "seguinte-b",
+        "erro": "falha falsa",
+        "episodio": null,
+        "simulacao": {
+          "triagem": "corrigivel",
+          "intervencoes": [
+            true
+          ],
+          "verificacoes": [
+            true
+          ],
+          "conta_confere": true
+        }
+      }
+    },
+    "resultados": {
+      "seguinte-a": {
+        "resultado": "corrigido",
+        "tentativas": 1,
+        "motivo": "",
+        "proposta_script": "proposta falsa",
+        "chamar_jose": false
+      },
+      "seguinte-b": {
+        "resultado": "corrigido",
+        "tentativas": 1,
+        "motivo": "",
+        "proposta_script": "proposta falsa",
+        "chamar_jose": false
+      }
+    },
+    "falhas": {
+      "falha": {
+        "operacao_id": "falha",
+        "filho_id": "teste-f3-05-recuperacao-475c9c6724e3a79c3e8aad89ff83e37a15b2262eee50a9d1955ea0f1bd8c83fc-op-38e55e2c50e69560265c4b1886ab446e1ade639a9b30a3395fa4ae2f1f0ae4f2",
+        "filho_run_id": "01a14ad1-b91c-7021-a4c4-2e4ee781cb87",
+        "revisao": 1,
+        "estado": "falha_tecnica_sintetica",
+        "resultado_efeito": "nao_reconciliado"
+      }
+    },
+    "pendentes": [],
+    "ativo": null,
+    "bloqueio": null,
+    "revisao": 1,
+    "recuperacoes": [
+      {
+        "versao": 1,
+        "decisao": "retomar_somente_pendentes",
+        "revisao": 1,
+        "falha_id": "falha",
+        "filho_run_id": "01a14ad1-b91c-7021-a4c4-2e4ee781cb87",
+        "pendentes": [
+          "seguinte-a",
+          "seguinte-b"
+        ]
+      }
+    ],
+    "observacoes": [
+      {
+        "id": "falha",
+        "estado": "aceito"
+      },
+      {
+        "id": "seguinte-a",
+        "estado": "aceito"
+      },
+      {
+        "id": "seguinte-b",
+        "estado": "aceito"
+      },
+      {
+        "id": "falha",
+        "estado": "pausado_apos_falha"
+      },
+      {
+        "estado": "recuperacao_recusada"
+      },
+      {
+        "estado": "recuperacao_recusada"
+      },
+      {
+        "estado": "recuperacao_recusada"
+      },
+      {
+        "estado": "recuperacao_recusada"
+      },
+      {
+        "estado": "recuperacao_recusada"
+      },
+      {
+        "estado": "recuperacao_recusada"
+      },
+      {
+        "estado": "recuperacao_recusada"
+      },
+      {
+        "estado": "recuperacao_recusada"
+      },
+      {
+        "id": "nova-nao-aceita",
+        "estado": "admissao_fechada"
+      },
+      {
+        "id": "seguinte-a",
+        "estado": "duplicado"
+      },
+      {
+        "id": "falha",
+        "estado": "duplicado"
+      },
+      {
+        "id": "seguinte-a",
+        "estado": "payload_divergente"
+      },
+      {
+        "estado": "recuperacao_aceita"
+      },
+      {
+        "estado": "recuperacao_recusada"
+      }
+    ],
+    "admissao_fechada": true,
+    "fechando": true,
+    "geracao": 0
+  },
+  "filho_falho_sem_retry": true,
+  "somente_pendentes": true,
+  "calls": [
+    {
+      "sessao": "test_pausa_recusa_comandos_e_recupera_so_aceitos",
+      "passo": "falha",
+      "inicio": 412038.793293834,
+      "fim": 412038.834447919,
+      "fila": "teste-f3-05-candidato-camofox-test_pausa_recusa_comandos_e_recupera_so_aceitos-recuperacao",
+      "tentativa": 1,
+      "workflow_id": "teste-f3-05-recuperacao-475c9c6724e3a79c3e8aad89ff83e37a15b2262eee50a9d1955ea0f1bd8c83fc-op-38e55e2c50e69560265c4b1886ab446e1ade639a9b30a3395fa4ae2f1f0ae4f2"
+    },
+    {
+      "sessao": "test_pausa_recusa_comandos_e_recupera_so_aceitos",
+      "passo": "seguinte-a",
+      "inicio": 412039.71367394,
+      "fim": 412039.754926374,
+      "fila": "teste-f3-05-candidato-camofox-test_pausa_recusa_comandos_e_recupera_so_aceitos-recuperacao",
+      "tentativa": 1,
+      "workflow_id": "teste-f3-05-recuperacao-475c9c6724e3a79c3e8aad89ff83e37a15b2262eee50a9d1955ea0f1bd8c83fc-op-2ecbf9a42dcf11c1b9fdb05fc53f8fe67085c4853642cdb9a21ae6e2e128ce32"
+    },
+    {
+      "sessao": "test_pausa_recusa_comandos_e_recupera_so_aceitos",
+      "passo": "seguinte-b",
+      "inicio": 412040.379233021,
+      "fim": 412040.420661515,
+      "fila": "teste-f3-05-candidato-camofox-test_pausa_recusa_comandos_e_recupera_so_aceitos-recuperacao",
+      "tentativa": 1,
+      "workflow_id": "teste-f3-05-recuperacao-475c9c6724e3a79c3e8aad89ff83e37a15b2262eee50a9d1955ea0f1bd8c83fc-op-9044b2869ea942140abdf0c11921e75e449d8f76bcdd845198e3d6c5991eab05"
+    }
+  ],
+  "registros": [
+    {
+      "resultado": "corrigido",
+      "tentativas": 1,
+      "motivo": "",
+      "proposta_script": "proposta falsa",
+      "chamar_jose": false
+    },
+    {
+      "resultado": "corrigido",
+      "tentativas": 1,
+      "motivo": "",
+      "proposta_script": "proposta falsa",
+      "chamar_jose": false
+    }
+  ],
+  "max_sessao": {
+    "test_pausa_recusa_comandos_e_recupera_so_aceitos": 1
+  },
+  "max_global": 1
+}

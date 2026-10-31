@@ -1,0 +1,41 @@
+{
+  "teste": "test_fechamento_drena_rejeita_novo_e_nao_reabre",
+  "workflow_id": "prototipo-ator-sessao-atomico-v1-07aa137bd2dc362b90b33958e3ed6b335ab8385dedfb7454998d1219cf0e9f50",
+  "run_id": "a2e40e41-c7a1-4264-81d8-b492428c7331",
+  "estado": "COMPLETED",
+  "pending_activities": 0,
+  "replay": "ok",
+  "atividades_agendadas": 2,
+  "fila_explicita": "teste-camofox-ator-a76c3227d8154c89ab8e072424b9bd7e",
+  "calls": [
+    {
+      "pedido": {
+        "falhar": false,
+        "id": "a1",
+        "sessao": "sessao-A"
+      },
+      "inicio": 404981.435764764,
+      "fim": 404981.532398126,
+      "fila": "teste-camofox-ator-a76c3227d8154c89ab8e072424b9bd7e",
+      "workflow_id": "prototipo-ator-sessao-atomico-v1-07aa137bd2dc362b90b33958e3ed6b335ab8385dedfb7454998d1219cf0e9f50",
+      "attempt": 1
+    },
+    {
+      "pedido": {
+        "falhar": false,
+        "id": "a2",
+        "sessao": "sessao-A"
+      },
+      "inicio": 404981.61329698,
+      "fim": 404981.613314906,
+      "fila": "teste-camofox-ator-a76c3227d8154c89ab8e072424b9bd7e",
+      "workflow_id": "prototipo-ator-sessao-atomico-v1-07aa137bd2dc362b90b33958e3ed6b335ab8385dedfb7454998d1219cf0e9f50",
+      "attempt": 1
+    }
+  ],
+  "max_global": 1,
+  "max_por_sessao": {
+    "sessao-A": 1
+  },
+  "erro": null
+}

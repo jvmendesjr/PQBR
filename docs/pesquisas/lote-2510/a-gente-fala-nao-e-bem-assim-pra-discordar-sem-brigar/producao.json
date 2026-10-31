@@ -1,0 +1,72 @@
+{
+ "slug": "a-gente-fala-nao-e-bem-assim-pra-discordar-sem-brigar",
+ "produzido_em": "2026-10-25",
+ "publicado": false,
+ "saida": "runtime/lote-saldo/nao-e-bem-assim/nao-e-bem-assim.mp4",
+ "duracao_s": 50.8,
+ "resolucao": "1080x1920",
+ "narracao": {
+  "servico": "elevenlabs",
+  "conta": "meioquedigital",
+  "voz": "Larissa xcNJswC7UcxsIiCuih19",
+  "modelo": "eleven_v3",
+  "custo_creditos": 658.9
+ },
+ "imagens": {
+  "servico": "higgsfield",
+  "modelo": "flux_3_image 1k 9:16",
+  "qtd": 7,
+  "custo_total": 14,
+  "ancora": "cena 1 como image_reference"
+ },
+ "clipes": {
+  "servico": "higgsfield",
+  "modelo": "seedance_2_0_mini 720p 9:16, sem audio, i2v",
+  "custo_por_s": 1,
+  "duracoes_s": [
+   8,
+   7,
+   5,
+   7,
+   8,
+   5,
+   7
+  ],
+  "custo_total": 47
+ },
+ "montagem": [
+  [
+   "k1.mp4",
+   7.65
+  ],
+  [
+   "k2.mp4",
+   6.43
+  ],
+  [
+   "k3.mp4",
+   5.09
+  ],
+  [
+   "k4.mp4",
+   6.42
+  ],
+  [
+   "k5.mp4",
+   7.44
+  ],
+  [
+   "k6.mp4",
+   4.93
+  ],
+  [
+   "k7.mp4",
+   6.68
+  ],
+  [
+   "k1.mp4",
+   6.22
+  ]
+ ],
+ "prompts": "ver cenas.md do pacote; sufixo: Flat 2D cartoon, bold black outlines, no text, no 3D"
+}

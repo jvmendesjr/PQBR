@@ -1,0 +1,20 @@
+{
+  "ticket": "PQBR-119",
+  "issueId": "d3b2eb41-63e5-4e7e-8cb7-06672e3ddab9",
+  "interactionId": "815e9e44-cf90-45b4-86a2-23aafd45d0fc",
+  "companyId": "be3980d6-51ae-4cee-b85f-923b4568188c",
+  "userId": "eHIQgWDGucnmgW8xT19VvSsypXRdbTr7",
+  "resolvedByUserId": "eHIQgWDGucnmgW8xT19VvSsypXRdbTr7",
+  "resolvedByAgentId": null,
+  "resolvedByRunId": null,
+  "status": "accepted",
+  "outcome": "accepted",
+  "requestedResolverPolicy": "human_only",
+  "effectiveResolverPolicy": "human_only",
+  "continuationPolicy": "none",
+  "idempotencyKey": "pqbr-f3-05-pqbr-119-synthetic-e2e-20261017-v1",
+  "resolvedAt": "2026-10-17T21:52:24.121Z",
+  "description": "Teste E2E único autorizado para o supervisor de sessão. Escopo: primeira já está em falha terminal e nunca deve ser repetida; segunda já foi aceita e pode retomar uma única vez após confirmação. Execução em Temporal Server 1.32.1 efêmero, rede interna sem saída, sem Workers persistentes, usando Activities falsas e armazenamento temporário. Nenhuma ação externa, integração real com Camofox/Hindsight, publicação ou produção. Aprovar autoriza somente essa execução única.",
+  "prompt": "Autoriza executar uma única vez o teste descrito neste ticket, apenas no Temporal descartável e com operações sintéticas?",
+  "detailsMarkdown": "Ticket PQBR-119. Primeira: operação sintética já em falha terminal; não repetir. Segunda: operação sintética já aceita e pendente; após aprovação, retomar exatamente uma vez. Temporal Server 1.32.1 efêmero, rede interna sem saída, Activities falsas e armazenamento temporário. Sem Workers persistentes, ação externa, Camofox/Hindsight reais, publicação ou produção. Aprovação autoriza somente esta execução única."
+}

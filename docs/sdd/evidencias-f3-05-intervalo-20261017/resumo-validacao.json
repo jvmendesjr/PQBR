@@ -1,0 +1,367 @@
+{
+  "historicos_novos": 18,
+  "replay_novos": 18,
+  "replay_legados": 14,
+  "testes_harness": 19,
+  "regressao": "274 passed, 19 skipped",
+  "namespace_encerrado": "net:[4026533133]",
+  "processos_restantes_no_namespace": [],
+  "python": "3.12.14",
+  "testes": [
+    {
+      "teste": "test_cancelamento_durante_espera_nao_intervem_novamente",
+      "replay": "ok",
+      "intervencoes": 1,
+      "esperas_s": [
+        380
+      ],
+      "timeouts_s": [
+        543
+      ],
+      "intervencoes_agendadas_em": [
+        "2026-10-17T13:26:33.626Z"
+      ],
+      "resultado": null,
+      "falha": "WorkflowFailureError"
+    },
+    {
+      "teste": "test_conta_divergente_interrompe_sem_verificar",
+      "replay": "ok",
+      "intervencoes": 1,
+      "esperas_s": [],
+      "timeouts_s": [
+        635
+      ],
+      "intervencoes_agendadas_em": [
+        "2026-10-17T13:26:34.130Z"
+      ],
+      "resultado": {
+        "resultado": "sensivel",
+        "tentativas": 1,
+        "motivo": "conta/sessão divergente",
+        "proposta_script": null,
+        "chamar_jose": true
+      },
+      "falha": null
+    },
+    {
+      "teste": "test_corrige_na_primeira_e_serializa_resultado",
+      "replay": "ok",
+      "intervencoes": 1,
+      "esperas_s": [],
+      "timeouts_s": [
+        331
+      ],
+      "intervencoes_agendadas_em": [
+        "2026-10-17T13:26:34.602Z"
+      ],
+      "resultado": {
+        "resultado": "corrigido",
+        "tentativas": 1,
+        "motivo": "",
+        "proposta_script": "trocar seletor X por Y",
+        "chamar_jose": false
+      },
+      "falha": null
+    },
+    {
+      "teste": "test_corrige_na_segunda_com_uma_espera",
+      "replay": "ok",
+      "intervencoes": 2,
+      "esperas_s": [
+        746
+      ],
+      "timeouts_s": [
+        370,
+        837
+      ],
+      "intervencoes_agendadas_em": [
+        "2026-10-17T13:26:35.163Z",
+        "2026-10-17T13:39:01.280Z"
+      ],
+      "resultado": {
+        "resultado": "corrigido",
+        "tentativas": 2,
+        "motivo": "",
+        "proposta_script": "trocar seletor X por Y",
+        "chamar_jose": false
+      },
+      "falha": null
+    },
+    {
+      "teste": "test_excecao_na_intervencao_nao_repete_activity",
+      "replay": "ok",
+      "intervencoes": 1,
+      "esperas_s": [],
+      "timeouts_s": [
+        893
+      ],
+      "intervencoes_agendadas_em": [
+        "2026-10-17T13:26:35.868Z"
+      ],
+      "resultado": null,
+      "falha": "WorkflowFailureError"
+    },
+    {
+      "teste": "test_novo_worker_retoma_activity_pendente_no_mesmo_servidor",
+      "replay": "ok",
+      "intervencoes": 1,
+      "esperas_s": [],
+      "timeouts_s": [
+        764
+      ],
+      "intervencoes_agendadas_em": [
+        "2026-10-17T13:26:36.327Z"
+      ],
+      "resultado": {
+        "resultado": "corrigido",
+        "tentativas": 1,
+        "motivo": "",
+        "proposta_script": "trocar seletor X por Y",
+        "chamar_jose": false
+      },
+      "falha": null
+    },
+    {
+      "teste": "test_novo_worker_retoma_timer_sem_duplicar_intervencao",
+      "replay": "ok",
+      "intervencoes": 2,
+      "esperas_s": [
+        666
+      ],
+      "timeouts_s": [
+        394,
+        897
+      ],
+      "intervencoes_agendadas_em": [
+        "2026-10-17T13:26:36.838Z",
+        "2026-10-17T13:37:43.004Z"
+      ],
+      "resultado": {
+        "resultado": "corrigido",
+        "tentativas": 2,
+        "motivo": "",
+        "proposta_script": "trocar seletor X por Y",
+        "chamar_jose": false
+      },
+      "falha": null
+    },
+    {
+      "teste": "test_outra_ferramenta_tres_tentativas_sem_espera",
+      "replay": "ok",
+      "intervencoes": 3,
+      "esperas_s": [],
+      "timeouts_s": [
+        600,
+        600,
+        600
+      ],
+      "intervencoes_agendadas_em": [
+        "2026-10-17T13:26:37.663Z",
+        "2026-10-17T13:26:37.714Z",
+        "2026-10-17T13:26:37.776Z"
+      ],
+      "resultado": {
+        "resultado": "esgotado",
+        "tentativas": 3,
+        "motivo": "3 tentativas sem sucesso",
+        "proposta_script": null,
+        "chamar_jose": true
+      },
+      "falha": null
+    },
+    {
+      "teste": "test_passo_sensivel_para_antes_do_backend",
+      "replay": "ok",
+      "intervencoes": 0,
+      "esperas_s": [],
+      "timeouts_s": [],
+      "intervencoes_agendadas_em": [],
+      "resultado": {
+        "resultado": "sensivel",
+        "tentativas": 0,
+        "motivo": "sensivel: passo sensível: solicitar pagamento",
+        "proposta_script": null,
+        "chamar_jose": true
+      },
+      "falha": null
+    },
+    {
+      "teste": "test_retry_de_triagem_para_na_terceira_falha",
+      "replay": "ok",
+      "intervencoes": 0,
+      "esperas_s": [],
+      "timeouts_s": [],
+      "intervencoes_agendadas_em": [],
+      "resultado": null,
+      "falha": "WorkflowFailureError"
+    },
+    {
+      "teste": "test_retry_real_de_registro_falso",
+      "replay": "ok",
+      "intervencoes": 1,
+      "esperas_s": [],
+      "timeouts_s": [
+        447
+      ],
+      "intervencoes_agendadas_em": [
+        "2026-10-17T13:26:40.378Z"
+      ],
+      "resultado": {
+        "resultado": "corrigido",
+        "tentativas": 1,
+        "motivo": "",
+        "proposta_script": "trocar seletor X por Y",
+        "chamar_jose": false
+      },
+      "falha": null
+    },
+    {
+      "teste": "test_retry_real_de_triagem",
+      "replay": "ok",
+      "intervencoes": 1,
+      "esperas_s": [],
+      "timeouts_s": [
+        449
+      ],
+      "intervencoes_agendadas_em": [
+        "2026-10-17T13:26:44.058Z"
+      ],
+      "resultado": {
+        "resultado": "corrigido",
+        "tentativas": 1,
+        "motivo": "",
+        "proposta_script": "trocar seletor X por Y",
+        "chamar_jose": false
+      },
+      "falha": null
+    },
+    {
+      "teste": "test_retry_real_de_verificacao",
+      "replay": "ok",
+      "intervencoes": 1,
+      "esperas_s": [],
+      "timeouts_s": [
+        852
+      ],
+      "intervencoes_agendadas_em": [
+        "2026-10-17T13:26:41.617Z"
+      ],
+      "resultado": {
+        "resultado": "corrigido",
+        "tentativas": 1,
+        "motivo": "",
+        "proposta_script": "trocar seletor X por Y",
+        "chamar_jose": false
+      },
+      "falha": null
+    },
+    {
+      "teste": "test_sem_backend_falha_uma_vez_sem_registro",
+      "replay": "ok",
+      "intervencoes": 0,
+      "esperas_s": [],
+      "timeouts_s": [],
+      "intervencoes_agendadas_em": [],
+      "resultado": null,
+      "falha": "WorkflowFailureError"
+    },
+    {
+      "teste": "test_terceira_tentativa_tem_duas_esperas_e_timeouts_separados",
+      "replay": "ok",
+      "intervencoes": 3,
+      "esperas_s": [
+        433,
+        318
+      ],
+      "timeouts_s": [
+        465,
+        573,
+        524
+      ],
+      "intervencoes_agendadas_em": [
+        "2026-10-17T13:26:42.529Z",
+        "2026-10-17T13:33:55.635Z",
+        "2026-10-17T13:39:13.755Z"
+      ],
+      "resultado": {
+        "resultado": "corrigido",
+        "tentativas": 3,
+        "motivo": "",
+        "proposta_script": "trocar seletor X por Y",
+        "chamar_jose": false
+      },
+      "falha": null
+    },
+    {
+      "teste": "test_tres_intervencoes_negativas_esgotam",
+      "replay": "ok",
+      "intervencoes": 3,
+      "esperas_s": [
+        867,
+        566
+      ],
+      "timeouts_s": [
+        406,
+        557,
+        766
+      ],
+      "intervencoes_agendadas_em": [
+        "2026-10-17T13:26:43.381Z",
+        "2026-10-17T13:41:10.479Z",
+        "2026-10-17T13:50:36.586Z"
+      ],
+      "resultado": {
+        "resultado": "esgotado",
+        "tentativas": 3,
+        "motivo": "3 tentativas sem sucesso",
+        "proposta_script": null,
+        "chamar_jose": true
+      },
+      "falha": null
+    },
+    {
+      "teste": "test_triagem_fora_de_escopo_nao_intervem",
+      "replay": "ok",
+      "intervencoes": 0,
+      "esperas_s": [],
+      "timeouts_s": [],
+      "intervencoes_agendadas_em": [],
+      "resultado": {
+        "resultado": "sensivel",
+        "tentativas": 0,
+        "motivo": "fora_de_escopo: simulado",
+        "proposta_script": null,
+        "chamar_jose": true
+      },
+      "falha": null
+    },
+    {
+      "teste": "test_verificacao_negativa_impede_sucesso",
+      "replay": "ok",
+      "intervencoes": 3,
+      "esperas_s": [
+        731,
+        393
+      ],
+      "timeouts_s": [
+        838,
+        445,
+        358
+      ],
+      "intervencoes_agendadas_em": [
+        "2026-10-17T13:26:44.654Z",
+        "2026-10-17T13:38:55.816Z",
+        "2026-10-17T13:45:29.018Z"
+      ],
+      "resultado": {
+        "resultado": "esgotado",
+        "tentativas": 3,
+        "motivo": "3 tentativas sem sucesso",
+        "proposta_script": null,
+        "chamar_jose": true
+      },
+      "falha": null
+    }
+  ]
+}

@@ -1,0 +1,242 @@
+{
+  "testes": 57,
+  "falhas": 0,
+  "erros": 0,
+  "pulados": 0,
+  "sucesso": true,
+  "segundos": 0.07300353498430923,
+  "somente_fakes": true,
+  "bloqueio_python_rede_e_subprocessos": true,
+  "sdk_temporal_importado": false,
+  "modulo_operacional_pqbr_importado": false,
+  "casos": [
+    {
+      "teste": "test_adversarial.Adversarial.test_approval_resumes_only_accepted_pending",
+      "estado": "passou"
+    },
+    {
+      "teste": "test_adversarial.Adversarial.test_completed_operation_cannot_be_pending",
+      "estado": "passou"
+    },
+    {
+      "teste": "test_adversarial.Adversarial.test_conflicting_idempotency_replay_rejected",
+      "estado": "passou"
+    },
+    {
+      "teste": "test_adversarial.Adversarial.test_direct_resume_with_altered_command_rejected",
+      "estado": "passou"
+    },
+    {
+      "teste": "test_adversarial.Adversarial.test_direct_resume_without_approved_ticket_rejected",
+      "estado": "passou"
+    },
+    {
+      "teste": "test_adversarial.Adversarial.test_failed_operation_cannot_be_pending",
+      "estado": "passou"
+    },
+    {
+      "teste": "test_adversarial.Adversarial.test_lost_decision_response_does_not_resume_on_first_attempt",
+      "estado": "passou"
+    },
+    {
+      "teste": "test_adversarial.Adversarial.test_lost_resume_ack_retry_via_facade_is_idempotent",
+      "estado": "passou"
+    },
+    {
+      "teste": "test_adversarial.Adversarial.test_mutated_receipt_is_rejected",
+      "estado": "passou"
+    },
+    {
+      "teste": "test_adversarial.Adversarial.test_new_operation_injected_into_scope_is_rejected",
+      "estado": "passou"
+    },
+    {
+      "teste": "test_adversarial.Adversarial.test_old_authorization_rejected",
+      "estado": "passou"
+    },
+    {
+      "teste": "test_adversarial.Adversarial.test_supervisor_swap_after_persist_before_resume_is_rejected",
+      "estado": "passou"
+    },
+    {
+      "teste": "test_adversarial.Adversarial.test_ticket_revision_race_between_read_and_cas_is_rejected",
+      "estado": "passou"
+    },
+    {
+      "teste": "test_adversarial.Adversarial.test_wrong_event_channel_rejected",
+      "estado": "passou"
+    },
+    {
+      "teste": "test_autorizacao.FluxoE2E.test_abertura_e_notificacao_idempotentes",
+      "estado": "passou"
+    },
+    {
+      "teste": "test_autorizacao.FluxoE2E.test_aprovacao_painel_persistida_antes_resume",
+      "estado": "passou"
+    },
+    {
+      "teste": "test_autorizacao.FluxoE2E.test_aprovacao_sem_ticket",
+      "estado": "passou"
+    },
+    {
+      "teste": "test_autorizacao.FluxoE2E.test_ator_fora_allowlist",
+      "estado": "passou"
+    },
+    {
+      "teste": "test_autorizacao.FluxoE2E.test_ausencia_ator_autenticado",
+      "estado": "passou"
+    },
+    {
+      "teste": "test_autorizacao.FluxoE2E.test_discord_atualiza_mesmo_ticket_canonico",
+      "estado": "passou"
+    },
+    {
+      "teste": "test_autorizacao.FluxoE2E.test_discord_indisponivel_nao_impede_registro_nem_painel",
+      "estado": "passou"
+    },
+    {
+      "teste": "test_autorizacao.FluxoE2E.test_discord_indisponivel_nao_inventa_decisao",
+      "estado": "passou"
+    },
+    {
+      "teste": "test_autorizacao.FluxoE2E.test_divergencias_escopo_do_evento",
+      "estado": "passou"
+    },
+    {
+      "teste": "test_autorizacao.FluxoE2E.test_duplicatas_dos_dois_canais",
+      "estado": "passou"
+    },
+    {
+      "teste": "test_autorizacao.FluxoE2E.test_expiracao_antecipada_recusada",
+      "estado": "passou"
+    },
+    {
+      "teste": "test_autorizacao.FluxoE2E.test_expiracao_implicita_falha_fechada",
+      "estado": "passou"
+    },
+    {
+      "teste": "test_autorizacao.FluxoE2E.test_expiracao_nao_retoma",
+      "estado": "passou"
+    },
+    {
+      "teste": "test_autorizacao.FluxoE2E.test_falha_ticket_api_abrir",
+      "estado": "passou"
+    },
+    {
+      "teste": "test_autorizacao.FluxoE2E.test_falha_ticket_api_decidir_retry_explicito",
+      "estado": "passou"
+    },
+    {
+      "teste": "test_autorizacao.FluxoE2E.test_falha_ticket_api_leitura",
+      "estado": "passou"
+    },
+    {
+      "teste": "test_autorizacao.FluxoE2E.test_identidade_nao_herda_permissao_outro_canal",
+      "estado": "passou"
+    },
+    {
+      "teste": "test_autorizacao.FluxoE2E.test_identidade_vazia_recusada",
+      "estado": "passou"
+    },
+    {
+      "teste": "test_autorizacao.FluxoE2E.test_perda_ack_temporal_retry_sem_repetir_pendentes",
+      "estado": "passou"
+    },
+    {
+      "teste": "test_autorizacao.FluxoE2E.test_perda_resposta_abertura_retry",
+      "estado": "passou"
+    },
+    {
+      "teste": "test_autorizacao.FluxoE2E.test_perda_resposta_decisao_retry_sem_dupla_escrita",
+      "estado": "passou"
+    },
+    {
+      "teste": "test_autorizacao.FluxoE2E.test_read_after_write_indisponivel_nao_chama_temporal",
+      "estado": "passou"
+    },
+    {
+      "teste": "test_autorizacao.FluxoE2E.test_recusa_discord",
+      "estado": "passou"
+    },
+    {
+      "teste": "test_autorizacao.FluxoE2E.test_recusa_painel",
+      "estado": "passou"
+    },
+    {
+      "teste": "test_autorizacao.FluxoE2E.test_revisao_booleana_recusada",
+      "estado": "passou"
+    },
+    {
+      "teste": "test_autorizacao.FluxoE2E.test_sem_registro_falha_nao_abre_ticket",
+      "estado": "passou"
+    },
+    {
+      "teste": "test_autorizacao.FluxoE2E.test_supervisor_mudou_apos_abertura",
+      "estado": "passou"
+    },
+    {
+      "teste": "test_autorizacao.FluxoE2E.test_temporal_indisponivel_nao_repete_decisao",
+      "estado": "passou"
+    },
+    {
+      "teste": "test_autorizacao.FluxoE2E.test_ticket_minimo_sem_payload_erro_ou_identidade_real",
+      "estado": "passou"
+    },
+    {
+      "teste": "test_autorizacao.FluxoE2E.test_ticket_sem_receipt",
+      "estado": "passou"
+    },
+    {
+      "teste": "test_autorizacao.FluxoE2E.test_ticket_stale",
+      "estado": "passou"
+    },
+    {
+      "teste": "test_limites.Limites.test_aprovacao_expira_entre_persistencia_e_resume",
+      "estado": "passou"
+    },
+    {
+      "teste": "test_limites.Limites.test_canonico_trocado_apos_escrita_nao_chama_temporal",
+      "estado": "passou"
+    },
+    {
+      "teste": "test_limites.Limites.test_evento_antigo_com_ticket_ainda_vigente",
+      "estado": "passou"
+    },
+    {
+      "teste": "test_limites.Limites.test_evento_futuro",
+      "estado": "passou"
+    },
+    {
+      "teste": "test_limites.Limites.test_expiracao_durante_cas_decisao",
+      "estado": "passou"
+    },
+    {
+      "teste": "test_limites.Limites.test_outra_identidade_nao_reusa_dispatch",
+      "estado": "passou"
+    },
+    {
+      "teste": "test_limites.Limites.test_receipt_decisao_sem_ator",
+      "estado": "passou"
+    },
+    {
+      "teste": "test_limites.Limites.test_recibo_de_outro_ticket_nao_autoriza",
+      "estado": "passou"
+    },
+    {
+      "teste": "test_limites.Limites.test_recusa_nao_pode_ser_convertida_em_aprovacao",
+      "estado": "passou"
+    },
+    {
+      "teste": "test_limites.Limites.test_reordenar_pendentes_apos_abertura_recusado",
+      "estado": "passou"
+    },
+    {
+      "teste": "test_limites.Limites.test_revogacao_allowlist_antes_retry",
+      "estado": "passou"
+    },
+    {
+      "teste": "test_limites.Limites.test_sem_receipt_canonico_apos_aprovacao",
+      "estado": "passou"
+    }
+  ]
+}

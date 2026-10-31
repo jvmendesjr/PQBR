@@ -1,0 +1,25 @@
+test_cleanup_not_truthiness (test_verificador_offline.OfflineTests.test_cleanup_not_truthiness) ... ok
+test_each_callback_failure_does_not_skip_other_checks (test_verificador_offline.OfflineTests.test_each_callback_failure_does_not_skip_other_checks) ... ok
+test_expected_ids_explicit_complete_unique (test_verificador_offline.OfflineTests.test_expected_ids_explicit_complete_unique) ... ok
+test_inventory_added_removed_detected (test_verificador_offline.OfflineTests.test_inventory_added_removed_detected) ... ok
+test_malformed_projection_rejected (test_verificador_offline.OfflineTests.test_malformed_projection_rejected) ... ok
+test_missing_inspect_fields_no_defaults (test_verificador_offline.OfflineTests.test_missing_inspect_fields_no_defaults) ... ok
+test_missing_operational_baseline_never_default_pass (test_verificador_offline.OfflineTests.test_missing_operational_baseline_never_default_pass) ... ok
+test_missing_or_duplicate_inventory_rejected (test_verificador_offline.OfflineTests.test_missing_or_duplicate_inventory_rejected) ... ok
+test_operational_change_detected (test_verificador_offline.OfflineTests.test_operational_change_detected) ... ok
+test_operational_must_be_in_inventory (test_verificador_offline.OfflineTests.test_operational_must_be_in_inventory) ... ok
+test_order_is_deterministic_no_input_mutation (test_verificador_offline.OfflineTests.test_order_is_deterministic_no_input_mutation) ... ok
+test_producer_consumer_pass (test_verificador_offline.OfflineTests.test_producer_consumer_pass) ... ok
+test_projection_uses_observed_fields_only (test_verificador_offline.OfflineTests.test_projection_uses_observed_fields_only) ... ok
+test_protected_hash_and_worker_changes (test_verificador_offline.OfflineTests.test_protected_hash_and_worker_changes) ... ok
+test_protected_missing_data_not_equal_empty (test_verificador_offline.OfflineTests.test_protected_missing_data_not_equal_empty) ... ok
+test_real_historical_inventory_remains_inconclusive (test_verificador_offline.OfflineTests.test_real_historical_inventory_remains_inconclusive) ... ok
+test_real_inspect_shape_without_claiming_operational_baseline (test_verificador_offline.OfflineTests.test_real_inspect_shape_without_claiming_operational_baseline) ... ok
+test_real_protected_shape (test_verificador_offline.OfflineTests.test_real_protected_shape) ... ok
+test_runtime_failure_cannot_be_overwritten (test_verificador_offline.OfflineTests.test_runtime_failure_cannot_be_overwritten) ... ok
+test_static_no_effect_imports_or_top_level_calls (test_verificador_offline.OfflineTests.test_static_no_effect_imports_or_top_level_calls) ... ok
+
+----------------------------------------------------------------------
+Ran 20 tests in 0.026s
+
+OK

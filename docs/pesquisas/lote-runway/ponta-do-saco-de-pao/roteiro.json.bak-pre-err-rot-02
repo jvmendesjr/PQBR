@@ -1,0 +1,165 @@
+{
+ "titulo": "Por que o brasileiro dobra a ponta do saco de pão antes de guardar?",
+ "gancho": "Você compra o pão francês quentinho e, na hora de guardar, dobra a ponta do saco de papel como um ritual. Por que a gente faz isso?",
+ "falas": [
+  "Você compra o pão francês quentinho e, na hora de guardar, dobra a ponta do saco de papel como um ritual. Por que a gente faz isso?",
+  "Na padaria, o pão vem no saco aberto pro vapor sair, mantendo a casquinha crocante.",
+  "Já em casa, guardar no plástico é um erro: a umidade fica presa, a casca vira borracha e o mofo ganha rédea solta.",
+  "Como o saco de papel comum deixa o ar passar e seca o miolo, dobrar a ponta é o truque brasileiro pra selar o saco sem abafar.",
+  "Mas tem quem diga que é só mania de família pra deixar a bancada da cozinha arrumada!",
+  "Pra manter a sua rotina bem crocante e a curiosidade afiada, segue o Porquê BR!"
+ ],
+ "cta_final": "Pra manter a sua rotina bem crocante e a curiosidade afiada, segue o Porquê BR!",
+ "palavras": 124,
+ "duracao_estimada_s": 55,
+ "cenas": [
+  {
+   "n": 1,
+   "fala": "Você compra o pão francês quentinho e, na hora de guardar, dobra a ponta do saco de papel como um ritual. Por que a gente faz isso?",
+   "duracao_s": 12,
+   "cenario": "Cozinha brasileira aconchegante com bancada de madeira",
+   "clipes": [
+    {
+     "id": "c1a",
+     "duracao_s": 5,
+     "prompt_imagem_en": "flat 2D cartoon illustration, vertical 9:16 aspect ratio, thick black outlines, warm flat colors. A 32-year-old slim Brazilian man with short brown hair, wearing a forest green t-shirt, dark blue jeans, red round glasses, no beard, standing at a wooden kitchen counter, carefully folding the top tip of a kraft paper bread bag like an intricate origami ritual, no text",
+     "movimento_en": "Hands precisely creasing the paper bag tip while camera slowly zooms in on the character's focused expression"
+    },
+    {
+     "id": "c1b",
+     "duracao_s": 5,
+     "prompt_imagem_en": "flat 2D cartoon illustration, vertical 9:16 aspect ratio, thick black outlines, warm flat colors. Close-up shot of a 32-year-old slim Brazilian man with short brown hair, wearing a forest green t-shirt, dark blue jeans, red round glasses, no beard, making a double fold on the top opening of a brown paper bag, no text",
+     "movimento_en": "Finger pressing down firmly along the folded paper seam with subtle steam particles rising nearby, static camera"
+    },
+    {
+     "id": "c1c",
+     "duracao_s": 2,
+     "prompt_imagem_en": "flat 2D cartoon illustration, vertical 9:16 aspect ratio, thick black outlines, warm flat colors. Medium shot of a 32-year-old slim Brazilian man with short brown hair, wearing a forest green t-shirt, dark blue jeans, red round glasses, no beard, holding up the neatly folded paper bag and looking curiously at the camera, no text",
+     "movimento_en": "Character tilts his head and raises one eyebrow with a questioning gesture toward the audience"
+    }
+   ]
+  },
+  {
+   "n": 2,
+   "fala": "Na padaria, o pão vem no saco aberto pro vapor sair, mantendo a casquinha crocante.",
+   "duracao_s": 7,
+   "cenario": "Balcão de padaria brasileira com cestos de pão ao fundo",
+   "clipes": [
+    {
+     "id": "c2a",
+     "duracao_s": 5,
+     "prompt_imagem_en": "flat 2D cartoon illustration, vertical 9:16 aspect ratio, thick black outlines, warm flat colors. Medium shot of a 32-year-old slim Brazilian man with short brown hair, wearing a forest green t-shirt, dark blue jeans, red round glasses, no beard, holding an open brown paper bag filled with golden french bread loaves near a bakery counter, no text",
+     "movimento_en": "Gentle wisps of steam rise continuously from the open bag while character admires the golden crust"
+    },
+    {
+     "id": "c2b",
+     "duracao_s": 2,
+     "prompt_imagem_en": "flat 2D cartoon illustration, vertical 9:16 aspect ratio, thick black outlines, warm flat colors. Close-up shot of crispy golden french bread tops inside an open kraft paper bag held by a 32-year-old slim Brazilian man with short brown hair, wearing a forest green t-shirt, dark blue jeans, red round glasses, no beard, no text",
+     "movimento_en": "Camera slowly tilts up from the golden crust to the smiling face of the character"
+    }
+   ]
+  },
+  {
+   "n": 3,
+   "fala": "Já em casa, guardar no plástico é um erro: a umidade fica presa, a casca vira borracha e o mofo ganha rédea solta.",
+   "duracao_s": 10,
+   "cenario": "Cozinha residencial, iluminação um pouco mais sombria",
+   "clipes": [
+    {
+     "id": "c3a",
+     "duracao_s": 5,
+     "prompt_imagem_en": "flat 2D cartoon illustration, vertical 9:16 aspect ratio, thick black outlines, warm flat colors. Medium shot of a 32-year-old slim Brazilian man with short brown hair, wearing a forest green t-shirt, dark blue jeans, red round glasses, no beard, looking disappointed while holding a clear plastic bag foggy with trapped moisture containing soggy bread, no text",
+     "movimento_en": "Water droplets slide down the foggy plastic bag as character squeezes the rubbery bread in frustration"
+    },
+    {
+     "id": "c3b",
+     "duracao_s": 5,
+     "prompt_imagem_en": "flat 2D cartoon illustration, vertical 9:16 aspect ratio, thick black outlines, warm flat colors. Close-up humorous shot of a 32-year-old slim Brazilian man with short brown hair, wearing a forest green t-shirt, dark blue jeans, red round glasses, no beard, looking shocked at green mold spots appearing on a bread loaf inside plastic, no text",
+     "movimento_en": "Tiny green cartoon mold spots pop into view on the bread surface with a quick camera shake effect"
+    }
+   ]
+  },
+  {
+   "n": 4,
+   "fala": "Como o saco de papel comum deixa o ar passar e seca o miolo, dobrar a ponta é o truque brasileiro pra selar o saco sem abafar.",
+   "duracao_s": 12,
+   "cenario": "Bancada da cozinha bem iluminada com xícara de café ao lado",
+   "clipes": [
+    {
+     "id": "c4a",
+     "duracao_s": 5,
+     "prompt_imagem_en": "flat 2D cartoon illustration, vertical 9:16 aspect ratio, thick black outlines, warm flat colors. Wide shot of a 32-year-old slim Brazilian man with short brown hair, wearing a forest green t-shirt, dark blue jeans, red round glasses, no beard, standing in his bright kitchen explaining with animated hand gestures next to a kraft paper bread bag on the table, no text",
+     "movimento_en": "Character gestures rhythmically with hands while air currents appear as subtle motion lines near the bag"
+    },
+    {
+     "id": "c4b",
+     "duracao_s": 5,
+     "prompt_imagem_en": "flat 2D cartoon illustration, vertical 9:16 aspect ratio, thick black outlines, warm flat colors. Medium shot of a 32-year-old slim Brazilian man with short brown hair, wearing a forest green t-shirt, dark blue jeans, red round glasses, no beard, folding the top of the paper bag twice into a clean triangle seal on the wooden table, no text",
+     "movimento_en": "Hands fold the paper top smoothly, creating a tight lock while camera pans slightly to follow the movement"
+    },
+    {
+     "id": "c4c",
+     "duracao_s": 2,
+     "prompt_imagem_en": "flat 2D cartoon illustration, vertical 9:16 aspect ratio, thick black outlines, warm flat colors. Close-up of the neatly folded kraft paper bag resting proudly on a kitchen shelf beside a warm cup of coffee, held at the edge by a 32-year-old slim Brazilian man with short brown hair, wearing a forest green t-shirt, dark blue jeans, red round glasses, no beard, no text",
+     "movimento_en": "Character gives a quick thumbs-up gesture next to the protected bread bag"
+    }
+   ]
+  },
+  {
+   "n": 5,
+   "fala": "Mas tem quem diga que é só mania de família pra deixar a bancada da cozinha arrumada!",
+   "duracao_s": 7,
+   "cenario": "Cozinha brasileira limpa e organizada",
+   "clipes": [
+    {
+     "id": "c5a",
+     "duracao_s": 5,
+     "prompt_imagem_en": "flat 2D cartoon illustration, vertical 9:16 aspect ratio, thick black outlines, warm flat colors. Medium shot of a 32-year-old slim Brazilian man with short brown hair, wearing a forest green t-shirt, dark blue jeans, red round glasses, no beard, wiping crumbs off the kitchen counter with a cloth while winking playfully at the folded bread bag, no text",
+     "movimento_en": "Character sweeps crumbs away smoothly and gives an affectionate shrug toward the camera"
+    },
+    {
+     "id": "c5b",
+     "duracao_s": 2,
+     "prompt_imagem_en": "flat 2D cartoon illustration, vertical 9:16 aspect ratio, thick black outlines, warm flat colors. Close-up shot of a 32-year-old slim Brazilian man with short brown hair, wearing a forest green t-shirt, dark blue jeans, red round glasses, no beard, smiling warmly next to a spotless kitchen counter with the folded bread bag, no text",
+     "movimento_en": "Character nods in satisfaction with a gentle sparkle effect on the clean table"
+    }
+   ]
+  },
+  {
+   "n": 6,
+   "fala": "Pra manter a sua rotina bem crocante e a curiosidade afiada, segue o Porquê BR!",
+   "duracao_s": 7,
+   "cenario": "Cozinha brasileira, iluminação alegre de encerramento",
+   "clipes": [
+    {
+     "id": "c6a",
+     "duracao_s": 5,
+     "prompt_imagem_en": "flat 2D cartoon illustration, vertical 9:16 aspect ratio, thick black outlines, warm flat colors. Medium shot of a 32-year-old slim Brazilian man with short brown hair, wearing a forest green t-shirt, dark blue jeans, red round glasses, no beard, holding a folded paper bread bag in one hand and smiling cheerfully while pointing forward, no text",
+     "movimento_en": "Character points enthusiastically at the viewer while holding the bread bag, cheerful expression"
+    },
+    {
+     "id": "c6b",
+     "duracao_s": 2,
+     "prompt_imagem_en": "flat 2D cartoon illustration, vertical 9:16 aspect ratio, thick black outlines, warm flat colors. Close-up of a 32-year-old slim Brazilian man with short brown hair, wearing a forest green t-shirt, dark blue jeans, red round glasses, no beard, repeating the exact initial folding gesture on the paper bread bag top to create a seamless loop back to scene 1, no text",
+     "movimento_en": "Hands fold the paper tip once again in a looping motion matching the opening scene"
+    }
+   ]
+  }
+ ],
+ "fontes": [
+  "ponta-do-saco-de-pao.md",
+  "Essa é a melhor maneira de armazenar o pão, segundo um padeiro: \"Nunca em um saco plástico, pois assim o mofo tem rédea solta\" - TudoGostoso",
+  "Nem em saco plástico, nem em cesta: aqui estão as dicas simples do padeiro para guardar o pão fresco - Gazeta de São Paulo",
+  "Beatriz Echeverría, padeira: \"Para manter o pão fresco por até cinco dias, não use sacos plásticos, um pano é melhor.\" - TudoGostoso",
+  "ELI5: Por que a padaria coloca pão francês em sacos de papel abertos? : r/explainlikeimfive",
+  "Pão francês – Wikipédia, a enciclopédia livre"
+ ],
+ "riscos": [
+  "ERR-PER-01: Manter rigorosamente 1 único personagem com a mesma ficha descritiva (32 anos, magro, cabelo castanho curto, camiseta verde-bandeira, calça jeans azul-escuro, óculos redondos vermelhos, sem barba) em todos os prompts visuais.",
+  "ERR-TXT-01: Garantir ausência total de texto, placas, letras ou números nas imagens geradas.",
+  "ERR-CMP-03: Não exibir marcas ou logos reais na embalagem de papel ou nos utensílios de cozinha.",
+  "ERR-ROT-01: Manter a sincronia estrita entre a narração e o que é ilustrado a cada clipe visual.",
+  "ERR-MON-02 / ERR-CMP-01: Assegurar que o CTA personalizado termine exatamente com a frase obrigatória 'segue o Porquê BR!'.",
+  "ERR-MON-01: Garantir cobertura contínua com clipes de 5 s por cena para evitar imagens estáticas."
+ ]
+}

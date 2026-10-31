@@ -1,0 +1,27 @@
+{
+  "worker_recriado": true,
+  "calls": [
+    {
+      "sessao": "test_restart_worker_reconstroi_dedup_do_historico",
+      "passo": "acao",
+      "inicio": 409313.530052157,
+      "fim": 409313.571342946,
+      "fila": "teste-f3-05-candidato-camofox-test_restart_worker_reconstroi_dedup_do_historico",
+      "tentativa": 1,
+      "workflow_id": "teste-f3-05-candidato-sessao-8fcee6f2856712ecb4d9c442d8c939f877920936ca9fbfa4be45474c0e9fb8dc-op-15e8900c9977db61a162bedd13fac114a7b5c06e20d347d9875239f8515b173d"
+    }
+  ],
+  "max_sessao": {
+    "test_restart_worker_reconstroi_dedup_do_historico": 1
+  },
+  "max_global": 1,
+  "registros": [
+    {
+      "resultado": "corrigido",
+      "tentativas": 1,
+      "motivo": "",
+      "proposta_script": "proposta falsa",
+      "chamar_jose": false
+    }
+  ]
+}

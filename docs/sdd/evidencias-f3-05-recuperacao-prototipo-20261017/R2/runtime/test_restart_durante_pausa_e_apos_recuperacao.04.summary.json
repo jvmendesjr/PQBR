@@ -1,0 +1,36 @@
+{
+  "workflow_id": "teste-f3-05-recuperacao-55564ca7847bd7a9fd169f12ff5c3d502ac7406fbeb2e01b8babbf13fb85285c-op-739edf885e87448d156ac297dce4c2d419aad8afce10930777cff6b4c4ea4e35",
+  "run_id": "01a14ad1-c63d-7de4-b4b9-2628ae78dddc",
+  "eventos": 31,
+  "replay": "ok",
+  "activities": [
+    {
+      "nome": "triagem_jev",
+      "fila": "teste-f3-05-candidato-wf-test_restart_durante_pausa_e_apos_recuperacao-recuperacao",
+      "max_tentativas": 3,
+      "id": "1",
+      "timeout_s": 120
+    },
+    {
+      "nome": "intervir_agente",
+      "fila": "teste-f3-05-candidato-camofox-test_restart_durante_pausa_e_apos_recuperacao-recuperacao",
+      "max_tentativas": 1,
+      "id": "intervencao-1",
+      "timeout_s": 857
+    },
+    {
+      "nome": "verificar_jev",
+      "fila": "teste-f3-05-candidato-wf-test_restart_durante_pausa_e_apos_recuperacao-recuperacao",
+      "max_tentativas": 3,
+      "id": "3",
+      "timeout_s": 120
+    },
+    {
+      "nome": "registrar_correcao",
+      "fila": "teste-f3-05-candidato-wf-test_restart_durante_pausa_e_apos_recuperacao-recuperacao",
+      "max_tentativas": 3,
+      "id": "4",
+      "timeout_s": 60
+    }
+  ]
+}

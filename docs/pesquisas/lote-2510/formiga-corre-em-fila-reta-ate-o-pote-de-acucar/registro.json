@@ -1,0 +1,41 @@
+{
+ "postgres": {
+  "temas_pendentes_id": 6,
+  "linhas": 1
+ },
+ "drive": {
+  "pasta": "19eFrprW8ZFnspGtM6ofQgxu1SgPhFIGA",
+  "arquivos": {
+   "seo.json": {
+    "id": "1WJ8uTVPeTkChB6cX8OuiXZeO40cCV5up",
+    "md5": "20e8bd17ad4ef53896a45cb5c6a5a853",
+    "bytes": 4343,
+    "reaproveitado": false
+   },
+   "roteiro.json": {
+    "id": "1Tx8xq0IFm6J_sWv65lV4ESyMdRjOjEA_",
+    "md5": "915a40decbb58e538323a39c2bf81eca",
+    "bytes": 5916,
+    "reaproveitado": false
+   },
+   "gate-pronto.json": {
+    "id": "1G8ot67qfm6Tqnbr8kd0ds5griL_I8LhH",
+    "md5": "c996b263650539cf765640a890350641",
+    "bytes": 1527,
+    "reaproveitado": false
+   },
+   "juiz-gemini.json": {
+    "id": "1mpJrZt_zyZw4ANTxoZuu_j4_kwFfsgSp",
+    "md5": "8fbf74f498744a6db5466eb0e9dc7ab2",
+    "bytes": 895,
+    "reaproveitado": false
+   },
+   "formiga-pronto-v2.mp4": {
+    "id": "1wXQzneEBzvr2tHf1b90zz4ut0soQ8IFF",
+    "md5": "73d4f3f61e763d95f10c156c5ed9b4ae",
+    "bytes": 25728570,
+    "reaproveitado": false
+   }
+  }
+ }
+}

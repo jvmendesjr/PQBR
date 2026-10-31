@@ -1,0 +1,5 @@
+[Unit]
+Description=PQBR backup diário do Postgres local do Paperclip (L-01)
+[Service]
+Type=oneshot
+ExecStart=/bin/sh %h/Workspace/PQBR/infra/paperclip-db/backup.sh

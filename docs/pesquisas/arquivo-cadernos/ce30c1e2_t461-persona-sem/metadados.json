@@ -1,0 +1,16 @@
+{
+  "id": "ce30c1e2-d589-4e0c-8eac-4eef988d1539",
+  "title": "Teste - t461-persona-sem",
+  "created_at": "2026-10-12T15:43:23+00:00",
+  "last_viewed_at": "2026-10-12T15:59:41+00:00",
+  "modified_at": "2026-10-12T15:59:41+00:00",
+  "is_owner": true,
+  "role": "owner",
+  "sources": [
+    {
+      "type": "markdown",
+      "title": "roteiro.md",
+      "url": null
+    }
+  ]
+}

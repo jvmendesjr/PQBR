@@ -1,0 +1,6 @@
+GATE DE ISOLAMENTO APROVADO; iniciando somente recursos descartáveis.
+Traceback (most recent call last):
+  File "/home/pc/Workspace/PQBR/tests/workflows/run_f3_05_recuperacao_container.py", line 341, in <module>
+    raise RuntimeError(f'Teste candidato terminou com código {exit_code}')
+RuntimeError: Teste candidato terminou com código 1
+Inventário e verificação final: {"containers": {"novos": [], "ausentes": []}, "networks": {"novos": [], "ausentes": []}, "volumes": {"novos": [], "ausentes": []}}

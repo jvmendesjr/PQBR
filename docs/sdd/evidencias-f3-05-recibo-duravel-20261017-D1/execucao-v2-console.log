@@ -1,0 +1,1 @@
+{"tests": 38, "passed": 38, "failures": 0, "errors": 0, "skipped": 0, "success": true, "python": "3.13.5", "sqlite": "3.46.1", "subprocesses": 355, "killed_subprocesses": 9, "network": "audit hook sem sockets; nao isolamento de kernel", "synthetic_only": true, "temporal_server": false}

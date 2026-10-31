@@ -1,0 +1,8 @@
+{
+  "issueId": "<NOVO_ISSUE_ID>",
+  "interactionId": "<NOVA_INTERACTION_ID>",
+  "scopeId": "scope-B3-next-once-v1",
+  "sessionId": "session-B3-next-disposable-v1",
+  "operationId": "second-B3-next-accepted-v1",
+  "idempotencyKey": "pqbr-f3-05-B3-next-single-proof-v1"
+}

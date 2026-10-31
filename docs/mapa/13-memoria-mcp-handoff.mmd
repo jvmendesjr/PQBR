@@ -1,0 +1,51 @@
+%% Memória, MCP e handoff (t84u–t116u, 26/10/2026). Decisões em DECISOES-LOG; detalhes em ARQUITETURA §12 e docs/ESTADO-ATUAL.md.
+%% Ressalva (29/10/2026, ordem do José): se GitNexus for chamado acidentalmente, leia-se codebase-memory-mcp (backend atual do codigo).
+flowchart LR
+  subgraph AG["Quem usa"]
+    PAP["8 papéis PydanticAI<br/>(Temporal)"]
+    EXT(["Agente externo = só mantenedor<br/>lê todas as tags · repo todo<br/>constrói/liga módulos (OK p/ reinício/migração)<br/>docs/operacao/onboarding-agente-externo.md"])
+    IDX["indexador (serviço)<br/>scripts/hindsight/indexar.py"]
+  end
+  POL{{"config/politica_papeis.json 1.4.0<br/>tags que lê/escreve + caminhos por papel<br/>tag estado: todos leem · papel desconhecido ⇒ negado"}}
+  subgraph MEM["Hindsight 127.0.0.1:8890 — bank único pqbr"]
+    TAGS["pqbr.storage.hindsight_tags<br/>regra única de tags (indexador + reclassificação)"]
+    HS[("memórias com tags + autor:cliente")]
+    OBS["descarte t90s398: 231 obsoletas apagadas (backup)<br/>7 obsoleto_candidato em revisão (José)"]
+  end
+  subgraph GN["codebase-memory-mcp 0.12.1 (usuário, MIT) — backend do codigo desde 29/10/2026"]
+    GNX["~/.local/opt/codebase-memory-mcp/codebase-memory-mcp · índice ~/.cache/codebase-memory-mcp/<br/>Lens desligada, stdio; backend anterior preservado em _obsoleto/, sem desinstalar"]
+    IDXG["instância PQBR: projeto PQBR, ready<br/>reindex no hook post-commit (auto_watch só vale na sessão dona)"]
+  end
+  subgraph MCPS["pqbr-mcp 0.4.0 · exclusivo mantenedor (na aplicação) · 127.0.0.1:8791 → tailscale serve (só tailnet)"]
+    LEI["leitura: onboarding · buscar_memoria · codigo · estado"]
+    ESC["escrita: registrar_memoria · registrar_alteracao 1.1.0<br/>(tipo alteracao|correcao|pendencia_resolvida · commit verificado)"]
+  end
+  subgraph REPO["Repo PQBR (branch feat/f8-01-publicacao-automatica, push t100u)"]
+    EST["docs/ESTADO-ATUAL.md<br/>onde estamos · próximo passo · pendências"]
+    AGM["AGENTS.md (gerado do onboarding)<br/>1ª seção = ESTADO-ATUAL + protocolo obrigatório"]
+    HK{{"pre-commit: segredos + ESTADO-ATUAL exigido<br/>se ROADMAP/LACUNAS/DECISOES-LOG/CHANGELOG mudam"}}
+  end
+  EXT -->|"HTTPS tailnet + Bearer (sem token ou outro papel ⇒ 401/403)"| MCPS
+  MCPS --> POL
+  PAP -->|"internos: dentro do sistema, não pelo MCP"| POL
+  POL --> HS & GNX
+  LEI -->|"recall filtrado por tags"| HS
+  LEI --> IDXG
+  ESC -->|"memória + handoff (tag estado)"| HS
+  ESC -. "correcao/pendencia exige ESTADO-ATUAL no commit" .-> EST
+  IDX --> TAGS --> HS
+  IDX -->|"indexa docs, inclusive ESTADO-ATUAL"| EST
+  EST --> AGM
+  HK --> EST
+  OBS --- HS
+  GNX --- IDXG
+  subgraph PERS["Persistência (verificada 26/10 18:21)"]
+    UN["systemd user: pqbr-mcp (Restart=on-failure) · hindsight-api (always)<br/>enabled · linger=yes"]
+    CT["Docker: pqbr-db · Temporal · temporal-postgresql<br/>restart unless-stopped"]
+    CHK["checagem: comando em onboarding-agente-externo.md"]
+  end
+  MCPS --- UN
+  HS --- UN
+  UN --- CT
+  P{{"Protocolo: onboarding → buscar_memoria → commit local + DECISOES-LOG/CHANGELOG + ESTADO-ATUAL → registrar_alteracao"}}
+  EXT --- P

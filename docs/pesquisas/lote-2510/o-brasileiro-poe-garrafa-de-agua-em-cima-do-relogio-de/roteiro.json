@@ -1,0 +1,78 @@
+{
+ "roteiro": {
+  "episodio_id": "o-brasileiro-poe-garrafa-de-agua-em-cima-do-relogio-de",
+  "titulo": "Por que o brasileiro põe garrafa de água no relógio de luz?",
+  "falas": [
+   "Por que a gente põe garrafa de água em cima do relógio de luz?",
+   "Em todo canto do Brasil, tem uma garrafa PET equilibrada no medidor pra tentar 'esfriar' a conta.",
+   "A versão mais aceita diz que a água era pro leiturista tomar no calor, e o costume virou boato de economia.",
+   "Mas tem quem diga que era sinal secreto entre amantes, e a desculpa pra vizinha curiosa virou mania nacional.",
+   "A física garante: a água não muda em nada a corrente do medidor. É só mito.",
+   "A gente sabe que não funciona, mas deixa a garrafa lá só por garantia.",
+   "Segue o Porquê BR"
+  ],
+  "tipo_cta": "fallback",
+  "entidades_cena": [
+   "garrafa PET com água",
+   "relógio de luz medidor",
+   "leiturista de energia",
+   "vizinhança brasileira"
+  ],
+  "bloco_visual": {
+   "estilo": "Ilustração 2D plana de cartum, como animação de TV brasileira: traço preto nítido e uniforme, personagem em cores chapadas quentes (amarelo-mostarda, verde-bandeira, terracota) com alto contraste sobre fundo limpo em tom frio ou neutro (azul-céu, bege claro), sem degradê nem sombra realista, fundo minimalista com no máximo 3–5 objetos, humor carinhoso. Personagem sempre grande no quadro (ocupa ≥ 1/3 da altura), centralizado, agindo, com expressões faciais e corporais exageradas. Proibido: fotorrealismo, 3D, rosto de pessoa real ou celebridade, marca ou logo real, texto escrito dentro das imagens (a legenda do NotebookLM não conta). Formato vertical 9:16, deixar livres a faixa de cima e a de baixo da tela.",
+   "personagem": "Um só: 35 anos, tipo físico magro, cabelo preto curto, camiseta amarela, bermuda verde-bandeira, óculos redondos vermelhos, expressão-base exagerada curiosa. Sem nome. Esta frase se repete idêntica em todas as cenas.",
+   "personagem_2": null,
+   "cenas": [
+    {
+     "fala": "Por que a gente põe garrafa de água em cima do relógio de luz?",
+     "acao": "O personagem equilibra cuidadosamente uma garrafa PET transparente cheia de água no topo de um medidor de luz elétrico na parede externa da casa, olhando intrigado.",
+     "enquadramento": "plano médio",
+     "ambiente": "Cena 1: muro externo de casa brasileira, hoje, objetos-âncora: caixa do relógio de luz, garrafa PET com água, portão de grade, luz do sol da tarde."
+    },
+    {
+     "fala": "Em todo canto do Brasil, tem uma garrafa PET equilibrada no medidor pra tentar 'esfriar' a conta.",
+     "acao": "O personagem abana uma conta de luz vermelha enorme enquanto aponta com surpresa para a garrafa d'água em cima do medidor.",
+     "enquadramento": "plano médio",
+     "ambiente": "Cena 2: fachada de casa simples, hoje, objetos-âncora: medidor de luz, conta de papel na mão, garrafa PET, calçada de paralelepípedo, luz do meio-dia."
+    },
+    {
+     "fala": "A versão mais aceita diz que a água era pro leiturista tomar no calor, e o costume virou boato de economia.",
+     "acao": "O personagem, vestido de leiturista sob sol forte, pega a garrafa de água do relógio para beber com alívio.",
+     "enquadramento": "plano aberto",
+     "ambiente": "Cena 3: calçada brasileira ensolarada, hoje, objetos-âncora: caixa do medidor, garrafa PET gelada, prancheta de leitura, poste de luz, luz do sol forte."
+    },
+    {
+     "fala": "Mas tem quem diga que era sinal secreto entre amantes, e a desculpa pra vizinha curiosa virou mania nacional.",
+     "acao": "O personagem coloca a garrafa no relógio piscando o olho, enquanto uma vizinha espia por cima do muro curiosa.",
+     "enquadramento": "plano médio",
+     "ambiente": "Cena 4: quintal com muro baixo, hoje, objetos-âncora: relógio de luz, muro de tijolos expostos, garrafa PET, plantas em xaxim, luz da manhã."
+    },
+    {
+     "fala": "A física garante: a água não muda em nada a corrente do medidor. É só mito.",
+     "acao": "O personagem segura um quadro negro com desenhos do circuito elétrico e faz sinal de 'não' com o dedo, decepcionado.",
+     "enquadramento": "plano médio",
+     "ambiente": "Cena 5: sala de casa, hoje, objetos-âncora: quadro negro com esquema elétrico, medidor de luz, lâmpada pendurada, luz neutra."
+    },
+    {
+     "fala": "A gente sabe que não funciona, mas deixa a garrafa lá só por garantia.",
+     "acao": "O personagem olha para a garrafa no medidor, dá um sorriso maroto e dá um tapinha carinhoso na garrafa PET.",
+     "enquadramento": "close",
+     "ambiente": "Cena 6: muro de casa, hoje, objetos-âncora: relógio de luz, garrafa PET cheia d'água, tinta descascada no muro, luz da tarde."
+    },
+    {
+     "fala": "Segue o Porquê BR",
+     "acao": "O personagem retoma a pose inicial, equilibrando a garrafa PET no medidor de luz e apontando para a tela em loop.",
+     "enquadramento": "plano médio",
+     "ambiente": "Cena 7: muro externo de casa brasileira, hoje, objetos-âncora: caixa do relógio de luz, garrafa PET com água, portão de grade, luz do sol da tarde."
+    }
+   ],
+   "pedido_3d_ou_realista": false
+  }
+ },
+ "fontes": [
+  "GARRAFA PET em cima do MEDIDOR ECONOMIZA ENERGIA? | Curso de Eletricista",
+  "www.e-farsas.com",
+  "Garrafas de água em contadores residenciais de energia elétrica: desfazendo um mito | Caderno Brasileiro de Ensino de Física - Portal de Periódicos UFSC",
+  "CPFL revela 20 mitos e verdades sobre a utilização da energia e equipamentos elétricos"
+ ]
+}

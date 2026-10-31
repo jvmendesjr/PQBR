@@ -1,0 +1,5 @@
+...xx                                                                    [100%]
+=========================== short test summary info ============================
+XFAIL tests/unit/test_f3_05_roteamento_offline.py::test_contrato_intervencao_tem_roteamento_explicito_para_fila_da_ferramenta - F3-05/G4 aberto: intervenção herda fila do workflow; não há task_queue explícita. Não comprova nem corrige roteamento por ferramenta/sessão.
+XFAIL tests/unit/test_f3_05_roteamento_offline.py::test_contrato_worker_da_sessao_registra_intervencao - F3-05/G4 aberto: Worker camofox-pqbr não registra intervir_agente. Limite local de um Worker não garante exclusão global por sessão.
+3 passed, 2 xfailed in 0.07s

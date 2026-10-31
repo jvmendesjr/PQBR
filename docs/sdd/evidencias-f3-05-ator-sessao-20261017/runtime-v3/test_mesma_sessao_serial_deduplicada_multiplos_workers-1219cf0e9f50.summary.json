@@ -1,0 +1,41 @@
+{
+  "teste": "test_mesma_sessao_serial_deduplicada_multiplos_workers",
+  "workflow_id": "prototipo-ator-sessao-v1-07aa137bd2dc362b90b33958e3ed6b335ab8385dedfb7454998d1219cf0e9f50",
+  "run_id": "219e881c-26c2-4c54-afd9-507f7cef94c1",
+  "estado": "COMPLETED",
+  "pending_activities": 0,
+  "replay": "ok",
+  "atividades_agendadas": 2,
+  "fila_explicita": "teste-camofox-ator-a62c54aa60c84dfc95c4185fee204f88",
+  "calls": [
+    {
+      "pedido": {
+        "falhar": false,
+        "id": "a1",
+        "sessao": "sessao-A"
+      },
+      "inicio": 404528.588079328,
+      "fim": 404528.89385642,
+      "fila": "teste-camofox-ator-a62c54aa60c84dfc95c4185fee204f88",
+      "workflow_id": "prototipo-ator-sessao-v1-07aa137bd2dc362b90b33958e3ed6b335ab8385dedfb7454998d1219cf0e9f50",
+      "attempt": 1
+    },
+    {
+      "pedido": {
+        "falhar": false,
+        "id": "a2",
+        "sessao": "sessao-A"
+      },
+      "inicio": 404528.987107522,
+      "fim": 404528.987125078,
+      "fila": "teste-camofox-ator-a62c54aa60c84dfc95c4185fee204f88",
+      "workflow_id": "prototipo-ator-sessao-v1-07aa137bd2dc362b90b33958e3ed6b335ab8385dedfb7454998d1219cf0e9f50",
+      "attempt": 1
+    }
+  ],
+  "max_global": 1,
+  "max_por_sessao": {
+    "sessao-A": 1
+  },
+  "erro": null
+}

@@ -1,0 +1,24 @@
+{
+  "titulo": "Por que o brasileiro põe garrafa de água no relógio de luz?",
+  "descricao": "Você já viu uma garrafa PET cheia de água em cima do medidor de energia elétrica? Descubra o mito e as histórias por trás dessa famosa mania brasileira de tentar 'esfriar' a conta de luz. Código do episódio: PQBR-EP0028.\n\nFontes:\n- GARRAFA PET em cima do MEDIDOR ECONOMIZA ENERGIA? | Curso de Eletricista\n- Garrafas de água em contadores residenciais de energia elétrica: desfazendo um mito | Caderno Brasileiro de Ensino de Física (UFSC)\n- www.e-farsas.com\n\n#shorts #porquebr #curiosidades #culturabrasileira #mitoseverdades",
+  "tags": [
+    "por que colocar garrafa de agua no relogio de luz",
+    "garrafa pet no medidor de energia",
+    "garrafa de agua economiza luz",
+    "relogio de luz",
+    "medidor de energia",
+    "mitos e verdades energia",
+    "curiosidades do brasil",
+    "porque br",
+    "habitos brasileiros",
+    "cultura brasileira",
+    "energia eletrica"
+  ],
+  "hashtags": [
+    "#shorts",
+    "#porquebr",
+    "#curiosidades",
+    "#culturabrasileira",
+    "#mitoseverdades"
+  ]
+}

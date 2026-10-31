@@ -1,13 +1,37 @@
-# PQBR — documentação
+# PQBR (Porquê BR)
 
-Mapa dos documentos e ordem de autoridade. Em caso de conflito, vale o primeiro da lista.
+Aplicação de produção do canal Porquê BR: Shorts de sátira leve, em desenho 2D genérico, sobre manias e rotinas dos brasileiros.
 
-1. `docs/00-entrega/decisoes-jose-2026-10-08.md`: registro de decisões do José (as entradas mais novas valem sobre as antigas).
-2. `docs/00-entrega/ENTREGA-core-eng-PQBR.md`: documento de entrega para a core-eng (agentes, fluxo, regras, tarefas e hipóteses).
-3. `docs/01-editorial/`: contrato editorial (DESATUALIZADO na chamada final e na identidade visual; ver decisões t262–t265) e aditivo dos 4 roteiros.
-4. `docs/02-pesquisas/`: pesquisas de comentários, agente de comunidade e auditoria audiovisual.
-5. `docs/03-auditor/`: resumo do auditor v3.
-6. `docs/04-canal/`: relatórios e levantamentos do canal. São só REFERÊNCIA, não fonte da verdade: os relatórios de 90 dias divergem (30 x 46 Shorts) e o levantamento diz 60 vídeos no cabeçalho e 58 na auditoria, com muitos "não encontrado". Métricas oficiais virão da API do YouTube Analytics.
-7. `docs/99-historico/`: material substituído (dossiê de preparação, rodada anterior do Gemini). Não usar para decidir.
+## Orientação para agentes e mapa documental
 
-Regras: nada de senhas, tokens ou dados pessoais neste repositório.
+`AGENTS.md` na raiz é a porta de entrada para agentes que trabalham neste checkout. `docs/README.md` é o mapa de documentos, diretórios e autoridade. O roster de papéis fica em `docs/AGENTES.md`; as personas de cada agente (PydanticAI em activities do Temporal; ADR-011) ficam em `company/agents/<slug>/AGENTS.md`.
+
+Há dois roadmaps com escopos diferentes. `docs/ROADMAP.md` é o roadmap canônico geral e fonte do estado oficial. `docs/blueprints/modulo-producao-video/ROADMAP.md` é auxiliar e cobre apenas o módulo de produção de vídeo. Não misture nem use um para substituir o outro.
+
+## Ordem de autoridade e de leitura
+
+Em conflito, vale o documento de maior autoridade, nesta ordem:
+
+1. `docs/REGRAS.md`: regras aprovadas pelo José; §0–§3 são a constituição.
+2. `docs/SPEC.md`: requisitos funcionais e não funcionais, histórias e critérios de aceite.
+3. `docs/ARQUITETURA.md`: ADRs, modelo de dados, workflows do Temporal, agentes PydanticAI (ADR-011; Paperclip em retirada) e contratos Pydantic v2.
+4. `docs/TESTES.md`: plano de testes e critérios de validação.
+5. `docs/ROADMAP.md`: tarefas, estado e próximo passo do projeto.
+
+`docs/RASTREABILIDADE.md` liga requisito → desenho → tarefa → teste. As fases, gates e rollback antes descritos em `PLANO.md` foram incorporados ao anexo de `docs/ROADMAP.md`; não há um `docs/PLANO.md` atual separado.
+
+## ⛔ Documentos restritos
+
+Arquivos de pré-construção e material legado não devem ser consultados sem aprovação explícita do José, conforme `docs/REGRAS.md` §0. Isso inclui `docs/_obsoleto/`, `docs/DECISOES-LOG.md`, `docs/pesquisas/`, `docs/arquivo/` e qualquer rascunho legado. O que vale como regra editorial está em `docs/REGRAS.md` §5 e no contrato oficial `docs/CONTRATO-EDITORIAL.md` (v2). **Exceção (t530, José):** `docs/pesquisas/PESQUISA-extensoes-geracao-em-serie.md` pode ser lido por qualquer agente, **somente leitura** (referência da Fase 4V).
+
+## Canal e painel
+
+José usa o Telegram (Hermes `pqbr`) para avisos, pedidos e aprovações (sinais do Temporal) e a Temporal UI como painel (t471/t474).
+
+## Regras do repositório
+
+- Dúvida ou conflito sem certeza: não adivinhar; marcar “EM CONSTRUÇÃO — aguardando José” (t323).
+- Decisão nova entra no `DECISOES-LOG.md` e no `REGRAS.md` no mesmo commit; atualizar também requisitos, desenho, testes e tarefas afetados.
+- Não colocar senhas, tokens, cookies, dados pessoais, IPs ou IDs internos neste repositório.
+- **Sessão Google (referência viva):** [`docs/REFERENCIA-sessao-google.md`](docs/REFERENCIA-sessao-google.md) — Camofox é a fonte/renovador da sessão; NotebookLM só a lê.
+- **Lacunas vivas:** [docs/LACUNAS-fluxo.md](docs/LACUNAS-fluxo.md). O checklist pré-E2E de 12/10 está em [docs/_obsoleto/LICOES-pre-E2E.md](docs/_obsoleto/LICOES-pre-E2E.md) e não manda mais abrir a CLI do Paperclip.

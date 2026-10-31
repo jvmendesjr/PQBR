@@ -1,0 +1,1 @@
+{"portas": "TODAS FAKES EM MEMORIA; sem transporte real", "testes": 104, "falhas": 0, "erros": 0, "pulados": 0, "sucesso": true, "pqbr_ou_temporal_importado": false, "rede_subprocesso": "bloqueados por audit hook Python (não sandbox de kernel)", "crash_safety_durabilidade_real": "NAO PROVADAS"}

@@ -1,0 +1,4 @@
+{
+  "passed": true,
+  "message": "Internal/isolated IPv4-only, sem IPv6, sem rota padrao/external, bridge host sem IP"
+}

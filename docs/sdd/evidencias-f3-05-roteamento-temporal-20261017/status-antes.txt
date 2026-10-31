@@ -1,0 +1,74 @@
+ M config/.env.example
+ M config/README.md
+ M docs/ARQUITETURA.md
+ M docs/CONTRATO-EDITORIAL.md
+ M docs/DECISOES-LOG.md
+ M docs/REFERENCIA-sessao-google.md
+ M docs/REGRAS.md
+ M docs/ROADMAP.md
+ M docs/SPEC.md
+ M docs/TESTES.md
+ M docs/blueprints/modulo-producao-video/ROADMAP.md
+ M docs/operacao/GUIA-ACESSO-PC-PAPERCLIP-CLI.md
+ M docs/sdd/gate-a9.md
+ M scripts/e2e/e2e_pre.py
+ M scripts/hindsight/indexar.py
+ M src/pqbr/contratos/__init__.py
+ M src/pqbr/kit/agente_texto.py
+ M src/pqbr/kit/mcp_kit.py
+ M src/pqbr/kit/paperclip_api.py
+ M src/pqbr/pipeline/auditor_visual.py
+ M src/pqbr/pipeline/capa.py
+ M src/pqbr/seguranca/barreira.py
+ M src/pqbr/seguranca/segredos.py
+ M src/pqbr/storage/banco.py
+ M src/pqbr/workflows/activities.py
+ M src/pqbr/workflows/auditor_gemini.py
+ M src/pqbr/workflows/correcao.py
+ M src/pqbr/workflows/criativo.py
+ M src/pqbr/workflows/notebooklm.py
+ M src/pqbr/workflows/paperclip.py
+ M src/pqbr/workflows/producao.py
+ M src/pqbr/workflows/worker.py
+ M src/pqbr/workflows/worker_camofox.py
+ M src/pqbr/workflows/worker_episodio.py
+ M src/pqbr/workflows/worker_notebooklm.py
+ M templates/auditor/VISUAL_2D.txt
+ M tests/unit/test_auditor_visual.py
+ M tests/unit/test_barreira.py
+ M tests/unit/test_contratos.py
+ M tests/unit/test_criativo_t464.py
+ M tests/workflows/test_producao.py
+?? config/voz_narracao.json
+?? docs/CONTRATO-EDITORIAL-v2-CANDIDATO.md
+?? docs/pesquisas/arquivo-cadernos/f757e751_ep1001-descartado/
+?? docs/sdd/evidencias-f3-05-intervalo-20261017/
+?? docs/sdd/evidencias-f3-05-roteamento-offline-20261017/
+?? docs/sdd/evidencias-f3-05-temporal-isolado-20261017/
+?? docs/sdd/f3-02-ts-sec-20261017.md
+?? docs/sdd/f3-04-preparo-offline-20261017.md
+?? docs/sdd/f3-05-intervalo-deterministico-20261017.md
+?? docs/sdd/f3-05-local-20261017.md
+?? docs/sdd/f3-05-roteamento-offline-20261017.md
+?? docs/sdd/f3-05-sdk-offline-20261017.md
+?? docs/sdd/f3-05-temporal-isolado-20261017.md
+?? docs/sdd/f7-01-dryrun-20261016.md
+?? scripts/backup_offsite/
+?? src/pqbr/integrations/elevenlabs.py
+?? src/pqbr/pipeline/auditor_texto.py
+?? src/pqbr/workflows/narracao.py
+?? templates/auditor/LOOP.txt
+?? tests/seguranca/test_f3_02_escritores.py
+?? tests/seguranca/test_f3_02_saidas.py
+?? tests/unit/test_auditor_gemini.py
+?? tests/unit/test_auditor_texto.py
+?? tests/unit/test_capa_a9.py
+?? tests/unit/test_elevenlabs.py
+?? tests/unit/test_f3_04_offline.py
+?? tests/unit/test_f3_05_local.py
+?? tests/unit/test_f3_05_roteamento_offline.py
+?? tests/unit/test_f3_05_sdk_offline.py
+?? tests/unit/test_f7_03_limits.py
+?? tests/unit/test_narracao.py
+?? tests/workflows/run_f3_05_isolado.sh
+?? tests/workflows/test_f3_05_temporal_isolado.py

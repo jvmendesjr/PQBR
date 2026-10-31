@@ -1,0 +1,409 @@
+test_continue_as_new_preserva_ids_e_resultados (tests.workflows.test_f3_05_candidate_runtime.CandidataRuntime.test_continue_as_new_preserva_ids_e_resultados) ... Executing <Task pending name='Task-2' coro=<CandidataRuntime.test_continue_as_new_preserva_ids_e_resultados() running at /home/pc/Workspace/PQBR/tests/workflows/test_f3_05_candidate_runtime.py:266> wait_for=<Future pending cb=[<builtins.PyDoneCallback object at 0x7f26e2646350>(), Task.task_wakeup()] created at /home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py:448> cb=[_run_until_complete_cb() at /home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py:181] created at /home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/runners.py:100> took 0.109 seconds
+ok
+test_dedup_payload_config_e_versao (tests.workflows.test_f3_05_candidate_runtime.CandidataRuntime.test_dedup_payload_config_e_versao) ... ok
+test_excecao_tecnica_falha_sem_retry_fallback_ou_proximo (tests.workflows.test_f3_05_candidate_runtime.CandidataRuntime.test_excecao_tecnica_falha_sem_retry_fallback_ou_proximo) ... Completing activity as failed ({'activity_id': 'intervencao-1', 'activity_type': 'intervir_agente', 'attempt': 1, 'namespace': 'f3-05-candidate', 'task_queue': 'teste-f3-05-candidato-camofox-test_excecao_tecnica_falha_sem_retry_fallback_ou_proximo', 'workflow_id': 'teste-f3-05-candidato-sessao-12f8bdf97ec05bbc1f4e3c4d095420b583c516a153e0bf7ad007084ecc5dd46c-op-0e07b8daee992d1e972944d343e9e34e5bf6511ec0f0f55add331c52c0fff33d', 'workflow_run_id': '01a14acf-5b2c-7157-9a47-8f202e7733f7', 'workflow_type': 'PQBRCorrecaoCandidata'})
+Traceback (most recent call last):
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 351, in _handle_start_activity_task
+    result = await self._execute_activity(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 681, in _execute_activity
+    return await impl.execute_activity(input)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 889, in execute_activity
+    return await input.fn(*input.args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/tests/workflows/composicao_candidata.py", line 59, in intervir
+    raise ApplicationError('falha técnica falsa', type='FalhaTecnicaFalsa')
+temporalio.exceptions.ApplicationError: FalhaTecnicaFalsa: falha técnica falsa
+ok
+test_fila_camofox_sem_consumidor_e_retomada_explicita (tests.workflows.test_f3_05_candidate_runtime.CandidataRuntime.test_fila_camofox_sem_consumidor_e_retomada_explicita) ... ok
+test_mesma_sessao_concorrente_sem_sobreposicao (tests.workflows.test_f3_05_candidate_runtime.CandidataRuntime.test_mesma_sessao_concorrente_sem_sobreposicao) ... ok
+test_replay_versao_anterior_sem_patch_e_nova_com_patch (tests.workflows.test_f3_05_candidate_runtime.CandidataRuntime.test_replay_versao_anterior_sem_patch_e_nova_com_patch) ... Executing <Task pending name='Task-3770' coro=<_WorkflowWorker._handle_activation() running at /home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_workflow.py:416> wait_for=<Future pending cb=[_chain_future.<locals>._call_check_cancel() at /home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/futures.py:389, Task.task_wakeup()] created at /home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py:448> created at /home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/tasks.py:420> took 0.128 seconds
+Executing <Task pending name='Task-3782' coro=<_WorkflowWorker._handle_activation() running at /home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_workflow.py:416> wait_for=<Future pending cb=[_chain_future.<locals>._call_check_cancel() at /home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/futures.py:389, Task.task_wakeup()] created at /home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py:448> created at /home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/tasks.py:420> took 0.101 seconds
+ok
+test_restart_worker_reconstroi_dedup_do_historico (tests.workflows.test_f3_05_candidate_runtime.CandidataRuntime.test_restart_worker_reconstroi_dedup_do_historico) ... ok
+test_sem_worker_workflow_rpc_nao_processa_e_retoma (tests.workflows.test_f3_05_candidate_runtime.CandidataRuntime.test_sem_worker_workflow_rpc_nao_processa_e_retoma) ... ok
+test_sessoes_diferentes_em_paralelo (tests.workflows.test_f3_05_candidate_runtime.CandidataRuntime.test_sessoes_diferentes_em_paralelo) ... ok
+test_trava_sensivel_e_conta_divergente (tests.workflows.test_f3_05_candidate_runtime.CandidataRuntime.test_trava_sensivel_e_conta_divergente) ... ok
+test_confirmacao_antecipada_nao_autoriza_falha_futura (tests.workflows.test_f3_05_recuperacao_runtime.RecuperacaoRuntime.test_confirmacao_antecipada_nao_autoriza_falha_futura) ... Completing activity as failed ({'activity_id': 'intervencao-1', 'activity_type': 'intervir_agente', 'attempt': 1, 'namespace': 'f3-05-recovery', 'task_queue': 'teste-f3-05-candidato-camofox-test_confirmacao_antecipada_nao_autoriza_falha_futura-recuperacao', 'workflow_id': 'teste-f3-05-recuperacao-4d487d946f8bba8ed4573e111e96ec1f246e0ba476a4785c546bd74a029990ff-op-38e55e2c50e69560265c4b1886ab446e1ade639a9b30a3395fa4ae2f1f0ae4f2', 'workflow_run_id': '01a14acf-9b2c-760c-80a6-36612221c360', 'workflow_type': 'PQBRCorrecaoCandidata'})
+Traceback (most recent call last):
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 351, in _handle_start_activity_task
+    result = await self._execute_activity(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 681, in _execute_activity
+    return await impl.execute_activity(input)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 889, in execute_activity
+    return await input.fn(*input.args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_recuperacao_runtime.py", line 26, in intervir
+    result = await super().intervir(t)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/tests/workflows/composicao_candidata.py", line 59, in intervir
+    raise ApplicationError('falha técnica falsa', type='FalhaTecnicaFalsa')
+temporalio.exceptions.ApplicationError: FalhaTecnicaFalsa: falha técnica falsa
+[2m2026-10-17T17:01:23.243571Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker::workflow[0m[2m:[0m Failing workflow task [3mrun_id[0m[2m=[0mae57138e-5ea1-476a-bad8-0ec49751ff53 [3mfailure[0m[2m=[0mFailure { failure: Some(Failure { message: "[TMPRL1100] Nondeterminism error: Fail workflow machine does not handle this event: HistoryEvent(id: 7, StartChildWorkflowExecutionInitiated)", source: "", stack_trace: "", encoded_attributes: None, cause: None, failure_info: Some(ApplicationFailureInfo(ApplicationFailureInfo { r#type: "", non_retryable: false, details: None, next_retry_delay: None, category: Unspecified })) }), force_cause: NonDeterministicError }
+ERROR
+test_continue_as_new_transfere_pausa_fila_e_dedup (tests.workflows.test_f3_05_recuperacao_runtime.RecuperacaoRuntime.test_continue_as_new_transfere_pausa_fila_e_dedup) ... Completing activity as failed ({'activity_id': 'intervencao-1', 'activity_type': 'intervir_agente', 'attempt': 1, 'namespace': 'f3-05-recovery', 'task_queue': 'teste-f3-05-candidato-camofox-test_continue_as_new_transfere_pausa_fila_e_dedup-recuperacao', 'workflow_id': 'teste-f3-05-recuperacao-9dbbec2dbc1ada6e293ed7748be7eef0be878850ec52ed8de2ce9300f19c23eb-op-38e55e2c50e69560265c4b1886ab446e1ade639a9b30a3395fa4ae2f1f0ae4f2', 'workflow_run_id': '01a14acf-a03c-7806-9c4c-f5084cba5ab3', 'workflow_type': 'PQBRCorrecaoCandidata'})
+Traceback (most recent call last):
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 351, in _handle_start_activity_task
+    result = await self._execute_activity(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 681, in _execute_activity
+    return await impl.execute_activity(input)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 889, in execute_activity
+    return await input.fn(*input.args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_recuperacao_runtime.py", line 26, in intervir
+    result = await super().intervir(t)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/tests/workflows/composicao_candidata.py", line 59, in intervir
+    raise ApplicationError('falha técnica falsa', type='FalhaTecnicaFalsa')
+temporalio.exceptions.ApplicationError: FalhaTecnicaFalsa: falha técnica falsa
+[2m2026-10-17T17:01:23.927966Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker::workflow[0m[2m:[0m Failing workflow task [3mrun_id[0m[2m=[0mc4592d86-82cf-4eda-b9e3-c25270924373 [3mfailure[0m[2m=[0mFailure { failure: Some(Failure { message: "[TMPRL1100] Nondeterminism error: Fail workflow machine does not handle this event: HistoryEvent(id: 7, StartChildWorkflowExecutionInitiated)", source: "", stack_trace: "", encoded_attributes: None, cause: None, failure_info: Some(ApplicationFailureInfo(ApplicationFailureInfo { r#type: "", non_retryable: false, details: None, next_retry_delay: None, category: Unspecified })) }), force_cause: NonDeterministicError }
+ERROR
+[2m2026-10-17T17:01:23.992868Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker::workflow[0m[2m:[0m Failing workflow task [3mrun_id[0m[2m=[0mc4592d86-82cf-4eda-b9e3-c25270924373 [3mfailure[0m[2m=[0mFailure { failure: Some(Failure { message: "[TMPRL1100] Nondeterminism error: Fail workflow machine does not handle this event: HistoryEvent(id: 7, StartChildWorkflowExecutionInitiated)", source: "", stack_trace: "", encoded_attributes: None, cause: None, failure_info: Some(ApplicationFailureInfo(ApplicationFailureInfo { r#type: "", non_retryable: false, details: None, next_retry_delay: None, category: Unspecified })) }), force_cause: NonDeterministicError }
+test_continue_as_new_transfere_pausa_fila_e_dedup (tests.workflows.test_f3_05_recuperacao_runtime.RecuperacaoRuntime.test_continue_as_new_transfere_pausa_fila_e_dedup) ... ERROR
+test_duas_falhas_recusam_recuperacao_obsoleta (tests.workflows.test_f3_05_recuperacao_runtime.RecuperacaoRuntime.test_duas_falhas_recusam_recuperacao_obsoleta) ... Completing activity as failed ({'activity_id': 'intervencao-1', 'activity_type': 'intervir_agente', 'attempt': 1, 'namespace': 'f3-05-recovery', 'task_queue': 'teste-f3-05-candidato-camofox-test_duas_falhas_recusam_recuperacao_obsoleta-recuperacao', 'workflow_id': 'teste-f3-05-recuperacao-52858e91c87ef0905db3e431b9f77a7fd42ce6ec4da4bd5bb534cf5e74eaab9e-op-38e55e2c50e69560265c4b1886ab446e1ade639a9b30a3395fa4ae2f1f0ae4f2', 'workflow_run_id': '01a14acf-a309-75f3-8631-628f7f46e208', 'workflow_type': 'PQBRCorrecaoCandidata'})
+Traceback (most recent call last):
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 351, in _handle_start_activity_task
+    result = await self._execute_activity(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 681, in _execute_activity
+    return await impl.execute_activity(input)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 889, in execute_activity
+    return await input.fn(*input.args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_recuperacao_runtime.py", line 26, in intervir
+    result = await super().intervir(t)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/tests/workflows/composicao_candidata.py", line 59, in intervir
+    raise ApplicationError('falha técnica falsa', type='FalhaTecnicaFalsa')
+temporalio.exceptions.ApplicationError: FalhaTecnicaFalsa: falha técnica falsa
+[2m2026-10-17T17:01:24.531987Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker::workflow[0m[2m:[0m Failing workflow task [3mrun_id[0m[2m=[0m0403113f-4fcf-4fa3-8d4b-b10d4358878e [3mfailure[0m[2m=[0mFailure { failure: Some(Failure { message: "[TMPRL1100] Nondeterminism error: Fail workflow machine does not handle this event: HistoryEvent(id: 7, StartChildWorkflowExecutionInitiated)", source: "", stack_trace: "", encoded_attributes: None, cause: None, failure_info: Some(ApplicationFailureInfo(ApplicationFailureInfo { r#type: "", non_retryable: false, details: None, next_retry_delay: None, category: Unspecified })) }), force_cause: NonDeterministicError }
+ERROR
+[2m2026-10-17T17:01:24.578761Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker::workflow[0m[2m:[0m Failing workflow task [3mrun_id[0m[2m=[0m0403113f-4fcf-4fa3-8d4b-b10d4358878e [3mfailure[0m[2m=[0mFailure { failure: Some(Failure { message: "[TMPRL1100] Nondeterminism error: Fail workflow machine does not handle this event: HistoryEvent(id: 7, StartChildWorkflowExecutionInitiated)", source: "", stack_trace: "", encoded_attributes: None, cause: None, failure_info: Some(ApplicationFailureInfo(ApplicationFailureInfo { r#type: "", non_retryable: false, details: None, next_retry_delay: None, category: Unspecified })) }), force_cause: NonDeterministicError }
+test_duas_falhas_recusam_recuperacao_obsoleta (tests.workflows.test_f3_05_recuperacao_runtime.RecuperacaoRuntime.test_duas_falhas_recusam_recuperacao_obsoleta) ... ERROR
+test_erro_desconhecido_propaga_sem_recuperacao (tests.workflows.test_f3_05_recuperacao_runtime.RecuperacaoRuntime.test_erro_desconhecido_propaga_sem_recuperacao) ... Completing activity as failed ({'activity_id': 'intervencao-1', 'activity_type': 'intervir_agente', 'attempt': 1, 'namespace': 'f3-05-recovery', 'task_queue': 'teste-f3-05-candidato-camofox-test_erro_desconhecido_propaga_sem_recuperacao-recuperacao', 'workflow_id': 'teste-f3-05-recuperacao-1f054622cfd0f9a0f78cf7f9d6cf8a7d1be8a4540d73b6985629f6e91651a239-op-38e55e2c50e69560265c4b1886ab446e1ade639a9b30a3395fa4ae2f1f0ae4f2', 'workflow_run_id': '01a14acf-a53e-799f-81d3-40fb493402f9', 'workflow_type': 'PQBRCorrecaoCandidata'})
+Traceback (most recent call last):
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 351, in _handle_start_activity_task
+    result = await self._execute_activity(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 681, in _execute_activity
+    return await impl.execute_activity(input)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 889, in execute_activity
+    return await input.fn(*input.args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_recuperacao_runtime.py", line 28, in intervir
+    raise ApplicationError('erro sintético não autorizado para recuperação', type='OutraFalhaFalsa')
+temporalio.exceptions.ApplicationError: OutraFalhaFalsa: erro sintético não autorizado para recuperação
+[2m2026-10-17T17:01:25.083876Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker::workflow[0m[2m:[0m Failing workflow task [3mrun_id[0m[2m=[0m22a57d4c-cd3f-49d7-b77b-10bda23b622c [3mfailure[0m[2m=[0mFailure { failure: Some(Failure { message: "[TMPRL1100] Nondeterminism error: Fail workflow machine does not handle this event: HistoryEvent(id: 7, StartChildWorkflowExecutionInitiated)", source: "", stack_trace: "", encoded_attributes: None, cause: None, failure_info: Some(ApplicationFailureInfo(ApplicationFailureInfo { r#type: "", non_retryable: false, details: None, next_retry_delay: None, category: Unspecified })) }), force_cause: NonDeterministicError }
+ERROR
+test_ingresso_invalido_nao_despacha (tests.workflows.test_f3_05_recuperacao_runtime.RecuperacaoRuntime.test_ingresso_invalido_nao_despacha) ... [2m2026-10-17T17:01:25.864781Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker::workflow[0m[2m:[0m Failing workflow task [3mrun_id[0m[2m=[0m80d009b8-b768-4672-8aad-8ef4ae8899ef [3mfailure[0m[2m=[0mFailure { failure: Some(Failure { message: "[TMPRL1100] Nondeterminism error: Fail workflow machine does not handle this event: HistoryEvent(id: 13, StartChildWorkflowExecutionInitiated)", source: "", stack_trace: "", encoded_attributes: None, cause: None, failure_info: Some(ApplicationFailureInfo(ApplicationFailureInfo { r#type: "", non_retryable: false, details: None, next_retry_delay: None, category: Unspecified })) }), force_cause: NonDeterministicError }
+ERROR
+test_pausa_recusa_comandos_e_recupera_so_aceitos (tests.workflows.test_f3_05_recuperacao_runtime.RecuperacaoRuntime.test_pausa_recusa_comandos_e_recupera_so_aceitos) ... Completing activity as failed ({'activity_id': 'intervencao-1', 'activity_type': 'intervir_agente', 'attempt': 1, 'namespace': 'f3-05-recovery', 'task_queue': 'teste-f3-05-candidato-camofox-test_pausa_recusa_comandos_e_recupera_so_aceitos-recuperacao', 'workflow_id': 'teste-f3-05-recuperacao-475c9c6724e3a79c3e8aad89ff83e37a15b2262eee50a9d1955ea0f1bd8c83fc-op-38e55e2c50e69560265c4b1886ab446e1ade639a9b30a3395fa4ae2f1f0ae4f2', 'workflow_run_id': '01a14acf-aa60-78b4-b76c-3aa33b4aaf6a', 'workflow_type': 'PQBRCorrecaoCandidata'})
+Traceback (most recent call last):
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 351, in _handle_start_activity_task
+    result = await self._execute_activity(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 681, in _execute_activity
+    return await impl.execute_activity(input)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 889, in execute_activity
+    return await input.fn(*input.args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_recuperacao_runtime.py", line 26, in intervir
+    result = await super().intervir(t)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/tests/workflows/composicao_candidata.py", line 59, in intervir
+    raise ApplicationError('falha técnica falsa', type='FalhaTecnicaFalsa')
+temporalio.exceptions.ApplicationError: FalhaTecnicaFalsa: falha técnica falsa
+[2m2026-10-17T17:01:26.497754Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker::workflow[0m[2m:[0m Failing workflow task [3mrun_id[0m[2m=[0ma64ea276-9060-4936-8706-32acd944c3b3 [3mfailure[0m[2m=[0mFailure { failure: Some(Failure { message: "[TMPRL1100] Nondeterminism error: Fail workflow machine does not handle this event: HistoryEvent(id: 7, StartChildWorkflowExecutionInitiated)", source: "", stack_trace: "", encoded_attributes: None, cause: None, failure_info: Some(ApplicationFailureInfo(ApplicationFailureInfo { r#type: "", non_retryable: false, details: None, next_retry_delay: None, category: Unspecified })) }), force_cause: NonDeterministicError }
+ERROR
+[2m2026-10-17T17:01:26.547580Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker::workflow[0m[2m:[0m Failing workflow task [3mrun_id[0m[2m=[0ma64ea276-9060-4936-8706-32acd944c3b3 [3mfailure[0m[2m=[0mFailure { failure: Some(Failure { message: "[TMPRL1100] Nondeterminism error: Fail workflow machine does not handle this event: HistoryEvent(id: 7, StartChildWorkflowExecutionInitiated)", source: "", stack_trace: "", encoded_attributes: None, cause: None, failure_info: Some(ApplicationFailureInfo(ApplicationFailureInfo { r#type: "", non_retryable: false, details: None, next_retry_delay: None, category: Unspecified })) }), force_cause: NonDeterministicError }
+test_pausa_recusa_comandos_e_recupera_so_aceitos (tests.workflows.test_f3_05_recuperacao_runtime.RecuperacaoRuntime.test_pausa_recusa_comandos_e_recupera_so_aceitos) ... ERROR
+test_restart_durante_pausa_e_apos_recuperacao (tests.workflows.test_f3_05_recuperacao_runtime.RecuperacaoRuntime.test_restart_durante_pausa_e_apos_recuperacao) ... Completing activity as failed ({'activity_id': 'intervencao-1', 'activity_type': 'intervir_agente', 'attempt': 1, 'namespace': 'f3-05-recovery', 'task_queue': 'teste-f3-05-candidato-camofox-test_restart_durante_pausa_e_apos_recuperacao-recuperacao', 'workflow_id': 'teste-f3-05-recuperacao-55564ca7847bd7a9fd169f12ff5c3d502ac7406fbeb2e01b8babbf13fb85285c-op-38e55e2c50e69560265c4b1886ab446e1ade639a9b30a3395fa4ae2f1f0ae4f2', 'workflow_run_id': '01a14acf-acf4-7b41-98e0-a87878e47310', 'workflow_type': 'PQBRCorrecaoCandidata'})
+Traceback (most recent call last):
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 351, in _handle_start_activity_task
+    result = await self._execute_activity(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 681, in _execute_activity
+    return await impl.execute_activity(input)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 889, in execute_activity
+    return await input.fn(*input.args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_recuperacao_runtime.py", line 26, in intervir
+    result = await super().intervir(t)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/tests/workflows/composicao_candidata.py", line 59, in intervir
+    raise ApplicationError('falha técnica falsa', type='FalhaTecnicaFalsa')
+temporalio.exceptions.ApplicationError: FalhaTecnicaFalsa: falha técnica falsa
+[2m2026-10-17T17:01:27.125347Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker::workflow[0m[2m:[0m Failing workflow task [3mrun_id[0m[2m=[0mf2b6b36a-512e-494d-9114-236b3a1f0db2 [3mfailure[0m[2m=[0mFailure { failure: Some(Failure { message: "[TMPRL1100] Nondeterminism error: Fail workflow machine does not handle this event: HistoryEvent(id: 7, StartChildWorkflowExecutionInitiated)", source: "", stack_trace: "", encoded_attributes: None, cause: None, failure_info: Some(ApplicationFailureInfo(ApplicationFailureInfo { r#type: "", non_retryable: false, details: None, next_retry_delay: None, category: Unspecified })) }), force_cause: NonDeterministicError }
+ERROR
+[2m2026-10-17T17:01:27.182887Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker::workflow[0m[2m:[0m Failing workflow task [3mrun_id[0m[2m=[0mf2b6b36a-512e-494d-9114-236b3a1f0db2 [3mfailure[0m[2m=[0mFailure { failure: Some(Failure { message: "[TMPRL1100] Nondeterminism error: Fail workflow machine does not handle this event: HistoryEvent(id: 7, StartChildWorkflowExecutionInitiated)", source: "", stack_trace: "", encoded_attributes: None, cause: None, failure_info: Some(ApplicationFailureInfo(ApplicationFailureInfo { r#type: "", non_retryable: false, details: None, next_retry_delay: None, category: Unspecified })) }), force_cause: NonDeterministicError }
+test_restart_durante_pausa_e_apos_recuperacao (tests.workflows.test_f3_05_recuperacao_runtime.RecuperacaoRuntime.test_restart_durante_pausa_e_apos_recuperacao) ... ERROR
+test_resultado_anterior_preservado_apos_falha (tests.workflows.test_f3_05_recuperacao_runtime.RecuperacaoRuntime.test_resultado_anterior_preservado_apos_falha) ... Completing activity as failed ({'activity_id': 'intervencao-1', 'activity_type': 'intervir_agente', 'attempt': 1, 'namespace': 'f3-05-recovery', 'task_queue': 'teste-f3-05-candidato-camofox-test_resultado_anterior_preservado_apos_falha-recuperacao', 'workflow_id': 'teste-f3-05-recuperacao-53962a374e59f57392ed15f04b180a79b60ef9aaf243ed10401829712261b139-op-38e55e2c50e69560265c4b1886ab446e1ade639a9b30a3395fa4ae2f1f0ae4f2', 'workflow_run_id': '01a14acf-b203-73fa-abab-2efb4b68b00a', 'workflow_type': 'PQBRCorrecaoCandidata'})
+Traceback (most recent call last):
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 351, in _handle_start_activity_task
+    result = await self._execute_activity(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 681, in _execute_activity
+    return await impl.execute_activity(input)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 889, in execute_activity
+    return await input.fn(*input.args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_recuperacao_runtime.py", line 26, in intervir
+    result = await super().intervir(t)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/tests/workflows/composicao_candidata.py", line 59, in intervir
+    raise ApplicationError('falha técnica falsa', type='FalhaTecnicaFalsa')
+temporalio.exceptions.ApplicationError: FalhaTecnicaFalsa: falha técnica falsa
+[2m2026-10-17T17:01:29.115706Z[0m [33m WARN[0m [2mtemporalio_sdk_core::worker::workflow[0m[2m:[0m Failing workflow task [3mrun_id[0m[2m=[0mb166edd8-281a-47c5-b772-55228b154b9a [3mfailure[0m[2m=[0mFailure { failure: Some(Failure { message: "[TMPRL1100] Nondeterminism error: Fail workflow machine does not handle this event: HistoryEvent(id: 6, StartChildWorkflowExecutionInitiated)", source: "", stack_trace: "", encoded_attributes: None, cause: None, failure_info: Some(ApplicationFailureInfo(ApplicationFailureInfo { r#type: "", non_retryable: false, details: None, next_retry_delay: None, category: Unspecified })) }), force_cause: NonDeterministicError }
+ERROR
+
+======================================================================
+ERROR: test_confirmacao_antecipada_nao_autoriza_falha_futura (tests.workflows.test_f3_05_recuperacao_runtime.RecuperacaoRuntime.test_confirmacao_antecipada_nao_autoriza_falha_futura)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_recuperacao_runtime.py", line 304, in test_confirmacao_antecipada_nao_autoriza_falha_futura
+    result = await self.fechar(h)
+             ^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_recuperacao_runtime.py", line 126, in fechar
+    await self.capture(h)
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_recuperacao_runtime.py", line 139, in capture
+    await Replayer(workflows=[AtorRecuperacao, CorrecaoCandidata],
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_replayer.py", line 147, in replay_workflow
+    raise result.replay_failure
+temporalio.workflow._exceptions.NondeterminismError: Workflow activation completion failed: Failure { failure: Some(Failure { message: "[TMPRL1100] Nondeterminism error: Fail workflow machine does not handle this event: HistoryEvent(id: 7, StartChildWorkflowExecutionInitiated)", source: "", stack_trace: "", encoded_attributes: None, cause: None, failure_info: Some(ApplicationFailureInfo(ApplicationFailureInfo { r#type: "", non_retryable: false, details: None, next_retry_delay: None, category: Unspecified })) }), force_cause: NonDeterministicError }
+
+======================================================================
+ERROR: test_continue_as_new_transfere_pausa_fila_e_dedup (tests.workflows.test_f3_05_recuperacao_runtime.RecuperacaoRuntime.test_continue_as_new_transfere_pausa_fila_e_dedup)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_recuperacao_runtime.py", line 225, in test_continue_as_new_transfere_pausa_fila_e_dedup
+    h, state = await self.preparar_falha(('seguinte-a', 'seguinte-b'))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_recuperacao_runtime.py", line 120, in preparar_falha
+    await self.capture(h)
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_recuperacao_runtime.py", line 139, in capture
+    await Replayer(workflows=[AtorRecuperacao, CorrecaoCandidata],
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_replayer.py", line 147, in replay_workflow
+    raise result.replay_failure
+temporalio.workflow._exceptions.NondeterminismError: Workflow activation completion failed: Failure { failure: Some(Failure { message: "[TMPRL1100] Nondeterminism error: Fail workflow machine does not handle this event: HistoryEvent(id: 7, StartChildWorkflowExecutionInitiated)", source: "", stack_trace: "", encoded_attributes: None, cause: None, failure_info: Some(ApplicationFailureInfo(ApplicationFailureInfo { r#type: "", non_retryable: false, details: None, next_retry_delay: None, category: Unspecified })) }), force_cause: NonDeterministicError }
+
+======================================================================
+ERROR: test_continue_as_new_transfere_pausa_fila_e_dedup (tests.workflows.test_f3_05_recuperacao_runtime.RecuperacaoRuntime.test_continue_as_new_transfere_pausa_fila_e_dedup)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_recuperacao_runtime.py", line 60, in asyncTearDown
+    await self.capture(h)
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_recuperacao_runtime.py", line 139, in capture
+    await Replayer(workflows=[AtorRecuperacao, CorrecaoCandidata],
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_replayer.py", line 147, in replay_workflow
+    raise result.replay_failure
+temporalio.workflow._exceptions.NondeterminismError: Workflow activation completion failed: Failure { failure: Some(Failure { message: "[TMPRL1100] Nondeterminism error: Fail workflow machine does not handle this event: HistoryEvent(id: 7, StartChildWorkflowExecutionInitiated)", source: "", stack_trace: "", encoded_attributes: None, cause: None, failure_info: Some(ApplicationFailureInfo(ApplicationFailureInfo { r#type: "", non_retryable: false, details: None, next_retry_delay: None, category: Unspecified })) }), force_cause: NonDeterministicError }
+
+======================================================================
+ERROR: test_duas_falhas_recusam_recuperacao_obsoleta (tests.workflows.test_f3_05_recuperacao_runtime.RecuperacaoRuntime.test_duas_falhas_recusam_recuperacao_obsoleta)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_recuperacao_runtime.py", line 259, in test_duas_falhas_recusam_recuperacao_obsoleta
+    h, first = await self.preparar_falha(('falha-dois', 'seguinte'))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_recuperacao_runtime.py", line 120, in preparar_falha
+    await self.capture(h)
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_recuperacao_runtime.py", line 139, in capture
+    await Replayer(workflows=[AtorRecuperacao, CorrecaoCandidata],
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_replayer.py", line 147, in replay_workflow
+    raise result.replay_failure
+temporalio.workflow._exceptions.NondeterminismError: Workflow activation completion failed: Failure { failure: Some(Failure { message: "[TMPRL1100] Nondeterminism error: Fail workflow machine does not handle this event: HistoryEvent(id: 7, StartChildWorkflowExecutionInitiated)", source: "", stack_trace: "", encoded_attributes: None, cause: None, failure_info: Some(ApplicationFailureInfo(ApplicationFailureInfo { r#type: "", non_retryable: false, details: None, next_retry_delay: None, category: Unspecified })) }), force_cause: NonDeterministicError }
+
+======================================================================
+ERROR: test_duas_falhas_recusam_recuperacao_obsoleta (tests.workflows.test_f3_05_recuperacao_runtime.RecuperacaoRuntime.test_duas_falhas_recusam_recuperacao_obsoleta)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_recuperacao_runtime.py", line 60, in asyncTearDown
+    await self.capture(h)
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_recuperacao_runtime.py", line 139, in capture
+    await Replayer(workflows=[AtorRecuperacao, CorrecaoCandidata],
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_replayer.py", line 147, in replay_workflow
+    raise result.replay_failure
+temporalio.workflow._exceptions.NondeterminismError: Workflow activation completion failed: Failure { failure: Some(Failure { message: "[TMPRL1100] Nondeterminism error: Fail workflow machine does not handle this event: HistoryEvent(id: 7, StartChildWorkflowExecutionInitiated)", source: "", stack_trace: "", encoded_attributes: None, cause: None, failure_info: Some(ApplicationFailureInfo(ApplicationFailureInfo { r#type: "", non_retryable: false, details: None, next_retry_delay: None, category: Unspecified })) }), force_cause: NonDeterministicError }
+
+======================================================================
+ERROR: test_erro_desconhecido_propaga_sem_recuperacao (tests.workflows.test_f3_05_recuperacao_runtime.RecuperacaoRuntime.test_erro_desconhecido_propaga_sem_recuperacao)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_recuperacao_runtime.py", line 286, in test_erro_desconhecido_propaga_sem_recuperacao
+    await self.capture(h)
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_recuperacao_runtime.py", line 139, in capture
+    await Replayer(workflows=[AtorRecuperacao, CorrecaoCandidata],
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_replayer.py", line 147, in replay_workflow
+    raise result.replay_failure
+temporalio.workflow._exceptions.NondeterminismError: Workflow activation completion failed: Failure { failure: Some(Failure { message: "[TMPRL1100] Nondeterminism error: Fail workflow machine does not handle this event: HistoryEvent(id: 7, StartChildWorkflowExecutionInitiated)", source: "", stack_trace: "", encoded_attributes: None, cause: None, failure_info: Some(ApplicationFailureInfo(ApplicationFailureInfo { r#type: "", non_retryable: false, details: None, next_retry_delay: None, category: Unspecified })) }), force_cause: NonDeterministicError }
+
+======================================================================
+ERROR: test_ingresso_invalido_nao_despacha (tests.workflows.test_f3_05_recuperacao_runtime.RecuperacaoRuntime.test_ingresso_invalido_nao_despacha)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_recuperacao_runtime.py", line 335, in test_ingresso_invalido_nao_despacha
+    result = await self.fechar(h)
+             ^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_recuperacao_runtime.py", line 126, in fechar
+    await self.capture(h)
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_recuperacao_runtime.py", line 139, in capture
+    await Replayer(workflows=[AtorRecuperacao, CorrecaoCandidata],
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_replayer.py", line 147, in replay_workflow
+    raise result.replay_failure
+temporalio.workflow._exceptions.NondeterminismError: Workflow activation completion failed: Failure { failure: Some(Failure { message: "[TMPRL1100] Nondeterminism error: Fail workflow machine does not handle this event: HistoryEvent(id: 13, StartChildWorkflowExecutionInitiated)", source: "", stack_trace: "", encoded_attributes: None, cause: None, failure_info: Some(ApplicationFailureInfo(ApplicationFailureInfo { r#type: "", non_retryable: false, details: None, next_retry_delay: None, category: Unspecified })) }), force_cause: NonDeterministicError }
+
+======================================================================
+ERROR: test_pausa_recusa_comandos_e_recupera_so_aceitos (tests.workflows.test_f3_05_recuperacao_runtime.RecuperacaoRuntime.test_pausa_recusa_comandos_e_recupera_so_aceitos)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_recuperacao_runtime.py", line 166, in test_pausa_recusa_comandos_e_recupera_so_aceitos
+    h, state = await self.preparar_falha(('seguinte-a', 'seguinte-b'))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_recuperacao_runtime.py", line 120, in preparar_falha
+    await self.capture(h)
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_recuperacao_runtime.py", line 139, in capture
+    await Replayer(workflows=[AtorRecuperacao, CorrecaoCandidata],
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_replayer.py", line 147, in replay_workflow
+    raise result.replay_failure
+temporalio.workflow._exceptions.NondeterminismError: Workflow activation completion failed: Failure { failure: Some(Failure { message: "[TMPRL1100] Nondeterminism error: Fail workflow machine does not handle this event: HistoryEvent(id: 7, StartChildWorkflowExecutionInitiated)", source: "", stack_trace: "", encoded_attributes: None, cause: None, failure_info: Some(ApplicationFailureInfo(ApplicationFailureInfo { r#type: "", non_retryable: false, details: None, next_retry_delay: None, category: Unspecified })) }), force_cause: NonDeterministicError }
+
+======================================================================
+ERROR: test_pausa_recusa_comandos_e_recupera_so_aceitos (tests.workflows.test_f3_05_recuperacao_runtime.RecuperacaoRuntime.test_pausa_recusa_comandos_e_recupera_so_aceitos)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_recuperacao_runtime.py", line 60, in asyncTearDown
+    await self.capture(h)
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_recuperacao_runtime.py", line 139, in capture
+    await Replayer(workflows=[AtorRecuperacao, CorrecaoCandidata],
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_replayer.py", line 147, in replay_workflow
+    raise result.replay_failure
+temporalio.workflow._exceptions.NondeterminismError: Workflow activation completion failed: Failure { failure: Some(Failure { message: "[TMPRL1100] Nondeterminism error: Fail workflow machine does not handle this event: HistoryEvent(id: 7, StartChildWorkflowExecutionInitiated)", source: "", stack_trace: "", encoded_attributes: None, cause: None, failure_info: Some(ApplicationFailureInfo(ApplicationFailureInfo { r#type: "", non_retryable: false, details: None, next_retry_delay: None, category: Unspecified })) }), force_cause: NonDeterministicError }
+
+======================================================================
+ERROR: test_restart_durante_pausa_e_apos_recuperacao (tests.workflows.test_f3_05_recuperacao_runtime.RecuperacaoRuntime.test_restart_durante_pausa_e_apos_recuperacao)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_recuperacao_runtime.py", line 205, in test_restart_durante_pausa_e_apos_recuperacao
+    h, state = await self.preparar_falha()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_recuperacao_runtime.py", line 120, in preparar_falha
+    await self.capture(h)
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_recuperacao_runtime.py", line 139, in capture
+    await Replayer(workflows=[AtorRecuperacao, CorrecaoCandidata],
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_replayer.py", line 147, in replay_workflow
+    raise result.replay_failure
+temporalio.workflow._exceptions.NondeterminismError: Workflow activation completion failed: Failure { failure: Some(Failure { message: "[TMPRL1100] Nondeterminism error: Fail workflow machine does not handle this event: HistoryEvent(id: 7, StartChildWorkflowExecutionInitiated)", source: "", stack_trace: "", encoded_attributes: None, cause: None, failure_info: Some(ApplicationFailureInfo(ApplicationFailureInfo { r#type: "", non_retryable: false, details: None, next_retry_delay: None, category: Unspecified })) }), force_cause: NonDeterministicError }
+
+======================================================================
+ERROR: test_restart_durante_pausa_e_apos_recuperacao (tests.workflows.test_f3_05_recuperacao_runtime.RecuperacaoRuntime.test_restart_durante_pausa_e_apos_recuperacao)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_recuperacao_runtime.py", line 60, in asyncTearDown
+    await self.capture(h)
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_recuperacao_runtime.py", line 139, in capture
+    await Replayer(workflows=[AtorRecuperacao, CorrecaoCandidata],
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_replayer.py", line 147, in replay_workflow
+    raise result.replay_failure
+temporalio.workflow._exceptions.NondeterminismError: Workflow activation completion failed: Failure { failure: Some(Failure { message: "[TMPRL1100] Nondeterminism error: Fail workflow machine does not handle this event: HistoryEvent(id: 7, StartChildWorkflowExecutionInitiated)", source: "", stack_trace: "", encoded_attributes: None, cause: None, failure_info: Some(ApplicationFailureInfo(ApplicationFailureInfo { r#type: "", non_retryable: false, details: None, next_retry_delay: None, category: Unspecified })) }), force_cause: NonDeterministicError }
+
+======================================================================
+ERROR: test_resultado_anterior_preservado_apos_falha (tests.workflows.test_f3_05_recuperacao_runtime.RecuperacaoRuntime.test_resultado_anterior_preservado_apos_falha)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_recuperacao_runtime.py", line 319, in test_resultado_anterior_preservado_apos_falha
+    result = await self.fechar(h)
+             ^^^^^^^^^^^^^^^^^^^^
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_recuperacao_runtime.py", line 126, in fechar
+    await self.capture(h)
+  File "/home/pc/Workspace/PQBR/tests/workflows/test_f3_05_recuperacao_runtime.py", line 139, in capture
+    await Replayer(workflows=[AtorRecuperacao, CorrecaoCandidata],
+  File "/home/pc/Workspace/PQBR/.venv/lib/python3.12/site-packages/temporalio/worker/_replayer.py", line 147, in replay_workflow
+    raise result.replay_failure
+temporalio.workflow._exceptions.NondeterminismError: Workflow activation completion failed: Failure { failure: Some(Failure { message: "[TMPRL1100] Nondeterminism error: Fail workflow machine does not handle this event: HistoryEvent(id: 6, StartChildWorkflowExecutionInitiated)", source: "", stack_trace: "", encoded_attributes: None, cause: None, failure_info: Some(ApplicationFailureInfo(ApplicationFailureInfo { r#type: "", non_retryable: false, details: None, next_retry_delay: None, category: Unspecified })) }), force_cause: NonDeterministicError }
+
+----------------------------------------------------------------------
+Ran 18 tests in 25.895s
+
+FAILED (errors=12)

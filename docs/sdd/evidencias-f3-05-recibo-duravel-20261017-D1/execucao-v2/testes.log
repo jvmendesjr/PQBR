@@ -1,0 +1,43 @@
+test_01_kill_decision_before_commit (test_duravel_d1.DurabilityTests.test_01_kill_decision_before_commit) ... ok
+test_02_kill_decision_after_commit_restart_pending (test_duravel_d1.DurabilityTests.test_02_kill_decision_after_commit_restart_pending) ... ok
+test_03_kill_consume_before_commit (test_duravel_d1.DurabilityTests.test_03_kill_consume_before_commit) ... ok
+test_04_kill_consume_after_commit_before_resume (test_duravel_d1.DurabilityTests.test_04_kill_consume_after_commit_before_resume) ... ok
+test_05_kill_receiver_before_commit (test_duravel_d1.DurabilityTests.test_05_kill_receiver_before_commit) ... ok
+test_06_kill_receiver_after_commit_before_reply (test_duravel_d1.DurabilityTests.test_06_kill_receiver_after_commit_before_reply) ... ok
+test_07_kill_after_accept_before_storing_ack (test_duravel_d1.DurabilityTests.test_07_kill_after_accept_before_storing_ack) ... ok
+test_08_kill_after_ack_restart (test_duravel_d1.DurabilityTests.test_08_kill_after_ack_restart) ... ok
+test_09_sequential_replay_after_full_process_restart (test_duravel_d1.DurabilityTests.test_09_sequential_replay_after_full_process_restart) ... ok
+test_10_concurrent_decision_and_consumption_unique (test_duravel_d1.DurabilityTests.test_10_concurrent_decision_and_consumption_unique) ... ok
+test_11_concurrent_receiver_persistent_dedup (test_duravel_d1.DurabilityTests.test_11_concurrent_receiver_persistent_dedup) ... ok
+test_12_concurrent_dispatch (test_duravel_d1.DurabilityTests.test_12_concurrent_dispatch) ... ok
+test_13_same_decision_key_conflicting_payload (test_duravel_d1.DurabilityTests.test_13_same_decision_key_conflicting_payload) ... ok
+test_14_same_receipt_conflicting_payload_after_accept (test_duravel_d1.DurabilityTests.test_14_same_receipt_conflicting_payload_after_accept) ... ok
+test_15_same_scope_new_receipt_conflict (test_duravel_d1.DurabilityTests.test_15_same_scope_new_receipt_conflict) ... ok
+test_16_stale_unknown_receipt (test_duravel_d1.DurabilityTests.test_16_stale_unknown_receipt) ... ok
+test_17_stale_ticket (test_duravel_d1.DurabilityTests.test_17_stale_ticket) ... ok
+test_18_stale_revision (test_duravel_d1.DurabilityTests.test_18_stale_revision) ... ok
+test_19_stale_pending_extra_missing_reordered_terminal (test_duravel_d1.DurabilityTests.test_19_stale_pending_extra_missing_reordered_terminal) ... ok
+test_20_stale_receiver_after_consumption (test_duravel_d1.DurabilityTests.test_20_stale_receiver_after_consumption) ... ok
+test_21_workflow_agent_token_never_human (test_duravel_d1.DurabilityTests.test_21_workflow_agent_token_never_human) ... ok
+test_22_discord_existing_link_fake (test_duravel_d1.DurabilityTests.test_22_discord_existing_link_fake) ... ok
+test_23_human_only_bound_recipient_and_no_continuation (test_duravel_d1.DurabilityTests.test_23_human_only_bound_recipient_and_no_continuation) ... ok
+test_24_rejection_does_not_resume (test_duravel_d1.DurabilityTests.test_24_rejection_does_not_resume) ... ok
+test_25_expiration_blocks_first_delivery (test_duravel_d1.DurabilityTests.test_25_expiration_blocks_first_delivery) ... ok
+test_26_expired_already_delivered_duplicate_only_ack (test_duravel_d1.DurabilityTests.test_26_expired_already_delivered_duplicate_only_ack) ... ok
+test_27_readonly_decision_storage_failure (test_duravel_d1.DurabilityTests.test_27_readonly_decision_storage_failure) ... ok
+test_28_readonly_consume_storage_failure (test_duravel_d1.DurabilityTests.test_28_readonly_consume_storage_failure) ... ok
+test_29_outbox_failure_rolls_back_cas (test_duravel_d1.DurabilityTests.test_29_outbox_failure_rolls_back_cas) ... ok
+test_30_receiver_readonly_storage_failure (test_duravel_d1.DurabilityTests.test_30_receiver_readonly_storage_failure) ... ok
+test_31_source_busy_real_lock (test_duravel_d1.DurabilityTests.test_31_source_busy_real_lock) ... ok
+test_32_receiver_busy_real_lock (test_duravel_d1.DurabilityTests.test_32_receiver_busy_real_lock) ... ok
+test_33_immutable_manifest_and_monotonic_state (test_duravel_d1.DurabilityTests.test_33_immutable_manifest_and_monotonic_state) ... ok
+test_34_receipt_without_consumption_not_authorization (test_duravel_d1.DurabilityTests.test_34_receipt_without_consumption_not_authorization) ... ok
+test_35_tampered_command_binding (test_duravel_d1.DurabilityTests.test_35_tampered_command_binding) ... ok
+test_36_expected_scope_stale (test_duravel_d1.DurabilityTests.test_36_expected_scope_stale) ... ok
+test_37_unlisted_new_operation_blocks (test_duravel_d1.DurabilityTests.test_37_unlisted_new_operation_blocks) ... ok
+test_38_receiver_constraint_failure_rolls_back_dedup_and_effect (test_duravel_d1.DurabilityTests.test_38_receiver_constraint_failure_rolls_back_dedup_and_effect) ... ok
+
+----------------------------------------------------------------------
+Ran 38 tests in 19.490s
+
+OK

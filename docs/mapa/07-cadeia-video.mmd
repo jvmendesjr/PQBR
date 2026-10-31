@@ -1,0 +1,26 @@
+%% Cadeia de vídeo (t517 + t529; config/motores.json, src/pqbr/motores). Decisões registradas; adaptadores ainda NÃO extraídos (ROADMAP Fase 4V).
+flowchart LR
+  P(["Roteiro aprovado<br/>(RoteiroShort)"]) --> SB["Prompts por cena já na ficha<br/>ManifestoSerie e nomes de arquivo: ainda não ligados<br/>ordem da extensão, sem instalar extensão"]
+  SB --> F["1 · Flow · Camofox<br/>t132u: imagem vista = Nano Banana 2 Lite, 9:16<br/>vídeo não gerado; a tela mostrava Omni 1.1 Flash como padrão<br/>adaptador ainda fora do código"]
+  F --> RV{"imagens revisadas?<br/>(antes do vídeo, t75u)"}
+  RV -- não --> STB
+  RV -- sim --> D1{"falhou ou cota esgotou?"}
+  D1 -- não --> OK(["cenas ordenadas → pós-produção"])
+  D1 -- sim --> V["2 · Google Vids<br/>navegador · cota paga"]
+  V --> D2{"falhou ou cota esgotou?"}
+  D2 -- não --> OK
+  D2 -- sim --> MV["3 · Meta Vibes<br/>navegador · cota paga"]
+  MV --> D3{"falhou?"}
+  D3 -- não --> OK
+  D3 -- sim --> H(["HOLD: publicação suspensa (DECISÃO José t529)"])
+  H --> TG["pedido de decisão ao José (Telegram)"]
+  TG --> SG{{"sinal Temporal decisao_video<br/>tentar de novo · trocar rota · cancelar"}}
+  N>"Lógica copiada das extensões de série (fila, nomes, ordem, ritmo humano) fica para o Camofox, SEM instalar extensões (PESQUISA-extensoes-geracao-em-serie). Sem APIs. t130u: o EpisodioWorkflow para na ficha e não baixa vídeo do NotebookLM. t141u: o material de stickman não troca esta cadeia. Flow, Vids e Vibes ainda não estão no código. A folha do elenco espera a cor da roupa."]
+  MC>"t131u: sem catálogo de cliques. O Camofox lê a tela. config/mapa_cliques.json só anota surpresa, com data. Não inventar seletor."]
+
+    %% t160u processo canônico
+    ProcessoDocs["docs/processos<br/>CRIACAO-README + flow.md"]
+    Conferir["processo_criacao_conferir"]
+    ProcessoDocs --> Conferir
+    Conferir --> P
+

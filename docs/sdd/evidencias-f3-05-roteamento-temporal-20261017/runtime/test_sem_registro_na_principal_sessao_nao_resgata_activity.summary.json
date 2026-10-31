@@ -1,0 +1,25 @@
+{
+  "teste": "test_sem_registro_na_principal_sessao_nao_resgata_activity",
+  "workflow_id": "roteamento-dfd8f600d52d485aacff52818d6502b7",
+  "principal": "teste-pqbr-episodio-f2b79c34232e498f8bc1f1fa13a829c2",
+  "sessao": "teste-camofox-pqbr-f2b79c34232e498f8bc1f1fa13a829c2",
+  "fila_intervencao": [
+    "teste-pqbr-episodio-f2b79c34232e498f8bc1f1fa13a829c2"
+  ],
+  "main_calls": [
+    {
+      "activity": "triagem_jev",
+      "attempt": 1,
+      "n": null,
+      "task_queue": "teste-pqbr-episodio-f2b79c34232e498f8bc1f1fa13a829c2",
+      "workflow_id": "roteamento-dfd8f600d52d485aacff52818d6502b7"
+    }
+  ],
+  "session_calls": [],
+  "main_records": [],
+  "session_records": [],
+  "resultado": null,
+  "falha": "ActivityError",
+  "replay": "ok",
+  "eventos": 17
+}

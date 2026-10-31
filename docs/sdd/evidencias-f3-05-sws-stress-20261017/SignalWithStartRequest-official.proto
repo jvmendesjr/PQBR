@@ -1,0 +1,105 @@
+message SignalWithStartWorkflowExecutionRequest {
+    string namespace = 1;
+    string workflow_id = 2;
+    temporal.api.common.v1.WorkflowType workflow_type = 3;
+    // The task queue to start this workflow on, if it will be started
+    temporal.api.taskqueue.v1.TaskQueue task_queue = 4;
+    // Serialized arguments to the workflow. These are passed as arguments to the workflow function.
+    temporal.api.common.v1.Payloads input = 5;
+    // Total workflow execution timeout including retries and continue as new
+    google.protobuf.Duration workflow_execution_timeout = 6;
+    // Timeout of a single workflow run
+    google.protobuf.Duration workflow_run_timeout = 7;
+    // Timeout of a single workflow task
+    google.protobuf.Duration workflow_task_timeout = 8;
+    // The identity of the worker/client
+    string identity = 9;
+    // Used to de-dupe signal w/ start requests
+    string request_id = 10;
+    // Defines whether to allow re-using the workflow id from a previously *closed* workflow.
+    // The default policy is WORKFLOW_ID_REUSE_POLICY_ALLOW_DUPLICATE.
+    //
+    // See `workflow_id_reuse_policy` for handling a workflow id duplication with a *running* workflow.
+    temporal.api.enums.v1.WorkflowIdReusePolicy workflow_id_reuse_policy = 11;
+    // Defines how to resolve a workflow id conflict with a *running* workflow.
+    // The default policy is WORKFLOW_ID_CONFLICT_POLICY_USE_EXISTING.
+    // Note that WORKFLOW_ID_CONFLICT_POLICY_FAIL is an invalid option.
+    //
+    // See `workflow_id_reuse_policy` for handling a workflow id duplication with a *closed* workflow.
+    temporal.api.enums.v1.WorkflowIdConflictPolicy workflow_id_conflict_policy = 22;
+    // The workflow author-defined name of the signal to send to the workflow
+    string signal_name = 12;
+    // Serialized value(s) to provide with the signal
+    temporal.api.common.v1.Payloads signal_input = 13;
+    // Deprecated.
+    string control = 14 [deprecated = true];
+    // Retry policy for the workflow
+    temporal.api.common.v1.RetryPolicy retry_policy = 15;
+    // See https://docs.temporal.io/docs/content/what-is-a-temporal-cron-job/
+    string cron_schedule = 16;
+    temporal.api.common.v1.Memo memo = 17;
+    temporal.api.common.v1.SearchAttributes search_attributes = 18;
+    temporal.api.common.v1.Header header = 19;
+    // Time to wait before dispatching the first workflow task. Cannot be used with `cron_schedule`.
+    // Note that the signal will be delivered with the first workflow task. If the workflow gets
+    // another SignalWithStartWorkflow before the delay a workflow task will be dispatched immediately
+    // and the rest of the delay period will be ignored, even if that request also had a delay.
+    // Signal via SignalWorkflowExecution will not unblock the workflow.
+    google.protobuf.Duration workflow_start_delay = 20;
+    reserved 21;
+    // Metadata on the workflow if it is started. This is carried over to the WorkflowExecutionInfo
+    // for use by user interfaces to display the fixed as-of-start summary and details of the
+    // workflow.
+    temporal.api.sdk.v1.UserMetadata user_metadata = 23;
+
+    // Links to be associated with the WorkflowExecutionStarted and WorkflowExecutionSignaled events.
+    repeated temporal.api.common.v1.Link links = 24;
+    // If set, takes precedence over the Versioning Behavior sent by the SDK on Workflow Task completion.
+    // To unset the override after the workflow is running, use UpdateWorkflowExecutionOptions.
+    temporal.api.workflow.v1.VersioningOverride versioning_override = 25;
+    // Priority metadata
+    temporal.api.common.v1.Priority priority = 26;
+    // Time-skipping configuration. If not set, time skipping is disabled.
+    temporal.api.workflow.v1.TimeSkippingConfig time_skipping_config = 27;
+}
+
+message SignalWithStartWorkflowExecutionResponse {
+    // The run id of the workflow that was started - or just signaled, if it was already running.
+    string run_id = 1;
+    // If true, a new workflow was started.
+    bool started = 2;
+    // Link to be associated with the WorkflowExecutionSignaled event.
+    // Added on the response to propagate the backlink.
+    // Available from Temporal server 1.31 and up.
+    temporal.api.common.v1.Link signal_link = 3;
+}
+
+message ResetWorkflowExecutionRequest {
+    string namespace = 1;
+    // The workflow to reset. If this contains a run ID then the workflow will be reset back to the
+    // provided event ID in that run. Otherwise it will be reset to the provided event ID in the
+    // current run. In all cases the current run will be terminated and a new run started.
+    temporal.api.common.v1.WorkflowExecution workflow_execution = 2;
+    string reason = 3;
+    // The id of a `WORKFLOW_TASK_COMPLETED`,`WORKFLOW_TASK_TIMED_OUT`, `WORKFLOW_TASK_FAILED`, or
+    // `WORKFLOW_TASK_STARTED` event to reset to.
+    int64 workflow_task_finish_event_id = 4;
+    // Used to de-dupe reset requests
+    string request_id = 5;
+    // Deprecated. Use `options`.
+    // Default: RESET_REAPPLY_TYPE_SIGNAL
+    temporal.api.enums.v1.ResetReapplyType reset_reapply_type = 6 [deprecated = true];
+    // Event types not to be reapplied
+    repeated temporal.api.enums.v1.ResetReapplyExcludeType reset_reapply_exclude_types = 7;
+    // Operations to perform after the workflow has been reset. These operations will be applied
+    // to the *new* run of the workflow execution in the order they are provided.
+    // All operations are applied to the workflow before the first new workflow task is generated
+    repeated temporal.api.workflow.v1.PostResetOperation post_reset_operations = 8;
+    // The identity of the worker/client
+    string identity = 9;
+}
+
+message ResetWorkflowExecutionResponse {
+    string run_id = 1;
+}
+

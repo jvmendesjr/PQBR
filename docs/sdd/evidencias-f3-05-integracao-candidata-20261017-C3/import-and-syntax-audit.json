@@ -1,0 +1,12 @@
+{
+  "worker_modules_imported": false,
+  "syntax_ok": [
+    "src/pqbr/workflows/candidato_sessao.py",
+    "tests/workflows/composicao_candidata.py",
+    "tests/workflows/test_f3_05_candidate_runtime.py",
+    "tests/workflows/f3_05_candidate_bootstrap.py",
+    "tests/workflows/run_f3_05_candidate_container.py",
+    "tests/unit/test_f3_05_candidate_unit.py"
+  ],
+  "no_worker_started_on_import": true
+}
