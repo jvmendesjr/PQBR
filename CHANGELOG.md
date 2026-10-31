@@ -1,3 +1,13 @@
+## Não lançado — 2026-10-31 — Aba Portões no painel :8088 (proposta em branch, só leitura)
+
+### Adicionado
+- Aba do painel **Portões — decisões do José** (`#portoes`), só leitura, gerada de `config/flow_projetos.json`, `banco-fichas/indice.json`, `banco-fichas/referencias-motion/indice.json` e `docs/ESTADO-ATUAL.md` via `scripts/mapa/portoes.py` (`secao()`, mesmo padrão de `producao.py` / `roadmap.py`), com navegação em `scripts/mapa/gerar_index.py` e `docs/mapa/index.html` regenerado. Cada card traz contexto, status/veredito, recomendação técnica e a ordem exata em texto (chat/Telegram); a aba não executa nada.
+- Leitura atual consolidada: piloto EP1003 com `imagens_revisadas: true` e próximo gate clipes (MG-05 segurado); 0 fichas `aguardando_ok_jose`, 11 `SIT-*` em `sugestao`; referências de motion 8/8 aprovadas; portões abertos do José P1, P11, P13, P14, P16, P17, P18/MG-12.
+- Testes `tests/unit/test_portoes_painel.py` (5 testes: classificação de pendências, portões abertos do José em ordem, fichas/referências, saída sem formulário/botão/rede, escape de HTML).
+
+### Sem
+- Bump de versão, contrato Pydantic novo, rename de "José", POST, troca da unit `pqbr-mapa.service`, escrita em banco, uso da tabela de revisão humana, sinal do Temporal, aprovação de ficha, troca de modelo, merge em main, push, reinício de worker, geração de mídia e alteração em `docs/REGRAS.md`.
+
 ## Não lançado — 2026-10-31 — Visualização Archify (mergeada na main em 31/10/2026, com OK do José via Junior)
 ### Adicionado
 - Painel interativo de arquitetura com Archify 3.2.0 em `docs/visualizacao/archify/` (`candidate.json` + processo em `README.md`; HTML gerado a partir do commit `82a5529` (v0.31.1) com fontes pinadas: fluxo canônico, contratos Pydantic v2, infra, EP1003 v3 e pendências — HTML não commitado (ver README): a barreira de segredos sinaliza o JavaScript do visualizador do Archify e uma exceção exige OK do José).
