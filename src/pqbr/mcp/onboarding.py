@@ -6,7 +6,7 @@ from pathlib import Path
 
 RAIZ = Path(__file__).resolve().parents[3]
 LIMITE = 6000
-LIMITE_ESTADO = 28000  # t169u: ESTADO ~21k+ após mestre; 20000 cortava P18
+LIMITE_ESTADO = 32000  # t169u: ESTADO ~21k+ após mestre; 20000 cortava P18. 31/10: ESTADO ~29k após Portões/decisões/funcional; 28000 cortava a última linha da tabela
 PROTOCOLO = """1. `onboarding` (este pacote).
 2. `buscar_memoria` sobre o assunto antes de agir; em conflito, vale o doc canônico.
 3. Implementar no checkout com commit local (sem push) e registrar a decisão em docs/DECISOES-LOG.md e a versão em CHANGELOG.md (SemVer).
