@@ -141,7 +141,9 @@ def _mapa_mmd() -> str:
 @activity.defn
 async def acompanhamento_executar(metas: list[dict]) -> dict:
     """Activity do workflow: roda acompanhar() com snapshot, canário Camofox e mapa. Só leitura."""
-    return acompanhar(metas or [], _carregar_snapshot(), _verificador_camofox, _mapa_mmd())
+    r = acompanhar(metas or [], _carregar_snapshot(), _verificador_camofox, _mapa_mmd())
+    r["registrado_no_worker"] = True  # esta activity só existe porque o workflow está registrado
+    return r
 
 
 @workflow.defn

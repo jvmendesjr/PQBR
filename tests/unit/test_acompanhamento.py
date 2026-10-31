@@ -58,3 +58,11 @@ def test_workflow_registrado_no_worker():
     assert "AcompanhamentoMudancasWorkflow" in src and "ATIVIDADES_ACOMPANHAMENTO" in src
     from pqbr.workflows.acompanhamento import AcompanhamentoMudancasWorkflow, ATIVIDADES_ACOMPANHAMENTO
     assert AcompanhamentoMudancasWorkflow is not None and len(ATIVIDADES_ACOMPANHAMENTO) == 1
+
+
+def test_activity_marca_registrado_no_worker():
+    import asyncio
+    from pqbr.workflows.acompanhamento import acompanhamento_executar
+    r = asyncio.run(acompanhamento_executar([]))
+    assert r["registrado_no_worker"] is True
+    assert r["ordem"] == ["fallbacks", "deriva", "canario", "dev_diagnosticar"]
