@@ -1,0 +1,337 @@
+{
+  "schemaVersion": 1,
+  "ok": true,
+  "command": "finalize",
+  "status": "pass",
+  "type": "architecture",
+  "quality": "showcase",
+  "specification": {
+    "path": "/home/pc/pqbr-archify-panel/.archify/architecture-pqbr-20261031-1600/candidate.json",
+    "sha256": "470e4f7eb4e899371ebb4743490feb791006de39e9b1587ae86ffb6796c64b81",
+    "bytes": 14747
+  },
+  "artifact": {
+    "path": "/home/pc/pqbr-archify-panel/pqbr-arquitetura.html",
+    "sha256": "3e4b45e8cedc6ec63e51c5d54819f01fe89e9b5f3b9785296bdba5f2ce22f95b",
+    "bytes": 881520
+  },
+  "gates": {
+    "validate": "pass",
+    "deliver": "pass",
+    "check": "pass",
+    "browser-check": "pass"
+  },
+  "diagnostics": [],
+  "diagnosticSummary": {
+    "total": 0,
+    "shown": 0,
+    "truncated": false
+  },
+  "evidence": {
+    "receipt": "/home/pc/pqbr-archify-panel/pqbr-arquitetura.finalize.json",
+    "summaryReceipt": "/home/pc/pqbr-archify-panel/pqbr-arquitetura.finalize-summary.json",
+    "browserCheckReceipt": "/home/pc/pqbr-archify-panel/pqbr-arquitetura.browser-check.json"
+  },
+  "update": {
+    "status": "current",
+    "installedVersion": "3.2.0",
+    "availableVersion": "3.2.0",
+    "releaseNotes": null,
+    "checkedAt": "2026-10-31T18:52:54.552Z",
+    "source": "cache",
+    "noticeRequired": false,
+    "noticeText": null
+  },
+  "visualReview": "not-requested",
+  "durationMs": 6634,
+  "browserCheck": {
+    "requested": true,
+    "ran": true
+  },
+  "visualReviewRecommendation": {
+    "action": "inspect-route-readability",
+    "signals": {
+      "resolvedCrossovers": 16,
+      "routesOverSuggestedBends": 7
+    },
+    "reason": "Automated gates passed, but crossings or detours still need perceptual review before claiming visual quality.",
+    "affectedRoutes": {
+      "crossings": [
+        {
+          "left": {
+            "id": "efemero-camofox",
+            "from": "nlm-efemero",
+            "to": "camofox",
+            "label": "DirecaoCenas",
+            "collectionIndex": 5,
+            "artifactIndex": 6
+          },
+          "right": {
+            "id": "flow-fichas",
+            "from": "flow",
+            "to": "fichas",
+            "label": "fichas",
+            "collectionIndex": 11,
+            "artifactIndex": 12
+          },
+          "point": [
+            375,
+            264
+          ]
+        },
+        {
+          "left": {
+            "id": "efemero-camofox",
+            "from": "nlm-efemero",
+            "to": "camofox",
+            "label": "DirecaoCenas",
+            "collectionIndex": 5,
+            "artifactIndex": 6
+          },
+          "right": {
+            "id": "juiz-motion",
+            "from": "juiz",
+            "to": "motion",
+            "label": "MG-05",
+            "collectionIndex": 12,
+            "artifactIndex": 13
+          },
+          "point": [
+            635,
+            264
+          ]
+        },
+        {
+          "left": {
+            "id": "efemero-camofox",
+            "from": "nlm-efemero",
+            "to": "camofox",
+            "label": "DirecaoCenas",
+            "collectionIndex": 5,
+            "artifactIndex": 6
+          },
+          "right": {
+            "id": "temporal-tdb",
+            "from": "temporal",
+            "to": "temporal-db",
+            "label": "estado",
+            "collectionIndex": 13,
+            "artifactIndex": 14
+          },
+          "point": [
+            817,
+            264
+          ]
+        },
+        {
+          "left": {
+            "id": "efemero-camofox",
+            "from": "nlm-efemero",
+            "to": "camofox",
+            "label": "DirecaoCenas",
+            "collectionIndex": 5,
+            "artifactIndex": 6
+          },
+          "right": {
+            "id": "workers-appdb",
+            "from": "workers",
+            "to": "app-db",
+            "label": "negócio",
+            "collectionIndex": 14,
+            "artifactIndex": 15
+          },
+          "point": [
+            1274,
+            264
+          ]
+        },
+        {
+          "left": {
+            "id": "efemero-camofox",
+            "from": "nlm-efemero",
+            "to": "camofox",
+            "label": "DirecaoCenas",
+            "collectionIndex": 5,
+            "artifactIndex": 6
+          },
+          "right": {
+            "id": "workers-router",
+            "from": "workers",
+            "to": "router9",
+            "label": "modelos",
+            "collectionIndex": 17,
+            "artifactIndex": 18
+          },
+          "point": [
+            1014,
+            264
+          ]
+        },
+        {
+          "left": {
+            "id": "efemero-camofox",
+            "from": "nlm-efemero",
+            "to": "camofox",
+            "label": "DirecaoCenas",
+            "collectionIndex": 5,
+            "artifactIndex": 6
+          },
+          "right": {
+            "id": "temporal-painel",
+            "from": "temporal",
+            "to": "painel",
+            "label": "UI / mapa",
+            "collectionIndex": 18,
+            "artifactIndex": 19
+          },
+          "point": [
+            557,
+            264
+          ]
+        },
+        {
+          "left": {
+            "id": "flow-juiz",
+            "from": "flow",
+            "to": "juiz",
+            "label": "auditar",
+            "collectionIndex": 7,
+            "artifactIndex": 8
+          },
+          "right": {
+            "id": "temporal-painel",
+            "from": "temporal",
+            "to": "painel",
+            "label": "UI / mapa",
+            "collectionIndex": 18,
+            "artifactIndex": 19
+          },
+          "point": [
+            557,
+            210
+          ]
+        },
+        {
+          "left": {
+            "id": "juiz-publicacao",
+            "from": "juiz",
+            "to": "publicacao",
+            "label": "veredito",
+            "collectionIndex": 8,
+            "artifactIndex": 9
+          },
+          "right": {
+            "id": "temporal-tdb",
+            "from": "temporal",
+            "to": "temporal-db",
+            "label": "estado",
+            "collectionIndex": 13,
+            "artifactIndex": 14
+          },
+          "point": [
+            817,
+            210
+          ]
+        }
+      ],
+      "detours": [
+        {
+          "relationship": {
+            "id": "efemero-camofox",
+            "from": "nlm-efemero",
+            "to": "camofox",
+            "label": "DirecaoCenas",
+            "collectionIndex": 5,
+            "artifactIndex": 6
+          },
+          "bends": 3,
+          "stretch": 1.034
+        },
+        {
+          "relationship": {
+            "id": "camofox-mestre",
+            "from": "camofox",
+            "to": "nlm-mestre",
+            "label": "sessão",
+            "collectionIndex": 10,
+            "artifactIndex": 11
+          },
+          "bends": 4,
+          "stretch": 1
+        },
+        {
+          "relationship": {
+            "id": "temporal-tdb",
+            "from": "temporal",
+            "to": "temporal-db",
+            "label": "estado",
+            "collectionIndex": 13,
+            "artifactIndex": 14
+          },
+          "bends": 4,
+          "stretch": 1
+        },
+        {
+          "relationship": {
+            "id": "workers-appdb",
+            "from": "workers",
+            "to": "app-db",
+            "label": "negócio",
+            "collectionIndex": 14,
+            "artifactIndex": 15
+          },
+          "bends": 3,
+          "stretch": 1.082
+        },
+        {
+          "relationship": {
+            "id": "mcp-hindsight",
+            "from": "mcp",
+            "to": "hindsight",
+            "label": "memória",
+            "collectionIndex": 16,
+            "artifactIndex": 17
+          },
+          "bends": 4,
+          "stretch": 1
+        },
+        {
+          "relationship": {
+            "id": "workers-router",
+            "from": "workers",
+            "to": "router9",
+            "label": "modelos",
+            "collectionIndex": 17,
+            "artifactIndex": 18
+          },
+          "bends": 3,
+          "stretch": 1.12
+        },
+        {
+          "relationship": {
+            "id": "temporal-painel",
+            "from": "temporal",
+            "to": "painel",
+            "label": "UI / mapa",
+            "collectionIndex": 18,
+            "artifactIndex": 19
+          },
+          "bends": 4,
+          "stretch": 1.226
+        }
+      ],
+      "truncated": true
+    },
+    "hints": [
+      "nlm-efemero → camofox crosses flow → fichas: move the node of whichever is a branch, return, or second entrance to the other side of the main path, so that relationship runs through an empty corridor.",
+      "nlm-efemero → camofox crosses juiz → motion: move the node of whichever is a branch, return, or second entrance to the other side of the main path, so that relationship runs through an empty corridor.",
+      "nlm-efemero → camofox crosses temporal → temporal-db: move the node of whichever is a branch, return, or second entrance to the other side of the main path, so that relationship runs through an empty corridor.",
+      "nlm-efemero → camofox crosses workers → app-db: move the node of whichever is a branch, return, or second entrance to the other side of the main path, so that relationship runs through an empty corridor.",
+      "nlm-efemero → camofox crosses workers → router9: move the node of whichever is a branch, return, or second entrance to the other side of the main path, so that relationship runs through an empty corridor.",
+      "nlm-efemero → camofox crosses temporal → painel: move the node of whichever is a branch, return, or second entrance to the other side of the main path, so that relationship runs through an empty corridor.",
+      "flow → juiz crosses temporal → painel: move the node of whichever is a branch, return, or second entrance to the other side of the main path, so that relationship runs through an empty corridor.",
+      "juiz → publicacao crosses temporal → temporal-db: move the node of whichever is a branch, return, or second entrance to the other side of the main path, so that relationship runs through an empty corridor."
+    ],
+    "repair": "Trace these relationships at the desktop viewport. For Architecture, use references/architecture-layout-repair.md: reflow a blocked main path or tangled connected scene, and repair an isolated defect locally only when the surrounding composition is accepted. Preserve all semantic content and user-fixed geometry. Rerun finalize once after the edit."
+  }
+}

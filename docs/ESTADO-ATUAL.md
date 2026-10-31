@@ -4,6 +4,10 @@ Fonte única de "onde estamos". Não repete o ROADMAP: aponta os itens por id. *
 
 Atualizado: 31/10/2026 (t170u: mapa prioriza etapa dos CADERNOS NLM; publicação só rótulo; próximos: auditoria dos cadernos + José refs VISUAIS) · versão 0.31.1
 
+## Visualização Archify — mergeada na main (31/10/2026, com OK do José via Junior)
+- Branch `feat/archify-visualizacao` (commit `6d6e32c`, base `82a5529`, v0.31.1) mergeada na main em 31/10/2026. Painel em `docs/visualizacao/archify/` (`candidate.json` + processo em `README.md`; HTML gerado, não commitado — barreira de segredos sinaliza o JS do visualizador do Archify, exceção exige OK do José); ao vivo só na tailnet, porta 8899, serviço `pqbr-archify-panel.service` no `pc`.
+- **Regra para os agentes:** ao mudar arquitetura, fluxos, contratos ou infra, regenerar o painel, atualizar o processo e este estado e registrar no MCP (`registrar_alteracao`, tipo `alteracao`). Divergência painel × código deve ser sinalizada, não corrigida por palpite.
+- **Não feito / não decidido:** HTML commitado (exceção em `.segredos-permitidos` ainda exige OK do José), entrada em `REGRAS.md` / `DECISOES-LOG.md`, alteração em `docs/mapa/` por decisão própria (mapa só muda por proposta aprovada pelo José, t517).
 
 ## Mestre de Auditoria + Efêmero de Auditoria (31/10/2026, t170u, versão 0.32.0 — piloto, sem reinício de worker)
 

@@ -1,4 +1,10 @@
-# CHANGELOG — PQBR
+## Não lançado — 2026-10-31 — Visualização Archify (mergeada na main em 31/10/2026, com OK do José via Junior)
+### Adicionado
+- Painel interativo de arquitetura com Archify 3.2.0 em `docs/visualizacao/archify/` (`candidate.json` + processo em `README.md`; HTML gerado a partir do commit `82a5529` (v0.31.1) com fontes pinadas: fluxo canônico, contratos Pydantic v2, infra, EP1003 v3 e pendências — HTML não commitado (ver README): a barreira de segredos sinaliza o JavaScript do visualizador do Archify e uma exceção exige OK do José).
+- Regra de atualização para agentes em `docs/visualizacao/archify/README.md`: ao mudar arquitetura, fluxos, contratos ou infra, regenerar o painel, atualizar o processo e o `ESTADO-ATUAL` e registrar no MCP.
+- Nota no `docs/ESTADO-ATUAL.md` sobre o painel servido só na tailnet (:8899).
+### Sem
+- Decisão sobre o HTML commitado (ainda exige exceção em `.segredos-permitidos` com OK do José), alteração em `docs/REGRAS.md` / `docs/DECISOES-LOG.md`, alteração em `docs/mapa/` por decisão própria, reinício de worker, publicação ou geração de mídia.
 
 ## [0.32.0] — 2026-10-31 (Mestre de Auditoria + Efêmero de Auditoria; híbrido aprovado, t170u)
 ### Adicionado
