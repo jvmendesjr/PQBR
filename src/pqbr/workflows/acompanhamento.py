@@ -15,7 +15,7 @@ falso nos testes). O workflow está registrado no worker principal
 não existe — a execução é manual até o José escolher a frequência.
 """
 from __future__ import annotations
-import json, os, urllib.request
+import json, os
 from collections.abc import Callable
 from datetime import timedelta
 from pathlib import Path
@@ -24,9 +24,12 @@ from temporalio import activity, workflow
 with workflow.unsafe.imports_passed_through():
     from ..contratos import VERSOES
 
-RAIZ = Path(__file__).resolve().parents[3]
+# Nível de módulo, sem Path.resolve e sem leitura de env: o sandbox do Temporal
+# bloqueia resolve() na importação do workflow (foi o que derrubou o worker em 31/10).
+# Leitura de arquivo/env só dentro das activities, que rodam fora do sandbox.
+RAIZ = Path(__file__).parents[3]
 SNAPSHOT = RAIZ / "config" / "contratos_versoes_snapshot.json"
-CAMOFOX_HEALTH = os.environ.get("PQBR_CAMOFOX_URL", "http://127.0.0.1:9387") + "/health"
+CAMOFOX_BASE_PADRAO = "http://127.0.0.1:9387"
 
 SINAL_APROVACAO = "aprovacao_jose"
 
@@ -115,8 +118,10 @@ def _verificador_camofox() -> dict:
     exigem sessão interativa e ficam como próximo passo; aqui o sinal é só se o
     navegador do Camofox está conectado. Se não estiver, o canário falha com motivo claro.
     """
+    import urllib.request
+    url = os.environ.get("PQBR_CAMOFOX_URL", CAMOFOX_BASE_PADRAO) + "/health"
     try:
-        with urllib.request.urlopen(urllib.request.Request(CAMOFOX_HEALTH), timeout=15) as r:
+        with urllib.request.urlopen(urllib.request.Request(url), timeout=15) as r:
             h = json.load(r)
         ok = bool(h.get("ok"))
         conectado = bool(h.get("browserConnected"))
