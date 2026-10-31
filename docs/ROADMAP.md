@@ -51,7 +51,7 @@ Decisões da conversa paralela, juntadas em cima do stickman (t133u). Nenhuma es
 
 ## Próximos tópicos (José 31/10/2026, t169u — só registro)
 
-1. Papel dos cadernos (mestre + efêmero) na validação e auditoria.
+1. Papel dos cadernos (mestre + efêmero) na validação e auditoria — PILOTO t170u: Mestre de Auditoria ce015620 + Efêmero EP1003 e82fc55e, teste S05 reprova / S04 ressalva. Falta activity Temporal e registro em banco.
 2. José ajusta referências VISUAIS (fichas de personagens, objetos, estilo).
 Nota mapa: página :8088 prioriza a etapa dos **cadernos** NLM; publicação só rótulo/rastreabilidade.
 
@@ -420,7 +420,7 @@ Ref.: REGRAS §26, `docs/fases/motion-graphics.md`, `banco-fichas/referencias-mo
 - [x] Activities `nlm_mestre_*` + abrir efêmero com briefing (código; **falta reinício** do worker)
 - [ ] Runtime: reinício `pqbr-notebooklm-worker` / `pqbr-episodio-worker` (OK José)
 - [ ] Passo 2: adaptador Temporal → Flow (agente só UI)
-- [ ] **Próximo tópico (José 31/10):** papel do mestre e do efêmero no processo de **validação e auditoria** (definir; sem implementar nesta rodada)
+- [x] **Próximo tópico (José 31/10, piloto t170u):** papel do mestre e do efêmero no processo de **validação e auditoria** — mestre + efêmero de auditoria criados e testados no EP1003; activity Temporal e registro em banco pendentes
 - [ ] **Próximo tópico (José 31/10):** José ajusta as **referências VISUAIS** das imagens (fichas de personagens, objetos, estilo/`banco-fichas`) — fora do código até ele entregar
 
 

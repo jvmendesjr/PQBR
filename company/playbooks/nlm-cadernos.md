@@ -29,5 +29,9 @@ Regra (t168u): **Caderno Mestre** `00ce61ae…` (`config/caderno_mestre.json`) =
 4. **Sem vídeo NLM.** Cenas no Flow = passo 2 (agente/UI; adaptador pendente).
 5. Papéis: Temporal orquestra; NLM mestre/efêmero geram texto; agente só Flow.
 
-**Próximos (José 31/10, só registro):** papel dos cadernos na validação/auditoria; José ajusta refs VISUAIS (fichas/objetos/estilo).
+## Auditoria (t170u, implementado como piloto, sem reinício de worker)
+**Mestre de Auditoria** `PQBR - Mestre de Auditoria` (ID em `config/caderno_mestre_auditoria.json`, criado 31/10/2026) = regra permanente, só audita, nunca mídia, nunca episódio, nunca veredito de episódio específico. **Efêmero de Auditoria** por episódio, título `Auditoria - PQBR-EP#### - <slug>`, recebe cópia versionada das regras (`AUD-SNAP 1.0.0`, em `src/pqbr/auditoria_cadernos.py`), não link — um caderno não pode usar outro como fonte. Na auditoria que vale, a referência é UMA só: o efêmero. Mestre + efêmero juntos só em teste comparativo.
+Vídeo bruto não entra como vídeo assistido: entram stills/pranchas rotuladas, quadros-chave, descrição de movimento, roteiro, fichas e laudo textual. Transcrição sozinha não audita movimento, tempo nem mão segurando objeto. O veredito final continua fora do caderno, validado por contrato (auditor Gemini Web + `gemini_juiz`); o caderno fundamenta, não decide sozinho.
+**Correção de bug encontrada no teste t170u (não tocar no mestre criativo sem OK):** `--type text` com caminho ingere só o caminho como texto (fulltext = caminho, 50-70 chars), não o conteúdo. O script do mestre criativo (t168u) tem o mesmo padrão nas fontes texto dele. Neste caderno o script corrigido usa `--type file` + rename para o título canônico, e a verificação é por `source fulltext`, não só por `source list`.
+**Próximos (José 31/10, só registro):** José ajusta refs VISUAIS (fichas/objetos/estilo).
 

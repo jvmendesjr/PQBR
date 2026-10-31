@@ -1068,3 +1068,11 @@ NÃO CABE:
 - **José:** atualizar documentos, ROADMAP, memórias e página :8088 ao fluxo novo; registrar próximos sem implementar: (1) papel dos cadernos mestre/efêmero na **validação e auditoria**; (2) José ajusta as **referências VISUAIS** (fichas de personagens, objetos, estilo) — não fontes textuais do mestre nesta tarefa.
 - **Aplicado:** docs vivos + mapa 1.2.0; sem reinício; sem push.
 
+
+## 31/10/2026 — Mestre de Auditoria + Efêmero de Auditoria (t170u, híbrido aprovado)
+
+- **Aprovação:** híbrido mestre permanente + efêmero por episódio, espelhando mestre+efêmero criativo. Mestre de Auditoria `PQBR - Mestre de Auditoria` ID `ce015620-7ce7-442c-aece-d9bece306ed1`; efêmero piloto EP1003 `Auditoria - PQBR-EP1003 - cafe-fraco` ID `e82fc55e-9725-4bc8-bc44-60a4a4082b6d`.
+- **Aplicado (branch atual, sem push/merge, sem reinício de worker):** `config/caderno_mestre_auditoria.json`, `templates/notebooklm/persona-auditoria-mestre.txt`, `scripts/notebooklm/criar_mestre_auditoria.py`, `src/pqbr/config_caderno_mestre_auditoria.py`, `src/pqbr/auditoria_cadernos.py` (snapshot AUD-SNAP 1.0.0, checklist, erros recorrentes, título efêmero), testes 4/4, playbook `nlm-cadernos.md`, ESTADO/ROADMAP/mapa atualizados, CHANGELOG 0.32.0.
+- **Teste:** mestre responde reprova-sozinho e banquinho proibido com citação; efêmero EP1003 reprova S05 original (4 motivos) e aprova S04 com ressalva (faltam stills). Flow v3 não tocado.
+- **Bug (achado, corrigido só no caderno de auditoria):** `--type text` com caminho ingere só o caminho. Script corrigido para `--type file` + rename, verificação por fulltext. Mestre criativo tem o mesmo padrão nas fontes texto — não corrigido aqui, sem tocar no mestre criativo.
+- **Sem:** reinício de worker, push/merge, activity Temporal de auditoria, mudança no auditor Gemini Web, delete de caderno.

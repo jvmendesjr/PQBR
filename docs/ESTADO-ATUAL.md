@@ -2,8 +2,16 @@
 
 Fonte única de "onde estamos". Não repete o ROADMAP: aponta os itens por id. **Atualize este arquivo a cada correção ou pendência resolvida.** O hook pre-commit exige isso quando o commit toca ROADMAP, LACUNAS, DECISOES-LOG ou CHANGELOG, e o `registrar_alteracao` exige isso para `tipo` correcao ou pendencia_resolvida.
 
-Atualizado: 31/10/2026 (t169u: mapa prioriza etapa dos CADERNOS NLM; publicação só rótulo; próximos: auditoria dos cadernos + José refs VISUAIS) · versão 0.31.1
+Atualizado: 31/10/2026 (t170u: mapa prioriza etapa dos CADERNOS NLM; publicação só rótulo; próximos: auditoria dos cadernos + José refs VISUAIS) · versão 0.31.1
 
+
+## Mestre de Auditoria + Efêmero de Auditoria (31/10/2026, t170u, versão 0.32.0 — piloto, sem reinício de worker)
+
+- Híbrido aprovado: **Mestre de Auditoria permanente** `PQBR - Mestre de Auditoria`, ID `ce015620-7ce7-442c-aece-d9bece306ed1` em `config/caderno_mestre_auditoria.json`, nunca mídia, nunca episódio. Fontes: índice, persona auditoria, snapshot regras 1.0.0, contrato editorial, regras editoriais, estilo stickman, processo de criação. Script: `scripts/notebooklm/criar_mestre_auditoria.py` (espelha o do mestre criativo, idempotente por título/fonte).
+- **Efêmero de Auditoria por episódio**, título `Auditoria - PQBR-EP#### - <slug>` (`src/pqbr/auditoria_cadernos.py`, testes `tests/unit/test_auditoria_cadernos.py` 4/4). Piloto EP1003 criado: `Auditoria - PQBR-EP1003 - cafe-fraco`, ID `e82fc55e-9725-4bc8-bc44-60a4a4082b6d`, com AUD-SNAP 1.0.0 + evidência S04/S05. Projeto Flow v3 NÃO tocado.
+- **Teste t170u:** pergunta ao mestre responde corretamente o que reprova sozinho e que banquinho é proibido, com citação. Pergunta ao efêmero EP1003: S05 original (banquinho + braços realistas + chaleira sem mão) = **reprova** com 4 motivos; S04 nova (adulta em pé, balcão na cintura, stickman) = **aprova_com_ressalva**, faltando stills/quadros-chave — comportamento fail-closed esperado.
+- **Bug encontrado e corrigido só neste caderno:** `--type text` com caminho só ingere o caminho. Fontes texto do mestre de auditoria foram apagadas e repostas como arquivo + rename, verificadas por fulltext. O mestre criativo tem o mesmo padrão nas fontes texto (fulltext = caminho) — registrado como achado, NÃO corrigido nesta entrega, sem tocar no mestre criativo.
+- **Sem nesta entrega:** reinício de worker, push/merge em main, activity Temporal de auditoria, alteração do auditor Gemini Web, alteração do Flow v3, delete de qualquer caderno.
 
 ## Caderno Mestre canônico (31/10/2026, t168u, versão 0.31.0)
 
@@ -59,7 +67,7 @@ Atualizado: 31/10/2026 (t169u: mapa prioriza etapa dos CADERNOS NLM; publicaçã
 **Fluxo vigente (código 0.31.x; runtime após reinício OK José):** NLM Mestre `00ce61ae` (norteador, nunca mídia) → `BriefingEfemerico` + nota + limpeza de chat → NLM efêmero (persona + `prompt_pesquisa` do mestre) → roteiro/SEO/compliance → `DirecaoCenas` 2.0.0 rótulo `PQBR-EP####-S##` → Flow adapter (**pendente**). Temporal orquestra; agente só opera UI Flow.
 
 **Próximos tópicos (José 31/10, só registro — sem implementar agora):**
-1. **Papel dos cadernos na validação e auditoria** — como o mestre e o efêmero entram no processo de validação/auditoria (além do briefing e da produção intelectual).
+1. **Papel dos cadernos na validação e auditoria** — IMPLEMENTADO COMO PILOTO em t170u (mestre + efêmero de auditoria, EP1003). Falta: activity Temporal, registro em banco e decisão de corrigir as fontes texto do mestre criativo.
 2. **José ajusta as referências VISUAIS** — fichas de personagens, objetos e estilo (imagens do catálogo/`banco-fichas`); não é tarefa de código nesta rodada.
 
 **Handoff EP1003:** projeto v3 `9c4ad934-…`; revisão de stills / clipes / MG-05 seguem; MG-12 / reinício worker / merge main **só com OK José**. Sem apagar nada.

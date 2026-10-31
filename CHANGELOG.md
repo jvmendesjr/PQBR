@@ -1,5 +1,16 @@
 # CHANGELOG — PQBR
 
+## [0.32.0] — 2026-10-31 (Mestre de Auditoria + Efêmero de Auditoria; híbrido aprovado, t170u)
+### Adicionado
+- Mestre de Auditoria permanente `PQBR - Mestre de Auditoria`, ID `ce015620-7ce7-442c-aece-d9bece306ed1` (`config/caderno_mestre_auditoria.json`, persona `templates/notebooklm/persona-auditoria-mestre.txt`, script `scripts/notebooklm/criar_mestre_auditoria.py`, módulo `src/pqbr/config_caderno_mestre_auditoria.py`). Nunca mídia, nunca episódio.
+- Efêmero de Auditoria por episódio, título `Auditoria - PQBR-EP#### - <slug>` (`src/pqbr/auditoria_cadernos.py`: snapshot AUD-SNAP 1.0.0, checklist CenaAuditada, erros recorrentes EP1003, veredito estruturado), testes `tests/unit/test_auditoria_cadernos.py` 4/4.
+- Piloto EP1003: efêmero `Auditoria - PQBR-EP1003 - cafe-fraco`, ID `e82fc55e-9725-4bc8-bc44-60a4a4082b6d`. Teste: S05 original = reprova (banquinho, braços realistas, chaleira sem mão, reuso de rejeitado); S04 nova = aprova_com_ressalva (faltam stills/quadros-chave).
+- Playbook `nlm-cadernos.md` (seção Auditoria), ESTADO/ROADMAP/DECISOES-LOG e mapa `producao-episodios.json` 1.3.0 + `01-episodio.mmd` atualizados.
+### Corrigido
+- Bug do `--type text` com caminho (só ingere o caminho, fulltext 50-70 chars): script de auditoria corrigido para `--type file` + rename, verificação por fulltext. Achado registrado: mestre criativo (t168u) tem o mesmo padrão nas fontes texto — NÃO corrigido nesta entrega, sem tocar no mestre criativo.
+### Sem
+- Reinício de worker, push/merge em main, activity Temporal de auditoria, registro em banco do efêmero de auditoria, mudança no auditor Gemini Web, mudança no Flow v3, delete de qualquer caderno.
+
 ## [0.31.1] — 2026-10-31 (docs/mapa/memórias do fluxo mestre; José t169u)
 ### Alterado
 - Documentos vivos (REGRAS, ARQUITETURA, ESTADO, ROADMAP, LACUNAS, processos, CONTRATO-EDITORIAL) alinhados ao fluxo: mestre `00ce61ae` → `BriefingEfemerico` → efêmero → direção 2.0.0 → Flow pendente; papéis NLM/Temporal/agente explícitos.

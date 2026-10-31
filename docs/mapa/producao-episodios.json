@@ -1,8 +1,8 @@
 {
-  "versao": "1.2.1",
+  "versao": "1.3.0",
   "atualizado": "2026-10-31",
   "titulo": "Produção de episódios (tema → publicação)",
-  "nota": "Fluxo t168u/t169u: prioridade na página = etapa DOS CADERNOS (NLM mestre 00ce61ae + efêmero). Mestre = norteador BriefingEfemerico (nunca mídia; nota + limpar chat). Efêmero = persona/pesquisa/roteiro/SEO/DirecaoCenas 2.0.0 (rótulo PQBR-EP####-S##). Temporal orquestra; agente só UI Flow (passo 2 pendente). Publicação: só coerência de rótulo/rastreabilidade (dry-run; sem redesign). Worker sem reinício nesta entrega. José OK mapa.",
+  "nota": "Fluxo t170u: cadernos de auditoria (Mestre ce015620 + Efêmero por episódio, piloto EP1003 e82fc55e) fundamentam a etapa 11; veredito final continua fora do caderno, validado por contrato. Sem reinício de worker, sem merge.",
   "etapas": [
     {
       "n": 1,
@@ -47,7 +47,7 @@
     {
       "n": 5,
       "nome": "Briefing do Mestre",
-      "objetivo": "Etapa central dos CADERNOS: pedir BriefingEfemerico ao mestre canônico 00ce61ae-ab72-4f5a-a405-e1381377bc38; gravar nota no mestre; limpar chat (ask --new -y). NUNCA generate/download de mídia. Legado c35d7b24 e MESTRES_PROIBIDOS bloqueados.",
+      "objetivo": "Etapa central dos CADERNOS: pedir BriefingEfemerico ao mestre canônico 00ce61ae-ab72-4f5a-a405-e1381377bc38; gravar nota no mestre; limpar chat (ask --new -y). NUNCA generate/download de mídia. Legado c35d7b24 e MESTRES_PROIBIDOS bloqueados. Auditoria tem mestre próprio (t170u), separado deste.",
       "wf_activity": "nlm_mestre_briefing",
       "fila": "notebooklm-pqbr",
       "responsavel": "NLM MESTRE (Temporal activity)",
@@ -109,12 +109,12 @@
     {
       "n": 11,
       "nome": "Auditoria / veredito",
-      "objetivo": "Juiz visual Gemini (Camofox). Papel do mestre/efêmero na validação = próximo tópico (só registro; sem implementar agora).",
-      "wf_activity": "auditor_* (parcial)",
+      "objetivo": "Auditoria fundamentada em caderno: Mestre de Auditoria ce015620 (regras) + Efêmero de Auditoria por episódio (AUD-SNAP 1.0.0 + stills/descrições, sem vídeo bruto). Veredito final fora do caderno, validado por contrato. Piloto EP1003: S05 reprova, S04 aprova_com_ressalva.",
+      "wf_activity": "auditor_* (parcial) + cadernos auditoria (piloto, sem activity Temporal)",
       "fila": "camofox-pqbr",
       "responsavel": "Temporal + Gemini Web (agente/Camofox)",
       "contratos": "VereditoAuditor 1.0.0",
-      "status": "codigo_falta_reinicio"
+      "status": "piloto_sem_reinicio"
     },
     {
       "n": 12,
@@ -164,5 +164,5 @@
       "status": "ativo"
     }
   ],
-  "mermaid": "flowchart LR\n  T[1 Tema] --> G[2 Grade]\n  G --> P[3 Pedido Temporal]\n  P --> PC[4 Gate playbook]\n  PC --> M[5 NLM Mestre briefing]\n  M --> E[6 NLM Efêmero + pesquisa]\n  E --> NLM[7 Roteiro SEO compliance]\n  NLM --> DIR[8 DirecaoCenas 2.0.0]\n  DIR --> GATE[9 Gates]\n  GATE --> FLOW[10 Flow agente - pendente]\n  FLOW --> AUD[11 Auditor]\n  AUD --> POS[12 Pós]\n  POS --> PUB[13 Publicação rótulo]\n  subgraph CAD[Cadernos NLM — prioridade do mapa]\n    M\n    E\n    NLM\n    DIR\n  end\n  style M fill:#bbdefb,stroke:#0d47a1,stroke-width:2px\n  style E fill:#c8e6c9,stroke:#1b5e20,stroke-width:2px\n  style NLM fill:#e8f5e9,stroke:#2e7d32\n  style DIR fill:#fff3e0,stroke:#ef6c00\n  style FLOW fill:#fdecea,stroke:#c62828\n  style GATE fill:#fff8e1,stroke:#f9a825\n  style PUB fill:#f5f5f5,stroke:#9e9e9e\n"
+  "mermaid": "flowchart LR\n  T[1 Tema] --> G[2 Grade]\n  G --> P[3 Pedido Temporal]\n  P --> PC[4 Gate playbook]\n  PC --> M[5 NLM Mestre briefing]\n  M --> E[6 NLM Efêmero + pesquisa]\n  E --> NLM[7 Roteiro SEO compliance]\n  NLM --> DIR[8 DirecaoCenas 2.0.0]\n  DIR --> GATE[9 Gates]\n  GATE --> FLOW[10 Flow agente - pendente]\n  FLOW --> AUD[11 Auditor + Cadernos Auditoria t170u]\n  AUD --> POS[12 Pós]\n  POS --> PUB[13 Publicação rótulo]\n  subgraph CAD[Cadernos NLM — prioridade do mapa]\n    M\n    E\n    NLM\n    DIR\n  end\n  style M fill:#bbdefb,stroke:#0d47a1,stroke-width:2px\n  style E fill:#c8e6c9,stroke:#1b5e20,stroke-width:2px\n  style NLM fill:#e8f5e9,stroke:#2e7d32\n  style DIR fill:#fff3e0,stroke:#ef6c00\n  style FLOW fill:#fdecea,stroke:#c62828\n  style GATE fill:#fff8e1,stroke:#f9a825\n  style PUB fill:#f5f5f5,stroke:#9e9e9e\n"
 }

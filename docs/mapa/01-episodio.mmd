@@ -1,4 +1,5 @@
 %% EpisodioWorkflow OFICIAL (src/pqbr/workflows/episodio.py) — fila episodio-pqbr.
+%% Fluxo t170u: auditoria com Mestre de Auditoria ce015620 + Efêmero por episódio (piloto EP1003 e82fc55e). Veredito final fora do caderno.
 %% Fluxo t168u/t169u: prioridade do mapa = etapa DOS CADERNOS (mestre + efêmero).
 %% Mestre 00ce61ae norteador → BriefingEfemerico → efêmero (persona+pesquisa) → roteiro/SEO → DirecaoCenas 2.0.0.
 %% Quem: Temporal orquestra; NLM mestre=briefing (nunca mídia); NLM efêmero=produção intelectual; agente=UI Flow (passo 2 pendente).
@@ -13,6 +14,7 @@ flowchart TD
     EF["NLM EFÊMERO<br/>nlm_abrir_efemero_com_briefing<br/>persona + prompt_pesquisa do mestre<br/>add-research no efêmero"]
     W1[["Temporal filho NotebookLMWorkflow<br/>fila notebooklm-pqbr<br/>roteiro + compliance + SEO<br/>PedidoNotebookLM 1.1.0<br/>sem vídeo"]]
     DIR["NLM EFÊMERO via Temporal<br/>direcao_cenas_nlm<br/>DirecaoCenas 2.0.0<br/>rótulo PQBR-EP####-S##<br/>CenaIndividual fail-closed"]
+    AUDN["NLM AUDITORIA t170u<br/>Mestre ce015620 regras<br/>Efêmero Auditoria-EP####<br/>AUD-SNAP 1.0.0 + stills<br/>sem vídeo bruto"]
   end
   A2 --> BR
   BR --> EF
