@@ -1106,3 +1106,9 @@ NÃO CABE:
 - **Worker:** primeira reinicialização falhou e deixou o `pqbr-temporal-worker` em crash-loop por ~1 minuto: o sandbox do Temporal bloqueia `Path.resolve()` em nível de módulo do workflow. O worker foi parado, o módulo foi corrigido (sem `resolve` e sem leitura de env em nível de módulo, só dentro das activities) e a validação local do workflow passou antes do segundo reinício, que voltou limpo (ActiveState=active, NRestarts=0).
 - **Execução manual:** `acompanhamento-manual-20261031-2`, fila `pqbr-episodio`: fallbacks 0, deriva 0, canário ok (Camofox `browserConnected`), diagnóstico `aplicado: False`, sinal `aprovacao_jose` só como dado (não enviado). `LIMITE_ESTADO` do onboarding subiu de 28000 para 32000 porque o ESTADO cresceu para ~29k e a tabela de pendências estava sendo cortada (mesmo precedente de t169u).
 - **Sem nesta etapa:** agenda recorrente (frequência a escolher), verificação de tela do Flow, merge em main, push, P18/piloto, AR Board.
+
+## 31/10/2026 — Correção do rótulo do painel: diagrama do acompanhamento (06 → 14)
+
+- **Problema encontrado ao conferir o painel :8088:** o diagrama do acompanhamento (funcional P14) usava o prefixo 06, já usado por `06-runs-presos.mmd`; `scripts/mapa/gerar_index.py` mapeia prefixo → título, então ambos apareciam como “Runs presos” com id `d06` duplicado e o diagrama novo ficava escondido — por isso o painel parecia não ter mudado visualmente.
+- **Correção:** renomear para `docs/mapa/14-acompanhamento-mudancas.mmd`, título “Acompanhamento de mudanças” no `TITULOS` de `gerar_index.py`, cobertura atualizada em `scripts/mapa/verificar_mapa.py`, `docs/mapa/index.html` regenerado. Nenhuma mudança de conteúdo do diagrama, nenhum reinício de worker.
+- **Sem nesta etapa:** alteração em `docs/REGRAS.md`.

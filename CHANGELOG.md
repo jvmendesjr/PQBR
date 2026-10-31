@@ -1,3 +1,11 @@
+## Não lançado — 2026-10-31 — Correção do rótulo do painel: diagrama do acompanhamento com prefixo 14
+
+### Corrigido
+- O diagrama do acompanhamento nasceu como `docs/mapa/06-acompanhamento-mudancas.mmd`, colidindo com `06-runs-presos.mmd`: ambos apareciam no painel :8088 com o mesmo título “Runs presos” e o mesmo id `d06`, e o diagrama novo ficava escondido. Renomeado para `docs/mapa/14-acompanhamento-mudancas.mmd`, com título próprio “Acompanhamento de mudanças” em `scripts/mapa/gerar_index.py` e cobertura atualizada em `scripts/mapa/verificar_mapa.py`; `docs/mapa/index.html` regenerado (15 diagramas). Testes de mapa e Portões passando.
+
+### Sem
+- Mudança de conteúdo do diagrama, reinício de worker, alteração em `docs/REGRAS.md`.
+
 ## Não lançado — 2026-10-31 — P13 ligada e P14 como workflow (funcional, sem agenda recorrente ainda)
 
 ### Adicionado
