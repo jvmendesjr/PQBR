@@ -68,7 +68,7 @@ def test_activity_notebooklm_aguarda_sem_asyncio_run(monkeypatch):
     )
     chamadas = []
 
-    async def fake_adirecionar(*, codigo, slug, caderno, n_cenas, estilo):
+    async def fake_adirecionar(self, *, codigo, slug, caderno, n_cenas, estilo):
         chamadas.append(codigo)
         return esperado
 
