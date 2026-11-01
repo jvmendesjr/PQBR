@@ -45,9 +45,11 @@ def test_briefing_ok():
     assert b.pesquisa_obrigatoria and b.versao == "1.0.0"
 
 
-def test_briefing_exige_url():
-    with pytest.raises(ValidationError):
-        BriefingEfemerico(**_briefing(urls_pesquisa=[]))
+def test_briefing_url_opcional():
+    # urls_pesquisa opcional desde a correcao definitiva 2026-11-01: o mestre nao
+    # inventa URLs; a descoberta web roda no efemero via add-research.
+    b = BriefingEfemerico(**_briefing(urls_pesquisa=[]))
+    assert b.urls_pesquisa == []
     with pytest.raises(ValidationError):
         BriefingEfemerico(**_briefing(urls_pesquisa=["ftp://x"]))
 
@@ -90,6 +92,55 @@ def test_parse_briefing_lista_string():
     b = parse_briefing(raw, p, MID)
     assert b.urls_pesquisa == ["https://example.com/a"]
     assert b.riscos_compliance == ["Citar marcas registradas ou clickbait enganoso."]
+
+
+def test_parse_briefing_descarta_placeholder_url():
+    """Regressao 2026-11-01 (workflow ep1003-redo-20261101c): o chat do NotebookLM
+    mascara links externos com placeholder; urls_pesquisa opcional descarta o
+    placeholder e nao falha com lista vazia."""
+    p = PedidoBriefingMestre(tema="chá de bico no Brasil", codigo="PQBR-EP1003")
+    raw = json.dumps({
+        "persona_efemero": "x" * 60,
+        "prompt_pesquisa": "origem chá de bico",
+        "urls_pesquisa": ["[suspicious link removed]", "https://example.com/a"],
+        "prompt_roteiro": "roteiro completo do short sobre o tema",
+        "prompt_seo": "titulo descricao hashtags do short",
+        "prompt_direcao_cenas": "direcao cenas com rotulo PQBR-EP####-S##",
+    })
+    b = parse_briefing(raw, p, MID)
+    assert b.urls_pesquisa == ["https://example.com/a"]
+    raw2 = json.dumps({
+        "persona_efemero": "x" * 60,
+        "prompt_pesquisa": "origem chá de bico",
+        "urls_pesquisa": ["[suspicious link removed]"],
+        "prompt_roteiro": "roteiro completo do short sobre o tema",
+        "prompt_seo": "titulo descricao hashtags do short",
+        "prompt_direcao_cenas": "direcao cenas com rotulo PQBR-EP####-S##",
+    })
+    b2 = parse_briefing(raw2, p, MID)
+    assert b2.urls_pesquisa == []
+
+
+def test_abriefar_limpa_chat_mesmo_com_falha_de_parse(monkeypatch):
+    """Regressao 2026-11-01: falha de parse nao pode deixar o chat do mestre sujo;
+    a limpeza roda em finally."""
+    from pqbr.motores.briefing_mestre import AdaptadorNotebookLMBriefing
+    from pqbr.workflows import notebooklm as n
+    chamadas = []
+
+    async def fake_perguntar(caderno, pergunta, salvar_nota=True):
+        return json.dumps({"persona_efemero": "curto"})  # parse vai falhar (campos faltando)
+
+    async def fake_limpar(caderno):
+        chamadas.append(caderno)
+        return "chat mestre limpo"
+
+    monkeypatch.setattr(n, "nlm_mestre_perguntar", fake_perguntar)
+    monkeypatch.setattr(n, "nlm_mestre_limpar_chat", fake_limpar)
+    p = PedidoBriefingMestre(tema="chá de bico no Brasil", codigo="PQBR-EP1003", caderno_mestre_id=MID)
+    with pytest.raises(ValidationError):
+        asyncio.run(AdaptadorNotebookLMBriefing().abriefar(p))
+    assert chamadas == [MID]
 
 
 def test_activity_falso(monkeypatch):

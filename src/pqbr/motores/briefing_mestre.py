@@ -32,12 +32,15 @@ def montar_pergunta_briefing(pedido: PedidoBriefingMestre) -> str:
     partes = [
         "Com base nas fontes deste caderno mestre, emita o BRIEFING do caderno efêmero.",
         "Responda SÓ um JSON (sem texto fora), campos:",
-        "persona_efemero, prompt_pesquisa, modo_pesquisa (fast|deep), urls_pesquisa (≥1 URL http),",
+        "persona_efemero, prompt_pesquisa, modo_pesquisa (fast|deep), urls_pesquisa (opcional, pode ser lista vazia; so URLs reais das fontes do mestre, nunca invente URLs),",
         "fontes_mestre_a_copiar (títulos), refs_catalogo_sugeridas, prompt_roteiro, prompt_seo,",
         "prompt_direcao_cenas, prompt_compliance (opcional), riscos_compliance, modelo_sugerido,",
         "rotulo_episodio_prefix, pesquisa_obrigatoria=true.",
-        "urls_pesquisa, fontes_mestre_a_copiar, refs_catalogo_sugeridas e riscos_compliance "
-        "DEVEM ser arrays JSON de strings, nunca uma string unica.",
+        "urls_pesquisa (opcional, pode ser lista vazia), fontes_mestre_a_copiar, "
+        "refs_catalogo_sugeridas e riscos_compliance DEVEM ser arrays JSON de strings, "
+        "nunca uma string unica. Nunca invente URLs brutas: a descoberta web roda "
+        "no EFEMERO via add-research com prompt_pesquisa; foque na qualidade do "
+        "prompt_pesquisa e nas diretrizes para esse add-research.",
         f"Tema: {pedido.tema}",
     ]
     if pedido.codigo:
@@ -71,6 +74,15 @@ def parse_briefing(texto: str, pedido: PedidoBriefingMestre, caderno_mestre_id: 
     for campo in _CAMPOS_LISTA_BRIEFING:
         if campo in d:
             d[campo] = _como_lista(d[campo])
+    # O chat do NotebookLM mascara links externos gerados pelo LLM (placeholder de link
+    # removido). urls_pesquisa e opcional: mantem so URLs reais; placeholder e qualquer
+    # nao-http sao descartados silenciosamente. Lista vazia nao falha, desde que
+    # prompt_pesquisa esteja valido (validador do contrato).
+    if isinstance(d.get("urls_pesquisa"), list):
+        d["urls_pesquisa"] = [
+            u.strip() for u in d["urls_pesquisa"]
+            if isinstance(u, str) and re.match(r"^https?://", u.strip(), re.I)
+        ]
     d["versao"] = "1.0.0"
     d["tema"] = pedido.tema
     d["caderno_mestre_id"] = caderno_mestre_id
@@ -153,10 +165,13 @@ class AdaptadorNotebookLMBriefing:
             raise RuntimeError("gasto briefing mestre negado")
         pergunta = montar_pergunta_briefing(pedido)
         txt = await n.nlm_mestre_perguntar(mid, pergunta, salvar_nota=pedido.salvar_nota)
-        briefing = parse_briefing(txt, pedido, mid)
-        if pedido.limpar_chat_apos:
-            await n.nlm_mestre_limpar_chat(mid)
-        return briefing.model_copy(update={"nota_salva": pedido.salvar_nota})
+        try:
+            briefing = parse_briefing(txt, pedido, mid)
+            return briefing.model_copy(update={"nota_salva": pedido.salvar_nota})
+        finally:
+            # Falha de parse nunca contamina o historico do mestre: limpa sempre.
+            if pedido.limpar_chat_apos:
+                await n.nlm_mestre_limpar_chat(mid)
 
 
 def briefador_mestre(nome: str | None = None) -> BriefadorMestre:

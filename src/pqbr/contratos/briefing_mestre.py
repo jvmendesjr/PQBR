@@ -28,7 +28,10 @@ class BriefingEfemerico(Contrato):
     modo_pesquisa: Literal["fast", "deep"] = "fast"
     # Pesquisa do tema é obrigatória no efêmero (José): consulta + pelo menos uma URL sugerida ou lista explícita.
     pesquisa_obrigatoria: bool = True
-    urls_pesquisa: list[str] = Field(min_length=1, max_length=20)
+    # Opcional: o mestre nao navega na web e nao deve inventar URLs; a descoberta web
+    # roda no EFEMERO via add-research com prompt_pesquisa. URLs do mestre, quando existirem,
+    # sao apenas sugestoes reais das fontes; placeholder de link removido e descartado no parser.
+    urls_pesquisa: list[str] = Field(default_factory=list, max_length=20)
     fontes_mestre_a_copiar: list[str] = Field(default_factory=list, max_length=30)
     refs_catalogo_sugeridas: list[str] = Field(default_factory=list, max_length=20)
     prompt_roteiro: str = Field(min_length=20, max_length=4000)
@@ -44,8 +47,6 @@ class BriefingEfemerico(Contrato):
     def _pesquisa_e_urls(self):
         if self.pesquisa_obrigatoria and not (self.prompt_pesquisa and self.prompt_pesquisa.strip()):
             raise ValueError("pesquisa_obrigatoria exige prompt_pesquisa")
-        if self.pesquisa_obrigatoria and len(self.urls_pesquisa) < 1:
-            raise ValueError("pesquisa_obrigatoria exige ao menos 1 URL em urls_pesquisa")
         for u in self.urls_pesquisa:
             if not URL.match(u.strip()):
                 raise ValueError(f"URL de pesquisa inválida: {u[:80]}")
