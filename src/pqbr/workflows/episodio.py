@@ -132,13 +132,27 @@ async def direcao_cenas_nlm(pedido: dict) -> dict:
         motor = AdaptadorNotebookLMDirecao()
     else:
         raise RuntimeError(f"adaptador direção desconhecido: {adaptador}")
-    r = motor.direcionar(
-        codigo=pedido["codigo"],
-        slug=pedido["slug"],
-        caderno=pedido["caderno"],
-        n_cenas=int(pedido["n_cenas"]),
-        estilo=pedido.get("estilo") or ESTILO_PADRAO_STICKMAN,
-    )
+    if adaptador == "notebooklm":
+        # A activity já roda dentro do loop do Temporal: aguardar direto.
+        # O wrapper síncrono direcionar() do adaptador real chama asyncio.run(),
+        # que falha aqui ("asyncio.run() cannot be called from a running event loop")
+        # — bug que derrubou a corrida ep1003-redo-20261101e na primeira execução
+        # ao vivo da direção (os testes usam o adaptador falso, sem esse caminho).
+        r = await motor.adirecionar(
+            codigo=pedido["codigo"],
+            slug=pedido["slug"],
+            caderno=pedido["caderno"],
+            n_cenas=int(pedido["n_cenas"]),
+            estilo=pedido.get("estilo") or ESTILO_PADRAO_STICKMAN,
+        )
+    else:
+        r = motor.direcionar(
+            codigo=pedido["codigo"],
+            slug=pedido["slug"],
+            caderno=pedido["caderno"],
+            n_cenas=int(pedido["n_cenas"]),
+            estilo=pedido.get("estilo") or ESTILO_PADRAO_STICKMAN,
+        )
     return r.model_dump(mode="json")
 
 @activity.defn

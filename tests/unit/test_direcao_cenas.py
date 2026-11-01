@@ -57,6 +57,31 @@ def test_adaptador_falso_sem_rede():
     assert d.cenas[0].rotulo == "PQBR-EP1003-S01"
 
 
+def test_activity_notebooklm_aguarda_sem_asyncio_run(monkeypatch):
+    """Regressão 2026-11-01 (corrida ep1003-redo-20261101e): a activity é async e
+    já roda dentro de um loop; o caminho notebooklm deve aguardar adirecionar(),
+    nunca passar pelo wrapper síncrono com asyncio.run()."""
+    from pqbr.motores.direcao_cenas import AdaptadorFalsoDirecao, AdaptadorNotebookLMDirecao
+
+    esperado = AdaptadorFalsoDirecao().direcionar(
+        codigo="PQBR-EP1003", slug="cafe-fraco", caderno="nb-fake-12345678", n_cenas=2,
+    )
+    chamadas = []
+
+    async def fake_adirecionar(*, codigo, slug, caderno, n_cenas, estilo):
+        chamadas.append(codigo)
+        return esperado
+
+    monkeypatch.setattr(AdaptadorNotebookLMDirecao, "adirecionar", fake_adirecionar)
+    out = asyncio.run(direcao_cenas_nlm({
+        "codigo": "PQBR-EP1003", "slug": "cafe-fraco", "caderno": "nb-fake-12345678",
+        "n_cenas": 2, "adaptador": "notebooklm",
+    }))
+    assert chamadas == ["PQBR-EP1003"]
+    assert len(out["cenas"]) == 2
+    assert out["codigo"] == "PQBR-EP1003"
+
+
 def test_fail_closed_ref_inexistente():
     with pytest.raises(ValueError, match="inexistente"):
         validar_lista([CenaIndividual(**_cena(refs=["PERS-nao-existe"]))])
