@@ -74,6 +74,24 @@ def test_parse_briefing_json():
     assert b.caderno_mestre_id == MID and b.codigo == "PQBR-EP1003"
 
 
+def test_parse_briefing_lista_string():
+    """Regressao 2026-11-01 (workflow ep1003-redo-20261101b): o mestre devolveu
+    riscos_compliance como string unica e o parse falhava; string vira lista."""
+    p = PedidoBriefingMestre(tema="chá de bico no Brasil", codigo="PQBR-EP1003")
+    raw = json.dumps({
+        "persona_efemero": "x" * 60,
+        "prompt_pesquisa": "origem chá de bico",
+        "urls_pesquisa": "https://example.com/a",
+        "prompt_roteiro": "roteiro completo do short sobre o tema",
+        "prompt_seo": "titulo descricao hashtags do short",
+        "prompt_direcao_cenas": "direcao cenas com rotulo PQBR-EP####-S##",
+        "riscos_compliance": "Citar marcas registradas ou clickbait enganoso.",
+    })
+    b = parse_briefing(raw, p, MID)
+    assert b.urls_pesquisa == ["https://example.com/a"]
+    assert b.riscos_compliance == ["Citar marcas registradas ou clickbait enganoso."]
+
+
 def test_activity_falso(monkeypatch):
     from pqbr.workflows import notebooklm as n
     out = asyncio.run(n.nlm_mestre_briefing({

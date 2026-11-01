@@ -36,6 +36,8 @@ def montar_pergunta_briefing(pedido: PedidoBriefingMestre) -> str:
         "fontes_mestre_a_copiar (títulos), refs_catalogo_sugeridas, prompt_roteiro, prompt_seo,",
         "prompt_direcao_cenas, prompt_compliance (opcional), riscos_compliance, modelo_sugerido,",
         "rotulo_episodio_prefix, pesquisa_obrigatoria=true.",
+        "urls_pesquisa, fontes_mestre_a_copiar, refs_catalogo_sugeridas e riscos_compliance "
+        "DEVEM ser arrays JSON de strings, nunca uma string unica.",
         f"Tema: {pedido.tema}",
     ]
     if pedido.codigo:
@@ -50,9 +52,25 @@ def montar_pergunta_briefing(pedido: PedidoBriefingMestre) -> str:
     return " ".join(partes)
 
 
+_CAMPOS_LISTA_BRIEFING = ("urls_pesquisa", "fontes_mestre_a_copiar", "refs_catalogo_sugeridas", "riscos_compliance")
+
+
+def _como_lista(v):
+    """Coercao tolerante do modelo: string unica vira lista de um item (ou varios, se vier
+    separada por quebra de linha/ponto-e-virgula). Outros tipos seguem para a validacao
+    fail-closed do Pydantic, sem mascarar erro."""
+    if isinstance(v, str):
+        partes = [p.strip(" \t-\u2022*") for p in re.split(r"[\n;]+", v) if p.strip(" \t-\u2022*")]
+        return partes or [v.strip()]
+    return v
+
+
 def parse_briefing(texto: str, pedido: PedidoBriefingMestre, caderno_mestre_id: str) -> BriefingEfemerico:
     d = _obj(texto)
     d = dict(d)
+    for campo in _CAMPOS_LISTA_BRIEFING:
+        if campo in d:
+            d[campo] = _como_lista(d[campo])
     d["versao"] = "1.0.0"
     d["tema"] = pedido.tema
     d["caderno_mestre_id"] = caderno_mestre_id
