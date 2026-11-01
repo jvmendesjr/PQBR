@@ -132,15 +132,39 @@ async def seo_9router(roteiro_md: str, fontes: list[dict] | None = None) -> dict
     raise ApplicationError("SEO 9router inválido: " + erro, type="SaidaInvalida", non_retryable=True)
 
 
+PROMPT_COMPLIANCE = (
+    "Confira o roteiro contra o contrato editorial do Porquê BR. O canal é irônico e hiperbólico por essência: "
+    "ironia, exagero e sátira leve de costumes brasileiros são o tom do canal, não infração. "
+    "PERMITIDO, não reprove por isso: "
+    "(a) personagem histórico do passado, sobretudo figura pública falecida, citado ou retratado em desenho stickman, "
+    "em contexto irônico e sem difamação; "
+    "(b) história política do passado, sem política atual, sem partidarismo, sem eleição e sem propaganda; "
+    "(c) suposição ou hipótese sobre possível origem de expressão ou fato, quando baseada em pesquisa e apresentada com "
+    "linguagem de incerteza ('versão mais aceita', 'tem quem diga', 'possível origem') — o assunto pode ser trivial, "
+    "como um café aguado, e não uma afirmação científica; "
+    "(d) hipérbole coloquial ('todo brasileiro odeia') como exagero cômico, não como estereótipo. "
+    "REPROVE só por: pessoa real viva ou celebridade atual citada ou retratada, ou difamação de qualquer pessoa; "
+    "marca real; estereótipo ofensivo contra grupo protegido; política atual ou partidária, religião como alvo, tragédia; "
+    "afirmação falsa apresentada como certa sem atenuador; pedido de comentário; conselho especializado "
+    "(médico, jurídico, financeiro). "
+    "Responda só JSON: {\"aprovado\":true|false,\"motivos\":[...],\"ressalvas\":[...]}"
+)
+
+
 @activity.defn
 async def compliance_roteiro(roteiro_md: str) -> dict:
-    """Líder de Compliance + Guardião (combos do papel). Reprova só por segurança (CONTRATO §16.6)."""
+    """Líder de Compliance + Guardião (combos do papel). Reprova só por segurança (CONTRATO §16.6).
+
+    Essência do canal (proposta 2026-11-01, pendente de OK do José para virar regra canônica):
+    ironia/hipérbole, personagem histórico do passado e história política do passado são permitidos;
+    hipótese com linguagem de incerteza não é afirmação falsa como certa. Seguem reprovando: pessoa
+    viva/celebridade, difamação, marca real, estereótipo ofensivo, política atual/partidária, religião
+    como alvo, tragédia, falso como certo sem atenuador, pedido de comentário e conselho especializado.
+    """
     from ..kit.router9 import chat_papel
     from ..seguranca.barreira import exigir_limpo
     exigir_limpo(roteiro_md, "notebooklm")   # Guardião: sem segredo/injeção no que vai ao NotebookLM
-    pedido = ("Confira o roteiro contra o contrato editorial do Porquê BR. Reprove só por: pessoa real/celebridade, marca real, "
-              "estereótipo ofensivo, política/religião/tragédia, afirmação falsa apresentada como certa, pedido de comentário, "
-              "conselho especializado. Responda só JSON: {\"aprovado\":true|false,\"motivos\":[...],\"ressalvas\":[...]}\n\n" + roteiro_md[:8000])
+    pedido = PROMPT_COMPLIANCE + "\n\n" + roteiro_md[:8000]
     d = _obj(await asyncio.to_thread(chat_papel, "lider-compliance", "Você é o Líder de Compliance do Porquê BR.", pedido, 800))
     if not isinstance(d.get("aprovado"), bool): raise ValueError("compliance sem campo aprovado")
     if not d["aprovado"]:   # segunda opinião antes de bloquear (t421)

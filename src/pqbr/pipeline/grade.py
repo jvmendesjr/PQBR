@@ -21,8 +21,12 @@ brasileiros brasil brasileira br sempre nao tem ter quase faz fica vira usa cham
 
 # Bloqueio absoluto (REGRAS §4): política partidária, tragédias, religião, grupos protegidos,
 # conselho de saúde/finanças/jurídico, incentivo a ato ilegal ou perigoso.
+# Proposta 2026-11-01 (pendente de OK do José): título de cargo sozinho ("senador", "deputado",
+# "presidente da república") não faz um tema partidário — história política do passado usa esses
+# títulos. Política atual/partidária continua bloqueada aqui por nomes, partido, eleição e STF, e
+# a jusante pela compliance (que reprova política atual/partidária, mas permite história do passado).
 BLOQUEIO: dict[str, tuple[str, ...]] = {
-    "politica_partidaria": ("lula", "bolsonaro", "pt ", "psdb", "partido", "eleição", "eleicao", "deputado", "senador", "presidente da república", "stf"),
+    "politica_partidaria": ("lula", "bolsonaro", "pt ", "psdb", "partido", "eleição", "eleicao", "stf"),
     "tragedia": ("tragédia", "tragedia", "enchente", "desabamento", "massacre", "chacina", "acidente fatal", "morte de", "assassinato"),
     "religiao": ("igreja", "religião", "religiao", "evangélico", "evangelico", "católico", "catolico", "umbanda", "candomblé", "pastor", "padre"),
     "grupos_protegidos": ("negros", "gays", "lgbt", "trans ", "indígenas", "indigenas", "deficientes", "nordestinos são", "imigrantes"),

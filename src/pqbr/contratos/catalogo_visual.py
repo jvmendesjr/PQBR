@@ -33,7 +33,7 @@ TAMANHO_MAX_IMAGEM = 2_000_000           # bytes; acima disso a imagem vai para 
 PROTAGONISTAS: dict[str, str] = {"masculino": "PERS-menino-azul", "feminino": "PERS-menina-rosa"}
 
 # Texto canônico que entra em toda ficha gerada (REGRAS §6, CONTRATO-EDITORIAL §19): vale para qualquer tipo.
-PROIBIDO_PADRAO = ("texto escrito dentro da imagem, marca ou logo real, pessoa realista ou fotorrealismo, rosto de pessoa real ou celebridade, "
+PROIBIDO_PADRAO = ("texto escrito dentro da imagem, marca ou logo real, pessoa realista ou fotorrealismo, rosto realista identificável de pessoa real ou celebridade (um stickman que representa figura histórica não é rosto real), "
                    "volume 3D, um olho só (ciclope), cabeça cortada, nome de personagem escrito ou falado")
 
 _NEGACAO = re.compile(r"proibid[oa]s?:?[^.]*|\b(?:sem|nada de|nunca|nem)\s+[^,.;]*", re.I)

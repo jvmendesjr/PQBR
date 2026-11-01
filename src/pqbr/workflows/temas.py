@@ -97,7 +97,7 @@ PEDIDO = (
     "Reposição da grade (t465): faltam {faltam} temas para manter 7 dias abertos (alvo {alvo}). Proponha até 5 temas NOVOS e curtos "
     "de curiosidade/cultura popular brasileira (origem de expressões, hábitos e manias, curiosidades que prendem a atenção), "
     "cada um como pergunta 'Por que …?', categoria ∈ expressao, habito_mania, curiosidade_cultura_pop. "
-    "Sem política, religião, tragédia, marca ou pessoa real; sem repetir os já usados (fonte 'temas-usados'). "
+    "Sem política atual ou partidária, religião como alvo, tragédia, marca real ou pessoa real viva; personagem histórico do passado e história política do passado são permitidos, com ironia e hipótese com linguagem de incerteza; sem repetir os já usados (fonte 'temas-usados'). "
     "Responda SÓ com JSON: {{\"temas\": [{{\"categoria\": \"...\", \"tema\": \"Por que ...?\"}}], \"justificativa\": \"...\"}}")
 
 
