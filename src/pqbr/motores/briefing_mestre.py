@@ -126,12 +126,11 @@ class AdaptadorNotebookLMBriefing:
 
     async def abriefar(self, pedido: PedidoBriefingMestre) -> BriefingEfemerico:
         from pqbr.workflows import notebooklm as n
-        from pqbr.config_caderno_mestre import id_mestre, recusar_midia_se_mestre
+        from pqbr.config_caderno_mestre import id_mestre  # briefing e texto, nao midia: a trava de midia fica nos caminhos de midia (nlm_gerar_short etc.)
 
         mid = pedido.caderno_mestre_id or id_mestre()
         if not mid or not _UUID.match(mid):
             raise RuntimeError("caderno_mestre_id não configurado")
-        recusar_midia_se_mestre(mid)
         if not GASTO_BRIEFING_MESTRE.pode_gastar:
             raise RuntimeError("gasto briefing mestre negado")
         pergunta = montar_pergunta_briefing(pedido)
