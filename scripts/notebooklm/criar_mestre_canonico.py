@@ -43,14 +43,23 @@ def js(s: str):
 
 
 def add_text(nb: str, title: str, texto: str):
+    """Injeta texto como ARQUIVO (t170u, correcao do bug do --type text).
+
+    Bug: --type text com caminho ingere so o caminho como texto
+    (fulltext = caminho, 50-70 chars), nao o conteudo. Usa --type file
+    e renomeia para o titulo canonico, porque o CLI ignora --title
+    em arquivo. O tmp e mantido ate a verificacao, nao apagado cegamente.
+    """
     tmp = HOME / "tmp" / f"mestre-{title.replace('/', '-')[:40]}.txt"
     tmp.parent.mkdir(parents=True, exist_ok=True)
     tmp.write_text(texto[:480_000], encoding="utf-8")
     pause(1.5, 3.5)
-    cli("source", "add", "-n", nb, "--type", "text", "--title", title, str(tmp), "--json", timeout=180)
+    out = cli("source", "add", "-n", nb, "--type", "file", "--title", title, str(tmp), "--json", timeout=180)
     try:
-        tmp.unlink()
-    except OSError:
+        sid = js(out).get("source", {}).get("id")
+        if sid:
+            cli("source", "rename", "-n", nb, sid, title, timeout=120)
+    except Exception:
         pass
 
 
@@ -58,7 +67,13 @@ def add_file(nb: str, title: str, path: Path):
     if not path.is_file():
         raise FileNotFoundError(path)
     pause(1.5, 3.5)
-    cli("source", "add", "-n", nb, "--type", "file", "--title", title, str(path), "--json", timeout=180)
+    out = cli("source", "add", "-n", nb, "--type", "file", "--title", title, str(path), "--json", timeout=180)
+    try:
+        sid = js(out).get("source", {}).get("id")
+        if sid:
+            cli("source", "rename", "-n", nb, sid, title, timeout=120)
+    except Exception:
+        pass
 
 
 def main() -> int:
