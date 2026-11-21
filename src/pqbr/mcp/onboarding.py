@@ -43,5 +43,10 @@ def pacote() -> str:
         "## Fase atual do ROADMAP", fase,
         "## LACUNAS (início)", _ler("docs/LACUNAS-fluxo.md")[:LIMITE // 2],
         "## Mapa visual", "docs/mapa/index.html (servido em :8088) — diagramas: " + ", ".join(mapa) + " · aba Roadmap gerada de ROADMAP + ESTADO-ATUAL (scripts/mapa/roadmap.py; edite as fontes, nunca o HTML)",
+        "## 2026-11-21 — Instância Camofox PQBR enquadrada na regra de isolamento (autorizado pelo José, t26u)",
+        "- `~/.pqbr/camofox/.env` ganhou `CAMOFOX_INSTANCE_ID=pqbr`, `CAMOFOX_INSTANCE_DIR=~/.pqbr/camofox` e `TMPDIR=~/.pqbr/camofox/tmp` (antes usava o `/tmp` do sistema). Todo o resto ficou igual (porta 9387, app 1.15.0, bundle `cache/camoufox`, perfis, indexedDB, chaves, `MAX_SESSIONS=1`). Backup: `~/.pqbr/camofox/backups-isolamento-*/`.\n"
+        "- `pqbr-camofox.service` foi reiniciado uma vez, logo após uma renovação do keepalive (10:14 BRT), com checkpoint do storage-state antes. Keepalive e sessão Google conferidos depois (aba do Studio logada, sinais SID/PSID/PSIDTS presentes).\n"
+        "- **Regra comum a todos os projetos:** `~/Workspace/REGRAS-ISOLAMENTO.md` — cada projeto tem a sua instância Camofox, sem nada compartilhado; nunca depender de `~/.cache/camoufox`, nunca usar a porta 9377 (global legado) nem mexer em instância de outro projeto. Canário: `~/.local/bin/camofox-isolamento`.\n"
+        "- Esta nota vive neste onboarding (`src/pqbr/mcp/onboarding.py`) para sobreviver quando `scripts/mcp/gerar_agents_md.py` regenerar o `AGENTS.md`.",
     ]
     return "\n\n".join(p for p in partes if p)
